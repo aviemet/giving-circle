@@ -90,3 +90,5 @@ group :test do
   gem "bullet", "~> 7.0"
   gem "simplecov", "~> 0.22.0"
 end
+
+gem "pundit", "~> 2.3"

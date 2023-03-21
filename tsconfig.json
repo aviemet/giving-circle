@@ -38,7 +38,6 @@
       "./node_modules/@types",
       "./node_modules/**/types",
       "./app/frontend/types",
-      "./node_modules/flatpickr/dist/types",
       "./node_modules/@inertiajs/react/types",
       "./node_modules/@inertiajs/core/types"
     ],
@@ -118,7 +117,6 @@
   ],
   "include": [
     "./app/frontend/**/*",
-    "app/frontend/stories/**/*",
   ],
   "compileOnSave": false
 }

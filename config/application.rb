@@ -16,7 +16,29 @@ module GivingCircle
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Pacific Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.autoload_paths += %W(#{config.root}/lib)
+
+    config.generators do |g|
+      g.test_framework      :rspec
+
+      g.template_engine     nil
+      g.scaffold_stylesheet false
+      g.stylesheets         false
+      g.javascripts         false
+      g.assets              false
+      g.helper              false
+    end
+
+    config.active_storage.service = :local
+
+    config.active_record.yaml_column_permitted_classes = [Symbol, Hash, Array, Time, Date, ActiveRecord::Base, ActiveSupport::HashWithIndifferentAccess]
+
+    # Establish db connection upon entering rails console
+    console do
+      ActiveRecord::Base.connection
+    end
   end
 end
