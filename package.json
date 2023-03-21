@@ -1,0 +1,9 @@
+{
+  "name": "giving-circle",
+  "version": "1.0.0",
+  "description": "Facilitate giving",
+  "main": "index.js",
+  "author": "Avram Walden <aviemet@gmail.com>",
+  "license": "MIT",
+  "packageManager": "yarn@3.5.0"
+}
