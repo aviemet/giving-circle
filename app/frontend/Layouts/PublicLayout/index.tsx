@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface IAuthLayoutProps {
+interface PublicLayoutProps {
 	children: any
 }
 
-const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
+const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 
 	return (
 		<div id="auth">
@@ -17,4 +17,4 @@ const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
 	)
 }
 
-export default AuthLayout
+export default PublicLayout

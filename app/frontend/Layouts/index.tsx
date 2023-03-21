@@ -4,7 +4,7 @@ import Providers from '@/Layouts/Providers'
 import { Flash } from '@/Components/Flash'
 
 import AppLayout from './AppLayout'
-import AuthLayout from './AuthLayout'
+import PublicLayout from './PublicLayout'
 
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -31,20 +31,20 @@ const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 const AppLayoutLayout = (page: InertiaPageProps) => {
 	return (
 		<LayoutWrapper>
-			<AppLayout>{ page }</AppLayout>
+			<AppLayout>{ page.props.children }</AppLayout>
 		</LayoutWrapper>
 	)
 }
 
-const AuthLayoutLayout = (page: InertiaPageProps) => {
+const PublicLayoutLayout = (page: InertiaPageProps) => {
 	return (
 		<LayoutWrapper>
-			<AuthLayout>{ page }</AuthLayout>
+			<PublicLayout>{ page }</PublicLayout>
 		</LayoutWrapper>
 	)
 }
 
 export {
 	AppLayoutLayout as AppLayout,
-	AuthLayoutLayout as AuthLayout,
+	PublicLayoutLayout as PublicLayout,
 }

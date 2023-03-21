@@ -2,7 +2,7 @@ import { createInertiaApp } from '@inertiajs/react'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios'
-import { AuthLayout, AppLayout } from '../Layouts'
+import { PublicLayout, AppLayout } from '../Layouts'
 import dynamicImport from '../dynamicImport'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let checkedName = name
 			let layout = AppLayout
 			if(name.startsWith('Public/')) {
-				layout = AuthLayout
+				layout = PublicLayout
 				checkedName = name.replace('Public/', '')
 			}
 
