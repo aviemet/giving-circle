@@ -5,6 +5,7 @@ export { default as Heading } from './Heading'
 export { default as Link } from './Link'
 export { default as RichTextEditor } from './RichTextEditor'
 export { default as Section } from './Section'
+export { default as Table } from './Table'
 export { default as Label } from './Inputs/Label'
 
 // Export UI library components as a proxy to allow easy refactoring

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Textarea, type TextareaProps } from '@mantine/core'
-import Label from './Label'
+import Label from '../Label'
 
 export interface ITextareaProps extends TextareaProps { }
 

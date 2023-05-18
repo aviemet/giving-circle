@@ -605,6 +605,14 @@ export const newTheme = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,
 
 /**
  * Generates rails route to
+ * /users/confirmation/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newUserConfirmation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"confirmation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/password/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -626,6 +634,14 @@ export const newUserRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"user
  * @returns {string} route path
  */
 export const newUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/unlock/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newUserUnlock = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"unlock"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -663,6 +679,14 @@ export const updateRailsDiskService = __jsr.r({"encoded_token":{"r":true},"forma
 
 /**
  * Generates rails route to
+ * /users/confirmation(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const userConfirmation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"confirmation"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/password(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -684,4 +708,12 @@ export const userRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"]
  * @returns {string} route path
  */
 export const userSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/unlock(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const userUnlock = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"unlock"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 

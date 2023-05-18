@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { TextInput, type TextInputProps } from '@mantine/core'
-import Label from './Label'
+import Label from '../Label'
 
 export interface ITextInputProps extends TextInputProps {}
 

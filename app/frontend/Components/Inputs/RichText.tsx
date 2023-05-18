@@ -1,6 +1,6 @@
 import React from 'react'
 import RichTextEditor, { type IRichTextEditorProps } from '../RichTextEditor'
-import Label from './Label'
+import Label from '../Label'
 
 export interface IRichTextProps extends IRichTextEditorProps {
 	label?: React.ReactNode

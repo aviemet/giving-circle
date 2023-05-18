@@ -29,7 +29,7 @@ const DynamicInputs = ({ children, model, label, emptyData }: IDynamicInputsProp
 							<Box sx={ { flex: 1 } }>
 								{ children }
 							</Box>
-							<Button onClick={ () => removeInput(i) }size='xs' ml="xs">
+							<Button onClick={ () => removeInput(i) } size='xs' ml="xs">
 								<MinusCircleIcon />
 							</Button>
 						</Flex>

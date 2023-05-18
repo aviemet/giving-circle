@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
-import Label from './Label'
+import Label from '../Label'
 
 export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	options: Array<Record<string, any>>

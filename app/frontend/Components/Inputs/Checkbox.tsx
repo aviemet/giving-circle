@@ -16,7 +16,7 @@ const CheckboxComponent = forwardRef<HTMLInputElement, ICheckboxProps>((
 			ref={ ref }
 			id={ inputId }
 			name={ name }
-			sx={ [{ padding: '14px 10px' }, sx] }
+			sx={ [{  }, sx] }
 			{ ...props }
 		/>
 	)

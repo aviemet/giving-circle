@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { NumberInput, type NumberInputProps } from '@mantine/core'
-import Label from './Label'
+import Label from '../Label'
 
 export interface INumberInputProps extends NumberInputProps {}
 

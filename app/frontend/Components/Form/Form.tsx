@@ -2,7 +2,6 @@ import React from 'react'
 import { Box } from '@mantine/core'
 import cx from 'clsx'
 import { Form as InertiaForm, type FormProps, type NestedObject } from 'use-inertia-form'
-import useFormStyles from './useFormStyles'
 
 interface IFormProps<TForm> extends FormProps<TForm> {
 	grid?: boolean
@@ -11,10 +10,9 @@ interface IFormProps<TForm> extends FormProps<TForm> {
 const Form = <TForm extends NestedObject>(
 	{ children, data, grid = true, className, railsAttributes = true, ...props }: IFormProps<TForm>,
 ) => {
-	const { classes } = useFormStyles()
 
 	return (
-		<Box className={ classes.form }>
+		<Box>
 			<InertiaForm
 				data={ data }
 				className={ cx({ 'format-grid': grid }, className) }

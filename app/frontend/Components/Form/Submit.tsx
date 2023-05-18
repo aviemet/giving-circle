@@ -19,7 +19,6 @@ const Submit = forwardRef<HTMLButtonElement, ISubmitButtonProps>((
 			<SubmitButton
 				component={ Button }
 				ref={ ref }
-				sx={ [{ flex: 1 }, sx] }
 				disabled={ disabled || processing || !isDirty }
 				{ ...props }
 			>

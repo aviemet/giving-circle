@@ -1,5 +1,5 @@
 import React from 'react'
-import Label from './Label'
+import Label from '../Label'
 import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
 import { isEmpty } from 'lodash'
 

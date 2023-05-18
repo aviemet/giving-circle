@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { PasswordInput, type PasswordInputProps } from '@mantine/core'
-import Label from './Label'
+import Label from '../Label'
 
 export interface IPasswordInputProps extends PasswordInputProps {}
 

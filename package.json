@@ -86,10 +86,10 @@
     "lint-staged": "^13.2.2",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4",
-    "vite": "^4.3.8",
+    "vite": "^4.3.0",
     "vite-plugin-dynamic-import": "^1.4.0",
     "vite-plugin-full-reload": "^1.0.5",
-    "vite-plugin-ruby": "^3.2.2",
+    "vite-plugin-ruby": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.31.1"
   },

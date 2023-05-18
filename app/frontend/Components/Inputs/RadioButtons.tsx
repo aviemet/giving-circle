@@ -1,6 +1,6 @@
 import React from 'react'
 import { SegmentedControl, SegmentedControlProps } from '@mantine/core'
-import Label from './Label'
+import Label from '../Label'
 
 export type TOption = {
 	label: string
