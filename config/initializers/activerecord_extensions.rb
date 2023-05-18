@@ -1,10 +1,10 @@
-module ActiveRecordExtensions
-  def blueprint
-    "#{self.name}Blueprint".constantize
-  end
+require_relative '../../app/lib/renderable'
 
-  def render(**args)
-    self.blueprint.render_as_json(self, **args)
+module ActiveRecordExtensions
+  extend ActiveSupport::Concern
+
+  included do
+    include Renderable::ClassMethods
   end
 end
 
