@@ -96,11 +96,23 @@ export const cancelUserRegistration: ((
 
 /**
  * Generates rails route to
- * /users/sign_out(.:format)
+ * /logout(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const destroyUserSession: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /members/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editMember: ((
+  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -112,6 +124,18 @@ export const destroyUserSession: ((
  * @returns {string} route path
  */
 export const editRailsConductorInboundEmail: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /themes/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editTheme: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -138,6 +162,48 @@ export const editUserRegistration: ((
 
 /**
  * Generates rails route to
+ * /members/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const member: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /members(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const members: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /members/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newMember: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /themes/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newTheme: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/password/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -148,7 +214,7 @@ export const newUserPassword: ((
 
 /**
  * Generates rails route to
- * /users/sign_up(.:format)
+ * /users/register(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -158,7 +224,7 @@ export const newUserRegistration: ((
 
 /**
  * Generates rails route to
- * /users/sign_in(.:format)
+ * /login(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -174,6 +240,28 @@ export const newUserSession: ((
  */
 export const root: ((
   options?: {} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /themes/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const theme: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /themes(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themes: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
@@ -210,7 +298,7 @@ export const userRegistration: ((
 
 /**
  * Generates rails route to
- * /users/sign_in(.:format)
+ * /login(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */

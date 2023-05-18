@@ -3,7 +3,7 @@ module.exports = {
 		'browser': true,
 		'es2021': true,
 	},
-	'extends': ['plugin:react/recommended', 'plugin:import/typescript', 'plugin:storybook/recommended'],
+	'extends': ['plugin:react/recommended', 'plugin:import/typescript'],
 	'plugins': ['react', '@typescript-eslint', 'import'],
 	'settings': {
 		'import/resolver': {
@@ -16,7 +16,6 @@ module.exports = {
 			'jsx': true,
 		},
 		'ecmaVersion': 'latest',
-		'sourceType': 'module',
 		'requireConfigFile': false,
 	},
 	'ignorePatterns': ['app/frontend/types/**/*', 'app/javascript/**/*'],
@@ -61,6 +60,13 @@ module.exports = {
 			'when': 'always',
 			'children': true,
 		}],
+		// 'react/jsx-space-before-closing': 2,
+		'react/jsx-tag-spacing': ['error', {
+			'closingSlash': 'never',
+			'beforeSelfClosing': 'always',
+			'afterOpening': 'never',
+			'beforeClosing': 'allow',
+		}],
 		'react/display-name': ['off'],
 		'react/prop-types': 0,
 		'eqeqeq': 'error',
@@ -77,6 +83,6 @@ module.exports = {
 				'catch': { 'after': false },
 			},
 		}],
-		'comma-dangle': [2, 'always-multiline'],
+		'comma-dangle': ['error', 'always-multiline'],
 	},
 }

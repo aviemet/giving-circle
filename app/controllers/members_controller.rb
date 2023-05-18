@@ -1,9 +1,9 @@
 class MembersController < ApplicationController
   include Searchable
 
-  expose :members, -> { search(@active_company.members.includes_associated, sortable_fields) }
-    expose :member, scope: ->{ @active_company.members }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :members, -> { search(members.includes_associated, sortable_fields) }
+  expose :member, scope: ->{ members }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /members
   def index
     authorize members

@@ -521,11 +521,20 @@ export const cancelUserRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"u
 
 /**
  * Generates rails route to
- * /users/sign_out(.:format)
+ * /logout(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"sign_out"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logout"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /members/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editMember = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -535,6 +544,15 @@ export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users
  * @returns {string} route path
  */
 export const editRailsConductorInboundEmail = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"rails"],[2,[7,"/"],[2,[6,"conductor"],[2,[7,"/"],[2,[6,"action_mailbox"],[2,[7,"/"],[2,[6,"inbound_emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /themes/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editTheme = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -554,6 +572,39 @@ export const editUserRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"use
 
 /**
  * Generates rails route to
+ * /members/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const member = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /members(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const members = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /members/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newMember = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /themes/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newTheme = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/password/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -562,19 +613,19 @@ export const newUserPassword = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],
 
 /**
  * Generates rails route to
- * /users/sign_up(.:format)
+ * /users/register(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"sign_up"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const newUserRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"register"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /users/sign_in(.:format)
+ * /login(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"sign_in"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const newUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -583,6 +634,23 @@ export const newUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[
  * @returns {string} route path
  */
 export const root = __jsr.r({}, [7,"/"]);
+
+/**
+ * Generates rails route to
+ * /themes/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const theme = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /themes(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themes = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"themes"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -611,9 +679,9 @@ export const userRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"]
 
 /**
  * Generates rails route to
- * /users/sign_in(.:format)
+ * /login(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"sign_in"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const userSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]);
 

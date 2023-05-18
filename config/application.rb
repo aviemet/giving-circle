@@ -23,8 +23,10 @@ module GivingCircle
 
     config.generators do |g|
       g.test_framework      :rspec
+      g.view_specs          false
+      g.routing_specs       false
 
-      g.template_engine     nil
+      g.template_engine     :tsx
       g.scaffold_stylesheet false
       g.stylesheets         false
       g.javascripts         false

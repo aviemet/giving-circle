@@ -2,9 +2,6 @@ import React from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
-import { usePage } from '@inertiajs/react'
-import axios from 'axios'
-import { Routes } from '@/lib'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	breakpoints: {
