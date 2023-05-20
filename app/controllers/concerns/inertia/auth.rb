@@ -5,7 +5,7 @@ module Inertia::Auth
 
   included do
     inertia_share auth: lambda { {
-      user: current_user ? current_user.render(view: :shared) : nil,
+      user: current_user ? current_user.render : nil,
       form_authenticity_token:,
     } }
   end

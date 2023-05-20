@@ -17,7 +17,6 @@ class UserSerializer < ApplicationSerializer
     :locked_at,
     :created_at,
     :updated_at,
-    :active,
   )
 
   has_many :activities, serializer: ActivitySerializer

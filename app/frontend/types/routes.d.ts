@@ -118,6 +118,16 @@ export const circles: ((
 
 /**
  * Generates rails route to
+ * /dashboard(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const dashboard: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /logout(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -191,6 +201,16 @@ export const editUserPassword: ((
  * @returns {string} route path
  */
 export const editUserRegistration: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /home(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const home: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

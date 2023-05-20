@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :circles
-  root "pages#home"
+  root "pages#dashboard" # Product home page, descriptions, call to action
+
+  get "home" => "pages#home"
+  get "dashboard" => "pages#dashboard", as: :dashboard
 
   # DEVISE PATHS #
 
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
 
   # RESOURCEFUL PATHS #
 
+  resources :circles
   resources :themes
   resources :members
 end
