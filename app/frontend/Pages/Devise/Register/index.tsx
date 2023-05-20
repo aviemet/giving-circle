@@ -1,8 +1,7 @@
 import React from 'react'
 import { Form, TextInput, PasswordInput, Submit, Field } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Heading, Link } from '@/Components'
-import { usePage } from '@inertiajs/react'
+import { Box, Heading, Link } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TRegisterFormData = {
@@ -13,19 +12,7 @@ type TRegisterFormData = {
 	}
 }
 
-const firstRun = {
-	heading: 'Create Admin User',
-	description: 'Time to create your first user which  will be the admin for your inventory system',
-}
-
-const register = {
-	heading: 'Sign Up',
-	description: '',
-}
-
 const Register = () => {
-	const { props } = usePage<SharedInertiaProps>()
-
 	const handleFormChange = ({ data }: UseFormProps<TRegisterFormData>) => {
 		// console.log({ data })
 	}
@@ -50,8 +37,6 @@ const Register = () => {
 		// console.log({ value, form })
 	}
 
-	const content = props?.first_run ? firstRun : register
-
 	return (
 		<Form
 			data={ {
@@ -68,10 +53,9 @@ const Register = () => {
 			grid={ false }
 		>
 
-			<div>
-				<Heading>{ content.heading }</Heading>
-				<p>{ content.description }</p>
-			</div>
+			<Box>
+				<Heading>Sign Up</Heading>
+			</Box>
 
 			<Field>
 				<TextInput

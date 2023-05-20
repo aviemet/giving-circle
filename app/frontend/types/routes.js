@@ -521,11 +521,37 @@ export const cancelUserRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"u
 
 /**
  * Generates rails route to
+ * /circles/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const circle = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /circles(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const circles = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"circles"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
  * /logout(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logout"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /circles/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editCircle = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -586,6 +612,14 @@ export const member = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"m
  * @returns {string} route path
  */
 export const members = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /circles/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newCircle = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

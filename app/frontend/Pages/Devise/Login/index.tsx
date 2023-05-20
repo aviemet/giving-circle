@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { Heading, Link } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
-type TLoginFormData = {
+type LoginFormData = {
 	user: {
 		email: string
 		password: string
@@ -23,7 +23,7 @@ const defaultData = {
 const Login = () => {
 	const emailInputRef = useRef<HTMLInputElement>(null)
 
-	const handleSubmit = ({ data }: UseFormProps<TLoginFormData>) => {
+	const handleSubmit = ({ data }: UseFormProps<LoginFormData>) => {
 		if(data.user.email === '' || data.user.password === '') {
 			emailInputRef.current!.focus()
 			return false

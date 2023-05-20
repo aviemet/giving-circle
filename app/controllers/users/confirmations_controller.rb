@@ -3,7 +3,7 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /users/confirmation/new(?email=:email)
   def new
-    render inertia: "Public/Devise/Confirmations/New", props: {
+    render inertia: "Auth/Devise/Confirmations/New", props: {
       user: {
         email: params[:email]
       }

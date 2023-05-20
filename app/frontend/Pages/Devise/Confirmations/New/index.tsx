@@ -17,7 +17,7 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 		>
 			<div>
 				<Heading order={ 3 }>Please check your email</Heading>
-				<p>You will receive an email within the next couple minutes. Please follow the link to confirm your account.</p>
+				<p>An email has been sent to the address provided. Please follow the link to confirm your account.</p>
 				<p>If you don&apos;t receive an email, use the form below to resend it.</p>
 			</div>
 

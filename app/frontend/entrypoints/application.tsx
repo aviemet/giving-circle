@@ -2,7 +2,7 @@ import React from 'react'
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios'
-import { PublicLayout, AppLayout } from '../Layouts'
+import { PublicLayout, AppLayout, AuthLayout } from '../Layouts'
 
 type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
@@ -19,10 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		resolve: async name => {
 			let checkedName = name
-			let layout = AppLayout
-			if(name.startsWith('Public/')) {
-				layout = PublicLayout
-				checkedName = name.replace('Public/', '')
+			let layout
+
+			switch(name.substring(0, name.indexOf('/'))) {
+				case 'Public':
+					layout = PublicLayout
+					checkedName = name.replace('Public/', '')
+					break
+				case 'Auth':
+					layout = AuthLayout
+					checkedName = name.replace('Auth/', '')
+					break
+				default:
+					layout = AppLayout
 			}
 
 			const page = (await pages[`../Pages/${checkedName}/index.tsx`]()).default

@@ -50,8 +50,8 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 })
 
 export const GlobalStyles = () => <Global styles={ theme => ({
-	'html, body': {
-		overflow: 'hidden',
+	'html, body, #app': {
+		height: '100%',
 	},
 
 	'*::selection': {

@@ -4,6 +4,7 @@ import Providers from '@/Layouts/Providers'
 import { Flash } from '@/Components/Flash'
 
 import AppLayout from './AppLayout'
+import AuthLayout from './AuthLayout'
 import PublicLayout from './PublicLayout'
 
 import dayjs from 'dayjs'
@@ -36,6 +37,14 @@ const AppLayoutLayout = (page: InertiaPageProps) => {
 	)
 }
 
+const AuthLayoutLayout = (page: InertiaPageProps) => {
+	return (
+		<LayoutWrapper>
+			<AuthLayout>{ page }</AuthLayout>
+		</LayoutWrapper>
+	)
+}
+
 const PublicLayoutLayout = (page: InertiaPageProps) => {
 	return (
 		<LayoutWrapper>
@@ -46,5 +55,6 @@ const PublicLayoutLayout = (page: InertiaPageProps) => {
 
 export {
 	AppLayoutLayout as AppLayout,
+	AuthLayoutLayout as AuthLayout,
 	PublicLayoutLayout as PublicLayout,
 }
