@@ -46,6 +46,10 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 		footer: {
 			height: 35,
 		},
+		table: {
+			sortButtonHeight: 5,
+			sortButtonWidth: 6,
+		},
 	},
 })
 

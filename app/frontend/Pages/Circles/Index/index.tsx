@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Container, Heading } from '@/Components'
+import { Container, Heading, Table } from '@/Components'
 import { NewIcon } from '@/Components/Icons'
 import CirclesTable from '../Table'
 
@@ -12,8 +12,14 @@ interface ICircleIndexProps {
 const CirclesIndex = ({ circles, pagination }: ICircleIndexProps) => {
 	return (
 		<Container>
-			<Heading>Circles</Heading>
-			<CirclesTable />
+			<Table.TableProvider
+				model="circle"
+				rows={ circles }
+				pagination={ pagination }
+			>
+				<Heading>Circles</Heading>
+				<CirclesTable />
+			</Table.TableProvider>
 		</Container>
 	)
 }

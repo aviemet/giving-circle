@@ -32,7 +32,7 @@ const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 const AppLayoutLayout = (page: InertiaPageProps) => {
 	return (
 		<LayoutWrapper>
-			<AppLayout>{ page.props.children }</AppLayout>
+			<AppLayout>{ page }</AppLayout>
 		</LayoutWrapper>
 	)
 }

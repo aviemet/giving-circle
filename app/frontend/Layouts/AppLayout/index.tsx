@@ -17,7 +17,7 @@ import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
 
-const AppLayout = ({ children }: { children: React.ReactNode}) => {
+const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
 	const [opened, toggleOpened] = useBooleanToggle(false)
 
