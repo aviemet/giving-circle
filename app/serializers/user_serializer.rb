@@ -19,5 +19,4 @@ class UserSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  has_many :activities, serializer: ActivitySerializer
 end

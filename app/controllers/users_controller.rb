@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ContactableConcern
 
   expose :users, -> { search(User.all.includes_associated, sortable_fields) }
-  expose :user
+  expose :user, id: ->{ params[:slug] }, scope: ->{ Circle.includes_associated }, find_by: :slug
 
   # GET /users
   def index
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     paginated_users = users.page(params[:page] || 1)
 
     render inertia: "Users/Index", props: {
-      users: users.render(view: :index),
+      users: users.render,
       pagination: -> { {
         count: users.count,
         **pagination_data(paginated_users)
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def show
     authorize user
     render inertia: "Users/Show", props: {
-      user: user.render(view: :show)
+      user: user.render
     }
   end
 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def edit
     authorize user
     render inertia: "Users/Edit", props: {
-      user: user.render(view: :edit)
+      user: user.render
     }
   end
 

@@ -4,12 +4,12 @@ import {
 	Navbar,
 	Header,
 	Footer,
-	Text,
 	MediaQuery,
 	Burger,
 	useMantineTheme,
 	Flex,
-	Container,
+	Box,
+	ScrollArea,
 } from '@mantine/core'
 import useAppLayoutStyles from './useAppLayoutStyles'
 import { useBooleanToggle } from '@/lib/hooks'
@@ -34,6 +34,7 @@ const AppLayout = ({ children }: { children: React.ReactNode}) => {
 			} }
 			navbarOffsetBreakpoint={ breakpoint }
 			asideOffsetBreakpoint={ breakpoint }
+			layout="alt"
 			header={
 				<Header height={ { base: 50 } } px="md">
 					<Flex align="center" sx={ { height: '100%' } }>
@@ -62,7 +63,7 @@ const AppLayout = ({ children }: { children: React.ReactNode}) => {
 				</Footer>
 			}
 		>
-			<>{ children }</>
+			<Box component={ ScrollArea }>{ children }</Box>
 		</AppShell>
 	)
 }

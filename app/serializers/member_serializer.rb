@@ -1,4 +1,4 @@
-class MembersSerializer < ApplicationSerializer
+class MemberSerializer < ApplicationSerializer
   object_as :member
 
   attributes(

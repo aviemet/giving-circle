@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include PublicActivity::StoreController
   include Pundit::Authorization
 
   protect_from_forgery with: :exception

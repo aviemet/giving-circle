@@ -1,38 +1,38 @@
 class CirclesController < ApplicationController
   include Searchable
 
-  expose :circles, -> { search(circles.includes_associated, sortable_fields) }
-    expose :circle, scope: ->{ circles }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :circles, -> { search(Circle.includes_associated, sortable_fields) }
+  expose :circle, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /circles
   def index
     authorize circles
-    render inertia: "Circle/Index", props: {
-      circles: -> { circles.render(view: :index) }
+    render inertia: "Circles/Index", props: {
+      circles: -> { circles.render }
     }
   end
 
   # GET /circles/:id
   def show
     authorize circle
-    render inertia: "Circle/Show", props: {
-      circle: -> { circle.render(view: :show) }
+    render inertia: "Circles/Show", props: {
+      circle: -> { circle.render }
     }
   end
 
   # GET /circles/new
   def new
     authorize Circle.new
-    render inertia: "Circle/New", props: {
-      circle: Circle.new.render(view: :form_data)
+    render inertia: "Circles/New", props: {
+      circle: Circle.new.render
     }
   end
 
   # GET /circles/:id/edit
   def edit
     authorize circle
-    render inertia: "Circle/Edit", props: {
-      circle: circle.render(view: :edit)
+    render inertia: "Circles/Edit", props: {
+      circle: circle.render
     }
   end
 

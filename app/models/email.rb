@@ -10,9 +10,7 @@ class Email < ApplicationRecord
     },
   )
 
-  tracked
   resourcify
-
 
   scope :includes_associated, -> { includes([]) }
 end

@@ -9,6 +9,5 @@ class RoleSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  has_many :activities, serializer: ActivitySerializer
   has_many :users, serializer: UserSerializer
 end

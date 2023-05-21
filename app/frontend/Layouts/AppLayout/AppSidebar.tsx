@@ -1,11 +1,26 @@
 import React from 'react'
-import { Box, Text } from '@mantine/core'
+import { Box, Divider, Navbar, Text } from '@mantine/core'
+import { Link } from '@/Components'
+import { Routes } from '@/lib'
 
 const AppSidebar = () => {
 	return (
-		<Box>
-			<Text>Application navbar</Text>
-		</Box>
+		<>
+			<Navbar.Section>
+				<Text>Giving Circle</Text>
+			</Navbar.Section>
+
+			<Divider />
+
+			<Navbar.Section grow>
+				<Link href={ Routes.circles() }>Circles</Link>
+			</Navbar.Section>
+
+			<Divider />
+
+			<Navbar.Section>
+			</Navbar.Section>
+		</>
 	)
 }
 

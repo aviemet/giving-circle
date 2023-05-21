@@ -7,32 +7,32 @@ class ThemesController < ApplicationController
   # GET /themes
   def index
     authorize themes
-    render inertia: "Theme/Index", props: {
-      themes: -> { themes.render(view: :index) }
+    render inertia: "Themes/Index", props: {
+      themes: -> { themes.render }
     }
   end
 
   # GET /themes/:id
   def show
     authorize theme
-    render inertia: "Theme/Show", props: {
-      theme: -> { theme.render(view: :show) }
+    render inertia: "Themes/Show", props: {
+      theme: -> { theme.render }
     }
   end
 
   # GET /themes/new
   def new
     authorize Theme.new
-    render inertia: "Theme/New", props: {
-      theme: Theme.new.render(view: :form_data)
+    render inertia: "Themes/New", props: {
+      theme: Theme.new.render
     }
   end
 
   # GET /themes/:id/edit
   def edit
     authorize theme
-    render inertia: "Theme/Edit", props: {
-      theme: theme.render(view: :edit)
+    render inertia: "Themes/Edit", props: {
+      theme: theme.render
     }
   end
 

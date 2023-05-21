@@ -10,33 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_20_152823) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_144508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", id: :serial, force: :cascade do |t|
-    t.string "trackable_type"
-    t.integer "trackable_id"
-    t.string "owner_type"
-    t.integer "owner_id"
-    t.string "key"
-    t.text "parameters"
-    t.string "recipient_type"
-    t.integer "recipient_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
-    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
-    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
-    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
-    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
-    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
-  end
-
   create_table "circles", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_circles_on_slug", unique: true
+  end
+
+  create_table "circles_themes", force: :cascade do |t|
+    t.bigint "circle_id", null: false
+    t.bigint "theme_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_circles_themes_on_circle_id"
+    t.index ["theme_id"], name: "index_circles_themes_on_theme_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -61,13 +53,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_152823) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "members_themes", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "theme_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_members_themes_on_member_id"
+    t.index ["theme_id"], name: "index_members_themes_on_theme_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
   create_table "themes", force: :cascade do |t|
     t.string "title"
     t.string "question"
     t.string "quarter"
-    t.string "slug"
+    t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,4 +108,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_152823) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "users_circles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "circle_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_users_circles_on_circle_id"
+    t.index ["user_id"], name: "index_users_circles_on_user_id"
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  add_foreign_key "circles_themes", "circles"
+  add_foreign_key "circles_themes", "themes"
+  add_foreign_key "members_themes", "members"
+  add_foreign_key "members_themes", "themes"
+  add_foreign_key "users_circles", "circles"
+  add_foreign_key "users_circles", "users"
 end

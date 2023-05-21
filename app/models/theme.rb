@@ -10,8 +10,15 @@ class Theme < ApplicationRecord
     },
   )
 
-  tracked
+  slug :title
+
   resourcify
 
   scope :includes_associated, -> { includes([]) }
+
+  has_many :circles_themes
+  has_many :circles, through: :circles_themes
+
+  has_many :members_themes
+  has_many :members, through: :members_themes
 end
