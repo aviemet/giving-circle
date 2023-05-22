@@ -16,6 +16,7 @@ import { useBooleanToggle } from '@/lib/hooks'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
+import { usePage } from '@inertiajs/react'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
@@ -53,7 +54,12 @@ const AppLayout = ({ children }: { children: any }) => {
 				</Header>
 			}
 			navbar={
-				<Navbar p="md" hiddenBreakpoint={ breakpoint } hidden={ !opened } width={ { sm: 200, lg: 300 } }>
+				<Navbar
+					p="md"
+					hiddenBreakpoint={ breakpoint }
+					hidden={ !opened }
+					width={ { sm: 200, lg: 300 } }
+				>
 					<AppSidebar />
 				</Navbar>
 			}

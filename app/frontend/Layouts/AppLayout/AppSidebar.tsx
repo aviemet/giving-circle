@@ -13,7 +13,7 @@ const AppSidebar = () => {
 			<Divider />
 
 			<Navbar.Section grow>
-				<Link href={ Routes.circles() }>Circles</Link>
+				<Link href={ Routes.themes() }>Themes</Link>
 			</Navbar.Section>
 
 			<Divider />
