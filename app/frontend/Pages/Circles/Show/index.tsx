@@ -10,10 +10,7 @@ const ShowCircle = ({ circle }: IShowCircleProps) => {
 	const title =  'Circle'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Circle', href: Routes.circles() },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
 				<Group position="apart">
 					<Heading>{ title }</Heading>

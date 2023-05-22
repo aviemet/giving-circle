@@ -2,8 +2,6 @@
 
 if Rails.env == "development"
 
-  ap("Keep this separate Rubocop")
-
   if User.count == 0
     user = User.create!({
       email: "aviemet@gmail.com",
@@ -12,6 +10,13 @@ if Rails.env == "development"
     })
 
     user.add_role :super_admin
+  end
+
+  if Circle.count == 0
+    circle = Circle.create!({
+      name: "Battery Powered"
+    })
+    user.add_role :admin, circle
   end
 
 end

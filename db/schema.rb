@@ -108,15 +108,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_144508) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "users_circles", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "circle_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_users_circles_on_circle_id"
-    t.index ["user_id"], name: "index_users_circles_on_user_id"
-  end
-
   create_table "users_roles", id: false, force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "role_id"
@@ -129,6 +120,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_144508) do
   add_foreign_key "circles_themes", "themes"
   add_foreign_key "members_themes", "members"
   add_foreign_key "members_themes", "themes"
-  add_foreign_key "users_circles", "circles"
-  add_foreign_key "users_circles", "users"
 end
