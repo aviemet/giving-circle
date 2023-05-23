@@ -1,14 +1,14 @@
 class ThemesController < ApplicationController
   include Searchable
 
-  expose :themes, -> { search(themes.includes_associated, sortable_fields) }
-  expose :theme, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :themes, -> { search(Theme.includes_associated, sortable_fields) }
+  expose :theme, id: ->{ params[:slug] }, scope: ->{ Theme.includes_associated }, find_by: :slug
 
   # GET /themes
   def index
     authorize themes
     render inertia: "Themes/Index", props: {
-      themes: -> { themes.render }
+      themes: -> { themes.render(view: :index) }
     }
   end
 

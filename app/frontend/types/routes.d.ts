@@ -96,13 +96,13 @@ export const cancelUserRegistration: ((
 
 /**
  * Generates rails route to
- * /circles/:id(.:format)
- * @param {any} id
+ * /circles/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const circle: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -138,13 +138,13 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
- * /circles/:id/edit(.:format)
- * @param {any} id
+ * /circles/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editCircle: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -174,13 +174,13 @@ export const editRailsConductorInboundEmail: ((
 
 /**
  * Generates rails route to
- * /themes/:id/edit(.:format)
- * @param {any} id
+ * /themes/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editTheme: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -328,13 +328,13 @@ export const root: ((
 
 /**
  * Generates rails route to
- * /themes/:id(.:format)
- * @param {any} id
+ * /themes/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const theme: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

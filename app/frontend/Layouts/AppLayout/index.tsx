@@ -17,29 +17,23 @@ import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
 import { usePage } from '@inertiajs/react'
-import { useLayout } from '../Providers'
-import {
-	matchPath,
-	otherwise,
-	useUrl,
-} from 'react-use-url'
+import { useUrl } from 'react-use-url'
+import cx from 'clsx'
+import useLayoutStore from '../store/LayoutStore'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
-	const [opened, toggleOpened] = useBooleanToggle(false)
+	const { sidebarOpen, sidebarVisible, toggleSidebarOpen, setSidebarVisible } = useLayoutStore()
 
 	const { classes } = useAppLayoutStyles()
-
-	const { layoutState, setLayoutState } = useLayout()
-	console.log({ layoutState })
 
 	const { path } = useUrl()
 
 	useEffect(() => {
 		if(path.length === 0 || path[0] === 'dashboard') {
-			setLayoutState({
-				sidebarVisible: false,
-			})
+			setSidebarVisible(false)
+		} else {
+			setSidebarVisible(true)
 		}
 	}, [path])
 
@@ -54,14 +48,14 @@ const AppLayout = ({ children }: { children: any }) => {
 			} }
 			navbarOffsetBreakpoint={ breakpoint }
 			asideOffsetBreakpoint={ breakpoint }
-			layout="alt"
+			// layout="alt"
 			header={
 				<Header height={ { base: 50 } } px="md">
 					<Flex align="center" sx={ { height: '100%' } }>
 						<MediaQuery largerThan={ breakpoint } styles={ { display: 'none' } }>
 							<Burger
-								opened={ opened }
-								onClick={ toggleOpened }
+								opened={ sidebarOpen }
+								onClick={ () => toggleSidebarOpen() }
 								size="sm"
 								color={ theme.colors.gray[6] }
 								mr="xl"
@@ -74,16 +68,17 @@ const AppLayout = ({ children }: { children: any }) => {
 			}
 			navbar={
 				<Navbar
-					p={ layoutState.sidebarVisible ? 'md' : 0 }
+					className={ cx(classes.navbar) }
 					hiddenBreakpoint={ breakpoint }
-					hidden={ !opened }
-					width={ layoutState.sidebarVisible ? {
+					p={ sidebarVisible ? 'md' : 0 }
+					hidden={ !sidebarOpen }
+					width={ sidebarVisible ? {
 						sm: 200, lg: 300,
 					} : {
 						xs: 0,
 					} }
 				>
-					{ layoutState.sidebarVisible && <AppSidebar /> }
+					<AppSidebar />
 				</Navbar>
 			}
 			footer={

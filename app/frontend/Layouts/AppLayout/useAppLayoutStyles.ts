@@ -4,6 +4,10 @@ export default createStyles((theme) => ({
 	page: {
 	},
 
+	navbar: {
+		transition: 'width 0.5s, min-width 0.5s',
+	},
+
 	wrapper: {
 		minHeight: '100vh',
 		width: '100%',

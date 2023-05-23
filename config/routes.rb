@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   # RESOURCEFUL PATHS #
 
-  resources :circles
-  resources :themes
+  resources :circles, param: :slug
+  resources :themes, param: :slug
   resources :members
 end
