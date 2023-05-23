@@ -5726,6 +5726,7 @@ __metadata:
     react-error-boundary: ^4.0.4
     react-html-props: ^2.0.2
     react-icons: ^4.8.0
+    react-use-url: ^1.0.5
     ts-jest: ^29.1.0
     typescript: ^5.0.4
     use-inertia-form: ^3.1.4
@@ -9185,6 +9186,15 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
+  languageName: node
+  linkType: hard
+
+"react-use-url@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "react-use-url@npm:1.0.5"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: da7489b69abf5869b73114763bf919b6ddd40600b3684bb6646d7a79ac638db96cada8da0127cef79a34dcbfea2fd10fde65020606d917563ebf5da18481e334
   languageName: node
   linkType: hard
 

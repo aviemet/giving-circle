@@ -3,6 +3,7 @@ import { createContext } from '@/lib/hooks'
 
 interface ILayoutSettings {
 	sidebarOpen: boolean
+	sidebarVisible: boolean
 }
 interface ILayoutContext {
 	layoutState: ILayoutSettings
@@ -20,6 +21,7 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const [layoutState, setLayoutState] = useReducer(layoutReducer, {
 		sidebarOpen: false,
+		sidebarVisible: true,
 	})
 
 	return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	AppShell,
 	Navbar,
@@ -17,12 +17,31 @@ import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
 import { usePage } from '@inertiajs/react'
+import { useLayout } from '../Providers'
+import {
+	matchPath,
+	otherwise,
+	useUrl,
+} from 'react-use-url'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
 	const [opened, toggleOpened] = useBooleanToggle(false)
 
 	const { classes } = useAppLayoutStyles()
+
+	const { layoutState, setLayoutState } = useLayout()
+	console.log({ layoutState })
+
+	const { path } = useUrl()
+
+	useEffect(() => {
+		if(path.length === 0 || path[0] === 'dashboard') {
+			setLayoutState({
+				sidebarVisible: false,
+			})
+		}
+	}, [path])
 
 	const breakpoint = 'sm'
 
@@ -55,12 +74,16 @@ const AppLayout = ({ children }: { children: any }) => {
 			}
 			navbar={
 				<Navbar
-					p="md"
+					p={ layoutState.sidebarVisible ? 'md' : 0 }
 					hiddenBreakpoint={ breakpoint }
 					hidden={ !opened }
-					width={ { sm: 200, lg: 300 } }
+					width={ layoutState.sidebarVisible ? {
+						sm: 200, lg: 300,
+					} : {
+						xs: 0,
+					} }
 				>
-					<AppSidebar />
+					{ layoutState.sidebarVisible && <AppSidebar /> }
 				</Navbar>
 			}
 			footer={
