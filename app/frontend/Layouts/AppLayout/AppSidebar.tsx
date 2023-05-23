@@ -1,13 +1,14 @@
 import React from 'react'
-import { Box, Divider, Navbar, Text } from '@mantine/core'
+import { Divider, Navbar, Text } from '@mantine/core'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
-import cx from 'clsx'
+import MobileMenuToggle from './MobileMenuToggle'
 
 const AppSidebar = () => {
 	return (
 		<>
 			<Navbar.Section>
+				<MobileMenuToggle />
 				<Text>Giving Circle</Text>
 			</Navbar.Section>
 

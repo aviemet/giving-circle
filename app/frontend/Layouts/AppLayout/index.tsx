@@ -4,26 +4,23 @@ import {
 	Navbar,
 	Header,
 	Footer,
-	MediaQuery,
-	Burger,
 	useMantineTheme,
 	Flex,
 	Box,
 	ScrollArea,
 } from '@mantine/core'
 import useAppLayoutStyles from './useAppLayoutStyles'
-import { useBooleanToggle } from '@/lib/hooks'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
-import { usePage } from '@inertiajs/react'
 import { useUrl } from 'react-use-url'
 import cx from 'clsx'
 import useLayoutStore from '../store/LayoutStore'
+import MobileMenuToggle from './MobileMenuToggle'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
-	const { sidebarOpen, sidebarVisible, toggleSidebarOpen, setSidebarVisible } = useLayoutStore()
+	const { sidebarOpen, sidebarVisible, sidebarBreakpoint, setSidebarVisible } = useLayoutStore()
 
 	const { classes } = useAppLayoutStyles()
 
@@ -37,8 +34,6 @@ const AppLayout = ({ children }: { children: any }) => {
 		}
 	}, [path])
 
-	const breakpoint = 'sm'
-
 	return (
 		<AppShell
 			styles={ {
@@ -46,22 +41,13 @@ const AppLayout = ({ children }: { children: any }) => {
 					background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
 				},
 			} }
-			navbarOffsetBreakpoint={ breakpoint }
-			asideOffsetBreakpoint={ breakpoint }
-			// layout="alt"
+			navbarOffsetBreakpoint={ sidebarBreakpoint }
+			asideOffsetBreakpoint={ sidebarBreakpoint }
+			layout="alt"
 			header={
 				<Header height={ { base: 50 } } px="md">
 					<Flex align="center" sx={ { height: '100%' } }>
-						<MediaQuery largerThan={ breakpoint } styles={ { display: 'none' } }>
-							<Burger
-								opened={ sidebarOpen }
-								onClick={ () => toggleSidebarOpen() }
-								size="sm"
-								color={ theme.colors.gray[6] }
-								mr="xl"
-							/>
-						</MediaQuery>
-
+						<MobileMenuToggle />
 						<AppHeader />
 					</Flex>
 				</Header>
@@ -69,7 +55,7 @@ const AppLayout = ({ children }: { children: any }) => {
 			navbar={
 				<Navbar
 					className={ cx(classes.navbar) }
-					hiddenBreakpoint={ breakpoint }
+					hiddenBreakpoint={ sidebarBreakpoint }
 					p={ sidebarVisible ? 'md' : 0 }
 					hidden={ !sidebarOpen }
 					width={ sidebarVisible ? {
@@ -77,8 +63,9 @@ const AppLayout = ({ children }: { children: any }) => {
 					} : {
 						xs: 0,
 					} }
+					sx={ { overflow: 'hidden' } }
 				>
-					<AppSidebar />
+					{ sidebarVisible && <AppSidebar /> }
 				</Navbar>
 			}
 			footer={

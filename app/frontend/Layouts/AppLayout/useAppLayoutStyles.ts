@@ -1,11 +1,17 @@
 import { createStyles } from '@mantine/core'
 
+const sidebarAnimationDelay = '0.5s'
+
 export default createStyles((theme) => ({
 	page: {
 	},
 
+	header: {
+		transition: `left ${sidebarAnimationDelay}, width ${sidebarAnimationDelay}`,
+	},
+
 	navbar: {
-		transition: 'width 0.5s, min-width 0.5s',
+		transition: `width ${sidebarAnimationDelay}, min-width ${sidebarAnimationDelay}`,
 	},
 
 	wrapper: {
