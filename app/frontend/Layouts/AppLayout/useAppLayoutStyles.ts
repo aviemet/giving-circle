@@ -32,9 +32,6 @@ export default createStyles((theme) => ({
 	},
 
 	content: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 		height: '100%',
 	},
 }))

@@ -7,7 +7,7 @@ interface IShowCircleProps {
 }
 
 const ShowCircle = ({ circle }: IShowCircleProps) => {
-	const title =  'Circle'
+	const title = circle.name || 'Circle'
 
 	return (
 		<Page title={ title }>

@@ -8,5 +8,5 @@ class Users::ShareSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  has_many :circles, serializer: CircleSerializer
+  has_many :circles, serializer: Circles::ShareSerializer
 end

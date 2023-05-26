@@ -6,7 +6,7 @@ declare global {
 	interface SharedInertiaProps extends PageProps {
 		auth: {
 			form_authenticty_token: string
-			user: Schema.User
+			user: Schema.UsersShare
 		}
 		flash: FlashMessage,
 		errors: Errors & ErrorBag

@@ -2,7 +2,7 @@ class CirclesController < ApplicationController
   include Searchable
 
   expose :circles, -> { search(Circle.includes_associated, sortable_fields) }
-  expose :circle, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :circle, id: ->{ params[:slug] }, scope: ->{ Circle.includes_associated }, find_by: :slug
 
   # GET /circles
   def index
@@ -16,7 +16,7 @@ class CirclesController < ApplicationController
   def show
     authorize circle
     render inertia: "Circles/Show", props: {
-      circle: -> { circle.render }
+      circle: -> { circle.render(view: :show) }
     }
   end
 
@@ -40,6 +40,7 @@ class CirclesController < ApplicationController
   def create
     authorize Circle.new
     if circle.save
+      current_user.add_role(:admin, circle)
       redirect_to circle, notice: "Circle was successfully created."
     else
       redirect_to new_circle_path, inertia: { errors: circle.errors }
