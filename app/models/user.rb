@@ -1,6 +1,13 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  resourcify
+  rolify
+
+  # :omniauthable, :timeoutable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,  :confirmable, :lockable, :trackable
+
+  scope :includes_associated, -> { includes([:circles]) }
+
+  def circles
+    Circle.with_roles(Circle.find_roles.pluck(:name), self)
+  end
 end

@@ -10,9 +10,10 @@ class Member < ApplicationRecord
     },
   )
 
-  tracked
   resourcify
 
+  has_many :members_themes
+  has_many :themes, through: :members_themes
 
   scope :includes_associated, -> { includes([]) }
 end

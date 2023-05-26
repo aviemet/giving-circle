@@ -6,25 +6,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    first_run = false
-    if User.count == 0
-      flash.clear
-      flash[:notice] = 'Create your admin user'
-      first_run = true
-    end
-
-    render inertia: 'Public/Devise/Register', props: {
-      first_run:
-    }
+    render inertia: 'Auth/Devise/Register'
   end
 
   # POST /resource
   def create
     build_resource(sign_up_params)
-
-    if User.count == 0
-      resource.confirmed_at = Time.now
-    end
 
     resource.save
     yield resource if block_given?

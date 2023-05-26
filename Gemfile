@@ -25,7 +25,6 @@ gem "money-rails", "~> 1.15"
 gem "decent_exposure", "~> 3.0"
 gem "time_for_a_boolean", "~> 0.2.1"
 gem "jsonb_accessor", "~> 1.3"
-gem "public_activity", "~> 2.0"
 gem "oj_serializers", "~> 2.0"
 gem "types_from_serializers", "~> 2.0", git: "https://github.com/aviemet/types_from_serializers"
 

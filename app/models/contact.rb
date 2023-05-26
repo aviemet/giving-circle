@@ -13,7 +13,6 @@ class Contact < ApplicationRecord
     },
   )
 
-  tracked
   resourcify
 
   belongs_to :contactable, polymorphic: true

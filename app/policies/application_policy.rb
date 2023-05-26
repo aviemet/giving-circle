@@ -52,7 +52,6 @@ class ApplicationPolicy
   private
 
   def standard_auth(_action)
-    user.has_role?(:super_admin) ||
-      user.person.roles.include?(Company.first.roles.find_by_name(:admin))
+    user.has_role?(:super_admin)
   end
 end
