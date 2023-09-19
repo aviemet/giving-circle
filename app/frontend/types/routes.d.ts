@@ -32,8 +32,8 @@ declare type RequiredParameters<T extends number> = T extends 1 ? [RequiredRoute
     RequiredRouteParameter,
     RequiredRouteParameter
 ] : RequiredRouteParameter[];
-declare type RouteHelperOptions<T extends string> = RouteOptions & Optional<Record<T, OptionalRouteParameter>>;
-declare type RouteHelper<T extends number = number, U extends string = string> = ((...args: [...RequiredParameters<T>, RouteHelperOptions<U>]) => string) & RouteHelperExtras;
+declare type RouteHelperOptions = RouteOptions & Record<string, OptionalRouteParameter>;
+declare type RouteHelper<T extends number = number> = ((...args: [...RequiredParameters<T>, RouteHelperOptions]) => string) & RouteHelperExtras;
 declare type RouteHelpers = Record<string, RouteHelper>;
 declare type Configuration = {
     prefix: string;
@@ -106,6 +106,18 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
+ * /members/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editMember: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -133,6 +145,38 @@ export const editUserPassword: ((
  * @returns {string} route path
  */
 export const editUserRegistration: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /members/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const member: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /members(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const members: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /members/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newMember: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
