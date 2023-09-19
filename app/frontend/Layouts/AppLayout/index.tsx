@@ -1,80 +1,42 @@
-import React, { useEffect } from 'react'
-import {
-	AppShell,
-	Navbar,
-	Header,
-	Footer,
-	useMantineTheme,
-	Flex,
-	Box,
-	ScrollArea,
-} from '@mantine/core'
-import useAppLayoutStyles from './useAppLayoutStyles'
+import React from 'react'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
-import { useUrl } from 'react-use-url'
-import cx from 'clsx'
-import useLayoutStore from '../store/LayoutStore'
-import MobileMenuToggle from './MobileMenuToggle'
+import { useDisclosure } from '@mantine/hooks'
+import { AppShell, Box, Burger, Group, ScrollArea } from '@mantine/core'
 
 const AppLayout = ({ children }: { children: any }) => {
-	const theme = useMantineTheme()
-	const { sidebarOpen, sidebarVisible, sidebarBreakpoint, setSidebarVisible } = useLayoutStore()
-
-	const { classes } = useAppLayoutStyles()
-
-	const { path } = useUrl()
-
-	useEffect(() => {
-		if(path.length === 0 || path[0] === 'dashboard') {
-			setSidebarVisible(false)
-		} else {
-			setSidebarVisible(true)
-		}
-	}, [path])
+	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
+	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
 
 	return (
 		<AppShell
-			styles={ {
-				main: {
-					background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-				},
-			} }
-			navbarOffsetBreakpoint={ sidebarBreakpoint }
-			asideOffsetBreakpoint={ sidebarBreakpoint }
 			layout="alt"
-			header={
-				<Header height={ { base: 50 } } px="md">
-					<Flex align="center" sx={ { height: '100%' } }>
-						<MobileMenuToggle />
-						<AppHeader />
-					</Flex>
-				</Header>
-			}
-			navbar={
-				<Navbar
-					className={ cx(classes.navbar) }
-					hiddenBreakpoint={ sidebarBreakpoint }
-					p={ sidebarVisible ? 'md' : 0 }
-					hidden={ !sidebarOpen }
-					width={ sidebarVisible ? {
-						sm: 200, lg: 300,
-					} : {
-						xs: 0,
-					} }
-					sx={ { overflow: 'hidden' } }
-				>
-					{ sidebarVisible && <AppSidebar /> }
-				</Navbar>
-			}
-			footer={
-				<Footer height={ 36 } px={ 8 } py={ 4 }>
-					<AppFooter />
-				</Footer>
-			}
+			header={ { height: 60 } }
+			navbar={ {
+				width: 300,
+				breakpoint: 'sm',
+				collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+			} }
+			footer={ { height: 36, px: 8, py: 4 } }
+			padding="md"
 		>
-			<Box component={ ScrollArea }>{ children }</Box>
+			<AppShell.Header>
+				<Group h="100%" px="md">
+					<Burger opened={ mobileOpened } onClick={ toggleMobile } hiddenFrom="sm" size="sm" />
+					<Burger opened={ desktopOpened } onClick={ toggleDesktop } visibleFrom="sm" size="sm" />
+					<AppHeader />
+				</Group>
+			</AppShell.Header>
+			<AppShell.Navbar p="md">
+				<AppSidebar />
+			</AppShell.Navbar>
+			<AppShell.Main>
+				<Box component={ ScrollArea }>{ children }</Box>
+			</AppShell.Main>
+			<AppShell.Footer>
+				<AppFooter />
+			</AppShell.Footer>
 		</AppShell>
 	)
 }

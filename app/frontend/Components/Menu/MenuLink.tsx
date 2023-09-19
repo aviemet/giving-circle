@@ -3,7 +3,7 @@ import { Menu, createPolymorphicComponent, type MenuItemProps } from '@mantine/c
 import cx from 'clsx'
 import { Link } from '@/Components'
 import { ILinkProps } from '../Link'
-import useMenuItemStyles from './useMenuItemStyles'
+import classes from './MenuItem.module.css'
 
 interface IMenuItemProps extends MenuItemProps, Omit<ILinkProps, 'color'|'children'> {
 	disabled?: boolean
@@ -14,8 +14,6 @@ const MenuItem = forwardRef<HTMLAnchorElement, IMenuItemProps>((
 	{ children, disabled = false, className, ...props },
 	ref,
 ) => {
-	const { classes } = useMenuItemStyles()
-
 	return (
 		<Menu.Item
 			ref={ ref }

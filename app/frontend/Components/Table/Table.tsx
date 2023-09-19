@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
-import { packSx, Table, type Sx, type TableProps } from '@mantine/core'
+import React from 'react'
+import { Table, type TableProps } from '@mantine/core'
 import cx from 'clsx'
-import useTableStyles from './useTableStyles'
+import classes from './Table.module.css'
 
 import Head from './Head'
 import Body from './Body'
@@ -48,21 +48,19 @@ const TableComponent: TableComponent & TableObjects = ({
 	fixed = false,
 	striped = true,
 	highlightOnHover = true,
-	sx,
 	...props
 }) => {
-	const { classes } = useTableStyles(fixed)
 
-	const stylesArray = useMemo(() => {
-		const arr: (Sx | undefined)[] = []
-		if(wrapper) {
-			arr.push({ thead: { top: -10 } })
-		}
-		if(sx) {
-			arr.push(...packSx(sx))
-		}
-		return arr
-	}, [wrapper, sx])
+	// const stylesArray = useMemo(() => {
+	// 	const arr: (Sx | undefined)[] = []
+	// 	if(wrapper) {
+	// 		arr.push({ thead: { top: -10 } })
+	// 	}
+	// 	if(sx) {
+	// 		arr.push(...packSx(sx))
+	// 	}
+	// 	return arr
+	// }, [wrapper, sx])
 
 	return (
 		<ConditionalWrapper
@@ -72,8 +70,8 @@ const TableComponent: TableComponent & TableObjects = ({
 			<Table
 				striped={ striped }
 				highlightOnHover={ highlightOnHover }
-				className={ cx(className, classes.table) }
-				sx={ stylesArray }
+				className={ cx(classes.table, className, { 'layout-fixed': fixed, 'layout-auto': !fixed }) }
+				// sx={ stylesArray }
 				{ ...props }
 			>
 				{ children }

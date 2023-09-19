@@ -11,17 +11,13 @@ const EditCircle = ({ circle }: IEditCircleProps) => {
 	const title = 'Edit Circle'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Circles', href: Routes.circles() },
-			{ title: Circle, href: Routes.circle(circle.id) },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<CirclesForm
 					method='put'
-					to={ Routes.circle() }
+					to={ Routes.circle(circle.slug) }
 					circle={ circle }
 				/>
 			</Section>

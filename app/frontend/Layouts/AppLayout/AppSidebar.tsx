@@ -1,27 +1,25 @@
 import React from 'react'
-import { Divider, Navbar, Text } from '@mantine/core'
+import { AppShell, Divider, Text } from '@mantine/core'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
-import MobileMenuToggle from './MobileMenuToggle'
 
 const AppSidebar = () => {
 	return (
 		<>
-			<Navbar.Section>
-				<MobileMenuToggle />
+			<AppShell.Section>
 				<Text>Giving Circle</Text>
-			</Navbar.Section>
+			</AppShell.Section>
 
 			<Divider />
 
-			<Navbar.Section grow>
+			<AppShell.Section grow>
 				<Link href={ Routes.themes() }>Themes</Link>
-			</Navbar.Section>
+			</AppShell.Section>
 
 			<Divider />
 
-			<Navbar.Section>
-			</Navbar.Section>
+			<AppShell.Section>
+			</AppShell.Section>
 		</>
 	)
 }

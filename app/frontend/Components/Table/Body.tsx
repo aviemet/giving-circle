@@ -1,9 +1,8 @@
 import React, { forwardRef } from 'react'
 import { TableSectionContextProvider, useTableContext } from './TableContext'
-import { TBodyProps } from 'react-html-props'
-import { Box, LoadingOverlay, type BoxProps } from '@mantine/core'
+import { Box, LoadingOverlay, type BoxProps, ElementProps } from '@mantine/core'
 
-interface ITableBody extends BoxProps, TBodyProps {}
+interface ITableBody extends BoxProps, ElementProps<'tbody'> {}
 
 const Body = forwardRef<HTMLTableSectionElement, ITableBody>(({ children, ...props }, ref) => {
 	try {
@@ -12,7 +11,14 @@ const Body = forwardRef<HTMLTableSectionElement, ITableBody>(({ children, ...pro
 		return (
 			<TableSectionContextProvider value={ { section: 'body' } }>
 				<Box component="tbody" { ...props } ref={ ref }>
-					{ searching && <tr><td><LoadingOverlay visible={ searching } overlayBlur={ 1 } /></td></tr> }
+					{ searching && <tr>
+						<td>
+							<LoadingOverlay
+								visible={ searching }
+								overlayProps={ { blur: 1 } }
+							/>
+						</td>
+					</tr> }
 					{ children }
 				</Box>
 			</TableSectionContextProvider>

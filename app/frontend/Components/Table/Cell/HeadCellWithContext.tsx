@@ -17,7 +17,6 @@ const HeadCellWithContext = ({
 	nowrap = true,
 	rows,
 	hideable,
-	sx,
 	...props
 }: IHeadCellWithContextProps) => {
 	const { auth: { user: { table_preferences } } } = usePage<SharedInertiaProps>().props
@@ -57,9 +56,8 @@ const HeadCellWithContext = ({
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },
 			) }
-			sx={ {
+			style={ {
 				whiteSpace: nowrap ? 'nowrap' : 'normal',
-				...sx,
 			} }
 			{ ...props }
 		>

@@ -31,9 +31,6 @@ const config = defineConfig({
 		},
 	},
 	base: './',
-	test: {
-		globals: true,
-	},
 })
 
 export default config

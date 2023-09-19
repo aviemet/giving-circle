@@ -8,7 +8,7 @@ import { SearchIcon, CrossIcon, DoubleDownArrowIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
 import { Table } from '@/Components'
 import { useSessionStorage } from '@mantine/hooks'
-import useTableStyles from '../useTableStyles'
+import classes from '../Table.module.css'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
@@ -21,7 +21,6 @@ interface ISearchInputProps {
 const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
 	const { search } = window.location
-	const { classes } = useTableStyles()
 
 	const params = new URLSearchParams(search)
 	const [searchValue, setSearchValue] = useSessionStorage({

@@ -1,10 +1,10 @@
 import React from 'react'
 import { useTableContext } from '../TableContext'
-import { TRProps } from 'react-html-props'
 import RowInContext from './RowInContext'
 import { Box, type BoxProps } from '@mantine/core'
+import { ElementProps } from '@mantine/core'
 
-export interface ITableRow extends BoxProps, TRProps {
+export interface ITableRow extends BoxProps, ElementProps<'tr'> {
 	children?: JSX.Element[]
 }
 
