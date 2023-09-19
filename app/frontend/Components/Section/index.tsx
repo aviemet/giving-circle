@@ -1,19 +1,17 @@
 import React from 'react'
-import { Box, type BoxProps } from '@mantine/core'
+import { Box, ElementProps, type BoxProps } from '@mantine/core'
 import cx from 'clsx'
-import useSectionStyles from './useSectionStyles'
+import classes from './Section.module.css'
 
-interface ISectionProps extends BoxProps {
+interface ISectionProps extends BoxProps, ElementProps<'section'> {
 	fullHeight?: boolean
 }
 
 const Section = ({ children, fullHeight = false, className, ...props }: ISectionProps) => {
-	const { classes } = useSectionStyles()
-
 	return (
 		<Box
 			component="section"
-			className={ cx(classes.section, className, { fullHeight }) }
+			className={ cx(classes, className, { fullHeight }) }
 			{ ...props }
 		>
 			{ children }

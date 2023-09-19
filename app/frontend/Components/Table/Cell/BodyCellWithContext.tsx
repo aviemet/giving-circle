@@ -1,15 +1,14 @@
 import React, { useRef } from 'react'
 import cx from 'clsx'
 import { type ICellProps } from './index'
-import { Box, type Sx } from '@mantine/core'
+import { Box } from '@mantine/core'
 
 export interface IBodyCellWithContextProps extends Omit<ICellProps, 'hideable'> {
 	hideable?: false|string
 	model?: string
-	sx?: Sx
 }
 
-const BodyCellWithContext = ({ children, nowrap, fitContent, hideable, model, sx, ...props }: IBodyCellWithContextProps) => {
+const BodyCellWithContext = ({ children, nowrap, fitContent, hideable, model, ...props }: IBodyCellWithContextProps) => {
 	const tdRef = useRef<HTMLTableCellElement>(null)
 
 	return (
@@ -17,7 +16,7 @@ const BodyCellWithContext = ({ children, nowrap, fitContent, hideable, model, sx
 			component="td"
 			ref={ tdRef }
 			className={ cx({ 'table-column-fit': fitContent }) }
-			sx={ [{ whiteSpace: nowrap ? 'nowrap' : 'normal' }, sx ] }
+			style={ { whiteSpace: nowrap ? 'nowrap' : 'normal' } }
 			{ ...props }
 		>
 			{ children }

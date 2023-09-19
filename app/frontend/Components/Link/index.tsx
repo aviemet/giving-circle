@@ -1,18 +1,69 @@
-import React, { forwardRef } from 'react'
-import { type Method, type Visit } from '@inertiajs/core'
+import React, { forwardRef, useMemo } from 'react'
+import { Link, type InertiaLinkProps } from '@inertiajs/react'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
-import { type AnchorProps, type ButtonProps } from '@mantine/core'
+import { createPolymorphicComponent, Anchor, type ElementProps, type AnchorProps, type ButtonProps, Button } from '@mantine/core'
+import classes from './Link.module.css'
+import cx from 'clsx'
+import { exclude } from '@/lib'
+import { ExternalLinkIcon } from '../Icons'
+import normalizeUrl from 'normalize-url'
+
+const hasExternalPrefix = (href: string) => {
+	return ['http', 'www'].some(prefix => {
+		return href.startsWith(prefix) && (new URL(href)).hostname !== window.location.hostname
+	})
+}
+
+interface ICustomLinkProps
+	extends
+	Omit<InertiaLinkProps, 'color'|'size'|'style'|'href'>
+{
+	external?: boolean
+	href: string
+}
+
+const CustomLink = createPolymorphicComponent<'a', ICustomLinkProps>(
+	forwardRef<HTMLAnchorElement, ICustomLinkProps>(({ children, href, external, className, as, ...props }, ref) => {
+		const isExternal = useMemo(() => {
+			if(external !== undefined) return external
+			return hasExternalPrefix(href)
+		}, [href, external])
+
+		const LinkComponent = as === 'button' ? Button : Anchor
+
+		if(isExternal) {
+			return (
+				<LinkComponent
+					ref={ ref }
+					href={ useMemo(() => normalizeUrl(href, { stripWWW: false }), [href]) }
+					target="_blank"
+					rel="noreferrer"
+					className={ cx(classes, 'external', className) }
+					{ ...exclude(props, 'onProgress') }
+				>
+					{ children }
+					<ExternalLinkIcon />
+				</LinkComponent>
+			)
+		}
+
+		return <LinkComponent
+			ref={ ref }
+			href={ href }
+			component={ Link }
+			className={ cx(classes, className) }
+			{ ...props }
+		>
+			{ children }
+		</LinkComponent>
+	}),
+)
 
 export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children?: React.ReactNode
 	href: string
-	method?: Method
-	visit?: Omit<Visit, 'method'>
 	external?: boolean
-	compact?: boolean
-	as?: 'a'|'button'
-	onProgress?: React.ReactEventHandler<HTMLAnchorElement>
 	target?: string
 	rel?: string
 	tabIndex?: number
@@ -21,45 +72,48 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	preserveScroll?: boolean
 }
 
-const externalPrefix = ['http', 'www']
 
-const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, ...props },
+const Link2 = forwardRef<HTMLAnchorElement, ILinkProps>((
+	{ children, href, as = 'a', external, preserveScroll, buttonProps, className, ...props },
 	ref,
 ) => {
-	let renderExternal = external
+	const isExternal = useMemo(() => {
+		if(external !== undefined) return external
 
-	if(external === undefined) {
+		let localExternal = false
 		externalPrefix.some(prefix => {
 			if(href.startsWith(prefix)) {
-				renderExternal = true
+				const url = new URL(href)
+				localExternal = url.hostname !== window.location.hostname
 			}
 		})
+		return localExternal
+	}, [href, external])
+
+	if(isExternal) {
+		return (
+			<ExternalLink
+				href={ href }
+				ref={ ref }
+				className={ cx(classes, className) }
+				{ ...props }
+			>
+				{ children }
+			</ExternalLink>
+		)
 	}
 
-	if(renderExternal) {
-		return <ExternalLink
-			href={ href }
+	return (
+		<InertiaLink
 			ref={ ref }
-			{ ...onProgress }
+			href={ href }
+			as={ as }
+			className={ cx(classes, className) }
 			{ ...props }
 		>
 			{ children }
-		</ExternalLink>
-	}
-
-	return <InertiaLink
-		href={ href }
-		as={ as }
-		method={ method }
-		visit={ visit }
-		ref={ ref }
-		preserveScroll={ preserveScroll }
-		{ ...onProgress }
-		{ ...props }
-	>
-		{ children }
-	</InertiaLink>
+		</InertiaLink>
+	)
 })
 
-export default Link
+export default CustomLink

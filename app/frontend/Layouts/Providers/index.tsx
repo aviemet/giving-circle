@@ -4,6 +4,7 @@ import UiFrameworkProvider from './UiFrameworkProvider'
 import SpotlightProvider from './SpotlightProvider'
 
 import './reset.css'
+import '@mantine/core/styles.css'
 
 interface IProviderProps {
 	children?: React.ReactNode

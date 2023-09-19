@@ -1,10 +1,8 @@
 import React from 'react'
 import { Section } from '@/Components'
-import useTableStyles from './useTableStyles'
+import classes from './Table.module.css'
 
 const TableSection = ({ children }: { children: React.ReactNode }) => {
-	const { classes } = useTableStyles()
-
 	return (
 		<Section fullHeight={ true } className={ classes.section }>
 			{ children }

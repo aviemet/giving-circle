@@ -1,0 +1,26 @@
+html, body, #app {
+	height: '100%';
+}
+
+/* 
+*::selection' {
+	backgroundColor: theme.colors[theme.primaryColor][2];
+} */
+
+.hidden {
+	display: 'none';
+},
+
+.fullHeight {
+	display: 'flex';
+	flexDirection: 'column';
+	/* height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`; */
+}
+
+table.layout-fixed {
+	table-layout: fixed
+}
+
+table.layout-auto {
+	table-layout: auto
+}

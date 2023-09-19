@@ -1,11 +1,10 @@
 import React from 'react'
 import { useTableSectionContext } from '../TableContext'
-import { TDProps } from 'react-html-props'
 import BodyCell from './BodyCell'
 import HeadCell from './HeadCell'
-import { type BoxProps } from '@mantine/core'
+import { ElementProps, type BoxProps } from '@mantine/core'
 
-export interface ICellProps extends TDProps, BoxProps {
+export interface ICellProps extends BoxProps, ElementProps<'td'> {
 	fitContent?: boolean
 	sort?: string
 	nowrap?: boolean

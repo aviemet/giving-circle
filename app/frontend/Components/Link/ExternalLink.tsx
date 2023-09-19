@@ -1,11 +1,10 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useMemo } from 'react'
 import normalizeUrl from 'normalize-url'
 import { ExternalLinkIcon } from '@/Components/Icons'
-import { Anchor, type AnchorProps } from '@mantine/core'
-import useLinkStyles from './useLinkStyles'
+import { Anchor, ElementProps, type AnchorProps } from '@mantine/core'
 import cx from 'clsx'
 
-interface IExternalLinkProps extends Omit<AnchorProps, 'component'> {
+interface IExternalLinkProps extends Omit<AnchorProps, 'component'>, ElementProps<'a', keyof AnchorProps> {
 	href: string
 	as?: 'a'|'button'
 }
@@ -14,16 +13,13 @@ const ExternalLink = forwardRef<HTMLAnchorElement, IExternalLinkProps>((
 	{ children, href, as, className, ...props },
 	ref,
 ) => {
-	const url = normalizeUrl(href, { stripWWW: false })
-	const { classes } = useLinkStyles()
-
 	return (
 		<Anchor
-			href={ url }
+			ref={ ref }
+			href={ useMemo(() => normalizeUrl(href, { stripWWW: false }), [href]) }
 			target="_blank"
 			rel="noreferrer"
-			className={ cx(classes.external, className ) }
-			ref={ ref }
+			className={ cx('external', className ) }
 			{ ...props }
 		>
 			{ children }

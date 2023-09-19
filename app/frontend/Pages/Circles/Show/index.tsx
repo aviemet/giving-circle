@@ -12,13 +12,13 @@ const ShowCircle = ({ circle }: IShowCircleProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<Group position="apart">
+				<Group justify="apart">
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editCircle(circle.id) }>
+							<Menu.Link href={ Routes.editCircle(circle.slug) }>
 								Edit Circle
 							</Menu.Link>
 						</Menu.Dropdown>
