@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.2.2"
 
 # Server
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
@@ -27,7 +27,8 @@ gem "time_for_a_boolean", "~> 0.2.1"
 gem "jsonb_accessor", "~> 1.3"
 gem "public_activity", "~> 2.0"
 gem "oj_serializers", "~> 2.0"
-gem "types_from_serializers", "~> 2.0", git: "https://github.com/aviemet/types_from_serializers"
+gem "types_from_serializers", "~> 2.1"
+
 
 # Helpers
 gem "factory_bot", "~> 6.2"
@@ -88,4 +89,6 @@ group :test do
   gem "shoulda-matchers", "~> 5.1"
   gem "bullet", "~> 7.0"
   gem "simplecov", "~> 0.22.0"
+  gem "pundit-matchers", "~> 3.1"
 end
+
