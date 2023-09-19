@@ -1,38 +1,38 @@
 class MembersController < ApplicationController
   include Searchable
 
-  expose :members, -> { search(@active_company.members.includes_associated, sortable_fields) }
-    expose :member, scope: ->{ @active_company.members }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :members, -> { search(members.includes_associated, sortable_fields) }
+  expose :member, scope: ->{ members }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /members
   def index
     authorize members
-    render inertia: "Member/Index", props: {
-      members: -> { members.render(view: :index) }
+    render inertia: "Members/Index", props: {
+      members: -> { members.render }
     }
   end
 
   # GET /members/:id
   def show
     authorize member
-    render inertia: "Member/Show", props: {
-      member: -> { member.render(view: :show) }
+    render inertia: "Members/Show", props: {
+      member: -> { member.render }
     }
   end
 
   # GET /members/new
   def new
     authorize Member.new
-    render inertia: "Member/New", props: {
-      member: Member.new.render(view: :form_data)
+    render inertia: "Members/New", props: {
+      member: Member.new.render
     }
   end
 
   # GET /members/:id/edit
   def edit
     authorize member
-    render inertia: "Member/Edit", props: {
-      member: member.render(view: :edit)
+    render inertia: "Members/Edit", props: {
+      member: member.render
     }
   end
 

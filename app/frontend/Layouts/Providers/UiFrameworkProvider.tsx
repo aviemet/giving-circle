@@ -2,9 +2,6 @@ import React from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
-import { usePage } from '@inertiajs/react'
-import axios from 'axios'
-import { Routes } from '@/lib'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	breakpoints: {
@@ -17,24 +14,24 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 		xs: '36rem',
 		'2xs': '30rem', // 480px
 	},
-	black: '#111111',
-	white: '#FCFCFC',
+	// black: '#111111',
+	// white: '#FCFCFC',
 	colorScheme,
-	fontFamily: 'Roboto, sans-serif',
-	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	primaryColor: 'violet',
+	// fontFamily: 'Roboto, sans-serif',
+	// fontFamilyMonospace: 'Monaco, Courier, monospace',
+	// primaryColor: 'violet',
 	defaultRadius: 'xs',
 	transitionTimingFunction: 'ease-in-out',
-	headings: {
-		fontFamily: 'Greycliff CF, Roboto, sans-serif',
-	},
-	shadows: {
-		xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
-		sm: '0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)',
-		md: '0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12)',
-		lg: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)',
-		xl: '0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)',
-	},
+	// headings: {
+	// 	fontFamily: 'Greycliff CF, Roboto, sans-serif',
+	// },
+	// shadows: {
+	// 	xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+	// 	sm: '0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)',
+	// 	md: '0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12)',
+	// 	lg: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)',
+	// 	xl: '0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)',
+	// },
 	other: {
 		colorSchemeOption: (light: any, dark: any) => colorScheme === 'dark' ? dark : light,
 		header: {
@@ -49,11 +46,6 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 		footer: {
 			height: 35,
 		},
-		form: {
-			label: {
-				width: '10rem',
-			},
-		},
 		table: {
 			sortButtonHeight: 5,
 			sortButtonWidth: 6,
@@ -62,8 +54,8 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 })
 
 export const GlobalStyles = () => <Global styles={ theme => ({
-	'html, body': {
-		overflow: 'hidden',
+	'html, body, #app': {
+		height: '100%',
 	},
 
 	'*::selection': {

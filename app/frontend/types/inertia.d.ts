@@ -6,7 +6,7 @@ declare global {
 	interface SharedInertiaProps extends PageProps {
 		auth: {
 			form_authenticty_token: string
-			user: Schema.User
+			user: Schema.UsersShare
 		}
 		flash: FlashMessage,
 		errors: Errors & ErrorBag
@@ -23,6 +23,15 @@ declare global {
 		getError: (data: string) => string
 	}
 
+	interface IInertiaInputProps {
+		name: string
+		model?: string
+		errorKey?: string
+		compact?: boolean
+		onChange?: (value: T, form: UseFormProps) => void
+		onBlur?: (value: T, form: UseFormProps) => void
+	}
+	
 	declare namespace Inertia {
 		type Errors = Record<string|number|symbol, string|string[]>
 		
