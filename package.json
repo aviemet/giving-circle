@@ -120,5 +120,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "ts-node": {
+    "moduleTypes": {
+      "postcss.config.ts": "cjs"
+    }
   }
 }

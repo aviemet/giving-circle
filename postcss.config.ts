@@ -5,7 +5,7 @@ for(const key in breakpoints) {
 	breakpoints[`mantine-breakpoints-${key}`] = String(breakpoints[key])
 }
 
-export const postcss = {
+export default {
 	plugins: {
 		'postcss-preset-mantine': {},
 	},
