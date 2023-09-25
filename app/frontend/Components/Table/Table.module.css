@@ -9,6 +9,14 @@ wrapper {
 table {
 	width: 100%;
 
+	&.layout-fixed {
+		table-layout: fixed;
+	}
+	
+	&.layout-auto {
+		table-layout: auto;
+	}
+	
 	thead {
 		/* boxShadow: theme.shadows.xs; */
 		position: sticky;

@@ -10,8 +10,8 @@ const Header = () => {
 
 	const u = props.auth.user.circles.map
 	return (
-		<Flex align="center" sx={ { width: '100%' } }>
-			<Box sx={ { flex: 1 } }>
+		<Flex align="center" style={ { width: '100%' } }>
+			<Box style={ { flex: 1 } }>
 				<Text>Giving Circle</Text>
 			</Box>
 			<Box>

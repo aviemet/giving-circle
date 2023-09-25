@@ -7,20 +7,20 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	return (
-		<Flex sx={ {
+		<Flex style={ {
 			height: '100%',
 		} }>
-			<Center p="lg" sx={ {
+			<Center p="lg" style={ {
 				flex: 1,
 			} }>
-				<Paper shadow="lg" radius="lg" p="xl" withBorder sx={ {
+				<Paper shadow="lg" radius="lg" p="xl" withBorder style={ {
 					flex: 0.75,
 				} }>
 					{ children }
 				</Paper>
 			</Center>
 
-			<Box sx={ theme =>({
+			<Box style={ theme =>({
 				flex: 1,
 				backgroundColor: theme.fn.primaryColor(),
 			}) }>

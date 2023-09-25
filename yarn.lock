@@ -1643,6 +1643,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/vanilla-extract@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "@mantine/vanilla-extract@npm:7.0.1"
+  peerDependencies:
+    "@mantine/core": 7.0.1
+  checksum: d741bdfba083f7505c7f2e85abb990ee121f4935c5fce4c0c20398e9644c37211b00c7e233d2c07042096f86e1e50f91987b4cd2248ba4fe45e77aa51c1b2c94
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -5585,6 +5594,7 @@ __metadata:
     "@mantine/rte": ^5.10.5
     "@mantine/spotlight": ^7.0.0
     "@mantine/tiptap": ^7.0.0
+    "@mantine/vanilla-extract": ^7.0.1
     "@tabler/icons-react": ^2.34.0
     "@testing-library/jest-dom": ^6.1.3
     "@testing-library/react": ^14.0.0
