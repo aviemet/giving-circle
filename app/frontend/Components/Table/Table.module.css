@@ -73,7 +73,7 @@ table {
 
 	}
 
-	@media (max-width: $mantine-breakpoint-sm) {
+	@media (max-width: $mantine-breakpoints-sm) {
 		thead {
 			display: none;
 		}
