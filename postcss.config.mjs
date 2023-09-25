@@ -1,4 +1,4 @@
-import breakpoints from './app/frontend/Layouts/Providers/breakpoints.mjs'
+import breakpoints from './app/frontend/lib/breakpoints.mjs'
 
 const postCssBreakpoints = {}
 for(const key in breakpoints) {

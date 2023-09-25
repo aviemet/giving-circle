@@ -7,4 +7,8 @@ export const theme = createTheme({
 	defaultRadius: 'xs',
 })
 
-export const vars = themeToVars(theme)
+const vars = themeToVars(theme)
+// Add primary colors array to theme object
+vars.colors.primaryColors = vars.colors[vars.colors.primary]
+export { vars }
+export { style } from '@vanilla-extract/css'
