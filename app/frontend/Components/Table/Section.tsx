@@ -1,6 +1,6 @@
 import React from 'react'
 import { Section } from '@/Components'
-import classes from './Table.module.css'
+import * as classes from './Table.css'
 
 const TableSection = ({ children }: { children: React.ReactNode }) => {
 	return (

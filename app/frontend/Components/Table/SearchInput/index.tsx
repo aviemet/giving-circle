@@ -8,7 +8,7 @@ import { SearchIcon, CrossIcon, DoubleDownArrowIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
 import { Table } from '@/Components'
 import { useSessionStorage } from '@mantine/hooks'
-import classes from '../Table.module.css'
+import * as classes from '../Table.css'
 
 interface ISearchInputProps {
 	columnPicker?: boolean

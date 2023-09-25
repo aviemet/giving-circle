@@ -9,7 +9,7 @@ interface IEditButtonProps extends Omit<ILinkProps, 'children'> {
 
 const EditButton = ({ href, label }: IEditButtonProps) => {
 	return (
-		<Link as="button" compact href={ href } aria-label={ `Edit ${label}` }><EditIcon /></Link>
+		<Link as="button" href={ href } aria-label={ `Edit ${label}` }><EditIcon /></Link>
 	)
 }
 

@@ -1,0 +1,11 @@
+authLayout {
+	height: 100%;
+
+	#auth-layout-left, #auth-layout-right {
+		flex: 1
+	}
+
+	#auth-layout-right {
+		
+	}
+}
