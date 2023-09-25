@@ -7,7 +7,7 @@ interface ITableHead extends BoxProps, ElementProps<'thead'> {}
 const Head = forwardRef<HTMLTableSectionElement, ITableHead>(({ children, ...props }, ref) => {
 	return (
 		<TableSectionContextProvider value={ { section: 'head' } }>
-			<Box component="thead" { ...props } ref={ ref } style={ { zIndex: 401 } }>
+			<Box component="thead" { ...props } ref={ ref }>
 				{ children }
 			</Box>
 		</TableSectionContextProvider>

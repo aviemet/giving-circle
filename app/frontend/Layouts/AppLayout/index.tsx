@@ -1,7 +1,6 @@
 import React from 'react'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
-import AppFooter from './AppFooter'
 import { useDisclosure } from '@mantine/hooks'
 import { AppShell, Box, Burger, Group, ScrollArea } from '@mantine/core'
 
@@ -18,7 +17,6 @@ const AppLayout = ({ children }: { children: any }) => {
 				breakpoint: 'sm',
 				collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
 			} }
-			footer={ { height: 36, px: 8, py: 4 } }
 			padding="md"
 		>
 			<AppShell.Header>
@@ -34,9 +32,6 @@ const AppLayout = ({ children }: { children: any }) => {
 			<AppShell.Main>
 				<Box component={ ScrollArea }>{ children }</Box>
 			</AppShell.Main>
-			<AppShell.Footer>
-				<AppFooter />
-			</AppShell.Footer>
 		</AppShell>
 	)
 }

@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Menu, createPolymorphicComponent, type MenuItemProps } from '@mantine/core'
 import cx from 'clsx'
-import classes from './MenuItem.module.css'
+import * as classes from './MenuItem.css'
 
 interface IMenuItemProps extends MenuItemProps {
 	disabled?: boolean
@@ -15,7 +15,7 @@ const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
 		<Menu.Item
 			ref={ ref }
 			disabled={ disabled }
-			className={ cx(classes, className, { disabled }) }
+			className={ cx(classes.menuItem, className, { disabled }) }
 			{ ...props }
 		>
 			{ children }
