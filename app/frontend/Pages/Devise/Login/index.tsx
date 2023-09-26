@@ -3,6 +3,7 @@ import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from '@/Compo
 import { Routes } from '@/lib'
 import { Heading, Link } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
+import * as classes from './Login.css'
 
 type LoginFormData = {
 	user: {
@@ -31,7 +32,7 @@ const Login = () => {
 	}
 
 	return (
-		<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } grid={ false }>
+		<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } grid={ false } className={ classes.form }>
 
 			<div>
 				<Heading>Inventory</Heading>

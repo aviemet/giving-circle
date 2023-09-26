@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Center, Flex, Paper } from '@/Components'
+import * as classes from './AuthLayout.css'
 
 interface LayoutProps {
 	children: any
@@ -7,23 +8,14 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	return (
-		<Flex sx={ {
-			height: '100%',
-		} }>
-			<Center p="lg" sx={ {
-				flex: 1,
-			} }>
-				<Paper shadow="lg" radius="lg" p="xl" withBorder sx={ {
-					flex: 0.75,
-				} }>
+		<Flex className={ classes.authLayout }>
+			<Center p="lg" id="auth-layout-left">
+				<Paper shadow="lg" radius="lg" p="xl" withBorder>
 					{ children }
 				</Paper>
 			</Center>
 
-			<Box sx={ theme =>({
-				flex: 1,
-				backgroundColor: theme.fn.primaryColor(),
-			}) }>
+			<Box id="auth-layout-right">
 			</Box>
 		</Flex>
 	)

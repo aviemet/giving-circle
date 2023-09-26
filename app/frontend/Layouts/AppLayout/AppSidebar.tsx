@@ -6,7 +6,7 @@ import { Routes } from '@/lib'
 const AppSidebar = () => {
 	return (
 		<>
-			<AppShell.Section>
+			<AppShell.Section mb="xs">
 				<Text>Giving Circle</Text>
 			</AppShell.Section>
 

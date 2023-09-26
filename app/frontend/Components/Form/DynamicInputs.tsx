@@ -16,7 +16,7 @@ const DynamicInputs = ({ children, model, label, emptyData }: IDynamicInputsProp
 	return (
 		<>
 			<Flex>
-				<Box sx={ { flex: 1 } }>{ label }</Box>
+				<Box style={ { flex: 1 } }>{ label }</Box>
 				<Button onClick={ addInput }size='xs' mb="xs" mr="xs">
 					<PlusCircleIcon />
 				</Button>
@@ -26,7 +26,7 @@ const DynamicInputs = ({ children, model, label, emptyData }: IDynamicInputsProp
 				<NestedFields key={ i } model={ path }>
 					<Paper p="xs" shadow="xs" mb="xs">
 						<Flex key={ i } align="center">
-							<Box sx={ { flex: 1 } }>
+							<Box style={ { flex: 1 } }>
 								{ children }
 							</Box>
 							<Button onClick={ () => removeInput(i) } size='xs' ml="xs">

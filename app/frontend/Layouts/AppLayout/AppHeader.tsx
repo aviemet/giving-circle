@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActionIcon, Avatar, Box, Divider, Flex, Menu, Text } from '@mantine/core'
+import { ActionIcon, Avatar, Box, Divider, Menu, Text } from '@mantine/core'
 import { SettingsIcon } from '@/Components/Icons'
 import { Link } from '@/Components'
 import { usePage } from '@inertiajs/react'
@@ -10,8 +10,8 @@ const Header = () => {
 
 	const u = props.auth.user.circles.map
 	return (
-		<Flex align="center" sx={ { width: '100%' } }>
-			<Box sx={ { flex: 1 } }>
+		<>
+			<Box style={ { flex: 1 } }>
 				<Text>Giving Circle</Text>
 			</Box>
 			<Box>
@@ -40,7 +40,7 @@ const Header = () => {
 					</Menu.Dropdown>
 				</Menu>
 			</Box>
-		</Flex>
+		</>
 	)
 }
 

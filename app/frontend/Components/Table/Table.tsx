@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, type TableProps } from '@mantine/core'
 import cx from 'clsx'
-import classes from './Table.module.css'
+import * as classes from './Table.css'
 
 import Head from './Head'
 import Body from './Body'
