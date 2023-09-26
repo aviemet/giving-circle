@@ -11,9 +11,9 @@ const AppLayout = ({ children }: { children: any }) => {
 	return (
 		<AppShell
 			layout="alt"
-			header={ { height: 60 } }
+			header={ { height: 50 } }
 			navbar={ {
-				width: 300,
+				width: 200,
 				breakpoint: 'sm',
 				collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
 			} }
