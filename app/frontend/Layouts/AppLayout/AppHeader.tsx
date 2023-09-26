@@ -8,7 +8,6 @@ import { Routes } from '@/lib'
 const Header = () => {
 	const { props } = usePage<SharedInertiaProps>()
 
-	const u = props.auth.user.circles.map
 	return (
 		<>
 			<Box style={ { flex: 1 } }>
@@ -22,7 +21,7 @@ const Header = () => {
 
 					<Menu.Dropdown>
 						{ props.auth.user.circles.length > 0 && <Text>Circles</Text> }
-						{ props.auth.user.circles.map(circle => (
+						{ props.auth.user.circles.slice(0,4).map(circle => (
 							<Menu.Item
 								key={ circle.id }
 								component={ Link }
@@ -31,10 +30,11 @@ const Header = () => {
 								{ circle.name }
 							</Menu.Item>
 						)) }
+						{ props.auth.user.circles.length > 4 && <Menu.Item href={ Routes.circles() }>more...</Menu.Item> }
 						<Divider />
 						<Menu.Item
 							component={ Link }
-							href="/"
+							href={ Routes.settingsGeneralIndex() }
 							icon={ <SettingsIcon /> }
 						>Preferences</Menu.Item>
 					</Menu.Dropdown>

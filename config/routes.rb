@@ -33,4 +33,17 @@ Rails.application.routes.draw do
   resources :circles, param: :slug
   resources :themes, param: :slug
   resources :members
+
+  # SETTINGS PAGES #
+
+  namespace :settings do
+    get "/", to: redirect("/settings/general")
+    resources :general
+    resources :appearance, only: [:index]
+    match :appearance, to: "appearance#update", via: [:put, :patch]
+    resources :integrations
+    resources :localizations
+    resources :notifications
+    resources :integrations, path: :mail
+  end
 end
