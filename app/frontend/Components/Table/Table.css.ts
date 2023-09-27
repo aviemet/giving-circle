@@ -111,7 +111,7 @@ export const section = style({
 	height: '100%',
 })
 
-export const earchWrapper = style({
+export const searchWrapper = style({
 	display: 'flex',
 	flex: 1,
 })

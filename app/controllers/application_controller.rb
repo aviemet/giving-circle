@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   before_action :authenticate_user!
+  before_action :set_active_circle
 
   include Inertia::Flash
   include Inertia::Auth
@@ -36,6 +37,18 @@ class ApplicationController < ActionController::Base
 
   def currencies
     Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
+  end
+
+  protected
+
+  def set_active_circle
+    return if !current_user
+
+    if current_user.active_circle
+      @active_circle = current_user.active_circle
+    elsif !['/logout', '/circles'].include? request.path
+      redirect_to circles_path
+    end
   end
 
   private

@@ -8,7 +8,6 @@ import { SearchIcon, CrossIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
 import { useSessionStorage } from '@mantine/hooks'
 import ColumnPicker from './ColumnPicker'
-import AdvancedSearch from './AdvancedSearch'
 import { useInit, useLocation } from '@/lib/hooks'
 import * as classes from '../Table.css'
 
@@ -74,7 +73,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 			(url.searchParams.get('search') === null && searchValue === '')
 		) return
 
-		if(searchValue === '') {
+		if(!searchValue || searchValue === '') {
 			url.searchParams.delete('search')
 		} else {
 			url.searchParams.set('search', searchValue)
@@ -86,7 +85,6 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 
 	return (
 		<Box className={ classes.searchWrapper }>
-			{ advancedSearch && <AdvancedSearch>{ advancedSearch }</AdvancedSearch> }
 			<TextInput
 				name="search"
 				id="search"
