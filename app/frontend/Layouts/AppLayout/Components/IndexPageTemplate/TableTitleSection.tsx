@@ -4,7 +4,7 @@ import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
-import useIndexPageStyles from './useIndexPageStyles'
+import * as classes from './IndexPageStyles.css'
 
 // TODO: Figure out correct type for icon
 export interface IIndexTableTitleSectionProps {
@@ -20,7 +20,6 @@ export interface IIndexTableTitleSectionProps {
 
 const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IIndexTableTitleSectionProps) => {
 	const { tableState: { selected } } = useTableContext()
-	const { classes } = useIndexPageStyles()
 
 	const deleteRecords = () => {
 		router.visit(deleteRoute, {
@@ -30,8 +29,8 @@ const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: I
 	}
 
 	return (
-		<Group position="apart" align="start" sx={ { marginBottom: 12 } } spacing="sm">
-			<Group position="apart" className={ classes.title }>
+		<Group align="start">
+			<Group className={ classes.title }>
 				<Title>
 					{ title }
 				</Title>

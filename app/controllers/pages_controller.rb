@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    render inertia: "Pages/Dashboard"
+    render inertia: "Pages/Dashboard", props: {
+      themes: current_user.active_circle.themes.render(view: :index)
+    }
   end
 end

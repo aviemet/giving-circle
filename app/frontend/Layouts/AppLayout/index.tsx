@@ -10,7 +10,6 @@ const AppLayout = ({ children }: { children: any }) => {
 
 	return (
 		<AppShell
-			layout="alt"
 			header={ { height: 50 } }
 			navbar={ {
 				width: 200,

@@ -1,8 +1,11 @@
 import React from 'react'
-import { Center, Container, Heading, Button, Link } from '@/Components'
-import { Text } from '@mantine/core'
+import { Center, Container, Heading, Button, Link, Table } from '@/Components'
+import { Box, Text } from '@mantine/core'
 import { Routes } from '@/lib'
 import { usePage } from '@inertiajs/react'
+import ThemesTable from '@/Pages/Themes/Table'
+import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { NewIcon } from '@/Components/Icons'
 
 const NoCircles = () => <>
 	<Text>It looks like you&apos;re not a member of any circles yet</Text>
@@ -14,26 +17,44 @@ const NoCircles = () => <>
 	</Text>
 </>
 
-const YesCircles = () => <Center>
-	<Text>You have circles</Text>
-</Center>
+interface YesCirclesProps {
+	themes: Schema.ThemesIndex
+	pagination: Schema.Pagination
+}
+const YesCircles = ({ themes, pagination }: YesCirclesProps) => {
+	return (
+		<>
+			<Center><Text>Dashboard</Text></Center>
+			<IndexPageTemplate
+				title="Themes"
+				model="themes"
+				rows={ themes }
+				pagination={ pagination }
+				deleteRoute={ Routes.themes() }
+				menuOptions={ [
+					{ label: 'New Theme', href: Routes.newTheme(), icon: NewIcon },
+				] }
+			>
+				<ThemesTable />
+			</IndexPageTemplate>
+		</>
+	)
+}
 
-const Dashboard = () => {
+interface DashboardProps {
+	themes: Schema.ThemesIndex
+	pagination: Schema.Pagination
+}
+
+const Dashboard = ({ themes, pagination }: DashboardProps) => {
 	const { props } = usePage<SharedInertiaProps>()
 
 	return (
-		<Container>
-			<Heading>Giving Circles</Heading>
-
-			{
-				props.auth.user.circles.length > 0 ?
-					<YesCircles />
-					:
-					<NoCircles />
-			}
-
-
-		</Container>
+		<Container>{ props.auth.user.circles.length > 0 ?
+			<YesCircles />
+			:
+			<NoCircles />
+		}</Container>
 	)
 }
 

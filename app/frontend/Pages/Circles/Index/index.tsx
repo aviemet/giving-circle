@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Container, Heading, Table } from '@/Components'
 import { NewIcon } from '@/Components/Icons'
 import CirclesTable from '../Table'
+import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 
 interface ICircleIndexProps {
 	circles: Schema.Circle[]
@@ -11,16 +11,18 @@ interface ICircleIndexProps {
 
 const CirclesIndex = ({ circles, pagination }: ICircleIndexProps) => {
 	return (
-		<Container>
-			<Table.TableProvider
-				model="circle"
-				rows={ circles }
-				pagination={ pagination }
-			>
-				<Heading>Circles</Heading>
-				<CirclesTable />
-			</Table.TableProvider>
-		</Container>
+		<IndexPageTemplate
+			title="Circles"
+			model="circle"
+			rows={ circles }
+			pagination={ pagination }
+			deleteRoute={ Routes.circles() }
+			menuOptions={ [
+				{ label: 'New Circle', href: Routes.newCircle(), icon: NewIcon },
+			] }
+		>
+			<CirclesTable />
+		</IndexPageTemplate>
 	)
 }
 

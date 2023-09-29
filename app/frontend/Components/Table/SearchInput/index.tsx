@@ -95,7 +95,6 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 				</ActionIcon> }
 				icon={ <SearchIcon size={ 24 } /> }
 				className={ classes.searchInput }
-				wrapper={ false }
 				aria-label="Search"
 			/>
 			{ columnPicker && <ColumnPicker /> }

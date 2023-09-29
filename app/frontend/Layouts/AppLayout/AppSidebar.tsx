@@ -7,7 +7,7 @@ const AppSidebar = () => {
 	return (
 		<>
 			<AppShell.Section mb="xs">
-				<Text>Giving Circle</Text>
+				<Text>Giving Circles</Text>
 			</AppShell.Section>
 
 			<Divider />
