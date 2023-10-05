@@ -10,18 +10,15 @@ const ShowTheme = ({ theme }: IShowThemeProps) => {
 	const title =  'Theme'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Theme', href: Routes.themes() },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editTheme(theme.id) }>
+							<Menu.Link href={ Routes.editTheme(theme.slug) }>
 								Edit Theme
 							</Menu.Link>
 						</Menu.Dropdown>

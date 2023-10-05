@@ -3,7 +3,7 @@ class Theme < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:title, :question, :quarter, :slug],
+    against: [:title, :question, :slug],
     using: {
       tsearch: { prefix: true },
       trigram: {}

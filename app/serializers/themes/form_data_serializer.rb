@@ -1,11 +1,9 @@
-class Themes::IndexSerializer < ApplicationSerializer
+class Themes::FormDataSerializer < ApplicationSerializer
   object_as :theme
 
   identifier :slug
 
   attributes(
-    :id,
-    :slug,
     :title,
     :question,
   )

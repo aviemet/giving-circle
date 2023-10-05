@@ -12,7 +12,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # GET /themes/:id
+  # GET /themes/:slug
   def show
     authorize theme
     render inertia: "Themes/Show", props: {
@@ -24,13 +24,14 @@ class ThemesController < ApplicationController
   def new
     authorize Theme.new
     render inertia: "Themes/New", props: {
-      theme: Theme.new.render
+      theme: Theme.new.render(view: :form_data)
     }
   end
 
-  # GET /themes/:id/edit
+  # GET /themes/:slug/edit
   def edit
     authorize theme
+    ap({ theme: })
     render inertia: "Themes/Edit", props: {
       theme: theme.render
     }
@@ -46,7 +47,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /themes/:id
+  # PATCH/PUT /themes/:slug
   def update
     authorize theme
     if theme.update(theme_params)
@@ -56,7 +57,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # DELETE /themes/:id
+  # DELETE /themes/:slug
   def destroy
     authorize theme
     theme.destroy

@@ -5,8 +5,6 @@ class User < ApplicationRecord
   # :omniauthable, :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,  :confirmable, :lockable, :trackable
 
-  belongs_to :active_circle, class_name: :Circle, optional: true
-
   scope :includes_associated, -> { includes([:circles]) }
 
   def circles

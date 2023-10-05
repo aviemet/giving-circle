@@ -1,4 +1,4 @@
-class Themes::IndexSerializer < ApplicationSerializer
+class Themes::ShowSerializer < ApplicationSerializer
   object_as :theme
 
   identifier :slug
@@ -8,6 +8,8 @@ class Themes::IndexSerializer < ApplicationSerializer
     :slug,
     :title,
     :question,
+    :created_at,
+    :updated_at,
   )
 
 end

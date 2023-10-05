@@ -538,14 +538,6 @@ export const circles = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"ci
 
 /**
  * Generates rails route to
- * /dashboard(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const dashboard = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"dashboard"],[1,[2,[8,"."],[3,"format"]]]]]);
-
-/**
- * Generates rails route to
  * /logout(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -639,14 +631,6 @@ export const editUserPassword = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],
  * @returns {string} route path
  */
 export const editUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
- * /home(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const home = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"home"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to

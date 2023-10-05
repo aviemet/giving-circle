@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  root "pages#dashboard" # Product home page, descriptions, call to action
-
-  get "home" => "pages#home"
-  get "dashboard" => "pages#dashboard", as: :dashboard
+  root "circles#index" # Product home page, descriptions, call to action
 
   # DEVISE PATHS #
 

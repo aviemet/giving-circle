@@ -4,11 +4,9 @@ class Users::ShareSerializer < ApplicationSerializer
   attributes(
     :id,
     :email,
-    :active_circle_id,
     :created_at,
     :updated_at,
   )
 
-  belongs_to :active_circle, serializer: Circles::ShareSerializer
   has_many :circles, serializer: Circles::ShareSerializer
 end

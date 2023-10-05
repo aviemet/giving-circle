@@ -7,11 +7,11 @@ import { Routes } from '@/lib'
 
 const Header = () => {
 	const { props } = usePage<SharedInertiaProps>()
-	console.log({ props })
+
 	return (
 		<>
 			<Box style={ { flex: 1 } }>
-				<Text>{ props?.auth?.user?.active_circle?.name || 'Giving Circle' }</Text>
+				<Text>{ 'Giving Circle' }</Text>
 			</Box>
 			<Box>
 				<Menu position="bottom-end">

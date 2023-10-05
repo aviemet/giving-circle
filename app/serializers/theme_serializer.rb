@@ -4,9 +4,9 @@ class ThemeSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
+    :id,
     :title,
     :question,
-    :quarter,
   )
 
 end

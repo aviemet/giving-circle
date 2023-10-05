@@ -4,24 +4,20 @@ import { Routes } from '@/lib'
 import ThemesForm from '../Form'
 
 interface IEditThemeProps {
-	theme: Schema.ThemesEdit
+	theme: Schema.ThemesFormData
 }
 
 const EditTheme = ({ theme }: IEditThemeProps) => {
 	const title = 'Edit Theme'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Themes', href: Routes.themes() },
-			{ title: Theme, href: Routes.theme(theme.id) },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<ThemesForm
 					method='put'
-					to={ Routes.theme() }
+					to={ Routes.themes({ id: theme.slug }) }
 					theme={ theme }
 				/>
 			</Section>

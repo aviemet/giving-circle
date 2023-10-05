@@ -11,10 +11,7 @@ const NewTheme = ({ ...data }: INewThemeProps) => {
 	const title = 'New Theme'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Themes', href: Routes.themes() },
-			{ title: 'New Theme' },
-		] }>
+		<Page title={ title }>
 
 			<Section>
 				<Heading>{ title }</Heading>
