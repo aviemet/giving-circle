@@ -8,4 +8,5 @@ class Themes::FormDataSerializer < ApplicationSerializer
     :question,
   )
 
+  belongs_to :circle, serializer: Circles::ShareSerializer
 end

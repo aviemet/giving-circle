@@ -1,10 +1,10 @@
 import React from 'react'
-import { Box, Group, Heading, Menu, Section } from '@/Components'
+import { Box, Group, Heading, Link, Menu, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShowCircleProps {
 	circle: Schema.CirclesShow
-	themes: Schema.Theme[]
+	themes: Schema.ThemesShow[]
 }
 
 const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
@@ -27,7 +27,9 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 
 			<Heading order={ 2 }>Upcoming Themes</Heading>
 			{ themes.map(theme => (
-				<Box key={ theme.id }>{ theme.title }</Box>
+				<Box key={ theme.id }>
+					<Link href={ Routes.circleTheme(circle.slug, theme.slug) }>{ theme.title }</Link>
+				</Box>
 			)) }
 
 		</Section>

@@ -16,7 +16,7 @@ class ThemesController < ApplicationController
   def show
     authorize theme
     render inertia: "Themes/Show", props: {
-      theme: -> { theme.render }
+      theme: -> { theme.render(view: :show) }
     }
   end
 
@@ -33,7 +33,7 @@ class ThemesController < ApplicationController
     authorize theme
     ap({ theme: })
     render inertia: "Themes/Edit", props: {
-      theme: theme.render
+      theme: theme.render(view: :form_data)
     }
   end
 

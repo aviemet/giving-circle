@@ -16,8 +16,8 @@ class Theme < ApplicationRecord
 
   belongs_to :circle
   has_many :presentations
-  has_many :themes_orgs
-  has_many :orgs, through: :themes_orgs
+  has_many :themes_org
+  has_many :orgs, through: :themes_org
 
   scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
 end

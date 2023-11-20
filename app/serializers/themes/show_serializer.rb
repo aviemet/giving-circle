@@ -12,4 +12,5 @@ class Themes::ShowSerializer < ApplicationSerializer
     :updated_at,
   )
 
+  belongs_to :circle, serializer: Circles::ShareSerializer
 end

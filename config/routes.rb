@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :orgs
-  root "circles#index" # Product home page, descriptions, call to action
+  root "pages#home"
 
   # DEVISE PATHS #
 
@@ -26,24 +25,30 @@ Rails.application.routes.draw do
   },
   skip: [:sessions]
 
-  # RESOURCEFUL PATHS #
+  scope :admin do
+    get "/", to: redirect("/admin/circles")
 
-  resources :circles, param: :slug do
-    resources :themes, param: :slug
-    resources :members
-    resources :orgs, param: :slug
+    # RESOURCEFUL PATHS #
+
+    resources :circles, param: :slug do
+      resources :themes, param: :slug
+      resources :members
+      resources :orgs, param: :slug
+    end
+
+    # SETTINGS PAGES #
+
+    namespace :settings do
+      get "/", to: redirect("/settings/general")
+      resources :general
+      resources :appearance, only: [:index]
+      match :appearance, to: "appearance#update", via: [:put, :patch]
+      resources :integrations
+      resources :localizations
+      resources :notifications
+      resources :integrations, path: :mail
+    end
+
   end
 
-  # SETTINGS PAGES #
-
-  namespace :settings do
-    get "/", to: redirect("/settings/general")
-    resources :general
-    resources :appearance, only: [:index]
-    match :appearance, to: "appearance#update", via: [:put, :patch]
-    resources :integrations
-    resources :localizations
-    resources :notifications
-    resources :integrations, path: :mail
-  end
 end

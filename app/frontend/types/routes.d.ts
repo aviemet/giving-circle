@@ -96,7 +96,7 @@ export const cancelUserRegistration: ((
 
 /**
  * Generates rails route to
- * /circles/:slug(.:format)
+ * /admin/circles/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -108,7 +108,7 @@ export const circle: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/members/:id(.:format)
+ * /admin/circles/:circle_slug/members/:id(.:format)
  * @param {any} circleSlug
  * @param {any} id
  * @param {object | undefined} options
@@ -122,7 +122,7 @@ export const circleMember: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/members(.:format)
+ * /admin/circles/:circle_slug/members(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -134,7 +134,7 @@ export const circleMembers: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/orgs/:slug(.:format)
+ * /admin/circles/:circle_slug/orgs/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} slug
  * @param {object | undefined} options
@@ -148,7 +148,7 @@ export const circleOrg: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/orgs(.:format)
+ * /admin/circles/:circle_slug/orgs(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -160,7 +160,7 @@ export const circleOrgs: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/themes/:slug(.:format)
+ * /admin/circles/:circle_slug/themes/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} slug
  * @param {object | undefined} options
@@ -174,7 +174,7 @@ export const circleTheme: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/themes(.:format)
+ * /admin/circles/:circle_slug/themes(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -186,7 +186,7 @@ export const circleThemes: ((
 
 /**
  * Generates rails route to
- * /circles(.:format)
+ * /admin/circles(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -206,7 +206,7 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
- * /circles/:slug/edit(.:format)
+ * /admin/circles/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -218,7 +218,7 @@ export const editCircle: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/members/:id/edit(.:format)
+ * /admin/circles/:circle_slug/members/:id/edit(.:format)
  * @param {any} circleSlug
  * @param {any} id
  * @param {object | undefined} options
@@ -232,7 +232,7 @@ export const editCircleMember: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/orgs/:slug/edit(.:format)
+ * /admin/circles/:circle_slug/orgs/:slug/edit(.:format)
  * @param {any} circleSlug
  * @param {any} slug
  * @param {object | undefined} options
@@ -246,7 +246,7 @@ export const editCircleOrg: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/themes/:slug/edit(.:format)
+ * /admin/circles/:circle_slug/themes/:slug/edit(.:format)
  * @param {any} circleSlug
  * @param {any} slug
  * @param {object | undefined} options
@@ -255,18 +255,6 @@ export const editCircleOrg: ((
 export const editCircleTheme: ((
   circleSlug: RequiredRouteParameter,
   slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /orgs/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editOrg: ((
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -284,7 +272,7 @@ export const editRailsConductorInboundEmail: ((
 
 /**
  * Generates rails route to
- * /settings/general/:id/edit(.:format)
+ * /admin/settings/general/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -296,7 +284,7 @@ export const editSettingsGeneral: ((
 
 /**
  * Generates rails route to
- * /settings/integrations/:id/edit(.:format)
+ * /admin/settings/integrations/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -308,7 +296,7 @@ export const editSettingsIntegration: ((
 
 /**
  * Generates rails route to
- * /settings/localizations/:id/edit(.:format)
+ * /admin/settings/localizations/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -320,7 +308,7 @@ export const editSettingsLocalization: ((
 
 /**
  * Generates rails route to
- * /settings/notifications/:id/edit(.:format)
+ * /admin/settings/notifications/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -352,7 +340,7 @@ export const editUserRegistration: ((
 
 /**
  * Generates rails route to
- * /circles/new(.:format)
+ * /admin/circles/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -362,7 +350,7 @@ export const newCircle: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/members/new(.:format)
+ * /admin/circles/:circle_slug/members/new(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -374,7 +362,7 @@ export const newCircleMember: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/orgs/new(.:format)
+ * /admin/circles/:circle_slug/orgs/new(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -386,7 +374,7 @@ export const newCircleOrg: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/themes/new(.:format)
+ * /admin/circles/:circle_slug/themes/new(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -398,17 +386,7 @@ export const newCircleTheme: ((
 
 /**
  * Generates rails route to
- * /orgs/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newOrg: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /settings/general/new(.:format)
+ * /admin/settings/general/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -418,7 +396,7 @@ export const newSettingsGeneral: ((
 
 /**
  * Generates rails route to
- * /settings/integrations/new(.:format)
+ * /admin/settings/integrations/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -428,7 +406,7 @@ export const newSettingsIntegration: ((
 
 /**
  * Generates rails route to
- * /settings/localizations/new(.:format)
+ * /admin/settings/localizations/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -438,7 +416,7 @@ export const newSettingsLocalization: ((
 
 /**
  * Generates rails route to
- * /settings/notifications/new(.:format)
+ * /admin/settings/notifications/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -498,28 +476,6 @@ export const newUserUnlock: ((
 
 /**
  * Generates rails route to
- * /orgs/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const org: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /orgs(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const orgs: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /
  * @param {object | undefined} options
  * @returns {string} route path
@@ -530,7 +486,7 @@ export const root: ((
 
 /**
  * Generates rails route to
- * /settings(.:format)
+ * /admin/settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -540,7 +496,7 @@ export const settings: ((
 
 /**
  * Generates rails route to
- * /settings/appearance(.:format)
+ * /admin/settings/appearance(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -550,7 +506,7 @@ export const settingsAppearance: ((
 
 /**
  * Generates rails route to
- * /settings/appearance(.:format)
+ * /admin/settings/appearance(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -560,7 +516,7 @@ export const settingsAppearanceIndex: ((
 
 /**
  * Generates rails route to
- * /settings/general/:id(.:format)
+ * /admin/settings/general/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -572,7 +528,7 @@ export const settingsGeneral: ((
 
 /**
  * Generates rails route to
- * /settings/general(.:format)
+ * /admin/settings/general(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -582,7 +538,7 @@ export const settingsGeneralIndex: ((
 
 /**
  * Generates rails route to
- * /settings/integrations/:id(.:format)
+ * /admin/settings/integrations/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -594,7 +550,7 @@ export const settingsIntegration: ((
 
 /**
  * Generates rails route to
- * /settings/integrations(.:format)
+ * /admin/settings/integrations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -604,7 +560,7 @@ export const settingsIntegrations: ((
 
 /**
  * Generates rails route to
- * /settings/localizations/:id(.:format)
+ * /admin/settings/localizations/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -616,7 +572,7 @@ export const settingsLocalization: ((
 
 /**
  * Generates rails route to
- * /settings/localizations(.:format)
+ * /admin/settings/localizations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -626,7 +582,7 @@ export const settingsLocalizations: ((
 
 /**
  * Generates rails route to
- * /settings/notifications/:id(.:format)
+ * /admin/settings/notifications/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -638,7 +594,7 @@ export const settingsNotification: ((
 
 /**
  * Generates rails route to
- * /settings/notifications(.:format)
+ * /admin/settings/notifications(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
