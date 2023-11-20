@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   add_flash_types :success, :error, :warning
 
   before_action :set_locale
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   # before_action :set_active_circle
 
   include Inertia::Flash

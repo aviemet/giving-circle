@@ -7,7 +7,9 @@ class Themes::IndexSerializer < ApplicationSerializer
     :id,
     :slug,
     :title,
-    :question,
+    :published,
+    :status,
   )
 
+  belongs_to :circle, serializer: Circles::ShareSerializer
 end

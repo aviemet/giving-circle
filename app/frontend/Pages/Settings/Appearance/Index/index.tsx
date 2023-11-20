@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import { Box, Heading } from '@/Components'
-import { Form, Submit, SwatchInput } from '@/Components/Form'
+import { Form, Submit } from '@/Components/Form'
 import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Routes } from '@/lib'
 import { defaults } from 'lodash'
@@ -59,7 +59,7 @@ const AppearanceSettings = ({ settings }: IAppearanceSettingsProps) => {
 					onSubmit={ handleSubmit }
 					remember={ false }
 				>
-					<SwatchInput label="Company Color" name="primary_color" onChange={ handleChange } />
+					{ /* <SwatchInput label="Company Color" name="primary_color" onChange={ handleChange } /> */ }
 					<Submit>Save Appearance Settings</Submit>
 				</Form>
 			</Box>

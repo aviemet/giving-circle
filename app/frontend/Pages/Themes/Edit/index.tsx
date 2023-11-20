@@ -9,7 +9,7 @@ interface IEditThemeProps {
 
 const EditTheme = ({ theme }: IEditThemeProps) => {
 	const title = 'Edit Theme'
-	console.log({ theme })
+
 	return (
 		<Page title={ title }>
 			<Section>
@@ -17,7 +17,7 @@ const EditTheme = ({ theme }: IEditThemeProps) => {
 
 				<ThemesForm
 					method='put'
-					to={ Routes.circleTheme(theme.circle.slug, theme.slug!) }
+					to={ Routes.adminCircleTheme(theme.circle.slug, theme.slug!) }
 					theme={ theme }
 				/>
 			</Section>

@@ -18,7 +18,7 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 				<Menu position="bottom-end">
 					<Menu.Target />
 					<Menu.Dropdown>
-						<Menu.Link href={ Routes.editCircle(circle.slug) }>
+						<Menu.Link href={ Routes.editAdminCircle(circle.slug) }>
 								Edit Circle
 						</Menu.Link>
 					</Menu.Dropdown>
@@ -28,7 +28,7 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 			<Heading order={ 2 }>Upcoming Themes</Heading>
 			{ themes.map(theme => (
 				<Box key={ theme.id }>
-					<Link href={ Routes.circleTheme(circle.slug, theme.slug) }>{ theme.title }</Link>
+					<Link href={ Routes.adminCircleTheme(circle.slug, theme.slug) }>{ theme.title }</Link>
 				</Box>
 			)) }
 

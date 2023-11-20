@@ -11,16 +11,13 @@ const NewCircle = ({ ...data }: INewCircleProps) => {
 	const title = 'New Circle'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Circles', href: Routes.circles() },
-			{ title: 'New Circle' },
-		] }>
+		<Page title={ title }>
 
 			<Section>
 				<Heading>{ title }</Heading>
 
 				<CircleForm
-					to={ Routes.circles() }
+					to={ Routes.adminCircles() }
 					{ ...data }
 				/>
 			</Section>

@@ -33,7 +33,7 @@ if Rails.env == "development"
     circle = Circle.first
     theme = Theme.create!({
       title: "Social issue needing attention",
-      question: "Can we fix it?",
+      status: 1,
       circle:,
     })
 

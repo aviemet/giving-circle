@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group } from '@/Components'
+/*import { Group } from '@/Components'
 import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
 import { Routes, isUnset } from '@/lib'
@@ -67,3 +67,6 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 }
 
 export default SmtpForm
+*/
+
+export default () => <h1>SMTP Settings</h1>

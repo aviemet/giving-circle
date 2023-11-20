@@ -26,50 +26,6 @@ class CirclesController < ApplicationController
     }
   end
 
-  # GET /circles/new
-  def new
-    authorize Circle.new
-    render inertia: "Circles/New", props: {
-      circle: Circle.new.render
-    }
-  end
-
-  # GET /circles/:slug/edit
-  def edit
-    authorize circle
-    render inertia: "Circles/Edit", props: {
-      circle: circle.render
-    }
-  end
-
-  # POST /circles
-  def create
-    authorize Circle.new
-    if circle.save
-      current_user.add_role(:admin, circle)
-      redirect_to circle, notice: "Circle was successfully created."
-    else
-      redirect_to new_circle_path, inertia: { errors: circle.errors }
-    end
-  end
-
-  # PATCH/PUT /circles/:slug
-  def update
-    authorize circle
-    if circle.update(circle_params)
-      redirect_to circle, notice: "Circle was successfully updated."
-    else
-      redirect_to edit_circle_path, inertia: { errors: circle.errors }
-    end
-  end
-
-  # DELETE /circles/:slug
-  def destroy
-    authorize circle
-    circle.destroy
-    redirect_to circles_url, notice: "Circle was successfully destroyed."
-  end
-
   private
 
   def sortable_fields

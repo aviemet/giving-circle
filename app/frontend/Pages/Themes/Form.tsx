@@ -22,7 +22,6 @@ const ThemeForm = ({ method = 'post', theme, ...props }: IThemeFormProps) => {
 			{ ...props }
 		>
 			<TextInput name="title" label="Title" />
-			<TextInput name="question" label="Question" />
 			<Submit>{ theme.id ? 'Update' : 'Create' } Theme</Submit>
 		</Form>
 	)

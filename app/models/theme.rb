@@ -1,9 +1,13 @@
 class Theme < ApplicationRecord
   include PgSearch::Model
+  include BooleanTimestamp
+
+  enum :status, { draft: 0, current: 1, past: 2, future: 3 }
+  boolean_timestamp :published
 
   pg_search_scope(
     :search,
-    against: [:title, :question, :slug],
+    against: [:title, :slug],
     using: {
       tsearch: { prefix: true },
       trigram: {}

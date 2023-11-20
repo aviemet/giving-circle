@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "pages#home"
+  root "pages#home" # Public home page for entire project
 
   # DEVISE PATHS #
 
@@ -25,30 +25,40 @@ Rails.application.routes.draw do
   },
   skip: [:sessions]
 
-  scope :admin do
+  namespace :admin do
     get "/", to: redirect("/admin/circles")
 
     # RESOURCEFUL PATHS #
 
     resources :circles, param: :slug do
-      resources :themes, param: :slug
-      resources :members
-      resources :orgs, param: :slug
+      resources :themes, except: [:create, :update], param: :slug
+      resources :members, except: [:create, :update]
+      resources :orgs, except: [:create, :update], param: :slug
     end
+
+    resources :themes, only: [:create, :update]
+    resources :orgs, only: [:create, :update]
+    resources :members, only: [:create, :update]
 
     # SETTINGS PAGES #
 
     namespace :settings do
-      get "/", to: redirect("/settings/general")
-      resources :general
-      resources :appearance, only: [:index]
-      match :appearance, to: "appearance#update", via: [:put, :patch]
-      resources :integrations
-      resources :localizations
-      resources :notifications
-      resources :integrations, path: :mail
+      get "/", to: redirect("/admin/settings/general")
+      resources :general, only: [:index, :update]
+      resources :appearance, only: [:index, :update]
+      resources :integrations, only: [:index, :update]
+      resources :localizations, only: [:index, :update]
+      resources :notifications, only: [:index, :update]
+      resources :integrations, only: [:index, :update], path: :mail
     end
 
+  end
+
+  # PUBLIC PAGES #
+
+  resources :circles, only: [:index, :show], param: :slug do
+    resources :themes, only: [:index, :show], param: :slug
+    resources :orgs, only: [:index, :show], param: :slug
   end
 
 end

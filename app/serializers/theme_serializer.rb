@@ -6,7 +6,8 @@ class ThemeSerializer < ApplicationSerializer
   attributes(
     :id,
     :title,
-    :question,
+    :published,
+    :status,
   )
 
 end

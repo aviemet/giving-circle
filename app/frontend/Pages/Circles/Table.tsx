@@ -20,7 +20,7 @@ const CircleTable = (props: ITableProps) => {
 							<Link href={ Routes.circle(circle.id) }>{ circle.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editCircle(circle.id) } />
+							<EditButton href={ Routes.editAdminCircle(circle.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

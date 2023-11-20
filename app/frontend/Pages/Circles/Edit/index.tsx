@@ -17,7 +17,7 @@ const EditCircle = ({ circle }: IEditCircleProps) => {
 
 				<CirclesForm
 					method='put'
-					to={ Routes.circle(circle.slug) }
+					to={ Routes.adminCircle(circle.slug) }
 					circle={ circle }
 				/>
 			</Section>

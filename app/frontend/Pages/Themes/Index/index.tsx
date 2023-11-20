@@ -7,18 +7,19 @@ import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 interface IThemeIndexProps {
 	themes: Schema.ThemesIndex[]
 	pagination: Schema.Pagination
+	circle: Schema.CirclesShare
 }
 
-const ThemesIndex = ({ themes, pagination }: IThemeIndexProps) => {
+const ThemesIndex = ({ themes, pagination, circle }: IThemeIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Themes"
 			model="themes"
 			rows={ themes }
 			pagination={ pagination }
-			deleteRoute={ Routes.themes() }
+			deleteRoute={ Routes.adminThemes() }
 			menuOptions={ [
-				{ label: 'New Theme', href: Routes.newTheme(), icon: NewIcon },
+				{ label: 'New Theme', href: Routes.newAdminCircleTheme(circle.slug), icon: NewIcon },
 			] }
 		>
 			<ThemesTable />

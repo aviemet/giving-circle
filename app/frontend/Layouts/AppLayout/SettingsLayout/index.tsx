@@ -37,7 +37,7 @@ const SettingsLayout = ({ children }: ISettingsLayoutProps) => {
 	}, [width])
 
 	const handleTabChange = (value: string|null) => {
-		router.get(`/settings/${value}`, {}, { preserveState: true })
+		router.get(`/admin/settings/${value}`, {}, { preserveState: true })
 	}
 
 	return (

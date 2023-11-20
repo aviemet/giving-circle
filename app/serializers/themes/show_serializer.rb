@@ -7,7 +7,8 @@ class Themes::ShowSerializer < ApplicationSerializer
     :id,
     :slug,
     :title,
-    :question,
+    :published,
+    :status,
     :created_at,
     :updated_at,
   )

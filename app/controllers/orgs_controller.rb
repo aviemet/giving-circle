@@ -21,49 +21,6 @@ class OrgsController < ApplicationController
     }
   end
 
-  # GET /circles/:circle_slug/orgs/new
-  def new
-    authorize Org.new
-    render inertia: "Orgs/New", props: {
-      org: Org.new.render
-    }
-  end
-
-  # GET /circles/:circle_slug/orgs/:slug/edit
-  def edit
-    authorize org
-    render inertia: "Orgs/Edit", props: {
-      org: org.render
-    }
-  end
-
-  # POST /circles/:circle_slug/orgs
-  def create
-    authorize Org.new
-    if org.save
-      redirect_to org, notice: "Org was successfully created."
-    else
-      redirect_to new_org_path, inertia: { errors: org.errors }
-    end
-  end
-
-  # PATCH/PUT /circles/:circle_slug/orgs/:slug
-  def update
-    authorize org
-    if org.update(org_params)
-      redirect_to org, notice: "Org was successfully updated."
-    else
-      redirect_to edit_org_path, inertia: { errors: org.errors }
-    end
-  end
-
-  # DELETE /circles/:circle_slug/orgs/:slug
-  def destroy
-    authorize org
-    org.destroy
-    redirect_to orgs_url, notice: "Org was successfully destroyed."
-  end
-
   private
 
   def sortable_fields

@@ -5,7 +5,8 @@ class Themes::FormDataSerializer < ApplicationSerializer
 
   attributes(
     :title,
-    :question,
+    :published,
+    :status,
   )
 
   belongs_to :circle, serializer: Circles::ShareSerializer
