@@ -1,7 +1,7 @@
 import React from 'react'
-import { ActionIcon, Avatar, Box, Divider, Menu, Text } from '@mantine/core'
-import { SettingsIcon } from '@/Components/Icons'
-import { Link } from '@/Components'
+import { ActionIcon, Avatar, Box, Divider, Text } from '@mantine/core'
+import { PlusCircleIcon, SettingsIcon } from '@/Components/Icons'
+import { Menu } from '@/Components'
 import { usePage } from '@inertiajs/react'
 import { Routes } from '@/lib'
 
@@ -21,22 +21,31 @@ const Header = () => {
 
 					<Menu.Dropdown>
 						{ props.auth.user.circles.length > 0 && <Text>Circles</Text> }
+
 						{ props.auth.user.circles.slice(0,4).map(circle => (
 							<Menu.Item
 								key={ circle.id }
-								component={ Link }
 								href={ Routes.circle(circle.slug) }
 							>
 								{ circle.name }
 							</Menu.Item>
 						)) }
-						{ props.auth.user.circles.length > 4 && <Menu.Item href={ Routes.circles() }>more...</Menu.Item> }
-						<Divider />
 						<Menu.Item
-							component={ Link }
+							href={ Routes.newCircle() }
+							icon={ <PlusCircleIcon /> }
+						>
+							New Circle
+						</Menu.Item>
+						{ props.auth.user.circles.length > 4 && <Menu.Item href={ Routes.circles() }>more...</Menu.Item> }
+
+						<Divider />
+
+						<Menu.Item
 							href={ Routes.settingsGeneralIndex() }
 							icon={ <SettingsIcon /> }
-						>Preferences</Menu.Item>
+						>
+							Preferences
+						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>
 			</Box>

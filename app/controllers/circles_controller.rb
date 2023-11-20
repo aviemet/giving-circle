@@ -6,17 +6,23 @@ class CirclesController < ApplicationController
 
   # GET /circles
   def index
+    if circles.count == 1
+      redirect_to circles.first
+      return
+    end
+
     authorize circles
     render inertia: "Circles/Index", props: {
-      circles: -> { circles.render }
+      circles: -> { circles.render },
     }
   end
 
-  # GET /circles/:id
+  # GET /circles/:slug
   def show
     authorize circle
     render inertia: "Circles/Show", props: {
-      circle: -> { circle.render(view: :show) }
+      circle: -> { circle.render(view: :show) },
+      themes: -> { circle.themes.render }
     }
   end
 
@@ -28,7 +34,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # GET /circles/:id/edit
+  # GET /circles/:slug/edit
   def edit
     authorize circle
     render inertia: "Circles/Edit", props: {
@@ -47,7 +53,7 @@ class CirclesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /circles/:id
+  # PATCH/PUT /circles/:slug
   def update
     authorize circle
     if circle.update(circle_params)
@@ -57,7 +63,7 @@ class CirclesController < ApplicationController
     end
   end
 
-  # DELETE /circles/:id
+  # DELETE /circles/:slug
   def destroy
     authorize circle
     circle.destroy

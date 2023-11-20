@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_08_212941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "address"
+    t.string "address_2"
+    t.string "city"
+    t.string "region"
+    t.string "country"
+    t.string "postal"
+    t.bigint "contact_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_addresses_on_contact_id"
+  end
 
   create_table "circles", force: :cascade do |t|
     t.string "name"
@@ -22,13 +35,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
     t.index ["slug"], name: "index_circles_on_slug", unique: true
   end
 
-  create_table "circles_themes", force: :cascade do |t|
+  create_table "circles_members", force: :cascade do |t|
     t.bigint "circle_id", null: false
-    t.bigint "theme_id", null: false
+    t.bigint "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_circles_themes_on_circle_id"
-    t.index ["theme_id"], name: "index_circles_themes_on_theme_id"
+    t.index ["circle_id"], name: "index_circles_members_on_circle_id"
+    t.index ["member_id"], name: "index_circles_members_on_member_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -41,8 +54,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
 
   create_table "emails", force: :cascade do |t|
     t.string "email"
+    t.bigint "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_emails_on_contact_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -53,13 +68,46 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "members_themes", force: :cascade do |t|
-    t.bigint "member_id", null: false
-    t.bigint "theme_id", null: false
+  create_table "orgs", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_members_themes_on_member_id"
-    t.index ["theme_id"], name: "index_members_themes_on_theme_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.string "number"
+    t.bigint "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_phones_on_contact_id"
+  end
+
+  create_table "presentations", force: :cascade do |t|
+    t.bigint "theme_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["theme_id"], name: "index_presentations_on_theme_id"
+  end
+
+  create_table "presentations_members", force: :cascade do |t|
+    t.bigint "presentation_id", null: false
+    t.bigint "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_presentations_members_on_member_id"
+    t.index ["presentation_id"], name: "index_presentations_members_on_presentation_id"
+  end
+
+  create_table "presentations_orgs", force: :cascade do |t|
+    t.bigint "presentation_id", null: false
+    t.bigint "org_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["org_id"], name: "index_presentations_orgs_on_org_id"
+    t.index ["presentation_id"], name: "index_presentations_orgs_on_presentation_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -75,11 +123,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
   create_table "themes", force: :cascade do |t|
     t.string "title"
     t.string "question"
-    t.string "quarter"
     t.string "slug", null: false
+    t.bigint "circle_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_themes_on_circle_id"
     t.index ["slug"], name: "index_themes_on_slug", unique: true
+  end
+
+  create_table "themes_orgs", force: :cascade do |t|
+    t.bigint "org_id", null: false
+    t.bigint "theme_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["org_id"], name: "index_themes_orgs_on_org_id"
+    t.index ["theme_id"], name: "index_themes_orgs_on_theme_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,12 +160,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "active_circle_id"
-    t.index ["active_circle_id"], name: "index_users_on_active_circle_id"
+    t.boolean "active", default: true
+    t.jsonb "table_preferences", default: {}
+    t.jsonb "user_preferences", default: {}
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.index ["user_preferences"], name: "index_users_on_user_preferences", using: :gin
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -118,9 +179,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_190509) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "circles_themes", "circles"
-  add_foreign_key "circles_themes", "themes"
-  add_foreign_key "members_themes", "members"
-  add_foreign_key "members_themes", "themes"
-  add_foreign_key "users", "circles", column: "active_circle_id"
+  add_foreign_key "addresses", "contacts"
+  add_foreign_key "circles_members", "circles"
+  add_foreign_key "circles_members", "members"
+  add_foreign_key "presentations", "themes"
+  add_foreign_key "presentations_members", "members"
+  add_foreign_key "presentations_members", "presentations"
+  add_foreign_key "presentations_orgs", "orgs"
+  add_foreign_key "presentations_orgs", "presentations"
+  add_foreign_key "themes", "circles"
+  add_foreign_key "themes_orgs", "orgs"
+  add_foreign_key "themes_orgs", "themes"
 end

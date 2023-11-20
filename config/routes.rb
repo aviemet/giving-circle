@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orgs
   root "circles#index" # Product home page, descriptions, call to action
 
   # DEVISE PATHS #
@@ -27,9 +28,11 @@ Rails.application.routes.draw do
 
   # RESOURCEFUL PATHS #
 
-  resources :circles, param: :slug
-  resources :themes, param: :slug
-  resources :members
+  resources :circles, param: :slug do
+    resources :themes, param: :slug
+    resources :members
+    resources :orgs, param: :slug
+  end
 
   # SETTINGS PAGES #
 

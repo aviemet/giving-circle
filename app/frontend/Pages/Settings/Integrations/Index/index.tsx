@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
+import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Group, Heading, Menu } from '@/Components'
 import Empty from './Empty'
 import SmtpList from './SmtpList'
@@ -11,10 +11,7 @@ interface IMailSettingsProps {
 
 const Mail = ({ smtps }: IMailSettingsProps) => {
 	return (
-		<SettingsLayout breadcrumbs={ [
-			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
-			{ title: 'Mail', href: Routes.settingsSmtps() },
-		] }>
+		<SettingsLayout>
 			<Group position="apart">
 				<Heading mb={ 24 }>Mail Settings</Heading>
 				<Menu position="bottom-end">

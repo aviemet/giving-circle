@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import { Box, Heading } from '@/Components'
 import { Form, Submit, SwatchInput } from '@/Components/Form'
-import SettingsLayout from '@/Pages/Settings/SettingsLayout'
+import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Routes } from '@/lib'
 import { defaults } from 'lodash'
-import useLayoutStore from '@/Layouts/AppLayout/store/LayoutStore'
+import useLayoutStore from '@/Layouts/store/LayoutStore'
 import { type UseFormProps } from 'use-inertia-form'
 
 interface IAppearanceFormData {

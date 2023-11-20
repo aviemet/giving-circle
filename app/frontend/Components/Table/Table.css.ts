@@ -1,5 +1,4 @@
-import { vars } from '@/lib/theme'
-import { style } from '@vanilla-extract/css'
+import { vars, style } from '@/lib/theme'
 
 export const wrapper = style({
 	overflow: 'auto',

@@ -12,7 +12,7 @@ interface ILayoutState {
 
 const useLayoutStore = create<ILayoutState>()((set) => ({
 	sidebarOpen: false,
-	sidebarVisible: true,
+	sidebarVisible: false,
 	primaryColor: undefined,
 	sidebarBreakpoint: 'sm',
 

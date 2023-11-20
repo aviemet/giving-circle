@@ -13,7 +13,7 @@ const AppSidebar = () => {
 			<Divider />
 
 			<AppShell.Section grow>
-				<Link href={ Routes.themes() }>Themes</Link>
+				{ /* <Link href={ Routes.the }>Themes</Link> */ }
 			</AppShell.Section>
 
 			<Divider />

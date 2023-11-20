@@ -12,8 +12,8 @@ class Member < ApplicationRecord
 
   resourcify
 
-  has_many :members_themes
-  has_many :themes, through: :members_themes
+  has_many :circles_members
+  has_many :circles, through: :circles_members
 
-  scope :includes_associated, -> { includes([]) }
+  scope :includes_associated, -> { includes([:circles]) }
 end

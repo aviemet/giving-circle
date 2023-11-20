@@ -4,6 +4,9 @@ class Email < ApplicationRecord
   pg_search_scope(
     :search,
     against: [:email],
+    associated_against: {
+      contact: [],
+    },
     using: {
       tsearch: { prefix: true },
       trigram: {}
@@ -12,5 +15,7 @@ class Email < ApplicationRecord
 
   resourcify
 
-  scope :includes_associated, -> { includes([]) }
+  belongs_to :contact
+
+  scope :includes_associated, -> { includes([:contact]) }
 end

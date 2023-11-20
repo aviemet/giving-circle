@@ -14,8 +14,10 @@ class Circle < ApplicationRecord
 
   resourcify
 
-  has_many :circles_themes
-  has_many :themes, through: :circles_themes
+  has_many :themes
+  has_many :presentations, through: :themes
+  has_many :circles_member
+  has_many :members, through: :circles_member
 
-  scope :includes_associated, -> { includes([:themes]) }
+  scope :includes_associated, -> { includes([:themes, :presentations, :members]) }
 end

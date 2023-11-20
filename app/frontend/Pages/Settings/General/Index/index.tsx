@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
+import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Heading } from '@/Components'
 
 const General = () => {

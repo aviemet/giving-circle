@@ -4,6 +4,8 @@ class CircleSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
+    :id,
+    :slug,
     :name,
   )
 end

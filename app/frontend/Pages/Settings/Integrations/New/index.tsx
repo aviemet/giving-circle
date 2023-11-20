@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
+import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Heading } from '@/Components'
 import { Routes } from '@/lib'
 import SmtpForm from '../Form'
@@ -10,11 +10,7 @@ interface ISmtpFormProps {
 
 const NewMail = ({ smtp }: ISmtpFormProps) => {
 	return (
-		<SettingsLayout breadcrumbs={ [
-			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
-			{ title: 'Mail', href: Routes.settingsSmtps() },
-			{ title: 'New', href: Routes.newSettingsSmtp() },
-		] }>
+		<SettingsLayout>
 			<Heading mb={ 24 }>Mail Settings</Heading>
 
 			<SmtpForm

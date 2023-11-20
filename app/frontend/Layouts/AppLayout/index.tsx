@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import { useDisclosure } from '@mantine/hooks'
 import { AppShell, Box, Burger, Group, ScrollArea } from '@mantine/core'
+import useLayoutStore from '@/Layouts/store/LayoutStore'
 
 const AppLayout = ({ children }: { children: any }) => {
-	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
-	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
+	const { sidebarOpen, sidebarVisible, toggleSidebarOpen, setSidebarVisible } = useLayoutStore()
+	// const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
+	// const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false)
+	// const [showSidebarControl, setShowSidebarControl] = useState(false)
 
 	return (
 		<AppShell
@@ -14,14 +17,16 @@ const AppLayout = ({ children }: { children: any }) => {
 			navbar={ {
 				width: 200,
 				breakpoint: 'sm',
-				collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+				collapsed: { mobile: !sidebarOpen, desktop: !sidebarOpen },
 			} }
 			padding="md"
 		>
 			<AppShell.Header>
 				<Group h="100%" px="md">
-					<Burger opened={ mobileOpened } onClick={ toggleMobile } hiddenFrom="sm" size="sm" />
-					<Burger opened={ desktopOpened } onClick={ toggleDesktop } visibleFrom="sm" size="sm" />
+					{ sidebarVisible && <>
+						<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } hiddenFrom="sm" size="sm" />
+						<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } visibleFrom="sm" size="sm" />
+					</> }
 					<AppHeader />
 				</Group>
 			</AppShell.Header>

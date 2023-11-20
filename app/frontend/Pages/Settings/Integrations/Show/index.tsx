@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
+import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Box, DangerousHtml, Heading, Table } from '@/Components'
 import { Routes } from '@/lib'
 
@@ -9,11 +9,7 @@ interface IShowMailSettingProps {
 
 const ShowMailSetting = ({ smtp }: IShowMailSettingProps) => {
 	return (
-		<SettingsLayout breadcrumbs={ [
-			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
-			{ title: 'Mail', href: Routes.settingsSmtps() },
-			{ title: smtp.name!, href: Routes.settingsSmtp(smtp.id!) },
-		] }>
+		<SettingsLayout>
 			<Heading mb={ 24 }>Mail Settings: { smtp.name }</Heading>
 
 			<Table>

@@ -14,11 +14,10 @@ class Theme < ApplicationRecord
 
   resourcify
 
-  scope :includes_associated, -> { includes([]) }
+  belongs_to :circle
+  has_many :presentations
+  has_many :themes_orgs
+  has_many :orgs, through: :themes_orgs
 
-  has_many :circles_themes
-  has_many :circles, through: :circles_themes
-
-  has_many :members_themes
-  has_many :members, through: :members_themes
+  scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
 end
