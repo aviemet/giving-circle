@@ -13,9 +13,10 @@ const AppLayout = ({ children }: { children: any }) => {
 
 	return (
 		<AppShell
+			layout="alt"
 			header={ { height: 50 } }
 			navbar={ {
-				width: 200,
+				width: 250,
 				breakpoint: 'sm',
 				collapsed: { mobile: !sidebarOpen, desktop: !sidebarOpen },
 			} }
@@ -23,10 +24,9 @@ const AppLayout = ({ children }: { children: any }) => {
 		>
 			<AppShell.Header>
 				<Group h="100%" px="md">
-					{ sidebarVisible && <>
-						<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } hiddenFrom="sm" size="sm" />
-						<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } visibleFrom="sm" size="sm" />
-					</> }
+					<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } hiddenFrom="sm" size="sm" />
+					<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } visibleFrom="sm" size="sm" />
+
 					<AppHeader />
 				</Group>
 			</AppShell.Header>

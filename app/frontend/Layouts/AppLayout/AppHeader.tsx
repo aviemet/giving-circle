@@ -11,7 +11,7 @@ const Header = () => {
 	return (
 		<>
 			<Box style={ { flex: 1 } }>
-				<Text>{ 'Giving Circle' }</Text>
+				<Text>Giving Circles</Text>
 			</Box>
 			<Box>
 				<Menu position="bottom-end">

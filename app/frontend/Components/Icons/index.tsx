@@ -66,6 +66,7 @@ export {
 
 export {
 	TbChevronsDown as DoubleDownArrowIcon,
+	TbChevronDown as DownArrowIcon,
 } from 'react-icons/tb'
 
 export {

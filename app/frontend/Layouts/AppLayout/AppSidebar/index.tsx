@@ -1,13 +1,15 @@
 import React from 'react'
-import { AppShell, Divider, Text } from '@mantine/core'
+import { AppShell, Divider, Text, NavLink } from '@mantine/core'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
+import CircleHeaderMenu from './CircleHeaderMenu'
 
 const AppSidebar = () => {
+
 	return (
 		<>
 			<AppShell.Section mb="xs">
-				<Text>Giving Circles</Text>
+				<CircleHeaderMenu />
 			</AppShell.Section>
 
 			<Divider />

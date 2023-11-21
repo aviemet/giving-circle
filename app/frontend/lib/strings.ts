@@ -7,3 +7,17 @@ export const camelize = (str?: string|null) => {
 	if(typeof str !== 'string') return ''
 	return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
 }
+
+export const initials = (str: string) => {
+	if(str.length === 0) return null
+
+	const split = str.split(/[ \-_]/)
+
+	let initials = split[0].charAt(0).toUpperCase()
+
+	if(split.length > 1) {
+		initials += split[split.length - 1].charAt(0).toUpperCase()
+	}
+
+	return initials
+}
