@@ -1,9 +1,9 @@
+import React from 'react'
 import { Link, Menu } from '@/Components'
 import { DownArrowIcon } from '@/Components/Icons'
 import { Routes, initials } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 import { Avatar, Group, Text, UnstyledButton } from '@mantine/core'
-import React from 'react'
 
 const CircleHeaderMenu = () => {
 	const props = usePageProps()

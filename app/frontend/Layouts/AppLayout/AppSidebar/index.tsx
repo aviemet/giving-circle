@@ -3,8 +3,13 @@ import { AppShell, Divider, Text, NavLink } from '@mantine/core'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import CircleHeaderMenu from './CircleHeaderMenu'
+import { circleMenu, themeMenu } from './menus'
+import { usePageProps } from '@/lib/hooks'
 
 const AppSidebar = () => {
+	const props = usePageProps()
+
+	console.log({ props })
 
 	return (
 		<>

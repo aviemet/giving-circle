@@ -5,6 +5,7 @@ class ThemeSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :title,
     :published,
     :status,

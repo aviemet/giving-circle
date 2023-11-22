@@ -31,7 +31,11 @@ Rails.application.routes.draw do
     # RESOURCEFUL PATHS #
 
     resources :circles, param: :slug do
-      resources :themes, except: [:create, :update], param: :slug
+      resources :themes, except: [:create, :update], param: :slug do
+        resources :members
+        resources :orgs, param: :slug
+        resources :presentations
+      end
       resources :members, except: [:create, :update]
       resources :orgs, except: [:create, :update], param: :slug
     end

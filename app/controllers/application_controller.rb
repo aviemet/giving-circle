@@ -10,11 +10,20 @@ class ApplicationController < ActionController::Base
   add_flash_types :success, :error, :warning
 
   before_action :set_locale
-  # before_action :authenticate_user!
-  # before_action :set_active_circle
-
   include Inertia::Flash
   include Inertia::Auth
+
+  inertia_share do
+    if current_user
+      {
+        menu: {
+          circles: current_user.circles.render(view: :share),
+        }
+      }
+    else
+      { menu: nil }
+    end
+  end
 
   rescue_from Pundit::NotAuthorizedError do |exception|
     flash[:warning] = exception.message
@@ -38,28 +47,6 @@ class ApplicationController < ActionController::Base
   def currencies
     Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
   end
-
-  # def set_active_circle
-  #   return if !current_user
-
-  #   if current_user.circles.empty?
-  #     if !['/logout', '/circles'].include? request.path
-  #       redirect_to circles_path
-  #     end
-  #   else
-  #     if current_user.active_circle.nil?
-  #       current_user.active_circle = current_user.circles.first
-  #       current_user.save
-  #     end
-  #     @active_circle = current_user.active_circle
-  #   end
-
-  #   if current_user.active_circle
-  #     @active_circle = current_user.active_circle
-  #   elsif !['/logout', '/circles'].include? request.path
-  #     redirect_to circles_path
-  #   end
-  # end
 
   private
 

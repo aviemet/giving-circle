@@ -63,6 +63,9 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
 
   gem "dotenv-rails", "~> 2.8"
+
+  gem "sorbet-static-and-runtime", "~> 0.5.11141"
+  gem "tapioca", "~> 0.11.12", require: false
 end
 
 group :development do
@@ -88,3 +91,4 @@ group :test do
   gem "simplecov", "~> 0.22.0"
   gem "pundit-matchers", "~> 3.1"
 end
+
