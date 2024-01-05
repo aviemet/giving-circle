@@ -9,7 +9,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 6.0"
 
 # Assets
-gem "inertia_rails", "~> 3.0.0"
+gem "inertia_rails", ">= 3.0.0"
 gem "vite_rails", "~> 3.0"
 
 # Models
@@ -28,7 +28,7 @@ gem "oj_serializers", "~> 2.0"
 gem "types_from_serializers", "~> 2.1"
 
 # Helpers
-gem "factory_bot", "~> 6.2"
+gem "factory_bot", ">= 6.2"
 gem "js-routes", "~> 2.2"
 gem "foreman", "~> 0.87.2"
 gem "amazing_print", "~> 1.4"
@@ -50,7 +50,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "rspec-rails", "~> 6.0.1"
-  gem "factory_bot_rails", "6.2"
+  gem "factory_bot_rails", ">=6.2"
   gem "pry-rails", "~> 0.3.9"
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
@@ -64,8 +64,6 @@ group :development, :test do
 
   gem "dotenv-rails", "~> 2.8"
 
-  gem "sorbet-static-and-runtime", "~> 0.5.11141"
-  gem "tapioca", "~> 0.11.12", require: false
 end
 
 group :development do
@@ -91,4 +89,3 @@ group :test do
   gem "simplecov", "~> 0.22.0"
   gem "pundit-matchers", "~> 3.1"
 end
-

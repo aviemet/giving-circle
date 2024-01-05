@@ -1,31 +1,32 @@
-import { vars, style } from '@/lib'
+import { vars } from '@/lib/theme'
+import { css } from '@linaria/core'
+import { rem } from '@mantine/core'
 
-export const title = style({
-	flex: '1 1 100%',
-	width: '100%',
+export const title = css`
+	flex: 1 1 100%;
+	width: 100%;
 
-	[`@media (min-width: ${vars.breakpoints.sm})`]: {
-		flex: 1,
-		width: 'auto',
-	},
+	@media (min-width: ${vars.breakpoints.sm}) {
+		flex: 1;
+		width: auto;
+	}
 
-	[`@media (max-width: ${vars.breakpoints.sm})`]: {
-		'&&': {
-			marginBottom: 0,
-		},
-	},
+	@media (max-width: ${vars.breakpoints.sm}) {
+		&& {
+			margin-bottom: 0;
+		}
+	}
 
-	h1: {
-		marginBottom: 0,
-	},
-})
+	h1 {
+		margin-bottom: 0;
+	}
+`
+export const content = css`
+	flex: 1 1 100%;
+	display: flex;
 
-export const content = style({
-	flex: '1 1 100%',
-	display: 'flex',
-
-	[`@media (min-width: ${vars.breakpoints.sm})`]: {
-		flex: 1,
-		width: 'auto',
-	},
-})
+	@media (min-width: ${vars.breakpoints.sm}) {
+		flex: 1;
+		width: auto;
+	}
+`

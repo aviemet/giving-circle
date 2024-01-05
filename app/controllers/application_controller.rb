@@ -7,9 +7,11 @@ class ApplicationController < ActionController::Base
   # subject to the same vulnerability as a standard web request
   skip_before_action :verify_authenticity_token, if: -> { request.inertia? }
 
+  before_action :set_locale
+  before_action :remove_empty_query_parameters
+
   add_flash_types :success, :error, :warning
 
-  before_action :set_locale
   include Inertia::Flash
   include Inertia::Auth
 
@@ -53,5 +55,21 @@ class ApplicationController < ActionController::Base
   def set_locale
     locale = params[:locale].to_s.strip.to_sym
     I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
+  end
+
+  def remove_empty_query_parameters
+    # Filter out empty query parameters
+    non_empty_params = request.query_parameters.compact_blank
+
+    # Remove direction param if table is not sorted
+    if non_empty_params['direction'].present? && non_empty_params['sort'].blank?
+      non_empty_params.delete('direction')
+    end
+
+    return unless request.query_parameters.keys.length > non_empty_params.keys.length
+
+    # Rebuild the URL without empty query parameters
+    new_url = "#{request.path}?#{non_empty_params.to_param}"
+    redirect_to new_url
   end
 end

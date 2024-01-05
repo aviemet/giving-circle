@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import RubyPlugin from 'vite-plugin-ruby'
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
+import wyw from '@wyw-in-js/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import FullReload from 'vite-plugin-full-reload'
 import react from '@vitejs/plugin-react'
@@ -23,7 +23,12 @@ const config = defineConfig({
 				plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
 			},
 		}),
-		vanillaExtractPlugin(),
+		wyw({
+			include: ['**/*.{ts,tsx}'],
+			babelOptions: {
+				presets: ['@babel/preset-typescript', '@babel/preset-react'],
+			},
+		}),
 	],
 	resolve: {
 		dedupe: ['axios'],
@@ -32,6 +37,11 @@ const config = defineConfig({
 		},
 	},
 	base: './',
+	server: {
+		fs: {
+			strict: false,
+		},
+	},
 })
 
 export default config
