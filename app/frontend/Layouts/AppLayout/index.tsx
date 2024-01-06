@@ -3,7 +3,7 @@ import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import { useDisclosure } from '@mantine/hooks'
 import { AppShell, Box, Burger, Group, ScrollArea } from '@mantine/core'
-import useLayoutStore from '@/Layouts/store/LayoutStore'
+import useLayoutStore from '@/lib/store/LayoutStore'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const { sidebarOpen, sidebarVisible, toggleSidebarOpen, setSidebarVisible } = useLayoutStore()

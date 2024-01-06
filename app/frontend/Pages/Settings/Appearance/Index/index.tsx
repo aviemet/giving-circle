@@ -4,7 +4,7 @@ import { Form, Submit } from '@/Components/Form'
 import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Routes } from '@/lib'
 import { defaults } from 'lodash'
-import useLayoutStore from '@/Layouts/store/LayoutStore'
+import useLayoutStore from '@/lib/store/LayoutStore'
 import { type UseFormProps } from 'use-inertia-form'
 
 interface IAppearanceFormData {

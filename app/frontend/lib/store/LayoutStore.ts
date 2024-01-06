@@ -1,9 +1,10 @@
 import { create } from 'zustand'
+import { defaultColor } from '../theme'
 
 interface ILayoutState {
 	sidebarOpen: boolean
 	sidebarVisible: boolean
-	primaryColor: string|undefined
+	primaryColor: string
 	sidebarBreakpoint: string
 	toggleSidebarOpen: (sidebarOpen?: boolean) => void
 	setSidebarVisible: (visible: boolean) => void
@@ -13,7 +14,7 @@ interface ILayoutState {
 const useLayoutStore = create<ILayoutState>()((set) => ({
 	sidebarOpen: false,
 	sidebarVisible: false,
-	primaryColor: undefined,
+	primaryColor: defaultColor,
 	sidebarBreakpoint: 'sm',
 
 	toggleSidebarOpen: sidebarOpen => set(state => {

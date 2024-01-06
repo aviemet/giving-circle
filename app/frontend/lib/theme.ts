@@ -4,7 +4,7 @@ import breakpoints from './breakpoints.mjs'
 
 export const defaultColor = 'blue'
 
-export const theme = mergeMantineTheme(DEFAULT_THEME, createTheme({
+export const themeObject = {
 	breakpoints,
 	defaultRadius: 'xs',
 	spacing: {
@@ -17,7 +17,9 @@ export const theme = mergeMantineTheme(DEFAULT_THEME, createTheme({
 			sortButtonWidth: 6,
 		},
 	},
-}))
+}
+
+export const theme = mergeMantineTheme(DEFAULT_THEME, createTheme(themeObject))
 
 export const vars = themeToVars(mergeMantineTheme(theme, {
 	// Overrides the primary color key for css vars. Values are set in UiFrameworkProvider
