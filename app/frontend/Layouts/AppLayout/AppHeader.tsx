@@ -1,6 +1,6 @@
 import React from 'react'
 import { ActionIcon, Avatar, Box, Divider, Text } from '@mantine/core'
-import { PlusCircleIcon, SettingsIcon } from '@/Components/Icons'
+import { LogoutIcon, PlusCircleIcon, SettingsIcon } from '@/Components/Icons'
 import { Menu } from '@/Components'
 import { usePage } from '@inertiajs/react'
 import { Routes } from '@/lib'
@@ -45,6 +45,15 @@ const Header = () => {
 							icon={ <SettingsIcon /> }
 						>
 							Preferences
+						</Menu.Item>
+
+						<Divider />
+
+						<Menu.Item
+							href={ Routes.destroyUserSession() }
+							icon={ <LogoutIcon /> }
+						>
+							Sign Out
 						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>

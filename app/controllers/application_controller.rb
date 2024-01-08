@@ -47,7 +47,11 @@ class ApplicationController < ActionController::Base
   end
 
   def currencies
-    Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
+    Monetize::Parser::CURRENCY_SYMBOLS.map { |sym, abbr| { symbol: sym, code: abbr } }
+  end
+
+  def after_sign_in_path_for(_resouce)
+    admin_path
   end
 
   private
