@@ -2,14 +2,14 @@ class CirclesController < ApplicationController
   include Searchable
 
   expose :circles, -> { search(Circle.includes_associated, sortable_fields) }
-  expose :circle, id: ->{ params[:slug] }, scope: ->{ Circle.includes_associated }, find_by: :slug
+  expose :circle, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   # GET /circles
   def index
-    if circles.count == 1
-      redirect_to circles.first
-      return
-    end
+    # if circles.count == 1
+    #   redirect_to circles.first
+    #   return
+    # end
 
     authorize circles
     render inertia: "Circles/Index", props: {

@@ -1,0 +1,19 @@
+import React from 'react'
+import DefaultMenu, { type DefaultMenuProps } from './DefaultMenu'
+import CircleMenu, { type CircleMenuProps  } from './CircleMenu'
+import ThemeMenu, { type ThemeMenuProps  } from './ThemeMenu'
+
+export type MenuNames = 'default' | 'circle' | 'theme'
+
+export type MenuType =
+	React.FC<DefaultMenuProps> |
+	React.FC<CircleMenuProps> |
+	React.FC<ThemeMenuProps>
+
+export const menus: Record<MenuNames, MenuType> = {
+	default: DefaultMenu,
+	circle: CircleMenu,
+	theme: ThemeMenu,
+}
+
+export { DefaultMenu, CircleMenu, ThemeMenu }

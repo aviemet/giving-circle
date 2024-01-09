@@ -77,11 +77,11 @@ Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: false
   AllowAliasSyntax: true
 Layout/MultilineBlockLayout:
-  # Enabled: false
-  Enabled: true
+  Enabled: false
+  # Enabled: true
 Layout/BlockEndNewline:
-  # Enabled: false
-  Enabled: true
+  Enabled: false
+  # Enabled: true
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented

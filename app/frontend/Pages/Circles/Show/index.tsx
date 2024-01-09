@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Container, Group, Heading, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { CircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface IShowCircleProps {
 	circle: Schema.CirclesShow
@@ -11,7 +12,10 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 	const title = circle.name || 'Circle'
 
 	return (
-		<Page title={ circle.name }>
+		<Page
+			title={ circle.name }
+			navMenu={ <CircleMenu circle={ circle } /> }
+		>
 			<Section>
 				<Container>
 					<Group justify="space-between">

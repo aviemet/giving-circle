@@ -1,41 +1,71 @@
 import React, { forwardRef } from 'react'
-import { Link, type InertiaLinkProps } from '@inertiajs/react'
-import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
-import { Button } from '@mantine/core'
-import ButtonLink from './ButtonLink'
-
-interface IAnchorLinkProps
-	extends Omit<InertiaLinkProps, 'color'|'size'|'span'>,
-	Omit<AnchorProps, 'href'|'style'> {}
-
-const AnchorLink = forwardRef<HTMLAnchorElement, IAnchorLinkProps>((props, ref) => <Anchor ref={ ref } component={ Link } { ...props } />)
+import { router } from '@inertiajs/react'
+import { Method, Visit } from '@inertiajs/core'
+import { type ButtonProps } from '@mantine/core'
+import { Button } from '@/Components'
+import { exclude } from '@/lib/collections'
+import AnchorLink, { type IAnchorLinkProps } from '@/Components/Link/AnchorLink'
 
 interface ILinkProps extends IAnchorLinkProps {
 	children?: React.ReactNode
 	href: string
 	as: 'a'|'button'
-	compact?: boolean
+	method?: Method
+	visit?: Omit<Visit, 'method'>
 	buttonProps?: ButtonProps
 	disabled?: boolean
 }
 
 const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', buttonProps, ...props },
+	{ children, href, as = 'a', method, visit, buttonProps, style, disabled, ...props },
 	ref,
 ) => {
-	if(as === 'button') {
-		return <ButtonLink
+	const handleHTTP = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		e.preventDefault()
+
+		router.visit(href, {
+			method,
+			...visit,
+		})
+	}
+
+	const mergedButtonProps = Object.assign(
+		{ disabled },
+		buttonProps,
+		exclude(props, ['classNames', 'style', 'vars']),
+	)
+
+	const processedHref = disabled ? '#' : href
+
+	if((method !== undefined && method !== 'get')) {
+		return <Button
 			ref={ ref }
-			href={ href }
-			{ ...props }
+			component={ AnchorLink }
+			href={ processedHref }
+			onClick={ handleHTTP }
+			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
+			c="bright"
+			{ ...mergedButtonProps }
 		>
 			{ children }
-		</ButtonLink>
+		</Button>
+	}
+
+	if(as === 'button') {
+		return <Button
+			ref={ ref }
+			component={ AnchorLink }
+			href={ processedHref }
+			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
+			c="bright"
+			{ ...mergedButtonProps }
+		>
+			{ children }
+		</Button>
 	}
 
 	return (
-		<AnchorLink href={ href } ref={ ref } { ...props }>{ children }</AnchorLink>
-
+		<AnchorLink href={ processedHref } ref={ ref } { ...props }>{ children }</AnchorLink>
 	)
 })
 

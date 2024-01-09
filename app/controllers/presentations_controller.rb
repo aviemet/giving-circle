@@ -2,8 +2,8 @@ class PresentationsController < ApplicationController
   include Searchable
 
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }
-    expose :presentation, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
+
   # GET /presentations
   def index
     authorize presentations

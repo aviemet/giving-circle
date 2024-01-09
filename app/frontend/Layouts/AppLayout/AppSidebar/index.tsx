@@ -1,15 +1,16 @@
 import React from 'react'
-import { AppShell, Divider, Text, NavLink } from '@mantine/core'
+import { AppShell, Divider, Text, NavLink, Portal } from '@mantine/core'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import CircleHeaderMenu from './CircleHeaderMenu'
-import { circleMenu, themeMenu } from './menus'
-import { usePageProps } from '@/lib/hooks'
+import { useLocation, usePageProps } from '@/lib/hooks'
+import useLayoutStore from '@/lib/store/LayoutStore'
+import { menus } from './menus'
+
 
 const AppSidebar = () => {
+	const { NavMenu } = useLayoutStore()
 	const props = usePageProps()
-
-	console.log({ props })
 
 	return (
 		<>
@@ -20,7 +21,7 @@ const AppSidebar = () => {
 			<Divider />
 
 			<AppShell.Section grow>
-				{ /* <Link href={ Routes.the }>Themes</Link> */ }
+				{ NavMenu }
 			</AppShell.Section>
 
 			<Divider />

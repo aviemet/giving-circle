@@ -1,8 +1,0 @@
-.external {
-	display: 'inline-block';
-
-	.react-icon.external {
-		display: inline-block;
-		verticalAlign: text-top;
-	}
-}
