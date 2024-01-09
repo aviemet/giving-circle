@@ -67,6 +67,7 @@ group :development, :test do
 
   # File annotation
   gem "chusaku", "~> 1.2", require: false
+  gem "annotate", "~> 3.2", require: false
 end
 
 group :development do
@@ -78,6 +79,7 @@ group :development do
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
+
 end
 
 group :test do
