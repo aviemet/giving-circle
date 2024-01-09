@@ -8,7 +8,7 @@ interface IShowThemeProps {
 }
 
 const ShowTheme = ({ theme }: IShowThemeProps) => {
-	const title =  'Theme'
+	const title =  theme.title || 'Theme'
 
 	return (
 		<Page

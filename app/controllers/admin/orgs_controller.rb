@@ -2,9 +2,9 @@ module Admin
   class OrgsController < AdminController
     include Searchable
 
-    expose :circle, id: ->{ params[:circle_slug] }, find_by: :slug
+    expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
     expose :orgs, -> { search(circle.orgs.includes_associated, sortable_fields) }
-    expose :org, id: ->{ params[:slug] }, scope: ->{ circle.orgs.includes_associated }, find_by: :slug
+    expose :org, id: -> { params[:slug] }, scope: -> { circle.orgs.includes_associated }, find_by: :slug
 
     # GET /circles/:circle_slug/orgs
     def index
