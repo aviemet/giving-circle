@@ -10,7 +10,6 @@ import { menus } from './menus'
 
 const AppSidebar = () => {
 	const { NavMenu } = useLayoutStore()
-	const props = usePageProps()
 
 	return (
 		<>
@@ -20,8 +19,7 @@ const AppSidebar = () => {
 
 			<Divider />
 
-			<AppShell.Section grow>
-				{ NavMenu }
+			<AppShell.Section grow id="dynamic-nav-menu">
 			</AppShell.Section>
 
 			<Divider />

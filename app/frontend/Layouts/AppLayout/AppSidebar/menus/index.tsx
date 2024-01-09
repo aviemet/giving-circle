@@ -6,14 +6,28 @@ import ThemeMenu, { type ThemeMenuProps  } from './ThemeMenu'
 export type MenuNames = 'default' | 'circle' | 'theme'
 
 export type MenuType =
-	React.FC<DefaultMenuProps> |
-	React.FC<CircleMenuProps> |
-	React.FC<ThemeMenuProps>
+	(() => React.FC<DefaultMenuProps>) |
+	(() => React.FC<CircleMenuProps>) |
+	(() => React.FC<ThemeMenuProps>)
 
 export const menus: Record<MenuNames, MenuType> = {
-	default: DefaultMenu,
-	circle: CircleMenu,
-	theme: ThemeMenu,
+	default: () => DefaultMenu,
+	circle: () => CircleMenu,
+	theme: () => ThemeMenu,
 }
+
+export const getDefaultMenu = () => () => <DefaultMenu />
+
+export const getCircleMenu = () => (circle: Schema.Circle) => (
+	<>
+		<CircleMenu circle={ circle } />
+	</>
+)
+
+export const getThemeMenu = () => (circle: Schema.Circle, theme: Schema.Theme) => (
+	<>
+		<ThemeMenu circle={ circle } theme={ theme } />
+	</>
+)
 
 export { DefaultMenu, CircleMenu, ThemeMenu }
