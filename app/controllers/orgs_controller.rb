@@ -5,7 +5,7 @@ class OrgsController < ApplicationController
   expose :orgs, -> { search(circle.orgs.includes_associated, sortable_fields) }
   expose :org, id: ->{ params[:slug] }, scope: ->{ circle.orgs.includes_associated }, find_by: :slug
 
-  # GET /circles/:circle_slug/orgs
+  # @route GET /circles/:circle_slug/orgs (circle_orgs)
   def index
     authorize orgs
     render inertia: "Orgs/Index", props: {
@@ -13,7 +13,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # GET /circles/:circle_slug/orgs/:slug
+  # @route GET /circles/:circle_slug/orgs/:slug (circle_org)
   def show
     authorize org
     render inertia: "Orgs/Show", props: {

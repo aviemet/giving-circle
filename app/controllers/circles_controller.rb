@@ -4,7 +4,7 @@ class CirclesController < ApplicationController
   expose :circles, -> { search(Circle.includes_associated, sortable_fields) }
   expose :circle, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
-  # GET /circles
+  # @route GET /circles (circles)
   def index
     # if circles.count == 1
     #   redirect_to circles.first
@@ -17,7 +17,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # GET /circles/:slug
+  # @route GET /circles/:slug (circle)
   def show
     authorize circle
     render inertia: "Circles/Show", props: {

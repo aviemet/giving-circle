@@ -5,7 +5,7 @@ module Admin
     expose :circles, -> { search(Circle.includes_associated, sortable_fields) }
     expose :circle, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
-    # GET /circles
+    # @route GET /admin/circles (admin_circles)
     def index
       # if circles.count == 1
       #   redirect_to [:admin, circles.first]
@@ -18,7 +18,7 @@ module Admin
       }
     end
 
-    # GET /circles/:slug
+    # @route GET /admin/circles/:slug (admin_circle)
     def show
       authorize circle
       render inertia: "Circles/Show", props: {
@@ -27,7 +27,7 @@ module Admin
       }
     end
 
-    # GET /circles/new
+    # @route GET /admin/circles/new (new_admin_circle)
     def new
       authorize Circle.new
       render inertia: "Circles/New", props: {
@@ -35,7 +35,7 @@ module Admin
       }
     end
 
-    # GET /circles/:slug/edit
+    # @route GET /admin/circles/:slug/edit (edit_admin_circle)
     def edit
       authorize circle
       render inertia: "Circles/Edit", props: {
@@ -43,7 +43,7 @@ module Admin
       }
     end
 
-    # POST /circles
+    # @route POST /admin/circles (admin_circles)
     def create
       authorize Circle.new
       if circle.save
@@ -54,7 +54,8 @@ module Admin
       end
     end
 
-    # PATCH/PUT /circles/:slug
+    # @route PATCH /admin/circles/:slug (admin_circle)
+    # @route PUT /admin/circles/:slug (admin_circle)
     def update
       authorize circle
       if circle.update(circle_params)
@@ -64,7 +65,7 @@ module Admin
       end
     end
 
-    # DELETE /circles/:slug
+    # @route DELETE /admin/circles/:slug (admin_circle)
     def destroy
       authorize circle
       circle.destroy

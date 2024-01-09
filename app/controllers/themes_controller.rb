@@ -4,7 +4,7 @@ class ThemesController < ApplicationController
   expose :themes, -> { search(Theme.includes_associated, sortable_fields) }
   expose :theme, id: ->{ params[:slug] }, scope: ->{ Theme.includes_associated }, find_by: :slug
 
-  # GET /themes
+  # @route GET /circles/:circle_slug/themes (circle_themes)
   def index
     authorize themes
     render inertia: "Themes/Index", props: {
@@ -12,7 +12,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # GET /themes/:slug
+  # @route GET /circles/:circle_slug/themes/:slug (circle_theme)
   def show
     authorize theme
     render inertia: "Themes/Show", props: {

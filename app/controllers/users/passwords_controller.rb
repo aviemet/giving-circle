@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
-  # GET /resource/password/new
+  # @route GET /users/password/new (new_user_password)
   def new
     render inertia: "Auth/Devise/Passwords/New"
   end
 
-  # POST /resource/password
   # def create
   #   super
   # end
 
-  # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
   #   super
   # end

@@ -54,6 +54,7 @@ group :development, :test do
   gem "pry-rails", "~> 0.3.9"
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
+  # Linting
   gem "rubocop-rails", "~> 2.14", require: false
   gem "rubocop-rspec", "~> 2.9", require: false
   gem "rubocop-performance", "~> 1.13", require: false
@@ -64,6 +65,8 @@ group :development, :test do
 
   gem "dotenv-rails", "~> 2.8"
 
+  # File annotation
+  gem "chusaku", "~> 1.2", require: false
 end
 
 group :development do

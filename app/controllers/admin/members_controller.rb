@@ -5,7 +5,8 @@ module Admin
     expose :members, -> { search(members.includes_associated, sortable_fields) }
     expose :member, scope: ->{ members }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /members
+    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/members (admin_circle_theme_members)
+    # @route GET /admin/circles/:circle_slug/members (admin_circle_members)
     def index
       authorize members
       render inertia: "Members/Index", props: {
@@ -13,7 +14,8 @@ module Admin
       }
     end
 
-  # GET /members/:id
+    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
+    # @route GET /admin/circles/:circle_slug/members/:id (admin_circle_member)
     def show
       authorize member
       render inertia: "Members/Show", props: {
@@ -21,7 +23,8 @@ module Admin
       }
     end
 
-  # GET /members/new
+    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/members/new (new_admin_circle_theme_member)
+    # @route GET /admin/circles/:circle_slug/members/new (new_admin_circle_member)
     def new
       authorize Member.new
       render inertia: "Members/New", props: {
@@ -29,7 +32,8 @@ module Admin
       }
     end
 
-  # GET /members/:id/edit
+    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/members/:id/edit (edit_admin_circle_theme_member)
+    # @route GET /admin/circles/:circle_slug/members/:id/edit (edit_admin_circle_member)
     def edit
       authorize member
       render inertia: "Members/Edit", props: {
@@ -37,7 +41,8 @@ module Admin
       }
     end
 
-  # POST /members
+    # @route POST /admin/circles/:circle_slug/themes/:theme_slug/members (admin_circle_theme_members)
+    # @route POST /admin/members (admin_members)
     def create
       authorize Member.new
       if member.save
@@ -47,7 +52,10 @@ module Admin
       end
     end
 
-  # PATCH/PUT /members/:id
+    # @route PATCH /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
+    # @route PUT /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
+    # @route PATCH /admin/members/:id (admin_member)
+    # @route PUT /admin/members/:id (admin_member)
     def update
       authorize member
       if member.update(member_params)
@@ -57,7 +65,8 @@ module Admin
       end
     end
 
-  # DELETE /members/:id
+    # @route DELETE /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
+    # @route DELETE /admin/circles/:circle_slug/members/:id (admin_circle_member)
     def destroy
       authorize member
       member.destroy
