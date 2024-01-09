@@ -18,13 +18,15 @@ export const menus: Record<MenuNames, MenuType> = {
 
 export const getDefaultMenu = () => () => <DefaultMenu />
 
-export const getCircleMenu = () => (circle: Schema.Circle) => (
+export const getCircleMenu = ({ circle }: {circle: Schema.Circle}) => () => (
 	<>
 		<CircleMenu circle={ circle } />
 	</>
 )
 
-export const getThemeMenu = () => (circle: Schema.Circle, theme: Schema.Theme) => (
+export const getThemeMenu = (
+	{ circle, theme }: {circle: Schema.Circle, theme: Schema.Theme},
+) => () => (
 	<>
 		<ThemeMenu circle={ circle } theme={ theme } />
 	</>

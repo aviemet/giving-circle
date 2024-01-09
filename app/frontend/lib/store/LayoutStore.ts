@@ -4,12 +4,12 @@ import { createColorSlice } from './slices/colorSlice'
 import { createMenuSlice } from './slices/menuSlice'
 import { createSidebarSlice } from './slices/sidebarSlice'
 
-type LayoutStoreSlices = IColorSlice & IMenuSlice & ISidebarSlice
+type LayoutStoreSlices = IColorSlice & ISidebarSlice //& IMenuSlice
 
 const useLayoutStore = create<LayoutStoreSlices>()((...a) => ({
 	...createColorSlice(...a),
-	...createMenuSlice(...a),
 	...createSidebarSlice(...a),
+	// ...createMenuSlice(...a),
 }))
 
 export default useLayoutStore

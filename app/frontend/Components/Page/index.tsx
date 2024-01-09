@@ -1,28 +1,25 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Head } from '@inertiajs/react'
-import { DefaultMenu, getDefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
-import useLayoutStore from '@/lib/store/LayoutStore'
+import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { Portal } from '@mantine/core'
 
 interface IPageProps {
 	children?: React.ReactNode
 	title?: string
 	meta?: React.ReactNode
-	navMenu?: React.JSX.Element
+	navMenu?: (props: any) => React.JSX.Element
 }
 
-const defaultMenu = getDefaultMenu()
-
-const Page = ({ children, title, meta, navMenu: NavMenu = defaultMenu }: IPageProps) => {
-	const dynamicNavMenu = document.getElementById('dynamic-nav-menu')
+const Page = ({ children, title, meta, navMenu: NavMenu }: IPageProps) => {
+	const dynamicNavMenuEl = document.getElementById('dynamic-nav-menu')
 
 	return (
 		<>
 			{ title && <Head title={ title }>
 				{ meta && meta }
 			</Head> }
-			{ dynamicNavMenu && <Portal target={ dynamicNavMenu }>
-				{ NavMenu && <NavMenu /> }
+			{ dynamicNavMenuEl && <Portal target={ dynamicNavMenuEl }>
+				{ NavMenu ? <NavMenu /> : <DefaultMenu /> }
 			</Portal> }
 			{ children }
 		</>

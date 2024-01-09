@@ -1,16 +1,11 @@
 import React from 'react'
-import { AppShell, Divider, Text, NavLink, Portal } from '@mantine/core'
+import { AppShell, Divider, Text, NavLink } from '@mantine/core'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import CircleHeaderMenu from './CircleHeaderMenu'
-import { useLocation, usePageProps } from '@/lib/hooks'
-import useLayoutStore from '@/lib/store/LayoutStore'
-import { menus } from './menus'
 
 
 const AppSidebar = () => {
-	const { NavMenu } = useLayoutStore()
-
 	return (
 		<>
 			<AppShell.Section mb="xs">

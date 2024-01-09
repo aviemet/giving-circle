@@ -14,7 +14,7 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 	return (
 		<Page
 			title={ circle.name }
-			navMenu={ getCircleMenu(circle) }
+			navMenu={ getCircleMenu({ circle }) }
 		>
 			<Section>
 				<Container>

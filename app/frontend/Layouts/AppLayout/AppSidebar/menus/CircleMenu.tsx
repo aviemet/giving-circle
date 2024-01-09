@@ -9,9 +9,18 @@ export interface CircleMenuProps {
 const CircleMenu = ({ circle }: CircleMenuProps) => {
 	return (
 		<>
-			<NavLink href={ Routes.adminCircle(circle.slug) }>Overview</NavLink>
-			<NavLink href={ Routes.adminCircleThemes(circle.slug) }>Themes</NavLink>
-			<NavLink href={ Routes.adminCircleMembers(circle.slug) }>Members</NavLink>
+			<NavLink
+				href={ Routes.adminCircle(circle.slug) }
+				label="Overview"
+			/>
+			<NavLink
+				href={ Routes.adminCircleThemes(circle.slug) }
+				label="Themes"
+			/>
+			<NavLink
+				href={ Routes.adminCircleMembers(circle.slug) }
+				label="Members"
+			/>
 		</>
 	)
 }
