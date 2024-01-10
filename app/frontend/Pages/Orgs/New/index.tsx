@@ -2,25 +2,24 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import OrgForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface INewOrgProps {
 	org: Schema.OrgsFormData
 }
 
 const NewOrg = ({ ...data }: INewOrgProps) => {
+	const { params } = usePageProps()
+
 	const title = 'New Org'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Orgs', href: Routes.orgs() },
-			{ title: 'New Org' },
-		] }>
-
+		<Page title={ title }>
 			<Section>
 				<Heading>{ title }</Heading>
 
 				<OrgForm
-					to={ Routes.orgs() }
+					to={ Routes.adminCircleThemeOrgs(params.circle_slug, params.theme_slug) }
 					{ ...data }
 				/>
 			</Section>

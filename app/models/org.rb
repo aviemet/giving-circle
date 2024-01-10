@@ -23,7 +23,9 @@ class Org < ApplicationRecord
 
   resourcify
 
-  has_many :presentations_orgs
+  validates :name, presence: true
+
+  has_many :presentations_orgs, dependent: :destroy
   has_many :presentations, through: :presentations_orgs
 
   scope :includes_associated, -> { includes([:presentations]) }

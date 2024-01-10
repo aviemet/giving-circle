@@ -24,8 +24,11 @@ class Circle < ApplicationRecord
 
   resourcify
 
+  validates :name, presence: true
+
   has_many :themes, dependent: :nullify
   has_many :presentations, through: :themes
+
   has_many :circles_member, dependent: :destroy
   has_many :members, through: :circles_member
 

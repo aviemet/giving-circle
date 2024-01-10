@@ -5,6 +5,7 @@ import SpotlightProvider from './SpotlightProvider'
 
 import './reset.css'
 import '@mantine/core/styles.css'
+import '@mantine/tiptap/styles.css'
 import './global.css'
 
 

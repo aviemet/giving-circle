@@ -31,9 +31,11 @@ class Theme < ApplicationRecord
 
   resourcify
 
+  validates :title, presence: true
+
   belongs_to :circle
-  has_many :presentations
-  has_many :themes_org
+  has_many :presentations, dependent: :destroy
+  has_many :themes_org, dependent: :destroy
   has_many :orgs, through: :themes_org
 
   scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }

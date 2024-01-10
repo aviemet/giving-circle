@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, TextInput, Submit } from '@/Components/Form'
+import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TOrgFormData = {
@@ -22,8 +22,7 @@ const OrgForm = ({ method = 'post', org, ...props }: IOrgFormProps) => {
 			{ ...props }
 		>
 			<TextInput name="name" label="Name" />
-			<TextInput name="slug" label="Slug" />
-			<TextInput name="description" label="Description" />
+			<RichText name="description" label="Description" />
 			<Submit>{ org.id ? 'Update' : 'Create' } Org</Submit>
 		</Form>
 	)

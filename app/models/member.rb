@@ -23,7 +23,10 @@ class Member < ApplicationRecord
 
   resourcify
 
-  has_many :circles_members
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  has_many :circles_members, dependent: :destroy
   has_many :circles, through: :circles_members
 
   scope :includes_associated, -> { includes([:circles]) }
