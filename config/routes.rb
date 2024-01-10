@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   root "pages#home" # Public home page for entire project
 
+  # CONCERNS #
+
+  concern :bulk_delete do
+    collection do
+      delete :destroy
+    end
+  end
+
   # DEVISE PATHS #
 
   devise_for(
@@ -38,17 +46,14 @@ Rails.application.routes.draw do
 
     resources :circles, param: :slug do
       resources :themes, except: [:create, :update], param: :slug do
-        resources :members
-        resources :orgs, param: :slug
-        resources :presentations
+        resources :members, concerns: :bulk_delete
+        resources :orgs, concerns: :bulk_delete, param: :slug
+        resources :presentations, concerns: :bulk_delete
       end
       resources :members, except: [:create, :update]
-      resources :orgs, except: [:create, :update], param: :slug
     end
 
     resources :themes, only: [:create, :update]
-    resources :orgs, only: [:create, :update]
-    resources :members, only: [:create, :update]
 
     # SETTINGS PAGES #
 

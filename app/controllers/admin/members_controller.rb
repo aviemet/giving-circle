@@ -42,7 +42,6 @@ module Admin
     end
 
     # @route POST /admin/circles/:circle_slug/themes/:theme_slug/members (admin_circle_theme_members)
-    # @route POST /admin/members (admin_members)
     def create
       authorize Member.new
       if member.save
@@ -54,8 +53,6 @@ module Admin
 
     # @route PATCH /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
     # @route PUT /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
-    # @route PATCH /admin/members/:id (admin_member)
-    # @route PUT /admin/members/:id (admin_member)
     def update
       authorize member
       if member.update(member_params)
@@ -65,6 +62,7 @@ module Admin
       end
     end
 
+    # @route DELETE /admin/circles/:circle_slug/themes/:theme_slug/members (admin_circle_theme_members)
     # @route DELETE /admin/circles/:circle_slug/themes/:theme_slug/members/:id (admin_circle_theme_member)
     # @route DELETE /admin/circles/:circle_slug/members/:id (admin_circle_member)
     def destroy

@@ -16,15 +16,18 @@ class ApplicationController < ActionController::Base
   include Inertia::Auth
 
   inertia_share do
+    share_object = {
+      menu: nil,
+      params: request.params.to_h.except("controller", "action")
+    }
+
     if current_user
-      {
-        menu: {
-          circles: current_user.circles.render(view: :share),
-        }
+      share_object[:menu] = {
+        circles: current_user.circles.render(view: :share),
       }
-    else
-      { menu: nil }
     end
+
+    share_object
   end
 
   rescue_from Pundit::NotAuthorizedError do |exception|
