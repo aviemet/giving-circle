@@ -21,6 +21,8 @@ class Org < ApplicationRecord
     },
   )
 
+  slug :name
+
   resourcify
 
   validates :name, presence: true

@@ -1,6 +1,8 @@
 class Orgs::ShowSerializer < ApplicationSerializer
   object_as :org
 
+  identifier :slug
+
   attributes(
     :id,
     :name,

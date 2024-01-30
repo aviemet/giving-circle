@@ -9,7 +9,7 @@ const PresentationTable = (props: ITableProps) => {
 		<Table>
 			<Table.Head>
 				<Table.Row>
-					
+
 					<Table.Cell sort="name">Name</Table.Cell>
 					<Table.Cell className="actions">Actions</Table.Cell>
 				</Table.Row>
@@ -17,7 +17,7 @@ const PresentationTable = (props: ITableProps) => {
 			<Table.Body>
 				<Table.RowIterator render={ (presentation: Schema.PresentationsIndex) => (
 					<Table.Row key={ presentation.id }>
-						
+
 						<Table.Cell>
 							<Link href={ Routes.presentation(presentation.id) }>{ presentation.name }</Link>
 						</Table.Cell>

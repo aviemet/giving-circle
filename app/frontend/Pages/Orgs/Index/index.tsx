@@ -19,9 +19,11 @@ const OrgsIndex = ({ orgs, pagination }: IOrgIndexProps) => {
 			model="orgs"
 			rows={ orgs }
 			pagination={ pagination }
-			deleteRoute={ Routes.adminCircleThemeOrgs(params.circle_slug, params.theme_slug) }
 			menuOptions={ [
-				{ label: 'New Org', href: Routes.newAdminCircleThemeOrg(params.circle_slug, params.theme_slug), icon: NewIcon },
+				{
+					label: 'New Org',
+					href: Routes.newThemeOrg(params.theme_slug), icon: NewIcon,
+				},
 			] }
 		>
 			<OrgsTable />

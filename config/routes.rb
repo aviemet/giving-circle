@@ -39,41 +39,40 @@ Rails.application.routes.draw do
     skip: [:sessions],
   )
 
-  namespace :admin do
-    get "/", to: redirect("/admin/circles")
+  scope :admin, module: "admin" do
+    get "/", to: redirect("/admin/circles"), as: "home"
 
     # RESOURCEFUL PATHS #
 
-    resources :circles, param: :slug do
-      resources :themes, except: [:create, :update], param: :slug do
-        resources :members, concerns: :bulk_delete
+    resources :users
+
+    resources :circles, shallow: true, param: :slug do
+      resources :themes, shallow: true, param: :slug do
         resources :orgs, concerns: :bulk_delete, param: :slug
+        resources :members, concerns: :bulk_delete, param: :slug
         resources :presentations, concerns: :bulk_delete
       end
       resources :members, except: [:create, :update]
     end
 
-    resources :themes, only: [:create, :update]
-
     # SETTINGS PAGES #
 
     namespace :settings do
       get "/", to: redirect("/admin/settings/general")
-      resources :general, only: [:index, :update]
-      resources :appearance, only: [:index, :update]
-      resources :integrations, only: [:index, :update]
-      resources :localizations, only: [:index, :update]
-      resources :notifications, only: [:index, :update]
-      resources :integrations, only: [:index, :update], path: :mail
+      [:general, :appearance, :integrations, :localizations, :notifications].freeze.each do |path|
+        get path, to: "#{path}#index"
+        patch path, to: "#{path}#update"
+      end
     end
 
   end
 
   # PUBLIC PAGES #
 
-  resources :circles, only: [:index, :show], param: :slug do
-    resources :themes, only: [:index, :show], param: :slug
-    resources :orgs, only: [:index, :show], param: :slug
+  namespace :public, path: "" do
+    resources :circles, only: [:index, :show], param: :slug do
+      resources :themes, only: [:index, :show], param: :slug
+      resources :orgs, only: [:index, :show], param: :slug
+    end
   end
-
 end

@@ -16,7 +16,7 @@ const EditMail = ({ smtp }: ISmtpFormProps) => {
 			<SmtpForm
 				method="put"
 				data={ { smtp } }
-				to={ Routes.settingsSmtp(smtp.id!) }
+				to={ Routes.settingsIntegrations(smtp.id!) }
 			/>
 		</SettingsLayout>
 	)

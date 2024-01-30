@@ -10,12 +10,9 @@ const ShowPresentation = ({ presentation }: IShowPresentationProps) => {
 	const title =  'Presentation'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentation', href: Routes.presentations() },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">

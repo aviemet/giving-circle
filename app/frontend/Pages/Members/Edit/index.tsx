@@ -16,7 +16,7 @@ const EditMember = ({ member }: IEditMemberProps) => {
 
 			<MembersForm
 				method='put'
-				to={ Routes.adminCircleMembers(member.slug) }
+				to={ Routes.member(member.slug) }
 				member={ member }
 			/>
 		</Section>

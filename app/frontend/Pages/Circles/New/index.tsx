@@ -17,7 +17,7 @@ const NewCircle = ({ ...data }: INewCircleProps) => {
 				<Heading>{ title }</Heading>
 
 				<CircleForm
-					to={ Routes.adminCircles() }
+					to={ Routes.circles() }
 					{ ...data }
 				/>
 			</Section>

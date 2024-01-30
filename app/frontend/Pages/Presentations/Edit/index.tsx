@@ -11,17 +11,13 @@ const EditPresentation = ({ presentation }: IEditPresentationProps) => {
 	const title = 'Edit Presentation'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentations', href: Routes.presentations() },
-			{ title: Presentation, href: Routes.presentation(presentation.id) },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<PresentationsForm
 					method='put'
-					to={ Routes.presentation() }
+					to={ Routes.presentation(presentation.id) }
 					presentation={ presentation }
 				/>
 			</Section>

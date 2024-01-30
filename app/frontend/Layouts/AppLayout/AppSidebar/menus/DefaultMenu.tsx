@@ -8,7 +8,7 @@ export interface DefaultMenuProps {
 const DefaultMenu = (props: DefaultMenuProps) => {
 	return (
 		<>
-			<NavLink label="Home" href={ Routes.admin() } />
+			<NavLink label="Home" href={ Routes.home() } />
 		</>
 	)
 }

@@ -11,17 +11,13 @@ const EditOrg = ({ org }: IEditOrgProps) => {
 	const title = 'Edit Org'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Orgs', href: Routes.orgs() },
-			{ title: Org, href: Routes.org(org.id) },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<OrgsForm
 					method='put'
-					to={ Routes.org() }
+					to={ Routes.org(org.slug) }
 					org={ org }
 				/>
 			</Section>

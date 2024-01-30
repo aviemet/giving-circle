@@ -10,12 +10,9 @@ const ShowMember = ({ member }: IShowMemberProps) => {
 	const title =  'Member'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Member', href: Routes.members() },
-			{ title },
-		] }>
+		<Page title={ title }>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">

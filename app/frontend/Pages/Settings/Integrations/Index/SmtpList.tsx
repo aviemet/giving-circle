@@ -33,7 +33,7 @@ const SmtpList = ({ smtps }: ISmtpListProps) => {
 							<Table.Cell>{ smtp.domain }</Table.Cell>
 							<Table.Cell>{ smtp.username }</Table.Cell>
 							<Table.Cell fitContent>
-								<Group noWrap spacing="sm">
+								<Group spacing="sm">
 									<EditButton href={ Routes.editSettingsSmtp(smtp.id!) } label={ smtp.name } />
 								</Group>
 							</Table.Cell>

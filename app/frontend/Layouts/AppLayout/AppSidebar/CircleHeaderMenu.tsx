@@ -32,7 +32,7 @@ const CircleHeaderMenu = () => {
 					<Menu.Item
 						key={ circle.id }
 						component={ Link }
-						href={ Routes.adminCircle(circle.slug) }
+						href={ Routes.circle(circle.slug) }
 					>
 						{ circle.name }
 					</Menu.Item>

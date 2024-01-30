@@ -31,7 +31,7 @@ const Header = () => {
 							</Menu.Item>
 						)) }
 						<Menu.Item
-							href={ Routes.newAdminCircle() }
+							href={ Routes.newCircle() }
 							icon={ <PlusCircleIcon /> }
 						>
 							New Circle
@@ -41,7 +41,7 @@ const Header = () => {
 						<Divider />
 
 						<Menu.Item
-							href={ Routes.adminSettingsGeneralIndex() }
+							href={ Routes.settingsGeneral() }
 							icon={ <SettingsIcon /> }
 						>
 							Preferences

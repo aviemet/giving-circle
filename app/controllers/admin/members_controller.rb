@@ -2,8 +2,8 @@ module Admin
   class MembersController < AdminController
     include Searchable
 
-    expose :members, -> { search(members.includes_associated, sortable_fields) }
-    expose :member, scope: ->{ members }, find: ->(id, scope){ scope.includes_associated.find(id) }
+    expose :members, -> { search(Member.includes_associated, sortable_fields) }
+    expose :member, scope: -> { members }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
     # @route GET /admin/circles/:circle_slug/themes/:theme_slug/members (admin_circle_theme_members)
     # @route GET /admin/circles/:circle_slug/members (admin_circle_members)

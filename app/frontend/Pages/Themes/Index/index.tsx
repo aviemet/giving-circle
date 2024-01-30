@@ -17,9 +17,8 @@ const ThemesIndex = ({ themes, pagination, circle }: IThemeIndexProps) => {
 			model="themes"
 			rows={ themes }
 			pagination={ pagination }
-			deleteRoute={ Routes.adminThemes() }
 			menuOptions={ [
-				{ label: 'New Theme', href: Routes.newAdminCircleTheme(circle.slug), icon: NewIcon },
+				{ label: 'New Theme', href: Routes.newCircleTheme(circle.slug), icon: NewIcon },
 			] }
 		>
 			<ThemesTable />

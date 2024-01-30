@@ -11,19 +11,19 @@ const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {
 	return (
 		<>
 			<NavLink
-				href={ Routes.adminCircleTheme(circle.slug, theme.slug) }
+				href={ Routes.theme(theme.slug) }
 				label="Overview"
 			/>
 			<NavLink
-				href={ Routes.adminCircleThemeOrgs(circle.slug, theme.slug) }
+				href={ Routes.themeOrgs(theme.slug) }
 				label="Organizations"
 			/>
 			<NavLink
-				href={ Routes.adminCircleThemeMembers(circle.slug, theme.slug) }
+				href={ Routes.themeMembers(theme.slug) }
 				label="Members"
 			/>
 			<NavLink
-				href={ Routes.adminCircleThemePresentations(circle.slug, theme.slug) }
+				href={ Routes.themePresentations(theme.slug) }
 				label="Presentations"
 			/>
 		</>

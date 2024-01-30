@@ -3,6 +3,7 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import PresentationsTable from '../Table'
+import { usePageProps } from '@/lib/hooks'
 
 interface IPresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
@@ -10,15 +11,16 @@ interface IPresentationIndexProps {
 }
 
 const PresentationsIndex = ({ presentations, pagination }: IPresentationIndexProps) => {
+	const { params } = usePageProps()
+
 	return (
 		<IndexPageTemplate
 			title="Presentations"
 			model="presentations"
 			rows={ presentations }
 			pagination={ pagination }
-			deleteRoute={ Routes.presentations() }
 			menuOptions={ [
-				{ label: 'New Presentation', href: Routes.newPresentation(), icon: NewIcon },
+				{ label: 'New Presentation', href: Routes.newThemePresentation(params.theme_slug), icon: NewIcon },
 			] }
 		>
 			<PresentationsTable />

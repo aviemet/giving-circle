@@ -1,4 +1,3 @@
-
 import { Routes } from '@/lib'
 
 export * as Routes from '@/types/routes'

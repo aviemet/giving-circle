@@ -19,7 +19,7 @@ const NewOrg = ({ ...data }: INewOrgProps) => {
 				<Heading>{ title }</Heading>
 
 				<OrgForm
-					to={ Routes.adminCircleThemeOrgs(params.circle_slug, params.theme_slug) }
+					to={ Routes.themeOrgs(params.theme_slug) }
 					{ ...data }
 				/>
 			</Section>

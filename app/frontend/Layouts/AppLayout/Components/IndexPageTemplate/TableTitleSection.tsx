@@ -10,7 +10,7 @@ import * as classes from './IndexPageStyles.css'
 export interface IIndexTableTitleSectionProps {
 	children: React.ReactNode
 	title: string
-	deleteRoute: string
+	deleteRoute?: string
 	menuOptions?: {
 		label: string
 		href: string
@@ -22,6 +22,8 @@ const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: I
 	const { tableState: { selected } } = useTableContext()
 
 	const deleteRecords = () => {
+		if(!deleteRoute) return
+
 		router.visit(deleteRoute, {
 			method: 'delete',
 			data: { ids: Array.from(selected) },

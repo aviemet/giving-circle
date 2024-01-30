@@ -10,15 +10,15 @@ const CircleMenu = ({ circle }: CircleMenuProps) => {
 	return (
 		<>
 			<NavLink
-				href={ Routes.adminCircle(circle.slug) }
+				href={ Routes.circle(circle.slug) }
 				label="Overview"
 			/>
 			<NavLink
-				href={ Routes.adminCircleThemes(circle.slug) }
+				href={ Routes.circleThemes(circle.slug) }
 				label="Themes"
 			/>
 			<NavLink
-				href={ Routes.adminCircleMembers(circle.slug) }
+				href={ Routes.circleMembers(circle.slug) }
 				label="Members"
 			/>
 		</>

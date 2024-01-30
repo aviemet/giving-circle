@@ -17,7 +17,7 @@ const EditTheme = ({ theme }: IEditThemeProps) => {
 
 				<ThemesForm
 					method='put'
-					to={ Routes.adminCircleTheme(theme.circle.slug, theme.slug!) }
+					to={ Routes.theme(theme.slug!) }
 					theme={ theme }
 				/>
 			</Section>
