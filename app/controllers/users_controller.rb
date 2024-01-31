@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ContactableConcern
 
   expose :users, -> { search(User.all.includes_associated, sortable_fields) }
-  expose :user, id: ->{ params[:slug] }, scope: ->{ Circle.includes_associated }, find_by: :slug
+  expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   # GET /users
   def index

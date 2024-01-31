@@ -1,9 +1,26 @@
+# == Schema Information
+#
+# Table name: themes
+#
+#  id           :bigint           not null, primary key
+#  title        :string
+#  slug         :string           not null
+#  published_at :datetime
+#  status       :integer          default("draft")
+#  circle_id    :bigint           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 class Theme < ApplicationRecord
   include PgSearch::Model
+  include BooleanTimestamp
+
+  enum :status, { draft: 0, current: 1, past: 2, future: 3 }
+  boolean_timestamp :published
 
   pg_search_scope(
     :search,
-    against: [:title, :question, :quarter, :slug],
+    against: [:title, :slug],
     using: {
       tsearch: { prefix: true },
       trigram: {}
@@ -14,11 +31,12 @@ class Theme < ApplicationRecord
 
   resourcify
 
-  scope :includes_associated, -> { includes([]) }
+  validates :title, presence: true
 
-  has_many :circles_themes
-  has_many :circles, through: :circles_themes
+  belongs_to :circle
+  has_many :presentations, dependent: :destroy
+  has_many :themes_org, dependent: :destroy
+  has_many :orgs, through: :themes_org
 
-  has_many :members_themes
-  has_many :members, through: :members_themes
+  scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
 end

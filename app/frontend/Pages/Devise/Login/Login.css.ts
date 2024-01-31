@@ -1,8 +1,9 @@
-import { vars, style } from '@/lib/theme'
+import { vars } from '@/lib/theme'
+import { css } from '@linaria/core'
 import { rem } from '@mantine/core'
 
-export const form = style({
-	'.field': {
-		marginBottom: rem(8),
-	},
-})
+export const form = css`
+	.field {
+		margin-bottom: ${rem(8)};
+	}
+`

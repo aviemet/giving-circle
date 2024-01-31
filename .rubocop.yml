@@ -1,4 +1,10 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
+
   Exclude:
     - "bin/**/*"
     - "node_modules/**/*"
@@ -11,6 +17,8 @@ Style/Documentation:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
+Style/HashAsLastArrayItem: 
+  Enabled: false
 Style/HashEachMethods:
   Enabled: true
 Style/HashTransformKeys:
@@ -28,7 +36,8 @@ Style/ClassAndModuleChildren:
 Style/EmptyMethod:
   Enabled: false
 Style/GuardClause:
-  Enabled: false
+  # Enabled: false
+  Enabled: true
 Style/SlicingWithRange:
   Enabled: true
 Style/RedundantRegexpCharacterClass:
@@ -60,13 +69,19 @@ Lint/MissingSuper:
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 Layout/FirstHashElementIndentation:
-  Enabled: false
-Layout/EmptyLinesAroundAttributeAccessor:
+  # Enabled: false
   Enabled: true
+  EnforcedStyle: consistent
+Layout/EmptyLinesAroundAttributeAccessor:
+  # Enabled: true
+  Enabled: false
+  AllowAliasSyntax: true
 Layout/MultilineBlockLayout:
   Enabled: false
+  # Enabled: true
 Layout/BlockEndNewline:
   Enabled: false
+  # Enabled: true
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
@@ -77,22 +92,31 @@ Layout/EmptyLinesAroundBlockBody:
 Layout/LineLength:
   Enabled: false
 Layout/ExtraSpacing:
-  Enabled: false
+  # Enabled: false
+  Enabled: true
+  AllowForAlignment: true
 Layout/TrailingWhitespace:
   Enabled: true
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 Layout/SpaceInsideHashLiteralBraces:
-  Enabled: false
+  Enabled: true
 Layout/CommentIndentation:
   Enabled: false
 Layout/HashAlignment:
-  Enabled: false
+  Enabled: true
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Lint/MixedRegexpCaptureTypes:
   Enabled: true
 Bundler/OrderedGems:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/InstanceVariable:
   Enabled: false
 
 # Relaxed.Ruby.Style
@@ -191,7 +215,7 @@ Style/SpecialGlobalVars:
   StyleGuide: https://relaxed.ruby.style/#stylespecialglobalvars
 
 Style/TrailingCommaInArguments:
-  Enabled: false
+  EnforcedStyleForMultiline: consistent_comma
   StyleGuide: https://relaxed.ruby.style/#styletrailingcommainarguments
 
 Style/TrailingCommaInArrayLiteral:
@@ -219,12 +243,21 @@ Layout/DotPosition:
   StyleGuide: https://relaxed.ruby.style/#layoutdotposition
 
 Layout/SpaceBeforeBlockBraces:
-  Enabled: false
+  EnforcedStyle: space
   StyleGuide: https://relaxed.ruby.style/#layoutspacebeforeblockbraces
 
 Layout/SpaceInsideParens:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#layoutspaceinsideparens
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: "indented"
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false

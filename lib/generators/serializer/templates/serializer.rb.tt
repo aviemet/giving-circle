@@ -1,7 +1,7 @@
-class Orders::EditSerializer < ApplicationSerializer
-  object_as :order
+class <%= model_name.camelize %>Serializer < ApplicationSerializer
+  object_as :<%= model_name %>
 
-  attributes(
-    
+  attributes(<% model_attributes.each do |attribute| %>
+    :<%= attribute %>,<% end %>
   )
 end

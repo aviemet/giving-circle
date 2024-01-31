@@ -5,6 +5,7 @@ class MemberSerializer < ApplicationSerializer
     :first_name,
     :last_name,
     :number,
+    :created_at,
+    :updated_at,
   )
-
 end

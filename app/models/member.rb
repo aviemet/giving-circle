@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id         :bigint           not null, primary key
+#  first_name :string
+#  last_name  :string
+#  number     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Member < ApplicationRecord
   include PgSearch::Model
 
@@ -12,8 +23,11 @@ class Member < ApplicationRecord
 
   resourcify
 
-  has_many :members_themes
-  has_many :themes, through: :members_themes
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
-  scope :includes_associated, -> { includes([]) }
+  has_many :circles_members, dependent: :destroy
+  has_many :circles, through: :circles_members
+
+  scope :includes_associated, -> { includes([:circles]) }
 end

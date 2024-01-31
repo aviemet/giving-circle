@@ -1,11 +1,12 @@
 import React from 'react'
-import { Container, Heading } from '@/Components'
+import { Box, Heading, Text } from '@/Components'
 
 const Home = () => {
 	return (
-		<Container>
+		<Box>
 			<Heading>Giving Circle</Heading>
-		</Container>
+			<Text>This is a placeholder page for the public section of the application.</Text>
+		</Box>
 	)
 }
 

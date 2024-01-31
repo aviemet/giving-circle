@@ -3,8 +3,11 @@ import { Routes } from '@/lib'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
+import { usePageProps } from '@/lib/hooks'
 
 const MemberTable = (props: ITableProps) => {
+	const { params } = usePageProps()
+
 	return (
 		<Table>
 			<Table.Head>
@@ -19,16 +22,16 @@ const MemberTable = (props: ITableProps) => {
 				<Table.RowIterator render={ (member: Schema.MembersIndex) => (
 					<Table.Row key={ member.id }>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.first_name }</Link>
+							<Link href={ Routes.member(params.member_slug) }>{ member.first_name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.last_name }</Link>
+							<Link href={ Routes.member(params.member_slug) }>{ member.last_name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.number }</Link>
+							<Link href={ Routes.member(params.member_slug) }>{ member.number }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editMember(member.id) } />
+							<EditButton href={ Routes.editMember(params.member_slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

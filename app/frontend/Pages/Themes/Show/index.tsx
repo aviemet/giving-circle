@@ -1,27 +1,28 @@
 import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface IShowThemeProps {
 	theme: Schema.ThemesShow
 }
 
 const ShowTheme = ({ theme }: IShowThemeProps) => {
-	const title =  'Theme'
+	const title =  theme.title || 'Theme'
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: 'Theme', href: Routes.themes() },
-			{ title },
-		] }>
+		<Page
+			title={ title }
+			navMenu={ getThemeMenu({ circle: theme.circle, theme }) }
+		>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editTheme(theme.id) }>
+							<Menu.Link href={ Routes.editTheme(theme.slug) }>
 								Edit Theme
 							</Menu.Link>
 						</Menu.Dropdown>

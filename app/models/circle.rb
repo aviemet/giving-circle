@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: circles
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  slug       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Circle < ApplicationRecord
   include PgSearch::Model
 
@@ -14,8 +24,13 @@ class Circle < ApplicationRecord
 
   resourcify
 
-  has_many :circles_themes
-  has_many :themes, through: :circles_themes
+  validates :name, presence: true
 
-  scope :includes_associated, -> { includes([:themes]) }
+  has_many :themes, dependent: :nullify
+  has_many :presentations, through: :themes
+
+  has_many :circles_member, dependent: :destroy
+  has_many :members, through: :circles_member
+
+  scope :includes_associated, -> { includes([:themes, :presentations, :members]) }
 end

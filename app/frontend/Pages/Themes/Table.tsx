@@ -6,12 +6,10 @@ import { type ITableProps } from '@/Components/Table/Table'
 
 const ThemeTable = (props: ITableProps) => {
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="title">Title</Table.Cell>
-					<Table.Cell sort="question">Question</Table.Cell>
-					<Table.Cell sort="quarter">Quarter</Table.Cell>
 					<Table.Cell sort="slug">Slug</Table.Cell>
 					<Table.Cell className="actions">Actions</Table.Cell>
 				</Table.Row>
@@ -20,16 +18,10 @@ const ThemeTable = (props: ITableProps) => {
 				<Table.RowIterator render={ (theme: Schema.ThemesIndex) => (
 					<Table.Row key={ theme.id }>
 						<Table.Cell>
-							<Link href={ Routes.theme(theme.id) }>{ theme.title }</Link>
+							<Link href={ Routes.theme(theme.slug) }>{ theme.title }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.theme(theme.id) }>{ theme.question }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.theme(theme.id) }>{ theme.quarter }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.theme(theme.id) }>{ theme.slug }</Link>
+							<Link href={ Routes.theme(theme.slug) }>{ theme.slug }</Link>
 						</Table.Cell>
 						<Table.Cell>
 							<EditButton href={ Routes.editTheme(theme.id) } />

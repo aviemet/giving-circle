@@ -13,10 +13,10 @@ const EditMember = ({ member }: IEditMemberProps) => {
 	return (
 		<Section>
 			<Heading>{ title }</Heading>
-			
+
 			<MembersForm
 				method='put'
-				to={ Routes.member() }
+				to={ Routes.member(member.slug) }
 				member={ member }
 			/>
 		</Section>
