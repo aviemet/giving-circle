@@ -1,12 +1,9 @@
-class Orgs::EditSerializer < ApplicationSerializer
-  object_as :org
-
-  identifier :slug
+class Orgs::EditSerializer < OrgSerializer
 
   attributes(
-    :id,
-    :name,
     :slug,
-    :description,
+    :id,
+    :updated_at,
+    :created_at,
   )
 end

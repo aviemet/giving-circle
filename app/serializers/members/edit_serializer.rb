@@ -1,10 +1,8 @@
-class Members::EditSerializer < ApplicationSerializer
-  object_as :member
+class Members::EditSerializer < MemberSerializer
 
   attributes(
     :id,
-    :first_name,
-    :last_name,
-    :number,
+    :updated_at,
+    :created_at,
   )
 end

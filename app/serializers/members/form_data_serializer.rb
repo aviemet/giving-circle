@@ -1,9 +1,3 @@
-class Members::FormDataSerializer < ApplicationSerializer
-  object_as :member
-
-  attributes(
-    :first_name,
-    :last_name,
-    :number,
-  )
+class Members::FormDataSerializer < MemberSerializer
+  attributes
 end

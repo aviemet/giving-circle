@@ -1,17 +1,8 @@
-class Themes::ShowSerializer < ApplicationSerializer
-  object_as :theme
-
-  identifier :slug
-
+class Themes::ShowSerializer < ThemeSerializer
   attributes(
-    :id,
     :slug,
-    :title,
-    :published,
-    :status,
-    :created_at,
+    :id,
     :updated_at,
+    :created_at,
   )
-
-  belongs_to :circle, serializer: Circles::ShareSerializer
 end

@@ -3,13 +3,22 @@
 # Table name: themes
 #
 #  id           :bigint           not null, primary key
-#  title        :string
-#  slug         :string           not null
 #  published_at :datetime
+#  slug         :string           not null
 #  status       :integer          default("draft")
-#  circle_id    :bigint           not null
+#  title        :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  circle_id    :bigint           not null
+#
+# Indexes
+#
+#  index_themes_on_circle_id  (circle_id)
+#  index_themes_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (circle_id => circles.id)
 #
 class ThemeSerializer < ApplicationSerializer
   object_as :theme
@@ -17,11 +26,9 @@ class ThemeSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-    :id,
-    :slug,
     :title,
-    :published,
+    :published_at,
     :status,
+    :circle_id,
   )
-
 end

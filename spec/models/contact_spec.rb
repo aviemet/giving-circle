@@ -4,9 +4,13 @@
 #
 #  id               :bigint           not null, primary key
 #  contactable_type :string           not null
-#  contactable_id   :bigint           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  contactable_id   :bigint           not null
+#
+# Indexes
+#
+#  index_contacts_on_contactable  (contactable_type,contactable_id)
 #
 require 'rails_helper'
 

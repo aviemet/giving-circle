@@ -1,11 +1,8 @@
-class Circles::ShowSerializer < ApplicationSerializer
-  object_as :circle
-
-  identifier :slug
-
+class Circles::ShowSerializer < CircleSerializer
   attributes(
-    :id,
     :slug,
-    :name,
+    :id,
+    :updated_at,
+    :created_at,
   )
 end

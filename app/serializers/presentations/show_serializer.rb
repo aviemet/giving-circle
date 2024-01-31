@@ -1,13 +1,7 @@
-class Presentations::ShowSerializer < ApplicationSerializer
-  object_as :presentation
-
+class Presentations::ShowSerializer < PresentationSerializer
   attributes(
     :id,
-    :theme_id,
-    :name,
-    :created_at,
     :updated_at,
+    :created_at,
   )
-
-  belongs_to :theme, serializer: ThemeSerializer
 end

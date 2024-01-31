@@ -19,11 +19,11 @@ const UsersTable = (props: ITableProps) => {
 					<Table.Row key={ user.id }>
 
 						<Table.Cell nowrap>
-							<Link href={ Routes.user(user) }>{ user.email }</Link>
+							<Link href={ Routes.user(user.id) }>{ user.email }</Link>
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editUser(user) } label={ user.person?.name || user.email } />
+							<EditButton href={ Routes.editUser(user.id) } label={ user.person?.name || user.email } />
 						</Table.Cell>
 
 					</Table.Row>

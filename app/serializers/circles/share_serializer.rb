@@ -1,11 +1,6 @@
-class Circles::ShareSerializer < ApplicationSerializer
-  object_as :circle
-
-  identifier :slug
-
+class Circles::ShareSerializer < CircleSerializer
   attributes(
     :id,
     :slug,
-    :name,
   )
 end

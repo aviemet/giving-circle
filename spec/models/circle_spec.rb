@@ -8,6 +8,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_circles_on_slug  (slug) UNIQUE
+#
 require 'rails_helper'
 
 RSpec.describe Circle, type: :model do

@@ -29,7 +29,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 						<CircleDotIcon size={ 30 } />
 					</Box>
 					<Box>
-						<Link href={ Routes.newUserSession() }>Sin In</Link>
+						<Link href={ Routes.newUserSession() }>Sign In</Link>
 					</Box>
 				</Group>
 			</AppShell.Header>

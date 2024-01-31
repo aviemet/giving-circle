@@ -1,14 +1,8 @@
-class Orgs::IndexSerializer < ApplicationSerializer
-  object_as :org
-
-  identifier :slug
-
+class Orgs::IndexSerializer < OrgSerializer
   attributes(
-    :id,
-    :name,
     :slug,
-    :description,
-    :created_at,
+    :id,
     :updated_at,
+    :created_at,
   )
 end

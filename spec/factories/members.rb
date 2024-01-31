@@ -1,13 +1,15 @@
 # == Schema Information
 #
-# Table name: members
+# Table name: people
 #
-#  id         :bigint           not null, primary key
-#  first_name :string
-#  last_name  :string
-#  number     :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  active      :boolean          default(TRUE), not null
+#  first_name  :string
+#  last_name   :string
+#  middle_name :string
+#  number      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 FactoryBot.define do
   factory :member do
