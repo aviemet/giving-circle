@@ -1,5 +1,5 @@
 module Admin
-  class Settings::SmtpsController < AdminController
+  class Settings::SmtpsController < ApplicationController
     expose :smtps, -> { @active_company.smtps }
     expose :smtp
 

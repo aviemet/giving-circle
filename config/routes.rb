@@ -1,7 +1,5 @@
-# == Route Map
-#
-
 Rails.application.routes.draw do
+  resources :people
   root "pages#home" # Public home page for entire project
 
   # CONCERNS #
@@ -41,41 +39,38 @@ Rails.application.routes.draw do
     },
     skip: [:sessions],
   )
+  get "/", to: redirect("/circles"), as: "home"
 
-  scope :admin, module: "admin" do
-    get "/", to: redirect("/admin/circles"), as: "home"
+  # RESOURCEFUL PATHS #
 
-    # RESOURCEFUL PATHS #
+  resources :users
 
-    resources :users
+  resources :circles, shallow: true, param: :slug do
+    get :about
 
-    resources :circles, shallow: true, param: :slug do
-      resources :themes, shallow: true, param: :slug do
-        resources :orgs, concerns: :bulk_delete, param: :slug
-        resources :members, concerns: :bulk_delete, param: :slug
-        resources :presentations, concerns: :bulk_delete
+    resources :members, concerns: :bulk_delete, param: :slug
+
+    resources :themes, shallow: true, param: :slug do
+      get :about
+
+      resources :orgs, concerns: :bulk_delete, param: :slug do
+        get :about
       end
-      resources :members, except: [:create, :update]
+
+      resources :members, concerns: :bulk_delete, param: :slug
+      resources :presentations, concerns: :bulk_delete
     end
-
-    # SETTINGS PAGES #
-
-    namespace :settings do
-      get "/", to: redirect("/admin/settings/general")
-      [:general, :appearance, :integrations, :localizations, :notifications].freeze.each do |path|
-        get path, to: "#{path}#index"
-        patch path, to: "#{path}#update"
-      end
-    end
-
   end
 
-  # PUBLIC PAGES #
+  # SETTINGS PAGES #
 
-  namespace :public, path: "" do
-    resources :circles, only: [:index, :show], param: :slug do
-      resources :themes, only: [:index, :show], param: :slug
-      resources :orgs, only: [:index, :show], param: :slug
+  namespace :settings do
+    get "/", to: redirect("/settings/general")
+    [:general, :appearance, :integrations, :localizations, :notifications].freeze.each do |path|
+      get path, to: "#{path}#index"
+      patch path, to: "#{path}#update"
     end
   end
+
+  draw(:api)
 end

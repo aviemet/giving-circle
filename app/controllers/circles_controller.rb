@@ -7,7 +7,7 @@ class CirclesController < ApplicationController
   # @route GET /circles (circles)
   def index
     # if circles.count == 1
-    #   redirect_to circles.first
+    #   redirect_to [:admin, circles.first]
     #   return
     # end
 
@@ -24,6 +24,60 @@ class CirclesController < ApplicationController
       circle: -> { circle.render(view: :show) },
       themes: -> { circle.themes.render }
     }
+  end
+
+  # @route GET /circles/:circle_slug/about (circle_about)
+  def about
+    authorize circle
+    render inertia: "Circles/About", props: {
+      circle: -> { circle.render(view: :show) },
+      themes: -> { circle.themes.render }
+    }
+  end
+
+  # @route GET /circles/new (new_circle)
+  def new
+    authorize Circle.new
+    render inertia: "Circles/New", props: {
+      circle: Circle.new.render
+    }
+  end
+
+  # @route GET /circles/:slug/edit (edit_circle)
+  def edit
+    authorize circle
+    render inertia: "Circles/Edit", props: {
+      circle: circle.render
+    }
+  end
+
+  # @route POST /circles (circles)
+  def create
+    authorize Circle.new
+    if circle.save
+      current_user.add_role(:admin, circle)
+      redirect_to [:admin, circle], notice: "Circle was successfully created."
+    else
+      redirect_to new_circle_path, inertia: { errors: circle.errors }
+    end
+  end
+
+  # @route PATCH /circles/:slug (circle)
+  # @route PUT /circles/:slug (circle)
+  def update
+    authorize circle
+    if circle.update(circle_params)
+      redirect_to [:admin, circle], notice: "Circle was successfully updated."
+    else
+      redirect_to [:admin, edit_circle_path], inertia: { errors: circle.errors }
+    end
+  end
+
+  # @route DELETE /circles/:slug (circle)
+  def destroy
+    authorize circle
+    circle.destroy
+    redirect_to [:admin, circles_url], notice: "Circle was successfully destroyed."
   end
 
   private

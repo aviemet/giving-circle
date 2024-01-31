@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   before_action :remove_empty_query_parameters
+  # before_action :authenticate_user!
 
   add_flash_types :success, :error, :warning
 
@@ -54,7 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resouce)
-    admin_path
+    circles_path
   end
 
   private

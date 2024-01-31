@@ -4,7 +4,7 @@ class PresentationsController < ApplicationController
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }
   expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
 
-  # GET /presentations
+  # @route GET /themes/:theme_slug/presentations (theme_presentations)
   def index
     authorize presentations
     render inertia: "Presentations/Index", props: {
@@ -12,7 +12,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # GET /presentations/:id
+  # @route GET /presentations/:id (presentation)
   def show
     authorize presentation
     render inertia: "Presentations/Show", props: {
@@ -20,7 +20,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # GET /presentations/new
+  # @route GET /themes/:theme_slug/presentations/new (new_theme_presentation)
   def new
     authorize Presentation.new
     render inertia: "Presentations/New", props: {
@@ -28,7 +28,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # GET /presentations/:id/edit
+  # @route GET /presentations/:id/edit (edit_presentation)
   def edit
     authorize presentation
     render inertia: "Presentations/Edit", props: {
@@ -36,7 +36,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # POST /presentations
+  # @route POST /themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new
     if presentation.save
@@ -46,7 +46,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /presentations/:id
+  # @route PATCH /presentations/:id (presentation)
+  # @route PUT /presentations/:id (presentation)
   def update
     authorize presentation
     if presentation.update(presentation_params)
@@ -56,7 +57,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # DELETE /presentations/:id
+  # @route DELETE /themes/:theme_slug/presentations (theme_presentations)
+  # @route DELETE /presentations/:id (presentation)
   def destroy
     authorize presentation
     presentation.destroy!
