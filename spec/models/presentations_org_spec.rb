@@ -3,10 +3,20 @@
 # Table name: presentations_orgs
 #
 #  id              :bigint           not null, primary key
-#  presentation_id :bigint           not null
-#  org_id          :bigint           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  org_id          :bigint           not null
+#  presentation_id :bigint           not null
+#
+# Indexes
+#
+#  index_presentations_orgs_on_org_id           (org_id)
+#  index_presentations_orgs_on_presentation_id  (presentation_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (org_id => orgs.id)
+#  fk_rails_...  (presentation_id => presentations.id)
 #
 require 'rails_helper'
 

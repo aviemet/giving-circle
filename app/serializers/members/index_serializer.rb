@@ -1,14 +1,7 @@
-class Members::IndexSerializer < ApplicationSerializer
-  object_as :member
-
+class Members::IndexSerializer < MemberSerializer
   attributes(
     :id,
-    :first_name,
-    :last_name,
-    :number,
-    :created_at,
     :updated_at,
+    :created_at,
   )
-
-  has_many :circle, serializer: Circles::OptionsSerializer
 end

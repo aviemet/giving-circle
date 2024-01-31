@@ -8,14 +8,16 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_circles_on_slug  (slug) UNIQUE
+#
 class CircleSerializer < ApplicationSerializer
   object_as :circle
 
   identifier :slug
 
   attributes(
-    :id,
-    :slug,
     :name,
   )
 end

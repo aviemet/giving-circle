@@ -8,6 +8,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_circles_on_slug  (slug) UNIQUE
+#
 class Circle < ApplicationRecord
   include PgSearch::Model
 

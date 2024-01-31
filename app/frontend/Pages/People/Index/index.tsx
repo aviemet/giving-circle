@@ -1,0 +1,29 @@
+import React from 'react'
+import { Routes } from '@/lib'
+import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { NewIcon } from '@/Components/Icons'
+import PeopleTable from '../Table'
+
+interface IPersonIndexProps {
+	people: Schema.PeopleIndex[]
+	pagination: Schema.Pagination
+}
+
+const PeopleIndex = ({ people, pagination }: IPersonIndexProps) => {
+	return (
+		<IndexPageTemplate
+			title="People"
+			model="people"
+			rows={ people }
+			pagination={ pagination }
+			deleteRoute={ Routes.people() }
+			menuOptions={ [
+				{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+			] }
+		>
+			<PeopleTable />
+		</IndexPageTemplate>
+	)
+}
+
+export default PeopleIndex

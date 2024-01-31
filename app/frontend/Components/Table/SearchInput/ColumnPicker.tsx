@@ -39,7 +39,7 @@ const ColumnPicker = () => {
 
 			<Menu.Dropdown>
 				{ columns.filter(option => option.hideable).map(({ label, hideable }) => (
-					<Menu.Item key={ label } component="div" sx={ { cursor: 'default', padding: 0 } }>
+					<Menu.Item key={ label } component="div" style={ { cursor: 'default', padding: 0 } }>
 						<Checkbox
 							name={ hideable }
 							label={ label }

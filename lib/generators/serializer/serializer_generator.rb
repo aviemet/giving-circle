@@ -17,6 +17,8 @@ class SerializerGenerator < Rails::Generators::NamedBase
     template 'serializer.rb', "app/serializers/#{model_name}_serializer.rb"
 
     generate_named_serializers
+
+    system("rails types:generate")
   end
 
   def validate_options

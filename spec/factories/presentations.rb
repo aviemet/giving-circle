@@ -3,10 +3,18 @@
 # Table name: presentations
 #
 #  id         :bigint           not null, primary key
-#  theme_id   :bigint           not null
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  theme_id   :bigint           not null
+#
+# Indexes
+#
+#  index_presentations_on_theme_id  (theme_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (theme_id => themes.id)
 #
 FactoryBot.define do
   factory :presentation do

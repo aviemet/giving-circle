@@ -60,18 +60,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
     t.index ["contact_id"], name: "index_emails_on_contact_id"
   end
 
-  create_table "members", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "orgs", force: :cascade do |t|
     t.string "name"
     t.string "slug", null: false
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "middle_name"
+    t.string "number"
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -161,11 +163,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "active", default: true
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
+    t.boolean "active", default: true, null: false
+    t.bigint "person_id"
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
+    t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -182,13 +197,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
 
   add_foreign_key "addresses", "contacts"
   add_foreign_key "circles_members", "circles"
-  add_foreign_key "circles_members", "members"
+  add_foreign_key "circles_members", "people", column: "member_id"
   add_foreign_key "presentations", "themes"
-  add_foreign_key "presentations_members", "members"
+  add_foreign_key "presentations_members", "people", column: "member_id"
   add_foreign_key "presentations_members", "presentations"
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
   add_foreign_key "themes", "circles"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
+  add_foreign_key "users", "people"
 end

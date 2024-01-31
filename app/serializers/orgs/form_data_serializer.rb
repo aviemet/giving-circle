@@ -1,9 +1,5 @@
-class Orgs::FormDataSerializer < ApplicationSerializer
-  object_as :org
-
+class Orgs::FormDataSerializer < OrgSerializer
   attributes(
-    :name,
     :slug,
-    :description,
   )
 end

@@ -535,6 +535,57 @@ export const serialize = __jsr.serialize;
 
 /**
  * Generates rails route to
+ * /api/searches(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiSearches = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"searches"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/spotlights(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiSpotlights = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"spotlights"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/users/:id/update_table_preferences(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiUpdateTablePreferences = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"update_table_preferences"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/users/:id/update_user_preferences(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiUpdateUserPreferences = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"update_user_preferences"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/users/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiUser = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/users(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiUsers = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/cancel(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -543,38 +594,47 @@ export const cancelUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7
 
 /**
  * Generates rails route to
- * /admin/circles/:slug(.:format)
+ * /circles/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const circle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/circles/:circle_slug/members(.:format)
+ * /circles/:circle_slug/about(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circleMembers = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const circleAbout = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"about"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/circles/:circle_slug/themes(.:format)
+ * /circles/:circle_slug/members(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circleThemes = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const circleMembers = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/circles(.:format)
+ * /circles/:circle_slug/themes(.:format)
+ * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circles = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const circleThemes = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /circles(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const circles = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"circles"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -586,57 +646,66 @@ export const destroyUserSession = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"
 
 /**
  * Generates rails route to
- * /admin/circles/:slug/edit(.:format)
+ * /circles/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editCircle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editCircle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/members/:slug/edit(.:format)
+ * /members/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editMember = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editMember = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/orgs/:slug/edit(.:format)
+ * /orgs/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editOrg = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editOrg = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/presentations/:id/edit(.:format)
+ * /people/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editPresentation = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editPerson = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:slug/edit(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editTheme = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /admin/users/:id/edit(.:format)
+ * /presentations/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editUser = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editPresentation = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /themes/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editTheme = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editUser = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -656,81 +725,89 @@ export const editUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"
 
 /**
  * Generates rails route to
- * /admin(.:format)
+ * /
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const home = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const home = /*#__PURE__*/ __jsr.r({}, [7,"/"]);
 
 /**
  * Generates rails route to
- * /admin/members/:slug(.:format)
+ * /members/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const member = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const member = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/circles/new(.:format)
+ * /circles/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newCircle = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const newCircle = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/circles/:circle_slug/members/new(.:format)
+ * /circles/:circle_slug/members/new(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newCircleMember = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const newCircleMember = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/circles/:circle_slug/themes/new(.:format)
+ * /circles/:circle_slug/themes/new(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newCircleTheme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const newCircleTheme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:theme_slug/members/new(.:format)
+ * /people/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newPerson = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /themes/:theme_slug/members/new(.:format)
  * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemeMember = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const newThemeMember = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"members"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:theme_slug/orgs/new(.:format)
+ * /themes/:theme_slug/orgs/new(.:format)
  * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemeOrg = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const newThemeOrg = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:theme_slug/presentations/new(.:format)
+ * /themes/:theme_slug/presentations/new(.:format)
  * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemePresentation = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const newThemePresentation = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/users/new(.:format)
+ * /users/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUser = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const newUser = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -774,76 +851,47 @@ export const newUserUnlock = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
- * /admin/orgs/:slug(.:format)
+ * /orgs/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const org = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const org = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/presentations/:id(.:format)
+ * /orgs/:org_slug/about(.:format)
+ * @param {any} orgSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const orgAbout = /*#__PURE__*/ __jsr.r({"org_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"org_slug"],[2,[7,"/"],[2,[6,"about"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const people = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /people/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const presentation = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const person = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /circles/:slug(.:format)
- * @param {any} slug
+ * /presentations/:id(.:format)
+ * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const publicCircle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/orgs/:slug(.:format)
- * @param {any} circleSlug
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const publicCircleOrg = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/orgs(.:format)
- * @param {any} circleSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const publicCircleOrgs = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"orgs"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/themes/:slug(.:format)
- * @param {any} circleSlug
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const publicCircleTheme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/themes(.:format)
- * @param {any} circleSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const publicCircleThemes = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /circles(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const publicCircles = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"circles"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const presentation = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -855,87 +903,96 @@ export const root = /*#__PURE__*/ __jsr.r({}, [7,"/"]);
 
 /**
  * Generates rails route to
- * /admin/settings(.:format)
+ * /settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settings = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"settings"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const settings = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
- * /admin/settings/appearance(.:format)
+ * /settings/appearance(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsAppearance = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const settingsAppearance = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/settings/general(.:format)
+ * /settings/general(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsGeneral = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"general"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const settingsGeneral = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"general"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/settings/integrations(.:format)
+ * /settings/integrations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsIntegrations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const settingsIntegrations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/settings/localizations(.:format)
+ * /settings/localizations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLocalizations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"localizations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const settingsLocalizations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"localizations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/settings/notifications(.:format)
+ * /settings/notifications(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsNotifications = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"notifications"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const settingsNotifications = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"notifications"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:slug(.:format)
+ * /themes/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const theme = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const theme = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:theme_slug/members(.:format)
+ * /themes/:theme_slug/about(.:format)
  * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themeMembers = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const themeAbout = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"about"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:theme_slug/orgs(.:format)
+ * /themes/:theme_slug/members(.:format)
  * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themeOrgs = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const themeMembers = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /admin/themes/:theme_slug/presentations(.:format)
+ * /themes/:theme_slug/orgs(.:format)
  * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentations = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"presentations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const themeOrgs = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /themes/:theme_slug/presentations(.:format)
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themePresentations = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"presentations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -948,12 +1005,12 @@ export const updateRailsDiskService = /*#__PURE__*/ __jsr.r({"encoded_token":{"r
 
 /**
  * Generates rails route to
- * /admin/users/:id(.:format)
+ * /users/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const user = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const user = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -997,9 +1054,9 @@ export const userUnlock = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,
 
 /**
  * Generates rails route to
- * /admin/users(.:format)
+ * /users(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const users = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"admin"],[2,[7,"/"],[2,[6,"users"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const users = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[1,[2,[8,"."],[3,"format"]]]]]);
 

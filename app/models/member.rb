@@ -1,30 +1,18 @@
 # == Schema Information
 #
-# Table name: members
+# Table name: people
 #
-#  id         :bigint           not null, primary key
-#  first_name :string
-#  last_name  :string
-#  number     :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  active      :boolean          default(TRUE), not null
+#  first_name  :string
+#  last_name   :string
+#  middle_name :string
+#  number      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
-class Member < ApplicationRecord
-  include PgSearch::Model
-
-  pg_search_scope(
-    :search,
-    against: [:first_name, :last_name, :number],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-  )
-
+class Member < Person
   resourcify
-
-  validates :first_name, presence: true
-  validates :last_name, presence: true
 
   has_many :circles_members, dependent: :destroy
   has_many :circles, through: :circles_members
