@@ -1,12 +1,11 @@
 module Admin
   class Settings::LocalizationsController < AdminController
-    # @route GET /admin/settings/localizations (admin_settings_localizations)
+    # @route GET /admin/settings/localizations (settings_localizations)
     def index
       render inertia: "Settings/Localization/Index"
     end
 
-    # @route PATCH /admin/settings/localizations/:id (admin_settings_localization)
-    # @route PUT /admin/settings/localizations/:id (admin_settings_localization)
+    # @route PATCH /admin/settings/localizations (settings_localizations)
     def update
     end
 

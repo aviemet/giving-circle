@@ -1,6 +1,6 @@
 module Admin
   class Settings::AppearanceController < AdminController
-    # @route GET /admin/settings/appearance (admin_settings_appearance_index)
+    # @route GET /admin/settings/appearance (settings_appearance)
     def index
       render inertia: "Settings/Appearance/Index", props: {
         settings: {
@@ -9,8 +9,7 @@ module Admin
       }
     end
 
-    # @route PATCH /admin/settings/appearance/:id (admin_settings_appearance)
-    # @route PUT /admin/settings/appearance/:id (admin_settings_appearance)
+    # @route PATCH /admin/settings/appearance (settings_appearance)
     def update
       # if @active_company.update(settings_params)
       #   redirect_to settings_appearance_index_path, notice: 'Appearance setttings successfully updated'

@@ -5,7 +5,7 @@ module Admin
     expose :themes, -> { search(Theme.includes_associated, sortable_fields) }
     expose :theme, id: ->{ params[:slug] }, scope: ->{ Theme.includes_associated }, find_by: :slug
 
-    # @route GET /admin/circles/:circle_slug/themes (admin_circle_themes)
+    # @route GET /admin/circles/:circle_slug/themes (circle_themes)
     def index
       authorize themes
       render inertia: "Themes/Index", props: {
@@ -14,7 +14,7 @@ module Admin
       }
     end
 
-    # @route GET /admin/circles/:circle_slug/themes/:slug (admin_circle_theme)
+    # @route GET /admin/themes/:slug (theme)
     def show
       authorize theme
       render inertia: "Themes/Show", props: {
@@ -22,7 +22,7 @@ module Admin
       }
     end
 
-    # @route GET /admin/circles/:circle_slug/themes/new (new_admin_circle_theme)
+    # @route GET /admin/circles/:circle_slug/themes/new (new_circle_theme)
     def new
       authorize Theme.new
       render inertia: "Themes/New", props: {
@@ -30,7 +30,7 @@ module Admin
       }
     end
 
-    # @route GET /admin/circles/:circle_slug/themes/:slug/edit (edit_admin_circle_theme)
+    # @route GET /admin/themes/:slug/edit (edit_theme)
     def edit
       authorize theme
       ap({ theme: })
@@ -39,7 +39,7 @@ module Admin
       }
     end
 
-    # @route POST /admin/themes (admin_themes)
+    # @route POST /admin/circles/:circle_slug/themes (circle_themes)
     def create
       authorize Theme.new
       if theme.save
@@ -49,8 +49,8 @@ module Admin
       end
     end
 
-    # @route PATCH /admin/themes/:id (admin_theme)
-    # @route PUT /admin/themes/:id (admin_theme)
+    # @route PATCH /admin/themes/:slug (theme)
+    # @route PUT /admin/themes/:slug (theme)
     def update
       authorize theme
       if theme.update(theme_params)
@@ -60,7 +60,7 @@ module Admin
       end
     end
 
-    # @route DELETE /admin/circles/:circle_slug/themes/:slug (admin_circle_theme)
+    # @route DELETE /admin/themes/:slug (theme)
     def destroy
       authorize theme
       theme.destroy

@@ -6,7 +6,7 @@ module Admin
     expose :orgs, -> { search(circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
     expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
-    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/orgs (admin_circle_theme_orgs)
+    # @route GET /admin/themes/:theme_slug/orgs (theme_orgs)
     def index
       authorize orgs
       render inertia: "Orgs/Index", props: {
@@ -14,7 +14,7 @@ module Admin
       }
     end
 
-    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/orgs/:slug (admin_circle_theme_org)
+    # @route GET /admin/orgs/:slug (org)
     def show
       authorize org
       render inertia: "Orgs/Show", props: {
@@ -22,7 +22,7 @@ module Admin
       }
     end
 
-    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/orgs/new (new_admin_circle_theme_org)
+    # @route GET /admin/themes/:theme_slug/orgs/new (new_theme_org)
     def new
       authorize Org.new
       render inertia: "Orgs/New", props: {
@@ -30,7 +30,7 @@ module Admin
       }
     end
 
-    # @route GET /admin/circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit (edit_admin_circle_theme_org)
+    # @route GET /admin/orgs/:slug/edit (edit_org)
     def edit
       authorize org
       render inertia: "Orgs/Edit", props: {
@@ -38,7 +38,7 @@ module Admin
       }
     end
 
-    # @route POST /admin/circles/:circle_slug/themes/:theme_slug/orgs (admin_circle_theme_orgs)
+    # @route POST /admin/themes/:theme_slug/orgs (theme_orgs)
     def create
       authorize Org.new
 
@@ -55,8 +55,8 @@ module Admin
       end
     end
 
-    # @route PATCH /admin/circles/:circle_slug/themes/:theme_slug/orgs/:slug (admin_circle_theme_org)
-    # @route PUT /admin/circles/:circle_slug/themes/:theme_slug/orgs/:slug (admin_circle_theme_org)
+    # @route PATCH /admin/orgs/:slug (org)
+    # @route PUT /admin/orgs/:slug (org)
     def update
       authorize org
       if org.update(org_params)
@@ -66,8 +66,8 @@ module Admin
       end
     end
 
-    # @route DELETE /admin/circles/:circle_slug/themes/:theme_slug/orgs (admin_circle_theme_orgs)
-    # @route DELETE /admin/circles/:circle_slug/themes/:theme_slug/orgs/:slug (admin_circle_theme_org)
+    # @route DELETE /admin/themes/:theme_slug/orgs (theme_orgs)
+    # @route DELETE /admin/orgs/:slug (org)
     def destroy
       authorize org
       org.destroy

@@ -1,12 +1,11 @@
 module Admin
   class Settings::GeneralController < AdminController
-    # @route GET /admin/settings/general (admin_settings_general_index)
+    # @route GET /admin/settings/general (settings_general)
     def index
       render inertia: "Settings/General/Index"
     end
 
-    # @route PATCH /admin/settings/general/:id (admin_settings_general)
-    # @route PUT /admin/settings/general/:id (admin_settings_general)
+    # @route PATCH /admin/settings/general (settings_general)
     def update
     end
 
