@@ -6518,7 +6518,7 @@ __metadata:
     ts-jest: ^29.1.2
     ts-node: ^10.9.2
     typescript: ^5.3.3
-    use-inertia-form: ^3.3.2
+    use-inertia-form: ^3.3.3
     vite: ^5.0.12
     vite-plugin-dynamic-import: ^1.5.0
     vite-plugin-full-reload: ^1.1.0
@@ -11890,9 +11890,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-inertia-form@npm:^3.3.2":
-  version: 3.3.2
-  resolution: "use-inertia-form@npm:3.3.2"
+"use-inertia-form@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "use-inertia-form@npm:3.3.3"
   dependencies:
     "@inertiajs/react": ^1.0.14
     lodash.get: ^4.4.2
@@ -11902,7 +11902,7 @@ __metadata:
     "@inertiajs/react": ^1.0.0
     lodash.isequal: ^4.5.0
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 61fb74b44fcea2d6cd6dd70c00e340c505fa31e633956de14d7293f93c18d9cd466c91a013ba603b43d49f97d07f5338d7c5838fffe870e7558593cd267c3e8b
+  checksum: 4d9dc5b5fe4dd61026b60170ce0b9596b1969cf1c589144756b9d9320faf7c1f1224c20d988f6ba8c0f11ab6dd2325033672725a79fd68dd8590b472d2fa822c
   languageName: node
   linkType: hard
 

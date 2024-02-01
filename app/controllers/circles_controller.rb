@@ -54,9 +54,10 @@ class CirclesController < ApplicationController
   # @route POST /circles (circles)
   def create
     authorize Circle.new
+    ap({ params: })
     if circle.save
       current_user.add_role(:admin, circle)
-      redirect_to [:admin, circle], notice: "Circle was successfully created."
+      redirect_to [circle], notice: "Circle was successfully created."
     else
       redirect_to new_circle_path, inertia: { errors: circle.errors }
     end
