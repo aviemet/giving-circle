@@ -54,7 +54,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<MantineProvider
 			theme={ theme }
-			defaultColorScheme="auto"
+			defaultColorScheme="dark"
 			cssVariablesResolver={ cssVariablesResolver }
 		>
 			<Notifications />

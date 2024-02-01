@@ -5,4 +5,6 @@ class Circles::IndexSerializer < CircleSerializer
     :updated_at,
     :created_at,
   )
+
+  has_many :themes, serializer: Themes::IndexSerializer
 end

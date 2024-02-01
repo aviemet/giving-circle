@@ -13,7 +13,7 @@ class CirclesController < ApplicationController
 
     authorize circles
     render inertia: "Circles/Index", props: {
-      circles: -> { circles.render },
+      circles: -> { circles.render(view: :index) },
     }
   end
 
