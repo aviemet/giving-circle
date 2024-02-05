@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { Head } from '@inertiajs/react'
 import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { Portal } from '@mantine/core'
@@ -17,6 +17,12 @@ const Page = ({ children, title, meta, hideNavMenu = false, navMenu: NavMenu }: 
 
 	const dynamicNavMenuRef = useRef(document.getElementById('dynamic-nav-menu'))
 
+	useLayoutEffect(() => {
+		if(dynamicNavMenuRef.current) return
+
+		dynamicNavMenuRef.current = document.getElementById('dynamic-nav-menu')
+	}, [])
+
 	useEffect(() =>{
 		if(sidebarVisible === !hideNavMenu) return
 
@@ -28,9 +34,11 @@ const Page = ({ children, title, meta, hideNavMenu = false, navMenu: NavMenu }: 
 			{ title && <Head title={ title }>
 				{ meta && meta }
 			</Head> }
+
 			{ dynamicNavMenuRef.current && <Portal target={ dynamicNavMenuRef.current }>
 				{ NavMenu ? <NavMenu /> : <DefaultMenu /> }
 			</Portal> }
+
 			{ children }
 		</>
 	)

@@ -18,7 +18,7 @@ export const menus: Record<MenuNames, MenuType> = {
 
 export const getDefaultMenu = () => () => <DefaultMenu />
 
-export const getCircleMenu = ({ circle }: {circle: Schema.Circle}) => () => (
+export const getCircleMenu = ({ circle }: {circle: Schema.CirclesShare}) => () => (
 	<>
 		<CircleMenu circle={ circle } />
 	</>
