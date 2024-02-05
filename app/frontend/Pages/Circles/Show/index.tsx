@@ -2,13 +2,14 @@ import React from 'react'
 import { Box, Container, Group, Heading, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
+import StatTile from './StatTile'
+import { CoinsIcon, HelpingIcon, MembersIcon } from '@/Components/Icons'
 
 interface IShowCircleProps {
 	circle: Schema.CirclesShow
-	themes: Schema.ThemesShow[]
 }
 
-const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
+const ShowCircle = ({ circle }: IShowCircleProps) => {
 	const title = circle.name || 'Circle'
 
 	return (
@@ -31,8 +32,31 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 						</Menu>
 					</Group>
 
+					<Section py="md">
+						<Group grow>
+							<StatTile
+								heading="Total Donated"
+								value="$10"
+								icon={ <CoinsIcon /> }
+								color="purple"
+							/>
+							<StatTile
+								heading="Orgs Helped"
+								value="6"
+								icon={ <HelpingIcon /> }
+								color="green"
+							/>
+							<StatTile
+								heading="Active Members"
+								value="55"
+								icon={ <MembersIcon /> }
+								color="orange"
+							/>
+						</Group>
+					</Section>
+
 					<Heading order={ 2 }>Upcoming Themes</Heading>
-					{ themes.map(theme => (
+					{ circle.themes.map(theme => (
 						<Box key={ theme.id }>
 							<Link href={ Routes.theme(theme.slug) }>{ theme.title }</Link>
 						</Box>
@@ -44,3 +68,11 @@ const ShowCircle = ({ circle, themes }: IShowCircleProps) => {
 }
 
 export default ShowCircle
+
+/*
+
+stat tiles:
+Money given
+orgs helped
+active members
+*/

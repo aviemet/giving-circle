@@ -62,6 +62,7 @@ export {
 export {
 	GrFormNext as NextIcon,
 	GrFormPrevious as PreviousIcon,
+	GrMoney as CoinsIcon,
 } from 'react-icons/gr'
 
 export {
@@ -75,3 +76,11 @@ export {
 
 export {
 } from 'react-icons/cg'
+
+export {
+	VscOrganization as MembersIcon,
+} from 'react-icons/vsc'
+
+export {
+	LiaHandsHelpingSolid as HelpingIcon,
+} from 'react-icons/lia'

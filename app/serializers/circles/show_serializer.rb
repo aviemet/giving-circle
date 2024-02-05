@@ -5,4 +5,7 @@ class Circles::ShowSerializer < CircleSerializer
     :updated_at,
     :created_at,
   )
+
+  has_many :themes, serializer: Themes::ShallowSerializer
+  has_many :members, serializer: Members::ShallowSerializer
 end
