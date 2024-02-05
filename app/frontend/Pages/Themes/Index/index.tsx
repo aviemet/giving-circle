@@ -3,6 +3,7 @@ import { Routes } from '@/lib'
 import { NewIcon } from '@/Components/Icons'
 import ThemesTable from '../Table'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface IThemeIndexProps {
 	themes: Schema.ThemesIndex[]
@@ -17,6 +18,7 @@ const ThemesIndex = ({ themes, pagination, circle }: IThemeIndexProps) => {
 			model="themes"
 			rows={ themes }
 			pagination={ pagination }
+			navMenu={ getCircleMenu({ circle }) }
 			menuOptions={ [
 				{ label: 'New Theme', href: Routes.newCircleTheme(circle.slug), icon: NewIcon },
 			] }

@@ -4,7 +4,7 @@ import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { Portal } from '@mantine/core'
 import useLayoutStore from '@/lib/store/LayoutStore'
 
-interface IPageProps {
+export interface PageProps {
 	children?: React.ReactNode
 	title?: string
 	meta?: React.ReactNode
@@ -12,7 +12,7 @@ interface IPageProps {
 	navMenu?: (props: any) => React.JSX.Element
 }
 
-const Page = ({ children, title, meta, hideNavMenu = false, navMenu: NavMenu }: IPageProps) => {
+const Page = ({ children, title, meta, hideNavMenu = false, navMenu: NavMenu }: PageProps) => {
 	const { sidebarVisible, setSidebarVisible } = useLayoutStore()
 
 	const dynamicNavMenuRef = useRef(document.getElementById('dynamic-nav-menu'))

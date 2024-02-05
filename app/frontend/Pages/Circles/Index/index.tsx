@@ -1,9 +1,7 @@
 import React from 'react'
-import { Heading, Page, Container, Divider, Group, Section } from '@/Components'
-import CircleCard from './CircleCard'
-import ThemeCard from './ThemeCard'
+import { Heading, Page, Container, Divider, Group } from '@/Components'
+import { CircleCard, ThemeCard, NewCard } from '@/Layouts/AppLayout/Components/Cards'
 import { Routes } from '@/lib'
-import NewCard from './NewCard'
 
 interface ICircleIndexProps {
 	circles: Schema.CirclesIndex[]

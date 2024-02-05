@@ -1,8 +1,9 @@
 import React from 'react'
-import { Page, Table } from '@/Components'
+import { Page, Table, type PageProps } from '@/Components'
 import TableTitleSection, { IIndexTableTitleSectionProps } from './TableTitleSection'
 
-interface IIndexPageTemplateProps extends IIndexTableTitleSectionProps {
+interface IndexPageTemplateProps
+	extends IIndexTableTitleSectionProps, Omit<PageProps, 'children'|'title'> {
 	model: string
 	rows: Record<string, any>[]
 	pagination: Schema.Pagination
@@ -20,9 +21,12 @@ const IndexPageTemplate = ({
 	menuOptions,
 	advancedSearch,
 	deleteRoute,
-}: IIndexPageTemplateProps) => {
+	navMenu,
+	hideNavMenu,
+	meta,
+}: IndexPageTemplateProps) => {
 	return (
-		<Page title={ title }>
+		<Page title={ title } navMenu={ navMenu } hideNavMenu={ hideNavMenu } meta={ meta }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable

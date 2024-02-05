@@ -4,6 +4,7 @@ import { Routes } from '@/lib'
 import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import StatTile from './StatTile'
 import { CoinsIcon, HelpingIcon, MembersIcon } from '@/Components/Icons'
+import { ThemeCard } from '@/Layouts/AppLayout/Components/Cards'
 
 interface IShowCircleProps {
 	circle: Schema.CirclesShow
@@ -57,9 +58,7 @@ const ShowCircle = ({ circle }: IShowCircleProps) => {
 
 					<Heading order={ 2 }>Upcoming Themes</Heading>
 					{ circle.themes.map(theme => (
-						<Box key={ theme.id }>
-							<Link href={ Routes.theme(theme.slug) }>{ theme.title }</Link>
-						</Box>
+						<ThemeCard key={ theme.id } theme={ theme }  />
 					)) }
 				</Container>
 			</Section>
@@ -68,11 +67,3 @@ const ShowCircle = ({ circle }: IShowCircleProps) => {
 }
 
 export default ShowCircle
-
-/*
-
-stat tiles:
-Money given
-orgs helped
-active members
-*/
