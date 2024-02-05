@@ -19,10 +19,10 @@ const NewTheme = ({ ...data }: INewThemeProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ThemeForm
+				{ /* <ThemeForm
 					to={ Routes.circleThemes(params.circle_slug) }
 					{ ...data }
-				/>
+				/> */ }
 			</Section>
 
 		</Page>

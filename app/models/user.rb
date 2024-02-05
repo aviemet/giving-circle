@@ -66,4 +66,9 @@ class User < ApplicationRecord
   def circles
     Circle.with_roles(Circle.find_roles.pluck(:name), self)
   end
+
+  # Rows page for pagination
+  def limit(model)
+    self.table_preferences&.[](model.to_s)&.[]('limit')
+  end
 end

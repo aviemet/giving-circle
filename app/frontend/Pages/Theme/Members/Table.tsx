@@ -4,13 +4,9 @@ import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
-interface MembersTableProps extends ITableProps {
-	circle: Schema.CirclesShare
-}
-
-const MembersTable = ({ circle, ...props }: MembersTableProps) => {
+const MemberTable = (props: ITableProps) => {
 	return (
-		<Table { ...props }>
+		<Table>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="first_name">First_name</Table.Cell>
@@ -23,16 +19,16 @@ const MembersTable = ({ circle, ...props }: MembersTableProps) => {
 				<Table.RowIterator render={ (member: Schema.MembersIndex) => (
 					<Table.Row key={ member.id }>
 						<Table.Cell>
-							<Link href={ Routes.member(member.slug) }>{ member.first_name }</Link>
+							{ /* <Link href={ Routes.member(params.member_slug) }>{ member.first_name }</Link> */ }
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.slug) }>{ member.last_name }</Link>
+							{ /* <Link href={ Routes.member(params.member_slug) }>{ member.last_name }</Link> */ }
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.slug) }>{ member.number }</Link>
+							{ /* <Link href={ Routes.member(params.member_slug) }>{ member.number }</Link> */ }
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editMember(member.slug) } />
+							{ /* <EditButton href={ Routes.editMember(params.member_slug) } /> */ }
 						</Table.Cell>
 					</Table.Row>
 				) } />
@@ -41,4 +37,4 @@ const MembersTable = ({ circle, ...props }: MembersTableProps) => {
 	)
 }
 
-export default MembersTable
+export default MemberTable

@@ -5,6 +5,7 @@ class OrgsController < ApplicationController
   expose :orgs, -> { search(circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
+  # @route GET /circles/:circle_slug/orgs (circle_orgs)
   # @route GET /themes/:theme_slug/orgs (theme_orgs)
   def index
     authorize orgs
@@ -13,6 +14,7 @@ class OrgsController < ApplicationController
     }
   end
 
+  # @route GET /orgs/:slug (org)
   # @route GET /orgs/:slug (org)
   def show
     authorize org
@@ -74,6 +76,7 @@ class OrgsController < ApplicationController
     end
   end
 
+  # @route DELETE /circles/:circle_slug/orgs (circle_orgs)
   # @route DELETE /themes/:theme_slug/orgs (theme_orgs)
   # @route DELETE /orgs/:slug (org)
   def destroy

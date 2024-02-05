@@ -5,6 +5,7 @@ class CreatePeople < ActiveRecord::Migration[7.1]
       t.string :last_name
       t.string :middle_name
       t.string :number
+      t.string :slug, null: false
       t.boolean :active, null: false, default: true
 
       t.timestamps

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :people
   root "pages#home" # Public home page for entire project
 
   # CONCERNS #
@@ -44,11 +43,13 @@ Rails.application.routes.draw do
   # RESOURCEFUL PATHS #
 
   resources :users
+  resources :people
 
   resources :circles, shallow: true, param: :slug do
     get :about
 
     resources :members, concerns: :bulk_delete, param: :slug
+    resources :orgs, only: [:index, :show], concerns: :bulk_delete, param: :slug
 
     resources :themes, shallow: true, param: :slug do
       get :about
@@ -57,7 +58,15 @@ Rails.application.routes.draw do
         get :about
       end
 
-      resources :members, concerns: :bulk_delete, param: :slug
+      get 'members', to: 'theme_members#index'
+      resources(
+        :theme_members,
+        shallow: false,
+        only: [:show, :new, :edit],
+        path: :members,
+        param: :slug,
+        as: 'member',
+      )
       resources :presentations, concerns: :bulk_delete
     end
   end

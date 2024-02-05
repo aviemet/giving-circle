@@ -3,28 +3,24 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import MembersTable from '../Table'
-import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface IMemberIndexProps {
 	members: Schema.MembersIndex[]
-	circle: Schema.CirclesShare
 	pagination: Schema.Pagination
 }
 
-const MembersIndex = ({ members, circle, pagination }: IMemberIndexProps) => {
-	console.log({ circle })
+const MembersIndex = ({ members, pagination }: IMemberIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Members"
 			model="members"
 			rows={ members }
 			pagination={ pagination }
-			navMenu={ getCircleMenu({ circle }) }
 			// menuOptions={ [
-			// 	{ label: 'New Member', href: Routes.newCircleMember(circle.slug), icon: NewIcon },
+			// 	{ label: 'New Member', href: Routes.newCircleMember(), icon: NewIcon },
 			// ] }
 		>
-			<MembersTable circle={ circle } />
+			<MembersTable />
 		</IndexPageTemplate>
 	)
 }

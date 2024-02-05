@@ -2,46 +2,52 @@ class MembersController < ApplicationController
   include Searchable
 
   expose :members, -> { search(Member.includes_associated, sortable_fields) }
-  expose :member, scope: -> { members }, find: ->(id, scope) { scope.includes_associated.find(id) }
+  expose :member, id: -> { params[:slug] }, scope: -> { members }, find_by: :slug
+
+  expose :circle_members, -> { search(Circle.find_by(slug: params[:circle_slug]).members) }
+  expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   # @route GET /circles/:circle_slug/members (circle_members)
-  # @route GET /themes/:theme_slug/members (theme_members)
   def index
     authorize members
+
+    paginated_members = circle_members.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "Members/Index", props: {
-      members: -> { members.render }
+      members: -> { paginated_members.render(view: :index) },
+      pagination: -> { {
+        count: circle_members.count,
+        **pagination_data(paginated_members)
+      } },
+      circle: -> { circle.render(view: :share) }
     }
   end
 
-  # @route GET /members/:slug (member)
   # @route GET /members/:slug (member)
   def show
     authorize member
     render inertia: "Members/Show", props: {
-      member: -> { member.render }
+      member: -> { member.render(view: :show) }
     }
   end
 
   # @route GET /circles/:circle_slug/members/new (new_circle_member)
-  # @route GET /themes/:theme_slug/members/new (new_theme_member)
   def new
     authorize Member.new
     render inertia: "Members/New", props: {
-      member: Member.new.render
+      member: Member.new.render(view: :form_data),
     }
   end
 
-  # @route GET /members/:slug/edit (edit_member)
   # @route GET /members/:slug/edit (edit_member)
   def edit
     authorize member
     render inertia: "Members/Edit", props: {
-      member: member.render
+      member: member.render(view: :edit)
     }
   end
 
   # @route POST /circles/:circle_slug/members (circle_members)
-  # @route POST /themes/:theme_slug/members (theme_members)
   def create
     authorize Member.new
     if member.save
@@ -64,7 +70,6 @@ class MembersController < ApplicationController
 
   # @route DELETE /circles/:circle_slug/members (circle_members)
   # @route DELETE /members/:slug (member)
-  # @route DELETE /themes/:theme_slug/members (theme_members)
   def destroy
     authorize member
     member.destroy

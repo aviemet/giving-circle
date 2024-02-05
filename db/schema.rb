@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
     t.string "last_name"
     t.string "middle_name"
     t.string "number"
+    t.string "slug", null: false
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
