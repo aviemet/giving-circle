@@ -45,18 +45,28 @@ Rails.application.routes.draw do
   resources :users
   resources :people
 
+  delete 'orgs', to: 'orgs#destroy'
+
   resources :circles, shallow: true, param: :slug do
     get :about
 
+    resources :orgs, param: :slug do
+      get :about
+    end
     resources :members, concerns: :bulk_delete, param: :slug
-    resources :orgs, only: [:index, :show], concerns: :bulk_delete, param: :slug
 
     resources :themes, shallow: true, param: :slug do
       get :about
 
-      resources :orgs, concerns: :bulk_delete, param: :slug do
-        get :about
-      end
+      get 'orgs', to: 'theme_orgs#index'
+      resources(
+        :theme_orgs,
+        shallow: false,
+        only: [:show, :new, :edit],
+        path: :orgs,
+        param: :slug,
+        as: 'org',
+      )
 
       get 'members', to: 'theme_members#index'
       resources(

@@ -6,7 +6,6 @@ class OrgsController < ApplicationController
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
   # @route GET /circles/:circle_slug/orgs (circle_orgs)
-  # @route GET /themes/:theme_slug/orgs (theme_orgs)
   def index
     authorize orgs
     render inertia: "Orgs/Index", props: {
@@ -14,7 +13,6 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /orgs/:slug (org)
   # @route GET /orgs/:slug (org)
   def show
     authorize org
@@ -32,7 +30,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/orgs/new (new_theme_org)
+  # @route GET /circles/:circle_slug/orgs/new (new_circle_org)
   def new
     authorize Org.new
     render inertia: "Orgs/New", props: {
@@ -48,7 +46,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route POST /themes/:theme_slug/orgs (theme_orgs)
+  # @route POST /circles/:circle_slug/orgs (circle_orgs)
   def create
     authorize Org.new
 
@@ -76,8 +74,7 @@ class OrgsController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/orgs (circle_orgs)
-  # @route DELETE /themes/:theme_slug/orgs (theme_orgs)
+  # @route DELETE /orgs (orgs)
   # @route DELETE /orgs/:slug (org)
   def destroy
     authorize org
