@@ -50,13 +50,23 @@ Rails.application.routes.draw do
   resources :circles, shallow: true, param: :slug do
     get :about
 
+    resources :members, concerns: :bulk_delete, param: :slug
     resources :orgs, param: :slug do
       get :about
     end
-    resources :members, concerns: :bulk_delete, param: :slug
 
     resources :themes, shallow: true, param: :slug do
       get :about
+
+      get 'members', to: 'theme_members#index'
+      resources(
+        :theme_members,
+        shallow: false,
+        only: [:show, :new, :edit],
+        path: :members,
+        param: :slug,
+        as: 'member',
+      )
 
       get 'orgs', to: 'theme_orgs#index'
       resources(
@@ -68,15 +78,6 @@ Rails.application.routes.draw do
         as: 'org',
       )
 
-      get 'members', to: 'theme_members#index'
-      resources(
-        :theme_members,
-        shallow: false,
-        only: [:show, :new, :edit],
-        path: :members,
-        param: :slug,
-        as: 'member',
-      )
       resources :presentations, concerns: :bulk_delete
     end
   end

@@ -16,7 +16,7 @@ class MembersController < ApplicationController
     render inertia: "Members/Index", props: {
       members: -> { paginated_members.render(view: :index) },
       pagination: -> { {
-        count: circle_members.count,
+        count: circle_members.size,
         **pagination_data(paginated_members)
       } },
       circle: -> { circle.render(view: :share) }

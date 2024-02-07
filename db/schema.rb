@@ -135,6 +135,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
+  create_table "themes_members", force: :cascade do |t|
+    t.bigint "theme_id", null: false
+    t.bigint "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_themes_members_on_member_id"
+    t.index ["theme_id"], name: "index_themes_members_on_theme_id"
+  end
+
   create_table "themes_orgs", force: :cascade do |t|
     t.bigint "org_id", null: false
     t.bigint "theme_id", null: false
@@ -205,6 +214,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
   add_foreign_key "themes", "circles"
+  add_foreign_key "themes_members", "people", column: "member_id"
+  add_foreign_key "themes_members", "themes"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

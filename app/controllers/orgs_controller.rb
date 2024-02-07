@@ -8,8 +8,16 @@ class OrgsController < ApplicationController
   # @route GET /circles/:circle_slug/orgs (circle_orgs)
   def index
     authorize orgs
+
+    paginated_orgs = orgs.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "Orgs/Index", props: {
-      orgs: -> { orgs.render }
+      orgs: -> { paginated_orgs.render(view: :index) },
+      pagination: -> { {
+        count: orgs.size,
+        **pagination_data(paginated_orgs)
+      } },
+      circle: -> { circle.render(view: :share) }
     }
   end
 
