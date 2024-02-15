@@ -12,8 +12,11 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>
   def index
     authorize <%= plural_table_name %>
+
+    paginated_%= plural_table_name %> = %= plural_table_name %>.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "<%= class_name.pluralize %>/Index", props: {
-      <%= plural_table_name %>: -> { <%= plural_table_name %>.render }
+      <%= plural_table_name %>: -> { <%= plural_table_name %>.render(view: :index) }
     }
   end
 
@@ -21,7 +24,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def show
     authorize <%= singular_table_name %>
     render inertia: "<%= class_name.pluralize %>/Show", props: {
-      <%= singular_table_name %>: -> { <%= singular_table_name %>.render }
+      <%= singular_table_name %>: -> { <%= singular_table_name %>.render(view: :show) }
     }
   end
 
@@ -29,7 +32,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def new
     authorize <%= orm_class.build(class_name) %>
     render inertia: "<%= class_name.pluralize %>/New", props: {
-      <%= singular_table_name %>: <%= orm_class.build(class_name) %>.render
+      <%= singular_table_name %>: <%= orm_class.build(class_name) %>.render(view: :new)
     }
   end
 
@@ -37,7 +40,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def edit
     authorize <%= singular_table_name %>
     render inertia: "<%= class_name.pluralize %>/Edit", props: {
-      <%= singular_table_name %>: <%= singular_table_name %>.render
+      <%= singular_table_name %>: <%= singular_table_name %>.render(view: :edit)
     }
   end
 

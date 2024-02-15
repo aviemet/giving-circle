@@ -3,15 +3,16 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import PresentationsTable from '../Table'
-import { usePageProps } from '@/lib/hooks'
+import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface IPresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
 	pagination: Schema.Pagination
+	circle: Schema.CirclesShare
+	theme: Schema.ThemesShallow
 }
 
-const PresentationsIndex = ({ presentations, pagination }: IPresentationIndexProps) => {
-	const { params } = usePageProps()
+const PresentationsIndex = ({ presentations, pagination, circle, theme }: IPresentationIndexProps) => {
 
 	return (
 		<IndexPageTemplate
@@ -19,8 +20,9 @@ const PresentationsIndex = ({ presentations, pagination }: IPresentationIndexPro
 			model="presentations"
 			rows={ presentations }
 			pagination={ pagination }
+			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			menuOptions={ [
-				{ label: 'New Presentation', href: Routes.newThemePresentation(params.theme_slug), icon: NewIcon },
+				{ label: 'New Presentation', href: Routes.newThemePresentation(theme.slug), icon: NewIcon },
 			] }
 		>
 			<PresentationsTable />

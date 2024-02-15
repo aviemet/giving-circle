@@ -35,6 +35,7 @@ class Circle < ApplicationRecord
 
   has_many :circles_member, dependent: :destroy
   has_many :members, through: :circles_member
+  has_many :groups
 
   scope :includes_associated, -> { includes([:themes, :presentations, :members]) }
 end

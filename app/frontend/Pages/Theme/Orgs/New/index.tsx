@@ -2,15 +2,12 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import OrgForm from '../Form'
-import { usePageProps } from '@/lib/hooks'
 
 interface INewOrgProps {
 	org: Schema.OrgsFormData
 }
 
-const NewOrg = ({ ...data }: INewOrgProps) => {
-	const { params } = usePageProps()
-
+const NewOrg = ({ org }: INewOrgProps) => {
 	const title = 'New Org'
 
 	return (
@@ -19,8 +16,8 @@ const NewOrg = ({ ...data }: INewOrgProps) => {
 				<Heading>{ title }</Heading>
 
 				<OrgForm
-					to={ Routes.themeOrgs(params.theme_slug) }
-					{ ...data }
+					to={ Routes.themeOrgs() }
+					org={ org }
 				/>
 			</Section>
 

@@ -1,6 +1,8 @@
 class OrgsController < ApplicationController
   include Searchable
 
+  skip_before_action :authenticate_user!, only: [:about]
+
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
   expose :orgs, -> { search(circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
@@ -25,7 +27,7 @@ class OrgsController < ApplicationController
   def show
     authorize org
     render inertia: "Orgs/Show", props: {
-      org: -> { org.render }
+      org: -> { org.render(view: :show) }
     }
   end
 
@@ -34,7 +36,7 @@ class OrgsController < ApplicationController
     authorize org
     render inertia: "Orgs/About", props: {
       org: -> { org.render(view: :show) },
-      themes: -> { org.themes.render }
+      themes: -> { org.themes.render(view: :show) }
     }
   end
 
@@ -42,7 +44,7 @@ class OrgsController < ApplicationController
   def new
     authorize Org.new
     render inertia: "Orgs/New", props: {
-      org: Org.new.render
+      org: Org.new.render(view: :new)
     }
   end
 
@@ -50,11 +52,10 @@ class OrgsController < ApplicationController
   def edit
     authorize org
     render inertia: "Orgs/Edit", props: {
-      org: org.render
+      org: org.render(view: :edit)
     }
   end
 
-  # @route POST /circles/:circle_slug/orgs (circle_orgs)
   def create
     authorize Org.new
 

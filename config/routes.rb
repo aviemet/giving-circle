@@ -46,12 +46,21 @@ Rails.application.routes.draw do
   resources :people
 
   delete 'orgs', to: 'orgs#destroy'
+  delete 'groups', to: 'groups#destroy'
 
   resources :circles, shallow: true, param: :slug do
     get :about
 
+    resources(
+      :groups,
+      shallow: true,
+      param: :slug,
+      path: :groups
+    )
+
     resources :members, concerns: :bulk_delete, param: :slug
-    resources :orgs, param: :slug do
+
+    resources :orgs, param: :slug, except: [:create] do
       get :about
     end
 

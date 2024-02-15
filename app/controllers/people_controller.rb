@@ -2,8 +2,8 @@ class PeopleController < ApplicationController
   include Searchable
 
   expose :people, -> { search(Person.includes_associated, sortable_fields) }
-    expose :person, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :person, find: ->(id, scope) { scope.includes_associated.find(id) }
+
   # @route GET /people (people)
   def index
     authorize people

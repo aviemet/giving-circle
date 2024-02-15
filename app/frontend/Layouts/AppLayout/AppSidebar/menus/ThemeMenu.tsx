@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 
 export interface ThemeMenuProps {
 	circle: Schema.Circle
-	theme: Schema.Theme
+	theme: Schema.ThemesShallow
 }
 
 const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {

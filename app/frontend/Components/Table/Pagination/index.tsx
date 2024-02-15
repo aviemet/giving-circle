@@ -24,10 +24,9 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 
 	if(!pagination) return <></>
 
-	const { count, pages, limit, current_page, next_page, prev_page, is_first_page, is_last_page } = pagination
-	const recordStart = ((current_page - 1) * limit) + 1
+	const { count, pages, limit, current_page, next_page, prev_page } = pagination
+	const recordStart = count === 0 ? 0 : ((current_page - 1) * limit) +  1
 	const recordEnd = Math.min(current_page * limit, count)
-
 
 	return (
 		<Group mt="auto" pt={ 8 }>

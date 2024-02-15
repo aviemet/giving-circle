@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   before_action :remove_empty_query_parameters
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   add_flash_types :success, :error, :warning
 

@@ -1,10 +1,11 @@
 class ThemeMembersController < ApplicationController
   include Searchable
 
-  expose :members, -> { search(Theme.find_by(slug: params[:theme_slug]).members.includes_associated, sortable_fields) }
-  expose :member, id: -> { params[:slug] }, scope: -> { members }, find_by: :slug
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
   expose :circle, -> { theme.circle }
+
+  expose :members, -> { search(theme.members.includes_associated, sortable_fields) }
+  expose :member, id: -> { params[:slug] }, scope: -> { members }, find_by: :slug
 
   # @route GET /themes/:theme_slug/members (theme_members)
   def index

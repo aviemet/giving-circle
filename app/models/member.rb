@@ -18,5 +18,8 @@ class Member < Person
   has_many :circles_members, dependent: :destroy
   has_many :circles, through: :circles_members
 
-  scope :includes_associated, -> { includes([:circles]) }
+  has_many :presentations_members, dependent: :destroy
+  has_many :presentations, through: :presentations_members
+
+  scope :includes_associated, -> { includes([:circles, :presentations]) }
 end

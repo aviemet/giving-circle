@@ -1,6 +1,9 @@
 class PresentationsController < ApplicationController
   include Searchable
 
+  expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
+  expose :circle, -> { theme.circle }
+
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }
   expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
 
@@ -8,7 +11,9 @@ class PresentationsController < ApplicationController
   def index
     authorize presentations
     render inertia: "Presentations/Index", props: {
-      presentations: -> { presentations.render }
+      presentations: -> { presentations.render(view: :index) },
+      theme: -> { theme.render(view: :shallow) },
+      circle: -> { circle.render(view: :share) },
     }
   end
 
@@ -16,7 +21,7 @@ class PresentationsController < ApplicationController
   def show
     authorize presentation
     render inertia: "Presentations/Show", props: {
-      presentation: -> { presentation.render }
+      presentation: -> { presentation.render(view: :show) }
     }
   end
 
@@ -24,7 +29,7 @@ class PresentationsController < ApplicationController
   def new
     authorize Presentation.new
     render inertia: "Presentations/New", props: {
-      presentation: Presentation.new.render
+      presentation: Presentation.new.render(view: :form_data)
     }
   end
 
@@ -32,7 +37,7 @@ class PresentationsController < ApplicationController
   def edit
     authorize presentation
     render inertia: "Presentations/Edit", props: {
-      presentation: presentation.render
+      presentation: presentation.render(view: :edit)
     }
   end
 

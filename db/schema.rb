@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_215117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["contact_id"], name: "index_emails_on_contact_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.bigint "circle_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_groups_on_circle_id"
   end
 
   create_table "orgs", force: :cascade do |t|
@@ -208,6 +217,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_212941) do
   add_foreign_key "addresses", "contacts"
   add_foreign_key "circles_members", "circles"
   add_foreign_key "circles_members", "people", column: "member_id"
+  add_foreign_key "groups", "circles"
   add_foreign_key "presentations", "themes"
   add_foreign_key "presentations_members", "people", column: "member_id"
   add_foreign_key "presentations_members", "presentations"

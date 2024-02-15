@@ -8,6 +8,7 @@ class ThemeOrgsController < ApplicationController
 
   # @route GET /themes/:theme_slug/orgs (theme_orgs)
   def index
+    authorize orgs
     paginated_orgs = orgs.page(params[:page] || 1).per(current_user.limit(:items))
 
     render inertia: "Theme/Orgs/Index", props: {
@@ -23,17 +24,26 @@ class ThemeOrgsController < ApplicationController
 
   # @route GET /themes/:theme_slug/orgs/:slug (theme_org)
   def show
-    render inertia: "Theme/Orgs/Show"
+    authorize org
+    render inertia: "Theme/Orgs/Show", props: {
+      org: org.render(view: :show)
+    }
   end
 
   # @route GET /themes/:theme_slug/orgs/new (new_theme_org)
   def new
-    render inertia: "Theme/Orgs/New"
+    authorize Org.new
+    render inertia: "Theme/Orgs/New", props: {
+      org: Org.new.render(view: :form_data)
+    }
   end
 
   # @route GET /themes/:theme_slug/orgs/:slug/edit (edit_theme_org)
   def edit
-    render inertia: "Theme/Orgs/Edit"
+    authorize org
+    render inertia: "Theme/Orgs/Edit", props: {
+      org: org.render(view: :edit)
+    }
   end
 
   private
