@@ -12,14 +12,6 @@ export const wrapper = css`
 export const table = css`
 	width: 100%;
 
-	${vars.lightSelector} {
-		background-color: ${vars.colors.gray[2]};
-	}
-
-	${vars.darkSelector} {
-		background-color: ${vars.colors.dark[6]};
-	}
-
 	&.layout-fixed {
 		table-layout: fixed;
 	}
@@ -37,16 +29,12 @@ export const table = css`
 		${vars.lightSelector} {
 			background-color: ${vars.colors.gray[1]};
 
-			/* th:hover {
+			th:hover {
 				background-color: ${vars.colors.gray[1]};
-			} */
+			}
 		}
 		${vars.darkSelector} {
 			background-color: ${vars.colors.dark[7]};
-
-			/* th:hover {
-				background-color: ${vars.colors.black};
-			} */
 		}
 	}
 
@@ -59,6 +47,10 @@ export const table = css`
 
 		&.table-column-fit {
 			width: 1px;
+			white-space: nowrap;
+		}
+
+		&.nowrap {
 			white-space: nowrap;
 		}
 	}
@@ -98,31 +90,35 @@ export const table = css`
 
 	}
 
+	/* On small screens, collapse tables into "cards" */
 	@media(max-width: ${vars.breakpoints.sm}) {
 		thead {
 			display: none;
 		}
 
-		tr {
-			display: flex;
-			flex-direction: column;
-			margin-bottom: 10px;
-			background-color: ${vars.colors.dark[7]};
-			border-radius: ${rem(4)};
-			padding: ${rem(6)};
-			border-bottom: 1px solid ${vars.colors.primary.filled};
-		}
-
-		td {
-			display: grid;
-			grid-template-columns: 8rem 1fr;
-
-			&::before {
-				content: attr(data-cell);
+		/* Only for tables with a thead */
+		thead + tbody {
+			tr {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 10px;
+				background-color: ${vars.colors.dark[7]};
+				border-radius: ${rem(4)};
+				padding: ${rem(6)};
+				border-bottom: 1px solid ${vars.colors.primaryColors.filled};
 			}
 
-			&.table-row-select-checkbox {
-				visibility: collapse;
+			td {
+				display: grid;
+				grid-template-columns: 8rem 1fr;
+
+				&::before {
+					content: attr(data-cell);
+				}
+
+				&.table-row-select-checkbox {
+					visibility: collapse;
+				}
 			}
 		}
 	}
@@ -145,20 +141,23 @@ export const searchInput = css`
 	input {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
+		border-top-left-radius: ${vars.radius.sm};
+		border-bottom-left-radius: ${vars.radius.sm};
 	}
 `
 
+export const columnPickerButton = css`
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+`
 
-// &:before, &:after {
-// 	position: absolute,
-// 	display: block,
-// 	right: 0.75rem,
-// 	width: 0,
-// 	height: 0,
-// 	content: ,
-// 	cursor: pointer,
-// 	border-color: vars.colors.gray[4],
-// 	border-style: solid,
-// 	borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-// 	borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-// }
+export const pagination = css`
+	a:hover {
+		text-decoration: none;
+	}
+`
+
+export const limitSelect = css`
+	display: inline-block;
+	max-width: 60px;
+`

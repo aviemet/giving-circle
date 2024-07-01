@@ -9,5 +9,6 @@ export default mergeConfig(viteConfig, defineConfig({
 			all: true,
 			include: ['app/frontend/**/*.test.{ts,tsx}'],
 		},
+		setupFiles: ['/tests/helpers/mockServer.ts'],
 	},
 }))

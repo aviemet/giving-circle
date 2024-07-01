@@ -36,8 +36,7 @@ Style/ClassAndModuleChildren:
 Style/EmptyMethod:
   Enabled: false
 Style/GuardClause:
-  # Enabled: false
-  Enabled: true
+  Enabled: false
 Style/SlicingWithRange:
   Enabled: true
 Style/RedundantRegexpCharacterClass:
@@ -69,19 +68,13 @@ Lint/MissingSuper:
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 Layout/FirstHashElementIndentation:
-  # Enabled: false
-  Enabled: true
-  EnforcedStyle: consistent
-Layout/EmptyLinesAroundAttributeAccessor:
-  # Enabled: true
   Enabled: false
-  AllowAliasSyntax: true
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
 Layout/MultilineBlockLayout:
   Enabled: false
-  # Enabled: true
 Layout/BlockEndNewline:
   Enabled: false
-  # Enabled: true
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
@@ -92,19 +85,17 @@ Layout/EmptyLinesAroundBlockBody:
 Layout/LineLength:
   Enabled: false
 Layout/ExtraSpacing:
-  # Enabled: false
-  Enabled: true
-  AllowForAlignment: true
+  Enabled: false
 Layout/TrailingWhitespace:
   Enabled: true
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 Layout/SpaceInsideHashLiteralBraces:
-  Enabled: true
+  Enabled: false
 Layout/CommentIndentation:
   Enabled: false
 Layout/HashAlignment:
-  Enabled: true
+  Enabled: false
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Lint/MixedRegexpCaptureTypes:
@@ -243,7 +234,7 @@ Layout/DotPosition:
   StyleGuide: https://relaxed.ruby.style/#layoutdotposition
 
 Layout/SpaceBeforeBlockBraces:
-  EnforcedStyle: space
+  Enabled: false
   StyleGuide: https://relaxed.ruby.style/#layoutspacebeforeblockbraces
 
 Layout/SpaceInsideParens:
@@ -251,13 +242,13 @@ Layout/SpaceInsideParens:
   StyleGuide: https://relaxed.ruby.style/#layoutspaceinsideparens
 
 Layout/FirstArrayElementIndentation:
-  EnforcedStyle: consistent
+  Enabled: false
 
 Layout/MultilineOperationIndentation:
-  EnforcedStyle: "indented"
+  Enabled: false
 
 Layout/ArgumentAlignment:
-  EnforcedStyle: with_fixed_indentation
+  Enabled: false
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
