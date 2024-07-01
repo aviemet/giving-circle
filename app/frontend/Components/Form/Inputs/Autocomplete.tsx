@@ -1,16 +1,20 @@
 import React from 'react'
-import TextInput, { type TextInputProps } from '@/Components/Inputs/TextInput'
 import Field from '../Components/Field'
-import { useInertiaInput, type NestedObject } from 'use-inertia-form'
+import AutocompleteInput, { type AutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
+import cx from 'clsx'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
+import { InputConflicts, type BaseFormInputProps } from '.'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface FormTextInputProps<TForm extends NestedObject>
+interface FormAutocompleteProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<TextInputProps, InputConflicts>,
-	BaseFormInputProps<string, TForm> {}
+	Omit<AutocompleteProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {
 
-const TextFormInput = <TForm extends NestedObject>(
+	endpoint?: string
+}
+
+const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -20,12 +24,13 @@ const TextFormInput = <TForm extends NestedObject>(
 		id,
 		required,
 		field = true,
+		endpoint,
 		wrapperProps,
 		errorKey,
 		defaultValue,
 		clearErrorsOnChange,
 		...props
-	}: FormTextInputProps<TForm>,
+	} : FormAutocompleteProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
@@ -35,18 +40,13 @@ const TextFormInput = <TForm extends NestedObject>(
 		clearErrorsOnChange,
 	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value
-		setValue(value)
-
-		onChange?.(value, form)
+	const handleChange = (parameter: string) => {
+		setValue(parameter)
+		onChange?.(parameter, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		const value = e.target.value
-		setValue(value)
-
-		onBlur?.(value, form)
+		if(onBlur) onBlur(value, form)
 	}
 
 	return (
@@ -63,14 +63,19 @@ const TextFormInput = <TForm extends NestedObject>(
 				</Field>
 			) }
 		>
-			<TextInput
+			<AutocompleteInput
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
-				onFocus={ e => onFocus?.(e.target.value, form) }
 				error={ errorKey ? form.getError(errorKey) : error }
+				wrapperProps={ {
+					component: Field,
+					className: cx({ required }),
+					errors: Boolean(error),
+					style: { padding: 0 },
+				} }
 				wrapper={ false }
 				{ ...props }
 			/>
@@ -78,4 +83,4 @@ const TextFormInput = <TForm extends NestedObject>(
 	)
 }
 
-export default TextFormInput
+export default FormAutocompleteComponent

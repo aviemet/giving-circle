@@ -1,16 +1,26 @@
 import React from 'react'
 import { Box, BoxProps } from '@mantine/core'
 import cx from 'clsx'
+import { useFormFormat } from '../Form'
+import { type InputType } from '@/types'
 
-export interface IFieldProps extends BoxProps {
+export interface FieldProps extends BoxProps {
 	children: React.ReactNode
-	type?: TInputType
+	type?: InputType
 	required?: boolean
 	errors?: boolean
-	grid?: boolean
 }
 
-const Field = ({ children, type, required = false, errors = false, className, grid, ...props }: IFieldProps) => {
+const Field = ({
+	children,
+	type,
+	required = false,
+	errors = false,
+	className,
+	...props
+}: FieldProps) => {
+	const { disableFormatting } = useFormFormat()
+
 	return (
 		<Box
 			className={ cx(
@@ -18,7 +28,8 @@ const Field = ({ children, type, required = false, errors = false, className, gr
 				{ [String(type)]: type },
 				{ 'required': required },
 				{ 'field_with_errors': errors },
-				{ 'no-grid': grid === false },
+				{ 'no-grid': disableFormatting },
+				className,
 			) }
 			{ ...props }
 		>

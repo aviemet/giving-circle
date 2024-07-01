@@ -1,32 +1,32 @@
 import React from 'react'
+import SegmentedControl, { type SegmentedControlProps } from '@/Components/Inputs/SegmentedControl'
 import Field from '../Components/Field'
-import RichTextInput, { type RichTextInputProps } from '@/Components/Inputs/RichText'
-import cx from 'clsx'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface FormRichTextInputProps<TForm extends NestedObject = NestedObject>
+interface FormSegmentedControlProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<RichTextInputProps, InputConflicts>,
+	Omit<SegmentedControlProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const RichText = <TForm extends NestedObject = NestedObject>({
-	label,
+const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
+	options,
 	name,
-	required = false,
 	id,
+	model,
 	onChange,
 	onBlur,
 	onFocus,
-	model,
+	required,
 	field = true,
 	wrapperProps,
 	errorKey,
 	defaultValue,
 	clearErrorsOnChange,
 	...props
-}: FormRichTextInputProps<TForm>) => {
+}: FormSegmentedControlProps<TForm>,
+) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -37,11 +37,16 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 
 	const handleChange = (v: string) => {
 		setValue(v)
+
 		onChange?.(v, form)
 	}
 
-	const handleBlur = () => {
-		onBlur?.(value, form )
+	const handleBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+		onBlur?.(value, form)
+	}
+
+	const handleFocus = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+		onFocus?.(value, form)
 	}
 
 	return (
@@ -49,7 +54,7 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 			condition={ field }
 			wrapper={ children => (
 				<Field
-					type="textarea"
+					type="radio"
 					required={ required }
 					errors={ !!error }
 					{ ...wrapperProps }
@@ -58,23 +63,19 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 				</Field>
 			) }
 		>
-			<>
-				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
-					{ label }
-				</label> }
-				<RichTextInput
-					id={ id }
-					name={ inputName }
-					onChange={ handleChange }
-					onBlur={ handleBlur }
-					onFocus={ () => onFocus?.(value, form ) }
-					value={ value }
-					wrapper={ false }
-					{ ...props }
-				/>
-			</>
+			<SegmentedControl
+				options={ options }
+				id={ id || inputId }
+				name={ inputName }
+				value={ value }
+				onChange={ handleChange }
+				onBlur={ handleBlur }
+				onFocus={ handleFocus }
+				wrapper={ false }
+				{ ...props }
+			/>
 		</ConditionalWrapper>
 	)
 }
 
-export default RichText
+export default FormSegmentedControl

@@ -2,11 +2,11 @@ import React from 'react'
 import { NestedFields, NestedFieldsProps } from 'use-inertia-form'
 import FormGroup from './FormGroup'
 
-interface IFieldsForProps extends NestedFieldsProps {
+interface FieldsForProps extends NestedFieldsProps {
 	legend?: string
 }
 
-const FieldsFor = ({ children, model, legend }: IFieldsForProps) => {
+const FieldsFor = ({ children, model, legend }: FieldsForProps) => {
 	return (
 		<NestedFields model={ model }>
 			<FormGroup className="fields_for" legend={ legend }>

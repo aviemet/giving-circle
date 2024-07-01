@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand'
 
-export interface ISidebarSlice {
+export interface SidebarSlice {
 	sidebarOpen: boolean
 	sidebarVisible: boolean
 	sidebarBreakpoint: string
@@ -8,7 +8,7 @@ export interface ISidebarSlice {
 	setSidebarVisible: (visible: boolean) => void
 }
 
-export const createSidebarSlice: StateCreator<ISidebarSlice, [], [], ISidebarSlice> =
+export const createSidebarSlice: StateCreator<SidebarSlice> =
 (set) => ({
 	sidebarOpen: true,
 	sidebarVisible: false,

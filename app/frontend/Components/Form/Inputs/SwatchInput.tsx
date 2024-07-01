@@ -1,16 +1,17 @@
 import React from 'react'
-import PasswordInput, { type PasswordInputProps } from '@/Components/Inputs/PasswordInput'
-import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
+import SwatchInput, { type SwatchInputProps } from '@/Components/Inputs/SwatchInput'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import Field from '../Components/Field'
 import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface FormPasswordInputProps<TForm extends NestedObject>
+interface FormSwatchInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<PasswordInputProps, InputConflicts>,
-	BaseFormInputProps<string, TForm> {}
+	Omit<SwatchInputProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {
+}
 
-const FormInput = <TForm extends NestedObject>(
+const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -25,7 +26,7 @@ const FormInput = <TForm extends NestedObject>(
 		defaultValue,
 		clearErrorsOnChange,
 		...props
-	}: FormPasswordInputProps<TForm>,
+	}: FormSwatchInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
@@ -35,18 +36,10 @@ const FormInput = <TForm extends NestedObject>(
 		clearErrorsOnChange,
 	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value
-		setValue(value)
+	const handleChange = (color: string) => {
+		setValue(color)
 
-		onChange?.(value, form)
-	}
-
-	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		const value = e.target.value
-		setValue(value)
-
-		if(onBlur) onBlur(value, form)
+		onChange?.(color, form)
 	}
 
 	return (
@@ -54,7 +47,7 @@ const FormInput = <TForm extends NestedObject>(
 			condition={ field }
 			wrapper={ children => (
 				<Field
-					type="password"
+					type="text"
 					required={ required }
 					errors={ !!error }
 					{ ...wrapperProps }
@@ -63,18 +56,18 @@ const FormInput = <TForm extends NestedObject>(
 				</Field>
 			) }
 		>
-			<PasswordInput
-				id={ id || inputId }
-				name={ inputName }
+			<SwatchInput
+				initialValue={ value }
 				value={ value }
 				onChange={ handleChange }
-				onBlur={ handleBlur }
 				onFocus={ e => onFocus?.(e.target.value, form) }
-				error={ error }
+				name={ inputName }
+				id={ inputId }
 				wrapper={ false }
 				{ ...props }
-			/></ConditionalWrapper>
+			/>
+		</ConditionalWrapper>
 	)
 }
 
-export default FormInput
+export default SwatchFormInput

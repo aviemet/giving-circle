@@ -1,3 +1,4 @@
-export { type IColorSlice } from './colorSlice'
-export { type IMenuSlice } from './menuSlice'
-export { type ISidebarSlice } from './sidebarSlice'
+export { type ColorSlice } from './colorSlice'
+export { type MenuSlice } from './menuSlice'
+export { type SidebarSlice } from './sidebarSlice'
+export { type TableSlice } from './tableSlice'
