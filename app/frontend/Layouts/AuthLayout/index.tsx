@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Center, Flex, Paper } from '@/Components'
+import { Box, Flex, Paper } from '@/Components'
 import * as classes from './AuthLayout.css'
 
 interface LayoutProps {
@@ -9,11 +9,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
 	return (
 		<Flex className={ classes.authLayout }>
-			<Center p="lg" id="auth-layout-left">
-				<Paper shadow="lg" radius="lg" p="xl" withBorder>
-					{ children }
-				</Paper>
-			</Center>
+			<Paper shadow="lg" radius="lg" p="xl" withBorder>
+				{ children }
+			</Paper>
 
 			<Box id="auth-layout-right">
 			</Box>

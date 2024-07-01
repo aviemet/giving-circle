@@ -26,7 +26,6 @@ const Form = <TForm extends NestedObject>({
 	children,
 	data,
 	disableFormatting = false,
-	className,
 	railsAttributes = true,
 	...props
 }: FormProps<TForm>) => {
@@ -35,7 +34,6 @@ const Form = <TForm extends NestedObject>({
 			<Box className={ cx(classes.form) }>
 				<InertiaForm
 					data={ data }
-					className={ cx({ 'format-grid': !disableFormatting }, className) }
 					railsAttributes={ railsAttributes }
 					{ ...props }
 				>
