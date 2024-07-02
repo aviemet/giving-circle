@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		setup({ el, App, props }) {
 			const root = createRoot(el)
 
-			// Convert ISO strings from server to javascript Date objects
+			// Convert SO strings from server to javascript Date objects
 			props.initialPage.props = propsMiddleware(props.initialPage.props)
 
 			root.render(<App { ...props } />)

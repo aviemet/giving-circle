@@ -6,14 +6,14 @@ type TGroupFormData = {
 	group: Schema.GroupsFormData
 }
 
-export interface IGroupFormProps {
+export interface GroupFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TGroupFormData>) => boolean|void
 	group: Schema.GroupsFormData
 }
 
-const GroupForm = ({ method = 'post', group, ...props }: IGroupFormProps) => {
+const GroupForm = ({ method = 'post', group, ...props }: GroupFormProps) => {
 	return (
 		<Form
 			model="group"

@@ -6,14 +6,14 @@ type TOrgFormData = {
 	org: Schema.OrgsFormData
 }
 
-export interface IOrgFormProps {
+export interface OrgFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TOrgFormData>) => boolean|void
 	org: Schema.OrgsFormData
 }
 
-const OrgForm = ({ method = 'post', org, ...props }: IOrgFormProps) => {
+const OrgForm = ({ method = 'post', org, ...props }: OrgFormProps) => {
 	return (
 		<Form
 			model="org"

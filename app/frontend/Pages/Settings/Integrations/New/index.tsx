@@ -4,11 +4,11 @@ import { Heading } from '@/Components'
 import { Routes } from '@/lib'
 import SmtpForm from '../Form'
 
-interface ISmtpFormProps {
+interface SmtpFormProps {
 	smtp: Schema.Smtp
 }
 
-const NewMail = ({ smtp }: ISmtpFormProps) => {
+const NewMail = ({ smtp }: SmtpFormProps) => {
 	return (
 		<SettingsLayout>
 			<Heading mb={ 24 }>Mail Settings</Heading>

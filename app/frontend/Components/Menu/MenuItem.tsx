@@ -4,13 +4,13 @@ import cx from 'clsx'
 import * as classes from './MenuItem.css'
 import { Link } from '..'
 
-interface IMenuItemProps extends MenuItemProps {
+interface MenuItemProps extends MenuItemProps {
 	disabled?: boolean
 	href?: string
 	icon?: JSX.Element
 }
 
-const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
+const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>((
 	{ children, disabled = false, href, icon, className, ...props },
 	ref,
 ) => {
@@ -31,4 +31,4 @@ const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
 	)
 })
 
-export default createPolymorphicComponent<'button', IMenuItemProps>(MenuItem)
+export default createPolymorphicComponent<'button', MenuItemProps>(MenuItem)

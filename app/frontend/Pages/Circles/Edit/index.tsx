@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CirclesForm from '../Form'
 
-interface IEditCircleProps {
+interface EditCircleProps {
 	circle: Schema.CirclesEdit
 }
 
-const EditCircle = ({ circle }: IEditCircleProps) => {
+const EditCircle = ({ circle }: EditCircleProps) => {
 	const title = 'Edit Circle'
 
 	return (

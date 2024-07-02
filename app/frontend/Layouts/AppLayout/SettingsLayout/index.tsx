@@ -5,7 +5,7 @@ import { Paper, useMantineTheme } from '@mantine/core'
 import { useViewportSize, useLocation } from '@/lib/hooks'
 import { px } from '@/lib'
 
-interface ISettingsLayoutProps {
+interface SettingsLayoutProps {
 	children: React.ReactNode
 }
 
@@ -23,7 +23,7 @@ const tabs: TTab[] = [
 	{ name: 'integrations', label: 'Integrations' },
 ]
 
-const SettingsLayout = ({ children }: ISettingsLayoutProps) => {
+const SettingsLayout = ({ children }: SettingsLayoutProps) => {
 	const title = 'Settings'
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()

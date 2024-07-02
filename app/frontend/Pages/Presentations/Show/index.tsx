@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Heading, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowPresentationProps {
+interface ShowPresentationProps {
 	presentation: Schema.PresentationsPresentation
 }
 
-const ShowPresentation = ({ presentation }: IShowPresentationProps) => {
+const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 	const title = presentation.name || 'Presentation'
 
 	return (

@@ -3,12 +3,12 @@ import { Heading, Page, Container, Divider, Group } from '@/Components'
 import { CircleCard, ThemeCard, NewCard } from '@/Layouts/AppLayout/Components/Cards'
 import { Routes } from '@/lib'
 
-interface ICircleIndexProps {
+interface CircleIndexProps {
 	circles: Schema.CirclesIndex[]
 	pagination: Schema.Pagination
 }
 
-const CirclesIndex = ({ circles }: ICircleIndexProps) => {
+const CirclesIndex = ({ circles }: CircleIndexProps) => {
 
 	return (
 		<Page

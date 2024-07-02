@@ -2,23 +2,23 @@ import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowTemplateProps {
-	template: Schema.TemplatesShow
+interface ShowTemplateProps {
+	template: Schema.PresentationTemplatesShow
 }
 
-const ShowTemplate = ({ template }: IShowTemplateProps) => {
+const ShowTemplate = ({ template }: ShowTemplateProps) => {
 	const title =  'Template'
 
 	return (
 		<Page title={ title }>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editTemplate(template.id) }>
+							<Menu.Link href={ Routes.editPresentationTemplate(template.id) }>
 								Edit Template
 							</Menu.Link>
 						</Menu.Dropdown>

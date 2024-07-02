@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import ThemesForm from '../Form'
 
-interface IEditThemeProps {
+interface EditThemeProps {
 	theme: Schema.ThemesFormData
 }
 
-const EditTheme = ({ theme }: IEditThemeProps) => {
+const EditTheme = ({ theme }: EditThemeProps) => {
 	const title = 'Edit Theme'
 
 	return (

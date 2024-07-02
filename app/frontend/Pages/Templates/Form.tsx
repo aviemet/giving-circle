@@ -1,19 +1,19 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
+import { HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type TTemplateFormData = {
-	template: Schema.TemplatesFormData
+	template: Schema.PresentationTemplatesFormData
 }
 
-export interface ITemplateFormProps {
+export interface TemplateFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TTemplateFormData>) => boolean|void
-	template: Schema.TemplatesFormData
+	template: Schema.PresentationTemplatesFormData
 }
 
-const TemplateForm = ({ method = 'post', template, ...props }: ITemplateFormProps) => {
+const TemplateForm = ({ method = 'post', template, ...props }: TemplateFormProps) => {
 	return (
 		<Form
 			model="template"

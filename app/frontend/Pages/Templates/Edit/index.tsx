@@ -3,21 +3,21 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import TemplatesForm from '../Form'
 
-interface IEditTemplateProps {
-	template: Schema.TemplatesEdit
+interface EditTemplateProps {
+	template: Schema.PresentationTemplatesEdit
 }
 
-const EditTemplate = ({ template }: IEditTemplateProps) => {
+const EditTemplate = ({ template }: EditTemplateProps) => {
 	const title = 'Edit Template'
 
 	return (
 		<Page title={ title }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<TemplatesForm
 					method='put'
-					to={ Routes.template() }
+					to={ Routes.presentationTemplate(template.id) }
 					template={ template }
 				/>
 			</Section>

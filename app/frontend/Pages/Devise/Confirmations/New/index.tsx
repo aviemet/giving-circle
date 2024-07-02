@@ -3,11 +3,11 @@ import { Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Link } from '@/Components'
 
-interface IConfirmationsNew {
+interface ConfirmationsNew {
 	user: Schema.User
 }
 
-const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
+const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 	return (
 		<Form
 			model="user"

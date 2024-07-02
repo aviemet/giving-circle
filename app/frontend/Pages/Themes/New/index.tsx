@@ -3,12 +3,12 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import ThemeForm from '../Form'
 
-interface INewThemeProps {
+interface NewThemeProps {
 	theme: Schema.ThemesFormData
 	circle: Schema.CirclesShare
 }
 
-const NewTheme = ({ circle, ...data }: INewThemeProps) => {
+const NewTheme = ({ circle, ...data }: NewThemeProps) => {
 
 	const title = 'New Theme'
 

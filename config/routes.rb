@@ -45,8 +45,6 @@ Rails.application.routes.draw do
   resources :users
   resources :people
 
-  resources :presentation_elements
-
   delete 'orgs', to: 'orgs#destroy'
   delete 'groups', to: 'groups#destroy'
 
@@ -66,8 +64,7 @@ Rails.application.routes.draw do
       get :about
     end
 
-    resources :templates, shallow: true
-    resources :template_slides, shallow: true
+    resources :presentation_templates, shallow: true, concerns: :bulk_delete
 
     resources :themes, shallow: true, param: :slug do
       get :about

@@ -6,11 +6,11 @@ import StatTile from './StatTile'
 import { CoinsIcon, HelpingIcon, MembersIcon } from '@/Components/Icons'
 import { ThemeCard } from '@/Layouts/AppLayout/Components/Cards'
 
-interface IShowCircleProps {
+interface ShowCircleProps {
 	circle: Schema.CirclesShow
 }
 
-const ShowCircle = ({ circle }: IShowCircleProps) => {
+const ShowCircle = ({ circle }: ShowCircleProps) => {
 	const title = circle.name || 'Circle'
 
 	return (

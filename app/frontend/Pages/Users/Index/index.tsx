@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import UsersTable from '../Table'
 
-interface IUserIndexProps {
+interface UserIndexProps {
 	users: Schema.UsersIndex[]
 	pagination: Schema.Pagination
 }
 
-const UserIndex = ({ users, pagination }: IUserIndexProps) => {
+const UserIndex = ({ users, pagination }: UserIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Users"

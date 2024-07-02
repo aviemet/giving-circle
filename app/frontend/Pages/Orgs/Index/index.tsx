@@ -5,12 +5,12 @@ import { NewIcon } from '@/Components/Icons'
 import OrgsTable from '../Table'
 import { usePageProps } from '@/lib/hooks'
 
-interface IOrgIndexProps {
+interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
 }
 
-const OrgsIndex = ({ orgs, pagination }: IOrgIndexProps) => {
+const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 	const { params } = usePageProps()
 
 	return (

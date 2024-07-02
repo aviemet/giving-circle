@@ -5,13 +5,13 @@ import { NewIcon } from '@/Components/Icons'
 import MembersTable from '../Table'
 import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
-interface IMemberIndexProps {
+interface MemberIndexProps {
 	members: Schema.MembersIndex[]
 	circle: Schema.CirclesShare
 	pagination: Schema.Pagination
 }
 
-const MembersIndex = ({ members, circle, pagination }: IMemberIndexProps) => {
+const MembersIndex = ({ members, circle, pagination }: MemberIndexProps) => {
 	console.log({ circle })
 	return (
 		<IndexPageTemplate

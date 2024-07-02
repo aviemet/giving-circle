@@ -12,14 +12,14 @@ export type TTab = {
 	icon?: React.ReactNode
 }
 
-export interface IVerticalNavLayoutProps {
+export interface VerticalNavLayoutProps {
 	tabs: TTab[]
 	title: string
 	routePrefix: string
 	children: React.ReactNode
 }
 
-const VerticalNavLayout = ({ children, tabs, title, routePrefix }: IVerticalNavLayoutProps) => {
+const VerticalNavLayout = ({ children, tabs, title, routePrefix }: VerticalNavLayoutProps) => {
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()
 	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < px(theme.breakpoints.sm))

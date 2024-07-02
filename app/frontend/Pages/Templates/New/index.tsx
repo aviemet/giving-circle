@@ -3,11 +3,12 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import TemplateForm from '../Form'
 
-interface INewTemplateProps {
-	template: Schema.TemplatesFormData
+interface NewTemplateProps {
+	template: Schema.PresentationTemplatesFormData
+	circle: Schema.CirclesOptions
 }
 
-const NewTemplate = ({ ...data }: INewTemplateProps) => {
+const NewTemplate = ({ template, circle }: NewTemplateProps) => {
 	const title = 'New Template'
 
 	return (
@@ -17,8 +18,8 @@ const NewTemplate = ({ ...data }: INewTemplateProps) => {
 				<Heading>{ title }</Heading>
 
 				<TemplateForm
-					to={ Routes.templates() }
-					{ ...data }
+					to={ Routes.circlePresentationTemplates(circle.slug) }
+					template={ template }
 				/>
 			</Section>
 

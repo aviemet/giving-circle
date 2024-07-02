@@ -6,14 +6,14 @@ type TThemeFormData = {
 	theme: Schema.ThemesFormData
 }
 
-export interface IThemeFormProps {
+export interface ThemeFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TThemeFormData>) => boolean|void
 	theme: Schema.ThemesFormData
 }
 
-const ThemeForm = ({ method = 'post', theme, ...props }: IThemeFormProps) => {
+const ThemeForm = ({ method = 'post', theme, ...props }: ThemeFormProps) => {
 	return (
 		<Form
 			model="theme"

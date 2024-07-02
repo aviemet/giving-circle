@@ -7,7 +7,7 @@ import { router } from '@inertiajs/react'
 import * as classes from './IndexPageStyles.css'
 
 // TODO: Figure out correct type for icon
-export interface IIndexTableTitleSectionProps {
+export interface IndexTableTitleSectionProps {
 	children: React.ReactNode
 	title: string
 	deleteRoute?: string
@@ -18,7 +18,7 @@ export interface IIndexTableTitleSectionProps {
 	}[]
 }
 
-const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IIndexTableTitleSectionProps) => {
+const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IndexTableTitleSectionProps) => {
 	const { tableState: { selected } } = useTableContext()
 
 	const deleteRecords = () => {

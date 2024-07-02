@@ -1,9 +1,9 @@
 import React from 'react'
 import { Page, Table, type PageProps } from '@/Components'
-import TableTitleSection, { IIndexTableTitleSectionProps } from './TableTitleSection'
+import TableTitleSection, { IndexTableTitleSectionProps } from './TableTitleSection'
 
 interface IndexPageTemplateProps
-	extends IIndexTableTitleSectionProps, Omit<PageProps, 'children'|'title'> {
+	extends IndexTableTitleSectionProps, Omit<PageProps, 'children'|'title'> {
 	model: string
 	rows: Record<string, any>[]
 	pagination: Schema.Pagination

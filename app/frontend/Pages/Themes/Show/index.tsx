@@ -3,11 +3,11 @@ import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
-interface IShowThemeProps {
+interface ShowThemeProps {
 	theme: Schema.ThemesShow
 }
 
-const ShowTheme = ({ theme }: IShowThemeProps) => {
+const ShowTheme = ({ theme }: ShowThemeProps) => {
 	const title =  theme.title || 'Theme'
 
 	return (

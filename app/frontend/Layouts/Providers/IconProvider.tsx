@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconContext } from 'react-icons'
 
-interface IIconProviderProps {
+interface IconProviderProps {
 	children: React.ReactNode
 	value?: { className?: string, size?: string }
 }
@@ -9,7 +9,7 @@ interface IIconProviderProps {
 const IconProvider = ({ children, value = {
 	className: 'react-icon',
 	size: '1rem',
-} }: IIconProviderProps) => {
+} }: IconProviderProps) => {
 	return (
 		<IconContext.Provider value={ value }>
 			{ children }

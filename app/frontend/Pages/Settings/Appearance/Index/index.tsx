@@ -7,19 +7,19 @@ import { defaults } from 'lodash'
 import useLayoutStore from '@/lib/store/LayoutStore'
 import { type UseFormProps } from 'use-inertia-form'
 
-interface IAppearanceFormData {
+interface AppearanceFormData {
 	settings: {
 		primary_color: string
 	}
 }
 
-interface IAppearanceSettingsProps {
+interface AppearanceSettingsProps {
 	settings: {
 		primary_color?: string
 	}
 }
 
-const AppearanceSettings = ({ settings }: IAppearanceSettingsProps) => {
+const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 	const { primaryColor, setPrimaryColor } = useLayoutStore()
 	const RevertColorRef = useRef<string>(primaryColor!)
 
@@ -42,7 +42,7 @@ const AppearanceSettings = ({ settings }: IAppearanceSettingsProps) => {
 		return merged
 	}, [])
 
-	const handleSubmit = ({ getData }: UseFormProps<IAppearanceFormData>) => {
+	const handleSubmit = ({ getData }: UseFormProps<AppearanceFormData>) => {
 		RevertColorRef.current = getData('settings.primary_color')
 	}
 

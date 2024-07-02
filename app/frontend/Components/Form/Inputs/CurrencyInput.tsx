@@ -7,7 +7,7 @@ import { InputConflicts, type BaseFormInputProps } from '.'
 import { type  Money } from '@/types'
 import { useCurrency } from '@/lib/hooks'
 
-interface INumberInputProps<TForm extends NestedObject = NestedObject>
+interface NumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<CurrencyInputProps, InputConflicts>,
 	BaseFormInputProps<number, TForm>
@@ -30,7 +30,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		defaultValue,
 		clearErrorsOnChange,
 		...props
-	} : INumberInputProps<TForm>,
+	} : NumberInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number|Money, TForm>({
 		name,

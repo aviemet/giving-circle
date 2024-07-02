@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowMemberProps {
+interface ShowMemberProps {
 	member: Schema.MembersShow
 }
 
-const ShowMember = ({ member }: IShowMemberProps) => {
+const ShowMember = ({ member }: ShowMemberProps) => {
 	const title =  'Member'
 
 	return (

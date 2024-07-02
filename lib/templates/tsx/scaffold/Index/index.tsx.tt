@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import <%= plural_table_name.camelize %>Table from '../Table'
 
-interface I<%= singular_table_name.camelize %>IndexProps {
+interface <%= singular_table_name.camelize %>IndexProps {
 	<%= plural_table_name %>: Schema.<%= plural_table_name.camelize %>Index[]
 	pagination: Schema.Pagination
 }
 
-const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagination }: I<%= singular_table_name.camelize %>IndexProps) => {
+const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagination }: <%= singular_table_name.camelize %>IndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="<%= plural_table_name.camelize %>"

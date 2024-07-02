@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import OrgsForm from '../Form'
 
-interface IEditOrgProps {
+interface EditOrgProps {
 	org: Schema.OrgsEdit
 }
 
-const EditOrg = ({ org }: IEditOrgProps) => {
+const EditOrg = ({ org }: EditOrgProps) => {
 	const title = 'Edit Org'
 
 	return (

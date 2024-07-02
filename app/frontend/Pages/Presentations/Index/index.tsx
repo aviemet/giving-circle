@@ -5,14 +5,14 @@ import { NewIcon } from '@/Components/Icons'
 import PresentationsTable from '../Table'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
-interface IPresentationIndexProps {
+interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
 	pagination: Schema.Pagination
 	circle: Schema.CirclesShare
 	theme: Schema.ThemesShallow
 }
 
-const PresentationsIndex = ({ presentations, pagination, circle, theme }: IPresentationIndexProps) => {
+const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
 
 	return (
 		<IndexPageTemplate

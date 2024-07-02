@@ -5,14 +5,14 @@ import { NewIcon } from '@/Components/Icons'
 import OrgsTable from '../Table'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
-interface IOrgIndexProps {
+interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
 	theme: Schema.ThemesShallow
 	circle: Schema.CirclesShare
 }
 
-const OrgsIndex = ({ orgs, pagination, theme, circle }: IOrgIndexProps) => {
+const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Orgs"

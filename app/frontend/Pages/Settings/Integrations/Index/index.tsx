@@ -5,14 +5,14 @@ import Empty from './Empty'
 import SmtpList from './SmtpList'
 import { Routes } from '@/lib'
 
-interface IMailSettingsProps {
+interface MailSettingsProps {
 	smtps: Schema.Smtp[]
 }
 
-const Mail = ({ smtps }: IMailSettingsProps) => {
+const Mail = ({ smtps }: MailSettingsProps) => {
 	return (
 		<SettingsLayout>
-			<Group position="apart">
+			<Group>
 				<Heading mb={ 24 }>Mail Settings</Heading>
 				<Menu position="bottom-end">
 					<Menu.Target />

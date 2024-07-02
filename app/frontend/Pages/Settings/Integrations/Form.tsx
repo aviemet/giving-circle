@@ -1,6 +1,6 @@
 import React from 'react'
 /*import { Group } from '@/Components'
-import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
+import { Form, type FormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
 import { Routes, isUnset } from '@/lib'
 import { omit } from 'lodash'
@@ -9,13 +9,13 @@ type TSmtpFormData = {
 	smtp: Schema.SmtpsFormData
 }
 
-export interface ISmtpFormProps extends IFormProps<TSmtpFormData> {
+export interface SmtpFormProps extends FormProps<TSmtpFormData> {
 	data: TSmtpFormData
 }
 
 const requiredFields = ['smtp.host', 'smtp.port', 'smtp.domain', 'smtp.username', 'smtp.password']
 
-const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
+const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 	return (
 		<Form
 			model="smtp"

@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CircleForm from '../Form'
 
-interface INewCircleProps {
+interface NewCircleProps {
 	circle: Schema.CirclesFormData
 }
 
-const NewCircle = ({ ...data }: INewCircleProps) => {
+const NewCircle = ({ ...data }: NewCircleProps) => {
 	const title = 'New Circle'
 
 	return (

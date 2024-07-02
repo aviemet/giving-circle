@@ -4,11 +4,11 @@ import { Routes } from '@/lib'
 import PresentationForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
 
-interface INewPresentationProps {
+interface NewPresentationProps {
 	presentation: Schema.PresentationsFormData
 }
 
-const NewPresentation = ({ ...data }: INewPresentationProps) => {
+const NewPresentation = ({ ...data }: NewPresentationProps) => {
 	const { params } = usePageProps()
 
 	const title = 'New Presentation'

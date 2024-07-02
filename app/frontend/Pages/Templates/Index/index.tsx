@@ -4,21 +4,22 @@ import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import TemplatesTable from '../Table'
 
-interface ITemplateIndexProps {
-	templates: Schema.TemplatesIndex[]
+interface TemplateIndexProps {
+	templates: Schema.PresentationTemplatesIndex[]
 	pagination: Schema.Pagination
+	circle: Schema.CirclesOptions
 }
 
-const TemplatesIndex = ({ templates, pagination }: ITemplateIndexProps) => {
+const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Templates"
 			model="templates"
 			rows={ templates }
 			pagination={ pagination }
-			deleteRoute={ Routes.templates() }
+			deleteRoute={ Routes.circlePresentationTemplates(circle.slug) }
 			menuOptions={ [
-				{ label: 'New Template', href: Routes.newTemplate(), icon: NewIcon },
+				{ label: 'New Template', href: Routes.newCirclePresentationTemplate(circle.slug), icon: NewIcon },
 			] }
 		>
 			<TemplatesTable />

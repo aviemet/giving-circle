@@ -1,11 +1,11 @@
 import { Box, type BoxProps } from '@mantine/core'
 import React from 'react'
 
-interface IDangerousHtmlProps extends BoxProps {
+interface DangerousHtmlProps extends BoxProps {
 	children?: string|null
 }
 
-const DangerousHtml = ({ children, ...props }: IDangerousHtmlProps) => {
+const DangerousHtml = ({ children, ...props }: DangerousHtmlProps) => {
 	return (
 		<Box { ...props } dangerouslySetInnerHTML={ { __html: children || '' } } />
 	)

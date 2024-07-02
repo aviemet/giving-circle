@@ -4,11 +4,11 @@ import { Routes } from '@/lib'
 import OrgForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
 
-interface INewOrgProps {
+interface NewOrgProps {
 	org: Schema.OrgsFormData
 }
 
-const NewOrg = ({ ...data }: INewOrgProps) => {
+const NewOrg = ({ ...data }: NewOrgProps) => {
 	const { params } = usePageProps()
 
 	const title = 'New Org'

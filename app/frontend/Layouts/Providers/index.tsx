@@ -7,11 +7,11 @@ import '@mantine/core/styles.css'
 import '@mantine/tiptap/styles.css'
 import './global.css'
 
-interface IProviderProps {
+interface ProviderProps {
 	children?: React.ReactNode
 }
 
-const Providers = React.memo(({ children }: IProviderProps) => {
+const Providers = React.memo(({ children }: ProviderProps) => {
 	return (
 		<UiFrameworkProvider>
 			<IconProvider>

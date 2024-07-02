@@ -2,12 +2,12 @@ import React from 'react'
 import { Tabs, type TabsProps } from '@mantine/core'
 import UrlTabs from './UrlTabs'
 
-export interface ITabsComponentProps extends TabsProps {
+export interface TabsComponentProps extends TabsProps {
 	urlControlled?: boolean
 	dependencies?: Record<string, string|string[]>
 }
 
-const TabsComponent = ({ children, urlControlled = false, ...props }: ITabsComponentProps) => {
+const TabsComponent = ({ children, urlControlled = false, ...props }: TabsComponentProps) => {
 	return urlControlled ?
 		<UrlTabs { ...props }>{ children }</UrlTabs>
 		:

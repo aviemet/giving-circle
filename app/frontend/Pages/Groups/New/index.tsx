@@ -3,12 +3,12 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import GroupForm from '../Form'
 
-interface INewGroupProps {
+interface NewGroupProps {
 	group: Schema.GroupsFormData
 	circle: Schema.CirclesOptions
 }
 
-const NewGroup = ({ circle, ...data }: INewGroupProps) => {
+const NewGroup = ({ circle, ...data }: NewGroupProps) => {
 	const title = 'New Group'
 
 	return (

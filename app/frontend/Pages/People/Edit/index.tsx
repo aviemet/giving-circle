@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PeopleForm from '../Form'
 
-interface IEditPersonProps {
+interface EditPersonProps {
 	person: Schema.PeopleEdit
 }
 
-const EditPerson = ({ person }: IEditPersonProps) => {
+const EditPerson = ({ person }: EditPersonProps) => {
 	const title = 'Edit Person'
 
 	return (
@@ -18,7 +18,7 @@ const EditPerson = ({ person }: IEditPersonProps) => {
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<PeopleForm
 					method='put'
 					to={ Routes.person() }

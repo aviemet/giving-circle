@@ -6,14 +6,14 @@ type TPresentationFormData = {
 	presentation: Schema.PresentationsFormData
 }
 
-export interface IPresentationFormProps {
+export interface PresentationFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TPresentationFormData>) => boolean|void
 	presentation: Schema.PresentationsFormData
 }
 
-const PresentationForm = ({ method = 'post', presentation, ...props }: IPresentationFormProps) => {
+const PresentationForm = ({ method = 'post', presentation, ...props }: PresentationFormProps) => {
 	return (
 		<Form
 			model="presentation"

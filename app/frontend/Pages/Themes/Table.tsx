@@ -2,9 +2,9 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const ThemeTable = (props: ITableProps) => {
+const ThemeTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>

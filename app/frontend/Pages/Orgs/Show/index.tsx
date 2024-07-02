@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowOrgProps {
+interface ShowOrgProps {
 	org: Schema.OrgsShow
 }
 
-const ShowOrg = ({ org }: IShowOrgProps) => {
+const ShowOrg = ({ org }: ShowOrgProps) => {
 	const title =  'Org'
 
 	return (

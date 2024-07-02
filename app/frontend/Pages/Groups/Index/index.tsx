@@ -4,13 +4,13 @@ import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import GroupsTable from '../Table'
 
-interface IGroupIndexProps {
+interface GroupIndexProps {
 	groups: Schema.GroupsIndex[]
 	pagination: Schema.Pagination
 	circle: Schema.CirclesOptions
 }
 
-const GroupsIndex = ({ groups, pagination, circle }: IGroupIndexProps) => {
+const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Groups"

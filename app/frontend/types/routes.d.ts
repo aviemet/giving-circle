@@ -222,24 +222,12 @@ export const circleOrgs: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/template_slides(.:format)
+ * /circles/:circle_slug/presentation_templates(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circleTemplateSlides: ((
-  circleSlug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/templates(.:format)
- * @param {any} circleSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const circleTemplates: ((
+export const circlePresentationTemplates: ((
   circleSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -350,36 +338,12 @@ export const editPresentation: ((
 
 /**
  * Generates rails route to
- * /presentation_elements/:id/edit(.:format)
+ * /presentation_templates/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editPresentationElement: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /templates/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editTemplate: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /template_slides/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editTemplateSlide: ((
+export const editPresentationTemplate: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -548,24 +512,12 @@ export const newCircleOrg: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/templates/new(.:format)
+ * /circles/:circle_slug/presentation_templates/new(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newCircleTemplate: ((
-  circleSlug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/template_slides/new(.:format)
- * @param {any} circleSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newCircleTemplateSlide: ((
+export const newCirclePresentationTemplate: ((
   circleSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -589,16 +541,6 @@ export const newCircleTheme: ((
  * @returns {string} route path
  */
 export const newPerson: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /presentation_elements/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newPresentationElement: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -768,23 +710,13 @@ export const presentation: ((
 
 /**
  * Generates rails route to
- * /presentation_elements/:id(.:format)
+ * /presentation_templates/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const presentationElement: ((
+export const presentationTemplate: ((
   id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /presentation_elements(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const presentationElements: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -867,30 +799,6 @@ export const settingsLocalizations: ((
  * @returns {string} route path
  */
 export const settingsNotifications: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /templates/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const template: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /template_slides/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const templateSlide: ((
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

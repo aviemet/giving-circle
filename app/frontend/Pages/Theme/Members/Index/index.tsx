@@ -5,14 +5,14 @@ import { NewIcon } from '@/Components/Icons'
 import MembersTable from '../Table'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
-interface IMemberIndexProps {
+interface MemberIndexProps {
 	members: Schema.MembersIndex[]
 	pagination: Schema.Pagination
 	theme: Schema.ThemesShallow
 	circle: Schema.CirclesShare
 }
 
-const MembersIndex = ({ members, pagination, theme, circle }: IMemberIndexProps) => {
+const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Members"

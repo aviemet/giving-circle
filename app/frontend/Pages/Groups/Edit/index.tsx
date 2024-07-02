@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import GroupsForm from '../Form'
 
-interface IEditGroupProps {
+interface EditGroupProps {
 	group: Schema.GroupsEdit
 }
 
-const EditGroup = ({ group }: IEditGroupProps) => {
+const EditGroup = ({ group }: EditGroupProps) => {
 	const title = 'Edit Group'
 
 	return (

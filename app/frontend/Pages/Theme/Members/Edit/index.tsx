@@ -3,11 +3,11 @@ import { Heading, Section } from '@/Components'
 import { Routes } from '@/lib'
 import MembersForm from '../Form'
 
-interface IEditMemberProps {
+interface EditMemberProps {
 	member: Schema.Member
 }
 
-const EditMember = ({ member }: IEditMemberProps) => {
+const EditMember = ({ member }: EditMemberProps) => {
 	const title = 'Edit Member'
 
 	return (

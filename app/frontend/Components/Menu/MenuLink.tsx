@@ -2,14 +2,14 @@ import React, { forwardRef } from 'react'
 import { Menu, createPolymorphicComponent, type MenuItemProps } from '@mantine/core'
 import cx from 'clsx'
 import { Link } from '@/Components'
-import { ILinkProps } from '../Link'
+import { LinkProps } from '../Link'
 
-interface IMenuItemProps extends MenuItemProps, Omit<ILinkProps, 'color'|'children'> {
+interface MenuItemProps extends MenuItemProps, Omit<LinkProps, 'color'|'children'> {
 	disabled?: boolean
 	type?: string
 }
 
-const MenuItem = forwardRef<HTMLAnchorElement, IMenuItemProps>((
+const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>((
 	{ children, disabled = false, className, ...props },
 	ref,
 ) => {
@@ -26,4 +26,4 @@ const MenuItem = forwardRef<HTMLAnchorElement, IMenuItemProps>((
 	)
 })
 
-export default createPolymorphicComponent<typeof Link, IMenuItemProps>(MenuItem)
+export default createPolymorphicComponent<typeof Link, MenuItemProps>(MenuItem)

@@ -6,14 +6,14 @@ type TCircleFormData = {
 	circle: Schema.CirclesFormData
 }
 
-export interface ICircleFormProps {
+export interface CircleFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TCircleFormData>) => boolean|void
 	circle: Schema.CirclesFormData
 }
 
-const CircleForm = ({ method = 'post', circle, ...props }: ICircleFormProps) => {
+const CircleForm = ({ method = 'post', circle, ...props }: CircleFormProps) => {
 	return (
 		<Form
 			model="circle"

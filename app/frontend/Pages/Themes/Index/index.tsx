@@ -5,13 +5,13 @@ import ThemesTable from '../Table'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
-interface IThemeIndexProps {
+interface ThemeIndexProps {
 	themes: Schema.ThemesIndex[]
 	pagination: Schema.Pagination
 	circle: Schema.CirclesShare
 }
 
-const ThemesIndex = ({ themes, pagination, circle }: IThemeIndexProps) => {
+const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Themes"

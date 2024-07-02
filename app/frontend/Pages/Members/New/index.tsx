@@ -4,11 +4,11 @@ import { Routes } from '@/lib'
 import MemberForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
 
-interface INewMemberProps {
+interface NewMemberProps {
 	member: Schema.MembersFormData
 }
 
-const NewMember = ({ ...data }: INewMemberProps) => {
+const NewMember = ({ ...data }: NewMemberProps) => {
 	const { params } = usePageProps()
 	const title = 'New Member'
 

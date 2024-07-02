@@ -6,14 +6,14 @@ type TMemberFormData = {
 	member: Schema.MembersFormData
 }
 
-export interface IMemberFormProps {
+export interface MemberFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TMemberFormData>) => boolean|void
 	member: Schema.MembersFormData
 }
 
-const MemberForm = ({ method = 'post', member, ...props }: IMemberFormProps) => {
+const MemberForm = ({ method = 'post', member, ...props }: MemberFormProps) => {
 	return (
 		<Form
 			model="member"

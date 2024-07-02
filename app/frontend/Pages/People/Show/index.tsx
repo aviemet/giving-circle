@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowPersonProps {
+interface ShowPersonProps {
 	person: Schema.PeopleShow
 }
 
-const ShowPerson = ({ person }: IShowPersonProps) => {
+const ShowPerson = ({ person }: ShowPersonProps) => {
 	const title =  'Person'
 
 	return (
@@ -15,7 +15,7 @@ const ShowPerson = ({ person }: IShowPersonProps) => {
 			{ title },
 		] }>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">

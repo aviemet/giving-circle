@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowGroupProps {
+interface ShowGroupProps {
 	group: Schema.GroupsShow
 }
 
-const ShowGroup = ({ group }: IShowGroupProps) => {
+const ShowGroup = ({ group }: ShowGroupProps) => {
 	const title =  group.name
 
 	return (

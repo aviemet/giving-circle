@@ -10,14 +10,14 @@ type TUserFormData = {
 	user: Schema.UsersFormData
 }
 
-export interface IUserFormProps {
+export interface UserFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TUserFormData>) => boolean|void
 	user: Schema.UsersFormData
 }
 
-const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, locations }: IUserFormProps) => {
+const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, locations }: UserFormProps) => {
 
 	return (
 		<Form

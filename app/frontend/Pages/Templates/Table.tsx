@@ -2,9 +2,9 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const TemplateTable = (props: ITableProps) => {
+const TemplateTable = (props: TableProps) => {
 	return (
 		<Table>
 			<Table.Head>
@@ -14,13 +14,13 @@ const TemplateTable = (props: ITableProps) => {
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (template: Schema.TemplatesIndex) => (
+				<Table.RowIterator render={ (template: Schema.PresentationTemplatesIndex) => (
 					<Table.Row key={ template.id }>
 						<Table.Cell>
-							<Link href={ Routes.template(template.id) }>{ template.name }</Link>
+							<Link href={ Routes.presentationTemplate(template.id) }>{ template.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editTemplate(template.id) } />
+							<EditButton href={ Routes.editPresentationTemplate(template.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

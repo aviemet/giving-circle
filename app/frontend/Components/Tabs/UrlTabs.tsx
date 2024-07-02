@@ -2,10 +2,10 @@ import React, { useEffect, useCallback } from 'react'
 import { Tabs } from '@mantine/core'
 import { type VisitOptions } from '@inertiajs/core'
 import { router } from '@inertiajs/react'
-import { ITabsComponentProps } from '.'
+import { TabsComponentProps } from '.'
 import { coerceArray } from '@/lib'
 
-const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: ITabsComponentProps) => {
+const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: TabsComponentProps) => {
 	const navigateTab = (value: string | null, options?: VisitOptions) => {
 		let only: string[] = []
 		if(value && dependencies?.[value]) {
