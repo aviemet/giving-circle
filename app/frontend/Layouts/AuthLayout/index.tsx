@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Paper } from '@/Components'
+import { Box, Paper, SimpleGrid } from '@/Components'
 import * as classes from './AuthLayout.css'
 
 interface LayoutProps {
@@ -8,14 +8,16 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	return (
-		<Flex className={ classes.authLayout }>
-			<Paper shadow="lg" radius="lg" p="xl" withBorder>
-				{ children }
-			</Paper>
+		<SimpleGrid cols={ { sm: 1, md: 2 } } className={ classes.authLayout }>
+			<Box id="auth-layout-left">
+				<Paper shadow="lg" radius="lg" p="xl"  withBorder>
+					{ children }
+				</Paper>
+			</Box>
 
 			<Box id="auth-layout-right">
 			</Box>
-		</Flex>
+		</SimpleGrid>
 	)
 }
 

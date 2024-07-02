@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_215117) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,11 +96,39 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_215117) do
     t.index ["contact_id"], name: "index_phones_on_contact_id"
   end
 
-  create_table "presentations", force: :cascade do |t|
-    t.bigint "theme_id", null: false
+  create_table "presentation_elements", force: :cascade do |t|
+    t.string "title"
+    t.jsonb "data"
+    t.integer "element"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "presentation_slides", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "order"
+    t.bigint "presentation_id"
+    t.bigint "presentation_template_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_id"], name: "index_presentation_slides_on_presentation_id"
+    t.index ["presentation_template_id"], name: "index_presentation_slides_on_presentation_template_id"
+  end
+
+  create_table "presentation_templates", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "presentations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "theme_id", null: false
+    t.bigint "presentation_template_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_template_id"], name: "index_presentations_on_presentation_template_id"
     t.index ["theme_id"], name: "index_presentations_on_theme_id"
   end
 
@@ -218,6 +246,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_215117) do
   add_foreign_key "circles_members", "circles"
   add_foreign_key "circles_members", "people", column: "member_id"
   add_foreign_key "groups", "circles"
+  add_foreign_key "presentation_slides", "presentation_templates"
+  add_foreign_key "presentation_slides", "presentations"
+  add_foreign_key "presentations", "presentation_templates"
   add_foreign_key "presentations", "themes"
   add_foreign_key "presentations_members", "people", column: "member_id"
   add_foreign_key "presentations_members", "presentations"

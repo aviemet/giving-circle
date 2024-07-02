@@ -21,6 +21,10 @@ const CircleMenu = ({ circle }: CircleMenuProps) => {
 				href={ Routes.circleMembers(circle.slug) }
 				label="Members"
 			/>
+			{ /* <NavLink
+				href={ Routes.presentationTemplates(circle.slug) }
+				label="Members"
+			/> */ }
 		</>
 	)
 }
