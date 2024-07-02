@@ -19,8 +19,6 @@
 class PresentationSerializer < ApplicationSerializer
   object_as :presentation
 
-  
-
   attributes(
     :theme_id,
     :name,

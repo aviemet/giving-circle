@@ -1,13 +1,13 @@
 import React from 'react'
-import { Group, Heading, Menu, Page, Section } from '@/Components'
+import { Group, Heading, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShowPresentationProps {
-	presentation: Schema.PresentationsShow
+	presentation: Schema.PresentationsPresentation
 }
 
 const ShowPresentation = ({ presentation }: IShowPresentationProps) => {
-	const title =  'Presentation'
+	const title = presentation.name || 'Presentation'
 
 	return (
 		<Page title={ title }>
@@ -25,6 +25,7 @@ const ShowPresentation = ({ presentation }: IShowPresentationProps) => {
 					</Menu>
 				</Group>
 
+				<Link as="button" href={ Routes.runPresentation(presentation.id) }>Start Presentation</Link>
 			</Section>
 		</Page>
 	)

@@ -55,7 +55,7 @@ Rails.application.routes.draw do
       :groups,
       shallow: true,
       param: :slug,
-      path: :groups
+      path: :groups,
     )
 
     resources :members, concerns: :bulk_delete, param: :slug
@@ -90,6 +90,8 @@ Rails.application.routes.draw do
       resources :presentations, concerns: :bulk_delete
     end
   end
+
+  get "presentation/:id", to: "presentations#run_presentation", as: :run_presentation
 
   # SETTINGS PAGES #
 

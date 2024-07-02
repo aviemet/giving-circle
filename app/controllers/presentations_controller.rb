@@ -41,6 +41,14 @@ class PresentationsController < ApplicationController
     }
   end
 
+  # @route GET /presentation/:id (run_presentation)
+  def run_presentation
+    authorize presentation
+    render inertia: "Presentations/Presentation", props: {
+      presentation: presentation.render(view: :presentation)
+    }
+  end
+
   # @route POST /themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new

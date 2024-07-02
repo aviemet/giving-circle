@@ -5,4 +5,8 @@ class PresentationPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def run_presentation?
+    true
+  end
 end
