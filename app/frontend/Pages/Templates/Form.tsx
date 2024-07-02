@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { PresentationLayoutEditor } from '@/Components/PresentationEditor'
 
 type TTemplateFormData = {
 	template: Schema.PresentationTemplatesFormData
@@ -22,6 +23,9 @@ const TemplateForm = ({ method = 'post', template, ...props }: TemplateFormProps
 			{ ...props }
 		>
 			<TextInput name="name" label="Name" />
+
+			<PresentationLayoutEditor />
+
 			<Submit>{ template.id ? 'Update' : 'Create' } Template</Submit>
 		</Form>
 	)

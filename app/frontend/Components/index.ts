@@ -25,6 +25,7 @@ export {
 	Flex,
 	Grid,
 	Group,
+	Image,
 	List,
 	Modal,
 	Paper,
@@ -32,6 +33,7 @@ export {
 	SimpleGrid,
 	Stack,
 	Text,
+	Title,
 	Tooltip,
 	ThemeIcon as Icon,
 } from '@mantine/core'
