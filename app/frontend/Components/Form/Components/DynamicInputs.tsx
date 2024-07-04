@@ -26,8 +26,8 @@ const DynamicInputs = ({ children, model, label, emptyData, grid = true }: Dynam
 			</Flex>
 
 			{ paths.map((path, i) => (
-				<NestedFields key={ i } model={ path }>
-					<Flex key={ i } align="center" className={ cx(classes.dynamicInputItem) }>
+				<NestedFields key={ path } model={ path }>
+					<Flex align="center" className={ cx(classes.dynamicInputItem) }>
 						<Paper p="xs" shadow="xs" mb="xs" style={ { flex: 1 } }>
 							<Box component={ grid ? Grid : undefined }>
 								{ children }

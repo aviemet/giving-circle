@@ -20,6 +20,7 @@ export {
 	Box,
 	Burger,
 	Card,
+	Center,
 	Container,
 	Divider,
 	Flex,

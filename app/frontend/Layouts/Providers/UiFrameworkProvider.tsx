@@ -5,6 +5,7 @@ import { Notifications } from '@mantine/notifications'
 import { theme as themeObject, vars } from '@/lib/theme'
 import useLayoutStore from '@/lib/store/LayoutStore'
 import { toKebabCase } from '@/lib'
+import { ModalsProvider } from '@mantine/modals'
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	/**
@@ -58,7 +59,9 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 			cssVariablesResolver={ cssVariablesResolver }
 		>
 			<Notifications />
-			{ children }
+			<ModalsProvider>
+				{ children }
+			</ModalsProvider>
 		</MantineProvider>
 	)
 }
