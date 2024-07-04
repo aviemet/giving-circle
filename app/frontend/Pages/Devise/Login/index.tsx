@@ -1,8 +1,10 @@
 import React from 'react'
-import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from '@/Components/Form'
+import { Form,TextInput, PasswordInput, Checkbox, Submit } from '@/Components/Form'
+import { Heading, Link,Box, Paper, SimpleGrid, Grid, Flex } from '@/Components'
 import { Routes } from '@/lib'
-import { Heading, Link } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
+
+import cx from 'clsx'
 import * as classes from './Login.css'
 
 type LoginFormData = {
@@ -30,43 +32,64 @@ const Login = () => {
 	}
 
 	return (
-		<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } className={ classes.form }>
+		<SimpleGrid cols={ { sm: 1, md: 2 } } className={ cx(classes.authLayout) }>
+			<Box id="auth-layout-left">
+				<Paper shadow="lg" radius="lg" p="xl"  withBorder>
 
-			<div>
-				<Heading>Inventory</Heading>
-			</div>
+					<Box mb="md">
+						<Heading>Giving Circle</Heading>
+					</Box>
 
-			<Field>
-				<TextInput
-					name="email"
-					placeholder="Email"
-					autoComplete="Email"
-					required
-					pattern=".+@.+\..+"
-				/>
-			</Field>
+					<Form
+						model="user"
+						data={ defaultData }
+						to={ Routes.newUserSession() }
+						onSubmit={ handleSubmit }
+					>
+						<Grid>
 
-			<Field>
-				<PasswordInput
-					name="password"
-					placeholder="Password"
-					autoComplete="current-password"
-					required
-				/>
-			</Field>
+							<Grid.Col>
+								<TextInput
+									name="email"
+									placeholder="Email"
+									autoComplete="Email"
+									required
+									pattern=".+@.+\..+"
+								/>
+							</Grid.Col>
 
-			<Field>
-				<Submit>Log In</Submit>
-			</Field>
+							<Grid.Col>
+								<PasswordInput
+									name="password"
+									placeholder="Password"
+									autoComplete="current-password"
+									required
+								/>
+							</Grid.Col>
 
-			<Field>
-				<Checkbox name="remember_me" label="Remember Me" />
-			</Field>
+							<Grid.Col>
+								<Submit>Log In</Submit>
+							</Grid.Col>
 
-			<Link href={ Routes.newUserPassword() }>Reset Password</Link>
-			<Link href={ Routes.newUserRegistration() }>Register</Link>
+							<Grid.Col>
+								<Checkbox name="remember_me" label="Remember Me" />
+							</Grid.Col>
 
-		</Form>
+						</Grid>
+
+						<Flex mt="lg" className={ cx(classes.bottomLinks) }>
+							<Link href={ Routes.newUserPassword() }>Reset Password</Link>
+							<Link href={ Routes.newUserRegistration() }>Register</Link>
+						</Flex>
+
+					</Form>
+				</Paper>
+			</Box>
+
+			<Box id="auth-layout-right">
+			</Box>
+		</SimpleGrid>
+
 	)
 }
 

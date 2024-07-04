@@ -6,10 +6,6 @@ const fieldsetAlphaAdjustment = 0.125
 
 export const form = css`
 	max-width: ${vars.breakpoints.md};
-
-	button[type=submit] {
-		margin-top: ${vars.spacing.xs};
-	}
 `
 
 export const fieldset = css`
