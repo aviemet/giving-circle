@@ -24,4 +24,9 @@ class MemberSerializer < ApplicationSerializer
     :number,
     :active,
   )
+
+  type :string
+  def name
+    "#{member.first_name} #{member.last_name}".strip
+  end
 end

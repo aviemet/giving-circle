@@ -17,6 +17,10 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 		<Page
 			title={ circle.name }
 			navMenu={ getCircleMenu({ circle }) }
+			breadcrumbs={ [
+				{ title: 'Circles', href: Routes.circles() },
+				{ title, href: Routes.circle(circle.slug) },
+			] }
 		>
 			<Section>
 				<Container>

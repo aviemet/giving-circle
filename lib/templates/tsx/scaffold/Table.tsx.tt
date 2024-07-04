@@ -10,7 +10,7 @@ const <%= singular_table_name.camelize %>Table = (props: ITableProps) => {
 			<Table.Head>
 				<Table.Row><% attributes.each do |column| %>
 					<% unless column.type == :references %><Table.Cell sort="<%= column.name %>"><%= column.name.capitalize %></Table.Cell><% end; end %>
-					<Table.Cell className="actions">Actions</Table.Cell>
+					<Table.Cell fitContent>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>

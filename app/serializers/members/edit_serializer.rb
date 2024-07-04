@@ -1,5 +1,4 @@
 class Members::EditSerializer < MemberSerializer
-
   attributes(
     :id,
     :slug,

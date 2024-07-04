@@ -20,6 +20,12 @@ export const table = css`
 		table-layout: auto;
 	}
 
+	&.wrapper-offset {
+		thead { 
+			top: -10 
+		}
+	}
+
 	thead {
 		box-shadow: ${vars.shadows.xs};
 		position: sticky;

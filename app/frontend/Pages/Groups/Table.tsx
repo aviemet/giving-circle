@@ -10,7 +10,7 @@ const GroupTable = (props: TableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell className="actions">Actions</Table.Cell>
+					<Table.Cell fitContent>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>

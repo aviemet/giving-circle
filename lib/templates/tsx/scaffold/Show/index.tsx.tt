@@ -10,7 +10,10 @@ const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }:
 	const title = <%= attributes.include?(:name) ? "#{singular_table_name}.name || " : "" %> '<%= singular_table_name.camelize %>'
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ [
+			{ title: '<%= human_name.titleize %>', href: Routes.<%= plural_table_name.camelize(:lower) %>() },
+			{ title, href: window.location.href },
+		] }>
 			<Section>
 				<Group position="apart">
 					<Heading>{ title }</Heading>

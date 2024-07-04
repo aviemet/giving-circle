@@ -4,6 +4,7 @@ import AppSidebar from './AppSidebar'
 import { useDisclosure } from '@mantine/hooks'
 import { AppShell, Box, Burger, Group, ScrollArea } from '@mantine/core'
 import useLayoutStore from '@/lib/store/LayoutStore'
+import AppFooter from './AppFooter'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const { sidebarOpen, sidebarVisible, toggleSidebarOpen } = useLayoutStore()
@@ -35,6 +36,8 @@ const AppLayout = ({ children }: { children: any }) => {
 			<AppShell.Navbar p="md">
 				<AppSidebar />
 			</AppShell.Navbar>
+
+			<AppFooter />
 
 			<AppShell.Main>
 				<Box component={ ScrollArea }>{ children }</Box>

@@ -1,3 +1,4 @@
+export { default as Breadcrumbs } from './Breadcrumbs'
 export { default as Button } from './Button'
 export { default as ConditionalWrapper } from './ConditionalWrapper'
 export { default as DangerousHtml } from './DangerousHtml'

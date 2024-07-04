@@ -13,7 +13,7 @@ const PersonTable = (props: TableProps) => {
 					<Table.Cell sort="last_name">Last_name</Table.Cell>
 					<Table.Cell sort="middle_name">Middle_name</Table.Cell>
 					<Table.Cell sort="active">Active</Table.Cell>
-					<Table.Cell className="actions">Actions</Table.Cell>
+					<Table.Cell fitContent>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>

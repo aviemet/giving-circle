@@ -1,18 +1,21 @@
 import React from 'react'
 import { ActionIcon, Avatar, Box, Divider, Text } from '@mantine/core'
-import { LogoutIcon, PlusCircleIcon, SettingsIcon } from '@/Components/Icons'
+import { LogoutIcon, SettingsIcon } from '@/Components/Icons'
 import { Link, Menu } from '@/Components'
-import { usePage } from '@inertiajs/react'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 
 const Header = () => {
-	const { props } = usePage<SharedInertiaProps>()
+	const props = usePageProps()
+
+	const title = props.circle?.name || 'Giving Circles'
 
 	return (
 		<>
 			<Box style={ { flex: 1 } }>
-				<Text>Giving Circles</Text>
+				<Text>{ title }</Text>
 			</Box>
+
 			<Box>
 				<Menu position="bottom-end">
 					<Menu.Target>
@@ -30,12 +33,7 @@ const Header = () => {
 								{ circle.name }
 							</Menu.Item>
 						)) }
-						{ /* <Menu.Item
-							href={ Routes.newCircle() }
-							icon={ <PlusCircleIcon /> }
-						>
-							New Circle
-						</Menu.Item> */ }
+
 						{ props.auth.user.circles.length > 4 && <Menu.Item href={ Routes.circles() }>more...</Menu.Item> }
 
 						<Divider />

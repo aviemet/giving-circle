@@ -16,7 +16,7 @@ const MembersTable = ({ circle, ...props }: MembersTableProps) => {
 					<Table.Cell sort="first_name">First_name</Table.Cell>
 					<Table.Cell sort="last_name">Last_name</Table.Cell>
 					<Table.Cell sort="number">Number</Table.Cell>
-					<Table.Cell className="actions">Actions</Table.Cell>
+					<Table.Cell fitContent>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>

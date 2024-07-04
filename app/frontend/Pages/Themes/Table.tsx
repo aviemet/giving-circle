@@ -11,7 +11,7 @@ const ThemeTable = (props: TableProps) => {
 				<Table.Row>
 					<Table.Cell sort="title">Title</Table.Cell>
 					<Table.Cell sort="slug">Slug</Table.Cell>
-					<Table.Cell className="actions">Actions</Table.Cell>
+					<Table.Cell fitContent>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>

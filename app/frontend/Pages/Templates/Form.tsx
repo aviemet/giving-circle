@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { PresentationLayoutEditor } from '@/Components/PresentationEditor'
+import { PresentationLayoutEditor } from '@/Features/PresentationEditor'
 
 type TTemplateFormData = {
 	template: Schema.PresentationTemplatesFormData

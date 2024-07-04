@@ -10,7 +10,6 @@ export const authLayout = css`
 		align-items: center;
 
 		.mantine-Paper-root {
-			flex: 0.75;
 			height: fit-content;
 		}
 	}

@@ -47,7 +47,6 @@ const TableComponent: TableObject = ({
 	fixed = false,
 	striped = true,
 	highlightOnHover = true,
-	style,
 	...props
 }) => {
 	const tableState = useTableContext(false)
@@ -64,8 +63,7 @@ const TableComponent: TableObject = ({
 				<Table
 					striped={ striped }
 					highlightOnHover={ highlightOnHover }
-					className={ cx(className, classes.table) }
-					style={ [wrapper ? { thead: { top: -10 } } : undefined, style] }
+					className={ cx(className, classes.table, { 'wrapper-offset': wrapper }) }
 					{ ...props }
 				>
 					{ children }

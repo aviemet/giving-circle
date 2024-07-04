@@ -1,18 +1,27 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { Head } from '@inertiajs/react'
 import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
-import { Portal } from '@mantine/core'
+import Breadcrumbs, { type Breadcrumb } from '@/Components/Breadcrumbs'
+import { Portal } from '@/Components'
 import useLayoutStore from '@/lib/store/LayoutStore'
 
 export interface PageProps {
 	children?: React.ReactNode
 	title?: string
 	meta?: React.ReactNode
+	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
 	navMenu?: (props: any) => React.JSX.Element
 }
 
-const Page = ({ children, title, meta, hideNavMenu = false, navMenu: NavMenu }: PageProps) => {
+const Page = ({
+	children,
+	title,
+	meta,
+	hideNavMenu = false,
+	navMenu: NavMenu,
+	breadcrumbs,
+}: PageProps) => {
 	const { sidebarVisible, setSidebarVisible } = useLayoutStore()
 
 	const dynamicNavMenuRef = useRef(document.getElementById('dynamic-nav-menu'))
@@ -38,6 +47,8 @@ const Page = ({ children, title, meta, hideNavMenu = false, navMenu: NavMenu }: 
 			{ dynamicNavMenuRef.current && <Portal target={ dynamicNavMenuRef.current }>
 				{ NavMenu ? <NavMenu /> : <DefaultMenu /> }
 			</Portal> }
+
+			{ breadcrumbs && <Breadcrumbs crumbs={ breadcrumbs } /> }
 
 			{ children }
 		</>

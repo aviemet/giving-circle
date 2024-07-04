@@ -3,7 +3,12 @@ import { useTableContext } from './TableContext'
 import Table from '.'
 import cx from 'clsx'
 
-const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
+interface RowIteratorProps {
+	render: (obj: any) => JSX.Element
+	emptyDataContent?: React.ReactNode
+}
+
+const RowIterator = ({ render, emptyDataContent }: RowIteratorProps) => {
 	const { tableState: { selected, rows, columns, selectable } } = useTableContext()
 
 	if(!rows || rows.length === 0) {
@@ -12,7 +17,7 @@ const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
 		return (
 			<Table.Row>
 				<Table.Cell colSpan={ colSpan } align="center">
-					Nothing to display
+					{ emptyDataContent || 'Nothing to display' }
 				</Table.Cell>
 			</Table.Row>
 		)

@@ -4,6 +4,7 @@ import Providers from '@/Layouts/Providers'
 import { Flash } from '@/Components/Flash'
 
 import AppLayout from './AppLayout'
+import PresentationLayout from './PresentationLayout'
 import AuthLayout from './AuthLayout'
 import PublicLayout from './PublicLayout'
 
@@ -37,6 +38,14 @@ const AppLayoutLayout = (page: InertiaPageProps) => {
 	)
 }
 
+const PresentationLayoutLayout = (page: InertiaPageProps) => {
+	return (
+		<LayoutWrapper>
+			<PresentationLayout>{ page }</PresentationLayout>
+		</LayoutWrapper>
+	)
+}
+
 const AuthLayoutLayout = (page: InertiaPageProps) => {
 	return (
 		<LayoutWrapper>
@@ -57,4 +66,5 @@ export {
 	AppLayoutLayout as AppLayout,
 	AuthLayoutLayout as AuthLayout,
 	PublicLayoutLayout as PublicLayout,
+	PresentationLayoutLayout as PresentationLayout,
 }

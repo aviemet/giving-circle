@@ -1,6 +1,7 @@
 import React from 'react'
 import { Page, Table, type PageProps } from '@/Components'
 import TableTitleSection, { IndexTableTitleSectionProps } from './TableTitleSection'
+import { type Breadcrumb } from '@/Components/Breadcrumbs'
 
 interface IndexPageTemplateProps
 	extends IndexTableTitleSectionProps, Omit<PageProps, 'children'|'title'> {
@@ -9,6 +10,7 @@ interface IndexPageTemplateProps
 	pagination: Schema.Pagination
 	search?: boolean
 	advancedSearch?: React.ReactNode
+	breadcrumbs?: Breadcrumb[]
 }
 
 const IndexPageTemplate = ({
@@ -20,13 +22,22 @@ const IndexPageTemplate = ({
 	search = true,
 	menuOptions,
 	advancedSearch,
+	breadcrumbs,
 	deleteRoute,
 	navMenu,
 	hideNavMenu,
 	meta,
 }: IndexPageTemplateProps) => {
 	return (
-		<Page title={ title } navMenu={ navMenu } hideNavMenu={ hideNavMenu } meta={ meta }>
+		<Page
+			title={ title }
+			navMenu={ navMenu }
+			hideNavMenu={ hideNavMenu }
+			meta={ meta }
+			breadcrumbs={ breadcrumbs ?? [
+				{ title, href: window.location.href },
+			] }
+		>
 			<Table.Section>
 				<Table.TableProvider
 					selectable

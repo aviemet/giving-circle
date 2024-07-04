@@ -41,7 +41,9 @@ const LayoutEditor = () => {
 				<Title order={ 3 }>Slides</Title>
 				<Button onClick={ handleAddSlide }>+</Button>
 			</Group>
+
 			<Divider my="sm" />
+
 			<Flex wrap="wrap" gap="sm">
 				{ paths.map((path, i) => (
 					<SlideCard
@@ -51,6 +53,10 @@ const LayoutEditor = () => {
 					/>
 				)) }
 			</Flex>
+
+			<Title order={ 3 }>Rounds</Title>
+
+			<Divider my="sm" />
 		</>
 	)
 }

@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
       }
     end
 
+    if defined? circle
+      share_object[:circle] = circle.render(view: :options)
+    end
+
     share_object
   end
 

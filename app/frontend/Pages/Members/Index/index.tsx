@@ -20,6 +20,11 @@ const MembersIndex = ({ members, circle, pagination }: MemberIndexProps) => {
 			rows={ members }
 			pagination={ pagination }
 			navMenu={ getCircleMenu({ circle }) }
+			breadcrumbs={ [
+				{ title: 'Circles', href: Routes.circles() },
+				{ title: circle.name, href: Routes.circle(circle.slug) },
+				{ title: 'Members', href: Routes.circleMembers(circle?.slug) },
+			] }
 			// menuOptions={ [
 			// 	{ label: 'New Member', href: Routes.newCircleMember(circle.slug), icon: NewIcon },
 			// ] }

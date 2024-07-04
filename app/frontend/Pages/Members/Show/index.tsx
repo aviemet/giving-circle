@@ -1,16 +1,24 @@
 import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 
 interface ShowMemberProps {
 	member: Schema.MembersShow
 }
 
 const ShowMember = ({ member }: ShowMemberProps) => {
-	const title =  'Member'
+	const { circle } = usePageProps()
+
+	const title = member.name
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ (circle?.name && circle?.slug) ? [
+			{ title: 'Circles', href: Routes.circles() },
+			{ title: circle.name, href: Routes.circle(circle.slug) },
+			{ title: 'Members', href: Routes.circleMembers(circle.slug) },
+			{ title, href: Routes.member(member.slug) },
+		] : [] }>
 			<Section>
 				<Group>
 					<Heading>{ title }</Heading>

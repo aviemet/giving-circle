@@ -8,19 +8,24 @@ interface NewMemberProps {
 	member: Schema.MembersFormData
 }
 
-const NewMember = ({ ...data }: NewMemberProps) => {
-	const { params } = usePageProps()
+const NewMember = ({ member }: NewMemberProps) => {
+	const { circle, params } = usePageProps()
 	const title = 'New Member'
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ (circle?.name && circle?.slug) ? [
+			{ title: 'Circles', href: Routes.circles() },
+			{ title: circle.name, href: Routes.circle(circle.slug) },
+			{ title: 'Members', href: Routes.circleMembers(circle.slug) },
+			{ title, href: Routes.newCircleMember(circle.slug) },
+		] : [] }>
 
 			<Section>
 				<Heading>{ title }</Heading>
 
 				{ /* <MemberForm
 					to={ Routes.circleMembers(params.circle_slug) }
-					{ ...data }
+					member={ member }
 				/> */ }
 			</Section>
 
