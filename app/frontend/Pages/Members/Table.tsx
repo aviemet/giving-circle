@@ -23,16 +23,16 @@ const MembersTable = ({ circle, ...props }: MembersTableProps) => {
 				<Table.RowIterator render={ (member: Schema.MembersIndex) => (
 					<Table.Row key={ member.id }>
 						<Table.Cell>
-							<Link href={ Routes.member(member.slug) }>{ member.first_name }</Link>
+							<Link href={ Routes.circleMember(circle.slug, member.slug) }>{ member.first_name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.slug) }>{ member.last_name }</Link>
+							<Link href={ Routes.circleMember(circle.slug, member.slug) }>{ member.last_name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.slug) }>{ member.number }</Link>
+							<Link href={ Routes.circleMember(circle.slug, member.slug) }>{ member.number }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editMember(member.slug) } />
+							<EditButton href={ Routes.editCircleMember(circle.slug, member.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

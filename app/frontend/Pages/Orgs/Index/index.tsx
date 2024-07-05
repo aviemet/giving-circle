@@ -1,18 +1,16 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import OrgsTable from '../Table'
-import { usePageProps } from '@/lib/hooks'
 
 interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
+	circle: Schema.CirclesShare
 }
 
-const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
-	const { params } = usePageProps()
-
+const OrgsIndex = ({ orgs, pagination, circle }: OrgIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Orgs"
@@ -22,7 +20,8 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 			menuOptions={ [
 				{
 					label: 'New Org',
-					href: Routes.newThemeOrg(params.theme_slug), icon: NewIcon,
+					href: Routes.newCircleOrg(circle.slug),
+					icon: NewIcon,
 				},
 			] }
 		>

@@ -8,10 +8,16 @@
 #  slug        :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  circle_id   :uuid             not null
 #
 # Indexes
 #
-#  index_orgs_on_slug  (slug) UNIQUE
+#  index_orgs_on_circle_id  (circle_id)
+#  index_orgs_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (circle_id => circles.id)
 #
 class Org < ApplicationRecord
   include PgSearch::Model
@@ -31,6 +37,11 @@ class Org < ApplicationRecord
   resourcify
 
   validates :name, presence: true
+
+  has_many :themes_org, dependent: :destroy
+  has_many :themes, through: :themes_org
+
+  belongs_to :circle
 
   has_many :presentations_orgs, dependent: :destroy
   has_many :presentations, through: :presentations_orgs

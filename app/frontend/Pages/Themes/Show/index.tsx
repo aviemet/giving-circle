@@ -22,7 +22,7 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editTheme(theme.slug) }>
+							<Menu.Link href={ Routes.editCircleTheme(theme.circle_id, theme.slug) }>
 								Edit Theme
 							</Menu.Link>
 						</Menu.Dropdown>

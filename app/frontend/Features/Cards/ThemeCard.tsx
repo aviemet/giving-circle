@@ -4,12 +4,13 @@ import { Routes } from '@/lib'
 import { Link } from '@inertiajs/react'
 
 interface ThemeCardProps {
+	circle: Schema.CirclesShare
 	theme: Schema.Theme & {
 		slug: string
 	}
 }
 
-const ThemeCard = ({ theme }: ThemeCardProps) => {
+const ThemeCard = ({ circle, theme }: ThemeCardProps) => {
 	return (
 		<Card
 			shadow="sm"
@@ -18,7 +19,7 @@ const ThemeCard = ({ theme }: ThemeCardProps) => {
 			radius="md"
 			withBorder
 			component={ Link }
-			href={ Routes.theme(theme.slug) }
+			href={ Routes.circleTheme(circle.slug, theme.slug) }
 		>
 			<Group justify="space-between" mt="md" mb="xs">
 				<Text fw={ 500 }>{ theme.name }</Text>

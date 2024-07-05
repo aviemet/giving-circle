@@ -5,9 +5,10 @@ import OrgsForm from '../Form'
 
 interface EditOrgProps {
 	org: Schema.OrgsEdit
+	circle: Schema.CirclesShare
 }
 
-const EditOrg = ({ org }: EditOrgProps) => {
+const EditOrg = ({ org, circle }: EditOrgProps) => {
 	const title = 'Edit Org'
 
 	return (
@@ -17,7 +18,7 @@ const EditOrg = ({ org }: EditOrgProps) => {
 
 				<OrgsForm
 					method='put'
-					to={ Routes.org(org.slug) }
+					to={ Routes.circleOrg(circle.slug, org.slug) }
 					org={ org }
 				/>
 			</Section>

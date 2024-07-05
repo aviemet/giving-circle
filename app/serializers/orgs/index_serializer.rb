@@ -5,4 +5,6 @@ class Orgs::IndexSerializer < OrgSerializer
     :updated_at,
     :created_at,
   )
+
+  belongs_to :circle, serializer: Circles::ShareSerializer
 end

@@ -44,9 +44,11 @@ if Rails.env.development?
   end
 
   if Org.count == 0
+    circle = Circle.first
     org = Org.create!({
       name: "Important Organization",
       description: "This organization does great things in great places",
+      circle:,
     })
     pres = Presentation.first
     pres.orgs << org

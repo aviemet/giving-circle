@@ -1,15 +1,13 @@
 import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
 
 interface ShowMemberProps {
 	member: Schema.MembersShow
+	circle: Schema.CirclesShare
 }
 
-const ShowMember = ({ member }: ShowMemberProps) => {
-	const { circle } = usePageProps()
-
+const ShowMember = ({ member, circle }: ShowMemberProps) => {
 	const title = member.name
 
 	return (

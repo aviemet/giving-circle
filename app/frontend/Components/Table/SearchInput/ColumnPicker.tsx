@@ -18,6 +18,7 @@ const ColumnPicker = () => {
 
 	if(!hideable || !model) return <></>
 
+	// TODO: User react-query
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
 			user: {

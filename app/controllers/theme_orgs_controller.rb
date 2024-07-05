@@ -6,7 +6,7 @@ class ThemeOrgsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
   expose :circle, -> { theme.circle }
 
-  # @route GET /themes/:theme_slug/orgs (theme_orgs)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
   def index
     authorize orgs
     paginated_orgs = orgs.page(params[:page] || 1).per(current_user.limit(:items))
@@ -22,7 +22,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/orgs/:slug (theme_org)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug (circle_theme_org)
   def show
     authorize org
     render inertia: "Theme/Orgs/Show", props: {
@@ -30,7 +30,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/orgs/new (new_theme_org)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/new (new_circle_theme_org)
   def new
     authorize Org.new
     render inertia: "Theme/Orgs/New", props: {
@@ -38,7 +38,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/orgs/:slug/edit (edit_theme_org)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit (edit_circle_theme_org)
   def edit
     authorize org
     render inertia: "Theme/Orgs/Edit", props: {

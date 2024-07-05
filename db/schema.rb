@@ -86,9 +86,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.uuid "circle_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_orgs_on_circle_id"
     t.index ["slug"], name: "index_orgs_on_slug", unique: true
   end
 
@@ -145,9 +147,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
 
   create_table "presentation_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.uuid "circle_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_presentation_templates_on_circle_id"
     t.index ["slug"], name: "index_presentation_templates_on_slug", unique: true
   end
 
@@ -277,8 +281,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
   add_foreign_key "circles_members", "circles"
   add_foreign_key "circles_members", "people", column: "member_id"
   add_foreign_key "groups", "circles"
+  add_foreign_key "orgs", "circles"
   add_foreign_key "presentation_slides", "presentation_templates"
   add_foreign_key "presentation_slides", "presentations"
+  add_foreign_key "presentation_templates", "circles"
   add_foreign_key "presentations", "presentation_templates"
   add_foreign_key "presentations", "themes"
   add_foreign_key "presentations_members", "people", column: "member_id"

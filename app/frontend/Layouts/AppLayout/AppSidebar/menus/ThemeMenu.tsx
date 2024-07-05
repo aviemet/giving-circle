@@ -3,7 +3,7 @@ import { NavLink } from '@/Components'
 import { Routes } from '@/lib'
 
 export interface ThemeMenuProps {
-	circle: Schema.Circle
+	circle: Schema.CirclesShare
 	theme: Schema.ThemesShallow
 }
 
@@ -11,15 +11,15 @@ const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {
 	return (
 		<>
 			<NavLink
-				href={ Routes.theme(theme.slug) }
+				href={ Routes.circleTheme(circle.slug, theme.slug) }
 				label="Overview"
 			/>
 			<NavLink
-				href={ Routes.themeOrgs(theme.slug) }
+				href={ Routes.circleThemeOrgs(circle.slug, theme.slug) }
 				label="Organizations"
 			/>
 			<NavLink
-				href={ Routes.themeMembers(theme.slug) }
+				href={ Routes.circleThemeMembers(circle.slug, theme.slug) }
 				label="Members"
 			/>
 			<NavLink

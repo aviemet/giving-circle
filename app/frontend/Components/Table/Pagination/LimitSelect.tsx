@@ -20,12 +20,12 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
 
 	const handleLimitChange = (limit: string|null) => {
-		if(!model) return
+		if(!model || !user) return
 
 		limit ||= String(defaultLimit)
 
 		// TODO: Use react-query
-		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
+		axios.patch( Routes.apiUpdateTablePreferences(user.id), {
 			user: {
 				table_preferences: {
 					[model]: { limit },

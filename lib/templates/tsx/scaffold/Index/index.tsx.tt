@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import <%= plural_table_name.camelize %>Table from '../Table'
 

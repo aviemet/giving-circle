@@ -24,6 +24,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 					desktop: !sidebarOpen || !sidebarVisible,
 				},
 			} }
+			footer={ { height: 40 } }
 			className={ cx(classes.appLayout) }
 		>
 			<AppShell.Header withBorder={ false }>

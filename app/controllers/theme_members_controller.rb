@@ -7,7 +7,7 @@ class ThemeMembersController < ApplicationController
   expose :members, -> { search(theme.members.includes_associated, sortable_fields) }
   expose :member, id: -> { params[:slug] }, scope: -> { members }, find_by: :slug
 
-  # @route GET /themes/:theme_slug/members (theme_members)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members (circle_theme_members)
   def index
     authorize members
 
@@ -24,19 +24,19 @@ class ThemeMembersController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/members/:slug (theme_member)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug (circle_theme_member)
   def show
     authorize member
     render inertia: "Theme/Members/Show"
   end
 
-  # @route GET /themes/:theme_slug/members/new (new_theme_member)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members/new (new_circle_theme_member)
   def new
     authorize Member.new
     render inertia: "Theme/Members/New"
   end
 
-  # @route GET /themes/:theme_slug/members/:slug/edit (edit_theme_member)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug/edit (edit_circle_theme_member)
   def edit
     authorize member
     render inertia: "Theme/Members/Edit"

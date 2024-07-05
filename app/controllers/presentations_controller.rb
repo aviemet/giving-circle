@@ -7,17 +7,23 @@ class PresentationsController < ApplicationController
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }
   expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
 
-  # @route GET /themes/:theme_slug/presentations (theme_presentations)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
   def index
     authorize presentations
+
+    paginated_presentations = presentations.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "Presentations/Index", props: {
-      presentations: -> { presentations.render(view: :index) },
+      presentations: -> { paginated_presentations.render(view: :index) },
+      pagination: -> { {
+        count: presentations.size,
+        **pagination_data(paginated_presentations)
+      } },
       theme: -> { theme.render(view: :shallow) },
-      circle: -> { circle.render(view: :share) },
     }
   end
 
-  # @route GET /presentations/:id (presentation)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
   def show
     authorize presentation
     render inertia: "Presentations/Show", props: {
@@ -25,7 +31,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/presentations/new (new_theme_presentation)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/new (new_circle_theme_presentation)
   def new
     authorize Presentation.new
     render inertia: "Presentations/New", props: {
@@ -33,7 +39,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /presentations/:id/edit (edit_presentation)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:id/edit (edit_circle_theme_presentation)
   def edit
     authorize presentation
     render inertia: "Presentations/Edit", props: {
@@ -49,7 +55,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route POST /themes/:theme_slug/presentations (theme_presentations)
+  # @route POST /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
   def create
     authorize Presentation.new
     if presentation.save
@@ -59,8 +65,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /presentations/:id (presentation)
-  # @route PUT /presentations/:id (presentation)
+  # @route PATCH /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
+  # @route PUT /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
   def update
     authorize presentation
     if presentation.update(presentation_params)
@@ -70,8 +76,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /themes/:theme_slug/presentations (theme_presentations)
-  # @route DELETE /presentations/:id (presentation)
+  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
+  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
   def destroy
     authorize presentation
     presentation.destroy!

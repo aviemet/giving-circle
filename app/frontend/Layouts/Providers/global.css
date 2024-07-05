@@ -2,10 +2,9 @@ html, body, #app {
 	height: 100%;
 }
 
-
-/* *::selection {
+*::selection {
 	background-color: var(--mantine-theme-primary-color-2);
-} */
+}
 
 .hidden {
 	display: 'none';

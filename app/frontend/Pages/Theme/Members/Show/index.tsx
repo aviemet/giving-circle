@@ -18,9 +18,9 @@ const ShowMember = ({ member }: ShowMemberProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editMember(member.id) }>
+							{ /* <Menu.Link href={ Routes.editMember(member.id) }>
 								Edit Member
-							</Menu.Link>
+							</Menu.Link> */ }
 						</Menu.Dropdown>
 					</Menu>
 				</Group>

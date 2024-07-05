@@ -16,7 +16,11 @@ class <%= controller_class_name %>Controller < ApplicationController
     paginated_<%= plural_table_name %> = %= plural_table_name %>.page(params[:page] || 1).per(current_user.limit(:items))
 
     render inertia: "<%= class_name.pluralize %>/Index", props: {
-      <%= plural_table_name %>: -> { <%= plural_table_name %>.render(view: :index) }
+      <%= plural_table_name %>: -> { paginated_<%= plural_table_name %>.render(view: :index) },
+      pagination: -> { {
+        count: <%= plural_table_name %>.size,
+        **pagination_data(paginated_<%= plural_table_name %>)
+      } },
     }
   end
 

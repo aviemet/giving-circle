@@ -19,16 +19,16 @@ const OrgTable = (props: TableProps) => {
 				<Table.RowIterator render={ (org: Schema.OrgsIndex) => (
 					<Table.Row key={ org.id }>
 						<Table.Cell>
-							<Link href={ Routes.org(org.slug) }>{ org.name }</Link>
+							<Link href={ Routes.circleOrg(org.circle_id, org.slug) }>{ org.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.org(org.slug) }>{ org.slug }</Link>
+							<Link href={ Routes.circleOrg(org.circle_id, org.slug) }>{ org.slug }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.org(org.slug) }>{ org.description }</Link>
+							<Link href={ Routes.circleOrg(org.circle_id, org.slug) }>{ org.description }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editOrg(org.slug) } />
+							<EditButton href={ Routes.editCircleOrg(org.circle_id, org.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

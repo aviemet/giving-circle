@@ -25,6 +25,7 @@ class GroupsController < ApplicationController
   # @route GET /groups/:slug (group)
   def show
     authorize group
+
     render inertia: "Groups/Show", props: {
       group: -> { group.render(view: :show) }
     }
@@ -33,6 +34,7 @@ class GroupsController < ApplicationController
   # @route GET /circles/:circle_slug/groups/new (new_circle_group)
   def new
     authorize Group.new
+
     render inertia: "Groups/New", props: {
       group: Group.new.render(view: :form_data),
       circle: -> { circle.render(view: :share) }
@@ -42,6 +44,7 @@ class GroupsController < ApplicationController
   # @route GET /groups/:slug/edit (edit_group)
   def edit
     authorize group
+
     render inertia: "Groups/Edit", props: {
       group: group.render(view: :edit),
       circle: -> { circle.render(view: :share) }
@@ -65,6 +68,7 @@ class GroupsController < ApplicationController
   # @route PUT /groups/:slug (group)
   def update
     authorize group
+
     if group.update(group_params)
       redirect_to group, notice: "Group was successfully updated."
     else
@@ -76,6 +80,7 @@ class GroupsController < ApplicationController
   # @route DELETE /groups/:slug (group)
   def destroy
     authorize group
+
     group.destroy!
     redirect_to groups_url, notice: "Group was successfully destroyed."
   end

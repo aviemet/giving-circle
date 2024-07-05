@@ -7,6 +7,7 @@ class PeopleController < ApplicationController
   # @route GET /people (people)
   def index
     authorize people
+
     render inertia: "People/Index", props: {
       people: -> { people.render }
     }
@@ -15,6 +16,7 @@ class PeopleController < ApplicationController
   # @route GET /people/:slug (person)
   def show
     authorize person
+
     render inertia: "People/Show", props: {
       person: -> { person.render }
     }
@@ -23,6 +25,7 @@ class PeopleController < ApplicationController
   # @route GET /people/new (new_person)
   def new
     authorize Person.new
+
     render inertia: "People/New", props: {
       person: Person.new.render
     }
@@ -31,6 +34,7 @@ class PeopleController < ApplicationController
   # @route GET /people/:slug/edit (edit_person)
   def edit
     authorize person
+
     render inertia: "People/Edit", props: {
       person: person.render
     }
@@ -39,6 +43,7 @@ class PeopleController < ApplicationController
   # @route POST /people (people)
   def create
     authorize Person.new
+
     if person.save
       redirect_to person, notice: "Person was successfully created."
     else
@@ -50,6 +55,7 @@ class PeopleController < ApplicationController
   # @route PUT /people/:slug (person)
   def update
     authorize person
+
     if person.update(person_params)
       redirect_to person, notice: "Person was successfully updated."
     else

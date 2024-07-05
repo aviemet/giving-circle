@@ -16,11 +16,9 @@ import { Routes, initials } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 
 const AppSidebar = () => {
-	const props = usePageProps()
+	const { auth, circle } = usePageProps()
 
-	const hasMultipleCircles = props.auth.user.circles.length > 1
-
-	const title = props.circle?.name || 'Giving Circles'
+	const hasMultipleCircles = auth.user.circles.length > 1
 
 	return (
 		<>
@@ -36,18 +34,24 @@ const AppSidebar = () => {
 
 						<Menu.Target>
 							<UnstyledButton style={ { width: '100%' } }>
-								<Group justify='space-between'>
-									{ props.circle?.name &&
-										<Avatar size="sm">{ initials(title) }</Avatar>
-									}
-									<Text style={ { flex: 1 } }>{ title }</Text>
-									{ hasMultipleCircles && <DownArrowIcon /> }
-								</Group>
+								{ circle?.slug
+									?
+									<Link href={ Routes.circle(circle.slug) } underline="never">
+										<Group justify='space-between'>
+											<Avatar size="sm">{ initials(circle.name) }</Avatar>
+											<Text style={ { flex: 1 } }>{ circle.name }</Text>
+											{ hasMultipleCircles && <DownArrowIcon /> }
+										</Group>
+									</Link>
+									:
+									'Giving Circles'
+								}
+
 							</UnstyledButton>
 						</Menu.Target>
 
 						<Menu.Dropdown>
-							{ props.auth.user.circles.map(circle => (
+							{ auth.user.circles.map(circle => (
 								<Menu.Item
 									key={ circle.id }
 									component={ Link }

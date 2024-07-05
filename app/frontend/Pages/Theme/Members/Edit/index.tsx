@@ -4,10 +4,11 @@ import { Routes } from '@/lib'
 import MembersForm from '../Form'
 
 interface EditMemberProps {
-	member: Schema.Member
+	member: Schema.MembersEdit
+	circle: Schema.CirclesShare
 }
 
-const EditMember = ({ member }: EditMemberProps) => {
+const EditMember = ({ member, circle }: EditMemberProps) => {
 	const title = 'Edit Member'
 
 	return (
@@ -16,7 +17,7 @@ const EditMember = ({ member }: EditMemberProps) => {
 
 			<MembersForm
 				method='put'
-				to={ Routes.member(member.slug) }
+				to={ Routes.circleMember(circle.id, member.slug) }
 				member={ member }
 			/>
 		</Section>

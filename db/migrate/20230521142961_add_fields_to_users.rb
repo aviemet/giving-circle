@@ -3,8 +3,6 @@ class AddFieldsToUsers < ActiveRecord::Migration[7.0]
     change_table :users, bulk: true do |t|
       t.boolean :active, default: true, null: false
 
-      # t.references :active_circle, type: :uuid, null: true, foreign_key: true
-
       t.references :person, type: :uuid, null: true, foreign_key: true
 
       t.jsonb :table_preferences, default: {}

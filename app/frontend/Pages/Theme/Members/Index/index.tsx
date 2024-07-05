@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import MembersTable from '../Table'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
@@ -21,7 +21,7 @@ const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) 
 			pagination={ pagination }
 			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			menuOptions={ [
-				{ label: 'Add Member', href: Routes.newThemeMember(theme.slug), icon: NewIcon },
+				// { label: 'Add Member', href: Routes.newThemeMember(theme.slug), icon: NewIcon },
 			] }
 		>
 			<MembersTable />

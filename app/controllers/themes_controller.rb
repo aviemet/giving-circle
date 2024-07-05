@@ -18,7 +18,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /themes/:slug (theme)
+  # @route GET /circles/:circle_slug/themes/:slug (circle_theme)
   def show
     authorize theme
 
@@ -27,7 +27,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/about (theme_about)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/about (circle_theme_about)
   def about
     authorize theme
 
@@ -46,7 +46,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /themes/:slug/edit (edit_theme)
+  # @route GET /circles/:circle_slug/themes/:slug/edit (edit_circle_theme)
   def edit
     authorize theme
 
@@ -69,8 +69,8 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route PATCH /themes/:slug (theme)
-  # @route PUT /themes/:slug (theme)
+  # @route PATCH /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route PUT /circles/:circle_slug/themes/:slug (circle_theme)
   def update
     authorize theme
     if theme.update(theme_params)
@@ -80,7 +80,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route DELETE /themes/:slug (theme)
+  # @route DELETE /circles/:circle_slug/themes/:slug (circle_theme)
   def destroy
     authorize theme
     theme.destroy

@@ -25,10 +25,10 @@ const TemplateTable = (props: TableProps) => {
 					render={ (template: Schema.PresentationTemplatesIndex) => (
 						<Table.Row key={ template.id }>
 							<Table.Cell>
-								<Link href={ Routes.presentationTemplate(template.id) }>{ template.name }</Link>
+								<Link href={ Routes.circlePresentationTemplate(template.circle_id, template.id) }>{ template.name }</Link>
 							</Table.Cell>
 							<Table.Cell>
-								<EditButton href={ Routes.editPresentationTemplate(template.id) } />
+								<EditButton href={ Routes.editCirclePresentationTemplate(template.circle_id, template.id) } />
 							</Table.Cell>
 						</Table.Row>
 					) } />

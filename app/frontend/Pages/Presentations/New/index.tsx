@@ -2,15 +2,12 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PresentationForm from '../Form'
-import { usePageProps } from '@/lib/hooks'
 
 interface NewPresentationProps {
 	presentation: Schema.PresentationsFormData
 }
 
-const NewPresentation = ({ ...data }: NewPresentationProps) => {
-	const { params } = usePageProps()
-
+const NewPresentation = ({ presentation }: NewPresentationProps) => {
 	const title = 'New Presentation'
 
 	return (
@@ -19,8 +16,8 @@ const NewPresentation = ({ ...data }: NewPresentationProps) => {
 				<Heading>{ title }</Heading>
 
 				<PresentationForm
-					to={ Routes.themePresentations(params.theme_slug) }
-					{ ...data }
+					to={ Routes.themePresentations(presentation.theme_id) }
+					presentation={ presentation }
 				/>
 			</Section>
 

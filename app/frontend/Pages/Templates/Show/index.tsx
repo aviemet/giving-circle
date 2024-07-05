@@ -18,7 +18,7 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editPresentationTemplate(template.id) }>
+							<Menu.Link href={ Routes.editCirclePresentationTemplate(template.circle_id, template.id) }>
 								Edit Template
 							</Menu.Link>
 						</Menu.Dropdown>

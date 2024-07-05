@@ -1,8 +1,7 @@
 import React from 'react'
-import { useTableContext } from '@/Components/Table/TableContext'
-import { Box, Title, Group, Divider } from '@mantine/core'
-import { Menu } from '@/Components'
+import { Menu, Box, Title, Group, Divider } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
+import { useTableContext } from '@/Components/Table/TableContext'
 import { router } from '@inertiajs/react'
 
 import cx from 'clsx'

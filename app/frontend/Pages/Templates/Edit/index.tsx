@@ -17,7 +17,7 @@ const EditTemplate = ({ template }: EditTemplateProps) => {
 
 				<TemplatesForm
 					method='put'
-					to={ Routes.presentationTemplate(template.id) }
+					to={ Routes.circlePresentationTemplate(template.circle_id, template.id) }
 					template={ template }
 				/>
 			</Section>

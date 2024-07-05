@@ -25,8 +25,8 @@ class MemberSerializer < ApplicationSerializer
     :first_name,
     :last_name,
     :middle_name,
-    :name,
     :number,
     :active,
+    name: { type: :string },
   )
 end

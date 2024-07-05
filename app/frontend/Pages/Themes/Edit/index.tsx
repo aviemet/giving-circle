@@ -17,7 +17,7 @@ const EditTheme = ({ theme }: EditThemeProps) => {
 
 				<ThemesForm
 					method='put'
-					to={ Routes.theme(theme.slug!) }
+					to={ Routes.circleTheme(theme.circle_id, theme.slug!) }
 					theme={ theme }
 				/>
 			</Section>

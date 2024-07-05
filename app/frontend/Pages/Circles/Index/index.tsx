@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heading, Page, Container, Divider, Group } from '@/Components'
-import { CircleCard, ThemeCard, NewCard } from '@/Layouts/AppLayout/Components/Cards'
+import { CircleCard, ThemeCard, NewCard } from '@/Features/Cards'
 import { Routes } from '@/lib'
 
 interface CircleIndexProps {
@@ -33,7 +33,7 @@ const CirclesIndex = ({ circles }: CircleIndexProps) => {
 					return (
 						<Group key={ circle.id }>
 							{ circle.themes?.map(theme => (
-								<ThemeCard key={ theme.id } theme={ theme } />
+								<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
 							)) }
 							<Divider />
 						</Group>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { NewIcon } from '@/Components/Icons'
 import ThemesTable from '../Table'
-import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { IndexPageTemplate } from '@/Features'
 import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface ThemeIndexProps {

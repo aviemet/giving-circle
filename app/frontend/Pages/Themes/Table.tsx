@@ -18,13 +18,13 @@ const ThemeTable = (props: TableProps) => {
 				<Table.RowIterator render={ (theme: Schema.ThemesIndex) => (
 					<Table.Row key={ theme.id }>
 						<Table.Cell>
-							<Link href={ Routes.theme(theme.slug) }>{ theme.name }</Link>
+							<Link href={ Routes.circleTheme(theme.circle_id, theme.slug) }>{ theme.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.theme(theme.slug) }>{ theme.slug }</Link>
+							<Link href={ Routes.circleTheme(theme.circle_id, theme.slug) }>{ theme.slug }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editTheme(theme.id) } />
+							<EditButton href={ Routes.editCircleTheme(theme.circle_id, theme.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

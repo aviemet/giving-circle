@@ -61,7 +61,6 @@ const Register = () => {
 				<TextInput
 					name="email"
 					placeholder="Email"
-					autoFocus
 					autoComplete="Email"
 					required
 					onBlur={ handleEmailBlur }

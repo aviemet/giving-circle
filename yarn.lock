@@ -2908,6 +2908,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.50.1":
+  version: 5.50.1
+  resolution: "@tanstack/query-core@npm:5.50.1"
+  checksum: e71d850ba8181e72e758c5c3001293865f959973f64d6ff21c41db5894665bd93e5f0a3e50e5c56656e09c87dcb8d7e0ab41e34b1eda84050473248fb8ac6eaf
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.50.1":
+  version: 5.50.1
+  resolution: "@tanstack/react-query@npm:5.50.1"
+  dependencies:
+    "@tanstack/query-core": 5.50.1
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 4120ee075a58b477df7a1044fcfff13c30037835717cdd77c77ed49f1f2a35cecfc032b8c96faadb38287e622159bab1cf70b26ed83506b95746d46fc8aed3f1
+  languageName: node
+  linkType: hard
+
 "@testing-library/jest-dom@npm:^6.4.6":
   version: 6.4.6
   resolution: "@testing-library/jest-dom@npm:6.4.6"
@@ -7241,6 +7259,7 @@ __metadata:
     "@mantine/tiptap": ^7.11.0
     "@mantine/vanilla-extract": ^7.11.0
     "@tabler/icons-react": ^3.7.0
+    "@tanstack/react-query": ^5.50.1
     "@testing-library/jest-dom": ^6.4.6
     "@testing-library/react": ^16.0.0
     "@testing-library/user-event": ^14.5.2

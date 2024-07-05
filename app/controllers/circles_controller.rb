@@ -8,12 +8,8 @@ class CirclesController < ApplicationController
 
   # @route GET /circles (circles)
   def index
-    # if circles.count == 1
-    #   redirect_to [:admin, circles.first]
-    #   return
-    # end
-
     authorize circles
+
     render inertia: "Circles/Index", props: {
       circles: -> { circles.render(view: :index) },
     }
@@ -22,6 +18,7 @@ class CirclesController < ApplicationController
   # @route GET /circles/:slug (circle)
   def show
     authorize circle
+
     render inertia: "Circles/Show", props: {
       circle: -> { circle.render(view: :show) },
       themes: -> { circle.themes.render }
@@ -31,6 +28,7 @@ class CirclesController < ApplicationController
   # @route GET /circles/:circle_slug/about (circle_about)
   def about
     authorize circle
+
     render inertia: "Circles/About", props: {
       circle: -> { circle.render(view: :show) },
       themes: -> { circle.themes.render }
@@ -40,6 +38,7 @@ class CirclesController < ApplicationController
   # @route GET /circles/new (new_circle)
   def new
     authorize Circle.new
+
     render inertia: "Circles/New", props: {
       circle: Circle.new.render
     }
@@ -48,6 +47,7 @@ class CirclesController < ApplicationController
   # @route GET /circles/:slug/edit (edit_circle)
   def edit
     authorize circle
+
     render inertia: "Circles/Edit", props: {
       circle: circle.render
     }
@@ -56,7 +56,7 @@ class CirclesController < ApplicationController
   # @route POST /circles (circles)
   def create
     authorize Circle.new
-    ap({ params: })
+
     if circle.save
       current_user.add_role(:admin, circle)
       redirect_to [circle], notice: "Circle was successfully created."
@@ -69,6 +69,7 @@ class CirclesController < ApplicationController
   # @route PUT /circles/:slug (circle)
   def update
     authorize circle
+
     if circle.update(circle_params)
       redirect_to [:admin, circle], notice: "Circle was successfully updated."
     else
@@ -79,6 +80,7 @@ class CirclesController < ApplicationController
   # @route DELETE /circles/:slug (circle)
   def destroy
     authorize circle
+
     circle.destroy
     redirect_to [:admin, circles_url], notice: "Circle was successfully destroyed."
   end

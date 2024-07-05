@@ -45,8 +45,10 @@ class Theme < ApplicationRecord
 
   belongs_to :circle
   has_many :presentations, dependent: :destroy
+
   has_many :themes_org, dependent: :destroy
   has_many :orgs, through: :themes_org
+
   has_many :themes_member, dependent: :destroy
   has_many :members, through: :themes_member
 

@@ -4,6 +4,7 @@ class OrgsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:about]
 
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
+
   expose :orgs, -> { search(circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
@@ -19,40 +20,48 @@ class OrgsController < ApplicationController
         count: orgs.size,
         **pagination_data(paginated_orgs)
       } },
-      circle: -> { circle.render(view: :share) }
+      circle: -> { circle.render(view: :share) },
     }
   end
 
   # @route GET /circles/:circle_slug/orgs/:slug (circle_org)
   def show
     authorize org
+
     render inertia: "Orgs/Show", props: {
-      org: -> { org.render(view: :show) }
+      org: -> { org.render(view: :show) },
+      circle: -> { circle.render(view: :share) }
     }
   end
 
   # @route GET /circles/:circle_slug/orgs/:org_slug/about (circle_org_about)
   def about
     authorize org
+
     render inertia: "Orgs/About", props: {
       org: -> { org.render(view: :show) },
-      themes: -> { org.themes.render(view: :show) }
+      themes: -> { org.themes.render(view: :show) },
+      circle: -> { circle.render(view: :share) }
     }
   end
 
   # @route GET /circles/:circle_slug/orgs/new (new_circle_org)
   def new
     authorize Org.new
+
     render inertia: "Orgs/New", props: {
-      org: Org.new.render(view: :new)
+      org: Org.new.render(view: :new),
+      circle: -> { circle.render(view: :share) }
     }
   end
 
   # @route GET /circles/:circle_slug/orgs/:slug/edit (edit_circle_org)
   def edit
     authorize org
+
     render inertia: "Orgs/Edit", props: {
-      org: org.render(view: :edit)
+      org: org.render(view: :edit),
+      circle: -> { circle.render(view: :share) }
     }
   end
 
@@ -76,6 +85,7 @@ class OrgsController < ApplicationController
   # @route PUT /circles/:circle_slug/orgs/:slug (circle_org)
   def update
     authorize org
+
     if org.update(org_params)
       redirect_to [:admin, circle, theme, org], notice: "Org was successfully updated."
     else
@@ -87,6 +97,7 @@ class OrgsController < ApplicationController
   # @route DELETE /circles/:circle_slug/orgs/:slug (circle_org)
   def destroy
     authorize org
+
     org.destroy
     redirect_to [:admin, orgs_url], notice: "Org was successfully destroyed."
   end

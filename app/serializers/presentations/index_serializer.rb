@@ -4,4 +4,6 @@ class Presentations::IndexSerializer < PresentationSerializer
     :updated_at,
     :created_at,
   )
+
+  belongs_to :theme, serializer: Themes::ShowSerializer
 end

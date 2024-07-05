@@ -15,11 +15,11 @@ const EditOrg = ({ org }: EditOrgProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<OrgsForm
+				{ /* <OrgsForm
 					method='put'
 					to={ Routes.org(org.slug) }
 					org={ org }
-				/>
+				/> */ }
 			</Section>
 		</Page>
 	)

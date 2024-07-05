@@ -8,12 +8,12 @@ interface EditPersonProps {
 }
 
 const EditPerson = ({ person }: EditPersonProps) => {
-	const title = 'Edit Person'
+	const title = `Edit ${person.name}`
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },
-			{ title: Person, href: Routes.person(person.id) },
+			{ title: person.name, href: Routes.person(person.id) },
 			{ title },
 		] }>
 			<Section>
@@ -21,7 +21,7 @@ const EditPerson = ({ person }: EditPersonProps) => {
 
 				<PeopleForm
 					method='put'
-					to={ Routes.person() }
+					to={ Routes.person(person.slug) }
 					person={ person }
 				/>
 			</Section>
