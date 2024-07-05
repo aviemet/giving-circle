@@ -1,23 +1,26 @@
 import React from 'react'
-import { Box, Text } from '@mantine/core'
+import { Text, Box, Group, Flex } from '@/Components'
 import { usePageProps } from '@/lib/hooks'
-import { UserHeaderMenu } from '@/Features'
+import { ToggleNavbarButton, UserHeaderMenu } from '@/Features'
+import { useLayoutStore } from '@/lib/store'
 
 const Header = () => {
 	const props = usePageProps()
+	const { sidebarOpen } = useLayoutStore()
 
 	const title = props.circle?.name || 'Giving Circles'
 
 	return (
-		<>
-			<Box style={ { flex: 1 } }>
+		<Group h="100%" px="md">
+			<Flex gap="md" style={ { flex: 1 } }>
+				<ToggleNavbarButton hidden={ sidebarOpen } />
 				<Text>{ title }</Text>
-			</Box>
+			</Flex>
 
 			<Box>
 				<UserHeaderMenu />
 			</Box>
-		</>
+		</Group>
 	)
 }
 

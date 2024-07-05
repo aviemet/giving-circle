@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { AppShell, Box, ScrollArea } from '@/Components'
+import useLayoutStore from '@/lib/store/LayoutStore'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
-import { useDisclosure } from '@mantine/hooks'
-import { AppShell, Box, Burger, Group, ScrollArea } from '@mantine/core'
-import useLayoutStore from '@/lib/store/LayoutStore'
 import AppFooter from './AppFooter'
 
-const AppLayout = ({ children }: { children: any }) => {
-	const { sidebarOpen, sidebarVisible, toggleSidebarOpen } = useLayoutStore()
+import cx from 'clsx'
+import * as classes from './AppLayout.css'
+
+const AppLayout = ({ children }: { children: React.ReactNode }) => {
+	const { sidebarOpen, sidebarVisible } = useLayoutStore()
 
 	return (
 		<AppShell
@@ -22,18 +24,13 @@ const AppLayout = ({ children }: { children: any }) => {
 					desktop: !sidebarOpen || !sidebarVisible,
 				},
 			} }
+			className={ cx(classes.appLayout) }
 		>
-			<AppShell.Header>
-				<Group h="100%" px="md">
-					{ sidebarVisible && <>
-						<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } hiddenFrom="sm" size="sm" />
-						<Burger opened={ sidebarOpen } onClick={ () => toggleSidebarOpen() } visibleFrom="sm" size="sm" />
-					</> }
-					<AppHeader />
-				</Group>
+			<AppShell.Header withBorder={ false }>
+				<AppHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar p="md">
+			<AppShell.Navbar p="sm">
 				<AppSidebar />
 			</AppShell.Navbar>
 
