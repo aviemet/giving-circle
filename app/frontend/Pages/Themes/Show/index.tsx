@@ -8,7 +8,7 @@ interface ShowThemeProps {
 }
 
 const ShowTheme = ({ theme }: ShowThemeProps) => {
-	const title =  theme.title || 'Theme'
+	const title =  theme.name || 'Theme'
 
 	return (
 		<Page

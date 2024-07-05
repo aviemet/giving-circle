@@ -2,7 +2,7 @@
 #
 # Table name: people
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  active      :boolean          default(TRUE), not null
 #  first_name  :string
 #  last_name   :string
@@ -12,8 +12,15 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_people_on_slug  (slug) UNIQUE
+#
 class Person < ApplicationRecord
   include PgSearch::Model
+
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history]
 
   pg_search_scope(
     :search,
@@ -29,8 +36,6 @@ class Person < ApplicationRecord
 
   resourcify
 
-  slug :full_name
-
   has_one :user, dependent: :nullify
 
   validates :first_name, presence: true
@@ -38,9 +43,7 @@ class Person < ApplicationRecord
 
   scope :includes_associated, -> { includes([:user]) }
 
-  def full_name
+  def name
     "#{first_name} #{last_name}"
   end
-
-  alias :name :full_name
 end

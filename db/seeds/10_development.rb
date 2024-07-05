@@ -1,6 +1,6 @@
 # Development data
 
-if Rails.env == "development"
+if Rails.env.development?
 
   if User.count == 0
     user = User.create!({
@@ -32,7 +32,7 @@ if Rails.env == "development"
   if Theme.count == 0
     circle = Circle.first
     theme = Theme.create!({
-      title: "Social issue needing attention",
+      name: "Social issue needing attention",
       status: 1,
       circle:,
     })

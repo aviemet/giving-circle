@@ -1,11 +1,13 @@
 class CreateThemes < ActiveRecord::Migration[7.0]
   def change
-    create_table :themes do |t|
-      t.string :title
-      t.string :slug, null: false, index: { unique: true }
+    create_table :themes, id: :uuid do |t|
+      t.string :name
       t.datetime :published_at
       t.integer :status, default: 0
-      t.references :circle, null: false, foreign_key: true
+
+      t.references :circle, type: :uuid, null: false, foreign_key: true
+
+      t.string :slug, null: false, index: { unique: true }
 
       t.timestamps
     end

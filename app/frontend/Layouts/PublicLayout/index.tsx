@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDisclosure } from '@mantine/hooks'
 import { AppShell, Burger, Skeleton } from '@mantine/core'
-import { Group, Link, Box } from '@/Components'
+import { Group, Box } from '@/Components'
 import { CircleDotIcon } from '@/Components/Icons'
-import { Routes } from '@/lib'
+import { UserHeaderMenu } from '@/Features'
 
 interface PublicLayoutProps {
 	children: any
@@ -29,7 +29,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 						<CircleDotIcon size={ 30 } />
 					</Box>
 					<Box>
-						<Link href={ Routes.newUserSession() }>Sign In</Link>
+						<UserHeaderMenu />
 					</Box>
 				</Group>
 			</AppShell.Header>

@@ -2,7 +2,7 @@
 #
 # Table name: people
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  active      :boolean          default(TRUE), not null
 #  first_name  :string
 #  last_name   :string
@@ -11,6 +11,10 @@
 #  slug        :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_people_on_slug  (slug) UNIQUE
 #
 class MemberSerializer < ApplicationSerializer
   object_as :member
@@ -21,12 +25,8 @@ class MemberSerializer < ApplicationSerializer
     :first_name,
     :last_name,
     :middle_name,
+    :name,
     :number,
     :active,
   )
-
-  type :string
-  def name
-    "#{member.first_name} #{member.last_name}".strip
-  end
 end

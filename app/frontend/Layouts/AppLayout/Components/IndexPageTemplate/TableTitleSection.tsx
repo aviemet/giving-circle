@@ -4,6 +4,8 @@ import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
+
+import cx from 'clsx'
 import * as classes from './IndexPageStyles.css'
 
 // TODO: Figure out correct type for icon
@@ -32,7 +34,7 @@ const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: I
 
 	return (
 		<Group align="start">
-			<Group className={ classes.title }>
+			<Group className={ cx(classes.title) }>
 				<Title>
 					{ title }
 				</Title>

@@ -2,11 +2,11 @@
 #
 # Table name: contacts
 #
-#  id               :bigint           not null, primary key
+#  id               :uuid             not null, primary key
 #  contactable_type :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  contactable_id   :bigint           not null
+#  contactable_id   :uuid             not null
 #
 # Indexes
 #

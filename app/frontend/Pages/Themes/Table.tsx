@@ -18,7 +18,7 @@ const ThemeTable = (props: TableProps) => {
 				<Table.RowIterator render={ (theme: Schema.ThemesIndex) => (
 					<Table.Row key={ theme.id }>
 						<Table.Cell>
-							<Link href={ Routes.theme(theme.slug) }>{ theme.title }</Link>
+							<Link href={ Routes.theme(theme.slug) }>{ theme.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
 							<Link href={ Routes.theme(theme.slug) }>{ theme.slug }</Link>

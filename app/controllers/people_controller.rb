@@ -12,7 +12,7 @@ class PeopleController < ApplicationController
     }
   end
 
-  # @route GET /people/:id (person)
+  # @route GET /people/:slug (person)
   def show
     authorize person
     render inertia: "People/Show", props: {
@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
     }
   end
 
-  # @route GET /people/:id/edit (edit_person)
+  # @route GET /people/:slug/edit (edit_person)
   def edit
     authorize person
     render inertia: "People/Edit", props: {
@@ -46,8 +46,8 @@ class PeopleController < ApplicationController
     end
   end
 
-  # @route PATCH /people/:id (person)
-  # @route PUT /people/:id (person)
+  # @route PATCH /people/:slug (person)
+  # @route PUT /people/:slug (person)
   def update
     authorize person
     if person.update(person_params)
@@ -57,7 +57,7 @@ class PeopleController < ApplicationController
     end
   end
 
-  # @route DELETE /people/:id (person)
+  # @route DELETE /people/:slug (person)
   def destroy
     authorize person
     person.destroy!

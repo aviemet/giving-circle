@@ -2,7 +2,7 @@
 #
 # Table name: circles
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  name       :string           not null
 #  slug       :string           not null
 #  created_at :datetime         not null
@@ -15,6 +15,9 @@
 class Circle < ApplicationRecord
   include PgSearch::Model
 
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history]
+
   pg_search_scope(
     :search,
     against: [:name],
@@ -23,8 +26,6 @@ class Circle < ApplicationRecord
       trigram: {}
     },
   )
-
-  slug :name
 
   resourcify
 
@@ -35,7 +36,7 @@ class Circle < ApplicationRecord
 
   has_many :circles_member, dependent: :destroy
   has_many :members, through: :circles_member
-  has_many :groups
+  has_many :groups, dependent: :destroy
 
   scope :includes_associated, -> { includes([:themes, :presentations, :members]) }
 end

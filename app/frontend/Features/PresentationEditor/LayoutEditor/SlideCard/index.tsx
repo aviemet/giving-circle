@@ -51,7 +51,7 @@ const SlideCard = ({ path, removeInput }: SlideCardProps) => {
 			</Card.Section>
 
 			<Center>
-				<TextInput name={ `${path}.title` } />
+				<TextInput name={ `${path}.name` } />
 			</Center>
 		</Card>
 	)

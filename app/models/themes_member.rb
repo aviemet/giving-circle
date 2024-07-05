@@ -2,11 +2,11 @@
 #
 # Table name: themes_members
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  member_id  :bigint           not null
-#  theme_id   :bigint           not null
+#  member_id  :uuid             not null
+#  theme_id   :uuid             not null
 #
 # Indexes
 #

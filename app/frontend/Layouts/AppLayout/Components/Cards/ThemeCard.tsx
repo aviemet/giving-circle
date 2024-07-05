@@ -21,7 +21,7 @@ const ThemeCard = ({ theme }: ThemeCardProps) => {
 			href={ Routes.theme(theme.slug) }
 		>
 			<Group justify="space-between" mt="md" mb="xs">
-				<Text fw={ 500 }>{ theme.title }</Text>
+				<Text fw={ 500 }>{ theme.name }</Text>
 				<Badge color="pink"></Badge>
 			</Group>
 

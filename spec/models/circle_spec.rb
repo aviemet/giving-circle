@@ -2,7 +2,7 @@
 #
 # Table name: circles
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  name       :string           not null
 #  slug       :string           not null
 #  created_at :datetime         not null

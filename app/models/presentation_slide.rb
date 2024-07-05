@@ -2,19 +2,21 @@
 #
 # Table name: presentation_slides
 #
-#  id                       :bigint           not null, primary key
+#  id                       :uuid             not null, primary key
 #  content                  :text
+#  name                     :string
 #  order                    :integer
-#  title                    :string
+#  slug                     :string           not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  presentation_id          :bigint
-#  presentation_template_id :bigint
+#  presentation_id          :uuid
+#  presentation_template_id :uuid
 #
 # Indexes
 #
 #  index_presentation_slides_on_presentation_id           (presentation_id)
 #  index_presentation_slides_on_presentation_template_id  (presentation_template_id)
+#  index_presentation_slides_on_slug                      (slug) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,6 +25,9 @@
 #
 class PresentationSlide < ApplicationRecord
   include PgSearch::Model
+
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history]
 
   pg_search_scope(
     :search,

@@ -2,14 +2,14 @@
 #
 # Table name: themes
 #
-#  id           :bigint           not null, primary key
+#  id           :uuid             not null, primary key
+#  name         :string
 #  published_at :datetime
 #  slug         :string           not null
 #  status       :integer          default("draft")
-#  title        :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  circle_id    :bigint           not null
+#  circle_id    :uuid             not null
 #
 # Indexes
 #
@@ -26,7 +26,7 @@ class ThemeSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-    :title,
+    :name,
     :published_at,
     :status,
     :circle_id,

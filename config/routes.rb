@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   # RESOURCEFUL PATHS #
 
   resources :users
-  resources :people
+  resources :people, param: :slug
 
   delete 'orgs', to: 'orgs#destroy'
   delete 'groups', to: 'groups#destroy'

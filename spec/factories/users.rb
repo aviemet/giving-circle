@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :bigint           not null, primary key
+#  id                     :uuid             not null, primary key
 #  active                 :boolean          default(TRUE), not null
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
@@ -32,8 +32,8 @@
 #  user_preferences       :jsonb
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  invited_by_id          :bigint
-#  person_id              :bigint
+#  invited_by_id          :uuid
+#  person_id              :uuid
 #
 # Indexes
 #

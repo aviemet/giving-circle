@@ -159,6 +159,8 @@ GEM
       railties (>= 5.0.0)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     generator_spec (0.10.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
@@ -386,10 +388,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    slug (4.1.1)
-      activerecord (> 3.0.0)
-      activesupport (> 3.0.0)
-      rake
     spring (4.2.1)
     stringio (3.1.1)
     strscan (3.1.0)
@@ -456,6 +454,7 @@ DEPENDENCIES
   factory_bot (>= 6.2)
   factory_bot_rails (>= 6.2)
   faker!
+  friendly_id (~> 5.5)
   generator_spec (>= 0.9.4)
   inertia_rails (>= 3.0.0)
   js-routes (~> 2.2)
@@ -480,7 +479,6 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 5.1)
   simplecov (~> 0.22.0)
-  slug (~> 4.1)
   spring
   types_from_serializers (~> 2.1)
   tzinfo-data

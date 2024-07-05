@@ -360,13 +360,13 @@ export const editGroup: ((
 
 /**
  * Generates rails route to
- * /people/:id/edit(.:format)
- * @param {any} id
+ * /people/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editPerson: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -696,13 +696,13 @@ export const people: ((
 
 /**
  * Generates rails route to
- * /people/:id(.:format)
- * @param {any} id
+ * /people/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const person: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

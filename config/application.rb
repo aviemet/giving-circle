@@ -22,6 +22,8 @@ module GivingCircle
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+
       g.test_framework      :rspec
       g.view_specs          false
       g.routing_specs       false

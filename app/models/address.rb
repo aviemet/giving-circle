@@ -2,7 +2,7 @@
 #
 # Table name: addresses
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  address    :string
 #  address_2  :string
 #  city       :string
@@ -11,7 +11,7 @@
 #  region     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  contact_id :bigint           not null
+#  contact_id :uuid             not null
 #
 # Indexes
 #

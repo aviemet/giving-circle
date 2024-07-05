@@ -2,14 +2,14 @@
 #
 # Table name: themes
 #
-#  id           :bigint           not null, primary key
+#  id           :uuid             not null, primary key
+#  name         :string
 #  published_at :datetime
 #  slug         :string           not null
 #  status       :integer          default("draft")
-#  title        :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  circle_id    :bigint           not null
+#  circle_id    :uuid             not null
 #
 # Indexes
 #
@@ -24,23 +24,24 @@ class Theme < ApplicationRecord
   include PgSearch::Model
   include BooleanTimestamp
 
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history]
+
   enum :status, { draft: 0, current: 1, past: 2, future: 3 }
   boolean_timestamp :published
 
   pg_search_scope(
     :search,
-    against: [:title, :slug],
+    against: [:name],
     using: {
       tsearch: { prefix: true },
       trigram: {}
     },
   )
 
-  slug :title
-
   resourcify
 
-  validates :title, presence: true
+  validates :name, presence: true
 
   belongs_to :circle
   has_many :presentations, dependent: :destroy

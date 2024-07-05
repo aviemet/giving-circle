@@ -2,10 +2,10 @@
 #
 # Table name: presentation_elements
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  data       :jsonb
 #  element    :integer
-#  title      :string
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -22,7 +22,6 @@ class PresentationElement < ApplicationRecord
   )
 
   resourcify
-
 
   scope :includes_associated, -> { includes([]) }
 end

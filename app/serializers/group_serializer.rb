@@ -2,16 +2,17 @@
 #
 # Table name: groups
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  name       :string           not null
 #  slug       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  circle_id  :bigint           not null
+#  circle_id  :uuid             not null
 #
 # Indexes
 #
 #  index_groups_on_circle_id  (circle_id)
+#  index_groups_on_slug       (slug) UNIQUE
 #
 # Foreign Keys
 #

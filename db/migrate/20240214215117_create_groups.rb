@@ -1,9 +1,11 @@
 class CreateGroups < ActiveRecord::Migration[7.1]
   def change
-    create_table :groups do |t|
+    create_table :groups, id: :uuid do |t|
       t.string :name, null: false
-      t.string :slug, null: false
-      t.references :circle, null: false, foreign_key: true
+
+      t.references :circle, type: :uuid, null: false, foreign_key: true
+
+      t.string :slug, null: false, index: { unique: true }
 
       t.timestamps
     end
