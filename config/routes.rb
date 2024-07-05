@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   delete 'orgs', to: 'orgs#destroy'
   delete 'groups', to: 'groups#destroy'
 
-  resources :circles, shallow: true, param: :slug do
+  resources :circles, param: :slug do
     get :about
 
     resources(

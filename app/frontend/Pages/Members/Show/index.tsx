@@ -17,7 +17,7 @@ const ShowMember = ({ member }: ShowMemberProps) => {
 			{ title: 'Circles', href: Routes.circles() },
 			{ title: circle.name, href: Routes.circle(circle.slug) },
 			{ title: 'Members', href: Routes.circleMembers(circle.slug) },
-			{ title, href: Routes.member(member.slug) },
+			{ title, href: Routes.circleMember(circle.slug, member.slug) },
 		] : [] }>
 			<Section>
 				<Group>
@@ -26,7 +26,7 @@ const ShowMember = ({ member }: ShowMemberProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editMember(member.id) }>
+							<Menu.Link href={ Routes.editCircleMember(circle.slug, member.slug) }>
 								Edit Member
 							</Menu.Link>
 						</Menu.Dropdown>

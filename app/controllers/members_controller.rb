@@ -24,12 +24,13 @@ class MembersController < ApplicationController
     }
   end
 
-  # @route GET /members/:slug (member)
+  # @route GET /circles/:circle_slug/members/:slug (circle_member)
   def show
     authorize member
 
     render inertia: "Members/Show", props: {
-      member: -> { member.render(view: :show) }
+      member: -> { member.render(view: :show) },
+      circle: -> { circle.render(view: :share) },
     }
   end
 
@@ -39,15 +40,17 @@ class MembersController < ApplicationController
 
     render inertia: "Members/New", props: {
       member: Member.new.render(view: :form_data),
+      circle: -> { circle.render(view: :share) },
     }
   end
 
-  # @route GET /members/:slug/edit (edit_member)
+  # @route GET /circles/:circle_slug/members/:slug/edit (edit_circle_member)
   def edit
     authorize member
 
     render inertia: "Members/Edit", props: {
-      member: member.render(view: :edit)
+      member: member.render(view: :edit),
+      circle: -> { circle.render(view: :share) },
     }
   end
 
@@ -62,8 +65,8 @@ class MembersController < ApplicationController
     end
   end
 
-  # @route PATCH /members/:slug (member)
-  # @route PUT /members/:slug (member)
+  # @route PATCH /circles/:circle_slug/members/:slug (circle_member)
+  # @route PUT /circles/:circle_slug/members/:slug (circle_member)
   def update
     authorize member
 
@@ -75,7 +78,7 @@ class MembersController < ApplicationController
   end
 
   # @route DELETE /circles/:circle_slug/members (circle_members)
-  # @route DELETE /members/:slug (member)
+  # @route DELETE /circles/:circle_slug/members/:slug (circle_member)
   def destroy
     authorize member
 

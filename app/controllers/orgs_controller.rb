@@ -23,7 +23,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /orgs/:slug (org)
+  # @route GET /circles/:circle_slug/orgs/:slug (circle_org)
   def show
     authorize org
     render inertia: "Orgs/Show", props: {
@@ -31,7 +31,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /orgs/:org_slug/about (org_about)
+  # @route GET /circles/:circle_slug/orgs/:org_slug/about (circle_org_about)
   def about
     authorize org
     render inertia: "Orgs/About", props: {
@@ -48,7 +48,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /orgs/:slug/edit (edit_org)
+  # @route GET /circles/:circle_slug/orgs/:slug/edit (edit_circle_org)
   def edit
     authorize org
     render inertia: "Orgs/Edit", props: {
@@ -72,8 +72,8 @@ class OrgsController < ApplicationController
     end
   end
 
-  # @route PATCH /orgs/:slug (org)
-  # @route PUT /orgs/:slug (org)
+  # @route PATCH /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route PUT /circles/:circle_slug/orgs/:slug (circle_org)
   def update
     authorize org
     if org.update(org_params)
@@ -84,7 +84,7 @@ class OrgsController < ApplicationController
   end
 
   # @route DELETE /orgs (orgs)
-  # @route DELETE /orgs/:slug (org)
+  # @route DELETE /circles/:circle_slug/orgs/:slug (circle_org)
   def destroy
     authorize org
     org.destroy
