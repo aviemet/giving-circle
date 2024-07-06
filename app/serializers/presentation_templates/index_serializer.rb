@@ -1,6 +1,7 @@
 class PresentationTemplates::IndexSerializer < PresentationTemplateSerializer
   attributes(
     :id,
+    :slug,
     :updated_at,
     :created_at,
   )

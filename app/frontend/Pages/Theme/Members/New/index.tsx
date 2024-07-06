@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import MemberForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
@@ -16,7 +16,7 @@ const NewMember = ({ ...data }: NewMemberProps) => {
 		<Page title={ title }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				{ /* <MemberForm
 					to={ Routes.circleMembers(params.circle_slug) }

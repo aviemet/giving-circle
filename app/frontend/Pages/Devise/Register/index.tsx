@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, TextInput, PasswordInput, Submit, Field } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Box, Heading, Link } from '@/Components'
+import { Box, Title, Link } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TRegisterFormData = {
@@ -54,7 +54,7 @@ const Register = () => {
 		>
 
 			<Box>
-				<Heading>Sign Up</Heading>
+				<Title>Sign Up</Title>
 			</Box>
 
 			<Field>

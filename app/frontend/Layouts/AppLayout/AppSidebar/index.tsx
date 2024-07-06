@@ -14,6 +14,7 @@ import { DownArrowIcon } from '@/Components/Icons'
 import { ToggleNavbarButton } from '@/Features'
 import { Routes, initials } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
+import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const AppSidebar = () => {
 	const { auth, circle } = usePageProps()
@@ -24,7 +25,9 @@ const AppSidebar = () => {
 		<>
 			<AppShell.Section mb="xs">
 				{ /* Navbar toggle */ }
-				<Flex justify="end">
+				<Flex justify="space-between" mb="sm">
+
+					<ToggleColorSchemeButton />
 					<ToggleNavbarButton />
 				</Flex>
 

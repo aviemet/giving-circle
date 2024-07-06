@@ -1,6 +1,5 @@
 import React from 'react'
 import { Box, AppShell, Group } from '@/Components'
-import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const FooterComponent = () => {
 	return (
@@ -9,8 +8,6 @@ const FooterComponent = () => {
 				<div id="footer-portal" />
 				<Box style={ { marginLeft: 'auto' } }>
 					©{ (new Date).getFullYear() }
-
-					<ToggleColorSchemeButton />
 				</Box>
 			</Group>
 		</AppShell.Footer>

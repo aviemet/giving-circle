@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PeopleForm from '../Form'
 
@@ -17,7 +17,7 @@ const EditPerson = ({ person }: EditPersonProps) => {
 			{ title },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<PeopleForm
 					method='put'

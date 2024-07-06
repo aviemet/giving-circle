@@ -24,6 +24,18 @@ export const themeObject = {
 			sortButtonHeight: 5,
 			sortButtonWidth: 6,
 		},
+		header: {
+			height: 60,
+		},
+		navbar: {
+			width: {
+				closed: 0,
+				open: 250,
+			},
+		},
+		footer: {
+			height: 35,
+		},
 	},
 }
 

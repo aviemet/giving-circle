@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import TemplatesForm from '../Form'
 
@@ -13,11 +13,9 @@ const EditTemplate = ({ template }: EditTemplateProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<Heading>{ title }</Heading>
-
 				<TemplatesForm
 					method='put'
-					to={ Routes.circlePresentationTemplate(template.circle_id, template.id) }
+					to={ Routes.circlePresentationTemplate(template.circle.slug, template.slug) }
 					template={ template }
 				/>
 			</Section>

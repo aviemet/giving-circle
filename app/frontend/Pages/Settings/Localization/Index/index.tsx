@@ -1,11 +1,11 @@
 import React from 'react'
 import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
-import { Heading } from '@/Components'
+import { Title } from '@/Components'
 
 const LocalizationSettings = () => {
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>Logs</Heading>
+			<Title mb={ 24 }>Logs</Title>
 		</SettingsLayout>
 	)
 }

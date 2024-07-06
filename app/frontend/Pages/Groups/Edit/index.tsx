@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import GroupsForm from '../Form'
 
@@ -13,7 +13,7 @@ const EditGroup = ({ group }: EditGroupProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<GroupsForm
 					method='put'

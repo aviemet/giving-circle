@@ -3,7 +3,7 @@ import { MantineProvider, createTheme, px, type CSSVariablesResolver } from '@ma
 import { type CSSVariables } from '@mantine/core/lib/core/MantineProvider/convert-css-variables/css-variables-object-to-string'
 import { Notifications } from '@mantine/notifications'
 import { theme as themeObject, vars } from '@/lib/theme'
-import useLayoutStore from '@/lib/store/LayoutStore'
+import useLayoutStore from '@/Store/LayoutStore'
 import { toKebabCase } from '@/lib'
 import { ModalsProvider } from '@mantine/modals'
 

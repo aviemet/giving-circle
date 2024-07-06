@@ -1,9 +1,10 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Table, Link, Text } from '@/Components'
+import { Button,Table, Link, Text } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
 import { usePageProps } from '@/lib/hooks'
+import { NewTemplateModal } from '@/Features'
 
 const TemplateTable = (props: TableProps) => {
 	const { circle } = usePageProps()
@@ -20,15 +21,15 @@ const TemplateTable = (props: TableProps) => {
 				<Table.RowIterator
 					emptyDataContent={ circle.slug && <>
 						<Text>{ circle.name || 'This circle' } doesn&apos;t have any saved presentation templates</Text>
-						<Link href={ Routes.newCirclePresentationTemplate(circle.slug) }>Create a new one</Link>
+						<NewTemplateModal circle={ circle }><Button>Create One</Button></NewTemplateModal>
 					</> }
 					render={ (template: Schema.PresentationTemplatesIndex) => (
 						<Table.Row key={ template.id }>
 							<Table.Cell>
-								<Link href={ Routes.circlePresentationTemplate(template.circle_id, template.id) }>{ template.name }</Link>
+								<Link href={ Routes.circlePresentationTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
 							</Table.Cell>
 							<Table.Cell>
-								<EditButton href={ Routes.editCirclePresentationTemplate(template.circle_id, template.id) } />
+								<EditButton href={ Routes.editCirclePresentationTemplate(template.circle.slug, template.slug) } />
 							</Table.Cell>
 						</Table.Row>
 					) } />

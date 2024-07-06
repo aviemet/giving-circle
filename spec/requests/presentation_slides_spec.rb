@@ -12,10 +12,10 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/templates", type: :request do
-  
+RSpec.describe "/presentation_slides", type: :request do
+
   # This should return the minimal set of attributes required to create a valid
-  # Template. As you add validations to Template, be sure to
+  # PresentationSlide. As you add validations to PresentationSlide, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,62 +27,61 @@ RSpec.describe "/templates", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Template.create! valid_attributes
-      get templates_url
+      PresentationSlide.create! valid_attributes
+      get template_slides_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      template = Template.create! valid_attributes
-      get template_url(template)
+      template_slide = PresentationSlide.create! valid_attributes
+      get template_slide_url(template_slide)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_template_url
+      get new_template_slide_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      template = Template.create! valid_attributes
-      get edit_template_url(template)
+      template_slide = PresentationSlide.create! valid_attributes
+      get edit_template_slide_url(template_slide)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Template" do
+      it "creates a new PresentationSlide" do
         expect {
-          post templates_url, params: { template: valid_attributes }
-        }.to change(Template, :count).by(1)
+          post template_slides_url, params: { template_slide: valid_attributes }
+        }.to change(PresentationSlide, :count).by(1)
       end
 
-      it "redirects to the created template" do
-        post templates_url, params: { template: valid_attributes }
-        expect(response).to redirect_to(template_url(Template.last))
+      it "redirects to the created template_slide" do
+        post template_slides_url, params: { template_slide: valid_attributes }
+        expect(response).to redirect_to(template_slide_url(PresentationSlide.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Template" do
+      it "does not create a new PresentationSlide" do
         expect {
-          post templates_url, params: { template: invalid_attributes }
-        }.to change(Template, :count).by(0)
+          post template_slides_url, params: { template_slide: invalid_attributes }
+        }.not_to change(PresentationSlide, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post templates_url, params: { template: invalid_attributes }
+        post template_slides_url, params: { template_slide: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -92,44 +91,44 @@ RSpec.describe "/templates", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested template" do
-        template = Template.create! valid_attributes
-        patch template_url(template), params: { template: new_attributes }
-        template.reload
+      it "updates the requested template_slide" do
+        template_slide = PresentationSlide.create! valid_attributes
+        patch template_slide_url(template_slide), params: { template_slide: new_attributes }
+        template_slide.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the template" do
-        template = Template.create! valid_attributes
-        patch template_url(template), params: { template: new_attributes }
-        template.reload
-        expect(response).to redirect_to(template_url(template))
+      it "redirects to the template_slide" do
+        template_slide = PresentationSlide.create! valid_attributes
+        patch template_slide_url(template_slide), params: { template_slide: new_attributes }
+        template_slide.reload
+        expect(response).to redirect_to(template_slide_url(template_slide))
       end
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        template = Template.create! valid_attributes
-        patch template_url(template), params: { template: invalid_attributes }
+        template_slide = PresentationSlide.create! valid_attributes
+        patch template_slide_url(template_slide), params: { template_slide: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested template" do
-      template = Template.create! valid_attributes
+    it "destroys the requested template_slide" do
+      template_slide = PresentationSlide.create! valid_attributes
       expect {
-        delete template_url(template)
-      }.to change(Template, :count).by(-1)
+        delete template_slide_url(template_slide)
+      }.to change(PresentationSlide, :count).by(-1)
     end
 
-    it "redirects to the templates list" do
-      template = Template.create! valid_attributes
-      delete template_url(template)
-      expect(response).to redirect_to(templates_url)
+    it "redirects to the template_slides list" do
+      template_slide = PresentationSlide.create! valid_attributes
+      delete template_slide_url(template_slide)
+      expect(response).to redirect_to(template_slides_url)
     end
   end
 end

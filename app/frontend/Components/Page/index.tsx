@@ -3,11 +3,12 @@ import { Head } from '@inertiajs/react'
 import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import Breadcrumbs, { type Breadcrumb } from '@/Components/Breadcrumbs'
 import { Portal } from '@/Components'
-import useLayoutStore from '@/lib/store/LayoutStore'
+import useLayoutStore from '@/Store/LayoutStore'
 
 export interface PageProps {
 	children?: React.ReactNode
 	title?: string
+	siteTitle?: string
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
@@ -17,26 +18,37 @@ export interface PageProps {
 const Page = ({
 	children,
 	title,
+	siteTitle,
 	meta,
 	hideNavMenu = false,
 	navMenu: NavMenu,
 	breadcrumbs,
 }: PageProps) => {
-	const { sidebarVisible, setSidebarVisible } = useLayoutStore()
+	const { sidebarVisible, setSidebarVisible, setSiteTitle } = useLayoutStore()
 
+	// Maintain ref to inner nav menu for page specific menus
 	const dynamicNavMenuRef = useRef(document.getElementById('dynamic-nav-menu'))
-
 	useLayoutEffect(() => {
 		if(dynamicNavMenuRef.current) return
 
 		dynamicNavMenuRef.current = document.getElementById('dynamic-nav-menu')
 	}, [])
 
+	// Allow pages to control wether the sidebar is open
 	useEffect(() =>{
 		if(sidebarVisible === !hideNavMenu) return
 
 		setSidebarVisible(!hideNavMenu)
 	}, [hideNavMenu])
+
+	// Allow pages to set the header title
+	useEffect(() => {
+		const usedSiteTitle = siteTitle ?? title
+
+		if(!usedSiteTitle) return
+
+		setSiteTitle(usedSiteTitle)
+	}, [siteTitle, title])
 
 	return (
 		<>

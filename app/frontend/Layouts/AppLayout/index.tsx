@@ -1,30 +1,38 @@
 import React from 'react'
-import { AppShell, Box, ScrollArea } from '@/Components'
-import useLayoutStore from '@/lib/store/LayoutStore'
+import { AppShell } from '@/Components'
+import useLayoutStore from '@/Store/LayoutStore'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
 
 import cx from 'clsx'
 import * as classes from './AppLayout.css'
+import { rem, useMantineTheme } from '@mantine/core'
+import { useHeadroom } from '@mantine/hooks'
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const { sidebarOpen, sidebarVisible } = useLayoutStore()
+	const theme = useMantineTheme()
+	const pinned = useHeadroom({ fixedAt: 120 })
 
 	return (
 		<AppShell
 			layout="alt"
 			padding="md"
-			header={ { height: 50 } }
+			header={ {
+				height: theme.other.header.height,
+				collapsed: !pinned,
+				offset: false,
+			} }
 			navbar={ {
-				width: 250,
+				width: theme.other.navbar.width.open,
 				breakpoint: 'sm',
 				collapsed: {
 					mobile: !sidebarOpen || !sidebarVisible,
 					desktop: !sidebarOpen || !sidebarVisible,
 				},
 			} }
-			footer={ { height: 40 } }
+			footer={ { height: theme.other.footer.height } }
 			className={ cx(classes.appLayout) }
 		>
 			<AppShell.Header withBorder={ false }>
@@ -37,8 +45,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
 			<AppFooter />
 
-			<AppShell.Main>
-				<Box component={ ScrollArea }>{ children }</Box>
+			<AppShell.Main className={ cx(classes.main) }>
+				{ children }
 			</AppShell.Main>
 		</AppShell>
 	)

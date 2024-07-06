@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import ThemeForm from '../Form'
 
@@ -16,7 +16,7 @@ const NewTheme = ({ circle, ...data }: NewThemeProps) => {
 		<Page title={ title }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ThemeForm
 					to={ Routes.circleThemes(circle.slug) }

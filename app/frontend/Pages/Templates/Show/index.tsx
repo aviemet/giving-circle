@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Heading, Menu, Page, Section } from '@/Components'
+import { Group, Title, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface ShowTemplateProps {
@@ -13,7 +13,7 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 		<Page title={ title }>
 			<Section>
 				<Group>
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

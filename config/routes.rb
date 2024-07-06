@@ -64,7 +64,7 @@ Rails.application.routes.draw do
       get :about
     end
 
-    resources :presentation_templates, concerns: :bulk_delete
+    resources :presentation_templates, concerns: :bulk_delete, param: :slug
 
     resources :themes, param: :slug do
       get :about

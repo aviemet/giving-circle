@@ -1,6 +1,6 @@
 import React from 'react'
 import { Burger } from '@/Components'
-import useLayoutStore from '@/lib/store/LayoutStore'
+import useLayoutStore from '@/Store/LayoutStore'
 import { BurgerProps } from '@mantine/core'
 
 interface ToggleNavBarButton extends BurgerProps {}

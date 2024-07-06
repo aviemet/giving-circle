@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Heading, Link, Menu, Page, Section } from '@/Components'
+import { Group, Title, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface ShowPresentationProps {
@@ -13,7 +13,7 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 		<Page title={ title }>
 			<Section>
 				<Group>
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

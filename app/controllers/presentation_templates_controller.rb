@@ -1,8 +1,10 @@
 class PresentationTemplatesController < ApplicationController
   include Searchable
 
+  expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
+
   expose :templates, -> { search(PresentationTemplate.includes_associated, sortable_fields) }
-  expose :template, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :template, model: PresentationTemplate, scope: -> { PresentationTemplate.includes_associated }, id: -> { params[:slug] }, find_by: :slug
 
   # @route GET /circles/:circle_slug/presentation_templates (circle_presentation_templates)
   def index
@@ -20,9 +22,10 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /presentation_templates/:id (presentation_template)
+  # @route GET /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
   def show
     authorize template
+
     render inertia: "Templates/Show", props: {
       template: -> { template.render(view: :show) }
     }
@@ -31,15 +34,17 @@ class PresentationTemplatesController < ApplicationController
   # @route GET /circles/:circle_slug/presentation_templates/new (new_circle_presentation_template)
   def new
     authorize PresentationTemplate.new
+
     render inertia: "Templates/New", props: {
       template: PresentationTemplate.new.render(view: :form_data),
       circle: -> { Circle.find_by(slug: params[:circle_slug]).render(view: :options) },
     }
   end
 
-  # @route GET /presentation_templates/:id/edit (edit_presentation_template)
+  # @route GET /circles/:circle_slug/presentation_templates/:slug/edit (edit_circle_presentation_template)
   def edit
     authorize template
+
     render inertia: "Templates/Edit", props: {
       template: template.render(view: :edit)
     }
@@ -48,28 +53,34 @@ class PresentationTemplatesController < ApplicationController
   # @route POST /circles/:circle_slug/presentation_templates (circle_presentation_templates)
   def create
     authorize PresentationTemplate.new
+
+    template = PresentationTemplate.new(presentation_template_params)
+    template.circle = circle
+
     if template.save
-      redirect_to template, notice: "Template was successfully created."
+      redirect_to edit_circle_presentation_template_path(circle.slug, template.id), notice: "Template was successfully created."
     else
-      redirect_to new_template_path, inertia: { errors: template.errors }
+      redirect_to new_circle_presentation_template_path(circle.slug, template.id), inertia: { errors: template.errors }
     end
   end
 
-  # @route PATCH /presentation_templates/:id (presentation_template)
-  # @route PUT /presentation_templates/:id (presentation_template)
+  # @route PATCH /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route PUT /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
   def update
     authorize template
-    if template.update(template_params)
+
+    if template.update(presentation_template_params)
       redirect_to template, notice: "Template was successfully updated."
     else
-      redirect_to edit_template_path, inertia: { errors: template.errors }
+      redirect_to edit_circle_presentation_template_path(circle.slug, template.id), inertia: { errors: template.errors }
     end
   end
 
   # @route DELETE /circles/:circle_slug/presentation_templates (circle_presentation_templates)
-  # @route DELETE /presentation_templates/:id (presentation_template)
+  # @route DELETE /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
   def destroy
     authorize template
+
     template.destroy!
     redirect_to templates_url, notice: "Template was successfully destroyed."
   end
@@ -80,7 +91,7 @@ class PresentationTemplatesController < ApplicationController
     %w(name).freeze
   end
 
-  def template_params
-    params.require(:template).permit(:name)
+  def presentation_template_params
+    params.require(:presentation_template).permit(:name)
   end
 end

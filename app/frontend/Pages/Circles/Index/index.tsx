@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Container, Divider, Group } from '@/Components'
+import { Title, Page, Container, Divider, Group } from '@/Components'
 import { CircleCard, ThemeCard, NewCard } from '@/Features/Cards'
 import { Routes } from '@/lib'
 
@@ -16,7 +16,7 @@ const CirclesIndex = ({ circles }: CircleIndexProps) => {
 			hideNavMenu
 		>
 			<Container>
-				<Heading>Your Circles</Heading>
+				<Title>Your Circles</Title>
 				<Divider />
 				<Group>
 					{ circles.map(circle => {
@@ -27,7 +27,7 @@ const CirclesIndex = ({ circles }: CircleIndexProps) => {
 					<NewCard href={ Routes.newCircle() } />
 				</Group>
 
-				<Heading>Recent Themes</Heading>
+				<Title>Recent Themes</Title>
 				<Divider />
 				{ circles.map(circle => {
 					return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CirclesForm from '../Form'
 
@@ -17,8 +17,6 @@ const EditCircle = ({ circle }: EditCircleProps) => {
 			{ title, href: Routes.editCircle(circle.slug) },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
-
 				<CirclesForm
 					method='put'
 					to={ Routes.circle(circle.slug) }

@@ -264,15 +264,15 @@ export const circleOrgs: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/presentation_templates/:id(.:format)
+ * /circles/:circle_slug/presentation_templates/:slug(.:format)
  * @param {any} circleSlug
- * @param {any} id
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const circlePresentationTemplate: ((
   circleSlug: RequiredRouteParameter,
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -450,15 +450,15 @@ export const editCircleOrg: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/presentation_templates/:id/edit(.:format)
+ * /circles/:circle_slug/presentation_templates/:slug/edit(.:format)
  * @param {any} circleSlug
- * @param {any} id
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editCirclePresentationTemplate: ((
   circleSlug: RequiredRouteParameter,
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

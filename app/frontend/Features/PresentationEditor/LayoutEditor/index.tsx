@@ -8,13 +8,13 @@ import { modals } from '@mantine/modals'
 
 const LayoutEditor = () => {
 	const { getData, data } = useForm()
-
+	console.log({ data })
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const { addInput, removeInput, paths } = useDynamicInputs({
 		model: 'presentation_slides',
 		emptyData: {
-			title: '',
+			name: '',
 			order: NaN,
 			content: '',
 		},
@@ -29,7 +29,7 @@ const LayoutEditor = () => {
 			labels: { confirm: 'Confirm', cancel: 'Cancel' },
 			onConfirm: () => {
 				addInput({
-					title: newSlideInputRef.current?.value,
+					name: newSlideInputRef.current?.value,
 				})
 			},
 		})
@@ -57,6 +57,47 @@ const LayoutEditor = () => {
 			<Title order={ 3 }>Rounds</Title>
 
 			<Divider my="sm" />
+
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+
+
+			blash
 		</>
 	)
 }

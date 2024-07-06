@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Section } from '@/Components'
+import { Title, Section } from '@/Components'
 import { Routes } from '@/lib'
 import MembersForm from '../Form'
 
@@ -13,7 +13,7 @@ const EditMember = ({ member, circle }: EditMemberProps) => {
 
 	return (
 		<Section>
-			<Heading>{ title }</Heading>
+			<Title>{ title }</Title>
 
 			<MembersForm
 				method='put'

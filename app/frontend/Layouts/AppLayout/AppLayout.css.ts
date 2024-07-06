@@ -1,10 +1,10 @@
 import { vars, theme } from '@/lib'
 import { css } from '@linaria/core'
+import { rem } from '@mantine/core'
 
 export const appLayout = css`
-	:global() {
-		html body {
-			overflow: hidden;
-		}
-	}
+`
+
+export const main = css`
+  padding-top: calc(${rem(theme.other.header.height)} + ${vars.spacing.md});
 `

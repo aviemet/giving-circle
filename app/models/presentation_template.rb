@@ -35,6 +35,8 @@ class PresentationTemplate < ApplicationRecord
 
   resourcify
 
+  belongs_to :circle
+
   has_many :presentation_slides, dependent: :nullify
 
   scope :includes_associated, -> { includes([]) }

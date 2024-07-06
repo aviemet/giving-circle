@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import GroupForm from '../Form'
 
@@ -15,7 +15,7 @@ const NewGroup = ({ circle, ...data }: NewGroupProps) => {
 		<Page title={ title }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<GroupForm
 					to={ Routes.circleGroups(circle.slug) }

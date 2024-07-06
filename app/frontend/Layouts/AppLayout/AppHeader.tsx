@@ -1,20 +1,18 @@
 import React from 'react'
-import { Text, Box, Group, Flex } from '@/Components'
-import { usePageProps } from '@/lib/hooks'
+import { Box, Group, Flex, Title } from '@/Components'
 import { ToggleNavbarButton, UserHeaderMenu } from '@/Features'
-import { useLayoutStore } from '@/lib/store'
+import { useLayoutStore } from '@/Store'
 
 const Header = () => {
-	const props = usePageProps()
-	const { sidebarOpen } = useLayoutStore()
-
-	const title = props.circle?.name || 'Giving Circles'
+	const { sidebarOpen, siteTitle } = useLayoutStore()
 
 	return (
 		<Group h="100%" px="md">
-			<Flex gap="md" style={ { flex: 1 } }>
+			<Flex align="center" gap="md" style={ { flex: 1 } }>
 				<ToggleNavbarButton hidden={ sidebarOpen } />
-				<Text>{ title }</Text>
+				<Box>
+					<Title>{ siteTitle }</Title>
+				</Box>
 			</Flex>
 
 			<Box>

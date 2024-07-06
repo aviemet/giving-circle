@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Heading, Link } from '@/Components'
+import { Title, Link } from '@/Components'
 
 interface ConfirmationsNew {
 	user: Schema.User
@@ -16,7 +16,7 @@ const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 			grid={ false }
 		>
 			<div>
-				<Heading order={ 3 }>Please check your email</Heading>
+				<Title order={ 3 }>Please check your email</Title>
 				<p>An email has been sent to the address provided. Please follow the link to confirm your account.</p>
 				<p>If you don&apos;t receive an email, use the form below to resend it.</p>
 			</div>

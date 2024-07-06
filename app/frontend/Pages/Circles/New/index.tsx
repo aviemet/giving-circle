@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CircleForm from '../Form'
 
@@ -17,7 +17,7 @@ const NewCircle = (data: NewCircleProps) => {
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CircleForm
 					to={ Routes.circles() }

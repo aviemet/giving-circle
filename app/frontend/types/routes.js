@@ -669,13 +669,13 @@ export const circleOrgs = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"forma
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/presentation_templates/:id(.:format)
+ * /circles/:circle_slug/presentation_templates/:slug(.:format)
  * @param {any} circleSlug
- * @param {any} id
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circlePresentationTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentation_templates"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const circlePresentationTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentation_templates"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -804,13 +804,13 @@ export const editCircleOrg = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"sl
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/presentation_templates/:id/edit(.:format)
+ * /circles/:circle_slug/presentation_templates/:slug/edit(.:format)
  * @param {any} circleSlug
- * @param {any} id
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editCirclePresentationTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentation_templates"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const editCirclePresentationTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentation_templates"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to

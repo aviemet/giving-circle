@@ -1,6 +1,6 @@
 import React from 'react'
 import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
-import { Group, Heading, Menu } from '@/Components'
+import { Group, Title, Menu } from '@/Components'
 import Empty from './Empty'
 import SmtpList from './SmtpList'
 import { Routes } from '@/lib'
@@ -13,7 +13,7 @@ const Mail = ({ smtps }: MailSettingsProps) => {
 	return (
 		<SettingsLayout>
 			<Group>
-				<Heading mb={ 24 }>Mail Settings</Heading>
+				<Title mb={ 24 }>Mail Settings</Title>
 				<Menu position="bottom-end">
 					<Menu.Target />
 					<Menu.Dropdown>

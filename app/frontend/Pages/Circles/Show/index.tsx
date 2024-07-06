@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Group, Heading, Menu, Page, Section } from '@/Components'
+import { Container, Group, Title, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import StatTile from './StatTile'
@@ -25,7 +25,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 			<Section>
 				<Container>
 					<Group justify="space-between">
-						<Heading>{ title }</Heading>
+						<Title>{ title }</Title>
 
 						<Menu position="bottom-end">
 							<Menu.Target />
@@ -60,7 +60,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 						</Group>
 					</Section>
 
-					<Heading order={ 2 }>Upcoming Themes</Heading>
+					<Title order={ 2 }>Upcoming Themes</Title>
 					{ circle.themes.map(theme => (
 						<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
 					)) }

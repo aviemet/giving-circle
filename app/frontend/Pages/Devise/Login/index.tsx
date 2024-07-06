@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form,TextInput, PasswordInput, Checkbox, Submit } from '@/Components/Form'
-import { Heading, Link,Box, Paper, SimpleGrid, Grid, Flex } from '@/Components'
+import { Title, Link,Box, Paper, SimpleGrid, Grid, Flex } from '@/Components'
 import { Routes } from '@/lib'
 import { type UseFormProps } from 'use-inertia-form'
 
@@ -37,7 +37,7 @@ const Login = () => {
 				<Paper shadow="lg" radius="lg" p="xl"  withBorder>
 
 					<Box mb="md">
-						<Heading>Giving Circle</Heading>
+						<Title>Giving Circle</Title>
 					</Box>
 
 					<Form

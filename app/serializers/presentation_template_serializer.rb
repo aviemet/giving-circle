@@ -21,6 +21,8 @@
 class PresentationTemplateSerializer < ApplicationSerializer
   object_as :presentation_template
 
+  identifier :slug
+
   attributes(
     :name,
     :circle_id,

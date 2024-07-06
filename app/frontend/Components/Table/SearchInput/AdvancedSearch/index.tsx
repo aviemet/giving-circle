@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { DoubleDownArrowIcon } from '@/Components/Icons'
-import { useLayoutStore } from '@/lib/store'
+import { useLayoutStore } from '@/Store'
 import { useBooleanToggle } from '@/lib/hooks'
 import { useClickOutside } from '@mantine/hooks'
 import {
