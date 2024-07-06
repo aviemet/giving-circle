@@ -13,8 +13,6 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 		<Page title={ title }>
 			<Section>
 				<Group>
-					<Title>{ title }</Title>
-
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>

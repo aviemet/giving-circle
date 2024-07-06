@@ -1,14 +1,13 @@
-import React, { useRef, useState } from 'react'
-import { Button, Divider, Flex, Group, Text, Title } from '@/Components'
+import React, { useRef } from 'react'
+import { Button, Divider, Flex, Group, Title } from '@/Components'
 import { TextInput } from '@/Components/Inputs'
 import SlideCard from './SlideCard'
 import { useDynamicInputs, useForm } from 'use-inertia-form'
-import { DynamicInputs } from '@/Components/Form'
 import { modals } from '@mantine/modals'
 
 const LayoutEditor = () => {
 	const { getData, data } = useForm()
-	console.log({ data })
+
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const { addInput, removeInput, paths } = useDynamicInputs({
@@ -58,46 +57,6 @@ const LayoutEditor = () => {
 
 			<Divider my="sm" />
 
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-
-
-			blash
 		</>
 	)
 }

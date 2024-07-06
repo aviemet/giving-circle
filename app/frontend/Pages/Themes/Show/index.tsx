@@ -17,8 +17,6 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 		>
 			<Section>
 				<Group>
-					<Title>{ title }</Title>
-
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>

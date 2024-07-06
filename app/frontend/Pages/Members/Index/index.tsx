@@ -12,7 +12,6 @@ interface MemberIndexProps {
 }
 
 const MembersIndex = ({ members, circle, pagination }: MemberIndexProps) => {
-	console.log({ circle })
 	return (
 		<IndexPageTemplate
 			title="Members"

@@ -1,14 +1,14 @@
 import React from 'react'
 import { AppShell } from '@/Components'
 import useLayoutStore from '@/Store/LayoutStore'
+import { useMantineTheme } from '@mantine/core'
+import { useHeadroom } from '@mantine/hooks'
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
 
 import cx from 'clsx'
 import * as classes from './AppLayout.css'
-import { rem, useMantineTheme } from '@mantine/core'
-import { useHeadroom } from '@mantine/hooks'
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const { sidebarOpen, sidebarVisible } = useLayoutStore()
