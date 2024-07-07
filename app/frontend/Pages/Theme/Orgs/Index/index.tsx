@@ -23,7 +23,7 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 			menuOptions={ [
 				{
 					label: 'Add Org To Theme',
-					href: Routes.newThemeOrg(theme.slug), icon: NewIcon,
+					href: Routes.newCircleThemeOrg(circle.slug, theme.slug), icon: NewIcon,
 				},
 			] }
 		>

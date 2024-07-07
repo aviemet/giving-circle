@@ -3,6 +3,7 @@
 # Table name: presentations
 #
 #  id                       :uuid             not null, primary key
+#  active                   :boolean          default(FALSE), not null
 #  name                     :string
 #  slug                     :string           not null
 #  created_at               :datetime         not null

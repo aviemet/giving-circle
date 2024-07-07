@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from '@/Components'
+import { Divider, NavLink } from '@/Components'
 import { Routes } from '@/lib'
 
 export interface ThemeMenuProps {
@@ -12,8 +12,11 @@ const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {
 		<>
 			<NavLink
 				href={ Routes.circleTheme(circle.slug, theme.slug) }
-				label="Overview"
+				label={ theme.name }
 			/>
+
+			<Divider />
+
 			<NavLink
 				href={ Routes.circleThemeOrgs(circle.slug, theme.slug) }
 				label="Organizations"

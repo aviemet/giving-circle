@@ -50,7 +50,7 @@ class PresentationsController < ApplicationController
   # @route GET /presentation/:id (run_presentation)
   def run_presentation
     authorize presentation
-    render inertia: "Presentations/Presentation", props: {
+    render inertia: "Present/Presentations/Presentation", props: {
       presentation: presentation.render(view: :presentation)
     }
   end

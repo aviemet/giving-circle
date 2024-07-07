@@ -85,3 +85,7 @@ export {
 export {
 	LiaHandsHelpingSolid as HelpingIcon,
 } from 'react-icons/lia'
+
+export {
+	PiPresentationChart as PresentationIcon,
+} from 'react-icons/pi'

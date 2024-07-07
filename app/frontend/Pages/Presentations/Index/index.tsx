@@ -2,8 +2,8 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
-import PresentationsTable from '../Table'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
+import PresentationsTable from '../Table'
 
 interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
