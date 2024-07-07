@@ -1,17 +1,14 @@
 import React, { forwardRef } from 'react'
-import { Menu, createPolymorphicComponent, type MenuItemProps, Flex } from '@mantine/core'
+import { Menu, createPolymorphicComponent, type MenuItemProps as MantineMenuItemProps } from '@mantine/core'
 import cx from 'clsx'
-import * as classes from './MenuItem.css'
-import { Link } from '..'
+import * as classes from './Menu.css'
 
-interface MenuItemProps extends MenuItemProps {
+interface MenuItemProps extends MantineMenuItemProps {
 	disabled?: boolean
-	href?: string
-	icon?: JSX.Element
 }
 
 const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>((
-	{ children, disabled = false, href, icon, className, ...props },
+	{ children, disabled = false, className, ...props },
 	ref,
 ) => {
 	return (
@@ -19,14 +16,9 @@ const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>((
 			ref={ ref }
 			disabled={ disabled }
 			className={ cx(classes.menuItem, className, { disabled }) }
-			component={ href !== undefined ? Link : 'button' }
-			href={ href }
 			{ ...props }
 		>
-			<Flex align="center" wrap="nowrap" gap="xs">
-				{ icon }
-				{ children }
-			</Flex>
+			{ children }
 		</Menu.Item>
 	)
 })

@@ -21,7 +21,7 @@ const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) =
 			navMenu={ getCircleMenu({ circle }) }
 			deleteRoute={ Routes.circlePresentationTemplates(circle.slug) }
 			menuOptions={ [
-				{ label: 'New Template', href: Routes.newCirclePresentationTemplate(circle.slug), icon: NewIcon },
+				{ label: 'New Template', href: Routes.newCirclePresentationTemplate(circle.slug), icon: <NewIcon /> },
 			] }
 		>
 			<TemplatesTable />

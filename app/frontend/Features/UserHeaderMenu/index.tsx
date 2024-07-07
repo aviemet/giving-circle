@@ -20,33 +20,33 @@ const UserHeaderMenu = () => {
 				{ props.auth.user.circles.length > 0 && <Text><Link href={ Routes.circles() }>Circles</Link></Text> }
 
 				{ props.auth.user.circles.slice(0,4).map(circle => (
-					<Menu.Item
+					<Menu.Link
 						key={ circle.id }
 						href={ Routes.circle(circle.slug) }
 					>
 						{ circle.name }
-					</Menu.Item>
+					</Menu.Link>
 				)) }
 
-				{ props.auth.user.circles.length > 4 && <Menu.Item href={ Routes.circles() }>more...</Menu.Item> }
+				{ props.auth.user.circles.length > 4 && <Menu.Link href={ Routes.circles() }>more...</Menu.Link> }
 
 				<Divider />
 
-				<Menu.Item
+				<Menu.Link
 					href={ Routes.settingsGeneral() }
 					icon={ <SettingsIcon /> }
 				>
 				Preferences
-				</Menu.Item>
+				</Menu.Link>
 
 				<Divider />
 
-				<Menu.Item
+				<Menu.Link
 					href={ Routes.destroyUserSession() }
 					icon={ <LogoutIcon /> }
 				>
 				Sign Out
-				</Menu.Item>
+				</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>
 	)

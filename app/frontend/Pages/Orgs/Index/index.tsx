@@ -21,7 +21,7 @@ const OrgsIndex = ({ orgs, pagination, circle }: OrgIndexProps) => {
 				{
 					label: 'New Org',
 					href: Routes.newCircleOrg(circle.slug),
-					icon: NewIcon,
+					icon: <NewIcon />,
 				},
 			] }
 		>

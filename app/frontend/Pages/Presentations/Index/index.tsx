@@ -21,7 +21,7 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 			pagination={ pagination }
 			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			menuOptions={ [
-				{ label: 'New Presentation', href: Routes.newThemePresentation(theme.slug), icon: NewIcon },
+				{ label: 'New Presentation', href: Routes.newThemePresentation(theme.slug), icon: <NewIcon /> },
 			] }
 		>
 			<PresentationsTable />

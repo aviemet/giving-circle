@@ -1,16 +1,19 @@
 import React, { forwardRef } from 'react'
-import { Menu, createPolymorphicComponent, type MenuItemProps } from '@mantine/core'
+import { Menu, createPolymorphicComponent, type MenuItemProps as MantineItemProps } from '@mantine/core'
 import cx from 'clsx'
 import { Link } from '@/Components'
 import { LinkProps } from '../Link'
+import * as classes from './Menu.css'
 
-interface MenuItemProps extends MenuItemProps, Omit<LinkProps, 'color'|'children'> {
+type DuplicateProps = 'color'|'children'|'classNames'|'styles'|'variant'|'vars'
+interface MenuItemProps extends MantineItemProps, Omit<LinkProps, DuplicateProps> {
+	icon?: React.ReactNode
 	disabled?: boolean
 	type?: string
 }
 
 const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>((
-	{ children, disabled = false, className, ...props },
+	{ children, disabled = false, className, icon, leftSection, ...props },
 	ref,
 ) => {
 	return (
@@ -18,7 +21,8 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>((
 			ref={ ref }
 			disabled={ disabled }
 			component={ Link }
-			className={ cx(className, { disabled }) }
+			className={ cx(classes.menuItem, className, { disabled }) }
+			leftSection={ <>{ icon && icon }{ leftSection && leftSection }</> }
 			{ ...props }
 		>
 			{ children }

@@ -18,7 +18,7 @@ const PeopleIndex = ({ people, pagination }: PersonIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.people() }
 			menuOptions={ [
-				{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+				{ label: 'New Person', href: Routes.newPerson(), icon: <NewIcon /> },
 			] }
 		>
 			<PeopleTable />

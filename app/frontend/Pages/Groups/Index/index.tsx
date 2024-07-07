@@ -19,7 +19,7 @@ const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.groups() }
 			menuOptions={ [
-				{ label: 'New Group', href: Routes.newCircleGroup(circle.slug), icon: NewIcon },
+				{ label: 'New Group', href: Routes.newCircleGroup(circle.slug), icon: <NewIcon /> },
 			] }
 		>
 			<GroupsTable />

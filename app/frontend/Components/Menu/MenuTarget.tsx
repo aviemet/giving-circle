@@ -1,8 +1,9 @@
 import React from 'react'
-import { ActionIcon, Menu, type MenuTargetProps } from '@mantine/core'
-import { DotsIcon } from '@/Components/Icons'
+import { ActionIcon, Button, Menu } from '@/Components'
+import { DotsIcon, DownArrowIcon } from '@/Components/Icons'
+import { type MenuTargetProps as MantineMenuTargetProps } from '@mantine/core'
 
-interface MenuTargetProps extends Omit<MenuTargetProps, 'children'> {
+interface MenuTargetProps extends Omit<MantineMenuTargetProps, 'children'> {
 	children?: React.ReactNode
 	icon?: React.ReactNode
 	variant?: 'gradient' | 'subtle' | 'filled' | 'outline' | 'light' | 'default' | 'transparent'
@@ -16,6 +17,20 @@ const MenuTarget = ({ children, icon, variant, color, ...props }: MenuTargetProp
 				<ActionIcon color={ color } variant={ variant } >
 					{ icon || <DotsIcon /> }
 				</ActionIcon>
+			</Menu.Target>
+		)
+	}
+
+	if(typeof children === 'string') {
+		return (
+			<Menu.Target { ...props }>
+				<Button
+					color={ color }
+					variant={ variant }
+					rightSection={ icon || <DownArrowIcon /> }
+				>
+					{ children }
+				</Button>
 			</Menu.Target>
 		)
 	}

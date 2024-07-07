@@ -21,7 +21,7 @@ const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) 
 			pagination={ pagination }
 			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			menuOptions={ [
-				// { label: 'Add Member', href: Routes.newThemeMember(theme.slug), icon: NewIcon },
+				// { label: 'Add Member', href: Routes.newThemeMember(theme.slug), icon: <NewIcon /> },
 			] }
 		>
 			<MembersTable />

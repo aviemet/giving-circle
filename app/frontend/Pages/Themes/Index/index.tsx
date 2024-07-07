@@ -20,7 +20,7 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 			pagination={ pagination }
 			navMenu={ getCircleMenu({ circle }) }
 			menuOptions={ [
-				{ label: 'New Theme', href: Routes.newCircleTheme(circle.slug), icon: NewIcon },
+				{ label: 'New Theme', href: Routes.newCircleTheme(circle.slug), icon: <NewIcon /> },
 			] }
 		>
 			<ThemesTable />
