@@ -2,12 +2,11 @@ class PresentationsController < ApplicationController
   include Searchable
 
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
-  expose :circle, -> { theme.circle }
 
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }
   expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
 
-  # @route GET /themes/:theme_id/presentations (theme_presentations)
+  # @route GET /themes/:theme_slug/presentations (theme_presentations)
   def index
     authorize presentations
 
@@ -20,7 +19,8 @@ class PresentationsController < ApplicationController
         **pagination_data(paginated_presentations)
       } },
       theme: -> { theme.render(view: :shallow) },
-    }
+      circle: -> { theme.circle.render(view: :share) }
+    }, layout: "something"
   end
 
   # @route GET /presentations/:id (presentation)
@@ -31,7 +31,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_id/presentations/new (new_theme_presentation)
+  # @route GET /themes/:theme_slug/presentations/new (new_theme_presentation)
   def new
     authorize Presentation.new
     render inertia: "Presentations/New", props: {
@@ -55,7 +55,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route POST /themes/:theme_id/presentations (theme_presentations)
+  # @route POST /themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new
     if presentation.save
@@ -76,7 +76,7 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /themes/:theme_id/presentations (theme_presentations)
+  # @route DELETE /themes/:theme_slug/presentations (theme_presentations)
   # @route DELETE /presentations/:id (presentation)
   def destroy
     authorize presentation

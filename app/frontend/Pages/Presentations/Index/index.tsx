@@ -13,7 +13,6 @@ interface PresentationIndexProps {
 }
 
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
-
 	return (
 		<IndexPageTemplate
 			title="Presentations"

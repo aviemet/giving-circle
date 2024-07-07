@@ -10,7 +10,11 @@ import AppFooter from './AppFooter'
 import cx from 'clsx'
 import * as classes from './AppLayout.css'
 
-const AppLayout = ({ children }: { children: React.ReactNode }) => {
+interface AppLayoutProps {
+	children: any
+}
+
+const AppLayout = ({ children }: AppLayoutProps) => {
 	const { sidebarOpen, sidebarVisible } = useLayoutStore()
 	const theme = useMantineTheme()
 	const pinned = useHeadroom({ fixedAt: 120 })

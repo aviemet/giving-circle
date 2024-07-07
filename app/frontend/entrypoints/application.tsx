@@ -2,7 +2,7 @@ import React from 'react'
 import { createInertiaApp, router } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios'
-import { PublicLayout, AppLayout, AuthLayout } from '../Layouts'
+import { PublicLayout, AppLayout, AuthLayout, PresentationLayout } from '../Layouts'
 import { propsMiddleware } from './middleware'
 import { runAxe } from './middleware/axe'
 
@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				case 'Auth':
 					layout = AuthLayout
 					checkedName = name.replace('Auth/', '')
+					break
+				case 'Present':
+					layout = PresentationLayout
+					checkedName = name.replace('Present/', '')
 					break
 				default:
 					layout = AppLayout

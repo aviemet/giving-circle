@@ -88,7 +88,7 @@ Rails.application.routes.draw do
       )
     end
 
-    resources :themes, shallow: true, only: [] do
+    resources :themes, shallow: true, param: :slug, only: [] do
       resources :presentations, concerns: :bulk_delete
     end
   end

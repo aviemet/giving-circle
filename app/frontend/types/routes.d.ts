@@ -718,13 +718,13 @@ export const newPerson: ((
 
 /**
  * Generates rails route to
- * /themes/:theme_id/presentations/new(.:format)
- * @param {any} themeId
+ * /themes/:theme_slug/presentations/new(.:format)
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newThemePresentation: ((
-  themeId: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -916,13 +916,13 @@ export const settingsNotifications: ((
 
 /**
  * Generates rails route to
- * /themes/:theme_id/presentations(.:format)
- * @param {any} themeId
+ * /themes/:theme_slug/presentations(.:format)
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const themePresentations: ((
-  themeId: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

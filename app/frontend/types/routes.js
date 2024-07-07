@@ -1004,12 +1004,12 @@ export const newPerson = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"
 
 /**
  * Generates rails route to
- * /themes/:theme_id/presentations/new(.:format)
- * @param {any} themeId
+ * /themes/:theme_slug/presentations/new(.:format)
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemePresentation = /*#__PURE__*/ __jsr.r({"theme_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_id"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const newThemePresentation = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1160,12 +1160,12 @@ export const settingsNotifications = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,
 
 /**
  * Generates rails route to
- * /themes/:theme_id/presentations(.:format)
- * @param {any} themeId
+ * /themes/:theme_slug/presentations(.:format)
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentations = /*#__PURE__*/ __jsr.r({"theme_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_id"],[2,[7,"/"],[2,[6,"presentations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const themePresentations = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"presentations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
