@@ -5,4 +5,8 @@ class OrgPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def import?
+    true
+  end
 end

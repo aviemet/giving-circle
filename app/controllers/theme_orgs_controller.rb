@@ -46,6 +46,15 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:org_slug/import (circle_theme_org_import)
+  def import
+    authorize Org.new
+
+    render inertia: "Theme/Orgs/Import", props: {
+      circle: -> { circle.render(view: :share) }
+    }
+  end
+
   private
 
   def sortable_fields

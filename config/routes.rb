@@ -79,6 +79,7 @@ Rails.application.routes.draw do
       )
 
       get 'orgs', to: 'theme_orgs#index'
+      get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
       resources(
         :theme_orgs,
         only: [:show, :new, :edit],

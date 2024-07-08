@@ -3,6 +3,7 @@ export { default as Button } from './Button'
 export { default as ConditionalWrapper } from './ConditionalWrapper'
 export { default as DangerousHtml } from './DangerousHtml'
 export { default as Date } from './Date'
+export { default as Dropzone } from './Dropzone'
 export { default as Flash } from './Flash'
 export { default as Link, NavLink } from './Link'
 export { default as Menu } from './Menu'
@@ -25,6 +26,7 @@ export {
 	Burger,
 	Card,
 	Center,
+	Chip,
 	Container,
 	Divider,
 	Flex,

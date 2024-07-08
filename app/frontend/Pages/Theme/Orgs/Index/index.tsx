@@ -33,7 +33,7 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 					},
 					{
 						label: 'Import Orgs From File',
-						href: Routes.newCircleThemeOrg(circle.slug, theme.slug), icon: <NewIcon />,
+						href: Routes.circleThemeOrgsImport(circle.slug, theme.slug), icon: <NewIcon />,
 					},
 				],
 			} }
