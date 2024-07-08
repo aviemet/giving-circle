@@ -8,24 +8,29 @@ import { router } from '@inertiajs/react'
 import cx from 'clsx'
 import * as classes from '../IndexPageTemplate/IndexPage.css'
 
-export interface IndexTableTitleSectionProps {
-	children: React.ReactNode
-	deleteRoute?: string
-	menuLabel?: React.ReactNode
-	menuOptions?: {
-		label: string
-		href: string
-		icon?: React.ReactNode
-	}[]
+type MenuOption = {
+	label: string
+	href: string
+	icon?: React.ReactNode
 }
 
-const IndexTableTitleSection = ({ children, deleteRoute, menuLabel,menuOptions }: IndexTableTitleSectionProps) => {
+export interface IndexTableTitleSectionProps {
+	children: React.ReactNode
+	contextMenu?: {
+		label?: string
+		options?: MenuOption[]
+		icon?: React.ReactNode
+		deleteRoute?: string
+	}
+}
+
+const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectionProps) => {
 	const { tableState: { selected } } = useTableContext()
 
 	const deleteRecords = () => {
-		if(!deleteRoute) return
+		if(!contextMenu?.deleteRoute) return
 
-		router.visit(deleteRoute, {
+		router.visit(contextMenu.deleteRoute, {
 			method: 'delete',
 			data: { ids: Array.from(selected) },
 		})
@@ -34,11 +39,11 @@ const IndexTableTitleSection = ({ children, deleteRoute, menuLabel,menuOptions }
 	return (
 		<Group justify="space-between" align="start" style={ { marginBottom: 12 } } gap="sm">
 			<Group justify="space-between" className={ cx(classes.title) }>
-				<Menu position="bottom-end">
-					{ menuLabel ? <Menu.Target>{ menuLabel }</Menu.Target> : <Menu.Target /> }
+				{ contextMenu?.options && <Menu position="bottom-end">
+					{ contextMenu?.label ? <Menu.Target>{ contextMenu.label }</Menu.Target> : <Menu.Target /> }
 
 					<Menu.Dropdown>
-						{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
+						{ contextMenu.options.map(({ label, href, icon }, index) => {
 							return (
 								<Menu.Link key={ index } href={ href } leftSection={ icon ? icon : undefined }>
 									{ label }
@@ -46,7 +51,7 @@ const IndexTableTitleSection = ({ children, deleteRoute, menuLabel,menuOptions }
 							)
 						}) }
 
-						{ deleteRoute && selected.size > 0 && <>
+						{ contextMenu?.deleteRoute && selected.size > 0 && <>
 							<Divider />
 
 							<Menu.Item leftSection={ <TrashIcon size={ 14 } color='red' /> } onClick={ deleteRecords }>
@@ -55,7 +60,7 @@ const IndexTableTitleSection = ({ children, deleteRoute, menuLabel,menuOptions }
 						</> }
 
 					</Menu.Dropdown>
-				</Menu>
+				</Menu> }
 			</Group>
 			{ !!children && <Box className={ classes.content }>
 				{ children }

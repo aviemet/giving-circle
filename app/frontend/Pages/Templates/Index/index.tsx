@@ -19,10 +19,12 @@ const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) =
 			rows={ templates }
 			pagination={ pagination }
 			navMenu={ getCircleMenu({ circle }) }
-			deleteRoute={ Routes.circlePresentationTemplates(circle.slug) }
-			menuOptions={ [
-				{ label: 'New Template', href: Routes.newCirclePresentationTemplate(circle.slug), icon: <NewIcon /> },
-			] }
+			contextMenu={ {
+				deleteRoute: Routes.circlePresentationTemplates(circle.slug),
+				options: [
+					{ label: 'New Template', href: Routes.newCirclePresentationTemplate(circle.slug), icon: <NewIcon /> },
+				],
+			} }
 		>
 			<TemplatesTable />
 		</IndexPageTemplate>

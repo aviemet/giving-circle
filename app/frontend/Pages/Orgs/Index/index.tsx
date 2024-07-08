@@ -17,13 +17,15 @@ const OrgsIndex = ({ orgs, pagination, circle }: OrgIndexProps) => {
 			model="orgs"
 			rows={ orgs }
 			pagination={ pagination }
-			menuOptions={ [
-				{
-					label: 'New Org',
-					href: Routes.newCircleOrg(circle.slug),
-					icon: <NewIcon />,
-				},
-			] }
+			contextMenu={ {
+				options: [
+					{
+						label: 'New Org',
+						href: Routes.newCircleOrg(circle.slug),
+						icon: <NewIcon />,
+					},
+				],
+			} }
 		>
 			<OrgsTable />
 		</IndexPageTemplate>

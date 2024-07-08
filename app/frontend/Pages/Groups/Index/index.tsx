@@ -17,10 +17,12 @@ const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
 			model="groups"
 			rows={ groups }
 			pagination={ pagination }
-			deleteRoute={ Routes.groups() }
-			menuOptions={ [
-				{ label: 'New Group', href: Routes.newCircleGroup(circle.slug), icon: <NewIcon /> },
-			] }
+			contextMenu={ {
+				deleteRoute:  Routes.groups(),
+				options: [
+					{ label: 'New Group', href: Routes.newCircleGroup(circle.slug), icon: <NewIcon /> },
+				],
+			} }
 		>
 			<GroupsTable />
 		</IndexPageTemplate>

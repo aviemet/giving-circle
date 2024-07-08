@@ -16,10 +16,12 @@ const UserIndex = ({ users, pagination }: UserIndexProps) => {
 			model="users"
 			rows={ users }
 			pagination={ pagination }
-			deleteRoute={ Routes.users() }
-			menuOptions={ [
-				{ label: 'Invite New User', href: Routes.newUser(), icon: <NewIcon /> },
-			] }
+			contextMenu={ {
+				deleteRoute: Routes.users(),
+				options: [
+					{ label: 'Invite New User', href: Routes.newUser(), icon: <NewIcon /> },
+				],
+			} }
 		>
 			<UsersTable />
 		</IndexPageTemplate>

@@ -24,9 +24,11 @@ const MembersIndex = ({ members, circle, pagination }: MemberIndexProps) => {
 				{ title: circle.name, href: Routes.circle(circle.slug) },
 				{ title: 'Members', href: Routes.circleMembers(circle?.slug) },
 			] }
-			// menuOptions={ [
-			// 	{ label: 'New Member', href: Routes.newCircleMember(circle.slug), icon: <NewIcon /> },
-			// ] }
+			// contextMenu={ {
+			// 	options: [
+			// 		{ label: 'New Member', href: Routes.newCircleMember(circle.slug), icon: <NewIcon /> },
+			// 	],
+			// } }
 		>
 			<MembersTable circle={ circle } />
 		</IndexPageTemplate>

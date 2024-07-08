@@ -25,10 +25,8 @@ const IndexPageTemplate = ({
 	pagination,
 	search = true,
 	breadcrumbs,
-	menuLabel,
-	menuOptions,
+	contextMenu,
 	advancedSearch,
-	deleteRoute,
 	navMenu,
 	hideNavMenu,
 	meta,
@@ -51,11 +49,7 @@ const IndexPageTemplate = ({
 					rows={ rows }
 					pagination={ pagination }
 				>
-					<TableTitleSection
-						menuLabel={ menuLabel }
-						menuOptions={ menuOptions }
-						deleteRoute={ deleteRoute }
-					>
+					<TableTitleSection contextMenu={ contextMenu }>
 						{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
 					</TableTitleSection>
 

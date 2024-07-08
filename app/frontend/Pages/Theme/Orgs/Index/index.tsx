@@ -20,13 +20,23 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 			rows={ orgs }
 			pagination={ pagination }
 			navMenu={ getThemeMenu({ circle: circle, theme }) }
-			menuLabel="Add Orgs to Theme"
-			menuOptions={ [
-				{
-					label: 'Add Org To Theme',
-					href: Routes.newCircleThemeOrg(circle.slug, theme.slug), icon: <NewIcon />,
-				},
-			] }
+			contextMenu={ {
+				label: 'Add Orgs to Theme',
+				options: [
+					{
+						label: 'Add New Org To Theme',
+						href: Routes.newCircleThemeOrg(circle.slug, theme.slug), icon: <NewIcon />,
+					},
+					{
+						label: 'Add Existing Org To Theme',
+						href: Routes.newCircleThemeOrg(circle.slug, theme.slug), icon: <NewIcon />,
+					},
+					{
+						label: 'Import Orgs From File',
+						href: Routes.newCircleThemeOrg(circle.slug, theme.slug), icon: <NewIcon />,
+					},
+				],
+			} }
 		>
 			<OrgsTable />
 		</IndexPageTemplate>

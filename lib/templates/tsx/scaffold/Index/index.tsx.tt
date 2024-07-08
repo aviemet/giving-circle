@@ -16,10 +16,12 @@ const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagi
 			model="<%= plural_table_name %>"
 			rows={ <%= plural_table_name %> }
 			pagination={ pagination }
-			deleteRoute={ Routes.<%= plural_table_name.camelize(:lower) %>() }
-			menuOptions={ [
-				{ label: 'New <%= human_name.titleize %>', href: Routes.new<%= singular_table_name.camelize %>(), icon: NewIcon },
-			] }
+			contextMenu={ {
+				deleteRoute: Routes.<%= plural_table_name.camelize(:lower) %>(),
+				[
+					{ label: 'New <%= human_name.titleize %>', href: Routes.new<%= singular_table_name.camelize %>(), icon: NewIcon },
+				]
+			} }
 		>
 			<<%= plural_table_name.camelize %>Table />
 		</IndexPageTemplate>
