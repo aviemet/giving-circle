@@ -1,10 +1,9 @@
 import React from 'react'
-import { ActionIcon, Button, Menu } from '@/Components'
+import { ActionIcon, Button } from '@/Components'
 import { DotsIcon, DownArrowIcon } from '@/Components/Icons'
-import { type MenuTargetProps as MantineMenuTargetProps } from '@mantine/core'
+import { Menu, type MenuTargetProps as MantineMenuTargetProps } from '@mantine/core'
 
-interface MenuTargetProps extends Omit<MantineMenuTargetProps, 'children'> {
-	children?: React.ReactNode
+interface MenuTargetProps extends MantineMenuTargetProps {
 	icon?: React.ReactNode
 	variant?: 'gradient' | 'subtle' | 'filled' | 'outline' | 'light' | 'default' | 'transparent'
 	color?: string
