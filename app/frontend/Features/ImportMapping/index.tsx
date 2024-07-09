@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Chip, Stack, Table, Paper, Text, Box } from '@/Components'
+import { Chip, Table, Paper, Text, Box, Flex, Badge } from '@/Components'
 import { Select } from '@/Components/Inputs'
+import { useInit } from '@/lib/hooks'
+
+import cx from 'clsx'
 
 interface MappingItem {
 	name: string
@@ -27,18 +30,18 @@ interface ImportMappingProps {
 const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headingMap, setHeadingMap] }: ImportMappingProps) => {
 	const [errors, setErrors] = useState<ErrorItem[][]>([])
 
-	// const alternateForm = (heading: string): string | undefined => {
-	// 	return mapping.find(m => m.forms.includes(heading.toLowerCase()))?.name
-	// }
+	const alternateForm = (heading: string): string | undefined => {
+		return mapping.find(m => m.forms.includes(heading.toLowerCase()))?.name
+	}
 
-	// const [headingMap, setHeadingMap] = useState<Record<string, string>>(() => {
-	// 	const map: Record<string, string> = {}
-	// 	headings.forEach(heading => {
-	// 		const inferredHeading = alternateForm(heading)
-	// 		map[heading] = inferredHeading || ''
-	// 	})
-	// 	return map
-	// })
+	useInit(() => {
+		const map: Record<string, string> = {}
+		headings.forEach(heading => {
+			const inferredHeading = alternateForm(heading)
+			map[heading] = inferredHeading || ''
+		})
+		setHeadingMap(map)
+	})
 
 	const handleSelectChange = (value: string | null, heading: string) => {
 		if(value === null) return
@@ -69,12 +72,14 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 				<Table>
 					<Table.Head>
 						<Table.Row>
-							{ headings.map((heading, i) => (
+							<Table.HeadCell className={ cx('align-bottom', 'center') }>#</Table.HeadCell>
+							<>{ headings.map((heading, i) => (
 								<Table.HeadCell key={ i }>
-									<Stack mb="sm">
-										<Text>Heading From CSV:</Text>
-										<Chip>{ heading }</Chip>
-									</Stack>
+									<Flex mb="xs" align="center" style={ { whiteSpace: 'nowrap' } }>
+										<Text>Import</Text>
+										<Badge radius="xs" size="xs" mx="xs">{ heading }</Badge>
+										<Text>As</Text>
+									</Flex>
 									<Select
 										options={ [
 											{ value: '', label: 'Do Not Import' },
@@ -85,7 +90,7 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 										placeholder="Select mapping"
 									/>
 								</Table.HeadCell>
-							)) }
+							)) }</>
 						</Table.Row>
 						{ errors.length > 0 && (
 							<Table.Row>
@@ -101,10 +106,13 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 						{ values.map((org, i) => (
 							<React.Fragment key={ i }>
 								<Table.Row>
-									{ headings.map((heading, j) => {
+									<Table.Cell className={ cx('align-middle') }>
+										<Text m="xs">{ i }</Text>
+									</Table.Cell>
+									<>{ headings.map((heading, j) => {
 										const headingMapForType = mapping.find(map => map.name === headingMap[heading])
 										const cellValue = headingMapForType?.type ? headingMapForType.type(org[heading]) : org[heading]
-
+										console.log({ headingMapForType, cellValue })
 										const error = errors[i] && errors[i].find(error => error.name === headingMapForType?.name)
 
 										if(error) console.log({ org, i, heading, headingMapForType, error: errors[i] })
@@ -112,7 +120,7 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 										return (
 											<Table.Cell key={ `${j}-${heading}` }>{ `${cellValue}` }</Table.Cell>
 										)
-									}) }
+									}) }</>
 								</Table.Row>
 								{ errors[i] && (
 									<Table.Row>

@@ -59,6 +59,19 @@ export const table = css`
 		&.nowrap {
 			white-space: nowrap;
 		}
+
+		&.center {
+			text-align: center;
+		}
+
+		&.align-middle {
+			vertical-align: middle;
+		}
+
+		&.align-bottom {
+			vertical-align: bottom;
+		}
+
 	}
 
 	th {
@@ -93,7 +106,6 @@ export const table = css`
 				border-color: ${vars.colors.gray[7]};
 			}
 		}
-
 	}
 
 	/* On small screens, collapse tables into "cards" */

@@ -128,7 +128,7 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 			siteTitle={ siteTitle }
 			navMenu={ getThemeMenu({ circle, theme }) }
 		>
-			{ pendingOrgs.length > 0 && pendingHeadings.length > 0 && (
+			{ displayImportTable ? (
 				<ImportMapping
 					headings={ pendingHeadings }
 					values={ pendingOrgs }
@@ -136,11 +136,14 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 					headingMapState={ [headingMap, setHeadingMap] }
 					// onImport={ handleImportData }
 				/>
-			) }
-
-			<Text mb="sm">Import a <Code>.csv</Code> file with the organization details for this theme. You can click in the space below or drag and drop the file.</Text>
-			<Text mb="sm">The file should contain the organizations&apos; name, grant request amount, and an optional brief description</Text>
-			<Dropzone onDrop={ handleFileInputChange } h="100%" />
+			)
+				:
+				<>
+					<Text mb="sm">Import a <Code>.csv</Code> file with the organization details for this theme. You can click in the space below or drag and drop the file.</Text>
+					<Text mb="sm">The file should contain the organizations&apos; name, grant request amount, and an optional brief description</Text>
+					<Dropzone onDrop={ handleFileInputChange } h="100%" />
+				</>
+			}
 		</Page>
 	)
 }
