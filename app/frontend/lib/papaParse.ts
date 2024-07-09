@@ -35,10 +35,11 @@ const inferHeadings = (headings: string[], acceptedHeadings: AcceptedHeading[], 
 	}, {} as HeadingMap)
 
 	callbacks?.afterInferHeadings?.(headingsMap)
+
 	return headingsMap
 }
 
-export const readCsv = (
+export const parseCsvFile = (
 	file: File,
 	callbacks: Callbacks,
 	acceptedHeadings?: AcceptedHeading[],
@@ -47,12 +48,13 @@ export const readCsv = (
 	const data: Record<string, unknown>[] = []
 	let headers: string[] = []
 
-	Papa.parse(file, {
+	Papa.parse<Record<string, unknown>>(file, {
 		header: true,
 		delimiter: ',',
 		dynamicTyping: true,
 		skipEmptyLines: true,
-		step: ({ data: [rowData], meta }: Papa.ParseResult<Record<string, unknown>>) => {
+		step: ({ data: rowData, errors, meta }) => {
+
 			if(!headings) {
 				headers = meta.fields?.filter(Boolean) || []
 				headings = acceptedHeadings ? inferHeadings(headers, acceptedHeadings, callbacks) : null
@@ -75,4 +77,6 @@ export const readCsv = (
 		},
 		complete: () => callbacks?.onComplete?.(data, headers),
 	})
+
+	return data
 }

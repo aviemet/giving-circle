@@ -10,9 +10,11 @@ const Header = () => {
 		<Group h="100%" px="md">
 			<Flex align="center" gap="md" style={ { flex: 1 } }>
 				<ToggleNavbarButton hidden={ sidebarOpen } />
-				<Box>
+				{ typeof siteTitle === 'string' ?
 					<Title>{ siteTitle }</Title>
-				</Box>
+					:
+					siteTitle
+				}
 			</Flex>
 
 			<Box>

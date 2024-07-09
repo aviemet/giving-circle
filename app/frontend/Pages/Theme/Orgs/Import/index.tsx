@@ -1,35 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { readCsv } from '@/lib/papaParse'
-import { Button, Dropzone } from '@/Components'
-import { FileInput, TextInput } from '@/Components/Inputs'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
+import { parseCsvFile } from '@/lib/papaParse'
+import { Button, Code, Dropzone, Page, Text, Title } from '@/Components'
 import { ImportMapping } from '@/Features'
 import { type FileWithPath } from '@mantine/dropzone'
+import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
+import { useLayoutStore } from '@/Store'
+import { headingsMap } from './headingsMap'
 
-interface OrgsImportProps {}
+interface OrgsImportProps {
+	theme: Schema.ThemesShallow
+	circle: Schema.CirclesShare
+}
 
-const OrgsImport = (props: OrgsImportProps) => {
+const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
+	const { sidebarVisible, toggleSidebarOpen } = useLayoutStore()
+	const [displayImportTable, setDisplayImportTable] = useState(false)
+
 	const [pendingOrgs, setPendingOrgs] = useState<Record<string, unknown>[]>([])
 	const [pendingHeadings, setPendingHeadings] = useState<string[]>([])
-
-	const [ loading, setLoading ] = useState(false)
-
-	const fileInputRef = useRef<HTMLButtonElement>(null)
 
 	const handleFileInputChange = (files: FileWithPath[]) => {
 		const file = files[0]
 
-		// TODO: Display error message on error
-		const parser = readCsv(file, {
+		parseCsvFile(file, {
 			onComplete: (data, headers) => {
 				setPendingOrgs(data)
+
 				if(headers){
 					setPendingHeadings(headers)
 				}
+
+				setDisplayImportTable(true)
 			},
 		})
-
-		return parser
 	}
+
+	useEffect(() => {
+		if(displayImportTable && sidebarVisible) {
+			toggleSidebarOpen(false)
+		} else {
+			toggleSidebarOpen(true)
+		}
+	}, [displayImportTable])
 
 	const handleImportData = (data: Record<string, any>[]) => {
 		data.forEach(datum => {
@@ -43,60 +55,94 @@ const OrgsImport = (props: OrgsImportProps) => {
 		// history.push(`/admin/${themeId}/orgs`)
 	}
 
-	const headingsMap = [
-		{
-			name: 'title',
-			label: 'Title',
-			forms: ['title', 'org', 'organization', 'name', 'org name', 'organization name'],
-			type: String,
-		},
-		{
-			name: 'ask',
-			label: 'Ask',
-			forms: ['ask', 'amount', 'request'],
-			type: (val: string|number) => typeof val === 'string' ? parseFloat(val.replace(/[^0-9.]/g, '')) : val,
-		},
-		{
-			name: 'description',
-			label: 'Description',
-			forms: ['description', 'desc', 'about', 'details', 'info', 'project overview'],
-			type: String,
-		},
-	]
+	const handleAcceptAction = () => {
+		const batchErrors: ErrorItem[][] = []
+
+		const validatedData = values.map((value, i) => {
+			const row: Record<string, any> = {}
+
+			for(const [csvHeading, dbField] of Object.entries(headingMap)) {
+				if(dbField === '') continue
+
+				const headingMapForType = mapping.find(map => map.name === headingMap[csvHeading])
+				const cellValue = headingMapForType?.type ? headingMapForType.type(value[csvHeading]) : value[csvHeading]
+
+				row[dbField] = cellValue
+			}
+
+			let sanitizedRow = row
+			if(sanitize) {
+				sanitizedRow = sanitize(row)
+			}
+
+			// if(!context.validate(sanitizedRow)) {
+			// 	batchErrors[i] = context.validationErrors().map(({ name, type }) => ({
+			// 		name,
+			// 		type,
+			// 		message: context.keyErrorMessage(name),
+			// 	}))
+			// }
+
+			return sanitizedRow
+		})
+
+		if(batchErrors.length > 0) {
+			setErrors(batchErrors)
+		} else {
+			onImport(validatedData)
+		}
+	}
+
+	const alternateForm = (heading: string): string | undefined => {
+		return headingsMap.find(m => m.forms.includes(heading.toLowerCase()))?.name
+	}
+
+	const [headingMap, setHeadingMap] = useState<Record<string, string>>(() => {
+		const map: Record<string, string> = {}
+		pendingHeadings.forEach(heading => {
+			const inferredHeading = alternateForm(heading)
+			map[heading] = inferredHeading || ''
+		})
+		return map
+	})
+
+	const handleCancelAction = () => {
+		setPendingOrgs([])
+		setPendingHeadings([])
+		setDisplayImportTable(false)
+	}
+
+	const siteTitle = useMemo(() => {
+		if(!displayImportTable) return undefined
+
+		return <>
+			<Title>Orgs Import</Title>
+			<Button onClick={ handleAcceptAction }>Accept</Button>
+			<Button onClick={ handleCancelAction } color="red">Cancel</Button>
+		</>
+	}, [displayImportTable])
 
 	return (
-		<Dropzone onDrop={ handleFileInputChange } />
+		<Page
+			title="Orgs Import"
+			siteTitle={ siteTitle }
+			navMenu={ getThemeMenu({ circle, theme }) }
+		>
+			{ pendingOrgs.length > 0 && pendingHeadings.length > 0 && (
+				<ImportMapping
+					headings={ pendingHeadings }
+					values={ pendingOrgs }
+					mapping={ headingsMap }
+					headingMapState={ [headingMap, setHeadingMap] }
+					// onImport={ handleImportData }
+				/>
+			) }
+
+			<Text mb="sm">Import a <Code>.csv</Code> file with the organization details for this theme. You can click in the space below or drag and drop the file.</Text>
+			<Text mb="sm">The file should contain the organizations&apos; name, grant request amount, and an optional brief description</Text>
+			<Dropzone onDrop={ handleFileInputChange } h="100%" />
+		</Page>
 	)
-
-
-	// TODO: Set loading=true when button clicked, false when csv is loaded
-	// return (
-	// 	<>
-	// 		{ pendingOrgs.length > 0 && pendingHeadings.length > 0 && (
-	// 			<ImportMapping
-	// 				headings={ pendingHeadings }
-	// 				values={ pendingOrgs }
-	// 				mapping={ headingsMap }
-	// 				onImport={ handleImportData }
-	// 			/>
-	// 		) }
-
-	// 		<Button
-	// 			style={ { float: 'right' } }
-	// 			onClick={ () => fileInputRef.current.click() }
-	// 			disabled={ loading }
-	// 		>
-	// 			Import List as .csv
-	// 		</Button>
-	// 		<FileInput
-	// 			inputRef={ fileInputRef }
-	// 			name='orgs_import_file'
-	// 			accept='.csv'
-	// 			style={ { display: 'none' } }
-	// 			onChange={ handleFileInputChange }
-	// 		/>
-	// 	</>
-	// )
 }
 
 export default OrgsImport

@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react'
-import { createContext } from '../../lib/hooks'
+import { createContext } from '@/lib/hooks'
 
 /**
  * Table Section Context

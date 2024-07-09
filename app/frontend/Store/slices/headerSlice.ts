@@ -1,8 +1,8 @@
 import { StateCreator } from 'zustand'
 
 export interface HeaderSlice {
-	siteTitle: string
-	setSiteTitle: (siteTitle: string) => void
+	siteTitle: React.ReactNode
+	setSiteTitle: (siteTitle: React.ReactNode) => void
 }
 
 export const createHeaderSlice: StateCreator<HeaderSlice, [], [],HeaderSlice> = (set) => ({

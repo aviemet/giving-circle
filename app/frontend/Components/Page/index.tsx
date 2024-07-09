@@ -8,7 +8,7 @@ import useLayoutStore from '@/Store/LayoutStore'
 export interface PageProps {
 	children?: React.ReactNode
 	title?: string
-	siteTitle?: string
+	siteTitle?: React.ReactNode
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
@@ -24,7 +24,7 @@ const Page = ({
 	navMenu: NavMenu,
 	breadcrumbs,
 }: PageProps) => {
-	const { sidebarVisible, setSidebarVisible, setSiteTitle } = useLayoutStore()
+	const { sidebarVisible, setSidebarVisible, siteTitle: storeSiteTitle, setSiteTitle } = useLayoutStore()
 
 	// Maintain ref to inner nav menu for page specific menus
 	const dynamicNavMenuRef = useRef(document.getElementById('dynamic-nav-menu'))
@@ -45,7 +45,7 @@ const Page = ({
 	useEffect(() => {
 		const usedSiteTitle = siteTitle ?? title
 
-		if(!usedSiteTitle) return
+		if(!usedSiteTitle || usedSiteTitle === storeSiteTitle) return
 
 		setSiteTitle(usedSiteTitle)
 	}, [siteTitle, title])

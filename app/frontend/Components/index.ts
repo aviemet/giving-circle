@@ -27,6 +27,7 @@ export {
 	Card,
 	Center,
 	Chip,
+	Code,
 	Container,
 	Divider,
 	Flex,

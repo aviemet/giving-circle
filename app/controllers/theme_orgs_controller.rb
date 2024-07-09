@@ -51,6 +51,7 @@ class ThemeOrgsController < ApplicationController
     authorize Org.new
 
     render inertia: "Theme/Orgs/Import", props: {
+      theme: -> { theme.render(view: :shallow) },
       circle: -> { circle.render(view: :share) }
     }
   end

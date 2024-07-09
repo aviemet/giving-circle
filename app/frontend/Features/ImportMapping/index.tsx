@@ -9,47 +9,40 @@ interface MappingItem {
 	type?: (value: any) => any
 }
 
-interface ImportMappingProps {
-	headings: string[]
-	values: Record<string, any>[]
-	mapping: MappingItem[]
-	schema: {
-		newContext: () => SchemaContext
-	}
-	sanitize?: (row: Record<string, any>) => Record<string, any>
-	onImport: (data: Record<string, any>[]) => void
-}
-
-interface SchemaContext {
-	validate: (data: Record<string, any>) => boolean
-	validationErrors: () => { name: string, type: string }[]
-	keyErrorMessage: (key: string) => string
-}
-
 interface ErrorItem {
 	name: string
 	type: string
 	message: string
 }
 
-const ImportMapping = ({ headings, values = [], mapping, schema, sanitize, onImport }: ImportMappingProps) => {
+interface ImportMappingProps {
+	headings: string[]
+	values: Record<string, any>[]
+	mapping: MappingItem[]
+	headingMapState: [state: Record<string, string>, setter: React.Dispatch<React.SetStateAction<Record<string, string>>>]
+	// sanitize?: (row: Record<string, any>) => Record<string, any>
+	// onImport: (data: Record<string, any>[]) => void
+}
+
+const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headingMap, setHeadingMap] }: ImportMappingProps) => {
 	const [errors, setErrors] = useState<ErrorItem[][]>([])
 
-	const alternateForm = (heading: string): string | undefined => {
-		return mapping.find(m => m.forms.includes(heading.toLowerCase()))?.name
-	}
+	// const alternateForm = (heading: string): string | undefined => {
+	// 	return mapping.find(m => m.forms.includes(heading.toLowerCase()))?.name
+	// }
 
-	const [headingMap, setHeadingMap] = useState<Record<string, string>>(() => {
-		const map: Record<string, string> = {}
-		headings.forEach(heading => {
-			const inferredHeading = alternateForm(heading)
-			map[heading] = inferredHeading || ''
-		})
-		return map
-	})
+	// const [headingMap, setHeadingMap] = useState<Record<string, string>>(() => {
+	// 	const map: Record<string, string> = {}
+	// 	headings.forEach(heading => {
+	// 		const inferredHeading = alternateForm(heading)
+	// 		map[heading] = inferredHeading || ''
+	// 	})
+	// 	return map
+	// })
 
 	const handleSelectChange = (value: string | null, heading: string) => {
 		if(value === null) return
+
 		setHeadingMap(prevState => {
 			const newState = { ...prevState }
 			for(const [csvHeading, dbField] of Object.entries(newState)) {
@@ -62,45 +55,6 @@ const ImportMapping = ({ headings, values = [], mapping, schema, sanitize, onImp
 		})
 	}
 
-	const performImportAction = () => {
-		const batchErrors: ErrorItem[][] = []
-
-		const validatedData = values.map((value, i) => {
-			const context = schema.newContext()
-
-			const row: Record<string, any> = {}
-			for(const [csvHeading, dbField] of Object.entries(headingMap)) {
-				if(dbField === '') continue
-
-				const headingMapForType = mapping.find(map => map.name === headingMap[csvHeading])
-				const cellValue = headingMapForType?.type ? headingMapForType.type(value[csvHeading]) : value[csvHeading]
-
-				row[dbField] = cellValue
-			}
-
-			let sanitizedRow = row
-			if(sanitize) {
-				sanitizedRow = sanitize(row)
-			}
-
-			if(!context.validate(sanitizedRow)) {
-				batchErrors[i] = context.validationErrors().map(({ name, type }) => ({
-					name,
-					type,
-					message: context.keyErrorMessage(name),
-				}))
-			}
-
-			return sanitizedRow
-		})
-
-		if(batchErrors.length > 0) {
-			setErrors(batchErrors)
-		} else {
-			onImport(validatedData)
-		}
-	}
-
 	useEffect(() => {
 		if(errors.length > 0) console.error({ errors })
 	}, [errors])
@@ -111,7 +65,6 @@ const ImportMapping = ({ headings, values = [], mapping, schema, sanitize, onImp
 
 	return (
 		<Box>
-			<Button onClick={ performImportAction } mb="md">Accept</Button>
 			<Paper>
 				<Table>
 					<Table.Head>
@@ -144,7 +97,7 @@ const ImportMapping = ({ headings, values = [], mapping, schema, sanitize, onImp
 							</Table.Row>
 						) }
 					</Table.Head>
-					<tbody>
+					<Table.Body>
 						{ values.map((org, i) => (
 							<React.Fragment key={ i }>
 								<Table.Row>
@@ -175,7 +128,7 @@ const ImportMapping = ({ headings, values = [], mapping, schema, sanitize, onImp
 								) }
 							</React.Fragment>
 						)) }
-					</tbody>
+					</Table.Body>
 				</Table>
 			</Paper>
 		</Box>
