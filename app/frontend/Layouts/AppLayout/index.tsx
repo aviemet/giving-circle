@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AppShell } from '@/Components'
 import useLayoutStore from '@/Store/LayoutStore'
 import { useMantineTheme } from '@mantine/core'
@@ -15,9 +15,14 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-	const { sidebarOpen, sidebarVisible } = useLayoutStore()
+	const { sidebarOpen, sidebarVisible, headerPinned, setHeaderPinned } = useLayoutStore()
 	const theme = useMantineTheme()
-	const pinned = useHeadroom({ fixedAt: 120 })
+	const headroom = useHeadroom({ fixedAt: 120 })
+
+	useEffect(() => {
+		if(headroom === headerPinned) return
+		setHeaderPinned(headroom)
+	}, [headroom])
 
 	return (
 		<AppShell
@@ -25,7 +30,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 			padding="md"
 			header={ {
 				height: theme.other.header.height,
-				collapsed: !pinned,
+				collapsed: !headerPinned,
 				offset: false,
 			} }
 			navbar={ {

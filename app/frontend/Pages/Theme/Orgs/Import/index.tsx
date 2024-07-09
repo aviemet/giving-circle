@@ -18,6 +18,7 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 
 	const [pendingOrgs, setPendingOrgs] = useState<Record<string, unknown>[]>([])
 	const [pendingHeadings, setPendingHeadings] = useState<string[]>([])
+	const [headingMap, setHeadingMap] = useState<Record<string, string>>({})
 
 	const handleFileInputChange = (files: FileWithPath[]) => {
 		const file = files[0]
@@ -92,19 +93,6 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 			onImport(validatedData)
 		}
 	}
-
-	const alternateForm = (heading: string): string | undefined => {
-		return headingsMap.find(m => m.forms.includes(heading.toLowerCase()))?.name
-	}
-
-	const [headingMap, setHeadingMap] = useState<Record<string, string>>(() => {
-		const map: Record<string, string> = {}
-		pendingHeadings.forEach(heading => {
-			const inferredHeading = alternateForm(heading)
-			map[heading] = inferredHeading || ''
-		})
-		return map
-	})
 
 	const handleCancelAction = () => {
 		setPendingOrgs([])

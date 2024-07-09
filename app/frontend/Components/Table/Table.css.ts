@@ -28,9 +28,6 @@ export const table = css`
 
 	thead {
 		box-shadow: ${vars.shadows.xs};
-		position: sticky;
-		top: 0;
-		z-index: 1;
 
 		${vars.lightSelector} {
 			background-color: ${vars.colors.gray[1]};

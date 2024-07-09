@@ -69,7 +69,7 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 	return (
 		<Box>
 			<Paper>
-				<Table>
+				<Table wrapper={ false }>
 					<Table.Head>
 						<Table.Row>
 							<Table.HeadCell className={ cx('align-bottom', 'center') }>#</Table.HeadCell>
@@ -112,13 +112,13 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 									<>{ headings.map((heading, j) => {
 										const headingMapForType = mapping.find(map => map.name === headingMap[heading])
 										const cellValue = headingMapForType?.type ? headingMapForType.type(org[heading]) : org[heading]
-										console.log({ headingMapForType, cellValue })
+
 										const error = errors[i] && errors[i].find(error => error.name === headingMapForType?.name)
 
 										if(error) console.log({ org, i, heading, headingMapForType, error: errors[i] })
 
 										return (
-											<Table.Cell key={ `${j}-${heading}` }>{ `${cellValue}` }</Table.Cell>
+											<Table.Cell key={ `${j}-${heading}` } className={ cx({ error }) }>{ `${cellValue}` }</Table.Cell>
 										)
 									}) }</>
 								</Table.Row>

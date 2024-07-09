@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Table, type TableProps as MantineTableProps } from '@mantine/core'
 
 import Head from './Head'
@@ -16,6 +16,8 @@ import ConditionalWrapper from '../ConditionalWrapper'
 
 import cx from 'clsx'
 import * as classes from './Table.css'
+import { useLayoutStore } from '@/Store'
+import { theme } from '@/lib'
 
 export interface TableProps extends MantineTableProps {
 	fixed?: boolean
@@ -47,9 +49,18 @@ const TableComponent: TableObject = ({
 	fixed = false,
 	striped = true,
 	highlightOnHover = true,
+	stickyHeader = true,
+	stickyHeaderOffset = 0,
 	...props
 }) => {
 	const tableState = useTableContext(false)
+	const { headerPinned } = useLayoutStore()
+
+	const stickyHeaderOffsetProp = useMemo(() => {
+		if(!stickyHeader) return undefined
+
+		return headerPinned ? Number(stickyHeaderOffset) + theme.other.header.height : stickyHeaderOffset
+	}, [headerPinned, stickyHeader])
 
 	return (
 		<ConditionalWrapper
@@ -63,6 +74,8 @@ const TableComponent: TableObject = ({
 				<Table
 					striped={ striped }
 					highlightOnHover={ highlightOnHover }
+					stickyHeader={ stickyHeader }
+					stickyHeaderOffset={ stickyHeaderOffsetProp }
 					className={ cx(className, classes.table, { 'wrapper-offset': wrapper }) }
 					{ ...props }
 				>
