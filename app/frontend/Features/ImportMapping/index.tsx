@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Chip, Table, Paper, Text, Box, Flex, Badge } from '@/Components'
+import { Table, Paper, Text, Box, Flex, Badge } from '@/Components'
 import { Select } from '@/Components/Inputs'
 import { useInit } from '@/lib/hooks'
 
