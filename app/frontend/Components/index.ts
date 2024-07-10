@@ -1,5 +1,5 @@
 export { default as Breadcrumbs } from './Breadcrumbs'
-export { default as Button } from './Button'
+export { default as Button, type ButtonProps } from './Button'
 export { default as ConditionalWrapper } from './ConditionalWrapper'
 export { default as DangerousHtml } from './DangerousHtml'
 export { default as Date } from './Date'
@@ -17,33 +17,38 @@ export { default as Tabs } from './Tabs'
 
 // Export UI library components as a proxy to allow easy refactoring
 export {
-	Accordion,
-	ActionIcon,
-	AppShell,
-	Avatar,
-	Badge,
-	Box,
-	Burger,
-	Card,
-	Center,
-	Chip,
-	Code,
-	Container,
-	Divider,
-	Flex,
-	Grid,
-	Group,
-	Image,
-	List,
-	Modal,
-	Paper,
-	Portal,
-	ScrollArea,
-	SimpleGrid,
-	Stack,
-	Text,
-	Title,
-	Tooltip,
-	ThemeIcon as Icon,
-	UnstyledButton,
+	Accordion, type AccordionProps,
+	ActionIcon, type ActionIconProps,
+	AppShell, type AppShellProps,
+	Avatar, type AvatarProps,
+	Badge, type BadgeProps,
+	Box, type BoxProps,
+	Burger, type BurgerProps,
+	Card, type CardProps,
+	Center, type CenterProps,
+	Chip, type ChipProps,
+	Code, type CodeProps,
+	Container, type ContainerProps,
+	Divider, type DividerProps,
+	Flex, type FlexProps,
+	Grid, type GridProps,
+	Group, type GroupProps,
+	Image, type ImageProps,
+	List, type ListProps,
+	Modal, type ModalProps,
+	Paper, type PaperProps,
+	Portal, type PortalProps,
+	ScrollArea, type ScrollAreaProps,
+	SimpleGrid, type SimpleGridProps,
+	Skeleton, type SkeletonProps,
+	Stack, type StackProps,
+	Text, type TextProps,
+	Title, type TitleProps,
+	Tooltip, type TooltipProps,
+	ThemeIcon as Icon, type ThemeIconProps as IconProps,
+	UnstyledButton, type UnstyledButtonProps,
 } from '@mantine/core'
+
+export {
+	type FileWithPath,
+} from '@mantine/dropzone'

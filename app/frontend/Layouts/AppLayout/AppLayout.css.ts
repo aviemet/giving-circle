@@ -1,6 +1,5 @@
-import { vars, theme } from '@/lib'
+import { vars, theme, rem } from '@/lib'
 import { css } from '@linaria/core'
-import { rem } from '@mantine/core'
 
 export const appLayout = css`
 `

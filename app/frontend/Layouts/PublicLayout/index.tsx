@@ -1,7 +1,6 @@
 import React from 'react'
-import { useDisclosure } from '@mantine/hooks'
-import { AppShell, Burger, Skeleton } from '@mantine/core'
-import { Group, Box } from '@/Components'
+import { useDisclosure } from '@/lib/hooks'
+import { Group, Box, AppShell, Burger, Skeleton } from '@/Components'
 import { CircleDotIcon } from '@/Components/Icons'
 import { UserHeaderMenu } from '@/Features'
 

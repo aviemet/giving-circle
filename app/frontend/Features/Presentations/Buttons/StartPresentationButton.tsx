@@ -1,7 +1,6 @@
 import React from 'react'
-import { Tooltip, Button } from '@/Components'
+import { Tooltip, Button, ButtonProps } from '@/Components'
 import { PresentationIcon } from '@/Components/Icons'
-import { ButtonProps } from '@mantine/core'
 
 interface PresentationIconProps extends ButtonProps {
 	presentation: Schema.PresentationsShallow

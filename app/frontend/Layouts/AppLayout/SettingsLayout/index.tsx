@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Page, Box, Section, Tabs } from '@/Components'
+import { Page, Box, Section, Tabs, Paper } from '@/Components'
 import { router } from '@inertiajs/react'
-import { Paper, useMantineTheme } from '@mantine/core'
-import { useViewportSize, useLocation } from '@/lib/hooks'
+import { useViewportSize, useLocation, useTheme } from '@/lib/hooks'
 import { px } from '@/lib'
 
 interface SettingsLayoutProps {
@@ -26,7 +25,7 @@ const tabs: TTab[] = [
 const SettingsLayout = ({ children }: SettingsLayoutProps) => {
 	const title = 'Settings'
 	const { width } = useViewportSize()
-	const theme = useMantineTheme()
+	const theme = useTheme()
 	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < px(theme.breakpoints.sm))
 
 	const { paths } = useLocation()

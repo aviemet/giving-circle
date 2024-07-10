@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useImperativeHandle } from 'react'
 import { Table, Paper, Text, Box, Flex, Badge } from '@/Components'
 import { Select } from '@/Components/Inputs'
 import { useInit } from '@/lib/hooks'
@@ -18,16 +18,36 @@ interface ErrorItem {
 	message: string
 }
 
+export interface TriggerHandle {
+	trigger: () => void
+}
+
+export const triggerRefAction = (ref: React.RefObject<TriggerHandle>) => {
+	ref?.current?.trigger()
+}
+
 interface ImportMappingProps {
 	headings: string[]
 	values: Record<string, any>[]
 	mapping: MappingItem[]
-	headingMapState: [state: Record<string, string>, setter: React.Dispatch<React.SetStateAction<Record<string, string>>>]
+	headingMapState: [
+		state: Record<string, string>,
+		setter: React.Dispatch<React.SetStateAction<Record<string, string>>>
+	]
+	triggerAcceptRef: React.Ref<TriggerHandle>
+	triggerCancelRef: React.Ref<TriggerHandle>
 	// sanitize?: (row: Record<string, any>) => Record<string, any>
 	// onImport: (data: Record<string, any>[]) => void
 }
 
-const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headingMap, setHeadingMap] }: ImportMappingProps) => {
+const ImportMapping = ({
+	headings,
+	values = [],
+	mapping,
+	headingMapState: [headingMap, setHeadingMap],
+	triggerAcceptRef,
+	triggerCancelRef,
+}: ImportMappingProps) => {
 	const [errors, setErrors] = useState<ErrorItem[][]>([])
 
 	const alternateForm = (heading: string): string | undefined => {
@@ -56,6 +76,62 @@ const ImportMapping = ({ headings, values = [], mapping, headingMapState: [headi
 			newState[heading] = value
 			return newState
 		})
+	}
+
+	useImperativeHandle(triggerAcceptRef, () => ({
+		trigger() {
+			console.log('Accept Triggered')
+		},
+	}))
+
+	const handleAcceptAction = () => {
+		const batchErrors: ErrorItem[][] = []
+
+		const validatedData = values.map((value, i) => {
+			const row: Record<string, any> = {}
+
+			for(const [csvHeading, dbField] of Object.entries(headingMap)) {
+				if(dbField === '') continue
+
+				const headingMapForType = headingsMap.find(map => map.name === headingMap[csvHeading])
+				const cellValue = headingMapForType?.type ? headingMapForType.type(value[csvHeading]) : value[csvHeading]
+
+				row[dbField] = cellValue
+			}
+
+			let sanitizedRow = row
+			if(sanitize) {
+				sanitizedRow = sanitize(row)
+			}
+
+			// if(!context.validate(sanitizedRow)) {
+			// 	batchErrors[i] = context.validationErrors().map(({ name, type }) => ({
+			// 		name,
+			// 		type,
+			// 		message: context.keyErrorMessage(name),
+			// 	}))
+			// }
+
+			return sanitizedRow
+		})
+
+		if(batchErrors.length > 0) {
+			setErrors(batchErrors)
+		} else {
+			onImport(validatedData)
+		}
+	}
+
+	useImperativeHandle(triggerCancelRef, () => ({
+		trigger() {
+			console.log('Cencel Triggered')
+		},
+	}))
+
+	const handleCancelAction = () => {
+		// setPendingOrgs([])
+		// setPendingHeadings([])
+		// setDisplayImportTable(false)
 	}
 
 	useEffect(() => {

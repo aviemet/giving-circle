@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from '@/Components'
-import { Text } from '@mantine/core'
+import { Link, Text } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 

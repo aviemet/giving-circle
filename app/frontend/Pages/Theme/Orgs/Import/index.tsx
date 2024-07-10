@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { parseCsvFile } from '@/lib/papaParse'
-import { Button, Code, Dropzone, Page, Text, Title } from '@/Components'
-import { ImportMapping } from '@/Features'
-import { type FileWithPath } from '@mantine/dropzone'
+import { Button, Code, Dropzone, Page, Text, Title, type FileWithPath } from '@/Components'
+import ImportMapping, { TriggerHandle, triggerRefAction } from '@/Features/ImportMapping'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { useLayoutStore } from '@/Store'
 import { headingsMap } from './headingsMap'
@@ -19,6 +18,9 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	const [pendingOrgs, setPendingOrgs] = useState<Record<string, unknown>[]>([])
 	const [pendingHeadings, setPendingHeadings] = useState<string[]>([])
 	const [headingMap, setHeadingMap] = useState<Record<string, string>>({})
+
+	const acceptButtonRef = useRef<TriggerHandle>(null)
+	const cancelButtonRef = useRef<TriggerHandle>(null)
 
 	const handleFileInputChange = (files: FileWithPath[]) => {
 		const file = files[0]
@@ -56,57 +58,13 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 		// history.push(`/admin/${themeId}/orgs`)
 	}
 
-	const handleAcceptAction = () => {
-		const batchErrors: ErrorItem[][] = []
-
-		const validatedData = values.map((value, i) => {
-			const row: Record<string, any> = {}
-
-			for(const [csvHeading, dbField] of Object.entries(headingMap)) {
-				if(dbField === '') continue
-
-				const headingMapForType = mapping.find(map => map.name === headingMap[csvHeading])
-				const cellValue = headingMapForType?.type ? headingMapForType.type(value[csvHeading]) : value[csvHeading]
-
-				row[dbField] = cellValue
-			}
-
-			let sanitizedRow = row
-			if(sanitize) {
-				sanitizedRow = sanitize(row)
-			}
-
-			// if(!context.validate(sanitizedRow)) {
-			// 	batchErrors[i] = context.validationErrors().map(({ name, type }) => ({
-			// 		name,
-			// 		type,
-			// 		message: context.keyErrorMessage(name),
-			// 	}))
-			// }
-
-			return sanitizedRow
-		})
-
-		if(batchErrors.length > 0) {
-			setErrors(batchErrors)
-		} else {
-			onImport(validatedData)
-		}
-	}
-
-	const handleCancelAction = () => {
-		setPendingOrgs([])
-		setPendingHeadings([])
-		setDisplayImportTable(false)
-	}
-
 	const siteTitle = useMemo(() => {
 		if(!displayImportTable) return undefined
 
 		return <>
 			<Title>Orgs Import</Title>
-			<Button onClick={ handleAcceptAction }>Accept</Button>
-			<Button onClick={ handleCancelAction } color="red">Cancel</Button>
+			<Button onClick={ () => triggerRefAction(acceptButtonRef) }>Accept</Button>
+			<Button onClick={ () => triggerRefAction(cancelButtonRef) } color="red">Cancel</Button>
 		</>
 	}, [displayImportTable])
 
@@ -122,6 +80,8 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 					values={ pendingOrgs }
 					mapping={ headingsMap }
 					headingMapState={ [headingMap, setHeadingMap] }
+					triggerAcceptRef={ acceptButtonRef }
+					triggerCancelRef={ cancelButtonRef }
 					// onImport={ handleImportData }
 				/>
 			)

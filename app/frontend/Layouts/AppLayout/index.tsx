@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { AppShell } from '@/Components'
 import useLayoutStore from '@/Store/LayoutStore'
-import { useMantineTheme } from '@mantine/core'
-import { useHeadroom } from '@mantine/hooks'
+import { useHeadroom, useTheme } from '@/lib/hooks'
+
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar'
 import AppFooter from './AppFooter'
@@ -16,7 +16,7 @@ interface AppLayoutProps {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
 	const { sidebarOpen, sidebarVisible, headerPinned, setHeaderPinned } = useLayoutStore()
-	const theme = useMantineTheme()
+	const theme = useTheme()
 	const headroom = useHeadroom({ fixedAt: 120 })
 
 	useEffect(() => {

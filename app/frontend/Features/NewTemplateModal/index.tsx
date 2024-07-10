@@ -1,8 +1,8 @@
-import { modals } from '@mantine/modals'
 import React from 'react'
-import NewPresentationTemplateForm, { NewTemplateFormData } from './NewPresentationTemplateForm'
+import { modals } from '@mantine/modals'
 import { Form } from '@/Components/Form'
 import { Routes } from '@/lib'
+import NewPresentationTemplateForm, { NewTemplateFormData } from './NewPresentationTemplateForm'
 
 interface ClickableElementProps {
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void

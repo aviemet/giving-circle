@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import { Button, Divider, Flex, Group, Title } from '@/Components'
 import { TextInput } from '@/Components/Inputs'
-import SlideCard from './SlideCard'
 import { useDynamicInputs, useForm } from 'use-inertia-form'
 import { modals } from '@mantine/modals'
+import SlideCard from './SlideCard'
 
 const LayoutEditor = () => {
 	const { getData, data } = useForm()

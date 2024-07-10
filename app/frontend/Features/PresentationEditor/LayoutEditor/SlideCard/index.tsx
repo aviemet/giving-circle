@@ -1,12 +1,12 @@
 import React from 'react'
 import { ActionIcon, Card, Image, Text, Center } from '@/Components'
 import { CrossIcon } from '@/Components/Icons'
+import { TextInput } from '@/Components/Form'
 import { modals } from '@mantine/modals'
+import { useForm } from 'use-inertia-form'
 
 import cx from 'clsx'
 import * as classes from './SlideCard.css'
-import { useForm } from 'use-inertia-form'
-import { TextInput } from '@/Components/Form'
 
 interface SlideCardProps {
 	path: string

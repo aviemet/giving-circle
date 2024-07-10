@@ -1,7 +1,6 @@
 import React from 'react'
-import { ActionIcon, Avatar, Divider, Text } from '@mantine/core'
+import { Link, Menu, ActionIcon, Avatar, Divider, Text } from '@/Components'
 import { LogoutIcon, SettingsIcon } from '@/Components/Icons'
-import { Link, Menu } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import { useTableContext } from '@/Components/Table/TableContext'
-import { Box, Group, Divider } from '@mantine/core'
-import { Menu } from '@/Components'
-import { TrashIcon } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
+import { Menu, Box, Group, Divider } from '@/Components'
+import { TrashIcon } from '@/Components/Icons'
+import { useTableContext } from '@/Components/Table/TableContext'
 
 import cx from 'clsx'
 import * as classes from '../IndexPageTemplate/IndexPage.css'
