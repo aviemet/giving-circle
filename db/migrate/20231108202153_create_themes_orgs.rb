@@ -4,6 +4,8 @@ class CreateThemesOrgs < ActiveRecord::Migration[7.0]
       t.references :org, type: :uuid, null: false, foreign_key: true
       t.references :theme, type: :uuid, null: false, foreign_key: true
 
+      t.monetize :ask, amount: { null: true, default: nil }
+
       t.timestamps
     end
   end

@@ -5,10 +5,30 @@ import { useInit } from '@/lib/hooks'
 
 import cx from 'clsx'
 
-interface MappingItem {
+/**
+ * CSV File Import Key
+ */
+export interface MappingItem {
+	/**
+	 * The new key name to assign to the corresponding old key.
+	 */
 	name: string
+
+	/**
+	 * The label used for displaying in UI dropdowns.
+	 */
 	label: string
+
+	/**
+	 * List of potential values that the old key can have for matching to this rule.
+	 */
 	forms: string[]
+
+	/**
+	 * Optional function to coerce and transform values associated with the old key.
+     * @param value The value associated with the old key to be transformed.
+     * @returns The transformed value to assign to the new key.
+	 */
 	type?: (value: any) => any
 }
 
@@ -26,29 +46,32 @@ export const triggerRefAction = (ref: React.RefObject<TriggerHandle>) => {
 	ref?.current?.trigger()
 }
 
-interface ImportMappingProps {
+interface ImportMappingProps<T = Record<string, unknown>> {
 	headings: string[]
-	values: Record<string, any>[]
+	rows: T[]
 	mapping: MappingItem[]
-	headingMapState: [
-		state: Record<string, string>,
-		setter: React.Dispatch<React.SetStateAction<Record<string, string>>>
-	]
 	triggerAcceptRef: React.Ref<TriggerHandle>
 	triggerCancelRef: React.Ref<TriggerHandle>
-	// sanitize?: (row: Record<string, any>) => Record<string, any>
-	// onImport: (data: Record<string, any>[]) => void
+	validate?: (row: T) => T
+	onAccept?: (data: Record<string, unknown>[]) => void
+	onCancel?: () => void
 }
 
-const ImportMapping = ({
+const ImportMapping = <T extends Record<string, unknown>>({
 	headings,
-	values = [],
+	rows = [],
 	mapping,
-	headingMapState: [headingMap, setHeadingMap],
 	triggerAcceptRef,
 	triggerCancelRef,
-}: ImportMappingProps) => {
-	const [errors, setErrors] = useState<ErrorItem[][]>([])
+	validate,
+	onAccept,
+	onCancel,
+}: ImportMappingProps<T>) => {
+	const [headingMap, setHeadingMap] = useState<Record<string, string>>({})
+
+	/**
+	 * Map headings from imported file to database field names
+	 */
 
 	const alternateForm = (heading: string): string | undefined => {
 		return mapping.find(m => m.forms.includes(heading.toLowerCase()))?.name
@@ -78,31 +101,49 @@ const ImportMapping = ({
 		})
 	}
 
+	/**
+	 * Validate and pass rows to Accept action
+	 */
+
 	useImperativeHandle(triggerAcceptRef, () => ({
 		trigger() {
-			console.log('Accept Triggered')
+			handleAcceptAction?.()
 		},
 	}))
+
+	const [errors, setErrors] = useState<ErrorItem[][]>([])
+
+	const rewriteRowKey = (row: T, headingsArray: [string, string][]) => {
+		const newRow: Record<keyof typeof headingMap, unknown> = {}
+
+		for(const [fromKey, toKey] of headingsArray) {
+			if(toKey === '') continue
+
+			const headingMapForType = mapping.find(map => map.name === headingMap[fromKey])
+			const cellValue = headingMapForType?.type ?
+				headingMapForType.type(row[fromKey])
+				:
+				row[fromKey]
+
+			newRow[toKey] = cellValue
+		}
+
+		return newRow
+	}
 
 	const handleAcceptAction = () => {
 		const batchErrors: ErrorItem[][] = []
 
-		const validatedData = values.map((value, i) => {
-			const row: Record<string, any> = {}
+		const headingsArray = Object.entries(headingMap)
 
-			for(const [csvHeading, dbField] of Object.entries(headingMap)) {
-				if(dbField === '') continue
+		const validatedData = rows.map((row, i) => {
+			const rowWithMappedKey = rewriteRowKey(row, headingsArray)
 
-				const headingMapForType = headingsMap.find(map => map.name === headingMap[csvHeading])
-				const cellValue = headingMapForType?.type ? headingMapForType.type(value[csvHeading]) : value[csvHeading]
 
-				row[dbField] = cellValue
-			}
-
-			let sanitizedRow = row
-			if(sanitize) {
-				sanitizedRow = sanitize(row)
-			}
+			let sanitizedRow = rowWithMappedKey
+			// if(sanitize) {
+			// 	sanitizedRow = sanitize(row)
+			// }
 
 			// if(!context.validate(sanitizedRow)) {
 			// 	batchErrors[i] = context.validationErrors().map(({ name, type }) => ({
@@ -118,21 +159,15 @@ const ImportMapping = ({
 		if(batchErrors.length > 0) {
 			setErrors(batchErrors)
 		} else {
-			onImport(validatedData)
+			onAccept?.(validatedData)
 		}
 	}
 
 	useImperativeHandle(triggerCancelRef, () => ({
 		trigger() {
-			console.log('Cencel Triggered')
+			onCancel?.()
 		},
 	}))
-
-	const handleCancelAction = () => {
-		// setPendingOrgs([])
-		// setPendingHeadings([])
-		// setDisplayImportTable(false)
-	}
 
 	useEffect(() => {
 		if(errors.length > 0) console.error({ errors })
@@ -170,7 +205,7 @@ const ImportMapping = ({
 						</Table.Row>
 						{ errors.length > 0 && (
 							<Table.Row>
-								<Table.Cell colSpan={ values.length }>
+								<Table.Cell colSpan={ rows.length }>
 									<Text>
                     There were errors in the data provided which prevented them from being saved. Please check the data and upload again.
 									</Text>
@@ -179,7 +214,7 @@ const ImportMapping = ({
 						) }
 					</Table.Head>
 					<Table.Body>
-						{ values.map((org, i) => (
+						{ rows.map((org, i) => (
 							<React.Fragment key={ i }>
 								<Table.Row>
 									<Table.Cell className={ cx('align-middle') }>
@@ -200,7 +235,7 @@ const ImportMapping = ({
 								</Table.Row>
 								{ errors[i] && (
 									<Table.Row>
-										<Table.Cell colSpan={ values.length }>
+										<Table.Cell colSpan={ rows.length }>
 											<Box>
 												<Text>Errors:</Text>
 												<ul>

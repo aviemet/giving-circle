@@ -5,6 +5,8 @@ import ImportMapping, { TriggerHandle, triggerRefAction } from '@/Features/Impor
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { useLayoutStore } from '@/Store'
 import { headingsMap } from './headingsMap'
+import axios from 'axios'
+import { Routes } from '@/lib'
 
 interface OrgsImportProps {
 	theme: Schema.ThemesShallow
@@ -17,7 +19,6 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 
 	const [pendingOrgs, setPendingOrgs] = useState<Record<string, unknown>[]>([])
 	const [pendingHeadings, setPendingHeadings] = useState<string[]>([])
-	const [headingMap, setHeadingMap] = useState<Record<string, string>>({})
 
 	const acceptButtonRef = useRef<TriggerHandle>(null)
 	const cancelButtonRef = useRef<TriggerHandle>(null)
@@ -46,16 +47,14 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 		}
 	}, [displayImportTable])
 
-	const handleImportData = (data: Record<string, any>[]) => {
-		data.forEach(datum => {
-			// const { error, response } = OrganizationMethods.create.call(Object.assign({ theme: themeId }, datum))
-		// 	if(error) {
-		// 		enqueueSnackbar('Error importing organizations', { variant: 'error' })
-		// 		console.error({ error })
-		// 	}
-		})
-		// enqueueSnackbar(`${data.length} Organization${ data.length === 1 ? '' : 's'} imported`, { variant: 'success' })
-		// history.push(`/admin/${themeId}/orgs`)
+	const handleImportData = (data: Record<string, unknown>[]) => {
+		axios.post(Routes.circleThemeOrgs(circle.slug, theme.slug), { orgs: data })
+	}
+
+	const handleCancel = () => {
+		setPendingOrgs([])
+		setPendingHeadings([])
+		setDisplayImportTable(false)
 	}
 
 	const siteTitle = useMemo(() => {
@@ -77,12 +76,12 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 			{ displayImportTable ? (
 				<ImportMapping
 					headings={ pendingHeadings }
-					values={ pendingOrgs }
+					rows={ pendingOrgs }
 					mapping={ headingsMap }
-					headingMapState={ [headingMap, setHeadingMap] }
 					triggerAcceptRef={ acceptButtonRef }
 					triggerCancelRef={ cancelButtonRef }
-					// onImport={ handleImportData }
+					onAccept={ handleImportData }
+					onCancel={ handleCancel }
 				/>
 			)
 				:

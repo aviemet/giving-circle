@@ -1,4 +1,6 @@
-export const headingsMap = [
+import { type MappingItem } from '@/Features/ImportMapping'
+
+export const headingsMap: MappingItem[] = [
 	{
 		name: 'name',
 		label: 'Name',
