@@ -4,12 +4,13 @@ import { FlashMessage } from '@/types'
 
 export interface SharedInertiaProps extends PageProps {
 	auth: {
-		form_authenticity_token: string
+		// form_authenticity_token: string
 		user: Schema.UsersShare
 	}
 	circle: Schema.CirclesShare
 	flash: FlashMessage
 	errors: Errors & ErrorBag
+	csrf_token?: string
 }
 
 const usePageProps = () => {

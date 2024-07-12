@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :remove_empty_query_parameters
   before_action :authenticate_user!
+  before_action :set_new_csrf_token
 
   add_flash_types :success, :error, :warning
 
@@ -19,7 +20,7 @@ class ApplicationController < ActionController::Base
   inertia_share do
     share_object = {
       menu: nil,
-      params: request.params.to_h.except("controller", "action")
+      params: request.params.to_h.except("controller", "action"),
     }
 
     if current_user
@@ -65,6 +66,14 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
   end
 
+  # If csrf token session variable is set, pass it as a header and destroy it
+  def set_new_csrf_token
+    if session[:new_csrf_token]
+      response.set_header('X-CSRF-Token', session[:new_csrf_token])
+      session.delete(:new_csrf_token)
+    end
+  end
+
   def remove_empty_query_parameters
     # Filter out empty query parameters
     non_empty_params = request.query_parameters.compact_blank
@@ -80,4 +89,5 @@ class ApplicationController < ActionController::Base
     new_url = "#{request.path}?#{non_empty_params.to_param}"
     redirect_to new_url
   end
+
 end
