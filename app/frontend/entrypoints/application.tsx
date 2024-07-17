@@ -13,20 +13,6 @@ type PagesObject = { default: React.ComponentType<any> & {
 const pages = import.meta.glob<PagesObject>('../Pages/**/index.tsx')
 
 document.addEventListener('DOMContentLoaded', () => {
-	// Set axios csrf token from Rails meta tag
-	const csrfToken = (document.querySelector('meta[name=csrf-token]') as HTMLMetaElement).content
-	axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
-
-	// Update csrf token when session token changes
-	axios.interceptors.response.use(response => {
-		const csrfToken = response.headers['x-csrf-token']
-		if(csrfToken) {
-			axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
-			document.querySelector('meta[name=csrf-token]')?.setAttribute('content', csrfToken)
-		}
-		return response
-	})
-
 	createInertiaApp({
 		title: title => `Giving Circle - ${title}`,
 
@@ -61,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		setup({ el, App, props }) {
 			const root = createRoot(el)
 
-			// Convert SO strings from server to javascript Date objects
+			// Convert ISO strings from server to javascript Date objects
 			props.initialPage.props = propsMiddleware(props.initialPage.props)
 
 			root.render(<App { ...props } />)

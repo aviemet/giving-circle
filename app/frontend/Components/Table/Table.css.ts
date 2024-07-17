@@ -22,7 +22,7 @@ export const table = css`
 
 	&.wrapper-offset {
 		thead { 
-			top: -10 
+			top: -10px;
 		}
 	}
 
