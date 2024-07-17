@@ -1,6 +1,4 @@
 class PresentationsController < ApplicationController
-  include Searchable
-
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }

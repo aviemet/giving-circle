@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { router } from '@inertiajs/react'
 import { type VisitOptions } from '@inertiajs/core'
 import { debounce } from 'lodash'
@@ -49,7 +49,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 		}
 	})
 
-	const debouncedSearch = useMemo(() => debounce((path) => {
+	const debouncedSearch = useCallback(debounce((path) => {
 		const options: VisitOptions = {
 			replace: true,
 			preserveScroll: true,

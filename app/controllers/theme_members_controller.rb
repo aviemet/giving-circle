@@ -1,6 +1,4 @@
 class ThemeMembersController < ApplicationController
-  include Searchable
-
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
   expose :circle, -> { theme.circle }
 

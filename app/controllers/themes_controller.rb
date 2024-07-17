@@ -1,6 +1,4 @@
 class ThemesController < ApplicationController
-  include Searchable
-
   skip_before_action :authenticate_user!, only: [:about]
 
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
@@ -12,8 +10,14 @@ class ThemesController < ApplicationController
   def index
     authorize themes
 
+    paginated_themes = themes.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "Themes/Index", props: {
-      themes: -> { themes.render(view: :index) },
+      themes: -> { paginated_themes.render(view: :index) },
+      pagination: -> { {
+        count: themes.size,
+        **pagination_data(paginated_themes)
+      } },
       circle: -> { circle.render(view: :share) },
     }
   end

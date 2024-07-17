@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  include Searchable
-  include ContactableConcern
+  include Contactable
 
   expose :users, -> { search(User.all.includes_associated, sortable_fields) }
   expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
@@ -8,10 +7,11 @@ class UsersController < ApplicationController
   # @route GET /users (users)
   def index
     authorize users
-    paginated_users = users.page(params[:page] || 1)
+
+    paginated_users = users.page(params[:page] || 1).per(current_user.limit(:items))
 
     render inertia: "Users/Index", props: {
-      users: users.render,
+      users: paginated_users.render,
       pagination: -> { {
         count: users.count,
         **pagination_data(paginated_users)

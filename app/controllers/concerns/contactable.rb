@@ -1,4 +1,4 @@
-module ContactableConcern
+module Contactable
   extend ActiveSupport::Concern
 
   def contact_attributes

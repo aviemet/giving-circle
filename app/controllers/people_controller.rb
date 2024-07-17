@@ -1,6 +1,4 @@
 class PeopleController < ApplicationController
-  include Searchable
-
   expose :people, -> { search(Person.includes_associated, sortable_fields) }
   expose :person, find: ->(id, scope) { scope.includes_associated.find(id) }
 
@@ -8,8 +6,14 @@ class PeopleController < ApplicationController
   def index
     authorize people
 
+    paginated_people = circle_people.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "People/Index", props: {
-      people: -> { people.render }
+      people: -> { paginated_people.render },
+      pagination: -> { {
+        count: people.size,
+        **pagination_data(paginated_people)
+      } },
     }
   end
 

@@ -1,6 +1,4 @@
 class GroupsController < ApplicationController
-  include Searchable
-
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :groups, -> { search(circle.groups.includes_associated, sortable_fields) }
@@ -13,7 +11,7 @@ class GroupsController < ApplicationController
     paginated_groups = groups.page(params[:page] || 1).per(current_user.limit(:items))
 
     render inertia: "Groups/Index", props: {
-      groups: -> { groups.render(view: :index) },
+      groups: -> { paginated_groups.render(view: :index) },
       pagination: -> { {
         count: groups.size,
         **pagination_data(paginated_groups)

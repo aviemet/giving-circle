@@ -1,6 +1,4 @@
 class PresentationTemplatesController < ApplicationController
-  include Searchable
-
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :templates, -> { search(PresentationTemplate.includes_associated, sortable_fields) }

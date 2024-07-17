@@ -1,6 +1,4 @@
 class OrgsController < ApplicationController
-  include Searchable
-
   skip_before_action :authenticate_user!, only: [:about]
 
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug

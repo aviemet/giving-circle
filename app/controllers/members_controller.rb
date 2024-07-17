@@ -1,6 +1,4 @@
 class MembersController < ApplicationController
-  include Searchable
-
   expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   expose :members, -> { search(Member.includes_associated, sortable_fields) }

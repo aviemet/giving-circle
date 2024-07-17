@@ -1,17 +1,19 @@
 class TemplateSlidesController < ApplicationController
-  include Searchable
-
   expose :template_slides, -> { search(TemplateSlide.includes_associated, sortable_fields) }
-    expose :template_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :template_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /template_slides
   def index
     authorize template_slides
 
-    paginated_%= plural_table_name %> = %= plural_table_name %>.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_templates = template_slides.page(params[:page] || 1).per(current_user.limit(:items))
 
     render inertia: "TemplateSlides/Index", props: {
-      template_slides: -> { template_slides.render(view: :index) }
+      template_slides: -> { paginated_templates.render(view: :index) },
+      pagination: -> { {
+        count: template_slides.size,
+        **pagination_data(paginated_templates)
+      } },
     }
   end
 

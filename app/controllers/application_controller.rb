@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   include Authorization
   include InertiaCsrf
   include Localization
-  include Pagination
   include InertiaShare::Flash
   include InertiaShare::Auth
   include InertiaShare::Menu
   include InertiaShare::Params
+  include Searchable
 end

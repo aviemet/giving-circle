@@ -1,9 +1,7 @@
 class CirclesController < ApplicationController
-  include Searchable
-
   skip_before_action :authenticate_user!, only: [:about]
 
-  expose :circles, -> { search(Circle.includes_associated, sortable_fields) }
+  expose :circles, from: :current_user
   expose :circle, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   # @route GET /circles (circles)

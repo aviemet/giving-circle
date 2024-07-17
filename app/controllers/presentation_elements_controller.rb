@@ -1,6 +1,4 @@
 class PresentationElementsController < ApplicationController
-  include Searchable
-
   expose :elements, -> { search(PresentationElement.includes_associated, sortable_fields) }
   expose :element, find: ->(id, scope){ scope.includes_associated.find(id) }
 
