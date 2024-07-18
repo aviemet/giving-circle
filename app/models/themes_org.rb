@@ -24,5 +24,7 @@ class ThemesOrg < ApplicationRecord
   belongs_to :theme
   belongs_to :org
 
+  monetize :ask_cents
+
   scope :includes_associated, -> { includes([:theme, :org]) }
 end

@@ -11,7 +11,7 @@ class ThemeMembersController < ApplicationController
 
     paginated_members = members.page(params[:page] || 1).per(current_user.limit(:items))
 
-    render inertia: "Theme/Members/Index", props: {
+    render inertia: "Themes/Members/Index", props: {
       members: -> { paginated_members.render(view: :index) },
       pagination: -> { {
         count: members.size,
@@ -25,19 +25,19 @@ class ThemeMembersController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug (circle_theme_member)
   def show
     authorize member
-    render inertia: "Theme/Members/Show"
+    render inertia: "Themes/Members/Show"
   end
 
   # @route GET /circles/:circle_slug/themes/:theme_slug/members/new (new_circle_theme_member)
   def new
     authorize Member.new
-    render inertia: "Theme/Members/New"
+    render inertia: "Themes/Members/New"
   end
 
   # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug/edit (edit_circle_theme_member)
   def edit
     authorize member
-    render inertia: "Theme/Members/Edit"
+    render inertia: "Themes/Members/Edit"
   end
 
   private

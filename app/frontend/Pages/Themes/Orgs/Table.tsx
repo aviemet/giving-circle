@@ -10,7 +10,7 @@ const OrgTable = (props: TableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell sort="slug">Slug</Table.Cell>
+					<Table.Cell sort="slug">Ask</Table.Cell>
 					<Table.Cell sort="description">Description</Table.Cell>
 					<Table.Cell fitContent>Actions</Table.Cell>
 				</Table.Row>
@@ -25,7 +25,7 @@ const OrgTable = (props: TableProps) => {
 							<Link href={ Routes.circleOrg(org.circle_id, org.slug) }>{ org.slug }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.circleOrg(org.circle_id, org.slug) }>{ org.description }</Link>
+							{ org.description }
 						</Table.Cell>
 						<Table.Cell>
 							<EditButton href={ Routes.editCircleOrg(org.circle_id, org.slug) } />

@@ -10,7 +10,7 @@ class ThemeOrgsController < ApplicationController
     authorize orgs
     paginated_orgs = orgs.page(params[:page] || 1).per(current_user.limit(:items))
 
-    render inertia: "Theme/Orgs/Index", props: {
+    render inertia: "Themes/Orgs/Index", props: {
       orgs: -> { paginated_orgs.render(view: :index) },
       pagination: -> { {
         count: orgs.size,
@@ -24,7 +24,7 @@ class ThemeOrgsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug (circle_theme_org)
   def show
     authorize org
-    render inertia: "Theme/Orgs/Show", props: {
+    render inertia: "Themes/Orgs/Show", props: {
       org: org.render(view: :show)
     }
   end
@@ -32,7 +32,7 @@ class ThemeOrgsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/new (new_circle_theme_org)
   def new
     authorize Org.new
-    render inertia: "Theme/Orgs/New", props: {
+    render inertia: "Themes/Orgs/New", props: {
       org: Org.new.render(view: :form_data)
     }
   end
@@ -40,7 +40,7 @@ class ThemeOrgsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit (edit_circle_theme_org)
   def edit
     authorize org
-    render inertia: "Theme/Orgs/Edit", props: {
+    render inertia: "Themes/Orgs/Edit", props: {
       org: org.render(view: :edit)
     }
   end
@@ -49,7 +49,7 @@ class ThemeOrgsController < ApplicationController
   def import
     authorize Org.new
 
-    render inertia: "Theme/Orgs/Import", props: {
+    render inertia: "Themes/Orgs/Import", props: {
       theme: -> { theme.render(view: :shallow) },
       circle: -> { circle.render(view: :share) }
     }
@@ -70,6 +70,44 @@ class ThemeOrgsController < ApplicationController
 
   private
 
+  def create_single_record
+    org = Org.new(org_params)
+    theme = Theme.find_by(slug: params[:theme_slug])
+
+    ActiveRecord::Base.transaction do
+      if org.save
+        theme.orgs << org
+        redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: "Org was successfully created."
+      else
+        redirect_to new_circle_theme_org_path(circle.slug, theme.slug), inertia: { errors: e.message }
+      end
+    end
+  end
+
+  def create_bulk_records
+    orgs = orgs_params
+    theme = Theme.find_by(slug: params[:theme_slug])
+
+    processed_orgs = orgs.map do |org|
+      ask_value = org.delete(:ask)
+      org_model = Org.new(org)
+      org_model.circle = circle
+      org_model.themes_org.build({
+        theme_id: theme.id,
+        ask: ask_value
+      })
+      org_model
+    end
+
+    imported_orgs = Org.import processed_orgs, :track_validation_failures, recursive: true
+
+    if imported_orgs[:failed_instances].empty?
+      redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: "Orgs were successfully created."
+    else
+      redirect_to circle_theme_orgs_import_path(circle.slug, theme.slug), inertia: { errors: '' }
+    end
+  end
+
   def sortable_fields
     %w(name slug description).freeze
   end
@@ -88,44 +126,4 @@ class ThemeOrgsController < ApplicationController
     end
   end
 
-  def create_single_record
-    org = Org.new(org_params)
-    theme = Theme.find_by(slug: params[:theme_slug])
-
-    ActiveRecord::Base.transaction do
-      if org.save
-        theme.orgs << org
-        render json: org, status: :created
-      else
-        render json: org.errors, status: :unprocessable_entity
-      end
-    end
-  end
-
-  def create_bulk_records
-    orgs = orgs_params
-    theme = Theme.find_by(slug: params[:theme_slug])
-
-    processed_orgs = []
-    theme_orgs = []
-
-    orgs.each do |org|
-      ask_value = org.delete(:ask)
-      processed_orgs << org
-      theme_orgs << {
-        org_id: org.id,
-        theme_id: theme.id,
-        ask: ask_value,
-      }
-    end
-
-    ActiveRecord::Base.transaction do
-      Org.insert_all!(orgs)
-      ThemesOrg.insert_all!(theme_orgs)
-
-      render json: { message: 'Records created successfully' }, status: :created
-    end
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { errors: e.message }, status: :unprocessable_entity
-  end
 end

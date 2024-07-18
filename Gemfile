@@ -34,6 +34,7 @@ gem "js-routes", "~> 2.2"
 gem "overmind", "~> 2.5"
 gem "amazing_print", "~> 1.4"
 gem "delayed_job_active_record", "~> 4.1"
+gem "activerecord-import", "~> 1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"

@@ -63,21 +63,21 @@ class OrgsController < ApplicationController
     }
   end
 
-  def create
-    authorize Org.new
+  # def create
+  #   authorize Org.new
 
-    theme = Theme.find_by(slug: params[:theme_slug])
+  #   theme = Theme.find_by(slug: params[:theme_slug])
 
-    ActiveRecord::Base.transaction do
-      if org.save
-        theme.orgs << org # Assuming there's a has_many relationship between Theme and Org
-        redirect_to [:admin, circle, theme, org], notice: "Org was successfully created."
-      else
-        redirect_to [:new, :admin, circle, theme], inertia: { errors: org.errors }
-        raise ActiveRecord::Rollback # Rollback the transaction if there's an error
-      end
-    end
-  end
+  #   ActiveRecord::Base.transaction do
+  #     if org.save
+  #       theme.orgs << org
+  #       redirect_to [:admin, circle, theme, org], notice: "Org was successfully created."
+  #     else
+  #       redirect_to [:new, :admin, circle, theme], inertia: { errors: org.errors }
+  #       raise ActiveRecord::Rollback
+  #     end
+  #   end
+  # end
 
   # @route PATCH /circles/:circle_slug/orgs/:slug (circle_org)
   # @route PUT /circles/:circle_slug/orgs/:slug (circle_org)

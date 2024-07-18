@@ -19,7 +19,7 @@ const ShowOrg = ({ org }: ShowOrgProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link
-								href={ Routes.editOrg(org.slug) }
+								href={ Routes.editCircleOrg(org.circle.slug, org.slug) }
 							>
 								Edit Org
 							</Menu.Link>

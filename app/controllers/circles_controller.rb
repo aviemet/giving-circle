@@ -69,9 +69,9 @@ class CirclesController < ApplicationController
     authorize circle
 
     if circle.update(circle_params)
-      redirect_to [:admin, circle], notice: "Circle was successfully updated."
+      redirect_to circle, notice: "Circle was successfully updated."
     else
-      redirect_to [:admin, edit_circle_path], inertia: { errors: circle.errors }
+      redirect_to edit_circle_path, inertia: { errors: circle.errors }
     end
   end
 
