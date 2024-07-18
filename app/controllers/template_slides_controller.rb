@@ -6,7 +6,7 @@ class TemplateSlidesController < ApplicationController
   def index
     authorize template_slides
 
-    paginated_templates = template_slides.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_templates = paginate(template_slides, :items)
 
     render inertia: "TemplateSlides/Index", props: {
       template_slides: -> { paginated_templates.render(view: :index) },

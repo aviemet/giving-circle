@@ -16,7 +16,7 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Orgs"
-			model="orgs"
+			model="theme_orgs"
 			rows={ orgs }
 			pagination={ pagination }
 			navMenu={ getThemeMenu({ circle: circle, theme }) }

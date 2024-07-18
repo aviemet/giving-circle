@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def index
     authorize users
 
-    paginated_users = users.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_users = paginate(users, :items)
 
     render inertia: "Users/Index", props: {
       users: paginated_users.render,

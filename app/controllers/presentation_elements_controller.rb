@@ -6,7 +6,7 @@ class PresentationElementsController < ApplicationController
   def index
     authorize elements
 
-    paginated_elements = elements.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_elements = paginate(elements, :items)
 
     render inertia: "PresentationElements/Index", props: {
       elements: -> { paginated_elements.render(view: :index) },

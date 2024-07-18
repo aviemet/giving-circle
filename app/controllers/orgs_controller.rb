@@ -10,7 +10,7 @@ class OrgsController < ApplicationController
   def index
     authorize orgs
 
-    paginated_orgs = orgs.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_orgs = paginate(orgs, :items)
 
     render inertia: "Orgs/Index", props: {
       orgs: -> { paginated_orgs.render(view: :index) },

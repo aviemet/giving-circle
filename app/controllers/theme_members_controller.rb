@@ -9,7 +9,7 @@ class ThemeMembersController < ApplicationController
   def index
     authorize members
 
-    paginated_members = members.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_members = paginate(members, :items)
 
     render inertia: "Themes/Members/Index", props: {
       members: -> { paginated_members.render(view: :index) },

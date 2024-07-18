@@ -8,7 +8,8 @@ class ThemeOrgsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
   def index
     authorize orgs
-    paginated_orgs = orgs.page(params[:page] || 1).per(current_user.limit(:items))
+
+    paginated_orgs = paginate(orgs, :theme_orgs)
 
     render inertia: "Themes/Orgs/Index", props: {
       orgs: -> { paginated_orgs.render(view: :index) },

@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   def index
     authorize people
 
-    paginated_people = circle_people.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_people = paginate(circle_people, :items)
 
     render inertia: "People/Index", props: {
       people: -> { paginated_people.render },

@@ -10,7 +10,7 @@ class MembersController < ApplicationController
   def index
     authorize members
 
-    paginated_members = circle_members.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_members = paginate(circle_members, :items)
 
     render inertia: "Members/Index", props: {
       members: -> { paginated_members.render(view: :index) },

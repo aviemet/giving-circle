@@ -5,4 +5,12 @@ class UserPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def update_table_preferences?
+    standard_auth(:update)
+  end
+
+  def update_user_preferences?
+    standard_auth(:update)
+  end
 end

@@ -17,6 +17,10 @@ module Searchable
       sort(search_by_params(model), model, sortable_fields)
     end
 
+    def paginate(resource, key)
+      resource.page(params[:page] || 1).per(key ? current_user.limit(key) : nil)
+    end
+
     def pagination_data(model)
       return if !model.respond_to? :total_pages
 

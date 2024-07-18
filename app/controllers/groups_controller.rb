@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   def index
     authorize groups
 
-    paginated_groups = groups.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_groups = paginate(groups, :items)
 
     render inertia: "Groups/Index", props: {
       groups: -> { paginated_groups.render(view: :index) },
