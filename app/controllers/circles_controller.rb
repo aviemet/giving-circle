@@ -21,7 +21,7 @@ class CirclesController < ApplicationController
 
     render inertia: "Circles/Show", props: {
       circle: -> { circle.render(:show) },
-      themes: -> { circle.themes.render }
+      themes: -> { circle.themes.render(:index) }
     }
   end
 
@@ -31,7 +31,7 @@ class CirclesController < ApplicationController
 
     render inertia: "Circles/About", props: {
       circle: -> { circle.render(:show) },
-      themes: -> { circle.themes.render }
+      themes: -> { circle.themes.render(:index) }
     }
   end
 
@@ -40,7 +40,7 @@ class CirclesController < ApplicationController
     authorize Circle.new
 
     render inertia: "Circles/New", props: {
-      circle: Circle.new.render
+      circle: Circle.new.render(:form_data)
     }
   end
 
@@ -49,7 +49,7 @@ class CirclesController < ApplicationController
     authorize circle
 
     render inertia: "Circles/Edit", props: {
-      circle: circle.render
+      circle: circle.render(:edit)
     }
   end
 

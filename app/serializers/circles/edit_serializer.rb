@@ -1,7 +1,2 @@
-class Circles::EditSerializer < CircleSerializer
-  include Persisted
-
-  attributes(
-    :slug,
-  )
+class Circles::EditSerializer < Circles::PersistedSerializer
 end
