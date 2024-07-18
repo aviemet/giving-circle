@@ -1,15 +1,16 @@
 import React from 'react'
-import { Form, TextInput, Submit } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
+import { Form, TextInput, Submit, FormProps } from '@/Components/Form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import ConsoleLogger from '@/Components/Form/Components/ConsoleLogger'
 
-type TCircleFormData = {
+type CircleFormData = {
 	circle: Schema.CirclesFormData
 }
 
-export interface CircleFormProps {
+export interface CircleFormProps extends FormProps<CircleFormData> {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TCircleFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<CircleFormData>) => boolean|void
 	circle: Schema.CirclesFormData
 }
 
@@ -21,6 +22,7 @@ const CircleForm = ({ method = 'post', circle, ...props }: CircleFormProps) => {
 			method={ method }
 			{ ...props }
 		>
+			<ConsoleLogger />
 			<TextInput name="name" label="Name" />
 			<Submit>{ circle.id ? 'Update' : 'Create' } Circle</Submit>
 		</Form>

@@ -38,7 +38,7 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 				],
 			} }
 		>
-			<OrgsTable />
+			<OrgsTable theme={ theme } />
 		</IndexPageTemplate>
 	)
 }

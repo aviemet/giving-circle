@@ -8,4 +8,5 @@ class ApplicationController < ActionController::Base
   include InertiaShare::Menu
   include InertiaShare::Params
   include Searchable
+  include StrongParams
 end

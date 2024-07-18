@@ -1,8 +1,7 @@
 class Members::ShallowSerializer < MemberSerializer
+  include Persisted
+
   attributes(
-    :id,
     :slug,
-    :updated_at,
-    :created_at,
   )
 end

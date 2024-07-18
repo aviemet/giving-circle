@@ -13,12 +13,12 @@ class ThemesController < ApplicationController
     paginated_themes = paginate(themes, :items)
 
     render inertia: "Themes/Index", props: {
-      themes: -> { paginated_themes.render(view: :index) },
+      themes: -> { paginated_themes.render(:index) },
       pagination: -> { {
         count: themes.size,
         **pagination_data(paginated_themes)
       } },
-      circle: -> { circle.render(view: :share) },
+      circle: -> { circle.render(:share) },
     }
   end
 
@@ -27,7 +27,7 @@ class ThemesController < ApplicationController
     authorize theme
 
     render inertia: "Themes/Show", props: {
-      theme: -> { theme.render(view: :show) }
+      theme: -> { theme.render(:show) }
     }
   end
 
@@ -45,8 +45,8 @@ class ThemesController < ApplicationController
     authorize Theme.new
 
     render inertia: "Themes/New", props: {
-      theme: Theme.new.render(view: :form_data),
-      circle: -> { circle.render(view: :share) },
+      theme: Theme.new.render(:form_data),
+      circle: -> { circle.render(:share) },
     }
   end
 
@@ -55,8 +55,8 @@ class ThemesController < ApplicationController
     authorize theme
 
     render inertia: "Themes/Edit", props: {
-      theme: theme.render(view: :form_data),
-      circle: -> { circle.render(view: :share) },
+      theme: theme.render(:form_data),
+      circle: -> { circle.render(:share) },
     }
   end
 

@@ -8,6 +8,7 @@ import {
 
 import cx from 'clsx'
 import * as classes from './Form.css'
+import { isDevelopment } from '@/lib'
 
 export interface FormProps<TForm> extends UifFormProps<TForm> {
 	disableFormatting?: boolean
@@ -18,6 +19,7 @@ const Form = <TForm extends NestedObject>({
 	children,
 	data,
 	railsAttributes = true,
+	remember,
 	...props
 }: FormProps<TForm>) => {
 	return (
@@ -25,6 +27,7 @@ const Form = <TForm extends NestedObject>({
 			<InertiaForm
 				data={ data }
 				railsAttributes={ railsAttributes }
+				remember={ remember === undefined && isDevelopment() ? false : remember }
 				{ ...props }
 			>
 				{ children }

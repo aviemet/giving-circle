@@ -1,3 +1,7 @@
-class Circles::FormDataSerializer < CircleSerializer
-  attributes
+class Circles::FormDataSerializer < ApplicationSerializer
+  identifier :slug
+
+  attributes(
+    :name,
+  )
 end

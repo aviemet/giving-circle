@@ -78,7 +78,7 @@ Rails.application.routes.draw do
         as: 'member',
       )
 
-      get 'orgs', to: 'theme_orgs#index'
+      # get 'orgs', to: 'theme_orgs#index'
       get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
       resources(
         :theme_orgs,

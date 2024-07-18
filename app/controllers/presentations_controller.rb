@@ -4,6 +4,8 @@ class PresentationsController < ApplicationController
   expose :presentations, -> { search(Presentation.includes_associated, sortable_fields) }
   expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
 
+  strong_params :presentation, permit: [:name, :theme_id]
+
   # @route GET /themes/:theme_slug/presentations (theme_presentations)
   def index
     authorize presentations
@@ -11,13 +13,13 @@ class PresentationsController < ApplicationController
     paginated_presentations = paginate(presentations, :items)
 
     render inertia: "Presentations/Index", props: {
-      presentations: -> { paginated_presentations.render(view: :index) },
+      presentations: -> { paginated_presentations.render(:index) },
       pagination: -> { {
         count: presentations.size,
         **pagination_data(paginated_presentations)
       } },
-      theme: -> { theme.render(view: :shallow) },
-      circle: -> { theme.circle.render(view: :share) }
+      theme: -> { theme.render(:shallow) },
+      circle: -> { theme.circle.render(:share) }
     }, layout: "something"
   end
 
@@ -25,7 +27,7 @@ class PresentationsController < ApplicationController
   def show
     authorize presentation
     render inertia: "Presentations/Show", props: {
-      presentation: -> { presentation.render(view: :show) }
+      presentation: -> { presentation.render(:show) }
     }
   end
 
@@ -33,7 +35,7 @@ class PresentationsController < ApplicationController
   def new
     authorize Presentation.new
     render inertia: "Presentations/New", props: {
-      presentation: Presentation.new.render(view: :form_data)
+      presentation: Presentation.new.render(:form_data)
     }
   end
 
@@ -41,7 +43,7 @@ class PresentationsController < ApplicationController
   def edit
     authorize presentation
     render inertia: "Presentations/Edit", props: {
-      presentation: presentation.render(view: :edit)
+      presentation: presentation.render(:edit)
     }
   end
 
@@ -49,7 +51,7 @@ class PresentationsController < ApplicationController
   def run_presentation
     authorize presentation
     render inertia: "Present/Presentations/Presentation", props: {
-      presentation: presentation.render(view: :presentation)
+      presentation: presentation.render(:presentation)
     }
   end
 

@@ -20,14 +20,14 @@ module Admin
     # GET /settings/mail/new
     def new
       render inertia: "Settings/Mail/New", props: {
-        smtp: Smtp.new({ security: 'tls' }).render(view: :form_data)
+        smtp: Smtp.new({ security: 'tls' }).render(:form_data)
       }
     end
 
     # GET /settings/mail/:id/edit
     def edit
       render inertia: "Settings/Mail/Edit", props: {
-        smtp: smtp.render(view: :form_data)
+        smtp: smtp.render(:form_data)
       }
     end
 

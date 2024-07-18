@@ -6,6 +6,8 @@ class MembersController < ApplicationController
 
   expose :circle_members, -> { search(Circle.find_by(slug: params[:circle_slug]).members) }
 
+  strong_params :member, permit: [:first_name, :last_name, :number]
+
   # @route GET /circles/:circle_slug/members (circle_members)
   def index
     authorize members
@@ -13,12 +15,12 @@ class MembersController < ApplicationController
     paginated_members = paginate(circle_members, :items)
 
     render inertia: "Members/Index", props: {
-      members: -> { paginated_members.render(view: :index) },
+      members: -> { paginated_members.render(:index) },
       pagination: -> { {
         count: circle_members.size,
         **pagination_data(paginated_members)
       } },
-      circle: -> { circle.render(view: :share) }
+      circle: -> { circle.render(:share) }
     }
   end
 
@@ -27,8 +29,8 @@ class MembersController < ApplicationController
     authorize member
 
     render inertia: "Members/Show", props: {
-      member: -> { member.render(view: :show) },
-      circle: -> { circle.render(view: :share) },
+      member: -> { member.render(:show) },
+      circle: -> { circle.render(:share) },
     }
   end
 
@@ -37,8 +39,8 @@ class MembersController < ApplicationController
     authorize Member.new
 
     render inertia: "Members/New", props: {
-      member: Member.new.render(view: :form_data),
-      circle: -> { circle.render(view: :share) },
+      member: Member.new.render(:form_data),
+      circle: -> { circle.render(:share) },
     }
   end
 
@@ -47,8 +49,8 @@ class MembersController < ApplicationController
     authorize member
 
     render inertia: "Members/Edit", props: {
-      member: member.render(view: :edit),
-      circle: -> { circle.render(view: :share) },
+      member: member.render(:edit),
+      circle: -> { circle.render(:share) },
     }
   end
 
@@ -88,9 +90,5 @@ class MembersController < ApplicationController
 
   def sortable_fields
     %w(first_name last_name number).freeze
-  end
-
-  def member_params
-    params.require(:member).permit(:first_name, :last_name, :number)
   end
 end

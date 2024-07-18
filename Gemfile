@@ -5,7 +5,7 @@ ruby "3.2.2"
 
 # Server
 gem "rails", "~> 7.1"
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.5"
 gem "puma", "~> 6.0"
 
 # Assets

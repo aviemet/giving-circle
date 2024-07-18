@@ -1,10 +1,11 @@
 import React from 'react'
 import FormConsumer from './FormConsumer'
 
-const ConsoleLogger = ({ prop }) => {
+const ConsoleLogger = ({ key }: { key?: string }) => {
 	return (
-		<FormConsumer>{ (form) => {
-			console.log({ [prop]: form[prop] })
+		<FormConsumer>{ ({ data }) => {
+
+			console.log({ [key || 'data']: data })
 			return <></>
 		} }</FormConsumer>
 	)

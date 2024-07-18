@@ -4,6 +4,6 @@ root {
 	padding: '1rem 0.75rem';
 
 	& + & {
-		marginTop: 10,
+		margin-top: 10,
 	}
 }

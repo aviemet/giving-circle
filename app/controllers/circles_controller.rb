@@ -4,12 +4,14 @@ class CirclesController < ApplicationController
   expose :circles, from: :current_user
   expose :circle, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
+  strong_params :circle, permit: :name
+
   # @route GET /circles (circles)
   def index
     authorize circles
 
     render inertia: "Circles/Index", props: {
-      circles: -> { circles.render(view: :index) },
+      circles: -> { circles.render(:index) },
     }
   end
 
@@ -18,7 +20,7 @@ class CirclesController < ApplicationController
     authorize circle
 
     render inertia: "Circles/Show", props: {
-      circle: -> { circle.render(view: :show) },
+      circle: -> { circle.render(:show) },
       themes: -> { circle.themes.render }
     }
   end
@@ -28,7 +30,7 @@ class CirclesController < ApplicationController
     authorize circle
 
     render inertia: "Circles/About", props: {
-      circle: -> { circle.render(view: :show) },
+      circle: -> { circle.render(:show) },
       themes: -> { circle.themes.render }
     }
   end
@@ -81,15 +83,5 @@ class CirclesController < ApplicationController
 
     circle.destroy
     redirect_to [:admin, circles_url], notice: "Circle was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name).freeze
-  end
-
-  def circle_params
-    params.require(:circle).permit(:name)
   end
 end

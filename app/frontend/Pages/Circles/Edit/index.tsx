@@ -21,6 +21,7 @@ const EditCircle = ({ circle }: EditCircleProps) => {
 					method='put'
 					to={ Routes.circle(circle.slug) }
 					circle={ circle }
+					filter={ ['circle.id', 'circle.slug'] }
 				/>
 			</Section>
 		</Page>

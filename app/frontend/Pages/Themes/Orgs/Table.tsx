@@ -4,9 +4,13 @@ import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
 
-const OrgTable = (props: TableProps) => {
+interface ThemeOrgTableProps extends TableProps{
+	theme: Schema.ThemesShallow
+}
+
+const ThemeOrgTable = ({ theme, ...props }: ThemeOrgTableProps) => {
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -28,7 +32,7 @@ const OrgTable = (props: TableProps) => {
 							{ org.description }
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editCircleOrg(org.circle_id, org.slug) } />
+							<EditButton href={ Routes.editCircleThemeOrg(org.circle.slug, theme.slug, org.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />
@@ -37,4 +41,4 @@ const OrgTable = (props: TableProps) => {
 	)
 }
 
-export default OrgTable
+export default ThemeOrgTable

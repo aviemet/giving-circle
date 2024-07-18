@@ -2,6 +2,8 @@ class TemplateSlidesController < ApplicationController
   expose :template_slides, -> { search(TemplateSlide.includes_associated, sortable_fields) }
   expose :template_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  strong_params :template_slide, permit: [:title, :content, :template_id, :order]
+
   # GET /template_slides
   def index
     authorize template_slides
@@ -9,7 +11,7 @@ class TemplateSlidesController < ApplicationController
     paginated_templates = paginate(template_slides, :items)
 
     render inertia: "TemplateSlides/Index", props: {
-      template_slides: -> { paginated_templates.render(view: :index) },
+      template_slides: -> { paginated_templates.render(:index) },
       pagination: -> { {
         count: template_slides.size,
         **pagination_data(paginated_templates)
@@ -21,7 +23,7 @@ class TemplateSlidesController < ApplicationController
   def show
     authorize template_slide
     render inertia: "TemplateSlides/Show", props: {
-      template_slide: -> { template_slide.render(view: :show) }
+      template_slide: -> { template_slide.render(:show) }
     }
   end
 
@@ -29,7 +31,7 @@ class TemplateSlidesController < ApplicationController
   def new
     authorize TemplateSlide.new
     render inertia: "TemplateSlides/New", props: {
-      template_slide: TemplateSlide.new.render(view: :new)
+      template_slide: TemplateSlide.new.render(:new)
     }
   end
 
@@ -37,7 +39,7 @@ class TemplateSlidesController < ApplicationController
   def edit
     authorize template_slide
     render inertia: "TemplateSlides/Edit", props: {
-      template_slide: template_slide.render(view: :edit)
+      template_slide: template_slide.render(:edit)
     }
   end
 
@@ -72,9 +74,5 @@ class TemplateSlidesController < ApplicationController
 
   def sortable_fields
     %w(title content template_id order).freeze
-  end
-
-  def template_slide_params
-    params.require(:template_slide).permit(:title, :content, :template_id, :order)
   end
 end

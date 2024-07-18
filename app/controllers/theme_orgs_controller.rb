@@ -4,7 +4,14 @@ class ThemeOrgsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
   expose :circle, -> { theme.circle }
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
+  strong_params :org, permit: %i(name ask description)
+
+  strong_params :orgs do
+    self.map do |org|
+      org.permit(%i(name ask description)).to_h
+    end
+  end
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
   def index
     authorize orgs
@@ -12,13 +19,13 @@ class ThemeOrgsController < ApplicationController
     paginated_orgs = paginate(orgs, :theme_orgs)
 
     render inertia: "Themes/Orgs/Index", props: {
-      orgs: -> { paginated_orgs.render(view: :index) },
+      orgs: -> { paginated_orgs.render(:index) },
       pagination: -> { {
         count: orgs.size,
         **pagination_data(paginated_orgs)
       } },
-      theme: -> { theme.render(view: :shallow) },
-      circle: -> { circle.render(view: :share) }
+      theme: -> { theme.render(:shallow) },
+      circle: -> { circle.render(:share) }
     }
   end
 
@@ -26,7 +33,8 @@ class ThemeOrgsController < ApplicationController
   def show
     authorize org
     render inertia: "Themes/Orgs/Show", props: {
-      org: org.render(view: :show)
+      org: org.render(:show),
+      theme: theme.render(:shallow),
     }
   end
 
@@ -34,7 +42,8 @@ class ThemeOrgsController < ApplicationController
   def new
     authorize Org.new
     render inertia: "Themes/Orgs/New", props: {
-      org: Org.new.render(view: :form_data)
+      org: Org.new.render(:form_data),
+      theme: theme.render(:shallow),
     }
   end
 
@@ -42,7 +51,8 @@ class ThemeOrgsController < ApplicationController
   def edit
     authorize org
     render inertia: "Themes/Orgs/Edit", props: {
-      org: org.render(view: :edit)
+      org: org.render(:edit),
+      theme: theme.render(:shallow),
     }
   end
 
@@ -51,12 +61,12 @@ class ThemeOrgsController < ApplicationController
     authorize Org.new
 
     render inertia: "Themes/Orgs/Import", props: {
-      theme: -> { theme.render(view: :shallow) },
-      circle: -> { circle.render(view: :share) }
+      theme: -> { theme.render(:shallow) },
+      circle: -> { circle.render(:share) }
     }
   end
 
-  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
+  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
   def create
     authorize Org.new
 
@@ -113,18 +123,18 @@ class ThemeOrgsController < ApplicationController
     %w(name slug description).freeze
   end
 
-  def default_strong_params
-    %i(name ask description)
-  end
+  # def default_strong_params
+  #   %i(name ask description)
+  # end
 
-  def org_params
-    params.require(:org).permit(default_strong_params)
-  end
+  # def org_params
+  #   params.require(:org).permit(default_strong_params)
+  # end
 
-  def orgs_params
-    params.require(:orgs).map do |org|
-      org.permit(default_strong_params).to_h
-    end
-  end
+  # def orgs_params
+  #   params.require(:orgs).map do |org|
+  #     org.permit(default_strong_params).to_h
+  #   end
+  # end
 
 end

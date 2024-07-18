@@ -1,9 +1,7 @@
 class Circles::EditSerializer < CircleSerializer
+  include Persisted
 
   attributes(
     :slug,
-    :id,
-    :updated_at,
-    :created_at,
   )
 end

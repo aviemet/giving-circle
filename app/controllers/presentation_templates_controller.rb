@@ -4,6 +4,8 @@ class PresentationTemplatesController < ApplicationController
   expose :templates, -> { search(PresentationTemplate.includes_associated, sortable_fields) }
   expose :template, model: PresentationTemplate, scope: -> { PresentationTemplate.includes_associated }, id: -> { params[:slug] }, find_by: :slug
 
+  strong_params :template, permit: [:name]
+
   # @route GET /circles/:circle_slug/presentation_templates (circle_presentation_templates)
   def index
     authorize templates
@@ -11,12 +13,12 @@ class PresentationTemplatesController < ApplicationController
     paginated_templates = paginate(templates, :items)
 
     render inertia: "Templates/Index", props: {
-      templates: -> { paginated_templates.render(view: :index) },
+      templates: -> { paginated_templates.render(:index) },
       pagination: -> { {
         count: templates.size,
         **pagination_data(paginated_templates)
       } },
-      circle: -> { Circle.find_by(slug: params[:circle_slug]).render(view: :options) },
+      circle: -> { Circle.find_by(slug: params[:circle_slug]).render(:options) },
     }
   end
 
@@ -25,7 +27,7 @@ class PresentationTemplatesController < ApplicationController
     authorize template
 
     render inertia: "Templates/Show", props: {
-      template: -> { template.render(view: :show) }
+      template: -> { template.render(:show) }
     }
   end
 
@@ -34,8 +36,8 @@ class PresentationTemplatesController < ApplicationController
     authorize PresentationTemplate.new
 
     render inertia: "Templates/New", props: {
-      template: PresentationTemplate.new.render(view: :form_data),
-      circle: -> { Circle.find_by(slug: params[:circle_slug]).render(view: :options) },
+      template: PresentationTemplate.new.render(:form_data),
+      circle: -> { Circle.find_by(slug: params[:circle_slug]).render(:options) },
     }
   end
 
@@ -44,7 +46,7 @@ class PresentationTemplatesController < ApplicationController
     authorize template
 
     render inertia: "Templates/Edit", props: {
-      template: template.render(view: :edit)
+      template: template.render(:edit)
     }
   end
 
@@ -87,9 +89,5 @@ class PresentationTemplatesController < ApplicationController
 
   def sortable_fields
     %w(name).freeze
-  end
-
-  def presentation_template_params
-    params.require(:presentation_template).permit(:name)
   end
 end

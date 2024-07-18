@@ -2,6 +2,8 @@ class PeopleController < ApplicationController
   expose :people, -> { search(Person.includes_associated, sortable_fields) }
   expose :person, find: ->(id, scope) { scope.includes_associated.find(id) }
 
+  strong_params :person, permit: [:first_name, :last_name, :middle_name, :active]
+
   # @route GET /people (people)
   def index
     authorize people
@@ -78,9 +80,5 @@ class PeopleController < ApplicationController
 
   def sortable_fields
     %w(first_name last_name middle_name active).freeze
-  end
-
-  def person_params
-    params.require(:person).permit(:first_name, :last_name, :middle_name, :active)
   end
 end

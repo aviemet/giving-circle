@@ -1,10 +1,17 @@
 class OrgsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:about]
 
+  # sortable_fields %w(name slug description themes_org.ask)
+
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :orgs, -> { search(circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
+  expose :orgs, -> { search(
+    circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated,
+    sortable_fields,
+  ) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
+
+  strong_params :org, permit: [:name, :slug, :description]
 
   # @route GET /circles/:circle_slug/orgs (circle_orgs)
   def index
@@ -13,12 +20,12 @@ class OrgsController < ApplicationController
     paginated_orgs = paginate(orgs, :items)
 
     render inertia: "Orgs/Index", props: {
-      orgs: -> { paginated_orgs.render(view: :index) },
+      orgs: -> { paginated_orgs.render(:index) },
       pagination: -> { {
         count: orgs.size,
         **pagination_data(paginated_orgs)
       } },
-      circle: -> { circle.render(view: :share) },
+      circle: -> { circle.render(:share) },
     }
   end
 
@@ -27,8 +34,8 @@ class OrgsController < ApplicationController
     authorize org
 
     render inertia: "Orgs/Show", props: {
-      org: -> { org.render(view: :show) },
-      circle: -> { circle.render(view: :share) }
+      org: -> { org.render(:show) },
+      circle: -> { circle.render(:share) }
     }
   end
 
@@ -37,9 +44,9 @@ class OrgsController < ApplicationController
     authorize org
 
     render inertia: "Orgs/About", props: {
-      org: -> { org.render(view: :show) },
-      themes: -> { org.themes.render(view: :show) },
-      circle: -> { circle.render(view: :share) }
+      org: -> { org.render(:show) },
+      themes: -> { org.themes.render(:show) },
+      circle: -> { circle.render(:share) }
     }
   end
 
@@ -48,8 +55,8 @@ class OrgsController < ApplicationController
     authorize Org.new
 
     render inertia: "Orgs/New", props: {
-      org: Org.new.render(view: :new),
-      circle: -> { circle.render(view: :share) }
+      org: Org.new.render(:new),
+      circle: -> { circle.render(:share) }
     }
   end
 
@@ -58,8 +65,8 @@ class OrgsController < ApplicationController
     authorize org
 
     render inertia: "Orgs/Edit", props: {
-      org: org.render(view: :edit),
-      circle: -> { circle.render(view: :share) }
+      org: org.render(:edit),
+      circle: -> { circle.render(:share) }
     }
   end
 
@@ -104,9 +111,5 @@ class OrgsController < ApplicationController
 
   def sortable_fields
     %w(name slug description).freeze
-  end
-
-  def org_params
-    params.require(:org).permit(:name, :slug, :description)
   end
 end
