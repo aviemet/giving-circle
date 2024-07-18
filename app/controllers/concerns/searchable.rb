@@ -3,16 +3,16 @@
 module Searchable
   extend ActiveSupport::Concern
 
-  ##
-  # Searches and sorts model using search params
-  # model: ActiveRecord object
-  # sortable_fields: string array of field names which the model can be sorted by.
-  #   Sortable fields in nested models use dot-notation: "related_model.field"
-  #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
-  ##
   included do
     before_action :remove_empty_query_parameters
 
+    ##
+    # Searches and sorts model using search params
+    # model: ActiveRecord object
+    # sortable_fields: string array of field names which the model can be sorted by.
+    #   Sortable fields in nested models use dot-notation: "related_model.field"
+    #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
+    ##
     def search(model, sortable_fields = [])
       sort(search_by_params(model), model, sortable_fields)
     end

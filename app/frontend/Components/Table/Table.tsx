@@ -9,7 +9,7 @@ import Cell from './Td'
 import HeadCell from './Th'
 import Footer from './Footer'
 import Pagination from './Pagination'
-import TableProvider, { useTableContext } from './TableContext'
+import TableProvider from './TableContext'
 import TableSection from './Section'
 import SearchInput from './SearchInput'
 import ConditionalWrapper from '../ConditionalWrapper'
@@ -53,7 +53,6 @@ const TableComponent: TableObject = ({
 	stickyHeaderOffset = 0,
 	...props
 }) => {
-	const tableState = useTableContext(false)
 	const { headerPinned } = useLayoutStore()
 
 	const stickyHeaderOffsetProp = useMemo(() => {
@@ -67,21 +66,16 @@ const TableComponent: TableObject = ({
 			condition={ wrapper }
 			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
 		>
-			<ConditionalWrapper
-				condition={ tableState !== null }
-				wrapper={ children => <TableProvider>{ children }</TableProvider> }
+			<Table
+				striped={ striped }
+				highlightOnHover={ highlightOnHover }
+				stickyHeader={ stickyHeader }
+				stickyHeaderOffset={ stickyHeaderOffsetProp }
+				className={ cx(className, classes.table, { 'wrapper-offset': wrapper }) }
+				{ ...props }
 			>
-				<Table
-					striped={ striped }
-					highlightOnHover={ highlightOnHover }
-					stickyHeader={ stickyHeader }
-					stickyHeaderOffset={ stickyHeaderOffsetProp }
-					className={ cx(className, classes.table, { 'wrapper-offset': wrapper }) }
-					{ ...props }
-				>
-					{ children }
-				</Table>
-			</ConditionalWrapper>
+				{ children }
+			</Table>
 		</ConditionalWrapper>
 	)
 }
