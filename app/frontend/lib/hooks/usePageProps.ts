@@ -2,19 +2,18 @@ import { usePage } from '@inertiajs/react'
 import { PageProps, Errors, ErrorBag } from '@inertiajs/core'
 import { FlashMessage } from '@/types'
 
-export interface SharedInertiaProps extends PageProps {
+interface InitialInertiaShareProps extends PageProps {
 	auth: {
-		// form_authenticity_token: string
-		user: Schema.UsersShare
+		user: Schema.UsersInertiaShare
 	}
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 	flash: FlashMessage
 	errors: Errors & ErrorBag
-	csrf_token?: string
+	params: Record<string, string>
 }
 
 const usePageProps = () => {
-	return usePage<SharedInertiaProps>().props
+	return usePage<InitialInertiaShareProps>().props
 }
 
 export default usePageProps

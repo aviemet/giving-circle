@@ -8,7 +8,7 @@ class MembersController < ApplicationController
 
   strong_params :member, permit: [:first_name, :last_name, :number]
 
-  # @route GET /circles/:circle_slug/members (circle_members)
+  # @route GET /circles/:circle_slug/members {export: true} (circle_members)
   def index
     authorize members
 
@@ -20,41 +20,41 @@ class MembersController < ApplicationController
         count: circle_members.size,
         **pagination_data(paginated_members)
       } },
-      circle: -> { circle.render(:share) }
+      circle: -> { circle.render(:persisted) }
     }
   end
 
-  # @route GET /circles/:circle_slug/members/:slug (circle_member)
+  # @route GET /circles/:circle_slug/members/:slug {export: true} (circle_member)
   def show
     authorize member
 
     render inertia: "Members/Show", props: {
       member: -> { member.render(:show) },
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route GET /circles/:circle_slug/members/new (new_circle_member)
+  # @route GET /circles/:circle_slug/members/new {export: true} (new_circle_member)
   def new
     authorize Member.new
 
     render inertia: "Members/New", props: {
       member: Member.new.render(:form_data),
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route GET /circles/:circle_slug/members/:slug/edit (edit_circle_member)
+  # @route GET /circles/:circle_slug/members/:slug/edit {export: true} (edit_circle_member)
   def edit
     authorize member
 
     render inertia: "Members/Edit", props: {
       member: member.render(:edit),
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route POST /circles/:circle_slug/members (circle_members)
+  # @route POST /circles/:circle_slug/members {export: true} (circle_members)
   def create
     authorize Member.new
 
@@ -65,8 +65,8 @@ class MembersController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/members/:slug (circle_member)
-  # @route PUT /circles/:circle_slug/members/:slug (circle_member)
+  # @route PATCH /circles/:circle_slug/members/:slug {export: true} (circle_member)
+  # @route PUT /circles/:circle_slug/members/:slug {export: true} (circle_member)
   def update
     authorize member
 
@@ -77,8 +77,8 @@ class MembersController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/members (circle_members)
-  # @route DELETE /circles/:circle_slug/members/:slug (circle_member)
+  # @route DELETE /circles/:circle_slug/members {export: true} (circle_members)
+  # @route DELETE /circles/:circle_slug/members/:slug {export: true} (circle_member)
   def destroy
     authorize member
 

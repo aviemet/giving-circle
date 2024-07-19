@@ -1,4 +1,4 @@
-class Users::ShareSerializer < UserSerializer
+class Users::InertiaShareSerializer < UserSerializer
   attributes(
     :id,
     :created_at,
@@ -9,5 +9,5 @@ class Users::ShareSerializer < UserSerializer
 
   has_one :person, serializer: PersonSerializer
   has_many :roles, serializer: RoleSerializer
-  has_many :circles, serializer: Circles::ShareSerializer
+  has_many :circles, serializer: Circles::PersistedSerializer
 end

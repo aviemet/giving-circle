@@ -6,5 +6,5 @@ class Themes::ShowSerializer < ThemeSerializer
     :created_at,
   )
 
-  belongs_to :circle, serializer: Circles::ShareSerializer
+  belongs_to :circle, serializer: Circles::PersistedSerializer
 end

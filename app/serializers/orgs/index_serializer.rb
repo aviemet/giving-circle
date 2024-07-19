@@ -6,5 +6,5 @@ class Orgs::IndexSerializer < OrgSerializer
     :created_at,
   )
 
-  belongs_to :circle, serializer: Circles::ShareSerializer
+  belongs_to :circle, serializer: Circles::PersistedSerializer
 end

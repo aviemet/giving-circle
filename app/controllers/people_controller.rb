@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
 
   strong_params :person, permit: [:first_name, :last_name, :middle_name, :active]
 
-  # @route GET /people (people)
+  # @route GET /people {export: true} (people)
   def index
     authorize people
 
@@ -19,7 +19,7 @@ class PeopleController < ApplicationController
     }
   end
 
-  # @route GET /people/:slug (person)
+  # @route GET /people/:slug {export: true} (person)
   def show
     authorize person
 
@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
     }
   end
 
-  # @route GET /people/new (new_person)
+  # @route GET /people/new {export: true} (new_person)
   def new
     authorize Person.new
 
@@ -37,7 +37,7 @@ class PeopleController < ApplicationController
     }
   end
 
-  # @route GET /people/:slug/edit (edit_person)
+  # @route GET /people/:slug/edit {export: true} (edit_person)
   def edit
     authorize person
 
@@ -46,7 +46,7 @@ class PeopleController < ApplicationController
     }
   end
 
-  # @route POST /people (people)
+  # @route POST /people {export: true} (people)
   def create
     authorize Person.new
 
@@ -57,8 +57,8 @@ class PeopleController < ApplicationController
     end
   end
 
-  # @route PATCH /people/:slug (person)
-  # @route PUT /people/:slug (person)
+  # @route PATCH /people/:slug {export: true} (person)
+  # @route PUT /people/:slug {export: true} (person)
   def update
     authorize person
 
@@ -69,7 +69,7 @@ class PeopleController < ApplicationController
     end
   end
 
-  # @route DELETE /people/:slug (person)
+  # @route DELETE /people/:slug {export: true} (person)
   def destroy
     authorize person
     person.destroy!

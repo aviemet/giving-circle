@@ -1,8 +1,8 @@
 class Api::UsersController < Api::ApiController
   expose :user
 
-  # @route PATCH /api/users/:id (api_user)
-  # @route PUT /api/users/:id (api_user)
+  # @route PATCH /api/users/:id {export: true} (api_user)
+  # @route PUT /api/users/:id {export: true} (api_user)
   def update
     authorize user
     if user.update(user_params)
@@ -12,7 +12,7 @@ class Api::UsersController < Api::ApiController
     end
   end
 
-  # @route PATCH /api/users/:id/update_table_preferences (api_update_table_preferences)
+  # @route PATCH /api/users/:id/update_table_preferences {export: true} (api_update_table_preferences)
   def update_table_preferences
     authorize user
     if user.update(
@@ -22,7 +22,7 @@ class Api::UsersController < Api::ApiController
     end
   end
 
-  # @route PATCH /api/users/:id/update_user_preferences (api_update_user_preferences)
+  # @route PATCH /api/users/:id/update_user_preferences {export: true} (api_update_user_preferences)
   def update_user_preferences
     authorize user
     if user.update(

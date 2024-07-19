@@ -1,4 +1,4 @@
-class Circles::IndexSerializer < CircleSerializer
+class Circles::PersistedSerializer < CircleSerializer
   include Persisted
 
   attributes(

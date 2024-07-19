@@ -6,7 +6,7 @@ class PresentationTemplatesController < ApplicationController
 
   strong_params :template, permit: [:name]
 
-  # @route GET /circles/:circle_slug/presentation_templates (circle_presentation_templates)
+  # @route GET /circles/:circle_slug/presentation_templates {export: true} (circle_presentation_templates)
   def index
     authorize templates
 
@@ -22,7 +22,7 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route GET /circles/:circle_slug/presentation_templates/:slug {export: true} (circle_presentation_template)
   def show
     authorize template
 
@@ -31,7 +31,7 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/presentation_templates/new (new_circle_presentation_template)
+  # @route GET /circles/:circle_slug/presentation_templates/new {export: true} (new_circle_presentation_template)
   def new
     authorize PresentationTemplate.new
 
@@ -41,7 +41,7 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/presentation_templates/:slug/edit (edit_circle_presentation_template)
+  # @route GET /circles/:circle_slug/presentation_templates/:slug/edit {export: true} (edit_circle_presentation_template)
   def edit
     authorize template
 
@@ -50,7 +50,7 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/presentation_templates (circle_presentation_templates)
+  # @route POST /circles/:circle_slug/presentation_templates {export: true} (circle_presentation_templates)
   def create
     authorize PresentationTemplate.new
 
@@ -64,8 +64,8 @@ class PresentationTemplatesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
-  # @route PUT /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route PATCH /circles/:circle_slug/presentation_templates/:slug {export: true} (circle_presentation_template)
+  # @route PUT /circles/:circle_slug/presentation_templates/:slug {export: true} (circle_presentation_template)
   def update
     authorize template
 
@@ -76,8 +76,8 @@ class PresentationTemplatesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/presentation_templates (circle_presentation_templates)
-  # @route DELETE /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route DELETE /circles/:circle_slug/presentation_templates {export: true} (circle_presentation_templates)
+  # @route DELETE /circles/:circle_slug/presentation_templates/:slug {export: true} (circle_presentation_template)
   def destroy
     authorize template
 

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   expose :users, -> { search(User.all.includes_associated, sortable_fields) }
   expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
-  # @route GET /users (users)
+  # @route GET /users {export: true} (users)
   def index
     authorize users
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # @route GET /users/:id (user)
+  # @route GET /users/:id {export: true} (user)
   def show
     authorize user
     render inertia: "Users/Show", props: {
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # @route GET /users/new (new_user)
+  # @route GET /users/new {export: true} (new_user)
   def new
     authorize User
     render inertia: "Users/New", props: {
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # @route GET /users/:id/edit (edit_user)
+  # @route GET /users/:id/edit {export: true} (edit_user)
   def edit
     authorize user
     render inertia: "Users/Edit", props: {
@@ -60,8 +60,8 @@ class UsersController < ApplicationController
     redirect_to complete_registration_path
   end
 
-  # @route PATCH /users/:id (user)
-  # @route PUT /users/:id (user)
+  # @route PATCH /users/:id {export: true} (user)
+  # @route PUT /users/:id {export: true} (user)
   def update
     authorize user
     if user.update(user_params)
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # @route DELETE /users/:id (user)
+  # @route DELETE /users/:id {export: true} (user)
   def destroy
     authorize user
     user.destroy

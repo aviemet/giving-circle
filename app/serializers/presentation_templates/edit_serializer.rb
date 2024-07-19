@@ -7,5 +7,5 @@ class PresentationTemplates::EditSerializer < PresentationTemplateSerializer
     :created_at,
   )
 
-  belongs_to :circle, serializer: Circles::ShareSerializer
+  belongs_to :circle, serializer: Circles::PersistedSerializer
 end

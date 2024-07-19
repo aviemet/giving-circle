@@ -13,7 +13,7 @@ class OrgsController < ApplicationController
 
   strong_params :org, permit: [:name, :slug, :description]
 
-  # @route GET /circles/:circle_slug/orgs (circle_orgs)
+  # @route GET /circles/:circle_slug/orgs {export: true} (circle_orgs)
   def index
     authorize orgs
 
@@ -25,48 +25,48 @@ class OrgsController < ApplicationController
         count: orgs.size,
         **pagination_data(paginated_orgs)
       } },
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route GET /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
   def show
     authorize org
 
     render inertia: "Orgs/Show", props: {
       org: -> { org.render(:show) },
-      circle: -> { circle.render(:share) }
+      circle: -> { circle.render(:persisted) }
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:org_slug/about (circle_org_about)
+  # @route GET /circles/:circle_slug/orgs/:org_slug/about {export: true} (circle_org_about)
   def about
     authorize org
 
     render inertia: "Orgs/About", props: {
       org: -> { org.render(:show) },
       themes: -> { org.themes.render(:show) },
-      circle: -> { circle.render(:share) }
+      circle: -> { circle.render(:persisted) }
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/new (new_circle_org)
+  # @route GET /circles/:circle_slug/orgs/new {export: true} (new_circle_org)
   def new
     authorize Org.new
 
     render inertia: "Orgs/New", props: {
       org: Org.new.render(:new),
-      circle: -> { circle.render(:share) }
+      circle: -> { circle.render(:persisted) }
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:slug/edit (edit_circle_org)
+  # @route GET /circles/:circle_slug/orgs/:slug/edit {export: true} (edit_circle_org)
   def edit
     authorize org
 
     render inertia: "Orgs/Edit", props: {
       org: org.render(:edit),
-      circle: -> { circle.render(:share) }
+      circle: -> { circle.render(:persisted) }
     }
   end
 
@@ -86,8 +86,8 @@ class OrgsController < ApplicationController
   #   end
   # end
 
-  # @route PATCH /circles/:circle_slug/orgs/:slug (circle_org)
-  # @route PUT /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route PATCH /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
+  # @route PUT /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
   def update
     authorize org
 
@@ -98,8 +98,8 @@ class OrgsController < ApplicationController
     end
   end
 
-  # @route DELETE /orgs (orgs)
-  # @route DELETE /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route DELETE /orgs {export: true} (orgs)
+  # @route DELETE /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
   def destroy
     authorize org
 

@@ -7,7 +7,7 @@ class ThemeMembersController < ApplicationController
 
   strong_params :member, permit: [:first_name, :last_name, :number]
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/members (circle_theme_members)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members {export: true} (circle_theme_members)
   def index
     authorize members
 
@@ -20,23 +20,23 @@ class ThemeMembersController < ApplicationController
         **pagination_data(paginated_members)
       } },
       theme: -> { theme.render(:shallow) },
-      circle: -> { circle.render(:share) }
+      circle: -> { circle.render(:persisted) }
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug (circle_theme_member)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug {export: true} (circle_theme_member)
   def show
     authorize member
     render inertia: "Themes/Members/Show"
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/members/new (new_circle_theme_member)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members/new {export: true} (new_circle_theme_member)
   def new
     authorize Member.new
     render inertia: "Themes/Members/New"
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug/edit (edit_circle_theme_member)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug/edit {export: true} (edit_circle_theme_member)
   def edit
     authorize member
     render inertia: "Themes/Members/Edit"

@@ -5,7 +5,7 @@ module InertiaShare::Menu
 
   included do
     inertia_share menu: lambda { {
-      circles: current_user&.circles&.render(:share),
+      circles: current_user&.circles&.render(:inertia_share),
     } }
   end
 end

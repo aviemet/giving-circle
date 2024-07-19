@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/Components'
+import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 

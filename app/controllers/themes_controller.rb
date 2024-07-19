@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
   expose :themes, -> { search(circle.themes.includes_associated, sortable_fields) }
   expose :theme, id: -> { params[:slug] }, scope: -> { Theme.includes_associated }, find_by: :slug
 
-  # @route GET /circles/:circle_slug/themes (circle_themes)
+  # @route GET /circles/:circle_slug/themes {export: true} (circle_themes)
   def index
     authorize themes
 
@@ -18,11 +18,11 @@ class ThemesController < ApplicationController
         count: themes.size,
         **pagination_data(paginated_themes)
       } },
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route GET /circles/:circle_slug/themes/:slug {export: true} (circle_theme)
   def show
     authorize theme
 
@@ -31,7 +31,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/about (circle_theme_about)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/about {export: true} (circle_theme_about)
   def about
     authorize theme
 
@@ -40,27 +40,27 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/new (new_circle_theme)
+  # @route GET /circles/:circle_slug/themes/new {export: true} (new_circle_theme)
   def new
     authorize Theme.new
 
     render inertia: "Themes/New", props: {
       theme: Theme.new.render(:form_data),
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:slug/edit (edit_circle_theme)
+  # @route GET /circles/:circle_slug/themes/:slug/edit {export: true} (edit_circle_theme)
   def edit
     authorize theme
 
     render inertia: "Themes/Edit", props: {
       theme: theme.render(:form_data),
-      circle: -> { circle.render(:share) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
-  # @route POST /circles/:circle_slug/themes (circle_themes)
+  # @route POST /circles/:circle_slug/themes {export: true} (circle_themes)
   def create
     authorize Theme.new
 
@@ -73,8 +73,8 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/themes/:slug (circle_theme)
-  # @route PUT /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route PATCH /circles/:circle_slug/themes/:slug {export: true} (circle_theme)
+  # @route PUT /circles/:circle_slug/themes/:slug {export: true} (circle_theme)
   def update
     authorize theme
     if theme.update(theme_params)
@@ -84,7 +84,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route DELETE /circles/:circle_slug/themes/:slug {export: true} (circle_theme)
   def destroy
     authorize theme
     theme.destroy
