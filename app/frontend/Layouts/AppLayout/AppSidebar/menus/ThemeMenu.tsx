@@ -3,7 +3,7 @@ import { Divider, NavLink } from '@/Components'
 import { Routes } from '@/lib'
 
 export interface ThemeMenuProps {
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 	theme: Schema.ThemesShallow
 }
 

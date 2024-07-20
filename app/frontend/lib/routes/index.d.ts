@@ -378,6 +378,20 @@ export const circleThemeOrgIndex: ((
 
 /**
  * Generates rails route to
+ * /circles/:circle_slug/themes/:theme_slug/orgs(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const circleThemeOrgs: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /circles/:circle_slug/themes/:theme_slug/orgs/import(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug

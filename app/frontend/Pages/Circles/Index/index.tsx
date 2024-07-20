@@ -10,7 +10,6 @@ interface CircleIndexProps {
 }
 
 const CirclesIndex = ({ circles }: CircleIndexProps) => {
-
 	return (
 		<Page
 			title="Dashboard"

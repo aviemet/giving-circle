@@ -2,6 +2,7 @@ import React from 'react'
 import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
+import { usePageProps } from '@/lib/hooks'
 
 interface ShowThemeProps {
 	theme: Schema.ThemesShow
@@ -9,6 +10,8 @@ interface ShowThemeProps {
 
 const ShowTheme = ({ theme }: ShowThemeProps) => {
 	const title =  theme.name || 'Theme'
+
+	const { params } = usePageProps<'circleTheme'>()
 
 	return (
 		<Page
@@ -20,7 +23,7 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editCircleTheme(theme.circle_id, theme.slug) }>
+							<Menu.Link href={ Routes.editCircleTheme(params.circle_slug, params.slug) }>
 								Edit Theme
 							</Menu.Link>
 						</Menu.Dropdown>
