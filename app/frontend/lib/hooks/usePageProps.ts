@@ -1,27 +1,9 @@
 import { usePage } from '@inertiajs/react'
 import { PageProps, Errors, ErrorBag } from '@inertiajs/core'
 import { FlashMessage } from '@/types'
+import { urlParams } from '../routes'
 
-const urlParams = {
-	circle: {
-		path: '/circles/:circle_slug',
-		params: ['circle_slug'],
-	},
-	circles: {
-		path: '/circles',
-		params: [],
-	},
-	newCircleMember: {
-		path: '/circles/:circle_slug/members/new',
-		params: ['circle_slug'],
-	},
-	circleTheme: {
-		path: '/circles/:circle_slug/themes/:slug',
-		params: ['circle_slug', 'slug'],
-	},
-} as const
-
-type UrlParams = typeof urlParams
+type UrlParams = typeof urlParams;
 
 interface InitialInertiaShareProps extends PageProps {
 	auth: {

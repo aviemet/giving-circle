@@ -6,7 +6,7 @@ class CirclesController < ApplicationController
 
   strong_params :circle, permit: :name
 
-  # @route GET /circles {export: true} (circles)
+  # @route GET /circles (circles)
   def index
     authorize circles
 
@@ -15,7 +15,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:slug {export: true} (circle)
+  # @route GET /circles/:slug (circle)
   def show
     authorize circle
 
@@ -25,7 +25,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/about {export: true} (circle_about)
+  # @route GET /circles/:circle_slug/about (circle_about)
   def about
     authorize circle
 
@@ -35,7 +35,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /circles/new {export: true} (new_circle)
+  # @route GET /circles/new (new_circle)
   def new
     authorize Circle.new
 
@@ -44,7 +44,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:slug/edit {export: true} (edit_circle)
+  # @route GET /circles/:slug/edit (edit_circle)
   def edit
     authorize circle
 
@@ -53,7 +53,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route POST /circles {export: true} (circles)
+  # @route POST /circles (circles)
   def create
     authorize Circle.new
 
@@ -65,8 +65,8 @@ class CirclesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:slug {export: true} (circle)
-  # @route PUT /circles/:slug {export: true} (circle)
+  # @route PATCH /circles/:slug (circle)
+  # @route PUT /circles/:slug (circle)
   def update
     authorize circle
 
@@ -77,7 +77,7 @@ class CirclesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:slug {export: true} (circle)
+  # @route DELETE /circles/:slug (circle)
   def destroy
     authorize circle
 

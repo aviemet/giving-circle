@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
   strong_params :group, permit: :name
 
-  # @route GET /circles/:circle_slug/groups {export: true} (circle_groups)
+  # @route GET /circles/:circle_slug/groups (circle_groups)
   def index
     authorize groups
 
@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
     }
   end
 
-  # @route GET /groups/:slug {export: true} (group)
+  # @route GET /groups/:slug (group)
   def show
     authorize group
 
@@ -31,7 +31,7 @@ class GroupsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/groups/new {export: true} (new_circle_group)
+  # @route GET /circles/:circle_slug/groups/new (new_circle_group)
   def new
     authorize Group.new
 
@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
     }
   end
 
-  # @route GET /groups/:slug/edit {export: true} (edit_group)
+  # @route GET /groups/:slug/edit (edit_group)
   def edit
     authorize group
 
@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/groups {export: true} (circle_groups)
+  # @route POST /circles/:circle_slug/groups (circle_groups)
   def create
     authorize Group.new
 
@@ -64,8 +64,8 @@ class GroupsController < ApplicationController
     end
   end
 
-  # @route PATCH /groups/:slug {export: true} (group)
-  # @route PUT /groups/:slug {export: true} (group)
+  # @route PATCH /groups/:slug (group)
+  # @route PUT /groups/:slug (group)
   def update
     authorize group
 
@@ -76,8 +76,8 @@ class GroupsController < ApplicationController
     end
   end
 
-  # @route DELETE /groups {export: true} (groups)
-  # @route DELETE /groups/:slug {export: true} (group)
+  # @route DELETE /groups (groups)
+  # @route DELETE /groups/:slug (group)
   def destroy
     authorize group
 

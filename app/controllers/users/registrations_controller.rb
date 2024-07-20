@@ -4,12 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  # @route GET /users/register {export: true} (new_user_registration)
+  # @route GET /users/register (new_user_registration)
   def new
     render inertia: 'Auth/Devise/Register'
   end
 
-  # @route POST /users {export: true} (user_registration)
+  # @route POST /users (user_registration)
   def create
     build_resource(sign_up_params)
 

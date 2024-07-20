@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
-  # @route GET /users/password/new {export: true} (new_user_password)
+  # @route GET /users/password/new (new_user_password)
   def new
     render inertia: "Auth/Devise/Passwords/New"
   end

@@ -10,7 +10,7 @@ class Api::SpotlightsController < Api::ApiController
   expose :vendors, -> { @active_company.vendors }
   expose :contracts, -> { @active_company.contracts }
 
-  # @route GET /api/spotlights {export: true} (api_spotlights)
+  # @route GET /api/spotlights (api_spotlights)
   def index
     render json: {
       items: ItemSerializer.render(items),

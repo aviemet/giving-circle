@@ -13,7 +13,7 @@ class OrgsController < ApplicationController
 
   strong_params :org, permit: [:name, :slug, :description]
 
-  # @route GET /circles/:circle_slug/orgs {export: true} (circle_orgs)
+  # @route GET /circles/:circle_slug/orgs (circle_orgs)
   def index
     authorize orgs
 
@@ -29,7 +29,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
+  # @route GET /circles/:circle_slug/orgs/:slug (circle_org)
   def show
     authorize org
 
@@ -39,7 +39,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:org_slug/about {export: true} (circle_org_about)
+  # @route GET /circles/:circle_slug/orgs/:org_slug/about (circle_org_about)
   def about
     authorize org
 
@@ -50,7 +50,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/new {export: true} (new_circle_org)
+  # @route GET /circles/:circle_slug/orgs/new (new_circle_org)
   def new
     authorize Org.new
 
@@ -60,7 +60,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:slug/edit {export: true} (edit_circle_org)
+  # @route GET /circles/:circle_slug/orgs/:slug/edit (edit_circle_org)
   def edit
     authorize org
 
@@ -86,8 +86,8 @@ class OrgsController < ApplicationController
   #   end
   # end
 
-  # @route PATCH /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
-  # @route PUT /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
+  # @route PATCH /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route PUT /circles/:circle_slug/orgs/:slug (circle_org)
   def update
     authorize org
 
@@ -98,8 +98,8 @@ class OrgsController < ApplicationController
     end
   end
 
-  # @route DELETE /orgs {export: true} (orgs)
-  # @route DELETE /circles/:circle_slug/orgs/:slug {export: true} (circle_org)
+  # @route DELETE /orgs (orgs)
+  # @route DELETE /circles/:circle_slug/orgs/:slug (circle_org)
   def destroy
     authorize org
 

@@ -3,12 +3,12 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
 
-  # @route GET /login {export: true} (new_user_session)
+  # @route GET /login (new_user_session)
   def new
     render inertia: "Auth/Devise/Login"
   end
 
-  # @route POST /login {export: true} (user_session)
+  # @route POST /login (user_session)
   def create
     # super
     self.resource = warden.authenticate!(auth_options)
@@ -17,7 +17,7 @@ class Users::SessionsController < Devise::SessionsController
     respond_with resource, location: after_sign_in_path_for(resource)
   end
 
-  # @route GET /logout {export: true} (destroy_user_session)
+  # @route GET /logout (destroy_user_session)
   def destroy
     # super
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)

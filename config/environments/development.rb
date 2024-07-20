@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require_relative '../../lib/url_params_json'
 
 Rails.application.default_url_options = { host: 'localhost', port: 3000 }
 
@@ -77,4 +78,7 @@ Rails.application.configure do
 
   # Automatically update routes.js file when routes.rb is changed
   config.middleware.use(JsRoutes::Middleware)
+
+  # Automatically update urlParams.json file when routes.rb is changed
+  config.middleware.use(UrlParamsJson::Middleware)
 end

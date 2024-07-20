@@ -12,7 +12,8 @@ class ThemeOrgsController < ApplicationController
     end
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs {export: true} (circle_theme_org_index)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
   def index
     authorize orgs
 
@@ -29,7 +30,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug {export: true} (circle_theme_org)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug (circle_theme_org)
   def show
     authorize org
     render inertia: "Themes/Orgs/Show", props: {
@@ -38,7 +39,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/new {export: true} (new_circle_theme_org)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/new (new_circle_theme_org)
   def new
     authorize Org.new
     render inertia: "Themes/Orgs/New", props: {
@@ -47,7 +48,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit {export: true} (edit_circle_theme_org)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit (edit_circle_theme_org)
   def edit
     authorize org
     render inertia: "Themes/Orgs/Edit", props: {
@@ -56,7 +57,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/import {export: true} (circle_theme_orgs_import)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/import (circle_theme_orgs_import)
   def import
     authorize Org.new
 
@@ -66,7 +67,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs {export: true} (circle_theme_org_index)
+  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
   def create
     authorize Org.new
 

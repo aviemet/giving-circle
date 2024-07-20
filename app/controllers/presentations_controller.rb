@@ -6,7 +6,7 @@ class PresentationsController < ApplicationController
 
   strong_params :presentation, permit: [:name, :theme_id]
 
-  # @route GET /themes/:theme_slug/presentations {export: true} (theme_presentations)
+  # @route GET /themes/:theme_slug/presentations (theme_presentations)
   def index
     authorize presentations
 
@@ -23,7 +23,7 @@ class PresentationsController < ApplicationController
     }, layout: "something"
   end
 
-  # @route GET /presentations/:id {export: true} (presentation)
+  # @route GET /presentations/:id (presentation)
   def show
     authorize presentation
     render inertia: "Presentations/Show", props: {
@@ -31,7 +31,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /themes/:theme_slug/presentations/new {export: true} (new_theme_presentation)
+  # @route GET /themes/:theme_slug/presentations/new (new_theme_presentation)
   def new
     authorize Presentation.new
     render inertia: "Presentations/New", props: {
@@ -39,7 +39,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /presentations/:id/edit {export: true} (edit_presentation)
+  # @route GET /presentations/:id/edit (edit_presentation)
   def edit
     authorize presentation
     render inertia: "Presentations/Edit", props: {
@@ -47,7 +47,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /presentation/:id {export: true} (run_presentation)
+  # @route GET /presentation/:id (run_presentation)
   def run_presentation
     authorize presentation
     render inertia: "Present/Presentations/Presentation", props: {
@@ -55,7 +55,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route POST /themes/:theme_slug/presentations {export: true} (theme_presentations)
+  # @route POST /themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new
     if presentation.save
@@ -65,8 +65,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /presentations/:id {export: true} (presentation)
-  # @route PUT /presentations/:id {export: true} (presentation)
+  # @route PATCH /presentations/:id (presentation)
+  # @route PUT /presentations/:id (presentation)
   def update
     authorize presentation
     if presentation.update(presentation_params)
@@ -76,8 +76,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /themes/:theme_slug/presentations {export: true} (theme_presentations)
-  # @route DELETE /presentations/:id {export: true} (presentation)
+  # @route DELETE /themes/:theme_slug/presentations (theme_presentations)
+  # @route DELETE /presentations/:id (presentation)
   def destroy
     authorize presentation
     presentation.destroy!

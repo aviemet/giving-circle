@@ -2,7 +2,7 @@
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
   # TODO: Display flash message on redirect
-  # @route GET /users/confirmation {export: true} (user_confirmation)
+  # @route GET /users/confirmation (user_confirmation)
   def show
     unless params[:confirmation_token]
       # flash.now[:alert] = "Invalid or missing confirmation token"
@@ -22,7 +22,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     end
   end
 
-  # @route GET /users/confirmation/new {export: true} (new_user_confirmation)
+  # @route GET /users/confirmation/new (new_user_confirmation)
   def new
     render inertia: "Auth/Devise/Confirmations/New", props: {
       user: {
@@ -31,7 +31,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     }
   end
 
-  # @route POST /users/confirmation {export: true} (user_confirmation)
+  # @route POST /users/confirmation (user_confirmation)
   def create
     self.resource = resource_class.send_confirmation_instructions(resource_params)
     yield resource if block_given?
