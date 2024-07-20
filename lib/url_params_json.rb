@@ -6,7 +6,9 @@ module UrlParamsJson
       url_params = {}
 
       Rails.application.routes.named_routes.to_a.each do |route|
-        url_params[route[0]] = {
+        next if route[0].match?(/^rails|^new_rails/)
+
+        url_params[route[0].to_s.camelize(:lower)] = {
           path: route[1].path.spec.to_s.gsub(/\(.:format\)/, ''),
           params: route[1].required_parts
         }
