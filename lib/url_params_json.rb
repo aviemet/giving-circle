@@ -55,24 +55,6 @@ module UrlParamsJson
       FileUtils.mv(annotated_file.path, path) unless annotated_file.nil?
     end
 
-    # OLD
-    def self.add_tsx_annotations(route_info)
-      Rails.root.glob("app/frontend/Pages/**/*.tsx").each do |file_path|
-        content = File.read(file_path)
-
-        route_info.each_value do |info|
-          component_name = File.basename(file_path, ".tsx")
-          next unless content.include?("export default function #{component_name}")
-
-          annotation = "/**\n * @path: #{info[:path]}\n * @route: #{info[:js_route]}\n **/\n"
-
-          updated_content = content.gsub(/(export default function #{component_name})/, "#{annotation}\\1")
-
-          File.write(file_path, updated_content)
-        end
-      end
-    end
-
   end
 
   class Middleware
@@ -189,7 +171,9 @@ def add_or_update_route_annotation(file, component_name, path, route)
       next
     when component_pattern
       unless found_path_annotation
-        temp_file << "\n"
+        if buffer.last != "\n"
+          temp_file << "\n"
+        end
         temp_file << path_annotation(path)
       end
       temp_file << route_annotation(route) unless found_route_annotation
@@ -204,9 +188,9 @@ def add_or_update_route_annotation(file, component_name, path, route)
 end
 
 def path_annotation(path)
-  "// @path: #{path}"
+  "// @path: #{path}\n"
 end
 
 def route_annotation(route)
-  "// @route: #{route}"
+  "// @route: #{route}\n"
 end
