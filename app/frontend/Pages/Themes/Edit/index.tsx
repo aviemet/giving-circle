@@ -7,6 +7,8 @@ interface EditThemeProps {
 	theme: Schema.ThemesFormData
 }
 
+// @path: /circles/:circle_slug/themes/:slug/edit
+// @route: editCircleTheme
 const EditTheme = ({ theme }: EditThemeProps) => {
 	const title = 'Edit Theme'
 

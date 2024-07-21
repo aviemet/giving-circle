@@ -7,6 +7,8 @@ type TPasswordsNewFormData = {
 	email: string
 }
 
+// @path: /users/password/new
+// @route: newUserPassword
 const PasswordsNew = () => {
 	const defaultData: TPasswordsNewFormData = {
 		email: '',

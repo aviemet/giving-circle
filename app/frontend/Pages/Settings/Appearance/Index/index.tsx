@@ -19,6 +19,8 @@ interface AppearanceSettingsProps {
 	}
 }
 
+// @path: /settings/appearance
+// @route: settingsAppearance
 const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 	const { primaryColor, setPrimaryColor } = useLayoutStore()
 	const RevertColorRef = useRef<string>(primaryColor!)

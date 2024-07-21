@@ -8,6 +8,8 @@ interface NewMemberProps {
 	member: Schema.MembersFormData
 }
 
+// @path: /circles/:circle_slug/members/new
+// @route: newCircleMember
 const NewMember = ({ member }: NewMemberProps) => {
 	const { circle, params } = usePageProps()
 	const title = 'New Member'

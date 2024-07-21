@@ -9,6 +9,8 @@ interface PersonIndexProps {
 	pagination: Schema.Pagination
 }
 
+// @path: /people
+// @route: people
 const PeopleIndex = ({ people, pagination }: PersonIndexProps) => {
 	return (
 		<IndexPageTemplate

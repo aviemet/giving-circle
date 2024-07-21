@@ -7,6 +7,8 @@ interface NewCircleProps {
 	circle: Schema.CirclesFormData
 }
 
+// @path: /circles/new
+// @route: newCircle
 const NewCircle = (data: NewCircleProps) => {
 	const title = 'New Circle'
 

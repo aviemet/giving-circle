@@ -7,6 +7,8 @@ interface EditPersonProps {
 	person: Schema.PeopleEdit
 }
 
+// @path: /people/:slug/edit
+// @route: editPerson
 const EditPerson = ({ person }: EditPersonProps) => {
 	const title = `Edit ${person.name}`
 

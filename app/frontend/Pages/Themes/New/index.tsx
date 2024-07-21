@@ -8,6 +8,8 @@ interface NewThemeProps {
 	circle: Schema.CirclesInertiaShare
 }
 
+// @path: /circles/:circle_slug/themes/new
+// @route: newCircleTheme
 const NewTheme = ({ circle, ...data }: NewThemeProps) => {
 
 	const title = 'New Theme'

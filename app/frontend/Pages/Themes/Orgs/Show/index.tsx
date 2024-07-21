@@ -6,6 +6,8 @@ interface ShowOrgProps {
 	org: Schema.OrgsShow
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/orgs/:slug
+// @route: circleThemeOrg
 const ShowOrg = ({ org }: ShowOrgProps) => {
 	const title =  'Org'
 

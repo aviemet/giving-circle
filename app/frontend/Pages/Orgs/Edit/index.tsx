@@ -2,13 +2,16 @@ import React from 'react'
 import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import OrgsForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface EditOrgProps {
 	org: Schema.OrgsEdit
-	circle: Schema.CirclesInertiaShare
 }
 
-const EditOrg = ({ org, circle }: EditOrgProps) => {
+// @path: /circles/:circle_slug/orgs/:slug/edit
+// @route: editCircleOrg
+const EditOrg = ({ org }: EditOrgProps) => {
+	const { params } = usePageProps<'editCircleOrg'>()
 	const title = 'Edit Org'
 
 	return (
@@ -18,7 +21,7 @@ const EditOrg = ({ org, circle }: EditOrgProps) => {
 
 				<OrgsForm
 					method='put'
-					to={ Routes.circleOrg(circle.slug, org.slug) }
+					to={ Routes.circleOrg(params.circle_slug, params.slug) }
 					org={ org }
 				/>
 			</Section>

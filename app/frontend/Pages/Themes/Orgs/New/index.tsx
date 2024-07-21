@@ -8,6 +8,8 @@ interface NewOrgProps {
 	theme: Schema.ThemesShallow
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/orgs/new
+// @route: newCircleThemeOrg
 const NewOrg = ({ org, theme }: NewOrgProps) => {
 	const title = 'New Org'
 

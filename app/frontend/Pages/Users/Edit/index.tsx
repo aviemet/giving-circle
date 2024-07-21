@@ -1,5 +1,7 @@
 import React from 'react'
 
+// @path: /users/:id/edit
+// @route: editUser
 const Edit = () => {
 	return (
 		<div>Edit</div>

@@ -8,6 +8,8 @@ interface NewTemplateProps {
 	circle: Schema.CirclesOptions
 }
 
+// @path: /circles/:circle_slug/presentation_templates/new
+// @route: newCirclePresentationTemplate
 const NewTemplate = ({ template, circle }: NewTemplateProps) => {
 	const title = 'New Template'
 

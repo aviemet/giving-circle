@@ -7,6 +7,8 @@ interface ConfirmationsNew {
 	user: Schema.User
 }
 
+// @path: /users/confirmation/new
+// @route: newUserConfirmation
 const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 	return (
 		<Form

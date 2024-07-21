@@ -7,6 +7,8 @@ interface ShowMemberProps {
 	circle: Schema.CirclesInertiaShare
 }
 
+// @path: /circles/:circle_slug/members/:slug
+// @route: circleMember
 const ShowMember = ({ member, circle }: ShowMemberProps) => {
 	const title = member.name
 

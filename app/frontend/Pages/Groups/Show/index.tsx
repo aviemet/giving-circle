@@ -6,6 +6,8 @@ interface ShowGroupProps {
 	group: Schema.GroupsShow
 }
 
+// @path: /groups/:slug
+// @route: group
 const ShowGroup = ({ group }: ShowGroupProps) => {
 	const title =  group.name
 

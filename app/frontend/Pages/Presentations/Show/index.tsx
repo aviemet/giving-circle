@@ -6,6 +6,8 @@ interface ShowPresentationProps {
 	presentation: Schema.PresentationsPresentation
 }
 
+// @path: /presentations/:id
+// @route: presentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 	const title = presentation.name || 'Presentation'
 

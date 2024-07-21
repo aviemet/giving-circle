@@ -7,6 +7,8 @@ interface EditOrgProps {
 	org: Schema.OrgsEdit
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit
+// @route: editCircleThemeOrg
 const EditOrg = ({ org }: EditOrgProps) => {
 	const title = 'Edit Org'
 

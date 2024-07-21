@@ -13,6 +13,8 @@ interface OrgsImportProps {
 	circle: Schema.CirclesInertiaShare
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/orgs/import
+// @route: circleThemeOrgsImport
 const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	const { sidebarVisible, toggleSidebarOpen } = useLayoutStore()
 	const [displayImportTable, setDisplayImportTable] = useState(false)

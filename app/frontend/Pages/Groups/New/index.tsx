@@ -8,6 +8,8 @@ interface NewGroupProps {
 	circle: Schema.CirclesOptions
 }
 
+// @path: /circles/:circle_slug/groups/new
+// @route: newCircleGroup
 const NewGroup = ({ circle, ...data }: NewGroupProps) => {
 	const title = 'New Group'
 

@@ -12,6 +12,8 @@ type TRegisterFormData = {
 	}
 }
 
+// @path: /users/register
+// @route: newUserRegistration
 const Register = () => {
 	const handleFormChange = ({ data }: UseFormProps<TRegisterFormData>) => {
 		// console.log({ data })

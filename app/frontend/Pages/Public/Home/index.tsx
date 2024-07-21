@@ -1,6 +1,8 @@
 import React from 'react'
 import { Box, Title, Text } from '@/Components'
 
+// @path: /
+// @route: root
 const Home = () => {
 	return (
 		<Box>

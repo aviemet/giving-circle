@@ -4,8 +4,32 @@ require 'fileutils'
 
 module UrlParamsJson
   class Generator
-    attr_accessor :tsx_map
-
+    ###
+    # Generates a urlParams.ts based on rails routes definitions
+    # - and -
+    # Adds annotation comments to React view files with the path and named route
+    #
+    # Example:
+    #   For a give route, `resources :users`, an entry in urlParams object would be:
+    #
+    #   "users": {
+    #     "params": []
+    #   },
+    #   "newUser": {
+    #     "params": []
+    #   },
+    #   "editUser": {
+    #     "params": ["id"]
+    #   },
+    #   "user": {
+    #     "params": ["id"]
+    #   },
+    #
+    #   Notation above the EditUser React component would be:
+    #
+    #   @path: /users/:id/edit
+    #   @route: editUser
+    ###
     def self.generate
       url_params = {}
 
@@ -13,7 +37,7 @@ module UrlParamsJson
         next if route[0].match?(/^rails|^new_rails/)
 
         url_params[route[0].to_s.camelize(:lower)] = {
-          path: route[1].path.spec.to_s.gsub(/\(.:format\)/, ''),
+          # path: route[1].path.spec.to_s.gsub(/\(.:format\)/, ''),
           params: route[1].required_parts
         }
 
@@ -140,7 +164,6 @@ def find_default_export(file)
   nil
 end
 
-## EXPERIMENTAL
 def add_or_update_route_annotation(file, component_name, path, route)
   annotation_path_pattern = %r{// @path:.*}
   annotation_route_pattern = %r{// @route:.*}
@@ -155,8 +178,6 @@ def add_or_update_route_annotation(file, component_name, path, route)
   buffer = []
 
   file.each_line do |line|
-    buffer << line unless component_found
-
     case line
     when annotation_path_pattern
       found_path_annotation = true
@@ -180,6 +201,7 @@ def add_or_update_route_annotation(file, component_name, path, route)
       component_found = true
     end
 
+    buffer << line unless component_found
     temp_file << line
   end
 

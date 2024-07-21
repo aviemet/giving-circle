@@ -6,6 +6,8 @@ interface ShowPersonProps {
 	person: Schema.PeopleShow
 }
 
+// @path: /people/:slug
+// @route: person
 const ShowPerson = ({ person }: ShowPersonProps) => {
 	const title =  'Person'
 

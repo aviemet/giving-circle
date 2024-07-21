@@ -7,6 +7,8 @@ interface EditTemplateProps {
 	template: Schema.PresentationTemplatesEdit
 }
 
+// @path: /circles/:circle_slug/presentation_templates/:slug/edit
+// @route: editCirclePresentationTemplate
 const EditTemplate = ({ template }: EditTemplateProps) => {
 	const title = 'Edit Template'
 

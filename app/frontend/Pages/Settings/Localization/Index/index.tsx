@@ -2,6 +2,8 @@ import React from 'react'
 import SettingsLayout from '@/Layouts/AppLayout/SettingsLayout'
 import { Title } from '@/Components'
 
+// @path: /settings/localizations
+// @route: settingsLocalizations
 const LocalizationSettings = () => {
 	return (
 		<SettingsLayout>

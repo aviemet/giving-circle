@@ -6,6 +6,8 @@ interface ShowMemberProps {
 	member: Schema.MembersShow
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/members/:slug
+// @route: circleThemeMember
 const ShowMember = ({ member }: ShowMemberProps) => {
 	const title =  'Member'
 

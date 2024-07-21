@@ -23,6 +23,8 @@ const defaultData = {
 	},
 }
 
+// @path: /login
+// @route: newUserSession
 const Login = () => {
 
 	const handleSubmit = ({ data }: UseFormProps<LoginFormData>) => {

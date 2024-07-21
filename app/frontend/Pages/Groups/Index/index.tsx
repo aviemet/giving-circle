@@ -10,6 +10,8 @@ interface GroupIndexProps {
 	circle: Schema.CirclesOptions
 }
 
+// @path: /circles/:circle_slug/groups
+// @route: circleGroups
 const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
 	return (
 		<IndexPageTemplate

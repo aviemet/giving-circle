@@ -8,6 +8,8 @@ interface EditMemberProps {
 	circle: Schema.CirclesInertiaShare
 }
 
+// @path: /circles/:circle_slug/members/:slug/edit
+// @route: editCircleMember
 const EditMember = ({ member, circle }: EditMemberProps) => {
 	const title = `Edit ${member?.name || 'Member'}`
 

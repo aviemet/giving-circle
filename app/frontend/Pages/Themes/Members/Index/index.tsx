@@ -12,6 +12,8 @@ interface MemberIndexProps {
 	circle: Schema.CirclesInertiaShare
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/members
+// @route: circleThemeMembers
 const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) => {
 	return (
 		<IndexPageTemplate

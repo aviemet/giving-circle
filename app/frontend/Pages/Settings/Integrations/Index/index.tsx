@@ -9,6 +9,8 @@ interface MailSettingsProps {
 	smtps: Schema.Smtp[]
 }
 
+// @path: /settings/integrations
+// @route: settingsIntegrations
 const Mail = ({ smtps }: MailSettingsProps) => {
 	return (
 		<SettingsLayout>

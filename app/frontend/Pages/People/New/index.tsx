@@ -7,6 +7,8 @@ interface NewPersonProps {
 	person: Schema.PeopleFormData
 }
 
+// @path: /people/new
+// @route: newPerson
 const NewPerson = ({ ...data }: NewPersonProps) => {
 	const title = 'New Person'
 

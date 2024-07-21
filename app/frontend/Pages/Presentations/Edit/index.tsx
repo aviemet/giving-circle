@@ -7,6 +7,8 @@ interface EditPresentationProps {
 	presentation: Schema.PresentationsEdit
 }
 
+// @path: /presentations/:id/edit
+// @route: editPresentation
 const EditPresentation = ({ presentation }: EditPresentationProps) => {
 	const title = 'Edit Presentation'
 

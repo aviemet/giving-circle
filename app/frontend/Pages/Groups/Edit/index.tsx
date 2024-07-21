@@ -7,6 +7,8 @@ interface EditGroupProps {
 	group: Schema.GroupsEdit
 }
 
+// @path: /groups/:slug/edit
+// @route: editGroup
 const EditGroup = ({ group }: EditGroupProps) => {
 	const title = 'Edit Group'
 

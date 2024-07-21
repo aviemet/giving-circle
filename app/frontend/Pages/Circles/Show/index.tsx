@@ -10,6 +10,8 @@ interface ShowCircleProps {
 	circle: Schema.CirclesShow
 }
 
+// @path: /circles/:slug
+// @route: circle
 const ShowCircle = ({ circle }: ShowCircleProps) => {
 	const title = circle.name || 'Circle'
 

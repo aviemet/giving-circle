@@ -7,6 +7,8 @@ interface NewOrgProps {
 	org: Schema.OrgsFormData
 }
 
+// @path: /circles/:circle_slug/orgs/new
+// @route: newCircleOrg
 const NewOrg = ({ org }: NewOrgProps) => {
 	const title = 'New Org'
 

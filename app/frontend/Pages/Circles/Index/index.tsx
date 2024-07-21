@@ -9,6 +9,8 @@ interface CircleIndexProps {
 	pagination: Schema.Pagination
 }
 
+// @path: /circles
+// @route: circles
 const CirclesIndex = ({ circles }: CircleIndexProps) => {
 	return (
 		<Page

@@ -7,6 +7,8 @@ interface EditCircleProps {
 	circle: Schema.CirclesEdit
 }
 
+// @path: /circles/:slug/edit
+// @route: editCircle
 const EditCircle = ({ circle }: EditCircleProps) => {
 	const title = 'Edit Circle'
 

@@ -7,6 +7,8 @@ interface NewPresentationProps {
 	presentation: Schema.PresentationsFormData
 }
 
+// @path: /themes/:theme_slug/presentations/new
+// @route: newThemePresentation
 const NewPresentation = ({ presentation }: NewPresentationProps) => {
 	const title = 'New Presentation'
 
