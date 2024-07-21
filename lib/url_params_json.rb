@@ -44,7 +44,7 @@ module UrlParamsJson
       Rails.root.join(path).open do |file|
         component_name = find_default_export(file)
 
-        break if component_name == 'Anonymous'
+        break if component_name.nil? || component_name == 'Anonymous'
 
         url_path = route[1].path.spec.to_s.gsub(/\(.:format\)/, '')
         js_route_method = route[0].to_s.camelize(:lower)
@@ -160,31 +160,53 @@ end
 
 ## EXPERIMENTAL
 def add_or_update_route_annotation(file, component_name, path, route)
-  temp_file = Tempfile.new('temp_file')
-  annotation_pattern = %r{/\*\*\n\s*\* @path:.*\n\s*\* @route:.*\n\s*\*/}
+  annotation_path_pattern = %r{// @path:.*}
+  annotation_route_pattern = %r{// @route:.*}
   component_pattern = /\b(function|class|const)\s+#{Regexp.escape(component_name)}\b/
 
-  found_annotation = false
-  found_component = false
+  found_path_annotation = false
+  found_route_annotation = false
+  component_found = false
+
+  temp_file = Tempfile.new('temp_file')
+
+  buffer = []
 
   file.each_line do |line|
-    if !found_component && line.match?(annotation_pattern)
-      # Update existing annotation
-      temp_file.puts generate_annotation(path, route)
-      found_annotation = true
-    elsif !found_component && line.match?(component_pattern)
-      # Add new annotation if none exists
-      temp_file.puts generate_annotation(path, route) unless found_annotation
-      temp_file.puts line
-      found_component = true
-    else
-      temp_file.puts line
+    buffer << line unless component_found
+
+    case line
+    when annotation_path_pattern
+      found_path_annotation = true
+      if buffer.last != "\n"
+        temp_file << "\n"
+      end
+      temp_file << path_annotation(path)
+      next
+    when annotation_route_pattern
+      found_route_annotation = true
+      temp_file << route_annotation(route)
+      next
+    when component_pattern
+      unless found_path_annotation
+        temp_file << "\n"
+        temp_file << path_annotation(path)
+      end
+      temp_file << route_annotation(route) unless found_route_annotation
+      component_found = true
     end
+
+    temp_file << line
   end
 
+  temp_file.rewind
   temp_file
 end
 
-def generate_annotation(path, route)
-  "/**\n * @path: #{path}\n * @route: #{route}\n */"
+def path_annotation(path)
+  "// @path: #{path}"
+end
+
+def route_annotation(route)
+  "// @route: #{route}"
 end
