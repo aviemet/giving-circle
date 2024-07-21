@@ -5,7 +5,7 @@ import OrgsForm from '../Form'
 
 interface EditOrgProps {
 	org: Schema.OrgsEdit
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const EditOrg = ({ org, circle }: EditOrgProps) => {

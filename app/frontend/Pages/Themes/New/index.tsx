@@ -5,7 +5,7 @@ import ThemeForm from '../Form'
 
 interface NewThemeProps {
 	theme: Schema.ThemesFormData
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const NewTheme = ({ circle, ...data }: NewThemeProps) => {

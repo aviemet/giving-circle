@@ -24,7 +24,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # @route GET /users/confirmation/new (new_user_confirmation)
   def new
-    render inertia: "Auth/Devise/Confirmations/New", props: {
+    render inertia: "Auth/Confirmations/New", props: {
       user: {
         email: params[:email]
       }

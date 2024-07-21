@@ -43,23 +43,6 @@ class UsersController < ApplicationController
     }
   end
 
-  def complete_registration
-    render inertia: "Public/Devise/Register/Complete"
-  end
-
-  def save_complete_registration
-    params.permit!
-
-    person = Person.new(params[:person])
-    person.user = current_user
-
-    if current_user.save
-      redirect_to root_path
-    end
-  rescue ActiveRecord::RecordInvalid
-    redirect_to complete_registration_path
-  end
-
   # @route PATCH /users/:id (user)
   # @route PUT /users/:id (user)
   def update

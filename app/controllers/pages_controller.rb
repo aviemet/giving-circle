@@ -4,6 +4,6 @@ class PagesController < ApplicationController
   # GET /
   # @route GET / (root)
   def home
-    render inertia: "Public/Pages/Home", props: {}
+    render inertia: "Public/Home", props: {}
   end
 end

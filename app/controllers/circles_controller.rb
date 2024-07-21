@@ -29,7 +29,7 @@ class CirclesController < ApplicationController
   def about
     authorize circle
 
-    render inertia: "Circles/About", props: {
+    render inertia: "Public/Circles/About", props: {
       circle: -> { circle.render(:show) },
       themes: -> { circle.themes.render(:index) }
     }

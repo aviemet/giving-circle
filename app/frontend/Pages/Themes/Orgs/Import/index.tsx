@@ -10,7 +10,7 @@ import { Routes } from '@/lib'
 
 interface OrgsImportProps {
 	theme: Schema.ThemesShallow
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const OrgsImport = ({ circle, theme }: OrgsImportProps) => {

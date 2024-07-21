@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # @route GET /users/register (new_user_registration)
   def new
-    render inertia: 'Auth/Devise/Register'
+    render inertia: 'Auth/Register'
   end
 
   # @route POST /users (user_registration)

@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { Link } from '@inertiajs/react'
 
 interface ThemeCardProps {
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 	theme: Schema.Theme & {
 		slug: string
 	}

@@ -23,15 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			switch(name.substring(0, name.indexOf('/'))) {
 				case 'Public':
 					layout = PublicLayout
-					checkedName = name.replace('Public/', '')
 					break
 				case 'Auth':
 					layout = AuthLayout
-					checkedName = name.replace('Auth/', '')
 					break
 				case 'Present':
 					layout = PresentationLayout
-					checkedName = name.replace('Present/', '')
 					break
 				default:
 					layout = AppLayout

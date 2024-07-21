@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # @route GET /login (new_user_session)
   def new
-    render inertia: "Auth/Devise/Login"
+    render inertia: "Auth/Login"
   end
 
   # @route POST /login (user_session)

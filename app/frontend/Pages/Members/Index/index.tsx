@@ -7,7 +7,7 @@ import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface MemberIndexProps {
 	members: Schema.MembersIndex[]
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 	pagination: Schema.Pagination
 }
 

@@ -8,7 +8,7 @@ import PresentationsTable from '../Table'
 interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
 	pagination: Schema.Pagination
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 	theme: Schema.ThemesShallow
 }
 

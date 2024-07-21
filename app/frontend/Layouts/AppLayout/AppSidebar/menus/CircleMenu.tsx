@@ -3,7 +3,7 @@ import { NavLink } from '@/Components'
 import { Routes } from '@/lib'
 
 export interface CircleMenuProps {
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const CircleMenu = ({ circle }: CircleMenuProps) => {

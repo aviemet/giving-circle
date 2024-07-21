@@ -5,7 +5,7 @@ import MembersForm from '../Form'
 
 interface EditMemberProps {
 	member: Schema.MembersEdit
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const EditMember = ({ member, circle }: EditMemberProps) => {

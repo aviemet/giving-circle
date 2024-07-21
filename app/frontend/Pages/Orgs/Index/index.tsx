@@ -7,7 +7,7 @@ import OrgsTable from '../Table'
 interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const OrgsIndex = ({ orgs, pagination, circle }: OrgIndexProps) => {

@@ -9,7 +9,7 @@ interface ClickableElementProps {
 }
 
 interface NewTemplateModalProps {
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 	children: React.ReactElement<ClickableElementProps>
 }
 

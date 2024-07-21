@@ -9,7 +9,7 @@ interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
 	theme: Schema.ThemesShallow
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {

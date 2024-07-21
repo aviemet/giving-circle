@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 
 interface ShowMemberProps {
 	member: Schema.MembersShow
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const ShowMember = ({ member, circle }: ShowMemberProps) => {

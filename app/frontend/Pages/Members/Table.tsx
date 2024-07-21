@@ -5,7 +5,7 @@ import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
 
 interface MembersTableProps extends TableProps {
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const MembersTable = ({ circle, ...props }: MembersTableProps) => {

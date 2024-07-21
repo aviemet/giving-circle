@@ -9,7 +9,7 @@ interface MemberIndexProps {
 	members: Schema.MembersIndex[]
 	pagination: Schema.Pagination
 	theme: Schema.ThemesShallow
-	circle: Schema.CirclesShare
+	circle: Schema.CirclesInertiaShare
 }
 
 const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) => {

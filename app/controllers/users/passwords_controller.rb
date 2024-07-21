@@ -3,7 +3,7 @@
 class Users::PasswordsController < Devise::PasswordsController
   # @route GET /users/password/new (new_user_password)
   def new
-    render inertia: "Auth/Devise/Passwords/New"
+    render inertia: "Auth/Passwords/New"
   end
 
   # def create
