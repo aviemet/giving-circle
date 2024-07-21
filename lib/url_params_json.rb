@@ -40,7 +40,7 @@ module UrlParamsJson
 
       return if path.nil?
 
-      annotated = nil
+      annotated_file = nil
       Rails.root.join(path).open do |file|
         component_name = find_default_export(file)
 
@@ -48,11 +48,11 @@ module UrlParamsJson
 
         url_path = route[1].path.spec.to_s.gsub(/\(.:format\)/, '')
         js_route_method = route[0].to_s.camelize(:lower)
-        ap({ url_path:, js_route_method: })
-        annotated = add_or_update_route_annotation(file, component_name, url_path, js_route_method)
+        file.rewind
+        annotated_file = add_or_update_route_annotation(file, component_name, url_path, js_route_method)
       end
 
-      # FileUtils.mv(annotated.path, file_path) unless annotated.nil?
+      FileUtils.mv(annotated_file.path, path) unless annotated_file.nil?
     end
 
     # OLD
@@ -170,7 +170,7 @@ def add_or_update_route_annotation(file, component_name, path, route)
   file.each_line do |line|
     if !found_component && line.match?(annotation_pattern)
       # Update existing annotation
-      temp_file.puts update_annotation(path, route)
+      temp_file.puts generate_annotation(path, route)
       found_annotation = true
     elsif !found_component && line.match?(component_pattern)
       # Add new annotation if none exists
@@ -187,8 +187,4 @@ end
 
 def generate_annotation(path, route)
   "/**\n * @path: #{path}\n * @route: #{route}\n */"
-end
-
-def update_annotation(path, route)
-  generate_annotation(path, route)
 end
