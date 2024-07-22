@@ -25,7 +25,6 @@ class OrgsController < ApplicationController
         count: orgs.size,
         **pagination_data(paginated_orgs)
       } },
-      circle: -> { circle.render(:persisted) },
     }
   end
 
@@ -56,7 +55,6 @@ class OrgsController < ApplicationController
 
     render inertia: "Orgs/New", props: {
       org: Org.new.render(:new),
-      circle: -> { circle.render(:persisted) }
     }
   end
 
@@ -66,7 +64,6 @@ class OrgsController < ApplicationController
 
     render inertia: "Orgs/Edit", props: {
       org: org.render(:edit),
-      circle: -> { circle.render(:persisted) }
     }
   end
 

@@ -7,6 +7,7 @@ import { useLayoutStore } from '@/Store'
 import { headingsMap } from './headingsMap'
 import axios from 'axios'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 
 interface OrgsImportProps {
 	theme: Schema.ThemesShallow
@@ -16,6 +17,8 @@ interface OrgsImportProps {
 // @path: /circles/:circle_slug/themes/:theme_slug/orgs/import
 // @route: circleThemeOrgsImport
 const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
+	const { params } = usePageProps<'circleThemeOrgsImport'>()
+
 	const { sidebarVisible, toggleSidebarOpen } = useLayoutStore()
 	const [displayImportTable, setDisplayImportTable] = useState(false)
 
@@ -50,7 +53,7 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	}, [displayImportTable])
 
 	const handleImportData = (data: Record<string, unknown>[]) => {
-		axios.post(Routes.circleThemeOrgs(circle.slug, theme.slug), { orgs: data })
+		axios.post(Routes.circleThemeOrgs(params.circle_slug, params.theme_slug), { orgs: data })
 	}
 
 	const handleCancel = () => {

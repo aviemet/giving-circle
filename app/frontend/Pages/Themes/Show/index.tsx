@@ -11,9 +11,9 @@ interface ShowThemeProps {
 // @path: /circles/:circle_slug/themes/:slug
 // @route: circleTheme
 const ShowTheme = ({ theme }: ShowThemeProps) => {
-	const title =  theme.name || 'Theme'
-
 	const { params } = usePageProps<'circleTheme'>()
+
+	const title =  theme.name || 'Theme'
 
 	return (
 		<Page

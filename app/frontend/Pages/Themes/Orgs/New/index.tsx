@@ -2,15 +2,16 @@ import React from 'react'
 import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import OrgForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface NewOrgProps {
 	org: Schema.OrgsFormData
-	theme: Schema.ThemesShallow
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/orgs/new
 // @route: newCircleThemeOrg
-const NewOrg = ({ org, theme }: NewOrgProps) => {
+const NewOrg = ({ org }: NewOrgProps) => {
+	const { params } = usePageProps<'newCircleThemeOrg'>()
 	const title = 'New Org'
 
 	return (
@@ -18,10 +19,10 @@ const NewOrg = ({ org, theme }: NewOrgProps) => {
 			<Section>
 				<Title>{ title }</Title>
 
-				{ /* <OrgForm
-					to={ Routes.circleThemeOrgs() }
+				<OrgForm
+					to={ Routes.circleThemeOrgs(params.circle_slug, params.theme_slug) }
 					org={ org }
-				/> */ }
+				/>
 			</Section>
 
 		</Page>

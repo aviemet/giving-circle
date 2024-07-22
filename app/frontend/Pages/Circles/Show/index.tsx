@@ -5,6 +5,7 @@ import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import StatTile from './StatTile'
 import { CoinsIcon, HelpingIcon, MembersIcon } from '@/Components/Icons'
 import { ThemeCard } from '@/Features/Cards'
+import { usePageProps } from '@/lib/hooks'
 
 interface ShowCircleProps {
 	circle: Schema.CirclesShow
@@ -13,6 +14,7 @@ interface ShowCircleProps {
 // @path: /circles/:slug
 // @route: circle
 const ShowCircle = ({ circle }: ShowCircleProps) => {
+	const { params } = usePageProps<'circle'>()
 	const title = circle.name || 'Circle'
 
 	return (
@@ -21,7 +23,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 			navMenu={ getCircleMenu({ circle }) }
 			breadcrumbs={ [
 				{ title: 'Circles', href: Routes.circles() },
-				{ title, href: Routes.circle(circle.slug) },
+				{ title, href: Routes.circle(params.slug) },
 			] }
 		>
 			<Section>
@@ -32,7 +34,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 						<Menu position="bottom-end">
 							<Menu.Target />
 							<Menu.Dropdown>
-								<Menu.Link href={ Routes.editCircle(circle.slug) }>
+								<Menu.Link href={ Routes.editCircle(params.slug) }>
 								Edit Circle
 								</Menu.Link>
 							</Menu.Dropdown>

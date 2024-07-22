@@ -4,7 +4,7 @@ import React from 'react'
 // @route: newUser
 const New = () => {
 	return (
-		<div>This needs to simultaneously create a User record and send an email containing a link to complete authorization.</div>
+		<div>New User</div>
 	)
 }
 

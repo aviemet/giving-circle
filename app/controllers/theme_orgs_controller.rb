@@ -44,7 +44,6 @@ class ThemeOrgsController < ApplicationController
     authorize Org.new
     render inertia: "Themes/Orgs/New", props: {
       org: Org.new.render(:form_data),
-      theme: theme.render(:shallow),
     }
   end
 

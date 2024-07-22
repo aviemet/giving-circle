@@ -1,6 +1,7 @@
 import React from 'react'
 import { Group, Title, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 
 interface ShowOrgProps {
 	org: Schema.OrgsShow
@@ -9,6 +10,7 @@ interface ShowOrgProps {
 // @path: /circles/:circle_slug/orgs/:slug
 // @route: circleOrg
 const ShowOrg = ({ org }: ShowOrgProps) => {
+	const { params } = usePageProps<'circleOrg'>()
 	const title =  'Org'
 
 	return (
@@ -21,7 +23,7 @@ const ShowOrg = ({ org }: ShowOrgProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link
-								href={ Routes.editCircleOrg(org.circle_id, org.slug) }
+								href={ Routes.editCircleOrg(params.circle_slug, params.slug) }
 							>
 								Edit Org
 							</Menu.Link>

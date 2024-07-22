@@ -3,16 +3,18 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import OrgsTable from '../Table'
+import { usePageProps } from '@/lib/hooks'
 
 interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
-	circle: Schema.CirclesInertiaShare
 }
 
 // @path: /circles/:circle_slug/orgs
 // @route: circleOrgs
-const OrgsIndex = ({ orgs, pagination, circle }: OrgIndexProps) => {
+const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
+	const { params } = usePageProps<'circleOrgs'>()
+
 	return (
 		<IndexPageTemplate
 			title="Orgs"
@@ -23,7 +25,7 @@ const OrgsIndex = ({ orgs, pagination, circle }: OrgIndexProps) => {
 				options: [
 					{
 						label: 'New Org',
-						href: Routes.newCircleOrg(circle.slug),
+						href: Routes.newCircleOrg(params.circle_slug),
 						icon: <NewIcon />,
 					},
 				],

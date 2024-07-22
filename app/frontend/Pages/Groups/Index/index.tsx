@@ -3,6 +3,7 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import GroupsTable from '../Table'
+import { usePageProps } from '@/lib/hooks'
 
 interface GroupIndexProps {
 	groups: Schema.GroupsIndex[]
@@ -13,6 +14,8 @@ interface GroupIndexProps {
 // @path: /circles/:circle_slug/groups
 // @route: circleGroups
 const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
+	const { params } = usePageProps<'circleGroups'>()
+
 	return (
 		<IndexPageTemplate
 			title="Groups"
@@ -22,7 +25,7 @@ const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
 			contextMenu={ {
 				deleteRoute:  Routes.groups(),
 				options: [
-					{ label: 'New Group', href: Routes.newCircleGroup(circle.slug), icon: <NewIcon /> },
+					{ label: 'New Group', href: Routes.newCircleGroup(params.circle_slug), icon: <NewIcon /> },
 				],
 			} }
 		>

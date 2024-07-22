@@ -2,6 +2,7 @@ import React from 'react'
 import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PresentationsForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface EditPresentationProps {
 	presentation: Schema.PresentationsEdit
@@ -10,6 +11,8 @@ interface EditPresentationProps {
 // @path: /presentations/:id/edit
 // @route: editPresentation
 const EditPresentation = ({ presentation }: EditPresentationProps) => {
+	const { params } = usePageProps<'editPresentation'>()
+
 	const title = 'Edit Presentation'
 
 	return (
@@ -19,7 +22,7 @@ const EditPresentation = ({ presentation }: EditPresentationProps) => {
 
 				<PresentationsForm
 					method='put'
-					to={ Routes.presentation(presentation.id) }
+					to={ Routes.presentation(params.id) }
 					presentation={ presentation }
 				/>
 			</Section>

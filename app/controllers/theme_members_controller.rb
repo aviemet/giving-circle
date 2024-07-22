@@ -39,7 +39,9 @@ class ThemeMembersController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/members/:slug/edit (edit_circle_theme_member)
   def edit
     authorize member
-    render inertia: "Themes/Members/Edit"
+    render inertia: "Themes/Members/Edit", props: {
+      member: member.render(view: :edit)
+    }
   end
 
   private

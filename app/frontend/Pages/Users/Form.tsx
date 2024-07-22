@@ -4,21 +4,20 @@ import {
 	TextInput,
 	Submit,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TUserFormData = {
+type UserFormData = {
 	user: Schema.UsersFormData
 }
 
 export interface UserFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TUserFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<UserFormData>) => boolean|void
 	user: Schema.UsersFormData
 }
 
-const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, locations }: UserFormProps) => {
-
+const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
 	return (
 		<Form
 			model="user"
@@ -27,7 +26,7 @@ const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, lo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="first_name" label="First Name" required autoFocus />
+			<TextInput name="first_name" label="First Name" required />
 
 			<TextInput name="last_name" label="Last Name" required  />
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import GroupForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface NewGroupProps {
 	group: Schema.GroupsFormData
@@ -11,6 +12,7 @@ interface NewGroupProps {
 // @path: /circles/:circle_slug/groups/new
 // @route: newCircleGroup
 const NewGroup = ({ circle, ...data }: NewGroupProps) => {
+	const { params } = usePageProps<'newCircleGroup'>()
 	const title = 'New Group'
 
 	return (
@@ -20,7 +22,7 @@ const NewGroup = ({ circle, ...data }: NewGroupProps) => {
 				<Title>{ title }</Title>
 
 				<GroupForm
-					to={ Routes.circleGroups(circle.slug) }
+					to={ Routes.circleGroups(params.circle_slug) }
 					{ ...data }
 				/>
 			</Section>

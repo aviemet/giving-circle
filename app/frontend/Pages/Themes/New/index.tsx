@@ -2,6 +2,7 @@ import React from 'react'
 import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import ThemeForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface NewThemeProps {
 	theme: Schema.ThemesFormData
@@ -11,6 +12,7 @@ interface NewThemeProps {
 // @path: /circles/:circle_slug/themes/new
 // @route: newCircleTheme
 const NewTheme = ({ circle, ...data }: NewThemeProps) => {
+	const { params } = usePageProps<'newCircleTheme'>()
 
 	const title = 'New Theme'
 
@@ -21,7 +23,7 @@ const NewTheme = ({ circle, ...data }: NewThemeProps) => {
 				<Title>{ title }</Title>
 
 				<ThemeForm
-					to={ Routes.circleThemes(circle.slug) }
+					to={ Routes.circleThemes(params.circle_slug) }
 					{ ...data }
 				/>
 			</Section>
