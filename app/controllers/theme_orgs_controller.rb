@@ -13,7 +13,6 @@ class ThemeOrgsController < ApplicationController
   end
 
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
   def index
     authorize orgs
 
@@ -66,7 +65,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
+  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
   def create
     authorize Org.new
 
@@ -113,6 +112,7 @@ class ThemeOrgsController < ApplicationController
     imported_orgs = Org.import processed_orgs, :track_validation_failures, recursive: true
 
     if imported_orgs[:failed_instances].empty?
+      ap({ redirect: circle_theme_orgs_path(circle.slug, theme.slug) })
       redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: "Orgs were successfully created."
     else
       redirect_to circle_theme_orgs_import_path(circle.slug, theme.slug), inertia: { errors: '' }
@@ -122,19 +122,5 @@ class ThemeOrgsController < ApplicationController
   def sortable_fields
     %w(name slug description).freeze
   end
-
-  # def default_strong_params
-  #   %i(name ask description)
-  # end
-
-  # def org_params
-  #   params.require(:org).permit(default_strong_params)
-  # end
-
-  # def orgs_params
-  #   params.require(:orgs).map do |org|
-  #     org.permit(default_strong_params).to_h
-  #   end
-  # end
 
 end

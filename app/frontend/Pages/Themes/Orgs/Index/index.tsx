@@ -14,7 +14,7 @@ interface OrgIndexProps {
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/orgs
-// @route: circleThemeOrgIndex
+// @route: circleThemeOrgs
 const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 	const { params } = usePageProps<'circleThemeOrgIndex'>()
 

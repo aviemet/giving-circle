@@ -5,9 +5,9 @@ import ImportMapping, { TriggerHandle, triggerRefAction } from '@/Features/Impor
 import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { useLayoutStore } from '@/Store'
 import { headingsMap } from './headingsMap'
-import axios from 'axios'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
+import { router } from '@inertiajs/react'
 
 interface OrgsImportProps {
 	theme: Schema.ThemesShallow
@@ -53,7 +53,16 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	}, [displayImportTable])
 
 	const handleImportData = (data: Record<string, unknown>[]) => {
-		axios.post(Routes.circleThemeOrgs(params.circle_slug, params.theme_slug), { orgs: data })
+		router.post(
+			Routes.circleThemeOrgs(params.circle_slug, params.theme_slug),
+			// @ts-ignore
+			{ orgs: data },
+			{
+				onSuccess: () => {
+					toggleSidebarOpen(true)
+				},
+			},
+		)
 	}
 
 	const handleCancel = () => {
@@ -91,7 +100,7 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 			)
 				:
 				<>
-					<Text mb="sm">Import a <Code>.csv</Code> file with the organization details for this theme. You can click in the space below or drag and drop the file.</Text>
+					<Text mb="sm">Import a <Code>.csv</Code> file containing the nominee organization details for this theme. You can click in the space below or drag and drop the file.</Text>
 					<Text mb="sm">The file should contain the organizations&apos; name, grant request amount, and an optional brief description</Text>
 					<Dropzone onDrop={ handleFileInputChange } h="100%" />
 				</>

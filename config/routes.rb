@@ -84,6 +84,7 @@ Rails.application.routes.draw do
         :theme_orgs,
         path: :orgs,
         param: :slug,
+        except: [:index],
         as: 'org',
       )
     end
