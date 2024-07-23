@@ -9,14 +9,14 @@ import MembersTable from '../Table'
 interface MemberIndexProps {
 	members: Schema.MembersIndex[]
 	pagination: Schema.Pagination
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 	circle: Schema.CirclesInertiaShare
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/members
 // @route: circleThemeMemberIndex
 const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) => {
-	const { params } = usePageProps<'editCircleThemeMember'>()
+	const { params } = usePageProps<'circleThemeMemberIndex'>()
 
 	return (
 		<IndexPageTemplate

@@ -49,9 +49,6 @@ Rails.application.routes.draw do
   delete 'groups', to: 'groups#destroy'
 
   # Explicitly define routes for Circle to use :circle_slug
-  get 'circles', to: 'circles#index', as: 'circles'
-  get 'circles/new', to: 'circles#new', as: 'new_circle'
-  post 'circles', to: 'circles#create'
   get 'circles/:circle_slug', to: 'circles#show', as: 'circle'
   get 'circles/:circle_slug/edit', to: 'circles#edit', as: 'edit_circle'
   patch 'circles/:circle_slug', to: 'circles#update'
@@ -59,7 +56,7 @@ Rails.application.routes.draw do
   delete 'circles/:circle_slug', to: 'circles#destroy'
 
   # Nested resources under Circle with standard slug param
-  resources :circles, param: :slug, only: [] do
+  resources :circles, param: :slug, only: [:new, :index, :create] do
     get :about
 
     resources(
@@ -77,7 +74,13 @@ Rails.application.routes.draw do
 
     resources :presentation_templates, concerns: :bulk_delete, param: :slug
 
-    resources :themes, param: :slug do
+    # Explicitly define routes for Theme to use :theme_slug
+    get 'themes/:theme_slug', to: 'themes#show', as: 'theme'
+    get 'themes/:theme_slug/edit', to: 'themes#edit', as: 'edit_theme'
+    patch 'themes/:theme_slug', to: 'themes#update'
+    put 'themes/:theme_slug', to: 'themes#update'
+    delete 'themes/:theme_slug', to: 'themes#destroy'
+    resources :themes, param: :slug, only: [:new, :index, :create] do
       get :about
 
       get 'members', to: 'theme_members#index'
@@ -97,9 +100,7 @@ Rails.application.routes.draw do
         except: [:index],
         as: 'org',
       )
-    end
 
-    resources :themes, shallow: true, param: :slug, only: [] do
       resources :presentations, concerns: :bulk_delete
     end
   end

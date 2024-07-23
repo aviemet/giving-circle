@@ -1,7 +1,2 @@
-class Members::EditSerializer < MemberSerializer
-  include Persisted
-
-  attributes(
-    :slug,
-  )
+class Members::EditSerializer < Members::PersistedSerializer
 end

@@ -1,7 +1,2 @@
-class Members::IndexSerializer < MemberSerializer
-  include Persisted
-
-  attributes(
-    :slug,
-  )
+class Members::IndexSerializer < Members::PersistedSerializer
 end

@@ -6,7 +6,7 @@ import MemberForm from '../Form'
 
 interface NewMemberProps {
 	member: Schema.MembersFormData
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/members/new

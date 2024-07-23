@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 
 export interface ThemeMenuProps {
 	circle: Schema.CirclesInertiaShare
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 }
 
 const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {
@@ -26,7 +26,7 @@ const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {
 				label="Members"
 			/>
 			<NavLink
-				href={ Routes.themePresentations(theme.slug) }
+				href={ Routes.circleThemePresentations(circle.slug, theme.slug) }
 				label="Presentations"
 			/>
 		</>

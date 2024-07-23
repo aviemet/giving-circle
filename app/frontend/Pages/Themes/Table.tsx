@@ -24,7 +24,7 @@ const ThemeTable = (props: TableProps) => {
 							<Link href={ Routes.circleTheme(theme.circle_id, theme.slug) }>{ theme.slug }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editCircleTheme(theme.circle_id, theme.id) } />
+							<EditButton href={ Routes.circleEditTheme(theme.circle_id, theme.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

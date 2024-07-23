@@ -25,7 +25,7 @@ export const getCircleMenu = ({ circle }: {circle: Schema.CirclesInertiaShare}) 
 )
 
 export const getThemeMenu = (
-	{ circle, theme }: {circle: Schema.Circle, theme: Schema.Theme},
+	{ circle, theme }: {circle: Schema.CirclesInertiaShare, theme: Schema.ThemesInertiaShare},
 ) => () => (
 	<>
 		<ThemeMenu circle={ circle } theme={ theme } />

@@ -1,4 +1,4 @@
-class Members::ShallowSerializer < MemberSerializer
+class Themes::PersistedSerializer < ThemeSerializer
   include Persisted
 
   attributes(

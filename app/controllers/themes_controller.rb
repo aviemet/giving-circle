@@ -4,7 +4,7 @@ class ThemesController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :themes, -> { search(circle.themes.includes_associated, sortable_fields) }
-  expose :theme, id: -> { params[:slug] }, scope: -> { Theme.includes_associated }, find_by: :slug
+  expose :theme, id: -> { params[:theme_slug] }, scope: -> { Theme.includes_associated }, find_by: :slug
 
   # @route GET /circles/:circle_slug/themes (circle_themes)
   def index
@@ -22,7 +22,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route GET /circles/:circle_slug/themes/:theme_slug (circle_theme)
   def show
     authorize theme
 
@@ -50,7 +50,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:slug/edit (edit_circle_theme)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/edit (circle_edit_theme)
   def edit
     authorize theme
 
@@ -73,8 +73,8 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/themes/:slug (circle_theme)
-  # @route PUT /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route PATCH /circles/:circle_slug/themes/:theme_slug (circle_theme)
+  # @route PUT /circles/:circle_slug/themes/:theme_slug (circle_theme)
   def update
     authorize theme
     if theme.update(theme_params)
@@ -84,7 +84,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/themes/:slug (circle_theme)
+  # @route DELETE /circles/:circle_slug/themes/:theme_slug (circle_theme)
   def destroy
     authorize theme
     theme.destroy

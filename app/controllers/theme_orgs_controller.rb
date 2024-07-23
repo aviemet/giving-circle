@@ -24,7 +24,7 @@ class ThemeOrgsController < ApplicationController
         count: orgs.size,
         **pagination_data(paginated_orgs)
       } },
-      theme: -> { theme.render(:shallow) },
+      theme: -> { theme.render(:inertia_share) },
       circle: -> { circle.render(:persisted) }
     }
   end
@@ -34,7 +34,7 @@ class ThemeOrgsController < ApplicationController
     authorize org
     render inertia: "Themes/Orgs/Show", props: {
       org: org.render(:show),
-      theme: theme.render(:shallow),
+      theme: theme.render(:inertia_share),
     }
   end
 
@@ -51,7 +51,7 @@ class ThemeOrgsController < ApplicationController
     authorize org
     render inertia: "Themes/Orgs/Edit", props: {
       org: org.render(:edit),
-      theme: theme.render(:shallow),
+      theme: theme.render(:inertia_share),
     }
   end
 
@@ -60,7 +60,7 @@ class ThemeOrgsController < ApplicationController
     authorize Org.new
 
     render inertia: "Themes/Orgs/Import", props: {
-      theme: -> { theme.render(:shallow) },
+      theme: -> { theme.render(:inertia_share) },
       circle: -> { circle.render(:persisted) }
     }
   end

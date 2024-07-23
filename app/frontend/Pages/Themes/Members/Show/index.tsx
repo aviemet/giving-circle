@@ -2,6 +2,7 @@ import React from 'react'
 import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
+import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface ShowMemberProps {
 	member: Schema.MembersShow
@@ -10,11 +11,22 @@ interface ShowMemberProps {
 // @path: /circles/:circle_slug/themes/:theme_slug/members/:slug
 // @route: circleThemeMember
 const ShowMember = ({ member }: ShowMemberProps) => {
-	const { params } = usePageProps<'circleThemeMember'>()
+	const { params, menu } = usePageProps<'circleThemeMember'>()
 	const title = member?.name || 'Member'
 
+	if(!menu.active_circle) return <></>
+
 	return (
-		<Page title={ title }>
+		<Page
+			title={ title }
+			breadcrumbs={ [
+				{ title: 'Circles', href: Routes.circles() },
+				{ title: menu.active_circle.name, href: Routes.circle(params.circle_slug) },
+				{ title: 'Members', href: Routes.circleMembers(params.circle_slug) },
+				{ title, href: Routes.circleMember(params.circle_slug, member.slug) },
+			] }
+			// navMenu={ getThemeMenu({ circle: menu.active_circle, theme: { slug: params.theme_slug } }) }
+		>
 			<Section>
 				<Group>
 					<Menu position="bottom-end">

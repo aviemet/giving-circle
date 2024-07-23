@@ -6,7 +6,7 @@ import { usePageProps } from '@/lib/hooks'
 
 interface EditMemberProps {
 	member: Schema.MembersEdit
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/members/:slug/edit

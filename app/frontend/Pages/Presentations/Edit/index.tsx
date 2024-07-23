@@ -8,8 +8,8 @@ interface EditPresentationProps {
 	presentation: Schema.PresentationsEdit
 }
 
-// @path: /presentations/:id/edit
-// @route: editPresentation
+// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:id/edit
+// @route: editCircleThemePresentation
 const EditPresentation = ({ presentation }: EditPresentationProps) => {
 	const { params } = usePageProps<'editPresentation'>()
 

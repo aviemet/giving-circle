@@ -1,10 +1,3 @@
-class Themes::ShowSerializer < ThemeSerializer
-  attributes(
-    :slug,
-    :id,
-    :updated_at,
-    :created_at,
-  )
-
+class Themes::ShowSerializer < Themes::PersistedSerializer
   belongs_to :circle, serializer: Circles::PersistedSerializer
 end

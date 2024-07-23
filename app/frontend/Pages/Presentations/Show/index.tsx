@@ -7,10 +7,10 @@ interface ShowPresentationProps {
 	presentation: Schema.PresentationsPresentation
 }
 
-// @path: /presentations/:id
-// @route: presentation
+// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:id
+// @route: circleThemePresentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
-	const { params } = usePageProps<'presentation'>()
+	const { params } = usePageProps<'circleThemePresentation'>()
 	const title = presentation.name || 'Presentation'
 
 	return (
@@ -22,7 +22,7 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editPresentation(params.id) }>
+							<Menu.Link href={ Routes.editCircleThemePresentation(params.circle_slug, params.theme_slug, params.id) }>
 								Edit Presentation
 							</Menu.Link>
 						</Menu.Dropdown>

@@ -14,7 +14,7 @@ export interface MemberFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TMemberFormData>) => boolean|void
 	member: Schema.MembersFormData
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 }
 
 const MemberForm = ({ method = 'post', member, theme, ...props }: MemberFormProps) => {

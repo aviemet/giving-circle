@@ -9,14 +9,14 @@ import { usePageProps } from '@/lib/hooks'
 interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
 	pagination: Schema.Pagination
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 	circle: Schema.CirclesInertiaShare
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/orgs
 // @route: circleThemeOrgs
 const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
-	const { params } = usePageProps<'circleThemeOrgIndex'>()
+	const { params } = usePageProps<'circleThemeOrgs'>()
 
 	return (
 		<IndexPageTemplate

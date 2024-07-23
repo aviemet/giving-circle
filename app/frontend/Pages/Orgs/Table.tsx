@@ -6,10 +6,10 @@ import { type TableProps } from '@/Components/Table/Table'
 import { usePageProps } from '@/lib/hooks'
 
 const OrgTable = (props: TableProps) => {
-	const { circle } = usePageProps()
+	const { menu } = usePageProps<'circleOrgs'>()
 
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -19,22 +19,26 @@ const OrgTable = (props: TableProps) => {
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (org: Schema.OrgsIndex) => (
-					<Table.Row key={ org.id }>
-						<Table.Cell>
-							{ circle?.slug && <Link href={ Routes.circleOrg(circle.slug, org.slug) }>{ org.name }</Link> }
-						</Table.Cell>
-						<Table.Cell>
-							{ circle?.slug && <Link href={ Routes.circleOrg(circle.slug, org.slug) }>{ org.slug }</Link> }
-						</Table.Cell>
-						<Table.Cell>
-							{ circle?.slug && <Link href={ Routes.circleOrg(circle.slug, org.slug) }>{ org.description }</Link> }
-						</Table.Cell>
-						<Table.Cell>
-							{ circle?.slug && <EditButton href={ Routes.editCircleOrg(circle.slug, org.slug) } /> }
-						</Table.Cell>
-					</Table.Row>
-				) } />
+				<Table.RowIterator render={ (org: Schema.OrgsIndex) => {
+					if(!menu.active_circle) return <></>
+
+					return (
+						<Table.Row key={ org.id }>
+							<Table.Cell>
+								{ <Link href={ Routes.circleOrg(menu.active_circle.slug, org.slug) }>{ org.name }</Link> }
+							</Table.Cell>
+							<Table.Cell>
+								{ <Link href={ Routes.circleOrg(menu.active_circle.slug, org.slug) }>{ org.slug }</Link> }
+							</Table.Cell>
+							<Table.Cell>
+								{ <Link href={ Routes.circleOrg(menu.active_circle.slug, org.slug) }>{ org.description }</Link> }
+							</Table.Cell>
+							<Table.Cell>
+								{ <EditButton href={ Routes.editCircleOrg(menu.active_circle.slug, org.slug) } /> }
+							</Table.Cell>
+						</Table.Row>
+					)
+				} } />
 			</Table.Body>
 		</Table>
 	)

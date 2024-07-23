@@ -1,10 +1,3 @@
-class People::EditSerializer < PersonSerializer
-  attributes(
-    :id,
-    :slug,
-    :created_at,
-    :updated_at,
-  )
-
+class People::EditSerializer < People::PersistedSerializer
   has_one :user, serializer: UserSerializer
 end

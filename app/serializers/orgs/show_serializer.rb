@@ -1,10 +1,3 @@
-class Orgs::ShowSerializer < OrgSerializer
-  attributes(
-    :slug,
-    :id,
-    :updated_at,
-    :created_at,
-  )
-
+class Orgs::ShowSerializer < Orgs::PersistedSerializer
   belongs_to :circle, serializer: Circles::OptionsSerializer
 end

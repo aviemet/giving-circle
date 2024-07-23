@@ -1,9 +1,3 @@
-class Circles::IndexSerializer < CircleSerializer
-  include Persisted
-
-  attributes(
-    :slug,
-  )
-
-  has_many :themes, serializer: Themes::IndexSerializer
+class Circles::IndexSerializer < Circles::PersistedSerializer
+  has_many :themes, serializer: Themes::PersistedSerializer
 end

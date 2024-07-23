@@ -1,10 +1,4 @@
-class Circles::ShowSerializer < CircleSerializer
-  include Persisted
-
-  attributes(
-    :slug,
-  )
-
-  has_many :themes, serializer: Themes::ShallowSerializer
-  has_many :members, serializer: Members::ShallowSerializer
+class Circles::ShowSerializer < Circles::PersistedSerializer
+  has_many :themes, serializer: Themes::PersistedSerializer
+  has_many :members, serializer: Members::PersistedSerializer
 end

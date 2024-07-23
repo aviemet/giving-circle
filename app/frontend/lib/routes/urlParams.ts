@@ -85,12 +85,6 @@ const urlParams = {
   "groups": {
     "params": []
   },
-  "circles": {
-    "params": []
-  },
-  "newCircle": {
-    "params": []
-  },
   "circle": {
     "params": [
       "circle_slug"
@@ -198,6 +192,18 @@ const urlParams = {
       "slug"
     ]
   },
+  "circleTheme": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
+  "circleEditTheme": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
   "circleThemeAbout": {
     "params": [
       "circle_slug",
@@ -274,6 +280,32 @@ const urlParams = {
       "slug"
     ]
   },
+  "circleThemePresentations": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
+  "newCircleThemePresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
+  "editCircleThemePresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "id"
+    ]
+  },
+  "circleThemePresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "id"
+    ]
+  },
   "circleThemes": {
     "params": [
       "circle_slug"
@@ -284,37 +316,11 @@ const urlParams = {
       "circle_slug"
     ]
   },
-  "editCircleTheme": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
+  "circles": {
+    "params": []
   },
-  "circleTheme": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "themePresentations": {
-    "params": [
-      "theme_slug"
-    ]
-  },
-  "newThemePresentation": {
-    "params": [
-      "theme_slug"
-    ]
-  },
-  "editPresentation": {
-    "params": [
-      "id"
-    ]
-  },
-  "presentation": {
-    "params": [
-      "id"
-    ]
+  "newCircle": {
+    "params": []
   },
   "runPresentation": {
     "params": [

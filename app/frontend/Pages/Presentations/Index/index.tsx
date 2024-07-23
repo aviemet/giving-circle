@@ -9,7 +9,7 @@ interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
 	pagination: Schema.Pagination
 	circle: Schema.CirclesInertiaShare
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 }
 
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
@@ -22,7 +22,7 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			contextMenu={ {
 				options: [
-					{ label: 'New Presentation', href: Routes.newThemePresentation(theme.slug), icon: <NewIcon /> },
+					{ label: 'New Presentation', href: Routes.newCircleThemePresentation(circle.slug, theme.slug), icon: <NewIcon /> },
 				],
 			} }
 		>

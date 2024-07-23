@@ -1,8 +1,2 @@
-class People::IndexSerializer < PersonSerializer
-  attributes(
-    :id,
-    :slug,
-    :created_at,
-    :updated_at,
-  )
+class People::IndexSerializer < People::PersistedSerializer
 end

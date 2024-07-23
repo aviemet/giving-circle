@@ -10,7 +10,7 @@ import { usePageProps } from '@/lib/hooks'
 import { router } from '@inertiajs/react'
 
 interface OrgsImportProps {
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 	circle: Schema.CirclesInertiaShare
 }
 

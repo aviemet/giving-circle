@@ -5,7 +5,7 @@ import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
 
 interface ThemeOrgTableProps extends TableProps{
-	theme: Schema.ThemesShallow
+	theme: Schema.ThemesInertiaShare
 }
 
 const ThemeOrgTable = ({ theme, ...props }: ThemeOrgTableProps) => {

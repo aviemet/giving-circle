@@ -20,7 +20,7 @@ class ThemeMembersController < ApplicationController
         count: members.size,
         **pagination_data(paginated_members)
       } },
-      theme: -> { theme.render(:shallow) },
+      theme: -> { theme.render(:inertia_share) },
       circle: -> { circle.render(:persisted) }
     }
   end
@@ -31,7 +31,7 @@ class ThemeMembersController < ApplicationController
 
     render inertia: "Themes/Members/Show", props: {
       member: member.render(:show),
-      theme: -> { theme.render(:shallow) },
+      theme: -> { theme.render(:inertia_share) },
     }
   end
 
@@ -41,7 +41,7 @@ class ThemeMembersController < ApplicationController
 
     render inertia: "Themes/Members/New", props: {
       member: Member.new.render(:form_data),
-      theme: -> { theme.render(:shallow) },
+      theme: -> { theme.render(:inertia_share) },
     }
   end
 
@@ -51,7 +51,7 @@ class ThemeMembersController < ApplicationController
 
     render inertia: "Themes/Members/Edit", props: {
       member: member.render(:edit),
-      theme: -> { theme.render(:shallow) },
+      theme: -> { theme.render(:inertia_share) },
     }
   end
 

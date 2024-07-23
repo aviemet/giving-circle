@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
@@ -9,8 +10,10 @@ import cx from 'clsx'
 import * as classes from './Table.css'
 
 const PresentationTable = (props: TableProps) => {
+	const { params } = usePageProps()
+
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -23,7 +26,7 @@ const PresentationTable = (props: TableProps) => {
 					<Table.Row key={ presentation.id }>
 
 						<Table.Cell>
-							<Link href={ Routes.presentation(presentation.id) }>{ presentation.name }</Link>
+							<Link href={ Routes.circleThemePresentation(params.circle_slug, params.theme_slug, presentation.id) }>{ presentation.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell fitContent className={ cx({ [classes.table]: presentation.active }) }>
@@ -31,7 +34,7 @@ const PresentationTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<EditButton href={ Routes.editPresentation(presentation.id) } />
+							<EditButton href={ Routes.editCircleThemePresentation(params.circle_slug, params.theme_slug,presentation.id) } />
 						</Table.Cell>
 
 					</Table.Row>

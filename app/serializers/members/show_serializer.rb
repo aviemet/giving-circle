@@ -1,7 +1,3 @@
-class Members::ShowSerializer < MemberSerializer
-  include Persisted
-
-  attributes(
-    :slug,
-  )
+class Members::ShowSerializer < Members::PersistedSerializer
+  has_many :themes, serializer: Themes::PersistedSerializer
 end
