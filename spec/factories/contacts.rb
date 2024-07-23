@@ -14,6 +14,11 @@
 #
 FactoryBot.define do
   factory :contact do
-    contactable { nil }
+    contactable factory: :person
+
+    phone
+    email
+    address
+
   end
 end

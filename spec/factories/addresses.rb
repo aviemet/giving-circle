@@ -23,12 +23,12 @@
 #
 FactoryBot.define do
   factory :address do
-    address { "MyString" }
-    address_2 { "MyString" }
-    city { "MyString" }
-    region { "MyString" }
-    country { "MyString" }
-    postal { "MyString" }
-    contact { nil }
+    address { Faker::Address.street_address }
+    city { Faker::Address.city }
+    region { Faker::Address.state }
+    country { "USA" }
+    postal { Faker::Address.zip }
+
+    contact
   end
 end

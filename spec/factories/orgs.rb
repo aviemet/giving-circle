@@ -21,8 +21,6 @@
 #
 FactoryBot.define do
   factory :org do
-    name { "MyString" }
-    slug { "MyString" }
-    description { "MyString" }
+    name { Faker::Company.name }
   end
 end

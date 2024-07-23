@@ -11,8 +11,6 @@
 #
 FactoryBot.define do
   factory :presentation_element do
-    title { "MyString" }
-    data { "" }
-    element { 1 }
+
   end
 end

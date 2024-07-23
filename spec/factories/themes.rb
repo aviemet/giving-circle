@@ -22,7 +22,8 @@
 #
 FactoryBot.define do
   factory :theme do
-    title { "MyString" }
-    slug { "MyString" }
+    name { Faker::Book.title }
+    status { 1 }
+    circle
   end
 end

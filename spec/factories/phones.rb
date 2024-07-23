@@ -14,6 +14,7 @@
 #
 FactoryBot.define do
   factory :phone do
-    number { "MyString" }
+    number { Faker::PhoneNumber.phone_number }
+    contact
   end
 end

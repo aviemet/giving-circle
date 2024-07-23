@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: groups
+# Table name: presentation_templates
 #
 #  id         :uuid             not null, primary key
-#  name       :string           not null
+#  name       :string
 #  slug       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -11,15 +11,16 @@
 #
 # Indexes
 #
-#  index_groups_on_circle_id  (circle_id)
-#  index_groups_on_slug       (slug) UNIQUE
+#  index_presentation_templates_on_circle_id  (circle_id)
+#  index_presentation_templates_on_slug       (slug) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (circle_id => circles.id)
 #
 FactoryBot.define do
-  factory :group do
-    name { Faker::Cosmere.feruchemist }
+  factory :presentation_template do
+    name { "Template" }
+    circle
   end
 end

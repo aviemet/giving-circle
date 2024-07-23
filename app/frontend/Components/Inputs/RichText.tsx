@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react'
+import React, { forwardRef } from 'react'
 import RichTextEditor, { type RichTextEditorProps } from '../RichTextEditor'
 import Label from './Label'
 import { type BaseInputProps } from '.'

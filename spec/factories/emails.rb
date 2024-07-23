@@ -14,6 +14,8 @@
 #
 FactoryBot.define do
   factory :email do
-    email { "MyString" }
+    email { Faker::Email.email }
+
+    contact
   end
 end

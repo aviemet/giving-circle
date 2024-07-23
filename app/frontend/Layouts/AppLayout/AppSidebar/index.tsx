@@ -17,7 +17,7 @@ import { usePageProps } from '@/lib/hooks'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const AppSidebar = () => {
-	const { auth, params, menu } = usePageProps()
+	const { auth, menu } = usePageProps()
 	const hasMultipleCircles = auth?.user?.circles?.length > 1
 
 	return (

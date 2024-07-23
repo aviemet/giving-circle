@@ -24,7 +24,8 @@
 #
 FactoryBot.define do
   factory :presentation do
-    theme { nil }
-    name { "MyString" }
+    name { Faker::Lorem.words(number: rand(1..4)).map(&:capitalize).join(' ') }
+
+    theme
   end
 end

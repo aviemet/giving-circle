@@ -1,3 +1,4 @@
+# rubocop:disable Style/SoleNestedConditional
 # Development data
 
 if Rails.env.development?
@@ -11,47 +12,5 @@ if Rails.env.development?
 
     user.add_role :super_admin
   end
-
-  if Circle.count == 0
-    circle = Circle.create!({
-      name: "Battery Powered",
-    })
-    user.add_role :admin, circle
-  end
-
-  if Member.count == 0
-    circle = Circle.first
-    member = Member.create!({
-      first_name: "Test",
-      last_name: "McTesterson",
-      number: 1234,
-    })
-    circle.members << member
-  end
-
-  if Theme.count == 0
-    circle = Circle.first
-    theme = Theme.create!({
-      name: "Social issue needing attention",
-      status: 1,
-      circle:,
-    })
-
-    Presentation.create!({
-      name: "Practice presentation",
-      theme:,
-    })
-  end
-
-  if Org.count == 0
-    circle = Circle.first
-    org = Org.create!({
-      name: "Important Organization",
-      description: "This organization does great things in great places",
-      circle:,
-    })
-    pres = Presentation.first
-    pres.orgs << org
-  end
-
 end
+# rubocop:enable Style/SoleNestedConditional

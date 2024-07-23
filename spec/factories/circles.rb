@@ -14,6 +14,6 @@
 #
 FactoryBot.define do
   factory :circle do
-    name { "MyString" }
+    name { Faker::Company.name }
   end
 end

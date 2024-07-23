@@ -22,6 +22,9 @@
 #
 FactoryBot.define do
   factory :themes_org do
-    
+    ask_cents { Faker::Number.between(from: 20000000, to: 35000000) }
+
+    theme
+    org
   end
 end

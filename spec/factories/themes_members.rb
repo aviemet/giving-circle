@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :themes_member do
-    theme { nil }
-    member { nil }
+    theme
+    member
   end
 end
