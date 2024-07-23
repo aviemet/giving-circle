@@ -85,6 +85,22 @@ const urlParams = {
   "groups": {
     "params": []
   },
+  "circles": {
+    "params": []
+  },
+  "newCircle": {
+    "params": []
+  },
+  "circle": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editCircle": {
+    "params": [
+      "circle_slug"
+    ]
+  },
   "circleAbout": {
     "params": [
       "circle_slug"
@@ -292,22 +308,6 @@ const urlParams = {
   "presentation": {
     "params": [
       "id"
-    ]
-  },
-  "circles": {
-    "params": []
-  },
-  "newCircle": {
-    "params": []
-  },
-  "editCircle": {
-    "params": [
-      "slug"
-    ]
-  },
-  "circle": {
-    "params": [
-      "slug"
     ]
   },
   "runPresentation": {

@@ -162,13 +162,13 @@ export const cancelUserRegistration: ((
 
 /**
  * Generates rails route to
- * /circles/:slug(.:format)
- * @param {any} slug
+ * /circles/:circle_slug(.:format)
+ * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const circle: ((
-  slug: RequiredRouteParameter,
+  circleSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -438,13 +438,13 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
- * /circles/:slug/edit(.:format)
- * @param {any} slug
+ * /circles/:circle_slug/edit(.:format)
+ * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editCircle: ((
-  slug: RequiredRouteParameter,
+  circleSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

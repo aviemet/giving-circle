@@ -2,7 +2,7 @@ class CirclesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:about]
 
   expose :circles, from: :current_user
-  expose :circle, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
+  expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   strong_params :circle, permit: :name
 
@@ -15,7 +15,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:slug (circle)
+  # @route GET /circles/:circle_slug (circle)
   def show
     authorize circle
 
@@ -44,7 +44,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:slug/edit (edit_circle)
+  # @route GET /circles/:circle_slug/edit (edit_circle)
   def edit
     authorize circle
 
@@ -65,8 +65,8 @@ class CirclesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:slug (circle)
-  # @route PUT /circles/:slug (circle)
+  # @route PATCH /circles/:circle_slug (circle)
+  # @route PUT /circles/:circle_slug (circle)
   def update
     authorize circle
 
@@ -77,7 +77,7 @@ class CirclesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:slug (circle)
+  # @route DELETE /circles/:circle_slug (circle)
   def destroy
     authorize circle
 

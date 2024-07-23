@@ -8,7 +8,7 @@ interface EditCircleProps {
 	circle: Schema.CirclesEdit
 }
 
-// @path: /circles/:slug/edit
+// @path: /circles/:circle_slug/edit
 // @route: editCircle
 const EditCircle = ({ circle }: EditCircleProps) => {
 	const { params } = usePageProps<'editCircle'>()
@@ -17,13 +17,13 @@ const EditCircle = ({ circle }: EditCircleProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Circles', href: Routes.circles() },
-			{ title: circle.name, href: Routes.circle(params.slug) },
-			{ title, href: Routes.editCircle(params.slug) },
+			{ title: circle.name, href: Routes.circle(params.circle_slug) },
+			{ title, href: Routes.editCircle(params.circle_slug) },
 		] }>
 			<Section>
 				<CirclesForm
 					method='put'
-					to={ Routes.circle(params.slug) }
+					to={ Routes.circle(params.circle_slug) }
 					circle={ circle }
 					filter={ ['circle.id', 'circle.slug'] }
 				/>

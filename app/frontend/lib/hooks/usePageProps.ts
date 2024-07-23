@@ -13,6 +13,7 @@ interface InitialInertiaShareProps
 		user: Schema.UsersInertiaShare
 	}
 	menu: {
+		active_circle: Schema.CirclesInertiaShare | undefined
 		circles: Schema.CirclesInertiaShare[] | undefined
 	}
 	flash: FlashMessage

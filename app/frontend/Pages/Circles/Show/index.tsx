@@ -11,7 +11,7 @@ interface ShowCircleProps {
 	circle: Schema.CirclesShow
 }
 
-// @path: /circles/:slug
+// @path: /circles/:circle_slug
 // @route: circle
 const ShowCircle = ({ circle }: ShowCircleProps) => {
 	const { params } = usePageProps<'circle'>()
@@ -23,7 +23,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 			navMenu={ getCircleMenu({ circle }) }
 			breadcrumbs={ [
 				{ title: 'Circles', href: Routes.circles() },
-				{ title, href: Routes.circle(params.slug) },
+				{ title, href: Routes.circle(params.circle_slug) },
 			] }
 		>
 			<Section>
@@ -34,7 +34,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 						<Menu position="bottom-end">
 							<Menu.Target />
 							<Menu.Dropdown>
-								<Menu.Link href={ Routes.editCircle(params.slug) }>
+								<Menu.Link href={ Routes.editCircle(params.circle_slug) }>
 								Edit Circle
 								</Menu.Link>
 							</Menu.Dropdown>

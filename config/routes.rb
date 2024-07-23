@@ -48,7 +48,18 @@ Rails.application.routes.draw do
   delete 'orgs', to: 'orgs#destroy'
   delete 'groups', to: 'groups#destroy'
 
-  resources :circles, param: :slug do
+  # Explicitly define routes for Circle to use :circle_slug
+  get 'circles', to: 'circles#index', as: 'circles'
+  get 'circles/new', to: 'circles#new', as: 'new_circle'
+  post 'circles', to: 'circles#create'
+  get 'circles/:circle_slug', to: 'circles#show', as: 'circle'
+  get 'circles/:circle_slug/edit', to: 'circles#edit', as: 'edit_circle'
+  patch 'circles/:circle_slug', to: 'circles#update'
+  put 'circles/:circle_slug', to: 'circles#update'
+  delete 'circles/:circle_slug', to: 'circles#destroy'
+
+  # Nested resources under Circle with standard slug param
+  resources :circles, param: :slug, only: [] do
     get :about
 
     resources(

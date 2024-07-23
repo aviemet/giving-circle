@@ -32,11 +32,13 @@
 #  user_preferences       :jsonb
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  active_circle_id       :uuid
 #  invited_by_id          :uuid
 #  person_id              :uuid
 #
 # Indexes
 #
+#  index_users_on_active_circle_id      (active_circle_id)
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_invitation_token      (invitation_token) UNIQUE
@@ -50,9 +52,12 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (active_circle_id => circles.id)
 #  fk_rails_...  (person_id => people.id)
 #
 class User < ApplicationRecord
+  # This will be activated upon auth changes as well
+  before_save :set_active_circle
 
   # multisearchable(
   #   against: [:email],
@@ -68,6 +73,7 @@ class User < ApplicationRecord
   scope :includes_associated, -> { includes([:circles]) }
 
   belongs_to :person, optional: true
+  belongs_to :active_circle, class_name: :Circle, optional: true
 
   def circles
     Circle.with_roles(Circle.find_roles.pluck(:name), self)
@@ -77,4 +83,13 @@ class User < ApplicationRecord
   def limit(model)
     self.table_preferences&.[](model.to_s)&.[]('limit')
   end
+
+  private
+
+  def set_active_circle
+    return if self.active_circle
+
+    self.active_circle ||= self.circles.first
+  end
+
 end
