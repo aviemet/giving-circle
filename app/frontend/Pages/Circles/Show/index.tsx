@@ -20,6 +20,19 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 	return (
 		<Page
 			title={ circle.name }
+			siteTitle={ (
+				<Group justify="space-between">
+					<Title>{ circle.name }</Title>
+					<Menu position="bottom-end">
+						<Menu.Target />
+						<Menu.Dropdown>
+							<Menu.Link href={ Routes.editCircle(params.circle_slug) }>
+								Edit Circle
+							</Menu.Link>
+						</Menu.Dropdown>
+					</Menu>
+				</Group>
+			) }
 			navMenu={ getCircleMenu({ circle }) }
 			breadcrumbs={ [
 				{ title: 'Circles', href: Routes.circles() },
@@ -28,19 +41,6 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 		>
 			<Section>
 				<Container>
-					<Group justify="space-between">
-						<Title>{ title }</Title>
-
-						<Menu position="bottom-end">
-							<Menu.Target />
-							<Menu.Dropdown>
-								<Menu.Link href={ Routes.editCircle(params.circle_slug) }>
-								Edit Circle
-								</Menu.Link>
-							</Menu.Dropdown>
-						</Menu>
-					</Group>
-
 					<Section py="md">
 						<Group grow>
 							<StatTile
