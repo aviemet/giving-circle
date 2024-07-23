@@ -3,8 +3,10 @@ import { Routes } from '@/lib'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
+import { usePageProps } from '@/lib/hooks'
 
 const MemberTable = (props: TableProps) => {
+	const { params } = usePageProps<'circleThemeMemberIndex'>()
 	return (
 		<Table>
 			<Table.Head>
@@ -19,16 +21,16 @@ const MemberTable = (props: TableProps) => {
 				<Table.RowIterator render={ (member: Schema.MembersIndex) => (
 					<Table.Row key={ member.id }>
 						<Table.Cell>
-							{ /* <Link href={ Routes.member(params.member_slug) }>{ member.first_name }</Link> */ }
+							<Link href={ Routes.circleThemeMember(params.circle_slug, params.theme_slug, member.slug) }>{ member.first_name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							{ /* <Link href={ Routes.member(params.member_slug) }>{ member.last_name }</Link> */ }
+							<Link href={ Routes.circleThemeMember(params.circle_slug, params.theme_slug, member.slug) }>{ member.last_name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							{ /* <Link href={ Routes.member(params.member_slug) }>{ member.number }</Link> */ }
+							<Link href={ Routes.circleThemeMember(params.circle_slug, params.theme_slug, member.slug) }>{ member.number }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							{ /* <EditButton href={ Routes.editMember(params.member_slug) } /> */ }
+							<EditButton href={ Routes.editCircleThemeMember(params.circle_slug, params.theme_slug, member.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

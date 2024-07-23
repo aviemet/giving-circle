@@ -340,6 +340,20 @@ export const circleThemeMember: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
+export const circleThemeMemberIndex: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /circles/:circle_slug/themes/:theme_slug/members(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
 export const circleThemeMembers: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,

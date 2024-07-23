@@ -14,7 +14,7 @@ interface MemberIndexProps {
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/members
-// @route: circleThemeMembers
+// @route: circleThemeMemberIndex
 const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) => {
 	const { params } = usePageProps<'editCircleThemeMember'>()
 
@@ -26,8 +26,20 @@ const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) 
 			pagination={ pagination }
 			navMenu={ getThemeMenu({ circle, theme }) }
 			contextMenu={ {
+				label: 'Add Members to Theme',
 				options: [
-				// { label: 'Add Member', href: Routes.newThemeMember(theme.slug), icon: <NewIcon /> },
+					{
+						label: 'Add New Member To Theme',
+						href: Routes.newCircleThemeMember(params.circle_slug, params.theme_slug), icon: <NewIcon />,
+					},
+					{
+						label: 'Add Existing Member To Theme',
+						href: Routes.newCircleThemeMember(params.circle_slug, params.theme_slug), icon: <NewIcon />,
+					},
+					// {
+					// 	label: 'Import Members From File',
+					// 	href: Routes.circleThemeMembersImport(params.circle_slug, params.theme_slug), icon: <NewIcon />,
+					// },
 				],
 			} }
 		>

@@ -725,6 +725,16 @@ export const circleThemeMember = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true}
  * @param {object | undefined} options
  * @returns {string} route path
  */
+export const circleThemeMemberIndex = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /circles/:circle_slug/themes/:theme_slug/members(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
 export const circleThemeMembers = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"members"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**

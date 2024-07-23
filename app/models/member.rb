@@ -22,6 +22,9 @@ class Member < Person
   has_many :circles_members, dependent: :destroy
   has_many :circles, through: :circles_members
 
+  has_many :themes_members, dependent: :destroy
+  has_many :themes, through: :themes_members
+
   has_many :presentations_members, dependent: :destroy
   has_many :presentations, through: :presentations_members
 

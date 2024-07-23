@@ -83,7 +83,6 @@ Rails.application.routes.draw do
       get 'members', to: 'theme_members#index'
       resources(
         :theme_members,
-        only: [:show, :new, :edit],
         path: :members,
         param: :slug,
         as: 'member',

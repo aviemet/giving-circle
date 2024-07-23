@@ -210,6 +210,12 @@ const urlParams = {
       "theme_slug"
     ]
   },
+  "circleThemeMemberIndex": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
   "newCircleThemeMember": {
     "params": [
       "circle_slug",

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/Components'
+import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 
@@ -11,14 +11,12 @@ interface ShowMemberProps {
 // @route: circleThemeMember
 const ShowMember = ({ member }: ShowMemberProps) => {
 	const { params } = usePageProps<'circleThemeMember'>()
-	const title =  'Member'
+	const title = member?.name || 'Member'
 
 	return (
 		<Page title={ title }>
 			<Section>
 				<Group>
-					<Title>{ title }</Title>
-
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
@@ -28,6 +26,7 @@ const ShowMember = ({ member }: ShowMemberProps) => {
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
+
 
 			</Section>
 		</Page>

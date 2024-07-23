@@ -1,11 +1,12 @@
 import React from 'react'
-import { Title, Page, Section } from '@/Components'
+import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 import MemberForm from '../Form'
 
 interface NewMemberProps {
 	member: Schema.MembersFormData
+	theme: Schema.ThemesShallow
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/members/new
@@ -16,12 +17,9 @@ const NewMember = ({ ...data }: NewMemberProps) => {
 
 	return (
 		<Page title={ title }>
-
 			<Section>
-				<Title>{ title }</Title>
-
 				<MemberForm
-					to={ Routes.circleMembers(params.circle_slug) }
+					to={ Routes.circleThemeMembers(params.circle_slug, params.theme_slug) }
 					{ ...data }
 				/>
 			</Section>

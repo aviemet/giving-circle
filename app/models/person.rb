@@ -44,6 +44,6 @@ class Person < ApplicationRecord
   scope :includes_associated, -> { includes([:user]) }
 
   def name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 end
