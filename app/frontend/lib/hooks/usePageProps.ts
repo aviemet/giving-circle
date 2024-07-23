@@ -5,11 +5,16 @@ import { urlParams } from '../routes'
 
 type UrlParams = typeof urlParams;
 
-interface InitialInertiaShareProps extends PageProps {
+interface InitialInertiaShareProps
+	extends
+	Omit<PageProps, 'errors'|'params'|'flash'>
+{
 	auth: {
 		user: Schema.UsersInertiaShare
 	}
-	circle: Schema.CirclesInertiaShare
+	menu: {
+		circles: Schema.CirclesInertiaShare[] | undefined
+	}
 	flash: FlashMessage
 	errors: Errors & ErrorBag
 	params: Record<string, string>
@@ -20,14 +25,14 @@ type ParamsObject<T extends readonly string[]> = {
 	[K in T[number]]: string
 }
 
-type UsePagePropsParams<T extends keyof UrlParams> = Omit<InitialInertiaShareProps, 'params'> & {
+interface UsePagePropsParams<T extends keyof UrlParams> extends InitialInertiaShareProps {
 	params: ParamsObject<UrlParams[T]['params']>
 }
 
 const usePageProps = <T extends keyof UrlParams>(): UsePagePropsParams<T> => {
 	const page = usePage<InitialInertiaShareProps>().props
 
-	return page as unknown as UsePagePropsParams<T>
+	return page as UsePagePropsParams<T>
 }
 
 export default usePageProps

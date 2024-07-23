@@ -1,7 +1,8 @@
 import React from 'react'
-import { Title, Page, Section } from '@/Components'
+import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import ThemesForm from '../Form'
+import { usePageProps } from '@/lib/hooks'
 
 interface EditThemeProps {
 	theme: Schema.ThemesFormData
@@ -10,16 +11,16 @@ interface EditThemeProps {
 // @path: /circles/:circle_slug/themes/:slug/edit
 // @route: editCircleTheme
 const EditTheme = ({ theme }: EditThemeProps) => {
+	const { params } = usePageProps<'editCircleTheme'>()
 	const title = 'Edit Theme'
 
 	return (
 		<Page title={ title }>
 			<Section>
-				<Title>{ title }</Title>
 
 				<ThemesForm
 					method='put'
-					to={ Routes.circleTheme(theme.circle_id, theme.slug!) }
+					to={ Routes.circleTheme(params.circle_slug, params.slug) }
 					theme={ theme }
 				/>
 			</Section>

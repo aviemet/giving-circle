@@ -1,7 +1,7 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit, FormProps } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import ConsoleLogger from '@/Components/Form/Components/ConsoleLogger'
 
 type CircleFormData = {
 	circle: Schema.CirclesFormData
@@ -22,9 +22,15 @@ const CircleForm = ({ method = 'post', circle, ...props }: CircleFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-			<ConsoleLogger />
-			<TextInput name="name" label="Name" />
-			<Submit>{ circle.id ? 'Update' : 'Create' } Circle</Submit>
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>{ circle?.id ? 'Update' : 'Create' } Circle</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

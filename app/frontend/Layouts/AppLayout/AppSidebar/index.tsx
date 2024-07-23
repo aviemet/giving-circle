@@ -17,10 +17,14 @@ import { usePageProps } from '@/lib/hooks'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const AppSidebar = () => {
-	const { auth, circle } = usePageProps()
+	const { auth, params, menu } = usePageProps()
+	const hasMultipleCircles = auth?.user?.circles?.length > 1
 
-	const hasMultipleCircles = auth.user.circles.length > 1
-
+	let menuCircle = undefined
+	if(params?.circle_slug && menu?.circles && menu.circles.length > 0) {
+		menuCircle = menu.circles.find(c => c.slug === params.circle_slug)
+	}
+	console.log({ param_slug: params.circle_slug, menuCircle, menu, circles: auth.user.circles })
 	return (
 		<>
 			<AppShell.Section mb="xs">
@@ -37,19 +41,18 @@ const AppSidebar = () => {
 
 						<Menu.Target>
 							<UnstyledButton style={ { width: '100%' } }>
-								{ circle?.slug
+								{ menuCircle !== undefined
 									?
-									<Link href={ Routes.circle(circle.slug) } underline="never">
+									<Link href={ Routes.circle(menuCircle.slug) } underline="never">
 										<Group justify='space-between'>
-											<Avatar size="sm">{ initials(circle.name) }</Avatar>
-											<Text style={ { flex: 1 } }>{ circle.name }</Text>
+											<Avatar size="sm">{ initials(menuCircle.name) }</Avatar>
+											<Text style={ { flex: 1 } }>{ menuCircle.name }</Text>
 											{ hasMultipleCircles && <DownArrowIcon /> }
 										</Group>
 									</Link>
 									:
 									'Giving Circles'
 								}
-
 							</UnstyledButton>
 						</Menu.Target>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -21,9 +22,19 @@ const OrgForm = ({ method = 'post', org, ...props }: OrgFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-			<TextInput name="name" label="Name" />
-			<RichText name="description" label="Description" />
-			<Submit>{ org.id ? 'Update' : 'Create' } Org</Submit>
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<RichText name="description" label="Description" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>{ org.id ? 'Update' : 'Create' } Org</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -21,8 +22,15 @@ const ThemeForm = ({ method = 'post', theme, ...props }: ThemeFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-			<TextInput name="title" label="Title" />
-			<Submit>{ theme.id ? 'Update' : 'Create' } Theme</Submit>
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>{ theme.id ? 'Update' : 'Create' } Theme</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

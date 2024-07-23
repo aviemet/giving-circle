@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import RichTextEditor, { type RichTextEditorProps } from '../RichTextEditor'
 import Label from './Label'
 import { type BaseInputProps } from '.'
@@ -31,6 +31,7 @@ const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
+
 			<RichTextEditor ref={ ref } id={ inputId } { ...props }>
 				{ value }
 			</RichTextEditor>

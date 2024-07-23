@@ -69,6 +69,8 @@ export {
 export {
 	TbChevronsDown as DoubleDownArrowIcon,
 	TbChevronDown as DownArrowIcon,
+	TbUpload as UploadIcon,
+	TbPhoto as PhotoIcon,
 } from 'react-icons/tb'
 
 export {
