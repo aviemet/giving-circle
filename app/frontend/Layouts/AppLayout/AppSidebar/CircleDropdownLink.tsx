@@ -4,7 +4,6 @@ import {
 	Menu,
 	Avatar,
 	Group,
-	Text,
 	Box,
 	Button,
 } from '@/Components'
@@ -22,16 +21,7 @@ const CircleDropdownLink = () => {
 		return <Box>Giving Circles</Box>
 	}
 
-	if(auth.user.circles.length === 1) {
-		return (
-			<Link href={ Routes.circle(menu.active_circle.slug) } underline="never">
-				<Group justify='space-between'>
-					<Avatar size="sm">{ initials(menu.active_circle.name) }</Avatar>
-					<Text style={ { flex: 1 } }>{ menu.active_circle.name }</Text>
-				</Group>
-			</Link>
-		)
-	}
+	const hasMultipleCircles = auth.user.circles.length > 1
 
 	return (
 		<>
@@ -39,18 +29,18 @@ const CircleDropdownLink = () => {
 				justify='space-between'
 				className={ cx(classes.circleMenuGroup) }
 			>
-				<Link href={ Routes.circle(menu.active_circle.slug) } underline="never">
-					<Group justify='space-between'>
-						<Avatar size="sm">{ initials(menu.active_circle.name) }</Avatar>
-					</Group>
-				</Link>
-				<Menu offset={ 9 } position="bottom-end" withArrow>
+				{ /* <Link href={ Routes.circle(menu.active_circle.slug) } underline="never"> */ }
+				<Group justify='space-between'>
+					<Avatar size="sm">{ initials(menu.active_circle.name) }</Avatar>
+				</Group>
+				{ /* </Link> */ }
+				<Menu offset={ 9 } position="bottom-end" withArrow disabled={ !hasMultipleCircles }>
 					<Menu.Target>
 						<Button
 							p={ 0 }
 							variant="transparent"
 							className={ cx(classes.circleMenuButton) }
-							rightSection={ <DownArrowIcon /> }
+							rightSection={ hasMultipleCircles && <DownArrowIcon /> }
 						>
 							{ menu.active_circle.name }
 						</Button>
