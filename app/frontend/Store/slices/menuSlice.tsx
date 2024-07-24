@@ -1,18 +1,23 @@
-import React from 'react'
 import { StateCreator } from 'zustand'
-import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
+
+const menuKeys = {
+	circle: 'circle',
+	theme: 'theme',
+	presentation: 'presentation',
+} as const
 
 export interface MenuSlice {
-	// NavMenu: React.JSX.Element
-	// setNavMenu: (menu: React.JSX.Element) => void
-
+	menuKeys: typeof menuKeys
 	openMenus: Set<string>
-	toggleOpenMenu: (menu: string, open?: boolean) => void
+	toggleOpenMenu: (menu: keyof typeof menuKeys, open?: boolean) => void
+	setOpenMenus: (menus: (keyof typeof menuKeys)[]) => void
 }
 
 export const createMenuSlice: StateCreator<MenuSlice> =
 (set) => ({
-	openMenus: new Set(),
+	menuKeys: menuKeys,
+
+	openMenus: new Set(Object.keys(menuKeys)),
 
 	toggleOpenMenu: (menu, open) => set(state => {
 		const newOpenMenus = new Set(state.openMenus)
@@ -29,9 +34,7 @@ export const createMenuSlice: StateCreator<MenuSlice> =
 		}
 	}),
 
-	// NavMenu: <DefaultMenu />,
-
-	// setNavMenu: menu => set(() => ({
-	// 	NavMenu: menu,
-	// })),
+	setOpenMenus: (menus) => set(() => ({
+		openMenus: new Set(menus),
+	})),
 })
