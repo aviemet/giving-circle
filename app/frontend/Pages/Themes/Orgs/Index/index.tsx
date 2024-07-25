@@ -3,7 +3,6 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import OrgsTable from '../Table'
-import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { usePageProps } from '@/lib/hooks'
 
 interface OrgIndexProps {
@@ -24,7 +23,6 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 			model="theme_orgs"
 			rows={ orgs }
 			pagination={ pagination }
-			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			contextMenu={ {
 				label: 'Add Orgs to Theme',
 				options: [

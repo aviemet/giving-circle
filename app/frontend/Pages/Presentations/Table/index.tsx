@@ -23,10 +23,10 @@ const PresentationTable = (props: TableProps) => {
 			</Table.Head>
 			<Table.Body>
 				<Table.RowIterator render={ (presentation: Schema.PresentationsIndex) => (
-					<Table.Row key={ presentation.id }>
+					<Table.Row key={ presentation.slug }>
 
 						<Table.Cell>
-							<Link href={ Routes.circleThemePresentation(params.circle_slug, params.theme_slug, presentation.id) }>{ presentation.name }</Link>
+							<Link href={ Routes.circleThemePresentation(params.circle_slug, params.theme_slug, presentation.slug) }>{ presentation.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell fitContent className={ cx({ [classes.table]: presentation.active }) }>
@@ -34,7 +34,7 @@ const PresentationTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<EditButton href={ Routes.editCircleThemePresentation(params.circle_slug, params.theme_slug,presentation.id) } />
+							<EditButton href={ Routes.circleThemeEditPresentation(params.circle_slug, params.theme_slug,presentation.slug) } />
 						</Table.Cell>
 
 					</Table.Row>

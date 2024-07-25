@@ -259,11 +259,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
     t.string "invited_by_type"
     t.uuid "invited_by_id"
     t.boolean "active", default: true, null: false
-    t.uuid "active_circle_id"
     t.uuid "person_id"
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
-    t.index ["active_circle_id"], name: "index_users_on_active_circle_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -303,6 +301,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
   add_foreign_key "themes_members", "themes"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
-  add_foreign_key "users", "circles", column: "active_circle_id"
   add_foreign_key "users", "people"
 end

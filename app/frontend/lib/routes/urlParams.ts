@@ -280,6 +280,27 @@ const urlParams = {
       "slug"
     ]
   },
+  "circleThemePresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "circleThemeEditPresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "circleThemePresentationActive": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
   "circleThemePresentations": {
     "params": [
       "circle_slug",
@@ -290,20 +311,6 @@ const urlParams = {
     "params": [
       "circle_slug",
       "theme_slug"
-    ]
-  },
-  "editCircleThemePresentation": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "id"
-    ]
-  },
-  "circleThemePresentation": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "id"
     ]
   },
   "circleThemes": {
@@ -322,9 +329,14 @@ const urlParams = {
   "newCircle": {
     "params": []
   },
-  "runPresentation": {
+  "activePresentationShow": {
     "params": [
-      "id"
+      "presentation_slug"
+    ]
+  },
+  "activePresentationSettings": {
+    "params": [
+      "presentation_slug"
     ]
   },
   "settings": {

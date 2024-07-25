@@ -32,13 +32,11 @@
 #  user_preferences       :jsonb
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  active_circle_id       :uuid
 #  invited_by_id          :uuid
 #  person_id              :uuid
 #
 # Indexes
 #
-#  index_users_on_active_circle_id      (active_circle_id)
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_invitation_token      (invitation_token) UNIQUE
@@ -52,7 +50,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (active_circle_id => circles.id)
 #  fk_rails_...  (person_id => people.id)
 #
 class UserSerializer < ApplicationSerializer

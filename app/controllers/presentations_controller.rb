@@ -2,7 +2,7 @@ class PresentationsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(theme.presentations.includes_associated, sortable_fields) }
-  expose :presentation, find: ->(id, scope) { scope.includes_associated.find(id) }
+  expose :presentation, id: -> { params[:slug] }, scope: -> { theme.presentations }, find_by: :slug
 
   strong_params :presentation, permit: [:name, :theme_id]
 
@@ -23,7 +23,7 @@ class PresentationsController < ApplicationController
     }, layout: "something"
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
   def show
     authorize presentation
     render inertia: "Presentations/Show", props: {
@@ -39,7 +39,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:id/edit (edit_circle_theme_presentation)
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (circle_theme_edit_presentation)
   def edit
     authorize presentation
     render inertia: "Presentations/Edit", props: {
@@ -47,10 +47,10 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /presentation/:id (run_presentation)
-  def run_presentation
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active (circle_theme_presentation_active)
+  def active
     authorize presentation
-    render inertia: "Present/Presentation", props: {
+    render inertia: "Presentations/Active", props: {
       presentation: presentation.render(:presentation)
     }
   end
@@ -65,8 +65,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
-  # @route PUT /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
+  # @route PATCH /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
+  # @route PUT /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
   def update
     authorize presentation
     if presentation.update(presentation_params)
@@ -76,8 +76,7 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
-  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations/:id (circle_theme_presentation)
+  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
   def destroy
     authorize presentation
     presentation.destroy!

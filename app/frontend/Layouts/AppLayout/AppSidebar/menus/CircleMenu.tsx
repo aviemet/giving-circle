@@ -1,54 +1,38 @@
 import React from 'react'
 import { Accordion, NavLink } from '@/Components'
 import { Routes } from '@/lib'
-import { useInit } from '@/lib/hooks'
+import { usePageProps } from '@/lib/hooks'
 import { useLayoutStore } from '@/Store'
+import { isEmpty } from 'lodash'
 
-export interface CircleMenuProps {
-	circle: Schema.CirclesInertiaShare
-}
+const CircleMenu = () => {
+	const { menu } = usePageProps()
+	const { menuKeys } = useLayoutStore()
 
-const menuKey = 'circle_menu'
-
-const CircleMenu = ({ circle }: CircleMenuProps) => {
-	const { openMenus, toggleOpenMenu } = useLayoutStore()
-
-	useInit(() => {
-		toggleOpenMenu(menuKey, true)
-	})
-
-	const handleAccordionChange = () => {
-		toggleOpenMenu(menuKey)
-	}
+	if(isEmpty(menu.active_circle)) return <></>
 
 	return (
-		<Accordion
-			multiple
-			value={ Array.from(openMenus) }
-			onChange={ handleAccordionChange }
-		>
-			<Accordion.Item key={ menuKey } value={ menuKey }>
-				<Accordion.Control>{ circle.name }</Accordion.Control>
-				<Accordion.Panel>
-					<NavLink
-						href={ Routes.circle(circle.slug) }
-						label="Overview"
-					/>
-					<NavLink
-						href={ Routes.circleThemes(circle.slug) }
-						label="Themes"
-					/>
-					<NavLink
-						href={ Routes.circleMembers(circle.slug) }
-						label="Members"
-					/>
-					<NavLink
-						href={ Routes.circlePresentationTemplates(circle.slug) }
-						label="Presentation Templates"
-					/>
-				</Accordion.Panel>
-			</Accordion.Item>
-		</Accordion>
+		<Accordion.Item key={ menuKeys.circle } value={ menuKeys.circle }>
+			<Accordion.Control>{ menu.active_circle.name }</Accordion.Control>
+			<Accordion.Panel>
+				<NavLink
+					href={ Routes.circle(menu.active_circle.slug) }
+					label="Dashboard"
+				/>
+				<NavLink
+					href={ Routes.circleThemes(menu.active_circle.slug) }
+					label="Themes"
+				/>
+				<NavLink
+					href={ Routes.circleMembers(menu.active_circle.slug) }
+					label="Members"
+				/>
+				<NavLink
+					href={ Routes.circlePresentationTemplates(menu.active_circle.slug) }
+					label="Presentation Templates"
+				/>
+			</Accordion.Panel>
+		</Accordion.Item>
 	)
 }
 

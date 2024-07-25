@@ -27,7 +27,6 @@ const IndexPageTemplate = ({
 	breadcrumbs,
 	contextMenu,
 	advancedSearch,
-	navMenu,
 	hideNavMenu,
 	meta,
 
@@ -35,7 +34,6 @@ const IndexPageTemplate = ({
 	return (
 		<Page
 			title={ title }
-			navMenu={ navMenu }
 			hideNavMenu={ hideNavMenu }
 			meta={ meta }
 			breadcrumbs={ breadcrumbs ?? [

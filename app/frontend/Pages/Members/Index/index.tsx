@@ -3,7 +3,6 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import MembersTable from '../Table'
-import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 
 interface MemberIndexProps {
 	members: Schema.MembersIndex[]
@@ -18,7 +17,6 @@ const MembersIndex = ({ members, circle, pagination }: MemberIndexProps) => {
 			model="members"
 			rows={ members }
 			pagination={ pagination }
-			navMenu={ getCircleMenu({ circle }) }
 			breadcrumbs={ [
 				{ title: 'Circles', href: Routes.circles() },
 				{ title: circle.name, href: Routes.circle(circle.slug) },

@@ -1,35 +1,39 @@
 import React from 'react'
-import { Divider, NavLink } from '@/Components'
+import { Accordion, NavLink } from '@/Components'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
+import { useLayoutStore } from '@/Store'
+import { isEmpty } from 'lodash'
 
-export interface ThemeMenuProps {
-	circle: Schema.CirclesInertiaShare
-	theme: Schema.ThemesInertiaShare
-}
+const ThemeMenu = () => {
+	const { menu } = usePageProps()
+	const { menuKeys } = useLayoutStore()
 
-const ThemeMenu = ({ circle, theme }: ThemeMenuProps) => {
+	if(isEmpty(menu.active_circle) || isEmpty(menu.active_theme)) return <></>
+
 	return (
-		<>
-			<NavLink
-				href={ Routes.circleTheme(circle.slug, theme.slug) }
-				label={ theme.name }
-			/>
+		<Accordion.Item key={ menuKeys.theme } value={ menuKeys.theme }>
+			<Accordion.Control>{ menu.active_theme.name }</Accordion.Control>
+			<Accordion.Panel>
+				<NavLink
+					href={ Routes.circleTheme(menu.active_circle.slug, menu.active_theme.slug) }
+					label="Overview"
+				/>
 
-			<Divider />
-
-			<NavLink
-				href={ Routes.circleThemeOrgs(circle.slug, theme.slug) }
-				label="Organizations"
-			/>
-			<NavLink
-				href={ Routes.circleThemeMembers(circle.slug, theme.slug) }
-				label="Members"
-			/>
-			<NavLink
-				href={ Routes.circleThemePresentations(circle.slug, theme.slug) }
-				label="Presentations"
-			/>
-		</>
+				<NavLink
+					href={ Routes.circleThemeOrgs(menu.active_circle.slug, menu.active_theme.slug) }
+					label="Organizations"
+				/>
+				<NavLink
+					href={ Routes.circleThemeMembers(menu.active_circle.slug, menu.active_theme.slug) }
+					label="Members"
+				/>
+				<NavLink
+					href={ Routes.circleThemePresentations(menu.active_circle.slug, menu.active_theme.slug) }
+					label="Presentations"
+				/>
+			</Accordion.Panel>
+		</Accordion.Item>
 	)
 }
 

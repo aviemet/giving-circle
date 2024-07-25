@@ -8,10 +8,10 @@ interface EditPresentationProps {
 	presentation: Schema.PresentationsEdit
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:id/edit
-// @route: editCircleThemePresentation
+// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit
+// @route: circleThemeEditPresentation
 const EditPresentation = ({ presentation }: EditPresentationProps) => {
-	const { params } = usePageProps<'editPresentation'>()
+	const { params } = usePageProps<'circleThemeEditPresentation'>()
 
 	const title = 'Edit Presentation'
 
@@ -22,7 +22,7 @@ const EditPresentation = ({ presentation }: EditPresentationProps) => {
 
 				<PresentationsForm
 					method='put'
-					to={ Routes.presentation(params.id) }
+					to={ Routes.circleThemeEditPresentation(params.circle_slug, params.theme_slug, params.presentation_slug) }
 					presentation={ presentation }
 				/>
 			</Section>

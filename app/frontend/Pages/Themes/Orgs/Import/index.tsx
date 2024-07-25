@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { parseCsvFile } from '@/lib/papaParse'
 import { Button, Code, Dropzone, Page, Text, Title, type FileWithPath } from '@/Components'
 import ImportMapping, { TriggerHandle, triggerRefAction } from '@/Features/ImportMapping'
-import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { useLayoutStore } from '@/Store'
 import { headingsMap } from './headingsMap'
 import { Routes } from '@/lib'
@@ -85,7 +84,6 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 		<Page
 			title="Orgs Import"
 			siteTitle={ siteTitle }
-			navMenu={ getThemeMenu({ circle, theme }) }
 		>
 			{ displayImportTable ? (
 				<ImportMapping

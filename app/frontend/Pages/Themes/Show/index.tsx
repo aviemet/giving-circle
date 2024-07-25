@@ -1,7 +1,6 @@
 import React from 'react'
 import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import { usePageProps } from '@/lib/hooks'
 
 interface ShowThemeProps {
@@ -18,7 +17,6 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 	return (
 		<Page
 			title={ title }
-			navMenu={ getThemeMenu({ circle: theme.circle, theme }) }
 		>
 			<Section>
 				<Group>

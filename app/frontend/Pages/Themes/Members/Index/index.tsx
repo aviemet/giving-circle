@@ -3,7 +3,6 @@ import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
-import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import MembersTable from '../Table'
 
 interface MemberIndexProps {
@@ -24,7 +23,6 @@ const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) 
 			model="members"
 			rows={ members }
 			pagination={ pagination }
-			navMenu={ getThemeMenu({ circle, theme }) }
 			contextMenu={ {
 				label: 'Add Members to Theme',
 				options: [

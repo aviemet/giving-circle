@@ -1,13 +1,13 @@
 import React from 'react'
 
-interface LayoutProps {
-	children: any
+interface PresentationLayoutProps {
+	children: React.ReactNode
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const PresentationLayout = ({ children }: PresentationLayoutProps) => {
 	return (
-		<>{ children }</>
+		<div>{ children }</div>
 	)
 }
 
-export default Layout
+export default PresentationLayout

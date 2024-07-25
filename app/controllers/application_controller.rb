@@ -9,5 +9,5 @@ class ApplicationController < ActionController::Base
   include InertiaShare::Params
   include Searchable
   include StrongParams
-  include ActiveCircleTracker
+  # include ActiveCircleTracker
 end

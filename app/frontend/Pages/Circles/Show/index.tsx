@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Group, Title, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { getCircleMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import StatTile from './StatTile'
 import { CoinsIcon, HelpingIcon, MembersIcon } from '@/Components/Icons'
 import { ThemeCard } from '@/Features/Cards'
@@ -33,7 +32,6 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 					</Menu>
 				</Group>
 			) }
-			navMenu={ getCircleMenu({ circle }) }
 			breadcrumbs={ [
 				{ title: 'Circles', href: Routes.circles() },
 				{ title, href: Routes.circle(params.circle_slug) },

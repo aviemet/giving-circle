@@ -1,8 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { Head } from '@inertiajs/react'
-import { DefaultMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import Breadcrumbs, { type Breadcrumb } from '@/Components/Breadcrumbs'
-import { Portal } from '@/Components'
 import useLayoutStore from '@/Store/LayoutStore'
 
 export interface PageProps {
@@ -12,7 +10,6 @@ export interface PageProps {
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
-	navMenu?: (props: any) => React.JSX.Element
 }
 
 const Page = ({
@@ -21,7 +18,6 @@ const Page = ({
 	siteTitle,
 	meta,
 	hideNavMenu = false,
-	navMenu: NavMenu,
 	breadcrumbs,
 }: PageProps) => {
 	const { sidebarVisible, setSidebarVisible, siteTitle: storeSiteTitle, setSiteTitle } = useLayoutStore()
@@ -55,10 +51,6 @@ const Page = ({
 			{ title && <Head title={ title }>
 				{ meta && meta }
 			</Head> }
-
-			{ dynamicNavMenuRef.current && <Portal target={ dynamicNavMenuRef.current }>
-				{ NavMenu ? <NavMenu /> : <DefaultMenu /> }
-			</Portal> }
 
 			{ breadcrumbs && <Breadcrumbs crumbs={ breadcrumbs } /> }
 

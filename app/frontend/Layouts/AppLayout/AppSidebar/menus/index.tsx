@@ -1,35 +1,3 @@
-import React from 'react'
-import DefaultMenu, { type DefaultMenuProps } from './DefaultMenu'
-import CircleMenu, { type CircleMenuProps  } from './CircleMenu'
-import ThemeMenu, { type ThemeMenuProps  } from './ThemeMenu'
-
-export type MenuNames = 'default' | 'circle' | 'theme'
-
-export type MenuType =
-	(() => React.FC<DefaultMenuProps>) |
-	(() => React.FC<CircleMenuProps>) |
-	(() => React.FC<ThemeMenuProps>)
-
-export const menus: Record<MenuNames, MenuType> = {
-	default: () => DefaultMenu,
-	circle: () => CircleMenu,
-	theme: () => ThemeMenu,
-}
-
-export const getDefaultMenu = () => () => <DefaultMenu />
-
-export const getCircleMenu = ({ circle }: {circle: Schema.CirclesInertiaShare}) => () => (
-	<>
-		<CircleMenu circle={ circle } />
-	</>
-)
-
-export const getThemeMenu = (
-	{ circle, theme }: {circle: Schema.CirclesInertiaShare, theme: Schema.ThemesInertiaShare},
-) => () => (
-	<>
-		<ThemeMenu circle={ circle } theme={ theme } />
-	</>
-)
-
-export { DefaultMenu, CircleMenu, ThemeMenu }
+export { default as CircleMenu } from './CircleMenu'
+export { default as ThemeMenu } from './ThemeMenu'
+export { default as PresentationMenu } from './PresentationMenu'

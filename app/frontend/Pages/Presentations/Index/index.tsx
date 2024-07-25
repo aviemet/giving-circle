@@ -2,8 +2,8 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
-import { getThemeMenu } from '@/Layouts/AppLayout/AppSidebar/menus'
 import PresentationsTable from '../Table'
+import { usePageProps } from '@/lib/hooks'
 
 interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
@@ -12,17 +12,20 @@ interface PresentationIndexProps {
 	theme: Schema.ThemesInertiaShare
 }
 
+// @path: /circles/:circle_slug/themes/:theme_slug/presentations
+// @route: circleThemePresentations
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
+	const { params } = usePageProps<'circleThemePresentations'>()
+
 	return (
 		<IndexPageTemplate
 			title="Presentations"
 			model="presentations"
 			rows={ presentations }
 			pagination={ pagination }
-			navMenu={ getThemeMenu({ circle: circle, theme }) }
 			contextMenu={ {
 				options: [
-					{ label: 'New Presentation', href: Routes.newCircleThemePresentation(circle.slug, theme.slug), icon: <NewIcon /> },
+					{ label: 'New Presentation', href: Routes.newCircleThemePresentation(params.circle_slug, params.theme_slug), icon: <NewIcon /> },
 				],
 			} }
 		>

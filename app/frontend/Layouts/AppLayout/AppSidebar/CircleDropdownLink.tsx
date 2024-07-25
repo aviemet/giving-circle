@@ -13,11 +13,12 @@ import { DownArrowIcon } from '@/Components/Icons'
 
 import cx from 'clsx'
 import * as classes from '../AppLayout.css'
+import { isEmpty } from 'lodash'
 
 const CircleDropdownLink = () => {
 	const { auth, menu } = usePageProps()
 
-	if(menu.active_circle === undefined) {
+	if(isEmpty(menu.active_circle)) {
 		return <Box>Giving Circles</Box>
 	}
 

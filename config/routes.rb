@@ -101,13 +101,26 @@ Rails.application.routes.draw do
         as: 'org',
       )
 
-      resources :presentations, concerns: :bulk_delete
+      # Admin presentation routes
+      get 'presentations/:presentation_slug', to: 'presentations#show', as: 'presentation'
+      get 'presentations/:presentation_slug/edit', to: 'presentations#edit', as: 'edit_presentation'
+      patch 'presentations/:presentation_slug', to: 'presentations#update'
+      put 'presentations/:presentation_slug', to: 'presentations#update'
+      delete 'presentations/:presentation_slug', to: 'presentations#destroy'
+      resources :presentations, param: :slug, only: [:new, :index, :create] do
+        get :active
+      end
     end
   end
 
-  get "presentation/:id", to: "presentations#run_presentation", as: :run_presentation
+  # Public facing presenations routes
+  namespace :presentations, param: :presentation_slug, as: :active_presentation do
+    %i[show settings].each do |r|
+      get ":presentation_slug/#{r}", to: "active##{r}", as: r
+    end
+  end
 
-    # SETTINGS PAGES #
+  # SETTINGS PAGES #
 
   namespace :settings do
     get "/", to: redirect("/settings/general")

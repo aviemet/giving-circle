@@ -86,6 +86,30 @@ export const serialize: RouterExposedMethods['serialize'];
 
 /**
  * Generates rails route to
+ * /presentations/:presentation_slug/settings(.:format)
+ * @param {any} presentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const activePresentationSettings: ((
+  presentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /presentations/:presentation_slug/show(.:format)
+ * @param {any} presentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const activePresentationShow: ((
+  presentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/searches(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -332,6 +356,22 @@ export const circleThemeAbout: ((
 
 /**
  * Generates rails route to
+ * /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {any} presentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const circleThemeEditPresentation: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
+  presentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /circles/:circle_slug/themes/:theme_slug/members/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
@@ -434,17 +474,33 @@ export const circleThemeOrgsImport: ((
 
 /**
  * Generates rails route to
- * /circles/:circle_slug/themes/:theme_slug/presentations/:id(.:format)
+ * /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
- * @param {any} id
+ * @param {any} presentationSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const circleThemePresentation: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
-  id: RequiredRouteParameter,
+  presentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {any} presentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const circleThemePresentationActive: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
+  presentationSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -577,22 +633,6 @@ export const editCircleThemeOrg: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /circles/:circle_slug/themes/:theme_slug/presentations/:id/edit(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editCircleThemePresentation: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -906,18 +946,6 @@ export const person: ((
  */
 export const root: ((
   options?: {} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /presentation/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const runPresentation: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
