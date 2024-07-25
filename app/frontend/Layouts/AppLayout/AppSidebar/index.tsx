@@ -9,6 +9,9 @@ import { ToggleColorSchemeButton } from '@/Components/Button'
 import CircleDropdownLink from './CircleDropdownLink'
 import Menu from './Menu'
 
+import cx from 'clsx'
+import * as classes from '../AppLayout.css'
+
 const AppSidebar = () => {
 	return (
 		<>
@@ -29,7 +32,6 @@ const AppSidebar = () => {
 			<Divider />
 
 			{ /* Nav menu portal */ }
-			{ /* <AppShell.Section grow id="dynamic-nav-menu"> */ }
 			<AppShell.Section grow>
 				<Menu />
 			</AppShell.Section>

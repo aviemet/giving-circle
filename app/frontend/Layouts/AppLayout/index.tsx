@@ -48,7 +48,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 				<AppHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar p="sm">
+			<AppShell.Navbar px={ 0 } py="sm" className={ cx(classes.navMenu) }>
 				<AppSidebar />
 			</AppShell.Navbar>
 

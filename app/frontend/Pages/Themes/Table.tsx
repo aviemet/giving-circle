@@ -3,8 +3,10 @@ import { Routes } from '@/lib'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
+import { usePageProps } from '@/lib/hooks'
 
 const ThemeTable = (props: TableProps) => {
+	const { params } = usePageProps<'circleThemes'>()
 	return (
 		<Table { ...props }>
 			<Table.Head>
@@ -18,13 +20,13 @@ const ThemeTable = (props: TableProps) => {
 				<Table.RowIterator render={ (theme: Schema.ThemesIndex) => (
 					<Table.Row key={ theme.id }>
 						<Table.Cell>
-							<Link href={ Routes.circleTheme(theme.circle_id, theme.slug) }>{ theme.name }</Link>
+							<Link href={ Routes.circleTheme(params.circle_slug, theme.slug) }>{ theme.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.circleTheme(theme.circle_id, theme.slug) }>{ theme.slug }</Link>
+							<Link href={ Routes.circleTheme(params.circle_slug, theme.slug) }>{ theme.slug }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.circleEditTheme(theme.circle_id, theme.id) } />
+							<EditButton href={ Routes.circleEditTheme(params.circle_slug, theme.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />
