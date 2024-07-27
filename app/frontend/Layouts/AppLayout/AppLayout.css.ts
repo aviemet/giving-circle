@@ -1,11 +1,15 @@
-import { vars, theme, rem } from '@/lib'
+import { vars, theme } from '@/lib'
 import { css } from '@linaria/core'
 
 export const appLayout = css`
 `
 
 export const main = css`
-  padding-top: calc(${rem(theme.other.header.height)} + ${vars.spacing.md});
+  padding-top: calc(${theme.other.header.height}px);
+
+  &.paddingDisabled {
+    --app-shell-padding: 0;
+  }
 `
 
 export const circleMenuGroup = css`

@@ -3,6 +3,7 @@ class CreatePresentations < ActiveRecord::Migration[7.1]
     create_table :presentations, id: :uuid do |t|
       t.string :name
       t.boolean :active, null: false, default: false
+      t.jsonb :settings
 
       t.references :theme, type: :uuid, null: false, foreign_key: true
       t.references :presentation_template, type: :uuid, null: true, foreign_key: true

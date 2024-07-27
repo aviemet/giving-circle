@@ -35,6 +35,7 @@ class Circle < ApplicationRecord
   has_many :presentations, through: :themes
 
   has_many :circles_member, dependent: :destroy
+  has_many :orgs, dependent: :nullify
   has_many :members, through: :circles_member
   has_many :groups, dependent: :destroy
 

@@ -24,9 +24,9 @@
 #  fk_rails_...  (presentation_template_id => presentation_templates.id)
 #
 FactoryBot.define do
-  factory :template_slide do
+  factory :presentation_slide do
     name { Faker::Company.buzzword.capitalize }
-    content { Faker::Lorem.words(number: rand(10..20).join(' ').capitalize) }
+    content { Faker::Lorem.words(number: rand(10..20)).join(' ').capitalize }
 
     presentation
   end

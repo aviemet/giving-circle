@@ -5,6 +5,7 @@ class CreatePeople < ActiveRecord::Migration[7.1]
       t.string :last_name
       t.string :middle_name
       t.string :number
+      t.monetize :funds, amount: { null: true, default: nil }
       t.boolean :active, null: false, default: true
 
       t.string :slug, null: false, index: { unique: true }

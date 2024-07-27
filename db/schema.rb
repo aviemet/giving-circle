@@ -101,6 +101,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
     t.string "last_name"
     t.string "middle_name"
     t.string "number"
+    t.integer "funds_cents"
+    t.string "funds_currency", default: "USD", null: false
     t.boolean "active", default: true, null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
@@ -149,6 +151,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
 
   create_table "presentation_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.jsonb "settings"
     t.uuid "circle_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
@@ -160,6 +163,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: false, null: false
+    t.jsonb "settings"
     t.uuid "theme_id", null: false
     t.uuid "presentation_template_id"
     t.string "slug", null: false

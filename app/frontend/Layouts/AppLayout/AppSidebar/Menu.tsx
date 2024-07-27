@@ -25,7 +25,7 @@ const Menu = () => {
 	}, [openMenus])
 
 	const prevMenus = usePrevious(openMenus)
-	console.log({ openMenus, prevMenus })
+
 	const handleAccordionChange = (menus: (keyof typeof menuKeys)[]) => {
 		setOpenMenus(menus)
 	}

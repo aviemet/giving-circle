@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  active                   :boolean          default(FALSE), not null
 #  name                     :string
+#  settings                 :jsonb
 #  slug                     :string           not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -52,7 +53,7 @@ class Presentation < ApplicationRecord
   has_many :presentations_orgs, dependent: :destroy
   has_many :orgs, through: :presentations_orgs
 
-  has_many :presentation_slides, dependent: :nullify
+  has_many :slides, class_name: "PresentationSlide", dependent: :nullify
 
   scope :includes_associated, -> { includes([:theme, :members, :orgs]) }
 end

@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  active                   :boolean          default(FALSE), not null
 #  name                     :string
+#  settings                 :jsonb
 #  slug                     :string           not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

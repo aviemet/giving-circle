@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { Head } from '@inertiajs/react'
 import Breadcrumbs, { type Breadcrumb } from '@/Components/Breadcrumbs'
 import useLayoutStore from '@/Store/LayoutStore'
+import { useInit } from '@/lib/hooks'
 
 export interface PageProps {
 	children?: React.ReactNode
@@ -10,6 +11,7 @@ export interface PageProps {
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
+	disablePadding?: boolean
 }
 
 const Page = ({
@@ -19,8 +21,15 @@ const Page = ({
 	meta,
 	hideNavMenu = false,
 	breadcrumbs,
+	disablePadding,
 }: PageProps) => {
-	const { sidebarVisible, setSidebarVisible, siteTitle: storeSiteTitle, setSiteTitle } = useLayoutStore()
+	const {
+		sidebarVisible,
+		setSidebarVisible,
+		siteTitle: storeSiteTitle,
+		setSiteTitle,
+		setMainPaddingDisabled,
+	} = useLayoutStore()
 
 	// Maintain ref to inner nav menu for page specific menus
 	const dynamicNavMenuRef = useRef(document.getElementById('dynamic-nav-menu'))
@@ -45,6 +54,10 @@ const Page = ({
 
 		setSiteTitle(usedSiteTitle)
 	}, [siteTitle, title])
+
+	useInit(() => {
+		setMainPaddingDisabled(disablePadding === true ? true : false)
+	})
 
 	return (
 		<>

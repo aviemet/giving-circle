@@ -2,15 +2,17 @@
 #
 # Table name: people
 #
-#  id          :uuid             not null, primary key
-#  active      :boolean          default(TRUE), not null
-#  first_name  :string
-#  last_name   :string
-#  middle_name :string
-#  number      :string
-#  slug        :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id             :uuid             not null, primary key
+#  active         :boolean          default(TRUE), not null
+#  first_name     :string
+#  funds_cents    :integer
+#  funds_currency :string           default("USD"), not null
+#  last_name      :string
+#  middle_name    :string
+#  number         :string
+#  slug           :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 # Indexes
 #
@@ -21,5 +23,6 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     number { Faker::Number.unique.number(digits: 6) }
+    funds_cents { Faker::Number.between(from: 50000, to: 1000000) }
   end
 end

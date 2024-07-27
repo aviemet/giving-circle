@@ -44,8 +44,8 @@ class PresentationSlide < ApplicationRecord
 
   resourcify
 
-  belongs_to :presentation
-  belongs_to :presentation_template
+  belongs_to :presentation, optional: true
+  belongs_to :presentation_template, optional: true
 
   validates :presentation_template_id, presence: true, if: -> { presentation_id.nil? }
   validates :presentation_id, presence: true, if: -> { presentation_template_id.nil? }

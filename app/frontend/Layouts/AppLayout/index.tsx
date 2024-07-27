@@ -15,7 +15,13 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-	const { sidebarOpen, sidebarVisible, headerPinned, setHeaderPinned } = useLayoutStore()
+	const {
+		sidebarOpen,
+		sidebarVisible,
+		mainPaddingDisabled,
+		headerPinned,
+		setHeaderPinned,
+	} = useLayoutStore()
 	const theme = useTheme()
 	const headroom = useHeadroom({ fixedAt: 120 })
 
@@ -54,7 +60,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
 			<AppFooter />
 
-			<AppShell.Main className={ cx(classes.main) }>
+			<AppShell.Main className={ cx(classes.main, { paddingDisabled: mainPaddingDisabled }) }>
 				{ children }
 			</AppShell.Main>
 		</AppShell>
