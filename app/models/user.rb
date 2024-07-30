@@ -74,6 +74,7 @@ class User < ApplicationRecord
 
   # Rows page for pagination
   def limit(model)
+    ap({ model: })
     self.table_preferences&.[](model.to_s)&.[]('limit')
   end
 

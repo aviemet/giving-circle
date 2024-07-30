@@ -12,7 +12,7 @@ class ThemeMembersController < ApplicationController
   def index
     authorize members
 
-    paginated_members = paginate(members, :members)
+    paginated_members = paginate(members, :theme_members)
 
     render inertia: "Themes/Members/Index", props: {
       members: -> { paginated_members.render(:index) },

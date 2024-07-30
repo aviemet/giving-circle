@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   def index
     authorize groups
 
-    paginated_groups = paginate(groups, :items)
+    paginated_groups = paginate(groups, :groups)
 
     render inertia: "Groups/Index", props: {
       groups: -> { paginated_groups.render(:index) },

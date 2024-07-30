@@ -10,7 +10,7 @@ class PresentationTemplatesController < ApplicationController
   def index
     authorize templates
 
-    paginated_templates = paginate(templates, :items)
+    paginated_templates = paginate(templates, :templates)
 
     render inertia: "Templates/Index", props: {
       templates: -> { paginated_templates.render(:index) },

@@ -17,7 +17,7 @@ class OrgsController < ApplicationController
   def index
     authorize orgs
 
-    paginated_orgs = paginate(orgs, :items)
+    paginated_orgs = paginate(orgs, :orgs)
 
     render inertia: "Orgs/Index", props: {
       orgs: -> { paginated_orgs.render(:index) },

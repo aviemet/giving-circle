@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
   def index
     authorize people
 
-    paginated_people = paginate(circle_people, :items)
+    paginated_people = paginate(circle_people, :people)
 
     render inertia: "People/Index", props: {
       people: -> { paginated_people.render },

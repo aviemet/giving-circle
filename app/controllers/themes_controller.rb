@@ -10,7 +10,7 @@ class ThemesController < ApplicationController
   def index
     authorize themes
 
-    paginated_themes = paginate(themes, :items)
+    paginated_themes = paginate(themes, :themes)
 
     render inertia: "Themes/Index", props: {
       themes: -> { paginated_themes.render(:index) },

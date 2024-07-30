@@ -6,18 +6,6 @@ import LimitSelect from './LimitSelect'
 import cx from 'clsx'
 import * as classes from '../Table.css'
 
-const pageLink = (page: number) => {
-	const url = new URL(window.location.href)
-
-	if(page === 1) {
-		url.searchParams.delete('page')
-	} else {
-		url.searchParams.set('page', String(page))
-	}
-
-	return `${url.pathname}${url.search}`
-}
-
 interface PaginationComponent extends Omit<PaginationProps, 'total'> {}
 
 const PaginationComponent = ({
@@ -95,3 +83,15 @@ const PaginationComponent = ({
 }
 
 export default PaginationComponent
+
+const pageLink = (page: number) => {
+	const url = new URL(window.location.href)
+
+	if(page === 1) {
+		url.searchParams.delete('page')
+	} else {
+		url.searchParams.set('page', String(page))
+	}
+
+	return `${url.pathname}${url.search}`
+}
