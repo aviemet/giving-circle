@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title, Page, Section } from '@/Components'
+import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PresentationsForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
@@ -16,10 +16,10 @@ const EditPresentation = ({ presentation }: EditPresentationProps) => {
 	const title = 'Edit Presentation'
 
 	return (
-		<Page title={ title }>
+		<Page
+			title={ title }
+		>
 			<Section>
-				<Title>{ title }</Title>
-
 				<PresentationsForm
 					method='put'
 					to={ Routes.circleThemeEditPresentation(params.circle_slug, params.theme_slug, params.presentation_slug) }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -21,8 +22,17 @@ const PresentationForm = ({ method = 'post', presentation, ...props }: Presentat
 			method={ method }
 			{ ...props }
 		>
-			<TextInput name="name" label="Name" />
-			<Submit>{ presentation.id ? 'Update' : 'Create' } Presentation</Submit>
+			<Grid>
+
+				<Grid.Col>
+					<TextInput name="name" label="Name" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>{ presentation.id ? 'Update' : 'Create' } Presentation</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

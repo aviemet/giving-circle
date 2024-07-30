@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import MembersTable from '../Table'
 
@@ -18,7 +18,7 @@ const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) 
 	const { params } = usePageProps<'circleThemeMemberIndex'>()
 
 	return (
-		<IndexPageTemplate
+		<IndexTableTemplate
 			title="Members"
 			model="members"
 			rows={ members }
@@ -42,7 +42,7 @@ const MembersIndex = ({ members, pagination, theme, circle }: MemberIndexProps) 
 			} }
 		>
 			<MembersTable />
-		</IndexPageTemplate>
+		</IndexTableTemplate>
 	)
 }
 

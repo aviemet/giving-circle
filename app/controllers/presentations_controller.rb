@@ -2,7 +2,7 @@ class PresentationsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(theme.presentations.includes_associated, sortable_fields) }
-  expose :presentation, id: -> { params[:slug] }, scope: -> { theme.presentations }, find_by: :slug
+  expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations }, find_by: :slug
 
   strong_params :presentation, permit: [:name, :theme_id]
 
@@ -26,6 +26,7 @@ class PresentationsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
   def show
     authorize presentation
+
     render inertia: "Presentations/Show", props: {
       presentation: -> { presentation.render(:show) }
     }

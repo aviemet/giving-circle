@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import OrgsTable from '../Table'
 import { usePageProps } from '@/lib/hooks'
@@ -18,7 +18,7 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 	const { params } = usePageProps<'circleThemeOrgs'>()
 
 	return (
-		<IndexPageTemplate
+		<IndexTableTemplate
 			title="Orgs"
 			model="theme_orgs"
 			rows={ orgs }
@@ -42,7 +42,7 @@ const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 			} }
 		>
 			<OrgsTable theme={ theme } />
-		</IndexPageTemplate>
+		</IndexTableTemplate>
 	)
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -20,9 +21,16 @@ const <%= singular_table_name.camelize %>Form = ({ method = 'post', <%= singular
 			data={ { <%= singular_table_name %> } }
 			method={ method }
 			{ ...props }
-		><% attributes.each do |column| %><% unless column.type == :references %>
-			<TextInput name="<%= column.name %>" label="<%= column.name.capitalize %>" /><% end %><% end %>
-			<Submit>{ <%= singular_table_name %>.id ? 'Update' : 'Create' } <%= singular_table_name.camelize %></Submit>
+		>
+			<Grid>
+			<% attributes.each do |column| %><% unless column.type == :references %>
+				<Grid.Col>
+					<TextInput name="<%= column.name %>" label="<%= column.name.capitalize %>" />
+				</Grid.Col><% end %><% end %>
+				<Grid.Col>
+					<Submit>{ <%= singular_table_name %>.id ? 'Update' : 'Create' } <%= singular_table_name.camelize %></Submit>
+				</Grid.Col>
+			</Grid.Col>
 		</Form>
 	)
 }

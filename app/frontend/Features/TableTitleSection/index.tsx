@@ -5,7 +5,7 @@ import { TrashIcon } from '@/Components/Icons'
 import { useTableContext } from '@/Components/Table/TableContext'
 
 import cx from 'clsx'
-import * as classes from '../IndexPageTemplate/IndexPage.css'
+import * as classes from '../IndexTableTemplate/IndexPage.css'
 
 type MenuOption = {
 	label: string

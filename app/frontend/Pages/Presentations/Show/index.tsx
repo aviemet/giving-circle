@@ -1,9 +1,7 @@
-import React, { useRef } from 'react'
-import { Group, Link, Menu, Page, Section } from '@/Components'
+import React from 'react'
+import { Group, Link, Menu, Page, Section, Title } from '@/Components'
 import { Routes } from '@/lib'
-import { useInit, usePageProps } from '@/lib/hooks'
-import VisualEditor from '@/Components/VisualEditor'
-import { useLayoutStore } from '@/Store'
+import { usePageProps } from '@/lib/hooks'
 
 interface ShowPresentationProps {
 	presentation: Schema.PresentationsPresentation
@@ -12,16 +10,14 @@ interface ShowPresentationProps {
 // @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug
 // @route: circleThemePresentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
-	const { toggleSidebarOpen } = useLayoutStore()
 	const { params } = usePageProps<'circleThemePresentation'>()
 	const title = presentation.name || 'Presentation'
 
 	return (
 		<Page
 			title={ title }
-			disablePadding
-		>
-			<Section>
+			siteTitle={ <>
+				<Title>{ title }</Title>
 				<Group>
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -32,8 +28,10 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
-
-				{ /* <Link as="button" href={ Routes.activePresentationShow(params.presentation_slug) }>Start Presentation</Link> */ }
+			</> }
+		>
+			<Section>
+				<Link as="button" href={ Routes.activePresentationShow(params.presentation_slug) }>Start Presentation</Link>
 			</Section>
 		</Page>
 	)

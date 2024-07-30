@@ -1,9 +1,10 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import PresentationsTable from '../Table'
 import { usePageProps } from '@/lib/hooks'
+import { Page } from '@/Components'
 
 interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
@@ -18,19 +19,22 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 	const { params } = usePageProps<'circleThemePresentations'>()
 
 	return (
-		<IndexPageTemplate
+		<Page
 			title="Presentations"
-			model="presentations"
-			rows={ presentations }
-			pagination={ pagination }
-			contextMenu={ {
-				options: [
-					{ label: 'New Presentation', href: Routes.newCircleThemePresentation(params.circle_slug, params.theme_slug), icon: <NewIcon /> },
-				],
-			} }
 		>
-			<PresentationsTable />
-		</IndexPageTemplate>
+			<IndexTableTemplate
+				model="presentations"
+				rows={ presentations }
+				pagination={ pagination }
+			// contextMenu={ {
+			// 	options: [
+			// 		{ label: 'New Presentation', href: Routes.newCircleThemePresentation(params.circle_slug, params.theme_slug), icon: <NewIcon /> },
+			// 	],
+			// } }
+			>
+				<PresentationsTable />
+			</IndexTableTemplate>
+		</Page>
 	)
 }
 

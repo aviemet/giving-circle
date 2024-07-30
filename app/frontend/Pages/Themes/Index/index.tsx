@@ -2,8 +2,9 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 import { NewIcon } from '@/Components/Icons'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import ThemesTable from '../Table'
+import { Page } from '@/Components'
 
 interface ThemeIndexProps {
 	themes: Schema.ThemesIndex[]
@@ -17,19 +18,22 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 	const { params } = usePageProps<'circleThemes'>()
 
 	return (
-		<IndexPageTemplate
+		<Page
 			title="Themes"
-			model="themes"
-			rows={ themes }
-			pagination={ pagination }
-			contextMenu={ {
-				options: [
-					{ label: 'New Theme', href: Routes.newCircleTheme(params.circle_slug), icon: <NewIcon /> },
-				],
-			} }
 		>
-			<ThemesTable />
-		</IndexPageTemplate>
+			<IndexTableTemplate
+				model="themes"
+				rows={ themes }
+				pagination={ pagination }
+			// contextMenu={ {
+			// 	options: [
+			// 		{ label: 'New Theme', href: Routes.newCircleTheme(params.circle_slug), icon: <NewIcon /> },
+			// 	],
+			// } }
+			>
+				<ThemesTable />
+			</IndexTableTemplate>
+		</Page>
 	)
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import <%= plural_table_name.camelize %>Table from '../Table'
 
@@ -11,7 +11,7 @@ interface <%= singular_table_name.camelize %>IndexProps {
 
 const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagination }: <%= singular_table_name.camelize %>IndexProps) => {
 	return (
-		<IndexPageTemplate
+		<IndexTableTemplate
 			title="<%= plural_table_name.camelize %>"
 			model="<%= plural_table_name %>"
 			rows={ <%= plural_table_name %> }
@@ -24,7 +24,7 @@ const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagi
 			} }
 		>
 			<<%= plural_table_name.camelize %>Table />
-		</IndexPageTemplate>
+		</IndexTableTemplate>
 	)
 }
 

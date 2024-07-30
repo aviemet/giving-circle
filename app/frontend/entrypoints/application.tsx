@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			router.on('success', event => {
 				event.detail.page.props = propsMiddleware(event.detail.page.props)
-				runAxe(root)
+				// runAxe(root)
 			})
 		},
 	})

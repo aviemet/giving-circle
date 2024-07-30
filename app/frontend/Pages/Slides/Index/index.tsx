@@ -1,8 +1,9 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import PresentationSlidesTable from '../Table'
+import { Page } from '@/Components'
 
 interface PresentationSlideIndexProps {
 	presentation_slides: Schema.PresentationSlidesIndex[]
@@ -13,20 +14,23 @@ interface PresentationSlideIndexProps {
 // @route: presentationSlides
 const PresentationSlidesIndex = ({ presentation_slides, pagination }: PresentationSlideIndexProps) => {
 	return (
-		<IndexPageTemplate
+		<Page
 			title="PresentationSlides"
-			model="presentation_slides"
-			rows={ presentation_slides }
-			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.presentationSlides(),
-				[
-					{ label: 'New Presentation Slide', href: Routes.newPresentationSlide(), icon: NewIcon },
-				]
-			} }
 		>
-			<PresentationSlidesTable />
-		</IndexPageTemplate>
+			<IndexTableTemplate
+				model="presentation_slides"
+				rows={ presentation_slides }
+				pagination={ pagination }
+			// contextMenu={ {
+			// 	deleteRoute: Routes.presentationSlides(),
+			// 	[
+			// 		{ label: 'New Presentation Slide', href: Routes.newPresentationSlide(), icon: NewIcon },
+			// 	]
+			// } }
+			>
+				<PresentationSlidesTable />
+			</IndexTableTemplate>
+		</Page>
 	)
 }
 

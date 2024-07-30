@@ -1,8 +1,9 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Features'
+import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import UsersTable from '../Table'
+import { Page } from '@/Components'
 
 interface UserIndexProps {
 	users: Schema.UsersIndex[]
@@ -13,20 +14,23 @@ interface UserIndexProps {
 // @route: users
 const UserIndex = ({ users, pagination }: UserIndexProps) => {
 	return (
-		<IndexPageTemplate
+		<Page
 			title="Users"
-			model="users"
-			rows={ users }
-			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.users(),
-				options: [
-					{ label: 'Invite New User', href: Routes.newUser(), icon: <NewIcon /> },
-				],
-			} }
 		>
-			<UsersTable />
-		</IndexPageTemplate>
+			<IndexTableTemplate
+				model="users"
+				rows={ users }
+				pagination={ pagination }
+			// contextMenu={ {
+			// 	deleteRoute: Routes.users(),
+			// 	options: [
+			// 		{ label: 'Invite New User', href: Routes.newUser(), icon: <NewIcon /> },
+			// 	],
+			// } }
+			>
+				<UsersTable />
+			</IndexTableTemplate>
+		</Page>
 	)
 }
 
