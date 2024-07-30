@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :presentation_slides
   root "pages#home" # Public home page for entire project
 
     # CONCERNS #

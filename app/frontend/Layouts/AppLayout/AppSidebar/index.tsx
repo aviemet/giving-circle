@@ -24,9 +24,9 @@ const AppSidebar = () => {
 				</Flex>
 
 				{ /* Circle title and avatar */ }
-				<Flex>
+				{ /* <Flex>
 					<CircleDropdownLink />
-				</Flex>
+				</Flex> */ }
 			</AppShell.Section>
 
 			<Divider />

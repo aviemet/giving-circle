@@ -955,6 +955,15 @@ export const editPerson = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}},
 
 /**
  * Generates rails route to
+ * /presentation_slides/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editPresentationSlide = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"presentation_slides"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1096,6 +1105,14 @@ export const newPerson = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"
 
 /**
  * Generates rails route to
+ * /presentation_slides/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newPresentationSlide = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"presentation_slides"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1166,6 +1183,23 @@ export const people = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"peo
  * @returns {string} route path
  */
 export const person = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /presentation_slides/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const presentationSlide = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"presentation_slides"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /presentation_slides(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const presentationSlides = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"presentation_slides"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to

@@ -37,7 +37,7 @@ if Rails.env.development?
   end
 
   if theme.presentations.count == 0
-    presentation = FactoryBot.build(:presentation, theme: theme)
+    presentation = FactoryBot.build(:presentation, name: "Allocation Night", theme: theme)
     presentation.settings = {
       question: Faker::ChuckNorris.fact,
       matched_funds_multiplier: 2,

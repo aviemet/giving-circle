@@ -1,4 +1,20 @@
 const urlParams = {
+  "presentationSlides": {
+    "params": []
+  },
+  "newPresentationSlide": {
+    "params": []
+  },
+  "editPresentationSlide": {
+    "params": [
+      "id"
+    ]
+  },
+  "presentationSlide": {
+    "params": [
+      "id"
+    ]
+  },
   "root": {
     "params": []
   },

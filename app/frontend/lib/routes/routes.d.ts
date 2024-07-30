@@ -662,6 +662,18 @@ export const editPerson: ((
 
 /**
  * Generates rails route to
+ * /presentation_slides/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editPresentationSlide: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -848,6 +860,16 @@ export const newPerson: ((
 
 /**
  * Generates rails route to
+ * /presentation_slides/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newPresentationSlide: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -935,6 +957,28 @@ export const people: ((
  */
 export const person: ((
   slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /presentation_slides/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const presentationSlide: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /presentation_slides(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const presentationSlides: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

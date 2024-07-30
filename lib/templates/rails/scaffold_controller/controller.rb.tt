@@ -6,14 +6,14 @@ class <%= controller_class_name %>Controller < ApplicationController
   <% if attributes.include?(:slug) -%>
   expose :<%= singular_table_name %>, id: ->{ params[:slug] }, scope: ->{ <%= class_name %>.includes_associated }, find_by: :slug
   <% else -%>
-  expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associated.find(id) }
+expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associated.find(id) }
   <% end -%>
 
   # GET <%= route_url %>
   def index
     authorize <%= plural_table_name %>
 
-    paginated_<%= plural_table_name %> = %= plural_table_name %>.paginate(params[:page] || 1).per(current_user.limit(:items))
+    paginated_<%= plural_table_name %> = paginate(<%= plural_table_name %>, :<%= plural_table_name %>)
 
     render inertia: "<%= class_name.pluralize %>/Index", props: {
       <%= plural_table_name %>: -> { paginated_<%= plural_table_name %>.render(:index) },

@@ -16,18 +16,13 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 	const { params } = usePageProps<'circleThemePresentation'>()
 	const title = presentation.name || 'Presentation'
 
-	useInit(() => {
-		toggleSidebarOpen(false)
-	})
-
 	return (
 		<Page
 			title={ title }
 			disablePadding
 		>
 			<Section>
-				<VisualEditor />
-				{ /* <Group>
+				<Group>
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
@@ -36,7 +31,7 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Group> */ }
+				</Group>
 
 				{ /* <Link as="button" href={ Routes.activePresentationShow(params.presentation_slug) }>Start Presentation</Link> */ }
 			</Section>
