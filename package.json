@@ -61,7 +61,7 @@
     "react-use-url": "^1.0.5",
     "use-inertia-form": "^4.3.1",
     "use-react-screenshot": "^4.0.0",
-    "xstate": "^5.15.0",
+    "xstate": "^5.16.0",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
@@ -92,6 +92,7 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-better-styled-components": "^1.1.2",
     "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsonc": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-react": "^7.34.4",
     "eslint-plugin-react-hooks": "^4.6.2",

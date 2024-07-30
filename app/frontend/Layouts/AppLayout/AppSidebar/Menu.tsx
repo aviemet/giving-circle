@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Accordion } from '@/Components'
-import { usePageProps, usePrevious } from '@/lib/hooks'
+import { usePageProps } from '@/lib/hooks'
 import { useLayoutStore } from '@/Store'
 import { CircleMenu, PresentationMenu, ThemeMenu } from './menus'
 
@@ -10,21 +10,7 @@ export interface MenuProps {
 
 const Menu = () => {
 	const { menu } = usePageProps()
-	const { menuKeys, openMenus, setOpenMenus, toggleOpenMenu } = useLayoutStore()
-
-	useEffect(() => {
-		if(!menu.active_presentation && openMenus.has(menuKeys.presentation)) {
-			toggleOpenMenu(menuKeys.presentation, false)
-		}
-		if(!menu.active_theme && openMenus.has(menuKeys.theme)) {
-			toggleOpenMenu(menuKeys.theme, false)
-		}
-		if(!menu.active_circle && openMenus.has(menuKeys.circle)) {
-			toggleOpenMenu(menuKeys.circle, false)
-		}
-	}, [openMenus])
-
-	const prevMenus = usePrevious(openMenus)
+	const { menuKeys, openMenus, setOpenMenus } = useLayoutStore()
 
 	const handleAccordionChange = (menus: (keyof typeof menuKeys)[]) => {
 		setOpenMenus(menus)

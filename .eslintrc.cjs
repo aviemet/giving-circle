@@ -8,11 +8,13 @@ module.exports = {
 		'plugin:import/typescript',
 		'plugin:react-hooks/recommended',
 		'plugin:jsx-a11y/recommended',
+		'plugin:jsonc/recommended-with-jsonc',
 	],
 	plugins: [
 		'react',
 		'@typescript-eslint',
 		'import',
+		'jsonc',
 	],
 	settings: {
 		react: {
@@ -110,6 +112,13 @@ module.exports = {
 				'no-unused-vars': 'off',
 				'@typescript-eslint/member-delimiter-style': 'off',
 				'@typescript-eslint/indent': 'off',
+			},
+		},
+		{
+			'files': ['*.json', '*.jsonc'],
+			'parser': 'jsonc-eslint-parser',
+			'rules': {
+				'jsonc/indent': ['error', 2, { 'ignoredNodes': ['Property'] }],
 			},
 		},
 	],

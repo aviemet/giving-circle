@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Accordion, NavLink } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
@@ -7,7 +7,12 @@ import { isEmpty } from 'lodash'
 
 const CircleMenu = () => {
 	const { menu } = usePageProps()
-	const { menuKeys } = useLayoutStore()
+	const { menuKeys, toggleOpenMenu } = useLayoutStore()
+
+	useEffect(() => {
+		toggleOpenMenu('circle', true)
+		return () => toggleOpenMenu('circle', false)
+	}, [])
 
 	if(isEmpty(menu.active_circle)) return <></>
 
@@ -20,16 +25,16 @@ const CircleMenu = () => {
 					label="Dashboard"
 				/>
 				<NavLink
-					href={ Routes.circleThemes(menu.active_circle.slug) }
-					label="Themes"
-				/>
-				<NavLink
 					href={ Routes.circleMembers(menu.active_circle.slug) }
 					label="Members"
 				/>
 				<NavLink
 					href={ Routes.circlePresentationTemplates(menu.active_circle.slug) }
 					label="Presentation Templates"
+				/>
+				<NavLink
+					href={ Routes.circleThemes(menu.active_circle.slug) }
+					label="Themes"
 				/>
 			</Accordion.Panel>
 		</Accordion.Item>
