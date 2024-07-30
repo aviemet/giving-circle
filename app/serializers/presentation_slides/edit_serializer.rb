@@ -1,9 +1,2 @@
-class PresentationSlides::EditSerializer < PresentationSlideSerializer
-
-  attributes(
-    :slug,
-    :id,
-    :updated_at,
-    :created_at,
-  )
+class PresentationSlides::EditSerializer < PresentationSlides::PersistedSerializer
 end

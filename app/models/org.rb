@@ -38,8 +38,8 @@ class Org < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :themes_org, dependent: :destroy
-  has_many :themes, through: :themes_org
+  has_many :themes_orgs, dependent: :destroy
+  has_many :themes, through: :themes_orgs
 
   belongs_to :circle
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Title, Page, Container, Divider, Group } from '@/Components'
+import { Title, Page, Container, Divider, Group, Stack } from '@/Components'
 import { NewButton } from '@/Components/Button'
-import { CircleCard, ThemeCard } from '@/Features/Cards'
+import { CardContainer, CircleCard, ThemeCard } from '@/Features/Cards'
 import { Routes } from '@/lib'
 
 interface CircleIndexProps {
@@ -23,25 +23,28 @@ const CirclesIndex = ({ circles }: CircleIndexProps) => {
 					<NewButton href={ Routes.newCircle() } />
 				</Group>
 				<Divider />
-				<Group>
+				<CardContainer>
 					{ circles.map(circle => {
 						return (
 							<CircleCard key={ circle.id } circle={ circle } />
 						)
 					}) }
-					{ /* <NewCard href={ Routes.newCircle() } /> */ }
-				</Group>
+				</CardContainer>
+				{ /* <NewCard href={ Routes.newCircle() } /> */ }
+
 
 				<Title>Recent Themes</Title>
 				<Divider />
 				{ circles.map(circle => {
 					return (
-						<Group key={ circle.id }>
-							{ circle.themes?.map(theme => (
-								<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
-							)) }
-							<Divider />
-						</Group>
+						<Stack key={ circle.id }>
+							{ circle.themes.length > 0 && <Title order={ 2 }>{ circle.name }</Title> }
+							<CardContainer>
+								{ circle.themes?.map(theme => (
+									<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
+								)) }
+							</CardContainer>
+						</Stack>
 					)
 				}) }
 			</Container>

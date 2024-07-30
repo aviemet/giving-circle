@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Accordion, NavLink } from '@/Components'
 import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import { useInit, usePageProps } from '@/lib/hooks'
 import { useLayoutStore } from '@/Store'
 import { isEmpty } from 'lodash'
 
@@ -9,10 +9,11 @@ const CircleMenu = () => {
 	const { menu } = usePageProps()
 	const { menuKeys, toggleOpenMenu } = useLayoutStore()
 
-	useEffect(() => {
+	useInit(() => {
 		toggleOpenMenu('circle', true)
-		return () => toggleOpenMenu('circle', false)
-	}, [])
+		toggleOpenMenu('theme', false)
+		toggleOpenMenu('presentation', false)
+	})
 
 	if(isEmpty(menu.active_circle)) return <></>
 

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Grid } from '@/Components'
+import { Grid, Group } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { SlideCard } from '@/Features/Cards'
+import CardContainer from '@/Features/Cards/CardContainer'
 
 type TPresentationFormData = {
 	presentation: Schema.PresentationsFormData
@@ -26,6 +28,12 @@ const PresentationForm = ({ method = 'post', presentation, ...props }: Presentat
 
 				<Grid.Col>
 					<TextInput name="name" label="Name" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<CardContainer>
+						{ presentation.slides.map(slide => <SlideCard key={ slide.id } slide={ slide } />) }
+					</CardContainer>
 				</Grid.Col>
 
 				<Grid.Col>

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Group, Menu, Page, Section } from '@/Components'
+import { Group, Menu, Page, Section, Title } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
+import { CardContainer } from '@/Features/Cards'
+import OrgCard from '@/Features/Cards/OrgCard'
 
 interface ShowThemeProps {
 	theme: Schema.ThemesShow
@@ -17,8 +19,8 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 	return (
 		<Page
 			title={ title }
-		>
-			<Section>
+			siteTitle={ <>
+				<Title>{ title }</Title>
 				<Group>
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -29,6 +31,14 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
+			</> }
+		>
+			<Section>
+				<CardContainer>
+					{ theme.orgs.map(org => (
+						<OrgCard key={ org.id } org={ org } />
+					)) }
+				</CardContainer>
 
 			</Section>
 		</Page>

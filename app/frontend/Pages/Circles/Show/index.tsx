@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container, Group, Title, Menu, Page, Section } from '@/Components'
-import { Routes } from '@/lib'
-import StatTile from './StatTile'
 import { CoinsIcon, HelpingIcon, MembersIcon } from '@/Components/Icons'
-import { ThemeCard } from '@/Features/Cards'
+import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
+import { CardContainer, ThemeCard } from '@/Features/Cards'
+import StatTile from './StatTile'
 
 interface ShowCircleProps {
 	circle: Schema.CirclesShow
@@ -63,9 +63,11 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 					</Section>
 
 					<Title order={ 2 }>Upcoming Themes</Title>
-					{ circle.themes.map(theme => (
-						<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
-					)) }
+					<CardContainer>
+						{ circle.themes.map(theme => (
+							<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
+						)) }
+					</CardContainer>
 				</Container>
 			</Section>
 		</Page>

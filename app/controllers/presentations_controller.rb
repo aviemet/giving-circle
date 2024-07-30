@@ -35,6 +35,7 @@ class PresentationsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/new (new_circle_theme_presentation)
   def new
     authorize Presentation.new
+
     render inertia: "Presentations/New", props: {
       presentation: Presentation.new.render(:form_data)
     }
@@ -43,6 +44,7 @@ class PresentationsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (circle_theme_edit_presentation)
   def edit
     authorize presentation
+
     render inertia: "Presentations/Edit", props: {
       presentation: presentation.render(:edit)
     }
@@ -51,6 +53,7 @@ class PresentationsController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active (circle_theme_presentation_active)
   def active
     authorize presentation
+
     render inertia: "Presentations/Active", props: {
       presentation: presentation.render(:presentation)
     }

@@ -15,7 +15,7 @@ interface InitialInertiaShareProps
 	menu: {
 		active_circle: Schema.CirclesInertiaShare | undefined
 		active_theme: Schema.ThemesInertiaShare | undefined
-		active_presentation: Schema.Presentation | undefined
+		active_presentation: Schema.PresentationsInertiaShare | undefined
 		circles: Schema.CirclesInertiaShare[] | undefined
 	}
 	flash: FlashMessage

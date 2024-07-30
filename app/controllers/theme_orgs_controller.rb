@@ -1,8 +1,9 @@
 class ThemeOrgsController < ApplicationController
-  expose :orgs, -> { search(Theme.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
-  expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
-  expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
   expose :circle, -> { theme.circle }
+  expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
+
+  expose :orgs, -> { search(Theme.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
+  expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slu
 
   strong_params :org, permit: %i(name ask description)
 
