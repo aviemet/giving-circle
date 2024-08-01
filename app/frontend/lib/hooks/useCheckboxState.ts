@@ -1,28 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
 
 const useCheckboxState = (length: number, selected: number) => {
-	const [allChecked, setAllChecked] = useState(false)
-	const [indeterminate, setIndeterminate] = useState(false)
-
-	// Set the status of the table head checkbox
-	useEffect(() => {
-		if(length === 0) return
-
-		switch(selected) {
-			case length: // All checked
-				setAllChecked(true)
-				setIndeterminate(false)
-				break
-			case 0: // None checked
-				setAllChecked(false)
-				setIndeterminate(false)
-				break
-			default: // Some checked
-				if(!indeterminate) setIndeterminate(true)
+	return useMemo(() => {
+		// No elements
+		if(length === 0) {
+			return { allChecked: false, indeterminate: false }
 		}
-	}, [selected])
 
-	return { allChecked, indeterminate }
+		// All selected
+		if(selected === length) {
+			return { allChecked: true, indeterminate: false }
+		}
+
+		// Nothing selected
+		if(selected === 0) {
+			return { allChecked: false, indeterminate: false }
+		}
+
+		// Some selected
+		return { allChecked: false, indeterminate: true }
+	}, [length, selected])
 }
 
 export default useCheckboxState

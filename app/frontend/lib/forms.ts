@@ -55,6 +55,8 @@ export function useInFormContext() {
 	try {
 		useForm()
 		return true
+	// catch requires a parameter, but we will not be using it
+	// eslint-disable-next-line no-unused-vars
 	} catch(e) {
 		return false
 	}

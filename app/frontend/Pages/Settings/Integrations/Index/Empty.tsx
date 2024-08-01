@@ -6,10 +6,10 @@ import { usePageProps } from '@/lib/hooks'
 const Empty = () => {
 	const { auth: { user } } = usePageProps()
 
-	return (
-		<Text>There are no SMTP servers set up for { user.active_company.name },
-			<Link href={ Routes.newSettingsSmtp() } as="button" size="sm" p="xs">Add one now</Link>
-		</Text>
+	return (<></>
+	// <Text>There are no SMTP servers set up for { user.active_circle.name },
+	// 	<Link href={ Routes.newSettingsSmtp() } as="button" size="sm" p="xs">Add one now</Link>
+	// </Text>
 	)
 }
 

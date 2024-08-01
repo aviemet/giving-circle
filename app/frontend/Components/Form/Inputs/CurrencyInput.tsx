@@ -10,10 +10,7 @@ import { useCurrency } from '@/lib/hooks'
 interface NumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<CurrencyInputProps, InputConflicts>,
-	BaseFormInputProps<number, TForm>
-{
-
-}
+	BaseFormInputProps<number, TForm> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -82,7 +79,8 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 				error={ error }
 				wrapper={ false }
 				{ ...props }
-			/></ConditionalWrapper>
+			/>
+		</ConditionalWrapper>
 	)
 }
 

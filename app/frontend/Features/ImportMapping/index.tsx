@@ -207,7 +207,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 							<Table.Row>
 								<Table.Cell colSpan={ rows.length }>
 									<Text>
-                    There were errors in the data provided which prevented them from being saved. Please check the data and upload again.
+										There were errors in the data provided which prevented them from being saved. Please check the data and upload again.
 									</Text>
 								</Table.Cell>
 							</Table.Row>

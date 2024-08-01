@@ -80,9 +80,7 @@ export default [
 				},
 				multilineDetection: 'brackets',
 			}],
-			'@stylistic/jsx-one-expression-per-line': ['error', {
-				allow: 'single-line',
-			}],
+			'@stylistic/jsx-one-expression-per-line': 'off',
 			'@stylistic/keyword-spacing': ['error', {
 				after: true,
 				before: true,

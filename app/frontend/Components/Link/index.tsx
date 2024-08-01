@@ -11,8 +11,8 @@ export { default as NavLink } from './NavLink'
 
 export interface LinkProps
 	extends
-	Omit<AnchorProps, 'onProgress'>
-{
+	Omit<AnchorProps, 'onProgress'> {
+
 	children?: React.ReactNode
 	href: string
 	method?: Method

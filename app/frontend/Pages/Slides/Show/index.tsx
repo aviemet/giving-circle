@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Heading, Menu, Page, Section } from '@/Components'
+import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShowPresentationSlideProps {
@@ -17,9 +17,7 @@ const ShowPresentationSlide = ({ presentation_slide }: IShowPresentationSlidePro
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Group position="apart">
-					<Heading>{ title }</Heading>
-
+				<Group>
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>

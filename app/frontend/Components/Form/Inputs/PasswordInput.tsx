@@ -73,7 +73,8 @@ const FormInput = <TForm extends NestedObject>(
 				error={ error }
 				wrapper={ false }
 				{ ...props }
-			/></ConditionalWrapper>
+			/>
+		</ConditionalWrapper>
 	)
 }
 

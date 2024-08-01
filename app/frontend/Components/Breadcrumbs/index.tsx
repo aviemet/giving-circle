@@ -10,10 +10,9 @@ export type Breadcrumb = {
 	href?: string
 }
 
-export const breadcrumbLinks = (links:Breadcrumb[]) => links.map((link, i) => link.href ?
-	<Link external={ false } href={ link.href } key={ i }>{ link.title }</Link>
-	:
-	<React.Fragment key={ i }>{ link.title }</React.Fragment>,
+export const breadcrumbLinks = (links: Breadcrumb[]) => links.map((link, i) => link.href
+	? <Link external={ false } href={ link.href } key={ i }>{ link.title }</Link>
+	:	<React.Fragment key={ i }>{ link.title }</React.Fragment>
 )
 
 interface BreadcrumbsProps extends Omit<BoxProps, 'children'> {
@@ -36,21 +35,30 @@ const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: Breadcrum
 					{ crumbs.reduce<React.ReactNode[]>((acc, crumb, index, array) => {
 						const isLastCrumb = index === array.length - 1
 
-						acc.push(<li key={ crumb.title }>{ crumb.href ?
-							<Link
-								external={ false }
-								href={ crumb.href }
-								aria-current={ isLastCrumb ? 'location' : null }
-							>
-								{ crumb.title }
-							</Link>
-							:
-							<Box>{ crumb.title }</Box>
-						}{
-							!isLastCrumb && <Box className={ cx(classes.separator) } aria-hidden="true">
-								{ separator }
-							</Box>
-						}</li>)
+						acc.push(
+							<li key={ crumb.title }>
+								{
+									crumb.href
+										? (
+											<Link
+												external={ false }
+												href={ crumb.href }
+												aria-current={ isLastCrumb ? 'location' : null }
+											>
+												{ crumb.title }
+											</Link>
+										)
+										: <Box>{ crumb.title }</Box>
+								}
+								{
+									!isLastCrumb && (
+										<Box className={ cx(classes.separator) } aria-hidden="true">
+											{ separator }
+										</Box>
+									)
+								}
+							</li>
+						)
 
 						return acc
 					}, []) }

@@ -33,7 +33,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 				</Group>
 			</AppShell.Header>
 			<AppShell.Navbar p="md">
-        Navigation
+				Navigation
 				{ Array(15)
 					.fill(0)
 					.map((_, index) => (
