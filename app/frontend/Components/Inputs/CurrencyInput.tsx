@@ -7,8 +7,8 @@ import { withInjectedProps, type BaseInputProps } from '.'
 export interface CurrencyInputProps
 	extends
 	NumberInputProps,
-	BaseInputProps
-{
+	BaseInputProps {
+
 	symbol?: string|React.ReactNode
 }
 

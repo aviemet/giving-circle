@@ -5,10 +5,7 @@ import { urlParams } from '../routes'
 
 type UrlParams = typeof urlParams;
 
-interface InitialInertiaShareProps
-	extends
-	Omit<PageProps, 'errors'|'params'|'flash'>
-{
+interface InitialInertiaShareProps extends Omit<PageProps, 'errors'|'params'|'flash'> {
 	auth: {
 		user: Schema.UsersInertiaShare
 	}

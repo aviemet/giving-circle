@@ -24,8 +24,9 @@ export {
 
 export type InputConflicts = 'name'|'onChange'|'onBlur'|'onFocus'|'value'|'defaultValue'
 export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject>
-	extends UseInertiaInputProps<T>
-{
+	extends
+	UseInertiaInputProps<T> {
+
 	model?: string
 	errorKey?: string
 	field?: boolean

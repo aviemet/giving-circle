@@ -35,7 +35,7 @@ const UserHeaderMenu = () => {
 					href={ Routes.settingsGeneral() }
 					icon={ <SettingsIcon /> }
 				>
-				Preferences
+					Preferences
 				</Menu.Link>
 
 				<Divider />
@@ -44,7 +44,7 @@ const UserHeaderMenu = () => {
 					href={ Routes.destroyUserSession() }
 					icon={ <LogoutIcon /> }
 				>
-				Sign Out
+					Sign Out
 				</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>

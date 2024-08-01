@@ -26,13 +26,13 @@ const SlideCard = ({ slide }: SlideCardProps) => {
 
 						<Menu.Dropdown>
 							<Menu.Item leftSection={ <EditIcon style={ { width: rem(14), height: rem(14) } } /> }>
-							Edit Slide
+								Edit Slide
 							</Menu.Item>
 							<Menu.Item
 								leftSection={ <TrashIcon style={ { width: rem(14), height: rem(14) } } /> }
 								color="red"
 							>
-							Delete Slide
+								Delete Slide
 							</Menu.Item>
 						</Menu.Dropdown>
 					</Menu>

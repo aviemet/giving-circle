@@ -1,6 +1,6 @@
 import React from 'react'
-import { rem, Routes } from '@/lib'
-import { ActionIcon, Button, Card, Group, Image, Link, Menu, Money, Text } from '@/Components'
+import { rem } from '@/lib'
+import { ActionIcon, Card, Group, Image, Menu, Money, Text } from '@/Components'
 import { DotsIcon, EditIcon, TrashIcon } from '@/Components/Icons'
 
 interface OrgCardProps {
@@ -35,13 +35,13 @@ const OrgCard = ({ org }: OrgCardProps) => {
 
 						<Menu.Dropdown>
 							<Menu.Item leftSection={ <EditIcon style={ { width: rem(14), height: rem(14) } } /> }>
-							Edit Org
+								Edit Org
 							</Menu.Item>
 							<Menu.Item
 								leftSection={ <TrashIcon style={ { width: rem(14), height: rem(14) } } /> }
 								color="red"
 							>
-							Delete Org
+								Delete Org
 							</Menu.Item>
 						</Menu.Dropdown>
 					</Menu>

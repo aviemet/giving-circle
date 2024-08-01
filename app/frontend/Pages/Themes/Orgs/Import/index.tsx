@@ -49,6 +49,8 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 		} else {
 			toggleSidebarOpen(true)
 		}
+		// In this case, adding the extra deps causes this useEffect to malfunction
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [displayImportTable])
 
 	const handleImportData = (data: Record<string, unknown>[]) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Head } from '@inertiajs/react'
 import Breadcrumbs, { type Breadcrumb } from '@/Components/Breadcrumbs'
 import useLayoutStore from '@/Store/LayoutStore'
@@ -50,11 +50,17 @@ const Page = ({
 		}
 	})
 
+	useEffect(() => {
+		setSiteTitle(siteTitle || title)
+	}, [siteTitle, title, setSiteTitle])
+
 	return (
 		<>
-			{ title && <Head title={ title }>
-				{ meta && meta }
-			</Head> }
+			{ title && (
+				<Head title={ title }>
+					{ meta && meta }
+				</Head>
+			) }
 
 			{ breadcrumbs && <Breadcrumbs crumbs={ breadcrumbs } /> }
 

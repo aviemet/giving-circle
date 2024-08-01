@@ -40,4 +40,3 @@ const Flash = () => {
 }
 
 export default Flash
-

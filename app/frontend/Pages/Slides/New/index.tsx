@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PresentationSlideForm from '../Form'
 
@@ -19,8 +19,6 @@ const NewPresentationSlide = ({ ...data }: INewPresentationSlideProps) => {
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
-
 				<PresentationSlideForm
 					to={ Routes.presentationSlides() }
 					{ ...data }
