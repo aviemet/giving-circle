@@ -1,0 +1,152 @@
+// import react from 'eslint-plugin-react'
+import _import from 'eslint-plugin-import'
+import typescriptEslint from '@typescript-eslint/eslint-plugin'
+import jsonc from 'eslint-plugin-jsonc'
+import globals from 'globals'
+import tsParser from '@typescript-eslint/parser'
+import stylisticTs from '@stylistic/eslint-plugin-ts'
+import stylisticJsx from '@stylistic/eslint-plugin-jsx'
+import eslintPlugin from '@stylistic/eslint-plugin'
+
+export default [
+	{
+	// extends: [
+	// 	'plugin:react/recommended',
+	// 	'plugin:import/typescript',
+	// 	'plugin:react-hooks/recommended',
+	// 	'plugin:jsx-a11y/recommended',
+	// 	'plugin:jsonc/recommended-with-jsonc',
+	// ],
+		plugins: {
+			// 'eslint-plugin-react': react,
+			'eslint-plugin-import': _import,
+			'eslint-plugin-jsonc': jsonc,
+			'@stylistic/eslint-plugin': eslintPlugin,
+		},
+		// [
+		// 	'react',
+		// 	'@typescript-eslint',
+		// 	'import',
+		// 	'jsonc',
+		// ],
+		settings: {
+			react: {
+				version: 'detect',
+			},
+			'import/resolver': {
+				'typescript': {},
+			},
+			'jsx-a11y': {
+				'polymorphicPropName': 'component',
+			},
+		},
+		languageOptions: {
+			parser: tsParser,
+			// ecmaFeatures: {
+			// 	jsx: true,
+			// },
+			ecmaVersion: 'latest',
+			sourceType: 'module',
+			// requireConfigFile: false,
+			globals: {
+				...globals.browser,
+			},
+		},
+		// parser: '@typescript-eslint/parser',
+		// parserOptions: {
+		// 	ecmaFeatures: {
+		// 		jsx: true,
+		// 	},
+		// 	ecmaVersion: 'latest',
+		// 	sourceType: 'module',
+		// 	requireConfigFile: false,
+		// },
+		// ignorePatterns: ['app/javascript/**/*'],
+		ignores: ['app/javascript/**/*'],
+		rules: {
+			indent: 'off',
+			'@stylistic/jsx-indent': ['error', 'tab', {
+				SwitchCase: 1,
+				VariableDeclarator: 'first',
+				MemberExpression: 1,
+				ArrayExpression: 1,
+				ignoredNodes: ['TSTypeParameterInstantiation'],
+			}],
+			'@stylistic/member-delimiter-style': ['error', {
+				multiline: {
+					delimiter: 'none',
+				},
+				singleline: {
+					delimiter: 'comma',
+				},
+				multilineDetection: 'brackets',
+			}],
+			'linebreak-style': ['error', 'unix'],
+			quotes: ['error', 'single'],
+			semi: ['error', 'never'],
+			'no-unused-vars': ['warn', {
+				vars: 'all',
+				args: 'none',
+			}],
+			'no-prototype-builtins': [0],
+			'space-infix-ops': ['error'],
+			'no-trailing-spaces': 'error',
+			'object-curly-spacing': [2, 'always', {
+				objectsInObjects: true,
+			}],
+			'computed-property-spacing': 2,
+			'array-bracket-spacing': 0,
+			'brace-style': ['error', '1tbs', {
+				allowSingleLine: true,
+			}],
+			'@stylistic/boolean-prop-naming': ['error'],
+			'@stylistic/no-typos': ['error'],
+			'@stylistic/jsx-curly-spacing': ['error', {
+				when: 'always',
+				children: true,
+			}],
+			// 'react/jsx-space-before-closing': 2,
+			'@stylistic/jsx-tag-spacing': ['error', {
+				closingSlash: 'never',
+				beforeSelfClosing: 'always',
+				afterOpening: 'never',
+				beforeClosing: 'allow',
+			}],
+			'@stylistic/display-name': ['off'],
+			'@stylistic/prop-types': 0,
+			eqeqeq: 'error',
+			'no-console': 'warn',
+			'eol-last': ['error', 'always'],
+			'@stylistic/ts/keyword-spacing': [2, {
+				after: true,
+				before: true,
+				overrides: {
+					if: { after: false },
+					for: { after: false },
+					while: { after: false },
+					switch: { after: false },
+					catch: { after: false },
+				},
+			}],
+			'comma-dangle': ['error', 'always-multiline'],
+			'react-hooks/exhaustive-deps': 0,
+		},
+	// overrides: [
+	// 	{
+	// 		files: ['*.d.ts'],
+	// 		rules: {
+	// 			'no-unused-vars': 'off',
+	// 			'@typescript-eslint/member-delimiter-style': 'off',
+	// 			'@typescript-eslint/indent': 'off',
+	// 		},
+	// 	},
+	// 	{
+	// 		'files': ['*.json', '*.jsonc'],
+	// 		'parser': 'jsonc-eslint-parser',
+	// 		'rules': {
+	// 			'jsonc/indent': ['error', 2, { 'ignoredNodes': ['Property'] }],
+	// 		},
+	// 	},
+	// ],
+	},
+]
