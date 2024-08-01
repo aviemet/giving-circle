@@ -38,17 +38,16 @@ const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: Breadcrum
 						acc.push(
 							<li key={ crumb.title }>
 								{
-									crumb.href
-										? (
-											<Link
-												external={ false }
-												href={ crumb.href }
-												aria-current={ isLastCrumb ? 'location' : null }
-											>
-												{ crumb.title }
-											</Link>
-										)
-										: <Box>{ crumb.title }</Box>
+									crumb.href ?
+										<Link
+											external={ false }
+											href={ crumb.href }
+											aria-current={ isLastCrumb ? 'location' : null }
+										>
+											{ crumb.title }
+										</Link>
+										:
+										<Box>{ crumb.title }</Box>
 								}
 								{
 									!isLastCrumb && (

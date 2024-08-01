@@ -5,6 +5,7 @@ import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
 import jsoncPlugin from 'eslint-plugin-jsonc'
 import tsParser from '@typescript-eslint/parser'
 import jsoncParser from 'jsonc-eslint-parser'
+// import stylelint from 'eslint-plugin-stylelint'
 
 const ignores = [
 	'app/javascript/**/*',
@@ -50,6 +51,7 @@ export default [
 			'react-hooks': fixupPluginRules(reactHooksPlugin),
 			'jsx-a11y': jsxA11yPlugin,
 			'@stylistic': stylistic,
+			// stylelint: fixupPluginRules(stylelint),
 		},
 		rules: {
 			'@stylistic/indent': ['error', 'tab', {
@@ -99,6 +101,18 @@ export default [
 				exports: 'always-multiline',
 				functions: 'only-multiline',
 			}],
+			'@stylistic/multiline-ternary': ['error', 'always-multiline'],
+			'@stylistic/space-infix-ops': 'error',
+      '@stylistic/space-unary-ops': ['error', {
+        words: true,
+        nonwords: false,
+        overrides: {
+          '!': false,
+          '!!': false,
+          '+': true,
+          '-': true,
+        },
+      }],
 			'no-trailing-spaces': ['error', {
         skipBlankLines: false,
         ignoreComments: false
@@ -110,6 +124,8 @@ export default [
 			'eqeqeq': 'error',
 			'no-console': 'warn',
 			'eol-last': ['error', 'always'],
+			// 'stylelint/no-invalid': 'error',
+			// ...stylelint.rules,
 			...reactHooksPlugin.configs.recommended.rules,
 		},
 	},

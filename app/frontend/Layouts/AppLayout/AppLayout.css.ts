@@ -32,8 +32,8 @@ export const navMenu = css`
   .mantine-Accordion-content {
     padding: 0;
 
-    .mantine-NavLink-root .mantine-NavLink-body {
-      padding-left: 0.8rem;
-    }
+  .mantine-NavLink-root .mantine-NavLink-body {
+    padding-left: 0.8rem;
+  }
   }
 `
