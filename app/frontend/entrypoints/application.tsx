@@ -2,9 +2,16 @@ import React from 'react'
 import { createInertiaApp, router } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 
-import { PublicLayout, AppLayout, AuthLayout, PresentationLayout } from '../Layouts'
+import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from '../Layouts'
 import { propsMiddleware } from './middleware'
 import { runAxe } from './middleware/axe'
+
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(localizedFormat)
+
+const SITE_TITLE = 'Giving Circle'
 
 type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
@@ -14,29 +21,34 @@ const pages = import.meta.glob<PagesObject>('../Pages/**/index.tsx')
 
 document.addEventListener('DOMContentLoaded', () => {
 	createInertiaApp({
-		title: title => `Giving Circle - ${title}`,
+		title: title => `${SITE_TITLE} - ${title}`,
 
 		resolve: async name => {
-			let checkedName = name
-			let layout
+			let Layout
 
+			/**
+				* Inertia doesn't provide a good way to specify Layout templates,
+				* so inferring from the render path is the best option we have at the moment
+				*/
 			switch(name.substring(0, name.indexOf('/'))) {
 				case 'Public':
-					layout = PublicLayout
+					Layout = PublicLayout
 					break
 				case 'Auth':
-					layout = AuthLayout
+					Layout = AuthLayout
 					break
 				case 'Present':
-					layout = PresentationLayout
+					Layout = PresentationLayout
 					break
 				default:
-					layout = AppLayout
+					Layout = AppLayout
 			}
 
-			const page = (await pages[`../Pages/${checkedName}/index.tsx`]()).default
+			const page = (await pages[`../Pages/${name}/index.tsx`]()).default
 
-			if(page.layout === undefined) page.layout = layout
+			if(page.layout === undefined) page.layout = (page) => <LayoutWrapper>
+				<Layout children={ page } />
+			</LayoutWrapper>
 
 			return page
 		},
@@ -49,9 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			root.render(<App { ...props } />)
 
+			// Adds accessibility errors to console
 			router.on('success', event => {
 				event.detail.page.props = propsMiddleware(event.detail.page.props)
-				// runAxe(root)
+				runAxe(root)
 			})
 		},
 	})

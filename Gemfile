@@ -35,6 +35,7 @@ gem "overmind", "~> 2.5"
 gem "amazing_print", "~> 1.4"
 gem "delayed_job_active_record", "~> 4.1"
 gem "activerecord-import", "~> 1.7"
+gem "thor", "~> 1.3"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
@@ -82,6 +83,9 @@ group :development do
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
+  gem "brakeman", "~> 6.1", require: false
+
+  gem "letter_opener", "~> 1.10"
 end
 
 group :test do
@@ -95,4 +99,5 @@ group :test do
   gem "bullet", "~> 7.0"
   gem "simplecov", "~> 0.22.0"
   gem "pundit-matchers", "~> 3.1"
+
 end
