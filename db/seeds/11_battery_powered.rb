@@ -85,6 +85,17 @@ if Rails.env.development?
       name: "Results",
       content: "<div>{{Results}}</div>",
     })
+  end
 
+  if presentation.votes.count == 0
+    presentation.votes << PresentationVote.create({
+      name: "Round 1",
+      type: "chit",
+    })
+
+    presentation.votes << PresentationVote.create({
+      name: "Round 2",
+      type: "value",
+    })
   end
 end

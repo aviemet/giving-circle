@@ -1,3 +1,2 @@
 class <%= model_name.pluralize.camelize %>::FormDataSerializer < <%= model_name.camelize %>Serializer
-  attributes
 end

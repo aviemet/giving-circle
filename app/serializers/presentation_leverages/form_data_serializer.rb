@@ -1,0 +1,2 @@
+class PresentationLeverages::FormDataSerializer < PresentationLeverageSerializer
+end

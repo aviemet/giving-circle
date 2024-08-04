@@ -1,20 +1,4 @@
 const urlParams = {
-  "presentationSlides": {
-    "params": []
-  },
-  "newPresentationSlide": {
-    "params": []
-  },
-  "editPresentationSlide": {
-    "params": [
-      "id"
-    ]
-  },
-  "presentationSlide": {
-    "params": [
-      "id"
-    ]
-  },
   "root": {
     "params": []
   },
@@ -315,6 +299,96 @@ const urlParams = {
       "circle_slug",
       "theme_slug",
       "presentation_slug"
+    ]
+  },
+  "circleThemePresentationSlides": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newCircleThemePresentationSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editCircleThemePresentationSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "circleThemePresentationSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "circleThemePresentationVotes": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newCircleThemePresentationVote": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editCircleThemePresentationVote": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "circleThemePresentationVote": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "circleThemePresentationLeverages": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newCircleThemePresentationLeverage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editCircleThemePresentationLeverage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "circleThemePresentationLeverage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
     ]
   },
   "circleThemePresentations": {

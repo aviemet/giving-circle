@@ -4,7 +4,7 @@ class PresentationSlidesController < ApplicationController
   expose :presentation_slides, -> { search(PresentationSlide.includes_associated, sortable_fields) }
   expose :presentation_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /presentation_slides
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides (circle_theme_presentation_slides)
   def index
     authorize presentation_slides
 
@@ -19,7 +19,7 @@ class PresentationSlidesController < ApplicationController
     }
   end
 
-  # GET /presentation_slides/:id
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id (circle_theme_presentation_slide)
   def show
     authorize presentation_slide
     render inertia: "PresentationSlides/Show", props: {
@@ -27,7 +27,7 @@ class PresentationSlidesController < ApplicationController
     }
   end
 
-  # GET /presentation_slides/new
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/new (new_circle_theme_presentation_slide)
   def new
     authorize PresentationSlide.new
     render inertia: "PresentationSlides/New", props: {
@@ -35,7 +35,7 @@ class PresentationSlidesController < ApplicationController
     }
   end
 
-  # GET /presentation_slides/:id/edit
+  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id/edit (edit_circle_theme_presentation_slide)
   def edit
     authorize presentation_slide
     render inertia: "PresentationSlides/Edit", props: {
@@ -43,7 +43,7 @@ class PresentationSlidesController < ApplicationController
     }
   end
 
-  # POST /presentation_slides
+  # @route POST /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides (circle_theme_presentation_slides)
   def create
     authorize PresentationSlide.new
     if presentation_slide.save
@@ -53,7 +53,8 @@ class PresentationSlidesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /presentation_slides/:id
+  # @route PATCH /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id (circle_theme_presentation_slide)
+  # @route PUT /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id (circle_theme_presentation_slide)
   def update
     authorize presentation_slide
     if presentation_slide.update(presentation_slide_params)
@@ -63,7 +64,7 @@ class PresentationSlidesController < ApplicationController
     end
   end
 
-  # DELETE /presentation_slides/:id
+  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id (circle_theme_presentation_slide)
   def destroy
     authorize presentation_slide
     presentation_slide.destroy!

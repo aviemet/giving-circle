@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../tsx"
+# require_relative "../../tsx"
 require "rails/generators/resource_helpers"
 
 module Tsx

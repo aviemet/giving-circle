@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -135,6 +135,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "presentation_leverages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "presentation_slides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "content"
@@ -158,6 +165,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_213559) do
     t.datetime "updated_at", null: false
     t.index ["circle_id"], name: "index_presentation_templates_on_circle_id"
     t.index ["slug"], name: "index_presentation_templates_on_slug", unique: true
+  end
+
+  create_table "presentation_votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

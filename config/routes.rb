@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :presentation_slides
   root "pages#home" # Public home page for entire project
 
     # CONCERNS #
@@ -110,6 +109,10 @@ Rails.application.routes.draw do
       delete 'presentations/:presentation_slug', to: 'presentations#destroy'
       resources :presentations, param: :slug, only: [:new, :index, :create] do
         get :active
+
+        resources :presentation_slides, as: :slides
+        resources :presentation_votes, as: :votes
+        resources :presentation_leverages, as: :leverages
       end
     end
   end

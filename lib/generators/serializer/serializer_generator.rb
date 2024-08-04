@@ -54,7 +54,7 @@ class SerializerGenerator < Rails::Generators::NamedBase
   def generate_named_serializers
     return if options[:base_only]
 
-    views = [:edit, :form_data, :index, :show]
+    views = %i(edit form_data index show)
 
     if options[:only].present?
       views.select! { |view| options[:only].include?(view.to_s) }
@@ -62,9 +62,13 @@ class SerializerGenerator < Rails::Generators::NamedBase
       views.reject! { |view| options[:except].include?(view.to_s) }
     end
 
-    views.each do |view|
-      template "#{view}_serializer.rb.tt", "app/serializers/#{model_name.pluralize}/#{view}_serializer.rb"
-    end
+    views.push :persisted
+
+    views.each { |view| generate_named_serializer(view) }
+  end
+
+  def generate_named_serializer(name)
+    template "#{name}_serializer.rb.tt", "app/serializers/#{model_name.pluralize}/#{name}_serializer.rb"
   end
 
 end

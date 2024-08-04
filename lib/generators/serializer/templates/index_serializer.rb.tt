@@ -1,8 +1,2 @@
-class <%= model_name.pluralize.camelize %>::IndexSerializer < <%= model_name.camelize %>Serializer
-  attributes(<% if model_attributes.include?("slug") %>
-    :slug,<% end %>
-    :id,
-    :updated_at,
-    :created_at,
-  )
+class <%= model_name.pluralize.camelize %>::IndexSerializer < <%= model_name.pluralize.camelize %>::PersistedSerializer
 end
