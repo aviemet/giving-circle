@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShow<%= singular_table_name.camelize %>Props {
+interface Show<%= singular_table_name.camelize %>Props {
 	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>Show
 }
 
-const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: IShow<%= singular_table_name.camelize %>Props) => {
+const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: Show<%= singular_table_name.camelize %>Props) => {
 	const title = <%= attributes.include?(:name) ? "#{singular_table_name}.name || " : "" %> '<%= singular_table_name.camelize %>'
 
 	return (
