@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :leverages
+  resources :votes
   root "pages#home" # Public home page for entire project
 
     # CONCERNS #

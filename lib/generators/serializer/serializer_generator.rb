@@ -5,11 +5,13 @@ require 'rails/generators/named_base'
 
 class SerializerGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("templates", __dir__)
+
   argument :args, type: :array, default: [], banner: 'model_name attribute attribute attribute ...'
 
   class_option :base_only, type: :boolean, default: false, desc: "Only generate the base serializer"
   class_option :only, type: :array, default: [], desc: "Generate only the actions specified"
   class_option :except, type: :array, default: [], desc: "Don't generate the actions specified"
+  class_option :skip_ts, type: :boolean, default: true, desc: "Skip generating ts files. Generation will fail unless migrations have been run. Setting to false will run migrations before generating types"
 
   def create_serializer
     validate_options
@@ -18,8 +20,13 @@ class SerializerGenerator < Rails::Generators::NamedBase
 
     generate_named_serializers
 
-    system("rails types:generate")
+    unless options[:skip_ts]
+      system("rails db:migrate")
+      system("rails types:generate")
+    end
   end
+
+  private
 
   def validate_options
     return unless options[:only].present? && options[:except].present?
@@ -32,7 +39,7 @@ class SerializerGenerator < Rails::Generators::NamedBase
   end
 
   def ar_model
-    model_name.camelize.constantize
+    model_exists? ? model_name.camelize.constantize : nil
   rescue NameError
     nil
   end
@@ -48,8 +55,6 @@ class SerializerGenerator < Rails::Generators::NamedBase
 
     []
   end
-
-  private
 
   def generate_named_serializers
     return if options[:base_only]
@@ -71,4 +76,7 @@ class SerializerGenerator < Rails::Generators::NamedBase
     template "#{name}_serializer.rb.tt", "app/serializers/#{model_name.pluralize}/#{name}_serializer.rb"
   end
 
+  def model_exists?
+    File.exist?(Rails.root.join('app', 'models', "#{model_name}.rb"))
+  end
 end
