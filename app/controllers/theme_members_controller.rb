@@ -7,6 +7,8 @@ class ThemeMembersController < ApplicationController
 
   strong_params :member, permit: [:first_name, :last_name, :number]
 
+  sortable_fields %w(first_name last_name number)
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/members (circle_theme_members)
   # @route GET /circles/:circle_slug/themes/:theme_slug/members (circle_theme_member_index)
   def index
@@ -84,11 +86,5 @@ class ThemeMembersController < ApplicationController
     else
       redirect_to [:admin, edit_member_path], inertia: { errors: member.errors }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(first_name last_name number).freeze
   end
 end

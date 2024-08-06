@@ -3,13 +3,13 @@ import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PresentationLeveragesForm from '../Form'
 
-interface IEditPresentationLeverageProps {
+interface EditPresentationLeverageProps {
 	presentation_leverage: Schema.PresentationLeveragesEdit
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages/:id/edit
 // @route: editCircleThemePresentationLeverage
-const EditPresentationLeverage = ({ presentation_leverage }: IEditPresentationLeverageProps) => {
+const EditPresentationLeverage = ({ presentation_leverage }: EditPresentationLeverageProps) => {
 	const title = 'Edit Presentation Leverage'
 
 	return (

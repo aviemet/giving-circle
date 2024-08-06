@@ -6,6 +6,8 @@ class PresentationTemplatesController < ApplicationController
 
   strong_params :template, permit: [:name]
 
+  sortable_fields %w(name)
+
   # @route GET /circles/:circle_slug/presentation_templates (circle_presentation_templates)
   def index
     authorize templates
@@ -83,11 +85,5 @@ class PresentationTemplatesController < ApplicationController
 
     template.destroy!
     redirect_to templates_url, notice: "Template was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name).freeze
   end
 end

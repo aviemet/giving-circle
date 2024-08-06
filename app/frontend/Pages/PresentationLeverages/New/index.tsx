@@ -3,13 +3,13 @@ import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import PresentationLeverageForm from '../Form'
 
-interface INewPresentationLeverageProps {
+interface NewPresentationLeverageProps {
 	presentation_leverage: Schema.PresentationLeveragesFormData
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages/new
 // @route: newCircleThemePresentationLeverage
-const NewPresentationLeverage = ({ ...data }: INewPresentationLeverageProps) => {
+const NewPresentationLeverage = ({ ...data }: NewPresentationLeverageProps) => {
 	const title = 'New Presentation Leverage'
 
 	return (

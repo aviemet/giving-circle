@@ -1,8 +1,6 @@
 class OrgsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:about]
 
-  # sortable_fields %w(name slug description themes_org.ask)
-
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :orgs, -> { search(
@@ -12,6 +10,8 @@ class OrgsController < ApplicationController
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
   strong_params :org, permit: [:name, :slug, :description]
+
+  sortable_fields %w(name slug description themes_org.ask)
 
   # @route GET /circles/:circle_slug/orgs (circle_orgs)
   def index
@@ -102,11 +102,5 @@ class OrgsController < ApplicationController
 
     org.destroy
     redirect_to [:admin, orgs_url], notice: "Org was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name slug description).freeze
   end
 end

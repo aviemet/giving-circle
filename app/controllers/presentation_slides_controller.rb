@@ -4,6 +4,10 @@ class PresentationSlidesController < ApplicationController
   expose :presentation_slides, -> { search(PresentationSlide.includes_associated, sortable_fields) }
   expose :presentation_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  strong_params :presentation_slide
+
+  sortable_fields %w()
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides (circle_theme_presentation_slides)
   def index
     authorize presentation_slides
@@ -69,15 +73,5 @@ class PresentationSlidesController < ApplicationController
     authorize presentation_slide
     presentation_slide.destroy!
     redirect_to presentation_slides_url, notice: "Presentation slide was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w().freeze
-  end
-
-  def presentation_slide_params
-    params.fetch(:presentation_slide, {})
   end
 end

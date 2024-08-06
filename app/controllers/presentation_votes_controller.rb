@@ -3,7 +3,11 @@ class PresentationVotesController < ApplicationController
 
   expose :presentation_votes, -> { search(PresentationVote.includes_associated, sortable_fields) }
   expose :presentation_vote, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+
+  strong_params :presentation_vote, [:name, :type]
+
+  sortable_fields %w(name type)
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes (circle_theme_presentation_votes)
   def index
     authorize presentation_votes
@@ -69,15 +73,5 @@ class PresentationVotesController < ApplicationController
     authorize presentation_vote
     presentation_vote.destroy!
     redirect_to presentation_votes_url, notice: "Presentation vote was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name type).freeze
-  end
-
-  def presentation_vote_params
-    params.require(:presentation_vote).permit(:name, :type)
   end
 end

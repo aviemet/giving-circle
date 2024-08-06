@@ -4,6 +4,8 @@ class PresentationElementsController < ApplicationController
 
   strong_params :element, permit: [:title, :data, :element]
 
+  sortable_fields %w(title data element)
+
   # GET /elements
   def index
     authorize elements
@@ -68,11 +70,5 @@ class PresentationElementsController < ApplicationController
     authorize element
     element.destroy!
     redirect_to elements_url, notice: "Presentation element was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(title data element).freeze
   end
 end

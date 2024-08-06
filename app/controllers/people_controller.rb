@@ -4,6 +4,8 @@ class PeopleController < ApplicationController
 
   strong_params :person, permit: [:first_name, :last_name, :middle_name, :active]
 
+  sortable_fields %w(first_name last_name middle_name active)
+
   # @route GET /people (people)
   def index
     authorize people
@@ -74,11 +76,5 @@ class PeopleController < ApplicationController
     authorize person
     person.destroy!
     redirect_to people_url, notice: "Person was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(first_name last_name middle_name active).freeze
   end
 end

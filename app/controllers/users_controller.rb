@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   expose :users, -> { search(User.all.includes_associated, sortable_fields) }
   expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
+  strong_params :user, permit: [:email, :password, :active, :first_name, :last_name, :number]
+
+  sortable_fields %w(email active first_name last_name number)
+
   # @route GET /users (users)
   def index
     authorize users
@@ -61,15 +65,5 @@ class UsersController < ApplicationController
     respond_to do
       redirect_to users_url, notice: 'User was successfully destroyed.'
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(email active first_name last_name number).freeze
-  end
-
-  def user_params
-    params.require(:user).permit(:email, :password, :active, :first_name, :last_name, :number)
   end
 end

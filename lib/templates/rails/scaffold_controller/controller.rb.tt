@@ -9,7 +9,8 @@ class <%= controller_class_name %>Controller < ApplicationController
 expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associated.find(id) }
   <% end -%>
 
-  # GET <%= route_url %>
+  strong_params :<%= singular_table_name %>, <%= permitted_params %>
+
   def index
     authorize <%= plural_table_name %>
 
@@ -24,7 +25,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     }
   end
 
-  # GET <%= route_url %>/:id
   def show
     authorize <%= singular_table_name %>
     render inertia: "<%= class_name.pluralize %>/Show", props: {
@@ -32,7 +32,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     }
   end
 
-  # GET <%= route_url %>/new
   def new
     authorize <%= orm_class.build(class_name) %>
     render inertia: "<%= class_name.pluralize %>/New", props: {
@@ -40,7 +39,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     }
   end
 
-  # GET <%= route_url %>/:id/edit
   def edit
     authorize <%= singular_table_name %>
     render inertia: "<%= class_name.pluralize %>/Edit", props: {
@@ -48,7 +46,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     }
   end
 
-  # POST <%= route_url %>
   def create
     authorize <%= orm_class.build(class_name) %>
     if <%= orm_instance.save %>
@@ -58,7 +55,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     end
   end
 
-  # PATCH/PUT <%= route_url %>/:id
   def update
     authorize <%= singular_table_name %>
     if <%= orm_instance.update("#{singular_table_name}_params") %>
@@ -68,7 +64,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     end
   end
 
-  # DELETE <%= route_url %>/:id
   def destroy
     authorize <%= singular_table_name %>
     <%= orm_instance.destroy %>
@@ -81,12 +76,5 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     %w(<%= permitted_params.gsub(/[:,]/, '') %>).freeze
   end
 
-  def <%= "#{singular_table_name}_params" %>
-    <%- if attributes_names.empty? -%>
-    params.fetch(:<%= singular_table_name %>, {})
-    <%- else -%>
-    params.require(:<%= singular_table_name %>).permit(<%= permitted_params %>)
-    <%- end -%>
-  end
 end
 <% end -%>

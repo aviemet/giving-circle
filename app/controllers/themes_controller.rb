@@ -6,6 +6,10 @@ class ThemesController < ApplicationController
   expose :themes, -> { search(circle.themes.includes_associated, sortable_fields) }
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
+  strong_params :theme, permit: [:title, :quarter, :slug]
+
+  sortable_fields %w(title quarter slug)
+
   # @route GET /circles/:circle_slug/themes (circle_themes)
   def index
     authorize themes
@@ -90,15 +94,5 @@ class ThemesController < ApplicationController
     authorize theme
     theme.destroy
     redirect_to circle_themes_url(circle.slug), notice: "Theme was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(title quarter slug).freeze
-  end
-
-  def theme_params
-    params.require(:theme).permit(:title, :quarter, :slug)
   end
 end

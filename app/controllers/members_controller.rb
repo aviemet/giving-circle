@@ -8,6 +8,8 @@ class MembersController < ApplicationController
 
   strong_params :member, permit: [:first_name, :last_name, :number]
 
+  sortable_fields %w(first_name last_name number)
+
   # @route GET /circles/:circle_slug/members (circle_members)
   def index
     authorize members
@@ -84,11 +86,5 @@ class MembersController < ApplicationController
 
     member.destroy
     redirect_to [:admin, members_url], notice: "Member was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(first_name last_name number).freeze
   end
 end

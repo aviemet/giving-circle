@@ -2,13 +2,13 @@ import React from 'react'
 import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowPresentationLeverageProps {
+interface ShowPresentationLeverageProps {
 	presentation_leverage: Schema.PresentationLeveragesShow
 }
 
 // @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages/:id
 // @route: circleThemePresentationLeverage
-const ShowPresentationLeverage = ({ presentation_leverage }: IShowPresentationLeverageProps) => {
+const ShowPresentationLeverage = ({ presentation_leverage }: ShowPresentationLeverageProps) => {
 	const title =  'PresentationLeverage'
 
 	return (

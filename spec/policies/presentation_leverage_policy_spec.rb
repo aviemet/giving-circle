@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe VotePolicy, type: :policy do
+RSpec.describe PresentationLeveragePolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }

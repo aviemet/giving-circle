@@ -6,6 +6,8 @@ class PresentationsController < ApplicationController
 
   strong_params :presentation, permit: [:name, :theme_id]
 
+  sortable_fields %w(theme_id name)
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
   def index
     authorize presentations
@@ -85,15 +87,5 @@ class PresentationsController < ApplicationController
     authorize presentation
     presentation.destroy!
     redirect_to presentations_url, notice: "Presentation was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(theme_id name).freeze
-  end
-
-  def presentation_params
-    params.require(:presentation).permit(:theme_id, :name)
   end
 end

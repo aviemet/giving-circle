@@ -4,6 +4,8 @@ class TemplateSlidesController < ApplicationController
 
   strong_params :template_slide, permit: [:title, :content, :template_id, :order]
 
+  sortable_fields %w(title content template_id order)
+
   # GET /template_slides
   def index
     authorize template_slides
@@ -68,11 +70,5 @@ class TemplateSlidesController < ApplicationController
     authorize template_slide
     template_slide.destroy!
     redirect_to template_slides_url, notice: "Template slide was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(title content template_id order).freeze
   end
 end

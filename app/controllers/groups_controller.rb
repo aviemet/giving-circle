@@ -4,7 +4,9 @@ class GroupsController < ApplicationController
   expose :groups, -> { search(circle.groups.includes_associated, sortable_fields) }
   expose :group, id: -> { params[:slug] }, scope: -> { Group.includes_associated }, find_by: :slug
 
-  strong_params :group, permit: :name
+  strong_params :group, permit: [:name]
+
+  sortable_fields %w(name)
 
   # @route GET /circles/:circle_slug/groups (circle_groups)
   def index
@@ -83,11 +85,5 @@ class GroupsController < ApplicationController
 
     group.destroy!
     redirect_to groups_url, notice: "Group was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name).freeze
   end
 end

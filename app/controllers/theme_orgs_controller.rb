@@ -13,6 +13,8 @@ class ThemeOrgsController < ApplicationController
     end
   end
 
+  sortable_fields %w(name slug description)
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
   def index
     authorize orgs
@@ -118,10 +120,6 @@ class ThemeOrgsController < ApplicationController
     else
       redirect_to circle_theme_orgs_import_path(circle.slug, theme.slug), inertia: { errors: '' }
     end
-  end
-
-  def sortable_fields
-    %w(name slug description).freeze
   end
 
 end

@@ -9,10 +9,18 @@ module StrongParams
 
       define_method param_method_name do
         if block_given?
-          params.require(name).instance_exec(&block)
-        elsif options[:permit].present?
-          params.require(name).permit(Array(options[:permit]))
+          return params.require(name).instance_exec(&block)
         end
+
+        if options[:permit!].present?
+          return params.require(name).permit!
+        end
+
+        if options[:permit].blank?
+          return params.fetch(name, {})
+        end
+
+        params.require(name).permit(Array(options[:permit]))
       end
     end
 

@@ -3,7 +3,11 @@ class PresentationLeveragesController < ApplicationController
 
   expose :presentation_leverages, -> { search(PresentationLeverage.includes_associated, sortable_fields) }
   expose :presentation_leverage, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+
+  strong_params :leverage, permit: [:name, :type]
+
+  sorable_fields %w(name type)
+
   # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages (circle_theme_presentation_leverages)
   def index
     authorize presentation_leverages
@@ -71,13 +75,4 @@ class PresentationLeveragesController < ApplicationController
     redirect_to presentation_leverages_url, notice: "Presentation leverage was successfully destroyed."
   end
 
-  private
-
-  def sortable_fields
-    %w(name type).freeze
-  end
-
-  def presentation_leverage_params
-    params.require(:presentation_leverage).permit(:name, :type)
-  end
 end
