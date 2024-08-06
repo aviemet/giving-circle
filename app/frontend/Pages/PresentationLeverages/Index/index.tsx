@@ -3,6 +3,8 @@ import { Routes } from '@/lib'
 import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import PresentationLeveragesTable from '../Table'
+import { Menu, Page, Title } from '@/Components'
+import { usePageProps } from '@/lib/hooks'
 
 interface PresentationLeverageIndexProps {
 	presentation_leverages: Schema.PresentationLeveragesIndex[]
@@ -12,21 +14,29 @@ interface PresentationLeverageIndexProps {
 // @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages
 // @route: circleThemePresentationLeverages
 const PresentationLeveragesIndex = ({ presentation_leverages, pagination }: PresentationLeverageIndexProps) => {
+	const { params } = usePageProps<'circleThemePresentationLeverages'>()
+	const title = "Leverages"
+
 	return (
-		<IndexTableTemplate
-			title="PresentationLeverages"
-			model="presentation_leverages"
-			rows={ presentation_leverages }
-			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.presentationLeverages(),
-				[
-					{ label: 'New Presentation Leverage', href: Routes.newPresentationLeverage(), icon: NewIcon },
-				]
-			} }
+		<Page
+			title={ title }
+			siteTitle={ <>
+				<Title>{ title }</Title>
+				<Menu>
+					<Menu.Link href={ Routes.newCircleThemePresentationLeverage(params.circle_slug, params.theme_slug, params.presentation_slug) } icon={ <NewIcon /> }>
+						New Leverage
+					</Menu.Link>
+				</Menu>
+			</> }
 		>
-			<PresentationLeveragesTable />
-		</IndexTableTemplate>
+			<IndexTableTemplate
+				model="presentation_leverages"
+				rows={ presentation_leverages }
+				pagination={ pagination }
+			>
+				<PresentationLeveragesTable />
+			</IndexTableTemplate>
+		</Page>
 	)
 }
 

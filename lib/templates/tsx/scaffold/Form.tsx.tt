@@ -30,7 +30,7 @@ const <%= singular_table_name.camelize %>Form = ({ method = 'post', <%= singular
 				<Grid.Col>
 					<Submit>{ <%= singular_table_name %>.id ? 'Update' : 'Create' } <%= singular_table_name.camelize %></Submit>
 				</Grid.Col>
-			</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

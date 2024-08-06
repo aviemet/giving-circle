@@ -11,8 +11,5 @@
 class PresentationVoteSerializer < ApplicationSerializer
   object_as :presentation_vote
 
-  
-
-  attributes(
-  )
+  attributes
 end
