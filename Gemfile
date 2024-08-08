@@ -54,7 +54,8 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "rspec-rails", "~> 6.0.1"
   gem "factory_bot_rails", ">=6.2"
-  gem "pry-rails", "~> 0.3.9"
+  # gem "pry-rails", "~> 0.3.9"
+  gem "pry", "~> 0.14.2"
   gem 'faker'
 
   # Linting

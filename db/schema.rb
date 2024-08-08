@@ -191,6 +191,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
   create_table "presentations_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "presentation_id", null: false
     t.uuid "member_id", null: false
+    t.integer "funds_cents"
+    t.string "funds_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_presentations_members_on_member_id"
@@ -231,6 +233,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
   create_table "themes_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "theme_id", null: false
     t.uuid "member_id", null: false
+    t.integer "funds_cents"
+    t.string "funds_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_themes_members_on_member_id"
