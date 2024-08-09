@@ -21,8 +21,18 @@
 #  fk_rails_...  (theme_id => themes.id)
 #
 class ThemesMember < ApplicationRecord
+  after_initialize :set_funds
+
   belongs_to :theme
   belongs_to :member
 
+  monetize :funds_cents
+
   scope :includes_associated, -> { includes([:theme, :member]) }
+
+  private
+
+  def set_funds
+    self.funds ||= self.member.funds
+  end
 end
