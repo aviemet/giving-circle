@@ -3,8 +3,6 @@
 # Table name: presentations_members
 #
 #  id              :uuid             not null, primary key
-#  funds_cents     :integer
-#  funds_currency  :string           default("USD"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  member_id       :uuid             not null
