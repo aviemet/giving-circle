@@ -1,7 +1,5 @@
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
-  include Searchable
-
   expose :<%= plural_table_name %>, -> { search(<%= class_name %>.includes_associated, sortable_fields) }
   <% if attributes.include?(:slug) -%>
   expose :<%= singular_table_name %>, id: ->{ params[:slug] }, scope: ->{ <%= class_name %>.includes_associated }, find_by: :slug
