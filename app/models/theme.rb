@@ -47,10 +47,7 @@ class Theme < ApplicationRecord
   has_many :presentations, dependent: :destroy
 
   has_many :themes_orgs, dependent: :destroy
-  has_many :orgs, -> { select('orgs.*, themes_orgs.*').joins(:themes_orgs) }, through: :themes_orgs
-
-  has_many :themes_members, dependent: :destroy
-  has_many :members, through: :themes_members
+  has_many :orgs, through: :themes_orgs
 
   scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
 end

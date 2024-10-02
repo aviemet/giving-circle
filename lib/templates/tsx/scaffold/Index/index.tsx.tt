@@ -1,7 +1,9 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexTableTemplate } from '@/Features'
+import { usePageProps } from '@/lib/hooks'
+import { Menu, Page, Title } from '@/Components'
 import { NewIcon } from '@/Components/Icons'
+import { IndexTableTemplate } from '@/Features'
 import <%= plural_table_name.camelize %>Table from '../Table'
 
 interface <%= singular_table_name.camelize %>IndexProps {
@@ -10,7 +12,22 @@ interface <%= singular_table_name.camelize %>IndexProps {
 }
 
 const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagination }: <%= singular_table_name.camelize %>IndexProps) => {
+	// copy @route above into the generic type assertion below
+	const { params } = usePageProps<''>()
+	const title = <%= human_name.titleize %>
+
 	return (
+		<Page
+			title={ title }
+			siteTitle={ <>
+				<Title>{ title }</Title>
+				<Menu>
+					<Menu.Link href={ Routes.new<%= singular_table_name.camelize %>() } icon={ <NewIcon /> }>
+						New <%= human_name.titleize %>
+					</Menu.Link>
+				</Menu>
+			</> }
+		>
 		<IndexTableTemplate
 			title="<%= plural_table_name.camelize %>"
 			model="<%= plural_table_name %>"
@@ -25,6 +42,7 @@ const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagi
 		>
 			<<%= plural_table_name.camelize %>Table />
 		</IndexTableTemplate>
+		</Page>
 	)
 }
 

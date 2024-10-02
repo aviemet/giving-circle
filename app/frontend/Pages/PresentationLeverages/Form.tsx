@@ -10,7 +10,7 @@ type PresentationLeverageFormData = {
 export interface PresentationLeverageFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PresentationLeverageFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PresentationLeverageFormData>) => boolean | void
 	presentation_leverage: Schema.PresentationLeveragesFormData
 }
 
@@ -23,7 +23,7 @@ const PresentationLeverageForm = ({ method = 'post', presentation_leverage, ...p
 			{ ...props }
 		>
 			<Grid>
-			
+
 				<Grid.Col>
 					<TextInput name="name" label="Name" />
 				</Grid.Col>
@@ -33,7 +33,7 @@ const PresentationLeverageForm = ({ method = 'post', presentation_leverage, ...p
 				<Grid.Col>
 					<Submit>{ presentation_leverage.id ? 'Update' : 'Create' } PresentationLeverage</Submit>
 				</Grid.Col>
-			</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

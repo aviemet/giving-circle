@@ -38,6 +38,8 @@ class Person < ApplicationRecord
 
   resourcify
 
+  monetize :funds_cents
+
   has_one :user, dependent: :nullify
 
   validates :first_name, presence: true

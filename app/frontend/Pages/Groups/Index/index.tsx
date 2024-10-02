@@ -4,7 +4,7 @@ import { IndexTableTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import GroupsTable from '../Table'
 import { usePageProps } from '@/lib/hooks'
-import { Page } from '@/Components'
+import { Menu, Page, Title } from '@/Components'
 
 interface GroupIndexProps {
 	groups: Schema.GroupsIndex[]
@@ -16,16 +16,19 @@ interface GroupIndexProps {
 // @route: circleGroups
 const GroupsIndex = ({ groups, pagination, circle }: GroupIndexProps) => {
 	const { params } = usePageProps<'circleGroups'>()
+	const title = "Groups"
 
 	return (
 		<Page
-			title="Groups"
-			// contextMenu={ {
-			// 	deleteRoute:  Routes.groups(),
-			// 	options: [
-			// 		{ label: 'New Group', href: Routes.newCircleGroup(params.circle_slug), icon: <NewIcon /> },
-			// 	],
-			// } }
+			title={ title }
+			siteTitle={ <>
+				<Title>{ title }</Title>
+				<Menu>
+					<Menu.Link href={ Routes.newCircleGroup(params.circle_slug) } icon={ <NewIcon /> }>
+						New Group
+					</Menu.Link>
+				</Menu>
+			</> }
 		>
 			<IndexTableTemplate
 				model="groups"

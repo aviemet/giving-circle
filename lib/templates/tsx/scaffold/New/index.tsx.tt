@@ -1,6 +1,7 @@
 import React from 'react'
 import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 import <%= singular_table_name.camelize %>Form from '../Form'
 
 interface New<%= singular_table_name.camelize %>Props {
@@ -8,6 +9,8 @@ interface New<%= singular_table_name.camelize %>Props {
 }
 
 const New<%= singular_table_name.camelize %> = ({ ...data }: New<%= singular_table_name.camelize %>Props) => {
+	// copy @route above into the generic type assertion below
+	const { params } = usePageProps<''>()
 	const title = 'New <%= human_name.titleize %>'
 
 	return (
