@@ -11,6 +11,8 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
 
   strong_params :<%= singular_table_name %>, <%= permitted_params %>
 
+  sortable_fields %w(<%= permitted_params.gsub(/[:,]/, '') %>)
+
   def index
     authorize <%= plural_table_name %>
 
@@ -68,12 +70,6 @@ expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associat
     authorize <%= singular_table_name %>
     <%= orm_instance.destroy %>
     redirect_to <%= index_helper %>_url, notice: <%= %("#{human_name} was successfully destroyed.") %>
-  end
-
-  private
-
-  def sortable_fields
-    %w(<%= permitted_params.gsub(/[:,]/, '') %>).freeze
   end
 
 end
