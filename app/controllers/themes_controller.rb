@@ -3,7 +3,7 @@ class ThemesController < ApplicationController
 
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :themes, -> { search(circle.themes.includes_associated, sortable_fields) }
+  expose :themes, -> { search(circle.themes.includes_associated) }
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   strong_params :theme, permit: [:title, :quarter, :slug]
@@ -29,8 +29,7 @@ class ThemesController < ApplicationController
   # @route GET /circles/:circle_slug/themes/:theme_slug (circle_theme)
   def show
     authorize theme
-    t = Theme.includes_associated.first
-    ap({ orgs: t.orgs })
+
     render inertia: "Themes/Show", props: {
       theme: -> { theme.render(:show) },
     }

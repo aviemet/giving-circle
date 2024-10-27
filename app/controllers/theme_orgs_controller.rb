@@ -2,7 +2,7 @@ class ThemeOrgsController < ApplicationController
   expose :circle, -> { theme.circle }
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
-  expose :orgs, -> { search(Theme.find_by(slug: params[:theme_slug]).orgs.includes_associated, sortable_fields) }
+  expose :orgs, -> { search(Theme.find_by(slug: params[:theme_slug]).orgs.includes_associated) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slu
 
   strong_params :org, permit: %i(name ask description)
@@ -115,7 +115,6 @@ class ThemeOrgsController < ApplicationController
     imported_orgs = Org.import processed_orgs, :track_validation_failures, recursive: true
 
     if imported_orgs[:failed_instances].empty?
-      ap({ redirect: circle_theme_orgs_path(circle.slug, theme.slug) })
       redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: "Orgs were successfully created."
     else
       redirect_to circle_theme_orgs_import_path(circle.slug, theme.slug), inertia: { errors: '' }

@@ -1,5 +1,5 @@
 class TemplateSlidesController < ApplicationController
-  expose :template_slides, -> { search(TemplateSlide.includes_associated, sortable_fields) }
+  expose :template_slides, -> { search(TemplateSlide.includes_associated) }
   expose :template_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :template_slide, permit: [:title, :content, :template_id, :order]

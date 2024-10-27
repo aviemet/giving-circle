@@ -1,7 +1,7 @@
 class PresentationTemplatesController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :templates, -> { search(PresentationTemplate.includes_associated, sortable_fields) }
+  expose :templates, -> { search(PresentationTemplate.includes_associated) }
   expose :template, model: PresentationTemplate, scope: -> { PresentationTemplate.includes_associated }, id: -> { params[:slug] }, find_by: :slug
 
   strong_params :template, permit: [:name]

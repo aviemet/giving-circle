@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  expose :people, -> { search(Person.includes_associated, sortable_fields) }
+  expose :people, -> { search(Person.includes_associated) }
   expose :person, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   strong_params :person, permit: [:first_name, :last_name, :middle_name, :active]

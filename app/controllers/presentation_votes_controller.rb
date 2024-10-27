@@ -1,7 +1,7 @@
 class PresentationVotesController < ApplicationController
   include Searchable
 
-  expose :presentation_votes, -> { search(PresentationVote.includes_associated, sortable_fields) }
+  expose :presentation_votes, -> { search(PresentationVote.includes_associated) }
   expose :presentation_vote, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :presentation_vote, [:name, :type]

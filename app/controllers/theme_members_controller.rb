@@ -2,7 +2,7 @@ class ThemeMembersController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
   expose :circle, -> { theme.circle }
 
-  expose :members, -> { search(theme.members.includes_associated, sortable_fields) }
+  expose :members, -> { search(theme.members.includes_associated) }
   expose :member, id: -> { params[:slug] }, scope: -> { members }, find_by: :slug
 
   strong_params :member, permit: [:first_name, :last_name, :number]

@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :groups, -> { search(circle.groups.includes_associated, sortable_fields) }
+  expose :groups, -> { search(circle.groups.includes_associated) }
   expose :group, id: -> { params[:slug] }, scope: -> { Group.includes_associated }, find_by: :slug
 
   strong_params :group, permit: [:name]

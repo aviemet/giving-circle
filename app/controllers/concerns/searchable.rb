@@ -3,21 +3,16 @@
 module Searchable
   extend ActiveSupport::Concern
 
-  attr_reader :sortable_fields
-
   included do
-
+    class_attribute :internal_sortable_fields
     before_action :remove_empty_query_parameters
 
     ##
     # Searches and sorts model using search params
     # model: ActiveRecord object
-    # sortable_fields: string array of field names which the model can be sorted by.
-    #   Sortable fields in nested models use dot-notation: "related_model.field"
-    #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
     ##
-    def search(model, sortable_fields = [])
-      sort(search_by_params(model), model, sortable_fields)
+    def search(model)
+      sort(search_by_params(model), model)
     end
 
     def paginate(resource, key)
@@ -41,7 +36,7 @@ module Searchable
 
   class_methods do
     def sortable_fields(fields)
-      @sortable_fields = fields
+      self.internal_sortable_fields = fields
     end
   end
 
@@ -59,19 +54,19 @@ module Searchable
   ##
   # Sorts ActiveRecord relation by sort params
   ##
-  def sort(obj, model, sortable_fields)
+  def sort(obj, model)
     # With empty sort params, don't sort
     return obj unless params[:sort]
 
     # Sort using db query
-    obj.order(sort_string(model, sortable_fields))
+    obj.order(sort_string(model))
   end
 
   ##
   # Returns a string to be used in an `order` statement
   ##
-  def sort_string(model, sortable_fields)
-    return unless sortable_fields&.include?(params[:sort])
+  def sort_string(model)
+    return unless self.class.internal_sortable_fields&.include?(params[:sort])
 
     field_type = get_field_type(model, params[:sort])
     # Don't error if field doesn't exist on model

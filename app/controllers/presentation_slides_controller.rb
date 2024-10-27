@@ -1,7 +1,7 @@
 class PresentationSlidesController < ApplicationController
   include Searchable
 
-  expose :presentation_slides, -> { search(PresentationSlide.includes_associated, sortable_fields) }
+  expose :presentation_slides, -> { search(PresentationSlide.includes_associated) }
   expose :presentation_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :presentation_slide

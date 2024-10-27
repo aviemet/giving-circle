@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include Contactable
 
-  expose :users, -> { search(User.all.includes_associated, sortable_fields) }
+  expose :users, -> { search(User.all.includes_associated) }
   expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
   strong_params :user, permit: [:email, :password, :active, :first_name, :last_name, :number]

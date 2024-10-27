@@ -1,7 +1,7 @@
 class PresentationLeveragesController < ApplicationController
   include Searchable
 
-  expose :presentation_leverages, -> { search(PresentationLeverage.includes_associated, sortable_fields) }
+  expose :presentation_leverages, -> { search(PresentationLeverage.includes_associated) }
   expose :presentation_leverage, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :leverage, permit: [:name, :type]

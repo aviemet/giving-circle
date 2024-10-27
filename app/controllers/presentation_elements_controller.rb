@@ -1,5 +1,5 @@
 class PresentationElementsController < ApplicationController
-  expose :elements, -> { search(PresentationElement.includes_associated, sortable_fields) }
+  expose :elements, -> { search(PresentationElement.includes_associated) }
   expose :element, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :element, permit: [:title, :data, :element]

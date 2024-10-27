@@ -1,7 +1,7 @@
 class PresentationsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
-  expose :presentations, -> { search(theme.presentations.includes_associated, sortable_fields) }
+  expose :presentations, -> { search(theme.presentations.includes_associated) }
   expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations }, find_by: :slug
 
   strong_params :presentation, permit: [:name, :theme_id]
