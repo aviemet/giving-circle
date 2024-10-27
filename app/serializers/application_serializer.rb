@@ -14,4 +14,11 @@ class ApplicationSerializer < Oj::Serializer
       currency_iso: money.currency.iso_code,
     }
   end
+
+  def self.timestamps
+    attributes(
+      :updated_at,
+      :created_at,
+    )
+  end
 end

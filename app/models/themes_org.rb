@@ -26,5 +26,5 @@ class ThemesOrg < ApplicationRecord
 
   monetize :ask_cents, allow_blank: true, allow_nil: true, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :includes_associated, -> { includes([]) }
+  scope :includes_associated, -> { includes([:theme, :org]) }
 end

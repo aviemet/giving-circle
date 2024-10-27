@@ -22,6 +22,5 @@ class PresentationLeverage < ApplicationRecord
 
   resourcify
 
-
   scope :includes_associated, -> { includes([]) }
 end

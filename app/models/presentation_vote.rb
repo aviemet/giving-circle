@@ -22,6 +22,5 @@ class PresentationVote < ApplicationRecord
 
   resourcify
 
-
   scope :includes_associated, -> { includes([]) }
 end

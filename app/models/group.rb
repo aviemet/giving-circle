@@ -37,5 +37,5 @@ class Group < ApplicationRecord
 
   belongs_to :circle
 
-  scope :includes_associated, -> { includes([]) }
+  scope :includes_associated, -> { includes([:circle]) }
 end

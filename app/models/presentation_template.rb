@@ -40,5 +40,5 @@ class PresentationTemplate < ApplicationRecord
 
   has_many :presentation_slides, dependent: :nullify
 
-  scope :includes_associated, -> { includes([]) }
+  scope :includes_associated, -> { includes([:circle]) }
 end

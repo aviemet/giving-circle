@@ -10,7 +10,7 @@ module Contactable
 
     accepts_nested_attributes_for :contact, :addresses, :phones, :emails, :websites
 
-    validates_presence_of :contact
+    validates :contact, presence: true
 
     before_validation :ensure_associated_contact
 

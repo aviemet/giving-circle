@@ -38,6 +38,8 @@ class Org < ApplicationRecord
 
   validates :name, presence: true
 
+  monetize :ask_cents, allow_blank: true, allow_nil: true, numericality: { greater_than_or_equal_to: 0 }
+
   has_many :themes_orgs, dependent: :destroy
   has_many :themes, through: :themes_orgs
 
@@ -46,5 +48,5 @@ class Org < ApplicationRecord
   has_many :presentations_orgs, dependent: :destroy
   has_many :presentations, through: :presentations_orgs
 
-  scope :includes_associated, -> { includes([:presentations]) }
+  scope :includes_associated, -> { includes([:circle, :presentations]) }
 end
