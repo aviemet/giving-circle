@@ -83,13 +83,13 @@ Rails.application.routes.draw do
     resources :themes, param: :slug, only: [:new, :index, :create] do
       get :about
 
-      get 'members', to: 'theme_members#index'
-      resources(
-        :theme_members,
-        path: :members,
-        param: :slug,
-        as: 'member',
-      )
+      # get 'members', to: 'theme_members#index'
+      # resources(
+      #   :theme_members,
+      #   path: :members,
+      #   param: :slug,
+      #   as: 'member',
+      # )
 
       get 'orgs', to: 'theme_orgs#index'
       get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import

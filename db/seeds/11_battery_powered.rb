@@ -10,23 +10,19 @@ if Rails.env.development?
     user.add_role :admin, circle
   end
 
-  if circle.members.count == 0
+  if circle.members.empty?
     50.times do
       circle.members << FactoryBot.create(:member)
     end
   end
 
-  if circle.themes.count == 0
-    theme = FactoryBot.create(:theme, circle: circle)
+  if circle.themes.empty?
+    FactoryBot.create(:theme, circle: circle)
   end
 
   theme = circle.themes.first
 
-  if theme.members.count == 0
-    theme.members << circle.members
-  end
-
-  if theme.orgs.count == 0
+  if theme.orgs.empty?
     10.times do
       ThemesOrg.create!({
         theme:,
@@ -36,7 +32,7 @@ if Rails.env.development?
     end
   end
 
-  if theme.presentations.count == 0
+  if theme.presentations.empty?
     presentation = FactoryBot.build(:presentation, name: "Allocation Night", theme: theme)
     presentation.settings = {
       question: Faker::ChuckNorris.fact,
@@ -47,15 +43,15 @@ if Rails.env.development?
 
   presentation = theme.presentations.first
 
-  if presentation.members.count == 0
+  if presentation.members.empty?
     presentation.members << theme.members
   end
 
-  if presentation.orgs.count == 0
+  if presentation.orgs.empty?
     presentation.orgs << theme.orgs
   end
 
-  if presentation.slides.count == 0
+  if presentation.slides.empty?
     presentation.slides << PresentationSlide.create({
       name: "Intro",
       content: "<div><h1>Intro</h1></div>",
@@ -87,7 +83,7 @@ if Rails.env.development?
     })
   end
 
-  if presentation.votes.count == 0
+  if presentation.votes.empty?
     presentation.votes << PresentationVote.create({
       name: "Round 1",
       type: "chit",
