@@ -44,7 +44,7 @@ if Rails.env.development?
   presentation = theme.presentations.first
 
   if presentation.members.empty?
-    presentation.members << theme.members
+    presentation.members << circle.members
   end
 
   if presentation.orgs.empty?
