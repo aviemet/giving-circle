@@ -29,6 +29,6 @@ FactoryBot.define do
     country { "USA" }
     postal { Faker::Address.zip }
 
-    contact
+    contact { nil }
   end
 end

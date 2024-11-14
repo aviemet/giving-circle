@@ -15,10 +15,5 @@
 FactoryBot.define do
   factory :contact do
     contactable factory: :person
-
-    phone
-    email
-    address
-
   end
 end

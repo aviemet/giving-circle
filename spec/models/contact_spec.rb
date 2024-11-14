@@ -14,6 +14,10 @@
 #
 require 'rails_helper'
 
-RSpec.describe Contact, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Contact do
+  describe "Associations" do
+    it { is_expected.to have_many(:addresses) }
+    it { is_expected.to have_many(:emails) }
+    it { is_expected.to have_many(:phones) }
+  end
 end

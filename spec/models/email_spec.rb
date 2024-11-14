@@ -13,7 +13,10 @@
 #  index_emails_on_contact_id  (contact_id)
 #
 require 'rails_helper'
+require 'models/shared/contact_method'
 
-RSpec.describe Email, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Email do
+  describe "Associations" do
+    it_behaves_like "contact_method"
+  end
 end
