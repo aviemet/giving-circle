@@ -68,13 +68,15 @@ class User < ApplicationRecord
 
   belongs_to :person, optional: true
 
+  validates :email, presence: true
+
   def circles
     Circle.with_roles(Circle.find_roles.pluck(:name), self)
   end
 
+  # TODO: why was this here? delete if nothing breaks
   # Rows page for pagination
-  def limit(model)
-    self.table_preferences&.[](model.to_s)&.[]('limit')
-  end
-
+  # def limit(model)
+  #   self.table_preferences&.[](model.to_s)&.[]('limit')
+  # end
 end

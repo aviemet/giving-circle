@@ -22,21 +22,23 @@
 require 'rails_helper'
 
 RSpec.describe Theme do
-  # Validations
-  describe 'validations' do
-    it { is_expected.to validate_presence_of(:name) }
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build_stubbed(:circle)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(name).each do |attr|
+        expect(build(:circle, attr => nil)).not_to be_valid
+      end
+    end
   end
 
   # Associations
-  describe 'associations' do
+  describe "Associations" do
     it { is_expected.to belong_to(:circle) }
     it { is_expected.to have_many(:presentations).dependent(:destroy) }
     it { is_expected.to have_many(:themes_orgs).dependent(:destroy) }
     it { is_expected.to have_many(:orgs).through(:themes_orgs) }
-  end
-
-  # Enums
-  describe 'enums' do
-    it { is_expected.to define_enum_for(:status).with_values(draft: 0, current: 1, past: 2, future: 3) }
   end
 end

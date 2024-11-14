@@ -21,14 +21,23 @@
 class Member < Person
   resourcify
 
+  after_initialize :set_default_funds, if: :new_record?
+
+  monetize :funds_cents
+
+  validates :number, presence: true
+
   has_many :circles_members, dependent: :destroy
   has_many :circles, through: :circles_members
-
-  has_many :themes_members, dependent: :destroy
-  has_many :themes, through: :themes_members
 
   has_many :presentations_members, dependent: :destroy
   has_many :presentations, through: :presentations_members
 
   scope :includes_associated, -> { includes([:circles, :presentations]) }
+
+  private
+
+  def set_default_funds
+    self.funds_cents ||= 0
+  end
 end

@@ -20,6 +20,25 @@
 #
 require 'rails_helper'
 
-RSpec.describe Member, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Member do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:member)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(first_name last_name number).each do |attr|
+        expect(build(:member, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Attributes" do
+    it { is_expected.to monetize(:funds) }
+  end
+
+  describe "Associations" do
+    it { is_expected.to have_many(:circles).through(:circles_members) }
+    it { is_expected.to have_many(:presentations).through(:presentations_members) }
+  end
 end

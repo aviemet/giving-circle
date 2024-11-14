@@ -22,5 +22,7 @@
 FactoryBot.define do
   factory :org do
     name { Faker::Company.name }
+
+    circle
   end
 end

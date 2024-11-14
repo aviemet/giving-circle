@@ -20,6 +20,20 @@
 #
 require 'rails_helper'
 
-RSpec.describe Person, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Person do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:person)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(first_name last_name).each do |attr|
+        expect(build(:person, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it { is_expected.to have_one(:user) }
+  end
 end
