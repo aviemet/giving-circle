@@ -22,6 +22,25 @@
 #
 require 'rails_helper'
 
-RSpec.describe ThemesOrg, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe ThemesOrg do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:themes_org)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(ask_cents org theme).each do |attr|
+        expect(build(:themes_org, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Attributes" do
+    it { is_expected.to monetize(:ask) }
+  end
+
+  describe "Associations" do
+    it { is_expected.to belong_to(:theme) }
+    it { is_expected.to belong_to(:org) }
+  end
 end
