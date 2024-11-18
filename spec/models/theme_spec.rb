@@ -17,7 +17,9 @@
 #  index_themes_on_slug       (slug) UNIQUE
 #
 # Foreign Keys
-## spec/models/theme_spec.rb
+#
+#  fk_rails_...  (circle_id => circles.id)
+#
 
 require 'rails_helper'
 
