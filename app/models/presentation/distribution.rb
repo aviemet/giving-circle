@@ -1,4 +1,4 @@
-class Presentation::Leverage < ApplicationRecord
+class Presentation::Distribution < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
@@ -11,6 +11,7 @@ class Presentation::Leverage < ApplicationRecord
   )
 
   resourcify
+
 
   scope :includes_associated, -> { includes([]) }
 end

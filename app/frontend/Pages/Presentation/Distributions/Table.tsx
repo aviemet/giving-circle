@@ -4,7 +4,7 @@ import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
 
-const PresentationLeverageTable = (props: TableProps) => {
+const PresentationDistributionTable = (props: TableProps) => {
 	return (
 		<Table>
 			<Table.Head>
@@ -15,16 +15,16 @@ const PresentationLeverageTable = (props: TableProps) => {
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (presentation_leverage: Schema.PresentationLeveragesIndex) => (
-					<Table.Row key={ presentation_leverage.id }>
+				<Table.RowIterator render={ (presentation_distribution: Schema.PresentationDistributionsIndex) => (
+					<Table.Row key={ presentation_distribution.id }>
 						<Table.Cell>
-							<Link href={ Routes.presentationLeverage(presentation_leverage.id) }>{ presentation_leverage.name }</Link>
+							<Link href={ Routes.presentationDistribution(presentation_distribution.id) }>{ presentation_distribution.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.presentationLeverage(presentation_leverage.id) }>{ presentation_leverage.type }</Link>
+							<Link href={ Routes.presentationDistribution(presentation_distribution.id) }>{ presentation_distribution.type }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editPresentationLeverage(presentation_leverage.id) } />
+							<EditButton href={ Routes.editPresentationDistribution(presentation_distribution.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />
@@ -33,4 +33,4 @@ const PresentationLeverageTable = (props: TableProps) => {
 	)
 }
 
-export default PresentationLeverageTable
+export default PresentationDistributionTable

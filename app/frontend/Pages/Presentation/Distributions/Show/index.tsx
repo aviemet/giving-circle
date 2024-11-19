@@ -3,18 +3,18 @@ import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 
-interface ShowPresentationLeverageProps {
-	presentation_leverage: Schema.PresentationLeveragesShow
+interface ShowPresentationDistributionProps {
+	presentation_distribution: Schema.PresentationDistributionsShow
 }
 
-const ShowPresentationLeverage = ({ presentation_leverage }: ShowPresentationLeverageProps) => {
+const ShowPresentationDistribution = ({ presentation_distribution }: ShowPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()
-	const title =  'PresentationLeverage'
+	const title =  'PresentationDistribution'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Leverage', href: Routes.presentationLeverages() },
+			{ title: 'Distribution', href: Routes.presentationDistributions() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>
@@ -22,8 +22,8 @@ const ShowPresentationLeverage = ({ presentation_leverage }: ShowPresentationLev
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editPresentationLeverage(presentation_leverage.id) }>
-								Edit PresentationLeverage
+							<Menu.Link href={ Routes.editPresentationDistribution(presentation_distribution.id) }>
+								Edit PresentationDistribution
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
@@ -34,4 +34,4 @@ const ShowPresentationLeverage = ({ presentation_leverage }: ShowPresentationLev
 	)
 }
 
-export default ShowPresentationLeverage
+export default ShowPresentationDistribution

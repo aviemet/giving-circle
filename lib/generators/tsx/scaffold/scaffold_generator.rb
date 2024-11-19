@@ -23,7 +23,7 @@ module Tsx
       private
 
       def controller_path
-        controller_file_path.gsub('::', '/').camelize
+        controller_file_path.camelize.gsub("::", "/")
       end
 
       def views_path

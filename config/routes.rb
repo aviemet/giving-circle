@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :presentation do
-    resources :leverages
+    resources :distributions
     resources :elements
   end
   root "pages#home" # Public home page for entire project

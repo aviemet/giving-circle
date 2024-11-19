@@ -48,7 +48,7 @@ const NewPresentationTemplateForm = ({}: NewPresentationTemplateFormProps) => {
 			<Grid.Col>
 				<Radio.Group
 					label="How will you allocate un-voted funds?"
-					name="leverage_strategy"
+					name="distribution_strategy"
 				>
 					<Radio value="waterfall" label="Waterfall" />
 					<Radio value="percentage" label="By percentage of voted funds" />
