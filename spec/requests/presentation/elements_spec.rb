@@ -12,10 +12,10 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/presentation_elements", type: :request do
+RSpec.describe "/presentation/elements", type: :request do
   
   # This should return the minimal set of attributes required to create a valid
-  # PresentationElement. As you add validations to PresentationElement, be sure to
+  # Presentation::Element. As you add validations to Presentation::Element, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,7 +27,7 @@ RSpec.describe "/presentation_elements", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      PresentationElement.create! valid_attributes
+      Presentation::Element.create! valid_attributes
       get presentation_elements_url
       expect(response).to be_successful
     end
@@ -35,8 +35,8 @@ RSpec.describe "/presentation_elements", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      presentation_element = PresentationElement.create! valid_attributes
-      get presentation_element_url(presentation_element)
+      element = Presentation::Element.create! valid_attributes
+      get presentation_element_url(element)
       expect(response).to be_successful
     end
   end
@@ -50,31 +50,31 @@ RSpec.describe "/presentation_elements", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      presentation_element = PresentationElement.create! valid_attributes
-      get edit_presentation_element_url(presentation_element)
+      element = Presentation::Element.create! valid_attributes
+      get edit_presentation_element_url(element)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new PresentationElement" do
+      it "creates a new Presentation::Element" do
         expect {
           post presentation_elements_url, params: { presentation_element: valid_attributes }
-        }.to change(PresentationElement, :count).by(1)
+        }.to change(Presentation::Element, :count).by(1)
       end
 
       it "redirects to the created presentation_element" do
         post presentation_elements_url, params: { presentation_element: valid_attributes }
-        expect(response).to redirect_to(presentation_element_url(PresentationElement.last))
+        expect(response).to redirect_to(presentation_element_url(Presentation::Element.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new PresentationElement" do
+      it "does not create a new Presentation::Element" do
         expect {
           post presentation_elements_url, params: { presentation_element: invalid_attributes }
-        }.to change(PresentationElement, :count).by(0)
+        }.to change(Presentation::Element, :count).by(0)
       end
 
     
@@ -93,25 +93,25 @@ RSpec.describe "/presentation_elements", type: :request do
       }
 
       it "updates the requested presentation_element" do
-        presentation_element = PresentationElement.create! valid_attributes
-        patch presentation_element_url(presentation_element), params: { presentation_element: new_attributes }
-        presentation_element.reload
+        element = Presentation::Element.create! valid_attributes
+        patch presentation_element_url(element), params: { presentation_element: new_attributes }
+        element.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the presentation_element" do
-        presentation_element = PresentationElement.create! valid_attributes
-        patch presentation_element_url(presentation_element), params: { presentation_element: new_attributes }
-        presentation_element.reload
-        expect(response).to redirect_to(presentation_element_url(presentation_element))
+        element = Presentation::Element.create! valid_attributes
+        patch presentation_element_url(element), params: { presentation_element: new_attributes }
+        element.reload
+        expect(response).to redirect_to(presentation_element_url(element))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        presentation_element = PresentationElement.create! valid_attributes
-        patch presentation_element_url(presentation_element), params: { presentation_element: invalid_attributes }
+        element = Presentation::Element.create! valid_attributes
+        patch presentation_element_url(element), params: { presentation_element: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -120,15 +120,15 @@ RSpec.describe "/presentation_elements", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested presentation_element" do
-      presentation_element = PresentationElement.create! valid_attributes
+      element = Presentation::Element.create! valid_attributes
       expect {
-        delete presentation_element_url(presentation_element)
-      }.to change(PresentationElement, :count).by(-1)
+        delete presentation_element_url(element)
+      }.to change(Presentation::Element, :count).by(-1)
     end
 
     it "redirects to the presentation_elements list" do
-      presentation_element = PresentationElement.create! valid_attributes
-      delete presentation_element_url(presentation_element)
+      element = Presentation::Element.create! valid_attributes
+      delete presentation_element_url(element)
       expect(response).to redirect_to(presentation_elements_url)
     end
   end

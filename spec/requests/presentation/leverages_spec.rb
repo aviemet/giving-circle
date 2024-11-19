@@ -12,10 +12,10 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/presentation_leverages", type: :request do
+RSpec.describe "/presentation/leverages", type: :request do
   
   # This should return the minimal set of attributes required to create a valid
-  # PresentationLeverage. As you add validations to PresentationLeverage, be sure to
+  # Presentation::Leverage. As you add validations to Presentation::Leverage, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,7 +27,7 @@ RSpec.describe "/presentation_leverages", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      PresentationLeverage.create! valid_attributes
+      Presentation::Leverage.create! valid_attributes
       get presentation_leverages_url
       expect(response).to be_successful
     end
@@ -35,8 +35,8 @@ RSpec.describe "/presentation_leverages", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      presentation_leverage = PresentationLeverage.create! valid_attributes
-      get presentation_leverage_url(presentation_leverage)
+      leverage = Presentation::Leverage.create! valid_attributes
+      get presentation_leverage_url(leverage)
       expect(response).to be_successful
     end
   end
@@ -50,31 +50,31 @@ RSpec.describe "/presentation_leverages", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      presentation_leverage = PresentationLeverage.create! valid_attributes
-      get edit_presentation_leverage_url(presentation_leverage)
+      leverage = Presentation::Leverage.create! valid_attributes
+      get edit_presentation_leverage_url(leverage)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new PresentationLeverage" do
+      it "creates a new Presentation::Leverage" do
         expect {
           post presentation_leverages_url, params: { presentation_leverage: valid_attributes }
-        }.to change(PresentationLeverage, :count).by(1)
+        }.to change(Presentation::Leverage, :count).by(1)
       end
 
       it "redirects to the created presentation_leverage" do
         post presentation_leverages_url, params: { presentation_leverage: valid_attributes }
-        expect(response).to redirect_to(presentation_leverage_url(PresentationLeverage.last))
+        expect(response).to redirect_to(presentation_leverage_url(Presentation::Leverage.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new PresentationLeverage" do
+      it "does not create a new Presentation::Leverage" do
         expect {
           post presentation_leverages_url, params: { presentation_leverage: invalid_attributes }
-        }.to change(PresentationLeverage, :count).by(0)
+        }.to change(Presentation::Leverage, :count).by(0)
       end
 
     
@@ -93,25 +93,25 @@ RSpec.describe "/presentation_leverages", type: :request do
       }
 
       it "updates the requested presentation_leverage" do
-        presentation_leverage = PresentationLeverage.create! valid_attributes
-        patch presentation_leverage_url(presentation_leverage), params: { presentation_leverage: new_attributes }
-        presentation_leverage.reload
+        leverage = Presentation::Leverage.create! valid_attributes
+        patch presentation_leverage_url(leverage), params: { presentation_leverage: new_attributes }
+        leverage.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the presentation_leverage" do
-        presentation_leverage = PresentationLeverage.create! valid_attributes
-        patch presentation_leverage_url(presentation_leverage), params: { presentation_leverage: new_attributes }
-        presentation_leverage.reload
-        expect(response).to redirect_to(presentation_leverage_url(presentation_leverage))
+        leverage = Presentation::Leverage.create! valid_attributes
+        patch presentation_leverage_url(leverage), params: { presentation_leverage: new_attributes }
+        leverage.reload
+        expect(response).to redirect_to(presentation_leverage_url(leverage))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        presentation_leverage = PresentationLeverage.create! valid_attributes
-        patch presentation_leverage_url(presentation_leverage), params: { presentation_leverage: invalid_attributes }
+        leverage = Presentation::Leverage.create! valid_attributes
+        patch presentation_leverage_url(leverage), params: { presentation_leverage: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -120,15 +120,15 @@ RSpec.describe "/presentation_leverages", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested presentation_leverage" do
-      presentation_leverage = PresentationLeverage.create! valid_attributes
+      leverage = Presentation::Leverage.create! valid_attributes
       expect {
-        delete presentation_leverage_url(presentation_leverage)
-      }.to change(PresentationLeverage, :count).by(-1)
+        delete presentation_leverage_url(leverage)
+      }.to change(Presentation::Leverage, :count).by(-1)
     end
 
     it "redirects to the presentation_leverages list" do
-      presentation_leverage = PresentationLeverage.create! valid_attributes
-      delete presentation_leverage_url(presentation_leverage)
+      leverage = Presentation::Leverage.create! valid_attributes
+      delete presentation_leverage_url(leverage)
       expect(response).to redirect_to(presentation_leverages_url)
     end
   end

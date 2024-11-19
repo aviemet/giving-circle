@@ -1,19 +1,20 @@
 import React from 'react'
 import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 
 interface ShowPresentationLeverageProps {
 	presentation_leverage: Schema.PresentationLeveragesShow
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages/:id
-// @route: circleThemePresentationLeverage
 const ShowPresentationLeverage = ({ presentation_leverage }: ShowPresentationLeverageProps) => {
+	// copy @route above into the generic type assertion below
+	const { params } = usePageProps<''>()
 	const title =  'PresentationLeverage'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentation Leverage', href: Routes.presentationLeverages() },
+			{ title: 'Leverage', href: Routes.presentationLeverages() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

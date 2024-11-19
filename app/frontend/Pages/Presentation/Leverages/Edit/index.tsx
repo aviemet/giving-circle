@@ -1,20 +1,21 @@
 import React from 'react'
 import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { usePageProps } from '@/lib/hooks'
 import PresentationLeveragesForm from '../Form'
 
 interface EditPresentationLeverageProps {
 	presentation_leverage: Schema.PresentationLeveragesEdit
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_leverages/:id/edit
-// @route: editCircleThemePresentationLeverage
 const EditPresentationLeverage = ({ presentation_leverage }: EditPresentationLeverageProps) => {
-	const title = 'Edit Presentation Leverage'
+	// copy @route above into the generic type assertion below
+	const { params } = usePageProps<''>()
+	const title = 'Edit Leverage'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentation Leverages', href: Routes.presentationLeverages() },
+			{ title: 'Leverages', href: Routes.presentationLeverages() },
 			{ title: "PresentationLeverage", href: Routes.presentationLeverage(presentation_leverage.id) },
 			{ title, href: window.location.href },
 		] }>
