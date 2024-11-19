@@ -10,7 +10,7 @@
 #  updated_at  :datetime         not null
 #  circle_id   :uuid             not null
 #
-# Indexesc
+# Indexes
 #
 #  index_orgs_on_circle_id  (circle_id)
 #  index_orgs_on_slug       (slug) UNIQUE

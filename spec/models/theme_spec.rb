@@ -42,5 +42,21 @@ RSpec.describe Theme do
     it { is_expected.to have_many(:presentations).dependent(:destroy) }
     it { is_expected.to have_many(:themes_orgs).dependent(:destroy) }
     it { is_expected.to have_many(:orgs).through(:themes_orgs) }
+
+    describe "#orgs" do
+      it 'includes ask_cents and ask_currency from the join table' do
+        theme = create(:theme)
+        create(:themes_org, {
+          theme:,
+          ask_cents: 20000,
+          ask_currency: "USD"
+        },)
+
+        loaded_org = theme.orgs.first
+
+        expect(loaded_org.ask_cents).to eq(20000)
+        expect(loaded_org.ask_currency).to eq("USD")
+      end
+    end
   end
 end
