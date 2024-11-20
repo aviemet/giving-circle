@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   namespace :presentation do
+    resources :votes
+    resources :slides
     resources :distributions
     resources :elements
   end

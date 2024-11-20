@@ -7,6 +7,7 @@
 #  name                     :string
 #  settings                 :jsonb
 #  slug                     :string           not null
+#  template                 :boolean          default(FALSE), not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  presentation_template_id :uuid
@@ -20,7 +21,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (presentation_template_id => presentation_templates.id)
+#  fk_rails_...  (presentation_template_id => presentations.id)
 #  fk_rails_...  (theme_id => themes.id)
 #
 require 'rails_helper'

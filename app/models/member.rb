@@ -19,6 +19,8 @@
 #  index_people_on_slug  (slug) UNIQUE
 #
 class Member < Person
+  include Ownable
+
   resourcify
 
   after_initialize :set_default_funds, if: :new_record?
@@ -27,13 +29,10 @@ class Member < Person
 
   validates :number, presence: true
 
-  has_many :circles_members, dependent: :destroy
-  has_many :circles, through: :circles_members
-
   has_many :presentations_members, dependent: :destroy
   has_many :presentations, through: :presentations_members
 
-  scope :includes_associated, -> { includes([:circles, :presentations]) }
+  scope :includes_associated, -> { includes([:presentations_members, :presentations]) }
 
   private
 

@@ -31,6 +31,9 @@ const PresentationDistributionForm = ({ method = 'post', presentation_distributi
 					<TextInput name="type" label="Type" />
 				</Grid.Col>
 				<Grid.Col>
+					<TextInput name="template" label="Template" />
+				</Grid.Col>
+				<Grid.Col>
 					<Submit>{ presentation_distribution.id ? 'Update' : 'Create' } PresentationDistribution</Submit>
 				</Grid.Col>
 			</Grid>

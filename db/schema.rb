@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -77,23 +77,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
 
   create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.uuid "circle_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_groups_on_circle_id"
     t.index ["slug"], name: "index_groups_on_slug", unique: true
   end
 
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.uuid "circle_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_orgs_on_circle_id"
     t.index ["slug"], name: "index_orgs_on_slug", unique: true
+  end
+
+  create_table "ownerships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "circle_id", null: false
+    t.string "ownable_type", null: false
+    t.uuid "ownable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_ownerships_on_circle_id"
+    t.index ["ownable_type", "ownable_id"], name: "index_ownerships_on_ownable"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -127,57 +133,44 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
     t.index ["contact_id"], name: "index_phones_on_contact_id"
   end
 
-  create_table "presentation_elements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.jsonb "data"
-    t.integer "element"
+  create_table "presentation_distributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "type"
+    t.boolean "template", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "presentation_leverages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.integer "type"
+  create_table "presentation_elements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.jsonb "data", default: {}
+    t.boolean "template", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "presentation_slides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.text "content"
+    t.string "name", null: false
+    t.jsonb "data", default: {}
     t.integer "order"
-    t.uuid "presentation_id"
-    t.uuid "presentation_template_id"
-    t.string "slug", null: false
+    t.boolean "template", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["presentation_id"], name: "index_presentation_slides_on_presentation_id"
-    t.index ["presentation_template_id"], name: "index_presentation_slides_on_presentation_template_id"
-    t.index ["slug"], name: "index_presentation_slides_on_slug", unique: true
-  end
-
-  create_table "presentation_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.jsonb "settings"
-    t.uuid "circle_id", null: false
-    t.string "slug", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_presentation_templates_on_circle_id"
-    t.index ["slug"], name: "index_presentation_templates_on_slug", unique: true
   end
 
   create_table "presentation_votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.integer "type"
+    t.string "name", null: false
+    t.jsonb "data", default: {}
+    t.boolean "template", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.boolean "active", default: false, null: false
     t.jsonb "settings"
+    t.boolean "active", default: false, null: false
+    t.boolean "template", default: false, null: false
     t.uuid "theme_id", null: false
     t.uuid "presentation_template_id"
     t.string "slug", null: false
@@ -186,6 +179,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
     t.index ["presentation_template_id"], name: "index_presentations_on_presentation_template_id"
     t.index ["slug"], name: "index_presentations_on_slug", unique: true
     t.index ["theme_id"], name: "index_presentations_on_theme_id"
+  end
+
+  create_table "presentations_distributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "presentation_id", null: false
+    t.uuid "presentation_distribution_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_distribution_id"], name: "idx_on_presentation_distribution_id_1e817598d7"
+    t.index ["presentation_id"], name: "index_presentations_distributions_on_presentation_id"
+  end
+
+  create_table "presentations_elements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "presentation_id", null: false
+    t.uuid "presentation_element_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_element_id"], name: "index_presentations_elements_on_presentation_element_id"
+    t.index ["presentation_id"], name: "index_presentations_elements_on_presentation_id"
   end
 
   create_table "presentations_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -208,6 +219,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
     t.index ["presentation_id"], name: "index_presentations_orgs_on_presentation_id"
   end
 
+  create_table "presentations_slides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "presentation_id", null: false
+    t.uuid "presentation_slide_id", null: false
+    t.string "instance_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_id"], name: "index_presentations_slides_on_presentation_id"
+    t.index ["presentation_slide_id"], name: "index_presentations_slides_on_presentation_slide_id"
+  end
+
+  create_table "presentations_votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "presentation_id", null: false
+    t.uuid "presentation_vote_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_id"], name: "index_presentations_votes_on_presentation_id"
+    t.index ["presentation_vote_id"], name: "index_presentations_votes_on_presentation_vote_id"
+  end
+
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -222,11 +252,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
     t.string "name"
     t.datetime "published_at"
     t.integer "status", default: 0
-    t.uuid "circle_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_themes_on_circle_id"
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
@@ -296,18 +324,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_050921) do
   add_foreign_key "addresses", "contacts"
   add_foreign_key "circles_members", "circles"
   add_foreign_key "circles_members", "people", column: "member_id"
-  add_foreign_key "groups", "circles"
-  add_foreign_key "orgs", "circles"
-  add_foreign_key "presentation_slides", "presentation_templates"
-  add_foreign_key "presentation_slides", "presentations"
-  add_foreign_key "presentation_templates", "circles"
-  add_foreign_key "presentations", "presentation_templates"
+  add_foreign_key "ownerships", "circles"
+  add_foreign_key "presentations", "presentations", column: "presentation_template_id"
   add_foreign_key "presentations", "themes"
+  add_foreign_key "presentations_distributions", "presentation_distributions"
+  add_foreign_key "presentations_distributions", "presentations"
+  add_foreign_key "presentations_elements", "presentation_elements"
+  add_foreign_key "presentations_elements", "presentations"
   add_foreign_key "presentations_members", "people", column: "member_id"
   add_foreign_key "presentations_members", "presentations"
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
-  add_foreign_key "themes", "circles"
+  add_foreign_key "presentations_slides", "presentation_slides"
+  add_foreign_key "presentations_slides", "presentations"
+  add_foreign_key "presentations_votes", "presentation_votes"
+  add_foreign_key "presentations_votes", "presentations"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

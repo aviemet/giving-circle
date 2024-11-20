@@ -34,10 +34,21 @@ class Circle < ApplicationRecord
   has_many :themes, dependent: :nullify
   has_many :presentations, through: :themes
 
-  has_many :circles_member, dependent: :destroy
+  # has_many :circles_member, dependent: :destroy
+  # has_many :members, through: :circles_member
   has_many :orgs, dependent: :nullify
-  has_many :members, through: :circles_member
   has_many :groups, dependent: :destroy
+
+  has_many :ownerships, dependent: :restrict_with_error
+  {
+    members: "Member",
+    themes: "Theme",
+    orgs: "Org",
+    groups: "Group",
+    presentations: "Presentation"
+  }.each_pair do |assoc, model|
+    has_many assoc, through: :ownerships, source: :ownable, source_type: model
+  end
 
   scope :includes_associated, -> { includes([:themes, :presentations, :members, :orgs, :groups]) }
 end

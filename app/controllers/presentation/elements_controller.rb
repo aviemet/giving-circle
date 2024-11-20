@@ -2,9 +2,9 @@ class Presentation::ElementsController < ApplicationController
   expose :presentation_elements, -> { search(Presentation::Element.includes_associated) }
   expose :presentation_element, find: ->(id, scope){ scope.includes_associated.find(id) }
   
-  strong_params :presentation_element, :name, :template, :data
+  strong_params :presentation_element, :data, :name, :template
 
-  sortable_fields %w(name template data)
+  sortable_fields %w(data name template)
 
   def index
     authorize presentation_elements

@@ -77,12 +77,10 @@ RSpec.describe "/presentation/elements", type: :request do
         }.to change(Presentation::Element, :count).by(0)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post presentation_elements_url, params: { presentation_element: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
@@ -108,13 +106,11 @@ RSpec.describe "/presentation/elements", type: :request do
     end
 
     context "with invalid parameters" do
-    
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         element = Presentation::Element.create! valid_attributes
         patch presentation_element_url(element), params: { presentation_element: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 

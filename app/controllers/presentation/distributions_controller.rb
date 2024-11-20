@@ -2,9 +2,9 @@ class Presentation::DistributionsController < ApplicationController
   expose :presentation_distributions, -> { search(Presentation::Distribution.includes_associated) }
   expose :presentation_distribution, find: ->(id, scope){ scope.includes_associated.find(id) }
   
-  strong_params :presentation_distribution, :name, :type
+  strong_params :presentation_distribution, :name, :type, :template
 
-  sortable_fields %w(name type)
+  sortable_fields %w(name type template)
 
   def index
     authorize presentation_distributions

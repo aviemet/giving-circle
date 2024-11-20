@@ -3,17 +3,19 @@
 # Table name: presentation_votes
 #
 #  id         :uuid             not null, primary key
-#  name       :string
-#  type       :integer
+#  data       :jsonb
+#  name       :string           not null
+#  template   :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class PresentationVote < ApplicationRecord
+class Presentation::Vote < ApplicationRecord
+  include Ownable
   include PgSearch::Model
 
   pg_search_scope(
     :search,
-    against: [:name, :type],
+    against: [:data, :name, :template],
     using: {
       tsearch: { prefix: true },
       trigram: {}
@@ -21,6 +23,8 @@ class PresentationVote < ApplicationRecord
   )
 
   resourcify
+
+  scope :templates, -> { where(template: true) }
 
   scope :includes_associated, -> { includes([]) }
 end

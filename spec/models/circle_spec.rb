@@ -33,5 +33,14 @@ RSpec.describe Circle do
     it { is_expected.to have_many(:members) }
     it { is_expected.to have_many(:orgs) }
     it { is_expected.to have_many(:groups) }
+
+    context "with child members" do
+      it "can retrieves members" do
+        circle = create(:circle)
+        create_list(:member, 5, circle: circle)
+
+        expect(circle.members.count).to eq(5)
+      end
+    end
   end
 end

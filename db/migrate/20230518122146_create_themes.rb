@@ -5,8 +5,6 @@ class CreateThemes < ActiveRecord::Migration[7.0]
       t.datetime :published_at
       t.integer :status, default: 0
 
-      t.references :circle, type: :uuid, null: false, foreign_key: true
-
       t.string :slug, null: false, index: { unique: true }
 
       t.timestamps

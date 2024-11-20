@@ -25,13 +25,13 @@ const PresentationElementForm = ({ method = 'post', presentation_element, ...pro
 			<Grid>
 			
 				<Grid.Col>
+					<TextInput name="data" label="Data" />
+				</Grid.Col>
+				<Grid.Col>
 					<TextInput name="name" label="Name" />
 				</Grid.Col>
 				<Grid.Col>
 					<TextInput name="template" label="Template" />
-				</Grid.Col>
-				<Grid.Col>
-					<TextInput name="data" label="Data" />
 				</Grid.Col>
 				<Grid.Col>
 					<Submit>{ presentation_element.id ? 'Update' : 'Create' } PresentationElement</Submit>

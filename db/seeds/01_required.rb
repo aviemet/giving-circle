@@ -1,23 +1,20 @@
-if PresentationElement.count == 0
-  PresentationElement.create({
+if false && Presentation::Element.count == 0
+  Presentation::Element.create({
     name: "Orgs Display",
-    element: "Orgs",
     data: {
 
     }
   })
 
-  PresentationElement.create({
+  Presentation::Element.create({
     name: "Orgs Bar Graph",
-    element: "BarGraph",
     data: {
 
     }
   })
 
-  PresentationElement.create({
+  Presentation::Element.create({
     name: "Timer",
-    element: "Timer",
     data: {
 
     }
