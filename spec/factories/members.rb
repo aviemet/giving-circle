@@ -20,8 +20,6 @@
 #
 FactoryBot.define do
   factory :member do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
     number { Faker::Number.unique.number(digits: 6) }
     funds_cents { Faker::Number.between(from: 50000, to: 1000000) }
 

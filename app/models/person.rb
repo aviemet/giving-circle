@@ -26,7 +26,7 @@ class Person < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:first_name, :last_name, :middle_name, :number],
+    against: [:first_name, :last_name, :middle_name],
     associated_against: {
       user: [:email]
     },
@@ -37,8 +37,6 @@ class Person < ApplicationRecord
   )
 
   resourcify
-
-  monetize :funds_cents, allow_blank: true, allow_nil: true
 
   has_one :user, dependent: :nullify
 
