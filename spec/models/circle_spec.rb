@@ -37,7 +37,10 @@ RSpec.describe Circle do
     context "with child members" do
       it "can retrieves members" do
         circle = create(:circle)
-        create_list(:member, 5, circle: circle)
+        5.times do
+          person = create(:person)
+          create(:membership, {circle:, people: [person]})
+        end
 
         expect(circle.members.count).to eq(5)
       end

@@ -31,30 +31,17 @@ class Circle < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :themes, dependent: :nullify
-  has_many :presentations, through: :themes
-
-  has_many :memberships, dependent: :nullify
-
-  has_many :members, -> { distinct }, class_name: 'Person', dependent: :nullify, inverse_of: :circles do
-    def to_a
-      Person.joins(memberships_people: :membership)
-        .where(memberships: { id: proxy_association.owner.memberships.pluck(:id) })
-    end
-  end
-
-  has_many :orgs, dependent: :nullify
-
   has_many :ownerships, dependent: :restrict_with_error
   {
     memberships: "Membership",
     themes: "Theme",
     orgs: "Org",
-    groups: "Group",
     presentations: "Presentation"
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
+
+  has_many :members, through: :memberships, source: :people, dependent: :nullify
 
   scope :includes_associated, -> { includes([:themes, :presentations, :members, :orgs, :groups]) }
 end

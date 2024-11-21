@@ -15,6 +15,7 @@
 #  index_themes_on_slug  (slug) UNIQUE
 #
 class Theme < ApplicationRecord
+  include Ownable
   include PgSearch::Model
   include BooleanTimestamp
 
@@ -37,7 +38,6 @@ class Theme < ApplicationRecord
 
   validates :name, presence: true
 
-  belongs_to :circle
   has_many :presentations, dependent: :destroy
 
   has_many :themes_orgs, dependent: :destroy

@@ -20,6 +20,27 @@
 #
 require 'rails_helper'
 
-RSpec.describe Ownership, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Ownership do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      ownership = build(:ownership, circle: build(:circle), ownable: build(:org))
+      expect(ownership).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(circle ownable).each do |attr|
+        expect(build(:ownership, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it "is associated to a Circle" do
+      expect(build(:ownership)).to belong_to(:circle)
+    end
+
+    it "is associated with an ownable record" do
+      expect(build(:ownership)).to belong_to(:ownable)
+    end
+  end
 end

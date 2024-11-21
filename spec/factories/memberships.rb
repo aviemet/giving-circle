@@ -23,5 +23,22 @@ FactoryBot.define do
     funds_cents { Faker::Number.between(from: 50000, to: 1000000) }
 
     circle
+
+    transient do
+      people { [] }
+    end
+
+    after(:build) do |membership, evaluator|
+      Array(evaluator.people).each do |person|
+        membership.memberships_people.build(
+          membership: membership,
+          person: person,
+        )
+      end
+    end
+
+    after(:create) do |membership, _evaluator|
+      membership.memberships_people.each(&:save!) if membership.memberships_people.any?
+    end
   end
 end

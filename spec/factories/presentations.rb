@@ -28,6 +28,7 @@ FactoryBot.define do
   factory :presentation do
     name { Faker::Lorem.words(number: rand(1..4)).map(&:capitalize).join(' ') }
 
+    circle
     theme
   end
 end
