@@ -1,14 +1,7 @@
 Rails.application.routes.draw do
-  resources :members
-  namespace :presentation do
-    resources :votes
-    resources :slides
-    resources :distributions
-    resources :elements
-  end
   root "pages#home" # Public home page for entire project
 
-    # CONCERNS #
+  # CONCERNS #
 
   concern :bulk_delete do
     collection do
@@ -16,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-    # DEVISE PATHS #
+  # DEVISE PATHS #
 
   devise_for(
     :users,
@@ -47,7 +40,7 @@ Rails.application.routes.draw do
   )
   get "/", to: redirect("/circles"), as: "home"
 
-    # RESOURCEFUL PATHS #
+  # RESOURCEFUL PATHS #
 
   resources :users
   resources :people, param: :slug
@@ -56,75 +49,45 @@ Rails.application.routes.draw do
   delete 'groups', to: 'groups#destroy'
 
   # Explicitly define routes for Circle to use :circle_slug
-  get 'circles/:circle_slug', to: 'circles#show', as: 'circle'
-  get 'circles/:circle_slug/edit', to: 'circles#edit', as: 'edit_circle'
-  patch 'circles/:circle_slug', to: 'circles#update'
-  put 'circles/:circle_slug', to: 'circles#update'
-  delete 'circles/:circle_slug', to: 'circles#destroy'
+  get 'circles', to: 'circles#index', as: 'circles'
 
   # Nested resources under Circle with standard slug param
-  resources :circles, param: :slug, only: [:new, :index, :create] do
-    get :about
-
-    resources(
-      :groups,
-      shallow: true,
-      param: :slug,
-      path: :groups,
-    )
-
-    resources :members, concerns: :bulk_delete, param: :slug
-
-    resources :orgs, param: :slug, except: [:create] do
-      get :about
-    end
-
-    resources :presentation_templates, concerns: :bulk_delete, param: :slug
-
-    # Explicitly define routes for Theme to use :theme_slug
-    get 'themes/:theme_slug', to: 'themes#show', as: 'theme'
-    get 'themes/:theme_slug/edit', to: 'themes#edit', as: 'edit_theme'
-    patch 'themes/:theme_slug', to: 'themes#update'
-    put 'themes/:theme_slug', to: 'themes#update'
-    delete 'themes/:theme_slug', to: 'themes#destroy'
-    resources :themes, param: :slug, only: [:new, :index, :create] do
+  scope ':circle_slug' do
+    resource :circles, path: '', param: :slug, as: :circle, shallow: true, except: [:new, :create, :index] do
       get :about
 
-      # get 'members', to: 'theme_members#index'
-      # resources(
-      #   :theme_members,
-      #   path: :members,
-      #   param: :slug,
-      #   as: 'member',
-      # )
+      # resources :members, concerns: :bulk_delete, param: :slug
 
-      get 'orgs', to: 'theme_orgs#index'
-      get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
-      resources(
-        :theme_orgs,
-        path: :orgs,
-        param: :slug,
-        except: [:index],
-        as: 'org',
-      )
+      resources :orgs, param: :slug, except: [:create] do
+        get :about
+      end
 
-      # Admin presentation routes
-      get 'presentations/:presentation_slug', to: 'presentations#show', as: 'presentation'
-      get 'presentations/:presentation_slug/edit', to: 'presentations#edit', as: 'edit_presentation'
-      patch 'presentations/:presentation_slug', to: 'presentations#update'
-      put 'presentations/:presentation_slug', to: 'presentations#update'
-      delete 'presentations/:presentation_slug', to: 'presentations#destroy'
-      resources :presentations, param: :slug, only: [:new, :index, :create] do
-        get :active
+      # resources :presentation_templates, concerns: :bulk_delete, param: :slug
 
-        resources :presentation_slides, as: :slides
-        resources :presentation_votes, as: :votes
-        resources :presentation_leverages, as: :leverages
+      resources :themes, param: :slug, as: :themes do
+        get :about
+
+        # get 'members', to: 'theme_members#index'
+        # resources :theme_members, path: :members, param: :slug, as: 'member'
+
+        get 'orgs', to: 'theme_orgs#index'
+        get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
+        resources :theme_orgs, path: :orgs, param: :slug, except: [:index], as: 'org'
+
+        # Admin presentation routes
+        resources :presentations, param: :slug do
+          get :active
+
+          resources :votes
+          resources :slides
+          resources :distributions
+          resources :elements
+        end
       end
     end
   end
 
-  # Public facing presenations routes
+  # Public facing presentations routes
   namespace :presentations, param: :presentation_slug, as: :active_presentation do
     %i[show settings].each do |r|
       get ":presentation_slug/#{r}", to: "active##{r}", as: r
