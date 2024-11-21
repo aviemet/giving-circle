@@ -1,68 +1,79 @@
 class MembersController < ApplicationController
-  expose :members, -> { search(Member.includes_associated) }
-  expose :member, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle }, find_by: :slug
 
-  strong_params :member, :number, :funds, :active, :name
+  expose :memberships, -> { search(Membership.where(circle:).includes_associated) }
+  expose :membership, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  sortable_fields %w(number funds active name)
+  strong_params :membership, :name, :number, :funds, :active
+
+  sortable_fields %w(name number funds active)
 
   def index
-    authorize members
+    authorize memberships
 
-    paginated_members = paginate(members, :members)
+    paginated_memberships = paginate(memberships, :memberships)
 
-    render inertia: "Members/Index", props: {
-      members: -> { paginated_members.render(:index) },
+    render inertia: "Memberships/Index", props: {
+      memberships: -> { paginated_memberships.render(:index) },
       pagination: -> { {
-        count: members.size,
-        **pagination_data(paginated_members)
+        count: memberships.size,
+        **pagination_data(paginated_memberships)
       } },
     }
   end
 
   def show
-    authorize member
-    render inertia: "Members/Show", props: {
-      member: -> { member.render(:show) }
+    authorize membership
+
+    render inertia: "Memberships/Show", props: {
+      membership: -> { membership.render(:show) },
+      circle: -> { circle.includes_associated.render(:persisted) },
     }
   end
 
   def new
-    authorize Member.new
-    render inertia: "Members/New", props: {
-      member: Member.new.render(:form_data)
+    authorize Membership.new
+
+    render inertia: "Memberships/New", props: {
+      membership: Membership.new.render(:form_data),
+      circle: -> { circle.includes_associated.render(:persisted) },
     }
   end
 
   def edit
-    authorize member
-    render inertia: "Members/Edit", props: {
-      member: member.render(:edit)
+    authorize membership
+
+    render inertia: "Memberships/Edit", props: {
+      membership: membership.render(:edit),
+      circle: -> { circle.includes_associated.render(:persisted) },
     }
   end
 
   def create
-    authorize Member.new
-    if member.save
-      redirect_to member, notice: "Member was successfully created."
+    authorize Membership.new
+
+    if membership.save
+      redirect_to membership, notice: "Membership was successfully created."
     else
-      redirect_to new_member_path, inertia: { errors: member.errors }
+      redirect_to new_member_path, inertia: { errors: membership.errors }
     end
   end
 
   def update
-    authorize member
-    if member.update(member_params)
-      redirect_to member, notice: "Member was successfully updated."
+    authorize membership
+
+    if membership.update(member_params)
+      redirect_to membership, notice: "Membership was successfully updated."
     else
-      redirect_to edit_member_path, inertia: { errors: member.errors }
+      redirect_to edit_member_path, inertia: { errors: membership.errors }
     end
   end
 
   def destroy
-    authorize member
-    member.destroy!
-    redirect_to members_url, notice: "Member was successfully destroyed."
+    authorize membership
+
+    membership.destroy!
+    redirect_to members_url, notice: "Membership was successfully destroyed."
   end
 
 end

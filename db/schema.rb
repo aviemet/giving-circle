@@ -39,15 +39,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.index ["slug"], name: "index_circles_on_slug", unique: true
   end
 
-  create_table "circles_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "circle_id", null: false
-    t.uuid "member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_circles_members_on_circle_id"
-    t.index ["member_id"], name: "index_circles_members_on_member_id"
-  end
-
   create_table "contacts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "contactable_type", null: false
     t.uuid "contactable_id", null: false
@@ -75,12 +66,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
+  create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "number"
+    t.integer "funds_cents", default: 0, null: false
+    t.string "funds_currency", default: "USD", null: false
+    t.boolean "active", default: true, null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_groups_on_slug", unique: true
+    t.index ["slug"], name: "index_memberships_on_slug", unique: true
+  end
+
+  create_table "memberships_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "membership_id", null: false
+    t.uuid "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["membership_id"], name: "index_memberships_people_on_membership_id"
+    t.index ["person_id"], name: "index_memberships_people_on_person_id"
   end
 
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -106,9 +110,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.string "first_name"
     t.string "last_name"
     t.string "middle_name"
-    t.string "number"
-    t.integer "funds_cents"
-    t.string "funds_currency", default: "USD", null: false
     t.boolean "active", default: true, null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
@@ -322,8 +323,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   end
 
   add_foreign_key "addresses", "contacts"
-  add_foreign_key "circles_members", "circles"
-  add_foreign_key "circles_members", "people", column: "member_id"
+  add_foreign_key "memberships_people", "memberships"
+  add_foreign_key "memberships_people", "people"
   add_foreign_key "ownerships", "circles"
   add_foreign_key "presentations", "presentations", column: "presentation_template_id"
   add_foreign_key "presentations", "themes"

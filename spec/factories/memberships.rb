@@ -16,9 +16,12 @@
 #
 #  index_memberships_on_slug  (slug) UNIQUE
 #
-class MemberSerializer < ApplicationSerializer
-  object_as :member
+FactoryBot.define do
+  factory :membership do
+    name { Faker::Name.name }
+    number { Faker::Number.unique.number(digits: 6) }
+    funds_cents { Faker::Number.between(from: 50000, to: 1000000) }
 
-  attributes(
-  )
+    circle
+  end
 end

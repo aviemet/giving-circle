@@ -34,14 +34,20 @@ class Circle < ApplicationRecord
   has_many :themes, dependent: :nullify
   has_many :presentations, through: :themes
 
-  # has_many :circles_member, dependent: :destroy
-  # has_many :members, through: :circles_member
+  has_many :memberships, dependent: :nullify
+
+  has_many :members, -> { distinct }, class_name: 'Person', dependent: :nullify, inverse_of: :circles do
+    def to_a
+      Person.joins(memberships_people: :membership)
+        .where(memberships: { id: proxy_association.owner.memberships.pluck(:id) })
+    end
+  end
+
   has_many :orgs, dependent: :nullify
-  has_many :groups, dependent: :destroy
 
   has_many :ownerships, dependent: :restrict_with_error
   {
-    members: "Member",
+    memberships: "Membership",
     themes: "Theme",
     orgs: "Org",
     groups: "Group",

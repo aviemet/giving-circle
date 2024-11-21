@@ -20,7 +20,7 @@
 #  fk_rails_...  (member_id => people.id)
 #  fk_rails_...  (presentation_id => presentations.id)
 #
-class PresentationsMember < ApplicationRecord
+class PresentationsMembership < ApplicationRecord
   belongs_to :presentation
-  belongs_to :member
+  belongs_to :membership
 end

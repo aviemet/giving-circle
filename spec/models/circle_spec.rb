@@ -30,9 +30,9 @@ RSpec.describe Circle do
   describe "Associations" do
     it { is_expected.to have_many(:themes) }
     it { is_expected.to have_many(:presentations) }
+    it { is_expected.to have_many(:memberships) }
     it { is_expected.to have_many(:members) }
     it { is_expected.to have_many(:orgs) }
-    it { is_expected.to have_many(:groups) }
 
     context "with child members" do
       it "can retrieves members" do
