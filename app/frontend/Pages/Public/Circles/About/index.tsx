@@ -4,8 +4,8 @@ interface AboutCircleProps {
 	circle: Schema.CirclesShow
 }
 
-// @path: /circles/:circle_slug/about
-// @route: circleAbout
+// @path: /:circle_slug/about
+// @route: aboutCircle
 const AboutCircle = ({ circle }: AboutCircleProps) => {
 	return (
 		<div>About { circle.name }</div>

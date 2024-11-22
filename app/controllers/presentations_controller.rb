@@ -8,7 +8,7 @@ class PresentationsController < ApplicationController
 
   sortable_fields %w(theme_id name)
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations (theme_presentations)
   def index
     authorize presentations
 
@@ -25,7 +25,7 @@ class PresentationsController < ApplicationController
     }, layout: "something"
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
+  # @route GET /:circle_slug/presentations/:slug (presentation)
   def show
     authorize presentation
 
@@ -34,7 +34,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/new (new_circle_theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/new (new_theme_presentation)
   def new
     authorize Presentation.new
 
@@ -43,7 +43,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (circle_theme_edit_presentation)
+  # @route GET /:circle_slug/presentations/:slug/edit (edit_presentation)
   def edit
     authorize presentation
 
@@ -52,7 +52,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active (circle_theme_presentation_active)
+  # @route GET /:circle_slug/presentations/:presentation_slug/active (presentation_active)
   def active
     authorize presentation
 
@@ -61,7 +61,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/themes/:theme_slug/presentations (circle_theme_presentations)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new
     if presentation.save
@@ -71,8 +71,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
-  # @route PUT /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
+  # @route PATCH /:circle_slug/presentations/:slug (presentation)
+  # @route PUT /:circle_slug/presentations/:slug (presentation)
   def update
     authorize presentation
     if presentation.update(presentation_params)
@@ -82,7 +82,7 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug (circle_theme_presentation)
+  # @route DELETE /:circle_slug/presentations/:slug (presentation)
   def destroy
     authorize presentation
     presentation.destroy!

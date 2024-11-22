@@ -12,7 +12,7 @@ interface ThemeIndexProps {
 	circle: Schema.CirclesInertiaShare
 }
 
-// @path: /circles/:circle_slug/themes
+// @path: /:circle_slug/themes
 // @route: circleThemes
 const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 	const { params } = usePageProps<'circleThemes'>()

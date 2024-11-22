@@ -11,8 +11,8 @@ interface PresentationVoteIndexProps {
 	pagination: Schema.Pagination
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes
-// @route: circleThemePresentationVotes
+// @path: /:circle_slug/presentations/:presentation_slug/presentation_votes
+// @route: presentationVotes
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
 	const { params } = usePageProps<'circleThemePresentationVotes'>()
 

@@ -10,7 +10,7 @@ interface ShowCircleProps {
 	circle: Schema.CirclesShow
 }
 
-// @path: /circles/:circle_slug
+// @path: /:circle_slug
 // @route: circle
 const ShowCircle = ({ circle }: ShowCircleProps) => {
 	const { params } = usePageProps<'circle'>()

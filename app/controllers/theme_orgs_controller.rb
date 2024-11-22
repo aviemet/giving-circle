@@ -15,7 +15,7 @@ class ThemeOrgsController < ApplicationController
 
   sortable_fields %w(name slug description)
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_orgs)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs (theme_orgs)
   def index
     authorize orgs
 
@@ -32,7 +32,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug (circle_theme_org)
+  # @route GET /:circle_slug/orgs/:slug (org)
   def show
     authorize org
     render inertia: "Themes/Orgs/Show", props: {
@@ -41,7 +41,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/new (new_circle_theme_org)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs/new (new_theme_org)
   def new
     authorize Org.new
     render inertia: "Themes/Orgs/New", props: {
@@ -49,7 +49,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit (edit_circle_theme_org)
+  # @route GET /:circle_slug/orgs/:slug/edit (edit_org)
   def edit
     authorize org
     render inertia: "Themes/Orgs/Edit", props: {
@@ -58,7 +58,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/orgs/import (circle_theme_orgs_import)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs/import (theme_orgs_import)
   def import
     authorize Org.new
 
@@ -68,7 +68,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/themes/:theme_slug/orgs (circle_theme_org_index)
+  # @route POST /:circle_slug/themes/:theme_slug/orgs (theme_org_index)
   def create
     authorize Org.new
 

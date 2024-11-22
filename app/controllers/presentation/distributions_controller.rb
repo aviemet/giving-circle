@@ -1,11 +1,12 @@
 class Presentation::DistributionsController < ApplicationController
   expose :presentation_distributions, -> { search(Presentation::Distribution.includes_associated) }
   expose :presentation_distribution, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
-  strong_params :presentation_distribution, :name, :type, :template
+
+  strong_params :presentation_distribution, permit: %i(name type template)
 
   sortable_fields %w(name type template)
 
+  # @route GET /:circle_slug/presentations/:presentation_slug/presentation_distributions (presentation_distributions)
   def index
     authorize presentation_distributions
 
@@ -20,6 +21,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/presentation_distributions/:id (distribution)
   def show
     authorize presentation_distribution
     render inertia: "Presentation::Distributions/Show", props: {
@@ -27,6 +29,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/presentations/:presentation_slug/presentation_distributions/new (new_presentation_distribution)
   def new
     authorize Presentation::Distribution.new
     render inertia: "Presentation::Distributions/New", props: {
@@ -34,6 +37,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/presentation_distributions/:id/edit (edit_distribution)
   def edit
     authorize presentation_distribution
     render inertia: "Presentation::Distributions/Edit", props: {
@@ -41,6 +45,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
+  # @route POST /:circle_slug/presentations/:presentation_slug/presentation_distributions (presentation_distributions)
   def create
     authorize Presentation::Distribution.new
     if presentation_distribution.save
@@ -50,6 +55,8 @@ class Presentation::DistributionsController < ApplicationController
     end
   end
 
+  # @route PATCH /:circle_slug/presentation_distributions/:id (distribution)
+  # @route PUT /:circle_slug/presentation_distributions/:id (distribution)
   def update
     authorize presentation_distribution
     if presentation_distribution.update(presentation_distribution_params)
@@ -59,6 +66,7 @@ class Presentation::DistributionsController < ApplicationController
     end
   end
 
+  # @route DELETE /:circle_slug/presentation_distributions/:id (distribution)
   def destroy
     authorize presentation_distribution
     presentation_distribution.destroy!

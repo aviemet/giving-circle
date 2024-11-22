@@ -8,8 +8,8 @@ interface EditOrgProps {
 	org: Schema.OrgsEdit
 }
 
-// @path: /circles/:circle_slug/orgs/:slug/edit
-// @route: editCircleOrg
+// @path: /:circle_slug/orgs/:slug/edit
+// @route: editOrg
 const EditOrg = ({ org }: EditOrgProps) => {
 	const { params } = usePageProps<'editCircleOrg'>()
 	const title = 'Edit Org'

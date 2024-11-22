@@ -9,7 +9,7 @@ interface NewThemeProps {
 	circle: Schema.CirclesInertiaShare
 }
 
-// @path: /circles/:circle_slug/themes/new
+// @path: /:circle_slug/themes/new
 // @route: newCircleTheme
 const NewTheme = ({ circle, ...data }: NewThemeProps) => {
 	const { params } = usePageProps<'newCircleTheme'>()

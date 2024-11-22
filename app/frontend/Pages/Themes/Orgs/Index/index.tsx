@@ -12,8 +12,8 @@ interface OrgIndexProps {
 	circle: Schema.CirclesInertiaShare
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/orgs
-// @route: circleThemeOrgs
+// @path: /:circle_slug/themes/:theme_slug/orgs
+// @route: themeOrgs
 const OrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 	const { params } = usePageProps<'circleThemeOrgs'>()
 

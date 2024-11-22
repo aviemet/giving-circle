@@ -7,8 +7,8 @@ interface IEditPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesEdit
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id/edit
-// @route: editCircleThemePresentationVote
+// @path: /:circle_slug/presentation_votes/:id/edit
+// @route: editVote
 const EditPresentationVote = ({ presentation_vote }: IEditPresentationVoteProps) => {
 	const title = 'Edit Presentation Vote'
 

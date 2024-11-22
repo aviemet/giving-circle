@@ -6,11 +6,11 @@ class ThemesController < ApplicationController
   expose :themes, -> { search(circle.themes.includes_associated) }
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
-  strong_params :theme, permit: [:title, :quarter, :slug]
+  strong_params :theme, permit: %i(title quarter slug)
 
   sortable_fields %w(title quarter slug)
 
-  # @route GET /circles/:circle_slug/themes (circle_themes)
+  # @route GET /:circle_slug/themes (circle_themes)
   def index
     authorize themes
 
@@ -26,7 +26,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug (circle_theme)
+  # @route GET /:circle_slug/themes/:slug (theme)
   def show
     authorize theme
 
@@ -35,7 +35,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/about (circle_theme_about)
+  # @route GET /:circle_slug/themes/:theme_slug/about (theme_about)
   def about
     authorize theme
 
@@ -44,7 +44,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/new (new_circle_theme)
+  # @route GET /:circle_slug/themes/new (new_circle_theme)
   def new
     authorize Theme.new
 
@@ -54,7 +54,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/themes/:theme_slug/edit (circle_edit_theme)
+  # @route GET /:circle_slug/themes/:slug/edit (edit_theme)
   def edit
     authorize theme
 
@@ -64,7 +64,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/themes (circle_themes)
+  # @route POST /:circle_slug/themes (circle_themes)
   def create
     authorize Theme.new
 
@@ -77,8 +77,8 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/themes/:theme_slug (circle_theme)
-  # @route PUT /circles/:circle_slug/themes/:theme_slug (circle_theme)
+  # @route PATCH /:circle_slug/themes/:slug (theme)
+  # @route PUT /:circle_slug/themes/:slug (theme)
   def update
     authorize theme
     if theme.update(theme_params)
@@ -88,7 +88,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/themes/:theme_slug (circle_theme)
+  # @route DELETE /:circle_slug/themes/:slug (theme)
   def destroy
     authorize theme
     theme.destroy

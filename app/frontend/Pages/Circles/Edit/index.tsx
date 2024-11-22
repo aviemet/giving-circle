@@ -8,7 +8,7 @@ interface EditCircleProps {
 	circle: Schema.CirclesEdit
 }
 
-// @path: /circles/:circle_slug/edit
+// @path: /:circle_slug/edit
 // @route: editCircle
 const EditCircle = ({ circle }: EditCircleProps) => {
 	const { params } = usePageProps<'editCircle'>()

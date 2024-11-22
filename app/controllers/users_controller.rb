@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   expose :users, -> { search(User.all.includes_associated) }
   expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
-  strong_params :user, permit: [:email, :password, :active, :first_name, :last_name, :number]
+  strong_params :user, permit: %i(email password active first_name last_name number)
 
   sortable_fields %w(email active first_name last_name number)
 

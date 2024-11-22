@@ -6,8 +6,8 @@ interface IShowPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesShow
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id
-// @route: circleThemePresentationVote
+// @path: /:circle_slug/presentation_votes/:id
+// @route: vote
 const ShowPresentationVote = ({ presentation_vote }: IShowPresentationVoteProps) => {
 	const title =  'PresentationVote'
 

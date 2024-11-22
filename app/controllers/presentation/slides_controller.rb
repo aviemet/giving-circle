@@ -1,11 +1,12 @@
 class Presentation::SlidesController < ApplicationController
   expose :presentation_slides, -> { search(Presentation::Slide.includes_associated) }
   expose :presentation_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
-  strong_params :presentation_slide, :name, :data, :order, :template
+
+  strong_params :presentation_slide, permit: %i(name data order template)
 
   sortable_fields %w(name data order template)
 
+  # @route GET /:circle_slug/presentations/:presentation_slug/presentation_slides (presentation_slides)
   def index
     authorize presentation_slides
 
@@ -20,6 +21,7 @@ class Presentation::SlidesController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/presentation_slides/:id (slide)
   def show
     authorize presentation_slide
     render inertia: "Presentation::Slides/Show", props: {
@@ -27,6 +29,7 @@ class Presentation::SlidesController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/presentations/:presentation_slug/presentation_slides/new (new_presentation_slide)
   def new
     authorize Presentation::Slide.new
     render inertia: "Presentation::Slides/New", props: {
@@ -34,6 +37,7 @@ class Presentation::SlidesController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/presentation_slides/:id/edit (edit_slide)
   def edit
     authorize presentation_slide
     render inertia: "Presentation::Slides/Edit", props: {
@@ -41,6 +45,7 @@ class Presentation::SlidesController < ApplicationController
     }
   end
 
+  # @route POST /:circle_slug/presentations/:presentation_slug/presentation_slides (presentation_slides)
   def create
     authorize Presentation::Slide.new
     if presentation_slide.save
@@ -50,6 +55,8 @@ class Presentation::SlidesController < ApplicationController
     end
   end
 
+  # @route PATCH /:circle_slug/presentation_slides/:id (slide)
+  # @route PUT /:circle_slug/presentation_slides/:id (slide)
   def update
     authorize presentation_slide
     if presentation_slide.update(presentation_slide_params)
@@ -59,6 +66,7 @@ class Presentation::SlidesController < ApplicationController
     end
   end
 
+  # @route DELETE /:circle_slug/presentation_slides/:id (slide)
   def destroy
     authorize presentation_slide
     presentation_slide.destroy!

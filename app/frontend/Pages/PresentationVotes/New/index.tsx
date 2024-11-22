@@ -7,8 +7,8 @@ interface INewPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesFormData
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/new
-// @route: newCircleThemePresentationVote
+// @path: /:circle_slug/presentations/:presentation_slug/presentation_votes/new
+// @route: newPresentationVote
 const NewPresentationVote = ({ ...data }: INewPresentationVoteProps) => {
 	const title = 'New Presentation Vote'
 

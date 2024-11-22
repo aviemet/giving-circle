@@ -7,8 +7,8 @@ interface ShowOrgProps {
 	org: Schema.OrgsShow
 }
 
-// @path: /circles/:circle_slug/orgs/:slug
-// @route: circleOrg
+// @path: /:circle_slug/orgs/:slug
+// @route: org
 const ShowOrg = ({ org }: ShowOrgProps) => {
 	const { params } = usePageProps<'circleOrg'>()
 	const title =  'Org'

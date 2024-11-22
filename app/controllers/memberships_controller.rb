@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   expose :memberships, -> { search(Membership.where(circle:).includes_associated) }
   expose :membership, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :membership, :name, :number, :funds, :active
+  strong_params :membership, permit: %i(name number funds active)
 
   sortable_fields %w(name number funds active)
 

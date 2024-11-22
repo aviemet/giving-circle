@@ -82,67 +82,15 @@ const urlParams = {
   "orgs": {
     "params": []
   },
-  "groups": {
+  "circles": {
     "params": []
   },
-  "circle": {
+  "aboutCircle": {
     "params": [
       "circle_slug"
     ]
   },
-  "editCircle": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "circleAbout": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "circleGroups": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "newCircleGroup": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "editGroup": {
-    "params": [
-      "slug"
-    ]
-  },
-  "group": {
-    "params": [
-      "slug"
-    ]
-  },
-  "circleMembers": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "newCircleMember": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "editCircleMember": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleMember": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleOrgAbout": {
+  "orgAbout": {
     "params": [
       "circle_slug",
       "org_slug"
@@ -158,249 +106,172 @@ const urlParams = {
       "circle_slug"
     ]
   },
-  "editCircleOrg": {
+  "editOrg": {
     "params": [
       "circle_slug",
       "slug"
     ]
   },
-  "circleOrg": {
+  "org": {
     "params": [
       "circle_slug",
       "slug"
     ]
   },
-  "circlePresentationTemplates": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "newCirclePresentationTemplate": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "editCirclePresentationTemplate": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circlePresentationTemplate": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleTheme": {
+  "themeAbout": {
     "params": [
       "circle_slug",
       "theme_slug"
     ]
   },
-  "circleEditTheme": {
+  "themeOrgs": {
     "params": [
       "circle_slug",
       "theme_slug"
     ]
   },
-  "circleThemeAbout": {
+  "themeOrgsImport": {
     "params": [
       "circle_slug",
       "theme_slug"
     ]
   },
-  "circleThemeMembers": {
+  "themeOrgIndex": {
     "params": [
       "circle_slug",
       "theme_slug"
     ]
   },
-  "circleThemeMemberIndex": {
+  "newThemeOrg": {
     "params": [
       "circle_slug",
       "theme_slug"
     ]
   },
-  "newCircleThemeMember": {
+  "presentationActive": {
     "params": [
       "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "editCircleThemeMember": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "slug"
-    ]
-  },
-  "circleThemeMember": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "slug"
-    ]
-  },
-  "circleThemeOrgs": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "circleThemeOrgsImport": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "circleThemeOrgIndex": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "newCircleThemeOrg": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "editCircleThemeOrg": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "slug"
-    ]
-  },
-  "circleThemeOrg": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "slug"
-    ]
-  },
-  "circleThemePresentation": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "circleThemeEditPresentation": {
+  "presentationDistributions": {
     "params": [
       "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "circleThemePresentationActive": {
+  "newPresentationDistribution": {
     "params": [
       "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "circleThemePresentationSlides": {
+  "editDistribution": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newCircleThemePresentationSlide": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editCircleThemePresentationSlide": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
       "id"
     ]
   },
-  "circleThemePresentationSlide": {
+  "distribution": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "presentation_slug",
       "id"
     ]
   },
-  "circleThemePresentationVotes": {
+  "presentationElements": {
     "params": [
       "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "newCircleThemePresentationVote": {
+  "newPresentationElement": {
     "params": [
       "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "editCircleThemePresentationVote": {
+  "editElement": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "presentation_slug",
       "id"
     ]
   },
-  "circleThemePresentationVote": {
+  "element": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "presentation_slug",
       "id"
     ]
   },
-  "circleThemePresentationLeverages": {
+  "presentationSlides": {
     "params": [
       "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "newCircleThemePresentationLeverage": {
+  "newPresentationSlide": {
     "params": [
       "circle_slug",
-      "theme_slug",
       "presentation_slug"
     ]
   },
-  "editCircleThemePresentationLeverage": {
+  "editSlide": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "presentation_slug",
       "id"
     ]
   },
-  "circleThemePresentationLeverage": {
+  "slide": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "presentation_slug",
       "id"
     ]
   },
-  "circleThemePresentations": {
+  "presentationVotes": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "newPresentationVote": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "editVote": {
+    "params": [
+      "circle_slug",
+      "id"
+    ]
+  },
+  "vote": {
+    "params": [
+      "circle_slug",
+      "id"
+    ]
+  },
+  "themePresentations": {
     "params": [
       "circle_slug",
       "theme_slug"
     ]
   },
-  "newCircleThemePresentation": {
+  "newThemePresentation": {
     "params": [
       "circle_slug",
       "theme_slug"
+    ]
+  },
+  "editPresentation": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "presentation": {
+    "params": [
+      "circle_slug",
+      "slug"
     ]
   },
   "circleThemes": {
@@ -413,11 +284,27 @@ const urlParams = {
       "circle_slug"
     ]
   },
-  "circles": {
-    "params": []
+  "editTheme": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
   },
-  "newCircle": {
-    "params": []
+  "theme": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "editCircle": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "circle": {
+    "params": [
+      "circle_slug"
+    ]
   },
   "activePresentationShow": {
     "params": [

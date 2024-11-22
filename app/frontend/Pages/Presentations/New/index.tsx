@@ -8,8 +8,8 @@ interface NewPresentationProps {
 	presentation: Schema.PresentationsFormData
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/presentations/new
-// @route: newCircleThemePresentation
+// @path: /:circle_slug/themes/:theme_slug/presentations/new
+// @route: newThemePresentation
 const NewPresentation = ({ presentation }: NewPresentationProps) => {
 	const { params } = usePageProps<'newCircleThemePresentation'>()
 

@@ -46,7 +46,6 @@ Rails.application.routes.draw do
   resources :people, param: :slug
 
   delete 'orgs', to: 'orgs#destroy'
-  delete 'groups', to: 'groups#destroy'
 
   # Explicitly define routes for Circle to use :circle_slug
   get 'circles', to: 'circles#index', as: 'circles'
@@ -78,10 +77,10 @@ Rails.application.routes.draw do
         resources :presentations, param: :slug do
           get :active
 
-          resources :votes
-          resources :slides
-          resources :distributions
-          resources :elements
+          resources :presentation_distributions, as: :distributions, controller: 'presentation/distributions'
+          resources :presentation_elements, as: :elements, controller: 'presentation/elements'
+          resources :presentation_slides, as: :slides, controller: 'presentation/slides'
+          resources :presentation_votes, as: :votes, controller: 'presentation/votes'
         end
       end
     end

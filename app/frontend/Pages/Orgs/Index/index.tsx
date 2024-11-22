@@ -11,7 +11,7 @@ interface OrgIndexProps {
 	pagination: Schema.Pagination
 }
 
-// @path: /circles/:circle_slug/orgs
+// @path: /:circle_slug/orgs
 // @route: circleOrgs
 const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 	const { params } = usePageProps<'circleOrgs'>()

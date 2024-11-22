@@ -13,7 +13,7 @@ class OrgsController < ApplicationController
 
   sortable_fields %w(name slug description themes_org.ask)
 
-  # @route GET /circles/:circle_slug/orgs (circle_orgs)
+  # @route GET /:circle_slug/orgs (circle_orgs)
   def index
     authorize orgs
 
@@ -28,7 +28,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route GET /:circle_slug/orgs/:slug (org)
   def show
     authorize org
 
@@ -38,7 +38,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:org_slug/about (circle_org_about)
+  # @route GET /:circle_slug/orgs/:org_slug/about (org_about)
   def about
     authorize org
 
@@ -49,7 +49,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/new (new_circle_org)
+  # @route GET /:circle_slug/orgs/new (new_circle_org)
   def new
     authorize Org.new
 
@@ -58,7 +58,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/orgs/:slug/edit (edit_circle_org)
+  # @route GET /:circle_slug/orgs/:slug/edit (edit_org)
   def edit
     authorize org
 
@@ -83,8 +83,8 @@ class OrgsController < ApplicationController
   #   end
   # end
 
-  # @route PATCH /circles/:circle_slug/orgs/:slug (circle_org)
-  # @route PUT /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route PATCH /:circle_slug/orgs/:slug (org)
+  # @route PUT /:circle_slug/orgs/:slug (org)
   def update
     authorize org
 
@@ -96,7 +96,7 @@ class OrgsController < ApplicationController
   end
 
   # @route DELETE /orgs (orgs)
-  # @route DELETE /circles/:circle_slug/orgs/:slug (circle_org)
+  # @route DELETE /:circle_slug/orgs/:slug (org)
   def destroy
     authorize org
 
