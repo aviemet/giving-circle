@@ -6,7 +6,7 @@ namespace :annotate do
 
   desc "Annotate controllers with route information"
   task :routes => [:environment] do
-    system("rails js:routes:typescript")
+    system("rails js:routes")
     system("rails url_params:generate")
     system("chusaku")
   end
