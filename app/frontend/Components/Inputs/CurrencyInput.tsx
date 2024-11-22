@@ -9,7 +9,7 @@ export interface CurrencyInputProps
 	NumberInputProps,
 	BaseInputProps {
 
-	symbol?: string|React.ReactNode
+	symbol?: string | React.ReactNode
 }
 
 const NumberInputComponent = forwardRef<HTMLInputElement, CurrencyInputProps>((

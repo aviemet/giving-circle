@@ -5,7 +5,11 @@ class Users::SessionsController < Devise::SessionsController
 
   # @route GET /login (new_user_session)
   def new
-    render inertia: "Auth/Login"
+    render inertia: "Auth/Login", controller: {
+      inertia_configuration: {
+        layout: "Something"
+      }
+    }
   end
 
   # @route POST /login (user_session)
@@ -30,5 +34,9 @@ class Users::SessionsController < Devise::SessionsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
     devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+  end
+
+  def layout_value
+    LAYOUTS[:auth]
   end
 end

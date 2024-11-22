@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface ConditionalWrapperProps {
-	children: JSX.Element
+	children: React.ReactNode
 	condition: boolean
 	wrapper: (children: React.ReactNode) => JSX.Element
 }

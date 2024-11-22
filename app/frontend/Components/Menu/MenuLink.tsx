@@ -5,7 +5,7 @@ import { Link } from '@/Components'
 import { LinkProps } from '../Link'
 import * as classes from './Menu.css'
 
-type DuplicateProps = 'color'|'children'|'classNames'|'styles'|'variant'|'vars'
+type DuplicateProps = 'color' | 'children' | 'classNames' | 'styles' | 'variant' | 'vars'
 interface MenuItemProps extends MantineItemProps, Omit<LinkProps, DuplicateProps> {
 	icon?: React.ReactNode
 	disabled?: boolean

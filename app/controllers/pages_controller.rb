@@ -6,4 +6,10 @@ class PagesController < ApplicationController
   def home
     render inertia: "Public/Home", props: {}
   end
+
+  protected
+
+  def layout_value
+    LAYOUTS[:public]
+  end
 end

@@ -29,4 +29,8 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  def layout_value
+    LAYOUTS[:auth]
+  end
 end

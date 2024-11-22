@@ -32,7 +32,7 @@ const SwatchPicker = ({ value, onChange }: SwatchPickerProps) => {
 				{ value === color && <CheckIcon width={ rem(12) } height={ rem(12) } /> }
 			</ColorSwatch>
 		))
-	}, [value, colorScheme])
+	}, [theme.colors, theme.white, colorScheme, value, onChange])
 
 	return (
 		<Group gap={ 2 } mt={ 5 }>

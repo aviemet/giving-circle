@@ -17,38 +17,36 @@ type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
 } }
 
-const pages = import.meta.glob<PagesObject>('../Pages/**/index.tsx')
+// Map of layout names to components
+// This needs to manually be kept in sync with the definitions on the server
+// app/controllers/concerns/inertia_share/layout.rb
+const LAYOUT_COMPONENTS = {
+	'AppLayout': AppLayout,
+	'AuthLayout': AuthLayout,
+	'PublicLayout': PublicLayout,
+	'PresentLayout': PresentationLayout,
+} as const
 
 document.addEventListener('DOMContentLoaded', () => {
 	createInertiaApp({
 		title: title => `${SITE_TITLE} - ${title}`,
 
 		resolve: async name => {
-			let Layout
-
-			/**
-				* Inertia doesn't provide a good way to specify Layout templates,
-				* so inferring from the render path is the best option we have at the moment
-				*/
-			switch(name.substring(0, name.indexOf('/'))) {
-				case 'Public':
-					Layout = PublicLayout
-					break
-				case 'Auth':
-					Layout = AuthLayout
-					break
-				case 'Present':
-					Layout = PresentationLayout
-					break
-				default:
-					Layout = AppLayout
-			}
-
+			const pages = import.meta.glob<PagesObject>('../Pages/**/index.tsx')
 			const page = (await pages[`../Pages/${name}/index.tsx`]()).default
 
-			if(page.layout === undefined) page.layout = (page) => <LayoutWrapper>
-				<Layout children={ page } />
-			</LayoutWrapper>
+			page.layout = (page) => {
+				const props = page.props
+				let Layout = LAYOUT_COMPONENTS[props.layout as keyof typeof LAYOUT_COMPONENTS] || LAYOUT_COMPONENTS['AppLayout']
+
+				return (
+					<LayoutWrapper>
+						<Layout>
+							{ page }
+						</Layout>
+					</LayoutWrapper>
+				)
+			}
 
 			return page
 		},

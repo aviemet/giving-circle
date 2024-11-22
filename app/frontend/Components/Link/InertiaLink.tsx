@@ -9,7 +9,7 @@ import AnchorLink, { type AnchorLinkProps } from '@/Components/Link/AnchorLink'
 interface LinkProps extends AnchorLinkProps {
 	children?: React.ReactNode
 	href: string
-	as: 'a'|'button'
+	as: 'a' | 'button'
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	buttonProps?: ButtonProps

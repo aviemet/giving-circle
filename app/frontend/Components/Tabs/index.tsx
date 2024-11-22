@@ -5,7 +5,7 @@ import TabsList from './TabsList'
 
 export interface TabsComponentProps extends TabsProps {
 	urlControlled?: boolean
-	dependencies?: Record<string, string|string[]>
+	dependencies?: Record<string, string | string[]>
 }
 
 const TabsComponent = ({ children, urlControlled = false, ...props }: TabsComponentProps) => {

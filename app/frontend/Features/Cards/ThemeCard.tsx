@@ -19,7 +19,7 @@ const ThemeCard = ({ circle, theme }: ThemeCardProps) => {
 			radius="md"
 			withBorder
 			component={ Link }
-			href={ Routes.circleTheme(circle.slug, theme.slug) }
+			href={ Routes.theme(circle.slug, theme.slug) }
 		>
 			<Group justify="space-between" mt="md" mb="xs">
 				<Text fw={ 500 }>{ theme.name }</Text>

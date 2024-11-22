@@ -62,4 +62,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def translation_scope
     'devise.confirmations'
   end
+
+  def layout_value
+    LAYOUTS[:auth]
+  end
 end

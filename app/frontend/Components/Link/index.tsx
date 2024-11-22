@@ -4,9 +4,6 @@ import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps, type ButtonProps } from '@mantine/core'
 
-import cx from 'clsx'
-import * as classes from './Link.css'
-
 export { default as NavLink } from './NavLink'
 
 export interface LinkProps
@@ -18,7 +15,7 @@ export interface LinkProps
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	external?: boolean
-	as?: 'a'|'button'
+	as?: 'a' | 'button'
 	onProgress?: React.ReactEventHandler<HTMLAnchorElement>
 	onClick?: React.ReactEventHandler<HTMLAnchorElement>
 	target?: string

@@ -1,9 +1,11 @@
-import React, { useEffect, useCallback } from 'react'
+import React from 'react'
 import { Tabs } from '@mantine/core'
 import { type VisitOptions } from '@inertiajs/core'
 import { router } from '@inertiajs/react'
 import { TabsComponentProps } from '.'
 import { coerceArray } from '@/lib'
+import { useInit } from '@/lib/hooks'
+
 
 const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: TabsComponentProps) => {
 	const navigateTab = (value: string | null, options?: VisitOptions) => {
@@ -20,14 +22,8 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 		}, options || {}))
 	}
 
-	const activeTab = useCallback(() => {
-		const url = new URL(window.location.href)
-
-		return url.searchParams.get('tab')
-	}, [window.location.href])
-
 	// Handle direct navigation to tabbed page
-	useEffect(() => {
+	useInit(() => {
 		if(!activeTab() && defaultValue) {
 			navigateTab(defaultValue, { replace: true })
 		} else {
@@ -36,7 +32,7 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 				document.removeEventListener('inertia:navigate', reloadActiveTab)
 			})
 		}
-	}, [])
+	})
 
 	const handleTabChange = (value: string | null) => {
 		navigateTab(value || activeTab())
@@ -57,3 +53,11 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 }
 
 export default UrlTabs
+
+// Utility Functions
+
+const activeTab = () => {
+	const url = new URL(window.location.href)
+
+	return url.searchParams.get('tab')
+}

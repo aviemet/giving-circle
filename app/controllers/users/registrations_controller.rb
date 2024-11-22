@@ -78,4 +78,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_inactive_sign_up_path_for(resource)
     new_confirmation_path(resource, { email: resource.email })
   end
+
+  def layout_value
+    LAYOUTS[:auth]
+  end
 end
