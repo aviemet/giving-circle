@@ -622,12 +622,12 @@ export const cancelUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7
 
 /**
  * Generates rails route to
- * /:circle_slug(.:format)
- * @param {any} circleSlug
+ * /circles/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const circle = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const circle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -803,6 +803,14 @@ export const element = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"id":{"r"
  * @returns {string} route path
  */
 export const home = /*#__PURE__*/ __jsr.r({}, [7,"/"]);
+
+/**
+ * Generates rails route to
+ * /circles/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newCircle = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

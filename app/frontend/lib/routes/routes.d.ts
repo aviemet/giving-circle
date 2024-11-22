@@ -199,13 +199,13 @@ export const cancelUserRegistration: ((
 
 /**
  * Generates rails route to
- * /:circle_slug(.:format)
- * @param {any} circleSlug
+ * /circles/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const circle: ((
-  circleSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -443,6 +443,16 @@ export const element: ((
  */
 export const home: ((
   options?: RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /circles/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newCircle: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**

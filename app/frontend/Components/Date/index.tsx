@@ -2,7 +2,7 @@ import React from 'react'
 import { formatter } from '@/lib'
 
 interface DateProps {
-	children: string|Date|undefined
+	children: string | Date | undefined
 	format?: keyof typeof formatter.date
 }
 

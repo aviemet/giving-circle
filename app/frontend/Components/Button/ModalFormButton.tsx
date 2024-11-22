@@ -12,8 +12,8 @@ interface ModalFormButtonProps {
 	title: string
 	buttonProps?: ButtonProps
 	modalProps?: Partial<ModalProps>
-	onSubmit?: (form: UseFormProps) => boolean|void
-	onSuccess?: (data: { id: string|number }) => void
+	onSubmit?: (form: UseFormProps) => boolean | void
+	onSuccess?: (data: { id: string | number }) => void
 }
 
 const ModalFormButton = ({

@@ -36,7 +36,6 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 	})
 
 	const handleChange = (v: string) => {
-		console.log({ v })
 		setValue(v)
 		onChange?.(v, form)
 	}
