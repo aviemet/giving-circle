@@ -37,7 +37,6 @@ gem "delayed_job_active_record", "~> 4.1"
 gem "activerecord-import", "~> 1.7"
 gem "thor", "~> 1.3"
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -50,6 +49,7 @@ gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+
 
 group :development, :test do
   gem "rspec-rails", "~> 7.1"
@@ -101,5 +101,4 @@ group :test do
   gem "bullet", "~> 7.0"
   gem "simplecov", "~> 0.22.0"
   gem "pundit-matchers", "~> 3.1"
-
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Presentation::DistributionPolicy, type: :policy do
   subject { described_class }

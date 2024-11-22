@@ -21,6 +21,5 @@ class OrgSerializer < ApplicationSerializer
   attributes(
     :name,
     :description,
-    :circle_id,
   )
 end

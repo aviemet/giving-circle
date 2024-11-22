@@ -16,9 +16,9 @@
 #
 #  index_memberships_on_slug  (slug) UNIQUE
 #
-class MemberSerializer < ApplicationSerializer
-  object_as :member
+class MembershipSerializer < ApplicationSerializer
+  object_as :membership
 
-  attributes(
-  )
+  attributes
+
 end

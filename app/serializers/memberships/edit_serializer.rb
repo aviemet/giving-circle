@@ -1,2 +1,2 @@
-class Members::EditSerializer < Members::PersistedSerializer
+class Memberships::EditSerializer < Memberships::PersistedSerializer
 end

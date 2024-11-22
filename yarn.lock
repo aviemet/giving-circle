@@ -5733,7 +5733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.13.0":
+"eslint@npm:^9.15.0":
   version: 9.15.0
   resolution: "eslint@npm:9.15.0"
   dependencies:
@@ -6485,7 +6485,7 @@ __metadata:
     dayjs: ^1.11.13
     dinero.js: ^1.9.1
     dmeditor: ^0.2.0-beta.3
-    eslint: ^9.13.0
+    eslint: ^9.15.0
     eslint-import-resolver-typescript: ^3.6.3
     eslint-plugin-jsonc: ^2.16.0
     eslint-plugin-jsx-a11y: ^6.10.2

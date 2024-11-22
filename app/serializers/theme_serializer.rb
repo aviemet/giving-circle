@@ -23,6 +23,5 @@ class ThemeSerializer < ApplicationSerializer
     :name,
     :published_at,
     :status,
-    :circle_id,
   )
 end

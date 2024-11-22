@@ -26,6 +26,5 @@ class PresentationTemplateSerializer < ApplicationSerializer
 
   attributes(
     :name,
-    :circle_id,
   )
 end

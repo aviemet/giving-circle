@@ -1,2 +1,2 @@
-class Members::FormDataSerializer < MemberSerializer
+class Memberships::FormDataSerializer < MembershipSerializer
 end

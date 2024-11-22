@@ -1,6 +1,6 @@
-class Members::PersistedSerializer < MemberSerializer
+class Memberships::PersistedSerializer < MembershipSerializer
   include Persisted
 
-  attributes(
-  )
+  attributes
+
 end

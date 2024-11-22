@@ -1,2 +1,2 @@
-class Members::IndexSerializer < Members::PersistedSerializer
+class Memberships::IndexSerializer < Memberships::PersistedSerializer
 end

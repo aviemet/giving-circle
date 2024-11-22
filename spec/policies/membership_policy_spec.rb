@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe MembershipPolicy, type: :policy do
   subject { described_class }
