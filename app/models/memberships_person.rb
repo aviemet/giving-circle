@@ -19,10 +19,6 @@
 #  fk_rails_...  (person_id => people.id)
 #
 class MembershipsPerson < ApplicationRecord
-  resourcify
-
   belongs_to :membership
   belongs_to :person
-
-  scope :includes_associated, -> { includes([:membership, :person]) }
 end

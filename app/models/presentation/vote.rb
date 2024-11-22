@@ -24,6 +24,9 @@ class Presentation::Vote < ApplicationRecord
 
   resourcify
 
+  has_many :presentations_votes, dependent: :destroy, inverse_of: :vote
+  has_many :presentations, through: :presentations_votes
+
   scope :templates, -> { where(template: true) }
 
   scope :includes_associated, -> { includes([]) }

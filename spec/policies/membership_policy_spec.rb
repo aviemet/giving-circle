@@ -1,9 +1,9 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe MemberPolicy, type: :policy do
-  let(:user) { User.new }
-
+RSpec.describe MembershipPolicy, type: :policy do
   subject { described_class }
+
+  let(:user) { User.new }
 
   permissions ".scope" do
     pending "add some examples to (or delete) #{__FILE__}"

@@ -15,6 +15,8 @@
 #
 require 'rails_helper'
 
+require "models/shared/ownable"
+
 RSpec.describe Org do
   describe "Validations" do
     it "is valid with valid attributes" do
@@ -33,10 +35,10 @@ RSpec.describe Org do
   end
 
   describe "Associations" do
+    it_behaves_like "ownable"
     it { is_expected.to have_many(:themes_orgs) }
     it { is_expected.to have_many(:themes) }
     it { is_expected.to have_many(:presentations_orgs) }
     it { is_expected.to have_many(:presentations) }
-    it { is_expected.to belong_to(:circle) }
   end
 end

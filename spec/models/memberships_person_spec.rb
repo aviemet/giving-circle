@@ -20,6 +20,21 @@
 #
 require 'rails_helper'
 
-RSpec.describe MembershipsPerson, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe MembershipsPerson do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:memberships_person)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(membership person).each do |attr|
+        expect(build(:memberships_person, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it { is_expected.to belong_to(:person) }
+    it { is_expected.to belong_to(:membership) }
+  end
 end

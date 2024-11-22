@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :presentations_distribution do
-    presentation { nil }
-    presentation_distribution { nil }
+    presentation
+    distribution factory: :presentation_distribution
   end
 end

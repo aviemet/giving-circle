@@ -21,5 +21,20 @@
 require 'rails_helper'
 
 RSpec.describe PresentationsDistribution, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:presentations_distribution)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(presentation distribution).each do |attr|
+        expect(build(:presentations_distribution, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it { is_expected.to belong_to(:presentation) }
+    it { is_expected.to belong_to(:distribution) }
+  end
 end

@@ -17,6 +17,8 @@
 
 require 'rails_helper'
 
+require "models/shared/ownable"
+
 RSpec.describe Theme do
   describe "Validations" do
     it "is valid with valid attributes" do
@@ -32,24 +34,22 @@ RSpec.describe Theme do
 
   # Associations
   describe "Associations" do
-    it { is_expected.to belong_to(:circle) }
+    it_behaves_like "ownable"
     it { is_expected.to have_many(:presentations).dependent(:destroy) }
     it { is_expected.to have_many(:themes_orgs).dependent(:destroy) }
     it { is_expected.to have_many(:orgs).through(:themes_orgs) }
 
     describe "#orgs" do
       it 'includes ask_cents and ask_currency from the join table' do
-        theme = create(:theme)
-        create(:themes_org, {
-          theme:,
+        themes_org = create(:themes_org, {
           ask_cents: 20000,
           ask_currency: "USD"
         },)
 
-        loaded_org = theme.orgs.first
+        org = themes_org.theme.orgs.first
 
-        expect(loaded_org.ask_cents).to eq(20000)
-        expect(loaded_org.ask_currency).to eq("USD")
+        expect(org.ask_cents).to eq(20000)
+        expect(org.ask_currency).to eq("USD")
       end
     end
   end

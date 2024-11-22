@@ -25,6 +25,9 @@ class Presentation::Slide < ApplicationRecord
 
   resourcify
 
+  has_many :presentations_slides, dependent: :destroy, inverse_of: :slide
+  has_many :presentations, through: :presentations_slides
+
   scope :templates, -> { where(template: true) }
 
   scope :includes_associated, -> { includes([]) }

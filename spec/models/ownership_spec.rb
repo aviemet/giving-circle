@@ -35,12 +35,7 @@ RSpec.describe Ownership do
   end
 
   describe "Associations" do
-    it "is associated to a Circle" do
-      expect(build(:ownership)).to belong_to(:circle)
-    end
-
-    it "is associated with an ownable record" do
-      expect(build(:ownership)).to belong_to(:ownable)
-    end
+    it { is_expected.to belong_to(:circle) }
+    it { is_expected.to belong_to(:ownable) }
   end
 end

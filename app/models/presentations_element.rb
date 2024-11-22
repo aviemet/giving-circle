@@ -20,5 +20,5 @@
 #
 class PresentationsElement < ApplicationRecord
   belongs_to :presentation
-  belongs_to :presentation_element
+  belongs_to :element, class_name: "Presentation::Element", foreign_key: "presentation_element_id", inverse_of: :presentations_elements
 end

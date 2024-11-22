@@ -33,6 +33,14 @@ RSpec.describe ThemesOrg do
         expect(build(:themes_org, attr => nil)).not_to be_valid
       end
     end
+
+    it "is invalid if theme.circle and org.circle are not the same" do
+      theme = build_stubbed(:theme)
+      org = build_stubbed(:org)
+      themes_org = build_stubbed(:themes_org, { theme:, org: })
+
+      expect(themes_org).not_to be_valid
+    end
   end
 
   describe "Attributes" do

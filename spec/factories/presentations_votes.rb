@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :presentations_vote do
-    presentation { nil }
-    presentation_vote { nil }
+    presentation
+    vote factory: :presentation_vote
   end
 end

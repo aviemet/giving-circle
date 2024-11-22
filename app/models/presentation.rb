@@ -25,6 +25,7 @@
 #  fk_rails_...  (theme_id => themes.id)
 #
 class Presentation < ApplicationRecord
+  include Ownable
   include PgSearch::Model
 
   extend FriendlyId
@@ -32,10 +33,7 @@ class Presentation < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:theme, :name],
-    associated_against: {
-      theme: [],
-    },
+    against: [:name, :template],
     using: {
       tsearch: { prefix: true },
       trigram: {}
@@ -45,19 +43,40 @@ class Presentation < ApplicationRecord
   resourcify
 
   validates :name, presence: true
+  validate :owner_matches_theme_owner
 
-  belongs_to :theme
-  belongs_to :presentation_template, optional: true
-
-  has_many :presentations_members, dependent: :destroy
-  has_many :members, through: :presentations_members
+  belongs_to :theme, optional: false
 
   has_many :presentations_orgs, dependent: :destroy
   has_many :orgs, through: :presentations_orgs
 
-  has_many :slides, class_name: "Presentation::Slide", dependent: :nullify
-  has_many :votes, class_name: "Presentation::Vote", dependent: :nullify
-  has_many :distributions, class_name: "Presentation::Distribution", dependent: :nullify
+  has_many :presentations_memberships, dependent: :destroy
+  has_many :memberships, through: :presentations_memberships
+  has_many :members, through: :memberships, source: :people
 
-  scope :includes_associated, -> { includes([:theme, :members, :orgs]) }
+  has_many :people, through: :memberships
+
+  has_many :presentations_distributions, dependent: :destroy
+  has_many :distributions, through: :presentations_distributions, dependent: :nullify
+
+  has_many :presentations_elements, dependent: :destroy
+  has_many :elements, through: :presentations_elements, dependent: :nullify
+
+  has_many :presentations_slides, dependent: :destroy
+  has_many :slides, through: :presentations_slides, dependent: :nullify
+
+  has_many :presentations_votes, dependent: :destroy
+  has_many :votes, through: :presentations_votes, dependent: :nullify
+
+  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :votes, :distributions]) }
+
+  private
+
+  def owner_matches_theme_owner
+    return unless circle && theme&.circle
+
+    unless circle.id == theme.circle.id
+      errors.add(:owner_matches_theme_owner, "record owner and theme owner must match")
+    end
+  end
 end

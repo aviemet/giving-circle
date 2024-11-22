@@ -12,5 +12,7 @@
 FactoryBot.define do
   factory :presentation_element, class: 'Presentation::Element' do
     name { Faker::Company.buzzword.capitalize }
+
+    circle
   end
 end

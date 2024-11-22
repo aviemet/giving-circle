@@ -20,7 +20,23 @@
 #  fk_rails_...  (membership_id => memberships.id)
 #  fk_rails_...  (presentation_id => presentations.id)
 #
-class PresentationsMembership < ApplicationRecord
-  belongs_to :presentation
-  belongs_to :membership
+require 'rails_helper'
+
+RSpec.describe PresentationsMembership do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:presentations_membership)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(presentation membership).each do |attr|
+        expect(build(:presentations_membership, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it { is_expected.to belong_to(:presentation) }
+    it { is_expected.to belong_to(:membership) }
+  end
 end

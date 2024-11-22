@@ -21,5 +21,5 @@
 #
 class PresentationsSlide < ApplicationRecord
   belongs_to :presentation
-  belongs_to :presentation_slide
+  belongs_to :slide, class_name: "Presentation::Slide", foreign_key: "presentation_slide_id", inverse_of: :presentations_slides
 end

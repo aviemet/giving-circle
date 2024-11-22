@@ -20,5 +20,5 @@
 #
 class PresentationsDistribution < ApplicationRecord
   belongs_to :presentation
-  belongs_to :presentation_distribution
+  belongs_to :distribution, class_name: "Presentation::Distribution", foreign_key: "presentation_distribution_id", inverse_of: :presentations_distributions
 end

@@ -29,6 +29,7 @@ FactoryBot.define do
     name { Faker::Lorem.words(number: rand(1..4)).map(&:capitalize).join(' ') }
 
     circle
-    theme
+
+    theme { association :theme, circle: circle }
   end
 end

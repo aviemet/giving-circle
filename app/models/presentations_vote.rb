@@ -20,5 +20,5 @@
 #
 class PresentationsVote < ApplicationRecord
   belongs_to :presentation
-  belongs_to :presentation_vote
+  belongs_to :vote, class_name: "Presentation::Vote", foreign_key: "presentation_vote_id", inverse_of: :presentations_votes
 end

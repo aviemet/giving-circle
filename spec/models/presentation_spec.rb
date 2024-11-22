@@ -26,6 +26,26 @@
 #
 require 'rails_helper'
 
-RSpec.describe Presentation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Presentation do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build_stubbed(:presentation)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(name).each do |attr|
+        expect(build(:presentation, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it { is_expected.to belong_to(:theme) }
+    it { is_expected.to have_many(:memberships).through(:presentations_memberships) }
+    it { is_expected.to have_many(:orgs).through(:presentations_orgs) }
+    it { is_expected.to have_many(:distributions).through(:presentations_distributions) }
+    it { is_expected.to have_many(:elements).through(:presentations_elements) }
+    it { is_expected.to have_many(:slides).through(:presentations_slides) }
+    it { is_expected.to have_many(:votes).through(:presentations_votes) }
+  end
 end

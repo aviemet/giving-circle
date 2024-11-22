@@ -32,5 +32,7 @@ RSpec.describe Person do
 
   describe "Associations" do
     it { is_expected.to have_one(:user) }
+    it { is_expected.to have_many(:memberships).through(:memberships_people) }
+    it { is_expected.to have_many(:circles) }
   end
 end

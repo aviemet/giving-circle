@@ -21,5 +21,20 @@
 require 'rails_helper'
 
 RSpec.describe PresentationsVote, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(build(:presentations_vote)).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      %i(presentation vote).each do |attr|
+        expect(build(:presentations_vote, attr => nil)).not_to be_valid
+      end
+    end
+  end
+
+  describe "Associations" do
+    it { is_expected.to belong_to(:presentation) }
+    it { is_expected.to belong_to(:vote) }
+  end
 end

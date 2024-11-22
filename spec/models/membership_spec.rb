@@ -20,7 +20,7 @@ require 'rails_helper'
 
 require "models/shared/ownable"
 
-RSpec.describe Membership, type: :model do
+RSpec.describe Membership do
   describe "Validations" do
     it "is valid with valid attributes" do
       expect(build(:membership)).to be_valid

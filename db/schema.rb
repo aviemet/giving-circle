@@ -200,15 +200,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.index ["presentation_id"], name: "index_presentations_elements_on_presentation_id"
   end
 
-  create_table "presentations_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "presentations_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "presentation_id", null: false
-    t.uuid "member_id", null: false
+    t.uuid "membership_id", null: false
     t.integer "funds_cents"
     t.string "funds_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_presentations_members_on_member_id"
-    t.index ["presentation_id"], name: "index_presentations_members_on_presentation_id"
+    t.index ["membership_id"], name: "index_presentations_memberships_on_membership_id"
+    t.index ["presentation_id"], name: "index_presentations_memberships_on_presentation_id"
   end
 
   create_table "presentations_orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -332,8 +332,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   add_foreign_key "presentations_distributions", "presentations"
   add_foreign_key "presentations_elements", "presentation_elements"
   add_foreign_key "presentations_elements", "presentations"
-  add_foreign_key "presentations_members", "people", column: "member_id"
-  add_foreign_key "presentations_members", "presentations"
+  add_foreign_key "presentations_memberships", "memberships"
+  add_foreign_key "presentations_memberships", "presentations"
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
   add_foreign_key "presentations_slides", "presentation_slides"
