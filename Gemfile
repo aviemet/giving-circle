@@ -63,6 +63,7 @@ group :development, :test do
   gem "rubocop-rspec", "~> 3.2", require: false
   gem "rubocop-performance", "~> 1.13", require: false
   gem "rubocop-daemon", "~> 0.3.2", require: false
+  gem "rubocop-factory_bot", "~> 2.26", require: false
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]

@@ -169,7 +169,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
 
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.jsonb "settings"
+    t.jsonb "settings", default: {}
     t.boolean "active", default: false, null: false
     t.boolean "template", default: false, null: false
     t.uuid "theme_id", null: false

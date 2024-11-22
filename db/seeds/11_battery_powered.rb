@@ -12,7 +12,10 @@ if Rails.env.development?
 
   if circle.members.empty?
     50.times do
-      circle.members << FactoryBot.create(:member)
+      person = FactoryBot.create(:person)
+      membership = FactoryBot.create(:membership, {circle:})
+      membership.people << person
+      circle.memberships << membership
     end
   end
 
@@ -24,74 +27,70 @@ if Rails.env.development?
 
   if theme.orgs.empty?
     10.times do
-      ThemesOrg.create!({
-        theme:,
-        org: FactoryBot.create(:org, circle: circle),
-        ask_cents: Faker::Number.between(from: 20000000, to: 30000000)
-      })
+      FactoryBot.create(:themes_org, { circle:, theme: })
     end
   end
 
   if theme.presentations.empty?
-    presentation = FactoryBot.build(:presentation, name: "Allocation Night", theme: theme)
+    presentation = FactoryBot.build(:presentation, {name: "Allocation Night", circle:, theme: })
     presentation.settings = {
       question: Faker::ChuckNorris.fact,
       matched_funds_multiplier: 2,
     }
-    presentation.save
+    presentation.save!
   end
 
   presentation = theme.presentations.first
 
-  if presentation.members.empty?
-    presentation.members << circle.members
+  if presentation.memberships.empty?
+    presentation.memberships << circle.memberships
   end
 
   if presentation.orgs.empty?
     presentation.orgs << theme.orgs
   end
 
-  if presentation.slides.empty?
-    presentation.slides << PresentationSlide.create({
-      name: "Intro",
-      content: "<div><h1>Intro</h1></div>",
-    })
+  # if presentation.slides.empty?
+  #   presentation.slides << PresentationSlide.create({
+  #     name: "Intro",
+  #     content: "<div><h1>Intro</h1></div>",
+  #   })
 
-    presentation.slides << PresentationSlide.create({
-      name: "All Orgs",
-      content: "<div><h1>All Orgs</h1></div>",
-    })
+  #   presentation.slides << PresentationSlide.create({
+  #     name: "All Orgs",
+  #     content: "<div><h1>All Orgs</h1></div>",
+  #   })
 
-    presentation.slides << PresentationSlide.create({
-      name: "Timer",
-      content: "<div>{{Timer(600)}}</div>",
-    })
+  #   presentation.slides << PresentationSlide.create({
+  #     name: "Timer",
+  #     content: "<div>{{Timer(600)}}</div>",
+  #   })
 
-    presentation.slides << PresentationSlide.create({
-      name: "Top Orgs",
-      content: "<div>Top Orgs</div>",
-    })
+  #   presentation.slides << PresentationSlide.create({
+  #     name: "Top Orgs",
+  #     content: "<div>Top Orgs</div>",
+  #   })
 
-    presentation.slides << PresentationSlide.create({
-      name: "Allocation",
-      content: "<div>{{Graph}}</div>",
-    })
+  #   presentation.slides << PresentationSlide.create({
+  #     name: "Allocation",
+  #     content: "<div>{{Graph}}</div>",
+  #   })
 
-    presentation.slides << PresentationSlide.create({
-      name: "Results",
-      content: "<div>{{Results}}</div>",
-    })
-  end
+  #   presentation.slides << PresentationSlide.create({
+  #     name: "Results",
+  #     content: "<div>{{Results}}</div>",
+  #   })
+  # end
 
-  if presentation.votes.empty?
-    presentation.votes << PresentationVote.create({
-      name: "Round 1",
-      type: "chit",
-    })
+  # if presentation.votes.empty?
+  #   presentation.votes << PresentationVote.create({
+  #     name: "Round 1",
+  #     type: "chit",
+  #   })
 
-    presentation.votes << PresentationVote.create({
-      name: "Round 2",
-      type: "value",
-    })
-  end
+  #   presentation.votes << PresentationVote.create({
+  #     name: "Round 2",
+  #     type: "value",
+  #   })
+  # end
 end

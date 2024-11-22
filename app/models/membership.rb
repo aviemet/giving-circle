@@ -41,6 +41,7 @@ class Membership < ApplicationRecord
 
   validates :name, presence: true
   validates :number, presence: true
+  # validate :people_must_not_be_empty
 
   has_many :memberships_people, dependent: :destroy
   has_many :people, through: :memberships_people
@@ -57,6 +58,10 @@ class Membership < ApplicationRecord
   end
 
   def set_default_name
-    self.people.first&.name || ""
+    self.name ||= self.people.first&.name || ""
   end
+
+  # def people_must_not_be_empty
+  #   errors.add(:people, "must not be empty") if people.empty?
+  # end
 end
