@@ -8,6 +8,8 @@ interface NewMemberProps {
 	member: Schema.MembersFormData
 }
 
+// @path: /:circle_slug/members/new
+// @route: newCircleMembership
 const NewMember = ({ ...data }: NewMemberProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

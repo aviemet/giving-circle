@@ -15,7 +15,7 @@ interface ShowCircleProps {
 const ShowCircle = ({ circle }: ShowCircleProps) => {
 	const { params } = usePageProps<'circle'>()
 	const title = circle.name || 'Circle'
-
+	console.log({ params })
 	return (
 		<Page
 			title={ circle.name }

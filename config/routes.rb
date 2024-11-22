@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     resource :circles, path: '', param: :slug, as: :circle, shallow: true, except: [:new, :create, :index] do
       get :about
 
-      # resources :members, concerns: :bulk_delete, param: :slug
+      resources :memberships, path: :members, param: :slug, concerns: :bulk_delete
 
       resources :orgs, param: :slug, except: [:create] do
         get :about

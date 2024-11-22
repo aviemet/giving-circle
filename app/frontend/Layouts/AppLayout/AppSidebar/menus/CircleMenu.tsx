@@ -26,13 +26,13 @@ const CircleMenu = () => {
 					label="Dashboard"
 				/>
 				<NavLink
-					href={ Routes.circleMembers(menu.active_circle.slug) }
+					href={ Routes.circleMemberships(menu.active_circle.slug) }
 					label="Members"
 				/>
-				<NavLink
+				{ /* <NavLink
 					href={ Routes.circlePresentationTemplates(menu.active_circle.slug) }
 					label="Presentation Templates"
-				/>
+				/> */ }
 				<NavLink
 					href={ Routes.circleThemes(menu.active_circle.slug) }
 					label="Themes"

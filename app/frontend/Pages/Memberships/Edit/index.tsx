@@ -8,6 +8,8 @@ interface EditMemberProps {
 	member: Schema.MembersEdit
 }
 
+// @path: /:circle_slug/members/:slug/edit
+// @route: editMembership
 const EditMember = ({ member }: EditMemberProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

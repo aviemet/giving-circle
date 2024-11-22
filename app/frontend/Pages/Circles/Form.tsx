@@ -10,7 +10,7 @@ type CircleFormData = {
 export interface CircleFormProps extends FormProps<CircleFormData> {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<CircleFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<CircleFormData>) => boolean | void
 	circle: Schema.CirclesFormData
 }
 

@@ -7,6 +7,8 @@ interface ShowMemberProps {
 	member: Schema.MembersShow
 }
 
+// @path: /:circle_slug/members/:slug
+// @route: membership
 const ShowMember = ({ member }: ShowMemberProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

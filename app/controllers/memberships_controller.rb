@@ -1,4 +1,4 @@
-class MembersController < ApplicationController
+class MembershipsController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle }, find_by: :slug
 
   expose :memberships, -> { search(Membership.where(circle:).includes_associated) }
@@ -8,6 +8,7 @@ class MembersController < ApplicationController
 
   sortable_fields %w(name number funds active)
 
+  # @route GET /:circle_slug/members (circle_memberships)
   def index
     authorize memberships
 
@@ -22,6 +23,7 @@ class MembersController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/members/:slug (membership)
   def show
     authorize membership
 
@@ -31,6 +33,7 @@ class MembersController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/members/new (new_circle_membership)
   def new
     authorize Membership.new
 
@@ -40,6 +43,7 @@ class MembersController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/members/:slug/edit (edit_membership)
   def edit
     authorize membership
 
@@ -49,6 +53,7 @@ class MembersController < ApplicationController
     }
   end
 
+  # @route POST /:circle_slug/members (circle_memberships)
   def create
     authorize Membership.new
 
@@ -59,6 +64,8 @@ class MembersController < ApplicationController
     end
   end
 
+  # @route PATCH /:circle_slug/members/:slug (membership)
+  # @route PUT /:circle_slug/members/:slug (membership)
   def update
     authorize membership
 
@@ -69,6 +76,8 @@ class MembersController < ApplicationController
     end
   end
 
+  # @route DELETE /:circle_slug/members (circle_memberships)
+  # @route DELETE /:circle_slug/members/:slug (membership)
   def destroy
     authorize membership
 

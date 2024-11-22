@@ -98,6 +98,28 @@ const urlParams = {
       "circle_slug"
     ]
   },
+  "circleMemberships": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newCircleMembership": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editMembership": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "membership": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
   "orgAbout": {
     "params": [
       "circle_slug",
