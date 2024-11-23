@@ -30,11 +30,11 @@ const CircleDropdownLink = () => {
 				justify='space-between'
 				className={ cx(classes.circleMenuGroup) }
 			>
-				{ /* <Link href={ Routes.circle(menu.active_circle.slug) } underline="never"> */ }
-				<Group justify='space-between'>
-					<Avatar size="sm">{ initials(menu.active_circle.name) }</Avatar>
-				</Group>
-				{ /* </Link> */ }
+				<Link href={ Routes.circle(menu.active_circle.slug) } underline="never">
+					<Group justify='space-between'>
+						<Avatar size="sm">{ initials(menu.active_circle.name) }</Avatar>
+					</Group>
+				</Link>
 				<Menu offset={ 9 } position="bottom-end" withArrow disabled={ !hasMultipleCircles }>
 					<Menu.Target>
 						<Button
