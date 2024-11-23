@@ -6,7 +6,7 @@ import { type TableProps } from '@/Components/Table/Table'
 import { usePageProps } from '@/lib/hooks'
 
 const OrgTable = (props: TableProps) => {
-	const { menu } = usePageProps<'circleOrgs'>()
+	const { params } = usePageProps<'circleOrgs'>()
 
 	return (
 		<Table { ...props }>
@@ -20,21 +20,21 @@ const OrgTable = (props: TableProps) => {
 			</Table.Head>
 			<Table.Body>
 				<Table.RowIterator render={ (org: Schema.OrgsIndex) => {
-					if(!menu.active_circle) return <></>
+					if(!params.circle_slug) return <></>
 
 					return (
 						<Table.Row key={ org.id }>
 							<Table.Cell>
-								{ <Link href={ Routes.circleOrg(menu.active_circle.slug, org.slug) }>{ org.name }</Link> }
+								{ <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.name }</Link> }
 							</Table.Cell>
 							<Table.Cell>
-								{ <Link href={ Routes.circleOrg(menu.active_circle.slug, org.slug) }>{ org.slug }</Link> }
+								{ <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.slug }</Link> }
 							</Table.Cell>
 							<Table.Cell>
-								{ <Link href={ Routes.circleOrg(menu.active_circle.slug, org.slug) }>{ org.description }</Link> }
+								{ <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.description }</Link> }
 							</Table.Cell>
 							<Table.Cell>
-								{ <EditButton href={ Routes.editCircleOrg(menu.active_circle.slug, org.slug) } /> }
+								{ <EditButton href={ Routes.editOrg(params.circle_slug, org.slug) } /> }
 							</Table.Cell>
 						</Table.Row>
 					)

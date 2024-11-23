@@ -8,10 +8,10 @@ interface EditOrgProps {
 	org: Schema.OrgsEdit
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/orgs/:slug/edit
-// @route: editCircleThemeOrg
-const EditOrg = ({ org }: EditOrgProps) => {
-	const { params } = usePageProps<'editCircleThemeOrg'>()
+// @path: /:circle_slug/themes/:theme_slug/orgs/:slug/edit
+// @route: editThemeOrg
+const EditThemeOrg = ({ org }: EditOrgProps) => {
+	const { params } = usePageProps<'editThemeOrg'>()
 
 	const title = 'Edit Org'
 
@@ -22,7 +22,7 @@ const EditOrg = ({ org }: EditOrgProps) => {
 
 				<OrgsForm
 					method='put'
-					to={ Routes.editCircleThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
+					to={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
 					org={ org }
 				/>
 			</Section>
@@ -30,4 +30,4 @@ const EditOrg = ({ org }: EditOrgProps) => {
 	)
 }
 
-export default EditOrg
+export default EditThemeOrg

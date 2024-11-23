@@ -16,7 +16,7 @@ interface PresentationIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations
 // @route: themePresentations
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
-	const { params } = usePageProps<'circleThemePresentations'>()
+	const { params } = usePageProps<'themePresentations'>()
 
 	return (
 		<Page

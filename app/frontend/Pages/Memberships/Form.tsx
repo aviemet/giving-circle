@@ -3,22 +3,22 @@ import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type MemberFormData = {
-	member: Schema.MembersFormData
+type MembershipFormData = {
+	membership: Schema.MembershipsFormData
 }
 
-export interface MemberFormProps {
+export interface MembershipFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<MemberFormData>) => boolean | void
-	member: Schema.MembersFormData
+	onSubmit?: (object: UseFormProps<MembershipFormData>) => boolean | void
+	membership: Schema.MembershipsFormData
 }
 
-const MemberForm = ({ method = 'post', member, ...props }: MemberFormProps) => {
+const MembershipForm = ({ method = 'post', membership, ...props }: MembershipFormProps) => {
 	return (
 		<Form
-			model="member"
-			data={ { member } }
+			model="membership"
+			data={ { membership } }
 			method={ method }
 			{ ...props }
 		>
@@ -37,11 +37,11 @@ const MemberForm = ({ method = 'post', member, ...props }: MemberFormProps) => {
 					<TextInput name="name" label="Name" />
 				</Grid.Col>
 				<Grid.Col>
-					<Submit>{ member.id ? 'Update' : 'Create' } Member</Submit>
+					<Submit>{ membership.id ? 'Update' : 'Create' } Membership</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>
 	)
 }
 
-export default MemberForm
+export default MembershipForm

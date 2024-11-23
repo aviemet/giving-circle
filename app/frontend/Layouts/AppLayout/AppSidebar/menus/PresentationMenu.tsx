@@ -6,7 +6,7 @@ import { useLayoutStore } from '@/Store'
 import { isEmpty } from 'lodash'
 
 const PresentationMenu = () => {
-	const { menu } = usePageProps()
+	const { active_circle, active_theme, active_presentation } = usePageProps()
 	const { menuKeys, toggleOpenMenu } = useLayoutStore()
 
 	useInit(() => {
@@ -15,18 +15,18 @@ const PresentationMenu = () => {
 		toggleOpenMenu('presentation', true)
 	})
 
-	if(isEmpty(menu.active_circle) || isEmpty(menu.active_theme) || isEmpty(menu.active_presentation)) return <></>
+	if(isEmpty(active_circle) || isEmpty(active_theme) || isEmpty(active_presentation)) return <></>
 
 	return (
 		<Accordion.Item key={ menuKeys.presentation } value={ menuKeys.presentation }>
-			<Accordion.Control>{ menu.active_presentation.name }</Accordion.Control>
+			<Accordion.Control>{ active_presentation.name }</Accordion.Control>
 			<Accordion.Panel>
 				<NavLink
-					href={ Routes.circleThemePresentation(menu.active_circle.slug, menu.active_theme.slug, menu.active_presentation.slug) }
+					href={ Routes.themePresentation(active_circle.slug, active_theme.slug, active_presentation.slug) }
 					label="Overview"
 				/>
 				<NavLink
-					href={ Routes.circleThemeEditPresentation(menu.active_circle.slug, menu.active_theme.slug, menu.active_presentation.slug) }
+					href={ Routes.editThemePresentation(active_circle.slug, active_theme.slug, active_presentation.slug) }
 					label="Setup"
 				/>
 			</Accordion.Panel>

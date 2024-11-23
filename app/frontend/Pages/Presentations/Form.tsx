@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Group } from '@/Components'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import { SlideCard } from '@/Features/Cards'
@@ -12,7 +12,7 @@ type TPresentationFormData = {
 export interface PresentationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPresentationFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<TPresentationFormData>) => boolean | void
 	presentation: Schema.PresentationsFormData
 }
 

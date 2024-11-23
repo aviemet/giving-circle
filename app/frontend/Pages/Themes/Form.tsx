@@ -10,7 +10,7 @@ type TThemeFormData = {
 export interface ThemeFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TThemeFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<TThemeFormData>) => boolean | void
 	theme: Schema.ThemesFormData
 }
 

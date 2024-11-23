@@ -10,7 +10,7 @@ type TOrgFormData = {
 export interface OrgFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TOrgFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<TOrgFormData>) => boolean | void
 	org: Schema.OrgsFormData
 }
 

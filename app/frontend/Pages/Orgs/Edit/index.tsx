@@ -11,7 +11,7 @@ interface EditOrgProps {
 // @path: /:circle_slug/orgs/:slug/edit
 // @route: editOrg
 const EditOrg = ({ org }: EditOrgProps) => {
-	const { params } = usePageProps<'editCircleOrg'>()
+	const { params } = usePageProps<'editOrg'>()
 	const title = 'Edit Org'
 
 	return (
@@ -21,7 +21,7 @@ const EditOrg = ({ org }: EditOrgProps) => {
 
 				<OrgsForm
 					method='put'
-					to={ Routes.circleOrg(params.circle_slug, params.slug) }
+					to={ Routes.org(params.circle_slug, org.slug) }
 					org={ org }
 				/>
 			</Section>

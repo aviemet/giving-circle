@@ -5,13 +5,13 @@ import ThemesForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
 
 interface EditThemeProps {
-	theme: Schema.ThemesFormData
+	theme: Schema.ThemesEdit
 }
 
 // @path: /:circle_slug/themes/:slug/edit
 // @route: editTheme
 const EditTheme = ({ theme }: EditThemeProps) => {
-	const { params } = usePageProps<'circleEditTheme'>()
+	const { params } = usePageProps<'editTheme'>()
 	const title = 'Edit Theme'
 
 	return (
@@ -20,7 +20,7 @@ const EditTheme = ({ theme }: EditThemeProps) => {
 
 				<ThemesForm
 					method='put'
-					to={ Routes.circleTheme(params.circle_slug, params.theme_slug) }
+					to={ Routes.theme(params.circle_slug, params.slug) }
 					theme={ theme }
 				/>
 			</Section>

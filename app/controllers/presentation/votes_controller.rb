@@ -6,7 +6,7 @@ class Presentation::VotesController < ApplicationController
 
   sortable_fields %w(data name template)
 
-  # @route GET /:circle_slug/presentations/:presentation_slug/presentation_votes (presentation_votes)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes (theme_presentation_votes)
   def index
     authorize presentation_votes
 
@@ -21,7 +21,7 @@ class Presentation::VotesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/presentation_votes/:id (vote)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id (theme_presentation_vote)
   def show
     authorize presentation_vote
     render inertia: "Presentation::Votes/Show", props: {
@@ -29,7 +29,7 @@ class Presentation::VotesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/presentations/:presentation_slug/presentation_votes/new (new_presentation_vote)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/new (new_theme_presentation_vote)
   def new
     authorize Presentation::Vote.new
     render inertia: "Presentation::Votes/New", props: {
@@ -37,7 +37,7 @@ class Presentation::VotesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/presentation_votes/:id/edit (edit_vote)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id/edit (edit_theme_presentation_vote)
   def edit
     authorize presentation_vote
     render inertia: "Presentation::Votes/Edit", props: {
@@ -45,7 +45,7 @@ class Presentation::VotesController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/presentations/:presentation_slug/presentation_votes (presentation_votes)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes (theme_presentation_votes)
   def create
     authorize Presentation::Vote.new
     if presentation_vote.save
@@ -55,8 +55,8 @@ class Presentation::VotesController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/presentation_votes/:id (vote)
-  # @route PUT /:circle_slug/presentation_votes/:id (vote)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id (theme_presentation_vote)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id (theme_presentation_vote)
   def update
     authorize presentation_vote
     if presentation_vote.update(presentation_vote_params)
@@ -66,7 +66,7 @@ class Presentation::VotesController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/presentation_votes/:id (vote)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id (theme_presentation_vote)
   def destroy
     authorize presentation_vote
     presentation_vote.destroy!

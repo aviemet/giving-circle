@@ -10,7 +10,7 @@ interface ShowOrgProps {
 // @path: /:circle_slug/orgs/:slug
 // @route: org
 const ShowOrg = ({ org }: ShowOrgProps) => {
-	const { params } = usePageProps<'circleOrg'>()
+	const { params } = usePageProps<'org'>()
 	const title =  'Org'
 
 	return (
@@ -23,7 +23,7 @@ const ShowOrg = ({ org }: ShowOrgProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link
-								href={ Routes.editCircleOrg(params.circle_slug, params.slug) }
+								href={ Routes.editOrg(params.circle_slug, org.slug) }
 							>
 								Edit Org
 							</Menu.Link>

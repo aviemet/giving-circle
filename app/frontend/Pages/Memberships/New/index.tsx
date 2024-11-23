@@ -2,28 +2,28 @@ import React from 'react'
 import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
-import MemberForm from '../Form'
+import MembershipForm from '../Form'
 
-interface NewMemberProps {
-	member: Schema.MembersFormData
+interface NewMembershipProps {
+	membership: Schema.MembershipsFormData
 }
 
-// @path: /:circle_slug/members/new
+// @path: /:circle_slug/memberships/new
 // @route: newCircleMembership
-const NewMember = ({ ...data }: NewMemberProps) => {
+const NewMembership = ({ ...data }: NewMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title = 'New Member'
+	const { params } = usePageProps<'newCircleMembership'>()
+	const title = 'New Membership'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Members', href: Routes.members() },
-			{ title: 'New Member', href: window.location.href },
+			{ title: 'Memberships', href: Routes.circleMemberships(params.circle_slug) },
+			{ title: 'New Membership', href: window.location.href },
 		] }>
 
 			<Section>
-				<MemberForm
-					to={ Routes.members() }
+				<MembershipForm
+					to={ Routes.circleMemberships(params.circle_slug) }
 					{ ...data }
 				/>
 			</Section>
@@ -32,4 +32,4 @@ const NewMember = ({ ...data }: NewMemberProps) => {
 	)
 }
 
-export default NewMember
+export default NewMembership

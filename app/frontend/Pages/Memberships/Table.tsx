@@ -4,7 +4,11 @@ import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
 
-const MemberTable = (props: TableProps) => {
+interface MembershipTableProps extends TableProps {
+	circle: Schema.CirclesOptions
+}
+
+const MembershipTable = ({ circle, ...props }: MembershipTableProps) => {
 	return (
 		<Table>
 			<Table.Head>
@@ -17,22 +21,22 @@ const MemberTable = (props: TableProps) => {
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (member: Schema.MembersIndex) => (
-					<Table.Row key={ member.id }>
+				<Table.RowIterator render={ (membership: Schema.MembershipsIndex) => (
+					<Table.Row key={ membership.id }>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.number }</Link>
+							<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.number }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.funds }</Link>
+							<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.funds }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.active }</Link>
+							<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.active }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.member(member.id) }>{ member.name }</Link>
+							<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<EditButton href={ Routes.editMember(member.id) } />
+							<EditButton href={ Routes.editMembership(circle.slug, membership.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />
@@ -41,4 +45,4 @@ const MemberTable = (props: TableProps) => {
 	)
 }
 
-export default MemberTable
+export default MembershipTable

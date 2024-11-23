@@ -16,9 +16,9 @@ import * as classes from '../AppLayout.css'
 import { isEmpty } from 'lodash'
 
 const CircleDropdownLink = () => {
-	const { auth, menu } = usePageProps()
+	const { auth, active_circle } = usePageProps()
 
-	if(isEmpty(menu.active_circle)) {
+	if(isEmpty(active_circle)) {
 		return <Box>Giving Circles</Box>
 	}
 
@@ -30,9 +30,9 @@ const CircleDropdownLink = () => {
 				justify='space-between'
 				className={ cx(classes.circleMenuGroup) }
 			>
-				<Link href={ Routes.circle(menu.active_circle.slug) } underline="never">
+				<Link href={ Routes.circle(active_circle.slug) } underline="never">
 					<Group justify='space-between'>
-						<Avatar size="sm">{ initials(menu.active_circle.name) }</Avatar>
+						<Avatar size="sm">{ initials(active_circle.name) }</Avatar>
 					</Group>
 				</Link>
 				<Menu offset={ 9 } position="bottom-end" withArrow disabled={ !hasMultipleCircles }>
@@ -43,7 +43,7 @@ const CircleDropdownLink = () => {
 							className={ cx(classes.circleMenuButton) }
 							rightSection={ hasMultipleCircles && <DownArrowIcon /> }
 						>
-							{ menu.active_circle.name }
+							{ active_circle.name }
 						</Button>
 					</Menu.Target>
 

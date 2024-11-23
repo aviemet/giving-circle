@@ -26,7 +26,7 @@ const PresentationTable = (props: TableProps) => {
 					<Table.Row key={ presentation.slug }>
 
 						<Table.Cell>
-							<Link href={ Routes.circleThemePresentation(params.circle_slug, params.theme_slug, presentation.slug) }>{ presentation.name }</Link>
+							<Link href={ Routes.themePresentation(params.circle_slug, params.theme_slug, presentation.slug) }>{ presentation.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell fitContent className={ cx({ [classes.table]: presentation.active }) }>
@@ -34,7 +34,7 @@ const PresentationTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<EditButton href={ Routes.circleThemeEditPresentation(params.circle_slug, params.theme_slug,presentation.slug) } />
+							<EditButton href={ Routes.editThemePresentation(params.circle_slug, params.theme_slug, presentation.slug) } />
 						</Table.Cell>
 
 					</Table.Row>

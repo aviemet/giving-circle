@@ -21,7 +21,7 @@ class ThemeOrgsController < ApplicationController
 
     paginated_orgs = paginate(orgs, :theme_orgs)
 
-    render inertia: "Themes/Orgs/Index", props: {
+    render inertia: "ThemeOrgs/Index", props: {
       orgs: -> { paginated_orgs.render(:index) },
       pagination: -> { {
         count: orgs.size,
@@ -32,10 +32,10 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/orgs/:slug (org)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs/:slug (theme_org)
   def show
     authorize org
-    render inertia: "Themes/Orgs/Show", props: {
+    render inertia: "ThemeOrgs/Show", props: {
       org: org.render(:show),
       theme: theme.render(:inertia_share),
     }
@@ -44,15 +44,15 @@ class ThemeOrgsController < ApplicationController
   # @route GET /:circle_slug/themes/:theme_slug/orgs/new (new_theme_org)
   def new
     authorize Org.new
-    render inertia: "Themes/Orgs/New", props: {
+    render inertia: "ThemeOrgs/New", props: {
       org: Org.new.render(:form_data),
     }
   end
 
-  # @route GET /:circle_slug/orgs/:slug/edit (edit_org)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs/:slug/edit (edit_theme_org)
   def edit
     authorize org
-    render inertia: "Themes/Orgs/Edit", props: {
+    render inertia: "ThemeOrgs/Edit", props: {
       org: org.render(:edit),
       theme: theme.render(:inertia_share),
     }
@@ -62,7 +62,7 @@ class ThemeOrgsController < ApplicationController
   def import
     authorize Org.new
 
-    render inertia: "Themes/Orgs/Import", props: {
+    render inertia: "ThemeOrgs/Import", props: {
       theme: -> { theme.render(:inertia_share) },
       circle: -> { circle.render(:persisted) }
     }

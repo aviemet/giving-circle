@@ -6,10 +6,10 @@ interface ActivePresentationProps {
 	presentation: Schema.PresentationsShow
 }
 
-// @path: /:circle_slug/presentations/:presentation_slug/active
-// @route: presentationActive
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active
+// @route: themePresentationActive
 const ActivePresentation = ({ presentation }: ActivePresentationProps) => {
-	const { params } = usePageProps<'circleThemePresentationActive'>()
+	const { params } = usePageProps<'themePresentationActive'>()
 
 	return (
 		<Page

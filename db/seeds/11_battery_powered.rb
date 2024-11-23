@@ -10,11 +10,9 @@ if Rails.env.development?
     user.add_role :admin, circle
   end
 
-  if circle.members.empty?
+  if circle.memberships.empty?
     50.times do
-      person = FactoryBot.create(:person)
-      membership = FactoryBot.create(:membership, {circle:})
-      membership.people << person
+      FactoryBot.create(:membership, {circle:})
     end
   end
 

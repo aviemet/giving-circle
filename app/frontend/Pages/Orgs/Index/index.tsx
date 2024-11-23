@@ -17,9 +17,7 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 	const { params } = usePageProps<'circleOrgs'>()
 
 	return (
-		<Page
-			title="Orgs"
-		>
+		<Page title="Orgs" >
 			<IndexTableTemplate
 				model="orgs"
 				rows={ orgs }

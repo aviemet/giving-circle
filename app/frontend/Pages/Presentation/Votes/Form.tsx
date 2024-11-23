@@ -10,7 +10,7 @@ type PresentationVoteFormData = {
 export interface PresentationVoteFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PresentationVoteFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PresentationVoteFormData>) => boolean | void
 	presentation_vote: Schema.PresentationVotesFormData
 }
 
@@ -23,7 +23,7 @@ const PresentationVoteForm = ({ method = 'post', presentation_vote, ...props }: 
 			{ ...props }
 		>
 			<Grid>
-			
+
 				<Grid.Col>
 					<TextInput name="data" label="Data" />
 				</Grid.Col>

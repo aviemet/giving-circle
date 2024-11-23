@@ -8,7 +8,7 @@ class MembershipsController < ApplicationController
 
   sortable_fields %w(name number funds active)
 
-  # @route GET /:circle_slug/members (circle_memberships)
+  # @route GET /:circle_slug/memberships (circle_memberships)
   def index
     authorize memberships
 
@@ -23,7 +23,7 @@ class MembershipsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/members/:slug (membership)
+  # @route GET /:circle_slug/memberships/:slug (membership)
   def show
     authorize membership
 
@@ -33,7 +33,7 @@ class MembershipsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/members/new (new_circle_membership)
+  # @route GET /:circle_slug/memberships/new (new_circle_membership)
   def new
     authorize Membership.new
 
@@ -43,7 +43,7 @@ class MembershipsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/members/:slug/edit (edit_membership)
+  # @route GET /:circle_slug/memberships/:slug/edit (edit_membership)
   def edit
     authorize membership
 
@@ -53,7 +53,7 @@ class MembershipsController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/members (circle_memberships)
+  # @route POST /:circle_slug/memberships (circle_memberships)
   def create
     authorize Membership.new
 
@@ -64,8 +64,8 @@ class MembershipsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/members/:slug (membership)
-  # @route PUT /:circle_slug/members/:slug (membership)
+  # @route PATCH /:circle_slug/memberships/:slug (membership)
+  # @route PUT /:circle_slug/memberships/:slug (membership)
   def update
     authorize membership
 
@@ -76,8 +76,7 @@ class MembershipsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/members (circle_memberships)
-  # @route DELETE /:circle_slug/members/:slug (membership)
+  # @route DELETE /:circle_slug/memberships/:slug (membership)
   def destroy
     authorize membership
 

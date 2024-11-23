@@ -3,12 +3,6 @@ Rails.application.routes.draw do
 
   # CONCERNS #
 
-  concern :bulk_delete do
-    collection do
-      delete :destroy
-    end
-  end
-
   # DEVISE PATHS #
 
   devise_for(
@@ -54,26 +48,27 @@ Rails.application.routes.draw do
     resource :circles, path: '/', param: :circle_slug, as: :circle, shallow: true, except: [:new, :create, :index] do
       get :about
 
-      resources :memberships, path: :members, param: :slug, concerns: :bulk_delete
+      resources :memberships, param: :slug
 
       resources :orgs, param: :slug, except: [:create] do
         get :about
       end
 
-      # resources :presentation_templates, concerns: :bulk_delete, param: :slug
+      # resources :presentation_templates, param: :slug
 
       resources :themes, param: :slug, as: :themes do
         get :about
 
-        # get 'members', to: 'theme_members#index'
-        # resources :theme_members, path: :members, param: :slug, as: 'member'
+        get 'memberships', to: 'theme_memberships#index'
+        post 'memberships', to: 'theme_memberships#create'
+        resources :theme_memberships, path: :memberships, param: :slug, except: [:index, :create], shallow: false, as: 'membership'
 
         get 'orgs', to: 'theme_orgs#index'
         get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
-        resources :theme_orgs, path: :orgs, param: :slug, except: [:index], as: 'org'
+        resources :theme_orgs, path: :orgs, param: :slug, except: [:index], shallow: false, as: 'org'
 
         # Admin presentation routes
-        resources :presentations, param: :slug do
+        resources :presentations, param: :slug, shallow: false do
           get :active
 
           resources :presentation_distributions, as: :distributions, controller: 'presentation/distributions'

@@ -4,15 +4,15 @@ import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 import MemberForm from '../Form'
 
-interface NewMemberProps {
+interface NewThemeMemberProps {
 	member: Schema.MembersFormData
 	theme: Schema.ThemesInertiaShare
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/members/new
-// @route: newCircleThemeMember
-const NewMember = ({ ...data }: NewMemberProps) => {
-	const { params } = usePageProps<'newCircleThemeMember'>()
+// @path: /:circle_slug/themes/:theme_slug/memberships/new
+// @route: newThemeMembership
+const NewThemeMember = ({ ...data }: NewThemeMemberProps) => {
+	const { params } = usePageProps<'newThemeMember'>()
 	const title = 'New Member'
 
 	return (
@@ -28,4 +28,4 @@ const NewMember = ({ ...data }: NewMemberProps) => {
 	)
 }
 
-export default NewMember
+export default NewThemeMember

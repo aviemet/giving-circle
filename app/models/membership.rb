@@ -6,15 +6,21 @@
 #  active         :boolean          default(TRUE), not null
 #  funds_cents    :integer          default(0), not null
 #  funds_currency :string           default("USD"), not null
-#  name           :string
+#  name           :string           not null
 #  number         :string
 #  slug           :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  person_id      :uuid             not null
 #
 # Indexes
 #
-#  index_memberships_on_slug  (slug) UNIQUE
+#  index_memberships_on_person_id  (person_id)
+#  index_memberships_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (person_id => people.id)
 #
 class Membership < ApplicationRecord
   include Ownable
@@ -41,15 +47,22 @@ class Membership < ApplicationRecord
 
   validates :name, presence: true
   validates :number, presence: true
-  # validate :people_must_not_be_empty
 
+  # Primary member
+  belongs_to :person
+
+  # Optional other co-members
   has_many :memberships_people, dependent: :destroy
-  has_many :people, through: :memberships_people
+  has_many :others, source: :person, through: :memberships_people
 
   has_many :presentations_memberships, dependent: :destroy
   has_many :presentations, through: :presentations_memberships
 
   scope :includes_associated, -> { includes([]) }
+
+  def members
+    [person] + others
+  end
 
   private
 
@@ -58,10 +71,6 @@ class Membership < ApplicationRecord
   end
 
   def set_default_name
-    self.name ||= self.people.first&.name || ""
+    self.name ||= self.person&.name || ""
   end
-
-  # def people_must_not_be_empty
-  #   errors.add(:people, "must not be empty") if people.empty?
-  # end
 end

@@ -15,8 +15,8 @@ interface OrgsImportProps {
 
 // @path: /:circle_slug/themes/:theme_slug/orgs/import
 // @route: themeOrgsImport
-const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
-	const { params } = usePageProps<'circleThemeOrgsImport'>()
+const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
+	const { params } = usePageProps<'themeOrgsImport'>()
 
 	const { sidebarVisible, toggleSidebarOpen } = useLayoutStore()
 	const [displayImportTable, setDisplayImportTable] = useState(false)
@@ -55,7 +55,7 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 
 	const handleImportData = (data: Record<string, unknown>[]) => {
 		router.post(
-			Routes.circleThemeOrgs(params.circle_slug, params.theme_slug),
+			Routes.themeOrgs(params.circle_slug, params.theme_slug),
 			// @ts-ignore
 			{ orgs: data },
 			{
@@ -87,17 +87,18 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 			title="Orgs Import"
 			siteTitle={ siteTitle }
 		>
-			{ displayImportTable ? (
-				<ImportMapping
-					headings={ pendingHeadings }
-					rows={ pendingOrgs }
-					mapping={ headingsMap }
-					triggerAcceptRef={ acceptButtonRef }
-					triggerCancelRef={ cancelButtonRef }
-					onAccept={ handleImportData }
-					onCancel={ handleCancel }
-				/>
-			)
+			{ displayImportTable
+				? (
+					<ImportMapping
+						headings={ pendingHeadings }
+						rows={ pendingOrgs }
+						mapping={ headingsMap }
+						triggerAcceptRef={ acceptButtonRef }
+						triggerCancelRef={ cancelButtonRef }
+						onAccept={ handleImportData }
+						onCancel={ handleCancel }
+					/>
+				)
 				:
 				<>
 					<Text mb="sm">Import a <Code>.csv</Code> file containing the nominee organization details for this theme. You can click in the space below or drag and drop the file.</Text>
@@ -109,4 +110,4 @@ const OrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	)
 }
 
-export default OrgsImport
+export default ThemeOrgsImport

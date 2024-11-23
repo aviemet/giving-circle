@@ -31,20 +31,6 @@ RSpec.describe Circle do
     it { is_expected.to have_many(:themes) }
     it { is_expected.to have_many(:presentations) }
     it { is_expected.to have_many(:memberships) }
-    it { is_expected.to have_many(:members) }
     it { is_expected.to have_many(:orgs) }
-
-    context "with child members" do
-      it "can retrieve members" do
-        circle = create(:circle)
-        5.times do
-          person = create(:person)
-          membership = create(:membership, {circle:})
-          membership.people << person
-        end
-
-        expect(circle.members.count).to eq(5)
-      end
-    end
   end
 end

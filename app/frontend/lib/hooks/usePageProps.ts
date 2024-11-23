@@ -9,14 +9,15 @@ interface InitialInertiaShareProps extends Omit<PageProps, 'errors' | 'params' |
 	auth: {
 		user: Schema.UsersInertiaShare
 	}
-	menu: {
-		active_circle: Schema.CirclesInertiaShare | undefined
-		active_theme: Schema.ThemesInertiaShare | undefined
-		active_presentation: Schema.PresentationsInertiaShare | undefined
-		circles: Schema.CirclesInertiaShare[] | undefined
-	}
 	flash: FlashMessage
+
 	errors: Errors & ErrorBag
+
+	active_circle: Schema.CirclesInertiaShare | undefined
+	active_theme: Schema.ThemesInertiaShare | undefined
+	active_presentation: Schema.PresentationsInertiaShare | undefined
+	circles: Schema.CirclesInertiaShare[] | undefined
+
 	params: Record<string, string>
 }
 

@@ -10,7 +10,7 @@ export interface MenuProps {
 }
 
 const Menu = () => {
-	const { menu } = usePageProps()
+	const { active_circle, active_theme, active_presentation } = usePageProps()
 	const { menuKeys, openMenus, setOpenMenus } = useLayoutStore()
 
 	const handleAccordionChange = (menus: (keyof typeof menuKeys)[]) => {
@@ -27,13 +27,13 @@ const Menu = () => {
 				href={ Routes.circles() }
 				label="Dashboard"
 			/>
-			{ menu.active_circle && <>
+			{ active_circle && <>
 				<CircleMenu />
 
-				{ menu.active_theme && <>
+				{ active_theme && <>
 					<ThemeMenu />
 
-					{ menu.active_presentation && <>
+					{ active_presentation && <>
 						<PresentationMenu />
 					</> }
 				</> }

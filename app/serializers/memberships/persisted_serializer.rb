@@ -1,6 +1,7 @@
 class Memberships::PersistedSerializer < MembershipSerializer
   include Persisted
 
-  attributes
-
+  attributes(
+    :slug,
+  )
 end

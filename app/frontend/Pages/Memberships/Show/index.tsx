@@ -3,29 +3,29 @@ import { Group, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 
-interface ShowMemberProps {
-	member: Schema.MembersShow
+interface ShowMembershipProps {
+	membership: Schema.MembershipsShow
 }
 
-// @path: /:circle_slug/members/:slug
+// @path: /:circle_slug/memberships/:slug
 // @route: membership
-const ShowMember = ({ member }: ShowMemberProps) => {
+const ShowMembership = ({ membership }: ShowMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title =  'Member'
+	const { params } = usePageProps<'membership'>()
+	const title =  'Membership'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Member', href: Routes.members() },
+			{ title: 'Membership', href: Routes.circleMemberships(params.circle_slug) },
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Group position="apart">
+				<Group>
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editMember(member.id) }>
-								Edit Member
+							<Menu.Link href={ Routes.editMembership(params.circle_slug, membership.slug) }>
+								Edit Membership
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
@@ -36,4 +36,4 @@ const ShowMember = ({ member }: ShowMemberProps) => {
 	)
 }
 
-export default ShowMember
+export default ShowMembership

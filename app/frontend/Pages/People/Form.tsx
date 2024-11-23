@@ -9,7 +9,7 @@ type TPersonFormData = {
 export interface PersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean | void
 	person: Schema.PeopleFormData
 }
 

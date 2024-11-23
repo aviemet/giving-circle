@@ -2,30 +2,33 @@ import React from 'react'
 import { Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
-import MembersForm from '../Form'
+import MembershipForm from '../Form'
 
-interface EditMemberProps {
-	member: Schema.MembersEdit
+interface EditMembershipProps {
+	membership: Schema.MembershipsEdit
+	circle: Schema.CirclesInertiaShare
 }
 
-// @path: /:circle_slug/members/:slug/edit
+// @path: /:circle_slug/memberships/:slug/edit
 // @route: editMembership
-const EditMember = ({ member }: EditMemberProps) => {
+const EditMember = ({ membership, circle }: EditMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
+	const { params } = usePageProps<'editMembership'>()
 	const title = 'Edit Member'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Members', href: Routes.members() },
-			{ title: "Member", href: Routes.member(member.id) },
+			{ title: 'Circles', href: Routes.circles() },
+			{ title: circle.name, href: Routes.circle(params.circle_slug) },
+			{ title: 'Members', href: Routes.circleMemberships(params.circle_slug) },
+			{ title: membership.name, href: Routes.membership(params.circle_slug, membership.id) },
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<MembersForm
+				<MembershipForm
 					method='put'
-					to={ Routes.member() }
-					member={ member }
+					to={ Routes.membership(params.circle_slug, membership.slug) }
+					membership={ membership }
 				/>
 			</Section>
 		</Page>

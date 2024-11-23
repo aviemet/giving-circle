@@ -6,61 +6,60 @@
 #  active         :boolean          default(TRUE), not null
 #  funds_cents    :integer          default(0), not null
 #  funds_currency :string           default("USD"), not null
-#  name           :string
+#  name           :string           not null
 #  number         :string
 #  slug           :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  person_id      :uuid             not null
 #
 # Indexes
 #
-#  index_memberships_on_slug  (slug) UNIQUE
+#  index_memberships_on_person_id  (person_id)
+#  index_memberships_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (person_id => people.id)
 #
 require 'rails_helper'
 
 require "models/shared/ownable"
 
 RSpec.describe Membership do
-  describe "Validations" do
-    it "is valid with valid attributes" do
+  describe 'Validations' do
+    it 'is valid with valid attributes' do
       expect(build(:membership)).to be_valid
     end
 
-    it "is invalid with invalid attributes" do
+    it 'is invalid with invalid attributes' do
       %i(name number).each do |attr|
         expect(build(:membership, attr => nil)).not_to be_valid
       end
     end
   end
 
-  describe "Attributes" do
+  describe 'Attributes' do
     it { is_expected.to monetize(:funds) }
   end
 
-  describe "Associations" do
-    it_behaves_like "ownable"
-    it { is_expected.to have_many(:people).through(:memberships_people) }
+  describe 'Associations' do
+    it_behaves_like 'ownable'
+
+    it { is_expected.to belong_to(:person) }
+    it { is_expected.to have_many(:others).through(:memberships_people) }
+
     it { is_expected.to have_many(:presentations).through(:presentations_memberships) }
 
-    context "with one person per membership" do
-      it "can retrieve the member" do
+  end
+
+  describe '#members' do
+    context 'with no "others"' do
+      it 'returns the primary member' do
         person = create(:person)
-        membership = create(:membership)
-        membership.people << person
+        membership = create(:membership, person:)
 
-        expect(membership.people.count).to eq(1)
-      end
-    end
-
-    context "with more than one person per membership" do
-      it "retrieves all members" do
-        membership = create(:membership)
-        2.times do
-          person = create(:person)
-          membership.people << person
-        end
-
-        expect(membership.people.count).to eq(2)
+        expect(membership.members).to contain_exactly(person)
       end
     end
   end

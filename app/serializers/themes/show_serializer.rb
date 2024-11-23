@@ -1,4 +1,5 @@
 class Themes::ShowSerializer < Themes::PersistedSerializer
-  belongs_to :circle, serializer: Circles::PersistedSerializer
+  include Owned
+
   has_many :orgs, serializer: Themes::Orgs::ShowSerializer
 end

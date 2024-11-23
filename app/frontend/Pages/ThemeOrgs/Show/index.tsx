@@ -3,14 +3,14 @@ import { Group, Title, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 
-interface ShowOrgProps {
+interface ShowThemeOrgProps {
 	org: Schema.OrgsShow
 }
 
-// @path: /circles/:circle_slug/themes/:theme_slug/orgs/:slug
-// @route: circleThemeOrg
-const ShowOrg = ({ org }: ShowOrgProps) => {
-	const { params } = usePageProps<'circleThemeOrg'>()
+// @path: /:circle_slug/themes/:theme_slug/orgs/:slug
+// @route: themeOrg
+const ShowThemeOrg = ({ org }: ShowThemeOrgProps) => {
+	const { params } = usePageProps<'themeOrg'>()
 	const title =  'Org'
 
 	return (
@@ -23,7 +23,7 @@ const ShowOrg = ({ org }: ShowOrgProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link
-								href={ Routes.editCircleOrg(params.circle_slug, params.slug) }
+								href={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
 							>
 								Edit Org
 							</Menu.Link>
@@ -36,4 +36,4 @@ const ShowOrg = ({ org }: ShowOrgProps) => {
 	)
 }
 
-export default ShowOrg
+export default ShowThemeOrg

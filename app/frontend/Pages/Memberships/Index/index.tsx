@@ -4,17 +4,19 @@ import { usePageProps } from '@/lib/hooks'
 import { Menu, Page, Title } from '@/Components'
 import { NewIcon } from '@/Components/Icons'
 import { IndexTableTemplate } from '@/Features'
-import MembersTable from '../Table'
+import MembershipsTable from '../Table'
 
-interface MemberIndexProps {
-	members: Schema.MembersIndex[]
+interface MembershipIndexProps {
+	memberships: Schema.MembershipsIndex[]
 	pagination: Schema.Pagination
 }
 
-const MembersIndex = ({ members, pagination }: MemberIndexProps) => {
+// @path: /:circle_slug/memberships
+// @route: circleMemberships
+const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title = Member
+	const { params, active_circle } = usePageProps<'circleMemberships'>()
+	const title = active_circle ? `${active_circle} Memberships` : 'Memberships'
 
 	return (
 		<Page
@@ -22,28 +24,27 @@ const MembersIndex = ({ members, pagination }: MemberIndexProps) => {
 			siteTitle={ <>
 				<Title>{ title }</Title>
 				<Menu>
-					<Menu.Link href={ Routes.newMember() } icon={ <NewIcon /> }>
-						New Member
+					<Menu.Link href={ Routes.newCircleMembership(params.circle_slug) } icon={ <NewIcon /> }>
+						New Membership
 					</Menu.Link>
 				</Menu>
 			</> }
 		>
-		<IndexTableTemplate
-			title="Members"
-			model="members"
-			rows={ members }
-			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.members(),
-				[
-					{ label: 'New Member', href: Routes.newMember(), icon: NewIcon },
-				]
-			} }
-		>
-			<MembersTable />
-		</IndexTableTemplate>
+			<IndexTableTemplate
+				model="memberships"
+				rows={ memberships }
+				pagination={ pagination }
+			// contextMenu={ {
+			// 	deleteRoute: Routes.memberships(),
+			// 	[
+			// 		{ label: 'New Membership', href: Routes.newMembership(), icon: NewIcon },
+			// 	]
+			// } }
+			>
+				<MembershipsTable />
+			</IndexTableTemplate>
 		</Page>
 	)
 }
 
-export default MembersIndex
+export default MembershipsIndex

@@ -11,7 +11,7 @@ interface NewPresentationProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/new
 // @route: newThemePresentation
 const NewPresentation = ({ presentation }: NewPresentationProps) => {
-	const { params } = usePageProps<'newCircleThemePresentation'>()
+	const { params } = usePageProps<'newThemePresentation'>()
 
 	const title = 'New Presentation'
 
@@ -21,7 +21,7 @@ const NewPresentation = ({ presentation }: NewPresentationProps) => {
 				<Title>{ title }</Title>
 
 				<PresentationForm
-					to={ Routes.circleThemePresentations(params.circle_slug, params.theme_slug) }
+					to={ Routes.themePresentations(params.circle_slug, params.theme_slug) }
 					presentation={ presentation }
 				/>
 			</Section>

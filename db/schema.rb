@@ -67,14 +67,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   end
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "number"
     t.integer "funds_cents", default: 0, null: false
     t.string "funds_currency", default: "USD", null: false
     t.boolean "active", default: true, null: false
     t.string "slug", null: false
+    t.uuid "person_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_memberships_on_person_id"
     t.index ["slug"], name: "index_memberships_on_slug", unique: true
   end
 
@@ -323,6 +325,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   end
 
   add_foreign_key "addresses", "contacts"
+  add_foreign_key "memberships", "people"
   add_foreign_key "memberships_people", "memberships"
   add_foreign_key "memberships_people", "people"
   add_foreign_key "ownerships", "circles"

@@ -4,14 +4,14 @@ import { Routes } from '@/lib'
 import OrgForm from '../Form'
 import { usePageProps } from '@/lib/hooks'
 
-interface NewOrgProps {
+interface NewThemeOrgProps {
 	org: Schema.OrgsFormData
 }
 
 // @path: /:circle_slug/themes/:theme_slug/orgs/new
 // @route: newThemeOrg
-const NewOrg = ({ org }: NewOrgProps) => {
-	const { params } = usePageProps<'newCircleThemeOrg'>()
+const NewThemeOrg = ({ org }: NewThemeOrgProps) => {
+	const { params } = usePageProps<'newThemeOrg'>()
 	const title = 'New Org'
 
 	return (
@@ -20,7 +20,7 @@ const NewOrg = ({ org }: NewOrgProps) => {
 				<Title>{ title }</Title>
 
 				<OrgForm
-					to={ Routes.circleThemeOrgs(params.circle_slug, params.theme_slug) }
+					to={ Routes.themeOrgs(params.circle_slug, params.theme_slug) }
 					org={ org }
 				/>
 			</Section>
@@ -29,4 +29,4 @@ const NewOrg = ({ org }: NewOrgProps) => {
 	)
 }
 
-export default NewOrg
+export default NewThemeOrg

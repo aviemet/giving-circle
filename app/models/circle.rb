@@ -41,7 +41,5 @@ class Circle < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
 
-  has_many :members, through: :memberships, source: :people, dependent: :nullify
-
-  scope :includes_associated, -> { includes([:themes, :presentations, :members, :orgs]) }
+  scope :includes_associated, -> { includes([:themes, :presentations, :memberships, :orgs]) }
 end

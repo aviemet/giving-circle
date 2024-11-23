@@ -4,7 +4,7 @@ class ThemesController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :themes, -> { search(circle.themes.includes_associated) }
-  expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
+  expose :theme, id: -> { params[:slug] }, find_by: :slug
 
   strong_params :theme, permit: %i(title quarter slug)
 
@@ -29,7 +29,6 @@ class ThemesController < ApplicationController
   # @route GET /:circle_slug/themes/:slug (theme)
   def show
     authorize theme
-
     render inertia: "Themes/Show", props: {
       theme: -> { theme.render(:show) },
     }
@@ -57,9 +56,9 @@ class ThemesController < ApplicationController
   # @route GET /:circle_slug/themes/:slug/edit (edit_theme)
   def edit
     authorize theme
-
+    ap({ theme: })
     render inertia: "Themes/Edit", props: {
-      theme: theme.render(:form_data),
+      theme: theme.render(:edit),
       circle: -> { circle.render(:persisted) },
     }
   end
