@@ -3,7 +3,7 @@ import { Box, Group, Paper, Text } from '@/Components'
 
 interface StatTileProps {
 	heading: string
-	value: string
+	value: string | number
 	icon: JSX.Element
 	color: string
 }

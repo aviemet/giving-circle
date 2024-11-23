@@ -22,10 +22,6 @@ const CircleMenu = () => {
 			<Accordion.Control>{ menu.active_circle.name }</Accordion.Control>
 			<Accordion.Panel>
 				<NavLink
-					href={ Routes.circle(menu.active_circle.slug) }
-					label="Dashboard"
-				/>
-				<NavLink
 					href={ Routes.circleMemberships(menu.active_circle.slug) }
 					label="Members"
 				/>

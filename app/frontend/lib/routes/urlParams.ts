@@ -88,11 +88,6 @@ const urlParams = {
   "newCircle": {
     "params": []
   },
-  "circle": {
-    "params": [
-      "slug"
-    ]
-  },
   "aboutCircle": {
     "params": [
       "circle_slug"
@@ -327,6 +322,11 @@ const urlParams = {
     ]
   },
   "editCircle": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "circle": {
     "params": [
       "circle_slug"
     ]

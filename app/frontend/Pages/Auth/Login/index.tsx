@@ -34,7 +34,7 @@ const Login = () => {
 	}
 
 	return (
-		<SimpleGrid cols={ { sm: 1, md: 2 } } className={ cx(classes.authLayout) }>
+		<SimpleGrid cols={ { sm: 1, md: 2 } } spacing={ 0 } className={ cx(classes.authLayout) }>
 			<Box id="auth-layout-left">
 				<Paper shadow="lg" radius="lg" p="xl"  withBorder>
 

@@ -15,7 +15,7 @@ interface ShowCircleProps {
 const ShowCircle = ({ circle }: ShowCircleProps) => {
 	const { params } = usePageProps<'circle'>()
 	const title = circle.name || 'Circle'
-	console.log({ params })
+
 	return (
 		<Page
 			title={ circle.name }
@@ -55,7 +55,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 							/>
 							<StatTile
 								heading="Active Members"
-								value="55"
+								value={ circle.memberships.length }
 								icon={ <MembersIcon /> }
 								color="orange"
 							/>

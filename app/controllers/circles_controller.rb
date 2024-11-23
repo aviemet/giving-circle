@@ -17,7 +17,7 @@ class CirclesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug
+  # @route GET /:circle_slug (circle)
   def show
     authorize circle
 
@@ -67,8 +67,8 @@ class CirclesController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug
-  # @route PUT /:circle_slug
+  # @route PATCH /:circle_slug (circle)
+  # @route PUT /:circle_slug (circle)
   def update
     authorize circle
 
@@ -79,8 +79,7 @@ class CirclesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:slug (circle)
-  # @route DELETE /:circle_slug
+  # @route DELETE /:circle_slug (circle)
   def destroy
     authorize circle
 

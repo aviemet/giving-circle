@@ -15,7 +15,6 @@ if Rails.env.development?
       person = FactoryBot.create(:person)
       membership = FactoryBot.create(:membership, {circle:})
       membership.people << person
-      circle.memberships << membership
     end
   end
 

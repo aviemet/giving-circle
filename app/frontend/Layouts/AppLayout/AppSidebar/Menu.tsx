@@ -1,8 +1,9 @@
 import React from 'react'
-import { Accordion } from '@/Components'
+import { Accordion, NavLink } from '@/Components'
 import { usePageProps } from '@/lib/hooks'
 import { useLayoutStore } from '@/Store'
 import { CircleMenu, PresentationMenu, ThemeMenu } from './menus'
+import { Routes } from '@/lib'
 
 export interface MenuProps {
 	circle: Schema.CirclesInertiaShare
@@ -22,6 +23,10 @@ const Menu = () => {
 			value={ Array.from(openMenus) }
 			onChange={ (menus) => handleAccordionChange(menus as (keyof typeof menuKeys)[]) }
 		>
+			<NavLink
+				href={ Routes.circles() }
+				label="Dashboard"
+			/>
 			{ menu.active_circle && <>
 				<CircleMenu />
 

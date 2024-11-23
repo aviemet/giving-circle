@@ -8,6 +8,7 @@ export const authLayout = css`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		padding: ${vars.spacing.md};
 
 		.mantine-Paper-root {
 			height: fit-content;

@@ -10,7 +10,7 @@ module UrlParamsJson
     # Adds annotation comments to React view files with the path and named route
     #
     # Example:
-    #   For a give route, `resources :users`, an entry in urlParams object would be:
+    #   For a given route, `resources :users`, an entry in urlParams object would be:
     #
     #   "users": {
     #     "params": []
@@ -56,6 +56,7 @@ module UrlParamsJson
       js_content = "const urlParams = #{JSON.pretty_generate(url_params)} as const;\n\nexport default urlParams;"
 
       file_path = Rails.root.join("app/frontend/lib/routes/urlParams.ts")
+      FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, js_content)
     end
 
