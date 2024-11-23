@@ -55,7 +55,10 @@ RSpec.describe Theme do
       it 'returns a successful count value' do
         theme = create(:theme)
         create_list(:themes_org, 2, { theme:, circle: theme.circle })
+        # Dummy Org:
+        create(:org, circle: theme.circle)
 
+        expect(Org.count).to eq(3)
         expect(theme.orgs.count).to eq(2)
       end
     end

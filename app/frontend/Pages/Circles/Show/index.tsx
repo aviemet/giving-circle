@@ -48,7 +48,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 								color="purple"
 							/>
 							<StatTile
-								heading="Orgs Helped"
+								heading="Organizations Funded"
 								value="6"
 								icon={ <HelpingIcon /> }
 								color="green"

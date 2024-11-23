@@ -42,8 +42,14 @@ class Theme < ApplicationRecord
 
   has_many :themes_orgs, dependent: :destroy
   has_many :orgs, -> {
+    # Merge ask values from join table onto org records
     select('orgs.*, themes_orgs.ask_cents as ask_cents, themes_orgs.ask_currency as ask_currency')
-      .joins(:themes_orgs)
+      # Override count method which would error with the above select statement
+      .extending {
+      def count
+        except(:select).calculate(:count, :all)
+      end
+    }
   }, through: :themes_orgs
 
   scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
