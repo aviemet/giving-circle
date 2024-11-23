@@ -51,6 +51,13 @@ RSpec.describe Theme do
         expect(org.ask_cents).to eq(20000)
         expect(org.ask_currency).to eq("USD")
       end
+
+      it 'returns a successful count value' do
+        theme = create(:theme)
+        create_list(:themes_org, 2, { theme:, circle: theme.circle })
+
+        expect(theme.orgs.count).to eq(2)
+      end
     end
   end
 end

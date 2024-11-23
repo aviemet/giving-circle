@@ -12,7 +12,7 @@ interface ShowThemeProps {
 // @path: /:circle_slug/themes/:slug
 // @route: theme
 const ShowTheme = ({ theme }: ShowThemeProps) => {
-	const { params } = usePageProps<'circleTheme'>()
+	const { params } = usePageProps<'theme'>()
 
 	const title =  theme.name || 'Theme'
 
@@ -25,7 +25,7 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.circleEditTheme(params.circle_slug, params.theme_slug) }>
+							<Menu.Link href={ Routes.editTheme(params.circle_slug, params.slug) }>
 								Edit Theme
 							</Menu.Link>
 						</Menu.Dropdown>
