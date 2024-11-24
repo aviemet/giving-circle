@@ -84,6 +84,6 @@ class CirclesController < ApplicationController
     authorize circle
 
     circle.destroy
-    redirect_to [:admin, circles_url], notice: "Circle was successfully destroyed."
+    redirect_to circles_url, notice: "Circle was successfully destroyed."
   end
 end
