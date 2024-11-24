@@ -2,8 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/members", type: :request do
-  login_admin
-
   def valid_attributes(circle = nil)
     { membership: attributes_for(:membership, { circle: circle || create(:circle)}) }
   end
@@ -13,38 +11,54 @@ RSpec.describe "/members", type: :request do
   end
 
   describe "GET /index" do
+    login_super_admin
+
     it "renders a successful response" do
       membership = create(:membership)
-      # ap({ membership:, url: circle_memberships_url(membership.circle) })
+
       get circle_memberships_url(membership.circle)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
+    login_super_admin
+
     it "renders a successful response" do
       membership = create(:membership)
+
       get membership_url(membership.circle, membership)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
+    login_super_admin
+
     it "renders a successful response" do
       get new_circle_membership_url(@admin.circles.first)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
+    login_super_admin
+
     it "renders a successful response" do
       membership = create(:membership)
+
       get edit_membership_url(membership.circle, membership)
+
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
+    login_super_admin
+
     context "with valid parameters" do
       it "creates a new Membership" do
         circle = @admin.circles.first
@@ -71,6 +85,7 @@ RSpec.describe "/members", type: :request do
     context "with invalid parameters" do
       it "does not create a new Membership" do
         circle = create(:circle)
+
         expect {
           post circle_memberships_url(circle), params: invalid_attributes
         }.not_to change(Membership, :count)
@@ -86,6 +101,8 @@ RSpec.describe "/members", type: :request do
   end
 
   describe "PATCH /update" do
+    login_super_admin
+
     context "with valid parameters" do
       it "updates the requested membership" do
         membership = create(:membership, { circle: @admin.circles.first })
@@ -112,13 +129,17 @@ RSpec.describe "/members", type: :request do
     context "with invalid parameters" do
       it "redirects back to the edit membership page" do
         membership = create(:membership)
+
         patch membership_url(membership.circle, membership), params: invalid_attributes
+
         expect(response).to redirect_to(edit_membership_url(membership.circle, membership))
       end
     end
   end
 
   describe "DELETE /destroy" do
+    login_super_admin
+
     it "destroys the requested membership" do
       membership = create(:membership)
 

@@ -5,4 +5,8 @@ class OrgPolicy < ApplicationPolicy
   def import?
     true
   end
+
+  def about?
+    true
+  end
 end

@@ -2,8 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/circles", type: :request do
-  login_admin
-
   def valid_attributes
     { circle: attributes_for(:circle) }
   end
@@ -13,14 +11,20 @@ RSpec.describe "/circles", type: :request do
   end
 
   describe "GET /index" do
+    login_super_admin
+
     it "renders a successful response" do
       create(:circle)
+
       get circles_url
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
+    login_super_admin
+
     it "renders a successful response" do
       get circle_url(@admin.circles.first)
 
@@ -29,6 +33,8 @@ RSpec.describe "/circles", type: :request do
   end
 
   describe "GET /new" do
+    login_super_admin
+
     it "renders a successful response" do
       get new_circle_url
 
@@ -37,6 +43,8 @@ RSpec.describe "/circles", type: :request do
   end
 
   describe "GET /edit" do
+    login_super_admin
+
     it "renders a successful response" do
       get edit_circle_url(create(:circle))
 
@@ -45,6 +53,8 @@ RSpec.describe "/circles", type: :request do
   end
 
   describe "POST /create" do
+    login_super_admin
+
     context "with valid parameters" do
       it "creates a new Circle" do
         expect {
@@ -76,6 +86,8 @@ RSpec.describe "/circles", type: :request do
   end
 
   describe "PATCH /update" do
+    login_super_admin
+
     context "with valid parameters" do
       it "updates the requested circle" do
         circle = create(:circle)
@@ -107,6 +119,8 @@ RSpec.describe "/circles", type: :request do
   end
 
   describe "DELETE /destroy" do
+    login_super_admin
+
     it "destroys the requested circle" do
       circle = create(:circle)
 

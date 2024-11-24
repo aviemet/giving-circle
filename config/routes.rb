@@ -50,7 +50,7 @@ Rails.application.routes.draw do
 
       resources :memberships, param: :slug
 
-      resources :orgs, param: :slug, except: [:create] do
+      resources :orgs, param: :slug do
         get :about
       end
 

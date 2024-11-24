@@ -3,10 +3,7 @@ class OrgsController < ApplicationController
 
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :orgs, -> { search(
-    circle.themes.find_by(slug: params[:theme_slug]).orgs.includes_associated,
-    sortable_fields,
-  ) }
+  expose :orgs, -> { search(circle.orgs.includes_associated) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
   strong_params :org, permit: [:name, :slug, :description]
@@ -54,7 +51,7 @@ class OrgsController < ApplicationController
     authorize Org.new
 
     render inertia: "Orgs/New", props: {
-      org: Org.new.render(:new),
+      org: Org.new.render(:form_data),
     }
   end
 
@@ -67,21 +64,18 @@ class OrgsController < ApplicationController
     }
   end
 
-  # def create
-  #   authorize Org.new
+  # @route POST /:circle_slug/orgs (circle_orgs)
+  def create
+    authorize Org.new
 
-  #   theme = Theme.find_by(slug: params[:theme_slug])
+    org.circle = circle
 
-  #   ActiveRecord::Base.transaction do
-  #     if org.save
-  #       theme.orgs << org
-  #       redirect_to [:admin, circle, theme, org], notice: "Org was successfully created."
-  #     else
-  #       redirect_to [:new, :admin, circle, theme], inertia: { errors: org.errors }
-  #       raise ActiveRecord::Rollback
-  #     end
-  #   end
-  # end
+    if org.save
+      redirect_to org_path(params[:circle_slug], org), notice: t('orgs.notices.created')
+    else
+      redirect_to new_circle_org_path(params[:circle_slug]), inertia: { errors: org.errors }
+    end
+  end
 
   # @route PATCH /:circle_slug/orgs/:slug (org)
   # @route PUT /:circle_slug/orgs/:slug (org)
@@ -89,9 +83,9 @@ class OrgsController < ApplicationController
     authorize org
 
     if org.update(org_params)
-      redirect_to [:admin, circle, theme, org], notice: "Org was successfully updated."
+      redirect_to org_path(params[:circle_slug], org), notice: t('orgs.notices.updated')
     else
-      redirect_to [:edit, :admin, circle, theme, org], inertia: { errors: org.errors }
+      redirect_to edit_org_path(params[:circle_slug], org), inertia: { errors: org.errors }
     end
   end
 
@@ -100,7 +94,7 @@ class OrgsController < ApplicationController
   def destroy
     authorize org
 
-    org.destroy
-    redirect_to [:admin, orgs_url], notice: "Org was successfully destroyed."
+    org.destroy!
+    redirect_to circle_orgs_path(params[:circle_slug]), notice: t('orgs.notices.destroyed')
   end
 end

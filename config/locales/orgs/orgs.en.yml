@@ -1,0 +1,6 @@
+en:
+  orgs:
+    notices:
+      created: "Org was successfully created."
+      updated: "Org was successfully updated."
+      destroyed: "Org was successfully destroyed."

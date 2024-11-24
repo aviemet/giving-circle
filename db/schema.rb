@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   end
 
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.string "slug", null: false
     t.datetime "created_at", null: false
