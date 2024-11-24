@@ -48,4 +48,12 @@ RSpec.describe Presentation do
     it { is_expected.to have_many(:slides).through(:presentations_slides) }
     it { is_expected.to have_many(:votes).through(:presentations_votes) }
   end
+
+  describe "Templates" do
+    it "works" do
+      presentation = create(:presentation)
+      ap({ presentation: })
+
+    end
+  end
 end

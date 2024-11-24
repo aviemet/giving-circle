@@ -14,7 +14,7 @@ interface <%= singular_table_name.camelize %>IndexProps {
 const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagination }: <%= singular_table_name.camelize %>IndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()
-	const title = <%= human_name.titleize %>
+	const title = '<%= human_name.titleize %>'
 
 	return (
 		<Page
@@ -33,12 +33,16 @@ const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagi
 			model="<%= plural_table_name %>"
 			rows={ <%= plural_table_name %> }
 			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.<%= plural_table_name.camelize(:lower) %>(),
+			contextMenu={ 
 				[
-					{ label: 'New <%= human_name.titleize %>', href: Routes.new<%= singular_table_name.camelize %>(), icon: NewIcon },
+					{ 
+						label: 'New <%= human_name.titleize %>', 
+						href: Routes.new<%= singular_table_name.camelize %>(), 
+						icon: NewIcon,
+						deleteRoute: Routes.<%= plural_table_name.camelize(:lower) %>(),
+					},
 				]
-			} }
+			}
 		>
 			<<%= plural_table_name.camelize %>Table />
 		</IndexTableTemplate>

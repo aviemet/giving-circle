@@ -14,7 +14,7 @@ interface PresentationVoteIndexProps {
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()
-	const title = Vote
+	const title = 'Vote'
 
 	return (
 		<Page
@@ -28,20 +28,24 @@ const PresentationVotesIndex = ({ presentation_votes, pagination }: Presentation
 				</Menu>
 			</> }
 		>
-		<IndexTableTemplate
-			title="PresentationVotes"
-			model="presentation_votes"
-			rows={ presentation_votes }
-			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.presentationVotes(),
-				[
-					{ label: 'New Vote', href: Routes.newPresentationVote(), icon: NewIcon },
-				]
-			} }
-		>
-			<PresentationVotesTable />
-		</IndexTableTemplate>
+			<IndexTableTemplate
+				title="PresentationVotes"
+				model="presentation_votes"
+				rows={ presentation_votes }
+				pagination={ pagination }
+				contextMenu={
+					[
+						{
+							label: 'New Vote',
+							href: Routes.newPresentationVote(),
+							icon: NewIcon,
+							deleteRoute: Routes.presentationVotes(),
+						},
+					]
+				}
+			>
+				<PresentationVotesTable />
+			</IndexTableTemplate>
 		</Page>
 	)
 }

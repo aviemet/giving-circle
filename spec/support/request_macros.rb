@@ -4,7 +4,7 @@ module RequestMacros
       @admin = FactoryBot.create(:user)
       @admin.confirm
       @admin.add_role(:super_admin)
-      @admin.add_role(:admin, Company.first)
+      @admin.add_role(:admin, Circle.first)
       sign_in @admin
     end
   end
@@ -13,7 +13,7 @@ module RequestMacros
     before do
       @user = FactoryBot.create(:user)
       @user.confirm
-      @user.add_role(:admin, Company.first)
+      @user.add_role(:admin, Circle.first)
       sign_in @user
     end
   end

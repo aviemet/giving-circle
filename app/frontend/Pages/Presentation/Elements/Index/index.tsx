@@ -14,7 +14,7 @@ interface PresentationElementIndexProps {
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()
-	const title = Element
+	const title = 'Element'
 
 	return (
 		<Page
@@ -28,20 +28,24 @@ const PresentationElementsIndex = ({ presentation_elements, pagination }: Presen
 				</Menu>
 			</> }
 		>
-		<IndexTableTemplate
-			title="PresentationElements"
-			model="presentation_elements"
-			rows={ presentation_elements }
-			pagination={ pagination }
-			contextMenu={ {
-				deleteRoute: Routes.presentationElements(),
-				[
-					{ label: 'New Element', href: Routes.newPresentationElement(), icon: NewIcon },
-				]
-			} }
-		>
-			<PresentationElementsTable />
-		</IndexTableTemplate>
+			<IndexTableTemplate
+				title="PresentationElements"
+				model="presentation_elements"
+				rows={ presentation_elements }
+				pagination={ pagination }
+				contextMenu={
+					[
+						{
+							label: 'New Element',
+							href: Routes.newPresentationElement(),
+							icon: NewIcon,
+							deleteRoute: Routes.presentationElements(),
+						},
+					]
+				}
+			>
+				<PresentationElementsTable />
+			</IndexTableTemplate>
 		</Page>
 	)
 }

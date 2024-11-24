@@ -13,7 +13,9 @@
 FactoryBot.define do
   factory :presentation_slide, class: 'Presentation::Slide' do
     name { Faker::Company.buzzword.capitalize }
+    data { {} }
 
     circle
+    presentation
   end
 end

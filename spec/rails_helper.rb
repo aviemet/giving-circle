@@ -11,6 +11,8 @@ require 'inertia_rails/rspec'
 require 'bullet'
 require 'database_cleaner/active_record'
 require "pundit/rspec"
+require 'capybara/rails'
+require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -66,6 +68,14 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Capybara
+  config.include Capybara::DSL, type: :feature
+
+  Capybara.configure do |c|
+    c.default_driver = :selenium_chrome
+    c.app_host = 'https://localhost:3000'
+  end
 
   # Database Cleaner
   config.before :suite do
@@ -137,4 +147,5 @@ RSpec.configure do |config|
       "#{policy.class} does not forbid #{action} on #{policy.record} for #{policy.user.inspect}."
     end
   end
+
 end

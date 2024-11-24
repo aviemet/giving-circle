@@ -15,5 +15,20 @@ FactoryBot.define do
     type { 1 }
 
     circle
+
+    transient do
+      # Default to `false` unless specified
+      template { false }
+    end
+
+    # Conditionally build or skip the association
+    presentation { template ? nil : association(:presentation) }
+
+    after(:build) do |presentation_distribution, evaluator|
+      # Ensure no presentation is set if `template` is true
+      if evaluator.template
+        presentation_distribution.presentation = nil
+      end
+    end
   end
 end
