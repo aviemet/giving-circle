@@ -87,6 +87,12 @@ group :development do
   gem "brakeman", "~> 6.1", require: false
 
   gem "letter_opener", "~> 1.10"
+
+  # I18n
+  # Report unused and missing locale keys [https://github.com/glebm/i18n-tasks]
+  gem "i18n-tasks", "~> 1.0", require: false
+  # Generate json and ts locale files from locale.yml files [https://github.com/fnando/i18n-js]
+  gem "i18n-js", "~> 4.2", require: false
 end
 
 group :test do

@@ -1,0 +1,6 @@
+en:
+  circles:
+    notices:
+      created: "Circle was successfully created."
+      updated: "Circle was successfully updated."
+      destroyed: "Circle was successfully destroyed."

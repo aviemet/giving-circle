@@ -55,6 +55,7 @@ RSpec.describe "/circles", type: :request do
         post circles_url, params: valid_attributes
 
         expect(response).to redirect_to(circle_url(Circle.last))
+        expect(flash[:notice]).to eq(I18n.t('circles.notices.created'))
       end
     end
 
@@ -92,6 +93,7 @@ RSpec.describe "/circles", type: :request do
         circle.reload
 
         expect(response).to redirect_to(circle_url(circle))
+        expect(flash[:notice]).to eq(I18n.t('circles.notices.updated'))
       end
     end
 
@@ -118,6 +120,7 @@ RSpec.describe "/circles", type: :request do
       delete circle_url(circle)
 
       expect(response).to redirect_to(circles_url)
+      expect(flash[:notice]).to eq(I18n.t('circles.notices.destroyed'))
     end
   end
 end

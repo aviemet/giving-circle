@@ -51,8 +51,7 @@ RSpec.describe Presentation do
 
   describe "Templates" do
     it "works" do
-      presentation = create(:presentation)
-      ap({ presentation: })
+      # presentation = create(:presentation)
 
     end
   end

@@ -56,7 +56,7 @@ class ThemesController < ApplicationController
   # @route GET /:circle_slug/themes/:slug/edit (edit_theme)
   def edit
     authorize theme
-    ap({ theme: })
+
     render inertia: "Themes/Edit", props: {
       theme: theme.render(:edit),
       circle: -> { circle.render(:persisted) },
