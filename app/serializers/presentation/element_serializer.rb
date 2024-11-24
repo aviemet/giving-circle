@@ -10,11 +10,11 @@
 #  updated_at :datetime         not null
 #
 class Presentation::ElementSerializer < ApplicationSerializer
-  object_as :presentation_element
-  
+  object_as :element, model: "Presentation::Element"
+
   attributes(
     :name,
     :data,
-    :element,
+    :template,
   )
 end

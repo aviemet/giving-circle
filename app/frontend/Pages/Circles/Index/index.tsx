@@ -12,6 +12,7 @@ interface CircleIndexProps {
 // @path: /circles
 // @route: circles
 const CirclesIndex = ({ circles }: CircleIndexProps) => {
+	console.log({ circles })
 	return (
 		<Page
 			title="Dashboard"

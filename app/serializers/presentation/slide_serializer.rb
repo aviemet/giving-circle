@@ -11,13 +11,12 @@
 #  updated_at :datetime         not null
 #
 class Presentation::SlideSerializer < ApplicationSerializer
-  object_as :presentation_slide
-  identifier :slug
+  object_as :slide, model: "Presentation::Slide"
+
   attributes(
     :name,
-    :content,
+    :data,
     :order,
-    :presentation_id,
-    :presentation_template_id,
+    :template,
   )
 end

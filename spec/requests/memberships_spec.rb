@@ -2,119 +2,138 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/members", type: :request do
+  login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # Member. As you add validations to Member, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  def valid_attributes(circle = nil)
+    { membership: attributes_for(:membership, { circle: circle || create(:circle)}) }
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  def invalid_attributes
+    { membership: { name: "" } }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
-      Member.create! valid_attributes
-      get members_url
+      membership = create(:membership)
+      # ap({ membership:, url: circle_memberships_url(membership.circle) })
+      get circle_memberships_url(membership.circle)
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      member = Member.create! valid_attributes
-      get member_url(member)
+      membership = create(:membership)
+      get membership_url(membership.circle, membership)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_member_url
+      get new_circle_membership_url(@admin.circles.first)
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      member = Member.create! valid_attributes
-      get edit_member_url(member)
+      membership = create(:membership)
+      get edit_membership_url(membership.circle, membership)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Member" do
+      it "creates a new Membership" do
+        circle = @admin.circles.first
+        attributes = valid_attributes(circle)
+        attributes[:membership][:person_id] = create(:person).id
+
         expect {
-          post members_url, params: { member: valid_attributes }
-        }.to change(Member, :count).by(1)
+          post circle_memberships_url(circle), params: attributes
+        }.to change(Membership, :count).by(1)
       end
 
-      it "redirects to the created member" do
-        post members_url, params: { member: valid_attributes }
-        expect(response).to redirect_to(member_url(Member.last))
+      it "redirects to the created membership" do
+        circle = @admin.circles.first
+        attributes = valid_attributes(circle)
+        attributes[:membership][:person_id] = create(:person).id
+
+        post circle_memberships_url(circle), params: attributes
+
+        expect(response).to redirect_to(membership_url(Membership.last.circle, Membership.last))
+        expect(flash[:notice]).to eq(I18n.t('memberships.notices.created'))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Member" do
+      it "does not create a new Membership" do
+        circle = create(:circle)
         expect {
-          post members_url, params: { member: invalid_attributes }
-        }.not_to change(Member, :count)
+          post circle_memberships_url(circle), params: invalid_attributes
+        }.not_to change(Membership, :count)
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post members_url, params: { member: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+      it "redirects back to the new membership page" do
+        circle = create(:circle)
+        post circle_memberships_url(circle), params: invalid_attributes
+
+        expect(response).to redirect_to(new_circle_membership_url(circle))
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      it "updates the requested membership" do
+        membership = create(:membership, { circle: @admin.circles.first })
+        new_attributes = valid_attributes(membership.circle)
 
-      it "updates the requested member" do
-        member = Member.create! valid_attributes
-        patch member_url(member), params: { member: new_attributes }
-        member.reload
-        skip("Add assertions for updated state")
+        patch membership_url(membership.circle, membership), params: new_attributes
+        membership.reload
+
+        expect(membership.name).to eq(new_attributes[:membership][:name])
       end
 
-      it "redirects to the member" do
-        member = Member.create! valid_attributes
-        patch member_url(member), params: { member: new_attributes }
-        member.reload
-        expect(response).to redirect_to(member_url(member))
+      it "redirects to the membership" do
+        membership = create(:membership, { circle: @admin.circles.first })
+        new_attributes = valid_attributes(membership.circle)
+
+        patch membership_url(membership.circle, membership), params: new_attributes
+        membership.reload
+
+        expect(response).to redirect_to(membership_url(membership.circle, membership))
+        expect(flash[:notice]).to eq(I18n.t('memberships.notices.updated'))
       end
     end
 
     context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        member = Member.create! valid_attributes
-        patch member_url(member), params: { member: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+      it "redirects back to the edit membership page" do
+        membership = create(:membership)
+        patch membership_url(membership.circle, membership), params: invalid_attributes
+        expect(response).to redirect_to(edit_membership_url(membership.circle, membership))
       end
     end
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested member" do
-      member = Member.create! valid_attributes
+    it "destroys the requested membership" do
+      membership = create(:membership)
+
       expect {
-        delete member_url(member)
-      }.to change(Member, :count).by(-1)
+        delete membership_url(membership.circle, membership)
+      }.to change(Membership, :count).by(-1)
     end
 
     it "redirects to the members list" do
-      member = Member.create! valid_attributes
-      delete member_url(member)
-      expect(response).to redirect_to(members_url)
+      membership = create(:membership, circle: @admin.circles.first)
+
+      delete membership_url(membership.circle, membership)
+
+      expect(response).to redirect_to(circle_memberships_url(@admin.circles.first))
+      expect(flash[:notice]).to eq(I18n.t('memberships.notices.destroyed'))
     end
   end
 end

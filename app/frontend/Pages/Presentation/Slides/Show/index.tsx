@@ -7,6 +7,8 @@ interface ShowPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesShow
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id
+// @route: themePresentationSlide
 const ShowPresentationSlide = ({ presentation_slide }: ShowPresentationSlideProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

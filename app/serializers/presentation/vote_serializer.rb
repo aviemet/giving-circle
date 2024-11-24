@@ -10,10 +10,11 @@
 #  updated_at :datetime         not null
 #
 class Presentation::VoteSerializer < ApplicationSerializer
-  object_as :presentation_vote
-  
+  object_as :vote, model: "Presentation::Vote"
+
   attributes(
     :name,
-    :type,
+    :data,
+    :template,
   )
 end

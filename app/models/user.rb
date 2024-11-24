@@ -53,11 +53,6 @@
 #  fk_rails_...  (person_id => people.id)
 #
 class User < ApplicationRecord
-  # multisearchable(
-  #   against: [:email],
-  #   additional_attributes: ->(record) { { label: record.email } },
-  # )
-
   resourcify
   rolify
 
@@ -74,9 +69,8 @@ class User < ApplicationRecord
     Circle.with_roles(Circle.find_roles.pluck(:name), self)
   end
 
-  # TODO: why was this here? delete if nothing breaks
-  # Rows page for pagination
-  # def limit(model)
-  #   self.table_preferences&.[](model.to_s)&.[]('limit')
-  # end
+  # Per table query limit for pagination
+  def limit(model)
+    self.table_preferences&.[](model.to_s)&.[]('limit') || 25
+  end
 end

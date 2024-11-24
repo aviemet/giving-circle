@@ -11,6 +11,8 @@ interface PresentationElementIndexProps {
 	pagination: Schema.Pagination
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements
+// @route: themePresentationElements
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

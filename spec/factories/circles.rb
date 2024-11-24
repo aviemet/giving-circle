@@ -14,6 +14,6 @@
 #
 FactoryBot.define do
   factory :circle do
-    name { Faker::Company.name }
+    name { "#{Faker::Commerce.brand} #{Faker::IndustrySegments.industry}" }
   end
 end

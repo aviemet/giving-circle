@@ -11,6 +11,8 @@ interface PresentationVoteIndexProps {
 	pagination: Schema.Pagination
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes
+// @route: themePresentationVotes
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

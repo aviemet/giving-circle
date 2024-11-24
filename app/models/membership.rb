@@ -60,6 +60,8 @@ class Membership < ApplicationRecord
 
   scope :includes_associated, -> { includes([]) }
 
+  accepts_nested_attributes_for :person
+
   def members
     [person] + others
   end

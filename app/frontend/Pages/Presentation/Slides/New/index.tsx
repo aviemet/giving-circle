@@ -8,6 +8,8 @@ interface NewPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesFormData
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/new
+// @route: newThemePresentationSlide
 const NewPresentationSlide = ({ ...data }: NewPresentationSlideProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

@@ -11,6 +11,7 @@
 #
 class Presentation::Distribution < ApplicationRecord
   include Ownable
+  include PresentationFeature
   include PgSearch::Model
 
   pg_search_scope(
@@ -23,11 +24,6 @@ class Presentation::Distribution < ApplicationRecord
   )
 
   resourcify
-
-  has_many :presentations_distributions, dependent: :destroy
-  has_many :presentations, through: :presentations_distributions
-
-  scope :templates, -> { where(template: true) }
 
   scope :includes_associated, -> { includes([]) }
 end

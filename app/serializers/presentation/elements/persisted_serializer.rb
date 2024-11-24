@@ -2,5 +2,6 @@ class Presentation::Elements::PersistedSerializer < Presentation::ElementSeriali
   include Persisted
 
   attributes(
+    :id,
   )
 end

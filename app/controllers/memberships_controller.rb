@@ -1,12 +1,12 @@
 class MembershipsController < ApplicationController
-  expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle }, find_by: :slug
+  expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :memberships, -> { search(Membership.where(circle:).includes_associated) }
-  expose :membership, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :memberships, -> { search(circle.memberships.includes_associated) }
+  expose :membership, id: -> { params[:slug] }, scope: -> { circle.memberships.includes_associated }, find_by: :slug
 
-  strong_params :membership, permit: %i(name number funds active)
+  strong_params :membership, permit: [:name, :number, :funds, :active, :person_id, person: [:first_name, :last_name]]
 
-  sortable_fields %w(name number funds active)
+  sortable_fields %w(id slug name number funds active)
 
   # @route GET /:circle_slug/memberships (circle_memberships)
   def index
@@ -29,7 +29,7 @@ class MembershipsController < ApplicationController
 
     render inertia: "Memberships/Show", props: {
       membership: -> { membership.render(:show) },
-      circle: -> { circle.includes_associated.render(:persisted) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
@@ -39,7 +39,7 @@ class MembershipsController < ApplicationController
 
     render inertia: "Memberships/New", props: {
       membership: Membership.new.render(:form_data),
-      circle: -> { circle.includes_associated.render(:persisted) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
@@ -49,7 +49,7 @@ class MembershipsController < ApplicationController
 
     render inertia: "Memberships/Edit", props: {
       membership: membership.render(:edit),
-      circle: -> { circle.includes_associated.render(:persisted) },
+      circle: -> { circle.render(:persisted) },
     }
   end
 
@@ -57,10 +57,12 @@ class MembershipsController < ApplicationController
   def create
     authorize Membership.new
 
+    membership.circle = circle
+
     if membership.save
-      redirect_to membership, notice: "Membership was successfully created."
+      redirect_to membership_path(params[:circle_slug], membership), notice: t('memberships.notices.created')
     else
-      redirect_to new_member_path, inertia: { errors: membership.errors }
+      redirect_to new_circle_membership_path(params[:circle_slug]), inertia: { errors: membership.errors }
     end
   end
 
@@ -69,10 +71,10 @@ class MembershipsController < ApplicationController
   def update
     authorize membership
 
-    if membership.update(member_params)
-      redirect_to membership, notice: "Membership was successfully updated."
+    if membership.update(membership_params)
+      redirect_to membership_path(params[:circle_slug], membership), notice: t('memberships.notices.updated')
     else
-      redirect_to edit_member_path, inertia: { errors: membership.errors }
+      redirect_to edit_membership_path(params[:circle_slug], membership), inertia: { errors: membership.errors }
     end
   end
 
@@ -81,7 +83,7 @@ class MembershipsController < ApplicationController
     authorize membership
 
     membership.destroy!
-    redirect_to members_url, notice: "Membership was successfully destroyed."
+    redirect_to circle_memberships_path(params[:circle_slug]), notice: t('memberships.notices.destroyed')
   end
 
 end

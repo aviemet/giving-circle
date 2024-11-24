@@ -7,6 +7,8 @@ interface ShowPresentationElementProps {
 	presentation_element: Schema.PresentationElementsShow
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements/:id
+// @route: themePresentationElement
 const ShowPresentationElement = ({ presentation_element }: ShowPresentationElementProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

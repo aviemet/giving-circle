@@ -8,6 +8,8 @@ interface EditPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesEdit
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id/edit
+// @route: editThemePresentationVote
 const EditPresentationVote = ({ presentation_vote }: EditPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

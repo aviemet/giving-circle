@@ -10,8 +10,12 @@
 #  updated_at :datetime         not null
 #
 class Presentation::DistributionSerializer < ApplicationSerializer
-  object_as :presentation_distribution
+  object_as :distribution, model: "Presentation::Distribution"
 
-  attributes
+  attributes(
+    :name,
+    :template,
+    :type,
+  )
 
 end

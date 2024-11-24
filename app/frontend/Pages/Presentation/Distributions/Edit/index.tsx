@@ -5,25 +5,27 @@ import { usePageProps } from '@/lib/hooks'
 import PresentationDistributionsForm from '../Form'
 
 interface EditPresentationDistributionProps {
-	presentation_distribution: Schema.PresentationDistributionsEdit
+	distribution: Schema.PresentationDistributionsEdit
 }
 
-const EditPresentationDistribution = ({ presentation_distribution }: EditPresentationDistributionProps) => {
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions/:id/edit
+// @route: editThemePresentationDistribution
+const EditPresentationDistribution = ({ distribution }: EditPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
+	const { params } = usePageProps<'editThemePresentationDistribution'>()
 	const title = 'Edit Distribution'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Distributions', href: Routes.presentationDistributions() },
-			{ title: "PresentationDistribution", href: Routes.presentationDistribution(presentation_distribution.id) },
+			{ title: 'Distributions', href: Routes.themePresentationDistributions(params.circle_slug, params.theme_slug, params.presentation_slug) },
+			{ title: "PresentationDistribution", href: Routes.themePresentationDistribution(params.circle_slug, params.theme_slug, params.presentation_slug, distribution.id) },
 			{ title, href: window.location.href },
 		] }>
-			<Section>				
+			<Section>
 				<PresentationDistributionsForm
 					method='put'
-					to={ Routes.presentationDistribution() }
-					presentation_distribution={ presentation_distribution }
+					to={ Routes.themePresentationDistribution(params.circle_slug, params.theme_slug, params.presentation_slug, distribution.id) }
+					presentation_distribution={ distribution }
 				/>
 			</Section>
 		</Page>

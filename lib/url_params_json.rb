@@ -134,7 +134,7 @@ def tsx_file_path(controller, action)
       elsif line.include?('render inertia:')
         match = line.match(/render inertia:\s*["']([^"]+)["']/)
         if match
-          path = Rails.root.join("app/frontend/Pages/#{match[1]}/index.tsx")
+          path = Rails.root.join("app/frontend/Pages/#{match[1].gsub('::', '/')}/index.tsx")
           component = path if path.exist?
         end
         break

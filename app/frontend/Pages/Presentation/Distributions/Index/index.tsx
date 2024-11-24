@@ -11,9 +11,11 @@ interface PresentationDistributionIndexProps {
 	pagination: Schema.Pagination
 }
 
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions
+// @route: themePresentationDistributions
 const PresentationDistributionsIndex = ({ presentation_distributions, pagination }: PresentationDistributionIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
+	const { params } = usePageProps<'themePresentationDistributions'>()
 	const title = 'Distribution'
 
 	return (
@@ -22,7 +24,7 @@ const PresentationDistributionsIndex = ({ presentation_distributions, pagination
 			siteTitle={ <>
 				<Title>{ title }</Title>
 				<Menu>
-					<Menu.Link href={ Routes.newPresentationDistribution() } icon={ <NewIcon /> }>
+					<Menu.Link href={ Routes.newThemePresentationDistribution(params.circle_slug, params.theme_slug, params.presentation_slug) } icon={ <NewIcon /> }>
 						New Distribution
 					</Menu.Link>
 				</Menu>
@@ -34,14 +36,14 @@ const PresentationDistributionsIndex = ({ presentation_distributions, pagination
 				rows={ presentation_distributions }
 				pagination={ pagination }
 				contextMenu={
-					[
-						{
-							label: 'New Distribution',
-							href: Routes.newPresentationDistribution(),
-							icon: NewIcon ,
-							deleteRoute: Routes.presentationDistributions(),
-						},
-					]
+
+					{
+						label: 'New Distribution',
+						href: Routes.newThemePresentationDistribution(params.circle_slug, params.theme_slug, params.presentation_slug),
+						icon: NewIcon ,
+						deleteRoute: Routes.themePresentationDistributions(params.circle_slug, params.theme_slug, params.presentation_slug),
+					}
+
 				}
 			>
 				<PresentationDistributionsTable />

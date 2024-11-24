@@ -2,5 +2,6 @@ class Presentation::Distributions::PersistedSerializer < Presentation::Distribut
   include Persisted
 
   attributes(
+    :id,
   )
 end
