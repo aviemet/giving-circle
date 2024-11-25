@@ -1,0 +1,6 @@
+en:
+  themes:
+    notices:
+      created: "Theme was successfully created."
+      updated: "Theme was successfully updated."
+      destroyed: "Theme was successfully destroyed."

@@ -2,122 +2,143 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/themes", type: :request do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Theme. As you add validations to Theme, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  def invalid_attributes
+    { theme: { name: "" } }
+  end
 
   describe "GET /index" do
+    login_super_admin
+
     it "renders a successful response" do
-      Theme.create! valid_attributes
-      get themes_url
+      theme = create(:theme)
+
+      get circle_themes_url(theme.circle)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
+    login_super_admin
+
     it "renders a successful response" do
-      theme = Theme.create! valid_attributes
-      get theme_url(theme)
+      theme = create(:theme)
+
+      get theme_url(theme.circle, theme)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
+    login_super_admin
+
     it "renders a successful response" do
-      get new_theme_url
+      get new_circle_theme_url(@admin.circles.first)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
+    login_super_admin
+
     it "renders a successful response" do
-      theme = Theme.create! valid_attributes
-      get edit_theme_url(theme)
+      theme = create(:theme, circle: @admin.circles.first)
+
+      get edit_theme_url(theme.circle, theme)
+
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
+    login_super_admin
+
     context "with valid parameters" do
       it "creates a new Theme" do
         expect {
-          post themes_url, params: { theme: valid_attributes }
+          post circle_themes_url(@admin.circles.first), params: { theme: attributes_for(:theme) }
         }.to change(Theme, :count).by(1)
       end
 
       it "redirects to the created theme" do
-        post themes_url, params: { theme: valid_attributes }
-        expect(response).to redirect_to(theme_url(Theme.last))
+        post circle_themes_url(@admin.circles.first), params: { theme: attributes_for(:theme) }
+
+        expect(response).to redirect_to(theme_url(@admin.circles.first, Theme.last))
+        expect(flash[:notice]).to eq(I18n.t('themes.notices.created'))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Theme" do
         expect {
-          post themes_url, params: { theme: invalid_attributes }
+          post circle_themes_url(@admin.circles.first), params: invalid_attributes
         }.not_to change(Theme, :count)
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post themes_url, params: { theme: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+      it "redirects back to the new theme page" do
+        post circle_themes_url(@admin.circles.first), params: invalid_attributes
+
+        expect(response).to redirect_to(new_circle_theme_url(@admin.circles.first))
       end
 
     end
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    login_super_admin
 
+    context "with valid parameters" do
       it "updates the requested theme" do
-        theme = Theme.create! valid_attributes
-        patch theme_url(theme), params: { theme: new_attributes }
+        theme = create(:theme)
+        new_attributes = attributes_for(:theme)
+
+        patch theme_url(theme.circle, theme), params: { theme: new_attributes }
         theme.reload
-        skip("Add assertions for updated state")
+
+        expect(theme.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the theme" do
-        theme = Theme.create! valid_attributes
-        patch theme_url(theme), params: { theme: new_attributes }
+        theme = create(:theme)
+        new_attributes = attributes_for(:theme)
+
+        patch theme_url(theme.circle, theme), params: { theme: new_attributes }
         theme.reload
-        expect(response).to redirect_to(theme_url(theme))
+
+        expect(response).to redirect_to(theme_url(theme.circle, theme))
       end
     end
 
     context "with invalid parameters" do
+      it "redirects back to the edit theme page" do
+        theme = create(:theme)
 
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        theme = Theme.create! valid_attributes
-        patch theme_url(theme), params: { theme: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        patch theme_url(theme.circle, theme), params: invalid_attributes
+
+        expect(response).to redirect_to(edit_theme_url(theme.circle, theme))
       end
-
     end
   end
 
   describe "DELETE /destroy" do
+    login_super_admin
+
     it "destroys the requested theme" do
-      theme = Theme.create! valid_attributes
+      theme = create(:theme)
+
       expect {
-        delete theme_url(theme)
+        delete theme_url(theme.circle, theme)
       }.to change(Theme, :count).by(-1)
     end
 
     it "redirects to the themes list" do
-      theme = Theme.create! valid_attributes
-      delete theme_url(theme)
-      expect(response).to redirect_to(themes_url)
+      theme = create(:theme)
+      circle_slug = theme.circle.slug
+
+      delete theme_url(circle_slug, theme)
+      expect(response).to redirect_to(circle_themes_url(circle_slug))
     end
   end
 end

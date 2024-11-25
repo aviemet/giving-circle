@@ -2,10 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/presentations", type: :request do
-  def valid_attributes
-    { presentation: attributes_for(:presentation)}
-  end
-
   def invalid_attributes
     { presentation: { name: "" } }
   end
@@ -66,14 +62,14 @@ RSpec.describe "/presentations", type: :request do
         theme = create(:theme, circle: @admin.circles.first)
 
         expect {
-          post theme_presentations_url(theme.circle, theme), params: valid_attributes
+          post theme_presentations_url(theme.circle, theme), params: { presentation: attributes_for(:presentation) }
         }.to change(Presentation, :count).by(1)
       end
 
       it "redirects to the created presentation" do
         theme = create(:theme, circle: @admin.circles.first)
 
-        post theme_presentations_url(theme.circle, theme), params: valid_attributes
+        post theme_presentations_url(theme.circle, theme), params: { presentation: attributes_for(:presentation) }
 
         expect(response).to redirect_to(theme_presentation_url(theme.circle, theme, Presentation.last))
         expect(flash[:notice]).to eq(I18n.t('presentations.notices.created'))
@@ -106,18 +102,18 @@ RSpec.describe "/presentations", type: :request do
     context "with valid parameters" do
       it "updates the requested presentation" do
         presentation = create(:presentation)
-        new_attributes = valid_attributes
+        new_attributes = attributes_for(:presentation)
 
-        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: new_attributes
+        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: { presentation: new_attributes }
         presentation.reload
 
-        expect(presentation.name).to eq(new_attributes[:presentation][:name])
+        expect(presentation.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the presentation" do
         presentation = create(:presentation)
 
-        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: valid_attributes
+        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: { presentation: attributes_for(:presentation) }
         presentation.reload
 
         expect(response).to redirect_to(theme_presentation_url(presentation.circle, presentation.theme, presentation))

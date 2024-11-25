@@ -2,10 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/circles", type: :request do
-  def valid_attributes
-    { circle: attributes_for(:circle) }
-  end
-
   def invalid_attributes
     { circle: { name: "" } }
   end
@@ -58,12 +54,12 @@ RSpec.describe "/circles", type: :request do
     context "with valid parameters" do
       it "creates a new Circle" do
         expect {
-          post circles_url, params: valid_attributes
+          post circles_url, params: { circle: attributes_for(:circle) }
         }.to change(Circle, :count).by(1)
       end
 
       it "redirects to the created circle" do
-        post circles_url, params: valid_attributes
+        post circles_url, params: { circle: attributes_for(:circle) }
 
         expect(response).to redirect_to(circle_url(Circle.last))
         expect(flash[:notice]).to eq(I18n.t('circles.notices.created'))
@@ -91,18 +87,18 @@ RSpec.describe "/circles", type: :request do
     context "with valid parameters" do
       it "updates the requested circle" do
         circle = create(:circle)
-        new_attributes = valid_attributes
+        new_attributes = attributes_for(:circle)
 
-        patch circle_url(circle), params: new_attributes
+        patch circle_url(circle), params: { circle: new_attributes }
         circle.reload
 
-        expect(circle.name).to eq(new_attributes[:circle][:name])
+        expect(circle.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the circle" do
         circle = create(:circle)
 
-        patch circle_url(circle), params: valid_attributes
+        patch circle_url(circle), params: { circle: attributes_for(:circle) }
         circle.reload
 
         expect(response).to redirect_to(circle_url(circle))

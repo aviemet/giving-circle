@@ -17,7 +17,7 @@
 FactoryBot.define do
   factory :theme do
     name { Faker::Book.title }
-    status { 1 }
+    status { "draft" }
 
     circle
   end

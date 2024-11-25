@@ -333,22 +333,6 @@ export const editTheme: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/memberships/:slug/edit(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editThemeMembership: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
-  slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /:circle_slug/themes/:theme_slug/orgs/:slug/edit(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
@@ -560,20 +544,6 @@ export const newCircleTheme: ((
  * @returns {string} route path
  */
 export const newPerson: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /:circle_slug/themes/:theme_slug/memberships/new(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newThemeMembership: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -882,36 +852,6 @@ export const theme: ((
  * @returns {string} route path
  */
 export const themeAbout: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /:circle_slug/themes/:theme_slug/memberships/:slug(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const themeMembership: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
-  slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /:circle_slug/themes/:theme_slug/memberships(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const themeMemberships: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions

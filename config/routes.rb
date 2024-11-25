@@ -59,15 +59,6 @@ Rails.application.routes.draw do
       resources :themes, param: :slug, as: :themes do
         get :about
 
-        get 'memberships', to: 'theme_memberships#index'
-        post 'memberships', to: 'theme_memberships#create'
-        resources :theme_memberships,
-          path: :memberships,
-          param: :slug,
-          except: [:index, :create],
-          shallow: false,
-          as: 'membership'
-
         get 'orgs', to: 'theme_orgs#index'
         get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
         resources :theme_orgs, path: :orgs, param: :slug, except: [:index], shallow: false, as: 'org'

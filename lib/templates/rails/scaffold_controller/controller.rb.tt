@@ -7,7 +7,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 expose :<%= singular_table_name %>, find: ->(id, scope){ scope.includes_associated.find(id) }
   <% end -%>
 
-  strong_params :<%= singular_table_name %>, permit: %i(<%= permitted_params %>)
+  strong_params :<%= singular_table_name %>, permit: [<%= permitted_params %>]
 
   sortable_fields %w(<%= permitted_params.gsub(/[:,]/, '') %>)
 

@@ -2,10 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/people", type: :request do
-  def valid_attributes
-    { person: attributes_for(:person) }
-  end
-
   def invalid_attributes
     { person: { first_name: "", last_name: "" } }
   end
@@ -62,12 +58,12 @@ RSpec.describe "/people", type: :request do
     context "with valid parameters" do
       it "creates a new Person" do
         expect {
-          post people_url, params: valid_attributes
+          post people_url, params: { person: attributes_for(:person) }
         }.to change(Person, :count).by(1)
       end
 
       it "redirects to the created person" do
-        post people_url, params: valid_attributes
+        post people_url, params: { person: attributes_for(:person) }
 
         expect(response).to redirect_to(person_url(Person.last))
         expect(flash[:notice]).to eq(I18n.t('people.notices.created'))
@@ -96,20 +92,20 @@ RSpec.describe "/people", type: :request do
     context "with valid parameters" do
       it "updates the requested person" do
         person = create(:person)
-        new_attributes = valid_attributes
+        new_attributes = attributes_for(:person)
 
-        patch person_url(person), params: new_attributes
+        patch person_url(person), params: { person: new_attributes }
         person.reload
 
-        expect(person.first_name).to eq(new_attributes[:person][:first_name])
-        expect(person.last_name).to eq(new_attributes[:person][:last_name])
+        expect(person.first_name).to eq(new_attributes[:first_name])
+        expect(person.last_name).to eq(new_attributes[:last_name])
       end
 
       it "redirects to the person" do
         person = create(:person)
-        new_attributes = valid_attributes
+        new_attributes = attributes_for(:person)
 
-        patch person_url(person), params: new_attributes
+        patch person_url(person), params:  { person: new_attributes }
         person.reload
 
         expect(response).to redirect_to(person_url(person))

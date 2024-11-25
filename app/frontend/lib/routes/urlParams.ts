@@ -149,32 +149,6 @@ const urlParams = {
       "theme_slug"
     ]
   },
-  "themeMemberships": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "newThemeMembership": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "editThemeMembership": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "slug"
-    ]
-  },
-  "themeMembership": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "slug"
-    ]
-  },
   "themeOrgs": {
     "params": [
       "circle_slug",

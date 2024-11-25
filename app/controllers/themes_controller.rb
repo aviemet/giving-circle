@@ -4,9 +4,9 @@ class ThemesController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :themes, -> { search(circle.themes.includes_associated) }
-  expose :theme, id: -> { params[:slug] }, find_by: :slug
+  expose :theme, id: -> { params[:slug] }, scope: -> { circle.themes.includes_associated }, find_by: :slug
 
-  strong_params :theme, permit: [:title, :quarter, :slug]
+  strong_params :theme, permit: [:name, :status, :slug]
 
   sortable_fields %w(title quarter slug)
 
@@ -68,11 +68,11 @@ class ThemesController < ApplicationController
     authorize Theme.new
 
     theme.circle = circle
-
+    # ap({ theme:, params:, circle:, valid: theme.valid?, errors: theme.errors})
     if theme.save
-      redirect_to theme, notice: "Theme was successfully created."
+      redirect_to theme_path(params[:circle_slug], theme), notice: t('themes.notices.created')
     else
-      redirect_to new_circle_theme_path(circle.slug), inertia: { errors: theme.errors }
+      redirect_to new_circle_theme_path(params[:circle_slug]), inertia: { errors: theme.errors }
     end
   end
 
@@ -80,17 +80,19 @@ class ThemesController < ApplicationController
   # @route PUT /:circle_slug/themes/:slug (theme)
   def update
     authorize theme
+
     if theme.update(theme_params)
-      redirect_to theme, notice: "Theme was successfully updated."
+      redirect_to theme_path(params[:circle_slug], theme), notice: t('themes.notices.updated')
     else
-      redirect_to edit_theme_path(circle.slug), inertia: { errors: theme.errors }
+      redirect_to edit_theme_path(params[:circle_slug], theme), inertia: { errors: theme.errors }
     end
   end
 
   # @route DELETE /:circle_slug/themes/:slug (theme)
   def destroy
     authorize theme
+
     theme.destroy
-    redirect_to circle_themes_url(circle.slug), notice: "Theme was successfully destroyed."
+    redirect_to circle_themes_path(params[:circle_slug]), notice: t('themes.notices.destroyed')
   end
 end

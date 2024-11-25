@@ -2,10 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/orgs", type: :request do
-  def valid_attributes(circle = nil)
-    { org: attributes_for(:org, { circle: circle || create(:circle)}) }
-  end
-
   def invalid_attributes
     { org: { name: "" } }
   end
@@ -98,18 +94,19 @@ RSpec.describe "/orgs", type: :request do
     context "with valid parameters" do
       it "creates a new Org" do
         circle = @admin.circles.first
-        attributes = valid_attributes(circle)
+        attributes = attributes_for(:org, circle:)
 
         expect {
-          post circle_orgs_url(circle), params: attributes
+          post circle_orgs_url(circle), params: { org: attributes }
         }.to change(Org, :count).by(1)
       end
 
       it "redirects to the created org" do
         circle = @admin.circles.first
-        attributes = valid_attributes(circle)
+        attributes = attributes_for(:org, circle:)
 
-        post circle_orgs_url(circle), params: attributes
+        post circle_orgs_url(circle), params: { org: attributes }
+
         expect(response).to redirect_to(org_url(circle, Org.last))
         expect(flash[:notice]).to eq(I18n.t('orgs.notices.created'))
       end
@@ -140,19 +137,19 @@ RSpec.describe "/orgs", type: :request do
     context "with valid parameters" do
       it "updates the requested org" do
         org = create(:org, { circle: @admin.circles.first })
-        new_attributes = valid_attributes(org.circle)
+        new_attributes = attributes_for(:org, circle: org.circle)
 
-        patch org_url(org.circle, org), params: new_attributes
+        patch org_url(org.circle, org), params: { org: new_attributes }
         org.reload
 
-        expect(org.name).to eq(new_attributes[:org][:name])
+        expect(org.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the org" do
         org = create(:org, { circle: @admin.circles.first })
-        new_attributes = valid_attributes(org.circle)
+        new_attributes = attributes_for(:org, circle: org.circle)
 
-        patch org_url(org.circle, org), params: new_attributes
+        patch org_url(org.circle, org), params: { org: new_attributes }
         org.reload
 
         expect(response).to redirect_to(org_url(org.circle, org))

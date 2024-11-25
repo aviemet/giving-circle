@@ -2,10 +2,6 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/members", type: :request do
-  def valid_attributes(circle = nil)
-    { membership: attributes_for(:membership, { circle: circle || create(:circle)}) }
-  end
-
   def invalid_attributes
     { membership: { name: "" } }
   end
@@ -62,20 +58,20 @@ RSpec.describe "/members", type: :request do
     context "with valid parameters" do
       it "creates a new Membership" do
         circle = @admin.circles.first
-        attributes = valid_attributes(circle)
-        attributes[:membership][:person_id] = create(:person).id
+        attributes = attributes_for(:membership, circle:)
+        attributes[:person_id] = create(:person).id
 
         expect {
-          post circle_memberships_url(circle), params: attributes
+          post circle_memberships_url(circle), params: { membership: attributes }
         }.to change(Membership, :count).by(1)
       end
 
       it "redirects to the created membership" do
         circle = @admin.circles.first
-        attributes = valid_attributes(circle)
-        attributes[:membership][:person_id] = create(:person).id
+        attributes = attributes_for(:membership, circle:)
+        attributes[:person_id] = create(:person).id
 
-        post circle_memberships_url(circle), params: attributes
+        post circle_memberships_url(circle), params: { membership: attributes }
 
         expect(response).to redirect_to(membership_url(Membership.last.circle, Membership.last))
         expect(flash[:notice]).to eq(I18n.t('memberships.notices.created'))
@@ -106,19 +102,19 @@ RSpec.describe "/members", type: :request do
     context "with valid parameters" do
       it "updates the requested membership" do
         membership = create(:membership, { circle: @admin.circles.first })
-        new_attributes = valid_attributes(membership.circle)
+        new_attributes = attributes_for(:membership, circle: membership.circle)
 
-        patch membership_url(membership.circle, membership), params: new_attributes
+        patch membership_url(membership.circle, membership), params: { membership: new_attributes }
         membership.reload
 
-        expect(membership.name).to eq(new_attributes[:membership][:name])
+        expect(membership.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the membership" do
         membership = create(:membership, { circle: @admin.circles.first })
-        new_attributes = valid_attributes(membership.circle)
+        new_attributes = attributes_for(:membership, circle: membership.circle)
 
-        patch membership_url(membership.circle, membership), params: new_attributes
+        patch membership_url(membership.circle, membership), params: { membership: new_attributes }
         membership.reload
 
         expect(response).to redirect_to(membership_url(membership.circle, membership))
