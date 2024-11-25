@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
   expose :themes, -> { search(circle.themes.includes_associated) }
   expose :theme, id: -> { params[:slug] }, find_by: :slug
 
-  strong_params :theme, permit: %i(title quarter slug)
+  strong_params :theme, permit: [:title, :quarter, :slug]
 
   sortable_fields %w(title quarter slug)
 

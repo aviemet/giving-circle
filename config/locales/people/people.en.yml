@@ -1,0 +1,6 @@
+en:
+  people:
+    notices:
+      created: "Person was successfully created."
+      updated: "Person was successfully updated."
+      destroyed: "Person was successfully destroyed."

@@ -5,7 +5,7 @@ class ThemeOrgsController < ApplicationController
   expose :orgs, -> { search(Theme.find_by(slug: params[:theme_slug]).orgs.includes_associated) }
   expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slu
 
-  strong_params :org, permit: %i(name ask description)
+  strong_params :org, permit: [:name, :ask, :description]
 
   strong_params :orgs do
     self.map do |org|

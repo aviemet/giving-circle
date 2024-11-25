@@ -4,7 +4,7 @@ class CirclesController < ApplicationController
   expose :circles, from: :current_user
   expose :circle, id: -> { params[:circle_slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
 
-  strong_params :circle, permit: %i(name)
+  strong_params :circle, permit: [:name]
 
   sortable_fields %w(name)
 

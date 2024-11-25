@@ -4,7 +4,7 @@ class OrgsController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :orgs, -> { search(circle.orgs.includes_associated) }
-  expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
+  expose :org, id: -> { params[:slug] }, scope: -> { circle.orgs.includes_associated }, find_by: :slug
 
   strong_params :org, permit: [:name, :slug, :description]
 

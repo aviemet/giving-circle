@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   expose :people, -> { search(Person.includes_associated) }
-  expose :person, find: ->(id, scope) { scope.includes_associated.find(id) }
+  expose :person, id: -> { params[:slug] }, scope: -> { Person.includes_associated }, find_by: :slug
 
   strong_params :person, permit: [:first_name, :last_name, :middle_name, :active]
 
@@ -10,10 +10,10 @@ class PeopleController < ApplicationController
   def index
     authorize people
 
-    paginated_people = paginate(circle_people, :people)
+    paginated_people = paginate(people, :people)
 
     render inertia: "People/Index", props: {
-      people: -> { paginated_people.render },
+      people: -> { paginated_people.render(:index) },
       pagination: -> { {
         count: people.size,
         **pagination_data(paginated_people)
@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
     authorize person
 
     render inertia: "People/Show", props: {
-      person: -> { person.render }
+      person: -> { person.render(:show) }
     }
   end
 
@@ -35,7 +35,7 @@ class PeopleController < ApplicationController
     authorize Person.new
 
     render inertia: "People/New", props: {
-      person: Person.new.render
+      person: Person.new.render(:form_data)
     }
   end
 
@@ -44,7 +44,7 @@ class PeopleController < ApplicationController
     authorize person
 
     render inertia: "People/Edit", props: {
-      person: person.render
+      person: person.render(:edit)
     }
   end
 
@@ -53,7 +53,7 @@ class PeopleController < ApplicationController
     authorize Person.new
 
     if person.save
-      redirect_to person, notice: "Person was successfully created."
+      redirect_to person, notice: t('people.notices.created')
     else
       redirect_to new_person_path, inertia: { errors: person.errors }
     end
@@ -65,7 +65,7 @@ class PeopleController < ApplicationController
     authorize person
 
     if person.update(person_params)
-      redirect_to person, notice: "Person was successfully updated."
+      redirect_to person, notice: t('people.notices.updated')
     else
       redirect_to edit_person_path, inertia: { errors: person.errors }
     end
@@ -75,6 +75,6 @@ class PeopleController < ApplicationController
   def destroy
     authorize person
     person.destroy!
-    redirect_to people_url, notice: "Person was successfully destroyed."
+    redirect_to people_url, notice: t('people.notices.destroyed')
   end
 end
