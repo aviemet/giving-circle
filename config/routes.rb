@@ -61,20 +61,43 @@ Rails.application.routes.draw do
 
         get 'memberships', to: 'theme_memberships#index'
         post 'memberships', to: 'theme_memberships#create'
-        resources :theme_memberships, path: :memberships, param: :slug, except: [:index, :create], shallow: false, as: 'membership'
+        resources :theme_memberships,
+          path: :memberships,
+          param: :slug,
+          except: [:index, :create],
+          shallow: false,
+          as: 'membership'
 
         get 'orgs', to: 'theme_orgs#index'
         get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
         resources :theme_orgs, path: :orgs, param: :slug, except: [:index], shallow: false, as: 'org'
 
         # Admin presentation routes
-        resources :presentations, param: :slug, shallow: false do
+        resources :presentations, param: :presentation_slug, shallow: false do
           get :active
+        end
 
-          resources :presentation_distributions, path: :distributions, shallow: false, as: :distributions, controller: 'presentation/distributions'
-          resources :presentation_elements, path: :elements, shallow: false, as: :elements, controller: 'presentation/elements'
-          resources :presentation_slides, path: :slides, shallow: false, as: :slides, controller: 'presentation/slides'
-          resources :presentation_votes, path: :votes, shallow: false, as: :votes, controller: 'presentation/votes'
+        namespace :presentations do
+          resources :presentation_distributions,
+            path: ':presentation_slug/distributions',
+            shallow: false,
+            as: :distributions,
+            controller: '/presentation/distributions'
+          resources :presentation_elements,
+            path: ':presentation_slug/elements',
+            shallow: false,
+            as: :elements,
+            controller: '/presentation/elements'
+          resources :presentation_slides,
+            path: ':presentation_slug/slides',
+            shallow: false,
+            as: :slides,
+            controller: '/presentation/slides'
+          resources :presentation_votes,
+            path: ':presentation_slug/votes',
+            shallow: false,
+            as: :votes,
+            controller: '/presentation/votes'
         end
       end
     end

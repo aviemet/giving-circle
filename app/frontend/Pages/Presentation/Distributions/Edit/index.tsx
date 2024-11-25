@@ -9,7 +9,7 @@ interface EditPresentationDistributionProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id/edit
-// @route: editThemePresentationDistribution
+// @route: editThemePresentationsDistribution
 const EditPresentationDistribution = ({ distribution }: EditPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<'editThemePresentationDistribution'>()

@@ -6,7 +6,7 @@ class Presentation::ElementsController < ApplicationController
 
   sortable_fields %w(data name template)
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements (theme_presentation_elements)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements (theme_presentations_elements)
   def index
     authorize presentation_elements
 
@@ -21,7 +21,7 @@ class Presentation::ElementsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentation_element)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentations_element)
   def show
     authorize presentation_element
     render inertia: "Presentation::Elements/Show", props: {
@@ -29,7 +29,7 @@ class Presentation::ElementsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/new (new_theme_presentation_element)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/new (new_theme_presentations_element)
   def new
     authorize Presentation::Element.new
     render inertia: "Presentation::Elements/New", props: {
@@ -37,7 +37,7 @@ class Presentation::ElementsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id/edit (edit_theme_presentation_element)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id/edit (edit_theme_presentations_element)
   def edit
     authorize presentation_element
     render inertia: "Presentation::Elements/Edit", props: {
@@ -45,7 +45,7 @@ class Presentation::ElementsController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements (theme_presentation_elements)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements (theme_presentations_elements)
   def create
     authorize Presentation::Element.new
     if presentation_element.save
@@ -55,8 +55,8 @@ class Presentation::ElementsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentation_element)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentation_element)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentations_element)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentations_element)
   def update
     authorize presentation_element
     if presentation_element.update(presentation_element_params)
@@ -66,7 +66,7 @@ class Presentation::ElementsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentation_element)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id (theme_presentations_element)
   def destroy
     authorize presentation_element
     presentation_element.destroy!

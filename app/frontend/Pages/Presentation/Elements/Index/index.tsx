@@ -12,7 +12,7 @@ interface PresentationElementIndexProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements
-// @route: themePresentationElements
+// @route: themePresentationsElements
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

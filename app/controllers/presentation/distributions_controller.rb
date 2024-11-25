@@ -6,7 +6,7 @@ class Presentation::DistributionsController < ApplicationController
 
   sortable_fields %w(name type template)
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions (theme_presentation_distributions)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions (theme_presentations_distributions)
   def index
     authorize presentation_distributions
 
@@ -21,7 +21,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentation_distribution)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentations_distribution)
   def show
     authorize presentation_distribution
     render inertia: "Presentation::Distributions/Show", props: {
@@ -29,7 +29,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/new (new_theme_presentation_distribution)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/new (new_theme_presentations_distribution)
   def new
     authorize Presentation::Distribution.new
     render inertia: "Presentation::Distributions/New", props: {
@@ -37,7 +37,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id/edit (edit_theme_presentation_distribution)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id/edit (edit_theme_presentations_distribution)
   def edit
     authorize presentation_distribution
     render inertia: "Presentation::Distributions/Edit", props: {
@@ -45,7 +45,7 @@ class Presentation::DistributionsController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions (theme_presentation_distributions)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions (theme_presentations_distributions)
   def create
     authorize Presentation::Distribution.new
     if presentation_distribution.save
@@ -55,8 +55,8 @@ class Presentation::DistributionsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentation_distribution)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentation_distribution)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentations_distribution)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentations_distribution)
   def update
     authorize presentation_distribution
     if presentation_distribution.update(presentation_distribution_params)
@@ -66,7 +66,7 @@ class Presentation::DistributionsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentation_distribution)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id (theme_presentations_distribution)
   def destroy
     authorize presentation_distribution
     presentation_distribution.destroy!

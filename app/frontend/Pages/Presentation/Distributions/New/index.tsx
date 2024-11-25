@@ -9,7 +9,7 @@ interface NewPresentationDistributionProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/new
-// @route: newThemePresentationDistribution
+// @route: newThemePresentationsDistribution
 const NewPresentationDistribution = ({ ...data }: NewPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

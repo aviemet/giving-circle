@@ -9,7 +9,7 @@ interface NewPresentationElementProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/new
-// @route: newThemePresentationElement
+// @route: newThemePresentationsElement
 const NewPresentationElement = ({ ...data }: NewPresentationElementProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

@@ -8,7 +8,7 @@ interface ShowPresentationVoteProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes/:id
-// @route: themePresentationVote
+// @route: themePresentationsVote
 const ShowPresentationVote = ({ presentation_vote }: ShowPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

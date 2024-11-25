@@ -1,4 +1,5 @@
 class PresentationsController < ApplicationController
+  expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(theme.presentations.includes_associated) }
@@ -6,7 +7,7 @@ class PresentationsController < ApplicationController
 
   strong_params :presentation, permit: [:name, :theme_id]
 
-  sortable_fields %w(theme_id name)
+  sortable_fields %w(name theme_id)
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations (theme_presentations)
   def index
@@ -25,7 +26,7 @@ class PresentationsController < ApplicationController
     }, layout: "something"
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
   def show
     authorize presentation
 
@@ -43,7 +44,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug/edit (edit_theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (edit_theme_presentation)
   def edit
     authorize presentation
 
@@ -52,7 +53,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active (theme_presentation_active)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_presentation_slug/active (theme_presentation_active)
   def active
     authorize presentation
 
@@ -64,28 +65,33 @@ class PresentationsController < ApplicationController
   # @route POST /:circle_slug/themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new
+
+    presentation.circle = circle
+
     if presentation.save
-      redirect_to presentation, notice: "Presentation was successfully created."
+      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t('presentations.notices.created')
     else
       redirect_to new_theme_presentation_path(params[:circle_slug], params[:theme_slug]), inertia: { errors: presentation.errors }
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
   def update
     authorize presentation
+
     if presentation.update(presentation_params)
-      redirect_to presentation, notice: "Presentation was successfully updated."
+      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t('presentations.notices.updated')
     else
-      redirect_to edit_presentation_path, inertia: { errors: presentation.errors }
+      redirect_to edit_theme_presentation_path, inertia: { errors: presentation.errors }
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
   def destroy
     authorize presentation
+
     presentation.destroy!
-    redirect_to presentations_url, notice: "Presentation was successfully destroyed."
+    redirect_to theme_presentations_path(params[:circle_slug], params[:theme_slug]), notice: t('presentations.notices.destroyed')
   end
 end

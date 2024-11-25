@@ -217,127 +217,7 @@ const urlParams = {
     "params": [
       "circle_slug",
       "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "themePresentationDistributions": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationDistribution": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationDistribution": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationDistribution": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationElements": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationElement": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationElement": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationElement": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationSlides": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationSlide": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationSlide": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationSlide": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationVotes": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationVote": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationVote": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationVote": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
+      "presentation_presentation_slug"
     ]
   },
   "themePresentations": {
@@ -356,14 +236,134 @@ const urlParams = {
     "params": [
       "circle_slug",
       "theme_slug",
-      "slug"
+      "presentation_slug"
     ]
   },
   "themePresentation": {
     "params": [
       "circle_slug",
       "theme_slug",
-      "slug"
+      "presentation_slug"
+    ]
+  },
+  "themePresentationsDistributions": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemePresentationsDistribution": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemePresentationsDistribution": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsDistribution": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsElements": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemePresentationsElement": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemePresentationsElement": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsElement": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsSlides": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemePresentationsSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemePresentationsSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsVotes": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemePresentationsVote": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemePresentationsVote": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsVote": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
     ]
   },
   "circleThemes": {

@@ -12,7 +12,7 @@ interface PresentationVoteIndexProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes
-// @route: themePresentationVotes
+// @route: themePresentationsVotes
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

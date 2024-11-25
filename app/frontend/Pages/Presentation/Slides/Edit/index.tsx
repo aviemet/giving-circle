@@ -9,7 +9,7 @@ interface EditPresentationSlideProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/:id/edit
-// @route: editThemePresentationSlide
+// @route: editThemePresentationsSlide
 const EditPresentationSlide = ({ presentation_slide }: EditPresentationSlideProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<''>()

@@ -365,17 +365,17 @@ export const editThemeOrg: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:slug/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
- * @param {any} slug
+ * @param {any} presentationSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editThemePresentation: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
-  slug: RequiredRouteParameter,
+  presentationSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -389,7 +389,7 @@ export const editThemePresentation: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editThemePresentationDistribution: ((
+export const editThemePresentationsDistribution: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -407,7 +407,7 @@ export const editThemePresentationDistribution: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editThemePresentationElement: ((
+export const editThemePresentationsElement: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -425,7 +425,7 @@ export const editThemePresentationElement: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editThemePresentationSlide: ((
+export const editThemePresentationsSlide: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -443,7 +443,7 @@ export const editThemePresentationSlide: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editThemePresentationVote: ((
+export const editThemePresentationsVote: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -614,7 +614,7 @@ export const newThemePresentation: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemePresentationDistribution: ((
+export const newThemePresentationsDistribution: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -630,7 +630,7 @@ export const newThemePresentationDistribution: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemePresentationElement: ((
+export const newThemePresentationsElement: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -646,7 +646,7 @@ export const newThemePresentationElement: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemePresentationSlide: ((
+export const newThemePresentationsSlide: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -662,7 +662,7 @@ export const newThemePresentationSlide: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newThemePresentationVote: ((
+export const newThemePresentationsVote: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -977,33 +977,47 @@ export const themeOrgsImport: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:slug(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const themePresentation: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
-  slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/active(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationActive: ((
+export const themePresentation: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_presentation_slug/active(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {any} presentationPresentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themePresentationActive: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
+  presentationPresentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /:circle_slug/themes/:theme_slug/presentations(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themePresentations: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1017,7 +1031,7 @@ export const themePresentationActive: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationDistribution: ((
+export const themePresentationsDistribution: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1034,7 +1048,7 @@ export const themePresentationDistribution: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationDistributions: ((
+export const themePresentationsDistributions: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1051,7 +1065,7 @@ export const themePresentationDistributions: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationElement: ((
+export const themePresentationsElement: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1068,7 +1082,7 @@ export const themePresentationElement: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationElements: ((
+export const themePresentationsElements: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1085,7 +1099,7 @@ export const themePresentationElements: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationSlide: ((
+export const themePresentationsSlide: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1102,7 +1116,7 @@ export const themePresentationSlide: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationSlides: ((
+export const themePresentationsSlides: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1119,7 +1133,7 @@ export const themePresentationSlides: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationVote: ((
+export const themePresentationsVote: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
@@ -1136,24 +1150,10 @@ export const themePresentationVote: ((
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const themePresentationVotes: ((
+export const themePresentationsVotes: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   presentationSlug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const themePresentations: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

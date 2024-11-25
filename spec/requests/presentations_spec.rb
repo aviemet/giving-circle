@@ -2,12 +2,8 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/presentations", type: :request do
-  def valid_attributes(theme = nil)
-    if theme.nil?
-      { presentation: attributes_for(:presentation)}
-    else
-      { presentation: attributes_for(:presentation, { theme: theme })}
-    end
+  def valid_attributes
+    { presentation: attributes_for(:presentation)}
   end
 
   def invalid_attributes
@@ -108,35 +104,35 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
       it "updates the requested presentation" do
-        presentation = Presentation.create! valid_attributes
-        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: { presentation:
-        new_attributes }
+        presentation = create(:presentation)
+        new_attributes = valid_attributes
+
+        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: new_attributes
         presentation.reload
-        skip("Add assertions for updated state")
+
+        expect(presentation.name).to eq(new_attributes[:presentation][:name])
       end
 
       it "redirects to the presentation" do
-        presentation = Presentation.create! valid_attributes
-        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: { presentation:
-        new_attributes }
+        presentation = create(:presentation)
+
+        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: valid_attributes
         presentation.reload
+
         expect(response).to redirect_to(theme_presentation_url(presentation.circle, presentation.theme, presentation))
+        expect(flash[:notice]).to eq(I18n.t('presentations.notices.updated'))
 
       end
     end
 
     context "with invalid parameters" do
+      it "redirects back to the edit org page" do
+        presentation = create(:presentation)
 
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        presentation = Presentation.create! valid_attributes
-        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: { presentation:
-        invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: invalid_attributes
+
+        expect(response).to redirect_to(edit_theme_presentation_url(presentation.circle, presentation.theme, presentation))
       end
 
     end
@@ -154,11 +150,13 @@ RSpec.describe "/presentations", type: :request do
     end
 
     it "redirects to the presentations list" do
-      presentation = create(:presentation)
+      theme = create(:theme)
+      presentation = create(:presentation, theme:)
 
       delete theme_presentation_url(presentation.circle, presentation.theme, presentation)
 
-      expect(response).to redirect_to(theme_presentations_url)
+      expect(response).to redirect_to(theme_presentations_url(theme.circle, theme))
+      expect(flash[:notice]).to eq(I18n.t('presentations.notices.destroyed'))
     end
   end
 end
