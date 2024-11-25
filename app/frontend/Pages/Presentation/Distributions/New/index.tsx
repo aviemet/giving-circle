@@ -8,7 +8,7 @@ interface NewPresentationDistributionProps {
 	presentation_distribution: Schema.PresentationDistributionsFormData
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions/new
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/new
 // @route: newThemePresentationDistribution
 const NewPresentationDistribution = ({ ...data }: NewPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below

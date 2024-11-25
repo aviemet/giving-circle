@@ -11,7 +11,7 @@ interface PresentationSlideIndexProps {
 	pagination: Schema.Pagination
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides
 // @route: themePresentationSlides
 const PresentationSlidesIndex = ({ presentation_slides, pagination }: PresentationSlideIndexProps) => {
 	// copy @route above into the generic type assertion below

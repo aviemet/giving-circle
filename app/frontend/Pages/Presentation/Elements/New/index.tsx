@@ -8,7 +8,7 @@ interface NewPresentationElementProps {
 	presentation_element: Schema.PresentationElementsFormData
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements/new
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/new
 // @route: newThemePresentationElement
 const NewPresentationElement = ({ ...data }: NewPresentationElementProps) => {
 	// copy @route above into the generic type assertion below

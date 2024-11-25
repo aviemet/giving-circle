@@ -381,7 +381,7 @@ export const editThemePresentation: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions/:id/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id/edit(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -399,7 +399,7 @@ export const editThemePresentationDistribution: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements/:id/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id/edit(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -417,7 +417,7 @@ export const editThemePresentationElement: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/:id/edit(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -435,7 +435,7 @@ export const editThemePresentationSlide: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes/:id/edit(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -607,7 +607,7 @@ export const newThemePresentation: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions/new(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/new(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -623,7 +623,7 @@ export const newThemePresentationDistribution: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements/new(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/new(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -639,7 +639,7 @@ export const newThemePresentationElement: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/new(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/new(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -655,7 +655,7 @@ export const newThemePresentationSlide: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/new(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes/new(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1009,7 +1009,7 @@ export const themePresentationActive: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions/:id(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1027,7 +1027,7 @@ export const themePresentationDistribution: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1043,7 +1043,7 @@ export const themePresentationDistributions: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements/:id(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1061,7 +1061,7 @@ export const themePresentationElement: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1077,7 +1077,7 @@ export const themePresentationElements: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides/:id(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/:id(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1095,7 +1095,7 @@ export const themePresentationSlide: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_slides(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1111,7 +1111,7 @@ export const themePresentationSlides: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes/:id(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug
@@ -1129,7 +1129,7 @@ export const themePresentationVote: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes(.:format)
+ * /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
  * @param {any} presentationSlug

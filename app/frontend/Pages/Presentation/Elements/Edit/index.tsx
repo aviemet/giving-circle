@@ -8,7 +8,7 @@ interface EditPresentationElementProps {
 	presentation_element: Schema.PresentationElementsEdit
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_elements/:id/edit
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id/edit
 // @route: editThemePresentationElement
 const EditPresentationElement = ({ presentation_element }: EditPresentationElementProps) => {
 	// copy @route above into the generic type assertion below

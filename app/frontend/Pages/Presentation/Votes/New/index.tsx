@@ -8,7 +8,7 @@ interface NewPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesFormData
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/new
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes/new
 // @route: newThemePresentationVote
 const NewPresentationVote = ({ ...data }: NewPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below

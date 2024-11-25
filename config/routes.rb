@@ -71,10 +71,10 @@ Rails.application.routes.draw do
         resources :presentations, param: :slug, shallow: false do
           get :active
 
-          resources :presentation_distributions, as: :distributions, controller: 'presentation/distributions'
-          resources :presentation_elements, as: :elements, controller: 'presentation/elements'
-          resources :presentation_slides, as: :slides, controller: 'presentation/slides'
-          resources :presentation_votes, as: :votes, controller: 'presentation/votes'
+          resources :presentation_distributions, path: :distributions, shallow: false, as: :distributions, controller: 'presentation/distributions'
+          resources :presentation_elements, path: :elements, shallow: false, as: :elements, controller: 'presentation/elements'
+          resources :presentation_slides, path: :slides, shallow: false, as: :slides, controller: 'presentation/slides'
+          resources :presentation_votes, path: :votes, shallow: false, as: :votes, controller: 'presentation/votes'
         end
       end
     end

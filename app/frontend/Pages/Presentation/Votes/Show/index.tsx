@@ -7,7 +7,7 @@ interface ShowPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesShow
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_votes/:id
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/votes/:id
 // @route: themePresentationVote
 const ShowPresentationVote = ({ presentation_vote }: ShowPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below

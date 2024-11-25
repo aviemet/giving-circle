@@ -7,7 +7,7 @@ interface ShowPresentationDistributionProps {
 	presentation_distribution: Schema.PresentationDistributionsShow
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/presentation_distributions/:id
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/distributions/:id
 // @route: themePresentationDistribution
 const ShowPresentationDistribution = ({ presentation_distribution }: ShowPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below

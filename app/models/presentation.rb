@@ -4,7 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  active                   :boolean          default(FALSE), not null
-#  name                     :string
+#  name                     :string           not null
 #  settings                 :jsonb
 #  slug                     :string           not null
 #  template                 :boolean          default(FALSE), not null

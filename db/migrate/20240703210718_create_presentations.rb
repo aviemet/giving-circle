@@ -1,7 +1,7 @@
 class CreatePresentations < ActiveRecord::Migration[7.1]
   def change
     create_table :presentations, id: :uuid do |t|
-      t.string :name
+      t.string :name, null: false
       t.jsonb :settings, default: {}
       t.boolean :active, null: false, default: false
       t.boolean :template, null: false, default: false

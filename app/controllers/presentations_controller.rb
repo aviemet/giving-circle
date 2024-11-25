@@ -2,7 +2,7 @@ class PresentationsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(theme.presentations.includes_associated) }
-  expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations }, find_by: :slug
+  expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations.includes_associated }, find_by: :slug
 
   strong_params :presentation, permit: [:name, :theme_id]
 
@@ -67,7 +67,7 @@ class PresentationsController < ApplicationController
     if presentation.save
       redirect_to presentation, notice: "Presentation was successfully created."
     else
-      redirect_to new_presentation_path, inertia: { errors: presentation.errors }
+      redirect_to new_theme_presentation_path(params[:circle_slug], params[:theme_slug]), inertia: { errors: presentation.errors }
     end
   end
 
