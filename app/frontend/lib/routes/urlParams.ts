@@ -174,11 +174,10 @@ const urlParams = {
       "theme_slug"
     ]
   },
-  "themeOrgImport": {
+  "themeOrgsImport": {
     "params": [
       "circle_slug",
-      "theme_slug",
-      "org_slug"
+      "theme_slug"
     ]
   },
   "newThemeOrg": {

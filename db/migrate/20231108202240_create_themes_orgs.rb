@@ -7,6 +7,8 @@ class CreateThemesOrgs < ActiveRecord::Migration[7.0]
       t.monetize :ask, amount: { null: true, default: nil }
 
       t.timestamps
+
+      t.index [:theme_id, :org_id], unique: true, name: 'index_themes_orgs_on_theme_id_and_org_id'
     end
   end
 end

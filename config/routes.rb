@@ -64,10 +64,9 @@ Rails.application.routes.draw do
         get :about
 
         get 'orgs', to: 'theme_orgs#index'
-        get 'orgs', to: 'theme_orgs#create'
-        resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create] do
-          get :import
-        end
+        post 'orgs', to: 'theme_orgs#create'
+        get 'orgs/import', to: 'theme_orgs#import'
+        resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
         # Admin presentation routes
         resources :presentations, param: :presentation_slug, shallow: false do

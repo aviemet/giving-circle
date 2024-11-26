@@ -33,6 +33,10 @@ const CircleMenu = () => {
 					href={ Routes.circleThemes(active_circle.slug) }
 					label="Themes"
 				/>
+				<NavLink
+					href={ Routes.circleOrgs(active_circle.slug) }
+					label="Orgs"
+				/>
 			</Accordion.Panel>
 		</Accordion.Item>
 	)

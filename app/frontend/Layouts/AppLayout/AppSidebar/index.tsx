@@ -13,7 +13,7 @@ const AppSidebar = () => {
 		<>
 			<AppShell.Section mb="xs">
 				{ /* Navbar toggle */ }
-				<Flex justify="space-between" mb="sm" mx="xs">
+				<Flex justify="space-between" align="center" mx="xs">
 					{ /* Circle title and avatar */ }
 					<CircleDropdownLink />
 					<ToggleNavbarButton />

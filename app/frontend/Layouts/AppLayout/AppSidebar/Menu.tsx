@@ -12,7 +12,7 @@ export interface MenuProps {
 const Menu = () => {
 	const { active_circle, active_theme, active_presentation } = usePageProps()
 	const { menuKeys, openMenus, setOpenMenus } = useLayoutStore()
-	console.log({ active_theme })
+
 	const handleAccordionChange = (menus: (keyof typeof menuKeys)[]) => {
 		setOpenMenus(menus)
 	}

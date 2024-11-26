@@ -32,11 +32,6 @@ const ThemeMenu = () => {
 				/>
 
 				<NavLink
-					href={ Routes.theme(active_circle.slug, active_theme.slug) }
-					label="Members"
-				/>
-
-				<NavLink
 					href={ Routes.themePresentations(active_circle.slug, active_theme.slug) }
 					label="Presentations"
 				/>

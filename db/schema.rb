@@ -269,6 +269,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["org_id"], name: "index_themes_orgs_on_org_id"
+    t.index ["theme_id", "org_id"], name: "index_themes_orgs_on_theme_id_and_org_id", unique: true
     t.index ["theme_id"], name: "index_themes_orgs_on_theme_id"
   end
 

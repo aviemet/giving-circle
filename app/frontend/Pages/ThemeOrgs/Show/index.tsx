@@ -1,36 +1,36 @@
 import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/Components'
+import { Title, Menu, Page, Section, Text, Money } from '@/Components'
 import { Routes } from '@/lib'
 import { usePageProps } from '@/lib/hooks'
 
 interface ShowThemeOrgProps {
-	org: Schema.OrgsShow
+	org: Schema.ThemesOrgsShow
 }
 
 // @path: /:circle_slug/themes/:theme_slug/orgs/:slug
 // @route: themeOrg
 const ShowThemeOrg = ({ org }: ShowThemeOrgProps) => {
 	const { params } = usePageProps<'themeOrg'>()
-	const title =  'Org'
+	const title = org.name || 'Org'
 
 	return (
-		<Page title={ title }>
+		<Page
+			title={ title }
+			siteTitle={ <><Title>{ title }</Title><Menu position="bottom-end">
+				<Menu.Target />
+				<Menu.Dropdown>
+					<Menu.Link
+						href={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
+					>
+						Edit Org
+					</Menu.Link>
+				</Menu.Dropdown>
+			</Menu></> }>
 			<Section>
-				<Group>
-					<Title>{ title }</Title>
 
-					<Menu position="bottom-end">
-						<Menu.Target />
-						<Menu.Dropdown>
-							<Menu.Link
-								href={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
-							>
-								Edit Org
-							</Menu.Link>
-						</Menu.Dropdown>
-					</Menu>
-				</Group>
+				<Text>Asking: <Money>{ org.ask }</Money></Text>
 
+				<Text>{ org.description }</Text>
 			</Section>
 		</Page>
 	)

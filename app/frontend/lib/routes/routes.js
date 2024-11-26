@@ -1114,17 +1114,6 @@ export const themeOrg = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_s
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/orgs/:org_slug/import(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {any} orgSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const themeOrgImport = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"org_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[3,"org_slug"],[2,[7,"/"],[2,[6,"import"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /:circle_slug/themes/:theme_slug/orgs(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
@@ -1132,6 +1121,16 @@ export const themeOrgImport = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"t
  * @returns {string} route path
  */
 export const themeOrgs = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /:circle_slug/themes/:theme_slug/orgs/import(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themeOrgsImport = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"orgs"],[2,[7,"/"],[2,[6,"import"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to

@@ -11,7 +11,7 @@ export const headingsMap: MappingItem[] = [
 		name: 'ask',
 		label: 'Ask',
 		forms: ['ask', 'amount', 'request'],
-		type: (val: string|number) => typeof val === 'string' ? parseFloat(val.replace(/[^0-9.]/g, '')) : val,
+		type: (val: string | number) => typeof val === 'string' ? parseFloat(val.replace(/[^0-9.]/g, '')) : val,
 	},
 	{
 		name: 'description',

@@ -13,13 +13,11 @@ interface EditOrgProps {
 const EditThemeOrg = ({ org }: EditOrgProps) => {
 	const { params } = usePageProps<'editThemeOrg'>()
 
-	const title = 'Edit Org'
+	const title = `Edit: ${org.name || 'Org'}`
 
 	return (
 		<Page title={ title }>
 			<Section>
-				<Title>{ title }</Title>
-
 				<OrgsForm
 					method='put'
 					to={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }

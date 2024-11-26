@@ -1,0 +1,10 @@
+en:
+  theme_orgs:
+    notices:
+      created: "Organization was successfully added to the theme."
+      bulk_created: "%{count} Organizations successfully added to the theme"
+      updated: "Organization was successfully updated."
+      destroyed: "Organization was successfully removed from the theme."
+    validations:
+      uniqueness: "An org may only be added to a theme once"
+      match_owner: "Theme owner and org owner must match"

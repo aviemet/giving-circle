@@ -12,8 +12,9 @@
 #
 # Indexes
 #
-#  index_themes_orgs_on_org_id    (org_id)
-#  index_themes_orgs_on_theme_id  (theme_id)
+#  index_themes_orgs_on_org_id               (org_id)
+#  index_themes_orgs_on_theme_id             (theme_id)
+#  index_themes_orgs_on_theme_id_and_org_id  (theme_id,org_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -22,6 +23,11 @@
 #
 class ThemesOrg < ApplicationRecord
   validate :theme_owner_matches_org_owner
+  validates :theme_id, uniqueness: {
+    scope: :org_id,
+    message: t('theme_orgs.validations.uniqueness'),
+    if: -> { theme_id.present? && org_id.present? }
+  }
 
   belongs_to :theme
   belongs_to :org
@@ -30,13 +36,15 @@ class ThemesOrg < ApplicationRecord
 
   scope :includes_associated, -> { includes([:theme, :org]) }
 
+  accepts_nested_attributes_for :org
+
   private
 
   def theme_owner_matches_org_owner
     return unless theme&.circle && org&.circle
 
     unless theme.circle.id == org.circle.id
-      errors.add(:theme_owner_matches_org_owner, "theme owner and org owner must match")
+      errors.add(:theme_owner_matches_org_owner, I18n.t('theme_orgs.validations.match_owner'))
     end
   end
 end

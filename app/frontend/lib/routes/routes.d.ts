@@ -865,22 +865,6 @@ export const themeOrg: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:theme_slug/orgs/:org_slug/import(.:format)
- * @param {any} circleSlug
- * @param {any} themeSlug
- * @param {any} orgSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const themeOrgImport: ((
-  circleSlug: RequiredRouteParameter,
-  themeSlug: RequiredRouteParameter,
-  orgSlug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /:circle_slug/themes/:theme_slug/orgs(.:format)
  * @param {any} circleSlug
  * @param {any} themeSlug
@@ -888,6 +872,20 @@ export const themeOrgImport: ((
  * @returns {string} route path
  */
 export const themeOrgs: ((
+  circleSlug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /:circle_slug/themes/:theme_slug/orgs/import(.:format)
+ * @param {any} circleSlug
+ * @param {any} themeSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const themeOrgsImport: ((
   circleSlug: RequiredRouteParameter,
   themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
