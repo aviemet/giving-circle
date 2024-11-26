@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   root "pages#home" # Public home page for entire project
 
   # CONCERNS #
+  concern :bulk_delete do
+    collection do
+      delete :destroy
+    end
+  end
 
   # DEVISE PATHS #
 
@@ -46,7 +51,7 @@ Rails.application.routes.draw do
     resource :circles, path: '/', param: :circle_slug, as: :circle, shallow: true, except: [:new, :create, :index] do
       get :about
 
-      resources :memberships, param: :slug
+      resources :memberships, param: :slug, concerns: [:bulk_delete]
 
       resources :orgs, param: :slug do
         get :about

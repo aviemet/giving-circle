@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { router } from '@inertiajs/react'
 import { type VisitOptions } from '@inertiajs/core'
 import { debounce } from 'lodash'
@@ -49,7 +49,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 		}
 	})
 
-	const debouncedSearch = useCallback(debounce((path) => {
+	const debouncedSearch = debounce((path) => {
 		const options: VisitOptions = {
 			replace: true,
 			preserveScroll: true,
@@ -61,10 +61,11 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 				setTableState({ searching: false })
 			},
 		}
+
 		if(model) options.only = [model, 'pagination']
 
 		router.get(path, {}, options)
-	}, 500), [model, setTableState])
+	}, 500)
 
 	useEffect(() => {
 		const url = new URL(window.location.href)
@@ -82,7 +83,10 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 		}
 
 		debouncedSearch(url.toString())
-	}, [debouncedSearch, searchValue])
+		// debouncedSearch is not memoized, therefore not stable.
+		// Including it would cause an infinite re-render loop.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchValue])
 
 	return (
 		<Box className={ classes.searchWrapper }>
@@ -90,11 +94,11 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 			<TextInput
 				name="search"
 				id="search"
+				clearable
 				value={ searchValue }
-				onChange={ e => setSearchValue(e.target.value) }
-				rightSection={ searchValue !== '' && <ActionIcon variant="transparent" onClick={ () => setSearchValue('') }>
-					<CrossIcon color="grey" />
-				</ActionIcon> }
+				onChange={ e => {
+					setSearchValue(e.target.value)
+				} }
 				leftSection={ <SearchIcon size={ 24 } /> }
 				leftSectionPointerEvents="none"
 				className={ classes.searchInput }

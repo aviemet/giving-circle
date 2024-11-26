@@ -12,7 +12,7 @@ interface ShowMembershipProps {
 const ShowMembership = ({ membership }: ShowMembershipProps) => {
 	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<'membership'>()
-	const title =  'Membership'
+	const title = membership.name || 'Membership'
 
 	return (
 		<Page title={ title } breadcrumbs={ [

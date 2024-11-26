@@ -3,17 +3,17 @@ class ThemesController < ApplicationController
 
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :themes, -> { search(circle.themes.includes_associated) }
-  expose :theme, id: -> { params[:slug] }, scope: -> { circle.themes.includes_associated }, find_by: :slug
+  expose :themes, -> { search(Circle.includes_associated.find_by(slug: params[:circle_slug]).themes) }
+  expose :theme, id: -> { params[:slug] }, scope: -> { circle.themes }, find_by: :slug
 
   strong_params :theme, permit: [:name, :status, :slug]
 
-  sortable_fields %w(title quarter slug)
+  sortable_fields %w(title status slug)
 
   # @route GET /:circle_slug/themes (circle_themes)
   def index
     authorize themes
-
+    ap({ themes: })
     paginated_themes = paginate(themes, :themes)
 
     render inertia: "Themes/Index", props: {
@@ -29,6 +29,7 @@ class ThemesController < ApplicationController
   # @route GET /:circle_slug/themes/:slug (theme)
   def show
     authorize theme
+
     render inertia: "Themes/Show", props: {
       theme: -> { theme.render(:show) },
     }

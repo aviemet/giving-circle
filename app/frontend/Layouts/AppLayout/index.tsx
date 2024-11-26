@@ -28,7 +28,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 	useEffect(() => {
 		if(headroom === headerPinned) return
 		setHeaderPinned(headroom)
-	}, [headroom])
+	}, [headerPinned, headroom, setHeaderPinned])
 
 	return (
 		<AppShell

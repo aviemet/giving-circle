@@ -1,12 +1,12 @@
 class MembershipsController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :memberships, -> { search(circle.memberships.includes_associated) }
+  expose :memberships, -> { search(Circle.includes_associated.find_by(slug: params[:circle_slug]).memberships.includes_associated) }
   expose :membership, id: -> { params[:slug] }, scope: -> { circle.memberships.includes_associated }, find_by: :slug
 
-  strong_params :membership, permit: [:name, :number, :funds, :active, :person_id, person: [:first_name, :last_name]]
+  strong_params :membership, permit: [:name, :number, :funds_cents, :active, :person_id, person: [:first_name, :last_name]]
 
-  sortable_fields %w(id slug name number funds active)
+  sortable_fields %w(id slug name number funds_cents active)
 
   # @route GET /:circle_slug/memberships (circle_memberships)
   def index
@@ -78,6 +78,7 @@ class MembershipsController < ApplicationController
     end
   end
 
+  # @route DELETE /:circle_slug/memberships (circle_memberships)
   # @route DELETE /:circle_slug/memberships/:slug (membership)
   def destroy
     authorize membership

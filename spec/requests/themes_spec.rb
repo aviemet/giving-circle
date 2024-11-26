@@ -10,9 +10,10 @@ RSpec.describe "/themes", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      theme = create(:theme)
-
-      get circle_themes_url(theme.circle)
+      10.times do
+        create(:theme, circle: @admin.circles.first)
+      end
+      get circle_themes_url(@admin.circles.first)
 
       expect(response).to be_successful
     end

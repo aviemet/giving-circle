@@ -31,7 +31,7 @@ class Membership < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:number, :funds, :active, :name],
+    against: [:name, :number, :funds_cents, :active],
     using: {
       tsearch: { prefix: true },
       trigram: {}
