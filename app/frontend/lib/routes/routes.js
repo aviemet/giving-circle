@@ -712,13 +712,13 @@ export const editPerson = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}},
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:slug/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/edit(.:format)
  * @param {any} circleSlug
- * @param {any} slug
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editTheme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editTheme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1083,13 +1083,13 @@ export const settingsNotifications = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:slug(.:format)
+ * /:circle_slug/themes/:theme_slug(.:format)
  * @param {any} circleSlug
- * @param {any} slug
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const theme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const theme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

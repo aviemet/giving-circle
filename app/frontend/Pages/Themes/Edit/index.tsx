@@ -8,7 +8,7 @@ interface EditThemeProps {
 	theme: Schema.ThemesEdit
 }
 
-// @path: /:circle_slug/themes/:slug/edit
+// @path: /:circle_slug/themes/:theme_slug/edit
 // @route: editTheme
 const EditTheme = ({ theme }: EditThemeProps) => {
 	const { params } = usePageProps<'editTheme'>()

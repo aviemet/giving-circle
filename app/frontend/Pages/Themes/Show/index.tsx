@@ -9,7 +9,7 @@ interface ShowThemeProps {
 	theme: Schema.ThemesShow
 }
 
-// @path: /:circle_slug/themes/:slug
+// @path: /:circle_slug/themes/:theme_slug
 // @route: theme
 const ShowTheme = ({ theme }: ShowThemeProps) => {
 	const { params } = usePageProps<'theme'>()

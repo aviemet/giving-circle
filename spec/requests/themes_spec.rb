@@ -31,6 +31,42 @@ RSpec.describe "/themes", type: :request do
     end
   end
 
+  describe "GET /about" do
+    context "when logged in as an admin" do
+      login_super_admin
+
+      it "renders a successful response" do
+        theme = create(:theme)
+
+        get theme_about_url(theme.circle, theme)
+
+        expect(response).to be_successful
+      end
+    end
+
+    context "when logged in as a normal user" do
+      login_user(:admin)
+
+      it "renders a successful response" do
+        theme = create(:theme)
+
+        get theme_about_url(theme.circle, theme)
+
+        expect(response).to be_successful
+      end
+    end
+
+    context "without being logged in" do
+      it "renders a successful response" do
+        theme = create(:theme)
+
+        get theme_about_url(theme.circle, theme)
+
+        expect(response).to be_successful
+      end
+    end
+  end
+
   describe "GET /new" do
     login_super_admin
 

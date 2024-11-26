@@ -319,15 +319,15 @@ export const editPerson: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:slug/edit(.:format)
+ * /:circle_slug/themes/:theme_slug/edit(.:format)
  * @param {any} circleSlug
- * @param {any} slug
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editTheme: ((
   circleSlug: RequiredRouteParameter,
-  slug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -821,15 +821,15 @@ export const settingsNotifications: ((
 
 /**
  * Generates rails route to
- * /:circle_slug/themes/:slug(.:format)
+ * /:circle_slug/themes/:theme_slug(.:format)
  * @param {any} circleSlug
- * @param {any} slug
+ * @param {any} themeSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const theme: ((
   circleSlug: RequiredRouteParameter,
-  slug: RequiredRouteParameter,
+  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

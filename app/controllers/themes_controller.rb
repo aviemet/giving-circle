@@ -4,7 +4,10 @@ class ThemesController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
   expose :themes, -> { search(Circle.includes_associated.find_by(slug: params[:circle_slug]).themes) }
-  expose :theme, id: -> { params[:slug] }, scope: -> { circle.themes }, find_by: :slug
+  expose :theme,
+    id: -> { params[:slug] },
+    scope: -> { Circle.includes_associated.find_by(slug: params[:circle_slug]).themes },
+    find_by: :slug
 
   strong_params :theme, permit: [:name, :status, :slug]
 
@@ -13,7 +16,7 @@ class ThemesController < ApplicationController
   # @route GET /:circle_slug/themes (circle_themes)
   def index
     authorize themes
-    ap({ themes: })
+
     paginated_themes = paginate(themes, :themes)
 
     render inertia: "Themes/Index", props: {
@@ -26,7 +29,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:slug (theme)
+  # @route GET /:circle_slug/themes/:theme_slug (theme)
   def show
     authorize theme
 
@@ -54,7 +57,7 @@ class ThemesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:slug/edit (edit_theme)
+  # @route GET /:circle_slug/themes/:theme_slug/edit (edit_theme)
   def edit
     authorize theme
 
@@ -69,7 +72,7 @@ class ThemesController < ApplicationController
     authorize Theme.new
 
     theme.circle = circle
-    # ap({ theme:, params:, circle:, valid: theme.valid?, errors: theme.errors})
+
     if theme.save
       redirect_to theme_path(params[:circle_slug], theme), notice: t('themes.notices.created')
     else
@@ -77,11 +80,11 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:slug (theme)
-  # @route PUT /:circle_slug/themes/:slug (theme)
+  # @route PATCH /:circle_slug/themes/:theme_slug (theme)
+  # @route PUT /:circle_slug/themes/:theme_slug (theme)
   def update
     authorize theme
-
+    ap({ params:, theme:, valid: theme.valid?, errors: theme.errors })
     if theme.update(theme_params)
       redirect_to theme_path(params[:circle_slug], theme), notice: t('themes.notices.updated')
     else
@@ -89,7 +92,7 @@ class ThemesController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:slug (theme)
+  # @route DELETE /:circle_slug/themes/:theme_slug (theme)
   def destroy
     authorize theme
 
