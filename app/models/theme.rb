@@ -46,10 +46,10 @@ class Theme < ApplicationRecord
     select('orgs.*, themes_orgs.ask_cents as ask_cents, themes_orgs.ask_currency as ask_currency')
       # Override count method which would error with the above select statement
       .extending {
-      def count
-        except(:select).calculate(:count, :all)
-      end
-    }
+        def count(args = :all)
+          except(:select).calculate(:count, args)
+        end
+      }
   }, through: :themes_orgs
 
   scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }

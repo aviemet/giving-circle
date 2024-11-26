@@ -89,7 +89,6 @@ class OrgsController < ApplicationController
     end
   end
 
-  # @route DELETE /orgs (orgs)
   # @route DELETE /:circle_slug/orgs/:slug (org)
   def destroy
     authorize org

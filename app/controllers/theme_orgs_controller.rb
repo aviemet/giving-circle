@@ -2,8 +2,8 @@ class ThemeOrgsController < ApplicationController
   expose :circle, -> { theme.circle }
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
-  expose :orgs, -> { search(Theme.find_by(slug: params[:theme_slug]).orgs.includes_associated) }
-  expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slu
+  expose :orgs, -> { search(theme.orgs.includes_associated) }
+  expose :org, id: -> { params[:slug] }, scope: -> { orgs }, find_by: :slug
 
   strong_params :org, permit: [:name, :ask, :description]
 
@@ -58,7 +58,7 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/orgs/import (theme_orgs_import)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs/:org_slug/import (theme_org_import)
   def import
     authorize Org.new
 
@@ -68,16 +68,17 @@ class ThemeOrgsController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/themes/:theme_slug/orgs (theme_org_index)
+  # @route GET /:circle_slug/themes/:theme_slug/orgs (theme_orgs)
   def create
     authorize Org.new
 
-    if params[:org].present?
-      create_single_record
-    elsif params[:orgs].present?
-      create_bulk_records
+    org = find_or_create_by(org_params)
+    org.themes << theme
+
+    if org.save
+      redirect_to theme_org_path(params[:circle_slug], params[:theme_slug], org), notice: t('theme_orgs.notices.created')
     else
-      render json: { error: 'Invalid parameters' }, status: :unprocessable_entity
+      redirect_to new_theme_org_path(params[:circle_slug], params[:theme_slug]), inertia: { errors: org.errors }
     end
   end
 

@@ -79,9 +79,6 @@ const urlParams = {
       "slug"
     ]
   },
-  "orgs": {
-    "params": []
-  },
   "circles": {
     "params": []
   },
@@ -155,16 +152,11 @@ const urlParams = {
       "theme_slug"
     ]
   },
-  "themeOrgsImport": {
+  "themeOrgImport": {
     "params": [
       "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "themeOrgIndex": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
+      "theme_slug",
+      "org_slug"
     ]
   },
   "newThemeOrg": {

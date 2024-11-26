@@ -39,8 +39,6 @@ Rails.application.routes.draw do
   resources :users
   resources :people, param: :slug
 
-  delete 'orgs', to: 'orgs#destroy'
-
   resources :circles, param: :circle_slug, only: [:new, :create, :index]
 
   # Nested resources under Circle with standard slug param
@@ -60,8 +58,10 @@ Rails.application.routes.draw do
         get :about
 
         get 'orgs', to: 'theme_orgs#index'
-        get 'orgs/import', to: 'theme_orgs#import', as: :orgs_import
-        resources :theme_orgs, path: :orgs, param: :slug, except: [:index], shallow: false, as: 'org'
+        get 'orgs', to: 'theme_orgs#create'
+        resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create] do
+          get :import
+        end
 
         # Admin presentation routes
         resources :presentations, param: :presentation_slug, shallow: false do

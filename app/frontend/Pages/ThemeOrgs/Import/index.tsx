@@ -13,8 +13,8 @@ interface OrgsImportProps {
 	circle: Schema.CirclesInertiaShare
 }
 
-// @path: /:circle_slug/themes/:theme_slug/orgs/import
-// @route: themeOrgsImport
+// @path: /:circle_slug/themes/:theme_slug/orgs/:org_slug/import
+// @route: themeOrgImport
 const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	const { params } = usePageProps<'themeOrgsImport'>()
 
