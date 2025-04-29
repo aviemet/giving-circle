@@ -2,7 +2,7 @@ import React from 'react'
 import { createInertiaApp, router } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 
-import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from '../Layouts'
+import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from '../layouts'
 import { propsMiddleware } from './middleware'
 import { runAxe } from './middleware/axe'
 
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		title: title => `${SITE_TITLE} - ${title}`,
 
 		resolve: async name => {
-			const pages = import.meta.glob<PagesObject>('../Pages/**/index.tsx')
-			const page = (await pages[`../Pages/${name}/index.tsx`]()).default
+			const pages = import.meta.glob<PagesObject>('../pages/**/index.tsx')
+			const page = (await pages[`../pages/${name}/index.tsx`]()).default
 
 			page.layout = (page) => {
 				const props = page.props
