@@ -1,12 +1,13 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Table, Link } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Table, Link } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const OrgTable = (props: TableProps) => {
-	const { params } = usePageProps<'circleOrgs'>()
+	const { params } = usePageProps<"circleOrgs">()
 
 	return (
 		<Table { ...props }>

@@ -1,7 +1,9 @@
-import React from 'react'
-import { Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import PresentationVoteForm from '../Form'
+import React from "react"
+
+import { Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import PresentationVoteForm from "../Form"
 
 interface INewPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesFormData
@@ -10,12 +12,12 @@ interface INewPresentationVoteProps {
 // @path: /:circle_slug/presentations/:presentation_slug/presentation_votes/new
 // @route: newPresentationVote
 const NewPresentationVote = ({ ...data }: INewPresentationVoteProps) => {
-	const title = 'New Presentation Vote'
+	const title = "New Presentation Vote"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentation Votes', href: Routes.presentationVotes() },
-			{ title: 'New Presentation Vote', href: window.location.href },
+			{ title: "Presentation Votes", href: Routes.presentationVotes() },
+			{ title: "New Presentation Vote", href: window.location.href },
 		] }>
 
 			<Section>

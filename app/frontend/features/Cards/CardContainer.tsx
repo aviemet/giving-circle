@@ -1,9 +1,10 @@
-import React from 'react'
-import { Group, GroupProps, SimpleGrid } from '@/components'
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
-import * as classes from './Cards.css'
-import { exclude } from '@/lib'
+import { Group, GroupProps, SimpleGrid } from "@/components"
+import { exclude } from "@/lib"
+
+import * as classes from "./Cards.css"
 
 interface FlexProps {
 	flexBasis?: number | string
@@ -15,7 +16,7 @@ interface SingleFlexProp {
 	flex: string
 }
 
-interface CardGroupProps extends Omit<GroupProps, 'flex'> {
+interface CardGroupProps extends Omit<GroupProps, "flex"> {
 	children: React.ReactNode
 }
 
@@ -24,15 +25,15 @@ type CardContainerProps = CardGroupProps & (FlexProps | SingleFlexProp);
 const CardContainer = ({ children, className, ...props }: CardContainerProps) => {
 	let flex: string
 
-	if('flex' in props) {
+	if("flex" in props) {
 		flex = props.flex
 	} else {
 		let { flexGrow, flexShrink, flexBasis } = props
-		flexGrow ||= '0'
-		flexShrink ||= '0'
-		flexBasis ||= '25%'
+		flexGrow ||= "0"
+		flexShrink ||= "0"
+		flexBasis ||= "25%"
 
-		const parse = (str: string | number) => typeof str === 'number' ? `${str}px` : str
+		const parse = (str: string | number) => typeof str === "number" ? `${str}px` : str
 		flex = `${parse(flexGrow)} ${parse(flexShrink)} ${parse(flexBasis)}`
 	}
 

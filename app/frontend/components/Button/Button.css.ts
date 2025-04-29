@@ -1,7 +1,8 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
 
 export const colorSchemeButton = css`
 	display: inline-flex;
-	margin-left: ${vars.spacing.md};
+	margin-left: ${ vars.spacing.md };
 `

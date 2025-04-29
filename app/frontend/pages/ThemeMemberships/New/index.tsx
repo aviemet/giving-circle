@@ -1,8 +1,10 @@
-import React from 'react'
-import { Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import MemberForm from '../Form'
+import React from "react"
+
+import { Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import MemberForm from "../Form"
 
 interface NewThemeMemberProps {
 	member: Schema.MembersFormData
@@ -12,8 +14,8 @@ interface NewThemeMemberProps {
 // @path: /:circle_slug/themes/:theme_slug/memberships/new
 // @route: newThemeMembership
 const NewThemeMember = ({ ...data }: NewThemeMemberProps) => {
-	const { params } = usePageProps<'newThemeMember'>()
-	const title = 'New Member'
+	const { params } = usePageProps<"newThemeMember">()
+	const title = "New Member"
 
 	return (
 		<Page title={ title }>

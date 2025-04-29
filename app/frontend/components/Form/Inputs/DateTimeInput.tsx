@@ -1,15 +1,18 @@
-import React from 'react'
-import Field from '../components/Field'
-import DateTimeInput, { type DateTimeProps } from '@/components/Inputs/DateTimeInput'
-import { NestedObject, useInertiaInput } from 'use-inertia-form'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import { type InputConflicts, type BaseFormInputProps } from '.'
-import { isUnset } from '@/lib'
+import React from "react"
+import { NestedObject, useInertiaInput } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import DateTimeInput, { type DateTimeProps } from "@/components/Inputs/DateTimeInput"
+import { isUnset } from "@/lib"
+
+import Field from "../components/Field"
+
+import { type InputConflicts, type BaseFormInputProps } from "."
 
 interface DateTimeFormProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<DateTimeProps, InputConflicts>,
-	BaseFormInputProps<Date | '', TForm> {}
+	BaseFormInputProps<Date | "", TForm> {}
 
 const DateTime = <TForm extends NestedObject = NestedObject>({
 	name,
@@ -27,7 +30,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	...props
 }: DateTimeFormProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date | '', TForm>({
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date | "", TForm>({
 		name,
 		model,
 		errorKey,
@@ -36,7 +39,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	})
 
 	const handleChange = (date: Date | null) => {
-		const dateWithValidEmptyType = (isUnset(date) ? '' : date)
+		const dateWithValidEmptyType = (isUnset(date) ? "" : date)
 
 		setValue(dateWithValidEmptyType)
 
@@ -68,7 +71,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 			<DateTimeInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ value === '' ? undefined : value }
+				value={ value === "" ? undefined : value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				onFocus={ handleFocus }

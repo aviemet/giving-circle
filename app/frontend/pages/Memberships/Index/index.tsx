@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { Page, Title } from '@/components'
-import { NewIcon } from '@/components/Icons'
-import { IndexTableTemplate } from '@/features'
-import MembershipsTable from '../Table'
+import React from "react"
+
+import { Page, Title } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import MembershipsTable from "../Table"
 
 interface MembershipIndexProps {
 	memberships: Schema.MembershipsIndex[]
@@ -15,8 +17,8 @@ interface MembershipIndexProps {
 // @route: circleMemberships
 const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params, active_circle } = usePageProps<'circleMemberships'>()
-	const title = active_circle ? `${active_circle.name} Memberships` : 'Memberships'
+	const { params, active_circle } = usePageProps<"circleMemberships">()
+	const title = active_circle ? `${active_circle.name} Memberships` : "Memberships"
 
 	return (
 		<Page
@@ -33,7 +35,7 @@ const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => 
 					{
 						options: [
 							{
-								label: 'New Membership',
+								label: "New Membership",
 								href: Routes.newCircleMembership(params.circle_slug),
 								icon: <NewIcon />,
 							},

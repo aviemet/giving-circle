@@ -1,7 +1,8 @@
-import React from 'react'
-import { Badge, Button, Card, Group, Text } from '@/components'
-import { Routes } from '@/lib'
-import { Link } from '@inertiajs/react'
+import { Link } from "@inertiajs/react"
+import React from "react"
+
+import { Badge, Button, Card, Group, Text } from "@/components"
+import { Routes } from "@/lib"
 
 interface ThemeCardProps {
 	circle: Schema.CirclesInertiaShare

@@ -1,9 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexTableTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import PresentationSlidesTable from '../Table'
-import { Page } from '@/components'
+import React from "react"
+
+import { Page } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import PresentationSlidesTable from "../Table"
+
 
 interface PresentationSlideIndexProps {
 	presentation_slides: Schema.PresentationSlidesIndex[]

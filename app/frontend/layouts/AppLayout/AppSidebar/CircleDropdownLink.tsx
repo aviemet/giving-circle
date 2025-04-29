@@ -1,4 +1,7 @@
-import React from 'react'
+import cx from "clsx"
+import { isEmpty } from "lodash"
+import React from "react"
+
 import {
 	Link,
 	Menu,
@@ -6,14 +9,12 @@ import {
 	Group,
 	Box,
 	Button,
-} from '@/components'
-import { initials, Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { DownArrowIcon } from '@/components/Icons'
+} from "@/components"
+import { DownArrowIcon } from "@/components/Icons"
+import { initials, Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
-import cx from 'clsx'
-import * as classes from '../AppLayout.css'
-import { isEmpty } from 'lodash'
+import * as classes from "../AppLayout.css"
 
 const CircleDropdownLink = () => {
 	const { auth, active_circle } = usePageProps()
@@ -27,11 +28,11 @@ const CircleDropdownLink = () => {
 	return (
 		<>
 			<Group
-				justify='space-between'
+				justify="space-between"
 				className={ cx(classes.circleMenuGroup) }
 			>
 				<Link href={ Routes.circle(active_circle.slug) } underline="never">
-					<Group justify='space-between'>
+					<Group justify="space-between">
 						<Avatar size="sm">{ initials(active_circle.name) }</Avatar>
 					</Group>
 				</Link>

@@ -1,5 +1,5 @@
-import Papa from 'papaparse'
-import { has } from 'lodash'
+import { has } from "lodash"
+import Papa from "papaparse"
 
 interface AcceptedHeading {
 	name: string
@@ -50,7 +50,7 @@ export const parseCsvFile = (
 
 	Papa.parse<Record<string, unknown>>(file, {
 		header: true,
-		delimiter: ',',
+		delimiter: ",",
 		dynamicTyping: true,
 		skipEmptyLines: true,
 		step: ({ data: rowData, errors, meta }) => {

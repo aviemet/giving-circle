@@ -1,11 +1,13 @@
-import React, { forwardRef } from 'react'
-import { Menu, createPolymorphicComponent, type MenuItemProps as MantineItemProps } from '@mantine/core'
-import cx from 'clsx'
-import { Link } from '@/components'
-import { LinkProps } from '../Link'
-import * as classes from './Menu.css'
+import { Menu, createPolymorphicComponent, type MenuItemProps as MantineItemProps } from "@mantine/core"
+import cx from "clsx"
+import React, { forwardRef } from "react"
 
-type DuplicateProps = 'color' | 'children' | 'classNames' | 'styles' | 'variant' | 'vars'
+import { Link } from "@/components"
+
+import { LinkProps } from "../Link"
+import * as classes from "./Menu.css"
+
+type DuplicateProps = "color" | "children" | "classNames" | "styles" | "variant" | "vars"
 interface MenuItemProps extends MantineItemProps, Omit<LinkProps, DuplicateProps> {
 	icon?: React.ReactNode
 	disabled?: boolean

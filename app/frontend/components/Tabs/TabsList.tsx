@@ -1,7 +1,8 @@
-import React from 'react'
-import { TabsListProps, Tabs } from '@mantine/core'
-import cx from 'clsx'
-import * as classes from './Tabs.css'
+import { TabsListProps, Tabs } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
+
+import * as classes from "./Tabs.css"
 
 interface TabsListComponentProps extends TabsListProps {
 	scrollOverflow?: boolean

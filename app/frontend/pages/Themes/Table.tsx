@@ -1,12 +1,13 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Table, Link } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Table, Link } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const ThemeTable = (props: TableProps) => {
-	const { params } = usePageProps<'circleThemes'>()
+	const { params } = usePageProps<"circleThemes">()
 	return (
 		<Table { ...props }>
 			<Table.Head>

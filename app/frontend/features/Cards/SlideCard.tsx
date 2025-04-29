@@ -1,7 +1,8 @@
-import React from 'react'
-import { rem, Routes } from '@/lib'
-import { ActionIcon, Button, Card, Group, Image, Link, Menu, Text } from '@/components'
-import { DotsIcon, EditIcon, TrashIcon } from '@/components/Icons'
+import React from "react"
+
+import { ActionIcon, Button, Card, Group, Image, Link, Menu, Text } from "@/components"
+import { DotsIcon, EditIcon, TrashIcon } from "@/components/Icons"
+import { rem, Routes } from "@/lib"
 
 interface SlideCardProps {
 	slide: Schema.PresentationSlide

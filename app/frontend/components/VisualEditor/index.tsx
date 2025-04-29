@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Puck, PuckComponent, usePuck, type Config, type Data } from '@measured/puck'
-import '@measured/puck/puck.css'
-import { Box, Button } from '@mantine/core'
+import React, { useState } from "react"
+import { Puck, PuckComponent, usePuck, type Config, type Data } from "@measured/puck"
+import "@measured/puck/puck.css"
+import { Box, Button } from "@mantine/core"
+import cx from "clsx"
 
-import cx from 'clsx'
-import * as classes from './Puck.css'
+import * as classes from "./Puck.css"
 
 type Components = {
 	HeadingBlock: {}
@@ -16,7 +16,7 @@ const config: Config<Components> = {
 		HeadingBlock: {
 			fields: {
 				children: {
-					type: 'text',
+					type: "text",
 				},
 			},
 			render: ({ children }: PuckComponent<{}>) => {
@@ -32,7 +32,7 @@ const VisualEditor = () => {
 	const { appState } = usePuck()
 
 	const [data] = useState<Data>(() => {
-		const dataStr = localStorage.getItem('lskdfjsdlkfj')
+		const dataStr = localStorage.getItem("lskdfjsdlkfj")
 
 		if(dataStr) {
 			return JSON.parse(dataStr)

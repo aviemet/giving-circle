@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Link, Table } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Link, Table } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const UsersTable = (props: TableProps) => {
 	return (
@@ -10,7 +11,7 @@ const UsersTable = (props: TableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="email" hideable={ false }>Email</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.Cell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 

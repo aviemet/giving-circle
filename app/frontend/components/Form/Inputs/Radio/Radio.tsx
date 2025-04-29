@@ -1,15 +1,17 @@
-import React from 'react'
-import { useForm, useInertiaInput, type NestedObject } from 'use-inertia-form'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import { Field } from '@/components/Form'
-import RadioInput, { type RadioProps } from '@/components/Inputs/Radio'
-import FormRadioGroup from './Group'
-import { type BaseFormInputProps } from '..'
+import React from "react"
+import { useForm, useInertiaInput, type NestedObject } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import { Field } from "@/components/Form"
+import RadioInput, { type RadioProps } from "@/components/Inputs/Radio"
+
+import { type BaseFormInputProps } from ".."
+import FormRadioGroup from "./Group"
 
 export interface FormRadioProps<TForm extends NestedObject>
 	extends
-	Omit<RadioProps, 'name' | 'onChange' | 'onBlur' | 'onFocus' | 'defaultValue'>,
-	Omit<BaseFormInputProps<string, TForm>, 'name'> {}
+	Omit<RadioProps, "name" | "onChange" | "onBlur" | "onFocus" | "defaultValue">,
+	Omit<BaseFormInputProps<string, TForm>, "name"> {}
 
 const FormRadioComponent = <TForm extends NestedObject>(
 	{
@@ -48,7 +50,7 @@ const FormRadioComponent = <TForm extends NestedObject>(
 			onChange={ handleChange }
 			onBlur={ handleBlur }
 			onFocus={ e => onFocus?.(value, form) }
-			style={ [{ padding: '14px 10px' }, style] }
+			style={ [{ padding: "14px 10px" }, style] }
 			wrapper={ false }
 			{ ...props }
 		/>

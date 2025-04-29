@@ -1,8 +1,10 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import ThemeForm from '../Form'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import ThemeForm from "../Form"
 
 interface NewThemeProps {
 	theme: Schema.ThemesFormData
@@ -12,9 +14,9 @@ interface NewThemeProps {
 // @path: /:circle_slug/themes/new
 // @route: newCircleTheme
 const NewTheme = ({ circle, ...data }: NewThemeProps) => {
-	const { params } = usePageProps<'newCircleTheme'>()
+	const { params } = usePageProps<"newCircleTheme">()
 
-	const title = 'New Theme'
+	const title = "New Theme"
 
 	return (
 		<Page title={ title }>

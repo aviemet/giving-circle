@@ -1,9 +1,9 @@
-import React from 'react'
-import { Box, type BoxProps } from '@mantine/core'
-import cx from 'clsx'
-import { LabelProps as HtmlLabelProps } from 'react-html-props'
+import { Box, type BoxProps } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
+import { LabelProps as HtmlLabelProps } from "react-html-props"
 
-interface LabelProps extends BoxProps, Omit<HtmlLabelProps, 'ref' | 'style'> {
+interface LabelProps extends BoxProps, Omit<HtmlLabelProps, "ref" | "style"> {
 	required?: boolean
 }
 

@@ -1,7 +1,9 @@
-import React, { forwardRef } from 'react'
-import { Checkbox, type CheckboxProps as MantineCheckboxProps } from '@mantine/core'
-import { type BaseInputProps } from '.'
-import InputWrapper from './InputWrapper'
+import { Checkbox, type CheckboxProps as MantineCheckboxProps } from "@mantine/core"
+import React, { forwardRef } from "react"
+
+import InputWrapper from "./InputWrapper"
+
+import { type BaseInputProps } from "."
 
 export interface CheckboxProps extends MantineCheckboxProps, BaseInputProps {}
 

@@ -1,8 +1,9 @@
-import React from 'react'
-import { useDisclosure } from '@/lib/hooks'
-import { Group, Box, AppShell, Burger, Skeleton } from '@/components'
-import { CircleDotIcon } from '@/components/Icons'
-import { UserHeaderMenu } from '@/features'
+import React from "react"
+
+import { Group, Box, AppShell, Burger, Skeleton } from "@/components"
+import { CircleDotIcon } from "@/components/Icons"
+import { UserHeaderMenu } from "@/features"
+import { useDisclosure } from "@/lib/hooks"
 
 interface PublicLayoutProps {
 	children: any
@@ -16,7 +17,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 			header={ { height: { base: 30, md: 50, lg: 60 } } }
 			navbar={ {
 				width: { base: 100, md: 200, lg: 300 },
-				breakpoint: 'sm',
+				breakpoint: "sm",
 				collapsed: { mobile: !opened },
 			} }
 			padding="md"

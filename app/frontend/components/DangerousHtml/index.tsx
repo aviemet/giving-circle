@@ -1,5 +1,5 @@
-import { Box, type BoxProps } from '@mantine/core'
-import React from 'react'
+import { Box, type BoxProps } from "@mantine/core"
+import React from "react"
 
 interface DangerousHtmlProps extends BoxProps {
 	children?: string | null
@@ -7,7 +7,7 @@ interface DangerousHtmlProps extends BoxProps {
 
 const DangerousHtml = ({ children, ...props }: DangerousHtmlProps) => {
 	return (
-		<Box { ...props } dangerouslySetInnerHTML={ { __html: children || '' } } />
+		<Box { ...props } dangerouslySetInnerHTML={ { __html: children || "" } } />
 	)
 }
 

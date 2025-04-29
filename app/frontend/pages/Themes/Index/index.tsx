@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { NewIcon } from '@/components/Icons'
-import { IndexTableTemplate } from '@/features'
-import ThemesTable from '../Table'
-import { Page } from '@/components'
+import React from "react"
+
+import { Page } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import ThemesTable from "../Table"
 
 interface ThemeIndexProps {
 	themes: Schema.ThemesIndex[]
@@ -15,7 +17,7 @@ interface ThemeIndexProps {
 // @path: /:circle_slug/themes
 // @route: circleThemes
 const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
-	const { params } = usePageProps<'circleThemes'>()
+	const { params } = usePageProps<"circleThemes">()
 
 	return (
 		<Page

@@ -1,7 +1,9 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import CircleForm from '../Form'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import CircleForm from "../Form"
 
 interface NewCircleProps {
 	circle: Schema.CirclesFormData
@@ -10,12 +12,12 @@ interface NewCircleProps {
 // @path: /circles/new
 // @route: newCircle
 const NewCircle = (data: NewCircleProps) => {
-	const title = 'New Circle'
+	const title = "New Circle"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Circles', href: Routes.circles() },
-			{ title: 'New Circle', href: Routes.newCircle() },
+			{ title: "Circles", href: Routes.circles() },
+			{ title: "New Circle", href: Routes.newCircle() },
 		] }>
 
 			<Section>

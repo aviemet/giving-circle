@@ -1,7 +1,8 @@
-import React from 'react'
-import { Title, Menu, Page, Section, Text, Money } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Title, Menu, Page, Section, Text, Money } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowThemeOrgProps {
 	org: Schema.ThemesOrgsShow
@@ -10,8 +11,8 @@ interface ShowThemeOrgProps {
 // @path: /:circle_slug/themes/:theme_slug/orgs/:slug
 // @route: themeOrg
 const ShowThemeOrg = ({ org }: ShowThemeOrgProps) => {
-	const { params } = usePageProps<'themeOrg'>()
-	const title = org.name || 'Org'
+	const { params } = usePageProps<"themeOrg">()
+	const title = org.name || "Org"
 
 	return (
 		<Page

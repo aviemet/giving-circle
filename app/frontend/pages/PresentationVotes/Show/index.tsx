@@ -1,6 +1,7 @@
-import React from 'react'
-import { Group, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Group, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
 
 interface IShowPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesShow
@@ -9,11 +10,11 @@ interface IShowPresentationVoteProps {
 // @path: /:circle_slug/presentation_votes/:id
 // @route: vote
 const ShowPresentationVote = ({ presentation_vote }: IShowPresentationVoteProps) => {
-	const title =  'PresentationVote'
+	const title = "PresentationVote"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentation Vote', href: Routes.presentationVotes() },
+			{ title: "Presentation Vote", href: Routes.presentationVotes() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

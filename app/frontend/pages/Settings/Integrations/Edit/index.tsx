@@ -1,8 +1,10 @@
-import React from 'react'
-import SettingsLayout from '@/layouts/AppLayout/SettingsLayout'
-import { Title } from '@/components'
-import { Routes } from '@/lib'
-import SmtpForm from '../Form'
+import React from "react"
+
+import { Title } from "@/components"
+import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { Routes } from "@/lib"
+
+import SmtpForm from "../Form"
 
 interface SmtpFormProps {
 	smtp: Schema.Smtp

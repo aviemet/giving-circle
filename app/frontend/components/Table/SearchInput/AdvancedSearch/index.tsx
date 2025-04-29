@@ -1,8 +1,3 @@
-import React, { useState } from 'react'
-import { DoubleDownArrowIcon } from '@/components/Icons'
-import { useLayoutStore } from '@/store'
-import { useBooleanToggle } from '@/lib/hooks'
-import { useClickOutside } from '@mantine/hooks'
 import {
 	ActionIcon,
 	Paper,
@@ -12,16 +7,22 @@ import {
 	px,
 	Tooltip,
 	Box,
-} from '@mantine/core'
+} from "@mantine/core"
+import { useClickOutside } from "@mantine/hooks"
+import cx from "clsx"
+import React, { useState } from "react"
 
-import cx from 'clsx'
-import * as classes from './AdvancedSearch.css'
+import { DoubleDownArrowIcon } from "@/components/Icons"
+import { useBooleanToggle } from "@/lib/hooks"
+import { useLayoutStore } from "@/store"
+
+import * as classes from "./AdvancedSearch.css"
 
 const scaleY = {
-	in: { opacity: 1, transform: 'scaleY(1)' },
-	out: { opacity: 0, transform: 'scaleY(0)' },
-	common: { transformOrigin: 'top' },
-	transitionProperty: 'transform, opacity',
+	in: { opacity: 1, transform: "scaleY(1)" },
+	out: { opacity: 0, transform: "scaleY(0)" },
+	common: { transformOrigin: "top" },
+	transitionProperty: "transform, opacity",
 }
 
 interface AdvancedSearchProps {
@@ -31,7 +32,7 @@ interface AdvancedSearchProps {
 const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 	const { sidebarOpen } = useLayoutStore()
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
-	const navBarWidth = width[sidebarOpen ? 'open' : 'closed']
+	const navBarWidth = width[sidebarOpen ? "open" : "closed"]
 
 	const [open, toggleOpen] = useBooleanToggle(false)
 	const [searchButton, setSearchButton] = useState<HTMLButtonElement | null>(null)
@@ -75,7 +76,7 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 						className={ cx(classes.paper) }
 						style={ {
 							...styles,
-							left: rem(navBarWidth + Number(px('1rem'))),
+							left: rem(navBarWidth + Number(px("1rem"))),
 							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
 						} }
 					>
@@ -91,4 +92,4 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 
 export default AdvancedSearch
 
-export { default as useAdvancedSearch } from './useAdvancedSearch'
+export { default as useAdvancedSearch } from "./useAdvancedSearch"

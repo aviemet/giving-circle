@@ -1,11 +1,12 @@
-import React from 'react'
-import FormConsumer from './FormConsumer'
+import React from "react"
+
+import FormConsumer from "./FormConsumer"
 
 const ConsoleLogger = ({ key }: { key?: string }) => {
 	return (
 		<FormConsumer>
 			{ ({ data }) => {
-				console.log({ [key || 'data']: data })
+				console.log({ [key || "data"]: data })
 				return <></>
 			} }
 		</FormConsumer>

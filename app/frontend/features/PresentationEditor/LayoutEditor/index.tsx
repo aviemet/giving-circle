@@ -1,9 +1,11 @@
-import React, { useRef } from 'react'
-import { Button, Divider, Flex, Group, Title } from '@/components'
-import { TextInput } from '@/components/Inputs'
-import { useDynamicInputs, useForm } from 'use-inertia-form'
-import { modals } from '@mantine/modals'
-import SlideCard from './SlideCard'
+import { modals } from "@mantine/modals"
+import React, { useRef } from "react"
+import { useDynamicInputs, useForm } from "use-inertia-form"
+
+import { Button, Divider, Flex, Group, Title } from "@/components"
+import { TextInput } from "@/components/Inputs"
+
+import SlideCard from "./SlideCard"
 
 const LayoutEditor = () => {
 	const { getData, data } = useForm()
@@ -11,21 +13,21 @@ const LayoutEditor = () => {
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const { addInput, removeInput, paths } = useDynamicInputs({
-		model: 'presentation_slides',
+		model: "presentation_slides",
 		emptyData: {
-			name: '',
+			name: "",
 			order: NaN,
-			content: '',
+			content: "",
 		},
 	})
 
 	const handleAddSlide = () => {
 		modals.openConfirmModal({
-			title: 'Add a slide to this template',
+			title: "Add a slide to this template",
 			children: (
 				<TextInput label="New Slide Title" ref={ newSlideInputRef } />
 			),
-			labels: { confirm: 'Confirm', cancel: 'Cancel' },
+			labels: { confirm: "Confirm", cancel: "Cancel" },
 			onConfirm: () => {
 				addInput({
 					name: newSlideInputRef.current?.value,

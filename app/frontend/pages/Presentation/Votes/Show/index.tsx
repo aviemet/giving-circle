@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Group, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesShow
@@ -11,12 +12,12 @@ interface ShowPresentationVoteProps {
 // @route: themePresentationsVote
 const ShowPresentationVote = ({ presentation_vote }: ShowPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title =  'PresentationVote'
+	const { params } = usePageProps<"">()
+	const title = "PresentationVote"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Vote', href: Routes.presentationVotes() },
+			{ title: "Vote", href: Routes.presentationVotes() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

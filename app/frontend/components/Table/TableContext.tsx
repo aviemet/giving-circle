@@ -1,12 +1,13 @@
-import React, { useReducer, useEffect } from 'react'
-import { createContext } from '@/lib/hooks'
+import React, { useReducer, useEffect } from "react"
+
+import { createContext } from "@/lib/hooks"
 
 /**
  * Table Section Context
  * Used by Cell component to determine which tag to use
  */
 interface TableSectionContextProvider {
-	section: 'head'|'body'|'footer'
+	section: "head" | "body" | "footer"
 }
 
 const [useTableSectionContext, TableSectionContextProvider] = createContext<TableSectionContextProvider>()
@@ -18,7 +19,7 @@ export { useTableSectionContext, TableSectionContextProvider }
 interface TableState {
 	selectable: boolean
 	pagination?: Schema.Pagination
-	rows?: Record<string,any>[]
+	rows?: Record<string, any>[]
 	columns: { hideable: string, label: string }[]
 	selected: Set<string>
 	hideable: boolean
@@ -35,7 +36,7 @@ interface TableContextProviderProps {
 	children: React.ReactNode
 	selectable?: boolean
 	pagination?: Schema.Pagination
-	rows?: Record<string,any>[]
+	rows?: Record<string, any>[]
 	hideable?: boolean
 
 	/** Name of the ActiveRecord model being tabularized.
@@ -83,7 +84,7 @@ const TableProvider = ({
 
 interface StatePreservingRowUpdaterProps {
 	children: React.ReactElement
-	rows?: Record<string,any>[]
+	rows?: Record<string, any>[]
 	pagination?: Schema.Pagination
 }
 

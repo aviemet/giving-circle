@@ -1,13 +1,14 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { Table, Link } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
-import { CheckIcon } from '@/components/Icons'
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
-import * as classes from './Table.css'
+import { Table, Link } from "@/components"
+import { EditButton } from "@/components/Button"
+import { CheckIcon } from "@/components/Icons"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import * as classes from "./Table.css"
 
 const PresentationTable = (props: TableProps) => {
 	const { params } = usePageProps()

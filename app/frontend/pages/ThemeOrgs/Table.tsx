@@ -1,10 +1,11 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Table, Link, Money } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
 
-interface ThemeOrgTableProps extends TableProps{
+import { Table, Link, Money } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
+
+interface ThemeOrgTableProps extends TableProps {
 	theme: Schema.ThemesInertiaShare
 	circle: Schema.CirclesInertiaShare
 }

@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo } from 'react'
-import { MantineProvider, createTheme, px, type CSSVariablesResolver } from '@mantine/core'
-import { type CSSVariables } from '@mantine/core/lib/core/MantineProvider/convert-css-variables/css-variables-object-to-string'
-import { Notifications } from '@mantine/notifications'
-import { theme as themeObject, vars } from '@/lib/theme'
-import useLayoutStore from '@/store/LayoutStore'
-import { toKebabCase } from '@/lib'
-import { ModalsProvider } from '@mantine/modals'
+import { MantineProvider, createTheme, px, type CSSVariablesResolver } from "@mantine/core"
+import { type CSSVariables } from "@mantine/core/lib/core/MantineProvider/convert-css-variables/css-variables-object-to-string"
+import { ModalsProvider } from "@mantine/modals"
+import { Notifications } from "@mantine/notifications"
+import React, { useEffect, useMemo } from "react"
+
+import { toKebabCase } from "@/lib"
+import { theme as themeObject, vars } from "@/lib/theme"
+import useLayoutStore from "@/store/LayoutStore"
+
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	/**
@@ -41,7 +43,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		/* eslint-disable no-console */
-		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+		if(process.env.NODE_ENV && process.env.NODE_ENV === "development") {
 			console.log({ theme })
 			console.log({ vars })
 

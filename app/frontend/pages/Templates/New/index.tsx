@@ -1,7 +1,9 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import TemplateForm from '../Form'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import TemplateForm from "../Form"
 
 interface NewTemplateProps {
 	template: Schema.PresentationTemplatesFormData
@@ -11,7 +13,7 @@ interface NewTemplateProps {
 // @path: /circles/:circle_slug/presentation_templates/new
 // @route: newCirclePresentationTemplate
 const NewTemplate = ({ template, circle }: NewTemplateProps) => {
-	const title = 'New Template'
+	const title = "New Template"
 
 	return (
 		<Page title={ title }>

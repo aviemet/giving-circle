@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexTableTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import PresentationVotesTable from '../Table'
-import { Page } from '@/components'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Page } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import PresentationVotesTable from "../Table"
 
 interface PresentationVoteIndexProps {
 	presentation_votes: Schema.PresentationVotesIndex[]
@@ -14,7 +16,7 @@ interface PresentationVoteIndexProps {
 // @path: /:circle_slug/presentations/:presentation_slug/presentation_votes
 // @route: presentationVotes
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
-	const { params } = usePageProps<'circleThemePresentationVotes'>()
+	const { params } = usePageProps<"circleThemePresentationVotes">()
 
 	return (
 		<Page

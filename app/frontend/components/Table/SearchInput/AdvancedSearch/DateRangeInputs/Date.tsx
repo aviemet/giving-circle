@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
-import { DateInput, type DateInputValue } from '@/components/Inputs'
-import { type AdvancedInputProps } from '.'
+import React, { useEffect } from "react"
+
+import { DateInput, type DateInputValue } from "@/components/Inputs"
+
+import { type AdvancedInputProps } from "."
 
 const Date = ({
 	advancedSearch,
@@ -25,7 +27,7 @@ const Date = ({
 	const type = values.get(`${name}[type]`)
 
 	useEffect(() => {
-		if(type !== 'range') {
+		if(type !== "range") {
 			setInputValue(`${name}[end]`, null)
 		}
 	}, [type, name, setInputValue])
@@ -35,7 +37,7 @@ const Date = ({
 			label="Date"
 			{ ...{ mb, wrapperProps, value } }
 			onChange={ handleChange }
-			type={ type === 'range' ? 'range' : 'default' }
+			type={ type === "range" ? "range" : "default" }
 		/>
 	)
 }

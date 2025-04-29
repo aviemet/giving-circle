@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo } from "react"
 
 const useCheckboxState = (length: number, selected: number) => {
 	return useMemo(() => {

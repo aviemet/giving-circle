@@ -1,4 +1,5 @@
-import { create } from 'zustand'
+import { create } from "zustand"
+
 import {
 	type ColorSlice,
 	type MenuSlice,
@@ -6,13 +7,13 @@ import {
 	type TableSlice,
 	type HeaderSlice,
 	type ContentSlice,
-} from './slices'
-import { createColorSlice } from './slices/colorSlice'
-import { createMenuSlice } from './slices/menuSlice'
-import { createSidebarSlice } from './slices/sidebarSlice'
-import { createTableSlice } from './slices/tableSlice'
-import { createHeaderSlice } from './slices/headerSlice'
-import { createContentSlice } from './slices/contentSlice'
+} from "./slices"
+import { createColorSlice } from "./slices/colorSlice"
+import { createContentSlice } from "./slices/contentSlice"
+import { createHeaderSlice } from "./slices/headerSlice"
+import { createMenuSlice } from "./slices/menuSlice"
+import { createSidebarSlice } from "./slices/sidebarSlice"
+import { createTableSlice } from "./slices/tableSlice"
 
 type LayoutStoreSlices = ColorSlice & SidebarSlice & TableSlice & HeaderSlice & MenuSlice & ContentSlice
 

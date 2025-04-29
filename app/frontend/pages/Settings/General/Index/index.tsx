@@ -1,6 +1,7 @@
-import React from 'react'
-import SettingsLayout from '@/layouts/AppLayout/SettingsLayout'
-import { Title } from '@/components'
+import React from "react"
+
+import { Title } from "@/components"
+import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
 
 // @path: /settings/general
 // @route: settingsGeneral

@@ -1,6 +1,7 @@
-import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Group, Title, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
 
 interface ShowTemplateProps {
 	template: Schema.PresentationTemplatesShow
@@ -9,7 +10,7 @@ interface ShowTemplateProps {
 // @path: /circles/:circle_slug/presentation_templates/:slug
 // @route: circlePresentationTemplate
 const ShowTemplate = ({ template }: ShowTemplateProps) => {
-	const title =  'Template'
+	const title = "Template"
 
 	return (
 		<Page title={ title }>

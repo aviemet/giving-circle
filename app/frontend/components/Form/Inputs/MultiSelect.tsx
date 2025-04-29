@@ -1,17 +1,20 @@
-import React from 'react'
-import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
-import { ConditionalWrapper } from '@/components'
-import Field from '../components/Field'
-import MultiSelect, { type MultiSelectInputProps } from '@/components/Inputs/MultiSelect'
-import { type ComboboxData } from '@mantine/core'
-import { type InputConflicts, type BaseFormInputProps } from '.'
-import { exclude, isUnset } from '@/lib'
-import { coerceArray } from '../../../lib/collections'
+import { type ComboboxData } from "@mantine/core"
+import React from "react"
+import { NestedObject, UseFormProps, useInertiaInput } from "use-inertia-form"
 
-type OmittedDropdownTypes = InputConflicts | 'onDropdownOpen' | 'onDropdownClose' | 'onOptionSubmit' | 'onClear'
+import { ConditionalWrapper } from "@/components"
+import MultiSelect, { type MultiSelectInputProps } from "@/components/Inputs/MultiSelect"
+import { exclude, isUnset } from "@/lib"
+
+import { coerceArray } from "../../../lib/collections"
+import Field from "../components/Field"
+
+import { type InputConflicts, type BaseFormInputProps } from "."
+
+type OmittedDropdownTypes = InputConflicts | "onDropdownOpen" | "onDropdownClose" | "onOptionSubmit" | "onClear"
 export interface FormMultiSelectProps<TForm extends NestedObject = NestedObject>
 	extends Omit<MultiSelectInputProps, OmittedDropdownTypes>,
-	Omit<BaseFormInputProps<string[], TForm>, 'onChange' | 'onBlur' | 'onFocus'> {
+	Omit<BaseFormInputProps<string[], TForm>, "onChange" | "onBlur" | "onFocus"> {
 
 	value?: string[]
 	onChange?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
@@ -115,7 +118,7 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 				onDropdownClose={ handleDropdownClose }
 				onOptionSubmit={ handleOptionSubmit }
 				wrapper={ false }
-				{ ...exclude(props, 'value') }
+				{ ...exclude(props, "value") }
 			/>
 		</ConditionalWrapper>
 	)

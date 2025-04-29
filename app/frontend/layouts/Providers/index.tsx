@@ -1,13 +1,14 @@
-import React from 'react'
-import IconProvider from './IconProvider'
-import UiFrameworkProvider from './UiFrameworkProvider'
+import React from "react"
 
-import './reset.css'
-import '@mantine/core/styles.css'
-import '@mantine/tiptap/styles.css'
-import '@mantine/dropzone/styles.css'
-import './global.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import IconProvider from "./IconProvider"
+import UiFrameworkProvider from "./UiFrameworkProvider"
+
+import "./reset.css"
+import "@mantine/core/styles.css"
+import "@mantine/tiptap/styles.css"
+import "@mantine/dropzone/styles.css"
+import "./global.css"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 interface ProviderProps {
 	children?: React.ReactNode

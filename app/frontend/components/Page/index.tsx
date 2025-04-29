@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
-import { Head } from '@inertiajs/react'
-import Breadcrumbs, { type Breadcrumb } from '@/components/Breadcrumbs'
-import useLayoutStore from '@/store/LayoutStore'
-import { useInit } from '@/lib/hooks'
+import { Head } from "@inertiajs/react"
+import React, { useEffect } from "react"
+
+import Breadcrumbs, { type Breadcrumb } from "@/components/Breadcrumbs"
+import { useInit } from "@/lib/hooks"
+import useLayoutStore from "@/store/LayoutStore"
 
 export interface PageProps {
 	children?: React.ReactNode

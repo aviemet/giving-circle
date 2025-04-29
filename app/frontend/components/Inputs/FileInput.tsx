@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react'
-import { FileInput, type FileInputProps as MantineFileInputProps } from '@mantine/core'
+import { FileInput, type FileInputProps as MantineFileInputProps } from "@mantine/core"
+import React, { forwardRef } from "react"
 
 const FileInputComponent = forwardRef<HTMLButtonElement, MantineFileInputProps>((
 	{

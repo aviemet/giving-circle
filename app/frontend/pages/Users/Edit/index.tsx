@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 // @path: /users/:id/edit
 // @route: editUser

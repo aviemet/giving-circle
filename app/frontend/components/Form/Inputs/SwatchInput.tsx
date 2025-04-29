@@ -1,9 +1,12 @@
-import React from 'react'
-import { NestedObject, useInertiaInput } from 'use-inertia-form'
-import SwatchInput, { type SwatchInputProps } from '@/components/Inputs/SwatchInput'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import Field from '../components/Field'
-import { type InputConflicts, type BaseFormInputProps } from '.'
+import React from "react"
+import { NestedObject, useInertiaInput } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import SwatchInput, { type SwatchInputProps } from "@/components/Inputs/SwatchInput"
+
+import Field from "../components/Field"
+
+import { type InputConflicts, type BaseFormInputProps } from "."
 
 interface FormSwatchInputProps<TForm extends NestedObject = NestedObject>
 	extends

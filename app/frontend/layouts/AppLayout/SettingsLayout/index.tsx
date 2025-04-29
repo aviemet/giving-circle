@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Page, Box, Section, Tabs, Paper } from '@/components'
-import { router } from '@inertiajs/react'
-import { useViewportSize, useLocation, useTheme } from '@/lib/hooks'
-import { px } from '@/lib'
+import { router } from "@inertiajs/react"
+import React, { useEffect, useState } from "react"
+
+import { Page, Box, Section, Tabs, Paper } from "@/components"
+import { px } from "@/lib"
+import { useViewportSize, useLocation, useTheme } from "@/lib/hooks"
 
 interface SettingsLayoutProps {
 	children: React.ReactNode
@@ -15,15 +16,15 @@ type TTab = {
 }
 
 const tabs: TTab[] = [
-	{ name: 'general', label: 'General' },
-	{ name: 'appearance', label: 'Appearance' },
-	{ name: 'mail', label: 'Mail' },
-	{ name: 'notifications', label: 'Notifications' },
-	{ name: 'integrations', label: 'Integrations' },
+	{ name: "general", label: "General" },
+	{ name: "appearance", label: "Appearance" },
+	{ name: "mail", label: "Mail" },
+	{ name: "notifications", label: "Notifications" },
+	{ name: "integrations", label: "Integrations" },
 ]
 
 const SettingsLayout = ({ children }: SettingsLayoutProps) => {
-	const title = 'Settings'
+	const title = "Settings"
 	const { width } = useViewportSize()
 	const theme = useTheme()
 	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < px(theme.breakpoints.sm))
@@ -43,17 +44,17 @@ const SettingsLayout = ({ children }: SettingsLayoutProps) => {
 		<Page title={ title }>
 			<Section fullHeight>
 				<Tabs
-					orientation={ mobileFormat ? 'horizontal' : 'vertical' }
+					orientation={ mobileFormat ? "horizontal" : "vertical" }
 					variant="pills"
 					defaultValue={ paths[1] }
 					onChange={ handleTabChange }
 				>
-					<Paper withBorder p='xs' shadow="sm">
+					<Paper withBorder p="xs" shadow="sm">
 						<Tabs.List
 							style={ mobileFormat
 								? {
-									flexWrap: 'nowrap',
-									overflow: 'auto',
+									flexWrap: "nowrap",
+									overflow: "auto",
 								}
 								: {} }
 						>
@@ -66,8 +67,8 @@ const SettingsLayout = ({ children }: SettingsLayoutProps) => {
 					</Paper>
 
 					{ tabs.map(tab => (
-						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" style={ { position: 'relative' } }>
-							<Box p='lg' style={ { height: '100%' } }>
+						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" style={ { position: "relative" } }>
+							<Box p="lg" style={ { height: "100%" } }>
 								{ children }
 							</Box>
 						</Tabs.Panel>

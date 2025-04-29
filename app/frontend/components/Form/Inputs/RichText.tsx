@@ -1,10 +1,13 @@
-import React from 'react'
-import Field from '../components/Field'
-import RichTextInput, { type RichTextInputProps } from '@/components/Inputs/RichText'
-import cx from 'clsx'
-import { NestedObject, useInertiaInput } from 'use-inertia-form'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import { type InputConflicts, type BaseFormInputProps } from '.'
+import cx from "clsx"
+import React from "react"
+import { NestedObject, useInertiaInput } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import RichTextInput, { type RichTextInputProps } from "@/components/Inputs/RichText"
+
+import Field from "../components/Field"
+
+import { type InputConflicts, type BaseFormInputProps } from "."
 
 interface FormRichTextInputProps<TForm extends NestedObject = NestedObject>
 	extends

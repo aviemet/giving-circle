@@ -1,5 +1,6 @@
-import React from 'react'
-import { Box, Group, Paper, Text } from '@/components'
+import React from "react"
+
+import { Box, Group, Paper, Text } from "@/components"
 
 interface StatTileProps {
 	heading: string

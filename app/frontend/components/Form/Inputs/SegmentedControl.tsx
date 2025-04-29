@@ -1,9 +1,12 @@
-import React from 'react'
-import SegmentedControl, { type SegmentedControlProps } from '@/components/Inputs/SegmentedControl'
-import Field from '../components/Field'
-import { NestedObject, useInertiaInput } from 'use-inertia-form'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import { type InputConflicts, type BaseFormInputProps } from '.'
+import React from "react"
+import { NestedObject, useInertiaInput } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import SegmentedControl, { type SegmentedControlProps } from "@/components/Inputs/SegmentedControl"
+
+import Field from "../components/Field"
+
+import { type InputConflicts, type BaseFormInputProps } from "."
 
 interface FormSegmentedControlProps<TForm extends NestedObject = NestedObject>
 	extends

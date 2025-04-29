@@ -1,6 +1,6 @@
-import { StateCreator } from 'zustand'
+import { StateCreator } from "zustand"
 
-const DEFAULT_SITE_TITLE = 'Giving Circle'
+const DEFAULT_SITE_TITLE = "Giving Circle"
 
 export interface HeaderSlice {
 	defaultSiteTitle: string
@@ -11,7 +11,7 @@ export interface HeaderSlice {
 	setHeaderPinned: (pinned: boolean) => void
 }
 
-export const createHeaderSlice: StateCreator<HeaderSlice, [], [],HeaderSlice> = (set) => ({
+export const createHeaderSlice: StateCreator<HeaderSlice, [], [], HeaderSlice> = (set) => ({
 	defaultSiteTitle: DEFAULT_SITE_TITLE,
 	siteTitle: DEFAULT_SITE_TITLE,
 	setSiteTitle: siteTitle => set(() => ({ siteTitle })),

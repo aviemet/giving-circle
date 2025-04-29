@@ -1,8 +1,9 @@
-import React from 'react'
-import { Menu, type MenuProps } from '@mantine/core'
-import MenuItem from './MenuItem'
-import MenuLink from './MenuLink'
-import MenuTarget from './MenuTarget'
+import { Menu, type MenuProps } from "@mantine/core"
+import React from "react"
+
+import MenuItem from "./MenuItem"
+import MenuLink from "./MenuLink"
+import MenuTarget from "./MenuTarget"
 
 const MenuComponent = ({ children, ...props }: MenuProps) => {
 	return (

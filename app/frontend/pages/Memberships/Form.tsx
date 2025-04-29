@@ -1,7 +1,8 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
 
 type MembershipFormData = {
 	membership: Schema.MembershipsFormData
@@ -14,7 +15,7 @@ export interface MembershipFormProps {
 	membership: Schema.MembershipsFormData
 }
 
-const MembershipForm = ({ method = 'post', membership, ...props }: MembershipFormProps) => {
+const MembershipForm = ({ method = "post", membership, ...props }: MembershipFormProps) => {
 	return (
 		<Form
 			model="membership"
@@ -37,7 +38,7 @@ const MembershipForm = ({ method = 'post', membership, ...props }: MembershipFor
 					<TextInput name="name" label="Name" />
 				</Grid.Col>
 				<Grid.Col>
-					<Submit>{ membership.id ? 'Update' : 'Create' } Membership</Submit>
+					<Submit>{ membership.id ? "Update" : "Create" } Membership</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Group, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesShow
@@ -11,12 +12,12 @@ interface ShowPresentationSlideProps {
 // @route: themePresentationsSlide
 const ShowPresentationSlide = ({ presentation_slide }: ShowPresentationSlideProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title =  'PresentationSlide'
+	const { params } = usePageProps<"">()
+	const title = "PresentationSlide"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Slide', href: Routes.presentationSlides() },
+			{ title: "Slide", href: Routes.presentationSlides() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

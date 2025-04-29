@@ -1,6 +1,7 @@
-import { Page } from '@/components'
-import { usePageProps } from '@/lib/hooks'
-import React from 'react'
+import React from "react"
+
+import { Page } from "@/components"
+import { usePageProps } from "@/lib/hooks"
 
 interface PresentationProps {
 	presentation: Schema.PresentationsShow
@@ -9,7 +10,7 @@ interface PresentationProps {
 // @path: /presentations/:presentation_slug/show
 // @route: activePresentationShow
 const PresentationDashboard = ({ presentation }: PresentationProps) => {
-	const { params } = usePageProps<'activePresentationShow'>()
+	const { params } = usePageProps<"activePresentationShow">()
 
 	return (
 		<Page

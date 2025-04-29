@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexTableTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import PresentationsTable from '../Table'
-import { usePageProps } from '@/lib/hooks'
-import { Page } from '@/components'
+import React from "react"
+
+import { Page } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import PresentationsTable from "../Table"
 
 interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
@@ -16,7 +18,7 @@ interface PresentationIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations
 // @route: themePresentations
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
-	const { params } = usePageProps<'themePresentations'>()
+	const { params } = usePageProps<"themePresentations">()
 
 	return (
 		<Page

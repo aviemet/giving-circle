@@ -1,8 +1,10 @@
-import React from 'react'
-import { modals } from '@mantine/modals'
-import { Form } from '@/components/Form'
-import { Routes } from '@/lib'
-import NewPresentationTemplateForm, { NewTemplateFormData } from './NewPresentationTemplateForm'
+import { modals } from "@mantine/modals"
+import React from "react"
+
+import { Form } from "@/components/Form"
+import { Routes } from "@/lib"
+
+import NewPresentationTemplateForm, { NewTemplateFormData } from "./NewPresentationTemplateForm"
 
 interface ClickableElementProps {
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -17,7 +19,7 @@ const NewTemplateModal = ({ children, circle }: NewTemplateModalProps) => {
 	const handleOpenModal = (originalOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void) => (event: React.MouseEvent<HTMLButtonElement>) => {
 
 		modals.open({
-			title: 'Create New Presentation Template',
+			title: "Create New Presentation Template",
 			children:
 			<Form<NewTemplateFormData>
 				model="presentation_template"

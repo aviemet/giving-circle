@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { IndexTableTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import { Page } from '@/components'
-import ThemeMembershipsTable from '../Table'
+import React from "react"
+
+import { Page } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import ThemeMembershipsTable from "../Table"
 
 interface ThemeMemberIndexProps {
 	memberships: Schema.MembershipsIndex[]
@@ -16,7 +18,7 @@ interface ThemeMemberIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/memberships
 // @route: themeMemberships
 const ThemeMembersIndex = ({ memberships, pagination, theme, circle }: ThemeMemberIndexProps) => {
-	const { params } = usePageProps<'themeMemberships'>()
+	const { params } = usePageProps<"themeMemberships">()
 
 	return (
 		<Page title="Memberships">
@@ -25,14 +27,14 @@ const ThemeMembersIndex = ({ memberships, pagination, theme, circle }: ThemeMemb
 				rows={ memberships }
 				pagination={ pagination }
 				contextMenu={ {
-					label: 'Add Memberships to Theme',
+					label: "Add Memberships to Theme",
 					options: [
 						{
-							label: 'Add New Membership To Theme',
+							label: "Add New Membership To Theme",
 							href: Routes.newThemeMembership(params.circle_slug, params.theme_slug), icon: <NewIcon />,
 						},
 						{
-							label: 'Add Existing Member To Theme',
+							label: "Add Existing Member To Theme",
 							href: Routes.newThemeMembership(params.circle_slug, params.theme_slug), icon: <NewIcon />,
 						},
 					// {

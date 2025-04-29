@@ -1,6 +1,7 @@
-import { Grid } from '@/components'
-import { Form, TextInput, Submit, RichText } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit, RichText } from "@/components/Form"
 
 type TOrgFormData = {
 	org: Schema.OrgsFormData
@@ -13,7 +14,7 @@ export interface OrgFormProps {
 	org: Schema.OrgsFormData
 }
 
-const OrgForm = ({ method = 'post', org, ...props }: OrgFormProps) => {
+const OrgForm = ({ method = "post", org, ...props }: OrgFormProps) => {
 	return (
 		<Form
 			model="org"
@@ -31,7 +32,7 @@ const OrgForm = ({ method = 'post', org, ...props }: OrgFormProps) => {
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ org.id ? 'Update' : 'Create' } Org</Submit>
+					<Submit>{ org.id ? "Update" : "Create" } Org</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

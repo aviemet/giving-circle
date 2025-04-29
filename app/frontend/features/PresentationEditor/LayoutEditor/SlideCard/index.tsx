@@ -1,12 +1,13 @@
-import React from 'react'
-import { ActionIcon, Card, Image, Text, Center } from '@/components'
-import { CrossIcon } from '@/components/Icons'
-import { TextInput } from '@/components/Form'
-import { modals } from '@mantine/modals'
-import { useForm } from 'use-inertia-form'
+import { modals } from "@mantine/modals"
+import cx from "clsx"
+import React from "react"
+import { useForm } from "use-inertia-form"
 
-import cx from 'clsx'
-import * as classes from './SlideCard.css'
+import { ActionIcon, Card, Image, Text, Center } from "@/components"
+import { TextInput } from "@/components/Form"
+import { CrossIcon } from "@/components/Icons"
+
+import * as classes from "./SlideCard.css"
 
 interface SlideCardProps {
 	path: string
@@ -18,11 +19,11 @@ const SlideCard = ({ path, removeInput }: SlideCardProps) => {
 
 	const handleRemoveElement = () => {
 		modals.openConfirmModal({
-			title: 'Remove this slide?',
+			title: "Remove this slide?",
 			children: (
 				<Text>Click confirm to remove this slide from this presentation template.</Text>
 			),
-			labels: { confirm: 'Confirm', cancel: 'Cancel' },
+			labels: { confirm: "Confirm", cancel: "Cancel" },
 			onConfirm: () => removeInput(),
 		})
 	}
@@ -39,7 +40,7 @@ const SlideCard = ({ path, removeInput }: SlideCardProps) => {
 				<ActionIcon
 					variant="transparent"
 					color="white"
-					className={ cx('remove-input-button') }
+					className={ cx("remove-input-button") }
 					onClick={ handleRemoveElement }
 				>
 					<CrossIcon />

@@ -1,5 +1,6 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
 
 export const breadcrumbs = css`
 	ol li {
@@ -9,6 +10,6 @@ export const breadcrumbs = css`
 
 export const separator = css`
 	display: inline-block;
-	margin-left: ${vars.spacing.sm};
-	margin-right: ${vars.spacing.sm};
+	margin-left: ${ vars.spacing.sm };
+	margin-right: ${ vars.spacing.sm };
 `

@@ -1,9 +1,10 @@
-import React from 'react'
-import { BoxProps } from '@mantine/core'
-import { Box, Link, Portal } from '@/components'
+import { BoxProps } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
-import * as classes from './Breadcrumbs.css'
+import { Box, Link, Portal } from "@/components"
+
+import * as classes from "./Breadcrumbs.css"
 
 export type Breadcrumb = {
 	title: string
@@ -15,12 +16,12 @@ export const breadcrumbLinks = (links: Breadcrumb[]) => links.map((link, i) => l
 	:	<React.Fragment key={ i }>{ link.title }</React.Fragment>
 )
 
-interface BreadcrumbsProps extends Omit<BoxProps, 'children'> {
+interface BreadcrumbsProps extends Omit<BoxProps, "children"> {
 	crumbs?: Breadcrumb[]
 	separator?: string
 }
 
-const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: BreadcrumbsProps) => {
 	if(!crumbs) return <></>
 
 	return (
@@ -42,7 +43,7 @@ const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: Breadcrum
 										<Link
 											external={ false }
 											href={ crumb.href }
-											aria-current={ isLastCrumb ? 'location' : null }
+											aria-current={ isLastCrumb ? "location" : null }
 										>
 											{ crumb.title }
 										</Link>

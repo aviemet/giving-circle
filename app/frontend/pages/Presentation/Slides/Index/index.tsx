@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { Menu, Page, Title } from '@/components'
-import { NewIcon } from '@/components/Icons'
-import { IndexTableTemplate } from '@/features'
-import PresentationSlidesTable from '../Table'
+import React from "react"
+
+import { Menu, Page, Title } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import PresentationSlidesTable from "../Table"
 
 interface PresentationSlideIndexProps {
 	presentation_slides: Schema.PresentationSlidesIndex[]
@@ -15,8 +17,8 @@ interface PresentationSlideIndexProps {
 // @route: themePresentationsSlides
 const PresentationSlidesIndex = ({ presentation_slides, pagination }: PresentationSlideIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title = 'Slide'
+	const { params } = usePageProps<"">()
+	const title = "Slide"
 
 	return (
 		<Page
@@ -38,7 +40,7 @@ const PresentationSlidesIndex = ({ presentation_slides, pagination }: Presentati
 				contextMenu={
 					[
 						{
-							label: 'New Slide',
+							label: "New Slide",
 							href: Routes.newPresentationSlide(),
 							icon: NewIcon,
 							deleteRoute: Routes.presentationSlides(),

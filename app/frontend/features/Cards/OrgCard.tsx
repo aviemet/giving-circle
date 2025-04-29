@@ -1,7 +1,8 @@
-import React from 'react'
-import { rem } from '@/lib'
-import { ActionIcon, Card, Group, Image, Menu, Money, Text } from '@/components'
-import { DotsIcon, EditIcon, TrashIcon } from '@/components/Icons'
+import React from "react"
+
+import { ActionIcon, Card, Group, Image, Menu, Money, Text } from "@/components"
+import { DotsIcon, EditIcon, TrashIcon } from "@/components/Icons"
+import { rem } from "@/lib"
 
 interface OrgCardProps {
 	org: Schema.OrgsPersisted | Schema.ThemesOrgsShow
@@ -55,5 +56,5 @@ const OrgCard = ({ org }: OrgCardProps) => {
 export default OrgCard
 
 function isThemesOrgsShow(org: Schema.OrgsPersisted | Schema.ThemesOrgsShow): org is Schema.ThemesOrgsShow {
-	return 'ask' in org
+	return "ask" in org
 }

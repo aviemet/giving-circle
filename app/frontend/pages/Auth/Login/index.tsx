@@ -1,11 +1,12 @@
-import React from 'react'
-import { Form,TextInput, PasswordInput, Checkbox, Submit } from '@/components/Form'
-import { Title, Link,Box, Paper, SimpleGrid, Grid, Flex } from '@/components'
-import { Routes } from '@/lib'
-import { type UseFormProps } from 'use-inertia-form'
+import cx from "clsx"
+import React from "react"
+import { type UseFormProps } from "use-inertia-form"
 
-import cx from 'clsx'
-import * as classes from './Login.css'
+import { Title, Link, Box, Paper, SimpleGrid, Grid, Flex } from "@/components"
+import { Form, TextInput, PasswordInput, Checkbox, Submit } from "@/components/Form"
+import { Routes } from "@/lib"
+
+import * as classes from "./Login.css"
 
 type LoginFormData = {
 	user: {
@@ -17,8 +18,8 @@ type LoginFormData = {
 
 const defaultData = {
 	user: {
-		email: '',
-		password: '',
+		email: "",
+		password: "",
 		remember_me: false,
 	},
 }
@@ -28,7 +29,7 @@ const defaultData = {
 const Login = () => {
 
 	const handleSubmit = ({ data }: UseFormProps<LoginFormData>) => {
-		if(data.user.email === '' || data.user.password === '') {
+		if(data.user.email === "" || data.user.password === "") {
 			return false
 		}
 	}
@@ -36,7 +37,7 @@ const Login = () => {
 	return (
 		<SimpleGrid cols={ { sm: 1, md: 2 } } spacing={ 0 } className={ cx(classes.authLayout) }>
 			<Box id="auth-layout-left">
-				<Paper shadow="lg" radius="lg" p="xl"  withBorder>
+				<Paper shadow="lg" radius="lg" p="xl" withBorder>
 
 					<Box mb="md">
 						<Title>Giving Circle</Title>

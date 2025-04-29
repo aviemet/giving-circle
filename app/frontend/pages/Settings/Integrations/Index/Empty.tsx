@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link, Text } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Link, Text } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const Empty = () => {
 	const { auth: { user } } = usePageProps()

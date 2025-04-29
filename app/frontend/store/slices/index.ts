@@ -1,6 +1,6 @@
-export { type ColorSlice } from './colorSlice'
-export { type MenuSlice } from './menuSlice'
-export { type SidebarSlice } from './sidebarSlice'
-export { type TableSlice } from './tableSlice'
-export { type HeaderSlice } from './headerSlice'
-export { type ContentSlice } from './contentSlice'
+export { type ColorSlice } from "./colorSlice"
+export { type MenuSlice } from "./menuSlice"
+export { type SidebarSlice } from "./sidebarSlice"
+export { type TableSlice } from "./tableSlice"
+export { type HeaderSlice } from "./headerSlice"
+export { type ContentSlice } from "./contentSlice"

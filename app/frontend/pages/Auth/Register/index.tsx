@@ -1,8 +1,9 @@
-import React from 'react'
-import { Form, TextInput, PasswordInput, Submit, Field } from '@/components/Form'
-import { Routes } from '@/lib'
-import { Box, Title, Link } from '@/components'
-import { type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Box, Title, Link } from "@/components"
+import { Form, TextInput, PasswordInput, Submit, Field } from "@/components/Form"
+import { Routes } from "@/lib"
 
 type TRegisterFormData = {
 	user: {
@@ -20,17 +21,17 @@ const Register = () => {
 	}
 
 	const handlePasswordChange = (value: string | number, { data, getError, clearErrors }: UseFormProps<TRegisterFormData>) => {
-		if(getError('user.password') || getError('user.password_confirmation')) {
+		if(getError("user.password") || getError("user.password_confirmation")) {
 			if(data.user.password === data.user.password_confirmation) {
-				clearErrors('user.password')
-				clearErrors('user.password_confirmation')
+				clearErrors("user.password")
+				clearErrors("user.password_confirmation")
 			}
 		}
 	}
 
 	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<TRegisterFormData>) => {
 		if(data.user.password !== data.user.password_confirmation) {
-			setError('user.password_confirmation', 'Passwords must match')
+			setError("user.password_confirmation", "Passwords must match")
 			return false
 		}
 	}
@@ -43,9 +44,9 @@ const Register = () => {
 		<Form
 			data={ {
 				user: {
-					email: '',
-					password: '',
-					password_confirmation: '',
+					email: "",
+					password: "",
+					password_confirmation: "",
 				},
 			} }
 			model="user"

@@ -1,12 +1,14 @@
-import React from 'react'
-import { Link } from '@/components'
-import { useTableContext } from '../TableContext'
-import { Group, Pagination, type PaginationProps } from '@mantine/core'
-import LimitSelect from './LimitSelect'
-import cx from 'clsx'
-import * as classes from '../Table.css'
+import { Group, Pagination, type PaginationProps } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 
-interface PaginationComponent extends Omit<PaginationProps, 'total'> {}
+import { Link } from "@/components"
+
+import { useTableContext } from "../TableContext"
+import LimitSelect from "./LimitSelect"
+import * as classes from "../Table.css"
+
+interface PaginationComponent extends Omit<PaginationProps, "total"> {}
 
 const PaginationComponent = ({
 	boundaries = 2,
@@ -47,8 +49,8 @@ const PaginationComponent = ({
 				{ ...props }
 			>
 				<Group gap={ 7 } justify="center"
-					style={ { 'a:hover': {
-						textDecoration: 'none',
+					style={ { "a:hover": {
+						textDecoration: "none",
 					} } }>
 					<Pagination.First
 						component={ Link }
@@ -88,9 +90,9 @@ const pageLink = (page: number) => {
 	const url = new URL(window.location.href)
 
 	if(page === 1) {
-		url.searchParams.delete('page')
+		url.searchParams.delete("page")
 	} else {
-		url.searchParams.set('page', String(page))
+		url.searchParams.set("page", String(page))
 	}
 
 	return `${url.pathname}${url.search}`

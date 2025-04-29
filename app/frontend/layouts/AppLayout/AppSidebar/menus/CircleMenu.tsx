@@ -1,18 +1,19 @@
-import React from 'react'
-import { Accordion, NavLink } from '@/components'
-import { Routes } from '@/lib'
-import { useInit, usePageProps } from '@/lib/hooks'
-import { useLayoutStore } from '@/store'
-import { isEmpty } from 'lodash'
+import { isEmpty } from "lodash"
+import React from "react"
+
+import { Accordion, NavLink } from "@/components"
+import { Routes } from "@/lib"
+import { useInit, usePageProps } from "@/lib/hooks"
+import { useLayoutStore } from "@/store"
 
 const CircleMenu = () => {
 	const { active_circle } = usePageProps()
 	const { menuKeys, toggleOpenMenu } = useLayoutStore()
 
 	useInit(() => {
-		toggleOpenMenu('circle', true)
-		toggleOpenMenu('theme', false)
-		toggleOpenMenu('presentation', false)
+		toggleOpenMenu("circle", true)
+		toggleOpenMenu("theme", false)
+		toggleOpenMenu("presentation", false)
 	})
 
 	if(isEmpty(active_circle)) return <></>

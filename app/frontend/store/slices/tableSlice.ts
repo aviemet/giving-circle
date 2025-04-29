@@ -1,4 +1,4 @@
-import { StateCreator } from 'zustand'
+import { StateCreator } from "zustand"
 
 export interface TableSlice {
 	defaults: {
@@ -6,7 +6,7 @@ export interface TableSlice {
 	}
 }
 
-export const createTableSlice: StateCreator<TableSlice, [], [],TableSlice> = (set) => ({
+export const createTableSlice: StateCreator<TableSlice, [], [], TableSlice> = (set) => ({
 	defaults: {
 		tableRecordsLimit: 25,
 	},

@@ -1,7 +1,8 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit, RichText } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit, RichText } from "@/components/Form"
 
 type ThemeOrgFormData = {
 	org: Schema.OrgsFormData
@@ -14,7 +15,7 @@ export interface ThemeOrgFormProps {
 	org: Schema.OrgsFormData
 }
 
-const ThemeOrgForm = ({ method = 'post', org, ...props }: ThemeOrgFormProps) => {
+const ThemeOrgForm = ({ method = "post", org, ...props }: ThemeOrgFormProps) => {
 	return (
 		<Form
 			model="org"
@@ -33,7 +34,7 @@ const ThemeOrgForm = ({ method = 'post', org, ...props }: ThemeOrgFormProps) => 
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ org.id ? 'Update' : 'Create' } Org</Submit>
+					<Submit>{ org.id ? "Update" : "Create" } Org</Submit>
 				</Grid.Col>
 
 			</Grid>

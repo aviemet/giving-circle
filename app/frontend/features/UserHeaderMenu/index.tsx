@@ -1,8 +1,9 @@
-import React from 'react'
-import { Link, Menu, ActionIcon, Avatar, Divider, Text } from '@/components'
-import { LogoutIcon, SettingsIcon } from '@/components/Icons'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Link, Menu, ActionIcon, Avatar, Divider, Text } from "@/components"
+import { LogoutIcon, SettingsIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const UserHeaderMenu = () => {
 	const props = usePageProps()
@@ -18,7 +19,7 @@ const UserHeaderMenu = () => {
 			<Menu.Dropdown>
 				{ props.auth.user.circles.length > 0 && <Text><Link href={ Routes.circles() }>Circles</Link></Text> }
 
-				{ props.auth.user.circles.slice(0,4).map(circle => (
+				{ props.auth.user.circles.slice(0, 4).map(circle => (
 					<Menu.Link
 						key={ circle.id }
 						href={ Routes.circle(circle.slug) }

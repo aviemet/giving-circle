@@ -1,6 +1,7 @@
-import React from 'react'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Form, TextInput, Submit } from "@/components/Form"
 
 type TPersonFormData = {
 	person: Schema.PeopleFormData
@@ -13,7 +14,7 @@ export interface PersonFormProps {
 	person: Schema.PeopleFormData
 }
 
-const PersonForm = ({ method = 'post', person, ...props }: PersonFormProps) => {
+const PersonForm = ({ method = "post", person, ...props }: PersonFormProps) => {
 	return (
 		<Form
 			model="person"
@@ -25,7 +26,7 @@ const PersonForm = ({ method = 'post', person, ...props }: PersonFormProps) => {
 			<TextInput name="last_name" label="Last_name" />
 			<TextInput name="middle_name" label="Middle_name" />
 			<TextInput name="active" label="Active" />
-			<Submit>{ person.id ? 'Update' : 'Create' } Person</Submit>
+			<Submit>{ person.id ? "Update" : "Create" } Person</Submit>
 		</Form>
 	)
 }

@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
-import { AppShell } from '@/components'
-import useLayoutStore from '@/store/LayoutStore'
-import { useHeadroom, useTheme } from '@/lib/hooks'
+import cx from "clsx"
+import React, { useEffect } from "react"
 
-import AppHeader from './AppHeader'
-import AppSidebar from './AppSidebar'
-import AppFooter from './AppFooter'
+import { AppShell } from "@/components"
+import { useHeadroom, useTheme } from "@/lib/hooks"
+import useLayoutStore from "@/store/LayoutStore"
 
-import cx from 'clsx'
-import * as classes from './AppLayout.css'
+import AppFooter from "./AppFooter"
+import AppHeader from "./AppHeader"
+import * as classes from "./AppLayout.css"
+import AppSidebar from "./AppSidebar"
+
 
 interface AppLayoutProps {
 	children: any
@@ -41,7 +42,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 			} }
 			navbar={ {
 				width: theme.other.navbar.width.open,
-				breakpoint: 'sm',
+				breakpoint: "sm",
 				collapsed: {
 					mobile: !sidebarOpen || !sidebarVisible,
 					desktop: !sidebarOpen || !sidebarVisible,

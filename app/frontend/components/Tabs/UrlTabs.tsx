@@ -1,10 +1,12 @@
-import React from 'react'
-import { Tabs } from '@mantine/core'
-import { type VisitOptions } from '@inertiajs/core'
-import { router } from '@inertiajs/react'
-import { TabsComponentProps } from '.'
-import { coerceArray } from '@/lib'
-import { useInit } from '@/lib/hooks'
+import { type VisitOptions } from "@inertiajs/core"
+import { router } from "@inertiajs/react"
+import { Tabs } from "@mantine/core"
+import React from "react"
+
+import { coerceArray } from "@/lib"
+import { useInit } from "@/lib/hooks"
+
+import { TabsComponentProps } from "."
 
 
 const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: TabsComponentProps) => {
@@ -27,9 +29,9 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 		if(!activeTab() && defaultValue) {
 			navigateTab(defaultValue, { replace: true })
 		} else {
-			document.addEventListener('inertia:navigate', function reloadActiveTab() {
+			document.addEventListener("inertia:navigate", function reloadActiveTab() {
 				navigateTab(activeTab())
-				document.removeEventListener('inertia:navigate', reloadActiveTab)
+				document.removeEventListener("inertia:navigate", reloadActiveTab)
 			})
 		}
 	})
@@ -59,5 +61,5 @@ export default UrlTabs
 const activeTab = () => {
 	const url = new URL(window.location.href)
 
-	return url.searchParams.get('tab')
+	return url.searchParams.get("tab")
 }

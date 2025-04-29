@@ -1,6 +1,7 @@
-import React from 'react'
-import { Burger, BurgerProps } from '@/components'
-import useLayoutStore from '@/store/LayoutStore'
+import React from "react"
+
+import { Burger, BurgerProps } from "@/components"
+import useLayoutStore from "@/store/LayoutStore"
 
 interface ToggleNavBarButton extends BurgerProps {}
 

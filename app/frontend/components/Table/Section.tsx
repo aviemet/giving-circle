@@ -1,6 +1,8 @@
-import React from 'react'
-import { Section } from '@/components'
-import * as classes from './Table.css'
+import React from "react"
+
+import { Section } from "@/components"
+
+import * as classes from "./Table.css"
 
 const TableSection = ({ children }: { children: React.ReactNode }) => {
 	return (

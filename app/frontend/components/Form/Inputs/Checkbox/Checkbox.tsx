@@ -1,10 +1,12 @@
-import React from 'react'
-import { useInertiaInput, type NestedObject } from 'use-inertia-form'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import { Field } from '@/components/Form'
-import CheckboxInput, { type CheckboxProps } from '@/components/Inputs/Checkbox'
-import FormCheckboxGroup from './Group'
-import { type InputConflicts, type BaseFormInputProps } from '..'
+import React from "react"
+import { useInertiaInput, type NestedObject } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import { Field } from "@/components/Form"
+import CheckboxInput, { type CheckboxProps } from "@/components/Inputs/Checkbox"
+
+import { type InputConflicts, type BaseFormInputProps } from ".."
+import FormCheckboxGroup from "./Group"
 
 export interface FormCheckboxProps<TForm extends NestedObject>
 	extends
@@ -71,7 +73,7 @@ const FormCheckboxComponent = <TForm extends NestedObject>(
 				onBlur={ handleBlur }
 				onFocus={ e => onFocus?.(e.target.checked, form) }
 				error={ error }
-				style={ [{ padding: '14px 10px' }, style] }
+				style={ [{ padding: "14px 10px" }, style] }
 				wrapper={ false }
 				{ ...props }
 			/>

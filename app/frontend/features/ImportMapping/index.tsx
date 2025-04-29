@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useImperativeHandle } from 'react'
-import { Table, Paper, Text, Box, Flex, Badge } from '@/components'
-import { Select } from '@/components/Inputs'
-import { useInit } from '@/lib/hooks'
+import cx from "clsx"
+import React, { useState, useEffect, useImperativeHandle } from "react"
 
-import cx from 'clsx'
+import { Table, Paper, Text, Box, Flex, Badge } from "@/components"
+import { Select } from "@/components/Inputs"
+import { useInit } from "@/lib/hooks"
+
 
 /**
  * CSV File Import Key
@@ -81,7 +82,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 		const map: Record<string, string> = {}
 		headings.forEach(heading => {
 			const inferredHeading = alternateForm(heading)
-			map[heading] = inferredHeading || ''
+			map[heading] = inferredHeading || ""
 		})
 		setHeadingMap(map)
 	})
@@ -93,7 +94,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 			const newState = { ...prevState }
 			for(const [csvHeading, dbField] of Object.entries(newState)) {
 				if(dbField === value) {
-					newState[csvHeading] = ''
+					newState[csvHeading] = ""
 				}
 			}
 			newState[heading] = value
@@ -117,7 +118,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 		const newRow: Record<keyof typeof headingMap, unknown> = {}
 
 		for(const [fromKey, toKey] of headingsArray) {
-			if(toKey === '') continue
+			if(toKey === "") continue
 
 			const headingMapForType = mapping.find(map => map.name === headingMap[fromKey])
 			const cellValue = headingMapForType?.type ?
@@ -183,17 +184,17 @@ const ImportMapping = <T extends Record<string, unknown>>({
 				<Table wrapper={ false }>
 					<Table.Head>
 						<Table.Row>
-							<Table.HeadCell className={ cx('align-bottom', 'center') }>#</Table.HeadCell>
+							<Table.HeadCell className={ cx("align-bottom", "center") }>#</Table.HeadCell>
 							<>{ headings.map((heading, i) => (
 								<Table.HeadCell key={ i }>
-									<Flex mb="xs" align="center" style={ { whiteSpace: 'nowrap' } }>
+									<Flex mb="xs" align="center" style={ { whiteSpace: "nowrap" } }>
 										<Text>Import</Text>
 										<Badge radius="xs" size="xs" mx="xs">{ heading }</Badge>
 										<Text>As</Text>
 									</Flex>
 									<Select
 										options={ [
-											{ value: '', label: 'Do Not Import' },
+											{ value: "", label: "Do Not Import" },
 											...mapping.map(h => ({ value: h.name, label: h.label })),
 										] }
 										value={ headingMap[heading] }
@@ -217,7 +218,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 						{ rows.map((org, i) => (
 							<React.Fragment key={ i }>
 								<Table.Row>
-									<Table.Cell className={ cx('align-middle') }>
+									<Table.Cell className={ cx("align-middle") }>
 										<Text m="xs">{ i }</Text>
 									</Table.Cell>
 									<>{ headings.map((heading, j) => {

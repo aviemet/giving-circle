@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Group, Title, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowPersonProps {
 	person: Schema.PeopleShow
@@ -10,12 +11,12 @@ interface ShowPersonProps {
 // @path: /people/:slug
 // @route: person
 const ShowPerson = ({ person }: ShowPersonProps) => {
-	const { params } = usePageProps<'person'>()
-	const title =  'Person'
+	const { params } = usePageProps<"person">()
+	const title = "Person"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Person', href: Routes.people() },
+			{ title: "Person", href: Routes.people() },
 			{ title },
 		] }>
 			<Section>

@@ -1,7 +1,8 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
 
 type TThemeFormData = {
 	theme: Schema.ThemesFormData
@@ -14,7 +15,7 @@ export interface ThemeFormProps {
 	theme: Schema.ThemesFormData
 }
 
-const ThemeForm = ({ method = 'post', theme, ...props }: ThemeFormProps) => {
+const ThemeForm = ({ method = "post", theme, ...props }: ThemeFormProps) => {
 	return (
 		<Form
 			model="theme"
@@ -28,7 +29,7 @@ const ThemeForm = ({ method = 'post', theme, ...props }: ThemeFormProps) => {
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ theme.id ? 'Update' : 'Create' } Theme</Submit>
+					<Submit>{ theme.id ? "Update" : "Create" } Theme</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

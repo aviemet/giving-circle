@@ -1,8 +1,9 @@
-import React from 'react'
-import { Grid, Text } from '@/components'
-import { Checkbox, DynamicInputs, Form, NumberInput, Radio, Submit, Switch, TextInput } from '@/components/Form'
-import { Routes } from '@/lib'
-import { useForm } from 'use-inertia-form'
+import React from "react"
+import { useForm } from "use-inertia-form"
+
+import { Grid, Text } from "@/components"
+import { Checkbox, DynamicInputs, Form, NumberInput, Radio, Submit, Switch, TextInput } from "@/components/Form"
+import { Routes } from "@/lib"
 
 export type NewTemplateFormData = {
 	presentation_template: {
@@ -64,8 +65,6 @@ const NewPresentationTemplateForm = ({}: NewPresentationTemplateFormProps) => {
 }
 
 export default NewPresentationTemplateForm
-
-
 
 
 /**

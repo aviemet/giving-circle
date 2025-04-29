@@ -1,9 +1,10 @@
-import React from 'react'
-import { Group, Menu, Page, Section, Title } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { CardContainer } from '@/features/Cards'
-import OrgCard from '@/features/Cards/OrgCard'
+import React from "react"
+
+import { Group, Menu, Page, Section, Title } from "@/components"
+import { CardContainer } from "@/features/Cards"
+import OrgCard from "@/features/Cards/OrgCard"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowThemeProps {
 	theme: Schema.ThemesShow
@@ -12,9 +13,9 @@ interface ShowThemeProps {
 // @path: /:circle_slug/themes/:theme_slug
 // @route: theme
 const ShowTheme = ({ theme }: ShowThemeProps) => {
-	const { params } = usePageProps<'theme'>()
+	const { params } = usePageProps<"theme">()
 
-	const title =  theme.name || 'Theme'
+	const title = theme.name || "Theme"
 
 	return (
 		<Page

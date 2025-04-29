@@ -1,9 +1,11 @@
-import React from 'react'
-import SettingsLayout from '@/layouts/AppLayout/SettingsLayout'
-import { Group, Title, Menu } from '@/components'
-import Empty from './Empty'
-import SmtpList from './SmtpList'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Group, Title, Menu } from "@/components"
+import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { Routes } from "@/lib"
+
+import Empty from "./Empty"
+import SmtpList from "./SmtpList"
 
 interface MailSettingsProps {
 	smtps: Schema.Smtp[]

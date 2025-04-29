@@ -1,6 +1,7 @@
-import React from 'react'
-import { Group, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Group, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
 
 interface IShowPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesShow
@@ -9,11 +10,11 @@ interface IShowPresentationSlideProps {
 // @path: /presentation_slides/:id
 // @route: presentationSlide
 const ShowPresentationSlide = ({ presentation_slide }: IShowPresentationSlideProps) => {
-	const title =  'PresentationSlide'
+	const title = "PresentationSlide"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Presentation Slide', href: Routes.presentationSlides() },
+			{ title: "Presentation Slide", href: Routes.presentationSlides() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

@@ -1,7 +1,9 @@
-import React from 'react'
-import { useTableContext } from './TableContext'
-import Table from '.'
-import cx from 'clsx'
+import cx from "clsx"
+import React from "react"
+
+import { useTableContext } from "./TableContext"
+
+import Table from "."
 
 interface RowIteratorProps {
 	render: (obj: any) => JSX.Element
@@ -17,7 +19,7 @@ const RowIterator = ({ render, emptyDataContent }: RowIteratorProps) => {
 		return (
 			<Table.Row>
 				<Table.Cell colSpan={ colSpan } align="center">
-					{ emptyDataContent || 'Nothing to display' }
+					{ emptyDataContent || "Nothing to display" }
 				</Table.Cell>
 			</Table.Row>
 		)

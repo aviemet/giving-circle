@@ -1,9 +1,11 @@
-import React from 'react'
-import { Accordion, NavLink } from '@/components'
-import { usePageProps } from '@/lib/hooks'
-import { useLayoutStore } from '@/store'
-import { CircleMenu, PresentationMenu, ThemeMenu } from './menus'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Accordion, NavLink } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+import { useLayoutStore } from "@/store"
+
+import { CircleMenu, PresentationMenu, ThemeMenu } from "./menus"
 
 export interface MenuProps {
 	circle: Schema.CirclesInertiaShare

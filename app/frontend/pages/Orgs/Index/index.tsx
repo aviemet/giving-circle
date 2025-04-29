@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexTableTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import OrgsTable from '../Table'
-import { usePageProps } from '@/lib/hooks'
-import { Page } from '@/components'
+import React from "react"
+
+import { Page } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import OrgsTable from "../Table"
 
 interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]
@@ -14,7 +16,7 @@ interface OrgIndexProps {
 // @path: /:circle_slug/orgs
 // @route: circleOrgs
 const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
-	const { params } = usePageProps<'circleOrgs'>()
+	const { params } = usePageProps<"circleOrgs">()
 
 	return (
 		<Page title="Orgs" >

@@ -1,7 +1,8 @@
-import React from 'react'
-import SettingsLayout from '@/layouts/AppLayout/SettingsLayout'
-import { Box, DangerousHtml, Title, Table } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Box, DangerousHtml, Title, Table } from "@/components"
+import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { Routes } from "@/lib"
 
 interface ShowMailSettingProps {
 	smtp: Schema.Smtp

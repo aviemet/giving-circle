@@ -1,10 +1,11 @@
-import React from 'react'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
 import {
 	Form,
 	TextInput,
 	Submit,
-} from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
 
 type UserFormData = {
 	user: Schema.UsersFormData
@@ -17,7 +18,7 @@ export interface UserFormProps {
 	user: Schema.UsersFormData
 }
 
-const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
+const UserForm = ({ to, method = "post", onSubmit, user }: UserFormProps) => {
 	return (
 		<Form
 			model="user"
@@ -28,12 +29,12 @@ const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
 		>
 			<TextInput name="first_name" label="First Name" required />
 
-			<TextInput name="last_name" label="Last Name" required  />
+			<TextInput name="last_name" label="Last Name" required />
 
-			<TextInput name="number" label="Number" required  />
+			<TextInput name="number" label="Number" required />
 
 			<Submit>
-				{ user.id ? 'Update' : 'Create' } User
+				{ user.id ? "Update" : "Create" } User
 			</Submit>
 		</Form>
 	)

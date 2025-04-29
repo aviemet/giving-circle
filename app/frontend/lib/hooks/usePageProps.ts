@@ -1,11 +1,13 @@
-import { usePage } from '@inertiajs/react'
-import { PageProps, Errors, ErrorBag } from '@inertiajs/core'
-import { FlashMessage } from '@/types'
-import { urlParams } from '../routes'
+import { PageProps, Errors, ErrorBag } from "@inertiajs/core"
+import { usePage } from "@inertiajs/react"
+
+import { FlashMessage } from "@/types"
+
+import { urlParams } from "../routes"
 
 type UrlParams = typeof urlParams;
 
-interface InitialInertiaShareProps extends Omit<PageProps, 'errors' | 'params' | 'flash'> {
+interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" | "flash"> {
 	auth: {
 		user: Schema.UsersInertiaShare
 	}
@@ -27,7 +29,7 @@ type ParamsObject<T extends readonly string[]> = {
 }
 
 interface UsePagePropsParams<T extends keyof UrlParams> extends InitialInertiaShareProps {
-	params: ParamsObject<UrlParams[T]['params']>
+	params: ParamsObject<UrlParams[T]["params"]>
 }
 
 const usePageProps = <T extends keyof UrlParams>(): UsePagePropsParams<T> => {

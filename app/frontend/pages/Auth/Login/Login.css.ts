@@ -1,5 +1,6 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
 
 export const authLayout = css`
 	height: 100%;
@@ -8,7 +9,7 @@ export const authLayout = css`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: ${vars.spacing.md};
+		padding: ${ vars.spacing.md };
 
 		.mantine-Paper-root {
 			height: fit-content;
@@ -16,9 +17,9 @@ export const authLayout = css`
 	}
 
 	#auth-layout-right {
-		background-color: ${vars.colors.primaryColors.filled};
+		background-color: ${ vars.colors.primaryColors.filled };
 		
-		@media(max-width: ${vars.breakpoints.md}) {
+		@media(max-width: ${ vars.breakpoints.md }) {
 			display: none;
 		}
 	}

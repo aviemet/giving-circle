@@ -1,8 +1,10 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import OrgsForm from '../Form'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import OrgsForm from "../Form"
 
 interface EditOrgProps {
 	org: Schema.OrgsEdit
@@ -11,8 +13,8 @@ interface EditOrgProps {
 // @path: /:circle_slug/orgs/:slug/edit
 // @route: editOrg
 const EditOrg = ({ org }: EditOrgProps) => {
-	const { params } = usePageProps<'editOrg'>()
-	const title = 'Edit Org'
+	const { params } = usePageProps<"editOrg">()
+	const title = "Edit Org"
 
 	return (
 		<Page title={ title }>
@@ -20,7 +22,7 @@ const EditOrg = ({ org }: EditOrgProps) => {
 				<Title>{ title }</Title>
 
 				<OrgsForm
-					method='put'
+					method="put"
 					to={ Routes.org(params.circle_slug, org.slug) }
 					org={ org }
 				/>

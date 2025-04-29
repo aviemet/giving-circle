@@ -1,7 +1,8 @@
-import React from 'react'
-import { Box, Group, Flex, Title } from '@/components'
-import { ToggleNavbarButton, UserHeaderMenu } from '@/features'
-import { useLayoutStore } from '@/store'
+import React from "react"
+
+import { Box, Group, Flex, Title } from "@/components"
+import { ToggleNavbarButton, UserHeaderMenu } from "@/features"
+import { useLayoutStore } from "@/store"
 
 const Header = () => {
 	const { sidebarOpen, siteTitle } = useLayoutStore()
@@ -10,7 +11,7 @@ const Header = () => {
 		<Group h="100%" px="md">
 			<Flex align="center" gap="md" style={ { flex: 1 } }>
 				<ToggleNavbarButton hidden={ sidebarOpen } />
-				{ typeof siteTitle === 'string' ?
+				{ typeof siteTitle === "string" ?
 					<Title>{ siteTitle }</Title>
 					:
 					siteTitle

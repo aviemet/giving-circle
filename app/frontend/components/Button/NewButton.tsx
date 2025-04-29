@@ -1,9 +1,11 @@
-import React from 'react'
-import { Link } from '@/components'
-import { NewIcon } from '@/components/Icons'
-import { LinkProps } from '../Link'
+import React from "react"
 
-interface NewButtonProps extends Omit<LinkProps, 'children'> {
+import { Link } from "@/components"
+import { NewIcon } from "@/components/Icons"
+
+import { LinkProps } from "../Link"
+
+interface NewButtonProps extends Omit<LinkProps, "children"> {
 	children?: string
 	label?: string
 }

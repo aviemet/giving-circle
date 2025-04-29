@@ -1,7 +1,8 @@
-import React from 'react'
-import { Tabs, type TabsProps } from '@mantine/core'
-import UrlTabs from './UrlTabs'
-import TabsList from './TabsList'
+import { Tabs, type TabsProps } from "@mantine/core"
+import React from "react"
+
+import TabsList from "./TabsList"
+import UrlTabs from "./UrlTabs"
 
 export interface TabsComponentProps extends TabsProps {
 	urlControlled?: boolean

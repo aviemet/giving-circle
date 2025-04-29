@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
-import { parseCsvFile } from '@/lib/papaParse'
-import { Button, Code, Dropzone, Page, Text, Title, type FileWithPath } from '@/components'
-import ImportMapping, { TriggerHandle, triggerRefAction } from '@/features/ImportMapping'
-import { useLayoutStore } from '@/store'
-import { headingsMap } from './headingsMap'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { router } from '@inertiajs/react'
+import { router } from "@inertiajs/react"
+import React, { useState, useEffect, useRef, useMemo } from "react"
+
+import { Button, Code, Dropzone, Page, Text, Title, type FileWithPath } from "@/components"
+import ImportMapping, { TriggerHandle, triggerRefAction } from "@/features/ImportMapping"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+import { parseCsvFile } from "@/lib/papaParse"
+import { useLayoutStore } from "@/store"
+
+import { headingsMap } from "./headingsMap"
 
 interface OrgsImportProps {
 	theme: Schema.ThemesInertiaShare
@@ -16,7 +18,7 @@ interface OrgsImportProps {
 // @path: /:circle_slug/themes/:theme_slug/orgs/import
 // @route: themeOrgsImport
 const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
-	const { params } = usePageProps<'themeOrgsImport'>()
+	const { params } = usePageProps<"themeOrgsImport">()
 
 	const { sidebarVisible, toggleSidebarOpen } = useLayoutStore()
 	const [displayImportTable, setDisplayImportTable] = useState(false)
@@ -34,7 +36,7 @@ const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
 			onComplete: (data, headers) => {
 				setPendingOrgs(data)
 
-				if(headers){
+				if(headers) {
 					setPendingHeadings(headers)
 				}
 

@@ -1,11 +1,14 @@
-import React, { forwardRef, useState } from 'react'
-import { TextInput, type TextInputProps as MantineTextInputProps } from '@mantine/core'
-import { type BaseInputProps } from '.'
-import Label from './Label'
-import InputWrapper from './InputWrapper'
-import { CrossIcon } from '../Icons'
-import { isUnset } from '@/lib'
-import { withInjectedProps } from './index'
+import { TextInput, type TextInputProps as MantineTextInputProps } from "@mantine/core"
+import React, { forwardRef, useState } from "react"
+
+import { isUnset } from "@/lib"
+
+import InputWrapper from "./InputWrapper"
+import Label from "./Label"
+import { CrossIcon } from "../Icons"
+
+import { type BaseInputProps } from "."
+import { withInjectedProps } from "./index"
 
 export interface TextInputProps extends MantineTextInputProps, BaseInputProps {
 	clearable?: boolean
@@ -17,7 +20,7 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 		label,
 		required = false,
 		id,
-		size = 'md',
+		size = "md",
 		wrapper,
 		wrapperProps,
 		clearable = false,
@@ -30,7 +33,7 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 	ref,
 ) => {
 	// Manage value as a local state to enable clearable feature
-	const [localValue, setLocalValue] = useState(value || '')
+	const [localValue, setLocalValue] = useState(value || "")
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if(onChange) {
@@ -43,7 +46,7 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 	const handleClear = () => {
 		const fakeEvent = {
 			target: {
-				value: '',
+				value: "",
 			},
 		} as React.ChangeEvent<HTMLInputElement>
 		handleChange(fakeEvent)

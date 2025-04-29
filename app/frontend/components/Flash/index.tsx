@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { showNotification } from '@mantine/notifications'
-import { usePageProps } from '@/lib/hooks'
-import { FlashMessage } from '@/types'
+import { showNotification } from "@mantine/notifications"
+import React, { useEffect } from "react"
+
+import { usePageProps } from "@/lib/hooks"
+import { FlashMessage } from "@/types"
 
 const Flash = () => {
 	const { flash } = usePageProps()
@@ -12,17 +13,17 @@ const Flash = () => {
 			if(flash[key]) {
 				let color
 				switch(key) {
-					case 'alert':
-						color = 'red'
+					case "alert":
+						color = "red"
 						break
-					case 'success':
-						color = 'green'
+					case "success":
+						color = "green"
 						break
-					case 'info':
-						color = 'blue'
+					case "info":
+						color = "blue"
 						break
-					case 'warning':
-						color = 'yellow'
+					case "warning":
+						color = "yellow"
 						break
 				}
 

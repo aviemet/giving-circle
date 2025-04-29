@@ -1,12 +1,14 @@
-import React from 'react'
+import React from "react"
+
 import {
 	AppShell,
 	Divider,
 	Flex,
-} from '@/components'
-import { ToggleNavbarButton } from '@/features'
-import CircleDropdownLink from './CircleDropdownLink'
-import Menu from './Menu'
+} from "@/components"
+import { ToggleNavbarButton } from "@/features"
+
+import CircleDropdownLink from "./CircleDropdownLink"
+import Menu from "./Menu"
 
 const AppSidebar = () => {
 	return (

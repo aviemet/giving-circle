@@ -1,42 +1,43 @@
-import React, { forwardRef } from 'react'
 import {
 	RichTextEditor,
 	Link,
 	type RichTextEditorProps as MantineRichTextEditorProps,
-} from '@mantine/tiptap'
-import { BubbleMenu, FloatingMenu, useEditor } from '@tiptap/react'
-import { Color } from '@tiptap/extension-color'
-import TextStyle from '@tiptap/extension-text-style'
-import Highlight from '@tiptap/extension-highlight'
-import StarterKit from '@tiptap/starter-kit'
-import Underline from '@tiptap/extension-underline'
-import TextAlign from '@tiptap/extension-text-align'
-import Superscript from '@tiptap/extension-superscript'
-import SubScript from '@tiptap/extension-subscript'
-import { DEFAULT_LABELS } from './tiptapLabels'
+} from "@mantine/tiptap"
+import { Color } from "@tiptap/extension-color"
+import Highlight from "@tiptap/extension-highlight"
+import SubScript from "@tiptap/extension-subscript"
+import Superscript from "@tiptap/extension-superscript"
+import TextAlign from "@tiptap/extension-text-align"
+import TextStyle from "@tiptap/extension-text-style"
+import Underline from "@tiptap/extension-underline"
+import { BubbleMenu, FloatingMenu, useEditor } from "@tiptap/react"
+import StarterKit from "@tiptap/starter-kit"
+import React, { forwardRef } from "react"
+
+import { DEFAULT_LABELS } from "./tiptapLabels"
 
 const ColorPickerControl = () => (
 	<RichTextEditor.ColorPicker
 		colors={ [
-			'#25262b',
-			'#868e96',
-			'#fa5252',
-			'#e64980',
-			'#be4bdb',
-			'#7950f2',
-			'#4c6ef5',
-			'#228be6',
-			'#15aabf',
-			'#12b886',
-			'#40c057',
-			'#82c91e',
-			'#fab005',
-			'#fd7e14',
+			"#25262b",
+			"#868e96",
+			"#fa5252",
+			"#e64980",
+			"#be4bdb",
+			"#7950f2",
+			"#4c6ef5",
+			"#228be6",
+			"#15aabf",
+			"#12b886",
+			"#40c057",
+			"#82c91e",
+			"#fab005",
+			"#fd7e14",
 		] }
 	/>
 )
 
-export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, 'children' | 'editor' | 'onChange'> {
+export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, "children" | "editor" | "onChange"> {
 	children?: string
 	onChange?: (value: string) => void
 }
@@ -55,7 +56,7 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 			Highlight,
 			TextStyle,
 			Color,
-			TextAlign.configure({ types: ['heading', 'paragraph'] }),
+			TextAlign.configure({ types: ["heading", "paragraph"] }),
 		],
 		content: children,
 		onUpdate: ({ editor }) => {

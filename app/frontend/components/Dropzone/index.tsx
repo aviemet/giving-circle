@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, rem } from '@mantine/core'
-import { Dropzone, type DropzoneProps as MantineDropzoneProps } from '@mantine/dropzone'
-import { CrossIcon, PhotoIcon, UploadIcon } from '../Icons'
+import { Group, rem } from "@mantine/core"
+import { Dropzone, type DropzoneProps as MantineDropzoneProps } from "@mantine/dropzone"
+import React from "react"
+
+import { CrossIcon, PhotoIcon, UploadIcon } from "../Icons"
 
 interface DropzoneProps extends MantineDropzoneProps {
 	acceptZoneOverride?: React.ReactNode
@@ -21,7 +22,7 @@ const DropzoneComponent = ({
 			maxSize={ 5 * 1024 ** 2 }
 			{ ...props }
 		>
-			<Group justify="center" gap="xl" mih={ 220 } style={ { pointerEvents: 'none' } }>
+			<Group justify="center" gap="xl" mih={ 220 } style={ { pointerEvents: "none" } }>
 				{ acceptZoneOverride ||
 					<Dropzone.Accept>
 						<UploadIcon size={ 52 } />
@@ -29,7 +30,7 @@ const DropzoneComponent = ({
 				}
 				{ rejectZoneOverride ||
 					<Dropzone.Reject>
-						<CrossIcon  size={ 52 } />
+						<CrossIcon size={ 52 } />
 					</Dropzone.Reject>
 				}
 				{ idleZoneOverride ||

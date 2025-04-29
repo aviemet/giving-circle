@@ -1,9 +1,11 @@
-import React from 'react'
-import { Box, Button, Flex, Grid, Paper } from '@/components'
-import { PlusCircleIcon, MinusCircleIcon } from '@/components/Icons'
-import { NestedFields, useDynamicInputs } from 'use-inertia-form'
-import cx from 'clsx'
-import * as classes from '../Form.css'
+import cx from "clsx"
+import React from "react"
+import { NestedFields, useDynamicInputs } from "use-inertia-form"
+
+import { Box, Button, Flex, Grid, Paper } from "@/components"
+import { PlusCircleIcon, MinusCircleIcon } from "@/components/Icons"
+
+import * as classes from "../Form.css"
 
 interface DynamicInputsProps {
 	children: React.ReactNode | React.ReactElement[]
@@ -20,7 +22,7 @@ const DynamicInputs = ({ children, model, label, emptyData, grid = true }: Dynam
 		<>
 			<Flex>
 				<Box style={ { flex: 1 } }>{ label }</Box>
-				<Button onClick={ () => addInput() } size='xs' mb="xs" mr="xs">
+				<Button onClick={ () => addInput() } size="xs" mb="xs" mr="xs">
 					<PlusCircleIcon />
 				</Button>
 			</Flex>

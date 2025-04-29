@@ -1,5 +1,6 @@
-import { vars, theme } from '@/lib'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars, theme } from "@/lib"
 
 export const dropzone = css`
 

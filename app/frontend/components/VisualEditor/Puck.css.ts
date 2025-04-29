@@ -1,18 +1,19 @@
-import { vars, theme } from '@/lib'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars, theme } from "@/lib"
 
 export const puckRoot = css`
 	--puck-font-family: inherit;
-	--puck-color-white: ${vars.colors.white};
+	--puck-color-white: ${ vars.colors.white };
 
 	position: relative;
-	height: calc(100dvh - ${theme.other.header.height}px - ${theme.other.footer.height}px);
+	height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
 
 	& .Puck {
-		--puck-space-px: ${vars.spacing.sm};
+		--puck-space-px: ${ vars.spacing.sm };
 
 		& > div {
-			--puck-space-px: ${vars.spacing.sm};
+			--puck-space-px: ${ vars.spacing.sm };
 			position: unset;
 
 			/* Left sidebar is hidden */
@@ -31,11 +32,11 @@ export const puckRoot = css`
 		}
 
 		input, select {
-			color: ${vars.colors.black};
+			color: ${ vars.colors.black };
 		}
 	} 
 
 	& [class*="PuckLayout-inner"] {
-		height: calc(100dvh - ${theme.other.header.height}px - ${theme.other.footer.height}px);
+		height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
 	}
 `

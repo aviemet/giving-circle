@@ -1,5 +1,6 @@
-import React from 'react'
-import { Box, Title, Text } from '@/components'
+import React from "react"
+
+import { Box, Title, Text } from "@/components"
 
 // @path: /
 // @route: root

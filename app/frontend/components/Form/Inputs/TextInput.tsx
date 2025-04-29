@@ -1,9 +1,12 @@
-import React from 'react'
-import TextInput, { type TextInputProps } from '@/components/Inputs/TextInput'
-import Field from '../components/Field'
-import { useInertiaInput, type NestedObject } from 'use-inertia-form'
-import ConditionalWrapper from '@/components/ConditionalWrapper'
-import { type InputConflicts, type BaseFormInputProps } from '.'
+import React from "react"
+import { useInertiaInput, type NestedObject } from "use-inertia-form"
+
+import ConditionalWrapper from "@/components/ConditionalWrapper"
+import TextInput, { type TextInputProps } from "@/components/Inputs/TextInput"
+
+import Field from "../components/Field"
+
+import { type InputConflicts, type BaseFormInputProps } from "."
 
 interface FormTextInputProps<TForm extends NestedObject>
 	extends

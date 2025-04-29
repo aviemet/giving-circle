@@ -1,10 +1,11 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Button,Table, Link, Text } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
-import { usePageProps } from '@/lib/hooks'
-import { NewTemplateModal } from '@/features'
+import React from "react"
+
+import { Button, Table, Link, Text } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { NewTemplateModal } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const TemplateTable = (props: TableProps) => {
 	const { circle } = usePageProps()
@@ -20,7 +21,7 @@ const TemplateTable = (props: TableProps) => {
 			<Table.Body>
 				<Table.RowIterator
 					emptyDataContent={ circle.slug && <>
-						<Text>{ circle.name || 'This circle' } doesn&apos;t have any saved presentation templates</Text>
+						<Text>{ circle.name || "This circle" } doesn&apos;t have any saved presentation templates</Text>
 						<NewTemplateModal circle={ circle }><Button>Create One</Button></NewTemplateModal>
 					</> }
 					render={ (template: Schema.PresentationTemplatesIndex) => (

@@ -1,8 +1,9 @@
-import React from 'react'
-import { Grid, Link, Text } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { Routes } from '@/lib'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid, Link, Text } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
+import { Routes } from "@/lib"
 
 type ThemeMemberFormData = {
 	membership: Schema.MembershipsFormData
@@ -17,7 +18,7 @@ export interface ThemeMemberFormProps {
 	theme: Schema.ThemesInertiaShare
 }
 
-const ThemeMemberForm = ({ method = 'post', membership, circle, theme, ...props }: ThemeMemberFormProps) => {
+const ThemeMemberForm = ({ method = "post", membership, circle, theme, ...props }: ThemeMemberFormProps) => {
 	return (
 		<Form
 			model="membership"
@@ -42,7 +43,7 @@ const ThemeMemberForm = ({ method = 'post', membership, circle, theme, ...props 
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ membership?.id ? 'Update' : 'Create' } Member</Submit>
+					<Submit>{ membership?.id ? "Update" : "Create" } Member</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

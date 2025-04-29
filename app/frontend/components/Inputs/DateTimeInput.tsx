@@ -1,10 +1,13 @@
-import React, { forwardRef } from 'react'
-import Label from './Label'
-import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
-import { CalendarIcon } from '../Icons'
-import { type BaseInputProps } from '.'
-import InputWrapper from './InputWrapper'
-import { isUnset } from '@/lib'
+import { DateTimePicker, DateTimePickerProps } from "@mantine/dates"
+import React, { forwardRef } from "react"
+
+import { isUnset } from "@/lib"
+
+import Label from "./Label"
+import { CalendarIcon } from "../Icons"
+import InputWrapper from "./InputWrapper"
+
+import { type BaseInputProps } from "."
 
 export interface DateTimeProps extends DateTimePickerProps, BaseInputProps {
 	name?: string
@@ -21,9 +24,9 @@ const DateTime = forwardRef<HTMLButtonElement, DateTimeProps>((
 		name,
 		required,
 		value,
-		size = 'md',
-		radius = 'xs',
-		valueFormat = 'L LT',
+		size = "md",
+		radius = "xs",
+		valueFormat = "L LT",
 		wrapper,
 		wrapperProps,
 		...props

@@ -1,4 +1,4 @@
-import { StateCreator } from 'zustand'
+import { StateCreator } from "zustand"
 
 export interface SidebarSlice {
 	sidebarOpen: boolean
@@ -12,7 +12,7 @@ export const createSidebarSlice: StateCreator<SidebarSlice> =
 (set) => ({
 	sidebarOpen: true,
 	sidebarVisible: false,
-	sidebarBreakpoint: 'sm',
+	sidebarBreakpoint: "sm",
 
 	toggleSidebarOpen: sidebarOpen => set(state => {
 		let setValue = sidebarOpen

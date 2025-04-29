@@ -1,8 +1,10 @@
-import React, { forwardRef } from 'react'
-import { Textarea, type TextareaProps as MantineTextareaProps } from '@mantine/core'
-import { withInjectedProps, type BaseInputProps } from '.'
-import Label from './Label'
-import InputWrapper from './InputWrapper'
+import { Textarea, type TextareaProps as MantineTextareaProps } from "@mantine/core"
+import React, { forwardRef } from "react"
+
+import InputWrapper from "./InputWrapper"
+import Label from "./Label"
+
+import { withInjectedProps, type BaseInputProps } from "."
 
 export interface TextareaProps extends MantineTextareaProps, BaseInputProps {}
 

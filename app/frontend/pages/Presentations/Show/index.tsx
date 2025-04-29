@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, Link, Menu, Page, Section, Title } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Group, Link, Menu, Page, Section, Title } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowPresentationProps {
 	presentation: Schema.PresentationsPresentation
@@ -10,8 +11,8 @@ interface ShowPresentationProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug
 // @route: themePresentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
-	const { params } = usePageProps<'themePresentation'>()
-	const title = presentation.name || 'Presentation'
+	const { params } = usePageProps<"themePresentation">()
+	const title = presentation.name || "Presentation"
 
 	return (
 		<Page

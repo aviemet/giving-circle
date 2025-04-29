@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Group, Title, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowOrgProps {
 	org: Schema.OrgsShow
@@ -10,8 +11,8 @@ interface ShowOrgProps {
 // @path: /:circle_slug/orgs/:slug
 // @route: org
 const ShowOrg = ({ org }: ShowOrgProps) => {
-	const { params } = usePageProps<'org'>()
-	const title =  'Org'
+	const { params } = usePageProps<"org">()
+	const title = "Org"
 
 	return (
 		<Page title={ title }>

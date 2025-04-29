@@ -1,21 +1,22 @@
-import React, { forwardRef, useMemo } from 'react'
-import { type Method, type Visit } from '@inertiajs/core'
-import InertiaLink from './InertiaLink'
-import ExternalLink from './ExternalLink'
-import { type AnchorProps, type ButtonProps } from '@mantine/core'
+import { type Method, type Visit } from "@inertiajs/core"
+import { type AnchorProps, type ButtonProps } from "@mantine/core"
+import React, { forwardRef, useMemo } from "react"
 
-export { default as NavLink } from './NavLink'
+import ExternalLink from "./ExternalLink"
+import InertiaLink from "./InertiaLink"
+
+export { default as NavLink } from "./NavLink"
 
 export interface LinkProps
 	extends
-	Omit<AnchorProps, 'onProgress'> {
+	Omit<AnchorProps, "onProgress"> {
 
 	children?: React.ReactNode
 	href: string
 	method?: Method
-	visit?: Omit<Visit, 'method'>
+	visit?: Omit<Visit, "method">
 	external?: boolean
-	as?: 'a' | 'button'
+	as?: "a" | "button"
 	onProgress?: React.ReactEventHandler<HTMLAnchorElement>
 	onClick?: React.ReactEventHandler<HTMLAnchorElement>
 	target?: string
@@ -26,13 +27,13 @@ export interface LinkProps
 	preserveScroll?: boolean
 }
 
-const externalPrefix = ['http', 'www']
+const externalPrefix = ["http", "www"]
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((
 	{
 		children,
 		href,
-		as = 'a',
+		as = "a",
 		method,
 		visit,
 		external,
@@ -61,7 +62,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((
 		let localExternal = false
 		externalPrefix.some(prefix => {
 			if(href?.startsWith(prefix)) {
-				const url = new URL(href.startsWith('http') ? href : `http://${href}`)
+				const url = new URL(href.startsWith("http") ? href : `http://${href}`)
 				localExternal = url.hostname !== window.location.hostname
 			}
 		})

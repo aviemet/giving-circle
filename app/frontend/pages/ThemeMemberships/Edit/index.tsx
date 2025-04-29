@@ -1,8 +1,10 @@
-import React from 'react'
-import { Section, Page } from '@/components'
-import { Routes } from '@/lib'
-import ThemeMembershipsForm from '../Form'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Section, Page } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import ThemeMembershipsForm from "../Form"
 
 interface EditThemeMembershipProps {
 	membership: Schema.MembershipsEdit
@@ -11,17 +13,17 @@ interface EditThemeMembershipProps {
 // @path: /:circle_slug/themes/:theme_slug/memberships/:slug/edit
 // @route: editThemeMembership
 const EditThemeMembership = ({ membership }: EditThemeMembershipProps) => {
-	const { params, active_circle, active_theme } = usePageProps<'editThemeMembership'>()
+	const { params, active_circle, active_theme } = usePageProps<"editThemeMembership">()
 
 	if(!active_circle || !active_theme) return <></>
 
-	const title = 'Edit Membership'
+	const title = "Edit Membership"
 
 	return (
 		<Page title={ title }>
 			<Section>
 				<ThemeMembershipsForm
-					method='put'
+					method="put"
 					to={ Routes.themeMembership(params.circle_slug, params.theme_slug, params.slug) }
 					membership={ membership }
 					circle={ active_circle }

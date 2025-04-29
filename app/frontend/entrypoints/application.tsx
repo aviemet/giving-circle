@@ -1,17 +1,17 @@
-import React from 'react'
-import { createInertiaApp, router } from '@inertiajs/react'
-import { createRoot } from 'react-dom/client'
+import { createInertiaApp, router } from "@inertiajs/react"
+import dayjs from "dayjs"
+import localizedFormat from "dayjs/plugin/localizedFormat"
+import React from "react"
+import { createRoot } from "react-dom/client"
 
-import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from '../layouts'
-import { propsMiddleware } from './middleware'
-import { runAxe } from './middleware/axe'
+import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from "../layouts"
+import { propsMiddleware } from "./middleware"
+import { runAxe } from "./middleware/axe"
 
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 dayjs.extend(localizedFormat)
 
-const SITE_TITLE = 'Giving Circle'
+const SITE_TITLE = "Giving Circle"
 
 type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
@@ -21,23 +21,23 @@ type PagesObject = { default: React.ComponentType<any> & {
 // This needs to manually be kept in sync with the definitions on the server
 // app/controllers/concerns/inertia_share/layout.rb
 const LAYOUT_COMPONENTS = {
-	'AppLayout': AppLayout,
-	'AuthLayout': AuthLayout,
-	'PublicLayout': PublicLayout,
-	'PresentLayout': PresentationLayout,
+	"AppLayout": AppLayout,
+	"AuthLayout": AuthLayout,
+	"PublicLayout": PublicLayout,
+	"PresentLayout": PresentationLayout,
 } as const
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 	createInertiaApp({
 		title: title => `${SITE_TITLE} - ${title}`,
 
 		resolve: async name => {
-			const pages = import.meta.glob<PagesObject>('../pages/**/index.tsx')
+			const pages = import.meta.glob<PagesObject>("../pages/**/index.tsx")
 			const page = (await pages[`../pages/${name}/index.tsx`]()).default
 
 			page.layout = (page) => {
 				const props = page.props
-				let Layout = LAYOUT_COMPONENTS[props.layout as keyof typeof LAYOUT_COMPONENTS] || LAYOUT_COMPONENTS['AppLayout']
+				let Layout = LAYOUT_COMPONENTS[props.layout as keyof typeof LAYOUT_COMPONENTS] || LAYOUT_COMPONENTS["AppLayout"]
 
 				return (
 					<LayoutWrapper>
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			root.render(<App { ...props } />)
 
 			// Adds accessibility errors to console
-			router.on('success', event => {
+			router.on("success", event => {
 				event.detail.page.props = propsMiddleware(event.detail.page.props)
 				runAxe(root)
 			})

@@ -1,4 +1,5 @@
-export { Radio as GroupedRadio } from '@/components/Inputs'
+export { Radio as GroupedRadio } from "@/components/Inputs"
 
-import FormRadioInput from './Radio'
+import FormRadioInput from "./Radio"
+
 export default FormRadioInput

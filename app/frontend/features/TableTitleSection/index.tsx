@@ -1,11 +1,12 @@
-import React from 'react'
-import { router } from '@inertiajs/react'
-import { Menu, Box, Group, Divider } from '@/components'
-import { TrashIcon } from '@/components/Icons'
-import { useTableContext } from '@/components/Table/TableContext'
+import { router } from "@inertiajs/react"
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
-import * as classes from '../IndexTableTemplate/IndexPage.css'
+import { Menu, Box, Group, Divider } from "@/components"
+import { TrashIcon } from "@/components/Icons"
+import { useTableContext } from "@/components/Table/TableContext"
+
+import * as classes from "../IndexTableTemplate/IndexPage.css"
 
 type MenuOption = {
 	label: string
@@ -30,7 +31,7 @@ const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectio
 		if(!contextMenu?.deleteRoute) return
 
 		router.visit(contextMenu.deleteRoute, {
-			method: 'delete',
+			method: "delete",
 			data: { ids: Array.from(selected) },
 		})
 	}
@@ -53,7 +54,7 @@ const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectio
 						{ contextMenu?.deleteRoute && selected.size > 0 && <>
 							<Divider />
 
-							<Menu.Item leftSection={ <TrashIcon size={ 14 } color='red' /> } onClick={ deleteRecords }>
+							<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ deleteRecords }>
 								Delete
 							</Menu.Item>
 						</> }

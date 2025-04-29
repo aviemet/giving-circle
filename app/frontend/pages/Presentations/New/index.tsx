@@ -1,8 +1,10 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import PresentationForm from '../Form'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import PresentationForm from "../Form"
 
 interface NewPresentationProps {
 	presentation: Schema.PresentationsFormData
@@ -11,9 +13,9 @@ interface NewPresentationProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/new
 // @route: newThemePresentation
 const NewPresentation = ({ presentation }: NewPresentationProps) => {
-	const { params } = usePageProps<'newThemePresentation'>()
+	const { params } = usePageProps<"newThemePresentation">()
 
-	const title = 'New Presentation'
+	const title = "New Presentation"
 
 	return (
 		<Page title={ title }>

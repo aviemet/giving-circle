@@ -1,23 +1,24 @@
-import React, { useMemo } from 'react'
-import { Table, type TableProps as MantineTableProps } from '@mantine/core'
+import { Table, type TableProps as MantineTableProps } from "@mantine/core"
+import cx from "clsx"
+import React, { useMemo } from "react"
 
-import Head from './Head'
-import Body from './Body'
-import RowIterator from './RowIterator'
-import Row from './Row'
-import Cell from './Td'
-import HeadCell from './Th'
-import Footer from './Footer'
-import Pagination from './Pagination'
-import TableProvider from './TableContext'
-import TableSection from './Section'
-import SearchInput from './SearchInput'
-import ConditionalWrapper from '../ConditionalWrapper'
+import { theme } from "@/lib"
+import { useLayoutStore } from "@/store"
 
-import cx from 'clsx'
-import * as classes from './Table.css'
-import { useLayoutStore } from '@/store'
-import { theme } from '@/lib'
+import Body from "./Body"
+import Footer from "./Footer"
+import Head from "./Head"
+import Pagination from "./Pagination"
+import Row from "./Row"
+import RowIterator from "./RowIterator"
+import SearchInput from "./SearchInput"
+import TableSection from "./Section"
+import TableProvider from "./TableContext"
+import Cell from "./Td"
+import HeadCell from "./Th"
+import ConditionalWrapper from "../ConditionalWrapper"
+import * as classes from "./Table.css"
+
 
 export interface TableProps extends MantineTableProps {
 	fixed?: boolean
@@ -71,7 +72,7 @@ const TableComponent: TableObject = ({
 				highlightOnHover={ highlightOnHover }
 				stickyHeader={ stickyHeader }
 				stickyHeaderOffset={ stickyHeaderOffsetProp }
-				className={ cx(className, classes.table, { 'wrapper-offset': wrapper }) }
+				className={ cx(className, classes.table, { "wrapper-offset": wrapper }) }
 				{ ...props }
 			>
 				{ children }

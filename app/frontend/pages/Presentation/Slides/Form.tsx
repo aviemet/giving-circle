@@ -1,7 +1,8 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
 
 type PresentationSlideFormData = {
 	presentation_slide: Schema.PresentationSlidesFormData
@@ -14,7 +15,7 @@ export interface PresentationSlideFormProps {
 	presentation_slide: Schema.PresentationSlidesFormData
 }
 
-const PresentationSlideForm = ({ method = 'post', presentation_slide, ...props }: PresentationSlideFormProps) => {
+const PresentationSlideForm = ({ method = "post", presentation_slide, ...props }: PresentationSlideFormProps) => {
 	return (
 		<Form
 			model="presentation_slide"
@@ -37,7 +38,7 @@ const PresentationSlideForm = ({ method = 'post', presentation_slide, ...props }
 					<TextInput name="template" label="Template" />
 				</Grid.Col>
 				<Grid.Col>
-					<Submit>{ presentation_slide.id ? 'Update' : 'Create' } PresentationSlide</Submit>
+					<Submit>{ presentation_slide.id ? "Update" : "Create" } PresentationSlide</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

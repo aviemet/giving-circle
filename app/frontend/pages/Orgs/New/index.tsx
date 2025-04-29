@@ -1,8 +1,10 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import OrgForm from '../Form'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import OrgForm from "../Form"
 
 interface NewOrgProps {
 	org: Schema.OrgsFormData
@@ -11,8 +13,8 @@ interface NewOrgProps {
 // @path: /:circle_slug/orgs/new
 // @route: newCircleOrg
 const NewOrg = ({ org }: NewOrgProps) => {
-	const { params } = usePageProps<'newCircleOrg'>()
-	const title = 'New Org'
+	const { params } = usePageProps<"newCircleOrg">()
+	const title = "New Org"
 
 	return (
 		<Page title={ title }>

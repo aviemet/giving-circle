@@ -1,9 +1,9 @@
-import { StateCreator } from 'zustand'
+import { StateCreator } from "zustand"
 
 const menuKeys = {
-	circle: 'circle',
-	theme: 'theme',
-	presentation: 'presentation',
+	circle: "circle",
+	theme: "theme",
+	presentation: "presentation",
 } as const
 
 export interface MenuSlice {

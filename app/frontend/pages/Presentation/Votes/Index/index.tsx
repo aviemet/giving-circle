@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { Menu, Page, Title } from '@/components'
-import { NewIcon } from '@/components/Icons'
-import { IndexTableTemplate } from '@/features'
-import PresentationVotesTable from '../Table'
+import React from "react"
+
+import { Menu, Page, Title } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { IndexTableTemplate } from "@/features"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import PresentationVotesTable from "../Table"
 
 interface PresentationVoteIndexProps {
 	presentation_votes: Schema.PresentationVotesIndex[]
@@ -15,8 +17,8 @@ interface PresentationVoteIndexProps {
 // @route: themePresentationsVotes
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title = 'Vote'
+	const { params } = usePageProps<"">()
+	const title = "Vote"
 
 	return (
 		<Page
@@ -38,7 +40,7 @@ const PresentationVotesIndex = ({ presentation_votes, pagination }: Presentation
 				contextMenu={
 					[
 						{
-							label: 'New Vote',
+							label: "New Vote",
 							href: Routes.newPresentationVote(),
 							icon: NewIcon,
 							deleteRoute: Routes.presentationVotes(),

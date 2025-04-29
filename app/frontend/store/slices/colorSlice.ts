@@ -1,5 +1,6 @@
-import { StateCreator } from 'zustand'
-import { defaultColor } from '@/lib/theme'
+import { StateCreator } from "zustand"
+
+import { defaultColor } from "@/lib/theme"
 
 export interface ColorSlice {
 	primaryColor: string

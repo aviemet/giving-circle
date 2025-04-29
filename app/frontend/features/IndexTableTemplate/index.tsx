@@ -1,6 +1,8 @@
-import React from 'react'
-import { Table } from '@/components'
-import TableTitleSection, { IndexTableTitleSectionProps } from '../TableTitleSection'
+import React from "react"
+
+import { Table } from "@/components"
+
+import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 
 interface IndexTableTemplateProps extends IndexTableTitleSectionProps {
 	model: string

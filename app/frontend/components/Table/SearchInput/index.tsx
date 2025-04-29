@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
-import { router } from '@inertiajs/react'
-import { type VisitOptions } from '@inertiajs/core'
-import { debounce } from 'lodash'
-import { useTableContext } from '../TableContext'
-import { TextInput } from '@/components/Inputs'
-import { SearchIcon, CrossIcon } from '@/components/Icons'
-import { ActionIcon, Box } from '@mantine/core'
-import { useSessionStorage } from '@mantine/hooks'
-import ColumnPicker from './ColumnPicker'
-import AdvancedSearch from './AdvancedSearch'
-import { useInit, useLocation } from '@/lib/hooks'
-import * as classes from '../Table.css'
+import { type VisitOptions } from "@inertiajs/core"
+import { router } from "@inertiajs/react"
+import { ActionIcon, Box } from "@mantine/core"
+import { useSessionStorage } from "@mantine/hooks"
+import { debounce } from "lodash"
+import React, { useEffect } from "react"
+
+import { SearchIcon, CrossIcon } from "@/components/Icons"
+import { TextInput } from "@/components/Inputs"
+import { useInit, useLocation } from "@/lib/hooks"
+
+import ColumnPicker from "./ColumnPicker"
+import { useTableContext } from "../TableContext"
+import AdvancedSearch from "./AdvancedSearch"
+import * as classes from "../Table.css"
 
 interface SearchInputProps {
 	columnPicker?: boolean
@@ -26,13 +28,13 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 
 	const location = useLocation()
 	const [searchValue, setSearchValue] = useSessionStorage({
-		key: `${model ?? 'standard'}-query`,
-		defaultValue: location.params.get('search') || '',
+		key: `${model ?? "standard"}-query`,
+		defaultValue: location.params.get("search") || "",
 		getInitialValueInEffect: false,
 	})
 
 	useInit(() => {
-		const urlSearchString = location.params.get('search')
+		const urlSearchString = location.params.get("search")
 
 		// On first render, use URL search param as search value.
 		// This should only trigger on page load when directly visited via a shared link e.g.
@@ -62,7 +64,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 			},
 		}
 
-		if(model) options.only = [model, 'pagination']
+		if(model) options.only = [model, "pagination"]
 
 		router.get(path, {}, options)
 	}, 500)
@@ -71,15 +73,15 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 		const url = new URL(window.location.href)
 
 		if(
-			url.searchParams.get('search') === searchValue ||
-			(url.searchParams.get('search') === null && searchValue === '')
+			url.searchParams.get("search") === searchValue ||
+			(url.searchParams.get("search") === null && searchValue === "")
 		) return
 
-		if(searchValue === '') {
-			url.searchParams.delete('search')
+		if(searchValue === "") {
+			url.searchParams.delete("search")
 		} else {
-			url.searchParams.set('search', searchValue ?? '')
-			url.searchParams.delete('page')
+			url.searchParams.set("search", searchValue ?? "")
+			url.searchParams.delete("page")
 		}
 
 		debouncedSearch(url.toString())

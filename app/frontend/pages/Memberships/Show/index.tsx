@@ -1,7 +1,8 @@
-import React from 'react'
-import { Group, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Group, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface ShowMembershipProps {
 	membership: Schema.MembershipsShow
@@ -11,12 +12,12 @@ interface ShowMembershipProps {
 // @route: membership
 const ShowMembership = ({ membership }: ShowMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<'membership'>()
-	const title = membership.name || 'Membership'
+	const { params } = usePageProps<"membership">()
+	const title = membership.name || "Membership"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Membership', href: Routes.circleMemberships(params.circle_slug) },
+			{ title: "Membership", href: Routes.circleMemberships(params.circle_slug) },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

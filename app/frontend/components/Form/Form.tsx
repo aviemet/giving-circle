@@ -1,14 +1,15 @@
-import React from 'react'
-import { Box } from '@mantine/core'
+import { Box } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 import {
 	Form as InertiaForm,
 	type FormProps as UifFormProps,
 	type NestedObject,
-} from 'use-inertia-form'
+} from "use-inertia-form"
 
-import cx from 'clsx'
-import * as classes from './Form.css'
-import { isDevelopment } from '@/lib'
+import { isDevelopment } from "@/lib"
+
+import * as classes from "./Form.css"
 
 export interface FormProps<TForm> extends UifFormProps<TForm> {
 	disableFormatting?: boolean

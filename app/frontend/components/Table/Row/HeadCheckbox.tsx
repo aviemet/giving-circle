@@ -1,12 +1,14 @@
-import React from 'react'
-import Td from '../Td'
-import { Checkbox } from '@/components/Inputs'
-import { CheckboxProps } from '@/components/Inputs/Checkbox'
-import { useTableContext } from '../TableContext'
+import React from "react"
+
+import { Checkbox } from "@/components/Inputs"
+import { CheckboxProps } from "@/components/Inputs/Checkbox"
+
+import { useTableContext } from "../TableContext"
+import Td from "../Td"
 
 interface RowCheckBoxProps extends CheckboxProps {
 	selected: Set<string>
-	rows?: Record<string,any>[]
+	rows?: Record<string, any>[]
 	allChecked: boolean
 	indeterminate: boolean
 }
@@ -35,7 +37,7 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate, ...props }: R
 				checked={ allChecked }
 				indeterminate={ indeterminate }
 				disabled={ rows?.length === 0 }
-				aria-label={ `${allChecked ? 'deselect' : 'select'} all rows` }
+				aria-label={ `${allChecked ? "deselect" : "select"} all rows` }
 				{ ...props }
 			/>
 		</Td>

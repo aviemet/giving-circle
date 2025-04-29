@@ -1,10 +1,12 @@
-import React from 'react'
-import { Container, Group, Title, Menu, Page, Section } from '@/components'
-import { CoinsIcon, HelpingIcon, MembersIcon } from '@/components/Icons'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import { CardContainer, ThemeCard } from '@/features/Cards'
-import StatTile from './StatTile'
+import React from "react"
+
+import { Container, Group, Title, Menu, Page, Section } from "@/components"
+import { CoinsIcon, HelpingIcon, MembersIcon } from "@/components/Icons"
+import { CardContainer, ThemeCard } from "@/features/Cards"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+import StatTile from "./StatTile"
 
 interface ShowCircleProps {
 	circle: Schema.CirclesShow
@@ -13,8 +15,8 @@ interface ShowCircleProps {
 // @path: /:circle_slug
 // @route: circle
 const ShowCircle = ({ circle }: ShowCircleProps) => {
-	const { params } = usePageProps<'circle'>()
-	const title = circle.name || 'Circle'
+	const { params } = usePageProps<"circle">()
+	const title = circle.name || "Circle"
 
 	return (
 		<Page
@@ -33,7 +35,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 				</Group>
 			) }
 			breadcrumbs={ [
-				{ title: 'Circles', href: Routes.circles() },
+				{ title: "Circles", href: Routes.circles() },
 				{ title, href: Routes.circle(params.circle_slug) },
 			] }
 		>

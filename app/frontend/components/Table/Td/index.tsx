@@ -1,15 +1,17 @@
-import React from 'react'
-import { useTableContext } from '../TableContext'
-import BodyCell from './BodyCell'
-import { type TableTdProps } from '@mantine/core'
-import { usePageProps } from '@/lib/hooks'
+import { type TableTdProps } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
+import { usePageProps } from "@/lib/hooks"
+
+import { useTableContext } from "../TableContext"
+import BodyCell from "./BodyCell"
+
 
 export interface TableCellProps extends TableTdProps {
 	fitContent?: boolean
 	sort?: string
-	hideable?: false|string
+	hideable?: false | string
 	ref?: React.RefObject<HTMLTableCellElement>
 	nowrap?: boolean
 }

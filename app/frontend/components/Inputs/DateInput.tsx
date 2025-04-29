@@ -1,14 +1,18 @@
-import React, { useEffect, useState, forwardRef } from 'react'
-import Label from './Label'
-import { DatePickerInput, type DatePickerInputProps } from '@mantine/dates'
-import { CalendarIcon } from '@/components/Icons'
-import { type DateInputValue, type BaseInputProps } from '.'
-import InputWrapper from './InputWrapper'
-import { isUnset } from '@/lib'
+import { DatePickerInput, type DatePickerInputProps } from "@mantine/dates"
+import React, { useEffect, useState, forwardRef } from "react"
+
+import { CalendarIcon } from "@/components/Icons"
+import { isUnset } from "@/lib"
+
+import InputWrapper from "./InputWrapper"
+import Label from "./Label"
+
+import { type DateInputValue, type BaseInputProps } from "."
+
 
 export interface DateInputProps
 	extends
-	Omit<DatePickerInputProps, 'onChange' | 'value'>,
+	Omit<DatePickerInputProps, "onChange" | "value">,
 	BaseInputProps {
 
 	name?: string
@@ -23,10 +27,10 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 		label,
 		id,
 		name,
-		type = 'default',
-		size = 'md',
-		radius = 'xs',
-		valueFormat = 'L',
+		type = "default",
+		size = "md",
+		radius = "xs",
+		valueFormat = "L",
 		required,
 		wrapper,
 		wrapperProps,
@@ -52,7 +56,7 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 		if(datePickerType === type) return
 
 		// DatesRangeValue and Date[] are the Array type options
-		if(type === 'range') {
+		if(type === "range") {
 			if(Array.isArray(localValue)) {
 				// An array of length 2 indicates it's already a range of dates
 				if(localValue.length !== 2) {

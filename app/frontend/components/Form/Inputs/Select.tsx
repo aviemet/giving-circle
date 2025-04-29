@@ -1,20 +1,23 @@
-import React from 'react'
-import { useInertiaInput, type UseFormProps, NestedObject } from 'use-inertia-form'
-import Field from '../components/Field'
-import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from '@mantine/core'
-import { exclude } from '@/lib'
-import { ConditionalWrapper, Group } from '@/components'
-import { ModalFormButton } from '@/components/Button'
-import SelectInput, { type SelectInputProps } from '@/components/Inputs/Select'
-import { type BaseFormInputProps } from '.'
+import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from "@mantine/core"
+import React from "react"
+import { useInertiaInput, type UseFormProps, NestedObject } from "use-inertia-form"
+
+import { ConditionalWrapper, Group } from "@/components"
+import { ModalFormButton } from "@/components/Button"
+import SelectInput, { type SelectInputProps } from "@/components/Inputs/Select"
+import { exclude } from "@/lib"
+
+import Field from "../components/Field"
+
+import { type BaseFormInputProps } from "."
 
 export type SelectOption = string | ComboboxItem | ComboboxItemGroup<string | ComboboxItem>
 export { type ComboboxData, ComboboxItem, ComboboxItemGroup }
 
-type OmittedOverwrittenTypes = 'onFocus' | 'onBlur' | 'onChange' | 'onClear' | 'onDropdownOpen' | 'onDropdownClose' | 'onOptionSubmit'
+type OmittedOverwrittenTypes = "onFocus" | "onBlur" | "onChange" | "onClear" | "onDropdownOpen" | "onDropdownClose" | "onOptionSubmit"
 export interface FormSelectProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<SelectInputProps, OmittedOverwrittenTypes | 'name' | 'defaultValue'>,
+	Omit<SelectInputProps, OmittedOverwrittenTypes | "name" | "defaultValue">,
 	Omit<BaseFormInputProps<string, TForm>, OmittedOverwrittenTypes> {
 
 	onChange?: (option: SelectOption | null, options: ComboboxData, form: UseFormProps<TForm>) => void
@@ -64,13 +67,13 @@ const Select = <TForm extends NestedObject = NestedObject>(
 	})
 
 	const handleChange = (option: string | null) => {
-		setValue(option ? option : '')
+		setValue(option ? option : "")
 
 		onChange?.(option, options || [], form)
 	}
 
 	const handleBlur = () => {
-		onBlur?.(String(value), options || [],  form)
+		onBlur?.(String(value), options || [], form)
 	}
 
 	const handleFocus = () => {
@@ -138,7 +141,7 @@ const Select = <TForm extends NestedObject = NestedObject>(
 						error={ error }
 						options={ options }
 						wrapper={ false }
-						{ ...exclude(props, 'value') }
+						{ ...exclude(props, "value") }
 					/>
 				</ConditionalWrapper>
 				{ newForm && <ModalFormButton
