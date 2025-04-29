@@ -1,5 +1,6 @@
 export * as Routes from "./routes"
 export * as formatter from "./formatters"
+export { i18n } from "./i18n"
 
 export * from "./uuid"
 export * from "./strings"
@@ -8,10 +9,7 @@ export * from "./forms"
 export * from "./theme"
 export * from "./units"
 
-export {
-	rem,
-	px,
-} from "@mantine/core"
+export { rem } from "@mantine/core"
 
 export const polymorphicRoute = (model: string, param: string | number) => {
 	// @ts-ignore

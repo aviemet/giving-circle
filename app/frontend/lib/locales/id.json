@@ -1,0 +1,46 @@
+{
+  "id": {
+    "devise": {
+      "failure": {
+        "invited": "Anda memiliki undangan yang tertunda, harap terima undangan tersebut untuk menyelesaikan pembuatan akun Anda."
+      },
+      "invitations": {
+        "edit": {
+          "header": "Atur kata sandi Anda",
+          "submit_button": "Atur kata sandi"
+        },
+        "invitation_removed": "Undangan Anda telah dihapus.",
+        "invitation_token_invalid": "Token undangan yang diberikan tidak valid!",
+        "new": {
+          "header": "Kirim Undangan",
+          "submit_button": "Kirim undangan"
+        },
+        "no_invitations_remaining": "Tidak ada undangan tersisa.",
+        "send_instructions": "Email undangan telah dikirim ke %{email}.",
+        "updated": "Kata sandi Anda telah berhasil diatur. Anda sudah masuk.",
+        "updated_not_active": "Kata sandi Anda telah berhasil diatur."
+      },
+      "mailer": {
+        "invitation_instructions": {
+          "accept": "Terima Undangan",
+          "accept_until": "Undangan ini akan berakhir pada %{due_date}.",
+          "hello": "Halo %{email}",
+          "ignore": "Jika Anda tidak ingin menerima undangan ini, silakan abaikan email ini. Akun Anda tidak akan dibuat sampai Anda mengakses tautan di atas dan mengatur kata sandi Anda.",
+          "someone_invited_you": "Seseorang telah mengundang Anda ke %{url}. Anda dapat menerima undangan ini melalui tautan di bawah ini.",
+          "subject": "Instruksi Undangan"
+        }
+      }
+    },
+    "time": {
+      "formats": {
+        "devise": {
+          "mailer": {
+            "invitation_instructions": {
+              "accept_until_format": "%d %B %Y %H:%M:%S"
+            }
+          }
+        }
+      }
+    }
+  }
+}

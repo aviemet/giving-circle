@@ -1,0 +1,46 @@
+{
+  "nl": {
+    "devise": {
+      "failure": {
+        "invited": "U bent reeds uitgenodigd, accepteer de uitnodiging die u heeft ontvangen per mail om uw account te accepteren."
+      },
+      "invitations": {
+        "edit": {
+          "header": "Stel Uw wachtwoord in",
+          "submit_button": "Stel mijn wachtwoord in"
+        },
+        "invitation_removed": "Uw uitnodiging is verwijderd.",
+        "invitation_token_invalid": "De uitnodigingscode is ongeldig!",
+        "new": {
+          "header": "Verstuur uitnodiging",
+          "submit_button": "Verstuur een uitnodiging"
+        },
+        "no_invitations_remaining": "Geen uitnodigingen over.",
+        "send_instructions": "Een uitnodigingsmail aan %{email} is verstuurd.",
+        "updated": "Uw wachtwoord is ingesteld. U bent nu ingelogd.",
+        "updated_not_active": "Uw wachtwoord is ingesteld."
+      },
+      "mailer": {
+        "invitation_instructions": {
+          "accept": "Accepteer uitnodiging",
+          "accept_until": "Deze uitnodoging vervalt per %{due_date}.",
+          "hello": "Beste %{email}",
+          "ignore": "Indien U de uitnodiging niet wenst te accepteren, negeer dan alstublieft deze email.<br />\nUw account wordt niet aangemaakt indien U niet via bovenstaande link uw wachtwoord aanmaakt.",
+          "someone_invited_you": "Iemand heeft U uitgenodigd voor %{url}, U kunt de uitnodiging accepteren via onderstaande link.",
+          "subject": "Instructies voor uitnodigingen"
+        }
+      }
+    },
+    "time": {
+      "formats": {
+        "devise": {
+          "mailer": {
+            "invitation_instructions": {
+              "accept_until_format": "%a %d %b %Y %H:%M:%S %Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

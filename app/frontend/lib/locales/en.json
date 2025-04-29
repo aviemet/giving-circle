@@ -1,0 +1,409 @@
+{
+  "en": {
+    "circles": {
+      "notices": {
+        "created": "Circle was successfully created.",
+        "destroyed": "Circle was successfully destroyed.",
+        "updated": "Circle was successfully updated."
+      }
+    },
+    "date": {
+      "abbr_day_names": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "abbr_month_names": [
+        null,
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ],
+      "day_names": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%B %d, %Y",
+        "short": "%b %d"
+      },
+      "month_names": [
+        null,
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "about 1 hour",
+          "other": "about %{count} hours"
+        },
+        "about_x_months": {
+          "one": "about 1 month",
+          "other": "about %{count} months"
+        },
+        "about_x_years": {
+          "one": "about 1 year",
+          "other": "about %{count} years"
+        },
+        "almost_x_years": {
+          "one": "almost 1 year",
+          "other": "almost %{count} years"
+        },
+        "half_a_minute": "half a minute",
+        "less_than_x_minutes": {
+          "one": "less than a minute",
+          "other": "less than %{count} minutes"
+        },
+        "less_than_x_seconds": {
+          "one": "less than 1 second",
+          "other": "less than %{count} seconds"
+        },
+        "over_x_years": {
+          "one": "over 1 year",
+          "other": "over %{count} years"
+        },
+        "x_days": {
+          "one": "1 day",
+          "other": "%{count} days"
+        },
+        "x_minutes": {
+          "one": "1 minute",
+          "other": "%{count} minutes"
+        },
+        "x_months": {
+          "one": "1 month",
+          "other": "%{count} months"
+        },
+        "x_seconds": {
+          "one": "1 second",
+          "other": "%{count} seconds"
+        }
+      },
+      "prompts": {
+        "day": "Day",
+        "hour": "Hour",
+        "minute": "Minute",
+        "month": "Month",
+        "second": "Seconds",
+        "year": "Year"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Your email address has been successfully confirmed.",
+        "send_instructions": "You will receive an email with instructions for how to confirm your email address in a few minutes.",
+        "send_paranoid_instructions": "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      },
+      "failure": {
+        "already_authenticated": "You are already signed in.",
+        "inactive": "Your account is not activated yet.",
+        "invalid": "Invalid %{authentication_keys} or password.",
+        "invited": "You have a pending invitation, accept it to finish creating your account.",
+        "last_attempt": "You have one more attempt before your account is locked.",
+        "locked": "Your account is locked.",
+        "not_found_in_database": "Invalid %{authentication_keys} or password.",
+        "timeout": "Your session expired. Please sign in again to continue.",
+        "unauthenticated": "You need to sign in or sign up before continuing.",
+        "unconfirmed": "You have to confirm your email address before continuing."
+      },
+      "invitations": {
+        "edit": {
+          "header": "Set your password",
+          "submit_button": "Set my password"
+        },
+        "invitation_removed": "Your invitation was removed.",
+        "invitation_token_invalid": "The invitation token provided is not valid!",
+        "new": {
+          "header": "Send invitation",
+          "submit_button": "Send an invitation"
+        },
+        "no_invitations_remaining": "No invitations remaining",
+        "send_instructions": "An invitation email has been sent to %{email}.",
+        "updated": "Your password was set successfully. You are now signed in.",
+        "updated_not_active": "Your password was set successfully."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "subject": "Confirmation instructions"
+        },
+        "email_changed": {
+          "subject": "Email Changed"
+        },
+        "invitation_instructions": {
+          "accept": "Accept invitation",
+          "accept_until": "This invitation will be due in %{due_date}.",
+          "hello": "Hello %{email}",
+          "ignore": "If you don't want to accept the invitation, please ignore this email. Your account won't be created until you access the link above and set your password.",
+          "someone_invited_you": "Someone has invited you to %{url}, you can accept it through the link below.",
+          "subject": "Invitation instructions"
+        },
+        "password_change": {
+          "subject": "Password Changed"
+        },
+        "reset_password_instructions": {
+          "subject": "Reset password instructions"
+        },
+        "unlock_instructions": {
+          "subject": "Unlock instructions"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Could not authenticate you from %{kind} because \"%{reason}\".",
+        "success": "Successfully authenticated from %{kind} account."
+      },
+      "passwords": {
+        "no_token": "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
+        "send_instructions": "You will receive an email with instructions on how to reset your password in a few minutes.",
+        "send_paranoid_instructions": "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",
+        "updated": "Your password has been changed successfully. You are now signed in.",
+        "updated_not_active": "Your password has been changed successfully."
+      },
+      "registrations": {
+        "destroyed": "Bye! Your account has been successfully cancelled. We hope to see you again soon.",
+        "signed_up": "Welcome! You have signed up successfully.",
+        "signed_up_but_inactive": "You have signed up successfully. However, we could not sign you in because your account is not yet activated.",
+        "signed_up_but_locked": "You have signed up successfully. However, we could not sign you in because your account is locked.",
+        "signed_up_but_unconfirmed": "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.",
+        "update_needs_confirmation": "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirmation link to confirm your new email address.",
+        "updated": "Your account has been updated successfully.",
+        "updated_but_not_signed_in": "Your account has been updated successfully, but since your password was changed, you need to sign in again."
+      },
+      "sessions": {
+        "already_signed_out": "Signed out successfully.",
+        "signed_in": "Signed in successfully.",
+        "signed_out": "Signed out successfully."
+      },
+      "unlocks": {
+        "send_instructions": "You will receive an email with instructions for how to unlock your account in a few minutes.",
+        "send_paranoid_instructions": "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.",
+        "unlocked": "Your account has been unlocked successfully. Please sign in to continue."
+      }
+    },
+    "flash": {
+      "actions": {
+        "create": {
+          "notice": "%{resource_name} was successfully created."
+        },
+        "destroy": {
+          "alert": "%{resource_name} could not be destroyed.",
+          "notice": "%{resource_name} was successfully destroyed."
+        },
+        "update": {
+          "notice": "%{resource_name} was successfully updated."
+        }
+      }
+    },
+    "hello": "Hello world",
+    "helpers": {
+      "page_entries_info": {
+        "entry": {
+          "one": "entry",
+          "other": "entries",
+          "zero": "entries"
+        },
+        "more_pages": {
+          "display_entries": "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+        },
+        "one_page": {
+          "display_entries": {
+            "one": "Displaying <b>1</b> %{entry_name}",
+            "other": "Displaying <b>all %{count}</b> %{entry_name}",
+            "zero": "No %{entry_name} found"
+          }
+        }
+      },
+      "select": {
+        "prompt": "Please select"
+      },
+      "submit": {
+        "create": "Create %{model}",
+        "submit": "Save %{model}",
+        "update": "Update %{model}"
+      }
+    },
+    "memberships": {
+      "notices": {
+        "created": "Membership was successfully created.",
+        "destroyed": "Membership was successfully destroyed.",
+        "updated": "Membership was successfully updated."
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u%n",
+          "negative_format": "-%u%n",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "$"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "round_mode": "default",
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "Billion",
+            "million": "Million",
+            "quadrillion": "Quadrillion",
+            "thousand": "Thousand",
+            "trillion": "Trillion",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Bytes"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB",
+            "zb": "ZB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "orgs": {
+      "notices": {
+        "created": "Org was successfully created.",
+        "destroyed": "Org was successfully destroyed.",
+        "updated": "Org was successfully updated."
+      }
+    },
+    "people": {
+      "notices": {
+        "created": "Person was successfully created.",
+        "destroyed": "Person was successfully destroyed.",
+        "updated": "Person was successfully updated."
+      }
+    },
+    "presentations": {
+      "notices": {
+        "created": "Presentation was successfully created.",
+        "destroyed": "Presentation was successfully destroyed.",
+        "updated": "Presentation was successfully updated."
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", and ",
+        "two_words_connector": " and ",
+        "words_connector": ", "
+      }
+    },
+    "theme_orgs": {
+      "notices": {
+        "bulk_created": "%{count} Organizations successfully added to the theme",
+        "created": "Organization was successfully added to the theme.",
+        "destroyed": "Organization was successfully removed from the theme.",
+        "updated": "Organization was successfully updated."
+      },
+      "validations": {
+        "match_owner": "Theme owner and org owner must match",
+        "uniqueness": "An org may only be added to a theme once"
+      }
+    },
+    "themes": {
+      "notices": {
+        "created": "Theme was successfully created.",
+        "destroyed": "Theme was successfully destroyed.",
+        "updated": "Theme was successfully updated."
+      }
+    },
+    "time": {
+      "am": "AM",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "devise": {
+          "mailer": {
+            "invitation_instructions": {
+              "accept_until_format": "%B %d, %Y %I:%M %p"
+            }
+          }
+        },
+        "long": "%B %d, %Y %H:%M",
+        "short": "%d %b %H:%M",
+        "us": "%m/%d/%Y %I:%M %p"
+      },
+      "pm": "PM"
+    },
+    "views": {
+      "pagination": {
+        "first": "&laquo; First",
+        "last": "Last &raquo;",
+        "next": "Next &rsaquo;",
+        "previous": "&lsaquo; Prev",
+        "truncate": "&hellip;"
+      }
+    }
+  }
+}

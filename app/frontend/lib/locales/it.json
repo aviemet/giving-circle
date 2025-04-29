@@ -1,0 +1,46 @@
+{
+  "it": {
+    "devise": {
+      "failure": {
+        "invited": "Hai un invito in sospeso, accettalo per completare la creazione del tuo account."
+      },
+      "invitations": {
+        "edit": {
+          "header": "Imposta la tua password",
+          "submit_button": "Imposta la password"
+        },
+        "invitation_removed": "Il tuo invito è stato rimosso.",
+        "invitation_token_invalid": "Il token di invito fornito non è valido!",
+        "new": {
+          "header": "Inoltra l'invito",
+          "submit_button": "Inoltra un invito"
+        },
+        "no_invitations_remaining": "Non sono più disponibili inviti.",
+        "send_instructions": "Un'email di invito è stata inoltrata a %{email}.",
+        "updated": "La tua password è stata impostata correttamente. Ora sei connesso.",
+        "updated_not_active": "La tua password è stata impostata correttamente."
+      },
+      "mailer": {
+        "invitation_instructions": {
+          "accept": "Accetta l'invito",
+          "accept_until": "L'invito sarà valido fino a %{due_date}.",
+          "hello": "Buongiorno %{email}",
+          "ignore": "Se non si desidera accettare l'invito si prega di ignorare la presente email.<br />L'account non sarà creato finché non verrà impostata la password (v. link sotto).",
+          "someone_invited_you": "Qualcuno ti ha invitato a %{url}, accetta tramite il link qua sotto.",
+          "subject": "Istruzioni per l'invito"
+        }
+      }
+    },
+    "time": {
+      "formats": {
+        "devise": {
+          "mailer": {
+            "invitation_instructions": {
+              "accept_until_format": "%B %d, %Y %I:%M %p"
+            }
+          }
+        }
+      }
+    }
+  }
+}
