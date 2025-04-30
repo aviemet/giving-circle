@@ -1,6 +1,6 @@
-require 'json'
-require 'tempfile'
-require 'fileutils'
+require "json"
+require "tempfile"
+require "fileutils"
 
 module UrlParamsJson
   class Generator
@@ -69,9 +69,9 @@ module UrlParamsJson
       Rails.root.join(path).open do |file|
         component_name = find_default_export(file)
 
-        break if component_name.nil? || component_name == 'Anonymous'
+        break if component_name.nil? || component_name == "Anonymous"
 
-        url_path = route[1].path.spec.to_s.gsub(/\(.:format\)/, '')
+        url_path = route[1].path.spec.to_s.gsub(/\(.:format\)/, "")
         js_route_method = route[0].to_s.camelize(:lower)
         file.rewind
         annotated_file = add_or_update_route_annotation(file, component_name, url_path, js_route_method)
@@ -131,7 +131,7 @@ def tsx_file_path(controller, action)
 
       if line.match?(/\bend\b/)
         break
-      elsif line.include?('render inertia:')
+      elsif line.include?("render inertia:")
         match = line.match(/render inertia:\s*["']([^"]+)["']/)
         if match
           path = Rails.root.join("app/frontend/Pages/#{match[1].gsub('::', '/')}/index.tsx")
@@ -159,7 +159,7 @@ def find_default_export(file)
       return match[1]
     end
 
-    return 'Anonymous'
+    return "Anonymous"
   end
 
   nil
@@ -174,7 +174,7 @@ def add_or_update_route_annotation(file, component_name, path, route)
   found_route_annotation = false
   component_found = false
 
-  temp_file = Tempfile.new('temp_file')
+  temp_file = Tempfile.new("temp_file")
 
   buffer = []
 
