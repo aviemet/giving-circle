@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Box, Group, Flex, Title } from "@/components"
 import { ToggleNavbarButton, UserHeaderMenu } from "@/features"
 import { useLayoutStore } from "@/store"

@@ -1,6 +1,5 @@
 import { Box, ElementProps, type BoxProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import classes from "./Section.module.css"
 
@@ -12,7 +11,7 @@ const Section = ({ children, fullHeight = false, className, ...props }: SectionP
 	return (
 		<Box
 			component="section"
-			className={ cx(classes, className, { fullHeight }) }
+			className={ clsx(classes, className, { fullHeight }) }
 			{ ...props }
 		>
 			{ children }

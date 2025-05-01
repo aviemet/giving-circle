@@ -1,4 +1,3 @@
-import React from "react"
 import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import { Grid } from "@/components"

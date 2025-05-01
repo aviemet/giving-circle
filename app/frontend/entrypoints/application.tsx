@@ -1,7 +1,6 @@
 import { createInertiaApp, router } from "@inertiajs/react"
 import dayjs from "dayjs"
 import localizedFormat from "dayjs/plugin/localizedFormat"
-import React from "react"
 import { createRoot } from "react-dom/client"
 
 import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from "../layouts"

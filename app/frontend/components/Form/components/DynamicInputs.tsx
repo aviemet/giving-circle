@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { NestedFields, useDynamicInputs } from "use-inertia-form"
 
 import { Box, Button, Flex, Grid, Paper } from "@/components"
@@ -29,7 +28,7 @@ const DynamicInputs = ({ children, model, label, emptyData, grid = true }: Dynam
 
 			{ paths.map((path, i) => (
 				<NestedFields key={ path } model={ path }>
-					<Flex align="center" className={ cx(classes.dynamicInputItem) }>
+					<Flex align="center" className={ clsx(classes.dynamicInputItem) }>
 						<Paper p="xs" shadow="xs" mb="xs" style={ { flex: 1 } }>
 							<Box component={ grid ? Grid : undefined }>
 								{ children }

@@ -1,5 +1,4 @@
 import { type ButtonProps } from "@mantine/core"
-import React from "react"
 import { useForm } from "use-inertia-form"
 
 import { Button } from "@/components"

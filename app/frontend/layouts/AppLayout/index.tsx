@@ -1,4 +1,4 @@
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useEffect } from "react"
 
 import { AppShell } from "@/components"
@@ -49,19 +49,19 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 				},
 			} }
 			footer={ { height: theme.other.footer.height } }
-			className={ cx(classes.appLayout) }
+			className={ clsx(classes.appLayout) }
 		>
 			<AppShell.Header withBorder={ false }>
 				<AppHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar px={ 0 } py="sm" className={ cx(classes.navMenu) }>
+			<AppShell.Navbar px={ 0 } py="sm" className={ clsx(classes.navMenu) }>
 				<AppSidebar />
 			</AppShell.Navbar>
 
 			<AppFooter />
 
-			<AppShell.Main className={ cx(classes.main, { paddingDisabled: mainPaddingDisabled }) }>
+			<AppShell.Main className={ clsx(classes.main, { paddingDisabled: mainPaddingDisabled }) }>
 				{ children }
 			</AppShell.Main>
 		</AppShell>

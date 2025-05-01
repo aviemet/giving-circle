@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Page } from "@/components"
 import { usePageProps } from "@/lib/hooks"
 

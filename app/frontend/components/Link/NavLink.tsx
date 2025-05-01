@@ -1,6 +1,5 @@
 import { Link, type InertiaLinkProps } from "@inertiajs/react"
 import { NavLink, type NavLinkProps } from "@mantine/core"
-import React from "react"
 
 import { useLocation } from "@/lib/hooks"
 

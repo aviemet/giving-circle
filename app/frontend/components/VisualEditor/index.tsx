@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import { Puck, PuckComponent, usePuck, type Config, type Data } from "@measured/puck"
-import "@measured/puck/puck.css"
 import { Box, Button } from "@mantine/core"
-import cx from "clsx"
+import { Puck, PuckComponent, usePuck, type Config, type Data } from "@measured/puck"
+import clsx from "clsx"
+import { useState } from "react"
+import "@measured/puck/puck.css"
 
 import * as classes from "./Puck.css"
 
@@ -55,7 +55,7 @@ const VisualEditor = () => {
 	}
 
 	return (
-		<Box className={ cx(classes.puckRoot) }>
+		<Box className={ clsx(classes.puckRoot) }>
 			<Puck
 				config={ config }
 				data={ data }

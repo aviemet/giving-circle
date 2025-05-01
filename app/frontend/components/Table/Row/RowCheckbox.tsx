@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Checkbox } from "@/components/Inputs"
 import { CheckboxProps } from "@/components/Inputs/Checkbox"
@@ -27,7 +26,7 @@ const RowCheckbox = ({ name, selected, ...props }: RowCheckBox) => {
 	}
 
 	return (
-		<Td fitContent className={ cx("table-row-select-checkbox") }>
+		<Td fitContent className={ clsx("table-row-select-checkbox") }>
 			<Checkbox
 				checked={ selected?.has(name) }
 				onChange={ handleClick }

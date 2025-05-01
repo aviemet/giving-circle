@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Tooltip, Button, ButtonProps } from "@/components"
 import { PresentationIcon } from "@/components/Icons"
 

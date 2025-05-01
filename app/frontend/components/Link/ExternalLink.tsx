@@ -1,5 +1,5 @@
 import { Anchor, type AnchorProps } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import normalizeUrl from "normalize-url"
 import React, { forwardRef } from "react"
 
@@ -27,7 +27,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
 			href={ disabled ? "javascript:void(0)" : url }
 			target="_blank"
 			rel="noreferrer"
-			className={ cx(classes.external, className ) }
+			className={ clsx(classes.external, className ) }
 			ref={ ref }
 			{ ...props }
 		>

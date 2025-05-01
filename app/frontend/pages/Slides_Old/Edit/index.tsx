@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Page, Section } from "@/components"
 import VisualEditor from "@/components/VisualEditor"
 import { Routes } from "@/lib"

@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Group, Title, Menu } from "@/components"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
 import { Routes } from "@/lib"

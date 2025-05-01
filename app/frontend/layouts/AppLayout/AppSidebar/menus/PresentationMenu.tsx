@@ -1,5 +1,4 @@
 import { isEmpty } from "lodash"
-import React from "react"
 
 import { Accordion, NavLink } from "@/components"
 import { Routes } from "@/lib"

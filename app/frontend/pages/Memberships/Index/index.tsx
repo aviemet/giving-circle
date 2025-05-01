@@ -1,12 +1,9 @@
-import React from "react"
-
 import { Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
+import MembershipsTable from "@/features/Memberships/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
-
-import MembershipsTable from "../Table"
 
 interface MembershipIndexProps {
 	memberships: Schema.MembershipsIndex[]

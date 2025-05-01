@@ -5,7 +5,7 @@ import { useTableContext } from "../TableContext"
 import RowInContext from "./RowInContext"
 
 export interface TableRow extends TableTrProps {
-	children?: JSX.Element | JSX.Element[]
+	children?: React.JSX.Element | React.JSX.Element[]
 }
 
 interface TableRowProps extends Omit<TableRow, "ref"> {

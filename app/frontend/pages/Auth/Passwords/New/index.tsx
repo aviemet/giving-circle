@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Title, Link } from "@/components"
 import { Field, Form, TextInput, Submit } from "@/components/Form"
 import { Routes } from "@/lib"

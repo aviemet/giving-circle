@@ -1,5 +1,5 @@
 import { Table } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useRef } from "react"
 
 import { type TableCellProps } from "."
@@ -22,7 +22,7 @@ const BodyCellWithContext = ({
 	return (
 		<Table.Td
 			ref={ tdRef }
-			className={ cx({ "table-column-fit": fitContent }, className) }
+			className={ clsx({ "table-column-fit": fitContent }, className) }
 			{ ...props }
 		>
 			{ children }

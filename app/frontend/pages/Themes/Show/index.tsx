@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Group, Menu, Page, Section, Title } from "@/components"
 import { CardContainer } from "@/features/Cards"
 import OrgCard from "@/features/Cards/OrgCard"

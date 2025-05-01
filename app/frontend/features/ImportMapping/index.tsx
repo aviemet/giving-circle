@@ -1,4 +1,4 @@
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useState, useEffect, useImperativeHandle } from "react"
 
 import { Table, Paper, Text, Box, Flex, Badge } from "@/components"
@@ -184,7 +184,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 				<Table wrapper={ false }>
 					<Table.Head>
 						<Table.Row>
-							<Table.HeadCell className={ cx("align-bottom", "center") }>#</Table.HeadCell>
+							<Table.HeadCell className={ clsx("align-bottom", "center") }>#</Table.HeadCell>
 							<>{ headings.map((heading, i) => (
 								<Table.HeadCell key={ i }>
 									<Flex mb="xs" align="center" style={ { whiteSpace: "nowrap" } }>
@@ -218,7 +218,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 						{ rows.map((org, i) => (
 							<React.Fragment key={ i }>
 								<Table.Row>
-									<Table.Cell className={ cx("align-middle") }>
+									<Table.Cell className={ clsx("align-middle") }>
 										<Text m="xs">{ i }</Text>
 									</Table.Cell>
 									<>{ headings.map((heading, j) => {
@@ -230,7 +230,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 										if(error) console.log({ org, i, heading, headingMapForType, error: errors[i] })
 
 										return (
-											<Table.Cell key={ `${j}-${heading}` } className={ cx({ error }) }>{ `${cellValue}` }</Table.Cell>
+											<Table.Cell key={ `${j}-${heading}` } className={ clsx({ error }) }>{ `${cellValue}` }</Table.Cell>
 										)
 									}) }</>
 								</Table.Row>

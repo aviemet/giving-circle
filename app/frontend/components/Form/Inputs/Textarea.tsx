@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { useInertiaInput, type NestedObject } from "use-inertia-form"
 
 import ConditionalWrapper from "@/components/ConditionalWrapper"
@@ -63,7 +62,7 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 			) }
 		>
 			<>
-				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
+				{ label && <label className={ clsx({ required }) } htmlFor={ id || inputId }>
 					{ label }
 				</label> }
 				<TextareaInput

@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Group, Title, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 

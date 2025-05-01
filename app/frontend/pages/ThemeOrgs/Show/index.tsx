@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Title, Menu, Page, Section, Text, Money } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"

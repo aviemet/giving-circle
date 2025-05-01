@@ -1,5 +1,3 @@
-import React from "react"
-
 const useClickAwayListener = (ref: React.RefObject<HTMLElement>, callback: Function) => {
 	const startClickListener = (callback?: Function) => {
 		document.addEventListener("click", handleClickAway)

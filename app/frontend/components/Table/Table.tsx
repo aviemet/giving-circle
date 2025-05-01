@@ -1,5 +1,5 @@
 import { Table, type TableProps as MantineTableProps } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useMemo } from "react"
 
 import { theme } from "@/lib"
@@ -72,7 +72,7 @@ const TableComponent: TableObject = ({
 				highlightOnHover={ highlightOnHover }
 				stickyHeader={ stickyHeader }
 				stickyHeaderOffset={ stickyHeaderOffsetProp }
-				className={ cx(className, classes.table, { "wrapper-offset": wrapper }) }
+				className={ clsx(className, classes.table, { "wrapper-offset": wrapper }) }
 				{ ...props }
 			>
 				{ children }

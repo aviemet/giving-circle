@@ -1,4 +1,4 @@
-import cx from "clsx"
+import clsx from "clsx"
 import React from "react"
 
 import { useTableContext } from "./TableContext"
@@ -6,7 +6,7 @@ import { useTableContext } from "./TableContext"
 import Table from "."
 
 interface RowIteratorProps {
-	render: (obj: any) => JSX.Element
+	render: (obj: any) => React.JSX.Element
 	emptyDataContent?: React.ReactNode
 }
 
@@ -25,10 +25,10 @@ const RowIterator = ({ render, emptyDataContent }: RowIteratorProps) => {
 		)
 	}
 
-	const injectRowProps = (row: JSX.Element) => {
+	const injectRowProps = (row: React.JSX.Element) => {
 		return React.cloneElement(row, {
 			name: row.key,
-			className: cx(
+			className: clsx(
 				{ checked: selected.has(String(row.key!)) },
 			),
 		})

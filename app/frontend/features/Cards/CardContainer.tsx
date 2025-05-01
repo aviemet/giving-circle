@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Group, GroupProps, SimpleGrid } from "@/components"
 import { exclude } from "@/lib"
@@ -42,7 +41,7 @@ const CardContainer = ({ children, className, ...props }: CardContainerProps) =>
 			cols={ { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 } }
 			// data-child-flex
 			// style={ { '--child-flex': flex } }
-			className={ cx(className, classes.cardContainer) }
+			className={ clsx(className, classes.cardContainer) }
 			// { ...exclude(props, ['flexGrow', 'flexShrink', 'flexBasis', 'flex']) }
 		>
 			{ children }

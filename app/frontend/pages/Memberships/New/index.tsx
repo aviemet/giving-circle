@@ -1,10 +1,7 @@
-import React from "react"
-
 import { Page, Section } from "@/components"
+import MembershipForm from "@/features/Memberships/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
-
-import MembershipForm from "../Form"
 
 interface NewMembershipProps {
 	membership: Schema.MembershipsFormData

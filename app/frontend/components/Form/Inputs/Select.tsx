@@ -1,5 +1,4 @@
 import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from "@mantine/core"
-import React from "react"
 import { useInertiaInput, type UseFormProps, NestedObject } from "use-inertia-form"
 
 import { ConditionalWrapper, Group } from "@/components"

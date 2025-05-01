@@ -1,5 +1,5 @@
 import { ActionIcon, type ActionIconProps, MantineColorScheme, useComputedColorScheme, useMantineColorScheme } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React from "react"
 
 import { SunIcon, MoonIcon } from "@/components/Icons"
@@ -29,7 +29,7 @@ const ToggleColorSchemeButton = ({ onClick, title, className, ...props }: Toggle
 			onClick={ handleClick }
 			title={ title || "Toggle color scheme" }
 			aria-label={ `Toggle color scheme to ${colorScheme === "dark" ? "light" : "dark"} mode` }
-			className={ cx(classes.colorSchemeButton, className) }
+			className={ clsx(classes.colorSchemeButton, className) }
 			{ ...props }
 		>
 			{ colorScheme === "dark" ? <SunIcon size={ 18 } /> : <MoonIcon size={ 18 } /> }

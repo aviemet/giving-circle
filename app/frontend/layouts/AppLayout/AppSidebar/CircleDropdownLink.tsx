@@ -1,6 +1,5 @@
-import cx from "clsx"
+import clsx from "clsx"
 import { isEmpty } from "lodash"
-import React from "react"
 
 import {
 	Link,
@@ -29,7 +28,7 @@ const CircleDropdownLink = () => {
 		<>
 			<Group
 				justify="space-between"
-				className={ cx(classes.circleMenuGroup) }
+				className={ clsx(classes.circleMenuGroup) }
 			>
 				<Link href={ Routes.circle(active_circle.slug) } underline="never">
 					<Group justify="space-between">
@@ -41,7 +40,7 @@ const CircleDropdownLink = () => {
 						<Button
 							p={ 0 }
 							variant="transparent"
-							className={ cx(classes.circleMenuButton) }
+							className={ clsx(classes.circleMenuButton) }
 							rightSection={ hasMultipleCircles && <DownArrowIcon /> }
 						>
 							{ active_circle.name }

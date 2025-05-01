@@ -1,5 +1,4 @@
 import { Group } from "@mantine/core"
-import React from "react"
 
 import { type Money } from "@/types"
 

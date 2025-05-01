@@ -1,6 +1,5 @@
 import { type TableTdProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { usePageProps } from "@/lib/hooks"
 
@@ -41,7 +40,7 @@ const RenderedCell = ({
 
 	if(hiddenByUser) return <></>
 
-	return <BodyCell className={ cx(className, { nowrap }) } { ...props }>{ children }</BodyCell>
+	return <BodyCell className={ clsx(className, { nowrap }) } { ...props }>{ children }</BodyCell>
 }
 
 export default RenderedCell

@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
 import ConditionalWrapper from "@/components/ConditionalWrapper"
@@ -62,7 +61,7 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 			) }
 		>
 			<>
-				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
+				{ label && <label className={ clsx({ required }) } htmlFor={ id || inputId }>
 					{ label }
 				</label> }
 				<RichTextInput

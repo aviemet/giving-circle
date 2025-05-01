@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Button, Table, Link, Text } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"

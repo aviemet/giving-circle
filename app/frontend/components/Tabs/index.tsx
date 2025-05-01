@@ -1,5 +1,4 @@
 import { Tabs, type TabsProps } from "@mantine/core"
-import React from "react"
 
 import TabsList from "./TabsList"
 import UrlTabs from "./UrlTabs"

@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { type UseFormProps } from "use-inertia-form"
 
 import { Title, Link, Box, Paper, SimpleGrid, Grid, Flex } from "@/components"
@@ -35,7 +34,7 @@ const Login = () => {
 	}
 
 	return (
-		<SimpleGrid cols={ { sm: 1, md: 2 } } spacing={ 0 } className={ cx(classes.authLayout) }>
+		<SimpleGrid cols={ { sm: 1, md: 2 } } spacing={ 0 } className={ clsx(classes.authLayout) }>
 			<Box id="auth-layout-left">
 				<Paper shadow="lg" radius="lg" p="xl" withBorder>
 
@@ -80,7 +79,7 @@ const Login = () => {
 
 						</Grid>
 
-						<Flex mt="lg" className={ cx(classes.bottomLinks) }>
+						<Flex mt="lg" className={ clsx(classes.bottomLinks) }>
 							<Link href={ Routes.newUserPassword() }>Reset Password</Link>
 							<Link href={ Routes.newUserRegistration() }>Register</Link>
 						</Flex>

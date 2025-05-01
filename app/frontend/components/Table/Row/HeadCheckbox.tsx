@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Checkbox } from "@/components/Inputs"
 import { CheckboxProps } from "@/components/Inputs/Checkbox"
 

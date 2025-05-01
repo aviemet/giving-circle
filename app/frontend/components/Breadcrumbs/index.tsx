@@ -1,5 +1,5 @@
 import { BoxProps } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React from "react"
 
 import { Box, Link, Portal } from "@/components"
@@ -29,7 +29,7 @@ const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: Breadcrum
 			<Box
 				component="nav"
 				aria-label="breadcrumbs"
-				className={ cx(classes.breadcrumbs, className) }
+				className={ clsx(classes.breadcrumbs, className) }
 				{ ...props }
 			>
 				<ol>
@@ -52,7 +52,7 @@ const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: Breadcrum
 								}
 								{
 									!isLastCrumb && (
-										<Box className={ cx(classes.separator) } aria-hidden="true">
+										<Box className={ clsx(classes.separator) } aria-hidden="true">
 											{ separator }
 										</Box>
 									)

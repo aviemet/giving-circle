@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"

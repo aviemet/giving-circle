@@ -1,6 +1,5 @@
 import { Group, Pagination, type PaginationProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Link } from "@/components"
 
@@ -30,7 +29,7 @@ const PaginationComponent = ({
 				{ model && <>
 					Records per page:
 					<LimitSelect
-						className={ cx(classes.limitSelect) }
+						className={ clsx(classes.limitSelect) }
 						pagination={ pagination }
 						model={ model }
 					/>
@@ -39,7 +38,7 @@ const PaginationComponent = ({
 			</div>
 
 			<Pagination.Root
-				className={ cx(className, classes.pagination) }
+				className={ clsx(className, classes.pagination) }
 				total={ pages }
 				getItemProps={ (page) => ({
 					component: Link,

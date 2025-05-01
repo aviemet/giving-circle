@@ -1,5 +1,3 @@
-import React from "react"
-
 import FormConsumer from "./FormConsumer"
 
 const ConsoleLogger = ({ key }: { key?: string }) => {

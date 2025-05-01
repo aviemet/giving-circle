@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Link } from "@/components"
 import { EditIcon } from "@/components/Icons"
 

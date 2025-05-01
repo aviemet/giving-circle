@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
 import ConditionalWrapper from "@/components/ConditionalWrapper"
@@ -76,7 +75,7 @@ const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 				error={ errorKey ? form.getError(errorKey) : error }
 				wrapperProps={ {
 					component: Field,
-					className: cx({ required }),
+					className: clsx({ required }),
 					errors: Boolean(error),
 					style: { padding: 0 },
 				} }

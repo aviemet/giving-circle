@@ -1,5 +1,5 @@
 import { Menu, createPolymorphicComponent, type MenuItemProps as MantineItemProps } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { forwardRef } from "react"
 
 import { Link } from "@/components"
@@ -23,7 +23,7 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>((
 			ref={ ref }
 			disabled={ disabled }
 			component={ Link }
-			className={ cx(classes.menuItem, className, { disabled }) }
+			className={ clsx(classes.menuItem, className, { disabled }) }
 			leftSection={ <>{ icon && icon }{ leftSection && leftSection }</> }
 			{ ...props }
 		>

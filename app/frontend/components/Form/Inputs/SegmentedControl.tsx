@@ -1,4 +1,3 @@
-import React from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
 import ConditionalWrapper from "@/components/ConditionalWrapper"

@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Table } from "@/components"
 
 import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"

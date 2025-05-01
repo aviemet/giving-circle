@@ -1,6 +1,5 @@
 import { Box } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import {
 	Form as InertiaForm,
 	type FormProps as UifFormProps,
@@ -24,7 +23,7 @@ const Form = <TForm extends NestedObject>({
 	...props
 }: FormProps<TForm>) => {
 	return (
-		<Box className={ cx(classes.form) }>
+		<Box className={ clsx(classes.form) }>
 			<InertiaForm
 				data={ data }
 				railsAttributes={ railsAttributes }

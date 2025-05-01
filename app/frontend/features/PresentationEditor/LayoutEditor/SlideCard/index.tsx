@@ -1,6 +1,5 @@
 import { modals } from "@mantine/modals"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { useForm } from "use-inertia-form"
 
 import { ActionIcon, Card, Image, Text, Center } from "@/components"
@@ -34,13 +33,13 @@ const SlideCard = ({ path, removeInput }: SlideCardProps) => {
 			padding="md"
 			radius="md"
 			withBorder
-			className={ cx(classes.slideCard) }
+			className={ clsx(classes.slideCard) }
 		>
-			<Card.Section mb="sm" className={ cx(classes.imageSection) }>
+			<Card.Section mb="sm" className={ clsx(classes.imageSection) }>
 				<ActionIcon
 					variant="transparent"
 					color="white"
-					className={ cx("remove-input-button") }
+					className={ clsx("remove-input-button") }
 					onClick={ handleRemoveElement }
 				>
 					<CrossIcon />

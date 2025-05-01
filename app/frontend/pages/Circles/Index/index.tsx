@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Title, Page, Container, Divider, Group, Stack } from "@/components"
 import { NewButton } from "@/components/Button"
 import { CardContainer, CircleCard, ThemeCard } from "@/features/Cards"
@@ -13,7 +11,6 @@ interface CircleIndexProps {
 // @path: /circles
 // @route: circles
 const CirclesIndex = ({ circles }: CircleIndexProps) => {
-	console.log({ circles })
 	return (
 		<Page
 			title="Dashboard"

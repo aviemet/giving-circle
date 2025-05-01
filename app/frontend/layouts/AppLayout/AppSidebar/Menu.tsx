@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Accordion, NavLink } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"

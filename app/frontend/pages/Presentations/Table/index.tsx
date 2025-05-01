@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Table, Link } from "@/components"
 import { EditButton } from "@/components/Button"
@@ -30,7 +29,7 @@ const PresentationTable = (props: TableProps) => {
 							<Link href={ Routes.themePresentation(params.circle_slug, params.theme_slug, presentation.slug) }>{ presentation.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell fitContent className={ cx({ [classes.table]: presentation.active }) }>
+						<Table.Cell fitContent className={ clsx({ [classes.table]: presentation.active }) }>
 							{ presentation.active && <CheckIcon /> }
 						</Table.Cell>
 

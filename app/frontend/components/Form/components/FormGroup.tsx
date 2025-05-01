@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { DivProps } from "react-html-props"
 import { NestedFields } from "use-inertia-form"
 
@@ -18,7 +17,7 @@ const FormGroup = ({ children, legend, outline = true, model, grid = true }: For
 			condition={ grid }
 			wrapper={ children => (
 				<Grid.Col>
-					<Grid component="fieldset" className={ cx({ outline }) } style={ {
+					<Grid component="fieldset" className={ clsx({ outline }) } style={ {
 						marginTop: legend ? "0.5rem" : undefined,
 					} }>
 						{ children }
@@ -26,7 +25,7 @@ const FormGroup = ({ children, legend, outline = true, model, grid = true }: For
 				</Grid.Col>
 			) }
 			elseWrapper={ children => (
-				<Box component="fieldset" className={ cx({ outline }) } style={ {
+				<Box component="fieldset" className={ clsx({ outline }) } style={ {
 					marginTop: legend ? "0.5rem" : undefined,
 				} }>
 					{ children }

@@ -1,5 +1,4 @@
 import { Table } from "@mantine/core"
-import React from "react"
 
 import { useTableContext } from "../TableContext"
 import BodyCellWithContext from "./BodyCellWithContext"

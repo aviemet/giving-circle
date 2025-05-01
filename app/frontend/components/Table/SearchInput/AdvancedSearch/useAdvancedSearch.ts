@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react"
-import cx from "clsx"
+import clsx from "clsx"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { NestedURLSearchParams } from "@/lib"
@@ -131,7 +131,7 @@ const useAdvancedSearch = (
 				}
 			} }),
 			wrapperProps: {
-				className: cx({ highlighted: !isUnset(value) && !param?.dependent }),
+				className: clsx({ highlighted: !isUnset(value) && !param?.dependent }),
 			// 	style: (theme: MantineTheme) => ({
 			// 		'&.highlighted, &.highlighted input': {
 			// 			color: theme.other.colorSchemeOption(

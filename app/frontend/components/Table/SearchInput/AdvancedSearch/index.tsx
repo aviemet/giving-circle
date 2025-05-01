@@ -9,7 +9,7 @@ import {
 	Box,
 } from "@mantine/core"
 import { useClickOutside } from "@mantine/hooks"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useState } from "react"
 
 import { DoubleDownArrowIcon } from "@/components/Icons"
@@ -73,7 +73,7 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 						ref={ setSearchPaper }
 						shadow="md"
 						p="md"
-						className={ cx(classes.paper) }
+						className={ clsx(classes.paper) }
 						style={ {
 							...styles,
 							left: rem(navBarWidth + Number(px("1rem"))),

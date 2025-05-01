@@ -1,5 +1,4 @@
 import { Menu, type MenuProps } from "@mantine/core"
-import React from "react"
 
 import MenuItem from "./MenuItem"
 import MenuLink from "./MenuLink"

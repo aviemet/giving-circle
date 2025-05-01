@@ -1,6 +1,5 @@
 import { Box, type BoxProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 interface LabelProps extends
 	BoxProps,
@@ -11,7 +10,7 @@ interface LabelProps extends
 
 const Label = ({ children, required = false, className, ...props }: LabelProps) => {
 	return (
-		<Box component="label" className={ cx(className, { required }) } { ...props }>
+		<Box component="label" className={ clsx(className, { required }) } { ...props }>
 			{ children }
 		</Box>
 	)

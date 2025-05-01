@@ -1,4 +1,3 @@
-import React from "react"
 import { InputProps } from "react-html-props"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 

@@ -1,5 +1,3 @@
-import React from "react"
-
 interface ShowUserProps {
 	user: Schema.User
 }

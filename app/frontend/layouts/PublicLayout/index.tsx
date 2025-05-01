@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Group, Box, AppShell, Burger, Skeleton } from "@/components"
 import { CircleDotIcon } from "@/components/Icons"
 import { UserHeaderMenu } from "@/features"

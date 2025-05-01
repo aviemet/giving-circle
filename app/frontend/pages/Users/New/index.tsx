@@ -1,4 +1,3 @@
-import React from "react"
 
 // @path: /users/new
 // @route: newUser

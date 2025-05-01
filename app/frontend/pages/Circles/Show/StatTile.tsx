@@ -5,7 +5,7 @@ import { Box, Group, Paper, Text } from "@/components"
 interface StatTileProps {
 	heading: string
 	value: string | number
-	icon: JSX.Element
+	icon: React.JSX.Element
 	color: string
 }
 

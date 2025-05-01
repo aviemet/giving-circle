@@ -1,6 +1,5 @@
 import { Box, BoxProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { type InputType } from "@/types"
 
@@ -21,7 +20,7 @@ const Field = ({
 }: FieldProps) => {
 	return (
 		<Box
-			className={ cx(
+			className={ clsx(
 				"field",
 				{ [String(type)]: type },
 				{ "required": required },

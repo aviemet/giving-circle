@@ -1,6 +1,5 @@
 import { router } from "@inertiajs/react"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Menu, Box, Group, Divider } from "@/components"
 import { TrashIcon } from "@/components/Icons"
@@ -38,7 +37,7 @@ const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectio
 
 	return (
 		<Group justify="space-between" align="start" style={ { marginBottom: 12 } } gap="sm">
-			<Group justify="space-between" className={ cx(classes.title) }>
+			<Group justify="space-between" className={ clsx(classes.title) }>
 				{ contextMenu?.options && <Menu position="bottom-end">
 					{ contextMenu?.label ? <Menu.Target>{ contextMenu.label }</Menu.Target> : <Menu.Target /> }
 

@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Flash } from "@/components"
 
 import Providers from "./Providers"

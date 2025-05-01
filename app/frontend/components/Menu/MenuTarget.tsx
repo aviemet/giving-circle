@@ -1,5 +1,4 @@
 import { Menu, type MenuTargetProps as MantineMenuTargetProps } from "@mantine/core"
-import React from "react"
 
 import { ActionIcon, Button } from "@/components"
 import { DotsIcon, DownArrowIcon } from "@/components/Icons"

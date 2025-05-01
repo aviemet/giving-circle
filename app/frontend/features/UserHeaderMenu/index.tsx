@@ -1,5 +1,3 @@
-import React from "react"
-
 import { Link, Menu, ActionIcon, Avatar, Divider, Text } from "@/components"
 import { LogoutIcon, SettingsIcon } from "@/components/Icons"
 import { Routes } from "@/lib"

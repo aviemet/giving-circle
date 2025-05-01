@@ -1,5 +1,3 @@
-import React from "react"
-
 import { ActionIcon, Card, Group, Image, Menu, Money, Text } from "@/components"
 import { DotsIcon, EditIcon, TrashIcon } from "@/components/Icons"
 import { rem } from "@/lib"

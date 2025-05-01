@@ -1,7 +1,6 @@
 import { type VisitOptions } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
 import { Tabs } from "@mantine/core"
-import React from "react"
 
 import { coerceArray } from "@/lib"
 import { useInit } from "@/lib/hooks"

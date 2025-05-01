@@ -1,5 +1,3 @@
-import React from "react"
-
 import { formatter } from "@/lib"
 
 interface DateProps {
