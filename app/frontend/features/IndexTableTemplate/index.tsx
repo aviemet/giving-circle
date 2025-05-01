@@ -8,6 +8,8 @@ interface IndexTableTemplateProps extends IndexTableTitleSectionProps {
 	pagination: Schema.Pagination
 	search?: boolean
 	advancedSearch?: React.ReactNode
+	actions?: React.ReactNode
+	searchPlaceholder?: string
 }
 
 const IndexTableTemplate = ({
@@ -18,6 +20,8 @@ const IndexTableTemplate = ({
 	search = true,
 	contextMenu,
 	advancedSearch,
+	actions,
+	searchPlaceholder,
 	...props
 }: IndexTableTemplateProps) => {
 	return (
@@ -29,7 +33,7 @@ const IndexTableTemplate = ({
 				pagination={ pagination }
 			>
 				<TableTitleSection contextMenu={ contextMenu }>
-					{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
+					{ search && <Table.SearchInput advancedSearch={ advancedSearch } placeholder={ searchPlaceholder } /> }
 				</TableTitleSection>
 
 				{ children }

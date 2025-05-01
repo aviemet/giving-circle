@@ -51,6 +51,7 @@ export {
 } from "react-icons/fa"
 
 export {
+	RiDownload2Fill as DownloadIcon,
 } from "react-icons/ri"
 
 export {

@@ -1,11 +1,11 @@
 import { type VisitOptions } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
-import { ActionIcon, Box } from "@mantine/core"
+import { Box } from "@mantine/core"
 import { useSessionStorage } from "@mantine/hooks"
 import { debounce } from "lodash"
 import React, { useEffect } from "react"
 
-import { SearchIcon, CrossIcon } from "@/components/Icons"
+import { SearchIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
 import { useInit, useLocation } from "@/lib/hooks"
 
@@ -17,13 +17,14 @@ import * as classes from "../Table.css"
 interface SearchInputProps {
 	columnPicker?: boolean
 	advancedSearch?: React.ReactNode
+	placeholder?: string
 }
 
 /**
  * Performs an Inertia request to the current url (window.location), using the search params
  * as query string with the key of 'search'
  */
-const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) => {
+const SearchInput = ({ columnPicker = true, advancedSearch, placeholder = "Search" }: SearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
 
 	const location = useLocation()
@@ -101,11 +102,14 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 				onChange={ e => {
 					setSearchValue(e.target.value)
 				} }
-				leftSection={ <SearchIcon size={ 24 } /> }
+				leftSection={ <SearchIcon size={ 16 } /> }
 				leftSectionPointerEvents="none"
 				className={ classes.searchInput }
 				wrapper={ false }
-				aria-label="Search"
+				aria-label={ placeholder }
+				placeholder={ placeholder }
+				radius="xl"
+				size="sm"
 			/>
 			{ columnPicker && <ColumnPicker /> }
 		</Box>

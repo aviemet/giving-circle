@@ -1,16 +1,17 @@
 import { router } from "@inertiajs/react"
 import clsx from "clsx"
 
-import { Menu, Box, Group, Divider } from "@/components"
-import { TrashIcon } from "@/components/Icons"
+import { Menu, Group, Divider, Button } from "@/components"
+import { TrashIcon, DotsIcon } from "@/components/Icons"
 import { useTableContext } from "@/components/Table/TableContext"
 
 import * as classes from "../IndexTableTemplate/IndexPage.css"
 
 type MenuOption = {
 	label: string
-	href: string
+	href?: string
 	icon?: React.ReactNode
+	onClick?: () => void
 }
 
 export interface IndexTableTitleSectionProps {
@@ -36,34 +37,46 @@ const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectio
 	}
 
 	return (
-		<Group justify="space-between" align="start" style={ { marginBottom: 12 } } gap="sm">
-			<Group justify="space-between" className={ clsx(classes.title) }>
-				{ contextMenu?.options && <Menu position="bottom-end">
-					{ contextMenu?.label ? <Menu.Target>{ contextMenu.label }</Menu.Target> : <Menu.Target /> }
-
-					<Menu.Dropdown>
-						{ contextMenu.options.map(({ label, href, icon }, index) => {
-							return (
-								<Menu.Link key={ index } href={ href } leftSection={ icon ? icon : undefined }>
-									{ label }
-								</Menu.Link>
-							)
-						}) }
-
-						{ contextMenu?.deleteRoute && selected.size > 0 && <>
-							<Divider />
-
-							<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ deleteRecords }>
-								Delete
-							</Menu.Item>
-						</> }
-
-					</Menu.Dropdown>
-				</Menu> }
-			</Group>
-			{ !!children && <Box className={ classes.content }>
+		<Group justify="space-between" align="center" style={ { marginBottom: 12 } } gap="sm">
+			<Group className={ clsx(classes.content) }>
 				{ children }
-			</Box> }
+			</Group>
+			{ contextMenu?.options && <Menu position="bottom-end">
+				<Menu.Target>
+					<Button
+						variant="filled"
+						radius="xl"
+						rightSection={ <DotsIcon size={ 16 } /> }
+					>
+						{ contextMenu.label || "Actions" }
+					</Button>
+				</Menu.Target>
+
+				<Menu.Dropdown>
+					{ contextMenu.options.map(({ label, href, icon, onClick }, index) => {
+						return (
+							<Menu.Item
+								key={ index }
+								leftSection={ icon }
+								onClick={ onClick }
+								component={ href ? "a" : "button" }
+								href={ href }
+							>
+								{ label }
+							</Menu.Item>
+						)
+					}) }
+
+					{ contextMenu?.deleteRoute && selected.size > 0 && <>
+						<Divider />
+
+						<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ deleteRecords }>
+							Delete
+						</Menu.Item>
+					</> }
+
+				</Menu.Dropdown>
+			</Menu> }
 		</Group>
 	)
 }

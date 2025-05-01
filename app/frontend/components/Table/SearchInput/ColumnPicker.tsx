@@ -9,7 +9,6 @@ import { Checkbox } from "@/components/Inputs"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-
 import * as classes from "../Table.css"
 import { useTableContext } from "../TableContext"
 
@@ -39,8 +38,8 @@ const ColumnPicker = () => {
 	return (
 		<Menu closeOnItemClick={ false } position="bottom-end">
 			<Menu.Target>
-				<Button size="md" p="xs" className={ clsx(classes.columnPickerButton) }>
-					<ColumnsIcon size={ 24 } />
+				<Button size="sm" p="xs" className={ clsx(classes.columnPickerButton) }>
+					<ColumnsIcon size={ 20 } />
 				</Button>
 			</Menu.Target>
 

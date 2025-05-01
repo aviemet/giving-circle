@@ -149,22 +149,27 @@ export const section = css`
 export const searchWrapper = css`
 	display: flex;
 	flex: 1;
+	gap: 0;
 `
 
 export const searchInput = css`
 	flex: 1;
 
 	input {
+		border-radius: ${ vars.radius.xl };
+	}
+
+	&:not(:last-child) input {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
-		border-top-left-radius: ${ vars.radius.sm };
-		border-bottom-left-radius: ${ vars.radius.sm };
 	}
 `
 
 export const columnPickerButton = css`
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+	border-top-right-radius: ${ vars.radius.xl };
+	border-bottom-right-radius: ${ vars.radius.xl };
 `
 
 export const pagination = css`
