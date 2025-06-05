@@ -1,8 +1,6 @@
-interface PresentationLayoutProps {
-	children: any
-}
+import { LayoutProps } from ".."
 
-const PresentationLayout = ({ children }: PresentationLayoutProps) => {
+const PresentationLayout = ({ children }: LayoutProps) => {
 	return (
 		<div>{ children }</div>
 	)

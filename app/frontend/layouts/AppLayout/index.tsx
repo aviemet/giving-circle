@@ -5,17 +5,13 @@ import { AppShell } from "@/components"
 import { useHeadroom, useTheme } from "@/lib/hooks"
 import useLayoutStore from "@/store/LayoutStore"
 
+import { LayoutProps } from ".."
 import AppFooter from "./AppFooter"
 import AppHeader from "./AppHeader"
 import * as classes from "./AppLayout.css"
 import AppSidebar from "./AppSidebar"
 
-
-interface AppLayoutProps {
-	children: any
-}
-
-const AppLayout = ({ children }: AppLayoutProps) => {
+const AppLayout = ({ children }: LayoutProps) => {
 	const {
 		sidebarOpen,
 		sidebarVisible,

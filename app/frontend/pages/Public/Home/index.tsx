@@ -1,4 +1,5 @@
 import { Box, Title, Text } from "@/components"
+import { withLayout } from "@/lib"
 
 // @path: /
 // @route: root
@@ -11,4 +12,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default withLayout(Home, "public")

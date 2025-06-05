@@ -2,7 +2,7 @@ import { type UseFormProps } from "use-inertia-form"
 
 import { Box, Title, Link } from "@/components"
 import { Form, TextInput, PasswordInput, Submit, Field } from "@/components/Form"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 
 type TRegisterFormData = {
 	user: {
@@ -99,4 +99,4 @@ const Register = () => {
 	)
 }
 
-export default Register
+export default withLayout(Register, "auth")

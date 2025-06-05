@@ -1,6 +1,4 @@
-interface LayoutProps {
-	children: any
-}
+import { LayoutProps } from ".."
 
 const Layout = ({ children }: LayoutProps) => {
 	return (

@@ -3,7 +3,7 @@ import { type UseFormProps } from "use-inertia-form"
 
 import { Title, Link, Box, Paper, SimpleGrid, Grid, Flex } from "@/components"
 import { Form, TextInput, PasswordInput, Checkbox, Submit } from "@/components/Form"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 
 import * as classes from "./Login.css"
 
@@ -95,4 +95,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default withLayout(Login, "auth")

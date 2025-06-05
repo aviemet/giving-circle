@@ -1,68 +1,56 @@
 import { createInertiaApp, router } from "@inertiajs/react"
 import dayjs from "dayjs"
+import duration from "dayjs/plugin/duration"
 import localizedFormat from "dayjs/plugin/localizedFormat"
+import relativeTime from "dayjs/plugin/relativeTime"
 import { createRoot } from "react-dom/client"
 
-import { PublicLayout, AppLayout, AuthLayout, PresentationLayout, LayoutWrapper } from "../layouts"
-import { propsMiddleware } from "./middleware"
+import { LAYOUTS } from "../layouts"
+import {
+	applyPropsMiddleware,
+	setupCSRFToken,
+	setupInertiaListeners,
+	handlePageLayout,
+} from "./middleware"
 import { runAxe } from "./middleware/axe"
 
+const pages = import.meta.glob<PagesObject>("../pages/**/index.tsx")
 
 dayjs.extend(localizedFormat)
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
 const SITE_TITLE = "Giving Circle"
 
-type PagesObject = { default: React.ComponentType<any> & {
-	layout?: React.ComponentType<any>
+export type PagesObject<T = any> = { default: React.ComponentType<T> & {
+	layout?: React.ComponentType<T>
+	defaultLayout?: keyof typeof LAYOUTS
 } }
 
-// Map of layout names to components
-// This needs to manually be kept in sync with the definitions on the server
-// app/controllers/concerns/inertia_share/layout.rb
-const LAYOUT_COMPONENTS = {
-	"AppLayout": AppLayout,
-	"AuthLayout": AuthLayout,
-	"PublicLayout": PublicLayout,
-	"PresentLayout": PresentationLayout,
-} as const
-
 document.addEventListener("DOMContentLoaded", () => {
+	setupCSRFToken()
+	setupInertiaListeners(router)
+
 	createInertiaApp({
 		title: title => `${SITE_TITLE} - ${title}`,
 
 		resolve: async name => {
-			const pages = import.meta.glob<PagesObject>("../pages/**/index.tsx")
-			const page = (await pages[`../pages/${name}/index.tsx`]()).default
+			const page: PagesObject = (await pages[`../pages/${name}/index.tsx`]())
 
-			page.layout = (page) => {
-				const props = page.props
-				let Layout = LAYOUT_COMPONENTS[props.layout as keyof typeof LAYOUT_COMPONENTS] || LAYOUT_COMPONENTS["AppLayout"]
-
-				return (
-					<LayoutWrapper>
-						<Layout>
-							{ page }
-						</Layout>
-					</LayoutWrapper>
-				)
-			}
-
-			return page
+			return handlePageLayout(page)
 		},
 
 		setup({ el, App, props }) {
 			const root = createRoot(el)
 
-			// Convert ISO strings from server to javascript Date objects
-			props.initialPage.props = propsMiddleware(props.initialPage.props)
+			props.initialPage.props = applyPropsMiddleware(props.initialPage.props)
 
-			root.render(<App { ...props } />)
-
-			// Adds accessibility errors to console
-			router.on("success", event => {
-				event.detail.page.props = propsMiddleware(event.detail.page.props)
+			router.on("success", () => {
 				runAxe(root)
 			})
+
+			runAxe(root)
+			root.render(<App { ...props } />)
 		},
 	})
 })

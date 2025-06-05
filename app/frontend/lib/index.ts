@@ -8,6 +8,7 @@ export * from "./collections"
 export * from "./forms"
 export * from "./theme"
 export * from "./units"
+export * from "./withLayout"
 
 export { rem } from "@mantine/core"
 

@@ -1,6 +1,6 @@
 import { Title, Link } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 
 interface ConfirmationsNew {
 	user: Schema.User
@@ -37,4 +37,4 @@ const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 	)
 }
 
-export default ConfirmationsNew
+export default withLayout(ConfirmationsNew, "auth")

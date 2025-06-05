@@ -3,11 +3,9 @@ import { CircleDotIcon } from "@/components/Icons"
 import { UserHeaderMenu } from "@/features"
 import { useDisclosure } from "@/lib/hooks"
 
-interface PublicLayoutProps {
-	children: any
-}
+import { LayoutProps } from ".."
 
-const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
+const PublicLayout: React.FC<LayoutProps> = ({ children }) => {
 	const [opened, { toggle }] = useDisclosure()
 
 	return (

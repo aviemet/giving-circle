@@ -1,6 +1,6 @@
 import { Title, Link } from "@/components"
 import { Field, Form, TextInput, Submit } from "@/components/Form"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 
 type TPasswordsNewFormData = {
 	email: string
@@ -32,4 +32,4 @@ const PasswordsNew = () => {
 	)
 }
 
-export default PasswordsNew
+export default withLayout(PasswordsNew, "auth")
