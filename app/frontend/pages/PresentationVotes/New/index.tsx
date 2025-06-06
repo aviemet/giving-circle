@@ -1,15 +1,15 @@
 import { Page, Section } from "@/components"
+import PresentationVoteForm from "@/features/presentationVotes/Form"
 import { Routes } from "@/lib"
 
-import PresentationVoteForm from "../Form"
 
-interface INewPresentationVoteProps {
+interface NewPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesFormData
 }
 
 // @path: /:circle_slug/presentations/:presentation_slug/presentation_votes/new
 // @route: newPresentationVote
-const NewPresentationVote = ({ ...data }: INewPresentationVoteProps) => {
+const NewPresentationVote = ({ ...data }: NewPresentationVoteProps) => {
 	const title = "New Presentation Vote"
 
 	return (

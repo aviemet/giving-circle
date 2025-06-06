@@ -1,13 +1,13 @@
 import { Group, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-interface IShowPresentationVoteProps {
+interface ShowPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesShow
 }
 
 // @path: /:circle_slug/presentation_votes/:id
 // @route: vote
-const ShowPresentationVote = ({ presentation_vote }: IShowPresentationVoteProps) => {
+const ShowPresentationVote = ({ presentation_vote }: ShowPresentationVoteProps) => {
 	const title = "PresentationVote"
 
 	return (

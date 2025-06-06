@@ -1,8 +1,8 @@
 import { Page, Section } from "@/components"
+import PresentationDistributionForm from "@/features/presentation/distributions/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationDistributionForm from "../Form"
 
 interface NewPresentationDistributionProps {
 	presentation_distribution: Schema.PresentationDistributionsFormData
@@ -12,7 +12,7 @@ interface NewPresentationDistributionProps {
 // @route: newThemePresentationsDistribution
 const NewPresentationDistribution = ({ ...data }: NewPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"newThemePresentationsDistribution">()
 	const title = "New Distribution"
 
 	return (

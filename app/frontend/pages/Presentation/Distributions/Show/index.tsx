@@ -10,7 +10,7 @@ interface ShowPresentationDistributionProps {
 // @route: themePresentationsDistribution
 const ShowPresentationDistribution = ({ presentation_distribution }: ShowPresentationDistributionProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"themePresentationsDistribution">()
 	const title = "PresentationDistribution"
 
 	return (

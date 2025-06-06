@@ -10,7 +10,7 @@ interface ShowPresentationVoteProps {
 // @route: themePresentationsVote
 const ShowPresentationVote = ({ presentation_vote }: ShowPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"themePresentationsVote">()
 	const title = "PresentationVote"
 
 	return (

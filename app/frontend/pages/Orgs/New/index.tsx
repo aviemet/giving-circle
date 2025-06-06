@@ -1,8 +1,8 @@
 import { Title, Page, Section } from "@/components"
+import OrgForm from "@/features/orgs/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import OrgForm from "../Form"
 
 interface NewOrgProps {
 	org: Schema.OrgsFormData

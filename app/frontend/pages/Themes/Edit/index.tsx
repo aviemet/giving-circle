@@ -1,8 +1,8 @@
 import { Page, Section } from "@/components"
+import ThemesForm from "@/features/themes/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import ThemesForm from "../Form"
 
 interface EditThemeProps {
 	theme: Schema.ThemesEdit

@@ -1,8 +1,8 @@
 import { Page, Section } from "@/components"
+import PresentationsForm from "@/features/presentations/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationsForm from "../Form"
 
 interface EditPresentationProps {
 	presentation: Schema.PresentationsEdit

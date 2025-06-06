@@ -1,8 +1,8 @@
 import { Page, Section } from "@/components"
+import PresentationVotesForm from "@/features/presentation/votes/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationVotesForm from "../Form"
 
 interface EditPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesEdit
@@ -12,7 +12,7 @@ interface EditPresentationVoteProps {
 // @route: editThemePresentationsVote
 const EditPresentationVote = ({ presentation_vote }: EditPresentationVoteProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"editThemePresentationsVote">()
 	const title = "Edit Vote"
 
 	return (

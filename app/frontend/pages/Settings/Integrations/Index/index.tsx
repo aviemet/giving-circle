@@ -1,6 +1,6 @@
 import { Group, Title, Menu } from "@/components"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 
 import Empty from "./Empty"
 import SmtpList from "./SmtpList"
@@ -29,4 +29,4 @@ const Mail = ({ smtps }: MailSettingsProps) => {
 	)
 }
 
-export default Mail
+export default withLayout(Mail, "settings")

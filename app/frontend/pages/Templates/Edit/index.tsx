@@ -1,7 +1,7 @@
 import { Page, Section } from "@/components"
+import TemplatesForm from "@/features/templates/Form"
 import { Routes } from "@/lib"
 
-import TemplatesForm from "../Form"
 
 interface EditTemplateProps {
 	template: Schema.PresentationTemplatesEdit

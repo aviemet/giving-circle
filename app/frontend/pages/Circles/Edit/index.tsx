@@ -1,8 +1,7 @@
 import { Page, Section } from "@/components"
+import CirclesForm from "@/features/circles/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
-
-import CirclesForm from "../Form"
 
 interface EditCircleProps {
 	circle: Schema.CirclesEdit

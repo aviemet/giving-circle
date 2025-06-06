@@ -1,7 +1,7 @@
 import { Title, Page, Section } from "@/components"
+import CircleForm from "@/features/circles/Form"
 import { Routes } from "@/lib"
 
-import CircleForm from "../Form"
 
 interface NewCircleProps {
 	circle: Schema.CirclesFormData

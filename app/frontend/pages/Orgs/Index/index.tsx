@@ -1,10 +1,10 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
+import OrgsTable from "@/features/orgs/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import OrgsTable from "../Table"
 
 interface OrgIndexProps {
 	orgs: Schema.OrgsIndex[]

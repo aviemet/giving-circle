@@ -1,7 +1,7 @@
 import { Page, Group, Card, Stack, Text } from "@/components"
 import { NewIcon, UserGroupIcon, CalendarIcon, UploadIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
-import MembershipsTable from "@/features/Memberships/Table"
+import MembershipsTable from "@/features/memberships/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

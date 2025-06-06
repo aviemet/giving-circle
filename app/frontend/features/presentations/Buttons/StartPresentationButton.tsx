@@ -2,7 +2,7 @@ import { Tooltip, Button, ButtonProps } from "@/components"
 import { PresentationIcon } from "@/components/Icons"
 
 interface PresentationIconProps extends ButtonProps {
-	presentation: Schema.PresentationsShallow
+	presentation: Schema.PresentationsPersisted
 }
 
 const StartPresentationButton = ({ presentation }: PresentationIconProps) => {

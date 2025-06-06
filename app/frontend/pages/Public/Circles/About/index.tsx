@@ -1,3 +1,5 @@
+import { withLayout } from "@/lib"
+
 interface AboutCircleProps {
 	circle: Schema.CirclesShow
 }
@@ -10,4 +12,4 @@ const AboutCircle = ({ circle }: AboutCircleProps) => {
 	)
 }
 
-export default AboutCircle
+export default withLayout(AboutCircle, "public")

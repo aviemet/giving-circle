@@ -1,9 +1,8 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
+import UsersTable from "@/features/users/Table"
 import { Routes } from "@/lib"
-
-import UsersTable from "../Table"
 
 
 interface UserIndexProps {

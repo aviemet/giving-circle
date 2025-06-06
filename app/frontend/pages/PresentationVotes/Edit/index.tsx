@@ -1,15 +1,15 @@
 import { Page, Section } from "@/components"
+import PresentationVotesForm from "@/features/presentationVotes/Form"
 import { Routes } from "@/lib"
 
-import PresentationVotesForm from "../Form"
 
-interface IEditPresentationVoteProps {
+interface EditPresentationVoteProps {
 	presentation_vote: Schema.PresentationVotesEdit
 }
 
 // @path: /:circle_slug/presentation_votes/:id/edit
 // @route: editVote
-const EditPresentationVote = ({ presentation_vote }: IEditPresentationVoteProps) => {
+const EditPresentationVote = ({ presentation_vote }: EditPresentationVoteProps) => {
 	const title = "Edit Presentation Vote"
 
 	return (

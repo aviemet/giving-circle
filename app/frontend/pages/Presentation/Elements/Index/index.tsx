@@ -1,10 +1,10 @@
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
+import PresentationElementsTable from "@/features/presentation/elements/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationElementsTable from "../Table"
 
 interface PresentationElementIndexProps {
 	presentation_elements: Schema.PresentationElementsIndex[]
@@ -15,7 +15,7 @@ interface PresentationElementIndexProps {
 // @route: themePresentationsElements
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"themePresentationsElements">()
 	const title = "Element"
 
 	return (

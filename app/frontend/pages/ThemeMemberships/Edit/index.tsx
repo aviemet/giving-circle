@@ -1,8 +1,8 @@
 import { Section, Page } from "@/components"
+import ThemeMembershipsForm from "@/features/themeMemberships/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import ThemeMembershipsForm from "../Form"
 
 interface EditThemeMembershipProps {
 	membership: Schema.MembershipsEdit

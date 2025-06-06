@@ -1,10 +1,10 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
+import PresentationVotesTable from "@/features/presentationVotes/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationVotesTable from "../Table"
 
 interface PresentationVoteIndexProps {
 	presentation_votes: Schema.PresentationVotesIndex[]

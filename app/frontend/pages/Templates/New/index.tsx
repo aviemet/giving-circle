@@ -1,7 +1,7 @@
 import { Title, Page, Section } from "@/components"
+import TemplateForm from "@/features/templates/Form"
 import { Routes } from "@/lib"
 
-import TemplateForm from "../Form"
 
 interface NewTemplateProps {
 	template: Schema.PresentationTemplatesFormData

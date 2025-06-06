@@ -1,9 +1,9 @@
 import { Table, Link } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type ITableProps } from "@/components/Table/Table"
+import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const PresentationVoteTable = (props: ITableProps) => {
+const PresentationVoteTable = (props: TableProps) => {
 	return (
 		<Table>
 			<Table.Head>

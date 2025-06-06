@@ -1,5 +1,6 @@
 import { Title } from "@/components"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { withLayout } from "@/lib"
 
 // @path: /settings/general
 // @route: settingsGeneral
@@ -11,4 +12,4 @@ const General = () => {
 	)
 }
 
-export default General
+export default withLayout(General, "settings")

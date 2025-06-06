@@ -1,10 +1,10 @@
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
+import PresentationVotesTable from "@/features/presentation/votes/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationVotesTable from "../Table"
 
 interface PresentationVoteIndexProps {
 	presentation_votes: Schema.PresentationVotesIndex[]
@@ -15,7 +15,7 @@ interface PresentationVoteIndexProps {
 // @route: themePresentationsVotes
 const PresentationVotesIndex = ({ presentation_votes, pagination }: PresentationVoteIndexProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"themePresentationsVotes">()
 	const title = "Vote"
 
 	return (

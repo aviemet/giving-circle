@@ -1,8 +1,8 @@
 import { Title } from "@/components"
+import SmtpForm from "@/features/settings/integrations/Form"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 
-import SmtpForm from "../Form"
 
 interface SmtpFormProps {
 	smtp: Schema.Smtp
@@ -21,4 +21,4 @@ const NewMail = ({ smtp }: SmtpFormProps) => {
 	)
 }
 
-export default NewMail
+export default withLayout(NewMail, "settings")

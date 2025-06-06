@@ -5,7 +5,7 @@ import { type UseFormProps } from "use-inertia-form"
 import { Box, Title } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 import useLayoutStore from "@/store/LayoutStore"
 
 interface AppearanceFormData {
@@ -70,4 +70,4 @@ const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 	)
 }
 
-export default AppearanceSettings
+export default withLayout(AppearanceSettings, "settings")

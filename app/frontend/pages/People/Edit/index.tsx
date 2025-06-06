@@ -1,8 +1,8 @@
 import { Title, Page, Section } from "@/components"
+import PeopleForm from "@/features/people/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PeopleForm from "../Form"
 
 interface EditPersonProps {
 	person: Schema.PeopleEdit

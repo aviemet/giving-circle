@@ -1,8 +1,8 @@
 import { Page, Section } from "@/components"
+import PresentationSlideForm from "@/features/presentation/slides/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationSlideForm from "../Form"
 
 interface NewPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesFormData
@@ -12,7 +12,7 @@ interface NewPresentationSlideProps {
 // @route: newThemePresentationsSlide
 const NewPresentationSlide = ({ ...data }: NewPresentationSlideProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"newThemePresentationsSlide">()
 	const title = "New Slide"
 
 	return (

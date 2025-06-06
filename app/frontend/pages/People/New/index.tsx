@@ -1,7 +1,7 @@
 import { Title, Page, Section } from "@/components"
+import PersonForm from "@/features/people/Form"
 import { Routes } from "@/lib"
 
-import PersonForm from "../Form"
 
 interface NewPersonProps {
 	person: Schema.PeopleFormData

@@ -1,8 +1,8 @@
 import { Page, Section } from "@/components"
+import PresentationElementForm from "@/features/presentation/elements/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationElementForm from "../Form"
 
 interface NewPresentationElementProps {
 	presentation_element: Schema.PresentationElementsFormData
@@ -12,7 +12,7 @@ interface NewPresentationElementProps {
 // @route: newThemePresentationsElement
 const NewPresentationElement = ({ ...data }: NewPresentationElementProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"">()
+	const { params } = usePageProps<"newThemePresentationsElement">()
 	const title = "New Element"
 
 	return (

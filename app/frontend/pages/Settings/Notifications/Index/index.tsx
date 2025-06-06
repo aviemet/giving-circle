@@ -1,5 +1,6 @@
 import { Title } from "@/components"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { withLayout } from "@/lib"
 
 // @path: /settings/notifications
 // @route: settingsNotifications
@@ -11,4 +12,4 @@ const Appearance = () => {
 	)
 }
 
-export default Appearance
+export default withLayout(Appearance, "settings")
