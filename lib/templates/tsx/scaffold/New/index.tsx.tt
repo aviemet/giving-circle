@@ -1,8 +1,7 @@
-import React from 'react'
-import { Page, Section } from '@/Components'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
-import <%= singular_table_name.camelize %>Form from '../Form'
+import { Page, Section } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+import <%= singular_table_name.camelize %>Form from "@/features/<%= plural_table_name %>/Form"
 
 interface New<%= singular_table_name.camelize %>Props {
 	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>FormData
@@ -10,13 +9,13 @@ interface New<%= singular_table_name.camelize %>Props {
 
 const New<%= singular_table_name.camelize %> = ({ ...data }: New<%= singular_table_name.camelize %>Props) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<''>()
-	const title = 'New <%= human_name.titleize %>'
+	const { params } = usePageProps<"">()
+	const title = "New <%= human_name.titleize %>"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: '<%= human_name.pluralize.titleize %>', href: Routes.<%= plural_table_name.camelize(:lower) %>() },
-			{ title: 'New <%= human_name.titleize %>', href: window.location.href },
+			{ title: "<%= human_name.pluralize.titleize %>", href: Routes.<%= plural_table_name.camelize(:lower) %>() },
+			{ title: "New <%= human_name.titleize %>", href: window.location.href },
 		] }>
 
 			<Section>

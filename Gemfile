@@ -27,14 +27,18 @@ gem "boolean_timestamp", "~> 1.1"
 gem "jsonb_accessor", "~> 1.3"
 gem "oj_serializers", "~> 2.0"
 gem "types_from_serializers", "~> 2.1"
+gem "rails-settings-cached", "~> 2.9"
 
 # Helpers
-gem "factory_bot", ">= 6.2"
+gem "factory_bot", ">= 6.4"
+gem "factory_bot_rails", ">=6.4"
 gem "js-routes", "~> 2.3"
 gem "overmind", "~> 2.5"
 gem "amazing_print", "~> 1.4"
-gem "delayed_job_active_record", "~> 4.1"
+gem "good_job", "~> 4.7"
 gem "activerecord-import", "~> 1.7"
+gem "mini_magick", "~> 5.1"
+gem "active_storage_validations", "~> 2.0"
 gem "thor", "~> 1.3"
 
 gem "tzinfo-data"
@@ -52,17 +56,19 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "rspec-rails", "~> 7.1"
-  gem "factory_bot_rails", ">=6.2"
   # gem "pry-rails", "~> 0.3.9"
   gem "pry"
-  gem 'faker'
+  gem "faker"
+
+  gem "bullet", ">= 7.0"
 
   # Linting
-  gem "rubocop-rails", "~> 2.14", require: false
-  gem "rubocop-rspec", "~> 3.2", require: false
-  gem "rubocop-performance", "~> 1.13", require: false
-  gem "rubocop-daemon", "~> 0.3.2", require: false
-  gem "rubocop-factory_bot", "~> 2.26", require: false
+  gem "rubocop-rails", ">= 2.14", require: false
+  gem "rubocop-rspec", ">= 2.9", require: false
+  gem "rubocop-performance", ">= 1.13", require: false
+  gem "rubocop-daemon", ">= 0.3.2", require: false
+  gem "rubocop-capybara", ">= 2.20", require: false
+  gem "rubocop-factory_bot", ">= 2.25", require: false
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
@@ -71,21 +77,21 @@ group :development, :test do
 
   # File annotation
   gem "chusaku", "~> 1.2", require: false
-  gem "annotate", "~> 3.2", require: false
+  gem "annotaterb", "~> 4.14", require: false
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  gem "spring"
+  # Live Reload
+  gem "rack-livereload", ">= 0.3.17"
+  gem "guard-livereload", ">= 2.5", require: false
 
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
+  # Security analysis tool
   gem "brakeman", "~> 6.1", require: false
 
+  # Email previews
   gem "letter_opener", "~> 1.10"
 
   # I18n
@@ -93,6 +99,10 @@ group :development do
   gem "i18n-tasks", "~> 1.0", require: false
   # Generate json and ts locale files from locale.yml files [https://github.com/fnando/i18n-js]
   gem "i18n-js", "~> 4.2", require: false
+
+  # Tools for VSCode
+  gem "solargraph", ">= 0.48.0", require: false
+  gem "ruby-lsp", ">= 0.23.6", require: false
 end
 
 group :test do
@@ -105,7 +115,6 @@ group :test do
   gem "generator_spec", ">= 0.9.4"
   gem "database_cleaner-active_record", "~> 2.0"
   gem "shoulda-matchers", "~> 6.4"
-  gem "bullet", "~> 7.0"
   gem "simplecov", "~> 0.22.0"
   gem "pundit-matchers", "~> 3.1"
 end

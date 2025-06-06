@@ -47,8 +47,8 @@ Rails.application.routes.draw do
   resources :circles, param: :circle_slug, only: [:new, :create, :index]
 
   # Nested resources under Circle with standard slug param
-  scope ':circle_slug' do
-    resource :circles, path: '/', param: :circle_slug, as: :circle, shallow: true, except: [:new, :create, :index] do
+  scope ":circle_slug" do
+    resource :circles, path: "/", param: :circle_slug, as: :circle, shallow: true, except: [:new, :create, :index] do
       get :about
 
       resources :memberships, param: :slug, concerns: [:bulk_delete]
@@ -63,9 +63,9 @@ Rails.application.routes.draw do
       resources :themes, param: :slug, as: :themes, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
         get :about
 
-        get 'orgs', to: 'theme_orgs#index'
-        post 'orgs', to: 'theme_orgs#create'
-        get 'orgs/import', to: 'theme_orgs#import'
+        get "orgs", to: "theme_orgs#index"
+        post "orgs", to: "theme_orgs#create"
+        get "orgs/import", to: "theme_orgs#import"
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
         # Admin presentation routes
@@ -75,25 +75,25 @@ Rails.application.routes.draw do
 
         namespace :presentations do
           resources :presentation_distributions,
-            path: ':presentation_slug/distributions',
+            path: ":presentation_slug/distributions",
             shallow: false,
             as: :distributions,
-            controller: '/presentation/distributions'
+            controller: "/presentation/distributions"
           resources :presentation_elements,
-            path: ':presentation_slug/elements',
+            path: ":presentation_slug/elements",
             shallow: false,
             as: :elements,
-            controller: '/presentation/elements'
+            controller: "/presentation/elements"
           resources :presentation_slides,
-            path: ':presentation_slug/slides',
+            path: ":presentation_slug/slides",
             shallow: false,
             as: :slides,
-            controller: '/presentation/slides'
+            controller: "/presentation/slides"
           resources :presentation_votes,
-            path: ':presentation_slug/votes',
+            path: ":presentation_slug/votes",
             shallow: false,
             as: :votes,
-            controller: '/presentation/votes'
+            controller: "/presentation/votes"
         end
       end
     end

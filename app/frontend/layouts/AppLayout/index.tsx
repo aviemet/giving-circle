@@ -24,6 +24,7 @@ const AppLayout = ({ children }: LayoutProps) => {
 
 	useEffect(() => {
 		if(headroom === headerPinned) return
+
 		setHeaderPinned(headroom)
 	}, [headerPinned, headroom, setHeaderPinned])
 
@@ -34,7 +35,7 @@ const AppLayout = ({ children }: LayoutProps) => {
 			header={ {
 				height: theme.other.header.height,
 				collapsed: !headerPinned,
-				offset: false,
+				offset: true,
 			} }
 			navbar={ {
 				width: theme.other.navbar.width.open,

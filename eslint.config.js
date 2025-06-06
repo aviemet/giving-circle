@@ -8,21 +8,19 @@ import jsxA11yPlugin from "eslint-plugin-jsx-a11y"
 import reactHooksPlugin from "eslint-plugin-react-hooks"
 import jsoncParser from "jsonc-eslint-parser"
 
+const ignores = [
+	"app/javascript/**/*",
+	"app/frontend/types/serializers/**/*",
+	"app/frontend/lib/routes/urlParams.ts",
+	"app/frontend/lib/routes/routes.js",
+	"app/frontend/lib/routes/routes.d.ts",
+	"tmp/**/*",
+	"public/**/*",
+	".vscode/**/*",
+	".yarn/**/*",
+]
+
 export default [
-	{
-		ignores: [
-			"app/javascript/**/*",
-			"app/frontend/types/serializers/**/*",
-			"app/frontend/lib/routes/urlParams.ts",
-			"app/frontend/lib/routes/routes.js",
-			"app/frontend/lib/routes/routes.d.ts",
-			"tmp/**/*",
-			"public/**/*",
-			"coverage/**/*",
-			".vscode/**/*",
-			".yarn/**/*",
-		],
-	},
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
 	// Typescript/Javascript files
@@ -32,6 +30,7 @@ export default [
 		}),
 
 		files: ["**/*.{js,jsx,ts,tsx}"],
+		ignores,
 		languageOptions: {
 			ecmaVersion: "latest",
 			sourceType: "module",
@@ -183,6 +182,7 @@ export default [
 	// Typescript declaration files
 	{
 		files: ["**/*.d.ts"],
+		ignores,
 		rules: {
 			"no-unused-vars": "off",
 			"@typescript-eslint/member-delimiter-style": "off",
@@ -193,6 +193,7 @@ export default [
 	{
 		files: ["**/*.json", "**/*.jsonc", "**/*.json5"],
 		language: "json/json",
+		ignores,
 		plugins: {
 			jsonc: jsoncPlugin,
 			json,
@@ -204,12 +205,12 @@ export default [
 			"json/no-duplicate-keys": "error",
 			"jsonc/indent": ["error", 2, { ignoredNodes: ["Property"] }],
 			"@stylistic/no-multi-spaces": "off",
-			"jsonc/no-comments": "off",
 		},
 	},
 	// CSS-in-TS files
 	{
 		files: ["**/*.css.ts"],
+		ignores,
 		languageOptions: {
 			parser: tsParser,
 		},

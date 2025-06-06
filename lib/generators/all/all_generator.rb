@@ -1,4 +1,4 @@
-require 'rails/generators/rails/scaffold/scaffold_generator'
+require "rails/generators/rails/scaffold/scaffold_generator"
 
 class AllGenerator < Rails::Generators::ScaffoldGenerator
   def add_extra_components
