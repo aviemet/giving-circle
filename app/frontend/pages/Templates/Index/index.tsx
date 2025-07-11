@@ -29,7 +29,7 @@ const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) =
 			// 	],
 			// } }
 			>
-				<TemplatesTable />
+				<TemplatesTable circle={ circle } />
 			</IndexTableTemplate>
 		</Page>
 	)

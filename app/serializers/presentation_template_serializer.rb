@@ -20,7 +20,7 @@
 #  fk_rails_...  (circle_id => circles.id)
 #
 class PresentationTemplateSerializer < ApplicationSerializer
-  object_as :presentation_template
+  object_as :presentation
 
   identifier :slug
 

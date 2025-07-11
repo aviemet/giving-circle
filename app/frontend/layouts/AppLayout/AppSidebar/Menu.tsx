@@ -1,5 +1,6 @@
-import { Accordion, NavLink } from "@/components"
-import { Routes } from "@/lib"
+import { useEffect } from "react"
+
+import { Accordion } from "@/components"
 import { usePageProps } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
@@ -16,6 +17,24 @@ const Menu = () => {
 	const handleAccordionChange = (menus: (keyof typeof menuKeys)[]) => {
 		setOpenMenus(menus)
 	}
+
+	// Expand the bottom most menu upon navigation
+	useEffect(() => {
+		const contextToMenuMap = [
+			{ context: active_circle, menuKey: menuKeys.circle },
+			{ context: active_theme, menuKey: menuKeys.theme },
+			{ context: active_presentation, menuKey: menuKeys.presentation },
+		]
+
+		const activeMenus = contextToMenuMap
+			.filter(({ context }) => context)
+			.map(({ menuKey }) => menuKey)
+
+		if(activeMenus.length > 0) {
+			const bottomMostMenu = activeMenus[activeMenus.length - 1]
+			setOpenMenus([bottomMostMenu])
+		}
+	}, [active_circle, active_theme, active_presentation, setOpenMenus, menuKeys])
 
 	return (
 		<Accordion
