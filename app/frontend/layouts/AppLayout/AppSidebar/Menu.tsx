@@ -23,10 +23,6 @@ const Menu = () => {
 			value={ Array.from(openMenus) }
 			onChange={ (menus) => handleAccordionChange(menus as (keyof typeof menuKeys)[]) }
 		>
-			<NavLink
-				href={ Routes.circles() }
-				label="Dashboard"
-			/>
 			{ active_circle && <>
 				<CircleMenu />
 

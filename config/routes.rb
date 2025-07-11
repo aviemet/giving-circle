@@ -57,7 +57,7 @@ Rails.application.routes.draw do
         get :about
       end
 
-      # resources :presentation_templates, param: :slug
+      resources :presentation_templates, param: :slug, shallow: false
 
       resources :themes, param: :theme_slug, as: :themes
       resources :themes, param: :slug, as: :themes, except: [:show, :edit, :new, :index, :create, :update, :destroy] do

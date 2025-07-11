@@ -11,6 +11,8 @@ interface TemplateIndexProps {
 	circle: Schema.CirclesOptions
 }
 
+// @path: /:circle_slug/presentation_templates
+// @route: circlePresentationTemplates
 const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) => {
 	return (
 		<Page

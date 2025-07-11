@@ -53,7 +53,7 @@ export const themeObject = {
 			},
 		},
 		footer: {
-			height: 35,
+			height: 36,
 		},
 	},
 }

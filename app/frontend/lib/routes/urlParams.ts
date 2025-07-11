@@ -140,6 +140,28 @@ const urlParams = {
       "slug"
     ]
   },
+  "circlePresentationTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newCirclePresentationTemplate": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editCirclePresentationTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "circlePresentationTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
   "circleThemes": {
     "params": [
       "circle_slug"

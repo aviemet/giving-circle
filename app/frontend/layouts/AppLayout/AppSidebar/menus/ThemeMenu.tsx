@@ -21,20 +21,17 @@ const ThemeMenu = () => {
 		<Accordion.Item key={ menuKeys.theme } value={ menuKeys.theme }>
 			<Accordion.Control>{ active_theme.name }</Accordion.Control>
 			<Accordion.Panel>
-				<NavLink
-					href={ Routes.theme(active_circle.slug, active_theme.slug) }
-					label="Overview"
-				/>
+				<NavLink href={ Routes.theme(active_circle.slug, active_theme.slug) }>
+					Overview
+				</NavLink>
 
-				<NavLink
-					href={ Routes.themeOrgs(active_circle.slug, active_theme.slug) }
-					label="Organizations"
-				/>
+				<NavLink href={ Routes.themeOrgs(active_circle.slug, active_theme.slug) }>
+					Organizations
+				</NavLink>
 
-				<NavLink
-					href={ Routes.themePresentations(active_circle.slug, active_theme.slug) }
-					label="Presentations"
-				/>
+				<NavLink href={ Routes.themePresentations(active_circle.slug, active_theme.slug) }>
+					Presentations
+				</NavLink>
 			</Accordion.Panel>
 		</Accordion.Item>
 	)

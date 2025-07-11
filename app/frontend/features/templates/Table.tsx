@@ -3,11 +3,15 @@ import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { NewTemplateModal } from "@/features"
 import { Routes } from "@/lib"
-import { usePageProps } from "@/lib/hooks"
 
-const TemplateTable = (props: TableProps) => {
-	const { circle } = usePageProps()
+interface PresentationTemplateTableProps extends TableProps {
+	circle: Schema.CirclesPersisted
+}
 
+const TemplateTable = ({
+	circle,
+	...props
+}: PresentationTemplateTableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>

@@ -1,14 +1,14 @@
 class PresentationTemplatesController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :templates, -> { search(PresentationTemplate.includes_associated) }
-  expose :template, model: PresentationTemplate, scope: -> { PresentationTemplate.includes_associated }, id: -> { params[:slug] }, find_by: :slug
+  expose :templates, -> { search(Presentation.templates.includes_associated) }
+  expose :template, model: Presentation, scope: ->(scope){ scope.templates.includes_associated }, id: -> { params[:slug] }, find_by: :slug
 
   strong_params :template, permit: [:name]
 
   sortable_fields %w(name)
 
-  # @route GET /circles/:circle_slug/presentation_templates (circle_presentation_templates)
+  # @route GET /:circle_slug/presentation_templates (circle_presentation_templates)
   def index
     authorize templates
 
@@ -24,7 +24,7 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route GET /:circle_slug/presentation_templates/:slug (circle_presentation_template)
   def show
     authorize template
 
@@ -33,9 +33,9 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/presentation_templates/new (new_circle_presentation_template)
+  # @route GET /:circle_slug/presentation_templates/new (new_circle_presentation_template)
   def new
-    authorize PresentationTemplate.new
+    authorize Presentation.new
 
     render inertia: "Templates/New", props: {
       template: PresentationTemplate.new.render(:form_data),
@@ -43,7 +43,7 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route GET /circles/:circle_slug/presentation_templates/:slug/edit (edit_circle_presentation_template)
+  # @route GET /:circle_slug/presentation_templates/:slug/edit (edit_circle_presentation_template)
   def edit
     authorize template
 
@@ -52,11 +52,12 @@ class PresentationTemplatesController < ApplicationController
     }
   end
 
-  # @route POST /circles/:circle_slug/presentation_templates (circle_presentation_templates)
+  # @route POST /:circle_slug/presentation_templates (circle_presentation_templates)
   def create
-    authorize PresentationTemplate.new
+    authorize Presentation.new
 
-    template = PresentationTemplate.new(presentation_template_params)
+    template = Presentation.new(template_params)
+    template.template = true
     template.circle = circle
 
     if template.save
@@ -66,8 +67,8 @@ class PresentationTemplatesController < ApplicationController
     end
   end
 
-  # @route PATCH /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
-  # @route PUT /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route PATCH /:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route PUT /:circle_slug/presentation_templates/:slug (circle_presentation_template)
   def update
     authorize template
 
@@ -78,8 +79,7 @@ class PresentationTemplatesController < ApplicationController
     end
   end
 
-  # @route DELETE /circles/:circle_slug/presentation_templates (circle_presentation_templates)
-  # @route DELETE /circles/:circle_slug/presentation_templates/:slug (circle_presentation_template)
+  # @route DELETE /:circle_slug/presentation_templates/:slug (circle_presentation_template)
   def destroy
     authorize template
 
