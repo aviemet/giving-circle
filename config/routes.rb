@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   # Nested resources under Circle with standard slug param
   scope ":circle_slug" do
-    resource :circles, path: "/", param: :circle_slug, as: :circle, shallow: true, except: [:new, :create, :index] do
+    resource :circle, path: "/", param: :circle_slug, as: :circle, shallow: true, except: [:new, :create] do
       get :about
 
       resources :memberships, param: :slug, concerns: [:bulk_delete]
