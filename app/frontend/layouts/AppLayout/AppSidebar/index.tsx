@@ -2,8 +2,11 @@ import {
 	AppShell,
 	Divider,
 	Flex,
+	NavLink,
 } from "@/components"
+import { SettingsIcon } from "@/components/Icons"
 import { ToggleNavbarButton } from "@/features"
+import { Routes, theme } from "@/lib"
 
 import CircleDropdownLink from "./CircleDropdownLink"
 import Menu from "./Menu"
@@ -31,7 +34,14 @@ const AppSidebar = () => {
 			<Divider />
 
 			{ /* Sticky nav links */ }
-			<AppShell.Section>
+			<AppShell.Section style={ { height: `${theme.other.footer.height - 1}px` } }>
+				<NavLink
+					href={ Routes.settings() }
+					leftSection={ <SettingsIcon /> }
+					style={ { height: `${theme.other.footer.height - 1}px` } }
+				>
+					Settings
+				</NavLink>
 			</AppShell.Section>
 		</>
 	)

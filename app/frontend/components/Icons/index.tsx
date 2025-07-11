@@ -38,6 +38,7 @@ export {
 
 export {
 	BiLinkExternal as ExternalLinkIcon,
+	BiCollection as ThemesIcon,
 } from "react-icons/bi"
 
 export {
@@ -76,9 +77,11 @@ export {
 
 export {
 	HiOutlineUserGroup as UserGroupIcon,
+	// HiOutlinePresentationChartBar as PresentationIcon,
 } from "react-icons/hi"
 
 export {
+	CgOrganisation as OrgsIcon,
 } from "react-icons/cg"
 
 export {

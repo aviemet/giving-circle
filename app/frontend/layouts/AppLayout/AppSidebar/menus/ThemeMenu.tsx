@@ -1,6 +1,7 @@
 import { isEmpty } from "lodash"
 
 import { Accordion, NavLink } from "@/components"
+import { DashboardIcon, OrgsIcon, PresentationIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
@@ -23,18 +24,24 @@ const ThemeMenu = () => {
 			<Accordion.Panel>
 				<NavLink
 					href={ Routes.theme(active_circle.slug, active_theme.slug) }
-					label="Overview"
-				/>
+					leftSection={ <DashboardIcon /> }
+				>
+					Overview
+				</NavLink>
 
 				<NavLink
 					href={ Routes.themeOrgs(active_circle.slug, active_theme.slug) }
-					label="Organizations"
-				/>
+					leftSection={ <OrgsIcon /> }
+				>
+					Organizations
+				</NavLink>
 
 				<NavLink
 					href={ Routes.themePresentations(active_circle.slug, active_theme.slug) }
-					label="Presentations"
-				/>
+					leftSection={ <PresentationIcon /> }
+				>
+					Presentations
+				</NavLink>
 			</Accordion.Panel>
 		</Accordion.Item>
 	)

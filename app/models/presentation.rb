@@ -68,6 +68,7 @@ class Presentation < ApplicationRecord
   has_many :presentations_votes, dependent: :destroy
   has_many :votes, through: :presentations_votes, dependent: :nullify
 
+  scope :templates, -> { where(template: true) }
   scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :votes, :distributions]) }
 
   private

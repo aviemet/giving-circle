@@ -5,7 +5,7 @@ interface ShowTemplateProps {
 	template: Schema.PresentationTemplatesShow
 }
 
-// @path: /circles/:circle_slug/presentation_templates/:slug
+// @path: /:circle_slug/presentation_templates/:slug
 // @route: circlePresentationTemplate
 const ShowTemplate = ({ template }: ShowTemplateProps) => {
 	const title = "Template"

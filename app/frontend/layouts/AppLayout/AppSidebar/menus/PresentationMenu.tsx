@@ -21,14 +21,20 @@ const PresentationMenu = () => {
 		<Accordion.Item key={ menuKeys.presentation } value={ menuKeys.presentation }>
 			<Accordion.Control>{ active_presentation.name }</Accordion.Control>
 			<Accordion.Panel>
-				<NavLink
-					href={ Routes.themePresentation(active_circle.slug, active_theme.slug, active_presentation.slug) }
-					label="Overview"
-				/>
-				<NavLink
-					href={ Routes.editThemePresentation(active_circle.slug, active_theme.slug, active_presentation.slug) }
-					label="Setup"
-				/>
+				<NavLink href={ Routes.themePresentation(
+					active_circle.slug,
+					active_theme.slug,
+					active_presentation.slug
+				) }>
+					Overview
+				</NavLink>
+				<NavLink href={ Routes.editThemePresentation(
+					active_circle.slug,
+					active_theme.slug,
+					active_presentation.slug
+				) }>
+					Setup
+				</NavLink>
 			</Accordion.Panel>
 		</Accordion.Item>
 	)
