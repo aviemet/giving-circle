@@ -4,15 +4,16 @@ import {
 	type RichTextEditorProps as MantineRichTextEditorProps,
 } from "@mantine/tiptap"
 import { Color } from "@tiptap/extension-color"
-import Highlight from "@tiptap/extension-highlight"
-import SubScript from "@tiptap/extension-subscript"
-import Superscript from "@tiptap/extension-superscript"
-import TextAlign from "@tiptap/extension-text-align"
-import TextStyle from "@tiptap/extension-text-style"
-import Underline from "@tiptap/extension-underline"
-import { BubbleMenu, FloatingMenu, useEditor } from "@tiptap/react"
-import StarterKit from "@tiptap/starter-kit"
-import React, { forwardRef } from "react"
+import { Highlight } from "@tiptap/extension-highlight"
+import { Subscript } from "@tiptap/extension-subscript"
+import { Superscript } from "@tiptap/extension-superscript"
+import { TextAlign } from "@tiptap/extension-text-align"
+import { TextStyle } from "@tiptap/extension-text-style"
+import { Underline } from "@tiptap/extension-underline"
+import { useEditor } from "@tiptap/react"
+import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus"
+import { StarterKit } from "@tiptap/starter-kit"
+import { forwardRef } from "react"
 
 import { DEFAULT_LABELS } from "./tiptapLabels"
 
@@ -52,7 +53,7 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 			Underline,
 			Link,
 			Superscript,
-			SubScript,
+			Subscript,
 			Highlight,
 			TextStyle,
 			Color,
@@ -112,26 +113,27 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 				<ColorPickerControl />
 
 			</RichTextEditor.Toolbar>
-			{ editor && (
-				<>
-					<FloatingMenu editor={ editor }>
-						<RichTextEditor.ControlsGroup>
-							<RichTextEditor.H1 />
-							<RichTextEditor.H2 />
-							<RichTextEditor.BulletList />
-						</RichTextEditor.ControlsGroup>
-					</FloatingMenu>
 
-					<BubbleMenu editor={ editor }>
-						<RichTextEditor.ControlsGroup>
-							<RichTextEditor.Bold />
-							<RichTextEditor.Italic />
-							<RichTextEditor.Link />
-							<ColorPickerControl />
-						</RichTextEditor.ControlsGroup>
-					</BubbleMenu>
-				</>
+			{ editor && (
+				<BubbleMenu editor={ editor }>
+					<RichTextEditor.ControlsGroup>
+						<RichTextEditor.Bold />
+						<RichTextEditor.Italic />
+						<RichTextEditor.Link />
+					</RichTextEditor.ControlsGroup>
+				</BubbleMenu>
 			) }
+
+			{ editor && (
+				<FloatingMenu editor={ editor }>
+					<RichTextEditor.ControlsGroup>
+						<RichTextEditor.H1 />
+						<RichTextEditor.H2 />
+						<RichTextEditor.BulletList />
+					</RichTextEditor.ControlsGroup>
+				</FloatingMenu>
+			) }
+
 			<RichTextEditor.Content />
 		</RichTextEditor>
 	)

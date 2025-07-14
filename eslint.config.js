@@ -170,6 +170,7 @@ export default [
 			// "import/no-default-export": "error",
 			"import/newline-after-import": "error",
 			"import/consistent-type-specifier-style": ["error", "prefer-inline"],
+			"import/no-named-as-default": "off",
 			"semi": ["error", "never"],
 			"@stylistic/quotes": ["error", "double", {
 				avoidEscape: true,
