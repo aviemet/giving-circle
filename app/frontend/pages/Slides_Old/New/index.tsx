@@ -3,13 +3,13 @@ import { Routes } from "@/lib"
 
 import PresentationSlideForm from "../Form"
 
-interface INewPresentationSlideProps {
+interface NewPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesFormData
 }
 
 // @path: /presentation_slides/new
 // @route: newPresentationSlide
-const NewPresentationSlide = ({ ...data }: INewPresentationSlideProps) => {
+const NewPresentationSlide = ({ ...data }: NewPresentationSlideProps) => {
 	const title = "New Presentation Slide"
 
 	return (

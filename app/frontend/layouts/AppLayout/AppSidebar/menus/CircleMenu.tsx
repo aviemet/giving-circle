@@ -52,7 +52,7 @@ const CircleMenu = () => {
 				</NavLink>
 
 				<NavLink
-					href={ Routes.circlePresentationTemplates(active_circle.slug) }
+					href={ Routes.circleTemplates(active_circle.slug) }
 					leftSection={ <PresentationIcon /> }
 				>
 					Presentation Templates

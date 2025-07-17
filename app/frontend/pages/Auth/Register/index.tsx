@@ -4,7 +4,7 @@ import { Box, Title, Link } from "@/components"
 import { Form, TextInput, PasswordInput, Submit, Field } from "@/components/Form"
 import { Routes, withLayout } from "@/lib"
 
-type TRegisterFormData = {
+type RegisterFormData = {
 	user: {
 		email: string
 		password: string
@@ -15,11 +15,11 @@ type TRegisterFormData = {
 // @path: /users/register
 // @route: newUserRegistration
 const Register = () => {
-	const handleFormChange = ({ data }: UseFormProps<TRegisterFormData>) => {
+	const handleFormChange = ({ data }: UseFormProps<RegisterFormData>) => {
 		// console.log({ data })
 	}
 
-	const handlePasswordChange = (value: string | number, { data, getError, clearErrors }: UseFormProps<TRegisterFormData>) => {
+	const handlePasswordChange = (value: string | number, { data, getError, clearErrors }: UseFormProps<RegisterFormData>) => {
 		if(getError("user.password") || getError("user.password_confirmation")) {
 			if(data.user.password === data.user.password_confirmation) {
 				clearErrors("user.password")
@@ -28,14 +28,14 @@ const Register = () => {
 		}
 	}
 
-	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<TRegisterFormData>) => {
+	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<RegisterFormData>) => {
 		if(data.user.password !== data.user.password_confirmation) {
 			setError("user.password_confirmation", "Passwords must match")
 			return false
 		}
 	}
 
-	const handleEmailBlur = (value: string | number, form: UseFormProps<TRegisterFormData>) => {
+	const handleEmailBlur = (value: string | number, form: UseFormProps<RegisterFormData>) => {
 		// console.log({ value, form })
 	}
 

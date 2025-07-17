@@ -2,17 +2,17 @@ import { HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import { Grid } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
-import { PresentationLayoutEditor } from "@/features/PresentationEditor"
+import { TemplateLayoutEditor } from "@/features/TemplateEditor"
 
-type TTemplateFormData = {
-	template: Schema.PresentationTemplatesFormData
+type TemplateFormData = {
+	template: Schema.TemplatesFormData
 }
 
 export interface TemplateFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TTemplateFormData>) => boolean | void
-	template: Schema.PresentationTemplatesFormData
+	onSubmit?: (object: UseFormProps<TemplateFormData>) => boolean | void
+	template: Schema.TemplatesFormData
 }
 
 const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps) => {
@@ -29,7 +29,7 @@ const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps
 				</Grid.Col>
 
 				<Grid.Col>
-					<PresentationLayoutEditor />
+					<TemplateLayoutEditor />
 				</Grid.Col>
 
 				<Grid.Col>

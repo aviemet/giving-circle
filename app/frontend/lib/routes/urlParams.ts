@@ -140,23 +140,23 @@ const urlParams = {
       "slug"
     ]
   },
-  "circlePresentationTemplates": {
+  "circleTemplates": {
     "params": [
       "circle_slug"
     ]
   },
-  "newCirclePresentationTemplate": {
+  "newCircleTemplate": {
     "params": [
       "circle_slug"
     ]
   },
-  "editCirclePresentationTemplate": {
+  "editCircleTemplate": {
     "params": [
       "circle_slug",
       "slug"
     ]
   },
-  "circlePresentationTemplate": {
+  "circleTemplate": {
     "params": [
       "circle_slug",
       "slug"

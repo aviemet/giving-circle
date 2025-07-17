@@ -63,7 +63,7 @@ group :development, :test do
   gem "bullet", ">= 7.0"
 
   # Linting
-  gem "rubocop-rails", ">= 2.14", require: false
+  gem "rubocop-rails", ">= 2.32", require: false
   gem "rubocop-rspec", ">= 2.9", require: false
   gem "rubocop-performance", ">= 1.13", require: false
   gem "rubocop-daemon", ">= 0.3.2", require: false
@@ -71,7 +71,7 @@ group :development, :test do
   gem "rubocop-factory_bot", ">= 2.25", require: false
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "debug", platforms: %i[mri windows]
 
   gem "dotenv-rails", "~> 3.1"
 

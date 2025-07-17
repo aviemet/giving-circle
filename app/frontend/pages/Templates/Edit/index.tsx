@@ -4,11 +4,11 @@ import { Routes } from "@/lib"
 
 
 interface EditTemplateProps {
-	template: Schema.PresentationTemplatesEdit
+	template: Schema.TemplatesEdit
 }
 
-// @path: /:circle_slug/presentation_templates/:slug/edit
-// @route: editCirclePresentationTemplate
+// @path: /:circle_slug/templates/:slug/edit
+// @route: editCircleTemplate
 const EditTemplate = ({ template }: EditTemplateProps) => {
 	const title = "Edit Template"
 
@@ -17,7 +17,7 @@ const EditTemplate = ({ template }: EditTemplateProps) => {
 			<Section>
 				<TemplatesForm
 					method="put"
-					to={ Routes.circlePresentationTemplate(template.circle.slug, template.slug) }
+					to={ Routes.circleTemplate(template.circle.slug, template.slug) }
 					template={ template }
 				/>
 			</Section>

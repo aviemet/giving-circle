@@ -36,6 +36,7 @@ class Circle < ApplicationRecord
     memberships: "Membership",
     themes: "Theme",
     orgs: "Org",
+    templates: "Template",
     presentations: "Presentation"
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model

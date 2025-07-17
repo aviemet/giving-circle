@@ -2,14 +2,14 @@ import { Title, Link } from "@/components"
 import { Field, Form, TextInput, Submit } from "@/components/Form"
 import { Routes, withLayout } from "@/lib"
 
-type TPasswordsNewFormData = {
+type PasswordsNewFormData = {
 	email: string
 }
 
 // @path: /users/password/new
 // @route: newUserPassword
 const PasswordsNew = () => {
-	const defaultData: TPasswordsNewFormData = {
+	const defaultData: PasswordsNewFormData = {
 		email: "",
 	}
 

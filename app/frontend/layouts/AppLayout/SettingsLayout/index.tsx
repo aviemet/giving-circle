@@ -9,13 +9,13 @@ interface SettingsLayoutProps {
 	children: React.ReactNode
 }
 
-type TTab = {
+type Tab = {
 	name: string
 	label: string
 	icon?: React.ReactNode
 }
 
-const tabs: TTab[] = [
+const tabs: Tab[] = [
 	{ name: "general", label: "General" },
 	{ name: "appearance", label: "Appearance" },
 	{ name: "mail", label: "Mail" },

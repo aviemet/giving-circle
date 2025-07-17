@@ -2,14 +2,14 @@ import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import { Form, TextInput, Submit } from "@/components/Form"
 
-type TPersonFormData = {
+type PersonFormData = {
 	person: Schema.PeopleFormData
 }
 
 export interface PersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean | void
+	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean | void
 	person: Schema.PeopleFormData
 }
 

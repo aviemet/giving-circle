@@ -4,12 +4,12 @@ import { TestResponseButton } from '@/components/Button'
 import { Routes, isUnset } from '@/lib'
 import { omit } from 'lodash'
 
-type TSmtpFormData = {
+type SmtpFormData = {
 	smtp: Schema.SmtpsFormData
 }
 
-export interface SmtpFormProps extends FormProps<TSmtpFormData> {
-	data: TSmtpFormData
+export interface SmtpFormProps extends FormProps<SmtpFormData> {
+	data: SmtpFormData
 }
 
 const requiredFields = ['smtp.host', 'smtp.port', 'smtp.domain', 'smtp.username', 'smtp.password']
@@ -46,7 +46,7 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 			] } />
 
 			<Group pt="md" pb="xs" position="right">
-				<FormConsumer<TSmtpFormData>>{ ({ data, getData }) => (
+				<FormConsumer<SmtpFormData>>{ ({ data, getData }) => (
 					<TestResponseButton
 						method="post"
 						endpoint={ Routes.apiSmtpTest() }

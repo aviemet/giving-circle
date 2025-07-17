@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
-  enable_extension "plpgsql"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
 
@@ -152,15 +152,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "presentation_slides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.jsonb "data", default: {}
-    t.integer "order"
-    t.boolean "template", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "presentation_votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.jsonb "data", default: {}
@@ -171,16 +162,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
 
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "settings", default: {}
     t.boolean "active", default: false, null: false
-    t.boolean "template", default: false, null: false
+    t.jsonb "slides", default: {}
+    t.jsonb "settings", default: {}
     t.uuid "theme_id", null: false
-    t.uuid "presentation_template_id"
+    t.uuid "template_id"
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["presentation_template_id"], name: "index_presentations_on_presentation_template_id"
     t.index ["slug"], name: "index_presentations_on_slug", unique: true
+    t.index ["template_id"], name: "index_presentations_on_template_id"
     t.index ["theme_id"], name: "index_presentations_on_theme_id"
   end
 
@@ -222,16 +213,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.index ["presentation_id"], name: "index_presentations_orgs_on_presentation_id"
   end
 
-  create_table "presentations_slides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "presentation_id", null: false
-    t.uuid "presentation_slide_id", null: false
-    t.string "instance_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["presentation_id"], name: "index_presentations_slides_on_presentation_id"
-    t.index ["presentation_slide_id"], name: "index_presentations_slides_on_presentation_slide_id"
-  end
-
   create_table "presentations_votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "presentation_id", null: false
     t.uuid "presentation_vote_id", null: false
@@ -249,6 +230,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug", null: false
+    t.jsonb "settings", default: {}, null: false
+    t.jsonb "slides", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_templates_on_slug", unique: true
   end
 
   create_table "themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -330,7 +321,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   add_foreign_key "memberships_people", "memberships"
   add_foreign_key "memberships_people", "people"
   add_foreign_key "ownerships", "circles"
-  add_foreign_key "presentations", "presentations", column: "presentation_template_id"
+  add_foreign_key "presentations", "templates"
   add_foreign_key "presentations", "themes"
   add_foreign_key "presentations_distributions", "presentation_distributions"
   add_foreign_key "presentations_distributions", "presentations"
@@ -340,8 +331,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_19_222040) do
   add_foreign_key "presentations_memberships", "presentations"
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
-  add_foreign_key "presentations_slides", "presentation_slides"
-  add_foreign_key "presentations_slides", "presentations"
   add_foreign_key "presentations_votes", "presentation_votes"
   add_foreign_key "presentations_votes", "presentations"
   add_foreign_key "themes_orgs", "orgs"

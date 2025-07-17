@@ -1,13 +1,13 @@
 import { Group, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-interface IShowPresentationSlideProps {
+interface ShowPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesShow
 }
 
 // @path: /presentation_slides/:id
 // @route: presentationSlide
-const ShowPresentationSlide = ({ presentation_slide }: IShowPresentationSlideProps) => {
+const ShowPresentationSlide = ({ presentation_slide }: ShowPresentationSlideProps) => {
 	const title = "PresentationSlide"
 
 	return (

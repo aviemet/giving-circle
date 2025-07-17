@@ -5,14 +5,14 @@ import { type TableProps } from "@/components/Table/Table"
 import { NewTemplateModal } from "@/features"
 import { Routes } from "@/lib"
 
-interface PresentationTemplateTableProps extends TableProps {
+interface TemplateTableProps extends TableProps {
 	circle: Schema.CirclesOptions
 }
 
 const TemplateTable = ({
 	circle,
 	...props
-}: PresentationTemplateTableProps) => {
+}: TemplateTableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
@@ -27,13 +27,14 @@ const TemplateTable = ({
 						<Text>{ circle.name || "This circle" } doesn&apos;t have any saved presentation templates</Text>
 						<NewTemplateModal circle={ circle }><Button px="sm"><NewIcon /> Create One</Button></NewTemplateModal>
 					</> }
-					render={ (template: Schema.PresentationTemplatesIndex) => (
+					render={ (template: Schema.TemplatesIndex) => (
 						<Table.Row key={ template.id }>
 							<Table.Cell>
-								<Link href={ Routes.circlePresentationTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
+								<Link href={ Routes.circleTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
 							</Table.Cell>
+
 							<Table.Cell>
-								<EditButton href={ Routes.editCirclePresentationTemplate(template.circle.slug, template.slug) } />
+								<EditButton href={ Routes.editCircleTemplate(template.circle.slug, template.slug) } />
 							</Table.Cell>
 						</Table.Row>
 					) } />

@@ -1,4 +1,4 @@
-if false && Presentation::Element.count == 0
+if false && Presentation::Element.none?
   Presentation::Element.create({
     name: "Orgs Display",
     data: {

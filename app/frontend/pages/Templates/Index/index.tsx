@@ -6,13 +6,13 @@ import { Routes } from "@/lib"
 
 
 interface TemplateIndexProps {
-	templates: Schema.PresentationTemplatesIndex[]
+	templates: Schema.TemplatesIndex[]
 	pagination: Schema.Pagination
 	circle: Schema.CirclesOptions
 }
 
-// @path: /:circle_slug/presentation_templates
-// @route: circlePresentationTemplates
+// @path: /:circle_slug/templates
+// @route: circleTemplates
 const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) => {
 	return (
 		<Page
@@ -23,9 +23,9 @@ const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) =
 				rows={ templates }
 				pagination={ pagination }
 			// contextMenu={ {
-			// 	deleteRoute: Routes.circlePresentationTemplates(circle.slug),
+			// 	deleteRoute: Routes.circleTemplates(circle.slug),
 			// 	options: [
-			// 		{ label: 'New Template', href: Routes.newCirclePresentationTemplate(circle.slug), icon: <NewIcon /> },
+			// 		{ label: 'New Template', href: Routes.newCircleTemplate(circle.slug), icon: <NewIcon /> },
 			// 	],
 			// } }
 			>

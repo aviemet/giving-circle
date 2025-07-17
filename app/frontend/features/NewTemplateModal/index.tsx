@@ -4,7 +4,7 @@ import React from "react"
 import { Form } from "@/components/Form"
 import { Routes } from "@/lib"
 
-import NewPresentationTemplateForm, { NewTemplateFormData } from "./NewPresentationTemplateForm"
+import NewTemplateForm, { NewTemplateFormData } from "./NewTemplateForm"
 
 interface ClickableElementProps {
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -23,9 +23,9 @@ const NewTemplateModal = ({ children, circle }: NewTemplateModalProps) => {
 			children:
 			<Form<NewTemplateFormData>
 				model="presentation_template"
-				to={ Routes.circlePresentationTemplates(circle.slug) }
+				to={ Routes.circleTemplates(circle.slug) }
 			>
-				<NewPresentationTemplateForm />
+				<NewTemplateForm />
 			</Form>,
 		})
 

@@ -4,13 +4,13 @@ import { Routes } from "@/lib"
 
 import PresentationSlidesForm from "../Form"
 
-interface IEditPresentationSlideProps {
+interface EditPresentationSlideProps {
 	presentation_slide: Schema.PresentationSlidesEdit
 }
 
 // @path: /presentation_slides/:id/edit
 // @route: editPresentationSlide
-const EditPresentationSlide = ({ presentation_slide }: IEditPresentationSlideProps) => {
+const EditPresentationSlide = ({ presentation_slide }: EditPresentationSlideProps) => {
 	const title = "Edit Presentation Slide"
 
 	return (

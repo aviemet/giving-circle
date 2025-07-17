@@ -4,12 +4,12 @@ import { Routes } from "@/lib"
 
 
 interface NewTemplateProps {
-	template: Schema.PresentationTemplatesFormData
+	template: Schema.TemplatesFormData
 	circle: Schema.CirclesOptions
 }
 
-// @path: /:circle_slug/presentation_templates/new
-// @route: newCirclePresentationTemplate
+// @path: /:circle_slug/templates/new
+// @route: newCircleTemplate
 const NewTemplate = ({ template, circle }: NewTemplateProps) => {
 	const title = "New Template"
 
@@ -20,7 +20,7 @@ const NewTemplate = ({ template, circle }: NewTemplateProps) => {
 				<Title>{ title }</Title>
 
 				<TemplateForm
-					to={ Routes.circlePresentationTemplates(circle.slug) }
+					to={ Routes.circleTemplates(circle.slug) }
 					template={ template }
 				/>
 			</Section>

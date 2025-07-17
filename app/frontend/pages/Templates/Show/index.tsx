@@ -2,11 +2,11 @@ import { Group, Title, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
 interface ShowTemplateProps {
-	template: Schema.PresentationTemplatesShow
+	template: Schema.TemplatesShow
 }
 
-// @path: /:circle_slug/presentation_templates/:slug
-// @route: circlePresentationTemplate
+// @path: /:circle_slug/templates/:slug
+// @route: circleTemplate
 const ShowTemplate = ({ template }: ShowTemplateProps) => {
 	const title = "Template"
 
@@ -17,7 +17,7 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editCirclePresentationTemplate(template.circle_id, template.id) }>
+							<Menu.Link href={ Routes.editCircleTemplate(template.circle.slug, template.slug) }>
 								Edit Template
 							</Menu.Link>
 						</Menu.Dropdown>

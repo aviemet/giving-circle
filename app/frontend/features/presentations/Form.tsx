@@ -5,14 +5,14 @@ import { Form, TextInput, Submit } from "@/components/Form"
 import { SlideCard } from "@/features/Cards"
 import CardContainer from "@/features/Cards/CardContainer"
 
-type TPresentationFormData = {
+type PresentationFormData = {
 	presentation: Schema.PresentationsFormData
 }
 
 export interface PresentationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPresentationFormData>) => boolean | void
+	onSubmit?: (object: UseFormProps<PresentationFormData>) => boolean | void
 	presentation: Schema.PresentationsFormData
 }
 
