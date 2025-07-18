@@ -17,7 +17,7 @@ if Rails.env.development?
   end
 
   if circle.templates.empty?
-    FactoryBot.create(:template, circle: circle, slides: {
+    FactoryBot.create(:template, circle: circle, slides: [{
       id: 1,
       name: "Introduction",
       order: 1,
@@ -34,7 +34,7 @@ if Rails.env.development?
           },
         ]
       },
-    },)
+    }],)
   end
 
   if circle.themes.empty?

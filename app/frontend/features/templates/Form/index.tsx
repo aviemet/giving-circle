@@ -2,7 +2,9 @@ import { HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import { Grid } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
-import { TemplateLayoutEditor } from "@/features/TemplateEditor"
+import { usePageProps } from "@/lib/hooks"
+
+import SlidesSection from "./SlidesSection"
 
 type TemplateFormData = {
 	template: Schema.TemplatesFormData
@@ -16,6 +18,7 @@ export interface TemplateFormProps {
 }
 
 const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps) => {
+	const { active_circle } = usePageProps()
 	return (
 		<Form
 			model="template"
@@ -29,7 +32,10 @@ const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps
 				</Grid.Col>
 
 				<Grid.Col>
-					<TemplateLayoutEditor />
+					{ active_circle && <SlidesSection
+						circle={ active_circle }
+						template={ template }
+					/> }
 				</Grid.Col>
 
 				<Grid.Col>

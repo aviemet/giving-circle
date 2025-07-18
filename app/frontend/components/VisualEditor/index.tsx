@@ -1,36 +1,15 @@
 import { Box, Button } from "@mantine/core"
-import { Puck, PuckComponent, usePuck, type Config, type Data } from "@measured/puck"
+import { Puck, usePuck, type Data } from "@measured/puck"
 import clsx from "clsx"
 import { useState } from "react"
 import "@measured/puck/puck.css"
 
 import * as classes from "./Puck.css"
-
-type Components = {
-	HeadingBlock: {}
-};
-
-// Create Puck component config
-const config: Config<Components> = {
-	components: {
-		HeadingBlock: {
-			fields: {
-				children: {
-					type: "text",
-				},
-			},
-			render: ({ children }: PuckComponent<{}>) => {
-				return <h1>{ children }</h1>
-			},
-		},
-	},
-}
+import { config } from "./puckConfig"
 
 const initialData = {}
 
 const VisualEditor = () => {
-	const { appState } = usePuck()
-
 	const [data] = useState<Data>(() => {
 		const dataStr = localStorage.getItem("lskdfjsdlkfj")
 
@@ -63,11 +42,11 @@ const VisualEditor = () => {
 				onPublish={ handleSave }
 				onChange={ handleChange }
 				overrides={ {
-					headerActions: () => (
-						<Button onClick={ () => handleSave(appState.data) }>
-							Save
-						</Button>
-					),
+					// headerActions: () => (
+					// 	<Button onClick={ () => handleSave(appState.data) }>
+					// 		Save
+					// 	</Button>
+					// ),
 				} }
 			/>
 		</Box>

@@ -66,3 +66,11 @@ export const initials = (str: string) => {
 
 	return initials
 }
+
+/**
+ * Returns true if the value is non-empty string
+ */
+export const isNonEmptyString = (str: string | undefined): str is string => {
+	if(typeof str !== "string") return false
+	return str !== ""
+}

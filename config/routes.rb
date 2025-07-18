@@ -58,6 +58,9 @@ Rails.application.routes.draw do
       end
 
       resources :templates, param: :slug, shallow: false
+      namespace :templates do
+        get ":template_slug/slides/:id/edit", to: "slides#edit", as: :edit_slide
+      end
 
       resources :themes, param: :theme_slug, as: :themes
       resources :themes, param: :slug, as: :themes, except: [:show, :edit, :new, :index, :create, :update, :destroy] do

@@ -162,6 +162,13 @@ const urlParams = {
       "slug"
     ]
   },
+  "circleTemplatesEditSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug",
+      "id"
+    ]
+  },
   "circleThemes": {
     "params": [
       "circle_slug"

@@ -4,16 +4,22 @@ import { useDynamicInputs, useForm } from "use-inertia-form"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
 import { TextInput } from "@/components/Inputs"
+import { Routes } from "@/lib"
 
-import SlideCard from "./SlideCard"
+import SlideCard from "../../templates/Form/SlideCard"
 
-const LayoutEditor = () => {
+interface LayoutEditorProps {
+	circle: Schema.CirclesInertiaShare
+	template: Schema.TemplatesFormData
+}
+
+const LayoutEditor = ({ circle, template }: LayoutEditorProps) => {
 	const { getData, data } = useForm()
 
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const { addInput, removeInput, paths } = useDynamicInputs({
-		model: "presentation_slides",
+		model: "slides",
 		emptyData: {
 			name: "",
 			order: NaN,
@@ -43,21 +49,26 @@ const LayoutEditor = () => {
 				<Button onClick={ handleAddSlide }>+</Button>
 			</Group>
 
-			<Divider my="sm" />
+			<Divider mt="xs" mb="sm" />
 
 			<Flex wrap="wrap" gap="sm">
-				{ paths.map((path, i) => (
-					<SlideCard
-						key={ path }
-						path={ path }
-						removeInput={ () => removeInput(i) }
-					/>
-				)) }
+				{ paths.map((path, i) => {
+					const id = getData(`template.${path}.id`)
+
+					return (
+						<SlideCard
+							key={ path }
+							path={ path }
+							removeInput={ () => removeInput(i) }
+							href={ template.slug ? Routes.circleTemplatesEditSlide(circle.slug, template.slug, id) : undefined }
+						/>
+					)
+				}) }
 			</Flex>
 
-			<Title order={ 3 }>Rounds</Title>
+			<Title mt="sm" order={ 3 }>Actions</Title>
 
-			<Divider my="sm" />
+			<Divider mt="xs" mb="sm" />
 
 		</>
 	)
