@@ -13,19 +13,11 @@
 #  index_circles_on_slug  (slug) UNIQUE
 #
 class Circle < ApplicationRecord
-  include PgSearch::Model
-
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
-    against: [:name],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-  )
+  include PgSearchable
+  pg_search_config(against: [:name])
 
   resourcify
 

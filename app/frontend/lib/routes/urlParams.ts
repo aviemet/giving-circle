@@ -255,21 +255,21 @@ const urlParams = {
       "presentation_slug"
     ]
   },
-  "themePresentationsDistributions": {
+  "themePresentationsActions": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemePresentationsDistribution": {
+  "newThemePresentationsAction": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemePresentationsDistribution": {
+  "editThemePresentationsAction": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -277,7 +277,37 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsDistribution": {
+  "themePresentationsAction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsActionResponses": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemePresentationsActionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemePresentationsActionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "id"
+    ]
+  },
+  "themePresentationsActionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -338,36 +368,6 @@ const urlParams = {
     ]
   },
   "themePresentationsSlide": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationsVotes": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationsVote": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationsVote": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "id"
-    ]
-  },
-  "themePresentationsVote": {
     "params": [
       "circle_slug",
       "theme_slug",

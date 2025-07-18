@@ -16,23 +16,16 @@
 #
 class Theme < ApplicationRecord
   include Ownable
-  include PgSearch::Model
   include BooleanTimestamp
 
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
+  include PgSearchable
+  pg_search_config(against: [:name])
+
   enum :status, { draft: 0, current: 1, past: 2, future: 3 }
   boolean_timestamp :published
-
-  pg_search_scope(
-    :search,
-    against: [:name],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-  )
 
   resourcify
 
@@ -43,7 +36,7 @@ class Theme < ApplicationRecord
   has_many :themes_orgs, dependent: :destroy
   has_many :orgs, -> {
     # Merge ask values from join table onto org records
-    select('orgs.*, themes_orgs.ask_cents as ask_cents, themes_orgs.ask_currency as ask_currency')
+    select("orgs.*, themes_orgs.ask_cents as ask_cents, themes_orgs.ask_currency as ask_currency")
       # Override count method which would error with the above select statement
       .extending {
         def count(args = :all)

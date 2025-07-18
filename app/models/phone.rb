@@ -13,17 +13,11 @@
 #  index_phones_on_contact_id  (contact_id)
 #
 class Phone < ApplicationRecord
-  include PgSearch::Model
-
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:number],
     associated_against: {
       contact: [],
-    },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
   )
 

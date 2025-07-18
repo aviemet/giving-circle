@@ -13,17 +13,11 @@
 #  index_emails_on_contact_id  (contact_id)
 #
 class Email < ApplicationRecord
-  include PgSearch::Model
-
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:email],
     associated_against: {
       contact: [],
-    },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
   )
 

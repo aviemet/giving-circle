@@ -26,18 +26,13 @@
 #
 class Presentation < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:name, :template],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
   )
 
   resourcify
@@ -56,14 +51,8 @@ class Presentation < ApplicationRecord
 
   has_many :people, through: :memberships
 
-  has_many :presentations_distributions, dependent: :destroy
-  has_many :distributions, through: :presentations_distributions, dependent: :nullify
-
   has_many :presentations_elements, dependent: :destroy
   has_many :elements, through: :presentations_elements, dependent: :nullify
-
-  has_many :presentations_votes, dependent: :destroy
-  has_many :votes, through: :presentations_votes, dependent: :nullify
 
   scope :templates, -> { where(template: true) }
   scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :votes, :distributions]) }

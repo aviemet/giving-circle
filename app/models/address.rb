@@ -22,17 +22,11 @@
 #  fk_rails_...  (contact_id => contacts.id)
 #
 class Address < ApplicationRecord
-  include PgSearch::Model
-
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:address, :address_2, :city, :region, :country, :postal, :contact],
     associated_against: {
       contact: [],
-    },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
   )
 

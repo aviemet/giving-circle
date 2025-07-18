@@ -74,26 +74,29 @@ Rails.application.routes.draw do
         end
 
         namespace :presentations do
-          resources :presentation_distributions,
-            path: ":presentation_slug/distributions",
+          resources :actions,
+            path: ":presentation_slug/actions",
             shallow: false,
-            as: :distributions,
-            controller: "/presentation/distributions"
+            as: :actions,
+            controller: "/presentation/actions"
+
+          resources :action_responses,
+            path: ":presentation_slug/action_responses",
+            shallow: false,
+            as: :action_responses,
+            controller: "/presentation/action_responses"
+
           resources :presentation_elements,
             path: ":presentation_slug/elements",
             shallow: false,
             as: :elements,
             controller: "/presentation/elements"
+
           resources :presentation_slides,
             path: ":presentation_slug/slides",
             shallow: false,
             as: :slides,
             controller: "/presentation/slides"
-          resources :presentation_votes,
-            path: ":presentation_slug/votes",
-            shallow: false,
-            as: :votes,
-            controller: "/presentation/votes"
         end
       end
     end

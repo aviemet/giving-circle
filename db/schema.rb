@@ -10,13 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_18_002314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
+
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "activities", id: :serial, force: :cascade do |t|
+    t.string "trackable_type"
+    t.integer "trackable_id"
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "key"
+    t.jsonb "parameters", default: {}
+    t.string "recipient_type"
+    t.integer "recipient_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
+  end
 
   create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "address"
@@ -136,6 +183,27 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
     t.index ["contact_id"], name: "index_phones_on_contact_id"
   end
 
+  create_table "presentation_action_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "presentation_action_id", null: false
+    t.uuid "membership_id", null: false
+    t.jsonb "response_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["membership_id"], name: "index_presentation_action_responses_on_membership_id"
+    t.index ["presentation_action_id"], name: "index_presentation_action_responses_on_presentation_action_id"
+  end
+
+  create_table "presentation_actions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.integer "action_type"
+    t.jsonb "config"
+    t.jsonb "results"
+    t.integer "trigger_type"
+    t.jsonb "trigger_conditions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "presentation_distributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.integer "type"
@@ -175,15 +243,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
     t.index ["theme_id"], name: "index_presentations_on_theme_id"
   end
 
-  create_table "presentations_distributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "presentation_id", null: false
-    t.uuid "presentation_distribution_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["presentation_distribution_id"], name: "idx_on_presentation_distribution_id_1e817598d7"
-    t.index ["presentation_id"], name: "index_presentations_distributions_on_presentation_id"
-  end
-
   create_table "presentations_elements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "presentation_id", null: false
     t.uuid "presentation_element_id", null: false
@@ -211,15 +270,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
     t.datetime "updated_at", null: false
     t.index ["org_id"], name: "index_presentations_orgs_on_org_id"
     t.index ["presentation_id"], name: "index_presentations_orgs_on_presentation_id"
-  end
-
-  create_table "presentations_votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "presentation_id", null: false
-    t.uuid "presentation_vote_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["presentation_id"], name: "index_presentations_votes_on_presentation_id"
-    t.index ["presentation_vote_id"], name: "index_presentations_votes_on_presentation_vote_id"
   end
 
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -293,6 +343,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
     t.string "invited_by_type"
     t.uuid "invited_by_id"
     t.boolean "active", default: true, null: false
+    t.string "slug", null: false
     t.uuid "person_id"
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
@@ -303,6 +354,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["user_preferences"], name: "index_users_on_user_preferences", using: :gin
@@ -316,23 +368,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_222040) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "memberships", "people"
   add_foreign_key "memberships_people", "memberships"
   add_foreign_key "memberships_people", "people"
   add_foreign_key "ownerships", "circles"
+  add_foreign_key "presentation_action_responses", "memberships"
+  add_foreign_key "presentation_action_responses", "presentation_actions"
   add_foreign_key "presentations", "templates"
   add_foreign_key "presentations", "themes"
-  add_foreign_key "presentations_distributions", "presentation_distributions"
-  add_foreign_key "presentations_distributions", "presentations"
   add_foreign_key "presentations_elements", "presentation_elements"
   add_foreign_key "presentations_elements", "presentations"
   add_foreign_key "presentations_memberships", "memberships"
   add_foreign_key "presentations_memberships", "presentations"
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
-  add_foreign_key "presentations_votes", "presentation_votes"
-  add_foreign_key "presentations_votes", "presentations"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

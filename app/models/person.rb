@@ -16,20 +16,14 @@
 #  index_people_on_slug  (slug) UNIQUE
 #
 class Person < ApplicationRecord
-  include PgSearch::Model
-
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:first_name, :last_name, :middle_name],
     associated_against: {
       user: [:email]
-    },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
   )
 

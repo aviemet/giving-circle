@@ -15,18 +15,13 @@
 #
 class Org < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:name, :description],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
   )
 
   resourcify
