@@ -49,6 +49,7 @@ export {
 } from "react-icons/bs"
 
 export {
+	FaRegSave as SaveIcon,
 } from "react-icons/fa"
 
 export {

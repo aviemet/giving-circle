@@ -1,4 +1,3 @@
-import { fixupPluginRules } from "@eslint/compat"
 import json from "@eslint/json"
 import stylistic from "@stylistic/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
@@ -53,7 +52,7 @@ export default [
 			},
 		},
 		plugins: {
-			"react-hooks": fixupPluginRules(reactHooksPlugin),
+			"react-hooks": reactHooksPlugin,
 			"jsx-a11y": jsxA11yPlugin,
 			"@stylistic": stylistic,
 		},

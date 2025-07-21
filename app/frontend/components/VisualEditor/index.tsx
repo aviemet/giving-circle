@@ -1,11 +1,14 @@
 import { Box, Button } from "@mantine/core"
-import { Puck, usePuck, type Data } from "@measured/puck"
+import { createUsePuck, Puck, type Data } from "@measured/puck"
 import clsx from "clsx"
 import { useState } from "react"
 import "@measured/puck/puck.css"
 
+import { config } from "./puck.config"
 import * as classes from "./Puck.css"
-import { config } from "./puckConfig"
+import { SaveIcon } from "../Icons"
+
+const usePuck = createUsePuck()
 
 const initialData = {}
 
@@ -38,15 +41,23 @@ const VisualEditor = () => {
 			<Puck
 				config={ config }
 				data={ data }
-				iframe={ { enabled: true } }
+				iframe={ { enabled: false } }
 				onPublish={ handleSave }
 				onChange={ handleChange }
 				overrides={ {
-					// headerActions: () => (
-					// 	<Button onClick={ () => handleSave(appState.data) }>
-					// 		Save
-					// 	</Button>
-					// ),
+					headerActions: ({ children }) => {
+						// eslint-disable-next-line react-hooks/rules-of-hooks
+						const appState = usePuck((s) => s.appState)
+
+						return (
+							<Button
+								onClick={ () => handleSave(appState.data) }
+								leftSection={ <SaveIcon /> }
+							>
+								Save
+							</Button>
+						)
+					},
 				} }
 			/>
 		</Box>

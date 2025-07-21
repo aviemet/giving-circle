@@ -4,11 +4,14 @@ export { i18n } from "./i18n"
 
 export * from "./uuid"
 export * from "./strings"
+export * from "./dates"
 export * from "./collections"
 export * from "./forms"
 export * from "./theme"
 export * from "./units"
 export * from "./withLayout"
+
+export * from "./mergeRefs"
 
 export { rem } from "@mantine/core"
 

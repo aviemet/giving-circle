@@ -1,6 +1,7 @@
 import { NestedObject, UseFormProps, UseInertiaInputProps } from "use-inertia-form"
 
 export { default as Autocomplete } from "./Autocomplete"
+export { default as ColorPickerInput } from "./ColorPickerInput"
 export { default as CurrencyInput } from "./CurrencyInput"
 export { default as DateInput } from "./DateInput"
 export { default as DateTimeInput } from "./DateTimeInput"
@@ -24,9 +25,7 @@ export {
 
 export type InputConflicts = "name" | "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue"
 export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject>
-	extends
-	UseInertiaInputProps<T> {
-
+	extends UseInertiaInputProps<T> {
 	model?: string
 	errorKey?: string
 	field?: boolean
@@ -35,5 +34,4 @@ export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject
 	onChange?: (value: T, form: UseFormProps<TForm>) => void
 	onBlur?: (value: T, form: UseFormProps<TForm>) => void
 	onFocus?: (value: T, form: UseFormProps<TForm>) => void
-	wrapperProps?: Record<string, any>
 }

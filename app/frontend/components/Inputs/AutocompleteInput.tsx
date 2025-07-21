@@ -5,17 +5,18 @@ import InputWrapper from "./InputWrapper"
 
 import { withInjectedProps, type BaseInputProps } from "."
 
+
 export interface AutocompleteProps extends MantineAutocompleteProps, BaseInputProps {}
 
 const AutocompleteComponent = forwardRef<HTMLInputElement, AutocompleteProps>((
 	{
 		id,
 		name,
-		style,
 		wrapper,
 		wrapperProps,
 		disableAutofill = true,
-		...props },
+		...props
+	},
 	ref,
 ) => {
 	const inputId = id ?? name
@@ -26,8 +27,7 @@ const AutocompleteComponent = forwardRef<HTMLInputElement, AutocompleteProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				style={ [{ padding: "14px 10px" }, style] }
-				wrapperProps={ wrapper ? {} : wrapperProps }
+				wrapperProps={ wrapper ? undefined : wrapperProps }
 				{ ...withInjectedProps(props, {
 					disableAutofill,
 				}) }

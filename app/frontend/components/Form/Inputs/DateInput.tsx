@@ -1,11 +1,11 @@
+import { forwardRef, type ForwardedRef } from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
 import { DateInput, type DateInputValue } from "@/components/Inputs"
 import { type DateInputProps } from "@/components/Inputs/DateInput"
 import { isUnset } from "@/lib"
 
-import Field from "../components/Field"
+import InputWrapper from "../components/InputWrapper"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -14,21 +14,23 @@ interface FormDateInputProps<TForm extends NestedObject = NestedObject>
 	Omit<DateInputProps, InputConflicts>,
 	BaseFormInputProps<Exclude<DateInputValue, undefined | null> | "", TForm> {}
 
-const FormDateInput = <TForm extends NestedObject = NestedObject>({
-	name,
-	required,
-	onChange,
-	onBlur,
-	onFocus,
-	id,
-	model,
-	field = true,
-	wrapperProps,
-	errorKey,
-	defaultValue,
-	clearErrorsOnChange,
-	...props
-}: FormDateInputProps<TForm>,
+const FormDateInput = forwardRef(<TForm extends NestedObject = NestedObject>(
+	{
+		name,
+		required,
+		onChange,
+		onBlur,
+		onFocus,
+		id,
+		model,
+		field = true,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+		...props
+	}: FormDateInputProps<TForm>,
+	ref: ForwardedRef<HTMLButtonElement>
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<
 		Exclude<DateInputValue, undefined | null> | "",
@@ -54,20 +56,15 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	}
 
 	return (
-		<ConditionalWrapper
-			condition={ field }
-			wrapper={ children => (
-				<Field
-					type="date"
-					required={ required }
-					errors={ !!error }
-					{ ...wrapperProps }
-				>
-					{ children }
-				</Field>
-			) }
+		<InputWrapper
+			type="date"
+			wrapped={ props.hidden !== true && field }
+			required={ required }
+			errors={ !!error }
+			{ ...wrapperProps }
 		>
 			<DateInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ isUnset(value) ? undefined : value }
@@ -78,8 +75,8 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 				wrapper={ false }
 				{ ...props }
 			/>
-		</ConditionalWrapper>
+		</InputWrapper>
 	)
-}
+})
 
 export default FormDateInput

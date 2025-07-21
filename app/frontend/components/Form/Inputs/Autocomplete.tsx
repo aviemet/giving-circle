@@ -1,10 +1,9 @@
-import clsx from "clsx"
+import { forwardRef, type ForwardedRef } from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
 import AutocompleteInput, { type AutocompleteProps } from "@/components/Inputs/AutocompleteInput"
 
-import Field from "../components/Field"
+import InputWrapper from "../components/InputWrapper"
 
 import { InputConflicts, type BaseFormInputProps } from "."
 
@@ -17,7 +16,7 @@ interface FormAutocompleteProps<TForm extends NestedObject = NestedObject>
 	endpoint?: string
 }
 
-const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
+const FormAutocompleteComponent = forwardRef(<TForm extends NestedObject>(
 	{
 		name,
 		model,
@@ -34,6 +33,7 @@ const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 		clearErrorsOnChange,
 		...props
 	} : FormAutocompleteProps<TForm>,
+	ref: ForwardedRef<HTMLInputElement>
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
@@ -53,37 +53,26 @@ const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 	}
 
 	return (
-		<ConditionalWrapper
-			condition={ props.hidden !== true && field }
-			wrapper={ children => (
-				<Field
-					type="text"
-					required={ required }
-					errors={ !!error }
-					{ ...wrapperProps }
-				>
-					{ children }
-				</Field>
-			) }
+		<InputWrapper
+			type="text"
+			wrapped={ props.hidden !== true && field }
+			required={ required }
+			errors={ !!error }
+			{ ...wrapperProps }
 		>
 			<AutocompleteInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ errorKey ? form.getError(errorKey) : error }
-				wrapperProps={ {
-					component: Field,
-					className: clsx({ required }),
-					errors: Boolean(error),
-					style: { padding: 0 },
-				} }
 				wrapper={ false }
 				{ ...props }
 			/>
-		</ConditionalWrapper>
+		</InputWrapper>
 	)
-}
+})
 
 export default FormAutocompleteComponent

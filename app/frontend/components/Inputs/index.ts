@@ -2,6 +2,8 @@ import { type DateValue, type DatesRangeValue } from "@mantine/dates"
 
 export { default as AutocompleteInput } from "./AutocompleteInput"
 export { default as Checkbox } from "./Checkbox"
+export { default as ColorPickerInput } from "./ColorPickerInput"
+export { default as ColorInput } from "./ColorInput"
 export { default as CurrencyInput } from "./CurrencyInput"
 export { default as DateInput } from "./DateInput"
 export { default as DateTimeInput } from "./DateTimeInput"
@@ -17,13 +19,16 @@ export { default as Select } from "./Select"
 export { default as SwatchInput } from "./SwatchInput"
 export { default as Textarea } from "./Textarea"
 export { default as TextInput } from "./TextInput"
+export { default as TimeInput } from "./TimeInput"
 
 export interface BaseInputProps {
 	wrapper?: boolean
 	disableAutofill?: boolean
+	name?: string
+	required?: boolean
 }
 
-export type DateInputValue = DateValue | DatesRangeValue | Date[] | undefined
+export type DateInputValue = DateValue | DatesRangeValue<DateValue> | DateValue[] | undefined
 
 const disableAutofillProps = {
 	autoComplete: "off",

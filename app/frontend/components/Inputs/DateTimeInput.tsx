@@ -1,5 +1,5 @@
 import { DateTimePicker, DateTimePickerProps } from "@mantine/dates"
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 
 import { isUnset } from "@/lib"
 
@@ -9,11 +9,14 @@ import InputWrapper from "./InputWrapper"
 
 import { type BaseInputProps } from "."
 
-export interface DateTimeProps extends DateTimePickerProps, BaseInputProps {
+export interface DateTimeProps
+	extends
+	DateTimePickerProps,
+	Omit<BaseInputProps, "disableAutofill"> {
 	name?: string
 	id?: string
-	value?: Date
-	onChange?: (value: Date | null) => void
+	value?: string
+	onChange?: (value: string | null) => void
 	error?: string | string[]
 }
 
@@ -24,7 +27,6 @@ const DateTime = forwardRef<HTMLButtonElement, DateTimeProps>((
 		name,
 		required,
 		value,
-		size = "md",
 		radius = "xs",
 		valueFormat = "L LT",
 		wrapper,
@@ -44,12 +46,16 @@ const DateTime = forwardRef<HTMLButtonElement, DateTimeProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				value={ isUnset(value) ? null : new Date(value!) }
+				value={ isUnset(value) ? null : value }
 				radius={ radius }
-				size={ size }
 				valueFormat={ valueFormat }
 				leftSection={ <CalendarIcon /> }
 				leftSectionPointerEvents="none"
+				timePickerProps={ {
+					withDropdown: true,
+					popoverProps: { withinPortal: false },
+					format: "12h",
+				} }
 				{ ...props }
 			/>
 		</InputWrapper>
