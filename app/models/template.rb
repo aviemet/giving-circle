@@ -27,6 +27,8 @@ class Template < ApplicationRecord
 
   resourcify
 
+  has_many_attached :images
+
   scope :includes_associated, -> { includes([]) }
 
   def create_presentation(name, theme)

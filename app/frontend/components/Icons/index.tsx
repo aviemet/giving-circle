@@ -96,3 +96,11 @@ export {
 export {
 	PiPresentationChart as PresentationIcon,
 } from "react-icons/pi"
+
+export {
+	ImCancelCircle as CancelIcon,
+} from "react-icons/im"
+
+export {
+	FaRegImage as ImageIcon,
+} from "react-icons/fa6"

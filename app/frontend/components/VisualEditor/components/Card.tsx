@@ -1,5 +1,7 @@
 import { type ComponentConfig } from "@measured/puck"
 
+import { Card, Text } from "@/components"
+
 import { colorField } from "../fields"
 
 export type CardProps = {
@@ -7,6 +9,7 @@ export type CardProps = {
 	description: string
 	padding: number
 	backgroundColor: string
+	fontColor: string
 }
 
 export const cardConfig: ComponentConfig<CardProps> = {
@@ -14,20 +17,26 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		title: { type: "text" },
 		description: { type: "textarea" },
 		padding: { type: "number", min: 4, max: 64 },
-		backgroundColor: colorField,
+		backgroundColor: colorField({
+			label: "Background Color",
+		}),
+		fontColor: colorField({
+			label: "Font Color",
+		}),
 	},
 	defaultProps: {
 		title: "Topic Title",
 		description: "Topic description...",
 		padding: 16,
-		backgroundColor: "#ffffff",
+		backgroundColor: "#FEFEFE",
+		fontColor: "#111111",
 	},
-	render: ({ title, description, padding, backgroundColor }) => {
+	render: ({ title, description, padding, backgroundColor, fontColor }) => {
 		return (
-			<article style={ { padding, backgroundColor } }>
-				<h2>{ title }</h2>
-				<p>{ description }</p>
-			</article>
+			<Card style={ { padding, backgroundColor } }>
+				<Card.Section></Card.Section>
+				<Text>{ description }</Text>
+			</Card>
 		)
 	},
 }

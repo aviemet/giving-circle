@@ -1,4 +1,5 @@
 import { createInertiaApp, router } from "@inertiajs/react"
+import * as ActiveStorage from "@rails/activestorage"
 import dayjs from "dayjs"
 import duration from "dayjs/plugin/duration"
 import localizedFormat from "dayjs/plugin/localizedFormat"
@@ -13,6 +14,8 @@ import {
 	handlePageLayout,
 } from "./middleware"
 import { runAxe } from "./middleware/axe"
+
+ActiveStorage.start()
 
 const pages = import.meta.glob<PagesObject>("../pages/**/index.tsx")
 

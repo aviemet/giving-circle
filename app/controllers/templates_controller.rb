@@ -4,7 +4,7 @@ class TemplatesController < ApplicationController
   expose :templates, -> { search(Template.includes_associated) }
   expose :template, id: -> { params[:slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
 
-  strong_params :template, permit: [:name, :slides]
+  strong_params :template, permit: [:name, :slides, images: []]
 
   sortable_fields %w(name)
 
