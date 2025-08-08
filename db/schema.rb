@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_18_002314) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -282,6 +282,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_002314) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "slide_parents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "slide_id", null: false
+    t.string "parentable_type", null: false
+    t.uuid "parentable_id", null: false
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parentable_type", "parentable_id"], name: "index_slide_parents_on_parentable"
+    t.index ["slide_id"], name: "index_slide_parents_on_slide_id"
+  end
+
+  create_table "slides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.jsonb "data"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug", null: false
@@ -385,6 +404,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_002314) do
   add_foreign_key "presentations_memberships", "presentations"
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
+  add_foreign_key "slide_parents", "slides"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

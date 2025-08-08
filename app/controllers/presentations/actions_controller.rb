@@ -1,4 +1,4 @@
-class Presentation::ActionsController < ApplicationController
+class Presentations::ActionsController < ApplicationController
   expose :presentation_actions, -> { search(Presentation::Action.includes_associated) }
   expose :presentation_action, find: ->(id, scope){ scope.includes_associated.find(id) }
 

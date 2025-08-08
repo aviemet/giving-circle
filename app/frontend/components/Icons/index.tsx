@@ -14,6 +14,10 @@ export {
 	TbSquarePlus as ReplenishIcon,
 	TbSun as SunIcon,
 	TbMoonStars as MoonIcon,
+	TbAlignLeft as AlignLeftIcon,
+	TbAlignCenter as AlignCenterIcon,
+	TbAlignRight as AlignRightIcon,
+	TbAlignJustified as AlignJustifyIcon,
 } from "react-icons/tb"
 
 export {

@@ -43,9 +43,7 @@ RSpec.describe Presentation do
     it { is_expected.to belong_to(:theme) }
     it { is_expected.to have_many(:memberships).through(:presentations_memberships) }
     it { is_expected.to have_many(:orgs).through(:presentations_orgs) }
-    it { is_expected.to have_many(:distributions).through(:presentations_distributions) }
     it { is_expected.to have_many(:elements).through(:presentations_elements) }
-    it { is_expected.to have_many(:votes).through(:presentations_votes) }
   end
 
   describe "Templates" do

@@ -1,3 +1,5 @@
+require "securerandom"
+
 if Rails.env.development?
   circle = Circle.find_by(slug: "battery-powered")
   user = User.first
@@ -17,24 +19,39 @@ if Rails.env.development?
   end
 
   if circle.templates.empty?
-    FactoryBot.create(:template, circle: circle, slides: [{
-      id: 1,
-      name: "Introduction",
-      order: 1,
+    template = FactoryBot.create(:template, name: "Allocation Night", circle: circle)
 
-      zones: {
+    slide = FactoryBot.create(:slide, {
+      title: "Introduction",
+      data: {
         content: [
           {
-            type: "HeadingBlock",
+            type: "Heading",
             props: {
-              content: "Introduction",
-              fontSize: "24px",
-              color: "#333"
+              title: "Introduction",
+              padding: 16,
+              order: 1,
+              color: "#FFFFFF",
+              id: "Heading-#{SecureRandom.uuid}"
             },
           },
-        ]
-      },
-    }],)
+        ],
+        root: {
+          props: {
+            title: "Introduction",
+            backgroundColor:  "#000000",
+          },
+        },
+        zones: {}
+      }
+    },)
+
+    FactoryBot.create(:slide_parent, {
+      slide: slide,
+      parentable: template,
+      order: 1,
+    },)
+
   end
 
   if circle.themes.empty?
@@ -43,28 +60,31 @@ if Rails.env.development?
 
   theme = circle.themes.first
 
-  if theme.orgs.empty?
+  if theme&.orgs&.empty?
     10.times do
       FactoryBot.create(:themes_org, { circle:, theme: })
     end
   end
 
-  if theme.presentations.empty?
-    presentation = circle.templates.first.create_presentation("Allocation Night", theme)
-    presentation.settings = {
-      question: Faker::ChuckNorris.fact,
-      matched_funds_multiplier: 2,
-    }
-    presentation.save!
+  if theme&.presentations&.empty?
+    template = circle.templates.first
+    if template
+      presentation = template.create_presentation("Allocation Night", theme)
+      presentation.settings = {
+        question: Faker::ChuckNorris.fact,
+        matched_funds_multiplier: 2,
+      }
+      presentation.save!
+    end
   end
 
-  presentation = theme.presentations.first
+  presentation = theme&.presentations&.first
 
-  if presentation.memberships.empty?
+  if presentation&.memberships&.empty?
     presentation.memberships << circle.memberships
   end
 
-  if presentation.orgs.empty?
+  if presentation&.orgs&.empty?
     presentation.orgs << theme.orgs
   end
 end

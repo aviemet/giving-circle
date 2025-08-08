@@ -14,16 +14,16 @@ interface SlidesSectionProps {
 }
 
 const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
-	const { getData, data } = useForm()
+	const { getData } = useForm()
 
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const { addInput, removeInput, paths } = useDynamicInputs({
 		model: "slides",
 		emptyData: {
-			name: "",
-			order: NaN,
-			content: "",
+			id: NaN,
+			title: "",
+			slides: [],
 		},
 	})
 
@@ -36,7 +36,7 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 			labels: { confirm: "Confirm", cancel: "Cancel" },
 			onConfirm: () => {
 				addInput({
-					name: newSlideInputRef.current?.value,
+					title: newSlideInputRef.current?.value,
 				})
 			},
 		})
@@ -53,14 +53,14 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 
 			<Flex wrap="wrap" gap="sm">
 				{ paths.map((path, i) => {
-					const id = getData(`template.${path}.id`) as number
+					const slug = getData(`template.${path}.slug`) as number
 
 					return (
 						<SlideCard
 							key={ path }
 							path={ path }
 							removeInput={ () => removeInput(i) }
-							href={ template.slug ? Routes.circleTemplatesEditSlide(circle.slug, template.slug, id) : undefined }
+							href={ template.slug ? Routes.circleTemplatesEditSlide(circle.slug, template.slug, slug) : undefined }
 						/>
 					)
 				}) }

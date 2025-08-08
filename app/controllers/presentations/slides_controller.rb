@@ -1,4 +1,4 @@
-class Presentation::SlidesController < ApplicationController
+class Presentations::SlidesController < ApplicationController
   expose :presentation_slides, -> { search(Presentation::Slide.includes_associated) }
   expose :presentation_slide, find: ->(id, scope){ scope.includes_associated.find(id) }
 

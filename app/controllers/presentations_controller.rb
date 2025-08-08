@@ -53,7 +53,6 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_presentation_slug/active (theme_presentation_active)
   def active
     authorize presentation
 
@@ -69,7 +68,7 @@ class PresentationsController < ApplicationController
     presentation.circle = circle
 
     if presentation.save
-      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t('presentations.notices.created')
+      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t("presentations.notices.created")
     else
       redirect_to new_theme_presentation_path(params[:circle_slug], params[:theme_slug]), inertia: { errors: presentation.errors }
     end
@@ -81,7 +80,7 @@ class PresentationsController < ApplicationController
     authorize presentation
 
     if presentation.update(presentation_params)
-      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t('presentations.notices.updated')
+      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t("presentations.notices.updated")
     else
       redirect_to edit_theme_presentation_path, inertia: { errors: presentation.errors }
     end
@@ -92,6 +91,6 @@ class PresentationsController < ApplicationController
     authorize presentation
 
     presentation.destroy!
-    redirect_to theme_presentations_path(params[:circle_slug], params[:theme_slug]), notice: t('presentations.notices.destroyed')
+    redirect_to theme_presentations_path(params[:circle_slug], params[:theme_slug]), notice: t("presentations.notices.destroyed")
   end
 end

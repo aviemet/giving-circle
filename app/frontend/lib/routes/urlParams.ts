@@ -79,6 +79,58 @@ const urlParams = {
       "slug"
     ]
   },
+  "settings": {
+    "params": []
+  },
+  "settingsGeneral": {
+    "params": []
+  },
+  "settingsAppearance": {
+    "params": []
+  },
+  "settingsIntegrations": {
+    "params": []
+  },
+  "settingsLocalizations": {
+    "params": []
+  },
+  "settingsNotifications": {
+    "params": []
+  },
+  "apiUsers": {
+    "params": []
+  },
+  "apiUser": {
+    "params": [
+      "id"
+    ]
+  },
+  "apiUpdateTablePreferences": {
+    "params": [
+      "id"
+    ]
+  },
+  "apiUpdateUserPreferences": {
+    "params": [
+      "id"
+    ]
+  },
+  "apiSearches": {
+    "params": []
+  },
+  "apiSpotlights": {
+    "params": []
+  },
+  "activePresentationSettings": {
+    "params": [
+      "active_presentation_presentation_slug"
+    ]
+  },
+  "activePresentation": {
+    "params": [
+      "presentation_slug"
+    ]
+  },
   "circles": {
     "params": []
   },
@@ -166,7 +218,7 @@ const urlParams = {
     "params": [
       "circle_slug",
       "template_slug",
-      "id"
+      "slug"
     ]
   },
   "circleThemes": {
@@ -229,11 +281,30 @@ const urlParams = {
       "slug"
     ]
   },
-  "themePresentationActive": {
+  "themeActivePresentations": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
+  "newThemeActivePresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug"
+    ]
+  },
+  "editThemeActivePresentation": {
     "params": [
       "circle_slug",
       "theme_slug",
-      "presentation_presentation_slug"
+      "presentation_slug"
+    ]
+  },
+  "themeActivePresentation": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
     ]
   },
   "themePresentations": {
@@ -391,58 +462,6 @@ const urlParams = {
     "params": [
       "circle_slug"
     ]
-  },
-  "activePresentationShow": {
-    "params": [
-      "presentation_slug"
-    ]
-  },
-  "activePresentationSettings": {
-    "params": [
-      "presentation_slug"
-    ]
-  },
-  "settings": {
-    "params": []
-  },
-  "settingsGeneral": {
-    "params": []
-  },
-  "settingsAppearance": {
-    "params": []
-  },
-  "settingsIntegrations": {
-    "params": []
-  },
-  "settingsLocalizations": {
-    "params": []
-  },
-  "settingsNotifications": {
-    "params": []
-  },
-  "apiUsers": {
-    "params": []
-  },
-  "apiUser": {
-    "params": [
-      "id"
-    ]
-  },
-  "apiUpdateTablePreferences": {
-    "params": [
-      "id"
-    ]
-  },
-  "apiUpdateUserPreferences": {
-    "params": [
-      "id"
-    ]
-  },
-  "apiSearches": {
-    "params": []
-  },
-  "apiSpotlights": {
-    "params": []
   },
   "updateRailsDiskService": {
     "params": [

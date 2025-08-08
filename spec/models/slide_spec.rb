@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: presentation_votes
+# Table name: slides
 #
 #  id         :uuid             not null, primary key
 #  data       :jsonb
-#  name       :string           not null
-#  template   :boolean          default(FALSE), not null
+#  slug       :string
+#  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Presentation::Vote, type: :model do
+RSpec.describe Slide, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

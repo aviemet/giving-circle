@@ -55,7 +55,7 @@ class Presentation < ApplicationRecord
   has_many :elements, through: :presentations_elements, dependent: :nullify
 
   scope :templates, -> { where(template: true) }
-  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :votes, :distributions]) }
+  scope :includes_associated, -> { includes([:theme, :memberships, :orgs]) }
 
   private
 

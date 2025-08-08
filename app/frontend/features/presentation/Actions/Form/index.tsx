@@ -1,6 +1,7 @@
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
 import { Grid } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 type PresentationActionFormData = {
 	presentation_action: Schema.PresentationActionsFormData
@@ -9,7 +10,7 @@ type PresentationActionFormData = {
 export interface PresentationActionFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PresentationActionFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PresentationActionFormData>) => boolean | void
 	presentation_action: Schema.PresentationActionsFormData
 }
 
@@ -22,7 +23,7 @@ const PresentationActionForm = ({ method = "post", presentation_action, ...props
 			{ ...props }
 		>
 			<Grid>
-			
+
 				<Grid.Col>
 					<TextInput name="slug" label="Slug" />
 				</Grid.Col>
@@ -42,7 +43,7 @@ const PresentationActionForm = ({ method = "post", presentation_action, ...props
 					<TextInput name="trigger_conditions" label="Trigger_conditions" />
 				</Grid.Col>
 				<Grid.Col>
-					<Submit>{ presentation_action.id ? 'Update' : 'Create' } PresentationAction</Submit>
+					<Submit>{ presentation_action.id ? "Update" : "Create" } PresentationAction</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

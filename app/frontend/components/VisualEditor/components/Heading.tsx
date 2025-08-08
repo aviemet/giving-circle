@@ -2,10 +2,13 @@ import { type ComponentConfig } from "@measured/puck"
 
 import { Box, Title } from "@/components"
 
+import { colorField } from "../fields"
+
 export type HeadingProps = {
 	title: string
 	padding: number
 	order: 1 | 2 | 3 | 4 | 5 | 6
+	color: string
 }
 
 export const headingConfig: ComponentConfig<HeadingProps> = {
@@ -23,17 +26,21 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 				{ label: "6", value: 6 },
 			],
 		},
+		color: colorField({
+			label: "Text Color",
+		}),
 	},
 
 	defaultProps: {
 		title: "Heading",
 		padding: 16,
 		order: 1,
+		color: "#FFFFFF",
 	},
 
-	render: ({ title, padding, order }) => (
+	render: ({ title, padding, order, color }) => (
 		<Box p={ padding }>
-			<Title order={ order }>{ title }</Title>
+			<Title order={ order } c={ color }>{ title }</Title>
 		</Box>
 	),
 }

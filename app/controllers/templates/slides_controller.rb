@@ -3,6 +3,9 @@ class Templates::SlidesController < ApplicationController
 
   expose :template, id: -> { params[:template_slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
 
+  expose :slides, -> { template.slides.includes_associated }
+  expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }, find_by: :slug
+
   strong_params :slide, permit: [:name]
 
   sortable_fields %w(name)
@@ -19,10 +22,11 @@ class Templates::SlidesController < ApplicationController
     render inertia: "Templates/Slides/New"
   end
 
-  # @route GET /:circle_slug/templates/:template_slug/slides/:id/edit (circle_templates_edit_slide)
+  # @route GET /:circle_slug/templates/:template_slug/slides/:slug/edit (circle_templates_edit_slide)
   def edit
-    render inertia: "Templates/Slides/Edit", props: {
-      template: template.render(:form_data)
+    render inertia: "Slides/Edit", props: {
+      template: template.render(:persisted),
+      slide: slide.render(:form_data)
     }
   end
 

@@ -4,7 +4,6 @@ class CreateTemplates < ActiveRecord::Migration[8.0]
       t.string :name
       t.string :slug, null: false, index: { unique: true }
       t.jsonb :settings, null: false, default: {}
-      t.jsonb :slides, null: false, default: {}
 
       t.timestamps
     end

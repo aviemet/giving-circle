@@ -4,7 +4,11 @@ class TemplatesController < ApplicationController
   expose :templates, -> { search(Template.includes_associated) }
   expose :template, id: -> { params[:slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
 
-  strong_params :template, permit: [:name, :slides, images: []]
+  strong_params :template, permit: [:name, images: [], slides: [
+    :slide_index, slide: [
+      :id, :name, :order, :data
+    ],
+  ]]
 
   sortable_fields %w(name)
 
@@ -54,16 +58,15 @@ class TemplatesController < ApplicationController
 
   # @route POST /:circle_slug/templates (circle_templates)
   def create
-    authorize Presentation.new
+    authorize Template.new
 
-    template = Presentation.new(template_params)
-    template.template = true
+    template = Template.new(template_params)
     template.circle = circle
 
     if template.save
-      redirect_to edit_circle_presentation_template_path(circle.slug, template.id), notice: "Template was successfully created."
+      redirect_to edit_circle_template_path(circle.slug, template.id), notice: "Template was successfully created."
     else
-      redirect_to new_circle_presentation_template_path(circle.slug, template.id), inertia: { errors: template.errors }
+      redirect_to new_circle_template_path(circle.slug, template.id), inertia: { errors: template.errors }
     end
   end
 
@@ -72,10 +75,16 @@ class TemplatesController < ApplicationController
   def update
     authorize template
 
-    if template.update(presentation_template_params)
-      redirect_to template, notice: "Template was successfully updated."
+    ap({ params: })
+
+    if template_params[:name] != template.name
+      template.slug = nil
+    end
+
+    if template.update(template_params)
+      redirect_to circle_template_path(circle, template), notice: "Template was successfully updated."
     else
-      redirect_to edit_circle_presentation_template_path(circle.slug, template.id), inertia: { errors: template.errors }
+      redirect_to edit_circle_template_path(circle.slug, template.id), inertia: { errors: template.errors }
     end
   end
 
@@ -84,6 +93,6 @@ class TemplatesController < ApplicationController
     authorize template
 
     template.destroy!
-    redirect_to templates_url, notice: "Template was successfully destroyed."
+    redirect_to circle_templates_path(circle), notice: "Template was successfully destroyed."
   end
 end

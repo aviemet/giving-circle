@@ -4,7 +4,7 @@ import { useForm } from "use-inertia-form"
 
 import { ActionIcon, Card, Image, Text, Center, Link, ConditionalWrapper } from "@/components"
 import { TextInput } from "@/components/Form"
-import { CrossIcon } from "@/components/Icons"
+import { TrashIcon } from "@/components/Icons"
 import { isNonEmptyString } from "@/lib"
 
 import * as classes from "./SlideCard.css"
@@ -44,7 +44,7 @@ const SlideCard = ({ path, removeInput, href }: SlideCardProps) => {
 					className={ clsx("remove-input-button") }
 					onClick={ handleRemoveElement }
 				>
-					<CrossIcon />
+					<TrashIcon />
 				</ActionIcon>
 				<ConditionalWrapper
 					condition={ isNonEmptyString(href) }
@@ -58,7 +58,7 @@ const SlideCard = ({ path, removeInput, href }: SlideCardProps) => {
 			</Card.Section>
 
 			<Center>
-				<TextInput name={ `${path}.name` } />
+				<TextInput name={ `${path}.title` } />
 			</Center>
 		</Card>
 	)

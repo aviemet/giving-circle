@@ -64,6 +64,10 @@ export default [
 				ArrayExpression: 1,
 				ignoredNodes: [
 					"TSTypeParameterInstantiation",
+					"TemplateLiteral",
+					"TemplateElement",
+					"JSXExpressionContainer > TemplateLiteral",
+					"JSXExpressionContainer > TemplateElement",
 				],
 			}],
 			"@stylistic/brace-style": ["error", "1tbs", {
@@ -173,7 +177,7 @@ export default [
 			"semi": ["error", "never"],
 			"@stylistic/quotes": ["error", "double", {
 				avoidEscape: true,
-				allowTemplateLiterals: true,
+				allowTemplateLiterals: "always",
 			}],
 			"@stylistic/jsx-quotes": ["error", "prefer-double"],
 			...reactHooksPlugin.configs.recommended.rules,

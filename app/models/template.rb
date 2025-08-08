@@ -18,9 +18,11 @@ class Template < ApplicationRecord
   include Ownable
 
   extend FriendlyId
+
   friendly_id :name, use: [:slugged, :history]
 
   include PgSearchable
+
   pg_search_config(
     against: [:name, :settings, :slug, :slides],
   )
@@ -29,7 +31,10 @@ class Template < ApplicationRecord
 
   has_many_attached :images
 
-  scope :includes_associated, -> { includes([]) }
+  has_many :slide_parents, as: :parentable, dependent: :destroy
+  has_many :slides, through: :slide_parents
+
+  scope :includes_associated, -> { includes([:slides]) }
 
   def create_presentation(name, theme)
     Presentation.build({

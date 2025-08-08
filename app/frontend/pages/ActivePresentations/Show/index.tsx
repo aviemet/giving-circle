@@ -6,8 +6,8 @@ interface ShowPresentationProps {
 	presentation: Schema.PresentationsPresentation
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug
-// @route: themePresentation
+// @path: /:circle_slug/themes/:theme_slug/active_presentations/:presentation_slug
+// @route: themeActivePresentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 	const { params } = usePageProps<"themePresentation">()
 	const title = presentation.name || "Presentation"
