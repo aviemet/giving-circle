@@ -58,7 +58,7 @@ class PresentationsController < ApplicationController
   def activate
     authorize presentation
 
-    presentation.activate
+    presentation.activate unless presentation.active?
 
     redirect_to theme_presentation_controls_url(params[:circle_slug], params[:theme_slug], params[:presentation_slug])
   end

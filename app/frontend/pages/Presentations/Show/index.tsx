@@ -11,7 +11,7 @@ interface ShowPresentationProps {
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 	const { params } = usePageProps<"themePresentation">()
 	const title = presentation.name || "Presentation"
-	console.log({ presentation })
+
 	return (
 		<Page
 			title={ title }
