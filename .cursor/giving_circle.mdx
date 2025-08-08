@@ -98,6 +98,16 @@
 - Type assertions as last resort
 - Auto-generated types for serializers
 
+#### URL Routing & Navigation
+- Using js-routes gem for Rails route generation in TypeScript
+- Route helpers available via `Routes` object imported from `@/lib`
+- Route parameters defined in `app/frontend/lib/routes/urlParams.ts`
+- Route definitions auto-generated in `app/frontend/lib/routes/routes.d.ts`
+- Route parameters must be passed in correct order as defined in urlParams.ts
+- Use `usePageProps()` hook to access current route parameters
+- Nested routes require all parent path parameters (e.g., theme presentations require circle_slug, theme_slug, presentation_slug)
+- Route naming follows Rails conventions with camelCase in TypeScript
+
 #### Internationalization (i18n)
 - Using react-i18next for frontend translations
 - Translation files from i18n-js gem

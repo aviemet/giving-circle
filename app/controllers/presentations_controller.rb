@@ -3,7 +3,7 @@ class PresentationsController < ApplicationController
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(theme.presentations.includes_associated) }
-  expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations.includes_associated }, find_by: :slug
+  expose :presentation, id: -> { params[:presentation_slug] || params[:slug] }, scope: -> { theme.presentations.includes_associated }, find_by: :slug
 
   strong_params :presentation, permit: [:name, :theme_id]
 
@@ -26,8 +26,9 @@ class PresentationsController < ApplicationController
     }, layout: "something"
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
   def show
+    # Route for watching the presentation. Admin viewing of a presentation is all presented through the edit action
     authorize presentation
 
     render inertia: "Presentations/Show", props: {
@@ -44,7 +45,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (edit_theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug/edit (edit_theme_presentation)
   def edit
     authorize presentation
 
@@ -53,12 +54,20 @@ class PresentationsController < ApplicationController
     }
   end
 
-  def active
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/activate (theme_presentation_activate)
+  def activate
     authorize presentation
 
-    render inertia: "Presentations/Active", props: {
-      presentation: presentation.render(:presentation)
-    }
+    presentation.activate
+
+    redirect_to theme_presentation_controls_url(params[:circle_slug], params[:theme_slug], params[:presentation_slug])
+  end
+
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin (theme_presentation_controls)
+  def controls
+    authorize presentation
+
+    render inertia: "Presentations/Controls", props: {}
   end
 
   # @route POST /:circle_slug/themes/:theme_slug/presentations (theme_presentations)
@@ -74,8 +83,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
   def update
     authorize presentation
 
@@ -86,7 +95,7 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
   def destroy
     authorize presentation
 

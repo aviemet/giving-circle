@@ -56,11 +56,6 @@ Rails.application.routes.draw do
 
   draw(:api)
 
-  # Public facing presentations routes
-  resources :active_presentations, param: :presentation_slug, shallow: false, only: [:show] do
-    get "settings", to: "active_presentations#settings", as: :settings
-  end
-
   # :circle_slug being a param in the first position needs to come after any other first position routing names
   resources :circles, param: :circle_slug, only: [:new, :create, :index]
 
@@ -89,11 +84,11 @@ Rails.application.routes.draw do
         get "orgs/import", to: "theme_orgs#import"
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
-        # Active presentation backend/admin routes
-        resources :active_presentations, param: :presentation_slug, shallow: false
-
-        # Presentation building and editing routes
-        resources :presentations, param: :presentation_slug, shallow: false
+        # Presentation routes
+        resources :presentations, param: :slug, shallow: false do
+          get "activate"
+          get "admin", as: :controls, to: "presentations#controls"
+        end
 
         namespace :presentations do
           resources :actions,

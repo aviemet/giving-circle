@@ -28,9 +28,11 @@ class Presentation < ApplicationRecord
   include Ownable
 
   extend FriendlyId
+
   friendly_id :name, use: [:slugged, :history]
 
   include PgSearchable
+
   pg_search_config(
     against: [:name, :template],
   )
@@ -56,6 +58,10 @@ class Presentation < ApplicationRecord
 
   scope :templates, -> { where(template: true) }
   scope :includes_associated, -> { includes([:theme, :memberships, :orgs]) }
+
+  def activate
+    self.update(active: true)
+  end
 
   private
 

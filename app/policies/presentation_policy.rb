@@ -2,7 +2,11 @@ class PresentationPolicy < ApplicationPolicy
   class Scope < Scope
   end
 
-  def run_presentation?
+  def activate?
+    true
+  end
+
+  def controls?
     true
   end
 end

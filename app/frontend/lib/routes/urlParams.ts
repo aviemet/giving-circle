@@ -121,16 +121,6 @@ const urlParams = {
   "apiSpotlights": {
     "params": []
   },
-  "activePresentationSettings": {
-    "params": [
-      "active_presentation_presentation_slug"
-    ]
-  },
-  "activePresentation": {
-    "params": [
-      "presentation_slug"
-    ]
-  },
   "circles": {
     "params": []
   },
@@ -281,26 +271,14 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeActivePresentations": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "newThemeActivePresentation": {
-    "params": [
-      "circle_slug",
-      "theme_slug"
-    ]
-  },
-  "editThemeActivePresentation": {
+  "themePresentationActivate": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "themeActivePresentation": {
+  "themePresentationControls": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -323,14 +301,14 @@ const urlParams = {
     "params": [
       "circle_slug",
       "theme_slug",
-      "presentation_slug"
+      "slug"
     ]
   },
   "themePresentation": {
     "params": [
       "circle_slug",
       "theme_slug",
-      "presentation_slug"
+      "slug"
     ]
   },
   "themePresentationsActions": {
