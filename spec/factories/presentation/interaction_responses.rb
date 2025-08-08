@@ -20,7 +20,7 @@
 #  fk_rails_...  (presentation_action_id => presentation_actions.id)
 #
 FactoryBot.define do
-  factory :presentation_action_response, class: "Presentation::ActionResponse" do
+  factory :presentation_interaction_response, class: "Presentation::InteractionResponse" do
     presentation_action { nil }
     membership { nil }
     response_data { "" }

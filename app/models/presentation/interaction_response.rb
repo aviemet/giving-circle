@@ -19,8 +19,25 @@
 #  fk_rails_...  (membership_id => memberships.id)
 #  fk_rails_...  (presentation_action_id => presentation_actions.id)
 #
-require "rails_helper"
+class Presentation::InteractionResponse < ApplicationRecord
+  include PgSearch::Model
 
-RSpec.describe Presentation::ActionResponse, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pg_search_scope(
+    :search,
+    against: [:presentation_interaction, :membership, :response_data],
+    associated_against: {
+      presentation_interaction: [],
+      membership: [],
+    },
+    using: {
+      tsearch: { prefix: true },
+      trigram: {}
+    },
+  )
+
+  resourcify
+  belongs_to :presentation_interaction
+  belongs_to :membership
+
+  scope :includes_associated, -> { includes([:presentation_interaction, :membership]) }
 end

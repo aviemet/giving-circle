@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 
 import { AppShell } from "@/components"
 import { useHeadroom, useTheme } from "@/lib/hooks"
@@ -40,23 +40,20 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 			navbar={ {
 				width: theme.other.navbar.width.open,
 				breakpoint: "sm",
-				collapsed: {
-					mobile: !sidebarOpen || !sidebarVisible,
-					desktop: !sidebarOpen || !sidebarVisible,
-				},
+				// collapsed: {
+				// 	mobile: !sidebarOpen || !sidebarVisible,
+				// 	desktop: !sidebarOpen || !sidebarVisible,
+				// },
 			} }
-			footer={ { height: theme.other.footer.height } }
 			className={ clsx(classes.presentationLayout) }
 		>
 			<AppShell.Header withBorder={ false }>
 				<PresentationHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx(classes.navMenu) }>
+			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx() }>
 				<PresentationSidebar />
 			</AppShell.Navbar>
-
-			<PresentationFooter />
 
 			<AppShell.Main className={ clsx(classes.main, { paddingDisabled: mainPaddingDisabled }) }>
 				{ children }

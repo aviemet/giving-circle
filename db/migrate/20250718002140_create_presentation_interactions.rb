@@ -1,8 +1,8 @@
-class CreatePresentationActions < ActiveRecord::Migration[8.0]
+class CreatePresentationInteractions < ActiveRecord::Migration[8.0]
   def change
-    create_table :presentation_actions, id: :uuid do |t|
+    create_table :presentation_interactions, id: :uuid do |t|
       t.string :slug
-      t.integer :action_type
+      t.integer :interaction_type
       t.jsonb :config
       t.jsonb :results
       t.integer :trigger_type

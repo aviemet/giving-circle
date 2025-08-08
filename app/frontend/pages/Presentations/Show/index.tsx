@@ -1,5 +1,5 @@
 import { Group, Link, Menu, Page, Section, Title } from "@/components"
-import { Routes } from "@/lib"
+import { Routes, withLayout } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 interface ShowPresentationProps {
@@ -30,10 +30,15 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 			</> }
 		>
 			<Section>
-				<Link as="button" href={ Routes.themePresentationActivate(params.circle_slug, params.theme_slug, presentation.slug) }>Start Presentation</Link>
+				<Link
+					as="button"
+					href={ Routes.themePresentationActivate(params.circle_slug, params.theme_slug, presentation.slug) }
+				>
+					{ presentation.active ? "Resume" : "Start" } Presentation
+				</Link>
 			</Section>
 		</Page>
 	)
 }
 
-export default ShowPresentation
+export default withLayout(ShowPresentation, "unformatted")

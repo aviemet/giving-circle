@@ -12,10 +12,10 @@ require "rails_helper"
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/presentation/action_responses", type: :request do
+RSpec.describe "/presentation/interinteraction_responses", type: :request do
 
   # This should return the minimal set of attributes required to create a valid
-  # Presentation::ActionResponse. As you add validations to Presentation::ActionResponse, be sure to
+  # Presentation::InteractionResponse. As you add validations to Presentation::InteractionResponse, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,58 +27,58 @@ RSpec.describe "/presentation/action_responses", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Presentation::ActionResponse.create! valid_attributes
-      get presentation_action_responses_url
+      Presentation::InteractionResponse.create! valid_attributes
+      get presentation_interaction_responses_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      action_response = Presentation::ActionResponse.create! valid_attributes
-      get presentation_action_response_url(action_response)
+      interaction_response = Presentation::InteractionResponse.create! valid_attributes
+      get presentation_interaction_response_url(interaction_response)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_presentation_action_response_url
+      get new_presentation_interaction_response_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      action_response = Presentation::ActionResponse.create! valid_attributes
-      get edit_presentation_action_response_url(action_response)
+      interaction_response = Presentation::InteractionResponse.create! valid_attributes
+      get edit_presentation_interaction_response_url(interaction_response)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Presentation::ActionResponse" do
+      it "creates a new Presentation::InteractionResponse" do
         expect {
-          post presentation_action_responses_url, params: { presentation_action_response: valid_attributes }
-        }.to change(Presentation::ActionResponse, :count).by(1)
+          post presentation_interaction_responses_url, params: { presentation_interaction_response: valid_attributes }
+        }.to change(Presentation::InteractionResponse, :count).by(1)
       end
 
-      it "redirects to the created presentation_action_response" do
-        post presentation_action_responses_url, params: { presentation_action_response: valid_attributes }
-        expect(response).to redirect_to(presentation_action_response_url(Presentation::ActionResponse.last))
+      it "redirects to the created presentation_interaction_response" do
+        post presentation_interaction_responses_url, params: { presentation_interaction_response: valid_attributes }
+        expect(response).to redirect_to(presentation_interaction_response_url(Presentation::InteractionResponse.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Presentation::ActionResponse" do
+      it "does not create a new Presentation::InteractionResponse" do
         expect {
-          post presentation_action_responses_url, params: { presentation_action_response: invalid_attributes }
-        }.not_to change(Presentation::ActionResponse, :count)
+          post presentation_interaction_responses_url, params: { presentation_interaction_response: invalid_attributes }
+        }.not_to change(Presentation::InteractionResponse, :count)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post presentation_action_responses_url, params: { presentation_action_response: invalid_attributes }
+        post presentation_interaction_responses_url, params: { presentation_interaction_response: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -90,42 +90,42 @@ RSpec.describe "/presentation/action_responses", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested presentation_action_response" do
-        action_response = Presentation::ActionResponse.create! valid_attributes
-        patch presentation_action_response_url(action_response), params: { presentation_action_response: new_attributes }
-        action_response.reload
+      it "updates the requested presentation_interaction_response" do
+        interaction_response = Presentation::InteractionResponse.create! valid_attributes
+        patch presentation_interaction_response_url(interaction_response), params: { presentation_interaction_response: new_attributes }
+        interaction_response.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the presentation_action_response" do
-        action_response = Presentation::ActionResponse.create! valid_attributes
-        patch presentation_action_response_url(action_response), params: { presentation_action_response: new_attributes }
-        action_response.reload
-        expect(response).to redirect_to(presentation_action_response_url(action_response))
+      it "redirects to the presentation_interaction_response" do
+        interaction_response = Presentation::InteractionResponse.create! valid_attributes
+        patch presentation_interaction_response_url(interaction_response), params: { presentation_interaction_response: new_attributes }
+        interaction_response.reload
+        expect(response).to redirect_to(presentation_interaction_response_url(interaction_response))
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        action_response = Presentation::ActionResponse.create! valid_attributes
-        patch presentation_action_response_url(action_response), params: { presentation_action_response: invalid_attributes }
+        interaction_response = Presentation::InteractionResponse.create! valid_attributes
+        patch presentation_interaction_response_url(interaction_response), params: { presentation_interaction_response: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested presentation_action_response" do
-      action_response = Presentation::ActionResponse.create! valid_attributes
+    it "destroys the requested presentation_interaction_response" do
+      interaction_response = Presentation::InteractionResponse.create! valid_attributes
       expect {
-        delete presentation_action_response_url(action_response)
-      }.to change(Presentation::ActionResponse, :count).by(-1)
+        delete presentation_interaction_response_url(interaction_response)
+      }.to change(Presentation::InteractionResponse, :count).by(-1)
     end
 
-    it "redirects to the presentation_action_responses list" do
-      action_response = Presentation::ActionResponse.create! valid_attributes
-      delete presentation_action_response_url(action_response)
-      expect(response).to redirect_to(presentation_action_responses_url)
+    it "redirects to the presentation_interaction_responses list" do
+      interaction_response = Presentation::InteractionResponse.create! valid_attributes
+      delete presentation_interaction_response_url(interaction_response)
+      expect(response).to redirect_to(presentation_interaction_responses_url)
     end
   end
 end

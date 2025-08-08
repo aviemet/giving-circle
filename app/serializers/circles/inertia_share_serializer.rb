@@ -8,4 +8,6 @@ class Circles::InertiaShareSerializer < ApplicationSerializer
     :slug,
     :name,
   )
+
+  has_many :themes, serializer: Themes::InertiaShareSerializer
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: presentation_actions
+# Table name: presentation_interactions
 #
 #  id                 :uuid             not null, primary key
 #  action_type        :integer
@@ -13,9 +13,9 @@
 #  updated_at         :datetime         not null
 #
 FactoryBot.define do
-  factory :presentation_action, class: "Presentation::Action" do
+  factory :presentation_interaction, class: "Presentation::Interaction" do
     slug { "MyString" }
-    action_type { 1 }
+    interaction_type { 1 }
     config { "" }
     results { "" }
     trigger_type { 1 }

@@ -19,7 +19,6 @@ const AppSidebar = () => {
 					{ /* Circle title and avatar */ }
 					<ToggleNavbarButton />
 				</Flex>
-
 			</AppShell.Section>
 
 			<Divider />

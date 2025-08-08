@@ -1,16 +1,16 @@
 import { withLayout } from "@/lib"
 
-interface PresentationControlsProps {
+interface ActivePresentationControlsProps {
 
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin
 // @route: themePresentationControls
-const PresentationControls = ({}: PresentationControlsProps) => {
+const ActivePresentationControls = ({}: ActivePresentationControlsProps) => {
 	return (
 		<>Presentation Controls</>
 	)
 
 }
 
-export default withLayout(PresentationControls, "presentation")
+export default withLayout(ActivePresentationControls, "presentation")

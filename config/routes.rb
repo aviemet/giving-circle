@@ -87,33 +87,39 @@ Rails.application.routes.draw do
         # Presentation routes
         resources :presentations, param: :slug, shallow: false do
           get "activate"
-          get "admin", as: :controls, to: "presentations#controls"
-        end
 
-        namespace :presentations do
-          resources :actions,
-            path: ":presentation_slug/actions",
+          # Presentation builder components
+          resources :interactions,
+            path: ":presentation_slug/interactions",
             shallow: false,
-            as: :actions,
-            controller: "/presentations/actions"
+            as: :interactions,
+            controller: "presentations/interactions"
 
-          resources :action_responses,
-            path: ":presentation_slug/action_responses",
+          resources :interaction_responses,
+            path: ":presentation_slug/interaction_responses",
             shallow: false,
-            as: :action_responses,
-            controller: "/presentations/action_responses"
+            as: :interaction_responses,
+            controller: "presentations/interaction_responses"
 
           resources :presentation_elements,
             path: ":presentation_slug/elements",
             shallow: false,
             as: :elements,
-            controller: "/presentations/elements"
+            controller: "presentations/elements"
 
           resources :presentation_slides,
             path: ":presentation_slug/slides",
             shallow: false,
             as: :slides,
-            controller: "/presentations/slides"
+            controller: "presentations/slides"
+
+          # Active Presentation
+          get "admin", as: :controls, to: "presentations/active#index"
+          get "admin/overview", to: "presentations/active#overview", as: :overview
+          get "admin/members", to: "presentations/active#members", as: :members
+          get "admin/messaging", to: "presentations/active#messaging", as: :messaging
+          get "admin/settings", to: "presentations/active#settings", as: :settings
+
         end
       end
     end

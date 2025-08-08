@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: presentation_actions
+# Table name: presentation_interactions
 #
 #  id                 :uuid             not null, primary key
 #  action_type        :integer
@@ -14,6 +14,6 @@
 #
 require "rails_helper"
 
-RSpec.describe Presentation::Action, type: :model do
+RSpec.describe Presentation::Interaction, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -63,13 +63,6 @@ class PresentationsController < ApplicationController
     redirect_to theme_presentation_controls_url(params[:circle_slug], params[:theme_slug], params[:presentation_slug])
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin (theme_presentation_controls)
-  def controls
-    authorize presentation
-
-    render inertia: "Presentations/Controls", props: {}
-  end
-
   # @route POST /:circle_slug/themes/:theme_slug/presentations (theme_presentations)
   def create
     authorize Presentation.new

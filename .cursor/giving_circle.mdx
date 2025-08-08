@@ -107,6 +107,9 @@
 - Use `usePageProps()` hook to access current route parameters
 - Nested routes require all parent path parameters (e.g., theme presentations require circle_slug, theme_slug, presentation_slug)
 - Route naming follows Rails conventions with camelCase in TypeScript
+- Automatic route annotation system via `url_params_json.rb`:
+  - Adds `@path` and `@route` comments above React components
+  - Extracts component names from default exports, including HOC-wrapped components
 
 #### Internationalization (i18n)
 - Using react-i18next for frontend translations
@@ -141,3 +144,11 @@
 - Proper useEffect cleanup
 - Memoized expensive computations
 - Minimal global state
+
+## Architecture Decisions
+
+### Presentation System
+- Presentations have customizable events called "Interactions" which can be triggered during presentation runtime
+- Events are defined by `interaction_type`, `trigger_type`, `trigger_conditions`, and store `results` 
+- Events are managed through dedicated controllers under the `presentations` namespace
+- Rails routing restrictions prevent use of "actions" as controller/route names
