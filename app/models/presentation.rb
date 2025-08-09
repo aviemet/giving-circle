@@ -56,8 +56,11 @@ class Presentation < ApplicationRecord
   has_many :presentations_elements, dependent: :destroy
   has_many :elements, through: :presentations_elements, dependent: :nullify
 
+  has_many :slide_parents, as: :parentable, dependent: :destroy
+  has_many :slides, through: :slide_parents
+
   scope :templates, -> { where(template: true) }
-  scope :includes_associated, -> { includes([:theme, :memberships, :orgs]) }
+  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides]) }
 
   def activate
     self.update(active: true)

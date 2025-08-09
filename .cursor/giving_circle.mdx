@@ -7,9 +7,11 @@
 ### Slide Management
 - Slides are managed through a polymorphic association using `SlideParent` join table
 - Templates can have multiple slides through `has_many :slides, through: :slide_parents`
-- Slides can belong to multiple templates through `has_many :templates, through: :slide_parents`
+- Presentations can have multiple slides through `has_many :slides, through: :slide_parents`
+- Slides can belong to multiple templates/presentations through polymorphic `slide_parents` association
 - Slide ordering is handled by the `order` field in `SlideParent`
-- Templates also store slide data as JSONB in the `slides` field for presentation purposes
+- Templates and Presentations also store slide data as JSONB in the `slides` field for presentation purposes
+- When serializing presentations, use the ActiveRecord association (`slides`) not the JSONB field (`slides` column)
 
 ## Project Milestones
 

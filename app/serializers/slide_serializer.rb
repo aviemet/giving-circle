@@ -16,6 +16,6 @@ class SlideSerializer < ApplicationSerializer
 
   attributes(
     :title,
-    :data,
+    data: { type: "Slide" },
   )
 end

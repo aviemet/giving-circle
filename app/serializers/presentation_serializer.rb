@@ -31,6 +31,6 @@ class PresentationSerializer < ApplicationSerializer
     :name,
     :active,
     :theme_id,
-    slides: { type: "Slide" },
+    :slides,
   )
 end

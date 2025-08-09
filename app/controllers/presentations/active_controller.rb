@@ -13,7 +13,9 @@ class Presentations::ActiveController < ApplicationController
   def index
     authorize presentation
 
-    render inertia: "Presentations/Active/Index", props: {}
+    render inertia: "Presentations/Active/Index", props: {
+      presentation: presentation.render(:show)
+    }
   end
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/overview (theme_presentation_overview)
