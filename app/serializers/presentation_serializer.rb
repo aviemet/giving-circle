@@ -33,6 +33,5 @@ class PresentationSerializer < ApplicationSerializer
     :name,
     :active,
     :theme_id,
-    :slides,
   )
 end
