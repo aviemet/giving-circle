@@ -3,8 +3,8 @@
 # Table name: presentation_interactions
 #
 #  id                 :uuid             not null, primary key
-#  action_type        :integer
 #  config             :jsonb
+#  interaction_type   :integer
 #  results            :jsonb
 #  slug               :string
 #  trigger_conditions :jsonb

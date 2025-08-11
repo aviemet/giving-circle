@@ -11,8 +11,10 @@
 #
 # Indexes
 #
-#  index_ownerships_on_circle_id  (circle_id)
-#  index_ownerships_on_ownable    (ownable_type,ownable_id)
+#  index_ownerships_on_circle_id                    (circle_id)
+#  index_ownerships_on_ownable                      (ownable_type,ownable_id)
+#  index_ownerships_on_ownable_type_and_circle_id   (ownable_type,circle_id)
+#  index_ownerships_on_ownable_type_and_ownable_id  (ownable_type,ownable_id)
 #
 # Foreign Keys
 #

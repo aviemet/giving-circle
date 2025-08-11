@@ -18,7 +18,7 @@ class Presentations::ActiveController < ApplicationController
     authorize public_presentation, policy_class: Presentation::ActivePolicy
 
     render inertia: "Presentations/Active/PublicShow", props: {
-      presentation: public_presentation.render(:show),
+      presentation: public_presentation.render(:presentation),
       circle: circle.render(:persisted)
     }
   end

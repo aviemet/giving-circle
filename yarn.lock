@@ -2790,6 +2790,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rails/actioncable@npm:^8.0.200":
+  version: 8.0.200
+  resolution: "@rails/actioncable@npm:8.0.200"
+  checksum: 10/3ecb53aed4dddd75a3427c3b7e670934c221450097b2296d986a85bbdf5223771486815af6558cb0ed31bf24ed18a5991aa39dc3aa37dedff97a35e0f3b1e579
+  languageName: node
+  linkType: hard
+
 "@rails/activestorage@npm:^8.0.200":
   version: 8.0.200
   resolution: "@rails/activestorage@npm:8.0.200"
@@ -3955,6 +3962,13 @@ __metadata:
   dependencies:
     parchment: "npm:^1.1.2"
   checksum: 10/146ee94088092097aee4b5f1f4460a702f86bf8986e22c4767f0b1beeb510ab9bf20fba0af3067f02543b10c1e55d086b1bdd0e41e6299a3041fb4263c2d2ed2
+  languageName: node
+  linkType: hard
+
+"@types/rails__actioncable@npm:^6.1.11":
+  version: 6.1.11
+  resolution: "@types/rails__actioncable@npm:6.1.11"
+  checksum: 10/1941d7572f29d97b667b804a2d2f8f41b23eb6a3df1564ed818e8634440b7478d2c1405f57ccf0d28b0a8e0157276963ba47c9fb1dac9bb8e47d25eb5c67b425
   languageName: node
   linkType: hard
 
@@ -7627,6 +7641,7 @@ __metadata:
     "@mantine/tiptap": "npm:^8.2.4"
     "@mantine/vanilla-extract": "npm:^8.2.4"
     "@measured/puck": "npm:^0.19.3"
+    "@rails/actioncable": "npm:^8.0.200"
     "@rails/activestorage": "npm:^8.0.200"
     "@stylelint/postcss-css-in-js": "npm:^0.38.0"
     "@stylistic/eslint-plugin": "npm:^5.2.3"
@@ -7652,6 +7667,7 @@ __metadata:
     "@types/jest": "npm:^30.0.0"
     "@types/lodash": "npm:^4.17.20"
     "@types/papaparse": "npm:^5.3.16"
+    "@types/rails__actioncable": "npm:^6.1.11"
     "@types/rails__activestorage": "npm:^8.0.1"
     "@types/react": "npm:^19.1.9"
     "@types/react-dom": "npm:^19.1.7"

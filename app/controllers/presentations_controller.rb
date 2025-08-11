@@ -23,7 +23,7 @@ class PresentationsController < ApplicationController
       } },
       theme: -> { theme.render(:inertia_share) },
       circle: -> { theme.circle.render(:persisted) }
-    }, layout: "something"
+    }
   end
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)

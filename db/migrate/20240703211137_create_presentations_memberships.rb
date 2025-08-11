@@ -7,7 +7,5 @@ class CreatePresentationsMemberships < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_index :presentations_memberships, :presentation_id
   end
 end

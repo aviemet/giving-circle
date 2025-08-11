@@ -155,6 +155,14 @@
 - Memoized expensive computations
 - Minimal global state
 
+#### ActionCable Integration
+- Generic `useActionCable` hook provides base WebSocket functionality
+- Channel-specific hooks (e.g., `useActivePresentationChannel`) provide type safety and encapsulated logic
+- Channel-specific hooks handle message parsing and provide typed callbacks
+- Each channel type should have its own hook for better developer experience and type safety
+- Channel names must match between frontend and backend (e.g., `ActivePresentationChannel`)
+- Message types are defined as TypeScript interfaces for type safety
+
 ### Database Query Optimization
 - Use eager loading for polymorphic associations through ownerships
 - Add database indexes for frequently queried columns and join tables

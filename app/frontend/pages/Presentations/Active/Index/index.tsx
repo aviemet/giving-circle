@@ -1,6 +1,8 @@
-import { Title } from "@/components"
+import { Group, Title } from "@/components"
+import SwitchSlideButton from "@/features/presentations/Buttons/SwitchSlideButton"
 import { withLayout } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
+import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
 
 interface ActivePresentationControlsProps {
 	presentation: Schema.PresentationsShow
@@ -10,11 +12,25 @@ interface ActivePresentationControlsProps {
 // @route: themePresentationControls
 const ActivePresentationControls = ({ presentation }: ActivePresentationControlsProps) => {
 	const { active_presentation, active_theme } = usePageProps<"themePresentationControls">()
-	console.log({ presentation })
+
+	const { switchSlide } = useActivePresentationChannel({
+		presentationId: presentation.id,
+		onSlideSwitched: (slideId) => {
+			console.log("Slide switched to:", slideId)
+		},
+		onConnected: () => {
+			console.log("Connected to presentation channel")
+		},
+	})
+
 	return (
-		<>{ presentation.slides && presentation.slides.map((slide) => (
-			<Title>{ slide.title }</Title>
-		)) }</>
+		<Group>{ presentation.slides && presentation.slides.map((slide) => (
+			<SwitchSlideButton
+				key={ slide.id }
+				slide={ slide }
+				onClick={ () => switchSlide(slide.id) }
+			/>
+		)) }</Group>
 	)
 
 }

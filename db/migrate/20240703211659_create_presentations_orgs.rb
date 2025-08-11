@@ -6,7 +6,5 @@ class CreatePresentationsOrgs < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_index :presentations_orgs, :presentation_id
   end
 end

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 
-const useCheckboxState = (length: number, selected: number) => {
+export const useCheckboxState = (length: number, selected: number) => {
 	return useMemo(() => {
 		// No elements
 		if(length === 0) {
@@ -21,5 +21,3 @@ const useCheckboxState = (length: number, selected: number) => {
 		return { allChecked: false, indeterminate: true }
 	}, [length, selected])
 }
-
-export default useCheckboxState

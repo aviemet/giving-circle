@@ -1,4 +1,4 @@
-const useClickAwayListener = (ref: React.RefObject<HTMLElement>, callback: Function) => {
+export const useClickAwayListener = (ref: React.RefObject<HTMLElement>, callback: Function) => {
 	const startClickListener = (callback?: Function) => {
 		document.addEventListener("click", handleClickAway)
 		document.addEventListener("keydown", handleEscKey)
@@ -25,8 +25,6 @@ const useClickAwayListener = (ref: React.RefObject<HTMLElement>, callback: Funct
 
 	return { startClickListener, cancelClickListener }
 }
-
-export default useClickAwayListener
 
 
 // import React, { useEffect } from 'react'

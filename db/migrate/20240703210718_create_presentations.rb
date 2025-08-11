@@ -3,9 +3,9 @@ class CreatePresentations < ActiveRecord::Migration[7.1]
     create_table :presentations, id: :uuid do |t|
       t.string :name, null: false
       t.boolean :active, null: false, default: false
-      t.jsonb :slides, default: {}
       t.jsonb :settings, default: {}
 
+      t.references :active_slide, type: :uuid, foreign_key: { to_table: :slides }
       t.references :theme, type: :uuid, null: false, foreign_key: true
       t.references :template, type: :uuid, null: true, foreign_key: true
 
@@ -13,7 +13,5 @@ class CreatePresentations < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-
-    add_index :presentations, [:theme_id, :created_at]
   end
 end

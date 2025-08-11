@@ -41,4 +41,4 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 	)
 }
 
-export default withLayout(ShowPresentation, "unformatted")
+export default ShowPresentation

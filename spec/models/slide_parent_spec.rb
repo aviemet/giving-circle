@@ -12,8 +12,9 @@
 #
 # Indexes
 #
-#  index_slide_parents_on_parentable  (parentable_type,parentable_id)
-#  index_slide_parents_on_slide_id    (slide_id)
+#  index_slide_parents_on_parentable                         (parentable_type,parentable_id)
+#  index_slide_parents_on_parentable_type_and_parentable_id  (parentable_type,parentable_id)
+#  index_slide_parents_on_slide_id                           (slide_id)
 #
 # Foreign Keys
 #
