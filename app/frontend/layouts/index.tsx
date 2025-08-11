@@ -1,5 +1,3 @@
-import { Flash } from "@/components"
-
 import BareAppLayout from "./AppLayout"
 import BareAuthLayout from "./AuthLayout"
 import BarePresentationLayout from "./PresentationLayout"
@@ -26,7 +24,6 @@ export interface LayoutProps {
 export const LayoutWrapper = ({ children }: LayoutProps) => {
 	return (
 		<Providers>
-			<Flash />
 			{ children }
 		</Providers>
 	)

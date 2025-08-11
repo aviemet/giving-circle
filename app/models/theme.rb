@@ -37,6 +37,7 @@ class Theme < ApplicationRecord
   has_many :orgs, -> {
     # Merge ask values from join table onto org records
     select("orgs.*, themes_orgs.ask_cents as ask_cents, themes_orgs.ask_currency as ask_currency")
+      .includes(:circle)
       # Override count method which would error with the above select statement
       .extending {
         def count(args = :all)

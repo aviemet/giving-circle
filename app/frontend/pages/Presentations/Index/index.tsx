@@ -5,7 +5,6 @@ import PresentationsTable from "@/features/presentations/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-
 interface PresentationIndexProps {
 	presentations: Schema.PresentationsIndex[]
 	pagination: Schema.Pagination
@@ -17,7 +16,7 @@ interface PresentationIndexProps {
 // @route: themePresentations
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
 	const { params } = usePageProps<"themePresentations">()
-
+	console.log({ presentations })
 	return (
 		<Page
 			title="Presentations"

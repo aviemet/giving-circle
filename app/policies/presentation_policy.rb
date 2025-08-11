@@ -9,4 +9,8 @@ class PresentationPolicy < ApplicationPolicy
   def controls?
     true
   end
+
+  def show?
+    true
+  end
 end

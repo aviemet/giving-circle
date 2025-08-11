@@ -18,7 +18,10 @@
 ### Phase 1: Core Authentication and Authorization
 
 ## Conventions
+
 ### Architecture
+- Model data passed to the frontend from controllers is serialized using [oj_serializers](https://github.com/ElMassimo/oj_serializers?tab=readme-ov-file)
+- Typescript types are statically generated from the serializer definitions using [types_from_serializers](https://github.com/ElMassimo/types_from_serializers)
 
 ### Development Guidelines
 - Changes must be atomic and focused
@@ -41,6 +44,11 @@
 - Using Pundit for authorization policies
 - Using Rolify for role management
 - Authorization enforced at both API and UI levels
+- Authorization patterns:
+  - `standard_auth(:action)` method in ApplicationPolicy for super_admin role checks
+  - Circle-based access control through `user.circles.include?(record.circle)`
+  - Active record checks for presentation access (e.g., `record.active?`)
+  - Super admin bypass for all actions
 
 ### Document Management
 - Documents will be stored using Active Storage
@@ -146,6 +154,21 @@
 - Proper useEffect cleanup
 - Memoized expensive computations
 - Minimal global state
+
+### Database Query Optimization
+- Use eager loading for polymorphic associations through ownerships
+- Add database indexes for frequently queried columns and join tables
+- **N+1 Query Prevention Patterns:**
+  - Always use `includes_associated` scope when loading models for serialization
+  - For polymorphic associations (Ownable), include the ownership and circle associations
+  - When loading collections that will be serialized, include all associations used in serializers
+  - Use `preload` for associations that don't need to be filtered
+  - Use `joins` when you need to filter by associated data
+  - Cache frequently accessed data using Rails caching mechanisms
+  - **Inertia Share Optimization:** Avoid redundant queries in inertia_share by using cached associations
+  - **Menu Rendering Control:** Use `disable_menu_rendering` method to prevent menu data from being included in Inertia responses for public-facing views
+  - **Serializer Optimization:** Ensure serializers only load necessary associations and avoid nested queries
+  - **Menu Loading:** Optimize menu data loading by preloading associations in user.circles query
 
 ## Architecture Decisions
 

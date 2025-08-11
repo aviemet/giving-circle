@@ -121,6 +121,12 @@ const urlParams = {
   "apiSpotlights": {
     "params": []
   },
+  "circlePublicPresentation": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
   "circles": {
     "params": []
   },

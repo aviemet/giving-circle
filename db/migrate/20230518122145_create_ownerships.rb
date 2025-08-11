@@ -6,5 +6,8 @@ class CreateOwnerships < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+
+    add_index :ownerships, [:ownable_type, :circle_id]
+    add_index :ownerships, [:ownable_type, :ownable_id]
   end
 end

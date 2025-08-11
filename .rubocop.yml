@@ -53,6 +53,9 @@ Style/SafeNavigation:
   Enabled: true
   Exclude:
     - "/app/views/**/*.slim"
+Style/SafeNavigationChainLength:
+  Enabled: false
+
 Metrics/AbcSize:
   Enabled: false
 Metrics/MethodLength:
@@ -68,6 +71,8 @@ Lint/StructNewOverride:
 Lint/MissingSuper:
   Enabled: false
 Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/EmptyLinesAfterModuleInclusion:
   Enabled: false
 Layout/FirstHashElementIndentation:
   Enabled: false

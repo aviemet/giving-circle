@@ -68,11 +68,11 @@ module UrlParamsJson
       annotated_file = nil
       Rails.root.join(path).open do |file|
         component_name = find_default_export(file)
-        ap({ component_name: })
+
         break if component_name.nil? || component_name == "Anonymous"
 
         url_path = route[1].path.spec.to_s.gsub(/\(.:format\)/, "")
-        ap({ url_path: })
+
         js_route_method = route[0].to_s.camelize(:lower)
         file.rewind
         annotated_file = add_or_update_route_annotation(file, component_name, url_path, js_route_method)

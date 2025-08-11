@@ -56,6 +56,9 @@ Rails.application.routes.draw do
 
   draw(:api)
 
+  # Public presentation route (shorter URL)
+  get "/:circle_slug/p/:presentation_slug", to: "presentations/active#public_show", as: :circle_public_presentation
+
   # :circle_slug being a param in the first position needs to come after any other first position routing names
   resources :circles, param: :circle_slug, only: [:new, :create, :index]
 

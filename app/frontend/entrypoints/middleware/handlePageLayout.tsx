@@ -6,6 +6,7 @@ import {
 	SettingsLayout,
 	PresentationLayout,
 	LayoutProps,
+	UnformattedLayout,
 } from "@/layouts"
 
 import { PagesObject } from "../application"
@@ -16,6 +17,7 @@ const LAYOUT_COMPONENTS: Record<keyof typeof LAYOUTS, ({ children }: LayoutProps
 	"presentation": PresentationLayout,
 	"settings": SettingsLayout,
 	"public": PublicLayout,
+	"unformatted": UnformattedLayout,
 } as const
 
 const handlePageLayout = (page: PagesObject) => {

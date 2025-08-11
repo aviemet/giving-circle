@@ -75,8 +75,6 @@ class TemplatesController < ApplicationController
   def update
     authorize template
 
-    ap({ params: })
-
     if template_params[:name] != template.name
       template.slug = nil
     end

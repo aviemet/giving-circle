@@ -7,5 +7,7 @@ class CreateSlideParents < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+
+    add_index :slide_parents, [:parentable_type, :parentable_id]
   end
 end
