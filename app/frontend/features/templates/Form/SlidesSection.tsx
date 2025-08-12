@@ -3,10 +3,18 @@ import React, { useRef } from "react"
 import { useDynamicInputs, useForm } from "use-inertia-form"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
+import { Form } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
 import { Routes } from "@/lib"
+import { useCreateTemplateSlide } from "@/queries"
 
 import SlideCard from "./SlideCard"
+
+const emptySlideData: Partial<Schema.Slide> = {
+	id: "",
+	title: "",
+	data: {},
+}
 
 interface SlidesSectionProps {
 	circle: Schema.CirclesInertiaShare
@@ -20,10 +28,17 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 
 	const { addInput, removeInput, paths } = useDynamicInputs({
 		model: "slides",
-		emptyData: {
-			id: NaN,
-			title: "",
-			slides: [],
+		emptyData: emptySlideData,
+	})
+
+	const addTemplateSlideMutation = useCreateTemplateSlide({
+		params: {
+			circleSlug: circle.slug,
+			templateSlug: template.slug,
+		},
+		onSuccess(data, variables) {
+			addInput(data)
+			console.log("Success", { data, variables })
 		},
 	})
 
@@ -35,8 +50,8 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 			),
 			labels: { confirm: "Confirm", cancel: "Cancel" },
 			onConfirm: () => {
-				addInput({
-					title: newSlideInputRef.current?.value,
+				addTemplateSlideMutation.mutate({
+					title: newSlideInputRef.current!.value,
 				})
 			},
 		})

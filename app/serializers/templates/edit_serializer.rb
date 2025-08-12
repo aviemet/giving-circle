@@ -1,3 +1,3 @@
 class Templates::EditSerializer < Templates::PersistedSerializer
-  has_many :slides, serializer: SlideSerializer
+  has_many :slides, serializer: Slides::EditSerializer
 end

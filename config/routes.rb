@@ -78,6 +78,7 @@ Rails.application.routes.draw do
       resources :templates, param: :slug, shallow: false
       namespace :templates do
         get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
+        post ":template_slug/slides", to: "slides#create", as: :create_slide
       end
 
       resources :themes, param: :theme_slug, as: :themes

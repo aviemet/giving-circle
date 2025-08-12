@@ -21,6 +21,5 @@ class TemplateSerializer < ApplicationSerializer
   attributes(
     :name,
     :settings,
-    slides: { type: "Slide[]" },
   )
 end

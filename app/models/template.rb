@@ -30,7 +30,7 @@ class Template < ApplicationRecord
 
   has_many_attached :images
 
-  has_many :slide_parents, as: :parentable, dependent: :destroy
+  has_many :slide_parents, as: :parentable, dependent: :delete_all
   has_many :slides, through: :slide_parents
 
   scope :includes_associated, -> { includes([:slides]) }

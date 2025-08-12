@@ -6,16 +6,22 @@ alwaysApply: true
 # REQUIRED FOR EVERY INTERACTION
 
 1. Read .cursor/giving_circle.mdx at the start of each interaction
-2. Before ending ANY response, if you've learned ANYTHING about:
-   - Project structure
-   - Code patterns
-   - Implementation details
-   - Conventions
-   - Dependencies
-   - Configuration
+2. Before ending ANY response, if you've learned anything useful which is NOT immediately obvious from reading the code about:
+   - **Why** decisions were made (rationale, trade-offs, historical context)
+   - **Non-obvious** implementation details or gotchas
+   - **Cross-cutting concerns** that affect multiple parts of the system
+   - **Performance implications** or optimization strategies
+   - **Security considerations** or authorization patterns
+   - **Integration points** with external systems
+   - **Deployment or environment-specific** configurations
+   - **Known limitations** or edge cases
    You MUST update .cursor/giving_circle.mdx with this information
 3. When updating .cursor/giving_circle.mdx:
    - Only add new information not already documented
    - Place information in the appropriate section
    - If no appropriate section exists, create one
+   - DO NOT document what the code obviously does (e.g., "routes are defined in routes.rb")
+   - DO NOT document standard Rails/React patterns that are self-explanatory
+   - DO NOT document parameter names or method signatures that are clear from the code
+   - DO NOT document file organization that's obvious from the directory structure
 4. After updating .cursor/giving_circle.mdx, explicitly note in your response what new information was added

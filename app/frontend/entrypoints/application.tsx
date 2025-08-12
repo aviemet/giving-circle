@@ -12,6 +12,7 @@ import {
 	setupCSRFToken,
 	setupInertiaListeners,
 	handlePageLayout,
+	setupAxeListener,
 } from "./middleware"
 import { runAxe } from "./middleware/axe"
 
@@ -48,11 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			props.initialPage.props = applyPropsMiddleware(props.initialPage.props)
 
-			router.on("success", () => {
-				runAxe(root)
-			})
+			// setupAxeListener(router, root)
 
-			runAxe(root)
 			root.render(<App { ...props } />)
 		},
 	})

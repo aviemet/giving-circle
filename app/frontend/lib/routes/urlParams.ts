@@ -115,6 +115,53 @@ const urlParams = {
       "id"
     ]
   },
+  "apiCircleIndex": {
+    "params": []
+  },
+  "apiCircle": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiTemplateSlides": {
+    "params": [
+      "template_slug"
+    ]
+  },
+  "apiSlide": {
+    "params": [
+      "slug"
+    ]
+  },
+  "apiTemplates": {
+    "params": []
+  },
+  "apiTemplate": {
+    "params": [
+      "slug"
+    ]
+  },
+  "apiPresentationSlides": {
+    "params": [
+      "presentation_slug"
+    ]
+  },
+  "apiPresentations": {
+    "params": []
+  },
+  "apiPresentation": {
+    "params": [
+      "slug"
+    ]
+  },
+  "apiThemes": {
+    "params": []
+  },
+  "apiTheme": {
+    "params": [
+      "theme_slug"
+    ]
+  },
   "apiSearches": {
     "params": []
   },
@@ -215,6 +262,12 @@ const urlParams = {
       "circle_slug",
       "template_slug",
       "slug"
+    ]
+  },
+  "circleTemplatesCreateSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug"
     ]
   },
   "circleThemes": {

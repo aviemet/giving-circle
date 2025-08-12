@@ -8,10 +8,20 @@
 - Slides are managed through a polymorphic association using `SlideParent` join table
 - Templates can have multiple slides through `has_many :slides, through: :slide_parents`
 - Presentations can have multiple slides through `has_many :slides, through: :slide_parents`
-- Slides can belong to multiple templates/presentations through polymorphic `slide_parents` association
 - Slide ordering is handled by the `order` field in `SlideParent`
 - Templates and Presentations also store slide data as JSONB in the `slides` field for presentation purposes
 - When serializing presentations, use the ActiveRecord association (`slides`) not the JSONB field (`slides` column)
+- Presentations have an `active_slide_id` foreign key that references slides directly
+- When destroying slides, any presentations using that slide as active_slide will have their `active_slide_id` nullified via a `before_destroy` callback
+- SlideParent records are deleted directly in the `before_destroy` callback to avoid foreign key constraint issues during slide destruction
+- Both Presentation and Template models use `dependent: :delete_all` for slide_parents associations as a backup
+
+### API Routes Structure
+- API routes are defined in `config/routes/api.rb` under the `:api` namespace
+- Template slides use shallow routing: `resources :slides, param: :slug, shallow: true, controller: "templates/slides"`
+- Individual slide operations use `apiSlide` route with `:slug` parameter
+- Template slides controller uses `decent_exposure` gem with `expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }`
+- Route parameters are consistent: both route and controller use `:slug` for slide identification
 
 ## Project Milestones
 
@@ -120,6 +130,15 @@
 - Automatic route annotation system via `url_params_json.rb`:
   - Adds `@path` and `@route` comments above React components
   - Extracts component names from default exports, including HOC-wrapped components
+
+#### React Query Patterns
+- Mutation functions follow `ReactMutationFunction<T, P, O>` type pattern
+- Parameters object includes both route parameters and mutation data
+- Use `exclude(options, "params")` to separate route params from mutation options
+- Mutation keys follow hierarchical pattern: `["template", templateSlug, "slides", slideSlug, "update"]`
+- Cache invalidation targets parent query keys: `["template", templateSlug, "slides"]`
+- Error handling uses `isAllowedStatusCode` utility with expected status codes
+- Data interfaces separate create vs update operations (required vs optional fields)
 
 #### Internationalization (i18n)
 - Using react-i18next for frontend translations

@@ -18,11 +18,11 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 	const { toggleSidebarOpen } = useLayoutStore()
 
 	const updateSlideMutation = useUpdateTemplateSlide({
-		params: { circleSlug: params.circle_slug, templateSlug: params.template_slug },
+		params: { templateSlug: params.template_slug, slideSlug: params.slug },
 	})
 
 	const handleSave = async(data: Data) => {
-		// await updateSlideMutation.mutateAsync({ id: slide.id, slide: data })
+		await updateSlideMutation.mutateAsync({ data: data })
 	}
 
 	const title = `Slide Editor - ${slide?.title}`

@@ -58,8 +58,8 @@ class Presentation < ApplicationRecord
   has_many :presentations_elements, dependent: :destroy
   has_many :elements, through: :presentations_elements, dependent: :nullify
 
-  has_many :slide_parents, as: :parentable, dependent: :destroy
-  has_many :slides, through: :slide_parents
+  has_many :slide_parents, as: :parentable, dependent: :delete_all
+  has_many :slides, through: :slide_parents, dependent: :nullify
   belongs_to :active_slide, class_name: "Slide", optional: true
 
   scope :templates, -> { where(template: true) }

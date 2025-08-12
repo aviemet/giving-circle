@@ -6,7 +6,7 @@ class Templates::SlidesController < ApplicationController
   expose :slides, -> { template.slides.includes_associated }
   expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }, find_by: :slug
 
-  strong_params :slide, permit: [:name]
+  strong_params :slide, permit: [:name, :data]
 
   sortable_fields %w(name)
 
@@ -30,10 +30,25 @@ class Templates::SlidesController < ApplicationController
     }
   end
 
+  # @route POST /:circle_slug/templates/:template_slug/slides (circle_templates_create_slide)
   def create
+    authorize Slide.new
+
+    if slide.save
+      redirect_to [slide], notice: t("slides.notices.created")
+    else
+      redirect_to new_slide_path, inertia: { errors: slide.errors }
+    end
   end
 
   def update
+    authorize slide
+
+    if slide.update(slide_params)
+      redirect_to slide, notice: t("slides.notices.updated")
+    else
+      redirect_to edit_slide_path, inertia: { errors: slide.errors }
+    end
   end
 
   def destroy

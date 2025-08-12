@@ -25,9 +25,18 @@ class Slide < ApplicationRecord
   tracked # public_activity
   resourcify # rolify
 
-  has_many :slide_parents, dependent: :destroy
-  has_many :templates, through: :slide_parents, source: :parentable, source_type: "Template"
-  has_many :presentations, through: :slide_parents, source: :parentable, source_type: "Presentation"
+  has_one :slide_parent, dependent: :delete
+  has_one :template, through: :slide_parent, source: :parentable, source_type: "Template"
+  has_one :presentation, through: :slide_parent, source: :parentable, source_type: "Presentation"
 
-  scope :includes_associated, -> { includes([:slide_parents, :templates, :presentations]) }
+  scope :includes_associated, -> { includes([:slide_parent, :template, :presentation]) }
+
+  before_destroy :nullify_active_slide_references
+
+  private
+
+  def nullify_active_slide_references
+    Presentation.where(active_slide_id: id).update_all(active_slide_id: nil) # rubocop:disable Rails/SkipsModelValidations
+    SlideParent.where(slide_id: id).delete_all
+  end
 end

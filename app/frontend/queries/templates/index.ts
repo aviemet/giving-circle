@@ -1,122 +1,77 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 
-import { exclude, Routes } from "@/lib"
+import { exclude, isAllowedStatusCode, Routes } from "@/lib"
 
 import { type ReactMutationFunction } from ".."
 
-interface Slide {
-	id: string | number
-	name: string
-	order: number
+interface CreateSlideData {
+	title: string
+	data?: Record<string, unknown>
 }
 
-export const useUpdateTemplateSlides: ReactMutationFunction<Schema.Template, Slide[], { circleSlug: string, templateSlug: string }> = (
-	options,
-) => {
+export const useCreateTemplateSlide: ReactMutationFunction<
+	Schema.Slide,
+	CreateSlideData,
+	{ circleSlug: string, templateSlug: string }
+> = (options) => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: async(data) => {
-			const res = await axios.patch(Routes.circleTemplate(options.params.circleSlug, options.params.templateSlug), {
-				template: { slides: data },
-			})
-			if(res.statusText !== "OK") {
-				throw new Error("Failed to update template slides")
+			const res = await axios.post(
+				Routes.apiTemplateSlides(options.params.templateSlug),
+				{
+					slide: {
+						title: data.title,
+					},
+				},
+			)
+
+			if(!isAllowedStatusCode(res.statusText, [200, 201])) {
+				throw new Error("Failed to create slide")
 			}
 			return res.data
 		},
-		mutationKey: ["template", options.params.circleSlug, options.params.templateSlug, "slides"],
+		mutationKey: ["template", options.params.templateSlug, "slides", "create"],
 		...exclude(options, "params"),
 		onSuccess: (data, variables) => {
-			queryClient.invalidateQueries({ queryKey: ["template", options.params.circleSlug, options.params.templateSlug, "slides"] })
+			queryClient.invalidateQueries({ queryKey: ["template", options.params.templateSlug, "slides"] })
 			options?.onSuccess?.(data, variables)
 		},
 	})
 }
 
-export const useUpdateTemplateSlide: ReactMutationFunction<Schema.Template, { id: number, slide: Slide }, { circleSlug: string, templateSlug: string }> = (
-	options,
-) => {
+interface UpdateSlideData {
+	title?: string
+	data?: Record<string, unknown>
+}
+
+export const useUpdateTemplateSlide: ReactMutationFunction<
+	Schema.Slide,
+	UpdateSlideData,
+	{ templateSlug: string, slideSlug: string }
+> = (options) => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: async(data) => {
-			const res = await axios.patch(Routes.circleTemplate(options.params.circleSlug, options.params.templateSlug), {
-				template: {
-					slides: {
-						slide_index: data.id,
-						slide: data.slide,
-					},
+			const res = await axios.patch(
+				Routes.apiSlide(options.params.slideSlug),
+				{
+					slide: data,
 				},
-			})
-			if(res.statusText !== "OK") {
-				throw new Error("Failed to update template slide")
+			)
+
+			if(!isAllowedStatusCode(res.statusText, [200, 201])) {
+				throw new Error("Failed to update slide")
 			}
 			return res.data
 		},
-		mutationKey: ["template", options.params.circleSlug, options.params.templateSlug, "slide"],
+		mutationKey: ["template", options.params.templateSlug, "slides", options.params.slideSlug, "update"],
 		...exclude(options, "params"),
 		onSuccess: (data, variables) => {
-			queryClient.invalidateQueries({ queryKey: ["template", options.params.circleSlug, options.params.templateSlug, "slides"] })
-			options?.onSuccess?.(data, variables)
-		},
-	})
-}
-
-export const useAddTemplateSlide: ReactMutationFunction<Schema.Template, Slide, { circleSlug: string, templateSlug: string }> = (
-	options,
-) => {
-	const queryClient = useQueryClient()
-
-	return useMutation({
-		mutationFn: async(data) => {
-			const res = await axios.patch(Routes.circleTemplate(options.params.circleSlug, options.params.templateSlug), {
-				template: {
-					slides: {
-						action: "add",
-						slide: data,
-					},
-				},
-			})
-			if(res.statusText !== "OK") {
-				throw new Error("Failed to add template slide")
-			}
-			return res.data
-		},
-		mutationKey: ["template", options.params.circleSlug, options.params.templateSlug, "add_slide"],
-		...exclude(options, "params"),
-		onSuccess: (data, variables) => {
-			queryClient.invalidateQueries({ queryKey: ["template", options.params.circleSlug, options.params.templateSlug, "slides"] })
-			options?.onSuccess?.(data, variables)
-		},
-	})
-}
-
-export const useRemoveTemplateSlide: ReactMutationFunction<Schema.Template, number, { circleSlug: string, templateSlug: string }> = (
-	options,
-) => {
-	const queryClient = useQueryClient()
-
-	return useMutation({
-		mutationFn: async(slideIndex) => {
-			const res = await axios.patch(Routes.circleTemplate(options.params.circleSlug, options.params.templateSlug), {
-				template: {
-					slides: {
-						action: "remove",
-						slide_index: slideIndex,
-					},
-				},
-			})
-			if(res.statusText !== "OK") {
-				throw new Error("Failed to remove template slide")
-			}
-			return res.data
-		},
-		mutationKey: ["template", options.params.circleSlug, options.params.templateSlug, "remove_slide"],
-		...exclude(options, "params"),
-		onSuccess: (data, variables) => {
-			queryClient.invalidateQueries({ queryKey: ["template", options.params.circleSlug, options.params.templateSlug, "slides"] })
+			queryClient.invalidateQueries({ queryKey: ["template", options.params.templateSlug, "slides"] })
 			options?.onSuccess?.(data, variables)
 		},
 	})
