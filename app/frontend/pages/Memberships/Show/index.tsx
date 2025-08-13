@@ -1,4 +1,4 @@
-import { Group, Menu, Page, Section } from "@/components"
+import { Group, Menu, Page, Section, Title } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -10,16 +10,17 @@ interface ShowMembershipProps {
 // @route: membership
 const ShowMembership = ({ membership }: ShowMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"membership">()
-	const title = membership.name || "Membership"
+	const { params, active_circle } = usePageProps<"membership">()
+	const title = membership.name || "Member"
+
+	if(!active_circle) return <></>
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: "Membership", href: Routes.circleMemberships(params.circle_slug) },
-			{ title, href: window.location.href },
-		] }>
-			<Section>
+		<Page
+			title={ title }
+			heading={
 				<Group>
+					<Title>{ title }</Title>
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
@@ -29,6 +30,15 @@ const ShowMembership = ({ membership }: ShowMembershipProps) => {
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
+			}
+			breadcrumbs={ [
+				{ title: "Circles", href: Routes.circles() },
+				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+				{ title: "Members", href: Routes.circleMemberships(params.circle_slug) },
+				{ title, href: window.location.href },
+			] }
+		>
+			<Section>
 
 			</Section>
 		</Page>

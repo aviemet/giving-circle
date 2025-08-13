@@ -1,21 +1,4 @@
-class Api::PresentationsController < ApplicationController
-
-  def index
-    render inertia: "Api::Presentations/Index"
-  end
-
-  def show
-    render inertia: "Api::Presentations/Show"
-  end
-
-  def new
-    render inertia: "Api::Presentations/New"
-  end
-
-  def edit
-    render inertia: "Api::Presentations/Edit"
-  end
-
+class Api::PresentationsController < Api::ApiController
   # @route POST /api/presentations (api_presentations)
   def create
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -307,7 +307,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
   end
 
   create_table "themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "published_at"
     t.integer "status", default: 0
     t.string "slug", null: false

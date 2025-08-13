@@ -3,12 +3,13 @@ import { isEmpty } from "lodash"
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon, ThemesIcon, UserGroupIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit, usePageProps } from "@/lib/hooks"
+import { useInit, useLocation, usePageProps } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 const CircleMenu = () => {
 	const { active_circle } = usePageProps()
 	const { menuKeys, toggleOpenMenu } = useLayoutStore()
+	const location = useLocation()
 
 	useInit(() => {
 		toggleOpenMenu("circle", true)
@@ -32,20 +33,15 @@ const CircleMenu = () => {
 
 				<NavLink
 					href={ Routes.circleMemberships(active_circle.slug) }
+					active={ location.paths[1] === "memberships" }
 					leftSection={ <UserGroupIcon /> }
 				>
 					Members
 				</NavLink>
 
 				<NavLink
-					href={ Routes.circleThemes(active_circle.slug) }
-					leftSection={ <ThemesIcon /> }
-				>
-					Themes
-				</NavLink>
-
-				<NavLink
 					href={ Routes.circleOrgs(active_circle.slug) }
+					active={ location.paths[1] === "orgs" }
 					leftSection={ <OrgsIcon /> }
 				>
 					Orgs
@@ -53,9 +49,18 @@ const CircleMenu = () => {
 
 				<NavLink
 					href={ Routes.circleTemplates(active_circle.slug) }
+					active={ location.paths[1] === "templates" }
 					leftSection={ <PresentationIcon /> }
 				>
 					Presentation Templates
+				</NavLink>
+
+				<NavLink
+					href={ Routes.circleThemes(active_circle.slug) }
+					active={ location.paths[1] === "themes" }
+					leftSection={ <ThemesIcon /> }
+				>
+					Themes
 				</NavLink>
 			</Accordion.Panel>
 		</Accordion.Item>

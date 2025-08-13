@@ -22,7 +22,7 @@ const ActivePresentationControls = ({ presentation }: ActivePresentationControls
 			console.log("Connected to presentation channel")
 		},
 	})
-
+	console.log({ presentation })
 	return (
 		<Group>{ presentation.slides && presentation.slides.map((slide) => (
 			<SwitchSlideButton

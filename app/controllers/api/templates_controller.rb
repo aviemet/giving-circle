@@ -1,4 +1,4 @@
-class Api::TemplatesController < ApplicationController
+class Api::TemplatesController < Api::ApiController
   # @route POST /api/templates (api_templates)
   def create
   end

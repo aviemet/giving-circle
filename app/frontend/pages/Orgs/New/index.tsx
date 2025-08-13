@@ -11,14 +11,19 @@ interface NewOrgProps {
 // @path: /:circle_slug/orgs/new
 // @route: newCircleOrg
 const NewOrg = ({ org }: NewOrgProps) => {
-	const { params } = usePageProps<"newCircleOrg">()
-	const title = "New Org"
+	const { params, active_circle } = usePageProps<"newCircleOrg">()
+	const title = "New Organization"
+
+	if(!active_circle) return <></>
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ [
+			{ title: "Circles", href: Routes.circles() },
+			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+			{ title: "Organizations", href: Routes.circleOrgs(params.circle_slug) },
+			{ title: "New", href: window.location.href },
+		] }>
 			<Section>
-				<Title>{ title }</Title>
-
 				<OrgForm
 					to={ Routes.circleOrgs(params.circle_slug) }
 					org={ org }

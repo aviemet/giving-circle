@@ -1,4 +1,4 @@
-import { Title, Page, Section } from "@/components"
+import { Page, Section } from "@/components"
 import CircleForm from "@/features/circles/Form"
 import { Routes } from "@/lib"
 
@@ -19,8 +19,6 @@ const NewCircle = (data: NewCircleProps) => {
 		] }>
 
 			<Section>
-				<Title>{ title }</Title>
-
 				<CircleForm
 					to={ Routes.circles() }
 					{ ...data }

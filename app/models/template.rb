@@ -36,11 +36,12 @@ class Template < ApplicationRecord
   scope :includes_associated, -> { includes([:slides]) }
 
   def create_presentation(name, theme)
-    Presentation.build({
+    presentation = Presentation.build({
       theme: theme,
       name: name,
-      slides: self.slides,
       circle: self.circle,
     })
+    presentation.copy_template_slides
+    presentation
   end
 end

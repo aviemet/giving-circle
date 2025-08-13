@@ -1,5 +1,5 @@
 import { Group, Link, Menu, Page, Section, Title } from "@/components"
-import { Routes, withLayout } from "@/lib"
+import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 interface ShowPresentationProps {
@@ -9,13 +9,15 @@ interface ShowPresentationProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:slug
 // @route: themePresentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
-	const { params } = usePageProps<"themePresentation">()
+	const { params, active_circle, active_theme } = usePageProps<"themePresentation">()
 	const title = presentation.name || "Presentation"
+
+	if(!active_circle || !active_theme) return <></>
 
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <>
+			heading={ <>
 				<Title>{ title }</Title>
 				<Group>
 					<Menu position="bottom-end">
@@ -28,6 +30,14 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 					</Menu>
 				</Group>
 			</> }
+			breadcrumbs={ [
+				{ title: "Circles", href: Routes.circles() },
+				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+				{ title: "Themes", href: Routes.circleThemes(params.circle_slug) },
+				{ title: active_theme.name, href: Routes.theme(params.circle_slug, params.theme_slug) },
+				{ title: "Presentations", href: Routes.themePresentations(params.circle_slug, params.theme_slug) },
+				{ title, href: window.location.href },
+			] }
 		>
 			<Section>
 				<Link

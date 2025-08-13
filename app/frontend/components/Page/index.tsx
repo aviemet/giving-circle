@@ -8,7 +8,7 @@ import useLayoutStore from "@/store/LayoutStore"
 export interface PageProps {
 	children?: React.ReactNode
 	title?: string
-	siteTitle?: React.ReactNode
+	heading?: string | React.ReactNode
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
@@ -18,7 +18,7 @@ export interface PageProps {
 const Page = ({
 	children,
 	title,
-	siteTitle,
+	heading,
 	meta,
 	hideNavMenu = false,
 	breadcrumbs,
@@ -32,12 +32,13 @@ const Page = ({
 		setMainPaddingDisabled,
 	} = useLayoutStore()
 
+	// Allow pages to set header title
+	const usedTitle = heading || title
+
 	useInit(() => {
 		// Allow pages to disable padding on top level <main>
 		setMainPaddingDisabled(disablePadding === true ? true : false)
 
-		// Allow pages to set header title
-		const usedTitle = siteTitle || title
 
 		if(!usedTitle) {
 			setSiteTitle(defaultSiteTitle)
@@ -52,8 +53,8 @@ const Page = ({
 	})
 
 	useEffect(() => {
-		setSiteTitle(siteTitle || title)
-	}, [siteTitle, title, setSiteTitle])
+		setSiteTitle(usedTitle)
+	}, [setSiteTitle, usedTitle])
 
 	return (
 		<>

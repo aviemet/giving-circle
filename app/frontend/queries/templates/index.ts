@@ -21,11 +21,7 @@ export const useCreateTemplateSlide: ReactMutationFunction<
 		mutationFn: async(data) => {
 			const res = await axios.post(
 				Routes.apiTemplateSlides(options.params.templateSlug),
-				{
-					slide: {
-						title: data.title,
-					},
-				},
+				{ slide: data },
 			)
 
 			if(!isAllowedStatusCode(res.statusText, [200, 201])) {
@@ -57,7 +53,7 @@ export const useUpdateTemplateSlide: ReactMutationFunction<
 	return useMutation({
 		mutationFn: async(data) => {
 			const res = await axios.patch(
-				Routes.apiSlide(options.params.slideSlug),
+				Routes.apiTemplateSlide(options.params.templateSlug, options.params.slideSlug),
 				{
 					slide: data,
 				},

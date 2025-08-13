@@ -128,8 +128,9 @@ const urlParams = {
       "template_slug"
     ]
   },
-  "apiSlide": {
+  "apiTemplateSlide": {
     "params": [
+      "template_slug",
       "slug"
     ]
   },
@@ -144,6 +145,12 @@ const urlParams = {
   "apiPresentationSlides": {
     "params": [
       "presentation_slug"
+    ]
+  },
+  "apiPresentationSlide": {
+    "params": [
+      "presentation_slug",
+      "slug"
     ]
   },
   "apiPresentations": {

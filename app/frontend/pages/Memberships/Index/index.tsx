@@ -14,16 +14,25 @@ interface MembershipIndexProps {
 // @route: circleMemberships
 const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => {
 	const { params, active_circle } = usePageProps<"circleMemberships">()
-	const title = active_circle ? `${active_circle.name} Members` : "Members"
+
+	if(!active_circle) return <></>
+
+	const title = `${active_circle.name} Members`
 
 	const totalFunds = memberships.reduce((sum, m) => sum + m.funds.amount, 0)
 	const activeMembers = memberships.filter(m => m.active).length
 	const totalMembers = memberships.length
 
-	if(!active_circle) return null
 
 	return (
-		<Page title={ title }>
+		<Page
+			title={ title }
+			breadcrumbs={ [
+				{ title: "Circles", href: Routes.circles() },
+				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+				{ title: "Members", href: Routes.circleMemberships(params.circle_slug) },
+			] }
+		>
 			<Stack gap="lg">
 				<Group grow>
 					<Card withBorder p="lg" radius="md">

@@ -49,7 +49,7 @@ class MembershipsController < ApplicationController
 
     render inertia: "Memberships/Edit", props: {
       membership: membership.render(:edit),
-      circle: -> { circle.render(:persisted) },
+      # circle: -> { circle.render(:persisted) },
     }
   end
 
@@ -60,7 +60,7 @@ class MembershipsController < ApplicationController
     membership.circle = circle
 
     if membership.save
-      redirect_to membership_path(params[:circle_slug], membership), notice: t('memberships.notices.created')
+      redirect_to membership_path(params[:circle_slug], membership), notice: t("memberships.notices.created")
     else
       redirect_to new_circle_membership_path(params[:circle_slug]), inertia: { errors: membership.errors }
     end
@@ -72,7 +72,7 @@ class MembershipsController < ApplicationController
     authorize membership
 
     if membership.update(membership_params)
-      redirect_to membership_path(params[:circle_slug], membership), notice: t('memberships.notices.updated')
+      redirect_to membership_path(params[:circle_slug], membership), notice: t("memberships.notices.updated")
     else
       redirect_to edit_membership_path(params[:circle_slug], membership), inertia: { errors: membership.errors }
     end
@@ -84,7 +84,7 @@ class MembershipsController < ApplicationController
     authorize membership
 
     membership.destroy!
-    redirect_to circle_memberships_path(params[:circle_slug]), notice: t('memberships.notices.destroyed')
+    redirect_to circle_memberships_path(params[:circle_slug]), notice: t("memberships.notices.destroyed")
   end
 
 end

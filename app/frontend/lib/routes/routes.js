@@ -582,6 +582,16 @@ export const apiPresentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format"
 
 /**
  * Generates rails route to
+ * /api/presentations/:presentation_slug/slides/:slug(.:format)
+ * @param {any} presentationSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPresentationSlide = /*#__PURE__*/ __jsr.r({"presentation_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"presentation_slug"],[2,[7,"/"],[2,[6,"slides"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/presentations/:presentation_slug/slides(.:format)
  * @param {any} presentationSlug
  * @param {object | undefined} options
@@ -607,15 +617,6 @@ export const apiSearches = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6
 
 /**
  * Generates rails route to
- * /api/slides/:slug(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiSlide = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"slides"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /api/spotlights(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -630,6 +631,16 @@ export const apiSpotlights = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,
  * @returns {string} route path
  */
 export const apiTemplate = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"templates"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/templates/:template_slug/slides/:slug(.:format)
+ * @param {any} templateSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiTemplateSlide = /*#__PURE__*/ __jsr.r({"template_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"templates"],[2,[7,"/"],[2,[3,"template_slug"],[2,[7,"/"],[2,[6,"slides"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to

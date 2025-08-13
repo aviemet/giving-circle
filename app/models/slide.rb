@@ -29,6 +29,8 @@ class Slide < ApplicationRecord
   has_one :template, through: :slide_parent, source: :parentable, source_type: "Template"
   has_one :presentation, through: :slide_parent, source: :parentable, source_type: "Presentation"
 
+  belongs_to :source_slide, class_name: "Slide"
+
   scope :includes_associated, -> { includes([:slide_parent, :template, :presentation]) }
 
   before_destroy :nullify_active_slide_references

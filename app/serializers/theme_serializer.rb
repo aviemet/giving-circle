@@ -3,7 +3,7 @@
 # Table name: themes
 #
 #  id           :uuid             not null, primary key
-#  name         :string
+#  name         :string           not null
 #  published_at :datetime
 #  slug         :string           not null
 #  status       :integer          default("draft")

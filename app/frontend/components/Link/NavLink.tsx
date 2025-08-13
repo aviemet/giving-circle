@@ -6,10 +6,12 @@ import { useLocation } from "@/lib/hooks"
 interface NavLinkComponentProps
 	extends Omit<NavLinkProps, "label">,
 	Omit<InertiaLinkProps, "color" | "size" | "span" | "label" | "onChange" | "onClick" | "onKeyDown" | "style" | "active"> {}
+export { type NavLinkComponentProps as NavLinkProps }
 
 const NavLinkComponent = ({
 	children,
 	href,
+	active,
 	...props
 }: NavLinkComponentProps) => {
 	const { pathname } = useLocation()
@@ -18,7 +20,7 @@ const NavLinkComponent = ({
 		<NavLink
 			component={ Link }
 			href={ href }
-			active={ pathname === href }
+			active={ active === undefined ? pathname === href : active }
 			label={ children }
 			{ ...props }
 		/>

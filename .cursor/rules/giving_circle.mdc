@@ -20,8 +20,8 @@ alwaysApply: true
    - Only add new information not already documented
    - Place information in the appropriate section
    - If no appropriate section exists, create one
-   - DO NOT document what the code obviously does (e.g., "routes are defined in routes.rb")
-   - DO NOT document standard Rails/React patterns that are self-explanatory
-   - DO NOT document parameter names or method signatures that are clear from the code
-   - DO NOT document file organization that's obvious from the directory structure
-4. After updating .cursor/giving_circle.mdx, explicitly note in your response what new information was added
+   - ONLY document project-specific quirks, workarounds, or non-obvious architectural decisions
+   - If you're about to document something that's obvious from the code, DON'T
+   - If you're about to document a standard framework feature, DON'T
+   - If you're about to document a basic programming pattern, DON'T
+   - Ask yourself: "Would a competent developer need to know this to work on this project?" If no, don't document it

@@ -5,20 +5,19 @@ import React, { forwardRef, useMemo } from "react"
 import ExternalLink from "./ExternalLink"
 import InertiaLink from "./InertiaLink"
 
-export { default as NavLink } from "./NavLink"
+export { default as NavLink, type NavLinkProps } from "./NavLink"
 
 export interface LinkProps
 	extends
 	Omit<AnchorProps, "onProgress"> {
-
 	children?: React.ReactNode
 	href: string
 	method?: Method
 	visit?: Omit<Visit, "method">
 	external?: boolean
 	as?: "a" | "button"
-	onProgress?: React.ReactEventHandler<HTMLAnchorElement>
-	onClick?: React.ReactEventHandler<HTMLAnchorElement>
+	onProgress?: React.ReactEventHandler<Element>
+	onClick?: React.ReactEventHandler<Element>
 	target?: string
 	rel?: string
 	tabIndex?: number
@@ -46,7 +45,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((
 	ref,
 ) => {
 	// Disable navigation if link is disabled
-	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+	const handleClick = (e: React.MouseEvent<Element, MouseEvent>) => {
 		if(disabled) {
 			e.preventDefault()
 			onClick?.(e)
@@ -104,4 +103,3 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((
 })
 
 export default Link
-

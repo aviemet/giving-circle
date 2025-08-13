@@ -1,4 +1,4 @@
-class Api::Presentations::SlidesController < ApplicationController
+class Api::Presentations::SlidesController < Api::ApiController
   expose :presentation, id: -> { params[:presentation_slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
 
   expose :slides, -> { presentation.slides.includes_associated }
@@ -11,13 +11,13 @@ class Api::Presentations::SlidesController < ApplicationController
     authorize Slide.new, policy_class: Presentation::SlidePolicy
   end
 
-  # @route PATCH /api/slides/:slug (api_slide)
-  # @route PUT /api/slides/:slug (api_slide)
+  # @route PATCH /api/presentations/:presentation_slug/slides/:slug (api_presentation_slide)
+  # @route PUT /api/presentations/:presentation_slug/slides/:slug (api_presentation_slide)
   def update
     authorize slide, policy_class: Presentation::SlidePolicy
   end
 
-  # @route DELETE /api/slides/:slug (api_slide)
+  # @route DELETE /api/presentations/:presentation_slug/slides/:slug (api_presentation_slide)
   def destroy
     authorize slide, policy_class: Presentation::SlidePolicy
   end

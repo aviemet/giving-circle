@@ -134,6 +134,20 @@ export const apiPresentation: ((
 
 /**
  * Generates rails route to
+ * /api/presentations/:presentation_slug/slides/:slug(.:format)
+ * @param {any} presentationSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPresentationSlide: ((
+  presentationSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/presentations/:presentation_slug/slides(.:format)
  * @param {any} presentationSlug
  * @param {object | undefined} options
@@ -166,18 +180,6 @@ export const apiSearches: ((
 
 /**
  * Generates rails route to
- * /api/slides/:slug(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiSlide: ((
-  slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/spotlights(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -194,6 +196,20 @@ export const apiSpotlights: ((
  * @returns {string} route path
  */
 export const apiTemplate: ((
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/templates/:template_slug/slides/:slug(.:format)
+ * @param {any} templateSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiTemplateSlide: ((
+  templateSlug: RequiredRouteParameter,
   slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;

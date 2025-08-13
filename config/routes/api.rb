@@ -6,11 +6,11 @@ namespace :api do
   resources :circles, param: :circle_slug, as: :circle, shallow: true, only: [:create, :update]
 
   resources :templates, param: :slug, shallow: true, only: [:create, :update] do
-    resources :slides, param: :slug, shallow: true, controller: "templates/slides", only: [:create, :update, :destroy]
+    resources :slides, param: :slug, shallow: false, controller: "templates/slides", only: [:create, :update, :destroy]
   end
 
   resources :presentations, param: :slug, shallow: true, only: [:create, :update] do
-    resources :slides, param: :slug, shallow: true, controller: "presentations/slides", only: [:create, :update, :destroy]
+    resources :slides, param: :slug, shallow: false, controller: "presentations/slides", only: [:create, :update, :destroy]
   end
 
   resources :themes, param: :theme_slug, shallow: true, only: [:create, :update]

@@ -15,21 +15,30 @@ interface PresentationIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations
 // @route: themePresentations
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
-	const { params } = usePageProps<"themePresentations">()
-	console.log({ presentations })
+	const { params, active_circle, active_theme } = usePageProps<"themePresentations">()
+
+	if(!active_circle || !active_theme) return <></>
+
 	return (
 		<Page
 			title="Presentations"
+			breadcrumbs={ [
+				{ title: "Circles", href: Routes.circles() },
+				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+				{ title: "Themes", href: Routes.circleThemes(params.circle_slug) },
+				{ title: active_theme.name, href: Routes.theme(params.circle_slug, params.theme_slug) },
+				{ title: "Presentations", href: window.location.href },
+			] }
 		>
 			<IndexTableTemplate
 				model="presentations"
 				rows={ presentations }
 				pagination={ pagination }
-			// contextMenu={ {
-			// 	options: [
-			// 		{ label: 'New Presentation', href: Routes.newCircleThemePresentation(params.circle_slug, params.theme_slug), icon: <NewIcon /> },
-			// 	],
-			// } }
+				contextMenu={ {
+					options: [
+						{ label: "New Presentation", href: Routes.newThemePresentation(params.circle_slug, params.theme_slug), icon: <NewIcon /> },
+					],
+				} }
 			>
 				<PresentationsTable />
 			</IndexTableTemplate>

@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react"
 import clsx from "clsx"
 
-import { Menu, Group, Divider, Button } from "@/components"
+import { Menu, Group, Divider, Button, Link } from "@/components"
 import { TrashIcon, DotsIcon } from "@/components/Icons"
 import { useTableContext } from "@/components/Table/TableContext"
 
@@ -53,14 +53,26 @@ const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectio
 				</Menu.Target>
 
 				<Menu.Dropdown>
-					{ contextMenu.options.map(({ label, href, icon, onClick }, index) => {
+					{ contextMenu.options.map(({ label, icon, href, onClick }, index) => {
+						if(typeof href === "string") {
+							return (
+								<Menu.Link
+									key={ index }
+									leftSection={ icon }
+									component={ Link }
+									href={ href }
+								>
+									{ label }
+								</Menu.Link>
+							)
+						}
+
 						return (
 							<Menu.Item
 								key={ index }
 								leftSection={ icon }
+								component="button"
 								onClick={ onClick }
-								component={ href ? "a" : "button" }
-								href={ href }
 							>
 								{ label }
 							</Menu.Item>

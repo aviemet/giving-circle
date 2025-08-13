@@ -1,7 +1,6 @@
 import { type Config } from "@measured/puck"
 
 import { Box } from "@/components"
-import { theme } from "@/lib"
 
 import { cardConfig, CardProps } from "./components/Card"
 import { containerConfig, ContainerProps } from "./components/Container"
@@ -71,4 +70,3 @@ export const config: Config<ComponentProps, RootProps> = {
 		},
 	},
 }
-

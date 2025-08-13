@@ -22,7 +22,16 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 	})
 
 	const handleSave = async(data: Data) => {
-		await updateSlideMutation.mutateAsync({ data: data })
+		await updateSlideMutation.mutate({ data: data },
+			{
+				onError(error, variables, context) {
+					console.log("Error", { error, variables, context })
+				},
+				onSuccess(data, variables, context) {
+					console.log("Success", { data, variables, context })
+				},
+			}
+		)
 	}
 
 	const title = `Slide Editor - ${slide?.title}`

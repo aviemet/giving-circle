@@ -1,15 +1,16 @@
-import { Box, Button } from "@mantine/core"
+import { router } from "@inertiajs/react"
 import { createUsePuck, Puck, type Data } from "@measured/puck"
 import clsx from "clsx"
 import { useState, useEffect, ComponentProps } from "react"
 import "@measured/puck/puck.css"
 
+import { Menu, Box, Button, Divider } from "@/components"
+import { SaveIcon, DownArrowIcon, TrashIcon } from "@/components/Icons"
 import { useLocalStorage } from "@/lib/hooks"
 
 import { config } from "./puck.config"
 import * as classes from "./Puck.css"
 import ErrorBoundary from "../ErrorBoundary"
-import { SaveIcon } from "../Icons"
 
 const usePuck = createUsePuck()
 
@@ -21,7 +22,6 @@ interface VisualEditorProps {
 }
 
 const VisualEditor = ({ initialData = {}, onSave, isSaving = false, templateKey }: VisualEditorProps) => {
-	console.log({ initialData })
 	const [data, setData] = useLocalStorage<Partial<Data>>({
 		key: `puck-editor-${templateKey ?? "data"}`,
 		defaultValue: initialData ?? {},
@@ -44,7 +44,7 @@ const VisualEditor = ({ initialData = {}, onSave, isSaving = false, templateKey 
 	}
 
 	const handleChange = (changed: Data) => {
-		console.log({ changed })
+		// console.log({ changed })
 		setIsDirty(true)
 		setData(changed)
 	}
@@ -64,14 +64,43 @@ const VisualEditor = ({ initialData = {}, onSave, isSaving = false, templateKey 
 							const appState = usePuck((s) => s.appState)
 
 							return (
-								<Button
-									onClick={ () => handleSave(appState.data) }
-									leftSection={ <SaveIcon /> }
-									disabled={ !isDirty || isSaving }
-									loading={ isSaving }
-								>
-									Save
-								</Button>
+								<Button.Group>
+									<Button
+										onClick={ () => handleSave(appState.data) }
+										leftSection={ <SaveIcon /> }
+										disabled={ !isDirty || isSaving }
+										loading={ isSaving }
+										style={ { borderTopRightRadius: 0, borderBottomRightRadius: 0 } }
+									>
+										Save
+									</Button>
+									<Menu position="bottom-end">
+										<Menu.Target>
+											<Button p="xs">
+												<DownArrowIcon />
+											</Button>
+										</Menu.Target>
+										<Menu.Dropdown>
+											<Menu.Item
+												disabled={ !isDirty || isSaving }
+												leftSection={ <SaveIcon /> }
+											>
+												Save and Close
+											</Menu.Item>
+											<Divider />
+											<Menu.Item
+												leftSection={ <TrashIcon color="red" /> }
+												onClick={ () => {
+													const currentUrl = window.location.pathname + window.location.search
+													router.visit(currentUrl, { replace: true })
+													setTimeout(() => window.history.back(), 0)
+												} }
+											>
+												Discard and Close
+											</Menu.Item>
+										</Menu.Dropdown>
+									</Menu>
+								</Button.Group>
 							)
 						},
 					} }

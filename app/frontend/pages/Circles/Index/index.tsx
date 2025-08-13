@@ -15,6 +15,9 @@ const CirclesIndex = ({ circles }: CircleIndexProps) => {
 		<Page
 			title="Dashboard"
 			hideNavMenu
+			breadcrumbs={ [
+				{ title: "Circles", href: Routes.circles() },
+			] }
 		>
 			<Container>
 				<Group justify="space-between">

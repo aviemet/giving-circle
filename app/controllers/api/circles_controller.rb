@@ -1,4 +1,4 @@
-class Api::CirclesController < ApplicationController
+class Api::CirclesController < Api::ApiController
   # @route POST /api/circles (api_circle_index)
   def create
   end

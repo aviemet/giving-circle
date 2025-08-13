@@ -11,13 +11,18 @@ interface NewMembershipProps {
 // @route: newCircleMembership
 const NewMembership = ({ ...data }: NewMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"newCircleMembership">()
-	const title = "New Membership"
+	const { params, active_circle } = usePageProps<"newCircleMembership">()
+
+	if(!active_circle) return <></>
+
+	const title = "New Member"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Memberships", href: Routes.circleMemberships(params.circle_slug) },
-			{ title: "New Membership", href: window.location.href },
+			{ title: "Circles", href: Routes.circles() },
+			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+			{ title: "Members", href: Routes.circleMemberships(params.circle_slug) },
+			{ title: "New Member", href: window.location.href },
 		] }>
 
 			<Section>

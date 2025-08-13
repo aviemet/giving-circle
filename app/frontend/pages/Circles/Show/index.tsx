@@ -1,10 +1,10 @@
 import { Container, Group, Title, Menu, Page, Section } from "@/components"
 import { CoinsIcon, HelpingIcon, MembersIcon } from "@/components/Icons"
 import { CardContainer, ThemeCard } from "@/features/Cards"
+import StatTile from "@/features/circles/StatTile"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import StatTile from "./StatTile"
 
 interface ShowCircleProps {
 	circle: Schema.CirclesShow
@@ -19,7 +19,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 	return (
 		<Page
 			title={ circle.name }
-			siteTitle={ (
+			heading={ (
 				<Group justify="space-between">
 					<Title>{ circle.name }</Title>
 					<Menu position="bottom-end">

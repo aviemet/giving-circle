@@ -4,6 +4,7 @@ class CreateTemplates < ActiveRecord::Migration[8.0]
       t.string :name
       t.string :slug, null: false, index: { unique: true }
       t.jsonb :settings, null: false, default: {}
+      t.integer :version # Increment upon save for tracking changes
 
       t.timestamps
     end

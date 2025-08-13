@@ -62,7 +62,8 @@ class Presentation < ApplicationRecord
   has_many :slides, through: :slide_parents, dependent: :nullify
   belongs_to :active_slide, class_name: "Slide", optional: true
 
-  scope :templates, -> { where(template: true) }
+  belongs_to :template
+
   scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides]) }
 
   def activate
@@ -70,6 +71,17 @@ class Presentation < ApplicationRecord
   end
 
   private
+
+  def copy_template_slides
+    return unless template
+
+    template.slides.each do |slide|
+      new_slide = slide.dup
+      new_slide.save!
+
+      self.slides << new_slide
+    end
+  end
 
   def owner_matches_theme_owner
     return unless circle && theme&.circle
