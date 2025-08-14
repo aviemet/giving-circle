@@ -2,16 +2,17 @@
 #
 # Table name: presentations
 #
-#  id              :uuid             not null, primary key
-#  active          :boolean          default(FALSE), not null
-#  name            :string           not null
-#  settings        :jsonb
-#  slug            :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  active_slide_id :uuid
-#  template_id     :uuid
-#  theme_id        :uuid             not null
+#  id               :uuid             not null, primary key
+#  active           :boolean          default(FALSE), not null
+#  name             :string           not null
+#  settings         :jsonb
+#  slug             :string
+#  template_version :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  active_slide_id  :uuid
+#  template_id      :uuid
+#  theme_id         :uuid             not null
 #
 # Indexes
 #
@@ -70,18 +71,33 @@ class Presentation < ApplicationRecord
     self.update(active: true)
   end
 
-  private
-
   def copy_template_slides
     return unless template
 
-    template.slides.each do |slide|
-      new_slide = slide.dup
-      new_slide.save!
+    template.transaction do
+      template.slides.each do |slide|
+        new_slide = slide.dup
 
-      self.slides << new_slide
+        self.slides << new_slide
+
+        new_slide.source_slide = slide
+        new_slide.slug = nil
+        new_slide.save!
+      end
+
+      update(template_version: template.version)
     end
   end
+
+  def sync_template_slides
+    return unless template
+
+    slides.destroy_all
+
+    copy_template_slides
+  end
+
+  private
 
   def owner_matches_theme_owner
     return unless circle && theme&.circle

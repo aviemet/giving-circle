@@ -1,8 +1,16 @@
 class TemplatesController < ApplicationController
+  include FriendlyIdHistory
+  historical_slug_redirect_values Template, :slug
+
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
 
-  expose :templates, -> { search(Template.includes_associated) }
-  expose :template, id: -> { params[:slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
+  expose :templates, -> { search(circle.templates.includes_associated) }
+  expose(
+    :template,
+    id: -> { params[:slug] },
+    scope: ->(scope){ scope.includes_associated },
+    find: ->(id, scope) { scope.friendly.find(id) },
+  )
 
   strong_params :template, permit: [:name, images: [], slides: [
     :slide_index, slide: [
@@ -41,10 +49,12 @@ class TemplatesController < ApplicationController
   def new
     authorize Presentation.new
 
-    render inertia: "Templates/New", props: {
-      template: Template.new.render(:form_data),
-      circle: -> { Circle.find_by(slug: params[:circle_slug]).render(:options) },
-    }
+    template = Template.create({
+      name: "New Template",
+      circle: circle
+    })
+
+    redirect_to edit_circle_template_url(circle_slug: circle.slug, slug: template.slug)
   end
 
   # @route GET /:circle_slug/templates/:slug/edit (edit_circle_template)
@@ -75,14 +85,10 @@ class TemplatesController < ApplicationController
   def update
     authorize template
 
-    if template_params[:name] != template.name
-      template.slug = nil
-    end
-
     if template.update(template_params)
-      redirect_to circle_template_path(circle, template), notice: "Template was successfully updated."
+      redirect_to edit_circle_template_path(circle, template), notice: "Template was successfully updated."
     else
-      redirect_to edit_circle_template_path(circle.slug, template.id), inertia: { errors: template.errors }
+      redirect_to edit_circle_template_path(circle, template), inertia: { errors: template.errors }
     end
   end
 
@@ -93,4 +99,5 @@ class TemplatesController < ApplicationController
     template.destroy!
     redirect_to circle_templates_path(circle), notice: "Template was successfully destroyed."
   end
+
 end

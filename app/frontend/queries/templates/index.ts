@@ -2,12 +2,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 
 import { exclude, isAllowedStatusCode, Routes } from "@/lib"
+import { SlideData } from "@/types/SlideData"
 
 import { type ReactMutationFunction } from ".."
 
 interface CreateSlideData {
 	title: string
-	data?: Record<string, unknown>
+	data?: SlideData
 }
 
 export const useCreateTemplateSlide: ReactMutationFunction<
@@ -20,11 +21,11 @@ export const useCreateTemplateSlide: ReactMutationFunction<
 	return useMutation({
 		mutationFn: async(data) => {
 			const res = await axios.post(
-				Routes.apiTemplateSlides(options.params.templateSlug),
+				Routes.apiCircleTemplateSlides(options.params.circleSlug, options.params.templateSlug),
 				{ slide: data },
 			)
 
-			if(!isAllowedStatusCode(res.statusText, [200, 201])) {
+			if(!isAllowedStatusCode(res.statusText, [200, 201, 202])) {
 				throw new Error("Failed to create slide")
 			}
 			return res.data
@@ -40,26 +41,26 @@ export const useCreateTemplateSlide: ReactMutationFunction<
 
 interface UpdateSlideData {
 	title?: string
-	data?: Record<string, unknown>
+	data?: SlideData
 }
 
 export const useUpdateTemplateSlide: ReactMutationFunction<
 	Schema.Slide,
 	UpdateSlideData,
-	{ templateSlug: string, slideSlug: string }
+	{ circleSlug: string, templateSlug: string, slideSlug: string }
 > = (options) => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: async(data) => {
 			const res = await axios.patch(
-				Routes.apiTemplateSlide(options.params.templateSlug, options.params.slideSlug),
+				Routes.apiCircleTemplateSlide(options.params.circleSlug, options.params.templateSlug, options.params.slideSlug),
 				{
 					slide: data,
 				},
 			)
 
-			if(!isAllowedStatusCode(res.statusText, [200, 201])) {
+			if(!isAllowedStatusCode(res.statusText, [200, 201, 202])) {
 				throw new Error("Failed to update slide")
 			}
 			return res.data

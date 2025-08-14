@@ -7,7 +7,7 @@
 #  first_name  :string
 #  last_name   :string
 #  middle_name :string
-#  slug        :string           not null
+#  slug        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

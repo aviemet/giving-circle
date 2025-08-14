@@ -4,12 +4,13 @@ class CreatePresentations < ActiveRecord::Migration[7.1]
       t.string :name, null: false
       t.boolean :active, null: false, default: false
       t.jsonb :settings, default: {}
+      t.integer :template_version
 
       t.references :active_slide, type: :uuid, foreign_key: { to_table: :slides }
       t.references :theme, type: :uuid, null: false, foreign_key: true
       t.references :template, type: :uuid, null: true, foreign_key: true
 
-      t.string :slug, null: false, index: { unique: true }
+      t.string :slug, index: { unique: true }
 
       t.timestamps
     end

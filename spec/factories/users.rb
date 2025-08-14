@@ -26,7 +26,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0), not null
-#  slug                   :string           not null
+#  slug                   :string
 #  table_preferences      :jsonb
 #  unconfirmed_email      :string
 #  unlock_token           :string

@@ -1,20 +1,20 @@
-import { HTTPVerb, NestedFields, type UseFormProps } from "use-inertia-form"
+import { HTTPVerb, type UseFormProps } from "use-inertia-form"
 
-import { Grid } from "@/components"
-import { Form, TextInput, Submit, DynamicInputs } from "@/components/Form"
+import { Divider, Grid, Title } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
 import { usePageProps } from "@/lib/hooks"
 
 import SlidesSection from "./SlidesSection"
 
 export type TemplateFormData = {
-	template: Schema.TemplatesFormData
+	template: Schema.TemplatesEdit
 }
 
 export interface TemplateFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TemplateFormData>) => boolean | void
-	template: Schema.TemplatesFormData
+	template: Schema.TemplatesEdit
 }
 
 const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps) => {
@@ -39,6 +39,12 @@ const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps
 							template={ template }
 						/>
 					</> }
+				</Grid.Col>
+
+				<Grid.Col>
+					<Title mt="sm" order={ 3 }>Actions</Title>
+
+					<Divider mt="xs" mb="sm" />
 				</Grid.Col>
 
 				<Grid.Col>

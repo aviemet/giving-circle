@@ -1,7 +1,4 @@
 class Presentations::PersistedSerializer < PresentationSerializer
   include Persisted
-
-  attributes(
-    :slug,
-  )
+  with_slug
 end

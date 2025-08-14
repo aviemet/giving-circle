@@ -6,7 +6,7 @@ class Presentations::InteractionResponsesController < ApplicationController
 
   sortable_fields %w(presentation_action_id membership_id response_data)
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses (theme_presentation_interaction_responses)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses (theme_interaction_responses)
   def index
     authorize presentation_interaction_responses
 
@@ -21,7 +21,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses/:id (theme_presentation_interaction_response)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
   def show
     authorize presentation_interaction_response
     render inertia: "Presentation::InteractionResponses/Show", props: {
@@ -29,7 +29,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses/new (new_theme_presentation_interaction_response)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/new (new_theme_interaction_response)
   def new
     authorize Presentation::InteractionResponse.new
     render inertia: "Presentation::InteractionResponses/New", props: {
@@ -37,7 +37,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses/:id/edit (edit_theme_presentation_interaction_response)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id/edit (edit_theme_interaction_response)
   def edit
     authorize presentation_interaction_response
     render inertia: "Presentation::InteractionResponses/Edit", props: {
@@ -45,7 +45,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses (theme_presentation_interaction_responses)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses (theme_interaction_responses)
   def create
     authorize Presentation::InteractionResponse.new
     if presentation_interaction_response.save
@@ -55,8 +55,8 @@ class Presentations::InteractionResponsesController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses/:id (theme_presentation_interaction_response)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses/:id (theme_presentation_interaction_response)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
   def update
     authorize presentation_interaction_response
     if presentation_interaction_response.update(presentation_interaction_response_params)
@@ -66,7 +66,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interaction_responses/:id (theme_presentation_interaction_response)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
   def destroy
     authorize presentation_interaction_response
     presentation_interaction_response.destroy!

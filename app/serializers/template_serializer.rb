@@ -5,7 +5,8 @@
 #  id         :uuid             not null, primary key
 #  name       :string
 #  settings   :jsonb            not null
-#  slug       :string           not null
+#  slug       :string
+#  version    :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

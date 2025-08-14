@@ -6,7 +6,7 @@ class Presentations::InteractionsController < ApplicationController
 
   sortable_fields %w(slug interaction_type config results trigger_type trigger_conditions)
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions (theme_presentation_interactions)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions (theme_interactions)
   def index
     authorize presentation_interactions
 
@@ -21,7 +21,7 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions/:id (theme_presentation_interaction)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
   def show
     authorize presentation_interaction
     render inertia: "Presentation::Interactions/Show", props: {
@@ -29,7 +29,7 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions/new (new_theme_presentation_interaction)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/new (new_theme_interaction)
   def new
     authorize Presentation::Interaction.new
     render inertia: "Presentation::Interactions/New", props: {
@@ -37,7 +37,7 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions/:id/edit (edit_theme_presentation_interaction)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id/edit (edit_theme_interaction)
   def edit
     authorize presentation_interaction
     render inertia: "Presentation::Interactions/Edit", props: {
@@ -45,7 +45,7 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
-  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions (theme_presentation_interactions)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions (theme_interactions)
   def create
     authorize Presentation::Interaction.new
     if presentation_interaction.save
@@ -55,8 +55,8 @@ class Presentations::InteractionsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions/:id (theme_presentation_interaction)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions/:id (theme_presentation_interaction)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
   def update
     authorize presentation_interaction
     if presentation_interaction.update(presentation_interaction_params)
@@ -66,7 +66,7 @@ class Presentations::InteractionsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/:presentation_slug/interactions/:id (theme_presentation_interaction)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
   def destroy
     authorize presentation_interaction
     presentation_interaction.destroy!

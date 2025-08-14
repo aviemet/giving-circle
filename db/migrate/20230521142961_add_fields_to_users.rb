@@ -2,7 +2,7 @@ class AddFieldsToUsers < ActiveRecord::Migration[7.0]
   def change
     change_table :users, bulk: true do |t|
       t.boolean :active, default: true, null: false
-      t.string :slug, null: false, index: { unique: true }
+      t.string :slug, index: { unique: true }
 
       t.references :person, type: :uuid, null: true, foreign_key: true
 

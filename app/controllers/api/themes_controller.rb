@@ -1,5 +1,5 @@
 class Api::ThemesController < Api::ApiController
-  # @route POST /api/themes (api_themes)
+  # @route POST /api/circles/:circle_slug/themes (api_circle_themes)
   def create
   end
 

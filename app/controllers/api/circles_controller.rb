@@ -3,8 +3,8 @@ class Api::CirclesController < Api::ApiController
   def create
   end
 
-  # @route PATCH /api/circles/:circle_slug (api_circle)
-  # @route PUT /api/circles/:circle_slug (api_circle)
+  # @route PATCH /api/circles/:slug (api_circle)
+  # @route PUT /api/circles/:slug (api_circle)
   def update
   end
 end

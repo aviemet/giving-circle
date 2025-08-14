@@ -5,7 +5,7 @@ class CreateThemes < ActiveRecord::Migration[7.0]
       t.datetime :published_at
       t.integer :status, default: 0
 
-      t.string :slug, null: false, index: { unique: true }
+      t.string :slug, index: { unique: true }
 
       t.timestamps
     end

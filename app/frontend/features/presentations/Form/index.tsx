@@ -1,22 +1,25 @@
 import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
-import { Grid } from "@/components"
+import { Divider, Grid, Title } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
-import { SlideCard } from "@/features/Cards"
-import CardContainer from "@/features/Cards/CardContainer"
+import { usePageProps } from "@/lib/hooks"
+
+import SlidesSection from "./SlidesSection"
 
 type PresentationFormData = {
-	presentation: Schema.PresentationsFormData
+	presentation: Schema.PresentationsEdit
 }
 
 export interface PresentationFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<PresentationFormData>) => boolean | void
-	presentation: Schema.PresentationsFormData
+	presentation: Schema.PresentationsEdit
 }
 
 const PresentationForm = ({ method = "post", presentation, ...props }: PresentationFormProps) => {
+	const { active_circle } = usePageProps()
+
 	return (
 		<Form
 			model="presentation"
@@ -31,9 +34,19 @@ const PresentationForm = ({ method = "post", presentation, ...props }: Presentat
 				</Grid.Col>
 
 				<Grid.Col>
-					<CardContainer>
-						{ presentation.slides.map(slide => <SlideCard key={ slide.id } slide={ slide } />) }
-					</CardContainer>
+					{ active_circle && <>
+						<SlidesSection
+							circle={ active_circle }
+							presentation={ presentation }
+						/>
+					</> }
+				</Grid.Col>
+
+				<Grid.Col>
+
+					<Title mt="sm" order={ 3 }>Actions</Title>
+
+					<Divider mt="xs" mb="sm" />
 				</Grid.Col>
 
 				<Grid.Col>

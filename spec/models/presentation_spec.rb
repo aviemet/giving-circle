@@ -2,16 +2,17 @@
 #
 # Table name: presentations
 #
-#  id              :uuid             not null, primary key
-#  active          :boolean          default(FALSE), not null
-#  name            :string           not null
-#  settings        :jsonb
-#  slug            :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  active_slide_id :uuid
-#  template_id     :uuid
-#  theme_id        :uuid             not null
+#  id               :uuid             not null, primary key
+#  active           :boolean          default(FALSE), not null
+#  name             :string           not null
+#  settings         :jsonb
+#  slug             :string
+#  template_version :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  active_slide_id  :uuid
+#  template_id      :uuid
+#  theme_id         :uuid             not null
 #
 # Indexes
 #

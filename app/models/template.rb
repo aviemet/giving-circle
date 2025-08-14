@@ -5,7 +5,8 @@
 #  id         :uuid             not null, primary key
 #  name       :string
 #  settings   :jsonb            not null
-#  slug       :string           not null
+#  slug       :string
+#  version    :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -17,14 +18,14 @@ class Template < ApplicationRecord
   include Ownable
 
   extend FriendlyId
-
   friendly_id :name, use: [:slugged, :history]
 
   include PgSearchable
-
   pg_search_config(
     against: [:name, :settings, :slug, :slides],
   )
+
+  before_update :regenerate_slug
 
   resourcify
 
@@ -40,8 +41,18 @@ class Template < ApplicationRecord
       theme: theme,
       name: name,
       circle: self.circle,
+      template: self,
     })
     presentation.copy_template_slides
     presentation
+  end
+
+  private
+
+  def regenerate_slug
+    return unless will_save_change_to_attribute?(:name)
+
+    # Force slug regeneration
+    self.slug = name.parameterize if name.present?
   end
 end

@@ -6,22 +6,9 @@ alwaysApply: true
 # REQUIRED FOR EVERY INTERACTION
 
 1. Read .cursor/giving_circle.mdx at the start of each interaction
-2. Before ending ANY response, if you've learned anything useful which is NOT immediately obvious from reading the code about:
-   - **Why** decisions were made (rationale, trade-offs, historical context)
-   - **Non-obvious** implementation details or gotchas
-   - **Cross-cutting concerns** that affect multiple parts of the system
-   - **Performance implications** or optimization strategies
-   - **Security considerations** or authorization patterns
-   - **Integration points** with external systems
-   - **Deployment or environment-specific** configurations
-   - **Known limitations** or edge cases
-   You MUST update .cursor/giving_circle.mdx with this information
+2. Before ending ANY response, if you've learned anything useful about project-specific architectural details that are NOT immediately obvious from reading the code, you MUST update .cursor/giving_circle.mdx with this information
 3. When updating .cursor/giving_circle.mdx:
    - Only add new information not already documented
    - Place information in the appropriate section
    - If no appropriate section exists, create one
-   - ONLY document project-specific quirks, workarounds, or non-obvious architectural decisions
-   - If you're about to document something that's obvious from the code, DON'T
-   - If you're about to document a standard framework feature, DON'T
-   - If you're about to document a basic programming pattern, DON'T
-   - Ask yourself: "Would a competent developer need to know this to work on this project?" If no, don't document it
+   - ONLY document project-specific architectural decisions, custom patterns, and non-obvious implementation details

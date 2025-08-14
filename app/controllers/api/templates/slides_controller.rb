@@ -6,7 +6,7 @@ class Api::Templates::SlidesController < Api::ApiController
 
   strong_params :slide, permit: [:title, data: {}]
 
-  # @route POST /api/templates/:template_slug/slides (api_template_slides)
+  # @route POST /api/circles/:circle_slug/templates/:template_slug/slides (api_circle_template_slides)
   def create
     authorize Slide.new, policy_class: Template::SlidePolicy
 
@@ -15,25 +15,23 @@ class Api::Templates::SlidesController < Api::ApiController
     if slide.save
       render json: slide, status: :created
     else
-      render json: { errors: user.errors }, status: :partial_content
+      render json: { errors: user.errors }, status: :unprocessable_content
     end
   end
 
-  # @route PATCH /api/templates/:template_slug/slides/:slug (api_template_slide)
-  # @route PUT /api/templates/:template_slug/slides/:slug (api_template_slide)
+  # @route PATCH /api/circles/:circle_slug/templates/:template_slug/slides/:slug (api_circle_template_slide)
+  # @route PUT /api/circles/:circle_slug/templates/:template_slug/slides/:slug (api_circle_template_slide)
   def update
     authorize slide, policy_class: Template::SlidePolicy
 
-    ap({ params: })
-
     if slide.update(slide_params)
-      render json: slide, status: :created
+      render json: slide, status: :accepted
     else
-      render json: { errors: user.errors }, status: :partial_content
+      render json: { errors: user.errors }, status: :unprocessable_content
     end
   end
 
-  # @route DELETE /api/templates/:template_slug/slides/:slug (api_template_slide)
+  # @route DELETE /api/circles/:circle_slug/templates/:template_slug/slides/:slug (api_circle_template_slide)
   def destroy
     authorize slide, policy_class: Template::SlidePolicy
   end

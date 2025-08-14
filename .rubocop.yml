@@ -164,6 +164,10 @@ Style/Lambda:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylelambda
 
+Layout/SpaceInLambdaLiteral:
+  Enabled: true
+  EnforcedStyle: require_no_space
+
 Style/ModuleFunction:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylemodulefunction

@@ -1,8 +1,5 @@
 class Users::InertiaShareSerializer < UserSerializer
   attributes(
-    :id,
-    :created_at,
-    :updated_at,
     table_preferences: { type: "IUserTablePreferences" },
     user_preferences: { type: "IUserPreferences" },
   )

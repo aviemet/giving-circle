@@ -1,11 +1,10 @@
-class Users::ShowSerializer < UserSerializer
+class Users::ShowSerializer < Users::PersistedSerializer
   attributes(
-    :id,
-    :updated_at,
-    :created_at,
     table_preferences: { type: "IUserTablePreferences" },
     user_preferences: { type: "IUserPreferences" },
   )
+
+  timestamps
 
   has_one :person, serializer: PersonSerializer
   has_many :roles, serializer: RoleSerializer

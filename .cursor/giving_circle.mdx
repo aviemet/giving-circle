@@ -23,6 +23,13 @@
 - Template slides controller uses `decent_exposure` gem with `expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }`
 - Route parameters are consistent: both route and controller use `:slug` for slide identification
 
+### FriendlyId History Integration
+- Models using FriendlyId with history: Template, Presentation, Slide, Circle, Theme, Org, Membership, Person, User
+- Historical slug lookups handled via `FriendlyIdHistory` concern for controllers using decent_exposure
+- Controllers include `FriendlyIdHistory` concern and use `find_by_slug_or_history` method in exposure definitions
+- Automatic 301 redirects when accessing old slugs to current slug URLs
+- Historical slug lookup checks `friendly_id_slugs` table for previous slug values
+
 ## Project Milestones
 
 ### Phase 1: Core Authentication and Authorization

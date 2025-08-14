@@ -44,7 +44,6 @@ Rails.application.routes.draw do
   # RESOURCEFUL PATHS #
 
   resources :users
-  resources :people, param: :slug
 
   # SETTINGS PAGES #
 
@@ -91,42 +90,42 @@ Rails.application.routes.draw do
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
         # Presentation routes
-        resources :presentations, param: :slug, shallow: false do
-          get "activate"
+        resources :presentations, param: :presentation_slug, shallow: false
 
-          # Presentation builder components
-          resources :interactions,
-            path: ":presentation_slug/interactions",
-            shallow: false,
-            as: :interactions,
-            controller: "presentations/interactions"
+        # Presentation builder components
+        resources :presentation_slides,
+          path: "presentations/:presentation_slug/slides",
+          param: :slug,
+          shallow: false,
+          as: :presentation_slides,
+          controller: "presentations/slides"
 
-          resources :interaction_responses,
-            path: ":presentation_slug/interaction_responses",
-            shallow: false,
-            as: :interaction_responses,
-            controller: "presentations/interaction_responses"
+        resources :interactions,
+          path: "presentations/:presentation_slug/interactions",
+          shallow: false,
+          as: :interactions,
+          controller: "presentations/interactions"
 
-          resources :presentation_elements,
-            path: ":presentation_slug/elements",
-            shallow: false,
-            as: :elements,
-            controller: "presentations/elements"
+        resources :interaction_responses,
+          path: "presentations/:presentation_slug/interaction_responses",
+          shallow: false,
+          as: :interaction_responses,
+          controller: "presentations/interaction_responses"
 
-          resources :presentation_slides,
-            path: ":presentation_slug/slides",
-            shallow: false,
-            as: :slides,
-            controller: "presentations/slides"
+        resources :presentation_elements,
+          path: "presentations/:presentation_slug/elements",
+          shallow: false,
+          as: :elements,
+          controller: "presentations/elements"
 
-          # Active Presentation
-          get "admin", as: :controls, to: "presentations/active#index"
-          get "admin/overview", to: "presentations/active#overview", as: :overview
-          get "admin/members", to: "presentations/active#members", as: :members
-          get "admin/messaging", to: "presentations/active#messaging", as: :messaging
-          get "admin/settings", to: "presentations/active#settings", as: :settings
+        # Active Presentation
+        get "presentations/:presentation_slug/admin", as: :presentation_controls, to: "presentations/active#index"
+        get "presentations/:presentation_slug/admin/overview", to: "presentations/active#overview", as: :presentation_overview
+        get "presentations/:presentation_slug/admin/members", to: "presentations/active#members", as: :presentation_members
+        get "presentations/:presentation_slug/admin/messaging", to: "presentations/active#messaging", as: :presentation_messaging
+        get "presentations/:presentation_slug/admin/settings", to: "presentations/active#settings", as: :presentation_settings
 
-        end
+        get "presentations/:presentation_slug/activate", to: "presentations#activate", as: :presentation_activate
       end
     end
   end

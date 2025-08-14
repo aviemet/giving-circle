@@ -12,6 +12,10 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_presentation_interactions_on_slug  (slug) UNIQUE
+#
 class Presentation::Interaction < ApplicationRecord
   include PgSearch::Model
 

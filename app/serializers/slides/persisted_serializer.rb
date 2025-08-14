@@ -1,7 +1,4 @@
 class Slides::PersistedSerializer < SlideSerializer
   include Persisted
-
-  attributes(
-    :slug,
-  )
+  with_slug
 end

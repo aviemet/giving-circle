@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -80,7 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
 
   create_table "circles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "slug", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_circles_on_slug", unique: true
@@ -119,7 +119,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
     t.integer "funds_cents", default: 0, null: false
     t.string "funds_currency", default: "USD", null: false
     t.boolean "active", default: true, null: false
-    t.string "slug", null: false
+    t.string "slug"
     t.uuid "person_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,7 +139,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
-    t.string "slug", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_orgs_on_slug", unique: true
@@ -162,7 +162,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
     t.string "last_name"
     t.string "middle_name"
     t.boolean "active", default: true, null: false
-    t.string "slug", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_people_on_slug", unique: true
@@ -220,16 +220,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
     t.jsonb "trigger_conditions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_presentation_interactions_on_slug", unique: true
   end
 
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.boolean "active", default: false, null: false
     t.jsonb "settings", default: {}
+    t.integer "template_version"
     t.uuid "active_slide_id"
     t.uuid "theme_id", null: false
     t.uuid "template_id"
-    t.string "slug", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["active_slide_id"], name: "index_presentations_on_active_slide_id"
@@ -293,14 +295,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
     t.string "title"
     t.jsonb "data"
     t.string "slug"
+    t.uuid "source_slide_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_slides_on_slug"
+    t.index ["source_slide_id"], name: "index_slides_on_source_slide_id"
   end
 
   create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.string "slug", null: false
+    t.string "slug"
     t.jsonb "settings", default: {}, null: false
+    t.integer "version", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_templates_on_slug", unique: true
@@ -310,7 +316,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
     t.string "name", null: false
     t.datetime "published_at"
     t.integer "status", default: 0
-    t.string "slug", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_themes_on_slug", unique: true
@@ -357,7 +363,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
     t.string "invited_by_type"
     t.uuid "invited_by_id"
     t.boolean "active", default: true, null: false
-    t.string "slug", null: false
+    t.string "slug"
     t.uuid "person_id"
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
@@ -401,6 +407,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_213917) do
   add_foreign_key "presentations_orgs", "orgs"
   add_foreign_key "presentations_orgs", "presentations"
   add_foreign_key "slide_parents", "slides"
+  add_foreign_key "slides", "slides", column: "source_slide_id"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

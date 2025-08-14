@@ -1,14 +1,13 @@
 import { modals } from "@mantine/modals"
-import React, { useRef } from "react"
+import { useRef } from "react"
 import { useDynamicInputs, useForm } from "use-inertia-form"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
-import { Form } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
+import { SlideFormCard } from "@/features/Cards"
 import { Routes } from "@/lib"
 import { useCreateTemplateSlide } from "@/queries"
 
-import SlideCard from "./SlideCard"
 
 const emptySlideData: Partial<Schema.Slide> = {
 	id: "",
@@ -17,8 +16,8 @@ const emptySlideData: Partial<Schema.Slide> = {
 }
 
 interface SlidesSectionProps {
-	circle: Schema.CirclesInertiaShare
-	template: Schema.TemplatesFormData
+	circle: Schema.CirclesPersisted
+	template: Schema.TemplatesEdit
 }
 
 const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
@@ -38,7 +37,6 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 		},
 		onSuccess(data, variables) {
 			addInput(data)
-			console.log("Success", { data, variables })
 		},
 	})
 
@@ -71,7 +69,7 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 					const slug = getData(`template.${path}.slug`) as number
 
 					return (
-						<SlideCard
+						<SlideFormCard
 							key={ path }
 							path={ path }
 							removeInput={ () => removeInput(i) }
@@ -80,11 +78,6 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 					)
 				}) }
 			</Flex>
-
-			<Title mt="sm" order={ 3 }>Actions</Title>
-
-			<Divider mt="xs" mb="sm" />
-
 		</>
 	)
 }

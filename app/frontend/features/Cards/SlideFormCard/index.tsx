@@ -1,13 +1,12 @@
 import { modals } from "@mantine/modals"
 import clsx from "clsx"
-import { useForm } from "use-inertia-form"
 
 import { ActionIcon, Card, Image, Text, Center, Link, ConditionalWrapper } from "@/components"
 import { TextInput } from "@/components/Form"
 import { TrashIcon } from "@/components/Icons"
 import { isNonEmptyString } from "@/lib"
 
-import * as classes from "./SlideCard.css"
+import * as classes from "./SlideFormCard.css"
 
 interface SlideCardProps {
 	path: string
@@ -15,9 +14,7 @@ interface SlideCardProps {
 	href?: string
 }
 
-const SlideCard = ({ path, removeInput, href }: SlideCardProps) => {
-	const { getData, data } = useForm()
-
+const SlideFormCard = ({ path, removeInput, href }: SlideCardProps) => {
 	const handleRemoveElement = () => {
 		modals.openConfirmModal({
 			title: "Remove this slide?",
@@ -64,4 +61,4 @@ const SlideCard = ({ path, removeInput, href }: SlideCardProps) => {
 	)
 }
 
-export default SlideCard
+export default SlideFormCard

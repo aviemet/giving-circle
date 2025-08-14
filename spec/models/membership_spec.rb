@@ -8,7 +8,7 @@
 #  funds_currency :string           default("USD"), not null
 #  name           :string           not null
 #  number         :string
-#  slug           :string           not null
+#  slug           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  person_id      :uuid             not null

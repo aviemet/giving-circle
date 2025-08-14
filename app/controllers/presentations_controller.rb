@@ -1,9 +1,17 @@
 class PresentationsController < ApplicationController
+  include FriendlyIdHistory
+  historical_slug_redirect_values Presentation, :presentation_slug
+
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
   expose :theme, id: -> { params[:theme_slug] }, find_by: :slug
 
   expose :presentations, -> { search(theme.presentations.includes_associated) }
-  expose :presentation, id: -> { params[:presentation_slug] || params[:slug] }, scope: -> { theme.presentations.includes_associated }, find_by: :slug
+  expose(
+    :presentation,
+    id: -> { params[:presentation_slug] },
+    scope: -> { theme.presentations.includes_associated },
+    find_by: :slug,
+  )
 
   strong_params :presentation, permit: [:name, :theme_id]
 
@@ -26,9 +34,8 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
   def show
-    # Route for watching the presentation. Admin viewing of a presentation is all presented through the edit action
     authorize presentation
 
     render inertia: "Presentations/Show", props: {
@@ -45,7 +52,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug/edit (edit_theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (edit_theme_presentation)
   def edit
     authorize presentation
 
@@ -76,8 +83,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
   def update
     authorize presentation
 
@@ -88,7 +95,7 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
   def destroy
     authorize presentation
 

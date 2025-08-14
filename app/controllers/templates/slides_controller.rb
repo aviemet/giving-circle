@@ -1,10 +1,10 @@
 class Templates::SlidesController < ApplicationController
-  expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
+  expose :circle, id: ->{ params[:circle_slug] }, find_by: :slug
 
-  expose :template, id: -> { params[:template_slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
+  expose :template, id: ->{ params[:template_slug] }, scope: ->(scope){ scope.includes_associated }, find_by: :slug
 
-  expose :slides, -> { template.slides.includes_associated }
-  expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }, find_by: :slug
+  expose :slides, ->{ template.slides.includes_associated }
+  expose :slide, id: ->{ params[:slug] }, scope: ->{ template.slides }, find_by: :slug
 
   strong_params :slide, permit: [:name, :data]
 
@@ -24,7 +24,7 @@ class Templates::SlidesController < ApplicationController
 
   # @route GET /:circle_slug/templates/:template_slug/slides/:slug/edit (circle_templates_edit_slide)
   def edit
-    render inertia: "Slides/Edit", props: {
+    render inertia: "Templates/Slides/Edit", props: {
       template: template.render(:persisted),
       slide: slide.render(:form_data)
     }

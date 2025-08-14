@@ -4,21 +4,22 @@ import { Grid } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
 
 type PresentationSlideFormData = {
-	presentation_slide: Schema.PresentationSlidesFormData
+	slide: Schema.SlidesEdit
 }
 
 export interface PresentationSlideFormProps {
+	slide: Schema.SlidesEdit
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<PresentationSlideFormData>) => boolean | void
-	presentation_slide: Schema.PresentationSlidesFormData
 }
 
-const PresentationSlideForm = ({ method = "post", presentation_slide, ...props }: PresentationSlideFormProps) => {
+const PresentationSlideForm = ({ method = "post", slide, ...props }: PresentationSlideFormProps) => {
+	console.log({ slide })
 	return (
 		<Form
-			model="presentation_slide"
-			data={ { presentation_slide } }
+			model="slide"
+			data={ { slide } }
 			method={ method }
 			{ ...props }
 		>
@@ -37,7 +38,7 @@ const PresentationSlideForm = ({ method = "post", presentation_slide, ...props }
 					<TextInput name="template" label="Template" />
 				</Grid.Col>
 				<Grid.Col>
-					<Submit>{ presentation_slide.id ? "Update" : "Create" } PresentationSlide</Submit>
+					<Submit>{ slide.id ? "Update" : "Create" } PresentationSlide</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>
