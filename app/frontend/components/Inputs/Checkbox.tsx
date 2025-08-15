@@ -3,18 +3,26 @@ import React, { forwardRef } from "react"
 
 import InputWrapper from "./InputWrapper"
 
-import { type BaseInputProps } from "."
+import { withInjectedProps, type BaseInputProps } from "."
+
 
 export interface CheckboxProps extends MantineCheckboxProps, BaseInputProps {}
 
 type CheckboxComponentType = React.ForwardRefExoticComponent<
-  CheckboxProps & React.RefAttributes<HTMLInputElement>
+CheckboxProps & React.RefAttributes<HTMLInputElement>
 > & {
 	Group: typeof Checkbox.Group
 };
 
 const CheckboxComponent: CheckboxComponentType = forwardRef<HTMLInputElement, CheckboxProps>((
-	{ id, name, wrapper, wrapperProps, ...props },
+	{
+		id,
+		name,
+		wrapper,
+		wrapperProps,
+		disableAutofill = true,
+		...props
+	},
 	ref,
 ) => {
 	const inputId = id ?? name
@@ -25,7 +33,9 @@ const CheckboxComponent: CheckboxComponentType = forwardRef<HTMLInputElement, Ch
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				{ ...props }
+				{ ...withInjectedProps(props, {
+					disableAutofill,
+				}) }
 			/>
 		</InputWrapper>
 	)

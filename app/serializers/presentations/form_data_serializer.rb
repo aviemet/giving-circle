@@ -1,3 +1,3 @@
 class Presentations::FormDataSerializer < PresentationSerializer
-  has_many :slides, serializer: PresentationSlides::PersistedSerializer
+  has_many :slides, serializer: Slides::FormDataSerializer
 end

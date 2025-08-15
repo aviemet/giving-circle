@@ -1,11 +1,10 @@
-import { Flash } from "@/components"
-
 import BareAppLayout from "./AppLayout"
 import BareAuthLayout from "./AuthLayout"
 import BarePresentationLayout from "./PresentationLayout"
 import Providers from "./Providers"
 import BarePublicLayout from "./PublicLayout"
 import BareSettingsLayout from "./SettingsLayout"
+import BareUnformattedLayout from "./UnformattedLayout"
 
 import "@/lib/i18n"
 
@@ -15,6 +14,7 @@ export const LAYOUTS = {
 	"settings": "settings",
 	"public": "public",
 	"presentation": "presentation",
+	"unformatted": "unformatted",
 } as const
 
 export interface LayoutProps {
@@ -24,7 +24,6 @@ export interface LayoutProps {
 export const LayoutWrapper = ({ children }: LayoutProps) => {
 	return (
 		<Providers>
-			<Flash />
 			{ children }
 		</Providers>
 	)
@@ -76,6 +75,16 @@ export const PublicLayout = ({ children }: LayoutProps) => {
 			<BarePublicLayout>
 				{ children }
 			</BarePublicLayout>
+		</LayoutWrapper>
+	)
+}
+
+export const UnformattedLayout = ({ children }: LayoutProps) => {
+	return (
+		<LayoutWrapper>
+			<BareUnformattedLayout>
+				{ children }
+			</BareUnformattedLayout>
 		</LayoutWrapper>
 	)
 }

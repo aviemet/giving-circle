@@ -61,7 +61,7 @@ class CirclesController < ApplicationController
 
     if circle.save
       current_user.add_role(:admin, circle)
-      redirect_to [circle], notice: t('circles.notices.created')
+      redirect_to [circle], notice: t("circles.notices.created")
     else
       redirect_to new_circle_path, inertia: { errors: circle.errors }
     end
@@ -73,7 +73,7 @@ class CirclesController < ApplicationController
     authorize circle
 
     if circle.update(circle_params)
-      redirect_to circle, notice: t('circles.notices.updated')
+      redirect_to circle, notice: t("circles.notices.updated")
     else
       redirect_to edit_circle_path, inertia: { errors: circle.errors }
     end
@@ -84,6 +84,6 @@ class CirclesController < ApplicationController
     authorize circle
 
     circle.destroy
-    redirect_to circles_url, notice: t('circles.notices.destroyed')
+    redirect_to circles_url, notice: t("circles.notices.destroyed")
   end
 end

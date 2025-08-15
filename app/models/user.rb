@@ -26,6 +26,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0), not null
+#  slug                   :string
 #  table_preferences      :jsonb
 #  unconfirmed_email      :string
 #  unlock_token           :string
@@ -44,6 +45,7 @@
 #  index_users_on_invited_by_id         (invited_by_id)
 #  index_users_on_person_id             (person_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #  index_users_on_table_preferences     (table_preferences) USING gin
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #  index_users_on_user_preferences      (user_preferences) USING gin
@@ -53,8 +55,15 @@
 #  fk_rails_...  (person_id => people.id)
 #
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :email, use: [:slugged, :history]
+
+  include PgSearchable
+  pg_search_config(against: [:email, :active, :person_id], enable_multisearch: true)
+
   resourcify
   rolify
+  tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
 
   # :omniauthable, :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
@@ -66,11 +75,11 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def circles
-    Circle.with_roles(Circle.find_roles.pluck(:name), self)
+    Circle.with_roles(Circle.find_roles.pluck(:name), self).includes(:themes, :ownerships)
   end
 
   # Per table query limit for pagination
   def limit(model)
-    self.table_preferences&.[](model.to_s)&.[]('limit') || 25
+    self.table_preferences&.[](model.to_s)&.[]("limit") || 25
   end
 end

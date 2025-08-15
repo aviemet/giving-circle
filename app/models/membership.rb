@@ -8,7 +8,7 @@
 #  funds_currency :string           default("USD"), not null
 #  name           :string           not null
 #  number         :string
-#  slug           :string           not null
+#  slug           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  person_id      :uuid             not null
@@ -24,18 +24,13 @@
 #
 class Membership < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:name, :number, :funds_cents, :active],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
   )
 
   resourcify

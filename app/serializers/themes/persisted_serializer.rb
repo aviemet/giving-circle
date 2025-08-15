@@ -1,7 +1,4 @@
 class Themes::PersistedSerializer < ThemeSerializer
   include Persisted
-
-  attributes(
-    :slug,
-  )
+  with_slug
 end

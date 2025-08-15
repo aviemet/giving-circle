@@ -1,7 +1,7 @@
 import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import { Grid } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, TextInput, Submit, CurrencyInput } from "@/components/Form"
 
 type MembershipFormData = {
 	membership: Schema.MembershipsFormData
@@ -28,7 +28,7 @@ const MembershipForm = ({ method = "post", membership, ...props }: MembershipFor
 					<TextInput name="number" label="Number" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="funds" label="Funds" />
+					<CurrencyInput name="funds" label="Funds" />
 				</Grid.Col>
 				<Grid.Col>
 					<TextInput name="active" label="Active" />

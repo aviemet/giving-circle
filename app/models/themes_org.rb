@@ -25,7 +25,7 @@ class ThemesOrg < ApplicationRecord
   validate :theme_owner_matches_org_owner
   validates :theme_id, uniqueness: {
     scope: :org_id,
-    message: I18n.t('theme_orgs.validations.uniqueness'),
+    message: I18n.t("theme_orgs.validations.uniqueness"),
     if: -> { theme_id.present? && org_id.present? }
   }
 
@@ -44,7 +44,7 @@ class ThemesOrg < ApplicationRecord
     return unless theme&.circle && org&.circle
 
     unless theme.circle.id == org.circle.id
-      errors.add(:theme_owner_matches_org_owner, I18n.t('theme_orgs.validations.match_owner'))
+      errors.add(:theme_owner_matches_org_owner, I18n.t("theme_orgs.validations.match_owner"))
     end
   end
 end

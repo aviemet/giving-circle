@@ -3,12 +3,13 @@ import { isEmpty } from "lodash"
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit, usePageProps } from "@/lib/hooks"
+import { useInit, useLocation, usePageProps } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 const ThemeMenu = () => {
 	const { active_circle, active_theme } = usePageProps()
 	const { menuKeys, toggleOpenMenu } = useLayoutStore()
+	const location = useLocation()
 
 	useInit(() => {
 		toggleOpenMenu("circle", false)
@@ -31,6 +32,7 @@ const ThemeMenu = () => {
 
 				<NavLink
 					href={ Routes.themeOrgs(active_circle.slug, active_theme.slug) }
+					active={ location.paths[3] === "orgs" }
 					leftSection={ <OrgsIcon /> }
 				>
 					Organizations
@@ -38,6 +40,7 @@ const ThemeMenu = () => {
 
 				<NavLink
 					href={ Routes.themePresentations(active_circle.slug, active_theme.slug) }
+					active={ location.paths[3] === "presentations" }
 					leftSection={ <PresentationIcon /> }
 				>
 					Presentations

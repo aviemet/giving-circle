@@ -10,15 +10,17 @@ interface EditMembershipProps {
 
 // @path: /:circle_slug/memberships/:slug/edit
 // @route: editMembership
-const EditMember = ({ membership, circle }: EditMembershipProps) => {
+const EditMember = ({ membership }: EditMembershipProps) => {
 	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"editMembership">()
+	const { params, active_circle } = usePageProps<"editMembership">()
 	const title = "Edit Member"
+
+	if(!active_circle) return <></>
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: "Circles", href: Routes.circles() },
-			{ title: circle.name, href: Routes.circle(params.circle_slug) },
+			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
 			{ title: "Members", href: Routes.circleMemberships(params.circle_slug) },
 			{ title: membership.name, href: Routes.membership(params.circle_slug, membership.id) },
 			{ title, href: window.location.href },

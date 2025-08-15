@@ -1,2 +1,0 @@
-class PresentationSlides::FormDataSerializer < PresentationSlideSerializer
-end

@@ -3,14 +3,14 @@ import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 import { Grid } from "@/components"
 import { Form, TextInput, Submit, RichText } from "@/components/Form"
 
-type TOrgFormData = {
+type OrgFormData = {
 	org: Schema.OrgsFormData
 }
 
 export interface OrgFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TOrgFormData>) => boolean | void
+	onSubmit?: (object: UseFormProps<OrgFormData>) => boolean | void
 	org: Schema.OrgsFormData
 }
 

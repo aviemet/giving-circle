@@ -3,7 +3,7 @@
 
 if Rails.env.development?
 
-  if User.count == 0
+  if User.none?
     user = User.create!({
       email: "aviemet@gmail.com",
       password: "Complex1!",

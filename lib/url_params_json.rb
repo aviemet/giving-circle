@@ -72,6 +72,7 @@ module UrlParamsJson
         break if component_name.nil? || component_name == "Anonymous"
 
         url_path = route[1].path.spec.to_s.gsub(/\(.:format\)/, "")
+
         js_route_method = route[0].to_s.camelize(:lower)
         file.rewind
         annotated_file = add_or_update_route_annotation(file, component_name, url_path, js_route_method)
@@ -150,6 +151,10 @@ def find_default_export(file)
 
   file.reverse_each do |line|
     next unless line.match?(/^\s*export\s+default/)
+
+    if match = line.match(/export\s+default\s+\w+\((\w+)/)
+      return match[1]
+    end
 
     if match = line.match(/(?:function|class|const)\s+(\w+)/)
       return match[1]

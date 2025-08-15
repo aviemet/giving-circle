@@ -1,0 +1,213 @@
+# Giving Circle Project Documentation
+
+## Project Overview
+
+### Model Organization
+
+### Slide Management
+- Slides are managed through a polymorphic association using `SlideParent` join table
+- Templates can have multiple slides through `has_many :slides, through: :slide_parents`
+- Presentations can have multiple slides through `has_many :slides, through: :slide_parents`
+- Slide ordering is handled by the `order` field in `SlideParent`
+- Templates and Presentations also store slide data as JSONB in the `slides` field for presentation purposes
+- When serializing presentations, use the ActiveRecord association (`slides`) not the JSONB field (`slides` column)
+- Presentations have an `active_slide_id` foreign key that references slides directly
+- When destroying slides, any presentations using that slide as active_slide will have their `active_slide_id` nullified via a `before_destroy` callback
+- SlideParent records are deleted directly in the `before_destroy` callback to avoid foreign key constraint issues during slide destruction
+- Both Presentation and Template models use `dependent: :delete_all` for slide_parents associations as a backup
+
+### API Routes Structure
+- API routes are defined in `config/routes/api.rb` under the `:api` namespace
+- Template slides use shallow routing: `resources :slides, param: :slug, shallow: true, controller: "templates/slides"`
+- Individual slide operations use `apiSlide` route with `:slug` parameter
+- Template slides controller uses `decent_exposure` gem with `expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }`
+- Route parameters are consistent: both route and controller use `:slug` for slide identification
+
+### FriendlyId History Integration
+- Models using FriendlyId with history: Template, Presentation, Slide, Circle, Theme, Org, Membership, Person, User
+- Historical slug lookups handled via `FriendlyIdHistory` concern for controllers using decent_exposure
+- Controllers include `FriendlyIdHistory` concern and use `find_by_slug_or_history` method in exposure definitions
+- Automatic 301 redirects when accessing old slugs to current slug URLs
+- Historical slug lookup checks `friendly_id_slugs` table for previous slug values
+
+## Project Milestones
+
+### Phase 1: Core Authentication and Authorization
+
+## Conventions
+
+### Architecture
+- Model data passed to the frontend from controllers is serialized using [oj_serializers](https://github.com/ElMassimo/oj_serializers?tab=readme-ov-file)
+- Typescript types are statically generated from the serializer definitions using [types_from_serializers](https://github.com/ElMassimo/types_from_serializers)
+
+### Development Guidelines
+- Changes must be atomic and focused
+- TypeScript is used for all JavaScript code
+  - Start with most restrictive type definitions
+  - Avoid `any`, `unknown`, and type casting with `as`
+  - Prefer existing type definitions and interfaces
+  - Use generics, Records, and Mapped types before inline types
+  - Type assertions are a last resort
+
+### ESLint Configuration
+- Using `@stylistic/eslint-plugin` for code formatting
+
+## Feature Documentation
+*Document completed features and their core functionality here*
+
+## Technical Decisions
+### Authentication & Authorization
+- Using Devise for authentication
+- Using Pundit for authorization policies
+- Using Rolify for role management
+- Authorization enforced at both API and UI levels
+- Authorization patterns:
+  - `standard_auth(:action)` method in ApplicationPolicy for super_admin role checks
+  - Circle-based access control through `user.circles.include?(record.circle)`
+  - Active record checks for presentation access (e.g., `record.active?`)
+  - Super admin bypass for all actions
+
+### Document Management
+- Documents will be stored using Active Storage
+- Version control will be maintained for important documents
+- Access control will be managed through Pundit policies
+
+### Frontend Components
+#### UI Framework
+- Using Mantine v8+
+  - Always use latest component API and prop names
+  - Refer to Mantine documentation for current component structure
+
+#### Icons
+- Icons are centrally exported from `@/components/Icons`
+- Icons are renamed on export for semantic usage (e.g., `TbDashboard as DashboardIcon`)
+- Global icon configuration via `IconProvider` with defaults:
+  - className: "react-icon"
+  - size: "1rem"
+
+#### Component Organization
+- Frontend code is organized in `/app/frontend/`
+  - `/components`: Reusable, general-purpose components
+  - `/features`: Feature-specific components
+  - `/layouts`: App Layout components
+  - `/lib`: Non-React code and utilities
+  - `/pages`: Top-level Inertia pages (entry points for routes)
+  - `/queries`: Async react-query methods
+  - `/types`: Global types and interfaces
+
+#### UI & Styling
+- Mantine component library
+- CSS modules with Linaria
+  - Files use `.css.ts` extension
+  - Imports as `import * as classes from './file.css'`
+  - Class composition with `clsx`
+- Dark/light theme support via Mantine theme system
+
+#### Form Implementation
+- Built on `use-inertia-form`
+- Form component wraps Inertia form with Mantine UI
+- Supports nested data through `NestedObject` type
+- Rails-compatible form attributes by default
+- Custom inputs use `useInertiaInput` hook
+- Form state includes processing, errors, validation, and dirty tracking
+- All components strictly typed with `BaseFormInputProps<T>` interface
+
+#### State Management
+- Server state: Inertia.js
+- Client-only state: zustand
+- Form state: use-inertia-form
+
+#### Type System
+- Strict TypeScript throughout
+- No use of `any`, `unknown`, or type casting with `as`
+- Prefer existing type definitions and interfaces
+- Use generics, Records, and Mapped types before inline types
+- Type assertions as last resort
+- Auto-generated types for serializers
+
+#### URL Routing & Navigation
+- Using js-routes gem for Rails route generation in TypeScript
+- Route helpers available via `Routes` object imported from `@/lib`
+- Route parameters defined in `app/frontend/lib/routes/urlParams.ts`
+- Route definitions auto-generated in `app/frontend/lib/routes/routes.d.ts`
+- Route parameters must be passed in correct order as defined in urlParams.ts
+- Use `usePageProps()` hook to access current route parameters
+- Nested routes require all parent path parameters (e.g., theme presentations require circle_slug, theme_slug, presentation_slug)
+- Route naming follows Rails conventions with camelCase in TypeScript
+- Automatic route annotation system via `url_params_json.rb`:
+  - Adds `@path` and `@route` comments above React components
+  - Extracts component names from default exports, including HOC-wrapped components
+
+#### React Query Patterns
+- Mutation functions follow `ReactMutationFunction<T, P, O>` type pattern
+- Parameters object includes both route parameters and mutation data
+- Use `exclude(options, "params")` to separate route params from mutation options
+- Mutation keys follow hierarchical pattern: `["template", templateSlug, "slides", slideSlug, "update"]`
+- Cache invalidation targets parent query keys: `["template", templateSlug, "slides"]`
+- Error handling uses `isAllowedStatusCode` utility with expected status codes
+- Data interfaces separate create vs update operations (required vs optional fields)
+
+#### Internationalization (i18n)
+- Using react-i18next for frontend translations
+- Translation files from i18n-js gem
+- Translations in Rails locales (yml)
+- Full i18n support (numbers, dates, currency, RTL)
+- Translation organization:
+  - Model-specific translations in `config/locales/[model]/frontend.en.yml`
+  - Other frontend translations in `config/locales/frontend.en.yml`
+  - Frontend key structure:
+    - `views.[feature].[page].[key]` (e.g., `views.clients.index.title`)
+    - Common elements are shared within their feature namespace (e.g., `views.devise.shared.email`)
+- Common notice templates in `en.yml` under `templates.controllers.notices`
+  - Reusable patterns for CRUD operations
+  - Uses `%{model}` interpolation
+  - Can be extended in model-specific locale files
+- Controller notice messages use standard templates:
+  - Created: `t("templates.controllers.notices.created", model: "Model Name")`
+  - Updated: `t("templates.controllers.notices.updated", model: "Model Name")`
+  - Destroyed: `t("templates.controllers.notices.destroyed", model: "Model Name")`
+  - Status Updated: `t("templates.controllers.notices.status_updated", model: "Model Name")`
+
+#### Testing
+- Unit: Vitest + React Testing Library
+- E2E: Playwright (no mocks, uses test environment)
+- Test files mirror source structure in `/app/frontend/tests`
+
+#### Performance
+- Component code splitting
+- Route-based lazy loading
+- Image optimization
+- Proper useEffect cleanup
+- Memoized expensive computations
+- Minimal global state
+
+#### ActionCable Integration
+- Generic `useActionCable` hook provides base WebSocket functionality
+- Channel-specific hooks (e.g., `useActivePresentationChannel`) provide type safety and encapsulated logic
+- Channel-specific hooks handle message parsing and provide typed callbacks
+- Each channel type should have its own hook for better developer experience and type safety
+- Channel names must match between frontend and backend (e.g., `ActivePresentationChannel`)
+- Message types are defined as TypeScript interfaces for type safety
+
+### Database Query Optimization
+- Use eager loading for polymorphic associations through ownerships
+- Add database indexes for frequently queried columns and join tables
+- **N+1 Query Prevention Patterns:**
+  - Always use `includes_associated` scope when loading models for serialization
+  - For polymorphic associations (Ownable), include the ownership and circle associations
+  - When loading collections that will be serialized, include all associations used in serializers
+  - Use `preload` for associations that don't need to be filtered
+  - Use `joins` when you need to filter by associated data
+  - Cache frequently accessed data using Rails caching mechanisms
+  - **Inertia Share Optimization:** Avoid redundant queries in inertia_share by using cached associations
+  - **Menu Rendering Control:** Use `disable_menu_rendering` method to prevent menu data from being included in Inertia responses for public-facing views
+  - **Serializer Optimization:** Ensure serializers only load necessary associations and avoid nested queries
+  - **Menu Loading:** Optimize menu data loading by preloading associations in user.circles query
+
+## Architecture Decisions
+
+### Presentation System
+- Presentations have customizable events called "Interactions" which can be triggered during presentation runtime
+- Events are defined by `interaction_type`, `trigger_type`, `trigger_conditions`, and store `results` 
+- Events are managed through dedicated controllers under the `presentations` namespace
+- Rails routing restrictions prevent use of "actions" as controller/route names

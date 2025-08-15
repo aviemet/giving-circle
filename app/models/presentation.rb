@@ -2,42 +2,42 @@
 #
 # Table name: presentations
 #
-#  id                       :uuid             not null, primary key
-#  active                   :boolean          default(FALSE), not null
-#  name                     :string           not null
-#  settings                 :jsonb
-#  slug                     :string           not null
-#  template                 :boolean          default(FALSE), not null
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  presentation_template_id :uuid
-#  theme_id                 :uuid             not null
+#  id               :uuid             not null, primary key
+#  active           :boolean          default(FALSE), not null
+#  name             :string           not null
+#  settings         :jsonb
+#  slug             :string
+#  template_version :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  active_slide_id  :uuid
+#  template_id      :uuid
+#  theme_id         :uuid             not null
 #
 # Indexes
 #
-#  index_presentations_on_presentation_template_id  (presentation_template_id)
-#  index_presentations_on_slug                      (slug) UNIQUE
-#  index_presentations_on_theme_id                  (theme_id)
+#  index_presentations_on_active_slide_id  (active_slide_id)
+#  index_presentations_on_slug             (slug) UNIQUE
+#  index_presentations_on_template_id      (template_id)
+#  index_presentations_on_theme_id         (theme_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (presentation_template_id => presentations.id)
+#  fk_rails_...  (active_slide_id => slides.id)
+#  fk_rails_...  (template_id => templates.id)
 #  fk_rails_...  (theme_id => themes.id)
 #
 class Presentation < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   extend FriendlyId
+
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+
+  pg_search_config(
     against: [:name, :template],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
   )
 
   resourcify
@@ -56,20 +56,46 @@ class Presentation < ApplicationRecord
 
   has_many :people, through: :memberships
 
-  has_many :presentations_distributions, dependent: :destroy
-  has_many :distributions, through: :presentations_distributions, dependent: :nullify
-
   has_many :presentations_elements, dependent: :destroy
   has_many :elements, through: :presentations_elements, dependent: :nullify
 
-  has_many :presentations_slides, dependent: :destroy
-  has_many :slides, through: :presentations_slides, dependent: :nullify
+  has_many :slide_parents, as: :parentable, dependent: :delete_all
+  has_many :slides, through: :slide_parents, dependent: :nullify
+  belongs_to :active_slide, class_name: "Slide", optional: true
 
-  has_many :presentations_votes, dependent: :destroy
-  has_many :votes, through: :presentations_votes, dependent: :nullify
+  belongs_to :template
 
-  scope :templates, -> { where(template: true) }
-  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :votes, :distributions]) }
+  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides]) }
+
+  def activate
+    self.update(active: true)
+  end
+
+  def copy_template_slides
+    return unless template
+
+    template.transaction do
+      template.slides.each do |slide|
+        new_slide = slide.dup
+
+        self.slides << new_slide
+
+        new_slide.source_slide = slide
+        new_slide.slug = nil
+        new_slide.save!
+      end
+
+      update(template_version: template.version)
+    end
+  end
+
+  def sync_template_slides
+    return unless template
+
+    slides.destroy_all
+
+    copy_template_slides
+  end
 
   private
 

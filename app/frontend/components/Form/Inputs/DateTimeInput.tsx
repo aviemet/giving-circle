@@ -1,10 +1,10 @@
+import { forwardRef, type ForwardedRef } from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
 import DateTimeInput, { type DateTimeProps } from "@/components/Inputs/DateTimeInput"
 import { isUnset } from "@/lib"
 
-import Field from "../components/Field"
+import InputWrapper from "../components/InputWrapper"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -13,7 +13,7 @@ interface DateTimeFormProps<TForm extends NestedObject = NestedObject>
 	Omit<DateTimeProps, InputConflicts>,
 	BaseFormInputProps<Date | "", TForm> {}
 
-const DateTime = <TForm extends NestedObject = NestedObject>({
+const DateTime = forwardRef(<TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -28,6 +28,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	clearErrorsOnChange,
 	...props
 }: DateTimeFormProps<TForm>,
+	ref: ForwardedRef<HTMLButtonElement>
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date | "", TForm>({
 		name,
@@ -38,7 +39,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	})
 
 	const handleChange = (date: Date | null) => {
-		const dateWithValidEmptyType = (isUnset(date) ? "" : date)
+		const dateWithValidEmptyType = isUnset(date) ? "" : date
 
 		setValue(dateWithValidEmptyType)
 
@@ -54,20 +55,15 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	}
 
 	return (
-		<ConditionalWrapper
-			condition={ field }
-			wrapper={ children => (
-				<Field
-					type="date"
-					required={ required }
-					errors={ !!error }
-					{ ...wrapperProps }
-				>
-					{ children }
-				</Field>
-			) }
+		<InputWrapper
+			type="date"
+			wrapped={ props.hidden !== true && field }
+			required={ required }
+			errors={ !!error }
+			{ ...wrapperProps }
 		>
 			<DateTimeInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value === "" ? undefined : value }
@@ -79,8 +75,8 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 				wrapper={ false }
 				{ ...props }
 			/>
-		</ConditionalWrapper>
+		</InputWrapper>
 	)
-}
+})
 
 export default DateTime

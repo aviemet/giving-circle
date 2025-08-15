@@ -14,23 +14,29 @@ interface OrgIndexProps {
 // @path: /:circle_slug/orgs
 // @route: circleOrgs
 const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
-	const { params } = usePageProps<"circleOrgs">()
+	const { params, active_circle } = usePageProps<"circleOrgs">()
+
+	if(!active_circle) return <></>
 
 	return (
-		<Page title="Orgs" >
+		<Page title="Orgs" breadcrumbs={ [
+			{ title: "Circles", href: Routes.circles() },
+			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+			{ title: "Organizations", href: Routes.circleOrgs(params.circle_slug) },
+		] }>
 			<IndexTableTemplate
 				model="orgs"
 				rows={ orgs }
 				pagination={ pagination }
-			// contextMenu={ {
-			// 	options: [
-			// 		{
-			// 			label: 'New Org',
-			// 			href: Routes.newCircleOrg(params.circle_slug),
-			// 			icon: <NewIcon />,
-			// 		},
-			// 	],
-			// } }
+				contextMenu={ {
+					options: [
+						{
+							label: "New Org",
+							href: Routes.newCircleOrg(params.circle_slug),
+							icon: <NewIcon />,
+						},
+					],
+				} }
 			>
 				<OrgsTable />
 			</IndexTableTemplate>

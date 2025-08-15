@@ -10,12 +10,12 @@ import Field from "../components/Field"
 import { InputConflicts, type BaseFormInputProps } from "."
 
 
-interface NumberInputProps<TForm extends NestedObject = NestedObject>
+interface FormCurrencyInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<CurrencyInputProps, InputConflicts>,
 	BaseFormInputProps<number, TForm> {}
 
-const FormInput = <TForm extends NestedObject = NestedObject>(
+const FormCurrencyInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -30,7 +30,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		defaultValue,
 		clearErrorsOnChange,
 		...props
-	} : NumberInputProps<TForm>,
+	} : FormCurrencyInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number | Money, TForm>({
 		name,
@@ -87,4 +87,4 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 	)
 }
 
-export default FormInput
+export default FormCurrencyInput

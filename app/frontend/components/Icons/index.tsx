@@ -14,6 +14,10 @@ export {
 	TbSquarePlus as ReplenishIcon,
 	TbSun as SunIcon,
 	TbMoonStars as MoonIcon,
+	TbAlignLeft as AlignLeftIcon,
+	TbAlignCenter as AlignCenterIcon,
+	TbAlignRight as AlignRightIcon,
+	TbAlignJustified as AlignJustifyIcon,
 } from "react-icons/tb"
 
 export {
@@ -49,6 +53,7 @@ export {
 } from "react-icons/bs"
 
 export {
+	FaRegSave as SaveIcon,
 } from "react-icons/fa"
 
 export {
@@ -95,3 +100,11 @@ export {
 export {
 	PiPresentationChart as PresentationIcon,
 } from "react-icons/pi"
+
+export {
+	ImCancelCircle as CancelIcon,
+} from "react-icons/im"
+
+export {
+	FaRegImage as ImageIcon,
+} from "react-icons/fa6"

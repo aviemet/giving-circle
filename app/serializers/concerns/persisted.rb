@@ -3,7 +3,13 @@ module Persisted
 
   included do
     attributes :id
+  end
 
-    self.timestamps
+  class_methods do
+    def with_slug
+      attributes(
+        slug: { type: :string },
+      )
+    end
   end
 end

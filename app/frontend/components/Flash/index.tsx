@@ -1,5 +1,5 @@
 import { showNotification } from "@mantine/notifications"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 
 import { usePageProps } from "@/lib/hooks"
 import { FlashMessage } from "@/types"

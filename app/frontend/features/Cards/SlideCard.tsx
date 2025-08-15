@@ -3,7 +3,7 @@ import { DotsIcon, EditIcon, TrashIcon } from "@/components/Icons"
 import { rem, Routes } from "@/lib"
 
 interface SlideCardProps {
-	slide: Schema.PresentationSlide
+	slide: Schema.Slide
 }
 
 const SlideCard = ({ slide }: SlideCardProps) => {
@@ -14,7 +14,7 @@ const SlideCard = ({ slide }: SlideCardProps) => {
 			<Card.Section withBorder inheritPadding py="xs">
 
 				<Group justify="space-between" wrap="nowrap">
-					<Text fw={ 500 }>{ slide.name }</Text>
+					<Text fw={ 500 }>{ slide?.title }</Text>
 
 					<Menu withinPortal position="bottom-end" shadow="sm">
 						<Menu.Target>

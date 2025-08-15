@@ -1,11 +1,3 @@
-class Circles::InertiaShareSerializer < ApplicationSerializer
-  object_as :circle
-
-  identifier :slug
-
-  attributes(
-    :id,
-    :slug,
-    :name,
-  )
+class Circles::InertiaShareSerializer < Circles::PersistedSerializer
+  has_many :themes, serializer: Themes::InertiaShareSerializer
 end

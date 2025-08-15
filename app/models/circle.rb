@@ -4,7 +4,7 @@
 #
 #  id         :uuid             not null, primary key
 #  name       :string           not null
-#  slug       :string           not null
+#  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -13,19 +13,11 @@
 #  index_circles_on_slug  (slug) UNIQUE
 #
 class Circle < ApplicationRecord
-  include PgSearch::Model
-
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  pg_search_scope(
-    :search,
-    against: [:name],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-  )
+  include PgSearchable
+  pg_search_config(against: [:name])
 
   resourcify
 
@@ -36,6 +28,7 @@ class Circle < ApplicationRecord
     memberships: "Membership",
     themes: "Theme",
     orgs: "Org",
+    templates: "Template",
     presentations: "Presentation"
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model

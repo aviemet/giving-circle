@@ -9,13 +9,15 @@ interface ShowPresentationProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug
 // @route: themePresentation
 const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
-	const { params } = usePageProps<"themePresentation">()
+	const { params, active_circle, active_theme } = usePageProps<"themePresentation">()
 	const title = presentation.name || "Presentation"
+
+	if(!active_circle || !active_theme) return <></>
 
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <>
+			heading={ <>
 				<Title>{ title }</Title>
 				<Group>
 					<Menu position="bottom-end">
@@ -28,9 +30,22 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 					</Menu>
 				</Group>
 			</> }
+			breadcrumbs={ [
+				{ title: "Circles", href: Routes.circles() },
+				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
+				{ title: "Themes", href: Routes.circleThemes(params.circle_slug) },
+				{ title: active_theme.name, href: Routes.theme(params.circle_slug, params.theme_slug) },
+				{ title: "Presentations", href: Routes.themePresentations(params.circle_slug, params.theme_slug) },
+				{ title, href: window.location.href },
+			] }
 		>
 			<Section>
-				<Link as="button" href={ Routes.activePresentationShow(presentation.slug) }>Start Presentation</Link>
+				<Link
+					as="button"
+					href={ Routes.themePresentationActivate(params.circle_slug, params.theme_slug, presentation.slug) }
+				>
+					{ presentation.active ? "Resume" : "Start" } Presentation
+				</Link>
 			</Section>
 		</Page>
 	)

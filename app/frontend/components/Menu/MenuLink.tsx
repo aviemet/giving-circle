@@ -12,10 +12,19 @@ interface MenuItemProps extends MantineItemProps, Omit<LinkProps, DuplicateProps
 	icon?: React.ReactNode
 	disabled?: boolean
 	type?: string
+	active?: boolean
 }
 
 const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>((
-	{ children, disabled = false, className, icon, leftSection, ...props },
+	{
+		children,
+		disabled = false,
+		className,
+		icon,
+		leftSection,
+		active = false,
+		...props
+	},
 	ref,
 ) => {
 	return (

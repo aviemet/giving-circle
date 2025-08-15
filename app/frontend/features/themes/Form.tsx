@@ -3,14 +3,14 @@ import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 import { Grid } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
 
-type TThemeFormData = {
+type ThemeFormData = {
 	theme: Schema.ThemesFormData
 }
 
 export interface ThemeFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TThemeFormData>) => boolean | void
+	onSubmit?: (object: UseFormProps<ThemeFormData>) => boolean | void
 	theme: Schema.ThemesFormData
 }
 

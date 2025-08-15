@@ -1,4 +1,4 @@
-import { Group, Menu, Page, Section } from "@/components"
+import { Group, Menu, Page, Section, Title } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -12,12 +12,11 @@ const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }:
 	const title = <%= attributes.include?(:name) ? "#{singular_table_name}.name || " : "" %> "<%= singular_table_name.camelize %>"
 
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: "<%= human_name.titleize %>", href: Routes.<%= plural_table_name.camelize(:lower) %>() },
-			{ title, href: window.location.href },
-		] }>
-			<Section>
+		<Page 
+			title={ title }
+			heading={ 
 				<Group position="apart">
+					<Title>{ title }</Title>
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
@@ -27,6 +26,13 @@ const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }:
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
+			}
+			breadcrumbs={ [
+				{ title: "<%= human_name.titleize %>", href: Routes.<%= plural_table_name.camelize(:lower) %>() },
+				{ title, href: window.location.href },
+			] }
+		>
+			<Section>
 
 			</Section>
 		</Page>

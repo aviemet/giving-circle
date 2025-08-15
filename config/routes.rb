@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "pages#home" # Public home page for entire project
 
+  mount ActionCable.server => "/ws"
+
   # CONCERNS #
   concern :bulk_delete do
     collection do
@@ -42,8 +44,23 @@ Rails.application.routes.draw do
   # RESOURCEFUL PATHS #
 
   resources :users
-  resources :people, param: :slug
 
+  # SETTINGS PAGES #
+
+  namespace :settings do
+    get "/", to: redirect("/settings/general")
+    [:general, :appearance, :integrations, :localizations, :notifications].freeze.each do |path|
+      get path, to: "#{path}#index"
+      patch path, to: "#{path}#update"
+    end
+  end
+
+  draw(:api)
+
+  # Public presentation route (shorter URL)
+  get "/:circle_slug/p/:presentation_slug", to: "presentations/active#public_show", as: :circle_public_presentation
+
+  # :circle_slug being a param in the first position needs to come after any other first position routing names
   resources :circles, param: :circle_slug, only: [:new, :create, :index]
 
   # Nested resources under Circle with standard slug param
@@ -57,7 +74,11 @@ Rails.application.routes.draw do
         get :about
       end
 
-      resources :presentation_templates, param: :slug, shallow: false
+      resources :templates, param: :slug, shallow: false
+      namespace :templates do
+        get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
+        post ":template_slug/slides", to: "slides#create", as: :create_slide
+      end
 
       resources :themes, param: :theme_slug, as: :themes
       resources :themes, param: :slug, as: :themes, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
@@ -68,53 +89,45 @@ Rails.application.routes.draw do
         get "orgs/import", to: "theme_orgs#import"
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
-        # Admin presentation routes
-        resources :presentations, param: :presentation_slug, shallow: false do
-          get :active
-        end
+        # Presentation routes
+        resources :presentations, param: :presentation_slug, shallow: false
 
-        namespace :presentations do
-          resources :presentation_distributions,
-            path: ":presentation_slug/distributions",
-            shallow: false,
-            as: :distributions,
-            controller: "/presentation/distributions"
-          resources :presentation_elements,
-            path: ":presentation_slug/elements",
-            shallow: false,
-            as: :elements,
-            controller: "/presentation/elements"
-          resources :presentation_slides,
-            path: ":presentation_slug/slides",
-            shallow: false,
-            as: :slides,
-            controller: "/presentation/slides"
-          resources :presentation_votes,
-            path: ":presentation_slug/votes",
-            shallow: false,
-            as: :votes,
-            controller: "/presentation/votes"
-        end
+        # Presentation builder components
+        resources :presentation_slides,
+          path: "presentations/:presentation_slug/slides",
+          param: :slug,
+          shallow: false,
+          as: :presentation_slides,
+          controller: "presentations/slides"
+
+        resources :interactions,
+          path: "presentations/:presentation_slug/interactions",
+          shallow: false,
+          as: :interactions,
+          controller: "presentations/interactions"
+
+        resources :interaction_responses,
+          path: "presentations/:presentation_slug/interaction_responses",
+          shallow: false,
+          as: :interaction_responses,
+          controller: "presentations/interaction_responses"
+
+        resources :presentation_elements,
+          path: "presentations/:presentation_slug/elements",
+          shallow: false,
+          as: :elements,
+          controller: "presentations/elements"
+
+        # Active Presentation
+        get "presentations/:presentation_slug/admin", as: :presentation_controls, to: "presentations/active#index"
+        get "presentations/:presentation_slug/admin/overview", to: "presentations/active#overview", as: :presentation_overview
+        get "presentations/:presentation_slug/admin/members", to: "presentations/active#members", as: :presentation_members
+        get "presentations/:presentation_slug/admin/messaging", to: "presentations/active#messaging", as: :presentation_messaging
+        get "presentations/:presentation_slug/admin/settings", to: "presentations/active#settings", as: :presentation_settings
+
+        get "presentations/:presentation_slug/activate", to: "presentations#activate", as: :presentation_activate
       end
     end
   end
 
-  # Public facing presentations routes
-  namespace :presentations, param: :presentation_slug, as: :active_presentation do
-    %i[show settings].each do |r|
-      get ":presentation_slug/#{r}", to: "active##{r}", as: r
-    end
-  end
-
-  # SETTINGS PAGES #
-
-  namespace :settings do
-    get "/", to: redirect("/settings/general")
-    [:general, :appearance, :integrations, :localizations, :notifications].freeze.each do |path|
-      get path, to: "#{path}#index"
-      patch path, to: "#{path}#update"
-    end
-  end
-
-  draw(:api)
 end

@@ -32,10 +32,8 @@ interface UsePagePropsParams<T extends keyof UrlParams> extends InitialInertiaSh
 	params: ParamsObject<UrlParams[T]["params"]>
 }
 
-const usePageProps = <T extends keyof UrlParams>(): UsePagePropsParams<T> => {
+export const usePageProps = <T extends keyof UrlParams>(): UsePagePropsParams<T> => {
 	const page = usePage<InitialInertiaShareProps>().props
 
 	return page as UsePagePropsParams<T>
 }
-
-export default usePageProps

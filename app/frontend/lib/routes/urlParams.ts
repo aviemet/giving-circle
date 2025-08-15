@@ -63,20 +63,124 @@ const urlParams = {
       "id"
     ]
   },
-  "people": {
+  "settings": {
     "params": []
   },
-  "newPerson": {
+  "settingsGeneral": {
     "params": []
   },
-  "editPerson": {
+  "settingsAppearance": {
+    "params": []
+  },
+  "settingsIntegrations": {
+    "params": []
+  },
+  "settingsLocalizations": {
+    "params": []
+  },
+  "settingsNotifications": {
+    "params": []
+  },
+  "apiUsers": {
+    "params": []
+  },
+  "apiUser": {
+    "params": [
+      "id"
+    ]
+  },
+  "apiUpdateTablePreferences": {
+    "params": [
+      "id"
+    ]
+  },
+  "apiUpdateUserPreferences": {
+    "params": [
+      "id"
+    ]
+  },
+  "apiCircleTemplateSlides": {
+    "params": [
+      "circle_slug",
+      "template_slug"
+    ]
+  },
+  "apiCircleTemplateSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug",
+      "slug"
+    ]
+  },
+  "apiCircleTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiCircleTemplate": {
+    "params": [
+      "circle_slug",
+      "template_slug"
+    ]
+  },
+  "apiCirclePresentationSlides": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "apiCirclePresentationSlide": {
+    "params": [
+      "circle_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "apiCirclePresentations": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiCirclePresentation": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "apiCirclePresentationSyncSlides": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "apiCircleThemes": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiTheme": {
+    "params": [
+      "theme_slug"
+    ]
+  },
+  "apiCircleIndex": {
+    "params": []
+  },
+  "apiCircle": {
     "params": [
       "slug"
     ]
   },
-  "person": {
+  "apiSearches": {
+    "params": []
+  },
+  "apiSpotlights": {
+    "params": []
+  },
+  "circlePublicPresentation": {
     "params": [
-      "slug"
+      "circle_slug",
+      "presentation_slug"
     ]
   },
   "circles": {
@@ -140,26 +244,39 @@ const urlParams = {
       "slug"
     ]
   },
-  "circlePresentationTemplates": {
+  "circleTemplates": {
     "params": [
       "circle_slug"
     ]
   },
-  "newCirclePresentationTemplate": {
+  "newCircleTemplate": {
     "params": [
       "circle_slug"
     ]
   },
-  "editCirclePresentationTemplate": {
+  "editCircleTemplate": {
     "params": [
       "circle_slug",
       "slug"
     ]
   },
-  "circlePresentationTemplate": {
+  "circleTemplate": {
     "params": [
       "circle_slug",
       "slug"
+    ]
+  },
+  "circleTemplatesEditSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug",
+      "slug"
+    ]
+  },
+  "circleTemplatesCreateSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug"
     ]
   },
   "circleThemes": {
@@ -222,13 +339,6 @@ const urlParams = {
       "slug"
     ]
   },
-  "themePresentationActive": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_presentation_slug"
-    ]
-  },
   "themePresentations": {
     "params": [
       "circle_slug",
@@ -255,21 +365,51 @@ const urlParams = {
       "presentation_slug"
     ]
   },
-  "themePresentationsDistributions": {
+  "themePresentationSlides": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemePresentationsDistribution": {
+  "newThemePresentationSlide": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemePresentationsDistribution": {
+  "editThemePresentationSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "themePresentationSlide": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "themeInteractions": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemeInteraction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemeInteraction": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -277,7 +417,7 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsDistribution": {
+  "themeInteraction": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -285,21 +425,21 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsElements": {
+  "themeInteractionResponses": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemePresentationsElement": {
+  "newThemeInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemePresentationsElement": {
+  "editThemeInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -307,7 +447,7 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsElement": {
+  "themeInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -315,21 +455,21 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsSlides": {
+  "themeElements": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemePresentationsSlide": {
+  "newThemeElement": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemePresentationsSlide": {
+  "editThemeElement": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -337,7 +477,7 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsSlide": {
+  "themeElement": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -345,34 +485,46 @@ const urlParams = {
       "id"
     ]
   },
-  "themePresentationsVotes": {
+  "themePresentationControls": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemePresentationsVote": {
+  "themePresentationOverview": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemePresentationsVote": {
+  "themePresentationMembers": {
     "params": [
       "circle_slug",
       "theme_slug",
-      "presentation_slug",
-      "id"
+      "presentation_slug"
     ]
   },
-  "themePresentationsVote": {
+  "themePresentationMessaging": {
     "params": [
       "circle_slug",
       "theme_slug",
-      "presentation_slug",
-      "id"
+      "presentation_slug"
+    ]
+  },
+  "themePresentationSettings": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "themePresentationActivate": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
     ]
   },
   "editCircle": {
@@ -384,58 +536,6 @@ const urlParams = {
     "params": [
       "circle_slug"
     ]
-  },
-  "activePresentationShow": {
-    "params": [
-      "presentation_slug"
-    ]
-  },
-  "activePresentationSettings": {
-    "params": [
-      "presentation_slug"
-    ]
-  },
-  "settings": {
-    "params": []
-  },
-  "settingsGeneral": {
-    "params": []
-  },
-  "settingsAppearance": {
-    "params": []
-  },
-  "settingsIntegrations": {
-    "params": []
-  },
-  "settingsLocalizations": {
-    "params": []
-  },
-  "settingsNotifications": {
-    "params": []
-  },
-  "apiUsers": {
-    "params": []
-  },
-  "apiUser": {
-    "params": [
-      "id"
-    ]
-  },
-  "apiUpdateTablePreferences": {
-    "params": [
-      "id"
-    ]
-  },
-  "apiUpdateUserPreferences": {
-    "params": [
-      "id"
-    ]
-  },
-  "apiSearches": {
-    "params": []
-  },
-  "apiSpotlights": {
-    "params": []
   },
   "updateRailsDiskService": {
     "params": [

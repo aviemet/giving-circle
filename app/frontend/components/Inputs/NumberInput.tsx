@@ -1,5 +1,5 @@
 import { NumberInput, type NumberInputProps as MantineNumberInputProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 
 import InputWrapper from "./InputWrapper"
 import Label from "./Label"

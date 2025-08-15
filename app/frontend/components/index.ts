@@ -1,24 +1,30 @@
 export { default as Breadcrumbs } from "./Breadcrumbs"
-export { default as Button, type ButtonProps } from "./Button"
+export { default as Button } from "./Button"
+export * from "./Button"
+export { default as ColorPicker } from "./ColorPicker"
 export { default as ConditionalWrapper } from "./ConditionalWrapper"
 export { default as DangerousHtml } from "./DangerousHtml"
-export { default as Date } from "./Date"
 export { default as Dropzone } from "./Dropzone"
+export { default as ErrorBoundary } from "./ErrorBoundary"
 export { default as Flash } from "./Flash"
+export * as Formatters from "./Formatters"
 export { default as Link, NavLink } from "./Link"
 export { default as Menu } from "./Menu"
 export { default as Money } from "./Money"
 export { default as Page, type PageProps } from "./Page"
 export { default as RichTextEditor } from "./RichTextEditor"
 export { default as Section } from "./Section"
-export { default as Table } from "./Table"
+export { default as Table, type TableProps } from "./Table"
 export { default as Label } from "./Label"
 export { default as Tabs } from "./Tabs"
+
+export * from "./Formatters"
 
 // Export UI library components as a proxy to allow easy refactoring
 export {
 	Accordion, type AccordionProps,
 	ActionIcon, type ActionIconProps,
+	Anchor, type AnchorProps,
 	AppShell, type AppShellProps,
 	Avatar, type AvatarProps,
 	Badge, type BadgeProps,
