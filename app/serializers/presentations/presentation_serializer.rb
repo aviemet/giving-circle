@@ -1,3 +1,7 @@
 class Presentations::PresentationSerializer < Presentations::PersistedSerializer
-  has_many :slides, serializer: Slides::ShowSerializer
+  attributes(
+    :active_slide_id,
+  )
+
+  has_many :slides, serializer: Slides::PresentationSerializer
 end

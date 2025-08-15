@@ -22,7 +22,11 @@ type ComponentProps = {
 	Image: ImageProps
 }
 
-export const config: Config<ComponentProps, RootProps> = {
+export const config: Config<{
+	components: ComponentProps
+	root: RootProps
+	categories: ["layout", "content", "interactive", "other"]
+}> = {
 	root: {
 		inline: true,
 		fields: {

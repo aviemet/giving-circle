@@ -1,33 +1,34 @@
-import { Group, Title } from "@/components"
+import { useState } from "react"
+
+import { Group } from "@/components"
 import SwitchSlideButton from "@/features/presentations/Buttons/SwitchSlideButton"
 import { withLayout } from "@/lib"
-import { usePageProps } from "@/lib/hooks"
 import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
 
 interface ActivePresentationControlsProps {
-	presentation: Schema.PresentationsShow
+	presentation: Schema.PresentationsPresentation
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin
 // @route: themePresentationControls
 const ActivePresentationControls = ({ presentation }: ActivePresentationControlsProps) => {
-	const { active_presentation, active_theme } = usePageProps<"themePresentationControls">()
+	const [activeSlideId, setActiveSlideId] = useState(
+		presentation.active_slide_id || presentation.slides[0].id
+	)
 
 	const { switchSlide } = useActivePresentationChannel({
 		presentationId: presentation.id,
 		onSlideSwitched: (slideId) => {
-			console.log("Slide switched to:", slideId)
-		},
-		onConnected: () => {
-			console.log("Connected to presentation channel")
+			setActiveSlideId(slideId)
 		},
 	})
-	console.log({ presentation })
+
 	return (
 		<Group>{ presentation.slides && presentation.slides.map((slide) => (
 			<SwitchSlideButton
 				key={ slide.id }
 				slide={ slide }
+				active={ activeSlideId === slide.id }
 				onClick={ () => switchSlide(slide.id) }
 			/>
 		)) }</Group>

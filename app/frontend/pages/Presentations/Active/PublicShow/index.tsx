@@ -1,9 +1,8 @@
 import { Head } from "@inertiajs/react"
+import { useState } from "react"
 
-import { Page, Section, Title } from "@/components"
 import SlidePresentation from "@/components/SlidePresentation"
 import { withLayout } from "@/lib"
-import { usePageProps } from "@/lib/hooks"
 import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
 
 
@@ -16,16 +15,16 @@ interface PublicShowPresentationProps {
 // @path: /:circle_slug/p/:presentation_slug
 // @route: circlePublicPresentation
 const PublicShowPresentation = ({ presentation, circle, meta }: PublicShowPresentationProps) => {
-	const { params } = usePageProps<"circlePublicPresentation">()
+	const [activeSlideId, setActiveSlideId] = useState(
+		presentation.active_slide_id || presentation.slides[0].id
+	)
+
 	const title = presentation.name || "Presentation"
 
 	useActivePresentationChannel({
 		presentationId: presentation.id,
 		onSlideSwitched: (slideId) => {
-			console.log("Slide switched to:", slideId)
-		},
-		onConnected: () => {
-			console.log("Connected to presentation channel")
+			setActiveSlideId(slideId)
 		},
 	})
 
@@ -37,6 +36,7 @@ const PublicShowPresentation = ({ presentation, circle, meta }: PublicShowPresen
 
 			<SlidePresentation
 				presentation={ presentation }
+				activeSlide={ presentation.slides.find(slide => slide.id === activeSlideId)! }
 			/>
 		</>
 	)

@@ -1,18 +1,24 @@
+import clsx from "clsx"
+
 import { Card, Image, Text } from "@/components"
+
+
+import * as classes from "./SwitchSlideButton.css"
 
 interface SwitchSlideButtonProps {
 	slide: Schema.SlidesPersisted
 	onClick: () => void
+	active: boolean
 }
 
-const SwitchSlideButton = ({ slide, onClick }: SwitchSlideButtonProps) => {
+const SwitchSlideButton = ({ slide, onClick, active }: SwitchSlideButtonProps) => {
 	return (
 		<Card
 			withBorder
-			shadow="sm"
+			shadow={ active ? "lg" : "xs" }
 			radius="md"
 			onClick={ onClick }
-			style={ { cursor: "pointer" } }
+			className={ clsx(classes.buttonCard, { active }) }
 		>
 			<Card.Section>
 				<Image

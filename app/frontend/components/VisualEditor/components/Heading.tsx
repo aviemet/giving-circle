@@ -13,7 +13,7 @@ export type HeadingProps = {
 
 export const headingConfig: ComponentConfig<HeadingProps> = {
 	fields: {
-		title: { type: "text" },
+		title: { type: "text", contentEditable: true },
 		padding: { type: "number" },
 		order: {
 			type: "select",

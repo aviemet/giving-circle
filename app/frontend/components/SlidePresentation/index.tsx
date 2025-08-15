@@ -1,14 +1,20 @@
-import { Title } from "@/components"
+import { Config, Render } from "@measured/puck"
+
+import { config } from "../VisualEditor/puck.config"
 
 interface SlidePresentationProps {
 	presentation: Schema.PresentationsPresentation
+	activeSlide: Schema.SlidesPresentation
 }
 
-const SlidePresentation = ({ presentation }: SlidePresentationProps) => {
+const SlidePresentation = ({ presentation, activeSlide }: SlidePresentationProps) => {
+
 	return (
-		<Title>
-			{ presentation.name }
-		</Title>
+		<Render
+			config={ config as Config }
+			data={ activeSlide.data }
+			metadata={ {} }
+		/>
 	)
 }
 
