@@ -2,11 +2,14 @@ import { type Config } from "@measured/puck"
 
 import { Box } from "@/components"
 
-import { cardConfig, CardProps } from "./components/Card"
-import { containerConfig, ContainerProps } from "./components/Container"
-import { gridConfig, GridProps } from "./components/Grid"
-import { headingConfig, HeadingProps } from "./components/Heading"
-import { imageConfig, ImageProps } from "./components/Image"
+import {
+	cardConfig, type CardProps,
+	containerConfig, type ContainerProps,
+	gridConfig, type GridProps,
+	headingConfig, type HeadingProps,
+	imageConfig, type ImageProps,
+	orgsIteratorConfig, type OrgsIteratorProps,
+} from "./components"
 import { colorField } from "./fields"
 
 type RootProps = {
@@ -20,12 +23,13 @@ type ComponentProps = {
 	Heading: HeadingProps
 	Card: CardProps
 	Image: ImageProps
+	OrgsIterator: OrgsIteratorProps
 }
 
 export const config: Config<{
 	components: ComponentProps
 	root: RootProps
-	categories: ["layout", "content", "interactive", "other"]
+	categories: ["layout", "content", "data", "other"]
 }> = {
 	root: {
 		inline: true,
@@ -54,20 +58,21 @@ export const config: Config<{
 		Grid: gridConfig,
 		Card: cardConfig,
 		Image: imageConfig,
+		OrgsIterator: orgsIteratorConfig,
 	},
 
 	categories: {
 		layout: {
 			title: "Layout",
-			components: ["Grid", "Container"],
+			components: ["Container", "Grid" ],
 		},
 		content: {
 			title: "Content",
 			components: ["Heading", "Card", "Image"],
 		},
-		interactive: {
-			title: "Interactive",
-			components: [],
+		data: {
+			title: "Data",
+			components: ["OrgsIterator"],
 		},
 		other: {
 			title: "All Other Components",

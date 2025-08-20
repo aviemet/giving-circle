@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react"
-import { createUsePuck, Puck, type Data } from "@measured/puck"
+import { Config, createUsePuck, Puck, type Data } from "@measured/puck"
 import clsx from "clsx"
-import { useState, useEffect, ComponentProps } from "react"
+import { useState } from "react"
 import "@measured/puck/puck.css"
 
 import { Menu, Box, Button, Divider } from "@/components"
@@ -30,17 +30,12 @@ const VisualEditor = ({ initialData = {}, onSave, isSaving = false, templateKey 
 	const [isDirty, setIsDirty] = useState(false)
 
 	const handleSave = async(data: Data) => {
-		if(!onSave) {
-			console.error("No onSave handler provided")
-			return
-		}
+		if(!onSave) return
 
 		try {
 			await onSave(data)
 			setIsDirty(false)
-		} catch(error) {
-			console.error("Failed to save:", error)
-		}
+		} catch(_error) { }
 	}
 
 	const handleChange = (changed: Data) => {
@@ -53,7 +48,7 @@ const VisualEditor = ({ initialData = {}, onSave, isSaving = false, templateKey 
 		<Box className={ clsx(classes.puckRoot) }>
 			<ErrorBoundary>
 				<Puck
-					config={ config }
+					config={ config as Config }
 					data={ data }
 					iframe={ { enabled: false } }
 					onPublish={ handleSave }

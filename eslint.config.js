@@ -150,6 +150,9 @@ export default [
 			"no-unused-vars": ["warn", {
 				vars: "all",
 				args: "none",
+				caughtErrorsIgnorePattern: "^_",
+				destructuredArrayIgnorePattern: "^_",
+				ignoreRestSiblings: true,
 			}],
 			"eqeqeq": "error",
 			"no-console": "warn",
