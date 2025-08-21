@@ -12,9 +12,8 @@
 #
 # Indexes
 #
-#  index_themes_orgs_on_org_id               (org_id)
-#  index_themes_orgs_on_theme_id             (theme_id)
-#  index_themes_orgs_on_theme_id_and_org_id  (theme_id,org_id) UNIQUE
+#  index_themes_orgs_on_org_id    (org_id)
+#  index_themes_orgs_on_theme_id  (theme_id)
 #
 # Foreign Keys
 #

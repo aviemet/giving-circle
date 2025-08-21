@@ -573,6 +573,15 @@ export const apiCircleIndex = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/mock(.:format)
+ * @param {any} circleSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircleMock = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"mock"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/presentations/:presentation_slug(.:format)
  * @param {any} circleSlug
  * @param {any} presentationSlug

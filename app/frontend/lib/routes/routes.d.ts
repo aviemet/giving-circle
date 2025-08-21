@@ -122,6 +122,18 @@ export const apiCircleIndex: ((
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/mock(.:format)
+ * @param {any} circleSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircleMock: ((
+  circleSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/presentations/:presentation_slug(.:format)
  * @param {any} circleSlug
  * @param {any} presentationSlug

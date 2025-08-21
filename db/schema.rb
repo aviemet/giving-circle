@@ -80,6 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
 
   create_table "circles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.boolean "mock_data", default: false, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -263,6 +264,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
   create_table "presentations_orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "presentation_id", null: false
     t.uuid "org_id", null: false
+    t.integer "ask_cents"
+    t.string "ask_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["org_id"], name: "index_presentations_orgs_on_org_id"
@@ -330,7 +333,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_08_182816) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["org_id"], name: "index_themes_orgs_on_org_id"
-    t.index ["theme_id", "org_id"], name: "index_themes_orgs_on_theme_id_and_org_id", unique: true
     t.index ["theme_id"], name: "index_themes_orgs_on_theme_id"
   end
 

@@ -1,4 +1,10 @@
 class Api::CirclesController < Api::ApiController
+  # @route GET /api/circles/:circle_slug/mock (api_circle_mock)
+  def mock
+    circle = MockCircle.includes_associated.first
+    render json: Circles::MockSerializer.render(circle)
+  end
+
   # @route POST /api/circles (api_circle_index)
   def create
   end

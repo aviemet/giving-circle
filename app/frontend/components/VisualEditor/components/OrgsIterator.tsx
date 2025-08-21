@@ -1,35 +1,41 @@
 import { ComponentConfig, Slot } from "@measured/puck"
 
-import { createContext } from "@/lib/hooks"
+import { useMockDataContext } from ".."
 
-const [useOrgsContext, OrgsContextProvider] = createContext()
-export { useOrgsContext }
+
+interface OrgsIteratorDisplayProps {
+	children: React.ReactNode
+}
+
+const OrgsIteratorDisplay = ({ children }: OrgsIteratorDisplayProps) => {
+	const { mockCircle } = useMockDataContext()
+
+	if(!mockCircle.orgs) return children
+
+	return (
+		<>{ mockCircle.orgs.map(circle =>
+			children
+		) }</>
+	)
+}
+
 
 export type OrgsIteratorProps = {
 	content: Slot
-	orgs: "orgs" | "members"
 }
 
 export const orgsIteratorConfig: ComponentConfig<OrgsIteratorProps> = {
 	fields: {
 		content: { type: "slot" },
-		orgs: {
-			type: "select",
-			options: [
-				{ label: "Organizations", value: "orgs" },
-				{ label: "Members", value: "members" },
-			],
-		},
 	},
 	defaultProps: {
 		content: [],
-		orgs: "orgs",
 	},
-	render: ({ content: Content, orgs }) => {
+	render: ({ content: Content }) => {
 		return (
-			<OrgsContextProvider value={ { orgs } }>
+			<OrgsIteratorDisplay>
 				<Content />
-			</OrgsContextProvider>
+			</OrgsIteratorDisplay>
 		)
 	},
 }

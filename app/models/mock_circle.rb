@@ -13,18 +13,12 @@
 #
 #  index_circles_on_slug  (slug) UNIQUE
 #
-class Circle < ApplicationRecord
-  extend FriendlyId
-  friendly_id :name, use: [:slugged, :history]
+class MockCircle < Circle
+  default_scope { unscoped.where(mock_data: true) }
 
-  include PgSearchable
-  pg_search_config(against: [:name])
+  before_create :set_mock_data
 
-  resourcify
-
-  validates :name, presence: true
-
-  has_many :ownerships, dependent: :restrict_with_error
+  has_many :ownerships, foreign_key: "circle_id", dependent: :destroy
   {
     memberships: "Membership",
     themes: "Theme",
@@ -35,10 +29,9 @@ class Circle < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
 
-  scope :includes_associated, -> { includes([:themes, :presentations, :memberships, :orgs]) }
+  private
 
-  # MockCircle should be used if mock data is needed, these scopes separate the two models
-  default_scope { where(mock_data: false) }
-  scope :with_mock, -> { unscoped }
-  scope :mock_only, -> { unscoped.where(mock_data: true) }
+  def set_mock_data
+    self.mock_data = true
+  end
 end
