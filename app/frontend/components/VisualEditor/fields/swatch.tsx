@@ -1,6 +1,12 @@
 import SwatchPicker from "@/components/SwatchPicker"
 
-export const SwatchField = ({ name, onChange, value }: { name: string, onChange: (value: string) => void, value: string }) => {
+interface SwatchFieldProps {
+	name: string
+	onChange: (value: string) => void
+	value: string
+}
+
+export const SwatchField = ({ name, onChange, value }: SwatchFieldProps) => {
 	return (
 		<SwatchPicker
 			value={ value }

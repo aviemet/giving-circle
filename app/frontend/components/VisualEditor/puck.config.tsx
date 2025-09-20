@@ -10,7 +10,9 @@ import {
 	imageConfig, type ImageProps,
 	orgsIteratorConfig, type OrgsIteratorProps,
 } from "./components"
-import { colorField } from "./fields"
+import {
+	colorField,
+} from "./fields"
 
 type RootProps = {
 	title: string

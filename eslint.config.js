@@ -123,8 +123,8 @@ export default [
 				overrides: {
 					"!": false,
 					"!!": false,
-					"+": true,
-					"-": true,
+					"+": false,
+					"-": false,
 				},
 			}],
 			"@stylistic/comma-spacing": ["error", {

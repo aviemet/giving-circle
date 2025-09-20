@@ -1,4 +1,3 @@
-import { ActionIcon, Group, StyleProp } from "@mantine/core"
 import { Field, FieldLabel } from "@measured/puck"
 
 import { AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon } from "@/components/Icons"

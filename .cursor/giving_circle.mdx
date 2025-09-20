@@ -50,6 +50,10 @@
   - Use generics, Records, and Mapped types before inline types
   - Type assertions are a last resort
 
+### Code Style
+- No spaces between operators and parentheses: `if(condition)`, `for(item)`, `while(condition)`
+- This applies to all control flow operators: `if`, `for`, `while`, `switch`, etc.
+
 ### ESLint Configuration
 - Using `@stylistic/eslint-plugin` for code formatting
 
@@ -112,6 +116,16 @@
 - Custom inputs use `useInertiaInput` hook
 - Form state includes processing, errors, validation, and dirty tracking
 - All components strictly typed with `BaseFormInputProps<T>` interface
+
+#### TagsInput Component
+- Built on Mantine RichTextEditor with TipTap Mention extension
+- Supports inline tags with autocomplete functionality using `@tiptap/extension-mention`
+- Uses `dataAccess` and `getFlatOptions` from VisualEditor for tag data source
+- Autocomplete dropdown appears when typing `#` followed by text
+- Keyboard navigation support (arrow keys, enter, escape) built into Mention extension
+- Tags are styled with blue background and hover effects
+- Integrates with existing input wrapper and label components
+- Uses official TipTap Mention extension for proper tag handling and rendering
 
 #### State Management
 - Server state: Inertia.js

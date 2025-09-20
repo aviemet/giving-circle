@@ -7,8 +7,7 @@ import InputWrapper from "./InputWrapper"
 import Label from "./Label"
 import { CrossIcon } from "../Icons"
 
-import { type BaseInputProps } from "."
-import { withInjectedProps } from "./index"
+import { type BaseInputProps, withInjectedProps } from "."
 
 export interface TextInputProps extends MantineTextInputProps, BaseInputProps {
 	clearable?: boolean
