@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "/themes", type: :request do
   def invalid_attributes
@@ -103,7 +103,7 @@ RSpec.describe "/themes", type: :request do
         post circle_themes_url(@admin.circles.first), params: { theme: attributes_for(:theme) }
 
         expect(response).to redirect_to(theme_url(@admin.circles.first, Theme.last))
-        expect(flash[:notice]).to eq(I18n.t('themes.notices.created'))
+        expect(flash[:notice]).to eq(I18n.t("themes.notices.created"))
       end
     end
 

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "/members", type: :request do
   def invalid_attributes
@@ -74,7 +74,7 @@ RSpec.describe "/members", type: :request do
         post circle_memberships_url(circle), params: { membership: attributes }
 
         expect(response).to redirect_to(membership_url(Membership.last.circle, Membership.last))
-        expect(flash[:notice]).to eq(I18n.t('memberships.notices.created'))
+        expect(flash[:notice]).to eq(I18n.t("memberships.notices.created"))
       end
     end
 
@@ -118,7 +118,7 @@ RSpec.describe "/members", type: :request do
         membership.reload
 
         expect(response).to redirect_to(membership_url(membership.circle, membership))
-        expect(flash[:notice]).to eq(I18n.t('memberships.notices.updated'))
+        expect(flash[:notice]).to eq(I18n.t("memberships.notices.updated"))
       end
     end
 
@@ -150,7 +150,7 @@ RSpec.describe "/members", type: :request do
       delete membership_url(membership.circle, membership)
 
       expect(response).to redirect_to(circle_memberships_url(@admin.circles.first))
-      expect(flash[:notice]).to eq(I18n.t('memberships.notices.destroyed'))
+      expect(flash[:notice]).to eq(I18n.t("memberships.notices.destroyed"))
     end
   end
 end
