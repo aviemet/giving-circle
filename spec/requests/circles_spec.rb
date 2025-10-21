@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "/circles", type: :request do
   def invalid_attributes
@@ -62,7 +62,7 @@ RSpec.describe "/circles", type: :request do
         post circles_url, params: { circle: attributes_for(:circle) }
 
         expect(response).to redirect_to(circle_url(Circle.last))
-        expect(flash[:notice]).to eq(I18n.t('circles.notices.created'))
+        expect(flash[:notice]).to eq(I18n.t("circles.notices.created"))
       end
     end
 
@@ -102,7 +102,7 @@ RSpec.describe "/circles", type: :request do
         circle.reload
 
         expect(response).to redirect_to(circle_url(circle))
-        expect(flash[:notice]).to eq(I18n.t('circles.notices.updated'))
+        expect(flash[:notice]).to eq(I18n.t("circles.notices.updated"))
       end
     end
 
@@ -131,7 +131,7 @@ RSpec.describe "/circles", type: :request do
       delete circle_url(circle)
 
       expect(response).to redirect_to(circles_url)
-      expect(flash[:notice]).to eq(I18n.t('circles.notices.destroyed'))
+      expect(flash[:notice]).to eq(I18n.t("circles.notices.destroyed"))
     end
   end
 end

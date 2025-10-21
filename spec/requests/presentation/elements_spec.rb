@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../../support/devise'
+require "rails_helper"
+require_relative "../../support/devise"
 
 RSpec.describe "/presentation/elements", type: :request do
 

@@ -8,7 +8,7 @@ interface ShowThemeProps {
 	theme: Schema.ThemesShow
 }
 
-// @path: /:circle_slug/themes/:theme_slug
+// @path: /:circle_slug/themes/:slug
 // @route: theme
 const ShowTheme = ({ theme }: ShowThemeProps) => {
 	const { params } = usePageProps<"theme">()
@@ -18,13 +18,13 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <>
+			heading={ <>
 				<Title>{ title }</Title>
 				<Group>
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editTheme(params.circle_slug, params.theme_slug) }>
+							<Menu.Link href={ Routes.editTheme(params.circle_slug, params.slug) }>
 								Edit Theme
 							</Menu.Link>
 						</Menu.Dropdown>
