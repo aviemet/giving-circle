@@ -123,8 +123,8 @@ export default [
 				overrides: {
 					"!": false,
 					"!!": false,
-					"+": true,
-					"-": true,
+					"+": false,
+					"-": false,
 				},
 			}],
 			"@stylistic/comma-spacing": ["error", {
@@ -150,6 +150,9 @@ export default [
 			"no-unused-vars": ["warn", {
 				vars: "all",
 				args: "none",
+				caughtErrorsIgnorePattern: "^_",
+				destructuredArrayIgnorePattern: "^_",
+				ignoreRestSiblings: true,
 			}],
 			"eqeqeq": "error",
 			"no-console": "warn",

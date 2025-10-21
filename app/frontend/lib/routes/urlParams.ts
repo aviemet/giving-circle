@@ -99,6 +99,11 @@ const urlParams = {
       "id"
     ]
   },
+  "apiCircleMock": {
+    "params": [
+      "circle_slug"
+    ]
+  },
   "apiCircleTemplateSlides": {
     "params": [
       "circle_slug",

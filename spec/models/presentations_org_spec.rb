@@ -3,6 +3,8 @@
 # Table name: presentations_orgs
 #
 #  id              :uuid             not null, primary key
+#  ask_cents       :integer
+#  ask_currency    :string           default("USD"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  org_id          :uuid             not null

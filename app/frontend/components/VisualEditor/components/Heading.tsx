@@ -1,8 +1,9 @@
 import { type ComponentConfig } from "@measured/puck"
 
-import { Box, Title } from "@/components"
+import { Box, DangerousHtml, Title } from "@/components"
 
-import { colorField } from "../fields"
+import { useMockData } from "../dynamicData/MockData"
+import { colorField, tagsField } from "../fields"
 
 export type HeadingProps = {
 	title: string
@@ -13,7 +14,9 @@ export type HeadingProps = {
 
 export const headingConfig: ComponentConfig<HeadingProps> = {
 	fields: {
-		title: { type: "text", contentEditable: true },
+		title: tagsField({
+			label: "Title",
+		}),
 		padding: { type: "number" },
 		order: {
 			type: "select",
@@ -38,9 +41,15 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		color: "#FFFFFF",
 	},
 
-	render: ({ title, padding, order, color }) => (
-		<Box p={ padding }>
-			<Title order={ order } c={ color }>{ title }</Title>
-		</Box>
-	),
+	render: ({ title, padding, order, color }) => {
+		const evaluatedContent = useMockData(title)
+
+		return (
+			<Box p={ padding }>
+				<Title order={ order } c={ color }>
+					<DangerousHtml>{ evaluatedContent }</DangerousHtml>
+				</Title>
+			</Box>
+		)
+	},
 }

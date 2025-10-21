@@ -3,6 +3,7 @@
 # Table name: circles
 #
 #  id         :uuid             not null, primary key
+#  mock_data  :boolean          default(FALSE), not null
 #  name       :string           not null
 #  slug       :string
 #  created_at :datetime         not null
@@ -35,4 +36,9 @@ class Circle < ApplicationRecord
   end
 
   scope :includes_associated, -> { includes([:themes, :presentations, :memberships, :orgs]) }
+
+  # MockCircle should be used if mock data is needed, these scopes separate the two models
+  default_scope { where(mock_data: false) }
+  scope :with_mock, -> { unscoped }
+  scope :mock_only, -> { unscoped.where(mock_data: true) }
 end

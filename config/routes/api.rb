@@ -4,6 +4,7 @@ namespace :api do
   patch "users/:id/update_user_preferences" => "users#update_user_preferences", as: :update_user_preferences
 
   resources :circles, param: :slug, as: :circle, shallow: true, only: [:create, :update] do
+    get "mock" => "circles#mock"
 
     resources :templates, param: :slug, shallow: false, only: [:create] do
       resources :slides, param: :slug, shallow: false, controller: "templates/slides", only: [:create, :update, :destroy]

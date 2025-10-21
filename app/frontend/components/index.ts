@@ -5,7 +5,6 @@ export { default as ColorPicker } from "./ColorPicker"
 export { default as ConditionalWrapper } from "./ConditionalWrapper"
 export { default as DangerousHtml } from "./DangerousHtml"
 export { default as Dropzone } from "./Dropzone"
-export { default as ErrorBoundary } from "./ErrorBoundary"
 export { default as Flash } from "./Flash"
 export * as Formatters from "./Formatters"
 export { default as Link, NavLink } from "./Link"
@@ -19,6 +18,7 @@ export { default as Label } from "./Label"
 export { default as Tabs } from "./Tabs"
 
 export * from "./Formatters"
+export * from "./ErrorBoundary"
 
 // Export UI library components as a proxy to allow easy refactoring
 export {
