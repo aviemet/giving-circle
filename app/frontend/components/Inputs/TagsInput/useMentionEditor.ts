@@ -6,6 +6,8 @@ import { UndoRedo } from "@tiptap/extensions"
 import { ReactRenderer, useEditor, type Editor } from "@tiptap/react"
 import { type SuggestionProps as TiptapSuggestionProps } from "@tiptap/suggestion"
 
+import { parseContentToStructured, serializeStructuredContent } from "@/components/VisualEditor/dynamicData/contentParser"
+
 import MentionCombobox from "./MentionCombobox"
 
 interface TagOption {
@@ -34,11 +36,14 @@ const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) =
 				HTMLAttributes: {
 					class: "mention",
 				},
+				renderText({ options, node }) {
+					return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`
+				},
 				suggestion: {
 					char: "#",
 					items: ({ query }) => {
 						return tagOptions.filter(option =>
-							option.label.toLowerCase().includes(query.toLowerCase())
+							option.value.toLowerCase().includes(query.toLowerCase())
 						).slice(0, 10)
 					},
 
@@ -50,6 +55,29 @@ const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) =
 							const item = props.items[index]
 							if(item) {
 								props.command(item)
+							}
+						}
+
+						const handleClickOutside = (event: MouseEvent) => {
+							if(!component) return
+
+							const target = event.target as Node
+							const comboboxElement = component.element
+							const editorElement = document.querySelector(".ProseMirror")
+
+							const isOutsideCombobox = !comboboxElement.contains(target)
+							const isOutsideEditor = !editorElement?.contains(target)
+
+							if(isOutsideCombobox && isOutsideEditor) {
+								cleanup()
+							}
+						}
+
+						const cleanup = () => {
+							if(component) {
+								document.removeEventListener("mousedown", handleClickOutside)
+								component.element.remove()
+								component.destroy()
 							}
 						}
 
@@ -70,6 +98,7 @@ const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) =
 
 								updatePosition(props)
 								document.body.appendChild(component.element)
+								document.addEventListener("mousedown", handleClickOutside)
 							},
 
 							onUpdate: props => {
@@ -124,10 +153,7 @@ const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) =
 							},
 
 							onExit() {
-								if(component) {
-									component.element.remove()
-									component.destroy()
-								}
+								cleanup()
 							},
 						}
 
@@ -150,7 +176,9 @@ const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) =
 		content,
 		onUpdate: ({ editor }) => {
 			const html = editor.getHTML()
-			onChange?.(html)
+			const structured = parseContentToStructured(html)
+			const serialized = serializeStructuredContent(structured)
+			onChange?.(serialized)
 		},
 	})
 }

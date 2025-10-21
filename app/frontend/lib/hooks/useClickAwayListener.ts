@@ -1,57 +1,52 @@
-export const useClickAwayListener = (ref: React.RefObject<HTMLElement>, callback: Function) => {
-	const startClickListener = (callback?: Function) => {
-		document.addEventListener("click", handleClickAway)
-		document.addEventListener("keydown", handleEscKey)
-		if(callback) callback()
-	}
+import { useEffect, useCallback, useRef } from "react"
 
-	const handleClickAway = e => {
-		if(!ref.current?.contains(e.target)) {
-			cancelClickListener(callback)
-		}
-	}
-
-	const handleEscKey = e => {
-		if(e.key === "Escape") {
-			cancelClickListener(callback)
-		}
-	}
-
-	const cancelClickListener = (callback?: Function) => {
-		document.removeEventListener("click", handleClickAway)
-		document.removeEventListener("keydown", handleEscKey)
-		if(callback) callback()
-	}
-
-	return { startClickListener, cancelClickListener }
+interface UseClickAwayListenerOptions {
+	enabled?: boolean
+	onMouseDown?: () => void
+	onEscape?: () => void
 }
 
+export const useClickAwayListener = <T extends HTMLElement = HTMLElement>(
+	ref: React.RefObject<T>,
+	callback: () => void,
+	options: UseClickAwayListenerOptions = {}
+) => {
+	const { enabled = true, onMouseDown, onEscape } = options
+	const callbackRef = useRef(callback)
 
-// import React, { useEffect } from 'react'
+	useEffect(() => {
+		callbackRef.current = callback
+	}, [callback])
 
-// const useClickAwayListener = (ref: React.RefObject<HTMLElement>, onClickAway?: Function) => {
-// 	useEffect(() => {
-// 		const handleClickAway = e => {
-// 			if(!ref.current?.contains(e.target)) {
-// 				if(onClickAway) onClickAway()
-// 			}
-// 		}
+	const handleMouseDown = useCallback((e: MouseEvent) => {
+		if(ref.current && !ref.current.contains(e.target as Node)) {
+			if(onMouseDown) {
+				onMouseDown()
+			} else {
+				callbackRef.current()
+			}
+		}
+	}, [ref, onMouseDown])
 
-// 		const handleEscKey = e => {
-// 			if(e.key === 'Escape') {
-// 				if(onClickAway) onClickAway()
-// 			}
-// 		}
+	const handleEscKey = useCallback((e: KeyboardEvent) => {
+		if(e.key === "Escape") {
+			if(onEscape) {
+				onEscape()
+			} else {
+				callbackRef.current()
+			}
+		}
+	}, [onEscape])
 
-// 		document.addEventListener('click', handleClickAway)
-// 		document.addEventListener('keydown', handleEscKey)
+	useEffect(() => {
+		if(!enabled) return
 
-// 		return () => {
-// 			document.removeEventListener('click', handleClickAway)
-// 			document.removeEventListener('keydown', handleEscKey)
-// 		}
-// 	}, [ref, onClickAway])
+		document.addEventListener("mousedown", handleMouseDown)
+		document.addEventListener("keydown", handleEscKey)
 
-// }
-
-// export default useClickAwayListener
+		return () => {
+			document.removeEventListener("mousedown", handleMouseDown)
+			document.removeEventListener("keydown", handleEscKey)
+		}
+	}, [enabled, handleMouseDown, handleEscKey])
+}

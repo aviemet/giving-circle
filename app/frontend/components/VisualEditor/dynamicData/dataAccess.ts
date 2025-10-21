@@ -85,3 +85,34 @@ export const getFlatOptions = (dataAccess: DataAccess[]) => {
 
 	return options
 }
+
+interface MockDataContext {
+	mockCircle: Schema.CirclesMock
+}
+
+interface DataStructure {
+	circle: MockDataContext["mockCircle"]
+	theme: {
+		name: string
+		status: string
+	}
+	presentation: {
+		name: string
+		org: Schema.OrgsPersisted[]
+		membership: Schema.MembershipsPersisted[]
+	}
+}
+
+export const buildDataStructure = (dataAccess: DataAccess[], mockData: MockDataContext): DataStructure => {
+	const structure: DataStructure = {
+		circle: mockData.mockCircle,
+		theme: mockData.mockCircle.themes?.[0] || { name: "Sample Theme", status: "active" },
+		presentation: {
+			name: "Sample Presentation",
+			org: mockData.mockCircle.orgs || [],
+			membership: mockData.mockCircle.memberships || [],
+		},
+	}
+
+	return structure
+}

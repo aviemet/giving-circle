@@ -2,20 +2,8 @@ import { type ComponentConfig } from "@measured/puck"
 
 import { Box, DangerousHtml, Title } from "@/components"
 
+import { useMockData } from "../dynamicData/MockData"
 import { colorField, tagsField } from "../fields"
-
-const hashtagOptions = [
-	"#react",
-	"#typescript",
-	"#javascript",
-	"#frontend",
-	"#webdev",
-	"#programming",
-	"#coding",
-	"#developer",
-	"#tech",
-	"#software",
-]
 
 export type HeadingProps = {
 	title: string
@@ -28,7 +16,6 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 	fields: {
 		title: tagsField({
 			label: "Title",
-			options: hashtagOptions,
 		}),
 		padding: { type: "number" },
 		order: {
@@ -54,11 +41,15 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		color: "#FFFFFF",
 	},
 
-	render: ({ title, padding, order, color }) => (
-		<Box p={ padding }>
-			<Title order={ order } c={ color }>
-				<DangerousHtml>{ title }</DangerousHtml>
-			</Title>
-		</Box>
-	),
+	render: ({ title, padding, order, color }) => {
+		const evaluatedContent = useMockData(title)
+
+		return (
+			<Box p={ padding }>
+				<Title order={ order } c={ color }>
+					<DangerousHtml>{ evaluatedContent }</DangerousHtml>
+				</Title>
+			</Box>
+		)
+	},
 }
