@@ -82,10 +82,9 @@ Rails.application.routes.draw do
         post ":template_slug/slides", to: "slides#create", as: :create_slide
       end
 
-      resources :themes, param: :slug do
-        member do
-          get :about
-        end
+      resources :themes, param: :theme_slug
+      resources :themes, param: :slug, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
+        get :about
 
         get "orgs", to: "theme_orgs#index"
         post "orgs", to: "theme_orgs#create"
@@ -93,45 +92,46 @@ Rails.application.routes.draw do
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
         # Presentation routes
-        resources :presentations, param: :slug, shallow: false
+        resources :presentations, param: :presentation_slug, shallow: false
+        resources :presentations, param: :slug, shallow: false, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
+          # Presentation builder components
+          resources :presentation_slides,
+            path: "slides",
+            param: :slug,
+            shallow: false,
+            as: :slides,
+            controller: "presentations/slides"
 
-        # Presentation builder components
-        resources :presentation_slides,
-          path: "presentations/:presentation_slug/slides",
-          param: :slug,
-          shallow: false,
-          as: :presentation_slides,
-          controller: "presentations/slides"
+          resources :interactions,
+            path: "interactions",
+            param: :slug,
+            shallow: false,
+            as: :interactions,
+            controller: "presentations/interactions"
 
-        resources :interactions,
-          path: "presentations/:presentation_slug/interactions",
-          param: :slug,
-          shallow: false,
-          as: :interactions,
-          controller: "presentations/interactions"
+          resources :interaction_responses,
+            path: "interaction_responses",
+            param: :slug,
+            shallow: false,
+            as: :interaction_responses,
+            controller: "presentations/interaction_responses"
 
-        resources :interaction_responses,
-          path: "presentations/:presentation_slug/interaction_responses",
-          param: :slug,
-          shallow: false,
-          as: :interaction_responses,
-          controller: "presentations/interaction_responses"
+          resources :presentation_elements,
+            path: "elements",
+            param: :slug,
+            shallow: false,
+            as: :elements,
+            controller: "presentations/elements"
 
-        resources :presentation_elements,
-          path: "presentations/:presentation_slug/elements",
-          param: :slug,
-          shallow: false,
-          as: :elements,
-          controller: "presentations/elements"
+          # Active Presentation
+          get "admin", as: :controls, to: "presentations/active#index"
+          get "admin/overview", to: "presentations/active#overview", as: :overview
+          get "admin/members", to: "presentations/active#members", as: :members
+          get "admin/messaging", to: "presentations/active#messaging", as: :messaging
+          get "admin/settings", to: "presentations/active#settings", as: :settings
 
-        # Active Presentation
-        get "presentations/:presentation_slug/admin", as: :presentation_controls, to: "presentations/active#index"
-        get "presentations/:presentation_slug/admin/overview", to: "presentations/active#overview", as: :presentation_overview
-        get "presentations/:presentation_slug/admin/members", to: "presentations/active#members", as: :presentation_members
-        get "presentations/:presentation_slug/admin/messaging", to: "presentations/active#messaging", as: :presentation_messaging
-        get "presentations/:presentation_slug/admin/settings", to: "presentations/active#settings", as: :presentation_settings
-
-        get "presentations/:presentation_slug/activate", to: "presentations#activate", as: :presentation_activate
+          get "activate", to: "presentations#activate", as: :activate
+        end
       end
     end
   end

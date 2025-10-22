@@ -22,12 +22,12 @@ class Api::TemplatesController < Api::ApiController
   def create
   end
 
-  # @route PATCH /api/circles/:circle_slug/templates/:template_slug (api_circle_template)
-  # @route PUT /api/circles/:circle_slug/templates/:template_slug (api_circle_template)
+  # @route PATCH /api/circles/:circle_slug/templates/:slug (api_circle_template)
+  # @route PUT /api/circles/:circle_slug/templates/:slug (api_circle_template)
   def update
   end
 
-  # @route DELETE /api/circles/:circle_slug/templates/:template_slug (api_circle_template)
+  # @route DELETE /api/circles/:circle_slug/templates/:slug (api_circle_template)
   def destroy
   end
 end

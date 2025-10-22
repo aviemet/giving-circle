@@ -8,7 +8,7 @@ interface EditThemeProps {
 	theme: Schema.ThemesEdit
 }
 
-// @path: /:circle_slug/themes/:slug/edit
+// @path: /:circle_slug/themes/:theme_slug/edit
 // @route: editTheme
 const EditTheme = ({ theme }: EditThemeProps) => {
 	const { params } = usePageProps<"editTheme">()
@@ -20,7 +20,7 @@ const EditTheme = ({ theme }: EditThemeProps) => {
 
 				<ThemesForm
 					method="put"
-					to={ Routes.theme(params.circle_slug, params.slug) }
+					to={ Routes.theme(params.circle_slug, params.theme_slug) }
 					theme={ theme }
 				/>
 			</Section>

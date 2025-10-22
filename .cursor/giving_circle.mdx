@@ -182,17 +182,31 @@
   - ExternalLink handles both absolute URLs and relative paths (converts relative to absolute before normalizing)
 
 #### URL Parameter Naming Convention
-- **Consistent slug naming through Rails auto-prefixing**
-- All resources use `param: :slug` in route definitions
-- Rails automatically prefixes param names based on resource name:
-  - `resources :themes, param: :slug` → member routes use `:slug`, children routes use `:theme_slug`
-  - `resources :presentations, param: :slug` → member routes use `:slug`, children routes use `:presentation_slug`
-  - Leaf resources (orgs, slides, interactions, elements) always use `:slug`
-- Example URL: `/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug`
-- **Member routes** (show, edit, update, destroy, custom member actions) use `:slug`
-- **Child/nested resources** automatically get the parent resource name prefixed (`:theme_slug`, `:presentation_slug`)
-- This provides consistent parameter naming for navigation/breadcrumbs while using standard Rails `resources`
-- Wrap custom member actions in `member do` block to ensure they use `:slug` not auto-prefixed names
+- **Explicit parameter naming to ensure consistency across all routes**
+- Use double-declaration pattern for Theme and Presentation resources to maintain consistent parameter naming:
+  ```ruby
+  # First declaration: defines CRUD routes with explicit param name
+  resources :themes, param: :theme_slug
+  
+  # Second declaration: provides container for nested resources
+  resources :themes, param: :slug, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
+    # nested resources here
+    resources :presentations, param: :presentation_slug
+    resources :presentations, param: :slug, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
+      # deeply nested resources
+    end
+  end
+  ```
+- This ensures all URLs consistently use explicit parameter names:
+  - Theme CRUD: `/:circle_slug/themes/:theme_slug`
+  - Presentation CRUD: `/:circle_slug/themes/:theme_slug/presentations/:presentation_slug`
+  - Nested resources: `/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/:slug`
+- **Why this pattern?** Rails auto-prefixes nested resource params. Without double-declaration:
+  - `resources :themes, param: :theme_slug` would generate `:theme_theme_slug` for nested routes
+  - Double-declaration prevents auto-prefixing while maintaining explicit names for CRUD routes
+- Circle uses scope-based nesting, so doesn't need double-declaration
+- Leaf resources (orgs, slides, interactions, elements) use `param: :slug`
+- Controllers, menu logic, and frontend always reference `:theme_slug` and `:presentation_slug` consistently
 
 #### React Query Patterns
 - Mutation functions follow `ReactMutationFunction<T, P, O>` type pattern

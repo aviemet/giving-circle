@@ -1,6 +1,6 @@
 import { ComponentConfig, Slot } from "@measured/puck"
 
-import { usePresentationDataContext } from "../../../layouts/Providers/PresentationDataProvider"
+import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
 
 
 interface OrgsIteratorDisplayProps {
