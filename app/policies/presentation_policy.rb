@@ -13,4 +13,8 @@ class PresentationPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def overview?
+    true
+  end
 end

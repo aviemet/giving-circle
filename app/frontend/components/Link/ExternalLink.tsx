@@ -20,7 +20,11 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
 	{ children, href, as, className, disabled = false, ...props },
 	ref,
 ) => {
-	const url = normalizeUrl(href, { stripWWW: false })
+	const absoluteHref = href.startsWith("/") || href.startsWith(".")
+		? `${window.location.origin}${href.startsWith("/") ? href : `/${href}`}`
+		: href
+
+	const url = normalizeUrl(absoluteHref, { stripWWW: false })
 
 	return (
 		<Anchor

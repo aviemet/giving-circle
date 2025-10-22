@@ -1,3 +1,5 @@
+import { PresentationDataContextValue } from "@/layouts/Providers/PresentationDataProvider"
+
 type DataAccess = {
 	model: string
 	name: string
@@ -86,12 +88,8 @@ export const getFlatOptions = (dataAccess: DataAccess[]) => {
 	return options
 }
 
-interface MockDataContext {
-	mockCircle: Schema.CirclesMock
-}
-
 interface DataStructure {
-	circle: MockDataContext["mockCircle"]
+	circle: Schema.CirclesMock | Schema.CirclesPersisted
 	theme: {
 		name: string
 		status: string
@@ -103,14 +101,17 @@ interface DataStructure {
 	}
 }
 
-export const buildDataStructure = (dataAccess: DataAccess[], mockData: MockDataContext): DataStructure => {
+export const buildDataStructure = (dataAccess: DataAccess[], contextData: PresentationDataContextValue): DataStructure => {
+	const isMockCircle = "themes" in contextData.circle && "orgs" in contextData.circle && "memberships" in contextData.circle
+	const mockCircle = isMockCircle ? contextData.circle as Schema.CirclesMock : null
+
 	const structure: DataStructure = {
-		circle: mockData.mockCircle,
-		theme: mockData.mockCircle.themes?.[0] || { name: "Sample Theme", status: "active" },
+		circle: contextData.circle,
+		theme: contextData.theme || (mockCircle?.themes?.[0]) || { name: "Sample Theme", status: "active" },
 		presentation: {
-			name: "Sample Presentation",
-			org: mockData.mockCircle.orgs || [],
-			membership: mockData.mockCircle.memberships || [],
+			name: contextData.presentation?.name || "Sample Presentation",
+			org: mockCircle?.orgs || [],
+			membership: mockCircle?.memberships || [],
 		},
 	}
 

@@ -4,16 +4,14 @@ import clsx from "clsx"
 import { useState, Suspense } from "react"
 import "@measured/puck/puck.css"
 
-import { Menu, Box, Button, Divider, AsyncBoundary, ErrorBoundary, Badge } from "@/components"
+import { Menu, Box, Button, Divider, AsyncBoundary, ErrorBoundary } from "@/components"
 import { SaveIcon, DownArrowIcon, TrashIcon } from "@/components/Icons"
-import { useLocalStorage, createContext } from "@/lib/hooks"
+import { useLocalStorage } from "@/lib/hooks"
 import { useMockCircle } from "@/queries"
 
 import { config } from "./puck.config"
 import * as classes from "./Puck.css"
-
-const [useMockDataContext, MockDataProvider] = createContext<{ mockCircle: Schema.CirclesMock }>()
-export { useMockDataContext }
+import { PresentationDataProvider } from "../../layouts/Providers/PresentationDataProvider"
 
 const usePuck = createUsePuck()
 
@@ -51,9 +49,8 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 
 	return (
 		<Box className={ clsx(classes.puckRoot) }>
-			<Badge>Content</Badge>
 			<AsyncBoundary isLoading={ isLoading }>
-				<MockDataProvider value={ { mockCircle: mockCircle as Schema.CirclesMock } }>
+				<PresentationDataProvider value={ { circle: mockCircle as Schema.CirclesMock } }>
 					<ErrorBoundary>
 						<Puck
 							config={ config as Config }
@@ -109,7 +106,7 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 							} }
 						/>
 					</ErrorBoundary>
-				</MockDataProvider>
+				</PresentationDataProvider>
 			</AsyncBoundary>
 		</Box>
 	)

@@ -1,6 +1,6 @@
 import { ComponentConfig, Slot } from "@measured/puck"
 
-import { useMockDataContext } from ".."
+import { usePresentationDataContext } from "../../../layouts/Providers/PresentationDataProvider"
 
 
 interface OrgsIteratorDisplayProps {
@@ -8,12 +8,16 @@ interface OrgsIteratorDisplayProps {
 }
 
 const OrgsIteratorDisplay = ({ children }: OrgsIteratorDisplayProps) => {
-	const { mockCircle } = useMockDataContext()
+	const contextData = usePresentationDataContext()
 
-	if(!mockCircle.orgs) return children
+	const orgs = "orgs" in (contextData?.circle || {})
+		? (contextData?.circle as Schema.CirclesMock).orgs
+		: undefined
+
+	if(!orgs) return children
 
 	return (
-		<>{ mockCircle.orgs.map(circle =>
+		<>{ orgs.map((_org: Schema.OrgsPersisted) =>
 			children
 		) }</>
 	)

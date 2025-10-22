@@ -9,7 +9,8 @@ const Header = () => {
 	return (
 		<Group h="100%" px="md">
 			<Flex align="center" gap="md" style={ { flex: 1 } }>
-				<ToggleNavbarButton/>
+				<ToggleNavbarButton hidden={ sidebarOpen } />
+
 				{ typeof siteTitle === "string" ?
 					<Title>{ siteTitle }</Title>
 					:
