@@ -18,7 +18,7 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <>
+			heading={ <>
 				<Title>{ title }</Title>
 				<Group>
 					<Menu position="bottom-end">

@@ -19,6 +19,7 @@ class Presentations::ActiveController < ApplicationController
 
     render inertia: "Presentations/Active/PublicShow", props: {
       presentation: public_presentation.render(:presentation),
+      theme: public_presentation.theme.render(:persisted),
       circle: circle.render(:persisted)
     }
   end

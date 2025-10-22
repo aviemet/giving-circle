@@ -1,24 +1,37 @@
 import { useCallback, useMemo } from "react"
 
-import { useMockDataContext } from ".."
+import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
+
 import { parseContentToStructured } from "./contentParser"
 import { buildDataStructure, dataAccess } from "./dataAccess"
 
 
-export const useMockData = (content: string): string => {
-	const mockData = useMockDataContext()
+/**
+ * Transforms content containing dynamic data tags into resolved content with actual values.
+ *
+ * This hook enables the visual editor to display real presentation data in place of template tags.
+ * When presentation context is unavailable (e.g., during editing), tags are preserved as-is.
+ *
+ * @param content - String containing embedded data tags (e.g., "Welcome to #circle.name")
+ * @returns Processed string with tags replaced by their corresponding data values
+ */
+export const usePresentationData = (content: string): string => {
+	const contextData = usePresentationDataContext()
 
 	const structuredContent = useMemo(() => {
 		return parseContentToStructured(content)
 	}, [content])
 
+	/**
+	 * Resolves a dot-notated tag path to its actual value from the presentation data structure.
+	 * Returns the original tag if the path cannot be resolved or data is unavailable.
+	 */
 	const evaluateTag = useCallback((tagPath: string): string => {
-		if(!mockData?.mockCircle) {
+		if(!contextData?.circle) {
 			return `#${tagPath}`
 		}
 
-		// Build data structure dynamically from dataAccess configuration
-		const dataStructure = buildDataStructure(dataAccess, mockData)
+		const dataStructure = buildDataStructure(dataAccess, contextData)
 
 		const pathParts = tagPath.split(".")
 		let currentData: unknown = dataStructure
@@ -47,7 +60,7 @@ export const useMockData = (content: string): string => {
 		}
 
 		return `#${tagPath}`
-	}, [mockData])
+	}, [contextData])
 
 	return useMemo(() => {
 		return structuredContent.blocks.map(block => {

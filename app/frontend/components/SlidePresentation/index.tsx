@@ -7,7 +7,7 @@ interface SlidePresentationProps {
 	activeSlide: Schema.SlidesPresentation
 }
 
-const SlidePresentation = ({ presentation, activeSlide }: SlidePresentationProps) => {
+const SlidePresentation = ({ activeSlide }: SlidePresentationProps) => {
 
 	return (
 		<Render

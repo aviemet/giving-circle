@@ -42,4 +42,4 @@ const PublicShowPresentation = ({ presentation, circle, meta }: PublicShowPresen
 	)
 }
 
-export default withLayout(PublicShowPresentation, "unformatted")
+export default withLayout(PublicShowPresentation, "publicPresentation")

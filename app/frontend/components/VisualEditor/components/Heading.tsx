@@ -2,7 +2,7 @@ import { type ComponentConfig } from "@measured/puck"
 
 import { Box, DangerousHtml, Title } from "@/components"
 
-import { useMockData } from "../dynamicData/MockData"
+import { usePresentationData } from "../dynamicData/MockData"
 import { colorField, tagsField } from "../fields"
 
 export type HeadingProps = {
@@ -10,6 +10,18 @@ export type HeadingProps = {
 	padding: number
 	order: 1 | 2 | 3 | 4 | 5 | 6
 	color: string
+}
+
+const HeadingDisplay = ({ title, padding, order, color }: HeadingProps) => {
+	const evaluatedContent = usePresentationData(title)
+
+	return (
+		<Box p={ padding }>
+			<Title order={ order } c={ color }>
+				<DangerousHtml>{ evaluatedContent }</DangerousHtml>
+			</Title>
+		</Box>
+	)
 }
 
 export const headingConfig: ComponentConfig<HeadingProps> = {
@@ -41,15 +53,5 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		color: "#FFFFFF",
 	},
 
-	render: ({ title, padding, order, color }) => {
-		const evaluatedContent = useMockData(title)
-
-		return (
-			<Box p={ padding }>
-				<Title order={ order } c={ color }>
-					<DangerousHtml>{ evaluatedContent }</DangerousHtml>
-				</Title>
-			</Box>
-		)
-	},
+	render: (props) => <HeadingDisplay { ...props } />,
 }

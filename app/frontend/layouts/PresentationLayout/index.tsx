@@ -40,10 +40,10 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 			navbar={ {
 				width: theme.other.navbar.width.open,
 				breakpoint: "sm",
-				// collapsed: {
-				// 	mobile: !sidebarOpen || !sidebarVisible,
-				// 	desktop: !sidebarOpen || !sidebarVisible,
-				// },
+				collapsed: {
+					mobile: !sidebarOpen || !sidebarVisible,
+					desktop: !sidebarOpen || !sidebarVisible,
+				},
 			} }
 			className={ clsx(classes.presentationLayout) }
 		>

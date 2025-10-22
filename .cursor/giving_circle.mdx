@@ -127,6 +127,18 @@
 - Integrates with existing input wrapper and label components
 - Uses official TipTap Mention extension for proper tag handling and rendering
 
+#### VisualEditor Dynamic Data System
+- Uses `PresentationDataProvider` context to provide data to components
+- Context accepts either mock data (for editor preview) or real data (for public presentation)
+- Context provides: `circle`, `theme`, and `presentation` objects
+- Hook `usePresentationData` evaluates dynamic tags in content strings
+- Components using dynamic data must be wrapped as React components (not inline render functions)
+- Editor wraps components with mock circle data for preview
+- Public presentation layout wraps components with actual presentation data
+- `dataAccess` configuration defines available data paths for tag evaluation
+- Layout components control the `PresentationDataProvider` context for their entire page hierarchy
+- Puck's `Render` component relies on parent layout's context provider to enable dynamic data resolution
+
 #### State Management
 - Server state: Inertia.js
 - Client-only state: zustand
@@ -152,6 +164,11 @@
 - Automatic route annotation system via `url_params_json.rb`:
   - Adds `@path` and `@route` comments above React components
   - Extracts component names from default exports, including HOC-wrapped components
+- **Link Component Behavior:**
+  - By default, Link component uses Inertia's client-side routing via InertiaLink
+  - External links are auto-detected (starts with http/www and different hostname)
+  - For internal routes that need to open in new tabs, add `external`
+  - ExternalLink handles both absolute URLs and relative paths (converts relative to absolute before normalizing)
 
 #### React Query Patterns
 - Mutation functions follow `ReactMutationFunction<T, P, O>` type pattern

@@ -7,6 +7,7 @@ import {
 	PresentationLayout,
 	LayoutProps,
 	UnformattedLayout,
+	PublicPresentationLayout,
 } from "@/layouts"
 
 import { PagesObject } from "../application"
@@ -17,6 +18,7 @@ const LAYOUT_COMPONENTS: Record<keyof typeof LAYOUTS, ({ children }: LayoutProps
 	"presentation": PresentationLayout,
 	"settings": SettingsLayout,
 	"public": PublicLayout,
+	"publicPresentation": PublicPresentationLayout,
 	"unformatted": UnformattedLayout,
 } as const
 

@@ -3,6 +3,7 @@ import BareAuthLayout from "./AuthLayout"
 import BarePresentationLayout from "./PresentationLayout"
 import Providers from "./Providers"
 import BarePublicLayout from "./PublicLayout"
+import BarePublicPresentationLayout from "./PublicPresentationLayout"
 import BareSettingsLayout from "./SettingsLayout"
 import BareUnformattedLayout from "./UnformattedLayout"
 
@@ -14,6 +15,7 @@ export const LAYOUTS = {
 	"settings": "settings",
 	"public": "public",
 	"presentation": "presentation",
+	"publicPresentation": "publicPresentation",
 	"unformatted": "unformatted",
 } as const
 
@@ -55,6 +57,16 @@ export const PresentationLayout = ({ children }: LayoutProps) => {
 			<BarePresentationLayout>
 				{ children }
 			</BarePresentationLayout>
+		</LayoutWrapper>
+	)
+}
+
+export const PublicPresentationLayout = ({ children }: LayoutProps) => {
+	return (
+		<LayoutWrapper>
+			<BarePublicPresentationLayout>
+				{ children }
+			</BarePublicPresentationLayout>
 		</LayoutWrapper>
 	)
 }

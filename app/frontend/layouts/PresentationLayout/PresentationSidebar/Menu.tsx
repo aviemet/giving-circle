@@ -14,6 +14,7 @@ const Menu = () => {
 
 	return (
 		<>{ active_circle && active_theme && active_presentation && <>
+			<NavLink href={ Routes.themePresentationControls(active_circle.slug, active_theme.slug, active_presentation.slug) }>Controls</NavLink>
 			<NavLink href={ Routes.themePresentationOverview(active_circle.slug, active_theme.slug, active_presentation.slug) }>Overview</NavLink>
 			<NavLink href="">Members</NavLink>
 
