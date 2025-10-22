@@ -170,6 +170,19 @@
   - For internal routes that need to open in new tabs, add `external`
   - ExternalLink handles both absolute URLs and relative paths (converts relative to absolute before normalizing)
 
+#### URL Parameter Naming Convention
+- **Consistent slug naming through Rails auto-prefixing**
+- All resources use `param: :slug` in route definitions
+- Rails automatically prefixes param names based on resource name:
+  - `resources :themes, param: :slug` → member routes use `:slug`, children routes use `:theme_slug`
+  - `resources :presentations, param: :slug` → member routes use `:slug`, children routes use `:presentation_slug`
+  - Leaf resources (orgs, slides, interactions, elements) always use `:slug`
+- Example URL: `/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug`
+- **Member routes** (show, edit, update, destroy, custom member actions) use `:slug`
+- **Child/nested resources** automatically get the parent resource name prefixed (`:theme_slug`, `:presentation_slug`)
+- This provides consistent parameter naming for navigation/breadcrumbs while using standard Rails `resources`
+- Wrap custom member actions in `member do` block to ensure they use `:slug` not auto-prefixed names
+
 #### React Query Patterns
 - Mutation functions follow `ReactMutationFunction<T, P, O>` type pattern
 - Parameters object includes both route parameters and mutation data

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "/orgs", type: :request do
   def invalid_attributes
@@ -108,7 +108,7 @@ RSpec.describe "/orgs", type: :request do
         post circle_orgs_url(circle), params: { org: attributes }
 
         expect(response).to redirect_to(org_url(circle, Org.last))
-        expect(flash[:notice]).to eq(I18n.t('orgs.notices.created'))
+        expect(flash[:notice]).to eq(I18n.t("orgs.notices.created"))
       end
     end
 
@@ -153,7 +153,7 @@ RSpec.describe "/orgs", type: :request do
         org.reload
 
         expect(response).to redirect_to(org_url(org.circle, org))
-        expect(flash[:notice]).to eq(I18n.t('orgs.notices.updated'))
+        expect(flash[:notice]).to eq(I18n.t("orgs.notices.updated"))
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.describe "/orgs", type: :request do
       delete org_url(org.circle, org)
 
       expect(response).to redirect_to(circle_orgs_url(@admin.circles.first))
-      expect(flash[:notice]).to eq(I18n.t('orgs.notices.destroyed'))
+      expect(flash[:notice]).to eq(I18n.t("orgs.notices.destroyed"))
     end
   end
 end

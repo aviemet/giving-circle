@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "ThemeOrgs", type: :request do
   def invalid_attributes
@@ -84,7 +84,7 @@ RSpec.describe "ThemeOrgs", type: :request do
           post theme_orgs_url(theme.circle, theme), params: { org: attributes_for(:org, theme:) }
 
           expect(response).to redirect_to(org_url(Org.last))
-          expect(flash[:notice]).to eq(I18n.t('theme_orgs.notices.created'))
+          expect(flash[:notice]).to eq(I18n.t("theme_orgs.notices.created"))
         end
       end
     end

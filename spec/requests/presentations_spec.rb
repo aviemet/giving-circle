@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "/presentations", type: :request do
   def invalid_attributes
@@ -72,7 +72,7 @@ RSpec.describe "/presentations", type: :request do
         post theme_presentations_url(theme.circle, theme), params: { presentation: attributes_for(:presentation) }
 
         expect(response).to redirect_to(theme_presentation_url(theme.circle, theme, Presentation.last))
-        expect(flash[:notice]).to eq(I18n.t('presentations.notices.created'))
+        expect(flash[:notice]).to eq(I18n.t("presentations.notices.created"))
       end
     end
 
@@ -117,7 +117,7 @@ RSpec.describe "/presentations", type: :request do
         presentation.reload
 
         expect(response).to redirect_to(theme_presentation_url(presentation.circle, presentation.theme, presentation))
-        expect(flash[:notice]).to eq(I18n.t('presentations.notices.updated'))
+        expect(flash[:notice]).to eq(I18n.t("presentations.notices.updated"))
 
       end
     end
@@ -152,7 +152,7 @@ RSpec.describe "/presentations", type: :request do
       delete theme_presentation_url(presentation.circle, presentation.theme, presentation)
 
       expect(response).to redirect_to(theme_presentations_url(theme.circle, theme))
-      expect(flash[:notice]).to eq(I18n.t('presentations.notices.destroyed'))
+      expect(flash[:notice]).to eq(I18n.t("presentations.notices.destroyed"))
     end
   end
 end

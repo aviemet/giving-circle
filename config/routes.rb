@@ -71,7 +71,9 @@ Rails.application.routes.draw do
       resources :memberships, param: :slug, concerns: [:bulk_delete]
 
       resources :orgs, param: :slug do
-        get :about
+        member do
+          get :about
+        end
       end
 
       resources :templates, param: :slug, shallow: false
@@ -80,9 +82,10 @@ Rails.application.routes.draw do
         post ":template_slug/slides", to: "slides#create", as: :create_slide
       end
 
-      resources :themes, param: :theme_slug, as: :themes
-      resources :themes, param: :slug, as: :themes, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
-        get :about
+      resources :themes, param: :slug do
+        member do
+          get :about
+        end
 
         get "orgs", to: "theme_orgs#index"
         post "orgs", to: "theme_orgs#create"
@@ -90,7 +93,7 @@ Rails.application.routes.draw do
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
         # Presentation routes
-        resources :presentations, param: :presentation_slug, shallow: false
+        resources :presentations, param: :slug, shallow: false
 
         # Presentation builder components
         resources :presentation_slides,
@@ -102,18 +105,21 @@ Rails.application.routes.draw do
 
         resources :interactions,
           path: "presentations/:presentation_slug/interactions",
+          param: :slug,
           shallow: false,
           as: :interactions,
           controller: "presentations/interactions"
 
         resources :interaction_responses,
           path: "presentations/:presentation_slug/interaction_responses",
+          param: :slug,
           shallow: false,
           as: :interaction_responses,
           controller: "presentations/interaction_responses"
 
         resources :presentation_elements,
           path: "presentations/:presentation_slug/elements",
+          param: :slug,
           shallow: false,
           as: :elements,
           controller: "presentations/elements"
