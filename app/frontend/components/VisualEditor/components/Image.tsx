@@ -4,8 +4,7 @@ import { Image } from "@/components"
 import placeholderImage from "@/images/placeholder_image.jpeg"
 
 import { isNonEmptyString } from "../../../lib/strings"
-import { colorField } from "../fields"
-import imageField from "../fields/image"
+import { colorField, imageField } from "../fields"
 
 
 export type ImageProps = {

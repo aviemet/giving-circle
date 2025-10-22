@@ -21,7 +21,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:slug (theme_interaction_response)
   def show
     authorize presentation_interaction_response
     render inertia: "Presentation::InteractionResponses/Show", props: {
@@ -37,7 +37,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id/edit (edit_theme_interaction_response)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:slug/edit (edit_theme_interaction_response)
   def edit
     authorize presentation_interaction_response
     render inertia: "Presentation::InteractionResponses/Edit", props: {
@@ -55,8 +55,8 @@ class Presentations::InteractionResponsesController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:slug (theme_interaction_response)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:slug (theme_interaction_response)
   def update
     authorize presentation_interaction_response
     if presentation_interaction_response.update(presentation_interaction_response_params)
@@ -66,7 +66,7 @@ class Presentations::InteractionResponsesController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:id (theme_interaction_response)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interaction_responses/:slug (theme_interaction_response)
   def destroy
     authorize presentation_interaction_response
     presentation_interaction_response.destroy!

@@ -104,6 +104,12 @@ const urlParams = {
       "circle_slug"
     ]
   },
+  "uploadImageApiCircleTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
   "apiCircleTemplateSlides": {
     "params": [
       "circle_slug",

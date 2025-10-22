@@ -585,14 +585,6 @@ export const apiCircle = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, 
 
 /**
  * Generates rails route to
- * /api/circles(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiCircleIndex = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
  * /api/circles/:circle_slug/mock(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
@@ -602,13 +594,13 @@ export const apiCircleMock = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"fo
 
 /**
  * Generates rails route to
- * /api/circles/:circle_slug/presentations/:presentation_slug(.:format)
+ * /api/circles/:circle_slug/presentations/:slug(.:format)
  * @param {any} circleSlug
- * @param {any} presentationSlug
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCirclePresentation = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"presentation_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"presentation_slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const apiCirclePresentation = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -633,16 +625,6 @@ export const apiCirclePresentationSlides = /*#__PURE__*/ __jsr.r({"circle_slug":
 
 /**
  * Generates rails route to
- * /api/circles/:circle_slug/presentations/:presentation_slug/sync_slides(.:format)
- * @param {any} circleSlug
- * @param {any} presentationSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiCirclePresentationSyncSlides = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"presentation_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"presentation_slug"],[2,[7,"/"],[2,[6,"sync_slides"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /api/circles/:circle_slug/presentations(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
@@ -652,13 +634,13 @@ export const apiCirclePresentations = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":
 
 /**
  * Generates rails route to
- * /api/circles/:circle_slug/templates/:template_slug(.:format)
+ * /api/circles/:circle_slug/templates/:slug(.:format)
  * @param {any} circleSlug
- * @param {any} templateSlug
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCircleTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"template_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"templates"],[2,[7,"/"],[2,[3,"template_slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const apiCircleTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"templates"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -692,12 +674,30 @@ export const apiCircleTemplates = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/themes/:slug(.:format)
+ * @param {any} circleSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircleTheme = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/themes(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiCircleThemes = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"themes"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/circles(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircles = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -714,15 +714,6 @@ export const apiSearches = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6
  * @returns {string} route path
  */
 export const apiSpotlights = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"spotlights"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
- * /api/themes/:theme_slug(.:format)
- * @param {any} themeSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiTheme = /*#__PURE__*/ __jsr.r({"theme_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"themes"],[2,[7,"/"],[2,[3,"theme_slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1255,6 +1246,16 @@ export const settingsNotifications = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/presentations/:slug/sync_slides(.:format)
+ * @param {any} circleSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const syncSlidesApiCirclePresentation = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"sync_slides"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /:circle_slug/themes/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} slug
@@ -1481,6 +1482,16 @@ export const themePresentations = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true
  * @returns {string} route path
  */
 export const updateRailsDiskService = /*#__PURE__*/ __jsr.r({"encoded_token":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"rails"],[2,[7,"/"],[2,[6,"active_storage"],[2,[7,"/"],[2,[6,"disk"],[2,[7,"/"],[2,[3,"encoded_token"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/circles/:circle_slug/templates/:slug/upload_image(.:format)
+ * @param {any} circleSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const uploadImageApiCircleTemplate = /*#__PURE__*/ __jsr.r({"circle_slug":{"r":true},"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"templates"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"upload_image"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to

@@ -12,8 +12,7 @@ class Api::PresentationsController < Api::ApiController
 
   strong_params :presentation, permit: [:name, :theme_id]
 
-  # @route PATCH /api/circles/:circle_slug/presentations/:presentation_slug/sync_slides (api_circle_presentation_sync_slides)
-  # @route PUT /api/circles/:circle_slug/presentations/:presentation_slug/sync_slides (api_circle_presentation_sync_slides)
+  # @route PATCH /api/circles/:circle_slug/presentations/:slug/sync_slides (sync_slides_api_circle_presentation)
   def sync_slides
     authorize presentation
 
@@ -28,12 +27,12 @@ class Api::PresentationsController < Api::ApiController
   def create
   end
 
-  # @route PATCH /api/circles/:circle_slug/presentations/:presentation_slug (api_circle_presentation)
-  # @route PUT /api/circles/:circle_slug/presentations/:presentation_slug (api_circle_presentation)
+  # @route PATCH /api/circles/:circle_slug/presentations/:slug (api_circle_presentation)
+  # @route PUT /api/circles/:circle_slug/presentations/:slug (api_circle_presentation)
   def update
   end
 
-  # @route DELETE /api/circles/:circle_slug/presentations/:presentation_slug (api_circle_presentation)
+  # @route DELETE /api/circles/:circle_slug/presentations/:slug (api_circle_presentation)
   def destroy
   end
 end

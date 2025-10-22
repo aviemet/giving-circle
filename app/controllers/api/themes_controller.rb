@@ -3,8 +3,8 @@ class Api::ThemesController < Api::ApiController
   def create
   end
 
-  # @route PATCH /api/themes/:theme_slug (api_theme)
-  # @route PUT /api/themes/:theme_slug (api_theme)
+  # @route PATCH /api/circles/:circle_slug/themes/:slug (api_circle_theme)
+  # @route PUT /api/circles/:circle_slug/themes/:slug (api_circle_theme)
   def update
   end
 

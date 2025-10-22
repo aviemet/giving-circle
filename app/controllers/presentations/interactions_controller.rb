@@ -21,7 +21,7 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug (theme_interaction)
   def show
     authorize presentation_interaction
     render inertia: "Presentation::Interactions/Show", props: {
@@ -37,7 +37,7 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id/edit (edit_theme_interaction)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug/edit (edit_theme_interaction)
   def edit
     authorize presentation_interaction
     render inertia: "Presentation::Interactions/Edit", props: {
@@ -55,8 +55,8 @@ class Presentations::InteractionsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug (theme_interaction)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug (theme_interaction)
   def update
     authorize presentation_interaction
     if presentation_interaction.update(presentation_interaction_params)
@@ -66,7 +66,7 @@ class Presentations::InteractionsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:id (theme_interaction)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug (theme_interaction)
   def destroy
     authorize presentation_interaction
     presentation_interaction.destroy!

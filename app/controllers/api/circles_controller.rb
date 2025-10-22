@@ -5,7 +5,7 @@ class Api::CirclesController < Api::ApiController
     render json: Circles::MockSerializer.render(circle)
   end
 
-  # @route POST /api/circles (api_circle_index)
+  # @route POST /api/circles (api_circles)
   def create
   end
 

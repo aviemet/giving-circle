@@ -34,7 +34,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
   def show
     authorize presentation
 
@@ -52,7 +52,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (edit_theme_presentation)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:slug/edit (edit_theme_presentation)
   def edit
     authorize presentation
 
@@ -83,8 +83,8 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
-  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route PATCH /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
+  # @route PUT /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
   def update
     authorize presentation
 
@@ -95,7 +95,7 @@ class PresentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:presentation_slug (theme_presentation)
+  # @route DELETE /:circle_slug/themes/:theme_slug/presentations/:slug (theme_presentation)
   def destroy
     authorize presentation
 

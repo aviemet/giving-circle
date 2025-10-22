@@ -36,6 +36,8 @@ class Slide < ApplicationRecord
   tracked # public_activity
   resourcify # rolify
 
+  has_many_attached :images
+
   has_one :slide_parent, dependent: :delete
   has_one :template, through: :slide_parent, source: :parentable, source_type: "Template"
   has_one :presentation, through: :slide_parent, source: :parentable, source_type: "Presentation"

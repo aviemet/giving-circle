@@ -77,6 +77,17 @@
 - Version control will be maintained for important documents
 - Access control will be managed through Pundit policies
 
+### File Upload Pattern
+- All file uploads use Rails ActiveStorage with DirectUpload (client-side direct upload)
+- Upload flow:
+  1. Client uses `uploadFile` helper from `@/lib/files`
+  2. File uploads directly to ActiveStorage endpoint `/rails/active_storage/direct_uploads`
+  3. Returns `signed_id` which can be converted to blob URL: `/rails/active_storage/blobs/redirect/${signedId}/filename`
+  4. `DropzoneInput` component handles this flow with `uploadMode="immediate"` for instant uploads
+- Attach files to models using `has_one_attached` or `has_many_attached` as needed
+- No custom upload controller actions required - DirectUpload handles everything
+- File references can be stored as URLs in JSONB fields or as ActiveStorage attachments depending on use case
+
 ### Frontend Components
 #### UI Framework
 - Using Mantine v8+

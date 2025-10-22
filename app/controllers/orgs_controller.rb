@@ -35,7 +35,7 @@ class OrgsController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/orgs/:org_slug/about (org_about)
+  # @route GET /:circle_slug/orgs/:slug/about (about_org)
   def about
     authorize org
 

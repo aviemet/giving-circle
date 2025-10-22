@@ -140,16 +140,6 @@ export const apiCircle: ((
 
 /**
  * Generates rails route to
- * /api/circles(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiCircleIndex: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/circles/:circle_slug/mock(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
@@ -162,15 +152,15 @@ export const apiCircleMock: ((
 
 /**
  * Generates rails route to
- * /api/circles/:circle_slug/presentations/:presentation_slug(.:format)
+ * /api/circles/:circle_slug/presentations/:slug(.:format)
  * @param {any} circleSlug
- * @param {any} presentationSlug
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiCirclePresentation: ((
   circleSlug: RequiredRouteParameter,
-  presentationSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -206,20 +196,6 @@ export const apiCirclePresentationSlides: ((
 
 /**
  * Generates rails route to
- * /api/circles/:circle_slug/presentations/:presentation_slug/sync_slides(.:format)
- * @param {any} circleSlug
- * @param {any} presentationSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiCirclePresentationSyncSlides: ((
-  circleSlug: RequiredRouteParameter,
-  presentationSlug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/circles/:circle_slug/presentations(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
@@ -232,15 +208,15 @@ export const apiCirclePresentations: ((
 
 /**
  * Generates rails route to
- * /api/circles/:circle_slug/templates/:template_slug(.:format)
+ * /api/circles/:circle_slug/templates/:slug(.:format)
  * @param {any} circleSlug
- * @param {any} templateSlug
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiCircleTemplate: ((
   circleSlug: RequiredRouteParameter,
-  templateSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -288,6 +264,20 @@ export const apiCircleTemplates: ((
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/themes/:slug(.:format)
+ * @param {any} circleSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircleTheme: ((
+  circleSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/themes(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options
@@ -295,6 +285,16 @@ export const apiCircleTemplates: ((
  */
 export const apiCircleThemes: ((
   circleSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/circles(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircles: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -315,18 +315,6 @@ export const apiSearches: ((
  * @returns {string} route path
  */
 export const apiSpotlights: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /api/themes/:theme_slug(.:format)
- * @param {any} themeSlug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiTheme: ((
-  themeSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1048,6 +1036,20 @@ export const settingsNotifications: ((
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/presentations/:slug/sync_slides(.:format)
+ * @param {any} circleSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const syncSlidesApiCirclePresentation: ((
+  circleSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /:circle_slug/themes/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} slug
@@ -1375,6 +1377,20 @@ export const themePresentations: ((
  */
 export const updateRailsDiskService: ((
   encodedToken: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/circles/:circle_slug/templates/:slug/upload_image(.:format)
+ * @param {any} circleSlug
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const uploadImageApiCircleTemplate: ((
+  circleSlug: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

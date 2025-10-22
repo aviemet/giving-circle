@@ -11,4 +11,4 @@ alwaysApply: true
    - Only add new information not already documented
    - Place information in the appropriate section
    - If no appropriate section exists, create one
-   - ONLY document project-specific architectural decisions, custom patterns, and non-obvious implementation details
+   - ONLY document project-specific architectural decisions, custom patterns, and non-obvious implementation details. Do not document highly specific workflows; if your documentation would become immediately outdated it's not worth noting.
