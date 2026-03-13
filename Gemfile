@@ -1,46 +1,45 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.4"
+ruby "3.4.8"
 
 # Server
-gem "rails", "~> 8.0.2"
+gem "rails", "~> 8.1.2"
 gem "pg", "~> 1.5"
-gem "puma", "~> 6.0"
+gem "puma", "~> 7.0"
 
 # Assets
-gem "inertia_rails", ">= 3.0.0"
+gem "inertia_rails", ">= 3.1"
 gem "vite_rails", "~> 3.0"
 
 # Models
 gem "active_type", "~> 2.1"
 gem "pg_search", "~> 2.3"
-gem "devise", "~> 4.8"
+gem "devise", "~> 5.0"
 gem "devise_invitable", "~> 2.0"
 gem "rolify", "~> 6.0"
 gem "pundit", "~> 2.3"
-gem "friendly_id", "~> 5.5"
 gem "kaminari", "~> 1.2"
-gem "money-rails", "~> 1.15"
+gem "money-rails", "~> 3.0.0"
 gem "decent_exposure", "~> 3.0"
 gem "boolean_timestamp", "~> 1.1"
 gem "jsonb_accessor", "~> 1.3"
-gem "oj_serializers", "~> 2.0"
-gem "types_from_serializers", "~> 2.1"
 gem "public_activity", "~> 3.0"
 gem "rails-settings-cached", "~> 2.9"
-
+gem "oj_serializers", "~> 2.1"
+gem "types_from_serializers", "~> 2.5"
 
 # Helpers
 gem "factory_bot", ">= 6.4"
 gem "factory_bot_rails", ">=6.4"
+gem "friendly_id", "~> 5.5"
 gem "js-routes", "~> 2.3"
 gem "overmind", "~> 2.5"
-gem "amazing_print", "~> 1.4"
+gem "amazing_print", "~> 2.0"
 gem "good_job", "~> 4.7"
-gem "activerecord-import", "~> 1.7"
+gem "activerecord-import", "~> 2.2"
 gem "mini_magick", "~> 5.1"
-gem "active_storage_validations", "~> 2.0"
+gem "active_storage_validations", "~> 3.0"
 gem "thor", "~> 1.3"
 
 gem "tzinfo-data"
@@ -57,7 +56,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "rspec-rails", "~> 7.1"
+  gem "rspec-rails", "~> 8.0"
   # gem "pry-rails", "~> 0.3.9"
   gem "pry"
   gem "faker"
@@ -91,7 +90,7 @@ group :development do
   gem "guard-livereload", ">= 2.5", require: false
 
   # Security analysis tool
-  gem "brakeman", "~> 6.1", require: false
+  gem "brakeman", "~> 8.0.0", require: false
 
   # Email previews
   gem "letter_opener", "~> 1.10"
@@ -116,7 +115,7 @@ group :test do
   gem "webdrivers"
   gem "generator_spec", ">= 0.9.4"
   gem "database_cleaner-active_record", "~> 2.0"
-  gem "shoulda-matchers", "~> 6.4"
+  gem "shoulda-matchers", "~> 7.0.0"
   gem "simplecov", "~> 0.22.0"
-  gem "pundit-matchers", "~> 3.1"
+  gem "pundit-matchers", "~> 4.0"
 end
