@@ -3,13 +3,51 @@ import { themeToVars } from "@mantine/vanilla-extract"
 
 import breakpoints from "./breakpoints.mjs"
 
+export type PuckPalette = {
+	light: Record<string, string>
+	dark: Record<string, string>
+}
+
+export type EditorSemanticColors = {
+	light: {
+		inputBorder: string
+		inputBg: string
+		inputText: string
+	}
+	dark: {
+		inputBorder: string
+		inputBg: string
+		inputText: string
+	}
+}
+
+export type EditorSemanticVarMap = Record<keyof EditorSemanticColors["light"], string[]>
+
+export const EDITOR_SEMANTIC_VAR_MAP: EditorSemanticVarMap = {
+	inputBorder: ["--editor-input-border", "--puck-color-grey-09", "--puck-color-grey-08"],
+	inputBg: ["--editor-input-bg"],
+	inputText: ["--editor-input-text"],
+}
+
+export const EDITOR_SEMANTIC_KEYS: (keyof EditorSemanticColors["light"])[] = ["inputBorder", "inputBg", "inputText"]
+
 type CustomMantineTheme = Omit<MantineTheme, "spacing" | "other"> & {
 	spacing: Partial<MantineSpacingValues & {
 		xxl: string
 		xxs: string
 	}>
-	other: any
+	other: {
+		table: { sortButtonHeight: number, sortButtonWidth: number }
+		header: { height: number }
+		navbar: { width: { closed: number, open: number } }
+		footer: { height: number }
+		bodyColor: { light: string, dark: string }
+		editorSemanticColors: EditorSemanticColors
+		puck: PuckPalette
+	}
 }
+
+export type CustomThemeOther = CustomMantineTheme["other"]
 
 export const defaultColor = "blue"
 
@@ -62,6 +100,63 @@ export const themeObject: Partial<CustomMantineTheme> = {
 		},
 		footer: {
 			height: 36,
+		},
+		bodyColor: {
+			light: "var(--mantine-color-gray-0)",
+			dark: "var(--mantine-color-dark-7)",
+		},
+		editorSemanticColors: {
+			light: {
+				inputBorder: "var(--mantine-color-gray-4)",
+				inputBg: "var(--mantine-color-gray-0)",
+				inputText: "var(--mantine-color-dark-0)",
+			},
+			dark: {
+				inputBorder: "var(--mantine-color-dark-4)",
+				inputBg: "var(--mantine-color-dark-6)",
+				inputText: "var(--mantine-color-white)",
+			},
+		},
+		puck: {
+			light: {
+				white: "var(--mantine-color-gray-0)", // DrawerItem, right sidebar, input surfaces
+				black: "var(--mantine-color-dark-9)", // Primary text
+				"grey-01": "var(--mantine-color-gray-0)", // ActionBar (top bar) background
+				"grey-02": "var(--mantine-color-gray-2)", // Section header bg, right-sidebar input bg (recessed)
+				"grey-03": "var(--mantine-color-gray-7)", // LayerTree text (Outline) – readable on gray-2
+				"grey-04": "var(--mantine-color-gray-7)", // Input/field label text
+				"grey-05": "var(--mantine-color-gray-8)", // ComponentList + LayerTree zone title – strong contrast
+				"grey-06": "var(--mantine-color-gray-6)", // Canvas loader, misc text
+				"grey-07": "var(--mantine-color-gray-6)", // LayerTree helper text
+				"grey-08": "var(--mantine-color-gray-4)", // ActionBar labels, Layer icon, borders
+				"grey-09": "var(--mantine-color-gray-4)", // Input/sidebar borders, DropZone outline
+				"grey-10": "var(--mantine-color-gray-3)", // Table row borders
+				"grey-11": "var(--mantine-color-gray-1)", // ViewportControls, PuckCanvas bg
+				"grey-12": "var(--mantine-color-gray-2)", // Left sidebar (tinted so white items pop)
+			},
+			dark: {
+				white: "var(--mantine-color-dark-6)", // DrawerItem, right sidebar, input surfaces
+				black: "var(--mantine-color-white)", // Primary text
+				"grey-01": "var(--mantine-color-dark-8)", // ActionBar (top bar) background
+				"grey-02": "var(--mantine-color-dark-7)", // Section header bg, right-sidebar input bg (recessed)
+				"grey-03": "var(--mantine-color-dark-3)", // LayerTree text (Outline) – readable on dark-8
+				"grey-04": "var(--mantine-color-dark-4)", // Input/field label text
+				"grey-05": "var(--mantine-color-gray-0)", // ComponentList + LayerTree zone title – strong contrast
+				"grey-06": "var(--mantine-color-dark-4)", // Canvas loader, misc text
+				"grey-07": "var(--mantine-color-dark-4)", // LayerTree helper text
+				"grey-08": "var(--mantine-color-gray-5)", // ActionBar labels, Layer icon, borders
+				"grey-09": "var(--mantine-color-dark-4)", // Input/sidebar borders, DropZone outline
+				"grey-10": "var(--mantine-color-dark-5)", // Table row borders
+				"grey-11": "var(--mantine-color-dark-6)", // ViewportControls bg, PuckCanvas bg
+				"grey-12": "var(--mantine-color-dark-8)", // Left sidebar (darker than white = items pop)
+				"azure-04": "var(--mantine-color-primary-4)", // ComponentList/DrawerItem hover text, selection accent
+				"azure-05": "var(--mantine-color-primary-5)", // Focus outline, selection border
+				"azure-08": "var(--mantine-color-dark-4)", // DropZone dashed outline when selected/hover
+				"azure-09": "var(--mantine-color-dark-5)", // DropZone selected/hover background (color-mix)
+				"azure-10": "var(--mantine-color-dark-5)", // ComponentList title active state
+				"azure-11": "var(--mantine-color-dark-5)", // ComponentList/DrawerItem hover & selected bg, ArrayField expanded
+				"azure-12": "var(--mantine-color-dark-6)", // Hover tint, select dropdown hover
+			},
 		},
 	},
 }

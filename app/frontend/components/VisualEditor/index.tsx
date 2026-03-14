@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react"
 import { Config, createUsePuck, Puck, type Data } from "@measured/puck"
 import clsx from "clsx"
-import { useState, Suspense } from "react"
+import { useEffect, useRef, useState, Suspense } from "react"
 import "@measured/puck/puck.css"
 
 import { Menu, Box, Button, Divider, AsyncBoundary, ErrorBoundary } from "@/components"
@@ -25,12 +25,25 @@ interface VisualEditorProps {
 const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templateKey }: VisualEditorProps) => {
 	const { data: mockCircle, isLoading } = useMockCircle()
 
+	const previewChannelRef = useRef<BroadcastChannel | null>(null)
+
 	const [data, setData] = useLocalStorage<Partial<Data>>({
 		key: `puck-editor-${templateKey ?? "data"}`,
 		defaultValue: initialData ?? {},
 	})
 
 	const [isDirty, setIsDirty] = useState(false)
+
+	useEffect(() => {
+		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
+
+		previewChannelRef.current = new BroadcastChannel("visual-editor-preview")
+
+		return () => {
+			previewChannelRef.current?.close()
+			previewChannelRef.current = null
+		}
+	}, [])
 
 	const handleSave = async(data: Data) => {
 		if(!onSave) return
@@ -41,19 +54,40 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 		} catch(_error) { }
 	}
 
+	const sendToPreview = (payload: { type: "update", data: Data }) => {
+		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
+		let channel = previewChannelRef.current
+		if(!channel) {
+			channel = new BroadcastChannel("visual-editor-preview")
+			previewChannelRef.current = channel
+		}
+		try {
+			channel.postMessage(payload)
+		} catch{
+			previewChannelRef.current = null
+			channel = new BroadcastChannel("visual-editor-preview")
+			previewChannelRef.current = channel
+			try {
+				channel.postMessage(payload)
+			} catch{
+				previewChannelRef.current = null
+			}
+		}
+	}
+
 	const handleChange = (changed: Data) => {
-		// console.log({ changed })
 		setIsDirty(true)
 		setData(changed)
+		sendToPreview({ type: "update", data: changed })
 	}
 
 	return (
 		<Box className={ clsx(classes.puckRoot) }>
 			<AsyncBoundary isLoading={ isLoading }>
-				<PresentationDataProvider value={ { circle: mockCircle as Schema.CirclesMock } }>
+				<PresentationDataProvider value={ { circle: mockCircle!, isEditor: true } }>
 					<ErrorBoundary>
 						<Puck
-							config={ config as Config }
+							config={ config }
 							data={ data }
 							iframe={ { enabled: false } }
 							onPublish={ handleSave }
@@ -65,6 +99,16 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 
 									return (
 										<Button.Group>
+											<Button
+												variant="default"
+												onClick={ () => {
+													window.sessionStorage.setItem("puck-preview-data", JSON.stringify(appState.data))
+													sendToPreview({ type: "update", data: appState.data })
+													window.open("/preview/slide", "_blank")
+												} }
+											>
+												Open preview
+											</Button>
 											<Button
 												onClick={ () => handleSave(appState.data) }
 												leftSection={ <SaveIcon /> }

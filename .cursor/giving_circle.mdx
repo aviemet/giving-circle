@@ -43,12 +43,10 @@
 
 ### Development Guidelines
 - Changes must be atomic and focused
-- TypeScript is used for all JavaScript code
-  - Start with most restrictive type definitions
-  - Avoid `any`, `unknown`, and type casting with `as`
-  - Prefer existing type definitions and interfaces
-  - Use generics, Records, and Mapped types before inline types
-  - Type assertions are a last resort
+- Frontend: no default exports; use named exports only (except for the app/frontend/pages directory, those all MUST be default exports). React components use function declarations: `export function ComponentName({ ...props }: Props) { ... }`. Barrel files re-export with `export { X } from "./Y"`. Inertia page modules may export a named `Page` (e.g. `export const Page = withLayout(Inner, "layout")`) for the resolver.
+- When checking HTTP response status, use exact status equality (e.g. 201), not range checks.
+- TypeScript: strict types, prefer existing types and generics over inline types. Do not use type assertions (as, as unknown as). Do not add explicit return type annotations when TypeScript can infer them; only annotate when intent is genuinely ambiguous. Fix type errors by correcting the types (e.g. union types, generics), not by casting.
+- Nested ternaries are disallowed; use `if`/`else` or early returns.
 
 ### Code Style
 - No spaces between operators and parentheses: `if(condition)`, `for(item)`, `while(condition)`
@@ -56,6 +54,7 @@
 
 ### ESLint Configuration
 - Using `@stylistic/eslint-plugin` for code formatting
+- Using `eslint` v10 flat config with `eslint-plugin-import` wrapped via `@eslint/compat.fixupPluginRules` to keep `import/*` rules (including `import/order`) working despite removed legacy `SourceCode` helpers in ESLint 10
 
 ## Feature Documentation
 *Document completed features and their core functionality here*
@@ -147,14 +146,19 @@
 #### VisualEditor Dynamic Data System
 - Uses `PresentationDataProvider` context to provide data to components
 - Context accepts either mock data (for editor preview) or real data (for public presentation)
-- Context provides: `circle`, `theme`, and `presentation` objects
+- Context provides: `circle`, `theme`, `presentation`, and optional `isEditor` flag
 - Hook `usePresentationData` evaluates dynamic tags in content strings
 - Components using dynamic data must be wrapped as React components (not inline render functions)
-- Editor wraps components with mock circle data for preview
-- Public presentation layout wraps components with actual presentation data
-- `dataAccess` configuration defines available data paths for tag evaluation
+- Editor wraps components with mock circle data and sets `isEditor: true` so iterators show a single editable child with a "Repeats for each…" label
+- Public presentation layout wraps components with actual presentation data (including `presentation.orgs` from serializer); memberships are lazy-loaded via `GET /:circle_slug/p/:presentation_slug/memberships` when needed
+- `IteratorItemProvider` (VisualEditor/dynamicData) supplies `pathPrefix`, `currentItem`, and `index` when rendering inside an iterator; `usePresentationData` resolves paths like `presentation.org[].name` from `currentItem` when the path matches the iterator's `pathPrefix`
+- `buildDataStructure` (dataAccess.ts) uses `contextData.presentation?.orgs` when present, else mock circle orgs; presentation membership comes from context or mock
 - Layout components control the `PresentationDataProvider` context for their entire page hierarchy
 - Puck's `Render` component relies on parent layout's context provider to enable dynamic data resolution
+- Slot components in the editor need a minimum height when empty so the drop zone is targetable; pass `minEmptyHeight` (e.g. 128) to the slot render component in configs that use `type: "slot"`
+- Slide preview: editor "Open preview" button writes current Puck data to sessionStorage key `puck-preview-data` and opens `/preview/slide`; Preview/Slide page reads that key (via lazy `useState` initializer), wraps with mock `PresentationDataProvider`, and renders `Render` with the stored data. Live updates use `BroadcastChannel` ("visual-editor-preview"); when the preview tab closes it closes the channel, so the editor guards `postMessage` in try/catch and recreates the channel on next send to avoid InvalidStateError
+- VisualEditor (Puck) theming: Puck palette is defined in `lib/theme.ts` under `theme.other.puck` as `{ light, dark }` maps of Puck var names to Mantine CSS variable references. Dark palette includes `azure-*` (selection/drop zone) so selected components use dark backgrounds and heading text (default #FFFFFF) meets contrast. Puck theming is symmetric for light and dark: both palettes define the same hierarchy (panel vs section header vs content vs text/borders). Light: left sidebar grey-12 (gray-2), drawer items white (gray-0), section headers grey-02 (gray-2), LayerTree/Outline grey-03/05/07 (gray-7/8/6) for readable text; right-sidebar inputs and Heading RichTextEditor use grey-02 (recessed). Dark: same roles with dark-* (grey-12 dark-8, white dark-6, etc.). Puck.css: Outline block (ComponentList-content containing LayerTree) gets grey-02 background; LayerTree/Layer text forced to puck-color-black for contrast; right-sidebar RichTextEditor-content uses grey-02 so Heading title input matches other inputs. `CSSVariablesResolver` emits `--puck-color-*` and `--mantine-color-body` from `theme.other.bodyColor`
+- Editor semantic colors (single source for Mantine + Puck): `theme.other.editorSemanticColors` in `lib/theme.ts` has `light`/`dark` with keys `inputBorder`, `inputBg`, `inputText` (Mantine var refs). Change a value there to update both design systems. `EDITOR_SEMANTIC_VAR_MAP` maps each key to CSS var names (e.g. inputBorder → `--editor-input-border`, `--puck-color-grey-09`, `--puck-color-grey-08`). Resolver writes those vars from the store after applying the puck palette. Puck.css uses `--editor-input-border`, `--editor-input-bg`, `--editor-input-text` for all inputs and RichTextEditor (Heading title and sidebar inputs)
 
 #### State Management
 - Server state: Inertia.js
@@ -162,12 +166,13 @@
 - Form state: use-inertia-form
 
 #### Type System
-- Strict TypeScript throughout
-- No use of `any`, `unknown`, or type casting with `as`
-- Prefer existing type definitions and interfaces
-- Use generics, Records, and Mapped types before inline types
-- Type assertions as last resort
-- Auto-generated types for serializers
+- Strict TypeScript; prefer existing types and generics.
+- **NEVER use type assertions (typecasting).** No `as`, no `as unknown as`, no `as any`. If something does not type-check, fix the types (e.g. add a union type, widen a generic, export a type the API accepts). Casting is a project rule violation.
+- **NEVER add explicit return types** on functions when the return type can be inferred. Let TypeScript infer. Only add a return type when it is required for a public API or when inference is genuinely wrong/ambiguous.
+- Do not use `any` or `unknown` as escape hatches; do not add unnecessary type annotations on variables when the literal or expression already satisfies the expected type.
+- These TypeScript rules are non-negotiable. When in doubt, try without the cast or annotation first; the code often already type-checks.
+- Ruby constants can be exported to TS via rails types:generate; add a subtask in types.rake so it stays in sync.
+- moduleResolution "bundler" is required for subpath exports (e.g. tiptap menus).
 
 #### URL Routing & Navigation
 - Using js-routes gem for Rails route generation in TypeScript

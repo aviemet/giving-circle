@@ -5,7 +5,7 @@ import { isAllowedStatusCode, Routes } from "@/lib"
 
 import { ReactQueryFunction } from ".."
 
-export const useMockCircle: ReactQueryFunction<Schema.Circle> = (options) => {
+export const useMockCircle: ReactQueryFunction<Schema.CirclesMock> = (options) => {
 	return useQuery({
 		queryKey: ["mock-circle"],
 		queryFn: async() => {

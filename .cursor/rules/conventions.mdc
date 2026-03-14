@@ -4,4 +4,10 @@ globs:
 alwaysApply: true
 ---
 
+# Conventions
+
+Your primary function is to write human readable code.
+
 Only work on the task at hand. Limit the scope of your response to exactly what is being worked on in the moment.
+
+Use only standard ASCII punctuation. Never use curly/smart quotes (e.g. ' or ' for apostrophe; use '), em-dashes (use a hyphen), or other Unicode punctuation. This applies to all generated or edited text, including comments, docs, and commit messages.

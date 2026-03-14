@@ -7,7 +7,7 @@ import React, { useMemo } from "react"
 import { Flash } from "@/components"
 import { toKebabCase } from "@/lib"
 import { useInit } from "@/lib/hooks"
-import { theme as themeObject, vars } from "@/lib/theme"
+import { EDITOR_SEMANTIC_KEYS, EDITOR_SEMANTIC_VAR_MAP, theme as themeObject, vars, type CustomThemeOther } from "@/lib/theme"
 import useLayoutStore from "@/store/LayoutStore"
 
 import "./reset.css"
@@ -17,6 +17,16 @@ import "@mantine/dates/styles.css"
 import "@mantine/notifications/styles.css"
 import "mantine-contextmenu/styles.layer.css"
 import "./global.css"
+
+function isCustomThemeOther(other: unknown): other is CustomThemeOther {
+	return (
+		typeof other === "object" &&
+		other !== null &&
+		"bodyColor" in other &&
+		"puck" in other &&
+		"editorSemanticColors" in other
+	)
+}
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	/**
@@ -40,6 +50,31 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 					light[`--mantine-color-primary-${toKebabCase(key)}`] = val
 				}
 			})
+
+			const other = resolverTheme.other
+			if(isCustomThemeOther(other)) {
+				light["--mantine-color-body"] = other.bodyColor.light
+				dark["--mantine-color-body"] = other.bodyColor.dark
+				if(other.puck.light) {
+					for(const [key, value] of Object.entries(other.puck.light)) {
+						light[`--puck-color-${key}`] = value
+					}
+				}
+				if(other.puck.dark) {
+					for(const [key, value] of Object.entries(other.puck.dark)) {
+						dark[`--puck-color-${key}`] = value
+					}
+				}
+				for(const semanticKey of EDITOR_SEMANTIC_KEYS) {
+					const varNames = EDITOR_SEMANTIC_VAR_MAP[semanticKey]
+					const lightVal = other.editorSemanticColors.light[semanticKey]
+					const darkVal = other.editorSemanticColors.dark[semanticKey]
+					for(const varName of varNames) {
+						if(lightVal) light[varName] = lightVal
+						if(darkVal) dark[varName] = darkVal
+					}
+				}
+			}
 
 			return {
 				variables,

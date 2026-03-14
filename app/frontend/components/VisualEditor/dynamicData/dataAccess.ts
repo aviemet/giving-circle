@@ -101,17 +101,20 @@ interface DataStructure {
 	}
 }
 
+type PresentationWithMembership = Schema.PresentationsPresentation & { membership?: Schema.MembershipsPersisted[] }
+
 export const buildDataStructure = (dataAccess: DataAccess[], contextData: PresentationDataContextValue): DataStructure => {
 	const isMockCircle = "themes" in contextData.circle && "orgs" in contextData.circle && "memberships" in contextData.circle
 	const mockCircle = isMockCircle ? contextData.circle as Schema.CirclesMock : null
+	const presentation = contextData.presentation as PresentationWithMembership | undefined
 
 	const structure: DataStructure = {
 		circle: contextData.circle,
 		theme: contextData.theme || (mockCircle?.themes?.[0]) || { name: "Sample Theme", status: "active" },
 		presentation: {
 			name: contextData.presentation?.name || "Sample Presentation",
-			org: mockCircle?.orgs || [],
-			membership: mockCircle?.memberships || [],
+			org: presentation?.orgs ?? mockCircle?.orgs ?? [],
+			membership: presentation?.membership ?? mockCircle?.memberships ?? [],
 		},
 	}
 

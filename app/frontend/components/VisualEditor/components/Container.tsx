@@ -1,11 +1,17 @@
 import { Slot, type ComponentConfig } from "@measured/puck"
+import clsx from "clsx"
 
 import { Container } from "@/components"
 
-import { alignmentField } from "../fields"
-import { AlignmentValue } from "../fields/alignment"
+import {
+	alignmentField,
+	layoutStyleFields,
+	type LayoutStyleProps,
+} from "../fields"
+import { type AlignmentValue } from "../fields/alignment"
+import { buildLayoutStyle } from "../fields/layout"
 
-export type ContainerProps = {
+export type ContainerProps = LayoutStyleProps & {
 	content: Slot
 	padding: number
 	alignment: AlignmentValue
@@ -13,6 +19,7 @@ export type ContainerProps = {
 
 export const containerConfig: ComponentConfig<ContainerProps> = {
 	fields: {
+		...layoutStyleFields(),
 		content: { type: "slot" },
 		padding: { type: "number" },
 		alignment: alignmentField({
@@ -23,13 +30,17 @@ export const containerConfig: ComponentConfig<ContainerProps> = {
 		content: [],
 		padding: 16,
 		alignment: "left",
+		flexWrap: "wrap",
 	},
-	render: ({ content: Content, padding, alignment }) => {
+	render: ({ content: Content, padding, alignment, puck, ...styleProps }) => {
 		return (
 			<Container
+				ref={ puck.dragRef }
+				className={ clsx("presentation_container") }
 				component={ Content }
 				p={ padding }
 				ta={ alignment }
+				style={ buildLayoutStyle(styleProps) }
 			/>
 		)
 	},

@@ -4,7 +4,7 @@ class Presentations::ActiveController < ApplicationController
 
   expose :presentations, -> { search(theme.presentations.includes_associated) }
   expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations.includes_associated }, find_by: :slug
-  expose :public_presentation, -> { Presentation.find_by(slug: params[:presentation_slug]) }
+  expose :public_presentation, -> { Presentation.includes(:orgs, :slides).find_by(slug: params[:presentation_slug]) }
 
   strong_params :presentation, permit: [:name]
 
@@ -21,6 +21,16 @@ class Presentations::ActiveController < ApplicationController
       presentation: public_presentation.render(:presentation),
       theme: public_presentation.theme.render(:persisted),
       circle: circle.render(:persisted)
+    }
+  end
+
+  def public_memberships
+    authorize public_presentation, policy_class: Presentation::ActivePolicy
+
+    memberships = public_presentation.memberships
+
+    render json: {
+      memberships: memberships.map { |m| m.render(:persisted) }
     }
   end
 

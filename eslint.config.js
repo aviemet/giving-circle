@@ -5,7 +5,7 @@ import importPlugin from "eslint-plugin-import"
 import jsoncPlugin from "eslint-plugin-jsonc"
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y"
 import reactHooksPlugin from "eslint-plugin-react-hooks"
-import jsoncParser from "jsonc-eslint-parser"
+import { parseForESLint } from "jsonc-eslint-parser"
 
 const ignores = [
 	"app/javascript/**/*",
@@ -20,6 +20,23 @@ const ignores = [
 ]
 
 export default [
+	{
+		files: ["**/*.mjs"],
+		languageOptions: {
+			parser: tsParser,
+			parserOptions: {
+				ecmaVersion: "latest",
+				sourceType: "module",
+			},
+		},
+		settings: {
+			"import/resolver": {
+				typescript: {
+					project: "./tsconfig.json",
+				},
+			},
+		},
+	},
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
 	// Typescript/Javascript files
@@ -45,7 +62,9 @@ export default [
 				version: "detect",
 			},
 			"import/resolver": {
-				typescript: {},
+				typescript: {
+					project: "./tsconfig.json",
+				},
 			},
 			"jsx-a11y": {
 				polymorphicPropName: "component",
@@ -123,8 +142,8 @@ export default [
 				overrides: {
 					"!": false,
 					"!!": false,
-					"+": false,
-					"-": false,
+					"+": true,
+					"-": true,
 				},
 			}],
 			"@stylistic/comma-spacing": ["error", {
@@ -150,9 +169,6 @@ export default [
 			"no-unused-vars": ["warn", {
 				vars: "all",
 				args: "none",
-				caughtErrorsIgnorePattern: "^_",
-				destructuredArrayIgnorePattern: "^_",
-				ignoreRestSiblings: true,
 			}],
 			"eqeqeq": "error",
 			"no-console": "warn",
@@ -206,7 +222,7 @@ export default [
 			json,
 		},
 		languageOptions: {
-			parser: jsoncParser,
+			parser: { parseForESLint },
 		},
 		rules: {
 			"json/no-duplicate-keys": "error",

@@ -57,6 +57,8 @@ Rails.application.routes.draw do
 
   draw(:api)
 
+  get "/preview/slide", to: "preview#slide", as: :preview_slide
+
   # Public presentation route (shorter URL)
   get "/:circle_slug/p/:presentation_slug", to: "presentations/active#public_show", as: :circle_public_presentation
 
