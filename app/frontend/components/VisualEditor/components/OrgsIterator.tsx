@@ -52,14 +52,7 @@ const OrgsIteratorDisplay = ({ content: Content }: OrgsIteratorDisplayProps) => 
 	}
 
 	return (
-		<Box
-			style={ {
-				display: "flex",
-				flexWrap: "wrap",
-				flex: 1,
-				minWidth: 0,
-			} }
-		>
+		<>
 			{ orgs.map((org, index) => (
 				<Box key={ org.id } style={ { flex: 1, minWidth: 0 } }>
 					<IteratorItemProvider<Schema.OrgsPersisted>
@@ -73,7 +66,7 @@ const OrgsIteratorDisplay = ({ content: Content }: OrgsIteratorDisplayProps) => 
 					</IteratorItemProvider>
 				</Box>
 			) ) }
-		</Box>
+		</>
 	)
 }
 

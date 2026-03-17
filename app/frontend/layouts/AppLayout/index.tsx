@@ -31,7 +31,7 @@ const AppLayout = ({ children }: LayoutProps) => {
 	return (
 		<AppShell
 			layout="alt"
-			padding="md"
+			padding="sm"
 			header={ {
 				height: theme.other.header.height,
 				collapsed: !headerPinned,

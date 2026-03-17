@@ -12,7 +12,6 @@ import { buildLayoutStyle } from "../fields/layout"
 export type CardProps = LayoutStyleProps & {
 	title: string
 	description: string
-	padding: number
 	backgroundColor: string
 	fontColor: string
 }
@@ -22,7 +21,6 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		...layoutStyleFields(),
 		title: { type: "text" },
 		description: { type: "textarea" },
-		padding: { type: "number", min: 4, max: 64 },
 		backgroundColor: colorField({
 			label: "Background Color",
 		}),
@@ -33,13 +31,12 @@ export const cardConfig: ComponentConfig<CardProps> = {
 	defaultProps: {
 		title: "Topic Title",
 		description: "Topic description...",
-		padding: 16,
 		backgroundColor: "#FEFEFE",
 		fontColor: "#111111",
 	},
-	render: ({ title, description, padding, backgroundColor, fontColor, ...styleProps }) => {
+	render: ({ title, description, backgroundColor, fontColor, ...styleProps }) => {
 		return (
-			<Card style={ { ...buildLayoutStyle(styleProps), padding, backgroundColor } }>
+			<Card style={ { ...buildLayoutStyle(styleProps), backgroundColor } }>
 				<Card.Section></Card.Section>
 				<Text c={ fontColor }>{ description }</Text>
 			</Card>

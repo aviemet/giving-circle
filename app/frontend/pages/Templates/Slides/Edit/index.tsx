@@ -41,7 +41,7 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 	})
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } disablePadding>
 			<Section>
 				<VisualEditor
 					initialData={ slide?.data || {} }

@@ -6,10 +6,11 @@ export const appLayout = css`
 `
 
 export const main = css`
-  padding-top: calc(${ theme.other.header.height }px);
-
   &.paddingDisabled {
-    --app-shell-padding: 0;
+    padding-inline-start: 0 !important;
+    padding-inline-end: 0 !important;
+    padding-top: calc(var(--app-shell-header-offset, 0rem) + var(--app-shell-padding) - 12px);
+    padding-bottom: calc(var(--app-shell-footer-offset, 0rem) + var(--app-shell-padding) - 12px);
   }
 `
 

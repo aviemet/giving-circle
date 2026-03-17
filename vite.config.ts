@@ -5,26 +5,15 @@ import wyw from "@wyw-in-js/vite"
 import { defineConfig } from "vite"
 import FullReload from "vite-plugin-full-reload"
 import RubyPlugin from "vite-plugin-ruby"
-import tsconfigPaths from "vite-tsconfig-paths"
 
 const config = defineConfig({
 	build: {
 		sourcemap: true,
-		rollupOptions: {
-			external: [
-				"./app/frontend/images/*",
-			],
-		},
 	},
 	plugins: [
-		tsconfigPaths(),
 		RubyPlugin(),
 		FullReload(["config/routes.rb", "app/views/**/*"], { delay: 200 }),
-		react({
-			babel: {
-				plugins: ["babel-plugin-macros", "babel-plugin-styled-components"],
-			},
-		}),
+		react(),
 		wyw({
 			include: ["**/*.{ts,tsx}"],
 			babelOptions: {
@@ -34,6 +23,7 @@ const config = defineConfig({
 	],
 	resolve: {
 		dedupe: ["axios"],
+		tsconfigPaths: true,
 		alias: {
 			"@": path.resolve(__dirname, "app", "frontend"),
 		},

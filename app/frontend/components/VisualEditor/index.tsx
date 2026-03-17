@@ -93,6 +93,18 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 							onPublish={ handleSave }
 							onChange={ handleChange }
 							overrides={ {
+								drawer: ({ children }) => (
+									<div className={ classes.puckDrawer }>{ children }</div>
+								),
+								drawerItem: ({ children }) => (
+									<div className={ classes.puckDrawerItem }>{ children }</div>
+								),
+								outline: ({ children }) => (
+									<div className={ classes.puckOutline }>{ children }</div>
+								),
+								fields: ({ children }) => (
+									<div className={ classes.puckFields }>{ children }</div>
+								),
 								headerActions: ({ children }) => {
 									// eslint-disable-next-line react-hooks/rules-of-hooks
 									const appState = usePuck((s) => s.appState)
