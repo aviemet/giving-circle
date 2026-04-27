@@ -3,7 +3,7 @@ import { useEffect } from "react"
 
 import { AppShell } from "@/components"
 import { useHeadroom, useTheme } from "@/lib/hooks"
-import useLayoutStore from "@/store/LayoutStore"
+import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
 import PresentationFooter from "./PresentationFooter"
@@ -12,21 +12,16 @@ import * as classes from "./PresentationLayout.css"
 import PresentationSidebar from "./PresentationSidebar"
 
 const PresentationLayout = ({ children }: LayoutProps) => {
-	const {
-		sidebarOpen,
-		sidebarVisible,
-		mainPaddingDisabled,
-		headerPinned,
-		setHeaderPinned,
-	} = useLayoutStore()
+	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
+	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
+	const mainPaddingDisabled = useLayoutStore((state) => state.mainPaddingDisabled)
+	const setHeaderPinned = useLayoutStore((state) => state.setHeaderPinned)
 	const theme = useTheme()
-	const headroom = useHeadroom({ fixedAt: 120 })
+	const { pinned: isHeaderPinned } = useHeadroom({ fixedAt: 120 })
 
 	useEffect(() => {
-		if(headroom === headerPinned) return
-
-		setHeaderPinned(headroom)
-	}, [headerPinned, headroom, setHeaderPinned])
+		setHeaderPinned(isHeaderPinned)
+	}, [isHeaderPinned, setHeaderPinned])
 
 	return (
 		<AppShell
@@ -34,7 +29,7 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 			padding="md"
 			header={ {
 				height: theme.other.header.height,
-				collapsed: !headerPinned,
+				collapsed: !isHeaderPinned,
 				offset: true,
 			} }
 			navbar={ {

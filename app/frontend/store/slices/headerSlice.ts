@@ -17,5 +17,8 @@ export const createHeaderSlice: StateCreator<HeaderSlice, [], [], HeaderSlice> =
 	setSiteTitle: siteTitle => set(() => ({ siteTitle })),
 
 	headerPinned: true,
-	setHeaderPinned: headerPinned => set(() => ({ headerPinned })),
+	setHeaderPinned: headerPinned => set((state) => {
+		if(state.headerPinned === headerPinned) return state
+		return { headerPinned }
+	}),
 })

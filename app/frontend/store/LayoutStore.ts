@@ -17,7 +17,7 @@ import { createTableSlice } from "./slices/tableSlice"
 
 type LayoutStoreSlices = ColorSlice & SidebarSlice & TableSlice & HeaderSlice & MenuSlice & ContentSlice
 
-const useLayoutStore = create<LayoutStoreSlices>()((...a) => ({
+export const useLayoutStore = create<LayoutStoreSlices>()((...a) => ({
 	...createColorSlice(...a),
 	...createSidebarSlice(...a),
 	...createMenuSlice(...a),
@@ -25,5 +25,3 @@ const useLayoutStore = create<LayoutStoreSlices>()((...a) => ({
 	...createHeaderSlice(...a),
 	...createContentSlice(...a),
 }))
-
-export default useLayoutStore

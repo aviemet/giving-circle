@@ -15,7 +15,7 @@ interface EditSlidesProps {
 // @route: circleTemplatesEditSlide
 const EditSlides = ({ template, slide }: EditSlidesProps) => {
 	const { params } = usePageProps<"circleTemplatesEditSlide">()
-	const { toggleSidebarOpen } = useLayoutStore()
+	const toggleSidebarOpen = useLayoutStore((state) => state.toggleSidebarOpen)
 
 	const updateSlideMutation = useUpdateTemplateSlide({
 		params: { circleSlug: params.circle_slug, templateSlug: params.template_slug, slideSlug: params.slug },

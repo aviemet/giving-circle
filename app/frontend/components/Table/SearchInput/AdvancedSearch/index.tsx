@@ -30,7 +30,7 @@ interface AdvancedSearchProps {
 }
 
 const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
-	const { sidebarOpen } = useLayoutStore()
+	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? "open" : "closed"]
 

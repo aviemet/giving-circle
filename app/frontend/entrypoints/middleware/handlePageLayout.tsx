@@ -10,8 +10,6 @@ import {
 	PublicPresentationLayout,
 } from "@/layouts"
 
-import { PagesObject } from "../application"
-
 const LAYOUT_COMPONENTS: Record<keyof typeof LAYOUTS, ({ children }: LayoutProps) => React.JSX.Element> = {
 	"auth": AuthLayout,
 	"app": AppLayout,
@@ -22,11 +20,19 @@ const LAYOUT_COMPONENTS: Record<keyof typeof LAYOUTS, ({ children }: LayoutProps
 	"unformatted": UnformattedLayout,
 } as const
 
-const handlePageLayout = (page: PagesObject) => {
-	const DefaultLayout = LAYOUT_COMPONENTS[page.default.defaultLayout as keyof typeof LAYOUTS] || AppLayout
-	page.default.layout ||= (children: React.ReactNode) => <DefaultLayout>{ children }</DefaultLayout>
+type LayoutKey = keyof typeof LAYOUTS
 
-	return page.default
+type PageComponent = React.ComponentType & {
+	layout?: (children: React.ReactNode) => React.JSX.Element
+	defaultLayout?: LayoutKey
+}
+
+const handlePageLayout = (page: PageComponent) => {
+	const layoutKey = page.defaultLayout ?? "app"
+	const DefaultLayout = LAYOUT_COMPONENTS[layoutKey] ?? AppLayout
+	page.layout ||= (children: React.ReactNode) => <DefaultLayout>{ children }</DefaultLayout>
+
+	return page
 }
 
 export default handlePageLayout

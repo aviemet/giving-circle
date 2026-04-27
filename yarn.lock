@@ -1887,6 +1887,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inertiajs/vite@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@inertiajs/vite@npm:3.0.3"
+  dependencies:
+    "@inertiajs/core": "npm:3.0.3"
+    tinyglobby: "npm:^0.2.15"
+  peerDependencies:
+    vite: ^7.0.0 || ^8.0.0
+  checksum: 10/1e07c2116fd77c186609e6c2600653c4d4129853be62427f482ad34cd8ca9e8d634a2505a5b8ef10b841e0504fe517dc268691bface78b359f6759eaf41b2f12
+  languageName: node
+  linkType: hard
+
 "@inquirer/ansi@npm:^2.0.5":
   version: 2.0.5
   resolution: "@inquirer/ansi@npm:2.0.5"
@@ -7761,6 +7773,7 @@ __metadata:
     "@eslint/json": "npm:^1.2.0"
     "@fragaria/address-formatter": "npm:^6.7.1"
     "@inertiajs/react": "npm:^3.0.3"
+    "@inertiajs/vite": "npm:^3.0.3"
     "@linaria/core": "npm:^7.0.0"
     "@mantine/core": "npm:^9.1.0"
     "@mantine/dates": "npm:^9.1.0"

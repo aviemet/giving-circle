@@ -5,6 +5,30 @@ alwaysApply: false
 ---
 You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Mantine, TanStack Query, CSS, HTML, UI and UX.
 
+## Typecasting
+
+DO NOT TYPECAST!
+I repeat: DO NOT TYPECAST!
+Consider the keyword `as` to be forbidden (unless using it on a list via `as const`)
+
+DO NOT USE `any`
+I repeat: DO NOT USE `any`
+Consider the keyword `any` to be forbidden, with NO EXCEPTIONS!
+
+### TypeScript Usage
+
+- Use TypeScript for all javascript code; prefer interfaces over types.
+- DO NOT USE `any`, ever! If a specific type definition can't be derived, use `unknown`, but only as a last resort.
+- Write concise, technical TypeScript code with accurate examples.
+- Avoid enums; use maps instead.
+- Use functional components with TypeScript interfaces.
+- Apply generics to functions, actions, and slices where type flexibility is needed.
+- Utilize TypeScript utility types (Partial, Pick, Omit) for cleaner and reusable code.
+- Prefer interface over type for defining object structures, especially when extending.
+- Use mapped types for creating variations of existing types dynamically.
+- Let TypeScript infer return types when the return value is obvious.
+  - Only specify an explicit return type when inference is ambiguous or you need to constrain a public API surface.
+
 ## Code Style and Structure
 
 - Use functional and declarative programming patterns; avoid classes.
@@ -13,32 +37,24 @@ You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Manti
 - Consider edge cases and error scenarios, for simple edge cases, use the "return early" pattern to avoid nesting.
 - Properly structure files, all frontend code goes in /app/frontend
   - /app/frontend/components for all general purpose, highly reusable components.
+  - /app/frontend/domains for all domain specific components.
   - /app/frontend/features for all feature specific components.
   - /app/frontend/layouts for all layout components.
   - /app/frontend/lib for all non-react code.
   - /app/frontend/pages for all top-level Inertia pages. These components are the entry point for each route from the server.
   - /app/frontend/queries for all async react-query methods, following the convention and type definitions in /app/frontend/queries/index.ts.
   - /app/frontend/types for any globally used types or interfaces, or any custom types used in serializers. (Do no modify anything in types/serializers as it is all auto generated)
-
-  ### TypeScript Usage
-
-  - Use TypeScript for all javascript code; prefer interfaces over types.
-  - Write concise, technical TypeScript code with accurate examples.
-  - Avoid enums; use maps instead.
-  - Use functional components with TypeScript interfaces.
-  - Apply generics to functions, actions, and slices where type flexibility is needed.
-  - Utilize TypeScript utility types (Partial, Pick, Omit) for cleaner and reusable code.
-  - Prefer interface over type for defining object structures, especially when extending.
-  - Use mapped types for creating variations of existing types dynamically.
-  - DO NOT USE `any`, ever! If a specific type definition can't be derived, use `unknown`, but only as a last resort.
+- Avoid default exports.
 
   ### React Component Architecture
 
   - Use functional components with TypeScript interfaces.
-  - Define components using `const`.
+  - Define components using `export function`.
   - Extract reusable logic into custom hooks.
   - Implement proper component composition.
-  - Implement proper cleanup in `useEffect` hooks.
+  - Implement proper cleanup in useEffect hooks.
+  - Use React 19 new features:
+    - Pass `ref` as a normal prop, and always refactor `forwardRef` to use normal props when you encounter it
 
   ### React Performance Optimization
 
@@ -59,7 +75,6 @@ You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Manti
     - res (response)
     - props (properties)
     - ref (reference)
-    - config (configuration)
 
   ### File Naming Conventions
 
@@ -68,6 +83,7 @@ You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Manti
 
 ## Syntax and Formatting
 
+- Use the "function" keyword for pure functions.
 - Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
 - Use declarative JSX.
 
@@ -93,7 +109,7 @@ You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Manti
   ### E2E Testing
 
   - Use Playwright to write end to end tests, putting test files in app/frontend/tests/e2e.
-  - Don't mock the server, assume that the server will be running in a test environment when running e2e tests.
+  - Don't mock the server, assume that the server will be running in a test environment during when running e2e tests.
 
 ## Accessibility (a11y)
 
@@ -118,11 +134,11 @@ You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Manti
 
 ## UI and Styling
 
-- Use proxied Mantine components for styling. Mantine proxy files are located in app/frontend/components.
-- Use CSS modules for styling, name CSS files using the same name as the root component with the extension `.css.ts`. CSS module files use Linaria and should import the "css" method from `@/lib`.
+- Use proxied Mantine components for styling. Mantine proxy files are located in app/frontend/Components.
+- Use CSS modules for styling, name CSS files using the same name as the root component with the extension ".css.ts". CSS module files use Linaria and should import the "css" method from "@/lib".
 - Implement responsive design; use a mobile-first approach.
 - Use Mantine's dark mode methods for implementing visual themes in CSS files.
-- Always use `clsx` to wrap CSS classes passed to a `className` prop
+- Always use clsx to wrap CSS classes passed to a className prop
 
 ## Global State
 
@@ -132,7 +148,6 @@ You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Manti
 
 ## Performance Optimization
 
-- Minimize `useEffect`, and `setState`.
+- Minimize 'useEffect', and 'setState'.
 - Wrap client components in Suspense with fallback.
 - Optimize images: use WebP format, include size data, implement lazy loading.
-

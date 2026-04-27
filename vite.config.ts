@@ -1,5 +1,6 @@
 import path from "path"
 
+import inertia from "@inertiajs/vite"
 import react from "@vitejs/plugin-react"
 import wyw from "@wyw-in-js/vite"
 import { defineConfig } from "vite"
@@ -12,6 +13,7 @@ const config = defineConfig({
 	},
 	plugins: [
 		RubyPlugin(),
+		inertia(),
 		FullReload(["config/routes.rb", "app/views/**/*"], { delay: 200 }),
 		react(),
 		wyw({

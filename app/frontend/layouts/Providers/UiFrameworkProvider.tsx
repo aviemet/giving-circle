@@ -8,7 +8,7 @@ import { Flash } from "@/components"
 import { toKebabCase } from "@/lib"
 import { useInit } from "@/lib/hooks"
 import { EDITOR_SEMANTIC_KEYS, EDITOR_SEMANTIC_VAR_MAP, theme as themeObject, vars, type CustomThemeOther } from "@/lib/theme"
-import useLayoutStore from "@/store/LayoutStore"
+import { useLayoutStore } from "@/store"
 
 import "./reset.css"
 import "@mantine/core/styles.css"
@@ -32,7 +32,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	/**
 	 * Primary color customization
 	 */
-	const { primaryColor } = useLayoutStore()
+	const primaryColor = useLayoutStore((state) => state.primaryColor)
 
 	const theme = useMemo(() => createTheme({ ...themeObject, primaryColor }), [primaryColor])
 

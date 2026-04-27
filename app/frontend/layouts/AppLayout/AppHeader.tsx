@@ -3,7 +3,8 @@ import { ToggleNavbarButton, UserHeaderMenu } from "@/features"
 import { useLayoutStore } from "@/store"
 
 const Header = () => {
-	const { sidebarOpen, siteTitle } = useLayoutStore()
+	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
+	const siteTitle = useLayoutStore((state) => state.siteTitle)
 
 	return (
 		<Group h="100%" px="md">

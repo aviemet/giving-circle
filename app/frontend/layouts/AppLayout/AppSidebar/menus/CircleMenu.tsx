@@ -8,7 +8,8 @@ import { useLayoutStore } from "@/store"
 
 const CircleMenu = () => {
 	const { active_circle } = usePageProps()
-	const { menuKeys, toggleOpenMenu } = useLayoutStore()
+	const menuKeys = useLayoutStore((state) => state.menuKeys)
+	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 	const location = useLocation()
 
 	useInit(() => {

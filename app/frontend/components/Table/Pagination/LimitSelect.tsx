@@ -4,7 +4,7 @@ import clsx from "clsx"
 
 import { useLocation, usePageProps } from "@/lib/hooks"
 import { useUpdateTablePreferences } from "@/queries"
-import useLayoutStore from "@/store/LayoutStore"
+import { useLayoutStore } from "@/store"
 
 
 import * as classes from "../Table.css"

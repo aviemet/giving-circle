@@ -20,7 +20,8 @@ interface OrgsImportProps {
 const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	const { params } = usePageProps<"themeOrgsImport">()
 
-	const { sidebarVisible, toggleSidebarOpen } = useLayoutStore()
+	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
+	const toggleSidebarOpen = useLayoutStore((state) => state.toggleSidebarOpen)
 	const [displayImportTable, setDisplayImportTable] = useState(false)
 
 	const [pendingOrgs, setPendingOrgs] = useState<Record<string, unknown>[]>([])

@@ -6,7 +6,7 @@ import { Box, Title } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
 import { Routes, withLayout } from "@/lib"
-import useLayoutStore from "@/store/LayoutStore"
+import { useLayoutStore } from "@/store"
 
 interface AppearanceFormData {
 	settings: {
@@ -23,7 +23,8 @@ interface AppearanceSettingsProps {
 // @path: /settings/appearance
 // @route: settingsAppearance
 const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
-	const { primaryColor, setPrimaryColor } = useLayoutStore()
+	const primaryColor = useLayoutStore((state) => state.primaryColor)
+	const setPrimaryColor = useLayoutStore((state) => state.setPrimaryColor)
 	const RevertColorRef = useRef<string>(primaryColor!)
 
 	const handleChange = (color: string) => {

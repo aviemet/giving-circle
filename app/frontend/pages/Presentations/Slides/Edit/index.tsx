@@ -15,7 +15,7 @@ interface EditPresentationSlidesProps {
 // @route: editThemePresentationSlide
 const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesProps) => {
 	const { params } = usePageProps<"editThemePresentationSlide">()
-	const { toggleSidebarOpen } = useLayoutStore()
+	const toggleSidebarOpen = useLayoutStore((state) => state.toggleSidebarOpen)
 
 	const updateSlideMutation = useUpdatePresentationSlide({
 		params: { circleSlug: params.circle_slug, presentationSlug: params.presentation_slug, slideSlug: params.slug },

@@ -1,1 +1,1 @@
-export { default as useLayoutStore } from "./LayoutStore"
+export { useLayoutStore } from "./LayoutStore"

@@ -54,7 +54,7 @@ const TableComponent: TableObject = ({
 	stickyHeaderOffset = 0,
 	...props
 }) => {
-	const { headerPinned } = useLayoutStore()
+	const headerPinned = useLayoutStore((state) => state.headerPinned)
 
 	const stickyHeaderOffsetProp = useMemo(() => {
 		if(!stickyHeader) return undefined

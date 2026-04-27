@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 
 import Breadcrumbs, { type Breadcrumb } from "@/components/Breadcrumbs"
 import { useInit } from "@/lib/hooks"
-import useLayoutStore from "@/store/LayoutStore"
+import { useLayoutStore } from "@/store"
 
 export interface PageProps {
 	children?: React.ReactNode
@@ -24,13 +24,11 @@ const Page = ({
 	breadcrumbs,
 	disablePadding,
 }: PageProps) => {
-	const {
-		sidebarVisible,
-		setSidebarVisible,
-		defaultSiteTitle,
-		setSiteTitle,
-		setMainPaddingDisabled,
-	} = useLayoutStore()
+	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
+	const setSidebarVisible = useLayoutStore((state) => state.setSidebarVisible)
+	const defaultSiteTitle = useLayoutStore((state) => state.defaultSiteTitle)
+	const setSiteTitle = useLayoutStore((state) => state.setSiteTitle)
+	const setMainPaddingDisabled = useLayoutStore((state) => state.setMainPaddingDisabled)
 
 	// Allow pages to set header title
 	const usedTitle = heading || title

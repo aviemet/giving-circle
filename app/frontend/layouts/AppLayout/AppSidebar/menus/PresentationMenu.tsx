@@ -7,7 +7,8 @@ import { useLayoutStore } from "@/store"
 
 const PresentationMenu = () => {
 	const { active_circle, active_theme, active_presentation } = usePageProps()
-	const { menuKeys, toggleOpenMenu } = useLayoutStore()
+	const menuKeys = useLayoutStore((state) => state.menuKeys)
+	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 
 	useInit(() => {
 		toggleOpenMenu("circle", false)

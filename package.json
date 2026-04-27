@@ -21,6 +21,7 @@
   "dependencies": {
     "@fragaria/address-formatter": "^6.7.1",
     "@inertiajs/react": "^3.0.3",
+    "@inertiajs/vite": "^3.0.3",
     "@linaria/core": "^7.0.0",
     "@mantine/core": "^9.1.0",
     "@mantine/dates": "^9.1.0",
