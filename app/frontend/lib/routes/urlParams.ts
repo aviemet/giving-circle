@@ -183,6 +183,9 @@ const urlParams = {
   "apiSpotlights": {
     "params": []
   },
+  "previewSlide": {
+    "params": []
+  },
   "circlePublicPresentation": {
     "params": [
       "circle_slug",
@@ -361,14 +364,14 @@ const urlParams = {
     "params": [
       "circle_slug",
       "theme_slug",
-      "slug"
+      "presentation_slug"
     ]
   },
   "themePresentation": {
     "params": [
       "circle_slug",
       "theme_slug",
-      "slug"
+      "presentation_slug"
     ]
   },
   "themePresentationSlides": {
@@ -401,21 +404,21 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeInteractions": {
+  "themePresentationInteractions": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemeInteraction": {
+  "newThemePresentationInteraction": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemeInteraction": {
+  "editThemePresentationInteraction": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -423,7 +426,7 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeInteraction": {
+  "themePresentationInteraction": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -431,21 +434,21 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeInteractionResponses": {
+  "themePresentationInteractionResponses": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemeInteractionResponse": {
+  "newThemePresentationInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemeInteractionResponse": {
+  "editThemePresentationInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -453,7 +456,7 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeInteractionResponse": {
+  "themePresentationInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -461,21 +464,21 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeElements": {
+  "themePresentationElements": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "newThemeElement": {
+  "newThemePresentationElement": {
     "params": [
       "circle_slug",
       "theme_slug",
       "presentation_slug"
     ]
   },
-  "editThemeElement": {
+  "editThemePresentationElement": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -483,7 +486,7 @@ const urlParams = {
       "slug"
     ]
   },
-  "themeElement": {
+  "themePresentationElement": {
     "params": [
       "circle_slug",
       "theme_slug",

@@ -162,6 +162,9 @@
 - Client-only state: zustand
 - Form state: use-inertia-form
 
+#### Inertia Rails Root
+- Rails renders the Inertia mount via `inertia_root` from `inertia_rails` (default root DOM id is `app`), providing the initial page JSON for the frontend to bootstrap.
+
 #### Type System
 - Strict TypeScript; prefer existing types and generics.
 - **NEVER use type assertions (typecasting).** No `as`, no `as unknown as`, no `as any`. If something does not type-check, fix the types (e.g. add a union type, widen a generic, export a type the API accepts). Casting is a project rule violation.

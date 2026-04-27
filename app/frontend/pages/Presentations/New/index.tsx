@@ -2,7 +2,7 @@ import { Page, Section } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import PresentationForm from "@/features/presentations"
+import PresentationForm from "@/features/presentations/Form"
 
 
 interface NewPresentationProps {
