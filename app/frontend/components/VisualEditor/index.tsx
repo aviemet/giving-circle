@@ -1,11 +1,15 @@
 import { router } from "@inertiajs/react"
-import { Config, createUsePuck, Puck, type Data } from "@measured/puck"
+import { createUsePuck, Puck, type Data } from "@measured/puck"
 import clsx from "clsx"
 import { useEffect, useRef, useState, Suspense } from "react"
 import "@measured/puck/puck.css"
 
 import { Menu, Box, Button, Divider, AsyncBoundary, ErrorBoundary } from "@/components"
-import { SaveIcon, DownArrowIcon, TrashIcon } from "@/components/Icons"
+import {
+	SaveIcon,
+	DownArrowIcon,
+	TrashIcon,
+} from "@/components/Icons"
 import { useLocalStorage } from "@/lib/hooks"
 import { useMockCircle } from "@/queries"
 
@@ -51,22 +55,25 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 		try {
 			await onSave(data)
 			setIsDirty(false)
-		} catch(_error) { }
+		} catch(_) { }
 	}
 
 	const sendToPreview = (payload: { type: "update", data: Data }) => {
 		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
+
 		let channel = previewChannelRef.current
 		if(!channel) {
 			channel = new BroadcastChannel("visual-editor-preview")
 			previewChannelRef.current = channel
 		}
+
 		try {
 			channel.postMessage(payload)
 		} catch{
 			previewChannelRef.current = null
 			channel = new BroadcastChannel("visual-editor-preview")
 			previewChannelRef.current = channel
+
 			try {
 				channel.postMessage(payload)
 			} catch{
@@ -105,7 +112,7 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 								fields: ({ children }) => (
 									<div className={ classes.puckFields }>{ children }</div>
 								),
-								headerActions: ({ children }) => {
+								headerActions: () => {
 									// eslint-disable-next-line react-hooks/rules-of-hooks
 									const appState = usePuck((s) => s.appState)
 

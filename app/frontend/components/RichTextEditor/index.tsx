@@ -1,10 +1,10 @@
 import {
 	RichTextEditor,
-	Link,
 	type RichTextEditorProps as MantineRichTextEditorProps,
 } from "@mantine/tiptap"
 import { Color } from "@tiptap/extension-color"
 import { Highlight } from "@tiptap/extension-highlight"
+import { Link } from "@tiptap/extension-link"
 import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
 import { TextAlign } from "@tiptap/extension-text-align"

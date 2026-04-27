@@ -4,6 +4,7 @@ import { theme, vars } from "@/lib"
 
 export const puckDrawer = css``
 export const puckDrawerItem = css``
+export const puckDrawerItemIcon = css``
 export const puckOutline = css``
 export const puckFields = css``
 
@@ -118,9 +119,21 @@ export const puckRoot = css`
 		}
 
 		.${ puckDrawerItem } [class*="DrawerItem-draggable"] {
+			display: flex;
+			align-items: center;
+			gap: 6px;
 			background-color: var(--puck-color-white);
 			border: 1px solid var(--puck-color-grey-09);
 			padding: 2px 8px 0px 8px;
+		}
+
+		.${ puckDrawerItem } .${ puckDrawerItemIcon } {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 18px;
+			height: 18px;
+			color: var(--puck-color-grey-10);
 		}
 
 		.${ puckOutline } {
