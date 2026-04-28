@@ -7,7 +7,7 @@ import { useLayoutStore } from "@/store"
 
 export interface PageProps {
 	children?: React.ReactNode
-	title?: string
+	title?: string | undefined
 	heading?: string | React.ReactNode
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]

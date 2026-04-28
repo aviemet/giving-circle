@@ -88,7 +88,7 @@ const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
 	return (
 		<Page
 			title="Orgs Import"
-			siteTitle={ siteTitle }
+			heading={ siteTitle }
 		>
 			{ displayImportTable
 				? (

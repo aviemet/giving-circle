@@ -43,8 +43,8 @@ export interface TriggerHandle {
 	trigger: () => void
 }
 
-export const triggerRefAction = (ref: React.RefObject<TriggerHandle>) => {
-	ref?.current?.trigger()
+export const triggerRefAction = (ref: React.RefObject<TriggerHandle | null>) => {
+	ref.current?.trigger()
 }
 
 interface ImportMappingProps<T = Record<string, unknown>> {
@@ -90,6 +90,7 @@ const ImportMapping = <T extends Record<string, unknown>>({
 	const handleSelectChange = (value: string | null, heading: string) => {
 		if(value === null) return
 
+		setErrors([])
 		setHeadingMap(prevState => {
 			const newState = { ...prevState }
 			for(const [csvHeading, dbField] of Object.entries(newState)) {
@@ -101,16 +102,6 @@ const ImportMapping = <T extends Record<string, unknown>>({
 			return newState
 		})
 	}
-
-	/**
-	 * Validate and pass rows to Accept action
-	 */
-
-	useImperativeHandle(triggerAcceptRef, () => ({
-		trigger() {
-			handleAcceptAction?.()
-		},
-	}))
 
 	const [errors, setErrors] = useState<ErrorItem[][]>([])
 
@@ -164,6 +155,12 @@ const ImportMapping = <T extends Record<string, unknown>>({
 		}
 	}
 
+	useImperativeHandle(triggerAcceptRef, () => ({
+		trigger() {
+			handleAcceptAction()
+		},
+	}))
+
 	useImperativeHandle(triggerCancelRef, () => ({
 		trigger() {
 			onCancel?.()
@@ -173,10 +170,6 @@ const ImportMapping = <T extends Record<string, unknown>>({
 	useEffect(() => {
 		if(errors.length > 0) console.error({ errors })
 	}, [errors])
-
-	useEffect(() => {
-		setErrors([])
-	}, [headingMap])
 
 	return (
 		<Box>

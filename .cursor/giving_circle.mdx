@@ -45,7 +45,8 @@
 - Changes must be atomic and focused
 - Frontend: no default exports; use named exports only (except for the app/frontend/pages directory, those all MUST be default exports). React components use function declarations: `export function ComponentName({ ...props }: Props) { ... }`. Barrel files re-export with `export { X } from "./Y"`. Inertia page modules may export a named `Page` (e.g. `export const Page = withLayout(Inner, "layout")`) for the resolver.
 - When checking HTTP response status, use exact status equality (e.g. 201), not range checks.
-- TypeScript: strict types, prefer existing types and generics over inline types. Do not use type assertions (as, as unknown as). Do not add explicit return type annotations when TypeScript can infer them; only annotate when intent is genuinely ambiguous. Fix type errors by correcting the types (e.g. union types, generics), not by casting.
+- TypeScript: strict types, prefer existing types and generics over inline types. Do not use type assertions (as, as unknown as). Do not add explicit return type annotations when TypeScript can infer them; only annotate when intent is genuinely ambiguous. Fix type errors by correcting the types (e.g. union types, generics), not by casting. With React 19 typings, `useRef<SomeHandle>(null)` is `RefObject<SomeHandle | null>`; helpers that call into imperative handles should accept that shape, not `RefObject<SomeHandle>` only.
+- The shared `Page` component sets the app header label via `title` and/or `heading` (`heading` wins for `usedTitle` and can be a React node). `Page` has no `siteTitle` prop; custom header content belongs in `heading`.
 - Nested ternaries are disallowed; use `if`/`else` or early returns.
 
 ### Code Style
