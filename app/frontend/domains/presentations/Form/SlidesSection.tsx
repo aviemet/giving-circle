@@ -20,6 +20,9 @@ export const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 	const { active_theme } = usePageProps()
 	const { getFormData, setValue, clearPathsStartingWith } = useFormFieldContext()
 	const [count, setCount] = useState(presentation.slides?.length ?? 0)
+	const [slideSlugs, setSlideSlugs] = useState<string[]>(
+		() => presentation.slides?.map((slide) => slide.slug) ?? [],
+	)
 	const isRecord = (value: unknown): value is Record<string, unknown> => (
 		value !== null && typeof value === "object" && !Array.isArray(value)
 	)
@@ -36,6 +39,11 @@ export const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 		const pathEntries = flattenToPaths({ presentation: { slides_attributes: newArr } })
 		pathEntries.forEach(([path, val]) => setValue(path, val))
 		setCount(newArr.length)
+		setSlideSlugs((previous) => {
+			const next = [...previous]
+			next.splice(removeIndex, 1)
+			return next
+		})
 	}, [getFormData, clearPathsStartingWith, setValue])
 
 	const addPresentationSlideMutation = useCreatePresentationSlide({
@@ -47,6 +55,10 @@ export const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 			const nextIndex = count
 			Object.entries(data).forEach(([key, value]) => setValue(`presentation.slides_attributes.${nextIndex}.${key}`, value))
 			setCount(nextIndex + 1)
+			if(typeof data.slug === "string" && data.slug.length > 0) {
+				const newSlug = data.slug
+				setSlideSlugs((previous) => [...previous, newSlug])
+			}
 		},
 	})
 
@@ -82,7 +94,11 @@ export const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 						key={ index }
 						path={ `presentation.slides_attributes.${index}` }
 						removeInput={ () => handleRemoveSlide(index) }
-						href={ presentation.slug ? Routes.editThemePresentationSlide(circle.slug, active_theme.slug, presentation.slug, String(index)) : undefined }
+						href={
+							presentation.slug && slideSlugs[index]
+								? Routes.editThemePresentationSlide(circle.slug, active_theme.slug, presentation.slug, slideSlugs[index])
+								: undefined
+						}
 					/>
 				)) }
 			</Flex>

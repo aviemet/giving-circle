@@ -15,6 +15,7 @@
 - When destroying slides, any presentations using that slide as active_slide will have their `active_slide_id` nullified via a `before_destroy` callback
 - SlideParent records are deleted directly in the `before_destroy` callback to avoid foreign key constraint issues during slide destruction
 - Both Presentation and Template models use `dependent: :delete_all` for slide_parents associations as a backup
+- Presentation slide editor links must use each slide's FriendlyId `slug` in paths like `.../slides/:slug/edit`; array indices are not valid slide slugs and yield 404 from `Presentations::SlidesController#edit`
 
 ### API Routes Structure
 - API routes are defined in `config/routes/api.rb` under the `:api` namespace
