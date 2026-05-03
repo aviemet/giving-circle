@@ -42,7 +42,6 @@ const PresentationSlidesIndex = ({ presentation_slides, pagination }: Presentati
 			<IndexTableTemplate
 				title="PresentationSlides"
 				model="presentation_slides"
-				rows={ presentation_slides }
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
@@ -55,7 +54,11 @@ const PresentationSlidesIndex = ({ presentation_slides, pagination }: Presentati
 					deleteRoute: slidesIndexHref,
 				} }
 			>
-				<PresentationSlideTable />
+				<PresentationSlideTable
+					records={ presentation_slides }
+					pagination={ pagination }
+					model="presentation_slides"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

@@ -32,7 +32,6 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 		>
 			<IndexTableTemplate
 				model="presentations"
-				rows={ presentations }
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
@@ -40,7 +39,11 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 					],
 				} }
 			>
-				<PresentationTable />
+				<PresentationTable
+					records={ presentations }
+					pagination={ pagination }
+					model="presentations"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

@@ -69,7 +69,6 @@ const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => 
 				<Card withBorder radius="md">
 					<IndexTableTemplate
 						model="memberships"
-						rows={ memberships }
 						pagination={ pagination }
 						searchPlaceholder="Search Members"
 						contextMenu={ {
@@ -87,7 +86,12 @@ const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => 
 							deleteRoute: "hi",
 						} }
 					>
-						<MembershipTable circle={ active_circle } />
+						<MembershipTable
+							circle={ active_circle }
+							records={ memberships }
+							pagination={ pagination }
+							model="memberships"
+						/>
 					</IndexTableTemplate>
 				</Card>
 			</Stack>

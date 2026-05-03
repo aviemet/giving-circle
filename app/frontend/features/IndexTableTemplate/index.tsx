@@ -1,35 +1,29 @@
 import { Table } from "@/components"
 
-import { IndexTableTitleSection, type IndexTableTitleSectionProps } from "../TableTitleSection"
+import { IndexTableTitleSection, type IndexTableTitleSectionProps } from "./TableTitleSection"
 
 interface IndexTableTemplateProps extends IndexTableTitleSectionProps {
 	model: string
-	rows: Record<string, any>[]
 	pagination: Schema.Pagination
 	search?: boolean
 	advancedSearch?: React.ReactNode
-	actions?: React.ReactNode
 	searchPlaceholder?: string
 }
 
-const IndexTableTemplate = ({
+export function IndexTableTemplate({
 	children,
 	model,
-	rows,
 	pagination,
 	search = true,
 	contextMenu,
 	advancedSearch,
-	actions,
 	searchPlaceholder,
-	...props
-}: IndexTableTemplateProps) => {
+}: IndexTableTemplateProps) {
 	return (
-		<Table.Section { ...props }>
+		<Table.Section>
 			<Table.TableProvider
 				selectable
 				model={ model }
-				rows={ rows }
 				pagination={ pagination }
 			>
 				<IndexTableTitleSection contextMenu={ contextMenu }>
@@ -38,10 +32,8 @@ const IndexTableTemplate = ({
 
 				{ children }
 
-				<Table.Pagination />
+				{ pagination && <Table.Pagination /> }
 			</Table.TableProvider>
 		</Table.Section>
 	)
 }
-
-export { IndexTableTemplate }

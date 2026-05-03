@@ -18,7 +18,7 @@
 #  fk_rails_...  (membership_id => memberships.id)
 #  fk_rails_...  (person_id => people.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe MembershipsPerson do
   describe "Validations" do

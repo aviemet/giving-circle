@@ -12,8 +12,8 @@
 #
 #  index_emails_on_contact_id  (contact_id)
 #
-require 'rails_helper'
-require 'models/shared/contact_method'
+require "rails_helper"
+require "models/shared/contact_method"
 
 RSpec.describe Email do
   describe "Associations" do

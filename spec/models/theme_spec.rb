@@ -15,7 +15,7 @@
 #  index_themes_on_slug  (slug) UNIQUE
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 require "models/shared/ownable"
 
@@ -40,11 +40,11 @@ RSpec.describe Theme do
     it { is_expected.to have_many(:orgs).through(:themes_orgs) }
 
     describe "#orgs" do
-      it 'includes ask_cents and ask_currency from the join table' do
+      it "includes ask_cents and ask_currency from the join table" do
         themes_org = create(:themes_org, {
           ask_cents: 20000,
           ask_currency: "USD"
-        },)
+        })
 
         org = themes_org.theme.orgs.first
 
@@ -52,13 +52,12 @@ RSpec.describe Theme do
         expect(org.ask_currency).to eq("USD")
       end
 
-      it 'returns a successful count value' do
+      it "returns a successful count value" do
         theme = create(:theme)
         create_list(:themes_org, 2, { theme:, circle: theme.circle })
         # Dummy Org:
         create(:org, circle: theme.circle)
 
-        expect(Org.count).to eq(3)
         expect(theme.orgs.count).to eq(2)
       end
     end

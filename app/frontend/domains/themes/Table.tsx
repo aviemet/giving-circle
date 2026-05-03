@@ -1,35 +1,45 @@
-import { Table, Link } from "@/components"
+import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-export const ThemesTable = (props: TableProps) => {
+interface ThemesTableProps {
+	records: Schema.ThemesIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+export function ThemesTable({ records, pagination, model }: ThemesTableProps) {
 	const { params } = usePageProps<"circleThemes">()
+
+	const columns: TableColumn<Schema.ThemesIndex>[] = [
+		{
+			accessor: "name",
+			title: "Title",
+			sortable: true,
+			render: (theme) => <Link href={ Routes.theme(params.circle_slug, theme.slug) }>{ theme.name }</Link>,
+		},
+		{
+			accessor: "slug",
+			title: "Slug",
+			sortable: true,
+			render: (theme) => <Link href={ Routes.theme(params.circle_slug, theme.slug) }>{ theme.slug }</Link>,
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (theme) => <EditButton href={ Routes.editTheme(params.circle_slug, theme.slug) } />,
+		},
+	]
+
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="title">Title</Table.Cell>
-					<Table.Cell sort="slug">Slug</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (theme: Schema.ThemesIndex) => (
-					<Table.Row key={ theme.id }>
-						<Table.Cell>
-							<Link href={ Routes.theme(params.circle_slug, theme.slug) }>{ theme.name }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.theme(params.circle_slug, theme.slug) }>{ theme.slug }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editTheme(params.circle_slug, theme.slug) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

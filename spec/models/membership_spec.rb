@@ -22,29 +22,29 @@
 #
 #  fk_rails_...  (person_id => people.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 require "models/shared/ownable"
 
 RSpec.describe Membership do
-  describe 'Validations' do
-    it 'is valid with valid attributes' do
+  describe "Validations" do
+    it "is valid with valid attributes" do
       expect(build(:membership)).to be_valid
     end
 
-    it 'is invalid with invalid attributes' do
+    it "is invalid with invalid attributes" do
       %i(name number).each do |attr|
         expect(build(:membership, attr => nil)).not_to be_valid
       end
     end
   end
 
-  describe 'Attributes' do
+  describe "Attributes" do
     it { is_expected.to monetize(:funds) }
   end
 
-  describe 'Associations' do
-    it_behaves_like 'ownable'
+  describe "Associations" do
+    it_behaves_like "ownable"
 
     it { is_expected.to belong_to(:person) }
     it { is_expected.to have_many(:others).through(:memberships_people) }
@@ -53,9 +53,9 @@ RSpec.describe Membership do
 
   end
 
-  describe '#members' do
+  describe "#members" do
     context 'with no "others"' do
-      it 'returns the primary member' do
+      it "returns the primary member" do
         person = create(:person)
         membership = create(:membership, person:)
 

@@ -24,5 +24,6 @@ FactoryBot.define do
   factory :presentations_org do
     presentation
     org
+    ask_cents { 0 }
   end
 end

@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import { TemplatesForm } from "@/domains/templates/Form"
+import { TemplateForm } from "@/domains/templates/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -28,7 +28,7 @@ const EditTemplate = ({ template }: EditTemplateProps) => {
 			] }
 		>
 			<Section>
-				<TemplatesForm
+				<TemplateForm
 					method="put"
 					to={ Routes.circleTemplate(template.circle.slug, template.slug) }
 					template={ template }

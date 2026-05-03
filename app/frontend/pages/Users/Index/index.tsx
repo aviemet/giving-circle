@@ -19,7 +19,6 @@ const UserIndex = ({ users, pagination }: UserIndexProps) => {
 		>
 			<IndexTableTemplate
 				model="users"
-				rows={ users }
 				pagination={ pagination }
 			// contextMenu={ {
 			// 	deleteRoute: Routes.users(),
@@ -28,7 +27,7 @@ const UserIndex = ({ users, pagination }: UserIndexProps) => {
 			// 	],
 			// } }
 			>
-				<UsersTable />
+				<UsersTable records={ users } pagination={ pagination } model="users" />
 			</IndexTableTemplate>
 		</Page>
 	)

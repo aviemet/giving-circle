@@ -21,7 +21,7 @@ module Admin
     private
 
     def settings_params
-      params.require(:settings).permit(:primary_color)
+      params.expect(settings: [:primary_color])
     end
   end
 end

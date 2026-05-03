@@ -1,6 +1,7 @@
+---
 en:
   presentations:
     notices:
-      created: "Presentation was successfully created."
-      updated: "Presentation was successfully updated."
-      destroyed: "Presentation was successfully destroyed."
+      created: Presentation was successfully created.
+      destroyed: Presentation was successfully destroyed.
+      updated: Presentation was successfully updated.

@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import { ThemesForm } from "@/domains/themes/Form"
+import { ThemeForm } from "@/domains/themes/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -18,7 +18,7 @@ const EditTheme = ({ theme }: EditThemeProps) => {
 		<Page title={ title }>
 			<Section>
 
-				<ThemesForm
+				<ThemeForm
 					method="put"
 					to={ Routes.theme(params.circle_slug, params.theme_slug) }
 					theme={ theme }

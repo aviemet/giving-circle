@@ -1,52 +1,148 @@
-import { Table, Link } from "@/components"
+import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
-interface PresentationActionTableProps extends TableProps {
+type PresentationInteractionRow = {
+	id: string
+	slug: string
+	action_type: string
+	config: string
+	results: string
+	trigger_type: string
+	trigger_conditions: string
 }
 
-export const PresentationActionTable = (props: PresentationActionTableProps) => {
+interface PresentationActionTableProps {
+	records: PresentationInteractionRow[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+export function PresentationActionTable({ records, pagination, model }: PresentationActionTableProps) {
+	const { params } = usePageProps<"themePresentationInteractions">()
+
+	const columns: TableColumn<PresentationInteractionRow>[] = [
+		{
+			accessor: "slug",
+			title: "Slug",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteraction(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.slug }
+				</Link>
+			),
+		},
+		{
+			accessor: "action_type",
+			title: "Action type",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteraction(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.action_type }
+				</Link>
+			),
+		},
+		{
+			accessor: "config",
+			title: "Config",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteraction(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.config }
+				</Link>
+			),
+		},
+		{
+			accessor: "results",
+			title: "Results",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteraction(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.results }
+				</Link>
+			),
+		},
+		{
+			accessor: "trigger_type",
+			title: "Trigger type",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteraction(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.trigger_type }
+				</Link>
+			),
+		},
+		{
+			accessor: "trigger_conditions",
+			title: "Trigger conditions",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteraction(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.trigger_conditions }
+				</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (row) => (
+				<EditButton
+					href={ Routes.editThemePresentationInteraction(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+						row.slug,
+					) }
+				/>
+			),
+		},
+	]
+
 	return (
-		<Table>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="slug">Slug</Table.Cell>
-					<Table.Cell sort="action_type">Action_type</Table.Cell>
-					<Table.Cell sort="config">Config</Table.Cell>
-					<Table.Cell sort="results">Results</Table.Cell>
-					<Table.Cell sort="trigger_type">Trigger_type</Table.Cell>
-					<Table.Cell sort="trigger_conditions">Trigger_conditions</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (presentation_action: Schema.PresentationActionsIndex) => (
-					<Table.Row key={ presentation_action.id }>
-						<Table.Cell>
-							<Link href={ Routes.presentationAction(presentation_action.id) }>{ presentation_action.slug }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationAction(presentation_action.id) }>{ presentation_action.action_type }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationAction(presentation_action.id) }>{ presentation_action.config }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationAction(presentation_action.id) }>{ presentation_action.results }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationAction(presentation_action.id) }>{ presentation_action.trigger_type }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationAction(presentation_action.id) }>{ presentation_action.trigger_conditions }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editPresentationAction(presentation_action.id) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

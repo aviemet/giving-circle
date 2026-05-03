@@ -15,7 +15,9 @@ describe("pages/Presentations/Slides/Index/index", () => {
 			/>,
 		)
 
-		screen.getByRole("cell", { name: "Name" })
-		screen.getByRole("cell", { name: "Slide 1" })
+		screen.getByLabelText("Search")
+		screen.getByRole("button", { name: "Actions" })
+		screen.getByRole("table")
+		screen.getByRole("checkbox", { name: "Select record 1" })
 	})
 })

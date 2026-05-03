@@ -22,7 +22,6 @@ const ThemeMembersIndex = ({ memberships, pagination, theme, circle }: ThemeMemb
 		<Page title="Memberships">
 			<IndexTableTemplate
 				model="memberships"
-				rows={ memberships }
 				pagination={ pagination }
 				contextMenu={ {
 					label: "Add Memberships to Theme",
@@ -42,7 +41,13 @@ const ThemeMembersIndex = ({ memberships, pagination, theme, circle }: ThemeMemb
 					],
 				} }
 			>
-				<ThemeMembershipsTable circle={ circle } theme={ theme } />
+				<ThemeMembershipsTable
+					circle={ circle }
+					theme={ theme }
+					records={ memberships }
+					pagination={ pagination }
+					model="memberships"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

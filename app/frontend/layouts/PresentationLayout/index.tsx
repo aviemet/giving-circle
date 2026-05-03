@@ -6,6 +6,7 @@ import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
+import { shellRootKeepsHeaderScrollSlot } from "../AppShellHeaderOffsetWhenCollapsed.css"
 import { PresentationFooter } from "./PresentationFooter"
 import { PresentationHeader } from "./PresentationHeader"
 import * as classes from "./PresentationLayout.css"
@@ -40,7 +41,9 @@ export function PresentationLayout({ children }: LayoutProps) {
 					desktop: !sidebarOpen || !sidebarVisible,
 				},
 			} }
-			className={ clsx(classes.presentationLayout) }
+			className={ clsx(classes.presentationLayout, {
+				[shellRootKeepsHeaderScrollSlot]: !isHeaderPinned,
+			}) }
 		>
 			<AppShell.Header withBorder={ false }>
 				<PresentationHeader />

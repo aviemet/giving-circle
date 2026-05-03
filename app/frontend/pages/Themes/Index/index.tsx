@@ -23,7 +23,6 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 		>
 			<IndexTableTemplate
 				model="themes"
-				rows={ themes }
 				pagination={ pagination }
 			// contextMenu={ {
 			// 	options: [
@@ -31,7 +30,7 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 			// 	],
 			// } }
 			>
-				<ThemesTable />
+				<ThemesTable records={ themes } pagination={ pagination } model="themes" />
 			</IndexTableTemplate>
 		</Page>
 	)

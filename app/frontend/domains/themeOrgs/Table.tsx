@@ -1,42 +1,51 @@
 import { Table, Link, Money } from "@/components"
+import { type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-interface ThemeOrgTableProps extends TableProps {
+interface ThemeOrgTableProps {
 	theme: Schema.ThemesInertiaShare
 	circle: Schema.CirclesInertiaShare
+	records: Schema.ThemesOrgsShow[]
+	pagination: Schema.Pagination
+	model: string
 }
 
-export const ThemeOrgTable = ({ theme, circle, ...props }: ThemeOrgTableProps) => {
+export function ThemeOrgTable({ theme, circle, records, pagination, model }: ThemeOrgTableProps) {
+	const columns: TableColumn<Schema.ThemesOrgsShow>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (org) => (
+				<Link href={ Routes.themeOrg(circle.slug, theme.slug, org.slug) }>{ org.name }</Link>
+			),
+		},
+		{
+			accessor: "ask",
+			title: "Ask",
+			sortable: true,
+			render: (org) => (
+				<Link href={ Routes.themeOrg(circle.slug, theme.slug, org.slug) }>
+					<Money>{ org.ask }</Money>
+				</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (org) => <EditButton href={ Routes.editThemeOrg(circle.slug, theme.slug, org.slug) } />,
+		},
+	]
+
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell sort="slug">Ask</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (org: Schema.ThemesOrgsShow) => (
-					<Table.Row key={ org.id }>
-						<Table.Cell nowrap>
-							<Link href={ Routes.themeOrg(circle.slug, theme.slug, org.slug) }>
-								{ org.name }
-							</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.themeOrg(circle.slug, theme.slug, org.slug) }>
-								<Money>{ org.ask }</Money>
-							</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editThemeOrg(circle.slug, theme.slug, org.slug) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
-require_relative '../../lib/url_params_json'
+require_relative "../../lib/url_params_json"
 
-Rails.application.default_url_options = { host: 'localhost', port: 3000 }
+Rails.application.default_url_options = { host: "localhost", port: 3000 }
 
 Rails.application.configure do
   config.after_initialize do

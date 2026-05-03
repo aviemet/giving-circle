@@ -20,7 +20,7 @@
 #  fk_rails_...  (org_id => orgs.id)
 #  fk_rails_...  (theme_id => themes.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ThemesOrg do
   describe "Validations" do

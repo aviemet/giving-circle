@@ -1,5 +1,5 @@
 import { Title, Page, Section } from "@/components"
-import { OrgsForm } from "@/domains/themeOrgs/Form"
+import { ThemeOrgForm } from "@/domains/themeOrgs/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -18,7 +18,7 @@ const EditThemeOrg = ({ org }: EditOrgProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<OrgsForm
+				<ThemeOrgForm
 					method="put"
 					to={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
 					org={ org }

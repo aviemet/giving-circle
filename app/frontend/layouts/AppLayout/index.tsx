@@ -6,6 +6,7 @@ import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
+import { shellRootKeepsHeaderScrollSlot } from "../AppShellHeaderOffsetWhenCollapsed.css"
 import { AppFooter } from "./AppFooter"
 import { AppHeader } from "./AppHeader"
 import * as classes from "./AppLayout.css"
@@ -42,7 +43,9 @@ export function AppLayout({ children }: LayoutProps) {
 				},
 			} }
 			footer={ { height: theme.other.footer.height } }
-			className={ clsx(classes.appLayout) }
+			className={ clsx(classes.appLayout, {
+				[shellRootKeepsHeaderScrollSlot]: !isHeaderPinned,
+			}) }
 		>
 			<AppShell.Header withBorder={ false }>
 				<AppHeader />

@@ -75,7 +75,7 @@ RSpec.describe "ThemeOrgs", type: :request do
               theme:
             }
           }.to change(Org, :count).by(1)
-            .and change(ThemeOrg, :count).by(1)
+            .and change(ThemesOrg, :count).by(1)
         end
 
         it "redirects to the created org" do
@@ -83,7 +83,7 @@ RSpec.describe "ThemeOrgs", type: :request do
 
           post theme_orgs_url(theme.circle, theme), params: { org: attributes_for(:org, theme:) }
 
-          expect(response).to redirect_to(org_url(Org.last))
+          expect(response).to redirect_to(theme_org_url(theme.circle, theme, Org.last))
           expect(flash[:notice]).to eq(I18n.t("theme_orgs.notices.created"))
         end
       end
@@ -113,58 +113,62 @@ RSpec.describe "ThemeOrgs", type: :request do
     login_super_admin
 
     context "with valid parameters" do
-      it "updates the requested org and theme_org" do
-        theme = create(:theme, { circle: @admin.circles.first })
-        org = create(:org, { circle: @admin.circles.first })
-        theme_org = create(:themes_org, theme:, org:)
+      it "updates the requested org" do
+        theme = create(:theme, circle: @admin.circles.first)
+        org = create(:org, circle: @admin.circles.first)
+        create(:themes_org, theme:, org:)
+        new_name = "Updated Org In Theme"
 
-        new_attributes = {
-          theme_org: {
-            ask_cents: 30000000,
-            org_attributes: attributes_for(:org),
-          }
-        }
+        patch theme_org_url(theme.circle, theme, org), params: { org: { name: new_name, description: org.description } }
 
-        patch theme_org_url(theme.circle, theme, org), params: new_attributes
-        theme_org.reload
-
-        expect(org.name).to eq(new_attributes[:org][:name])
-        expect(theme_org.ask_cents).to eq(new_attributes[:theme_org][:ask_cents])
+        expect(org.reload.name).to eq(new_name)
       end
 
       it "redirects to the org" do
-        org = Org.create! valid_attributes
-        patch theme_org_url(org), params: { org: new_attributes }
-        org.reload
-        expect(response).to redirect_to(theme_org_url(org))
+        theme = create(:theme, circle: @admin.circles.first)
+        org = create(:org, circle: @admin.circles.first)
+        create(:themes_org, theme:, org:)
+
+        patch theme_org_url(theme.circle, theme, org), params: { org: { name: org.name, description: org.description } }
+
+        expect(response).to redirect_to(theme_org_url(theme.circle, theme, org))
       end
     end
 
     context "with invalid parameters" do
+      it "redirects back to the edit org page" do
+        theme = create(:theme, circle: @admin.circles.first)
+        org = create(:org, circle: @admin.circles.first)
+        create(:themes_org, theme:, org:)
 
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        org = Org.create! valid_attributes
-        patch theme_org_url(org), params: invalid_attributes
-        expect(response).to have_http_status(:unprocessable_entity)
+        patch theme_org_url(theme.circle, theme, org), params: invalid_attributes
+
+        expect(response).to redirect_to(edit_theme_org_url(theme.circle, theme, org))
       end
-
     end
   end
 
   describe "DELETE /destroy" do
     login_super_admin
 
-    it "destroys the requested org" do
-      org = Org.create! valid_attributes
+    it "removes the org from the theme" do
+      theme = create(:theme, circle: @admin.circles.first)
+      org = create(:org, circle: @admin.circles.first)
+      create(:themes_org, theme:, org:)
+
       expect {
-        delete theme_org_url(org)
-      }.to change(Org, :count).by(-1)
+        delete theme_org_url(theme.circle, theme, org)
+      }.to change { ThemesOrg.where(theme:, org:).count }.by(-1)
     end
 
     it "redirects to the orgs list" do
-      org = Org.create! valid_attributes
-      delete theme_org_url(org)
-      expect(response).to redirect_to(theme_orgs_url)
+      theme = create(:theme, circle: @admin.circles.first)
+      org = create(:org, circle: @admin.circles.first)
+      create(:themes_org, theme:, org:)
+
+      delete theme_org_url(theme.circle, theme, org)
+
+      expect(response).to redirect_to(theme_orgs_url(theme.circle, theme))
     end
   end
 end

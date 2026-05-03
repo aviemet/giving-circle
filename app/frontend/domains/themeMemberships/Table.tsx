@@ -1,42 +1,63 @@
 import { Table, Link } from "@/components"
+import { type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-interface MembershipTableProps extends TableProps {
+interface ThemeMembershipsTableProps {
 	circle: Schema.CirclesInertiaShare
 	theme: Schema.ThemesInertiaShare
+	records: Schema.MembershipsIndex[]
+	pagination: Schema.Pagination
+	model: string
 }
 
-export const MembershipTable = ({ circle, theme, ...props }: MembershipTableProps) => {
+export function ThemeMembershipsTable({ circle, theme, records, pagination, model }: ThemeMembershipsTableProps) {
+	const columns: TableColumn<Schema.MembershipsIndex>[] = [
+		{
+			accessor: "person.first_name",
+			title: "First name",
+			sortable: true,
+			render: (membership) => (
+				<Link href={ Routes.membership(circle.slug, membership.slug) }>
+					{ membership.person.first_name }
+				</Link>
+			),
+		},
+		{
+			accessor: "person.last_name",
+			title: "Last name",
+			sortable: true,
+			render: (membership) => (
+				<Link href={ Routes.membership(circle.slug, membership.slug) }>
+					{ membership.person.last_name }
+				</Link>
+			),
+		},
+		{
+			accessor: "number",
+			title: "Number",
+			sortable: true,
+			render: (membership) => (
+				<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.number }</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (membership) => (
+				<EditButton href={ Routes.editMembership(circle.slug, membership.slug) } />
+			),
+		},
+	]
+
 	return (
-		<Table>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="first_name">First_name</Table.Cell>
-					<Table.Cell sort="last_name">Last_name</Table.Cell>
-					<Table.Cell sort="number">Number</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (membership: Schema.MembershipsIndex) => (
-					<Table.Row key={ membership.id }>
-						<Table.Cell>
-							<Link href={ Routes.themeMembership(circle.slug, theme.slug, membership.slug) }>{ membership.person.first_name }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.themeMembership(circle.slug, theme.slug, membership.slug) }>{ membership.person.last_name }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.themeMembership(circle.slug, theme.slug, membership.slug) }>{ membership.number }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editThemeMembership(circle.slug, theme.slug, membership.slug) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

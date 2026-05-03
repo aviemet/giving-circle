@@ -1,36 +1,68 @@
-import { Table, Link } from "@/components"
+import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
-interface PresentationActionResponseTableProps extends TableProps {
+type PresentationInteractionResponseRow = {
+	id: string
+	slug: string
+	response_data: string
 }
 
-export const PresentationActionResponseTable = (props: PresentationActionResponseTableProps) => {
+interface PresentationActionResponseTableProps {
+	records: PresentationInteractionResponseRow[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+export function PresentationActionResponseTable({
+	records,
+	pagination,
+	model,
+}: PresentationActionResponseTableProps) {
+	const { params } = usePageProps<"themePresentationInteractionResponses">()
+
+	const columns: TableColumn<PresentationInteractionResponseRow>[] = [
+		{
+			accessor: "response_data",
+			title: "Response data",
+			sortable: true,
+			render: (row) => (
+				<Link href={ Routes.themePresentationInteractionResponse(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					row.slug,
+				) }
+				>
+					{ row.response_data }
+				</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (row) => (
+				<EditButton
+					href={ Routes.editThemePresentationInteractionResponse(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+						row.slug,
+					) }
+				/>
+			),
+		},
+	]
+
 	return (
-		<Table>
-			<Table.Head>
-				<Table.Row>
-
-
-					<Table.Cell sort="response_data">Response_data</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (presentation_action_response: Schema.PresentationActionResponsesIndex) => (
-					<Table.Row key={ presentation_action_response.id }>
-
-
-						<Table.Cell>
-							<Link href={ Routes.presentationActionResponse(presentation_action_response.id) }>{ presentation_action_response.response_data }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editPresentationActionResponse(presentation_action_response.id) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

@@ -1,6 +1,7 @@
+---
 en:
   people:
     notices:
-      created: "Person was successfully created."
-      updated: "Person was successfully updated."
-      destroyed: "Person was successfully destroyed."
+      created: Person was successfully created.
+      destroyed: Person was successfully destroyed.
+      updated: Person was successfully updated.

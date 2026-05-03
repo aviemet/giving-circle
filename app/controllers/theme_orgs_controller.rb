@@ -78,7 +78,7 @@ class ThemeOrgsController < ApplicationController
     org.themes << theme
 
     if org.save
-      redirect_to theme_org_path(params[:circle_slug], params[:theme_slug], org), notice: t('theme_orgs.notices.created')
+      redirect_to theme_org_path(params[:circle_slug], params[:theme_slug], org), notice: t("theme_orgs.notices.created")
     else
       redirect_to new_theme_org_path(params[:circle_slug], params[:theme_slug]), inertia: { errors: org.errors }
     end
@@ -89,10 +89,10 @@ class ThemeOrgsController < ApplicationController
   def update
     authorize org
 
-    if theme_org.update(theme_org_params)
-      redirect_to theme_org_path(params[:circle_slug], params[:theme_slug], org), notice: t('orgs.notices.updated')
+    if org.update(org_params)
+      redirect_to theme_org_path(params[:circle_slug], params[:theme_slug], org), notice: t("orgs.notices.updated")
     else
-      redirect_to edit_theme_org(params[:circle_slug], params[:theme_slug], org), inertia: { errors: org.errors }
+      redirect_to edit_theme_org_path(params[:circle_slug], params[:theme_slug], org), inertia: { errors: org.errors }
     end
   end
 
@@ -100,10 +100,8 @@ class ThemeOrgsController < ApplicationController
   def destroy
     authorize org
 
-    theme_org = ThemesOrg.where(theme:, org:)
-
-    theme_org.destroy!
-    redirect_to circle_orgs_path(params[:circle_slug]), notice: t('theme_orgs.notices.destroyed')
+    ThemesOrg.find_by!(theme: theme, org: org).destroy!
+    redirect_to theme_orgs_path(params[:circle_slug], params[:theme_slug]), notice: t("theme_orgs.notices.destroyed")
   end
 
   private
@@ -116,8 +114,8 @@ class ThemeOrgsController < ApplicationController
       if org.save
         theme.orgs << org
         redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: [
-          t('orgs.notices.created'),
-          t('theme_orgs.notices.created')
+          t("orgs.notices.created"),
+          t("theme_orgs.notices.created")
         ]
       else
         redirect_to new_circle_theme_org_path(circle.slug, theme.slug), inertia: { errors: e.message }
@@ -142,9 +140,9 @@ class ThemeOrgsController < ApplicationController
     imported_orgs = Org.import processed_orgs, :track_validation_failures, recursive: true
 
     if imported_orgs[:failed_instances].empty?
-      redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: t('theme_orgs.notices.bulk_created', orgs.size)
+      redirect_to circle_theme_orgs_path(circle.slug, theme.slug), notice: t("theme_orgs.notices.bulk_created", orgs.size)
     else
-      redirect_to circle_theme_orgs_import_path(circle.slug, theme.slug), inertia: { errors: '' }
+      redirect_to circle_theme_orgs_import_path(circle.slug, theme.slug), inertia: { errors: "" }
     end
   end
 

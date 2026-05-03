@@ -17,7 +17,7 @@ class ActivePresentationChannel < ApplicationCable::Channel
     ActivePresentationChannel.broadcast_to(presentation, {
       type: "slide_switched",
       active_slide: slide.id
-    },)
+    })
   end
 
   def update_slide(data)
@@ -30,6 +30,6 @@ class ActivePresentationChannel < ApplicationCable::Channel
       type: "slide_updated",
       slide_id: slide.id,
       content: slide.content
-    },)
+    })
   end
 end

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'rails/generators'
-require 'rails/generators/named_base'
+require "rails/generators"
+require "rails/generators/named_base"
 
 class SerializerGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("templates", __dir__)
 
-  argument :args, type: :array, default: [], banner: 'model_name attribute attribute attribute ...'
+  argument :args, type: :array, default: [], banner: "model_name attribute attribute attribute ..."
 
   class_option :base_only, type: :boolean, default: false, desc: "Only generate the base serializer"
   class_option :only, type: :array, default: [], desc: "Generate only the actions specified"
@@ -16,7 +16,7 @@ class SerializerGenerator < Rails::Generators::NamedBase
   def create_serializer
     validate_options
 
-    template 'serializer.rb', "app/serializers/#{model_name}_serializer.rb"
+    template "serializer.rb", "app/serializers/#{model_name}_serializer.rb"
 
     generate_named_serializers
 
@@ -50,7 +50,7 @@ class SerializerGenerator < Rails::Generators::NamedBase
     return args_attributes unless args_attributes&.empty?
 
     if ar_model&.ancestors&.include?(ActiveRecord::Base)
-      return ar_model.attribute_names.reject { |attr| attr.to_s == 'id' }
+      return ar_model.attribute_names.reject { |attr| attr.to_s == "id" }
     end
 
     []
@@ -77,6 +77,6 @@ class SerializerGenerator < Rails::Generators::NamedBase
   end
 
   def model_exists?
-    File.exist?(Rails.root.join('app', 'models', "#{model_name}.rb"))
+    Rails.root.join("app", "models", "#{model_name}.rb").exist?
   end
 end

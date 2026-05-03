@@ -16,6 +16,7 @@ import "@mantine/tiptap/styles.css"
 import "@mantine/dates/styles.css"
 import "@mantine/notifications/styles.css"
 import "mantine-contextmenu/styles.layer.css"
+import "mantine-datatable/styles.css"
 import "./global.css"
 
 function isCustomThemeOther(other: unknown): other is CustomThemeOther {

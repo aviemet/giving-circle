@@ -1,43 +1,66 @@
-import { Table } from "@/components"
+import { Table, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-export const PresentationSlideTable = (props: TableProps) => {
+interface PresentationSlideTableProps {
+	records: Schema.SlidesIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+export function PresentationSlideTable({ records, pagination, model }: PresentationSlideTableProps) {
 	const { params } = usePageProps<"themePresentationSlides">()
 
+	const columns: TableColumn<Schema.SlidesIndex>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (slide) => slide.title ?? slide.slug,
+		},
+		{
+			accessor: "data",
+			title: "Data",
+			sortable: true,
+			render: (slide) => JSON.stringify(slide.data),
+		},
+		{
+			accessor: "order",
+			title: "Order",
+			sortable: true,
+			render: () => "",
+		},
+		{
+			accessor: "template",
+			title: "Template",
+			sortable: true,
+			render: () => "",
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (slide) => (
+				<EditButton
+					href={ Routes.editThemePresentationSlide(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+						slide.slug,
+					) }
+				/>
+			),
+		},
+	]
+
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell sort="data">Data</Table.Cell>
-					<Table.Cell sort="order">Order</Table.Cell>
-					<Table.Cell sort="template">Template</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (slide: Schema.SlidesIndex) => (
-					<Table.Row key={ slide.id }>
-						<Table.Cell>{ slide.title ?? slide.slug }</Table.Cell>
-						<Table.Cell>{ JSON.stringify(slide.data) }</Table.Cell>
-						<Table.Cell />
-						<Table.Cell />
-						<Table.Cell>
-							<EditButton
-								href={ Routes.editThemePresentationSlide(
-									params.circle_slug,
-									params.theme_slug,
-									params.presentation_slug,
-									slide.slug,
-								) }
-							/>
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

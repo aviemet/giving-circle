@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import { PresentationElementsForm } from "@/domains/presentation/elements/Form"
+import { PresentationElementForm } from "@/domains/presentation/elements/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -22,7 +22,7 @@ const EditPresentationElement = ({ presentation_element }: EditPresentationEleme
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<PresentationElementsForm
+				<PresentationElementForm
 					method="put"
 					to={ Routes.presentationElement() }
 					presentation_element={ presentation_element }

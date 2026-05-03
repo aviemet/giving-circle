@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
 import { Title, Link, Box, Paper, SimpleGrid, Grid, Flex } from "@/components"
-import { Form, FormConsumer, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
 import { Checkbox, PasswordInput, TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
@@ -40,13 +40,6 @@ const Login = () => {
 						method="post"
 						initialData={ defaultData }
 					>
-						<FormConsumer>
-							{ ({ getFormData, slotProps }) => {
-								console.log({ slotProps, data: getFormData() })
-								return <></>
-							} }
-						</FormConsumer>
-
 						<Grid>
 							<Grid.Col>
 								<TextInput

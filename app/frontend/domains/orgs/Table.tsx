@@ -1,44 +1,67 @@
-import { Table, Link } from "@/components"
+import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-export const OrgTable = (props: TableProps) => {
+interface OrgTableProps {
+	records: Schema.OrgsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+export function OrgTable({ records, pagination, model }: OrgTableProps) {
 	const { params } = usePageProps<"circleOrgs">()
 
-	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell sort="slug">Slug</Table.Cell>
-					<Table.Cell sort="description">Description</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (org: Schema.OrgsIndex) => {
-					if(!params.circle_slug) return <></>
+	const columns: TableColumn<Schema.OrgsIndex>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (org) => {
+				if(!params.circle_slug) return org.name
 
-					return (
-						<Table.Row key={ org.id }>
-							<Table.Cell>
-								{ <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.name }</Link> }
-							</Table.Cell>
-							<Table.Cell>
-								{ <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.slug }</Link> }
-							</Table.Cell>
-							<Table.Cell>
-								{ <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.description }</Link> }
-							</Table.Cell>
-							<Table.Cell>
-								{ <EditButton href={ Routes.editOrg(params.circle_slug, org.slug) } /> }
-							</Table.Cell>
-						</Table.Row>
-					)
-				} } />
-			</Table.Body>
-		</Table>
+				return <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.name }</Link>
+			},
+		},
+		{
+			accessor: "slug",
+			title: "Slug",
+			sortable: true,
+			render: (org) => {
+				if(!params.circle_slug) return org.slug
+
+				return <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.slug }</Link>
+			},
+		},
+		{
+			accessor: "description",
+			title: "Description",
+			sortable: true,
+			render: (org) => {
+				if(!params.circle_slug) return org.description
+
+				return <Link href={ Routes.org(params.circle_slug, org.slug) }>{ org.description }</Link>
+			},
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (org) => {
+				if(!params.circle_slug) return null
+
+				return <EditButton href={ Routes.editOrg(params.circle_slug, org.slug) } />
+			},
+		},
+	]
+
+	return (
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

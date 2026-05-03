@@ -1,53 +1,59 @@
-import { Table, Link, Money } from "@/components"
+import { Table, Link, Money, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-interface MembershipTableProps extends TableProps {
+interface MembershipTableProps {
 	circle: Schema.CirclesInertiaShare
+	records: Schema.MembershipsIndex[]
+	pagination: Schema.Pagination
+	model: string
 }
 
-export const MembershipTable = ({ circle, ...props }: MembershipTableProps) => {
+export function MembershipTable({ circle, records, pagination, model }: MembershipTableProps) {
+	const columns: TableColumn<Schema.MembershipsIndex>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (membership) => (
+				<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.name }</Link>
+			),
+		},
+		{
+			accessor: "number",
+			title: "Number",
+			sortable: true,
+			render: (membership) => (
+				<Link href={ Routes.membership(circle.slug, membership.slug) }>{ membership.number }</Link>
+			),
+		},
+		{
+			accessor: "funds_cents",
+			title: "Funds",
+			sortable: true,
+			render: (membership) => (
+				<Link href={ Routes.membership(circle.slug, membership.slug) }>
+					<Money>{ membership.funds }</Money>
+				</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (membership) => (
+				<EditButton href={ Routes.editMembership(circle.slug, membership.slug) } />
+			),
+		},
+	]
+
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell sort="number">Number</Table.Cell>
-					<Table.Cell sort="funds_cents">Funds</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (membership: Schema.MembershipsIndex) => (
-					<Table.Row key={ membership.id }>
-
-						<Table.Cell>
-							<Link href={ Routes.membership(circle.slug, membership.slug) }>
-								{ membership.name }
-							</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.membership(circle.slug, membership.slug) }>
-								{ membership.number }
-							</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.membership(circle.slug, membership.slug) }>
-								<Money>{ membership.funds }</Money>
-							</Link>
-						</Table.Cell>
-
-
-						<Table.Cell>
-							<EditButton href={ Routes.editMembership(circle.slug, membership.slug) } />
-						</Table.Cell>
-
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }

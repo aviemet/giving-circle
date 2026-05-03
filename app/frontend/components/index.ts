@@ -4,6 +4,7 @@ export { ColorPickerComponent as ColorPicker } from "./ColorPicker"
 export { ConditionalWrapper } from "./ConditionalWrapper"
 export { DangerousHtml } from "./DangerousHtml"
 export { DropzoneComponent as Dropzone } from "./Dropzone"
+export * from "./ErrorBoundary"
 export { Flash } from "./Flash"
 export * from "./Formatters"
 export { Link, NavLink } from "./Link"
@@ -12,11 +13,9 @@ export { MoneyComponent as Money } from "./Money"
 export { Page, type PageProps } from "./Page"
 export { RichTextEditor, type RichTextEditorProps } from "./RichTextEditor"
 export { Section } from "./Section"
-export { TableObject as Table, type TableProps } from "./Table"
+export { Table, type TableColumn, type TableProps } from "./Table"
 export { Label } from "./Label"
 export { TabsComponent as Tabs } from "./Tabs"
-
-export * from "./ErrorBoundary"
 
 // Export UI library components as a proxy to allow easy refactoring
 export {

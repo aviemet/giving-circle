@@ -71,7 +71,7 @@ class OrgsController < ApplicationController
     org.circle = circle
 
     if org.save
-      redirect_to org_path(params[:circle_slug], org), notice: t('orgs.notices.created')
+      redirect_to org_path(params[:circle_slug], org), notice: t("orgs.notices.created")
     else
       redirect_to new_circle_org_path(params[:circle_slug]), inertia: { errors: org.errors }
     end
@@ -83,7 +83,7 @@ class OrgsController < ApplicationController
     authorize org
 
     if org.update(org_params)
-      redirect_to org_path(params[:circle_slug], org), notice: t('orgs.notices.updated')
+      redirect_to org_path(params[:circle_slug], org), notice: t("orgs.notices.updated")
     else
       redirect_to edit_org_path(params[:circle_slug], org), inertia: { errors: org.errors }
     end
@@ -94,6 +94,6 @@ class OrgsController < ApplicationController
     authorize org
 
     org.destroy!
-    redirect_to circle_orgs_path(params[:circle_slug]), notice: t('orgs.notices.destroyed')
+    redirect_to circle_orgs_path(params[:circle_slug]), notice: t("orgs.notices.destroyed")
   end
 end

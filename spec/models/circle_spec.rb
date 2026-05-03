@@ -13,7 +13,7 @@
 #
 #  index_circles_on_slug  (slug) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Circle do
   describe "Validations" do

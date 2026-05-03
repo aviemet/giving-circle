@@ -1,30 +1,36 @@
-import { Table, Link } from "@/components"
+import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-export const CircleTable = (props: TableProps) => {
-	return (
-		<Table>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (circle: Schema.CirclesIndex) => (
-					<Table.Row key={ circle.id }>
-						<Table.Cell>
-							<Link href={ Routes.circle(circle.id) }>{ circle.name }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editCircle(circle.id) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
-	)
+interface CircleTableProps {
+	records: Schema.CirclesIndex[]
+	pagination: Schema.Pagination
+	model: string
 }
 
+export function CircleTable({ records, pagination, model }: CircleTableProps) {
+	const columns: TableColumn<Schema.CirclesIndex>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (circle) => <Link href={ Routes.circle(circle.id) }>{ circle.name }</Link>,
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (circle) => <EditButton href={ Routes.editCircle(circle.id) } />,
+		},
+	]
+
+	return (
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
+	)
+}

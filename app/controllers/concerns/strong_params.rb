@@ -20,7 +20,7 @@ module StrongParams
           return params.fetch(name, {})
         end
 
-        params.require(name).permit(Array(options[:permit]))
+        params.expect(name => options[:permit])
       end
     end
 

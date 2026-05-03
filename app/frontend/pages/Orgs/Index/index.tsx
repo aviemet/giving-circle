@@ -26,7 +26,6 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 		] }>
 			<IndexTableTemplate
 				model="orgs"
-				rows={ orgs }
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
@@ -38,7 +37,7 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 					],
 				} }
 			>
-				<OrgTable />
+				<OrgTable records={ orgs } pagination={ pagination } model="orgs" />
 			</IndexTableTemplate>
 		</Page>
 	)

@@ -15,7 +15,7 @@
 #
 #  index_people_on_slug  (slug) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Person do
   describe "Validations" do

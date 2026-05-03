@@ -30,7 +30,6 @@ const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) =
 		>
 			<IndexTableTemplate
 				model="templates"
-				rows={ templates }
 				pagination={ pagination }
 				contextMenu={ {
 					deleteRoute: Routes.circleTemplates(circle.slug),
@@ -39,7 +38,12 @@ const TemplatesIndex = ({ templates, pagination, circle }: TemplateIndexProps) =
 					],
 				} }
 			>
-				<TemplatesTable circle={ circle } />
+				<TemplatesTable
+					circle={ circle }
+					records={ templates }
+					pagination={ pagination }
+					model="templates"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

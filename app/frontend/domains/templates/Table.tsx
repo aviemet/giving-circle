@@ -1,45 +1,59 @@
-import { Button, Table, Link, Text } from "@/components"
+import { Button, Table, Link, Text, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
 import { NewIcon } from "@/components/Icons"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
 import { NewTemplateModal } from "./NewTemplateModal"
 
-interface TemplateTableProps extends TableProps {
-	circle: Schema.CirclesOptions
+interface TemplatesTableProps {
+	circle: Schema.CirclesOptions & { slug: string }
+	records: Schema.TemplatesIndex[]
+	pagination: Schema.Pagination
+	model: string
 }
 
-export const TemplatesTable = ({
+export function TemplatesTable({
 	circle,
-	...props
-}: TemplateTableProps) => {
-	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator
-					emptyDataContent={ circle.slug && <>
-						<Text>{ circle.name || "This circle" } doesn&apos;t have any saved presentation templates</Text>
-						<NewTemplateModal circle={ circle }><Button px="sm"><NewIcon /> Create One</Button></NewTemplateModal>
-					</> }
-					render={ (template: Schema.TemplatesIndex) => (
-						<Table.Row key={ template.id }>
-							<Table.Cell>
-								<Link href={ Routes.circleTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
-							</Table.Cell>
+	records,
+	pagination,
+	model,
+}: TemplatesTableProps) {
+	const emptyState = circle.slug
+		? (
+			<>
+				<Text>{ circle.name || "This circle" } doesn&apos;t have any saved presentation templates</Text>
+				<NewTemplateModal circle={ circle }><Button px="sm"><NewIcon /> Create One</Button></NewTemplateModal>
+			</>
+		)
+		: undefined
 
-							<Table.Cell>
-								<EditButton href={ Routes.editCircleTemplate(template.circle.slug, template.slug) } />
-							</Table.Cell>
-						</Table.Row>
-					) } />
-			</Table.Body>
-		</Table>
+	const columns: TableColumn<Schema.TemplatesIndex>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (template) => (
+				<Link href={ Routes.circleTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (template) => (
+				<EditButton href={ Routes.editCircleTemplate(template.circle.slug, template.slug) } />
+			),
+		},
+	]
+
+	return (
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+			emptyState={ emptyState }
+		/>
 	)
 }

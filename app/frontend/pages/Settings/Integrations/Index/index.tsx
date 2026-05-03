@@ -3,10 +3,10 @@ import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
 import { Routes, withLayout } from "@/lib"
 
 import Empty from "./Empty"
-import SmtpList from "./SmtpList"
+import SmtpList, { type SmtpListRecord } from "./SmtpList"
 
 interface MailSettingsProps {
-	smtps: Schema.Smtp[]
+	smtps: SmtpListRecord[]
 }
 
 // @path: /settings/integrations
@@ -19,7 +19,7 @@ const Mail = ({ smtps }: MailSettingsProps) => {
 				<Menu position="bottom-end">
 					<Menu.Target />
 					<Menu.Dropdown>
-						<Menu.Link href={ Routes.newSettingsSmtp() }>New Mail Connection</Menu.Link>
+						<Menu.Link href="/settings/mail/new">New Mail Connection</Menu.Link>
 					</Menu.Dropdown>
 				</Menu>
 			</Group>

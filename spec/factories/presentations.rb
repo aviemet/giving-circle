@@ -29,36 +29,19 @@
 #
 FactoryBot.define do
   factory :presentation do
+    transient do
+      owning_circle { association(:circle) }
+    end
+
     name { Faker::Lorem.words(number: rand(1..4)).map(&:capitalize).join(" ") }
 
-    template
-    theme
+    theme { association(:theme, circle: owning_circle) }
+    template { association(:template, circle: owning_circle) }
 
-    after(:build) do |presentation, evaluator|
-      after_build(presentation, evaluator)
-    end
-
-    after(:stub) do |presentation, evaluator|
-      after_build(presentation, evaluator)
-    end
-  end
-end
-
-def after_build(presentation, evaluator)
-  build_strategy = evaluator.instance_variable_get(:@build_strategy).to_sym
-  if build_strategy == :stub
-    build_strategy = :build_stubbed
-  end
-
-  if !evaluator.theme
-    presentation.theme = FactoryBot.send(build_strategy, :theme, { circle: presentation.circle })
-  elsif evaluator.theme.circle != presentation.circle
-    old_circle = presentation.circle
-
-    presentation.circle = evaluator.theme.circle
-
-    if build_strategy == :create
-      old_circle.destroy
+    after(:build) do |presentation|
+      if presentation.theme
+        presentation.circle = presentation.theme.circle
+      end
     end
   end
 end

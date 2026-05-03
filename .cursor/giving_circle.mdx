@@ -104,6 +104,9 @@
   - Provides `motion` components and `AnimatePresence` for declarative animations
   - Used in slide transitions with configurable transition types
 
+#### Data tables (Mantine DataTable)
+- Index list pages use `IndexTableTemplate` (`features/IndexTableTemplate`) with `model` and `pagination` only (no row array on the template; `Table.TableProvider` matches ICR `IndexPageTemplate`). The toolbar row with search and context menu is `IndexTableTitleSection` in the same folder (`TableTitleSection.tsx`). Each domain `*Table` child receives `records`, `pagination`, and `model` from the page and renders `Table.DataTable` with `TableColumn<T>[]` from `@/components/Table`. Row selection updates `TableProvider` context for bulk actions. Vitest jsdom may not paint Mantine DataTable header/body cells reliably under the current `mantine-datatable` / `@mantine/core` pairing; a lightweight `TableExports` test guards the `Table.DataTable` wiring instead of asserting full grid markup in unit tests.
+
 #### Icons
 - Icons are centrally exported from `@/components/Icons`
 - Icons are renamed on export for semantic usage (e.g., `TbDashboard as DashboardIcon`)
@@ -121,6 +124,9 @@
   - `/pages`: Top-level Inertia pages (entry points for routes)
   - `/queries`: Async react-query methods
   - `/types`: Global types and interfaces
+
+#### App shell header (headroom)
+- `AppLayout` and `PresentationLayout` use Mantine `useHeadroom` with `AppShell` `header.collapsed` when unpinned. In fixed shell mode Mantine also sets `--app-shell-header-offset` to `0` when collapsed, which shortens the page and fights headroom at the bottom. When the header is collapsed, the shell root gets `shellRootKeepsHeaderScrollSlot` from `layouts/AppShellHeaderOffsetWhenCollapsed.css.ts`, forcing `--app-shell-header-offset` to `theme.other.header.height` so layout height matches the visible header case while the bar stays translated off-screen until the user scrolls up.
 
 #### UI & Styling
 - Mantine component library

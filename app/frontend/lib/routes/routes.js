@@ -3,9 +3,9 @@
  * @version f0b661e5aff4785fc07cd2b8d719424332c3b8901c5204e1b97b78fce3f10ec8
  * @see https://github.com/railsware/js-routes
  */
- 
+// eslint-disable-next-line
 const __jsr = (
- 
+// eslint-disable-next-line
 () => {
     const hasProp = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
     let NodeTypes;
@@ -214,7 +214,7 @@ const __jsr = (
             return this.is_callable(result) ? result.call(object) : result;
         }
         partition_parameters(parts, required_params, default_options, call_arguments) {
-             
+            // eslint-disable-next-line prefer-const
             let { args, options } = this.extract_options(parts.length, call_arguments);
             if (args.length > parts.length) {
                 throw new Error("Too many parameters provided for path");

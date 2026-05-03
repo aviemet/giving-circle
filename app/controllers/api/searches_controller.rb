@@ -4,7 +4,7 @@ class Api::SearchesController < Api::ApiController
   def index
     render json: SearchSerializer.many(
       PgSearch.multisearch(params[:search])
-        .order(:searchable_type, :content),
+      .order(:searchable_type, :content),
     )
   end
 

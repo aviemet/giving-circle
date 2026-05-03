@@ -13,7 +13,7 @@ export interface ThemeFormProps {
 	theme: Schema.ThemesFormData
 }
 
-const ThemeForm = ({ to, method = "post", theme }: ThemeFormProps) => {
+export function ThemeForm({ to, method = "post", theme }: ThemeFormProps) {
 	return (
 		<Form<ThemeFormData>
 			action={ to }
@@ -32,5 +32,3 @@ const ThemeForm = ({ to, method = "post", theme }: ThemeFormProps) => {
 		</Form>
 	)
 }
-
-export { ThemeForm }

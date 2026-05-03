@@ -1,37 +1,90 @@
-import { Table, Link } from "@/components"
+import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
-export const PresentationElementTable = (props: TableProps) => {
+interface PresentationElementsTableProps {
+	records: Schema.PresentationElementsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+export function PresentationElementsTable({ records, pagination, model }: PresentationElementsTableProps) {
+	const { params } = usePageProps<"themePresentationsElements">()
+
+	const columns: TableColumn<Schema.PresentationElementsIndex>[] = [
+		{
+			accessor: "data",
+			title: "Data",
+			sortable: true,
+			render: (presentation_element) => (
+				<Link href={ Routes.themePresentationElement(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					presentation_element.slug,
+				) }
+				>
+					{ JSON.stringify(presentation_element.data) }
+				</Link>
+			),
+		},
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: true,
+			render: (presentation_element) => (
+				<Link href={ Routes.themePresentationElement(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					presentation_element.slug,
+				) }
+				>
+					{ presentation_element.name }
+				</Link>
+			),
+		},
+		{
+			accessor: "template",
+			title: "Template",
+			sortable: true,
+			render: (presentation_element) => (
+				<Link href={ Routes.themePresentationElement(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					presentation_element.slug,
+				) }
+				>
+					{ String(presentation_element.template) }
+				</Link>
+			),
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (presentation_element) => (
+				<EditButton
+					href={ Routes.editThemePresentationElement(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+						presentation_element.slug,
+					) }
+				/>
+			),
+		},
+	]
+
 	return (
-		<Table>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell sort="data">Data</Table.Cell>
-					<Table.Cell sort="name">Name</Table.Cell>
-					<Table.Cell sort="template">Template</Table.Cell>
-					<Table.Cell fitContent>Actions</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (presentation_element: Schema.PresentationElementsIndex) => (
-					<Table.Row key={ presentation_element.id }>
-						<Table.Cell>
-							<Link href={ Routes.presentationElement(presentation_element.id) }>{ presentation_element.data }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationElement(presentation_element.id) }>{ presentation_element.name }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationElement(presentation_element.id) }>{ presentation_element.template }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editPresentationElement(presentation_element.id) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ columns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+			selectable
+		/>
 	)
 }
