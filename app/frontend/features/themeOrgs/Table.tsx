@@ -41,4 +41,4 @@ const ThemeOrgTable = ({ theme, circle, ...props }: ThemeOrgTableProps) => {
 	)
 }
 
-export default ThemeOrgTable
+export { ThemeOrgTable }

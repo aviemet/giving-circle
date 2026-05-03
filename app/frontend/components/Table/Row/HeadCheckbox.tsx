@@ -1,8 +1,9 @@
+import { Table } from "@mantine/core"
+
 import { Checkbox } from "@/components/Inputs"
 import { CheckboxProps } from "@/components/Inputs/Checkbox"
 
 import { useTableContext } from "../TableContext"
-import Td from "../Td"
 
 interface RowCheckBoxProps extends CheckboxProps {
 	selected: Set<string>
@@ -29,7 +30,7 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate, ...props }: R
 	}
 
 	return (
-		<Td fitContent>
+		<Table.Th style={ { width: "1%" } }>
 			<Checkbox
 				onChange={ handleClick }
 				checked={ allChecked }
@@ -38,8 +39,8 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate, ...props }: R
 				aria-label={ `${allChecked ? "deselect" : "select"} all rows` }
 				{ ...props }
 			/>
-		</Td>
+		</Table.Th>
 	)
 }
 
-export default HeadCheckbox
+export { HeadCheckbox }

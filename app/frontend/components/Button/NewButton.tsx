@@ -17,4 +17,4 @@ const NewButton = ({ children, href, label }: NewButtonProps) => {
 	)
 }
 
-export default NewButton
+export { NewButton }

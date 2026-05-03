@@ -1,7 +1,7 @@
 import { Head } from "@inertiajs/react"
 import { useState } from "react"
 
-import SlidePresentation from "@/components/SlidePresentation"
+import { SlidePresentation } from "@/components/SlidePresentation"
 import { withLayout } from "@/lib"
 import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
 

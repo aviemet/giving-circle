@@ -1,7 +1,7 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Grid } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 type PresentationActionFormData = {
 	presentation_action: Schema.PresentationActionsFormData
@@ -10,37 +10,35 @@ type PresentationActionFormData = {
 export interface PresentationActionFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PresentationActionFormData>) => boolean | void
 	presentation_action: Schema.PresentationActionsFormData
 }
 
-const PresentationActionForm = ({ method = "post", presentation_action, ...props }: PresentationActionFormProps) => {
+const PresentationActionForm = ({ to, method = "post", presentation_action }: PresentationActionFormProps) => {
 	return (
 		<Form
-			model="presentation_action"
-			data={ { presentation_action } }
+			action={ to }
+			initialData={ { presentation_action } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="slug" label="Slug" />
+					<TextInput name="presentation_action.slug" label="Slug" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="action_type" label="Action_type" />
+					<TextInput name="presentation_action.action_type" label="Action_type" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="config" label="Config" />
+					<TextInput name="presentation_action.config" label="Config" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="results" label="Results" />
+					<TextInput name="presentation_action.results" label="Results" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="trigger_type" label="Trigger_type" />
+					<TextInput name="presentation_action.trigger_type" label="Trigger_type" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="trigger_conditions" label="Trigger_conditions" />
+					<TextInput name="presentation_action.trigger_conditions" label="Trigger_conditions" />
 				</Grid.Col>
 				<Grid.Col>
 					<Submit>{ presentation_action.id ? "Update" : "Create" } PresentationAction</Submit>
@@ -50,4 +48,4 @@ const PresentationActionForm = ({ method = "post", presentation_action, ...props
 	)
 }
 
-export default PresentationActionForm
+export { PresentationActionForm }

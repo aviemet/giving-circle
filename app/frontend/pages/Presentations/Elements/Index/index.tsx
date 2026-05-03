@@ -1,7 +1,7 @@
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
-import PresentationElementsTable from "@/features/presentation/elements/Table"
+import { PresentationElementsTable } from "@/features/presentation/elements/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

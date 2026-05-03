@@ -1,4 +1,4 @@
-import { has } from "lodash"
+import { has } from "es-toolkit/compat"
 import Papa from "papaparse"
 
 interface AcceptedHeading {

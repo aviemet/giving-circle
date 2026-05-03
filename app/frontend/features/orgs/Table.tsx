@@ -43,4 +43,4 @@ const OrgTable = (props: TableProps) => {
 	)
 }
 
-export default OrgTable
+export { OrgTable }

@@ -6,12 +6,12 @@ import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
-import PresentationFooter from "./PresentationFooter"
-import PresentationHeader from "./PresentationHeader"
+import { PresentationFooter } from "./PresentationFooter"
+import { PresentationHeader } from "./PresentationHeader"
 import * as classes from "./PresentationLayout.css"
-import PresentationSidebar from "./PresentationSidebar"
+import { PresentationSidebar } from "./PresentationSidebar"
 
-const PresentationLayout = ({ children }: LayoutProps) => {
+export function PresentationLayout({ children }: LayoutProps) {
 	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
 	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
 	const mainPaddingDisabled = useLayoutStore((state) => state.mainPaddingDisabled)
@@ -56,5 +56,3 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 		</AppShell>
 	)
 }
-
-export default PresentationLayout

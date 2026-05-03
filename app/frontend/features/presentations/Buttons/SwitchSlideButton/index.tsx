@@ -36,4 +36,4 @@ const SwitchSlideButton = ({ slide, onClick, active }: SwitchSlideButtonProps) =
 	)
 }
 
-export default SwitchSlideButton
+export { SwitchSlideButton }

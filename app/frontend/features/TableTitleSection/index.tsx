@@ -93,4 +93,4 @@ const IndexTableTitleSection = ({ children, contextMenu }: IndexTableTitleSectio
 	)
 }
 
-export default IndexTableTitleSection
+export { IndexTableTitleSection }

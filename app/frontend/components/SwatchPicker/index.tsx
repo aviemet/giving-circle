@@ -44,4 +44,4 @@ const SwatchPicker = ({ value, onChange }: SwatchPickerProps) => {
 
 SwatchPicker.initialValue = "violet"
 
-export default SwatchPicker
+export { SwatchPicker }

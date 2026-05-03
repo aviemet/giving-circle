@@ -42,4 +42,4 @@ const MenuTarget = ({ children, icon, variant, color, ...props }: MenuTargetProp
 	)
 }
 
-export default MenuTarget
+export { MenuTarget }

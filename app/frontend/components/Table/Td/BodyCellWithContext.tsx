@@ -30,4 +30,4 @@ const BodyCellWithContext = ({
 	)
 }
 
-export default BodyCellWithContext
+export { BodyCellWithContext }

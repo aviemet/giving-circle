@@ -29,4 +29,4 @@ const StatTile = ({ heading, value, icon, color }: StatTileProps) => {
 	)
 }
 
-export default StatTile
+export { StatTile }

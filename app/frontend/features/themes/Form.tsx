@@ -1,7 +1,7 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Grid } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 type ThemeFormData = {
 	theme: Schema.ThemesFormData
@@ -10,21 +10,19 @@ type ThemeFormData = {
 export interface ThemeFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ThemeFormData>) => boolean | void
 	theme: Schema.ThemesFormData
 }
 
-const ThemeForm = ({ method = "post", theme, ...props }: ThemeFormProps) => {
+const ThemeForm = ({ to, method = "post", theme }: ThemeFormProps) => {
 	return (
 		<Form
-			model="theme"
-			data={ { theme } }
+			action={ to }
+			initialData={ { theme } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="theme.name" label="Name" />
 				</Grid.Col>
 
 				<Grid.Col>
@@ -35,4 +33,4 @@ const ThemeForm = ({ method = "post", theme, ...props }: ThemeFormProps) => {
 	)
 }
 
-export default ThemeForm
+export { ThemeForm }

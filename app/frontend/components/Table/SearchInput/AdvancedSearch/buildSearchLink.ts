@@ -55,4 +55,4 @@ function buildSearchLink(
 	}
 }
 
-export default buildSearchLink
+export { buildSearchLink }

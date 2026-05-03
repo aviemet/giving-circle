@@ -1,11 +1,14 @@
-import { Table, Link } from "@/components"
+import { Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const PresentationSlideTable = (props: TableProps) => {
+	const { params } = usePageProps<"themePresentationSlides">()
+
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -16,22 +19,21 @@ const PresentationSlideTable = (props: TableProps) => {
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (presentation_slide: Schema.PresentationSlidesIndex) => (
-					<Table.Row key={ presentation_slide.id }>
+				<Table.RowIterator render={ (slide: Schema.SlidesIndex) => (
+					<Table.Row key={ slide.id }>
+						<Table.Cell>{ slide.title ?? slide.slug }</Table.Cell>
+						<Table.Cell>{ JSON.stringify(slide.data) }</Table.Cell>
+						<Table.Cell />
+						<Table.Cell />
 						<Table.Cell>
-							<Link href={ Routes.presentationSlide(presentation_slide.id) }>{ presentation_slide.name }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationSlide(presentation_slide.id) }>{ presentation_slide.data }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationSlide(presentation_slide.id) }>{ presentation_slide.order }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.presentationSlide(presentation_slide.id) }>{ presentation_slide.template }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<EditButton href={ Routes.editPresentationSlide(presentation_slide.id) } />
+							<EditButton
+								href={ Routes.editThemePresentationSlide(
+									params.circle_slug,
+									params.theme_slug,
+									params.presentation_slug,
+									slide.slug,
+								) }
+							/>
 						</Table.Cell>
 					</Table.Row>
 				) } />
@@ -40,4 +42,4 @@ const PresentationSlideTable = (props: TableProps) => {
 	)
 }
 
-export default PresentationSlideTable
+export { PresentationSlideTable }

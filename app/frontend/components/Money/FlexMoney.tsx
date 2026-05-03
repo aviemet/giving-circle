@@ -41,4 +41,4 @@ const FlexMoney = ({ children, formatter, accounting }: FlexMoneyProps) => {
 }
 
 
-export default FlexMoney
+export { FlexMoney }

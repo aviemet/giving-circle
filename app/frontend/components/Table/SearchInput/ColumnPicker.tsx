@@ -60,4 +60,4 @@ const ColumnPicker = () => {
 	)
 }
 
-export default ColumnPicker
+export { ColumnPicker }

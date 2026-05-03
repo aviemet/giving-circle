@@ -1,65 +1,67 @@
-import { ActionIcon } from "@mantine/core"
-import { TimeInput as MantineTimeInput, type TimeInputProps as MantineTimeInputProps } from "@mantine/dates"
-import { forwardRef, useRef } from "react"
+import {
+	TimePicker,
+	type TimePickerProps as MantineTimePickerProps,
+} from "@mantine/dates"
+import dayjs from "dayjs"
+import React from "react"
 
 import { ClockIcon } from "@/components/Icons"
-import { mergeRefs } from "@/lib"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
+function normalizeTimeValue(value: unknown): string | undefined {
+	if(value === null || value === undefined) return undefined
+	if(typeof value === "string") return dayjs(value).isValid() ? dayjs(value).format("HH:mm") : value
+	if(typeof value === "object" && value instanceof Date) return dayjs(value).format("HH:mm")
+	return undefined
+}
 
 export interface TimeInputProps
 	extends
-	BaseInputProps,
-	MantineTimeInputProps {
+	Omit<BaseInputProps, "disableAutofill">,
+	MantineTimePickerProps {
+	ref?: React.Ref<HTMLDivElement>
 	name?: string
 	id?: string
-	picker?: boolean
 }
 
-const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>((
-	{
-		label,
-		id,
-		name,
-		wrapper,
-		wrapperProps,
-		required = false,
-		value,
-		picker = false,
-		...props
-	},
-	ref
-) => {
-	const localInputRef = useRef<HTMLInputElement>(null)
-	const combinedRef = mergeRefs([ref, localInputRef])
-
+export function TimeInput({
+	label,
+	id,
+	name,
+	wrapper,
+	wrapperProps,
+	format = "12h",
+	required = false,
+	value,
+	withDropdown = true,
+	popoverProps,
+	ref,
+	...props
+}: TimeInputProps) {
 	const inputId = id || name
-
-	const pickerControl = (
-		<ActionIcon variant="subtle" color="gray" onClick={ () => localInputRef.current?.showPicker() }>
-			<ClockIcon />
-		</ActionIcon>
-	)
+	const pickerValue = normalizeTimeValue(value)
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<MantineTimeInput
-				ref={ combinedRef }
-				id={ inputId }
+			<TimePicker
+				ref={ ref }
 				name={ name }
-				value={ value }
-				leftSection={ picker ? pickerControl : undefined }
+				value={ pickerValue }
+				withDropdown={ withDropdown }
+				format={ format }
+				leftSection={ <ClockIcon /> }
+				leftSectionPointerEvents="none"
+				hiddenInputProps={ { id: inputId, required } }
+				popoverProps={ { withinPortal: false, ...popoverProps } }
 				{ ...props }
 			/>
 		</InputWrapper>
 	)
-})
-
-export default TimeInput
+}

@@ -9,20 +9,20 @@ export interface SidebarSlice {
 }
 
 export const createSidebarSlice: StateCreator<SidebarSlice> =
-(set) => ({
-	sidebarOpen: true,
-	sidebarVisible: false,
-	sidebarBreakpoint: "sm",
+	(set) => ({
+		sidebarOpen: true,
+		sidebarVisible: false,
+		sidebarBreakpoint: "sm",
 
-	toggleSidebarOpen: sidebarOpen => set(state => {
-		let setValue = sidebarOpen
-		if(sidebarOpen === undefined) {
-			setValue = !state.sidebarOpen
-		}
-		return { sidebarOpen: setValue }
-	}),
+		toggleSidebarOpen: sidebarOpen => set(state => {
+			let setValue = sidebarOpen
+			if(sidebarOpen === undefined) {
+				setValue = !state.sidebarOpen
+			}
+			return { sidebarOpen: setValue }
+		}),
 
-	setSidebarVisible: visible => set(() => ({
-		sidebarVisible: visible,
-	})),
-})
+		setSidebarVisible: visible => set(() => ({
+			sidebarVisible: visible,
+		})),
+	})

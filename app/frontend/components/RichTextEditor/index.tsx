@@ -10,10 +10,10 @@ import { Superscript } from "@tiptap/extension-superscript"
 import { TextAlign } from "@tiptap/extension-text-align"
 import { TextStyle } from "@tiptap/extension-text-style"
 import { Underline } from "@tiptap/extension-underline"
-import { useEditor } from "@tiptap/react"
+import { type Editor, useEditor } from "@tiptap/react"
 import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus"
 import { StarterKit } from "@tiptap/starter-kit"
-import { forwardRef } from "react"
+import { useEffect, type Ref } from "react"
 
 import { DEFAULT_LABELS } from "./tiptapLabels"
 
@@ -41,12 +41,14 @@ const ColorPickerControl = () => (
 export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, "children" | "editor" | "onChange"> {
 	children?: string
 	onChange?: (value: string) => void
+	onEditorReady?: (editor: Editor | null) => void
 }
 
-const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>((
-	{ children, onChange },
-	ref
-) => {
+type RichTextEditorPropsWithRef = RichTextEditorProps & {
+	ref?: Ref<HTMLDivElement>
+}
+
+function RichTextEditorComponent({ children, onChange, onEditorReady, ref }: RichTextEditorPropsWithRef) {
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -64,6 +66,10 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 			if(onChange) onChange(editor.getHTML())
 		},
 	})
+
+	useEffect(() => {
+		onEditorReady?.(editor)
+	}, [editor, onEditorReady])
 
 	return (
 		<RichTextEditor
@@ -137,6 +143,6 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 			<RichTextEditor.Content />
 		</RichTextEditor>
 	)
-})
+}
 
-export default RichTextEditorComponent
+export { RichTextEditorComponent as RichTextEditor }

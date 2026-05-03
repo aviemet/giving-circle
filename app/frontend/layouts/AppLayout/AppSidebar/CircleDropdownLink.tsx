@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { isEmpty } from "lodash"
+import { isEmpty } from "es-toolkit/compat"
 
 import {
 	Link,
@@ -15,7 +15,7 @@ import { usePageProps } from "@/lib/hooks"
 
 import * as classes from "../AppLayout.css"
 
-const CircleDropdownLink = () => {
+export function CircleDropdownLink() {
 	const { auth, active_circle } = usePageProps()
 
 	if(isEmpty(active_circle)) {
@@ -63,5 +63,3 @@ const CircleDropdownLink = () => {
 		</>
 	)
 }
-
-export default CircleDropdownLink

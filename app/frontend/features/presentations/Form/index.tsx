@@ -1,10 +1,10 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Divider, Grid, Title } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
 import { usePageProps } from "@/lib/hooks"
+import { type HTTPVerb } from "@/lib/http"
 
-import SlidesSection from "./SlidesSection"
+import { SlidesSection } from "./SlidesSection"
 
 type PresentationFormData = {
 	presentation: Schema.PresentationsEdit
@@ -13,24 +13,22 @@ type PresentationFormData = {
 export interface PresentationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PresentationFormData>) => boolean | void
 	presentation: Schema.PresentationsEdit
 }
 
-const PresentationForm = ({ method = "post", presentation, ...props }: PresentationFormProps) => {
+export const PresentationForm = ({ to, method = "post", presentation }: PresentationFormProps) => {
 	const { active_circle } = usePageProps()
 
 	return (
 		<Form
-			model="presentation"
-			data={ { presentation } }
+			action={ to }
+			initialData={ { presentation } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="presentation.name" label="Name" />
 				</Grid.Col>
 
 				<Grid.Col>
@@ -57,5 +55,3 @@ const PresentationForm = ({ method = "post", presentation, ...props }: Presentat
 		</Form>
 	)
 }
-
-export default PresentationForm

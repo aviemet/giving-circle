@@ -1,7 +1,7 @@
 import { Tabs, type TabsProps } from "@mantine/core"
 
-import TabsList from "./TabsList"
-import UrlTabs from "./UrlTabs"
+import { TabsList } from "./TabsList"
+import { UrlTabs } from "./UrlTabs"
 
 export interface TabsComponentProps extends TabsProps {
 	urlControlled?: boolean
@@ -19,4 +19,4 @@ TabsComponent.List = TabsList
 TabsComponent.Tab = Tabs.Tab
 TabsComponent.Panel = Tabs.Panel
 
-export default TabsComponent
+export { TabsComponent }

@@ -1,11 +1,11 @@
 import React from "react"
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import {
 	Form,
-	TextInput,
 	Submit,
 } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 type UserFormData = {
 	user: Schema.UsersFormData
@@ -14,24 +14,21 @@ type UserFormData = {
 export interface UserFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<UserFormData>) => boolean | void
 	user: Schema.UsersFormData
 }
 
-const UserForm = ({ to, method = "post", onSubmit, user }: UserFormProps) => {
+const UserForm = ({ to, method = "post", user }: UserFormProps) => {
 	return (
 		<Form
-			model="user"
-			data={ { user } }
-			to={ to }
+			action={ to }
+			initialData={ { user } }
 			method={ method }
-			onSubmit={ onSubmit }
 		>
-			<TextInput name="first_name" label="First Name" required />
+			<TextInput name="user.first_name" label="First Name" required />
 
-			<TextInput name="last_name" label="Last Name" required />
+			<TextInput name="user.last_name" label="Last Name" required />
 
-			<TextInput name="number" label="Number" required />
+			<TextInput name="user.number" label="Number" required />
 
 			<Submit>
 				{ user.id ? "Update" : "Create" } User
@@ -40,4 +37,5 @@ const UserForm = ({ to, method = "post", onSubmit, user }: UserFormProps) => {
 	)
 }
 
-export default React.memo(UserForm)
+export const UserFormMemo = React.memo(UserForm)
+export { UserFormMemo as UserForm }

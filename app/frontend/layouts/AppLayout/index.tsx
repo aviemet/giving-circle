@@ -1,17 +1,18 @@
 import clsx from "clsx"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 
 import { AppShell } from "@/components"
 import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
-import AppFooter from "./AppFooter"
-import AppHeader from "./AppHeader"
+import { AppFooter } from "./AppFooter"
+import { AppHeader } from "./AppHeader"
 import * as classes from "./AppLayout.css"
-import AppSidebar from "./AppSidebar"
+import { AppSidebar } from "./AppSidebar"
 
-const AppLayout = ({ children }: LayoutProps) => {
+
+export function AppLayout({ children }: LayoutProps) {
 	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
 	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
 	const mainPaddingDisabled = useLayoutStore((state) => state.mainPaddingDisabled)
@@ -59,5 +60,3 @@ const AppLayout = ({ children }: LayoutProps) => {
 		</AppShell>
 	)
 }
-
-export default AppLayout

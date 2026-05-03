@@ -66,4 +66,4 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 	)
 }
 
-export default LimitSelect
+export { LimitSelect }

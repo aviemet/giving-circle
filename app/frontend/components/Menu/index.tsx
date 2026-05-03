@@ -1,8 +1,8 @@
 import { Menu, type MenuProps } from "@mantine/core"
 
-import MenuItem from "./MenuItem"
-import MenuLink from "./MenuLink"
-import MenuTarget from "./MenuTarget"
+import { MenuItem } from "./MenuItem"
+import { MenuLink } from "./MenuLink"
+import { MenuTarget } from "./MenuTarget"
 
 const MenuComponent = ({ children, ...props }: MenuProps) => {
 	return (
@@ -17,4 +17,4 @@ MenuComponent.Item = MenuItem
 MenuComponent.Link = MenuLink
 MenuComponent.Divider = Menu.Divider
 
-export default MenuComponent
+export { MenuComponent }

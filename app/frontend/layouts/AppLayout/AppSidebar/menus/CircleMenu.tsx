@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash"
+import { isEmpty } from "es-toolkit/compat"
 
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon, ThemesIcon, UserGroupIcon } from "@/components/Icons"
@@ -6,7 +6,7 @@ import { Routes } from "@/lib"
 import { useInit, useLocation, usePageProps } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
-const CircleMenu = () => {
+export function CircleMenu() {
 	const { active_circle } = usePageProps()
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
 	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
@@ -67,5 +67,3 @@ const CircleMenu = () => {
 		</Accordion.Item>
 	)
 }
-
-export default CircleMenu

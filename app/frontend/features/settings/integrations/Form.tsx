@@ -1,8 +1,10 @@
-/* import { Group } from '@/components'
-import { Form, type FormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/components/Form'
-import { TestResponseButton } from '@/components/Button'
-import { Routes, isUnset } from '@/lib'
-import { omit } from 'lodash'
+import { omit } from "es-toolkit/compat"
+
+import { Group } from "@/components"
+import { TestResponseButton } from "@/components/Button"
+import { Form, type FormProps, Submit, FormConsumer } from "@/components/Form"
+import { PasswordInput, SegmentedControl, RichText, TextInput } from "@/components/Inputs"
+import { Routes, isUnset } from "@/lib"
 
 type SmtpFormData = {
 	smtp: Schema.SmtpsFormData
@@ -12,9 +14,9 @@ export interface SmtpFormProps extends FormProps<SmtpFormData> {
 	data: SmtpFormData
 }
 
-const requiredFields = ['smtp.host', 'smtp.port', 'smtp.domain', 'smtp.username', 'smtp.password']
+const requiredFields = ["smtp.host", "smtp.port", "smtp.domain", "smtp.username", "smtp.password"]
 
-const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
+export const SmtpForm = ({ method = "post", ...props }: SmtpFormProps) => {
 	return (
 		<Form
 			model="smtp"
@@ -32,25 +34,25 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 			<PasswordInput name="password" label="Password" required />
 
 			<TextInput name="domain" label="Email Domain" required
-				placeholder='e.g. mycompany.com'
+				placeholder="e.g. mycompany.com"
 			/>
 
 			<TextInput name="address" label="Reply-To Address"
-				placeholder='If not provided, will default to your username'
+				placeholder="If not provided, will default to your username"
 			/>
 
-			<RadioButtons name="security" label="Security" options={ [
-				{ label: 'None', value: 'basic' },
-				{ label: 'TLS', value: 'tls' },
-				{ label: 'SSL', value: 'ssl' },
+			<SegmentedControl name="security" label="Security" options={ [
+				{ label: "None", value: "basic" },
+				{ label: "TLS", value: "tls" },
+				{ label: "SSL", value: "ssl" },
 			] } />
 
-			<Group pt="md" pb="xs" position="right">
+			<Group pt="md" pb="xs" justify="right">
 				<FormConsumer<SmtpFormData>>{ ({ data, getData }) => (
 					<TestResponseButton
 						method="post"
 						endpoint={ Routes.apiSmtpTest() }
-						data={ { smtp: omit(data.smtp, 'id') } }
+						data={ { smtp: omit(data.smtp, "id") } }
 						disabled={ requiredFields.some(field => isUnset(getData(field))) }
 					/>
 				) }</FormConsumer>
@@ -58,14 +60,11 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 
 			<RichText name="notes" label="Notes" />
 
-			<Submit requiredFields={ requiredFields }>
+			<Submit>
 				Save SMT Settings
 			</Submit>
 		</Form>
 	)
 }
 
-export default SmtpForm
-*/
 
-export default () => <h1>SMTP Settings</h1>

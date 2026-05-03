@@ -44,4 +44,4 @@ function alignmentField({ label = "Alignment" }: Partial<Field<AlignmentValue>> 
 	}
 }
 
-export default alignmentField
+export { alignmentField }

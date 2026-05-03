@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react"
-import React, { useEffect, useState } from "react"
+import React from "react"
 
 import { Page, Box, Section, Tabs, Paper } from "@/components"
 import { px } from "@/lib"
@@ -23,18 +23,14 @@ const tabs: Tab[] = [
 	{ name: "integrations", label: "Integrations" },
 ]
 
-const SettingsLayout = ({ children }: SettingsLayoutProps) => {
+function SettingsLayoutComponent({ children }: SettingsLayoutProps) {
 	const title = "Settings"
 	const { width } = useViewportSize()
 	const theme = useTheme()
-	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < px(theme.breakpoints.sm))
+	const usedWidth = width === 0 ? window.innerWidth : width
+	const isMobileSized = usedWidth < px(theme.breakpoints.sm)
 
 	const { paths } = useLocation()
-
-	useEffect(() => {
-		if(width === 0) return
-		setMobileFormat(width < px(theme.breakpoints.sm))
-	}, [width])
 
 	const handleTabChange = (value: string | null) => {
 		router.get(`/admin/settings/${value}`, {}, { preserveState: true })
@@ -44,14 +40,14 @@ const SettingsLayout = ({ children }: SettingsLayoutProps) => {
 		<Page title={ title }>
 			<Section fullHeight>
 				<Tabs
-					orientation={ mobileFormat ? "horizontal" : "vertical" }
+					orientation={ isMobileSized ? "horizontal" : "vertical" }
 					variant="pills"
 					defaultValue={ paths[1] }
 					onChange={ handleTabChange }
 				>
 					<Paper withBorder p="xs" shadow="sm">
 						<Tabs.List
-							style={ mobileFormat
+							style={ isMobileSized
 								? {
 									flexWrap: "nowrap",
 									overflow: "auto",
@@ -80,4 +76,4 @@ const SettingsLayout = ({ children }: SettingsLayoutProps) => {
 	)
 }
 
-export default React.memo(SettingsLayout)
+export const SettingsLayout = React.memo(SettingsLayoutComponent)

@@ -1,7 +1,7 @@
-import Table, { type TableObject } from "./Table"
+import { TableComponent, type TableObject } from "./Table"
 
 export { type TableProps } from "./Table"
 
-export { default as useAdvancedSearch } from "./SearchInput/AdvancedSearch/useAdvancedSearch"
+export { useAdvancedSearch } from "./SearchInput/AdvancedSearch/useAdvancedSearch"
 
-export default Table as TableObject
+export const TableObject = TableComponent as TableObject

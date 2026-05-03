@@ -40,4 +40,4 @@ const Flash = () => {
 	)
 }
 
-export default Flash
+export { Flash }

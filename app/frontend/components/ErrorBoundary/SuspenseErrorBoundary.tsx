@@ -1,6 +1,6 @@
 import React, { ComponentType, ErrorInfo, ReactNode } from "react"
 
-import DefaultErrorFallback from "./DefaultErrorFallback"
+import { DefaultErrorFallback } from "./DefaultErrorFallback"
 
 interface SuspenseErrorBoundaryProps {
 	children: ReactNode
@@ -112,4 +112,4 @@ class SuspenseErrorBoundary extends React.Component<
 	}
 }
 
-export default SuspenseErrorBoundary
+export { SuspenseErrorBoundary }

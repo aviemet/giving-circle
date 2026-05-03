@@ -1,13 +1,14 @@
 import { Method, Visit } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
 import { type ButtonProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import React from "react"
 
 import { Button } from "@/components"
-import AnchorLink, { type AnchorLinkProps } from "@/components/Link/AnchorLink"
+import { AnchorLink, type AnchorLinkProps } from "@/components/Link/AnchorLink"
 import { exclude } from "@/lib/collections"
 
-interface LinkProps extends AnchorLinkProps {
+interface InertiaLinkProps extends AnchorLinkProps {
+	ref?: React.Ref<HTMLAnchorElement>
 	children?: React.ReactNode
 	href: string
 	as: "a" | "button"
@@ -17,11 +18,19 @@ interface LinkProps extends AnchorLinkProps {
 	disabled?: boolean
 }
 
-const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
-	{ children, href, as = "a", method, visit, buttonProps, style, disabled, ...props },
+export function InertiaLink({
+	children,
+	href,
+	as = "a",
+	method,
+	visit,
+	buttonProps,
+	style,
+	disabled,
 	ref,
-) => {
-	const handleHTTP = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+	...props
+}: InertiaLinkProps) {
+	const handleHTTP = (e: React.MouseEvent<Element, MouseEvent>) => {
 		e.preventDefault()
 
 		router.visit(href, {
@@ -30,35 +39,35 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 		})
 	}
 
-	const isNonStandardMethod = (method !== undefined && method !== "get")
-
-	const processedHref = disabled ? "#" : href
-
-	const basicProps = {
-		disabled,
-		component: AnchorLink,
-		href: processedHref,
-		style: [{ "&:hover": { textDecoration: "none" } }, style],
-		c: "bright",
-	}
-
 	const mergedButtonProps = Object.assign(
-		basicProps,
+		{ disabled },
 		buttonProps,
 		exclude(props, ["classNames", "style", "vars"]),
 	)
 
-	if(isNonStandardMethod) {
-		const otherOnClick = mergedButtonProps.onClick
-		mergedButtonProps.onClick = (e: any) => {
-			handleHTTP(e)
-			otherOnClick?.(e)
-		}
-	}
+	const processedHref = disabled ? "#" : href
 
-	if(as === "button" || isNonStandardMethod) {
+	if((method !== undefined && method !== "get")) {
 		return <Button
 			ref={ ref }
+			component={ AnchorLink }
+			href={ processedHref }
+			onClick={ handleHTTP }
+			style={ [{ "&:hover": { textDecoration: "none" } }, style] }
+			c="bright"
+			{ ...mergedButtonProps }
+		>
+			{ children }
+		</Button>
+	}
+
+	if(as === "button") {
+		return <Button
+			ref={ ref }
+			component={ AnchorLink }
+			href={ processedHref }
+			style={ [{ "&:hover": { textDecoration: "none" } }, style] }
+			c="bright"
 			{ ...mergedButtonProps }
 		>
 			{ children }
@@ -68,6 +77,4 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 	return (
 		<AnchorLink href={ processedHref } ref={ ref } { ...props }>{ children }</AnchorLink>
 	)
-})
-
-export default InertiaLinkComponent
+}

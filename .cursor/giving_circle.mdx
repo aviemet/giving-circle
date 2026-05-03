@@ -45,17 +45,20 @@
 - Changes must be atomic and focused
 - Frontend: no default exports; use named exports only (except for the app/frontend/pages directory, those all MUST be default exports). React components use function declarations: `export function ComponentName({ ...props }: Props) { ... }`. Barrel files re-export with `export { X } from "./Y"`. Inertia page modules may export a named `Page` (e.g. `export const Page = withLayout(Inner, "layout")`) for the resolver.
 - When checking HTTP response status, use exact status equality (e.g. 201), not range checks.
-- TypeScript: strict types, prefer existing types and generics over inline types. Do not use type assertions (as, as unknown as). Do not add explicit return type annotations when TypeScript can infer them; only annotate when intent is genuinely ambiguous. Fix type errors by correcting the types (e.g. union types, generics), not by casting. With React 19 typings, `useRef<SomeHandle>(null)` is `RefObject<SomeHandle | null>`; helpers that call into imperative handles should accept that shape, not `RefObject<SomeHandle>` only.
-- The shared `Page` component sets the app header label via `title` and/or `heading` (`heading` wins for `usedTitle` and can be a React node). `Page` has no `siteTitle` prop; custom header content belongs in `heading`.
+- TypeScript: strict types, prefer existing types and generics over inline types. Do not use type assertions (as, as unknown as). Do not add explicit return type annotations when TypeScript can infer them; only annotate when intent is genuinely ambiguous. Fix type errors by correcting the types (e.g. union types, generics), not by casting. With React 19 typings, `useRef<SomeHandle>(null)` is `RefObject<SomeHandle | null>`; helpers that call into imperative handles should accept that shape, not `RefObject<SomeHandle>` only. With `@types/react` 19, bare `JSX.Element` can fail because global `JSX` is not populated like `@types/react` 18; prefer `import type { ReactElement, ReactNode } from "react"` (or `React.JSX.Element`). Transitive `react-i18next` augments `declare global { namespace JSX { ... } }`, which affects IDE "go to definition" on `JSX` without fixing that typing.
+- The shared `Page` component sets the app header label via `title` and/or `heading` (`heading` wins for `usedTitle` and can be a React node). `Page` has no `siteTitle` prop; custom header content belongs in `heading`. `Page` does not render `heading` (or `title`) as DOM inside itself; layout chrome reads `usedTitle` from the layout store. RTL tests should assert on content rendered by children (tables, forms, breadcrumbs), not on a document-level heading from `Page.heading` alone.
 - Nested ternaries are disallowed; use `if`/`else` or early returns.
 
 ### Code Style
+- Lodash-compatible helpers (`get`, `set`, `omit`, `isEmpty`, `debounce`, etc.) are imported from `es-toolkit/compat`, not `lodash` / `lodash-es`.
 - No spaces between operators and parentheses: `if(condition)`, `for(item)`, `while(condition)`
 - This applies to all control flow operators: `if`, `for`, `while`, `switch`, etc.
 
 ### ESLint Configuration
 - Using `@stylistic/eslint-plugin` for code formatting
-- Using `eslint` v10 flat config with `eslint-plugin-import` wrapped via `@eslint/compat.fixupPluginRules` to keep `import/*` rules (including `import/order`) working despite removed legacy `SourceCode` helpers in ESLint 10
+- Using `eslint` v10 flat config with `@eslint/compat`'s `fixupConfigRules` on `eslint-plugin-import` flat config entries. ESLint 10 omits legacy `SourceCode` methods such as `getTokenOrCommentAfter` that `import/order` still calls; skipping the fixup makes ESLint throw during lint, not a normal rule violation.
+- Those import flat configs have no `files` filter by default; give them `files` matching only JS/TS module sources. Otherwise `import/no-unresolved` runs on JSON (and similar), where ESLint 10 `SourceCode` lacks other legacy methods and `@eslint/compat` can throw when wiring `context` passthroughs (`Cannot read properties of undefined (reading 'bind')`).
+- Map the same project `ignores` onto those import fixup config objects. `importLintGlobs` matches paths ending in `.ts`, including `*.d.ts`. Generated serializer declarations live under `app/frontend/types/serializers/**/*`, which the main TS and `.d.ts` blocks already ignore; if the import-only layer does not share that `ignores`, ESLint can merge only that layer for those files, use Espree (no `import type`), and surface a parse error such as `Unexpected token UserTablePreferences` after `import type`.
 
 ## Feature Documentation
 *Document completed features and their core functionality here*
@@ -126,13 +129,14 @@
 - Dark/light theme support via Mantine theme system
 
 #### Form Implementation
-- Built on `use-inertia-form`
-- Form component wraps Inertia form with Mantine UI
-- Supports nested data through `NestedObject` type
-- Rails-compatible form attributes by default
-- Custom inputs use `useInertiaInput` hook
-- Form state includes processing, errors, validation, and dirty tracking
-- All components strictly typed with `BaseFormInputProps<T>` interface
+- Built on `@inertiajs/react` `Form` (uncontrolled inputs)
+- Form state and data access are derived from the live DOM form via a `FormFieldContext` store (no `useInertiaForm` hook)
+- Inputs use lodash-style path `name` attributes (e.g. `user.email`, `template.slides_attributes[0].title`)
+- `initialData` is applied by writing into inputs via their `name` attributes and dispatching input/change events so input-local state stays in sync
+- Rails-compatible parameter shape is preserved; `railsAttributes` transform support exists for object payload transforms, but most forms should rely on correctly-named inputs
+- If a wrapped input component does not forward its `name` prop to the underlying native form control, it will not be included in form submission or `getFormData()` output.
+- If you type an Inertia `Form` wrapper via `React.ComponentProps<typeof Form>`, you'll lose the component's generic and `transform` often degrades to `(data: object) => ...`. Prefer typing wrappers directly off `FormComponentProps<Record<string, FormDataConvertible>>` (and pass an explicit JSX generic to `Form` when needed) so `transform` stays accurately typed.
+- Optional `rememberKey` persists form data in `localStorage` and auto-clears on successful submit
 
 #### TagsInput Component
 - Built on Mantine RichTextEditor with TipTap Mention extension
@@ -174,6 +178,7 @@
 - These TypeScript rules are non-negotiable. When in doubt, try without the cast or annotation first; the code often already type-checks.
 - Ruby constants can be exported to TS via rails types:generate; add a subtask in types.rake so it stays in sync.
 - moduleResolution "bundler" is required for subpath exports (e.g. tiptap menus).
+- With React 19, prefer ref-as-prop on function components instead of `forwardRef`. Components that expose imperative handles can accept `ref?: Ref<Handle>` in their props and use `useImperativeHandle(ref, ...)`.
 
 #### URL Routing & Navigation
 - Using js-routes gem for Rails route generation in TypeScript
@@ -253,7 +258,14 @@
 #### Testing
 - Unit: Vitest + React Testing Library
 - E2E: Playwright (no mocks, uses test environment)
+- **Vitest browser mode (Playwright provider)** runs each test file inside real Chromium with Vite dev transforms. A test file that imports heavy app entrypoints (full Inertia pages, barrels that pull most of `@/components`, or anything that drags in large Mantine/editor graphs) can exceed the renderer V8 heap (on the order of a few GB) and die with `V8 javascript OOM`, which Vitest surfaces as “browser connection was closed”. That is usually a **test surface area / bundle size** issue, not missing Playwright browser installs (verify with `yarn playwright install chromium`). Prefer **small** browser-mode tests, jsdom + RTL for large React trees, and the Playwright package for separate E2E against a running server when you need full-app flows.
+- Unit tests that need Inertia shared props (`active_circle`, `active_theme`, etc.) can import `inertiaPageProps` from `@/tests/helpers/mockServer` and assign in `beforeEach`; clear optional fields in `afterEach` so later tests in the same file are not polluted. Helpers like `registerActiveCircleLifecycle` in `pageTestLifecycle.ts` centralize that pattern. With merged Vite config, Vitest's effective project root is `app/frontend`; `setupFiles` uses `./tests/helpers/mockServer.ts` relative to that root (MSW, Inertia `vi.mock`, `#footer-portal` for breadcrumb portals). Use `fileParallelism: false` under Vitest `test` when suites mutate the shared `inertiaPageProps` object so parallel files do not race.
+- Root `tsconfig.json` sets `compilerOptions.types` to `[]` (no automatic `@types` packages). Vitest `globals: true` still needs global typings: `app/frontend/vitest-globals.d.ts` with `/// <reference types="vitest/globals" />`. Listing `vitest/globals` in `compilerOptions.types` can fail to resolve (e.g. TS 6 reports TS2688). DOM matchers (`toHaveAttribute`, etc.) need `import "@testing-library/jest-dom/vitest"` in a setup file (e.g. `mockServer.ts`); Vitest 4's default `expect` does not include them without that import.
+- Vitest `vi.mock(import("pkg"), factory)` uses the typed overload: the factory must return `Partial<typeof import("pkg")>`, but nested exports keep their full type (e.g. a stub `router` object still must satisfy `Router`). For shallow stubs, prefer `vi.mock("pkg", factory)` (string path overload) or `importOriginal` plus spread from the real module.
+- **`vitest.browser.config.ts` must not `mergeConfig` the Rails app `vite.config.ts`** (Ruby plugin, Inertia plugin, WyW/Linaria, full-reload, `base: "./"`). That combination prevented the Vitest browser runner page from handshaking in headless Chromium (symptom: “Failed to connect to the browser session … within the timeout”). Browser Vitest uses its own minimal Vite config: `root` = `app/frontend`, `@` alias, `tsconfigPaths`, `@vitejs/plugin-react` only, `base: "/"`. Local headed runs: `yarn test:browser:headed` (or `BROWSER_HEADED=1`).
 - Test files mirror source structure in `/app/frontend/tests`
+- If `vitest.config.ts` uses `mergeConfig(viteConfig, ...)`, ensure `vite.config.ts` exports a concrete Vite `UserConfig` object (not `defineConfig(...)`'s `UserConfigExport` union), otherwise TypeScript can infer `mergeConfig` parameters as `never` and the whole Vitest config turns red.
+- If `vite.config.ts` exports a function config (`defineConfig((env) => ...)`), reuse it in **unit** Vitest (`vitest.config.ts`) by wrapping with `defineConfig((env) => mergeConfig(viteConfig(env), ...))`. Do **not** reuse that merge pattern for `vitest.browser.config.ts` (see Vitest browser bullet above).
 
 #### Performance
 - Component code splitting

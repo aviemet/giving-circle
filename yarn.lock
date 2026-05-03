@@ -792,6 +792,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@blazediff/core@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@blazediff/core@npm:1.9.1"
+  checksum: 10/6bb615f104da313934bcabc09627f3c803461bf85182453d5c13a6a354be4d32b35504b84f1043c21e95d0f6c0acb45083caeb72e72c1d6a76ca5e1f61f25510
+  languageName: node
+  linkType: hard
+
 "@bramus/specificity@npm:^2.4.2":
   version: 2.4.2
   resolution: "@bramus/specificity@npm:2.4.2"
@@ -2940,6 +2947,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@polka/url@npm:^1.0.0-next.24":
+  version: 1.0.0-next.29
+  resolution: "@polka/url@npm:1.0.0-next.29"
+  checksum: 10/69ca11ab15a4ffec7f0b07fcc4e1f01489b3d9683a7e1867758818386575c60c213401259ba3705b8a812228d17e2bfd18e6f021194d943fff4bca389c9d4f28
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.11.8":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
@@ -3256,9 +3270,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/eslint-plugin-query@npm:^5.100.5":
-  version: 5.100.5
-  resolution: "@tanstack/eslint-plugin-query@npm:5.100.5"
+"@tanstack/eslint-plugin-query@npm:^5.100.6":
+  version: 5.100.6
+  resolution: "@tanstack/eslint-plugin-query@npm:5.100.6"
   dependencies:
     "@typescript-eslint/utils": "npm:^8.58.1"
   peerDependencies:
@@ -3267,44 +3281,44 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/d8d0268f1597e3db1ea4ca189d7cf0e3356cf65211e24bcd655a06bd223a701af3db778574d650902399104caf5190a664cf291db0b97957108ecec5366cf8d8
+  checksum: 10/650258ec44b5bf36e84caa72ea631927fcfb9f08832e92eb8a26e4baa4ef66c25184b39ed114618b10d491f26ac67738361cbdb48d241f0f4ab17de151598b20
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.100.5":
-  version: 5.100.5
-  resolution: "@tanstack/query-core@npm:5.100.5"
-  checksum: 10/07f42dd4186057d85e5edcbdbd3a040cbf6f22621287b802c79339aa230aa16ff285330fac744ec471b7bbeb0181a916979dbc74613fb5342328ac1f6dc1a9a8
+"@tanstack/query-core@npm:5.100.6":
+  version: 5.100.6
+  resolution: "@tanstack/query-core@npm:5.100.6"
+  checksum: 10/f3875522790011a0dcd20dbd05e0e057132b6011bdd06e15dc77af8548c2ca64014727aa4e5786136ab5024a0e3f0f0cf37f9251341c466ecd7877ff1b89ea98
   languageName: node
   linkType: hard
 
-"@tanstack/query-devtools@npm:5.100.5":
-  version: 5.100.5
-  resolution: "@tanstack/query-devtools@npm:5.100.5"
-  checksum: 10/d321099050bcbb2963987664fe7373ba96bb955aa1533abb0219acbfb9156f84408b85da82338a74bf2e63f96560fdb297c1c5866156d7df3cad8e8ff3b49b52
+"@tanstack/query-devtools@npm:5.100.6":
+  version: 5.100.6
+  resolution: "@tanstack/query-devtools@npm:5.100.6"
+  checksum: 10/f10d7f8960f8e62d6169121de1935967abbf4add3571f4f973489f3b2f76ad7c8b11ad68ad679105fe5aa54cf655afa303534c6d40c4f54264653cc5fcfca4cf
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:^5.100.5":
-  version: 5.100.5
-  resolution: "@tanstack/react-query-devtools@npm:5.100.5"
+"@tanstack/react-query-devtools@npm:^5.100.6":
+  version: 5.100.6
+  resolution: "@tanstack/react-query-devtools@npm:5.100.6"
   dependencies:
-    "@tanstack/query-devtools": "npm:5.100.5"
+    "@tanstack/query-devtools": "npm:5.100.6"
   peerDependencies:
-    "@tanstack/react-query": ^5.100.5
+    "@tanstack/react-query": ^5.100.6
     react: ^18 || ^19
-  checksum: 10/5cae13e235f7157a85cfdf7bb3e328c197bd9e1ca45808b759159d67d597e9ed4195a1b41a46d751c77deeac5944df9f8feeeda0b883f1f724b16122c3a3d452
+  checksum: 10/493c0ea4c38f6e85752cd3e5a1a42c7dc90003307b222dc0cbbfd134e8453904257dfa1af40440bf1fe547d743d34e75645356c9dc8f801c27bc332b38fd46f3
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.100.5":
-  version: 5.100.5
-  resolution: "@tanstack/react-query@npm:5.100.5"
+"@tanstack/react-query@npm:^5.100.6":
+  version: 5.100.6
+  resolution: "@tanstack/react-query@npm:5.100.6"
   dependencies:
-    "@tanstack/query-core": "npm:5.100.5"
+    "@tanstack/query-core": "npm:5.100.6"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10/ad14776bb73b62ea337d12c35e2f041e96a8c4939568b4035247d6e138a4ada66124b6b8604b5c8d7f267f70e0b7754d220aa957cd7dda1c67c9d228ca7f4d2d
+  checksum: 10/2a41adcb1d81e862e7f0f0835dcc02be110ccf5e6d096b0d6c769b01184a9ad43be5ca0c234e42421686e6a4515aec97d774676188f0ced9788eb9c14a52b689
   languageName: node
   linkType: hard
 
@@ -3891,6 +3905,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/google-libphonenumber@npm:^7.4.30":
+  version: 7.4.30
+  resolution: "@types/google-libphonenumber@npm:7.4.30"
+  checksum: 10/70e90971a6218ab2900d29e801a85e59147d6af7b9fccfbb46df6846215d7e62aa1817c0f34c800080815eed2d4eda61a43a20353290db9429dc140ab6887356
+  languageName: node
+  linkType: hard
+
 "@types/is-hotkey@npm:^0.1.8":
   version: 0.1.10
   resolution: "@types/is-hotkey@npm:0.1.10"
@@ -3951,22 +3972,6 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 10/4e5aed58cabb2bbf6f725da13421aa50a49abb6bc17bfab6c31b8774b073fa7b50d557c61f961a09a85f6056151190f8ac95f13f5b48136ba5841f7d4484ec56
-  languageName: node
-  linkType: hard
-
-"@types/lodash-es@npm:^4.17.12":
-  version: 4.17.12
-  resolution: "@types/lodash-es@npm:4.17.12"
-  dependencies:
-    "@types/lodash": "npm:*"
-  checksum: 10/56b9a433348b11c31051c6fa9028540a033a08fb80b400c589d740446c19444d73b217cf1471d4036448ef686a83e8cf2a35d1fadcb3f2105f26701f94aebb07
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:*, @types/lodash@npm:^4.17.24":
-  version: 4.17.24
-  resolution: "@types/lodash@npm:4.17.24"
-  checksum: 10/0f2082565f60f9787eefc046edc38458054512be5a8b3584ef0bad5fd9e85d0ab55ec5a1fbfae1ed6ba015cf1f9e837d5fb4da1f99fc60b8f74b2a46146fb00f
   languageName: node
   linkType: hard
 
@@ -4476,6 +4481,54 @@ __metadata:
     babel-plugin-react-compiler:
       optional: true
   checksum: 10/a525799252fa6c12bf9a0a367b17dfc3d5e8e02ec0b5b81554db9d97b764c554be6b0686e3dd385b0ac0350f0c023120ce712d79feedd99fa2cb854b7cd1e960
+  languageName: node
+  linkType: hard
+
+"@vitest/browser-playwright@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "@vitest/browser-playwright@npm:4.1.5"
+  dependencies:
+    "@vitest/browser": "npm:4.1.5"
+    "@vitest/mocker": "npm:4.1.5"
+    tinyrainbow: "npm:^3.1.0"
+  peerDependencies:
+    playwright: "*"
+    vitest: 4.1.5
+  peerDependenciesMeta:
+    playwright:
+      optional: false
+  checksum: 10/a69c8e9f8efd3dc3e28a9faaa3656c9e5713f93093fbaeda2f9b268ea3c30de08d8c5fe28001e54a9adcb0d1c66f7298803f9451751c7cd5c4d6274b68f5555c
+  languageName: node
+  linkType: hard
+
+"@vitest/browser-preview@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "@vitest/browser-preview@npm:4.1.5"
+  dependencies:
+    "@testing-library/dom": "npm:^10.4.1"
+    "@testing-library/user-event": "npm:^14.6.1"
+    "@vitest/browser": "npm:4.1.5"
+  peerDependencies:
+    vitest: 4.1.5
+  checksum: 10/d851050a28f981703b58c2b4546b5aa026f227e8ad26888cc8c6314d972da50b64c31ea162f83190fadfc24a03313cd2ce6520daeaac7b7e9c176954b856e92e
+  languageName: node
+  linkType: hard
+
+"@vitest/browser@npm:4.1.5":
+  version: 4.1.5
+  resolution: "@vitest/browser@npm:4.1.5"
+  dependencies:
+    "@blazediff/core": "npm:1.9.1"
+    "@vitest/mocker": "npm:4.1.5"
+    "@vitest/utils": "npm:4.1.5"
+    magic-string: "npm:^0.30.21"
+    pngjs: "npm:^7.0.0"
+    sirv: "npm:^3.0.2"
+    tinyrainbow: "npm:^3.1.0"
+    ws: "npm:^8.19.0"
+  peerDependencies:
+    vitest: 4.1.5
+  checksum: 10/830e4fff6eda823ad16e4336a67350aa1928ed5131d60290ec1e2dd0f5bc39431317047d550a415462ac0600d48c6684f9c2b4b3d3e48edd18adba080e3f1667
   languageName: node
   linkType: hard
 
@@ -6768,7 +6821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-toolkit@npm:^1.32.0, es-toolkit@npm:^1.33.0":
+"es-toolkit@npm:^1.32.0, es-toolkit@npm:^1.33.0, es-toolkit@npm:^1.46.0":
   version: 1.46.0
   resolution: "es-toolkit@npm:1.46.0"
   dependenciesMeta:
@@ -7862,9 +7915,9 @@ __metadata:
     "@stylistic/eslint-plugin": "npm:^5.10.0"
     "@stylistic/stylelint-config": "npm:^5.0.0"
     "@stylistic/stylelint-plugin": "npm:^5.1.0"
-    "@tanstack/eslint-plugin-query": "npm:^5.100.5"
-    "@tanstack/react-query": "npm:^5.100.5"
-    "@tanstack/react-query-devtools": "npm:^5.100.5"
+    "@tanstack/eslint-plugin-query": "npm:^5.100.6"
+    "@tanstack/react-query": "npm:^5.100.6"
+    "@tanstack/react-query-devtools": "npm:^5.100.6"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.2"
@@ -7882,9 +7935,8 @@ __metadata:
     "@tiptap/react": "npm:^3.22.5"
     "@tiptap/starter-kit": "npm:^3.22.5"
     "@tiptap/suggestion": "npm:^3.22.5"
+    "@types/google-libphonenumber": "npm:^7.4.30"
     "@types/jest": "npm:^30.0.0"
-    "@types/lodash": "npm:^4.17.24"
-    "@types/lodash-es": "npm:^4.17.12"
     "@types/papaparse": "npm:^5.5.2"
     "@types/rails__actioncable": "npm:^8.0.3"
     "@types/rails__activestorage": "npm:^8.0.1"
@@ -7893,6 +7945,8 @@ __metadata:
     "@types/sanitize-html": "npm:^2.16.1"
     "@typescript-eslint/parser": "npm:^8.59.1"
     "@vitejs/plugin-react": "npm:^6.0.1"
+    "@vitest/browser-playwright": "npm:^4.1.5"
+    "@vitest/browser-preview": "npm:^4.1.5"
     "@wyw-in-js/vite": "npm:^1.1.0"
     "@xstate/react": "npm:^6.1.0"
     autoprefixer: "npm:^10.5.0"
@@ -7906,6 +7960,7 @@ __metadata:
     dayjs: "npm:^1.11.20"
     dinero.js: "npm:^2.0.2"
     dmeditor: "npm:^0.2.4"
+    es-toolkit: "npm:^1.46.0"
     eslint: "npm:^10.2.1"
     eslint-import-resolver-typescript: "npm:^4.4.4"
     eslint-plugin-better-styled-components: "npm:^1.1.2"
@@ -7926,8 +7981,6 @@ __metadata:
     jsdom: "npm:^29.1.0"
     jsonc-eslint-parser: "npm:^3.1.0"
     lint-staged: "npm:^16.4.0"
-    lodash: "npm:^4.18.1"
-    lodash-es: "npm:^4.18.1"
     mantine-contextmenu: "npm:^8.3.13"
     motion: "npm:^12.38.0"
     msw: "npm:^2.13.6"
@@ -7950,7 +8003,6 @@ __metadata:
     ts-jest: "npm:^29.4.9"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^6.0.3"
-    use-inertia-form: "npm:^4.6.0"
     use-react-screenshot: "npm:^4.0.0"
     vite: "npm:^8.0.10"
     vite-plugin-dynamic-import: "npm:^1.6.0"
@@ -7958,6 +8010,7 @@ __metadata:
     vite-plugin-ruby: "npm:^5.2.1"
     vite-tsconfig-paths: "npm:^6.1.1"
     vitest: "npm:^4.1.5"
+    vitest-browser-react: "npm:^2.2.0"
     xstate: "npm:^5.31.0"
     zustand: "npm:^5.0.12"
   languageName: unknown
@@ -10107,13 +10160,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.18.1":
-  version: 4.18.1
-  resolution: "lodash-es@npm:4.18.1"
-  checksum: 10/8bfad225ef09ef42b04283cdaf7830efcc2ba29ae41b56501c74422155ee1ccaa1f0f6e8319def3451a1fe54dec501c8e4bee622bae2b2d98ac993731e0a5cce
-  languageName: node
-  linkType: hard
-
 "lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
@@ -10202,13 +10248,6 @@ __metadata:
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.18.1":
-  version: 4.18.1
-  resolution: "lodash@npm:4.18.1"
-  checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
   languageName: node
   linkType: hard
 
@@ -10639,6 +10678,13 @@ __metadata:
     react-dom:
       optional: true
   checksum: 10/d7ae2ba3cc112c4467822956b92065239640b9c62204d3bee1780da9fc0147185373534138d39975e82bf73b5f1b28d3fb3581031e4e7e0cfb230472767bd10d
+  languageName: node
+  linkType: hard
+
+"mrmime@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "mrmime@npm:2.0.1"
+  checksum: 10/1f966e2c05b7264209c4149ae50e8e830908eb64dd903535196f6ad72681fa109b794007288a3c2814f7a1ecf9ca192769909c0c374d974d604a8de5fc095d4a
   languageName: node
   linkType: hard
 
@@ -11284,6 +11330,13 @@ __metadata:
   bin:
     playwright: cli.js
   checksum: 10/17b2df42effa362adc6aa3192b625bd80f26b91a0c253a2375ac89ace68407b746dd87b4081629c50c58c3cb031c5b837a32fef43a3c98c60ea504e0b001e5fa
+  languageName: node
+  linkType: hard
+
+"pngjs@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "pngjs@npm:7.0.0"
+  checksum: 10/e843ebbb0df092ee0f3a3e7dbd91ff87a239a4e4c4198fff202916bfb33b67622f4b83b3c29f3ccae94fcb97180c289df06068624554f61686fe6b9a4811f7db
   languageName: node
   linkType: hard
 
@@ -12561,6 +12614,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sirv@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "sirv@npm:3.0.2"
+  dependencies:
+    "@polka/url": "npm:^1.0.0-next.24"
+    mrmime: "npm:^2.0.0"
+    totalist: "npm:^3.0.0"
+  checksum: 10/259617f4ab57664be6d963f5b27b38a6351d3e91ce70d6726985d087b40efd595fcf7f72ae010babf5e0acb63bcb3e3d6db8de34604da1011be6e28ee32aa15d
+  languageName: node
+  linkType: hard
+
 "slash@npm:^3.0.0":
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
@@ -13415,6 +13479,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"totalist@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "totalist@npm:3.0.1"
+  checksum: 10/5132d562cf88ff93fd710770a92f31dbe67cc19b5c6ccae2efc0da327f0954d211bbfd9456389655d726c624f284b4a23112f56d1da931ca7cfabbe1f45e778a
+  languageName: node
+  linkType: hard
+
 "tough-cookie@npm:^6.0.1":
   version: 6.0.1
   resolution: "tough-cookie@npm:6.0.1"
@@ -13884,18 +13955,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-inertia-form@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "use-inertia-form@npm:4.6.0"
-  peerDependencies:
-    "@inertiajs/react": ^1.0.0 || ^2.0.0
-    axios: ^1.7.8
-    react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/97ed2edc3c062b91eef5bf48e939049d479078ea31fee969c8b4794dd69061017114ca1eb57f35e3ddc563c5e98c5268584a949a540a38e16df1d6a6b1cfb7de
-  languageName: node
-  linkType: hard
-
 "use-isomorphic-layout-effect@npm:^1.1.2":
   version: 1.2.1
   resolution: "use-isomorphic-layout-effect@npm:1.2.1"
@@ -14087,6 +14146,24 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10/64c6fa4efa1a9ca3e1cacbcca16487b75ea25d62efbfb99c4e571b5f716296dc4f8af825eb624e273b11c3bee4e87daec35815fb6a56e01c843659c003ed2bcd
+  languageName: node
+  linkType: hard
+
+"vitest-browser-react@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "vitest-browser-react@npm:2.2.0"
+  peerDependencies:
+    "@types/react": ^18.0.0 || ^19.0.0
+    "@types/react-dom": ^18.0.0 || ^19.0.0
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+    vitest: ^4.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10/44d1e9cabec5bb51f2a422abbb080db1a47c7efbcab4461fa24049cc2e8caf5cbe0204e99fe224b2141931ba23a753e35caf412db4875129c1768e9a1e6a81a0
   languageName: node
   linkType: hard
 
@@ -14480,6 +14557,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 10/725964438d752f0ab0de582cd48d6eeada58d1511c3f613485b5598a83680bedac6187c765b0fe082e2d8cc4341fc57707c813ae780feee82d0c5efe6a4c61b6
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.19.0":
+  version: 8.20.0
+  resolution: "ws@npm:8.20.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10/b7ab934b21ffdea9f25a5af5097e8c1ec7625db553bca026c5a23e35b7c236f3fb89782f2b57fab9da553864512f9aa7d245827ef998d26ffa1b2187a19a6d10
   languageName: node
   linkType: hard
 

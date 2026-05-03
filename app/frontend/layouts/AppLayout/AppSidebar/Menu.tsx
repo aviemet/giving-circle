@@ -10,7 +10,7 @@ export interface MenuProps {
 	circle: Schema.CirclesInertiaShare
 }
 
-const Menu = () => {
+export function AppSidebarMenu() {
 	const { active_circle, active_theme, active_presentation } = usePageProps()
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
 	const openMenus = useLayoutStore((state) => state.openMenus)
@@ -59,5 +59,3 @@ const Menu = () => {
 		</Accordion>
 	)
 }
-
-export default Menu

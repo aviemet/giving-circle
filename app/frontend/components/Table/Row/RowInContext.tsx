@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react"
+import React, { type Ref } from "react"
 
 import { useTableSectionContext } from "../TableContext"
-import BodyRow from "./BodyRow"
-import HeadRow from "./HeadRow"
+import { RowInContext as BodyRow } from "./BodyRow"
+import { HeadRow } from "./HeadRow"
 
 import { type TableRow } from "./index"
 
@@ -14,10 +14,11 @@ interface RowInContextProps extends Omit<TableRow, "ref"> {
 	selected: Set<string>
 }
 
-const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
-	{ children, ...props },
-	ref,
-) => {
+type RowInContextPropsWithRef = RowInContextProps & {
+	ref?: Ref<HTMLTableRowElement>
+}
+
+function RowInContext({ children, ref, ...props }: RowInContextPropsWithRef) {
 	const { section } = useTableSectionContext()
 
 	return section === "head" ?
@@ -25,6 +26,6 @@ const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 		:
 		<BodyRow ref={ ref } { ...props }>{ children }</BodyRow>
 
-})
+}
 
-export default RowInContext
+export { RowInContext }

@@ -2,19 +2,18 @@ import { useMantineTheme, type ModalProps, type ButtonProps } from "@mantine/cor
 import { useDisclosure } from "@mantine/hooks"
 import axios from "axios"
 import React from "react"
-import { type UseFormProps } from "use-inertia-form"
 
 import { Modal } from "@/components"
+import { type FormProps } from "@/components/Form"
 
-import Button from "./index"
+import { Button } from "./index"
 
 interface ModalFormButtonProps {
 	children?: string | React.ReactElement
-	form: React.ReactElement
+	form: React.ReactElement<FormProps>
 	title: string
 	buttonProps?: ButtonProps
 	modalProps?: Partial<ModalProps>
-	onSubmit?: (form: UseFormProps) => boolean | void
 	onSuccess?: (data: { id: string | number }) => void
 }
 
@@ -24,30 +23,27 @@ const ModalFormButton = ({
 	title,
 	buttonProps = {},
 	modalProps = {},
-	onSubmit,
 	onSuccess,
 }: ModalFormButtonProps) => {
 	const [opened, { open, close }] = useDisclosure(false)
 
 	const theme = useMantineTheme()
 
-	const handleSubmit = ({ data, method, to, setError }: UseFormProps) => {
-		if(!to) return false
+	const handleSubmit = async(data: Record<string, unknown>) => {
+		const action = form.props.action
+		const method = form.props.method ?? "post"
+		if(!action) return
 
-		axios[method](to, { ...data, redirect: false })
-			.then(response => {
-				if(response.statusText === "OK" || response.statusText === "Created") {
-					close()
-					if(onSuccess) onSuccess(response.data)
-				}
-			})
-			.catch(error => {
-				if(error.response.data?.errors) {
-					setError(error.response.data.errors)
-				}
-			})
+		const response = await axios.request({
+			url: action,
+			method,
+			data: { ...data, redirect: false },
+		})
 
-		return false // Returning false prevents the default form action
+		if(response.statusText === "OK" || response.statusText === "Created") {
+			close()
+			onSuccess?.(response.data)
+		}
 	}
 
 	return (
@@ -61,11 +57,11 @@ const ModalFormButton = ({
 				{ ...modalProps }
 			>
 				{ React.cloneElement(form, {
-					onSubmit: onSubmit ? onSubmit : handleSubmit,
+					submitWith: handleSubmit,
 				}) }
 			</Modal>
 		</>
 	)
 }
 
-export default ModalFormButton
+export { ModalFormButton }

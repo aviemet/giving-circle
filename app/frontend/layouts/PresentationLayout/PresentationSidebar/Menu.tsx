@@ -1,15 +1,12 @@
-import { useEffect } from "react"
-
-import { Accordion, Divider, NavLink } from "@/components"
+import { Divider, NavLink } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
-import { useLayoutStore } from "@/store"
 
 export interface MenuProps {
 	circle: Schema.CirclesInertiaShare
 }
 
-const Menu = () => {
+export function PresentationSidebarMenu() {
 	const { active_circle, active_theme, active_presentation } = usePageProps()
 
 	return (
@@ -24,5 +21,3 @@ const Menu = () => {
 		</> }</>
 	)
 }
-
-export default Menu

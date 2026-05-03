@@ -1,0 +1,2 @@
+export { vars } from "./theme"
+

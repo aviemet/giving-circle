@@ -1,8 +1,6 @@
-import { useForm } from "use-inertia-form"
-
-import { Grid, Text } from "@/components"
-import { Checkbox, DynamicInputs, Form, NumberInput, Radio, Submit, Switch, TextInput } from "@/components/Form"
-import { Routes } from "@/lib"
+import { Grid } from "@/components"
+import { Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
 
 export type NewTemplateFormData = {
 	presentation_template: {
@@ -15,12 +13,10 @@ export type NewTemplateFormData = {
 interface NewTemplateFormProps {}
 
 const NewTemplateForm = ({}: NewTemplateFormProps) => {
-	const { getData } = useForm<NewTemplateFormData>()
-
 	return (
 		<Grid>
 			<Grid.Col>
-				<TextInput label="Name" name="name" />
+				<TextInput label="Name" name="presentation_template.name" />
 			</Grid.Col>
 			{ /*
 			<Grid.Col>
@@ -63,9 +59,7 @@ const NewTemplateForm = ({}: NewTemplateFormProps) => {
 	)
 }
 
-export default NewTemplateForm
-
-
+export { NewTemplateForm }
 /**
  * what are presentation settings values?
  *

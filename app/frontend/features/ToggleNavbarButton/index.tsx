@@ -18,4 +18,4 @@ const ToggleNavbarButton = (props: ToggleNavBarButton) => {
 	)
 }
 
-export default ToggleNavbarButton
+export { ToggleNavbarButton }

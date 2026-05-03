@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash"
+import { isEmpty } from "es-toolkit/compat"
 
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon } from "@/components/Icons"
@@ -6,7 +6,7 @@ import { Routes } from "@/lib"
 import { useInit, useLocation, usePageProps } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
-const ThemeMenu = () => {
+export function ThemeMenu() {
 	const { active_circle, active_theme } = usePageProps()
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
 	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
@@ -50,5 +50,3 @@ const ThemeMenu = () => {
 		</Accordion.Item>
 	)
 }
-
-export default ThemeMenu

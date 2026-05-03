@@ -32,4 +32,4 @@ const UsersTable = (props: TableProps) => {
 	)
 }
 
-export default UsersTable
+export { UsersTable }

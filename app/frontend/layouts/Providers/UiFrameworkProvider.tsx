@@ -28,7 +28,7 @@ function isCustomThemeOther(other: unknown): other is CustomThemeOther {
 	)
 }
 
-const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
+export function UiFrameworkProvider({ children }: { children: React.ReactNode }) {
 	/**
 	 * Primary color customization
 	 */
@@ -114,5 +114,3 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		</MantineProvider>
 	)
 }
-
-export default UiFrameworkProvider

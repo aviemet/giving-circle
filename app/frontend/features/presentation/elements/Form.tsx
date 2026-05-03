@@ -1,7 +1,7 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Grid } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 type PresentationElementFormData = {
 	presentation_element: Schema.PresentationElementsFormData
@@ -10,28 +10,26 @@ type PresentationElementFormData = {
 export interface PresentationElementFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PresentationElementFormData>) => boolean | void
 	presentation_element: Schema.PresentationElementsFormData
 }
 
-const PresentationElementForm = ({ method = "post", presentation_element, ...props }: PresentationElementFormProps) => {
+const PresentationElementForm = ({ to, method = "post", presentation_element }: PresentationElementFormProps) => {
 	return (
 		<Form
-			model="presentation_element"
-			data={ { presentation_element } }
+			action={ to }
+			initialData={ { presentation_element } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="data" label="Data" />
+					<TextInput name="presentation_element.data" label="Data" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="presentation_element.name" label="Name" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="template" label="Template" />
+					<TextInput name="presentation_element.template" label="Template" />
 				</Grid.Col>
 				<Grid.Col>
 					<Submit>{ presentation_element.id ? "Update" : "Create" } PresentationElement</Submit>
@@ -41,4 +39,4 @@ const PresentationElementForm = ({ method = "post", presentation_element, ...pro
 	)
 }
 
-export default PresentationElementForm
+export { PresentationElementForm }

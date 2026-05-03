@@ -49,4 +49,4 @@ const MentionCombobox = ({ items, selectedIndex, selectItem, clientRect }: Menti
 	)
 }
 
-export default MentionCombobox
+export { MentionCombobox }

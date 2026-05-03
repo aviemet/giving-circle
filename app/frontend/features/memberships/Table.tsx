@@ -52,4 +52,4 @@ const MembershipTable = ({ circle, ...props }: MembershipTableProps) => {
 	)
 }
 
-export default MembershipTable
+export { MembershipTable }

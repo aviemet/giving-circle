@@ -1,7 +1,7 @@
 import { Page, Group, Card, Stack, Text } from "@/components"
 import { NewIcon, UserGroupIcon, CalendarIcon, UploadIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
-import MembershipsTable from "@/features/memberships/Table"
+import { MembershipTable } from "@/features/memberships/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -87,7 +87,7 @@ const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => 
 							deleteRoute: "hi",
 						} }
 					>
-						<MembershipsTable circle={ active_circle } />
+						<MembershipTable circle={ active_circle } />
 					</IndexTableTemplate>
 				</Card>
 			</Stack>

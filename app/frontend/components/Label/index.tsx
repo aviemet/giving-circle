@@ -14,4 +14,4 @@ const Label = ({ children, required = false, className, ...props }: LabelProps) 
 	)
 }
 
-export default Label
+export { Label }

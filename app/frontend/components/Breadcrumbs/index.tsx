@@ -21,7 +21,7 @@ interface BreadcrumbsProps extends Omit<BoxProps, "children"> {
 	separator?: string
 }
 
-const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: BreadcrumbsProps) => {
 	if(!crumbs) return <></>
 
 	return (
@@ -67,5 +67,3 @@ const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: Breadcrum
 		</Portal>
 	)
 }
-
-export default Breadcrumbs

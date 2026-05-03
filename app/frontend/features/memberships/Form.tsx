@@ -1,7 +1,7 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Grid } from "@/components"
-import { Form, TextInput, Submit, CurrencyInput } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { CurrencyInput, TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 type MembershipFormData = {
 	membership: Schema.MembershipsFormData
@@ -10,31 +10,29 @@ type MembershipFormData = {
 export interface MembershipFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<MembershipFormData>) => boolean | void
 	membership: Schema.MembershipsFormData
 }
 
-const MembershipForm = ({ method = "post", membership, ...props }: MembershipFormProps) => {
+const MembershipForm = ({ to, method = "post", membership }: MembershipFormProps) => {
 	return (
 		<Form
-			model="membership"
-			data={ { membership } }
+			action={ to }
+			initialData={ { membership } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="number" label="Number" />
+					<TextInput name="membership.number" label="Number" />
 				</Grid.Col>
 				<Grid.Col>
-					<CurrencyInput name="funds" label="Funds" />
+					<CurrencyInput name="membership.funds" label="Funds" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="active" label="Active" />
+					<TextInput name="membership.active" label="Active" />
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="membership.name" label="Name" />
 				</Grid.Col>
 				<Grid.Col>
 					<Submit>{ membership.id ? "Update" : "Create" } Membership</Submit>
@@ -44,4 +42,4 @@ const MembershipForm = ({ method = "post", membership, ...props }: MembershipFor
 	)
 }
 
-export default MembershipForm
+export { MembershipForm }

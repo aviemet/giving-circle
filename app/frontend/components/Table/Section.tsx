@@ -10,4 +10,4 @@ const TableSection = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-export default TableSection
+export { TableSection }

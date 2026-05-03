@@ -3,7 +3,7 @@ import { type TableThProps } from "@mantine/core"
 import { usePageProps } from "@/lib/hooks"
 
 import { useTableContext } from "../TableContext"
-import HeadCell from "./HeadCell"
+import { HeadCell } from "./HeadCell"
 
 export interface TableHeadCellProps extends TableThProps {
 	fitContent?: boolean
@@ -33,4 +33,4 @@ const RenderedCell = ({ children = true, hideable, sort, ...props }: TableHeadCe
 	return <HeadCell hideable={ hideable } sort={ sort } { ...props }>{ children }</HeadCell>
 }
 
-export default RenderedCell
+export { RenderedCell }

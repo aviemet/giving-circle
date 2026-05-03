@@ -51,4 +51,4 @@ const PresentationActionTable = (props: PresentationActionTableProps) => {
 	)
 }
 
-export default PresentationActionTable
+export { PresentationActionTable }

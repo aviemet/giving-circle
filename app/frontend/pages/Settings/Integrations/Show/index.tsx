@@ -1,5 +1,5 @@
 import { Box, DangerousHtml, Title, Table } from "@/components"
-import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
 import { Routes, withLayout } from "@/lib"
 
 interface ShowMailSettingProps {

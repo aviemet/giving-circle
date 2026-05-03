@@ -90,6 +90,5 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 	)
 }
 
-export default AdvancedSearch
-
-export { default as useAdvancedSearch } from "./useAdvancedSearch"
+export { AdvancedSearch }
+export { useAdvancedSearch } from "./useAdvancedSearch"

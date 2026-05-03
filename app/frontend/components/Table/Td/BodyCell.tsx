@@ -1,7 +1,7 @@
 import { Table } from "@mantine/core"
 
 import { useTableContext } from "../TableContext"
-import BodyCellWithContext from "./BodyCellWithContext"
+import { BodyCellWithContext } from "./BodyCellWithContext"
 
 import { type TableCellProps } from "."
 
@@ -20,4 +20,4 @@ const BodyCell = ({ children, ...props }: TableCellProps) => {
 
 }
 
-export default BodyCell
+export { BodyCell }

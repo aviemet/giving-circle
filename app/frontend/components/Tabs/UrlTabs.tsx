@@ -53,8 +53,7 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 	)
 }
 
-export default UrlTabs
-
+export { UrlTabs }
 // Utility Functions
 
 const activeTab = () => {

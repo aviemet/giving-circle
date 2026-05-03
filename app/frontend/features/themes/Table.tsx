@@ -34,4 +34,4 @@ const ThemeTable = (props: TableProps) => {
 	)
 }
 
-export default ThemeTable
+export { ThemeTable }

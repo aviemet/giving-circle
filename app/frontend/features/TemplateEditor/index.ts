@@ -1,2 +1,2 @@
-export { default as TemplateLayoutEditor } from "./LayoutEditor"
-export { default as TemplateSlidesEditor } from "./SlidesEditor"
+export { LayoutEditor as TemplateLayoutEditor } from "./LayoutEditor"
+export { Slides as TemplateSlidesEditor } from "./SlidesEditor"

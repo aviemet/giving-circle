@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { Link } from "@/components"
 
 import { useTableContext } from "../TableContext"
-import LimitSelect from "./LimitSelect"
+import { LimitSelect } from "./LimitSelect"
 import * as classes from "../Table.css"
 
 interface PaginationComponent extends Omit<PaginationProps, "total"> {}
@@ -83,8 +83,7 @@ const PaginationComponent = ({
 	)
 }
 
-export default PaginationComponent
-
+export { PaginationComponent }
 const pageLink = (page: number) => {
 	const url = new URL(window.location.href)
 

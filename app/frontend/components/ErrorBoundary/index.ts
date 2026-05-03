@@ -1,7 +1,7 @@
-export { default as AsyncBoundary } from "./AsyncBoundary"
-export { default as DefaultErrorFallback } from "./DefaultErrorFallback"
-export { default as ErrorBoundary } from "./ErrorBoundary"
-export { default as SuspenseErrorBoundary } from "./SuspenseErrorBoundary"
-export { default as useErrorBoundary } from "./useErrorBoundary"
-export { default as withAsyncBoundary } from "./withAsyncBoundary"
+export { AsyncBoundary } from "./AsyncBoundary"
+export { DefaultErrorFallback } from "./DefaultErrorFallback"
+export { ErrorBoundary } from "./ErrorBoundary"
+export { SuspenseErrorBoundary } from "./SuspenseErrorBoundary"
+export { useErrorBoundary } from "./useErrorBoundary"
+export { withAsyncBoundary } from "./withAsyncBoundary"
 

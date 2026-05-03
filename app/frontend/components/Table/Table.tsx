@@ -5,18 +5,18 @@ import React, { useMemo } from "react"
 import { theme } from "@/lib"
 import { useLayoutStore } from "@/store"
 
-import Body from "./Body"
-import Footer from "./Footer"
-import Head from "./Head"
-import Pagination from "./Pagination"
-import Row from "./Row"
-import RowIterator from "./RowIterator"
-import SearchInput from "./SearchInput"
-import TableSection from "./Section"
-import TableProvider from "./TableContext"
-import Cell from "./Td"
-import HeadCell from "./Th"
-import ConditionalWrapper from "../ConditionalWrapper"
+import { Body } from "./Body"
+import { Footer } from "./Footer"
+import { Head } from "./Head"
+import { PaginationComponent as Pagination } from "./Pagination"
+import { Row } from "./Row"
+import { RowIterator } from "./RowIterator"
+import { SearchInput } from "./SearchInput"
+import { TableSection } from "./Section"
+import { TableProvider } from "./TableContext"
+import { RenderedCell as Cell } from "./Td"
+import { RenderedCell as HeadCell } from "./Th"
+import { ConditionalWrapper } from "../ConditionalWrapper"
 import * as classes from "./Table.css"
 
 
@@ -93,4 +93,4 @@ TableComponent.RowIterator = RowIterator
 TableComponent.Footer = Footer
 TableComponent.Pagination = Pagination
 
-export default TableComponent
+export { TableComponent }

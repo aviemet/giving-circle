@@ -183,4 +183,4 @@ const VisualEditor = (props: VisualEditorProps) => {
 	)
 }
 
-export default VisualEditor
+export { VisualEditor }

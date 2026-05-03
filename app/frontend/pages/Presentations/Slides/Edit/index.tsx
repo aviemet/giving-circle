@@ -1,7 +1,7 @@
 import { Data } from "@measured/puck"
 
 import { Page, Section } from "@/components"
-import VisualEditor from "@/components/VisualEditor"
+import { VisualEditor } from "@/components/VisualEditor"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useUpdatePresentationSlide } from "@/queries"
 import { useLayoutStore } from "@/store"

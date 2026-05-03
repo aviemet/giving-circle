@@ -4,7 +4,7 @@ import React from "react"
 import { Form } from "@/components/Form"
 import { Routes } from "@/lib"
 
-import NewTemplateForm, { NewTemplateFormData } from "./NewTemplateForm"
+import { NewTemplateForm, NewTemplateFormData } from "./NewTemplateForm"
 
 interface ClickableElementProps {
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -22,8 +22,15 @@ const NewTemplateModal = ({ children, circle }: NewTemplateModalProps) => {
 			title: "Create New Presentation Template",
 			children:
 			<Form<NewTemplateFormData>
-				model="presentation_template"
-				to={ Routes.circleTemplates(circle.slug) }
+				action={ Routes.circleTemplates(circle.slug) }
+				method="post"
+				initialData={ {
+					presentation_template: {
+						orgs_vote_round: false,
+						num_top_orgs: 0,
+						allocation_vote_round: false,
+					},
+				} }
 			>
 				<NewTemplateForm />
 			</Form>,
@@ -39,4 +46,4 @@ const NewTemplateModal = ({ children, circle }: NewTemplateModalProps) => {
 		: children
 }
 
-export default NewTemplateModal
+export { NewTemplateModal }

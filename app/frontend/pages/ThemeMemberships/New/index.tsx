@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import MemberForm from "@/features/themeMemberships/Form"
+import { MemberForm } from "@/features/themeMemberships/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
-import PresentationsTable from "@/features/presentations/Table"
+import { PresentationTable } from "@/features/presentations/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -40,7 +40,7 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 					],
 				} }
 			>
-				<PresentationsTable />
+				<PresentationTable />
 			</IndexTableTemplate>
 		</Page>
 	)

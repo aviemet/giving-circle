@@ -1,8 +1,6 @@
 import { createMachine } from "xstate"
 
-const appLayoutMachine = createMachine({
+export const appLayoutMachine = createMachine({
 	id: "appLayout",
 	initial: "",
 })
-
-export default appLayoutMachine

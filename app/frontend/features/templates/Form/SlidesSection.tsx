@@ -1,19 +1,13 @@
 import { modals } from "@mantine/modals"
-import { useRef } from "react"
-import { useDynamicInputs, useForm } from "use-inertia-form"
+import set from "es-toolkit/compat/set"
+import { useCallback, useRef, useState } from "react"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
+import { useFormFieldContext } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
 import { SlideFormCard } from "@/features/Cards"
-import { Routes } from "@/lib"
+import { flattenToPaths, Routes } from "@/lib"
 import { useCreateTemplateSlide } from "@/queries"
-
-
-const emptySlideData: Partial<Schema.Slide> = {
-	id: "",
-	title: "",
-	data: {},
-}
 
 interface SlidesSectionProps {
 	circle: Schema.CirclesPersisted
@@ -21,14 +15,26 @@ interface SlidesSectionProps {
 }
 
 const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
-	const { getData } = useForm()
-
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
+	const { getFormData, setValue, clearPathsStartingWith } = useFormFieldContext()
+	const [count, setCount] = useState(template.slides?.length ?? 0)
 
-	const { addInput, removeInput, paths } = useDynamicInputs({
-		model: "slides",
-		emptyData: emptySlideData,
-	})
+	const isRecord = (value: unknown): value is Record<string, unknown> => (
+		value !== null && typeof value === "object" && !Array.isArray(value)
+	)
+
+	const handleRemoveSlide = useCallback((removeIndex: number) => {
+		const data = getFormData()
+		const templateObj = isRecord(data.template) ? data.template : {}
+		const arr = Array.isArray(templateObj.slides_attributes) ? templateObj.slides_attributes : []
+		const newArr = [...arr]
+		newArr.splice(removeIndex, 1)
+		set(data, "template.slides_attributes", newArr)
+		clearPathsStartingWith("template.slides_attributes")
+		const pathEntries = flattenToPaths({ template: { slides_attributes: newArr } })
+		pathEntries.forEach(([path, val]) => setValue(path, val))
+		setCount(newArr.length)
+	}, [getFormData, clearPathsStartingWith, setValue])
 
 	const addTemplateSlideMutation = useCreateTemplateSlide({
 		params: {
@@ -36,7 +42,9 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 			templateSlug: template.slug,
 		},
 		onSuccess(data, variables) {
-			addInput(data)
+			const nextIndex = count
+			Object.entries(data).forEach(([key, value]) => setValue(`template.slides_attributes.${nextIndex}.${key}`, value))
+			setCount(nextIndex + 1)
 		},
 	})
 
@@ -65,21 +73,17 @@ const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 			<Divider mt="xs" mb="sm" />
 
 			<Flex wrap="wrap" gap="sm">
-				{ paths.map((path, i) => {
-					const slug = getData(`template.${path}.slug`) as number
-
-					return (
-						<SlideFormCard
-							key={ path }
-							path={ path }
-							removeInput={ () => removeInput(i) }
-							href={ template.slug ? Routes.circleTemplatesEditSlide(circle.slug, template.slug, slug) : undefined }
-						/>
-					)
-				}) }
+				{ Array.from({ length: count }, (_, index) => (
+					<SlideFormCard
+						key={ index }
+						path={ `template.slides_attributes.${index}` }
+						removeInput={ () => handleRemoveSlide(index) }
+						href={ template.slug ? Routes.circleTemplatesEditSlide(circle.slug, template.slug, String(index)) : undefined }
+					/>
+				)) }
 			</Flex>
 		</>
 	)
 }
 
-export default SlidesSection
+export { SlidesSection }

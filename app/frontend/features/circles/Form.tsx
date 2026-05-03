@@ -1,30 +1,28 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Grid } from "@/components"
-import { Form, TextInput, Submit, FormProps } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 type CircleFormData = {
 	circle: Schema.CirclesFormData
 }
 
-export interface CircleFormProps extends FormProps<CircleFormData> {
+export interface CircleFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<CircleFormData>) => boolean | void
 	circle: Schema.CirclesFormData
 }
 
-const CircleForm = ({ method = "post", circle, ...props }: CircleFormProps) => {
+export const CircleForm = ({ to, method = "post", circle }: CircleFormProps) => {
 	return (
-		<Form
-			model="circle"
-			data={ { circle } }
+		<Form<CircleFormData>
+			action={ to }
+			initialData={ { circle } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="circle.name" label="Name" />
 				</Grid.Col>
 
 				<Grid.Col>
@@ -34,5 +32,3 @@ const CircleForm = ({ method = "post", circle, ...props }: CircleFormProps) => {
 		</Form>
 	)
 }
-
-export default CircleForm

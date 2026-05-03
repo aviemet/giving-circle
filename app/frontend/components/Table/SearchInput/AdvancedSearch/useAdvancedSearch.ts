@@ -1,12 +1,12 @@
 import { router } from "@inertiajs/react"
 import clsx from "clsx"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 import { NestedURLSearchParams } from "@/lib"
 import { isUnset } from "@/lib/forms"
 import { useLocation } from "@/lib/hooks"
 
-import buildSearchLink from "./buildSearchLink"
+import { buildSearchLink } from "./buildSearchLink"
 
 type SpecialSearchTypes = "date"
 
@@ -40,8 +40,6 @@ const useAdvancedSearch = (
 	type InputParamName = typeof inputParams[number]["name"]
 
 	const location = useLocation()
-
-	const [searchLink, setSearchLink] = useState(location.href)
 
 	const localInputParams = useMemo(() => {
 		const finalParams: InputParam[] = []
@@ -92,10 +90,10 @@ const useAdvancedSearch = (
 
 	const [values, setValues] = useState(startingValues)
 
-	// Build URL params when input values change
-	useEffect(() => {
-		setSearchLink(buildSearchLink(localInputParams, values))
-	}, [localInputParams, values])
+	const searchLink = useMemo(
+		() => buildSearchLink(localInputParams, values),
+		[localInputParams, values],
+	)
 
 	const resetValues = useCallback(() => {
 		setValues(prevValues => localInputParams.reduce(
@@ -165,4 +163,4 @@ const useAdvancedSearch = (
 	}
 }
 
-export default useAdvancedSearch
+export { useAdvancedSearch }

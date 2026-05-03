@@ -1,20 +1,15 @@
 import { modals } from "@mantine/modals"
-import React, { useRef } from "react"
-import { useDynamicInputs, useForm } from "use-inertia-form"
+import set from "es-toolkit/compat/set"
+import React, { useCallback, useRef, useState } from "react"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
+import { useFormFieldContext } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
 import { SlideFormCard } from "@/features/Cards"
-import { Routes } from "@/lib"
+import { Routes, flattenToPaths } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 import { useCreatePresentationSlide } from "@/queries"
 
-
-const emptySlideData: Partial<Schema.Slide> = {
-	id: "",
-	title: "",
-	data: {},
-}
 
 interface SlidesSectionProps {
 	circle: Schema.CirclesInertiaShare
@@ -23,15 +18,25 @@ interface SlidesSectionProps {
 
 const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 	const { active_theme } = usePageProps()
-
-	const { getData } = useForm()
+	const { getFormData, setValue, clearPathsStartingWith } = useFormFieldContext()
+	const [count, setCount] = useState(presentation.slides?.length ?? 0)
+	const isRecord = (value: unknown): value is Record<string, unknown> => (
+		value !== null && typeof value === "object" && !Array.isArray(value)
+	)
 
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
-
-	const { addInput, removeInput, paths } = useDynamicInputs({
-		model: "slides",
-		emptyData: emptySlideData,
-	})
+	const handleRemoveSlide = useCallback((removeIndex: number) => {
+		const data = getFormData()
+		const presentationObj = isRecord(data.presentation) ? data.presentation : {}
+		const arr = Array.isArray(presentationObj.slides_attributes) ? presentationObj.slides_attributes : []
+		const newArr = [...arr]
+		newArr.splice(removeIndex, 1)
+		set(data, "presentation.slides_attributes", newArr)
+		clearPathsStartingWith("presentation.slides_attributes")
+		const pathEntries = flattenToPaths({ presentation: { slides_attributes: newArr } })
+		pathEntries.forEach(([path, val]) => setValue(path, val))
+		setCount(newArr.length)
+	}, [getFormData, clearPathsStartingWith, setValue])
 
 	const addPresentationSlideMutation = useCreatePresentationSlide({
 		params: {
@@ -39,7 +44,9 @@ const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 			presentationSlug: presentation.slug,
 		},
 		onSuccess(data, variables) {
-			addInput(data)
+			const nextIndex = count
+			Object.entries(data).forEach(([key, value]) => setValue(`presentation.slides_attributes.${nextIndex}.${key}`, value))
+			setCount(nextIndex + 1)
 		},
 	})
 
@@ -70,18 +77,14 @@ const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 			<Divider mt="xs" mb="sm" />
 
 			<Flex wrap="wrap" gap="sm">
-				{ paths.map((path, i) => {
-					const slug = getData(`presentation.${path}.slug`) as number
-
-					return (
-						<SlideFormCard
-							key={ path }
-							path={ path }
-							removeInput={ () => removeInput(i) }
-							href={ presentation.slug ? Routes.editThemePresentationSlide(circle.slug, active_theme.slug, presentation.slug, slug) : undefined }
-						/>
-					)
-				}) }
+				{ Array.from({ length: count }, (_, index) => (
+					<SlideFormCard
+						key={ index }
+						path={ `presentation.slides_attributes.${index}` }
+						removeInput={ () => handleRemoveSlide(index) }
+						href={ presentation.slug ? Routes.editThemePresentationSlide(circle.slug, active_theme.slug, presentation.slug, String(index)) : undefined }
+					/>
+				)) }
 			</Flex>
 
 
@@ -89,4 +92,4 @@ const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 	)
 }
 
-export default SlidesSection
+export { SlidesSection }

@@ -4,8 +4,7 @@ import { useTableSectionContext } from "@/components/Table/TableContext"
 import { useCurrency, type UseCurrencyOptions } from "@/lib/hooks"
 import { type Money } from "@/types"
 
-import FlexCurrency from "./FlexCurrency"
-
+import { FlexCurrencyFormatter } from "./FlexCurrency"
 
 interface CurrencyFormatterProps {
 	children?: number | Money | null
@@ -15,7 +14,7 @@ interface CurrencyFormatterProps {
 	options?: UseCurrencyOptions
 }
 
-const CurrencyFormatter = ({
+export const CurrencyFormatter = ({
 	children,
 	currency = "USD",
 	locale = "en-US",
@@ -24,8 +23,10 @@ const CurrencyFormatter = ({
 }: CurrencyFormatterProps) => {
 	const [inTable, setInTable] = useState(false)
 
-	const useCurrencyOptions: UseCurrencyOptions = options
-	useCurrencyOptions.signDisplay = accounting ? "never" : "auto"
+	const useCurrencyOptions: UseCurrencyOptions = {
+		...options,
+		signDisplay: accounting ? "never" : "auto",
+	}
 
 	const [amount, formatter] = useCurrency({
 		amount: children ?? 0,
@@ -39,20 +40,18 @@ const CurrencyFormatter = ({
 		// (when used in a table cell, always use FlexCurrency. Throwing is easiest way to check context)
 		useTableSectionContext()
 		if(!inTable) setInTable(true)
-	} catch(e) {}
+	} catch{}
 
 	if(accounting || (inTable && accounting === undefined)) {
 		return (
-			<FlexCurrency
+			<FlexCurrencyFormatter
 				formatter={ formatter }
 				accounting={ accounting }
 			>
 				{ amount }
-			</FlexCurrency>
+			</FlexCurrencyFormatter>
 		)
 	}
 
 	return <>{ formatter.format(amount) }</>
 }
-
-export default CurrencyFormatter

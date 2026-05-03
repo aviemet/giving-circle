@@ -13,4 +13,4 @@ const DeleteButton = ({ href, label }: DeleteButtonProps) => {
 	)
 }
 
-export default DeleteButton
+export { DeleteButton }

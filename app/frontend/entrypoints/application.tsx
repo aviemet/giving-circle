@@ -8,10 +8,10 @@ import { createRoot } from "react-dom/client"
 
 import {
 	applyPropsMiddleware,
+	handlePageLayout,
 	setupCSRFToken,
 	setupInertiaListeners,
 } from "./middleware"
-import handlePageLayout from "./middleware/handlePageLayout"
 
 ActiveStorage.start()
 

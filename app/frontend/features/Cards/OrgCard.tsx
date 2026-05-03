@@ -51,8 +51,7 @@ const OrgCard = ({ org }: OrgCardProps) => {
 	)
 }
 
-export default OrgCard
-
+export { OrgCard }
 function isThemesOrgsShow(org: Schema.OrgsPersisted | Schema.ThemesOrgsShow): org is Schema.ThemesOrgsShow {
 	return "ask" in org
 }

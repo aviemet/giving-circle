@@ -1,10 +1,10 @@
-import { HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Divider, Grid, Title } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
 import { usePageProps } from "@/lib/hooks"
+import { type HTTPVerb } from "@/lib/http"
 
-import SlidesSection from "./SlidesSection"
+import { SlidesSection } from "./SlidesSection"
 
 export type TemplateFormData = {
 	template: Schema.TemplatesEdit
@@ -13,23 +13,21 @@ export type TemplateFormData = {
 export interface TemplateFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TemplateFormData>) => boolean | void
 	template: Schema.TemplatesEdit
 }
 
-const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps) => {
+const TemplateForm = ({ to, method = "post", template }: TemplateFormProps) => {
 	const { active_circle } = usePageProps()
 
 	return (
 		<Form
-			model="template"
-			data={ { template } }
+			action={ to }
+			initialData={ { template } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="template.name" label="Name" />
 				</Grid.Col>
 
 				<Grid.Col>
@@ -55,4 +53,4 @@ const TemplateForm = ({ method = "post", template, ...props }: TemplateFormProps
 	)
 }
 
-export default TemplateForm
+export { TemplateForm }

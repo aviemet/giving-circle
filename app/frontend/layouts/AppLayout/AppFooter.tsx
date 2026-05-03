@@ -1,7 +1,7 @@
 import { Box, AppShell, Group } from "@/components"
 import { ToggleColorSchemeButton } from "@/components/Button"
 
-const FooterComponent = () => {
+export function AppFooter() {
 	return (
 		<AppShell.Footer py={ 4 } px={ 8 } role="contentinfo">
 			<Group>
@@ -14,5 +14,3 @@ const FooterComponent = () => {
 		</AppShell.Footer>
 	)
 }
-
-export default FooterComponent

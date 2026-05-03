@@ -1,7 +1,7 @@
 import { Head } from "@inertiajs/react"
 import React, { useEffect } from "react"
 
-import Breadcrumbs, { type Breadcrumb } from "@/components/Breadcrumbs"
+import { Breadcrumbs, type Breadcrumb } from "@/components/Breadcrumbs"
 import { useInit } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
@@ -69,4 +69,4 @@ const Page = ({
 	)
 }
 
-export default Page
+export { Page }

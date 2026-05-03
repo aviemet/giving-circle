@@ -1,6 +1,6 @@
 import { Table } from "@/components"
 
-import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
+import { IndexTableTitleSection, type IndexTableTitleSectionProps } from "../TableTitleSection"
 
 interface IndexTableTemplateProps extends IndexTableTitleSectionProps {
 	model: string
@@ -32,9 +32,9 @@ const IndexTableTemplate = ({
 				rows={ rows }
 				pagination={ pagination }
 			>
-				<TableTitleSection contextMenu={ contextMenu }>
+				<IndexTableTitleSection contextMenu={ contextMenu }>
 					{ search && <Table.SearchInput advancedSearch={ advancedSearch } placeholder={ searchPlaceholder } /> }
-				</TableTitleSection>
+				</IndexTableTitleSection>
 
 				{ children }
 
@@ -44,4 +44,4 @@ const IndexTableTemplate = ({
 	)
 }
 
-export default IndexTableTemplate
+export { IndexTableTemplate }

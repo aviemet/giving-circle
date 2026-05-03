@@ -36,4 +36,4 @@ const PresentationElementTable = (props: TableProps) => {
 	)
 }
 
-export default PresentationElementTable
+export { PresentationElementTable }

@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
-import OrgsTable from "@/features/orgs/Table"
+import { OrgTable } from "@/features/orgs/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -38,7 +38,7 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 					],
 				} }
 			>
-				<OrgsTable />
+				<OrgTable />
 			</IndexTableTemplate>
 		</Page>
 	)

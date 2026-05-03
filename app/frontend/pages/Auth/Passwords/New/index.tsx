@@ -1,5 +1,6 @@
 import { Title, Link } from "@/components"
-import { Field, Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { Field, TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
 type PasswordsNewFormData = {
@@ -9,18 +10,16 @@ type PasswordsNewFormData = {
 // @path: /users/password/new
 // @route: newUserPassword
 const PasswordsNew = () => {
-	const defaultData: PasswordsNewFormData = {
-		email: "",
-	}
+	const defaultData: { user: PasswordsNewFormData } = { user: { email: "" } }
 
 	return (
-		<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } grid={ false }>
+		<Form action={ Routes.newUserPassword() } method="post" initialData={ defaultData }>
 			<div>
 				<Title>Reset Password</Title>
 			</div>
 
 			<Field>
-				<TextInput name="email" placeholder="Email" autoComplete="Email" />
+				<TextInput name="user.email" placeholder="Email" autoComplete="Email" />
 			</Field>
 
 			<Field>

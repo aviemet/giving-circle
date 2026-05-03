@@ -2,8 +2,8 @@ import { modals } from "@mantine/modals"
 import clsx from "clsx"
 
 import { ActionIcon, Card, Image, Text, Center, Link, ConditionalWrapper } from "@/components"
-import { TextInput } from "@/components/Form"
 import { TrashIcon } from "@/components/Icons"
+import { TextInput } from "@/components/Inputs"
 import { isNonEmptyString } from "@/lib"
 
 import * as classes from "./SlideFormCard.css"
@@ -61,4 +61,4 @@ const SlideFormCard = ({ path, removeInput, href }: SlideCardProps) => {
 	)
 }
 
-export default SlideFormCard
+export { SlideFormCard }

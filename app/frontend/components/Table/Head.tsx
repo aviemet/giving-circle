@@ -1,14 +1,15 @@
 import { Table, type TableTheadProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import React, { type Ref } from "react"
 
 import { TableSectionContextProvider } from "./TableContext"
 
 interface TableHead extends TableTheadProps {}
 
-const Head = forwardRef<HTMLTableSectionElement, TableHead>((
-	{ children, ...props },
-	ref,
-) => {
+type TableHeadPropsWithRef = TableHead & {
+	ref?: Ref<HTMLTableSectionElement>
+}
+
+export function Head({ children, ref, ...props }: TableHeadPropsWithRef) {
 	return (
 		<TableSectionContextProvider value={ { section: "head" } }>
 			<Table.Thead
@@ -19,6 +20,4 @@ const Head = forwardRef<HTMLTableSectionElement, TableHead>((
 			</Table.Thead>
 		</TableSectionContextProvider>
 	)
-})
-
-export default Head
+}

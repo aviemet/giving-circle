@@ -1,31 +1,24 @@
 import {
 	DatePickerInput,
-	type DatePickerType,
 	type DatePickerInputProps,
-	type DatesRangeValue,
-	type DateValue,
 } from "@mantine/dates"
 import dayjs from "dayjs"
-import { useEffect, useState, forwardRef } from "react"
+import React, { useEffect, useState } from "react"
 
 import { CalendarIcon } from "@/components/Icons"
-import { isUnset, isDate } from "@/lib"
+import { isUnset } from "@/lib"
+import { isDate } from "@/lib/dates"
 
-
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type DateInputValue, type BaseInputProps } from "."
-
-type DateValueByType<T extends DatePickerType = "default"> =
-	T extends "multiple" ? DateValue[] :
-		T extends "range" ? [DateValue, DateValue] | undefined :
-	DateValue | undefined
 
 export interface DateInputProps
 	extends
 	Omit<DatePickerInputProps, "onChange" | "value">,
 	Omit<BaseInputProps, "disableAutofill"> {
+	ref?: React.Ref<HTMLButtonElement>
 	name?: string
 	id?: string
 	value: DateInputValue
@@ -33,25 +26,23 @@ export interface DateInputProps
 	onChange?: (date: DateInputValue) => void
 }
 
-const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
-	{
-		label,
-		id,
-		name,
-		type = "default",
-		valueFormat = "L",
-		required,
-		wrapper,
-		wrapperProps,
-		value,
-		onChange,
-		...props
-	},
+export function DateInput({
+	label,
+	id,
+	name,
+	type = "default",
+	valueFormat = "L",
+	required,
+	wrapper,
+	wrapperProps,
+	value,
+	onChange,
 	ref,
-) => {
+	...props
+}: DateInputProps) {
 	const inputId = id || name
 
-	const [localValue, setLocalValue] = useState<DateValueByType<typeof type>>(() => {
+	const [localValue, setLocalValue] = useState<DateInputValue>(() => {
 		if(isUnset(value)) return undefined
 		if(isDate(value)) return dayjs(value).format(valueFormat)
 		if(Array.isArray(value)) {
@@ -60,14 +51,14 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 				if(typeof v === "string") return v
 				return ""
 			})
-			return formattedValues as DatesRangeValue
+
+			return formattedValues as string[]
 		}
 		return value
 	})
-
 	const [datePickerType, setDatePickerType] = useState(type)
 
-	const handleChange = (changeValue: DateInputValue) => {
+	const handleChange = (changeValue: DateInputValue | undefined) => {
 		setLocalValue(changeValue)
 		onChange?.(changeValue)
 	}
@@ -75,21 +66,23 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 	useEffect(() => {
 		if(datePickerType === type) return
 
-		if(type === "range") {
-			if(Array.isArray(localValue)) {
-				if(localValue.length !== 2) {
-					setLocalValue([localValue[0], ""] as DatesRangeValue)
+		const nextType = type
+		queueMicrotask(() => {
+			if(nextType === "range") {
+				if(Array.isArray(localValue)) {
+					if(localValue.length !== 2) {
+						setLocalValue([localValue[0], ""])
+					}
+				} else if(localValue) {
+					setLocalValue([localValue, ""])
+				} else {
+					setLocalValue(undefined)
 				}
-			} else if(localValue) {
-				setLocalValue([localValue, ""] as DatesRangeValue)
 			} else {
-				setLocalValue(undefined)
+				setLocalValue(Array.isArray(localValue) ? localValue[0] : undefined)
 			}
-		} else {
-			setLocalValue(Array.isArray(localValue) ? localValue[0] : undefined)
-		}
-
-		setDatePickerType(type)
+			setDatePickerType(nextType)
+		})
 	}, [type, datePickerType, localValue])
 
 	return (
@@ -101,7 +94,7 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				value={ localValue as DateValueByType<typeof datePickerType> }
+				value={ localValue as DatePickerInputProps["value"] }
 				type={ datePickerType }
 				onChange={ handleChange }
 				valueFormat={ valueFormat }
@@ -112,7 +105,5 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 			/>
 		</InputWrapper>
 	)
-})
-
-export default DateInputComponent
+}
 

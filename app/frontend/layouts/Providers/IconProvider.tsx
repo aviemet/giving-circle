@@ -5,15 +5,13 @@ interface IconProviderProps {
 	value?: { className?: string, size?: string }
 }
 
-const IconProvider = ({ children, value = {
+export function IconProvider({ children, value = {
 	className: "react-icon",
 	size: "1rem",
-} }: IconProviderProps) => {
+} }: IconProviderProps) {
 	return (
 		<IconContext.Provider value={ value }>
 			{ children }
 		</IconContext.Provider>
 	)
 }
-
-export default IconProvider

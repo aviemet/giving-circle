@@ -1,45 +1,37 @@
-import { TextInput, type TextInputProps as MantineTextInputProps } from "@mantine/core"
-import React, { forwardRef, useState } from "react"
+import {
+	TextInput as MantineTextInput,
+	type TextInputProps as MantineTextInputProps,
+} from "@mantine/core"
+import React from "react"
 
-import { isUnset } from "@/lib"
-
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 import { CrossIcon } from "../Icons"
 
-import { type BaseInputProps, withInjectedProps } from "."
+import { withInjectedProps, type BaseInputProps } from "."
 
 export interface TextInputProps extends MantineTextInputProps, BaseInputProps {
+	ref?: React.Ref<HTMLInputElement>
 	clearable?: boolean
 }
 
-const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
-	{
-		name,
-		label,
-		required = false,
-		id,
-		size = "md",
-		wrapper,
-		wrapperProps,
-		clearable = false,
-		value,
-		onChange,
-		readOnly,
-		disableAutofill = false,
-		...props
-	},
+export function TextInput({
+	name,
+	label,
+	required = false,
+	id,
+	wrapper,
+	wrapperProps,
+	clearable = false,
+	value,
+	onChange,
+	readOnly,
+	disableAutofill = true,
 	ref,
-) => {
-	// Manage value as a local state to enable clearable feature
-	const [localValue, setLocalValue] = useState(value || "")
-
+	...props
+}: TextInputProps) {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if(onChange) {
-			onChange(e)
-		} else {
-			setLocalValue(e.target.value)
-		}
+		onChange?.(e)
 	}
 
 	const handleClear = () => {
@@ -58,26 +50,18 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<TextInput
+			<MantineTextInput
 				ref={ ref }
 				name={ name }
 				id={ inputId }
-				value={ value || localValue }
+				{ ...(value !== undefined && { value }) }
 				onChange={ handleChange }
 				required={ required }
-				size={ size }
-				rightSection={
-					!readOnly &&
-					clearable &&
-					!isUnset(value) &&
-					<CrossIcon onClick={ handleClear } />
-				}
+				rightSection={ !readOnly && clearable && value !== "" && value !== undefined && <CrossIcon onClick={ handleClear } /> }
 				{ ...withInjectedProps(props, {
 					disableAutofill,
 				}) }
 			/>
 		</InputWrapper>
 	)
-})
-
-export default TextInputComponent
+}

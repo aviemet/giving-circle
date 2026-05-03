@@ -7,7 +7,7 @@ if Rails.env.development?
     user = User.create!({
       email: "aviemet@gmail.com",
       password: "Complex1!",
-      confirmed_at: Date.new,
+      confirmed_at: 1.year.ago,
     })
 
     user.add_role :super_admin

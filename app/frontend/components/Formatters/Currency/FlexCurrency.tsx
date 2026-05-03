@@ -28,7 +28,7 @@ const getParts = (formatter: Intl.NumberFormat, value: number | Money | null) =>
 	}
 }
 
-const FlexCurrencyFormatter = ({ children, formatter, accounting }: FlexCurrencyFormatterProps) => {
+export const FlexCurrencyFormatter = ({ children, formatter, accounting }: FlexCurrencyFormatterProps) => {
 	const { symbol, value, formattedValue } = getParts(formatter, children)
 
 	return (
@@ -39,6 +39,3 @@ const FlexCurrencyFormatter = ({ children, formatter, accounting }: FlexCurrency
 		</Group>
 	)
 }
-
-
-export default FlexCurrencyFormatter

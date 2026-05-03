@@ -1,35 +1,29 @@
-import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
-
 import { Grid } from "@/components"
-import { Form, TextInput, Submit, RichText } from "@/components/Form"
-
-type ThemeOrgFormData = {
-	org: Schema.OrgsFormData
-}
+import { Form, Submit } from "@/components/Form"
+import { RichText, TextInput } from "@/components/Inputs"
+import { type HTTPVerb } from "@/lib/http"
 
 export interface ThemeOrgFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ThemeOrgFormData>) => boolean | void
 	org: Schema.OrgsFormData
 }
 
-const ThemeOrgForm = ({ method = "post", org, ...props }: ThemeOrgFormProps) => {
+const ThemeOrgForm = ({ to, method = "post", org }: ThemeOrgFormProps) => {
 	return (
 		<Form
-			model="org"
-			data={ { org } }
+			action={ to }
+			initialData={ { org } }
 			method={ method }
-			{ ...props }
 		>
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="name" label="Name" />
+					<TextInput name="org.name" label="Name" />
 				</Grid.Col>
 
 				<Grid.Col>
-					<RichText name="description" label="Description" />
+					<RichText name="org.description" label="Description" />
 				</Grid.Col>
 
 				<Grid.Col>
@@ -41,4 +35,4 @@ const ThemeOrgForm = ({ method = "post", org, ...props }: ThemeOrgFormProps) => 
 	)
 }
 
-export default ThemeOrgForm
+export { ThemeOrgForm }

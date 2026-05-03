@@ -1,5 +1,5 @@
 import { Title } from "@/components"
-import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
 import { withLayout } from "@/lib"
 
 // @path: /settings/notifications

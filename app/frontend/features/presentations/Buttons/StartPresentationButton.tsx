@@ -19,4 +19,4 @@ const StartPresentationButton = ({ presentation }: PresentationIconProps) => {
 	)
 }
 
-export default StartPresentationButton
+export { StartPresentationButton }

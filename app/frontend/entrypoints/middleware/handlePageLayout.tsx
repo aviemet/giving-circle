@@ -27,7 +27,7 @@ type PageComponent = React.ComponentType & {
 	defaultLayout?: LayoutKey
 }
 
-const handlePageLayout = (page: PageComponent) => {
+export const handlePageLayout = (page: PageComponent) => {
 	const layoutKey = page.defaultLayout ?? "app"
 	const DefaultLayout = LAYOUT_COMPONENTS[layoutKey] ?? AppLayout
 	page.layout ||= (children: React.ReactNode) => <DefaultLayout>{ children }</DefaultLayout>
@@ -35,4 +35,4 @@ const handlePageLayout = (page: PageComponent) => {
 	return page
 }
 
-export default handlePageLayout
+

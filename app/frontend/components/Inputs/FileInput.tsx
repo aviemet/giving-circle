@@ -1,14 +1,16 @@
 import { FileInput, type FileInputProps as MantineFileInputProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import React, { type Ref } from "react"
 
-const FileInputComponent = forwardRef<HTMLButtonElement, MantineFileInputProps>((
-	{
-		id,
-		name,
-		...props
-	},
-	ref
-) => {
+type MantineFileInputPropsWithRef = MantineFileInputProps & {
+	ref?: Ref<HTMLButtonElement>
+}
+
+export function FileInputComponent({
+	id,
+	name,
+	ref,
+	...props
+}: MantineFileInputPropsWithRef) {
 	const inputId = id || name
 
 	return (
@@ -19,6 +21,4 @@ const FileInputComponent = forwardRef<HTMLButtonElement, MantineFileInputProps>(
 			{ ...props }
 		/>
 	)
-})
-
-export default FileInputComponent
+}

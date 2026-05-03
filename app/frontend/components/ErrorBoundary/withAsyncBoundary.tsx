@@ -1,7 +1,6 @@
 import { ComponentType } from "react"
 
-import AsyncBoundary, { AsyncBoundaryProps } from "./AsyncBoundary"
-
+import { AsyncBoundary, AsyncBoundaryProps } from "./AsyncBoundary"
 // HOC for wrapping components with AsyncBoundary
 const withAsyncBoundary = <P extends object>(
 	Component: ComponentType<P>,
@@ -17,4 +16,4 @@ const withAsyncBoundary = <P extends object>(
 	return WrappedComponent
 }
 
-export default withAsyncBoundary
+export { withAsyncBoundary }

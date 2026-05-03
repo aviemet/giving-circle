@@ -7,7 +7,7 @@ import { defineConfig } from "vite"
 import FullReload from "vite-plugin-full-reload"
 import RubyPlugin from "vite-plugin-ruby"
 
-const config = defineConfig({
+export default defineConfig((env) => ({
 	build: {
 		sourcemap: true,
 	},
@@ -36,6 +36,5 @@ const config = defineConfig({
 			strict: false,
 		},
 	},
-})
+}))
 
-export default config

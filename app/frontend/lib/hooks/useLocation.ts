@@ -1,4 +1,4 @@
-import { omit } from "lodash"
+import { omit } from "es-toolkit/compat"
 import { useState, useEffect, useMemo } from "react"
 
 import { NestedURLSearchParams } from "@/lib/collections"

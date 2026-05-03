@@ -1,7 +1,6 @@
-import { type UseFormProps } from "use-inertia-form"
-
 import { Box, Title, Link } from "@/components"
-import { Form, TextInput, PasswordInput, Submit, Field } from "@/components/Form"
+import { Form, FormConsumer, Submit } from "@/components/Form"
+import { Field, PasswordInput, TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
 type RegisterFormData = {
@@ -15,45 +14,36 @@ type RegisterFormData = {
 // @path: /users/register
 // @route: newUserRegistration
 const Register = () => {
-	const handleFormChange = ({ data }: UseFormProps<RegisterFormData>) => {
-		// console.log({ data })
-	}
-
-	const handlePasswordChange = (value: string | number, { data, getError, clearErrors }: UseFormProps<RegisterFormData>) => {
-		if(getError("user.password") || getError("user.password_confirmation")) {
-			if(data.user.password === data.user.password_confirmation) {
-				clearErrors("user.password")
-				clearErrors("user.password_confirmation")
-			}
-		}
-	}
-
-	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<RegisterFormData>) => {
-		if(data.user.password !== data.user.password_confirmation) {
-			setError("user.password_confirmation", "Passwords must match")
-			return false
-		}
-	}
-
-	const handleEmailBlur = (value: string | number, form: UseFormProps<RegisterFormData>) => {
-		// console.log({ value, form })
-	}
+	const isRecord = (value: unknown): value is Record<string, unknown> => (
+		value !== null && typeof value === "object" && !Array.isArray(value)
+	)
 
 	return (
 		<Form
-			data={ {
+			initialData={ {
 				user: {
 					email: "",
 					password: "",
 					password_confirmation: "",
 				},
 			} }
-			model="user"
-			to={ Routes.userRegistration() }
-			onChange={ handleFormChange }
-			onSubmit={ handleSubmit }
-			grid={ false }
+			action={ Routes.userRegistration() }
+			method="post"
 		>
+			<FormConsumer
+				onChange={ ({ getFormData, slotProps }) => {
+					const data = getFormData()
+					const user = isRecord(data.user) ? data.user : null
+					const password = typeof user?.password === "string" ? user.password : ""
+					const confirmation = typeof user?.password_confirmation === "string" ? user.password_confirmation : ""
+
+					if(password !== "" && confirmation !== "" && password !== confirmation) {
+						slotProps?.setError("user.password_confirmation", "Passwords must match")
+					} else {
+						slotProps?.clearErrors("user.password_confirmation")
+					}
+				} }
+			/>
 
 			<Box>
 				<Title>Sign Up</Title>
@@ -61,31 +51,28 @@ const Register = () => {
 
 			<Field>
 				<TextInput
-					name="email"
+					name="user.email"
 					placeholder="Email"
 					autoComplete="Email"
 					required
-					onBlur={ handleEmailBlur }
 				/>
 			</Field>
 
 			<Field>
 				<PasswordInput
-					name="password"
+					name="user.password"
 					placeholder="Password"
 					autoComplete="new-password"
 					required
-					onChange={ handlePasswordChange }
 				/>
 			</Field>
 
 			<Field>
 				<PasswordInput
-					name="password_confirmation"
+					name="user.password_confirmation"
 					placeholder="Confirm Password"
 					autoComplete="new-password"
 					required
-					onChange={ handlePasswordChange }
 				/>
 			</Field>
 

@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import PresentationsForm from "@/features/presentations/Form"
+import { PresentationForm } from "@/features/presentations/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -20,7 +20,7 @@ const EditPresentation = ({ presentation }: EditPresentationProps) => {
 			title={ title }
 		>
 			<Section>
-				<PresentationsForm
+				<PresentationForm
 					method="put"
 					to={ Routes.editThemePresentation(params.circle_slug, params.theme_slug, presentation.slug) }
 					presentation={ presentation }

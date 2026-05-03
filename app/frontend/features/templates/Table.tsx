@@ -43,4 +43,4 @@ const TemplateTable = ({
 	)
 }
 
-export default TemplateTable
+export { TemplateTable }

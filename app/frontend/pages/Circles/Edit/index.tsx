@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import CirclesForm from "@/features/circles/Form"
+import { CircleForm } from "@/features/circles/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -20,11 +20,10 @@ const EditCircle = ({ circle }: EditCircleProps) => {
 			{ title, href: Routes.editCircle(params.circle_slug) },
 		] }>
 			<Section>
-				<CirclesForm
+				<CircleForm
 					method="put"
 					to={ Routes.circle(params.circle_slug) }
 					circle={ circle }
-					filter={ ["circle.id", "circle.slug"] }
 				/>
 			</Section>
 		</Page>

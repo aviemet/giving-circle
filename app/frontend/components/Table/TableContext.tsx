@@ -105,4 +105,4 @@ const StatePreservingRowUpdater = React.memo(({ children, rows, pagination }: St
 	return <>{ children }</>
 })
 
-export default TableProvider
+export { TableProvider }

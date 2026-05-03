@@ -1,9 +1,9 @@
 import clsx from "clsx"
 import React from "react"
 
+import { Row } from "./Row"
 import { useTableContext } from "./TableContext"
-
-import Table from "."
+import { RenderedCell as Cell } from "./Td"
 
 interface RowIteratorProps {
 	render: (obj: any) => React.JSX.Element
@@ -17,11 +17,11 @@ const RowIterator = ({ render, emptyDataContent }: RowIteratorProps) => {
 		const colSpan = columns.length + (selectable ? 1 : 0)
 
 		return (
-			<Table.Row>
-				<Table.Cell colSpan={ colSpan } align="center">
+			<Row>
+				<Cell colSpan={ colSpan } align="center">
 					{ emptyDataContent || "Nothing to display" }
-				</Table.Cell>
-			</Table.Row>
+				</Cell>
+			</Row>
 		)
 	}
 
@@ -37,4 +37,4 @@ const RowIterator = ({ render, emptyDataContent }: RowIteratorProps) => {
 	return <>{ rows.map(row => injectRowProps(render(row))) }</>
 }
 
-export default RowIterator
+export { RowIterator }

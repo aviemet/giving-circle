@@ -43,4 +43,4 @@ const ColorPickerComponent = ({
 	)
 }
 
-export default ColorPickerComponent
+export { ColorPickerComponent }

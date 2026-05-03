@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import TemplatesForm from "@/features/templates/Form"
+import { TemplatesForm } from "@/features/templates/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

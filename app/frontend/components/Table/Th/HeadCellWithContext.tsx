@@ -73,4 +73,4 @@ const HeadCellWithContext = ({
 	)
 }
 
-export default HeadCellWithContext
+export { HeadCellWithContext }

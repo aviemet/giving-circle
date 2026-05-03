@@ -218,5 +218,4 @@ function spacingField({ label = "Spacing" }: Partial<Field<SpacingGroup | undefi
 	}
 }
 
-export default spacingField
-
+export { spacingField }

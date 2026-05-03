@@ -248,4 +248,4 @@ const ImportMapping = <T extends Record<string, unknown>>({
 	)
 }
 
-export default ImportMapping
+export { ImportMapping }

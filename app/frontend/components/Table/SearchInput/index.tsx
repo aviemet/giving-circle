@@ -2,16 +2,16 @@ import { type VisitOptions } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
 import { Box } from "@mantine/core"
 import { useSessionStorage } from "@mantine/hooks"
-import { debounce } from "lodash"
+import { debounce } from "es-toolkit/compat"
 import React, { useEffect } from "react"
 
 import { SearchIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
 import { useInit, useLocation } from "@/lib/hooks"
 
-import ColumnPicker from "./ColumnPicker"
+import { ColumnPicker } from "./ColumnPicker"
 import { useTableContext } from "../TableContext"
-import AdvancedSearch from "./AdvancedSearch"
+import { AdvancedSearch } from "./AdvancedSearch"
 import * as classes from "../Table.css"
 
 interface SearchInputProps {
@@ -116,4 +116,4 @@ const SearchInput = ({ columnPicker = true, advancedSearch, placeholder = "Searc
 	)
 }
 
-export default SearchInput
+export { SearchInput }

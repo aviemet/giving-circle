@@ -42,4 +42,4 @@ const Date = ({
 	)
 }
 
-export default Date
+export { Date }

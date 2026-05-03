@@ -4,8 +4,7 @@ import clsx from "clsx"
 import { usePageProps } from "@/lib/hooks"
 
 import { useTableContext } from "../TableContext"
-import BodyCell from "./BodyCell"
-
+import { BodyCell } from "./BodyCell"
 
 export interface TableCellProps extends TableTdProps {
 	fitContent?: boolean
@@ -43,4 +42,4 @@ const RenderedCell = ({
 	return <BodyCell className={ clsx(className, { nowrap }) } { ...props }>{ children }</BodyCell>
 }
 
-export default RenderedCell
+export { RenderedCell }

@@ -28,4 +28,4 @@ const CircleTable = (props: TableProps) => {
 	)
 }
 
-export default CircleTable
+export { CircleTable }

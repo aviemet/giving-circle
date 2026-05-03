@@ -1,7 +1,7 @@
 import { Container, Group, Title, Menu, Page, Section } from "@/components"
 import { CoinsIcon, HelpingIcon, MembersIcon } from "@/components/Icons"
 import { CardContainer, ThemeCard } from "@/features/Cards"
-import StatTile from "@/features/circles/StatTile"
+import { StatTile } from "@/features/circles/StatTile"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

@@ -16,4 +16,4 @@ const TabsList = ({ scrollOverflow = true, className, ...props }: TabsListCompon
 	)
 }
 
-export default TabsList
+export { TabsList }

@@ -1,6 +1,6 @@
 import { Group, Menu, Page, Section, Title } from "@/components"
 import { CardContainer } from "@/features/Cards"
-import OrgCard from "@/features/Cards/OrgCard"
+import { OrgCard } from "@/features/Cards/OrgCard"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

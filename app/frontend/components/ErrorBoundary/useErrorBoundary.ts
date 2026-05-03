@@ -11,4 +11,4 @@ const useErrorBoundary = () => {
 	return { resetKey, reset }
 }
 
-export default useErrorBoundary
+export { useErrorBoundary }

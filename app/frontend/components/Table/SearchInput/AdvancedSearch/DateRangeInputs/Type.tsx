@@ -33,4 +33,5 @@ const Type = ({
 	)
 }
 
-export default React.memo(Type)
+export const TypeMemo = React.memo(Type)
+export { TypeMemo as Type }

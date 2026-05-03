@@ -18,5 +18,10 @@ declare global {
 			symbol: string
 			code: string
 		}
+
+		type LanguageOption = {
+			value: string
+			label: string
+		}[]
 	}
 }

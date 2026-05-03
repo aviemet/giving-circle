@@ -35,4 +35,4 @@ const PresentationActionResponseTable = (props: PresentationActionResponseTableP
 	)
 }
 
-export default PresentationActionResponseTable
+export { PresentationActionResponseTable }

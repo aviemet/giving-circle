@@ -1,10 +1,10 @@
+import { Table } from "@mantine/core"
 import clsx from "clsx"
 
 import { Checkbox } from "@/components/Inputs"
 import { CheckboxProps } from "@/components/Inputs/Checkbox"
 
 import { useTableContext } from "../TableContext"
-import Td from "../Td"
 
 interface RowCheckBox extends CheckboxProps {
 	name: string
@@ -26,15 +26,15 @@ const RowCheckbox = ({ name, selected, ...props }: RowCheckBox) => {
 	}
 
 	return (
-		<Td fitContent className={ clsx("table-row-select-checkbox") }>
+		<Table.Td className={ clsx("table-row-select-checkbox") } style={ { width: "1%" } }>
 			<Checkbox
 				checked={ selected?.has(name) }
 				onChange={ handleClick }
 				aria-label={ `select ${name}` }
 				{ ...props }
 			/>
-		</Td>
+		</Table.Td>
 	)
 }
 
-export default RowCheckbox
+export { RowCheckbox }
