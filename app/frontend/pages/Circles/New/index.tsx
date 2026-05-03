@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import { CircleForm } from "@/features/circles/Form"
+import { CircleForm } from "@/domains/circles/Form"
 import { Routes } from "@/lib"
 
 

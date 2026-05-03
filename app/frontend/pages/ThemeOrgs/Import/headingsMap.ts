@@ -1,4 +1,4 @@
-import { type MappingItem } from "@/features/ImportMapping"
+import { type MappingItem } from "@/domains/themeOrgs/ImportMapping"
 
 export const headingsMap: MappingItem[] = [
 	{

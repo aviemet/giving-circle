@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { UsersTable } from "@/domains/users/Table"
 import { IndexTableTemplate } from "@/features"
-import { UsersTable } from "@/features/users/Table"
 import { Routes } from "@/lib"
 
 

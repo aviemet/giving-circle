@@ -2,7 +2,7 @@ import { router } from "@inertiajs/react"
 import React, { useState, useEffect, useRef, useMemo } from "react"
 
 import { Button, Code, Dropzone, Page, Text, Title, type FileWithPath } from "@/components"
-import ImportMapping, { TriggerHandle, triggerRefAction } from "@/features/ImportMapping"
+import { ImportMapping, TriggerHandle, triggerRefAction } from "@/domains/themeOrgs/ImportMapping"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 import { parseCsvFile } from "@/lib/papaParse"

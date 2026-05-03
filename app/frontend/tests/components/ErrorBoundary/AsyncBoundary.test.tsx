@@ -5,7 +5,7 @@ import { AsyncBoundary } from "@/components/ErrorBoundary/AsyncBoundary"
 import { render } from "@/tests/helpers/utils"
 
 describe("AsyncBoundary", () => {
-	it("renders children when minimumLoadingTime is 0", async () => {
+	it("renders children when minimumLoadingTime is 0", async() => {
 		vi.useFakeTimers()
 		render(
 			<AsyncBoundary minimumLoadingTime={ 0 }>

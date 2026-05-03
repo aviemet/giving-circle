@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { ThemeMembershipsTable } from "@/domains/themeMemberships/Table"
 import { IndexTableTemplate } from "@/features"
-import { ThemeMembershipsTable } from "@/features/themeMemberships/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

@@ -1,7 +1,7 @@
 import { Page, Section } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
-import <%= singular_table_name.camelize %>Form from "@/features/<%= plural_table_name %>/Form"
+import <%= singular_table_name.camelize %>Form from "@/domains/<%= plural_table_name %>/Form"
 
 interface New<%= singular_table_name.camelize %>Props {
 	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>FormData

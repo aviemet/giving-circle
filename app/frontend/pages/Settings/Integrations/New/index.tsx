@@ -1,5 +1,5 @@
 import { Title } from "@/components"
-import { SmtpForm } from "@/features/settings/integrations/Form"
+import { SmtpForm } from "@/domains/settings/integrations/Form"
 import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
 import { Routes, withLayout } from "@/lib"
 

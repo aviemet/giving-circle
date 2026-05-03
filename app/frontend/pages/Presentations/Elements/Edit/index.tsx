@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import { PresentationElementsForm } from "@/features/presentation/elements/Form"
+import { PresentationElementsForm } from "@/domains/presentation/elements/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { PresentationTable } from "@/domains/presentations/Table"
 import { IndexTableTemplate } from "@/features"
-import { PresentationTable } from "@/features/presentations/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

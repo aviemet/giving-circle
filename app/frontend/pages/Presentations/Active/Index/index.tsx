@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { Group, Menu, Page, Title } from "@/components"
-import { SwitchSlideButton } from "@/features/presentations/Buttons/SwitchSlideButton"
+import { SwitchSlideButton } from "@/domains/presentations/Buttons/SwitchSlideButton"
 import { Routes, withLayout } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"

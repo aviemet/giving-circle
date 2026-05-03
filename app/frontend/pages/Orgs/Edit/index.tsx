@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import { OrgForm } from "@/features/orgs/Form"
+import { OrgForm } from "@/domains/orgs/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

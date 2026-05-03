@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { ThemeOrgTable } from "@/domains/themeOrgs/Table"
 import { IndexTableTemplate } from "@/features"
-import { OrgsTable } from "@/features/themeOrgs/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -42,7 +42,7 @@ const ThemeOrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 					],
 				} }
 			>
-				<OrgsTable theme={ theme } circle={ circle } />
+				<ThemeOrgTable theme={ theme } circle={ circle } />
 			</IndexTableTemplate>
 		</Page>
 	)

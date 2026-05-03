@@ -1,5 +1,3 @@
 export { UserHeaderMenu } from "./UserHeaderMenu"
 export { ToggleNavbarButton } from "./ToggleNavbarButton"
 export { IndexTableTemplate } from "./IndexTableTemplate"
-export { NewTemplateModal } from "./NewTemplateModal"
-export { ImportMapping } from "./ImportMapping"

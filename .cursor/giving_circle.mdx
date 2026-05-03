@@ -113,7 +113,8 @@
 #### Component Organization
 - Frontend code is organized in `/app/frontend/`
   - `/components`: Reusable, general-purpose components
-  - `/features`: Feature-specific components
+  - `/domains`: Tables, forms, and other UI tied to specific models or pages (imports from `@/domains/...`)
+  - `/features`: Cross-cutting app pieces that are not the shared design system (e.g. index table page shell, header controls, template visual editor). The `Cards` folder lives here: card UIs are reused across multiple domains, not owned by a single model folder.
   - `/layouts`: App Layout components
   - `/lib`: Non-React code and utilities
   - `/pages`: Top-level Inertia pages (entry points for routes)
