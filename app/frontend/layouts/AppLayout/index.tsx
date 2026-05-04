@@ -6,7 +6,7 @@ import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
-import { shellRootKeepsHeaderScrollSlot } from "../AppShellHeaderOffsetWhenCollapsed.css"
+import { shellNavbar, shellRootKeepsHeaderScrollSlot } from "../AppShellChrome.css"
 import { AppFooter } from "./AppFooter"
 import { AppHeader } from "./AppHeader"
 import * as classes from "./AppLayout.css"
@@ -29,6 +29,7 @@ export function AppLayout({ children }: LayoutProps) {
 		<AppShell
 			layout="alt"
 			padding="sm"
+			withBorder={ false }
 			header={ {
 				height: theme.other.header.height,
 				collapsed: !isHeaderPinned,
@@ -51,7 +52,7 @@ export function AppLayout({ children }: LayoutProps) {
 				<AppHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx(classes.navMenu) }>
+			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx(shellNavbar, classes.navMenu) }>
 				<AppSidebar />
 			</AppShell.Navbar>
 

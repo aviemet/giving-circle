@@ -37,7 +37,7 @@ RSpec.describe "/orgs", type: :request do
       it "renders a successful response" do
         org = create(:org)
 
-        get org_about_url(org.circle, org)
+        get about_org_url(org.circle, org)
 
         expect(response).to be_successful
       end
@@ -49,7 +49,7 @@ RSpec.describe "/orgs", type: :request do
       it "renders a successful response" do
         org = create(:org)
 
-        get org_about_url(org.circle, org)
+        get about_org_url(org.circle, org)
 
         expect(response).to be_successful
       end
@@ -59,7 +59,7 @@ RSpec.describe "/orgs", type: :request do
       it "renders a successful response" do
         org = create(:org)
 
-        get org_about_url(org.circle, org)
+        get about_org_url(org.circle, org)
 
         expect(response).to be_successful
       end

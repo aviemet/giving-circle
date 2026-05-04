@@ -74,8 +74,9 @@ class ThemeOrgsController < ApplicationController
   def create
     authorize Org.new
 
-    org = Org.find_or_create_by(org_params)
-    org.themes << theme
+    org = Org.new(org_params)
+    org.circle = circle
+    org.themes_orgs.build(theme: theme, ask_cents: 0)
 
     if org.save
       redirect_to theme_org_path(params[:circle_slug], params[:theme_slug], org), notice: t("theme_orgs.notices.created")

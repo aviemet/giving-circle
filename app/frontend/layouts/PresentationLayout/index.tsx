@@ -6,8 +6,7 @@ import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
-import { shellRootKeepsHeaderScrollSlot } from "../AppShellHeaderOffsetWhenCollapsed.css"
-import { PresentationFooter } from "./PresentationFooter"
+import { shellNavbar, shellRootKeepsHeaderScrollSlot } from "../AppShellChrome.css"
 import { PresentationHeader } from "./PresentationHeader"
 import * as classes from "./PresentationLayout.css"
 import { PresentationSidebar } from "./PresentationSidebar"
@@ -28,6 +27,7 @@ export function PresentationLayout({ children }: LayoutProps) {
 		<AppShell
 			layout="alt"
 			padding="md"
+			withBorder={ false }
 			header={ {
 				height: theme.other.header.height,
 				collapsed: !isHeaderPinned,
@@ -49,7 +49,7 @@ export function PresentationLayout({ children }: LayoutProps) {
 				<PresentationHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx() }>
+			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx(shellNavbar) }>
 				<PresentationSidebar />
 			</AppShell.Navbar>
 

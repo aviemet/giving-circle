@@ -27,7 +27,7 @@ export function AppSidebar() {
 			<Divider />
 
 			{ /* Nav menu portal */ }
-			<AppShell.Section grow>
+			<AppShell.Section grow px="xs" pt="sm">
 				<AppSidebarMenu />
 			</AppShell.Section>
 

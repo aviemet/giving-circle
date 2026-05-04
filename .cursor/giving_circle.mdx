@@ -73,7 +73,7 @@
 - Icons are renamed on export for semantic usage (e.g., `TbDashboard as DashboardIcon`)
 
 #### App shell header (headroom)
-- With Mantine `useHeadroom` and a collapsed `AppShell` header, Mantine can set `--app-shell-header-offset` to `0`, shrinking the page and fighting headroom at the bottom. When collapsed, the shell root uses `shellRootKeepsHeaderScrollSlot` from `layouts/AppShellHeaderOffsetWhenCollapsed.css.ts` to pin `--app-shell-header-offset` to `theme.other.header.height` so scroll height matches the visible-header case while the bar stays translated off-screen until scroll-up.
+- With Mantine `useHeadroom` and a collapsed `AppShell` header, Mantine can set `--app-shell-header-offset` to `0`, shrinking the page and fighting headroom at the bottom. When collapsed, the shell root uses `shellRootKeepsHeaderScrollSlot` from `layouts/AppShellChrome.css.ts` to pin `--app-shell-header-offset` to `theme.other.header.height` so scroll height matches the visible-header case while the bar stays translated off-screen until scroll-up.
 
 #### UI & Styling
 - Mantine component library

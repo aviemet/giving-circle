@@ -71,8 +71,7 @@ RSpec.describe "ThemeOrgs", type: :request do
 
           expect {
             post theme_orgs_url(theme.circle, theme), params: {
-              org: attributes_for(:org, theme:),
-              theme:
+              org: attributes_for(:org, circle: theme.circle),
             }
           }.to change(Org, :count).by(1)
             .and change(ThemesOrg, :count).by(1)
@@ -81,7 +80,7 @@ RSpec.describe "ThemeOrgs", type: :request do
         it "redirects to the created org" do
           theme = create(:theme, circle: @admin.circles.first)
 
-          post theme_orgs_url(theme.circle, theme), params: { org: attributes_for(:org, theme:) }
+          post theme_orgs_url(theme.circle, theme), params: { org: attributes_for(:org, circle: theme.circle) }
 
           expect(response).to redirect_to(theme_org_url(theme.circle, theme, Org.last))
           expect(flash[:notice]).to eq(I18n.t("theme_orgs.notices.created"))

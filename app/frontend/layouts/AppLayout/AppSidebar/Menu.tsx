@@ -41,6 +41,8 @@ export function AppSidebarMenu() {
 	return (
 		<Accordion
 			multiple
+			variant="separated"
+			radius="lg"
 			value={ Array.from(openMenus) }
 			onChange={ (menus) => handleAccordionChange(menus as (keyof typeof menuKeys)[]) }
 		>

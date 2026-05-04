@@ -13,7 +13,7 @@ class PresentationsController < ApplicationController
     find_by: :slug,
   )
 
-  strong_params :presentation, permit: [:name, :theme_id]
+  strong_params :presentation, permit: [:name, :theme_id, :template_id]
 
   sortable_fields %w(name theme_id)
 
@@ -74,6 +74,7 @@ class PresentationsController < ApplicationController
   def create
     authorize Presentation.new
 
+    presentation.theme = theme
     presentation.circle = circle
 
     if presentation.save
