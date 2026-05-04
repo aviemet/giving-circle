@@ -1,5 +1,5 @@
 import { type FormComponentProps, type FormComponentSlotProps, type FormDataConvertible } from "@inertiajs/core"
-import { Form as InertiaForm } from "@inertiajs/react"
+import { Form as InertiaForm, useFormContext } from "@inertiajs/react"
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode } from "react"
 
 import { Box } from "@/components"
@@ -29,12 +29,23 @@ export interface FormProps<TFormData extends Record<string, unknown> = Record<st
 	Omit<React.FormHTMLAttributes<HTMLFormElement>, keyof FormComponentProps<InertiaFormData> | "children">,
 	Omit<React.AllHTMLAttributes<HTMLFormElement>, keyof FormComponentProps<InertiaFormData> | "children"> {
 
-	children: ReactNode | ((props: FormComponentSlotProps) => ReactNode)
+	children: ReactNode
 	initialData?: TFormData
 	normalizeSubmitError?: NormalizeSubmitError
 	railsAttributes?: boolean
 	rememberKey?: string
 	submitWith?: SubmitWith<TFormData>
+}
+
+function InertiaFormSlotPropsSync() {
+	const inertiaForm = useFormContext()
+	const { setSlotProps } = useFormFieldContext()
+
+	useLayoutEffect(() => {
+		if(inertiaForm) setSlotProps(inertiaForm)
+	}, [inertiaForm, setSlotProps])
+
+	return null
 }
 
 function loadRememberedData(key: string): Record<string, unknown> | undefined {
@@ -161,14 +172,6 @@ function FormInner<TFormData extends Record<string, unknown>>({
 		[submitWith, setSlotProps, normalizeSubmitError, onBefore]
 	)
 
-	const renderChildren = useCallback(
-		(slotProps: FormComponentSlotProps) => {
-			queueMicrotask(() => setSlotProps(slotProps))
-			return typeof children === "function" ? children(slotProps) : children
-		},
-		[children, setSlotProps]
-	)
-
 	return (
 		<Box ref={ wrapperRef } onInput={ handleInput } onChange={ handleInput }>
 			<InertiaForm<InertiaFormData>
@@ -176,7 +179,8 @@ function FormInner<TFormData extends Record<string, unknown>>({
 				transform={ composedTransform }
 				{ ...props }
 			>
-				{ renderChildren }
+				<InertiaFormSlotPropsSync />
+				{ children }
 			</InertiaForm>
 		</Box>
 	)

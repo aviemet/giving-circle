@@ -4,12 +4,10 @@ import {
 } from "@mantine/tiptap"
 import { Color } from "@tiptap/extension-color"
 import { Highlight } from "@tiptap/extension-highlight"
-import { Link } from "@tiptap/extension-link"
 import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
 import { TextAlign } from "@tiptap/extension-text-align"
 import { TextStyle } from "@tiptap/extension-text-style"
-import { Underline } from "@tiptap/extension-underline"
 import { type Editor, useEditor } from "@tiptap/react"
 import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus"
 import { StarterKit } from "@tiptap/starter-kit"
@@ -52,8 +50,6 @@ function RichTextEditorComponent({ children, onChange, onEditorReady, ref }: Ric
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
-			Underline,
-			Link,
 			Superscript,
 			Subscript,
 			Highlight,

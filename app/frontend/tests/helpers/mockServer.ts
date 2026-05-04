@@ -8,6 +8,8 @@ import { handlers } from "./handlers"
 
 const server = setupServer(...handlers)
 
+const TestInertiaFormContext = React.createContext<Record<string, unknown> | undefined>(undefined)
+
 interface TestInertiaPageProps {
 	auth: {
 		user: {
@@ -100,12 +102,19 @@ vi.mock("@inertiajs/react", () => {
 				validator: vi.fn(() => ({})),
 			}
 
+			const formBody = typeof children === "function" ? children(slotProps) : children
+
 			return React.createElement(
-				"form",
-				{ onSubmit: (event: Event) => event.preventDefault() },
-				typeof children === "function" ? children(slotProps) : children,
+				TestInertiaFormContext.Provider,
+				{ value: slotProps },
+				React.createElement(
+					"form",
+					{ onSubmit: (event: Event) => event.preventDefault() },
+					formBody,
+				),
 			)
 		},
+		useFormContext: () => React.useContext(TestInertiaFormContext),
 	}
 })
 
