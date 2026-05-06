@@ -43,7 +43,7 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 	})
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } disablePadding>
 			<Section>
 				<VisualEditor
 					initialData={ slide?.data || {} }
