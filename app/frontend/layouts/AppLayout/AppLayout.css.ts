@@ -1,7 +1,5 @@
 import { css } from "@linaria/core"
 
-import { vars, theme } from "@/lib"
-
 export const appLayout = css`
 `
 
@@ -44,22 +42,22 @@ export const navMenu = css`
   }
 
   html[data-mantine-color-scheme="light"] & [data-accordion][data-variant="separated"] > * {
-    background-color: color-mix(in srgb, var(--mantine-color-primary-5) 14%, var(--mantine-color-gray-1));
+    background-color: var(--mantine-color-primary-3);
     border-color: transparent;
   }
 
   html[data-mantine-color-scheme="light"] & [data-accordion][data-variant="separated"] > *[data-active] {
-    background-color: color-mix(in srgb, var(--mantine-color-primary-5) 30%, var(--mantine-color-gray-0));
-    border-color: var(--mantine-color-primary-4);
+    background-color: var(--mantine-color-primary-3);
+    border-color: transparent;
   }
 
   html[data-mantine-color-scheme="dark"] & [data-accordion][data-variant="separated"] > * {
-    background-color: color-mix(in srgb, var(--mantine-color-primary-4) 22%, var(--mantine-color-dark-6));
+    background-color: var(--mantine-color-primary-8);
     border-color: transparent;
   }
 
   html[data-mantine-color-scheme="dark"] & [data-accordion][data-variant="separated"] > *[data-active] {
-    background-color: color-mix(in srgb, var(--mantine-color-primary-4) 40%, var(--mantine-color-dark-5));
-    border-color: var(--mantine-color-primary-5);
+    background-color: var(--mantine-color-primary-8);
+    border-color: transparent;
   }
 `

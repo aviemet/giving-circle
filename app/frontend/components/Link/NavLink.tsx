@@ -6,6 +6,8 @@ import {
 
 import { useLocation } from "@/lib/hooks"
 
+import * as classes from "./NavLink.css"
+
 type OmittedLinkProps = "color" | "size" | "span" | "label" | "onChange" | "onClick" | "onKeyDown" | "style" | "active" | "component"
 export interface NavLinkProps
 	extends Omit<MantineNavLinkProps, "label">,
@@ -25,6 +27,7 @@ export const NavLink = ({
 			href={ href }
 			active={ active === undefined ? pathname === href : active }
 			label={ children }
+			className={ classes.root }
 			{ ...props }
 		/>
 	)
