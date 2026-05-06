@@ -1,7 +1,5 @@
 import { css } from "@linaria/core"
 
-import { vars, theme } from "@/lib"
-
 export const appLayout = css`
 `
 
@@ -37,5 +35,29 @@ export const navMenu = css`
   .mantine-NavLink-root .mantine-NavLink-body {
     padding-left: 0.8rem;
   }
+  }
+
+  [data-accordion][data-variant="separated"] > * {
+    overflow: hidden;
+  }
+
+  html[data-mantine-color-scheme="light"] & [data-accordion][data-variant="separated"] > * {
+    background-color: var(--mantine-color-primary-3);
+    border-color: transparent;
+  }
+
+  html[data-mantine-color-scheme="light"] & [data-accordion][data-variant="separated"] > *[data-active] {
+    background-color: var(--mantine-color-primary-3);
+    border-color: transparent;
+  }
+
+  html[data-mantine-color-scheme="dark"] & [data-accordion][data-variant="separated"] > * {
+    background-color: var(--mantine-color-primary-8);
+    border-color: transparent;
+  }
+
+  html[data-mantine-color-scheme="dark"] & [data-accordion][data-variant="separated"] > *[data-active] {
+    background-color: var(--mantine-color-primary-8);
+    border-color: transparent;
   }
 `

@@ -1,7 +1,7 @@
 import { type CSSProperties } from "react"
 
 import { optionalColorField } from "./color"
-import spacingField, { type SpacingGroup } from "./spacing"
+import { spacingField, type SpacingGroup } from "./spacing"
 
 export type SpacingProps = {
 	margin?: SpacingGroup

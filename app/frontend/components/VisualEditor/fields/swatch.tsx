@@ -1,4 +1,4 @@
-import SwatchPicker from "@/components/SwatchPicker"
+import { SwatchPicker } from "@/components/SwatchPicker"
 
 interface SwatchFieldProps {
 	name: string

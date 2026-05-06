@@ -1,10 +1,9 @@
-import { defaults } from "lodash"
+import { defaults } from "es-toolkit/compat"
 import React, { useCallback, useEffect, useRef } from "react"
-import { type UseFormProps } from "use-inertia-form"
 
 import { Box, Title } from "@/components"
-import { Form, Submit } from "@/components/Form"
-import SettingsLayout from "@/layouts/AppLayout/SettingsLayout"
+import { Form, Submit, useFormFieldContext } from "@/components/Form"
+import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
 import { Routes, withLayout } from "@/lib"
 import { useLayoutStore } from "@/store"
 
@@ -20,12 +19,27 @@ interface AppearanceSettingsProps {
 	}
 }
 
+function AppearanceSuccessWatcher({ onSubmitSuccess }: { onSubmitSuccess: (data: Record<string, unknown>) => void }) {
+	const { slotProps, getFormData } = useFormFieldContext()
+
+	useEffect(() => {
+		if(slotProps?.wasSuccessful) {
+			onSubmitSuccess(getFormData())
+		}
+	}, [slotProps?.wasSuccessful, onSubmitSuccess, getFormData])
+
+	return null
+}
+
 // @path: /settings/appearance
 // @route: settingsAppearance
 const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 	const primaryColor = useLayoutStore((state) => state.primaryColor)
 	const setPrimaryColor = useLayoutStore((state) => state.setPrimaryColor)
 	const RevertColorRef = useRef<string>(primaryColor!)
+	const isRecord = (value: unknown): value is Record<string, unknown> => (
+		value !== null && typeof value === "object" && !Array.isArray(value)
+	)
 
 	const handleChange = (color: string) => {
 		setPrimaryColor(color)
@@ -46,23 +60,23 @@ const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 		return merged
 	}, [])
 
-	const handleSubmit = ({ getData }: UseFormProps<AppearanceFormData>) => {
-		RevertColorRef.current = getData("settings.primary_color")
-	}
-
 	return (
 		<SettingsLayout>
 			<Title mb={ 24 }>Appearance Settings</Title>
 			<Box>
 				<Title order={ 2 }>Company Theme</Title>
 				<Form
-					model="settings"
-					data={ defaultFormData() }
+					action={ Routes.settingsAppearance() }
 					method="put"
-					to={ Routes.settingsAppearance() }
-					onSubmit={ handleSubmit }
-					remember={ false }
+					initialData={ defaultFormData() }
 				>
+					<AppearanceSuccessWatcher
+						onSubmitSuccess={ (data) => {
+							const settingsObj = isRecord(data.settings) ? data.settings : null
+							const primaryColorValue = settingsObj?.primary_color
+							if(typeof primaryColorValue === "string") RevertColorRef.current = primaryColorValue
+						} }
+					/>
 					{ /* <SwatchInput label="Company Color" name="primary_color" onChange={ handleChange } /> */ }
 					<Submit>Save Appearance Settings</Submit>
 				</Form>

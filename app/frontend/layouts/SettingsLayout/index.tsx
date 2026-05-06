@@ -7,8 +7,8 @@ import { Routes } from "@/lib"
 import { useLocation } from "@/lib/hooks"
 
 import { LayoutProps } from ".."
-import SettingsNavLink from "./SettingsNavLink"
-import AppLayout from "../AppLayout"
+import { SettingsNavLink } from "./SettingsNavLink"
+import { AppLayout } from "../AppLayout"
 import * as classes from "./SettingsLayout.css"
 
 const links = [
@@ -17,7 +17,7 @@ const links = [
 
 const linkIndex = (path: string) => links.findIndex(link => link.href === path || path.startsWith(link.href))
 
-const SettingsLayout = ({ children }: LayoutProps) => {
+export function SettingsLayout({ children }: LayoutProps) {
 	const { pathname } = useLocation()
 
 	const [rootRef, setRootRef] = useState<HTMLElement | null>(null)
@@ -72,5 +72,3 @@ const SettingsLayout = ({ children }: LayoutProps) => {
 		</AppLayout>
 	)
 }
-
-export default SettingsLayout

@@ -45,4 +45,4 @@ const DropzoneComponent = ({
 	)
 }
 
-export default DropzoneComponent
+export { DropzoneComponent }

@@ -47,4 +47,4 @@ const SlideCard = ({ slide }: SlideCardProps) => {
 	)
 }
 
-export default SlideCard
+export { SlideCard }

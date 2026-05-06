@@ -1,31 +1,33 @@
-import React, { forwardRef } from "react"
+import React from "react"
 
-import RichTextEditor, { type RichTextEditorProps } from "../RichTextEditor"
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { RichTextEditor, type RichTextEditorProps } from "../RichTextEditor"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
-export interface RichTextInputProps extends RichTextEditorProps, BaseInputProps {
+export interface RichTextInputProps
+	extends
+	RichTextEditorProps,
+	Omit<BaseInputProps, "disableAutofill"> {
+	ref?: React.Ref<HTMLDivElement>
 	label?: React.ReactNode
-	value: string
+	value?: string
 	required?: boolean
 	id?: string
 	name?: string
 }
 
-const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
-	{
-		label,
-		name,
-		required = false,
-		id,
-		value,
-		wrapper,
-		...props
-	},
+export function RichText({
+	label,
+	name,
+	required = false,
+	id,
+	value,
+	wrapper,
 	ref,
-) => {
+	...props
+}: RichTextInputProps) {
 	const inputId = id || name
 
 	return (
@@ -33,12 +35,9 @@ const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-
 			<RichTextEditor ref={ ref } id={ inputId } { ...props }>
 				{ value }
 			</RichTextEditor>
 		</InputWrapper>
 	)
-})
-
-export default RichText
+}

@@ -4,18 +4,17 @@ import {
 	type RichTextEditorProps as MantineRichTextEditorProps,
 } from "@mantine/tiptap"
 import clsx from "clsx"
-import { forwardRef, useMemo } from "react"
+import { useMemo } from "react"
 
 import { parseContentToStructured } from "@/components/VisualEditor/dynamicData/contentParser"
 import { dataAccess, getFlatOptions } from "@/components/VisualEditor/dynamicData/dataAccess"
 import { StructuredContent } from "@/components/VisualEditor/dynamicData/types"
 
 import { type BaseInputProps } from "../index"
-import InputWrapper from "../InputWrapper"
-import Label from "../Label"
+import { InputWrapper } from "../InputWrapper"
+import { Label } from "../Label"
 import * as classes from "./TagsInput.css"
-import useMentionEditor from "./useMentionEditor"
-
+import { useMentionEditor } from "./useMentionEditor"
 
 interface TagsInputProps extends Omit<MantineRichTextEditorProps, "children" | "editor" | "onChange">, BaseInputProps {
 	value?: string
@@ -30,7 +29,7 @@ interface TagsInputProps extends Omit<MantineRichTextEditorProps, "children" | "
 	options?: string[]
 }
 
-const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(({
+export function TagsInput({
 	label,
 	required = false,
 	id,
@@ -44,7 +43,7 @@ const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(({
 	className,
 	options,
 	...props
-}, ref) => {
+}: TagsInputProps) {
 
 	const inputId = id || name
 	const defaultTagOptions = useMemo(() => getFlatOptions(dataAccess), [])
@@ -76,7 +75,6 @@ const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(({
 			) }
 
 			<RichTextEditor
-				ref={ ref }
 				editor={ editor }
 				className={ clsx(classes.puckMentionBadge, className) }
 				{ ...props }
@@ -85,7 +83,4 @@ const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(({
 			</RichTextEditor>
 		</InputWrapper>
 	)
-})
-
-export default TagsInput
-
+}

@@ -15,5 +15,3 @@ export const Loading = ({ text, className }: LoadingProps) => {
 		</div>
 	)
 }
-
-export default Loading

@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react"
 import { createUsePuck, Puck, type Data } from "@measured/puck"
 import clsx from "clsx"
-import { useEffect, useRef, useState, Suspense } from "react"
+import { useCallback, useMemo, useRef, useState, Suspense } from "react"
 import "@measured/puck/puck.css"
 
 import { Menu, Box, Button, Divider, AsyncBoundary, ErrorBoundary } from "@/components"
@@ -10,14 +10,23 @@ import {
 	DownArrowIcon,
 	TrashIcon,
 } from "@/components/Icons"
-import { useLocalStorage } from "@/lib/hooks"
+import { PresentationDataProvider } from "@/layouts/Providers/PresentationDataProvider"
+import { useInit } from "@/lib/hooks"
+import { createContext } from "@/lib/hooks/createContext"
 import { useMockCircle } from "@/queries"
 
 import { config } from "./puck.config"
 import * as classes from "./Puck.css"
-import { PresentationDataProvider } from "../../layouts/Providers/PresentationDataProvider"
 
 const usePuck = createUsePuck()
+
+const [useVisualEditorUi, VisualEditorUiProvider] = createContext<{
+	isDirty: boolean
+	isSaving: boolean
+	handleSave: (data: Data) => void | Promise<void>
+	sendToPreview: (payload: { type: "update", data: Data }) => void
+	handleDiscardAndClose: () => void
+}>()
 
 interface VisualEditorProps {
 	initialData?: Partial<Data>
@@ -26,19 +35,78 @@ interface VisualEditorProps {
 	templateKey?: string
 }
 
+function HeaderActions() {
+	const ui = useVisualEditorUi()
+	const appState = usePuck((s) => s.appState)
+
+	return (
+		<Button.Group>
+			<Button
+				variant="default"
+				onClick={ () => {
+					window.sessionStorage.setItem("puck-preview-data", JSON.stringify(appState.data))
+					ui.sendToPreview({ type: "update", data: appState.data })
+					window.open("/preview/slide", "_blank")
+				} }
+			>
+				Open preview
+			</Button>
+			<Button
+				onClick={ () => ui.handleSave(appState.data) }
+				leftSection={ <SaveIcon /> }
+				disabled={ !ui.isDirty || ui.isSaving }
+				loading={ ui.isSaving }
+				style={ { borderTopRightRadius: 0, borderBottomRightRadius: 0 } }
+			>
+				Save
+			</Button>
+			<Menu position="bottom-end">
+				<Menu.Target>
+					<Button p="xs">
+						<DownArrowIcon />
+					</Button>
+				</Menu.Target>
+				<Menu.Dropdown>
+					<Menu.Item
+						disabled={ !ui.isDirty || ui.isSaving }
+						leftSection={ <SaveIcon /> }
+					>
+						Save and Close
+					</Menu.Item>
+					<Divider />
+					<Menu.Item
+						leftSection={ <TrashIcon color="red" /> }
+						onClick={ ui.handleDiscardAndClose }
+					>
+						Discard and Close
+					</Menu.Item>
+				</Menu.Dropdown>
+			</Menu>
+		</Button.Group>
+	)
+}
+
 const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templateKey }: VisualEditorProps) => {
 	const { data: mockCircle, isLoading } = useMockCircle()
 
 	const previewChannelRef = useRef<BroadcastChannel | null>(null)
 
-	const [data, setData] = useLocalStorage<Partial<Data>>({
-		key: `puck-editor-${templateKey ?? "data"}`,
-		defaultValue: initialData ?? {},
+	const storageKey = useMemo(() => `puck-editor-${templateKey ?? "data"}`, [templateKey])
+	const [data] = useState<Partial<Data>>(() => {
+		if(typeof window === "undefined") return initialData ?? {}
+
+		try {
+			const raw = window.localStorage.getItem(storageKey)
+			if(!raw) return initialData ?? {}
+			return JSON.parse(raw) as Partial<Data>
+		} catch{
+			return initialData ?? {}
+		}
 	})
 
 	const [isDirty, setIsDirty] = useState(false)
 
-	useEffect(() => {
+	useInit(() => {
 		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
 
 		previewChannelRef.current = new BroadcastChannel("visual-editor-preview")
@@ -47,18 +115,18 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 			previewChannelRef.current?.close()
 			previewChannelRef.current = null
 		}
-	}, [])
+	})
 
-	const handleSave = async(data: Data) => {
+	const handleSave = useCallback(async(data: Data) => {
 		if(!onSave) return
 
 		try {
 			await onSave(data)
 			setIsDirty(false)
-		} catch(_) { }
-	}
+		} catch{ }
+	}, [onSave])
 
-	const sendToPreview = (payload: { type: "update", data: Data }) => {
+	const sendToPreview = useCallback((payload: { type: "update", data: Data }) => {
 		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
 
 		let channel = previewChannelRef.current
@@ -80,94 +148,67 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 				previewChannelRef.current = null
 			}
 		}
-	}
+	}, [])
 
-	const handleChange = (changed: Data) => {
-		setIsDirty(true)
-		setData(changed)
+	const handleChange = useCallback((changed: Data) => {
+		setIsDirty((previousIsDirty) => previousIsDirty || true)
+		try {
+			window.localStorage.setItem(storageKey, JSON.stringify(changed))
+		} catch{ }
 		sendToPreview({ type: "update", data: changed })
-	}
+	}, [sendToPreview, storageKey])
+
+	const handleDiscardAndClose = useCallback(() => {
+		const currentUrl = window.location.pathname + window.location.search
+		router.visit(currentUrl, { replace: true })
+		setTimeout(() => window.history.back(), 0)
+	}, [])
+
+	const uiContextValue = useMemo(() => {
+		return {
+			isDirty,
+			isSaving,
+			handleSave,
+			sendToPreview,
+			handleDiscardAndClose,
+		}
+	}, [handleDiscardAndClose, handleSave, isDirty, isSaving, sendToPreview])
+
+	const overrides = useMemo(() => {
+		return {
+			drawer: ({ children }: { children: React.ReactNode }) => (
+				<div className={ classes.puckDrawer }>{ children }</div>
+			),
+			drawerItem: ({ children }: { children: React.ReactNode }) => (
+				<div className={ classes.puckDrawerItem }>{ children }</div>
+			),
+			outline: ({ children }: { children: React.ReactNode }) => (
+				<div className={ classes.puckOutline }>{ children }</div>
+			),
+			fields: ({ children }: { children: React.ReactNode }) => (
+				<div data-testid="puck-fields-container" className={ classes.puckFields }>
+					{ children }
+				</div>
+			),
+			headerActions: () => <HeaderActions />,
+		}
+	}, [])
 
 	return (
 		<Box className={ clsx(classes.puckRoot) }>
 			<AsyncBoundary isLoading={ isLoading }>
 				<PresentationDataProvider value={ { circle: mockCircle!, isEditor: true } }>
 					<ErrorBoundary>
-						<Puck
-							config={ config }
-							data={ data }
-							iframe={ { enabled: false } }
-							onPublish={ handleSave }
-							onChange={ handleChange }
-							overrides={ {
-								drawer: ({ children }) => (
-									<div className={ classes.puckDrawer }>{ children }</div>
-								),
-								drawerItem: ({ children }) => (
-									<div className={ classes.puckDrawerItem }>{ children }</div>
-								),
-								outline: ({ children }) => (
-									<div className={ classes.puckOutline }>{ children }</div>
-								),
-								fields: ({ children }) => (
-									<div className={ classes.puckFields }>{ children }</div>
-								),
-								headerActions: () => {
-									// eslint-disable-next-line react-hooks/rules-of-hooks
-									const appState = usePuck((s) => s.appState)
-
-									return (
-										<Button.Group>
-											<Button
-												variant="default"
-												onClick={ () => {
-													window.sessionStorage.setItem("puck-preview-data", JSON.stringify(appState.data))
-													sendToPreview({ type: "update", data: appState.data })
-													window.open("/preview/slide", "_blank")
-												} }
-											>
-												Open preview
-											</Button>
-											<Button
-												onClick={ () => handleSave(appState.data) }
-												leftSection={ <SaveIcon /> }
-												disabled={ !isDirty || isSaving }
-												loading={ isSaving }
-												style={ { borderTopRightRadius: 0, borderBottomRightRadius: 0 } }
-											>
-												Save
-											</Button>
-											<Menu position="bottom-end">
-												<Menu.Target>
-													<Button p="xs">
-														<DownArrowIcon />
-													</Button>
-												</Menu.Target>
-												<Menu.Dropdown>
-													<Menu.Item
-														disabled={ !isDirty || isSaving }
-														leftSection={ <SaveIcon /> }
-													>
-														Save and Close
-													</Menu.Item>
-													<Divider />
-													<Menu.Item
-														leftSection={ <TrashIcon color="red" /> }
-														onClick={ () => {
-															const currentUrl = window.location.pathname + window.location.search
-															router.visit(currentUrl, { replace: true })
-															setTimeout(() => window.history.back(), 0)
-														} }
-													>
-														Discard and Close
-													</Menu.Item>
-												</Menu.Dropdown>
-											</Menu>
-										</Button.Group>
-									)
-								},
-							} }
-						/>
+						<VisualEditorUiProvider value={ uiContextValue }>
+							<Puck
+								config={ config }
+								data={ data }
+								iframe={ { enabled: false } }
+								onPublish={ handleSave }
+								onChange={ handleChange }
+								overrides={ overrides }
+							/>
+						</VisualEditorUiProvider>
 					</ErrorBoundary>
 				</PresentationDataProvider>
 			</AsyncBoundary>
@@ -183,4 +224,4 @@ const VisualEditor = (props: VisualEditorProps) => {
 	)
 }
 
-export default VisualEditor
+export { VisualEditor }

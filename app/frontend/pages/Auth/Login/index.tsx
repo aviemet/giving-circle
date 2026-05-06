@@ -1,8 +1,8 @@
 import clsx from "clsx"
-import { type UseFormProps } from "use-inertia-form"
 
 import { Title, Link, Box, Paper, SimpleGrid, Grid, Flex } from "@/components"
-import { Form, TextInput, PasswordInput, Checkbox, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { Checkbox, PasswordInput, TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
 import * as classes from "./Login.css"
@@ -15,7 +15,7 @@ type LoginFormData = {
 	}
 }
 
-const defaultData = {
+const defaultData: LoginFormData = {
 	user: {
 		email: "",
 		password: "",
@@ -26,13 +26,6 @@ const defaultData = {
 // @path: /login
 // @route: newUserSession
 const Login = () => {
-
-	const handleSubmit = ({ data }: UseFormProps<LoginFormData>) => {
-		if(data.user.email === "" || data.user.password === "") {
-			return false
-		}
-	}
-
 	return (
 		<SimpleGrid cols={ { sm: 1, md: 2 } } spacing={ 0 } className={ clsx(classes.authLayout) }>
 			<Box id="auth-layout-left">
@@ -42,17 +35,15 @@ const Login = () => {
 						<Title>Giving Circle</Title>
 					</Box>
 
-					<Form
-						model="user"
-						data={ defaultData }
-						to={ Routes.newUserSession() }
-						onSubmit={ handleSubmit }
+					<Form<LoginFormData>
+						action={ Routes.newUserSession() }
+						method="post"
+						initialData={ defaultData }
 					>
 						<Grid>
-
 							<Grid.Col>
 								<TextInput
-									name="email"
+									name="user.email"
 									placeholder="Email"
 									autoComplete="Email"
 									required
@@ -62,7 +53,7 @@ const Login = () => {
 
 							<Grid.Col>
 								<PasswordInput
-									name="password"
+									name="user.password"
 									placeholder="Password"
 									autoComplete="current-password"
 									required
@@ -74,7 +65,7 @@ const Login = () => {
 							</Grid.Col>
 
 							<Grid.Col>
-								<Checkbox name="remember_me" label="Remember Me" />
+								<Checkbox name="user.remember_me" label="Remember Me" />
 							</Grid.Col>
 
 						</Grid>

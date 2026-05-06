@@ -41,4 +41,4 @@ function imageField({ label = "Image" }: Partial<Field<string>> = {}): Field<str
 	}
 }
 
-export default imageField
+export { imageField }

@@ -16,6 +16,7 @@ import "@mantine/tiptap/styles.css"
 import "@mantine/dates/styles.css"
 import "@mantine/notifications/styles.css"
 import "mantine-contextmenu/styles.layer.css"
+import "mantine-datatable/styles.css"
 import "./global.css"
 
 function isCustomThemeOther(other: unknown): other is CustomThemeOther {
@@ -28,7 +29,7 @@ function isCustomThemeOther(other: unknown): other is CustomThemeOther {
 	)
 }
 
-const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
+export function UiFrameworkProvider({ children }: { children: React.ReactNode }) {
 	/**
 	 * Primary color customization
 	 */
@@ -114,5 +115,3 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		</MantineProvider>
 	)
 }
-
-export default UiFrameworkProvider

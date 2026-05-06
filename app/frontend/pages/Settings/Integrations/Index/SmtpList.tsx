@@ -1,46 +1,64 @@
-import { Group, Link, Table } from "@/components"
+import { Group, Link, Table, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
-import { Routes } from "@/lib"
+
+export interface SmtpListRecord {
+	id?: number
+	name: string
+	domain: string
+	username: string
+}
 
 interface SmtpListProps {
-	smtps: Schema.Smtp[]
+	smtps: SmtpListRecord[]
+}
+
+function mailRecordPath(id: number | undefined) {
+	if(id === undefined) return "#"
+
+	return `/settings/mail/${id}`
+}
+
+function mailEditPath(id: number | undefined) {
+	if(id === undefined) return "#"
+
+	return `/settings/mail/${id}/edit`
 }
 
 const SmtpList = ({ smtps }: SmtpListProps) => {
+	const columns: TableColumn<SmtpListRecord>[] = [
+		{
+			accessor: "name",
+			title: "Name",
+			sortable: false,
+			render: (smtp) => <Link href={ mailRecordPath(smtp.id) }>{ smtp.name }</Link>,
+		},
+		{
+			accessor: "domain",
+			title: "Host",
+			sortable: false,
+			render: (smtp) => smtp.domain,
+		},
+		{
+			accessor: "username",
+			title: "Username",
+			sortable: false,
+			render: (smtp) => smtp.username,
+		},
+		{
+			accessor: "actions",
+			title: "Actions",
+			sortable: false,
+			render: (smtp) => (
+				<Group gap="sm">
+					<EditButton href={ mailEditPath(smtp.id) } label={ smtp.name } />
+				</Group>
+			),
+		},
+	]
+
 	return (
-		<Table.TableProvider
-			model="smtp"
-			rows={ smtps }
-			selectable
-		>
-			<Table>
-				<Table.Head>
-					<Table.Row>
-						<Table.Cell sort="name">Name</Table.Cell>
-						<Table.Cell sort="domain">Host</Table.Cell>
-						<Table.Cell sort="username">Username</Table.Cell>
-						<Table.Cell>Actions</Table.Cell>
-					</Table.Row>
-				</Table.Head>
-
-				<Table.Body>
-					<Table.RowIterator render={ (smtp: Schema.Smtp) => (
-						<Table.Row key={ smtp.id }>
-							<Table.Cell>
-								<Link href={ Routes.settingsSmtp(smtp.id!) }>{ smtp.name }</Link>
-							</Table.Cell>
-							<Table.Cell>{ smtp.domain }</Table.Cell>
-							<Table.Cell>{ smtp.username }</Table.Cell>
-							<Table.Cell fitContent>
-								<Group spacing="sm">
-									<EditButton href={ Routes.editSettingsSmtp(smtp.id!) } label={ smtp.name } />
-								</Group>
-							</Table.Cell>
-						</Table.Row>
-					) } />
-				</Table.Body>
-
-			</Table>
+		<Table.TableProvider model="smtp" records={ smtps } selectable>
+			<Table.DataTable columns={ columns } records={ smtps } selectable />
 		</Table.TableProvider>
 	)
 }

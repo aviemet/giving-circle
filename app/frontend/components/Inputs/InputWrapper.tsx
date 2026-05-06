@@ -1,16 +1,14 @@
-import { DataAttributes } from "@mantine/core"
-
 import { Box } from "@/components"
 
-import ConditionalWrapper from "../ConditionalWrapper"
+import { ConditionalWrapper } from "../ConditionalWrapper"
 
-interface InputWrapper {
+interface InputWrapperProps {
 	children: React.ReactNode
 	wrapper?: boolean
-	wrapperProps?: React.ComponentPropsWithoutRef<"div"> & DataAttributes
+	wrapperProps?: Record<string, any>
 }
 
-const InputWrapper = ({ children, wrapper = true, wrapperProps }: InputWrapper) => {
+export function InputWrapper({ children, wrapper = true, wrapperProps }: InputWrapperProps) {
 	return (
 		<ConditionalWrapper
 			wrapper={ children => <Box { ...wrapperProps }>{ children }</Box> }
@@ -20,5 +18,3 @@ const InputWrapper = ({ children, wrapper = true, wrapperProps }: InputWrapper) 
 		</ConditionalWrapper>
 	)
 }
-
-export default InputWrapper

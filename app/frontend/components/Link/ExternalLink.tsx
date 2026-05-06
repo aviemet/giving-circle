@@ -1,30 +1,31 @@
 import { Anchor, type AnchorProps } from "@mantine/core"
 import clsx from "clsx"
 import normalizeUrl from "normalize-url"
-import React, { forwardRef } from "react"
+import React from "react"
 
 import { ExternalLinkIcon } from "@/components/Icons"
 
 import * as classes from "./Link.css"
 
-
 interface ExternalLinkProps
 	extends AnchorProps,
 	Omit<React.ComponentPropsWithoutRef<"a">, keyof AnchorProps> {
+	ref?: React.Ref<HTMLAnchorElement>
 	href: string
 	as?: "a" | "button"
 	disabled?: boolean
 }
 
-const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
-	{ children, href, as, className, disabled = false, ...props },
+export function ExternalLink({
+	children,
+	href,
+	as,
+	className,
+	disabled = false,
 	ref,
-) => {
-	const absoluteHref = href.startsWith("/") || href.startsWith(".")
-		? `${window.location.origin}${href.startsWith("/") ? href : `/${href}`}`
-		: href
-
-	const url = normalizeUrl(absoluteHref, { stripWWW: false })
+	...props
+}: ExternalLinkProps) {
+	const url = normalizeUrl(href, { stripWWW: false })
 
 	return (
 		<Anchor
@@ -39,6 +40,4 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
 			<ExternalLinkIcon className="external" />
 		</Anchor>
 	)
-})
-
-export default ExternalLink
+}

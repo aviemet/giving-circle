@@ -1,38 +1,42 @@
-import { isEmpty } from "lodash"
+import React from "react"
 
 import { Accordion, NavLink } from "@/components"
 import { Routes } from "@/lib"
-import { useInit, usePageProps } from "@/lib/hooks"
+import { useInit } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
-const PresentationMenu = () => {
-	const { active_circle, active_theme, active_presentation } = usePageProps()
+interface PresentationMenuProps {
+	circle?: Schema.CirclesInertiaShare
+	theme?: Schema.ThemesInertiaShare
+	presentation?: Schema.PresentationsInertiaShare
+	style?: React.CSSProperties
+}
+
+export function PresentationMenu({ circle, theme, presentation, style }: PresentationMenuProps) {
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
 	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 
 	useInit(() => {
-		toggleOpenMenu("circle", false)
-		toggleOpenMenu("theme", false)
 		toggleOpenMenu("presentation", true)
 	})
 
-	if(isEmpty(active_circle) || isEmpty(active_theme) || isEmpty(active_presentation)) return <></>
+	if(!circle || !theme || !presentation) return <></>
 
 	return (
-		<Accordion.Item key={ menuKeys.presentation } value={ menuKeys.presentation }>
-			<Accordion.Control>{ active_presentation.name }</Accordion.Control>
+		<Accordion.Item key={ menuKeys.presentation } value={ menuKeys.presentation } style={ style }>
+			<Accordion.Control>{ presentation.name }</Accordion.Control>
 			<Accordion.Panel>
 				<NavLink href={ Routes.themePresentation(
-					active_circle.slug,
-					active_theme.slug,
-					active_presentation.slug
+					circle.slug,
+					theme.slug,
+					presentation.slug
 				) }>
 					Overview
 				</NavLink>
 				<NavLink href={ Routes.editThemePresentation(
-					active_circle.slug,
-					active_theme.slug,
-					active_presentation.slug
+					circle.slug,
+					theme.slug,
+					presentation.slug
 				) }>
 					Setup
 				</NavLink>
@@ -40,5 +44,3 @@ const PresentationMenu = () => {
 		</Accordion.Item>
 	)
 }
-
-export default PresentationMenu

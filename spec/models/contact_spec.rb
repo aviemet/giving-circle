@@ -12,7 +12,7 @@
 #
 #  index_contacts_on_contactable  (contactable_type,contactable_id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Contact do
   describe "Associations" do

@@ -13,4 +13,4 @@ const EditButton = ({ href, label }: EditButtonProps) => {
 	)
 }
 
-export default EditButton
+export { EditButton }

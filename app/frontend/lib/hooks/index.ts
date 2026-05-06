@@ -11,6 +11,5 @@ export { useContrastingTextColor } from "./useContrastingTextColor"
 export { useCurrency, type UseCurrencyOptions } from "./useCurrency"
 
 export * from "@mantine/hooks"
-export {
-	useMantineTheme as useTheme,
-} from "@mantine/core"
+export { useMantineTheme as useTheme } from "@mantine/core"
+

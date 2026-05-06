@@ -54,7 +54,7 @@
 #
 #  fk_rails_...  (person_id => people.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User do
   describe "Validations" do

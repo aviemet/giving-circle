@@ -37,4 +37,4 @@ const ToggleColorSchemeButton = ({ onClick, title, className, ...props }: Toggle
 	)
 }
 
-export default ToggleColorSchemeButton
+export { ToggleColorSchemeButton }

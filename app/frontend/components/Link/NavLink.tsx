@@ -1,30 +1,35 @@
 import { Link, type InertiaLinkProps } from "@inertiajs/react"
-import { NavLink, type NavLinkProps } from "@mantine/core"
+import {
+	NavLink as MantineNavLink,
+	type NavLinkProps as MantineNavLinkProps,
+} from "@mantine/core"
 
 import { useLocation } from "@/lib/hooks"
 
-interface NavLinkComponentProps
-	extends Omit<NavLinkProps, "label">,
-	Omit<InertiaLinkProps, "color" | "size" | "span" | "label" | "onChange" | "onClick" | "onKeyDown" | "style" | "active"> {}
-export { type NavLinkComponentProps as NavLinkProps }
+import * as classes from "./NavLink.css"
 
-const NavLinkComponent = ({
+type OmittedLinkProps = "color" | "size" | "span" | "label" | "onChange" | "onClick" | "onKeyDown" | "style" | "active" | "component"
+export interface NavLinkProps
+	extends Omit<MantineNavLinkProps, "label">,
+	Omit<InertiaLinkProps, OmittedLinkProps> {}
+
+export const NavLink = ({
 	children,
 	href,
 	active,
 	...props
-}: NavLinkComponentProps) => {
+}: NavLinkProps) => {
 	const { pathname } = useLocation()
 
 	return (
-		<NavLink
+		<MantineNavLink
 			component={ Link }
 			href={ href }
 			active={ active === undefined ? pathname === href : active }
 			label={ children }
+			className={ classes.root }
 			{ ...props }
 		/>
 	)
 }
 
-export default NavLinkComponent

@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { ThemesTable } from "@/domains/themes/Table"
 import { IndexTableTemplate } from "@/features"
-import ThemesTable from "@/features/themes/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -23,7 +23,6 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 		>
 			<IndexTableTemplate
 				model="themes"
-				rows={ themes }
 				pagination={ pagination }
 			// contextMenu={ {
 			// 	options: [
@@ -31,7 +30,7 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 			// 	],
 			// } }
 			>
-				<ThemesTable />
+				<ThemesTable records={ themes } pagination={ pagination } model="themes" />
 			</IndexTableTemplate>
 		</Page>
 	)

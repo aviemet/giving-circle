@@ -4,7 +4,7 @@ import { PresentationDataProvider } from "@/layouts/Providers/PresentationDataPr
 
 import { LayoutProps } from ".."
 
-const PublicPresentationLayout = ({ children }: LayoutProps) => {
+export function PublicPresentationLayout({ children }: LayoutProps) {
 	const { props } = usePage<{
 		presentation?: Schema.PresentationsPresentation
 		circle?: Schema.CirclesPersisted
@@ -23,5 +23,3 @@ const PublicPresentationLayout = ({ children }: LayoutProps) => {
 		</PresentationDataProvider>
 	)
 }
-
-export default PublicPresentationLayout

@@ -52,8 +52,12 @@ module UrlParamsJson
       generate_js_file(url_params)
     end
 
+    def self.ts_file_body(url_params)
+      "export const urlParams = #{JSON.pretty_generate(url_params)} as const;\n"
+    end
+
     def self.generate_js_file(url_params)
-      js_content = "const urlParams = #{JSON.pretty_generate(url_params)} as const;\n\nexport default urlParams;"
+      js_content = ts_file_body(url_params)
 
       file_path = Rails.root.join("app/frontend/lib/routes/urlParams.ts")
       FileUtils.mkdir_p(File.dirname(file_path))

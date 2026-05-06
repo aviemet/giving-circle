@@ -7,7 +7,7 @@ interface AddressFormatterProps {
 	address: Schema.Address
 }
 
-const AddressFormatter = ({ address }: AddressFormatterProps) => {
+export const AddressFormatter = ({ address }: AddressFormatterProps) => {
 	const formatAddressLines = useMemo(() => {
 		const addressData = {
 			road: address.address_2
@@ -39,5 +39,3 @@ const AddressFormatter = ({ address }: AddressFormatterProps) => {
 		</address>
 	)
 }
-
-export default AddressFormatter

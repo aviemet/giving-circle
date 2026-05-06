@@ -46,13 +46,13 @@ if Rails.env.development?
           },
           zones: {}
         }
-      },)
+      })
 
       FactoryBot.create(:slide_parent, {
         slide: slide,
         parentable: template,
         order: 1,
-      },)
+      })
 
     end
 

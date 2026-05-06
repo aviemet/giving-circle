@@ -63,4 +63,4 @@ const DefaultErrorFallback: React.FC<{
 	)
 }
 
-export default DefaultErrorFallback
+export { DefaultErrorFallback }

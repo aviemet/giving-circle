@@ -20,7 +20,7 @@
 #  fk_rails_...  (org_id => orgs.id)
 #  fk_rails_...  (presentation_id => presentations.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe PresentationsOrg, type: :model do
   describe "Validations" do

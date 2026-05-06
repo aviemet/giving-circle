@@ -1,24 +1,23 @@
 import { Radio, type RadioProps as MantineRadioProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import React, { type Ref } from "react"
 
-import InputWrapper from "./InputWrapper"
+import { InputWrapper } from "./InputWrapper"
 
 import { type BaseInputProps } from "."
 
 export interface RadioProps extends Omit<MantineRadioProps, "value">, BaseInputProps {
+	ref?: Ref<HTMLInputElement>
 	value: string
 }
 
-type RadioComponentType = React.ForwardRefExoticComponent<
-  RadioProps & React.RefAttributes<HTMLInputElement>
-> & {
-	Group: typeof Radio.Group
-};
-
-const RadioComponent: RadioComponentType = forwardRef<HTMLInputElement, RadioProps>((
-	{ id, wrapper, wrapperProps, value, ...props },
+export function RadioComponent({
+	id,
+	wrapper,
+	wrapperProps,
+	value,
 	ref,
-) => {
+	...props
+}: RadioProps) {
 	const inputId = id ?? value
 
 	return (
@@ -31,8 +30,6 @@ const RadioComponent: RadioComponentType = forwardRef<HTMLInputElement, RadioPro
 			/>
 		</InputWrapper>
 	)
-}) as RadioComponentType
+}
 
 RadioComponent.Group = Radio.Group
-
-export default RadioComponent

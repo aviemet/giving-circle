@@ -1,5 +1,5 @@
 import { Title, Page, Section } from "@/components"
-import OrgForm from "@/features/themeOrgs/Form"
+import { ThemeOrgForm } from "@/domains/themeOrgs/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -19,7 +19,7 @@ const NewThemeOrg = ({ org }: NewThemeOrgProps) => {
 			<Section>
 				<Title>{ title }</Title>
 
-				<OrgForm
+				<ThemeOrgForm
 					to={ Routes.themeOrgs(params.circle_slug, params.theme_slug) }
 					org={ org }
 				/>

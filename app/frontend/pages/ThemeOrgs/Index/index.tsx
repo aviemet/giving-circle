@@ -1,13 +1,13 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { ThemeOrgTable } from "@/domains/themeOrgs/Table"
 import { IndexTableTemplate } from "@/features"
-import OrgsTable from "@/features/themeOrgs/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 
 interface OrgIndexProps {
-	orgs: Schema.OrgsIndex[]
+	orgs: Schema.ThemesOrgsShow[]
 	pagination: Schema.Pagination
 	theme: Schema.ThemesInertiaShare
 	circle: Schema.CirclesInertiaShare
@@ -22,7 +22,6 @@ const ThemeOrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 		<Page title="Theme Organizations">
 			<IndexTableTemplate
 				model="theme_orgs"
-				rows={ orgs }
 				pagination={ pagination }
 				contextMenu={ {
 					label: "Add Orgs to Theme",
@@ -42,7 +41,13 @@ const ThemeOrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
 					],
 				} }
 			>
-				<OrgsTable theme={ theme } circle={ circle } />
+				<ThemeOrgTable
+					theme={ theme }
+					circle={ circle }
+					records={ orgs }
+					pagination={ pagination }
+					model="theme_orgs"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

@@ -1,7 +1,5 @@
 import { LayoutProps } from ".."
 
-const UnformattedLayout = ({ children }: LayoutProps) => {
+export function UnformattedLayout({ children }: LayoutProps) {
 	return <>{ children }</>
 }
-
-export default UnformattedLayout

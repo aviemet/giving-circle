@@ -1,30 +1,39 @@
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { PresentationSlideTable } from "@/domains/presentation/slides/Table"
 import { IndexTableTemplate } from "@/features"
-import PresentationSlidesTable from "@/features/presentation/slides/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 
 interface PresentationSlideIndexProps {
-	presentation_slides: Schema.PresentationSlidesIndex[]
+	presentation_slides: Schema.SlidesIndex[]
 	pagination: Schema.Pagination
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides
 // @route: themePresentationSlides
 const PresentationSlidesIndex = ({ presentation_slides, pagination }: PresentationSlideIndexProps) => {
-	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"themePresentationsSlides">()
+	const { params } = usePageProps<"themePresentationSlides">()
 	const title = "Slide"
+	const slidesIndexHref = Routes.themePresentationSlides(
+		params.circle_slug,
+		params.theme_slug,
+		params.presentation_slug,
+	)
+	const newSlideHref = Routes.newThemePresentationSlide(
+		params.circle_slug,
+		params.theme_slug,
+		params.presentation_slug,
+	)
 
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <>
+			heading={ <>
 				<Title>{ title }</Title>
 				<Menu>
-					<Menu.Link href={ Routes.newPresentationSlide() } icon={ <NewIcon /> }>
+					<Menu.Link href={ newSlideHref } icon={ <NewIcon /> }>
 						New Slide
 					</Menu.Link>
 				</Menu>
@@ -33,20 +42,23 @@ const PresentationSlidesIndex = ({ presentation_slides, pagination }: Presentati
 			<IndexTableTemplate
 				title="PresentationSlides"
 				model="presentation_slides"
-				rows={ presentation_slides }
 				pagination={ pagination }
-				contextMenu={
-					[
+				contextMenu={ {
+					options: [
 						{
 							label: "New Slide",
-							href: Routes.newPresentationSlide(),
-							icon: NewIcon,
-							deleteRoute: Routes.presentationSlides(),
+							href: newSlideHref,
+							icon: <NewIcon />,
 						},
-					]
-				}
+					],
+					deleteRoute: slidesIndexHref,
+				} }
 			>
-				<PresentationSlidesTable />
+				<PresentationSlideTable
+					records={ presentation_slides }
+					pagination={ pagination }
+					model="presentation_slides"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { ThemeMembershipsTable } from "@/domains/themeMemberships/Table"
 import { IndexTableTemplate } from "@/features"
-import ThemeMembershipsTable from "@/features/themeMemberships/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -22,7 +22,6 @@ const ThemeMembersIndex = ({ memberships, pagination, theme, circle }: ThemeMemb
 		<Page title="Memberships">
 			<IndexTableTemplate
 				model="memberships"
-				rows={ memberships }
 				pagination={ pagination }
 				contextMenu={ {
 					label: "Add Memberships to Theme",
@@ -42,7 +41,13 @@ const ThemeMembersIndex = ({ memberships, pagination, theme, circle }: ThemeMemb
 					],
 				} }
 			>
-				<ThemeMembershipsTable circle={ circle } theme={ theme } />
+				<ThemeMembershipsTable
+					circle={ circle }
+					theme={ theme }
+					records={ memberships }
+					pagination={ pagination }
+					model="memberships"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

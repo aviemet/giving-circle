@@ -22,6 +22,6 @@ class Api::SmtpsController < Api::ApiController
   end
 
   def smtp_params
-    params.require(:smtp).permit(:name, :host, :domain, :port, :security, :username, :password, :address, :notes)
+    params.expect(smtp: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes])
   end
 end

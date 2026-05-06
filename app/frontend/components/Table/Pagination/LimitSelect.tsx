@@ -6,19 +6,18 @@ import { useLocation, usePageProps } from "@/lib/hooks"
 import { useUpdateTablePreferences } from "@/queries"
 import { useLayoutStore } from "@/store"
 
-
-import * as classes from "../Table.css"
+import * as classes from "./Pagination.css"
 
 interface LimitSelectProps extends SelectProps {
 	pagination: Schema.Pagination
 	model: string
 }
 
-const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
+export function LimitSelect({ pagination, model, className }: LimitSelectProps) {
 	const { auth: { user } } = usePageProps()
 	const location = useLocation()
 	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
-	const mutate = useUpdateTablePreferences({ params: { userId: user.id } })
+	const mutate = useUpdateTablePreferences({ params: { userId: String(user.id) } })
 
 	const handleLimitChange = (limit: string | null) => {
 		if(!model || !user) return
@@ -26,10 +25,12 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 		limit ||= String(defaultLimit)
 
 		mutate.mutate({
-			[model]: { limit },
+			[model]: {
+				hide: user.table_preferences?.[model]?.hide ?? {},
+				limit,
+			},
 		}, {
 			onSuccess: () => {
-				// Redirect to first page if new limit puts page out of bounds of records
 				if(parseInt(limit) * (pagination.current_page - 1) > pagination.count) {
 					location.params.delete("page")
 					router.get(
@@ -50,12 +51,11 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 			mx={ 4 }
 			my={ 0 }
 			withCheckIcon={ false }
-			className={ clsx(classes.limitSelect) }
+			className={ clsx(classes.limitSelect, className) }
 			rightSectionWidth="1rem"
 			defaultValue={ String(pagination.limit) || String(defaultLimit) }
 			data={ [
 				{ value: "10", label: "10" },
-				{ value: "15", label: "15" },
 				{ value: "25", label: "25" },
 				{ value: "50", label: "50" },
 				{ value: "100", label: "100" },
@@ -65,5 +65,3 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 		/>
 	)
 }
-
-export default LimitSelect

@@ -8,7 +8,7 @@ import { type SuggestionProps as TiptapSuggestionProps } from "@tiptap/suggestio
 
 import { parseContentToStructured, serializeStructuredContent } from "@/components/VisualEditor/dynamicData/contentParser"
 
-import MentionCombobox from "./MentionCombobox"
+import { MentionCombobox } from "./MentionCombobox"
 
 interface TagOption {
 	label: string
@@ -183,4 +183,4 @@ const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) =
 	})
 }
 
-export default useMentionEditor
+export { useMentionEditor }

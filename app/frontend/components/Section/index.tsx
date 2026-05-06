@@ -19,4 +19,4 @@ const Section = ({ children, fullHeight = false, className, ...props }: SectionP
 	)
 }
 
-export default Section
+export { Section }

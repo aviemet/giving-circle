@@ -6,12 +6,12 @@ import { useHeadroom, useTheme } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 import { LayoutProps } from ".."
-import PresentationFooter from "./PresentationFooter"
-import PresentationHeader from "./PresentationHeader"
+import { shellNavbar, shellRootKeepsHeaderScrollSlot } from "../AppShellChrome.css"
+import { PresentationHeader } from "./PresentationHeader"
 import * as classes from "./PresentationLayout.css"
-import PresentationSidebar from "./PresentationSidebar"
+import { PresentationSidebar } from "./PresentationSidebar"
 
-const PresentationLayout = ({ children }: LayoutProps) => {
+export function PresentationLayout({ children }: LayoutProps) {
 	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
 	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
 	const mainPaddingDisabled = useLayoutStore((state) => state.mainPaddingDisabled)
@@ -27,6 +27,7 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 		<AppShell
 			layout="alt"
 			padding="md"
+			withBorder={ false }
 			header={ {
 				height: theme.other.header.height,
 				collapsed: !isHeaderPinned,
@@ -40,13 +41,15 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 					desktop: !sidebarOpen || !sidebarVisible,
 				},
 			} }
-			className={ clsx(classes.presentationLayout) }
+			className={ clsx(classes.presentationLayout, {
+				[shellRootKeepsHeaderScrollSlot]: !isHeaderPinned,
+			}) }
 		>
 			<AppShell.Header withBorder={ false }>
 				<PresentationHeader />
 			</AppShell.Header>
 
-			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx() }>
+			<AppShell.Navbar px={ 0 } pt="sm" className={ clsx(shellNavbar) }>
 				<PresentationSidebar />
 			</AppShell.Navbar>
 
@@ -56,5 +59,3 @@ const PresentationLayout = ({ children }: LayoutProps) => {
 		</AppShell>
 	)
 }
-
-export default PresentationLayout

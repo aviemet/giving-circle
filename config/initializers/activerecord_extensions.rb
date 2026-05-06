@@ -1,4 +1,4 @@
-require_relative '../../lib/renderable'
+require_relative "../../lib/renderable"
 
 module ActiveRecordExtensions
   extend ActiveSupport::Concern

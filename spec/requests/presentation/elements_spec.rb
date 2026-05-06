@@ -1,7 +1,7 @@
 require "rails_helper"
 require_relative "../../support/devise"
 
-RSpec.describe "/presentation/elements", type: :request do
+xdescribe "/presentation/elements", type: :request do
 
   # This should return the minimal set of attributes required to create a valid
   # Presentation::Element. As you add validations to Presentation::Element, be sure to

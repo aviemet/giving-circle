@@ -1,3 +1,4 @@
+import { fixupConfigRules } from "@eslint/compat"
 import json from "@eslint/json"
 import stylistic from "@stylistic/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
@@ -6,6 +7,10 @@ import jsoncPlugin from "eslint-plugin-jsonc"
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y"
 import reactHooksPlugin from "eslint-plugin-react-hooks"
 import { parseForESLint } from "jsonc-eslint-parser"
+
+const importLintGlobs = [
+	"**/*.{js,cjs,mjs,jsx,ts,mts,cts,tsx}",
+]
 
 const ignores = [
 	"app/javascript/**/*",
@@ -37,8 +42,14 @@ export default [
 			},
 		},
 	},
-	importPlugin.flatConfigs.recommended,
-	importPlugin.flatConfigs.typescript,
+	...fixupConfigRules([
+		importPlugin.flatConfigs.recommended,
+		importPlugin.flatConfigs.typescript,
+	]).map((config) => ({
+		...config,
+		files: importLintGlobs,
+		ignores,
+	})),
 	// Typescript/Javascript files
 	{
 		...stylistic.configs.customize({
@@ -206,6 +217,13 @@ export default [
 	{
 		files: ["**/*.d.ts"],
 		ignores,
+		languageOptions: {
+			parser: tsParser,
+			parserOptions: {
+				ecmaVersion: "latest",
+				sourceType: "module",
+			},
+		},
 		rules: {
 			"no-unused-vars": "off",
 			"@typescript-eslint/member-delimiter-style": "off",

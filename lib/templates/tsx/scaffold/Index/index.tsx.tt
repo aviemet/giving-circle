@@ -3,7 +3,7 @@ import { usePageProps } from "@/lib/hooks"
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { IndexTableTemplate } from "@/features"
-import <%= plural_table_name.camelize %>Table from "@/features/<%= plural_table_name %>/Table"
+import <%= plural_table_name.camelize %>Table from "@/domains/<%= plural_table_name %>/Table"
 
 interface <%= singular_table_name.camelize %>IndexProps {
 	<%= plural_table_name %>: Schema.<%= plural_table_name.camelize %>Index[]

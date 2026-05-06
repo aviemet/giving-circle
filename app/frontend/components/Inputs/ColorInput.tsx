@@ -1,9 +1,9 @@
 import { ColorInput, type ColorInputProps } from "@mantine/core"
 import { useUncontrolled } from "@mantine/hooks"
-import React, { forwardRef } from "react"
+import React, { type Ref } from "react"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
@@ -12,6 +12,7 @@ export interface ColorPickerInputProps
 	Omit<BaseInputProps, "disableAutofill">,
 	ColorInputProps
 {
+	ref?: Ref<HTMLInputElement>
 	label?: React.ReactNode
 	value?: string
 	initialValue?: string
@@ -22,22 +23,20 @@ export interface ColorPickerInputProps
 	children?: React.ReactNode
 }
 
-const ColorPickerInput = forwardRef<HTMLInputElement, ColorPickerInputProps>((
-	{
-		label,
-		id,
-		name,
-		required,
-		onChange,
-		onFocus,
-		value,
-		wrapper = true,
-		wrapperProps,
-		children,
-		...props
-	},
+export function ColorPickerInput({
 	ref,
-) => {
+	label,
+	id,
+	name,
+	required,
+	onChange,
+	onFocus,
+	value,
+	wrapper = true,
+	wrapperProps,
+	children,
+	...props
+}: ColorPickerInputProps) {
 	const inputId = id || name
 
 	const [currentValue, handleChange] = useUncontrolled<string>({
@@ -47,9 +46,11 @@ const ColorPickerInput = forwardRef<HTMLInputElement, ColorPickerInputProps>((
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
+
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
+
 			<ColorInput
 				ref={ ref }
 				id={ inputId }
@@ -58,8 +59,7 @@ const ColorPickerInput = forwardRef<HTMLInputElement, ColorPickerInputProps>((
 				onChange={ handleChange }
 				{ ...props }
 			/>
+
 		</InputWrapper>
 	)
-})
-
-export default ColorPickerInput
+}

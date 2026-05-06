@@ -1,26 +1,30 @@
 import { Page, Section } from "@/components"
-import MemberForm from "@/features/themeMemberships/Form"
+import { ThemeMemberForm } from "@/domains/themeMemberships/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 
 interface NewThemeMemberProps {
-	member: Schema.MembersFormData
+	member: Schema.MembershipsFormData
 	theme: Schema.ThemesInertiaShare
 }
 
 // @path: /:circle_slug/themes/:theme_slug/memberships/new
 // @route: newThemeMembership
-const NewThemeMember = ({ ...data }: NewThemeMemberProps) => {
-	const { params } = usePageProps<"newThemeMember">()
+const NewThemeMember = ({ member, theme }: NewThemeMemberProps) => {
+	const { params, active_circle } = usePageProps()
 	const title = "New Member"
+
+	if(!active_circle) return <></>
 
 	return (
 		<Page title={ title }>
 			<Section>
-				<MemberForm
+				<ThemeMemberForm
 					to={ Routes.circleThemeMembers(params.circle_slug, params.theme_slug) }
-					{ ...data }
+					membership={ member }
+					circle={ active_circle }
+					theme={ theme }
 				/>
 			</Section>
 

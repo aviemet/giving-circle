@@ -35,7 +35,7 @@ class Api::UsersController < Api::ApiController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme])
+    params.expect(user: [:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme]])
   end
 
 end

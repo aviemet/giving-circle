@@ -1,8 +1,8 @@
 import { ComponentType, ErrorInfo, ReactNode, Suspense, useEffect, useState } from "react"
 
-import Loading from "@/components/Loading"
+import { Loading } from "@/components/Loading"
 
-import SuspenseErrorBoundary from "./SuspenseErrorBoundary"
+import { SuspenseErrorBoundary } from "./SuspenseErrorBoundary"
 
 interface SuspenseErrorBoundaryProps {
 	children: ReactNode
@@ -53,9 +53,9 @@ const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
 		if(minimumLoadingTime > 0) {
 			const timer = setTimeout(() => setShowFallback(true), minimumLoadingTime)
 			return () => clearTimeout(timer)
-		} else {
-			setShowFallback(true)
 		}
+		const timer = setTimeout(() => setShowFallback(true), 0)
+		return () => clearTimeout(timer)
 	}, [minimumLoadingTime])
 
 	const defaultSuspenseFallback = suspenseFallback || (
@@ -80,4 +80,4 @@ const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
 	)
 }
 
-export default AsyncBoundary
+export { AsyncBoundary }

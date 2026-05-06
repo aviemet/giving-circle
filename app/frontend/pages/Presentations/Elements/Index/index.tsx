@@ -1,7 +1,7 @@
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { PresentationElementsTable } from "@/domains/presentation/elements/Table"
 import { IndexTableTemplate } from "@/features"
-import PresentationElementsTable from "@/features/presentation/elements/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -14,7 +14,6 @@ interface PresentationElementIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements
 // @route: themePresentationsElements
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
-	// copy @route above into the generic type assertion below
 	const { params } = usePageProps<"themePresentationsElements">()
 	const title = "Element"
 
@@ -33,20 +32,27 @@ const PresentationElementsIndex = ({ presentation_elements, pagination }: Presen
 			<IndexTableTemplate
 				title="PresentationElements"
 				model="presentation_elements"
-				rows={ presentation_elements }
 				pagination={ pagination }
-				contextMenu={
-					[
+				contextMenu={ {
+					options: [
 						{
 							label: "New Element",
 							href: Routes.newPresentationElement(),
-							icon: NewIcon,
-							deleteRoute: Routes.presentationElements(),
+							icon: <NewIcon />,
 						},
-					]
-				}
+					],
+					deleteRoute: Routes.themePresentationElements(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+					),
+				} }
 			>
-				<PresentationElementsTable />
+				<PresentationElementsTable
+					records={ presentation_elements }
+					pagination={ pagination }
+					model="presentation_elements"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

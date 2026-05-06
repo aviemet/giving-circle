@@ -8,11 +8,11 @@ export interface ColorSlice {
 }
 
 export const createColorSlice: StateCreator<ColorSlice> =
-(set) => ({
-	primaryColor: defaultColor,
+	(set) => ({
+		primaryColor: defaultColor,
 
-	setPrimaryColor: color => set(() => ({
-		primaryColor: color,
-	})),
+		setPrimaryColor: color => set(() => ({
+			primaryColor: color,
+		})),
 
-})
+	})

@@ -1,5 +1,6 @@
 import { Title, Link } from "@/components"
-import { Form, TextInput, Submit } from "@/components/Form"
+import { Form, Submit } from "@/components/Form"
+import { TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
 interface ConfirmationsNew {
@@ -11,10 +12,9 @@ interface ConfirmationsNew {
 const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 	return (
 		<Form
-			model="user"
-			data={ { user } }
-			to={ Routes.userConfirmation() }
-			grid={ false }
+			action={ Routes.userConfirmation() }
+			method="post"
+			initialData={ { user } }
 		>
 			<div>
 				<Title order={ 3 }>Please check your email</Title>
@@ -23,7 +23,7 @@ const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 			</div>
 
 			<div>
-				<TextInput name="email" placeholder="Email" autoComplete="Email" required />
+				<TextInput name="user.email" placeholder="Email" autoComplete="Email" required />
 			</div>
 
 			<div>

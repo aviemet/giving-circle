@@ -8,10 +8,10 @@ import { SettingsIcon } from "@/components/Icons"
 import { ToggleNavbarButton } from "@/features"
 import { Routes, theme } from "@/lib"
 
-import CircleDropdownLink from "./CircleDropdownLink"
-import Menu from "./Menu"
+import { CircleDropdownLink } from "./CircleDropdownLink"
+import { AppSidebarMenu } from "./Menu"
 
-const AppSidebar = () => {
+export function AppSidebar() {
 	return (
 		<>
 			<AppShell.Section mb="xs">
@@ -27,8 +27,8 @@ const AppSidebar = () => {
 			<Divider />
 
 			{ /* Nav menu portal */ }
-			<AppShell.Section grow>
-				<Menu />
+			<AppShell.Section grow px="xs" pt="sm">
+				<AppSidebarMenu />
 			</AppShell.Section>
 
 			<Divider />
@@ -46,5 +46,3 @@ const AppSidebar = () => {
 		</>
 	)
 }
-
-export default AppSidebar

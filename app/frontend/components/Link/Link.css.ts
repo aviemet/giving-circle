@@ -18,3 +18,10 @@ export const external = css`
 export const link = css`
 	cursor: pointer;
 `
+
+export const navLink = css`
+	&&:where(:not([data-active], [aria-current='page'])):where(:hover, :active) {
+		background-color: var(--mantine-primary-color-light);
+		color: var(--mantine-primary-color-light-color);
+	}
+`

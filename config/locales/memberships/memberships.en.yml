@@ -1,6 +1,7 @@
+---
 en:
   memberships:
     notices:
-      created: "Membership was successfully created."
-      updated: "Membership was successfully updated."
-      destroyed: "Membership was successfully destroyed."
+      created: Membership was successfully created.
+      destroyed: Membership was successfully destroyed.
+      updated: Membership was successfully updated.

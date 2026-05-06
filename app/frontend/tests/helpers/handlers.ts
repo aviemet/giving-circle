@@ -25,4 +25,35 @@ export const handlers = [
 			},
 		])
 	}),
+	http.get(Routes.apiCircleMock("circle-1"), () => {
+		return HttpResponse.json({
+			id: "circle-1",
+			name: "Circle 1",
+			slug: "circle-1",
+			themes: [
+				{
+					id: "theme-1",
+					name: "Theme 1",
+					slug: "theme-1",
+					status: "current",
+				},
+			],
+			orgs: [
+				{
+					id: "org-1",
+					name: "Org 1",
+					slug: "org-1",
+				},
+			],
+			memberships: [
+				{
+					id: "membership-1",
+					active: true,
+					funds: { amount: 10, cents: 1000, currency_iso: "USD" },
+					name: "Member 1",
+					slug: "membership-1",
+				},
+			],
+		})
+	}),
 ]

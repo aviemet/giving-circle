@@ -32,7 +32,7 @@ require "rails_helper"
 RSpec.describe Presentation do
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(build_stubbed(:presentation)).to be_valid
+      expect(build(:presentation)).to be_valid
     end
 
     it "is invalid with invalid attributes" do

@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { OrgTable } from "@/domains/orgs/Table"
 import { IndexTableTemplate } from "@/features"
-import OrgsTable from "@/features/orgs/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -26,7 +26,6 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 		] }>
 			<IndexTableTemplate
 				model="orgs"
-				rows={ orgs }
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
@@ -38,7 +37,7 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 					],
 				} }
 			>
-				<OrgsTable />
+				<OrgTable records={ orgs } pagination={ pagination } model="orgs" />
 			</IndexTableTemplate>
 		</Page>
 	)

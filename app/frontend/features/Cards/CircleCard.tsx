@@ -36,4 +36,4 @@ const CircleCard = ({ circle }: CircleCardProps) => {
 	)
 }
 
-export default CircleCard
+export { CircleCard }

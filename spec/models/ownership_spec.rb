@@ -20,7 +20,7 @@
 #
 #  fk_rails_...  (circle_id => circles.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Ownership do
   describe "Validations" do

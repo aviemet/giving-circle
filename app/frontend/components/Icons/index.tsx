@@ -108,3 +108,7 @@ export {
 export {
 	FaRegImage as ImageIcon,
 } from "react-icons/fa6"
+
+export {
+	GoPlus as PlusIcon,
+} from "react-icons/go"

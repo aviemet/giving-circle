@@ -1,7 +1,7 @@
 class Users::ShowSerializer < Users::PersistedSerializer
   attributes(
-    table_preferences: { type: "IUserTablePreferences" },
-    user_preferences: { type: "IUserPreferences" },
+    table_preferences: { type: "UserTablePreferences" },
+    user_preferences: { type: "UserPreferences" },
   )
 
   timestamps

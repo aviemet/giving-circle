@@ -8,9 +8,9 @@ import { SettingsIcon } from "@/components/Icons"
 import { ToggleNavbarButton } from "@/features"
 import { Routes, theme } from "@/lib"
 
-import Menu from "./Menu"
+import { PresentationSidebarMenu } from "./Menu"
 
-const AppSidebar = () => {
+export function PresentationSidebar() {
 	return (
 		<>
 			<AppShell.Section mb="xs">
@@ -25,7 +25,7 @@ const AppSidebar = () => {
 
 			{ /* Nav menu portal */ }
 			<AppShell.Section grow>
-				<Menu />
+				<PresentationSidebarMenu />
 			</AppShell.Section>
 
 			<Divider />
@@ -43,5 +43,3 @@ const AppSidebar = () => {
 		</>
 	)
 }
-
-export default AppSidebar

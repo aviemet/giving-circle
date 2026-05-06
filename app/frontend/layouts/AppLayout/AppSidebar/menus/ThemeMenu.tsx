@@ -1,38 +1,42 @@
-import { isEmpty } from "lodash"
+import React from "react"
 
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit, useLocation, usePageProps } from "@/lib/hooks"
+import { useInit, useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
-const ThemeMenu = () => {
-	const { active_circle, active_theme } = usePageProps()
+
+interface ThemeMenuProps {
+	circle?: Schema.CirclesInertiaShare
+	theme?: Schema.ThemesInertiaShare
+	style?: React.CSSProperties
+}
+
+export function ThemeMenu({ circle, theme, style }: ThemeMenuProps) {
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
 	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 	const location = useLocation()
 
 	useInit(() => {
-		toggleOpenMenu("circle", false)
 		toggleOpenMenu("theme", true)
-		toggleOpenMenu("presentation", false)
 	})
 
-	if(isEmpty(active_circle) || isEmpty(active_theme)) return <></>
+	if(!circle || !theme) return <></>
 
 	return (
-		<Accordion.Item key={ menuKeys.theme } value={ menuKeys.theme }>
-			<Accordion.Control>{ active_theme.name }</Accordion.Control>
+		<Accordion.Item key={ menuKeys.theme } value={ menuKeys.theme } style={ style }>
+			<Accordion.Control>{ theme.name }</Accordion.Control>
 			<Accordion.Panel>
 				<NavLink
-					href={ Routes.theme(active_circle.slug, active_theme.slug) }
+					href={ Routes.theme(circle.slug, theme.slug) }
 					leftSection={ <DashboardIcon /> }
 				>
 					Overview
 				</NavLink>
 
 				<NavLink
-					href={ Routes.themeOrgs(active_circle.slug, active_theme.slug) }
+					href={ Routes.themeOrgs(circle.slug, theme.slug) }
 					active={ location.paths[3] === "orgs" }
 					leftSection={ <OrgsIcon /> }
 				>
@@ -40,7 +44,7 @@ const ThemeMenu = () => {
 				</NavLink>
 
 				<NavLink
-					href={ Routes.themePresentations(active_circle.slug, active_theme.slug) }
+					href={ Routes.themePresentations(circle.slug, theme.slug) }
 					active={ location.paths[3] === "presentations" }
 					leftSection={ <PresentationIcon /> }
 				>
@@ -50,5 +54,3 @@ const ThemeMenu = () => {
 		</Accordion.Item>
 	)
 }
-
-export default ThemeMenu

@@ -18,7 +18,7 @@
 #  fk_rails_...  (presentation_element_id => presentation_elements.id)
 #  fk_rails_...  (presentation_id => presentations.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe PresentationsElement, type: :model do
   describe "Validations" do

@@ -23,8 +23,8 @@
 #
 # spec/models/address_spec.rb
 
-require 'rails_helper'
-require 'models/shared/contact_method'
+require "rails_helper"
+require "models/shared/contact_method"
 
 RSpec.describe Address do
   describe "Associations" do

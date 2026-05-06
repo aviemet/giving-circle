@@ -49,4 +49,4 @@ const CardContainer = ({ children, className, ...props }: CardContainerProps) =>
 	)
 }
 
-export default CardContainer
+export { CardContainer }

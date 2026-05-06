@@ -43,7 +43,7 @@ class ThemesController < ApplicationController
     authorize theme
 
     render inertia: "Themes/About", props: {
-      themes: -> { theme.themes.render }
+      theme: -> { theme.render(:show) },
     }
   end
 

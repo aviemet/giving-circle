@@ -1,24 +1,37 @@
-import React, { forwardRef, useState } from "react"
+import React, { useState } from "react"
 import { InputProps } from "react-html-props"
 
-import HiddenInput from "./HiddenInput"
-import SwatchPicker from "../SwatchPicker"
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { HiddenInput } from "./HiddenInput"
+import { SwatchPicker } from "../SwatchPicker"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
-export interface SwatchInputProps extends Omit<InputProps, "onChange">, BaseInputProps {
+
+export interface SwatchInputProps
+	extends
+	Omit<InputProps, "onChange">,
+	Omit<BaseInputProps, "disableAutofill"> {
+	ref?: React.Ref<HTMLInputElement>
 	label?: React.ReactNode
 	initialValue?: string
 	onChange?: (color: string) => void
 	wrapperProps?: Record<string, any>
 }
 
-const SwatchInput = forwardRef<HTMLInputElement, SwatchInputProps>((
-	{ label, id, name, required, initialValue, onChange, wrapper, wrapperProps, ...props },
+export function SwatchInput({
+	label,
+	id,
+	name,
+	required,
+	initialValue,
+	onChange,
+	wrapper,
+	wrapperProps,
 	ref,
-) => {
+	...props
+}: SwatchInputProps) {
 	const [color, setColor] = useState(initialValue || "")
 
 	const handleChange = (color: string) => {
@@ -38,6 +51,4 @@ const SwatchInput = forwardRef<HTMLInputElement, SwatchInputProps>((
 			<SwatchPicker value={ color } onChange={ handleChange } />
 		</InputWrapper>
 	)
-})
-
-export default SwatchInput
+}

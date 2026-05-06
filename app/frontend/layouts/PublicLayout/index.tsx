@@ -5,7 +5,7 @@ import { useDisclosure } from "@/lib/hooks"
 
 import { LayoutProps } from ".."
 
-const PublicLayout: React.FC<LayoutProps> = ({ children }) => {
+export const PublicLayout: React.FC<LayoutProps> = ({ children }) => {
 	const [opened, { toggle }] = useDisclosure()
 
 	return (
@@ -43,5 +43,3 @@ const PublicLayout: React.FC<LayoutProps> = ({ children }) => {
 		</AppShell>
 	)
 }
-
-export default PublicLayout

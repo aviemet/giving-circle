@@ -1,5 +1,5 @@
 import { Title, Page, Section } from "@/components"
-import ThemeForm from "@/features/themes/Form"
+import { ThemeForm } from "@/domains/themes/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 

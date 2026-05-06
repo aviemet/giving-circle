@@ -3,7 +3,7 @@ import { DownArrowIcon } from "@/components/Icons"
 import { ToggleNavbarButton, UserHeaderMenu } from "@/features"
 import { useLayoutStore } from "@/store"
 
-const Header = () => {
+export function PresentationHeader() {
 	const sidebarOpen = useLayoutStore((state) => state.sidebarOpen)
 	const siteTitle = useLayoutStore((state) => state.siteTitle)
 
@@ -30,5 +30,3 @@ const Header = () => {
 		</Group>
 	)
 }
-
-export default Header

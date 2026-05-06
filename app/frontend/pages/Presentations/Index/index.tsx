@@ -1,7 +1,7 @@
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import { PresentationTable } from "@/domains/presentations/Table"
 import { IndexTableTemplate } from "@/features"
-import PresentationsTable from "@/features/presentations/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -32,7 +32,6 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 		>
 			<IndexTableTemplate
 				model="presentations"
-				rows={ presentations }
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
@@ -40,7 +39,11 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 					],
 				} }
 			>
-				<PresentationsTable />
+				<PresentationTable
+					records={ presentations }
+					pagination={ pagination }
+					model="presentations"
+				/>
 			</IndexTableTemplate>
 		</Page>
 	)

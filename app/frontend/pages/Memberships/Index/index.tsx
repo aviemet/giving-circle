@@ -1,7 +1,7 @@
 import { Page, Group, Card, Stack, Text } from "@/components"
 import { NewIcon, UserGroupIcon, CalendarIcon, UploadIcon } from "@/components/Icons"
+import { MembershipTable } from "@/domains/memberships/Table"
 import { IndexTableTemplate } from "@/features"
-import MembershipsTable from "@/features/memberships/Table"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -69,7 +69,6 @@ const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => 
 				<Card withBorder radius="md">
 					<IndexTableTemplate
 						model="memberships"
-						rows={ memberships }
 						pagination={ pagination }
 						searchPlaceholder="Search Members"
 						contextMenu={ {
@@ -87,7 +86,12 @@ const MembershipsIndex = ({ memberships, pagination }: MembershipIndexProps) => 
 							deleteRoute: "hi",
 						} }
 					>
-						<MembershipsTable circle={ active_circle } />
+						<MembershipTable
+							circle={ active_circle }
+							records={ memberships }
+							pagination={ pagination }
+							model="memberships"
+						/>
 					</IndexTableTemplate>
 				</Card>
 			</Stack>

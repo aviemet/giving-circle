@@ -1,5 +1,5 @@
 import { Section, Page } from "@/components"
-import ThemeMembershipsForm from "@/features/themeMemberships/Form"
+import { ThemeMemberForm } from "@/domains/themeMemberships/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -20,7 +20,7 @@ const EditThemeMembership = ({ membership }: EditThemeMembershipProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<ThemeMembershipsForm
+				<ThemeMemberForm
 					method="put"
 					to={ Routes.themeMembership(params.circle_slug, params.theme_slug, params.slug) }
 					membership={ membership }

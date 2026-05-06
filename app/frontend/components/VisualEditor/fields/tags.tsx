@@ -38,4 +38,4 @@ function tagsField(params?: Partial<Field<string>> & { options?: string[] }): Fi
 	}
 }
 
-export default tagsField
+export { tagsField }

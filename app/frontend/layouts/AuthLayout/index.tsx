@@ -1,9 +1,7 @@
 import { LayoutProps } from ".."
 
-const Layout = ({ children }: LayoutProps) => {
+export function AuthLayout({ children }: LayoutProps) {
 	return (
 		<>{ children }</>
 	)
 }
-
-export default Layout

@@ -60,16 +60,20 @@ RSpec.describe "/presentations", type: :request do
     context "with valid parameters" do
       it "creates a new Presentation" do
         theme = create(:theme, circle: @admin.circles.first)
+        template = create(:template, circle: theme.circle)
+        presentation_attrs = attributes_for(:presentation).merge(template_id: template.id)
 
         expect {
-          post theme_presentations_url(theme.circle, theme), params: { presentation: attributes_for(:presentation) }
+          post theme_presentations_url(theme.circle, theme), params: { presentation: presentation_attrs }
         }.to change(Presentation, :count).by(1)
       end
 
       it "redirects to the created presentation" do
         theme = create(:theme, circle: @admin.circles.first)
+        template = create(:template, circle: theme.circle)
+        presentation_attrs = attributes_for(:presentation).merge(template_id: template.id)
 
-        post theme_presentations_url(theme.circle, theme), params: { presentation: attributes_for(:presentation) }
+        post theme_presentations_url(theme.circle, theme), params: { presentation: presentation_attrs }
 
         expect(response).to redirect_to(theme_presentation_url(theme.circle, theme, Presentation.last))
         expect(flash[:notice]).to eq(I18n.t("presentations.notices.created"))

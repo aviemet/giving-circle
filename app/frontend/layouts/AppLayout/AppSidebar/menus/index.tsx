@@ -1,3 +1,3 @@
-export { default as CircleMenu } from "./CircleMenu"
-export { default as ThemeMenu } from "./ThemeMenu"
-export { default as PresentationMenu } from "./PresentationMenu"
+export { CircleMenu } from "./CircleMenu"
+export { ThemeMenu } from "./ThemeMenu"
+export { PresentationMenu } from "./PresentationMenu"

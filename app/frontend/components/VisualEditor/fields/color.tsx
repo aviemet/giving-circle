@@ -40,8 +40,7 @@ function colorField({ label = "Color" }: Partial<Field<string>> = {}): Field<str
 	}
 }
 
-export default colorField
-
+export { colorField }
 export function optionalColorField(
 	params?: Partial<Field<string | undefined>>,
 ): Field<string | undefined> {

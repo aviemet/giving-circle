@@ -1,5 +1,5 @@
 import { Page, Section } from "@/components"
-import OrgsForm from "@/features/orgs/Form"
+import { OrgForm } from "@/domains/orgs/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -25,7 +25,7 @@ const EditOrg = ({ org }: EditOrgProps) => {
 			{ title: "Edit", href: window.location.href },
 		] }>
 			<Section>
-				<OrgsForm
+				<OrgForm
 					method="put"
 					to={ Routes.org(params.circle_slug, org.slug) }
 					org={ org }

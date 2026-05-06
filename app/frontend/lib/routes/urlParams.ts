@@ -1,7 +1,4 @@
-const urlParams = {
-  "root": {
-    "params": []
-  },
+export const urlParams = {
   "newUserSession": {
     "params": []
   },
@@ -552,5 +549,3 @@ const urlParams = {
     ]
   }
 } as const;
-
-export default urlParams;

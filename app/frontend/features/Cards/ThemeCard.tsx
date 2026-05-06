@@ -37,4 +37,4 @@ const ThemeCard = ({ circle, theme }: ThemeCardProps) => {
 	)
 }
 
-export default ThemeCard
+export { ThemeCard }
