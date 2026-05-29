@@ -1,0 +1,32 @@
+---
+en:
+  templates:
+    index:
+      breadcrumbs:
+        circles: Circles
+        templates: Templates
+      createPresentation: Create presentation
+      createPresentationModal:
+        cancel: Cancel
+        name: Presentation name
+        newTheme: New theme
+        noThemes: This circle has no themes yet. Create a theme before starting a presentation.
+        submit: Create presentation
+        theme: Theme
+        title: Create presentation from template
+      helperText: Reusable slide layouts for your circle. Create a presentation from a theme to use these at an event.
+      newTemplate: New Template
+      title: Templates
+    show:
+      addSlide: Add slide
+      addSlideModal:
+        cancel: Cancel
+        confirm: Add
+        slideTitle: Slide title
+        title: Add a slide
+      breadcrumbs:
+        circles: Circles
+        templates: Templates
+      defaultTitle: Template
+      emptySlides: No slides yet. Add one to start building this template.
+      settings: Settings

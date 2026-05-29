@@ -46,5 +46,5 @@ class Theme < ApplicationRecord
       }
   }, through: :themes_orgs
 
-  scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
+  scope :includes_associated, -> { includes([:circle, :presentations, :themes_orgs, { presentations: :slides }]) }
 end

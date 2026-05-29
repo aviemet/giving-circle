@@ -23,10 +23,11 @@ describe("pages/Presentations/New/index", () => {
 			active: true,
 			name: "",
 			slides: [],
+			template_id: "",
 			theme_id: "theme-1",
 		}
 
-		render(<NewPresentation presentation={ presentation } />)
+		render(<NewPresentation presentation={ presentation } templates={ [] } />)
 
 		screen.getByLabelText("Name")
 		screen.getByRole("button", { name: "Create Presentation" })

@@ -64,7 +64,7 @@ class Presentations::ActiveController < ApplicationController
     render inertia: "Presentations/Active/Messaging", props: {}
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/settings (theme_presentation_settings)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/settings (theme_presentation_admin_settings)
   def settings
     authorize presentation
 

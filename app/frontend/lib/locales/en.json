@@ -370,10 +370,74 @@
       }
     },
     "presentations": {
+      "alerts": {
+        "no_source_template": "This presentation is not linked to a Presentation Template."
+      },
       "notices": {
         "created": "Presentation was successfully created.",
         "destroyed": "Presentation was successfully destroyed.",
+        "template_created": "Presentation Template was successfully created.",
+        "template_updated": "Presentation Template was successfully updated.",
         "updated": "Presentation was successfully updated."
+      },
+      "show": {
+        "active": "Active",
+        "basedOnTemplate": "Based on Presentation Template:",
+        "breadcrumbs": {
+          "circles": "Circles",
+          "presentations": "Presentations",
+          "themes": "Themes"
+        },
+        "cancel": "Cancel",
+        "defaultTitle": "Presentation",
+        "inactive": "Inactive",
+        "resumePresentation": "Resume Presentation",
+        "saveAsNewTemplateModal": {
+          "confirm": "Save",
+          "defaultTemplateName": "%{name} Template",
+          "templateName": "Template name",
+          "title": "Save as new Presentation Template"
+        },
+        "settings": "Settings",
+        "slides": "Slides",
+        "slidesCount_one": "1 slide",
+        "slidesCount_other": "%{count} slides",
+        "startModal": {
+          "body": "You will open the presentation controls.",
+          "confirm": "Start",
+          "title": "Start presentation"
+        },
+        "startPresentation": "Start Presentation",
+        "syncFromTemplateModal": {
+          "body": "This removes all presentation slides and replaces them with slides from the template.",
+          "confirm": "Sync slides",
+          "title": "Sync from Presentation Template"
+        },
+        "updateSourceTemplateModal": {
+          "body": "This replaces all slides in %{templateName}. Presentation-specific data is not copied.",
+          "confirm": "Update template",
+          "title": "Update source Presentation Template"
+        }
+      },
+      "slides": {
+        "index": {
+          "addSlide": "Add slide",
+          "addSlideModal": {
+            "cancel": "Cancel",
+            "confirm": "Add",
+            "slideTitle": "Slide title",
+            "title": "Add a slide"
+          },
+          "breadcrumbs": {
+            "circles": "Circles",
+            "presentations": "Presentations",
+            "slides": "Slides",
+            "themes": "Themes"
+          },
+          "emptySlides": "No slides yet. Add one to start building this presentation.",
+          "settings": "Settings",
+          "title": "Slides"
+        }
       }
     },
     "slides": {
@@ -387,6 +451,43 @@
         "last_word_connector": ", and ",
         "two_words_connector": " and ",
         "words_connector": ", "
+      }
+    },
+    "templates": {
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "templates": "Templates"
+        },
+        "createPresentation": "Create presentation",
+        "createPresentationModal": {
+          "cancel": "Cancel",
+          "name": "Presentation name",
+          "newTheme": "New theme",
+          "noThemes": "This circle has no themes yet. Create a theme before starting a presentation.",
+          "submit": "Create presentation",
+          "theme": "Theme",
+          "title": "Create presentation from template"
+        },
+        "helperText": "Reusable slide layouts for your circle. Create a presentation from a theme to use these at an event.",
+        "newTemplate": "New Template",
+        "title": "Templates"
+      },
+      "show": {
+        "addSlide": "Add slide",
+        "addSlideModal": {
+          "cancel": "Cancel",
+          "confirm": "Add",
+          "slideTitle": "Slide title",
+          "title": "Add a slide"
+        },
+        "breadcrumbs": {
+          "circles": "Circles",
+          "templates": "Templates"
+        },
+        "defaultTitle": "Template",
+        "emptySlides": "No slides yet. Add one to start building this template.",
+        "settings": "Settings"
       }
     },
     "theme_orgs": {

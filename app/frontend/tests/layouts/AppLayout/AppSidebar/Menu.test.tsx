@@ -1,10 +1,15 @@
-import { waitFor } from "@testing-library/react"
+import { screen, waitFor } from "@testing-library/react"
 import { afterEach, describe, expect, test } from "vitest"
 
 import { AppSidebarMenu } from "@/layouts/AppLayout/AppSidebar/Menu"
+import { Routes } from "@/lib"
 import { useLayoutStore } from "@/store"
 import { type MenuKey } from "@/store/slices/menuSlice"
-import { createCircleInertiaShare, createThemeInertiaShare } from "@/tests/helpers/fixtures"
+import {
+	createCircleInertiaShare,
+	createPresentationInertiaShare,
+	createThemeInertiaShare,
+} from "@/tests/helpers/fixtures"
 import { inertiaPageProps } from "@/tests/helpers/mockServer"
 import { render } from "@/tests/helpers/utils"
 
@@ -40,6 +45,29 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 			const openMenus = useLayoutStore.getState().openMenus
 			expect(openMenus.has("circle")).toBe(true)
 			expect(openMenus.has("theme")).toBe(true)
+		})
+	})
+
+	test("renders presentation menu links", async() => {
+		inertiaPageProps.active_circle = createCircleInertiaShare()
+		inertiaPageProps.active_theme = createThemeInertiaShare()
+		inertiaPageProps.active_presentation = createPresentationInertiaShare()
+
+		render(<AppSidebarMenu />)
+
+		await waitFor(() => {
+			const presentationOverview = screen.getAllByRole("link", { name: "Overview" }).find(
+				(link) => link.getAttribute("href") === Routes.themePresentation("circle-1", "theme-1", "presentation-1"),
+			)
+			expect(presentationOverview).toBeDefined()
+			expect(screen.getByRole("link", { name: "Slides" })).toHaveAttribute(
+				"href",
+				Routes.themePresentationSlides("circle-1", "theme-1", "presentation-1"),
+			)
+			expect(screen.getByRole("link", { name: "Settings" })).toHaveAttribute(
+				"href",
+				Routes.themePresentationSettings("circle-1", "theme-1", "presentation-1"),
+			)
 		})
 	})
 })

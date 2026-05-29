@@ -12,6 +12,8 @@ interface CircleIndexProps {
 	recent_themes: Schema.ThemesDashboard[]
 }
 
+// @path: /circles
+// @route: circles
 const CirclesIndex = ({ circles, recent_themes }: CircleIndexProps) => {
 	const { t } = useTranslation()
 	const hasCircles = circles.length > 0

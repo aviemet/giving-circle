@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
   expose :themes, -> { search(Circle.find_by(slug: params[:circle_slug]).themes) }
   expose :theme,
     id: -> { params[:theme_slug] },
-    scope: -> { Circle.find_by(slug: params[:circle_slug]).themes },
+    scope: -> { Circle.find_by(slug: params[:circle_slug]).themes.includes_associated },
     find_by: :slug
 
   strong_params :theme, permit: [:name, :status, :slug]

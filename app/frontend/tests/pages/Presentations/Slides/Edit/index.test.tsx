@@ -4,12 +4,17 @@ import React from "react"
 import { beforeEach, describe, test } from "vitest"
 
 import EditPresentationSlides from "@/pages/Presentations/Slides/Edit"
-import { createSlideData } from "@/tests/helpers/fixtures"
+import { createPresentationInertiaShare, createSlideData } from "@/tests/helpers/fixtures"
+import { inertiaPageProps } from "@/tests/helpers/mockServer"
+import { registerActiveCircleAndThemeLifecycle } from "@/tests/helpers/pageTestLifecycle"
 import { render } from "@/tests/helpers/utils"
 
 describe("pages/Presentations/Slides/Edit/index", () => {
+	registerActiveCircleAndThemeLifecycle()
+
 	beforeEach(() => {
 		document.elementsFromPoint ??= () => []
+		inertiaPageProps.active_presentation = createPresentationInertiaShare()
 	})
 
 	test("renders slide visual editor", async() => {
@@ -17,6 +22,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 			active: true,
 			name: "Presentation",
 			slides: [],
+			template_id: "",
 			theme_id: "theme-1",
 		}
 
@@ -39,6 +45,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 			active: true,
 			name: "Presentation",
 			slides: [],
+			template_id: "",
 			theme_id: "theme-1",
 		}
 

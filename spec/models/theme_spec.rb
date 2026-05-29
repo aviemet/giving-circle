@@ -60,6 +60,16 @@ RSpec.describe Theme do
 
         expect(theme.orgs.count).to eq(2)
       end
+
+      it "loads ask values after includes_associated without preloading orgs" do
+        themes_org = create(:themes_org, ask_cents: 20000, ask_currency: "USD")
+        theme = described_class.includes_associated.find(themes_org.theme_id)
+
+        org = theme.orgs.first
+
+        expect(org.ask_cents).to eq(20000)
+        expect(org.ask_currency).to eq("USD")
+      end
     end
   end
 end

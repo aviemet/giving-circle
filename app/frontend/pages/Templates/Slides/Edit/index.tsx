@@ -2,6 +2,7 @@ import { Data } from "@measured/puck"
 
 import { Page, Section } from "@/components"
 import { VisualEditor } from "@/components/VisualEditor"
+import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useUpdateTemplateSlide } from "@/queries"
 import { useLayoutStore } from "@/store"
@@ -17,21 +18,14 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 	const { params } = usePageProps<"circleTemplatesEditSlide">()
 	const toggleSidebarOpen = useLayoutStore((state) => state.toggleSidebarOpen)
 
+	const returnTo = Routes.circleTemplate(params.circle_slug, params.template_slug)
+
 	const updateSlideMutation = useUpdateTemplateSlide({
 		params: { circleSlug: params.circle_slug, templateSlug: params.template_slug, slideSlug: params.slug },
 	})
 
 	const handleSave = async(data: Data) => {
-		await updateSlideMutation.mutate({ data: data },
-			{
-				onError(error, variables, context) {
-					console.log("Error", { error, variables, context })
-				},
-				onSuccess(data, variables, context) {
-					console.log("Success", { data, variables, context })
-				},
-			}
-		)
+		await updateSlideMutation.mutate({ data: data })
 	}
 
 	const title = `Slide Editor - ${slide?.title}`
@@ -47,6 +41,7 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 					initialData={ slide?.data || {} }
 					onSave={ handleSave }
 					isSaving={ updateSlideMutation.isPending }
+					returnTo={ returnTo }
 				/>
 			</Section>
 		</Page>

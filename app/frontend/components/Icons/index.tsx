@@ -58,6 +58,7 @@ export {
 
 export {
 	RiDownload2Fill as DownloadIcon,
+	RiSlideshowLine as SlidesIcon,
 } from "react-icons/ri"
 
 export {

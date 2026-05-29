@@ -63,9 +63,9 @@ class Presentation < ApplicationRecord
   has_many :slides, through: :slide_parents, dependent: :nullify
   belongs_to :active_slide, class_name: "Slide", optional: true
 
-  belongs_to :template
+  belongs_to :template, optional: true
 
-  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides]) }
+  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :template]) }
 
   def activate
     self.update(active: true)

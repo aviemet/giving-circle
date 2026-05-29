@@ -25,10 +25,8 @@ export const NewTemplateModal = ({ children, circle }: NewTemplateModalProps) =>
 				action={ Routes.circleTemplates(circle.slug) }
 				method="post"
 				initialData={ {
-					presentation_template: {
-						orgs_vote_round: false,
-						num_top_orgs: 0,
-						allocation_vote_round: false,
+					template: {
+						name: "",
 					},
 				} }
 			>

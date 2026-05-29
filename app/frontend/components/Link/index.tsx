@@ -1,11 +1,13 @@
 import { type Method, type Visit } from "@inertiajs/core"
 import { type AnchorProps, type ButtonProps } from "@mantine/core"
-import React, { useMemo } from "react"
+import React from "react"
 
-import { ExternalLink } from "./ExternalLink"
+import { ExternalLink, isExternalLink } from "./ExternalLink"
 import { InertiaLink } from "./InertiaLink"
 
 export { NavLink, type NavLinkProps } from "./NavLink"
+export { ButtonLink, type ButtonLinkProps } from "./ButtonLink"
+export { isExternalLink } from "./ExternalLink"
 
 export interface LinkProps
 	extends
@@ -27,8 +29,6 @@ export interface LinkProps
 	preserveScroll?: boolean
 }
 
-const externalPrefix = ["http", "www"]
-
 export function Link({
 	children,
 	href,
@@ -40,10 +40,10 @@ export function Link({
 	onClick,
 	preserveScroll,
 	disabled = false,
+	buttonProps,
 	ref,
 	...props
 }: LinkProps) {
-	// Disable navigation if link is disabled
 	const handleClick = (e: React.MouseEvent<Element, MouseEvent>) => {
 		if(disabled) {
 			e.preventDefault()
@@ -54,27 +54,15 @@ export function Link({
 		return onClick?.(e)
 	}
 
-	const renderExternal = useMemo(() => {
-		if(external !== undefined) return external
-
-		let localExternal = false
-		externalPrefix.some(prefix => {
-			if(href?.startsWith(prefix)) {
-				const url = new URL(href.startsWith("http") ? href : `http://${href}`)
-				localExternal = url.hostname !== window.location.hostname
-			}
-		})
-
-		return localExternal
-	}, [href, external])
-
-	if(renderExternal) {
+	if(isExternalLink(href, external)) {
 		return (
 			<ExternalLink
 				href={ href }
+				as={ as }
 				ref={ ref }
 				onClick={ handleClick }
 				disabled={ disabled }
+				buttonProps={ buttonProps }
 				{ ...onProgress }
 				{ ...props }
 			>
@@ -93,6 +81,7 @@ export function Link({
 			onClick={ handleClick }
 			preserveScroll={ preserveScroll }
 			disabled={ disabled }
+			buttonProps={ buttonProps }
 			{ ...onProgress }
 			{ ...props }
 		>

@@ -3,9 +3,11 @@
 ## Project Overview
 
 ### Model Organization
+- `Theme#orgs` selects `themes_orgs.ask_cents` / `ask_currency` onto each org. Do not `includes(:orgs)` or `preload(:orgs)` on `Theme` (including `Theme.includes_associated`); Rails' separate preload query omits the join and raises `PG::UndefinedTable`. Load orgs via the association when needed (lazy load uses the correct join).
 
 ### Slide Management
 - When serializing presentations, use the `slides` association, not the JSONB `slides` column on the record.
+- The presentation slide deck (card grid, add/delete) is at `.../presentations/:slug/slides`.
 - Presentation slide editor URLs must use each slide's FriendlyId `slug` (`.../slides/:slug/edit`). Positional indices are not valid slugs and `Presentations::SlidesController#edit` returns 404.
 - Destroying a slide nullifies dependent presentations' `active_slide_id` and removes `SlideParent` rows in model callbacks so FK order stays valid.
 
@@ -38,7 +40,7 @@
 ### ESLint (flat config, ESLint 10)
 - `eslint-plugin-import` flat entries need `@eslint/compat` `fixupConfigRules` because ESLint 10 dropped legacy `SourceCode` helpers that `import/order` still calls; without fixup, lint crashes instead of reporting a rule.
 - Scope those import fixup blocks with `files` limited to JS/TS modules. Without that, `import/no-unresolved` can run on JSON and similar, triggering more missing legacy APIs / bad `context` passthrough errors from the compat layer.
-- Reuse the same `ignores` as the rest of the project on those import fixup objects. Generated serializer declarations under `app/frontend/types/serializers/**/*` must stay ignored there too, or ESLint can parse those files with the wrong pipeline and throw on `import type` syntax.
+- Put shared ignore globs in a top-level `{ ignores }` config object (first entry in `eslint.config.js`). That is the flat-config global ignore list; it applies to every ESLint invocation (`lint`, `lint:fix`, IDE, lint-staged). Generated serializer declarations under `app/frontend/types/serializers/**/*` and `coverage/**/*` belong there.
 
 ## Feature Documentation
 *Document completed features and their core functionality here*
@@ -77,6 +79,7 @@
 
 #### UI & Styling
 - Mantine component library
+- Internal navigation uses Inertia (`Link`, `NavLink`, `Menu.Link`, `ButtonLink`). Do not use `<Button component="a" href="...">` for in-app routes; use `ButtonLink`. Plain `<a>` / full page loads are for external URLs only (`Link external`).
 - CSS modules with Linaria
   - Files use `.css.ts` extension
   - Imports as `import * as classes from './file.css'`
@@ -107,7 +110,7 @@
 - Route helpers are generated (js-routes) into `@/lib` / `app/frontend/lib/routes`; param ordering follows `urlParams.ts` / generated typings.
 - **Theme and presentation params:** Rails would auto-prefix nested params unless routes are declared twice: outer `resources :themes, param: :theme_slug` (and the same idea for presentations with `:presentation_slug`) for CRUD, then inner `resources :themes, param: :slug, except: [...]` (and nested presentation block with `:slug`) for nested routes. That keeps URLs like `/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/...` without `:theme_theme_slug`-style names. Circle stays scope-nested; leaf resources often use `param: :slug`.
 - `@path` / `@route` hints in TS come from the `url_params_json.rb` annotation pass.
-- Default `Link` uses Inertia. Absolute `http(s)` / `www` on another host is treated as external. Mark intentional same-site new-tab navigations with `external`. `ExternalLink` normalizes relative paths to absolute before comparing hosts.
+- Default `Link` uses Inertia. Off-site `http(s)` / `www` URLs (or `external`) render `ExternalLink` (normalized URL, new tab). Internal `target="_blank"` uses a plain anchor so the browser opens a new tab without Inertia intercepting the click.
 
 #### Internationalization (i18n)
 - Frontend uses `react-i18next`. **Do not edit** `app/frontend/lib/locales/*.json`; those files are generated. Add or change copy in `config/locales/**/*.yml` (model-scoped files such as `config/locales/circles/circles.en.yml` are fine), then run `bundle exec rails i18n:export` (see `lib/tasks/i18n.rake` and `config/i18n.yml`).
@@ -147,3 +150,7 @@
 ### Presentation system
 - Presentations support runtime "Interactions" (`interaction_type`, `trigger_type`, `trigger_conditions`, `results`) under the `presentations` namespace.
 - Rails reserves `actions` as a route/controller name segment; this project avoids that segment name.
+
+# Developer TODOS
+
+- Build an async dropdown library to use in place of passing props for dropdown values

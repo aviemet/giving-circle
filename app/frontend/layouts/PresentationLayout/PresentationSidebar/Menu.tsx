@@ -1,4 +1,4 @@
-import { Divider, NavLink } from "@/components"
+import { Divider, NavLink, Text } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
@@ -18,6 +18,20 @@ export function PresentationSidebarMenu() {
 			<Divider />
 
 			<NavLink href="">Messaging</NavLink>
+
+			<Divider />
+
+			<Text size="xs" tt="uppercase" c="dimmed" fw={ 500 } px="md" py="xs">
+				Links
+			</Text>
+			<NavLink
+				href={ Routes.circlePublicPresentation(active_circle.slug, active_presentation.slug) }
+				target="_blank"
+				rel="noreferrer"
+				active={ false }
+			>
+				Presentation
+			</NavLink>
 		</> }</>
 	)
 }

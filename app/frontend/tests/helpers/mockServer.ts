@@ -74,8 +74,8 @@ vi.mock("@inertiajs/react", () => {
 				children,
 			)
 		},
-		Link: ({ children, href }: { children?: React.ReactNode, href?: string }) => {
-			return React.createElement("a", { href: href ?? "#" }, children)
+		Link: ({ children, href, ...props }: { children?: React.ReactNode, href?: string }) => {
+			return React.createElement("a", { href: href ?? "#", ...props }, children)
 		},
 		usePage: () => {
 			return { props: inertiaPageProps }

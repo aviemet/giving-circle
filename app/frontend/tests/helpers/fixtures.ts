@@ -191,6 +191,33 @@ export function createOrgsIndex(overrides?: Partial<Schema.OrgsIndex>): Schema.O
 	}
 }
 
+export function createPresentationInertiaShare(
+	overrides?: Partial<Schema.PresentationsInertiaShare>,
+): Schema.PresentationsInertiaShare {
+	return {
+		id: "presentation-1",
+		active: false,
+		name: "Presentation 1",
+		slug: "presentation-1",
+		theme_id: "theme-1",
+		...overrides,
+	}
+}
+
+export function createPresentationsShow(overrides?: Partial<Schema.PresentationsShow>): Schema.PresentationsShow {
+	return {
+		id: "presentation-1",
+		active: false,
+		name: "Presentation 1",
+		slug: "presentation-1",
+		theme_id: "theme-1",
+		template_id: "",
+		slides: [],
+		slides_count: 0,
+		...overrides,
+	}
+}
+
 export function createThemesShow(overrides?: Partial<Schema.ThemesShow>): Schema.ThemesShow {
 	return {
 		id: "theme-1",
@@ -199,6 +226,22 @@ export function createThemesShow(overrides?: Partial<Schema.ThemesShow>): Schema
 		status: "current",
 		circle: createCirclePersisted(),
 		orgs: [],
+		orgs_count: 0,
+		presentations: [],
+		presentations_count: 0,
+		total_ask_cents: 0,
+		total_ask_currency: "USD",
+		...overrides,
+	}
+}
+
+export function createTemplatesIndex(overrides?: Partial<Schema.TemplatesIndex>): Schema.TemplatesIndex {
+	return {
+		id: "template-1",
+		circle: createCirclesOptions(),
+		name: "Template 1",
+		settings: {},
+		slug: "template-1",
 		...overrides,
 	}
 }
@@ -215,12 +258,32 @@ export function createPresentationsIndex(overrides?: Partial<Schema.Presentation
 	}
 }
 
+export function createTemplatesShow(overrides?: Partial<Schema.TemplatesShow>): Schema.TemplatesShow {
+	return {
+		...createTemplatePersisted(),
+		slides: [],
+		...overrides,
+	}
+}
+
 export function createSlidesIndex(overrides?: Partial<Schema.SlidesIndex>): Schema.SlidesIndex {
 	return {
 		id: "slide-1",
 		slug: "slide-1",
 		data: createSlideData(),
 		title: "Slide 1",
+		...overrides,
+	}
+}
+
+export function createPresentationsFormData(overrides?: Partial<Schema.PresentationsFormData>): Schema.PresentationsFormData {
+	return {
+		active: true,
+		name: "Presentation 1",
+		slides: [],
+		theme_id: "theme-1",
+		template_id: "",
+		id: "presentation-1",
 		...overrides,
 	}
 }

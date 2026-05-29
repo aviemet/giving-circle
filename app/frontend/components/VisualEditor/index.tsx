@@ -24,6 +24,7 @@ const [useVisualEditorUi, VisualEditorUiProvider] = createContext<{
 	isDirty: boolean
 	isSaving: boolean
 	handleSave: (data: Data) => void | Promise<void>
+	handleSaveAndClose: (data: Data) => void | Promise<void>
 	sendToPreview: (payload: { type: "update", data: Data }) => void
 	handleDiscardAndClose: () => void
 }>()
@@ -33,6 +34,7 @@ interface VisualEditorProps {
 	onSave?: (data: Data) => void | Promise<void>
 	isSaving?: boolean
 	templateKey?: string
+	returnTo?: string
 }
 
 function HeaderActions() {
@@ -70,6 +72,7 @@ function HeaderActions() {
 					<Menu.Item
 						disabled={ !ui.isDirty || ui.isSaving }
 						leftSection={ <SaveIcon /> }
+						onClick={ () => ui.handleSaveAndClose(appState.data) }
 					>
 						Save and Close
 					</Menu.Item>
@@ -86,7 +89,7 @@ function HeaderActions() {
 	)
 }
 
-const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templateKey }: VisualEditorProps) => {
+const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templateKey, returnTo }: VisualEditorProps) => {
 	const { data: mockCircle, isLoading } = useMockCircle()
 
 	const previewChannelRef = useRef<BroadcastChannel | null>(null)
@@ -117,14 +120,21 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 		}
 	})
 
-	const handleSave = useCallback(async(data: Data) => {
-		if(!onSave) return
+	const persistSave = useCallback(async(data: Data): Promise<boolean> => {
+		if(!onSave) return false
 
 		try {
 			await onSave(data)
 			setIsDirty(false)
-		} catch{ }
+			return true
+		} catch{
+			return false
+		}
 	}, [onSave])
+
+	const handleSave = useCallback(async(data: Data) => {
+		await persistSave(data)
+	}, [persistSave])
 
 	const sendToPreview = useCallback((payload: { type: "update", data: Data }) => {
 		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
@@ -158,21 +168,34 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 		sendToPreview({ type: "update", data: changed })
 	}, [sendToPreview, storageKey])
 
+	const handleSaveAndClose = useCallback(async(data: Data) => {
+		const saved = await persistSave(data)
+		if(saved && returnTo) {
+			router.visit(returnTo)
+		}
+	}, [persistSave, returnTo])
+
 	const handleDiscardAndClose = useCallback(() => {
+		if(returnTo) {
+			router.visit(returnTo)
+			return
+		}
+
 		const currentUrl = window.location.pathname + window.location.search
 		router.visit(currentUrl, { replace: true })
 		setTimeout(() => window.history.back(), 0)
-	}, [])
+	}, [returnTo])
 
 	const uiContextValue = useMemo(() => {
 		return {
 			isDirty,
 			isSaving,
 			handleSave,
+			handleSaveAndClose,
 			sendToPreview,
 			handleDiscardAndClose,
 		}
-	}, [handleDiscardAndClose, handleSave, isDirty, isSaving, sendToPreview])
+	}, [handleDiscardAndClose, handleSave, handleSaveAndClose, isDirty, isSaving, sendToPreview])
 
 	const overrides = useMemo(() => {
 		return {

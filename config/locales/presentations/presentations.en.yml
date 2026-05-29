@@ -1,7 +1,60 @@
 ---
 en:
   presentations:
+    alerts:
+      no_source_template: This presentation is not linked to a Presentation Template.
     notices:
       created: Presentation was successfully created.
       destroyed: Presentation was successfully destroyed.
+      template_created: Presentation Template was successfully created.
+      template_updated: Presentation Template was successfully updated.
       updated: Presentation was successfully updated.
+    show:
+      active: Active
+      basedOnTemplate: 'Based on Presentation Template:'
+      breadcrumbs:
+        circles: Circles
+        presentations: Presentations
+        themes: Themes
+      cancel: Cancel
+      defaultTitle: Presentation
+      inactive: Inactive
+      resumePresentation: Resume Presentation
+      saveAsNewTemplateModal:
+        confirm: Save
+        defaultTemplateName: "%{name} Template"
+        templateName: Template name
+        title: Save as new Presentation Template
+      settings: Settings
+      slides: Slides
+      slidesCount_one: 1 slide
+      slidesCount_other: "%{count} slides"
+      startModal:
+        body: You will open the presentation controls.
+        confirm: Start
+        title: Start presentation
+      startPresentation: Start Presentation
+      syncFromTemplateModal:
+        body: This removes all presentation slides and replaces them with slides from the template.
+        confirm: Sync slides
+        title: Sync from Presentation Template
+      updateSourceTemplateModal:
+        body: This replaces all slides in %{templateName}. Presentation-specific data is not copied.
+        confirm: Update template
+        title: Update source Presentation Template
+    slides:
+      index:
+        addSlide: Add slide
+        addSlideModal:
+          cancel: Cancel
+          confirm: Add
+          slideTitle: Slide title
+          title: Add a slide
+        breadcrumbs:
+          circles: Circles
+          presentations: Presentations
+          slides: Slides
+          themes: Themes
+        emptySlides: No slides yet. Add one to start building this presentation.
+        settings: Settings
+        title: Slides
