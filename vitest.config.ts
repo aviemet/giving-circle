@@ -6,7 +6,7 @@ export default defineConfig((env) => mergeConfig(
 	viteConfig(env),
 	defineConfig({
 		test: {
-			fileParallelism: false,
+			fileParallelism: true,
 			globals: true,
 			environment: "jsdom",
 			coverage: {

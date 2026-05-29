@@ -1,29 +1,20 @@
-import { ActionIcon, Card, Group, Image, Menu, Money, Text } from "@/components"
+import { ActionIcon, Card, Group, Image, Menu, Text } from "@/components"
 import { DotsIcon, EditIcon, TrashIcon } from "@/components/Icons"
 import { rem } from "@/lib"
 
-interface OrgCardProps {
-	org: Schema.OrgsPersisted | Schema.ThemesOrgsShow
+interface SlideCardProps {
+	slide: Schema.Slide
 }
 
-const OrgCard = ({ org }: OrgCardProps) => {
-	if(!org.id) return <></>
+export function SlideCard({ slide }: SlideCardProps) {
+	if(!slide.id) return null
 
 	return (
 		<Card withBorder shadow="sm" radius="md" >
 			<Card.Section withBorder inheritPadding py="xs">
 
-				<Text fw={ 500 } truncate="end">{ org.name }</Text>
-
-			</Card.Section>
-
-			<Card.Section>
-				<Image src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png" />
-			</Card.Section>
-
-			{ isThemesOrgsShow(org) && org?.ask && <Card.Section withBorder inheritPadding py="xs">
 				<Group justify="space-between" wrap="nowrap">
-					<Text>Ask: <Money>{ org.ask }</Money></Text>
+					<Text fw={ 500 }>{ slide?.title }</Text>
 
 					<Menu withinPortal position="bottom-end" shadow="sm">
 						<Menu.Target>
@@ -34,24 +25,24 @@ const OrgCard = ({ org }: OrgCardProps) => {
 
 						<Menu.Dropdown>
 							<Menu.Item leftSection={ <EditIcon style={ { width: rem(14), height: rem(14) } } /> }>
-								Edit Org
+								Edit Slide
 							</Menu.Item>
 							<Menu.Item
 								leftSection={ <TrashIcon style={ { width: rem(14), height: rem(14) } } /> }
 								color="red"
 							>
-								Delete Org
+								Delete Slide
 							</Menu.Item>
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
-			</Card.Section> }
+
+			</Card.Section>
+
+			<Card.Section>
+				<Image src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png" />
+			</Card.Section>
 
 		</Card>
 	)
-}
-
-export { OrgCard }
-function isThemesOrgsShow(org: Schema.OrgsPersisted | Schema.ThemesOrgsShow): org is Schema.ThemesOrgsShow {
-	return "ask" in org
 }

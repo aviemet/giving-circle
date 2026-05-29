@@ -1,6 +1,26 @@
 {
   "en": {
     "circles": {
+      "index": {
+        "circlesSectionTitle": "Your Circles",
+        "membersCount_one": "1 member",
+        "membersCount_other": "%{count} members",
+        "newCircle": "New circle",
+        "newCircleCard": "Create a circle",
+        "recentThemesTitle": "Recent and Upcoming Themes",
+        "themePublishedOn": "Published %{date}",
+        "themePublishedUpcoming": "Upcoming",
+        "themeStatus": {
+          "current": "Current",
+          "draft": "Draft",
+          "future": "Upcoming",
+          "past": "Past"
+        },
+        "themesCount_one": "1 theme",
+        "themesCount_other": "%{count} themes",
+        "title": "Dashboard",
+        "totalGivenPlaceholder": "Total given: --"
+      },
       "notices": {
         "created": "Circle was successfully created.",
         "destroyed": "Circle was successfully destroyed.",
@@ -122,6 +142,10 @@
         "month": "Month",
         "second": "Seconds",
         "year": "Year"
+      },
+      "relative": {
+        "future": "in %{time}",
+        "past": "%{time} ago"
       }
     },
     "devise": {
@@ -229,7 +253,6 @@
         }
       }
     },
-    "hello": "Hello world",
     "helpers": {
       "page_entries_info": {
         "entry": {
@@ -353,6 +376,12 @@
         "updated": "Presentation was successfully updated."
       }
     },
+    "slides": {
+      "notices": {
+        "created": "Slide was successfully created.",
+        "updated": "Slide was successfully updated."
+      }
+    },
     "support": {
       "array": {
         "last_word_connector": ", and ",
@@ -364,8 +393,7 @@
       "notices": {
         "bulk_created": "%{count} Organizations successfully added to the theme",
         "created": "Organization was successfully added to the theme.",
-        "destroyed": "Organization was successfully removed from the theme.",
-        "updated": "Organization was successfully updated."
+        "destroyed": "Organization was successfully removed from the theme."
       },
       "validations": {
         "match_owner": "Theme owner and org owner must match",

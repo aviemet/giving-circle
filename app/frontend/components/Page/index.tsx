@@ -7,8 +7,14 @@ import { useLayoutStore } from "@/store"
 
 export interface PageProps {
 	children?: React.ReactNode
-	title?: string | undefined
-	heading?: string | React.ReactNode
+	/** Browser tab title via Inertia Head. Omitted leaves the tab unchanged on client navigations. */
+	title?: string
+	/**
+	 * App shell header content (`AppHeader` / `siteTitle`).
+	 * Omitted: falls back to `title`, then the app default.
+	 * `null`: no shell heading (tab may still use `title`).
+	 */
+	heading?: string | React.ReactNode | null
 	meta?: React.ReactNode
 	breadcrumbs?: Breadcrumb[]
 	hideNavMenu?: boolean
@@ -30,33 +36,38 @@ const Page = ({
 	const setSiteTitle = useLayoutStore((state) => state.setSiteTitle)
 	const setMainPaddingDisabled = useLayoutStore((state) => state.setMainPaddingDisabled)
 
-	// Allow pages to set header title
-	const usedTitle = heading || title
+	let appShellHeading: React.ReactNode
+	switch(heading) {
+		case null:
+			appShellHeading = null
+			break
+		case undefined:
+			appShellHeading = title ?? defaultSiteTitle
+			break
+		default:
+			appShellHeading = heading
+			break
+	}
 
 	useInit(() => {
-		// Allow pages to disable padding on top level <main>
-		setMainPaddingDisabled(disablePadding === true ? true : false)
+		setMainPaddingDisabled(disablePadding === true)
 
-
-		if(!usedTitle) {
-			setSiteTitle(defaultSiteTitle)
-		} else {
-			setSiteTitle(usedTitle)
-		}
-
-		// Allow pages to control wether the sidebar is open
 		if(sidebarVisible === hideNavMenu) {
 			setSidebarVisible(!hideNavMenu)
 		}
 	})
 
 	useEffect(() => {
-		setSiteTitle(usedTitle)
-	}, [setSiteTitle, usedTitle])
+		setSiteTitle(appShellHeading)
+
+		return () => {
+			setSiteTitle(defaultSiteTitle)
+		}
+	}, [appShellHeading, setSiteTitle, defaultSiteTitle])
 
 	return (
 		<>
-			{ title && (
+			{ title !== undefined && (
 				<Head title={ title }>
 					{ meta && meta }
 				</Head>

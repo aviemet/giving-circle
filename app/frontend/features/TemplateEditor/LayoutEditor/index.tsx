@@ -1,17 +1,15 @@
 import { modals } from "@mantine/modals"
-import React, { useRef } from "react"
+import { useRef } from "react"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
 import { TextInput } from "@/components/Inputs"
-import { SlideCard } from "@/features/Cards/SlideCard"
-import { Routes } from "@/lib"
+import { SlideCard } from "@/features/Cards"
 
 interface LayoutEditorProps {
-	circle: Schema.CirclesInertiaShare
 	template: Schema.TemplatesFormData
 }
 
-const LayoutEditor = ({ circle, template }: LayoutEditorProps) => {
+const LayoutEditor = ({ template }: LayoutEditorProps) => {
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const handleAddSlide = () => {

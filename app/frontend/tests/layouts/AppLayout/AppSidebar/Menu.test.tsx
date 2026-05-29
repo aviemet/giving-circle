@@ -1,3 +1,4 @@
+import { waitFor } from "@testing-library/react"
 import { afterEach, describe, expect, test } from "vitest"
 
 import { AppSidebarMenu } from "@/layouts/AppLayout/AppSidebar/Menu"
@@ -16,17 +17,18 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 		useLayoutStore.getState().setOpenMenus(allMenus)
 	})
 
-	test("accordion uses separated variant for grouped nav", () => {
+	test("accordion uses separated variant for grouped nav", async() => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
 
 		const { container } = render(<AppSidebarMenu />)
-		const accordionRoot = container.querySelector("[data-accordion]")
 
-		expect(accordionRoot).toBeTruthy()
-		expect(accordionRoot).toHaveAttribute("data-variant", "separated")
+		await waitFor(() => {
+			const accordionRoot = container.querySelector("[data-accordion]")
+			expect(accordionRoot).toHaveAttribute("data-variant", "separated")
+		})
 	})
 
-	test("does not close other menus when deeper menu appears", () => {
+	test("does not close other menus when deeper menu appears", async() => {
 		useLayoutStore.getState().setOpenMenus(["circle"] satisfies MenuKey[])
 
 		inertiaPageProps.active_circle = createCircleInertiaShare()
@@ -34,8 +36,10 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 
 		render(<AppSidebarMenu />)
 
-		const openMenus = useLayoutStore.getState().openMenus
-		expect(openMenus.has("circle")).toBe(true)
-		expect(openMenus.has("theme")).toBe(true)
+		await waitFor(() => {
+			const openMenus = useLayoutStore.getState().openMenus
+			expect(openMenus.has("circle")).toBe(true)
+			expect(openMenus.has("theme")).toBe(true)
+		})
 	})
 })

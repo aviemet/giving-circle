@@ -14,6 +14,7 @@ class CirclesController < ApplicationController
 
     render inertia: "Circles/Index", props: {
       circles: -> { circles.render(:index) },
+      recent_themes: -> { Themes::DashboardSerializer.render(RecentThemes.for(user: current_user)) },
     }
   end
 

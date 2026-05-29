@@ -1,12 +1,15 @@
 import { css } from "@linaria/core"
 
-import { vars } from "@/lib"
+export const dashboardCard = css`
+	min-height: 9rem;
+`
 
-export const cardContainer = css`
-flex-wrap: wrap;
-justify-content: 'center';
+export const cardTitle = css`
+	line-height: 1.3;
+	word-break: break-word;
+`
 
-	&[data-child-flex] > * {
-		flex: var(--child-flex)
-	}	
+export const cardMetaLine = css`
+	line-height: 1.4;
+	word-break: break-word;
 `

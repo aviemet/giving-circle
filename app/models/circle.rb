@@ -35,7 +35,7 @@ class Circle < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
 
-  scope :includes_associated, -> { includes([:themes, :presentations, :memberships, :orgs]) }
+  scope :includes_associated, -> { includes([:presentations, :memberships, :orgs], themes: :circle) }
 
   # MockCircle should be used if mock data is needed, these scopes separate the two models
   default_scope { where(mock_data: false) }

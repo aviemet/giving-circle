@@ -29,7 +29,7 @@
 - Frontend: named exports only (except `app/frontend/pages`, which must default-export Inertia pages). React components as `export function Name`. Barrel files use `export { X } from "./Y"`. Inertia pages may export a named `Page` from `withLayout`.
 - Prefer exact HTTP status checks (e.g. `=== 201`), not ranges.
 - TypeScript: no type assertions (`as`, `as unknown as`). Prefer fixing types (unions, generics, exports). Do not add explicit return types when inference is enough. React 19: `useRef<Handle>(null)` is `RefObject<Handle | null>` for imperative helpers; with `@types/react` 19 prefer `ReactElement` / `ReactNode` imports over bare `JSX.Element` when the global `JSX` namespace mis-resolves. `react-i18next` augments global `JSX`, which can confuse IDE navigation on `JSX`.
-- The shared `Page` component drives the shell title via `title` / `heading`; it does not render those strings as DOM -- layout reads `usedTitle` from the layout store. RTL tests should assert on real content (tables, forms), not on `Page.heading` alone.
+- The shared `Page` component: `title` sets the browser tab only (`<Head>`). `heading` sets the App shell header via the layout store (`AppHeader` reads `siteTitle`). Omitted `heading` falls back to `title`, then the app default; `heading={null}` clears the shell header while the tab may still use `title`. Neither prop renders in the page body. RTL tests should assert on real content (tables, forms), not on header copy alone.
 - Nested ternaries are forbidden; use `if`/`else` or early returns.
 
 ### Code Style
@@ -65,7 +65,7 @@
   - `/layouts`: App Layout components
   - `/lib`: Non-React code and utilities
   - `/pages`: Top-level Inertia pages (entry points for routes)
-  - `/queries`: Async react-query methods
+  - `/queries`: Async react-query methods (not Ruby query objects; see **Ruby query objects** below)
   - `/types`: Global types and interfaces
 
 #### Icons
@@ -82,6 +82,7 @@
   - Imports as `import * as classes from './file.css'`
   - Class composition with `clsx`
 - Dark/light theme support via Mantine theme system
+- Linaria styles that set surfaces or hover backgrounds must use `vars.lightSelector` / `vars.darkSelector` (or Mantine CSS variables such as `--mantine-color-default-border`), not a single light-theme gray such as `vars.colors.gray[0]`, or dark mode will look wrong.
 
 #### Form implementation
 - App `Form` is uncontrolled Inertia `Form` with field coordination through `FormFieldContext` (not `useInertiaForm` on consumers). Inputs must forward `name` to a real control or they are omitted from submit and `getFormData()`.
@@ -109,12 +110,17 @@
 - Default `Link` uses Inertia. Absolute `http(s)` / `www` on another host is treated as external. Mark intentional same-site new-tab navigations with `external`. `ExternalLink` normalizes relative paths to absolute before comparing hosts.
 
 #### Internationalization (i18n)
-- Frontend uses `react-i18next`; strings ultimately come from Rails YAML. Model-scoped copy often lives in `config/locales/[model]/frontend.en.yml`, general UI copy in `config/locales/frontend.en.yml`, with keys like `views.[feature].[page].[key]`. Shared flash templates live under `templates.controllers.notices` in `en.yml`.
+- Frontend uses `react-i18next`. **Do not edit** `app/frontend/lib/locales/*.json`; those files are generated. Add or change copy in `config/locales/**/*.yml` (model-scoped files such as `config/locales/circles/circles.en.yml` are fine), then run `bundle exec rails i18n:export` (see `lib/tasks/i18n.rake` and `config/i18n.yml`).
+- Keys in YAML map to nested JSON under the locale key (e.g. `circles.index.title` in YAML becomes `circles.index.title` in `en.json`). Frontend `t()` uses that path without a `views.` prefix when defined at the model root in YAML.
+- For react-i18next plurals after export, prefer flat sibling keys in YAML (`themesCount_one`, `themesCount_other`) rather than a nested `themesCount: one/other` hash; nested Rails plural hashes export as objects and `t("...themesCount", { count })` fails at runtime.
+- Dynamic key segments (e.g. `t(\`circles.index.themeStatus.${status}\`)`) may need `ignore_unused` entries in `config/i18n-tasks.yml`; `spec/i18n_spec.rb` enforces no unused keys.
+- Shared flash templates live under `templates.controllers.notices` in `en.yml`.
 
 #### Testing
+- Inertia **request** specs for page loads: assert `expect(response).to be_successful` only; do not assert prop shape or contents (frontend tests cover rendering). Use `expect(inertia).to render_component(...)` only when lazy props would make a bare status check miss a serialization failure.
 - Vitest **browser** mode runs real Chromium with Vite transforms. Importing huge barrels or full Inertia pages can blow the renderer heap (`V8 javascript OOM` / "browser connection was closed") -- shrink browser-mode suites, use jsdom + RTL for heavy trees, and reserve full Playwright E2E for whole-app flows (`yarn playwright install chromium` if binaries are missing).
 - **`vitest.browser.config.ts` must not `mergeConfig` the Rails `vite.config.ts`** (Ruby plugin, Inertia, WyW/Linaria, `base: "./"`, etc.); that broke the browser runner handshake. Browser Vitest uses a minimal Vite setup rooted at `app/frontend` with `@` alias, `tsconfigPaths`, `@vitejs/plugin-react`, and `base: "/"`. Headed runs: `yarn test:browser:headed` / `BROWSER_HEADED=1`.
-- Shared Inertia props for tests: `inertiaPageProps` in `@/tests/helpers/mockServer` (reset in `afterEach`); `registerActiveCircleLifecycle` in `pageTestLifecycle.ts` wraps the pattern. With merged Vite config the Vitest root is `app/frontend`; `setupFiles` paths are relative to that root. Use `fileParallelism: false` when a suite mutates the shared `inertiaPageProps` object.
+- Shared Inertia props for tests: `inertiaPageProps` in `@/tests/helpers/mockServer` (global `afterEach` clears `active_*` / `circles`); `registerActiveCircleLifecycle` in `pageTestLifecycle.ts` wraps the pattern. With merged Vite config the Vitest root is `app/frontend`; `setupFiles` paths are relative to that root. Unit Vitest uses `fileParallelism: true` (fork workers isolate module state); MSW handlers include `Routes.apiCircleMock("mock-circle")` for `useMockCircle` / `VisualEditor`.
 - Root `tsconfig.json` uses `compilerOptions.types: []`; Vitest globals still need `app/frontend/vitest-globals.d.ts` referencing `vitest/globals` (listing it in `types` can fail on newer TS). `@testing-library/jest-dom` matchers require an explicit setup import (see `mockServer.ts`); Vitest 4 does not ship those matchers by default.
 - Prefer `vi.mock("pkg", factory)` or `importOriginal` when you only need shallow stubs; the typed `vi.mock(import("pkg"), factory)` overload forces nested exports to still satisfy full module types.
 - If `vitest.config.ts` uses `mergeConfig(viteConfig, ...)`, `vite.config.ts` should export a concrete `UserConfig` (not only a `UserConfigExport` union) so `mergeConfig` does not collapse to `never`. Function Vite configs can be wrapped for **unit** Vitest; do not reuse that merge for `vitest.browser.config.ts`.
@@ -125,6 +131,16 @@
 ### Database query loading
 - Prefer the `includes_associated` scope (and similar patterns) when loading records for serializers to avoid N+1s; include polymorphic ownership/circle edges where serializers touch them.
 - Trim redundant work from `inertia_share` (cached associations where it helps). `disable_menu_rendering` stops menu payloads on public Inertia responses. Preload what menus need on `user.circles` when menus render.
+
+### Ruby query objects
+- Non-ActiveRecord query/service objects live in `app/queries/` (e.g. `RecentThemes`). This directory is **not** on Rails default autoload paths; `config/application.rb` must add it to both `autoload_paths` and `eager_load_paths`. Do not confuse with `app/frontend/queries/` (react-query hooks only).
+- With that path registered, `app/queries/recent_themes.rb` defines a top-level `RecentThemes` constant (not `Queries::RecentThemes`).
+
+### Serializers (oj_serializers)
+- Computed attributes on a serializer use the `attribute` block form, e.g. `attribute :themes_count, type: :number do ... end`. A bare `def themes_count` on the serializer class will not work and breaks Inertia pages that call `render(:index)`.
+
+### App shell and navigation hierarchy
+- `/circles` (dashboard) uses `Page` `hideNavMenu` on purpose: the user is choosing a Circle before circle-scoped sidebar nav (themes, orgs, presentations) applies. In-circle routes show the normal sidebar. Dashboard copy should stay minimal; hierarchy is conveyed by layout, not long subtitles.
 
 ## Architecture Decisions
 

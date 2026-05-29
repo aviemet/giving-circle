@@ -1,7 +1,5 @@
 import { css } from "@linaria/core"
 
-import { vars } from "@/lib"
-
 export const slideCard = css`
 	width: 12rem;
 `

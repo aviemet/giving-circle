@@ -9,12 +9,22 @@ export function createCirclePersisted(overrides?: Partial<Schema.CirclesPersiste
 	}
 }
 
+export function createCirclesOptions(overrides?: Partial<Schema.CirclesOptions>): Schema.CirclesOptions {
+	return {
+		id: "circle-1",
+		name: "Circle 1",
+		slug: "circle-1",
+		...overrides,
+	}
+}
+
 export function createThemePersisted(overrides?: Partial<Schema.ThemesPersisted>): Schema.ThemesPersisted {
 	return {
 		id: "theme-1",
 		name: "Theme 1",
 		slug: "theme-1",
 		status: "current",
+		circle: createCirclesOptions(),
 		...overrides,
 	}
 }
@@ -25,6 +35,7 @@ export function createThemeInertiaShare(overrides?: Partial<Schema.ThemesInertia
 		name: "Theme 1",
 		slug: "theme-1",
 		status: "current",
+		circle: createCirclesOptions(),
 		...overrides,
 	}
 }
@@ -75,8 +86,9 @@ export function createSlideData(overrides?: Partial<SlideData>): SlideData {
 	return {
 		content: [],
 		root: {
-			type: "root",
-			props: {},
+			props: {
+				title: "Slide",
+			},
 		},
 		...overrides,
 	}

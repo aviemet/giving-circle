@@ -22,7 +22,7 @@ const EditPresentation = ({ presentation }: EditPresentationProps) => {
 			<Section>
 				<PresentationForm
 					method="put"
-					to={ Routes.editThemePresentation(params.circle_slug, params.theme_slug, presentation.slug) }
+					to={ Routes.themePresentation(params.circle_slug, params.theme_slug, presentation.slug) }
 					presentation={ presentation }
 				/>
 			</Section>

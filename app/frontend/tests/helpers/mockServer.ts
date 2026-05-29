@@ -67,8 +67,12 @@ vi.mock("@inertiajs/react", () => {
 			reload: vi.fn(),
 			visit: vi.fn(),
 		},
-		Head: ({ children }: { children?: React.ReactNode }) => {
-			return React.createElement(React.Fragment, null, children)
+		Head: ({ children, title }: { children?: React.ReactNode, title?: string }) => {
+			return React.createElement(
+				"div",
+				{ "data-testid": "inertia-head", "data-title": title ?? "" },
+				children,
+			)
 		},
 		Link: ({ children, href }: { children?: React.ReactNode, href?: string }) => {
 			return React.createElement("a", { href: href ?? "#" }, children)
@@ -76,7 +80,15 @@ vi.mock("@inertiajs/react", () => {
 		usePage: () => {
 			return { props: inertiaPageProps }
 		},
-		Form: ({ children }: { children?: React.ReactNode | ((props: Record<string, unknown>) => React.ReactNode) }) => {
+		Form: ({
+			children,
+			action,
+			method,
+		}: {
+			children?: React.ReactNode | ((props: Record<string, unknown>) => React.ReactNode)
+			action?: string
+			method?: string
+		}) => {
 			const slotProps = {
 				errors: {},
 				hasErrors: false,
@@ -109,7 +121,11 @@ vi.mock("@inertiajs/react", () => {
 				{ value: slotProps },
 				React.createElement(
 					"form",
-					{ onSubmit: (event: Event) => event.preventDefault() },
+					{
+						action,
+						method,
+						onSubmit: (event: Event) => event.preventDefault(),
+					},
 					formBody,
 				),
 			)
@@ -180,5 +196,11 @@ beforeAll(() => {
 	}
 	server.listen()
 })
-afterEach(() => server.resetHandlers())
+afterEach(() => {
+	inertiaPageProps.active_circle = undefined
+	inertiaPageProps.active_theme = undefined
+	inertiaPageProps.active_presentation = undefined
+	inertiaPageProps.circles = undefined
+	server.resetHandlers()
+})
 afterAll(() => server.close())
