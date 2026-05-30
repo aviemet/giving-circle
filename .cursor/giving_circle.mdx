@@ -95,7 +95,7 @@
 #### VisualEditor / dynamic data
 - `PresentationDataProvider` supplies either mock editor data or live presentation data (`isEditor` in the editor). Public views can lazy-load memberships via `GET /:circle_slug/p/:presentation_slug/memberships` when needed.
 - Inside iterators, `IteratorItemProvider` exposes `pathPrefix`, `currentItem`, and `index`; `usePresentationData` resolves paths like `presentation.org[].name` against `currentItem` when the path matches the iterator prefix. `buildDataStructure` prefers `contextData.presentation?.orgs` when present.
-- Puck `Render` depends on the layout's provider for dynamic resolution. Slot fields that can be empty need a tangible hit target (e.g. pass `minEmptyHeight` such as 128 in slot configs).
+- Puck `Render` depends on the layout's provider for dynamic resolution. Slot fields that can be empty need a tangible hit target (pass `minEmptyHeight` via `slotDropZoneProps()` in `VisualEditor/slotEditor.ts` on each slot render). `withStarterSlideContent` seeds empty slides in the editor only when there is no localStorage draft; starter `ComponentData` must include stable `props.id` values or Puck can loop `onChange` and exhaust memory.
 
 #### State management
 - Server-driven UI: Inertia. Ephemeral client state: zustand. Form field coordination: `FormFieldContext` / app `Form` (see Form implementation).

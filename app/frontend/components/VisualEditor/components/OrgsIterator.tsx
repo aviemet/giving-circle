@@ -1,9 +1,11 @@
-import { ComponentConfig, Slot } from "@measured/puck"
+import { ComponentConfig, Slot, type SlotComponent } from "@measured/puck"
 
 import { Box } from "@/components"
 import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
 
 import { IteratorItemProvider } from "../dynamicData/IteratorItemContext"
+import { presentationSlot } from "../Puck.css"
+import { slotDropZoneProps } from "../slotEditor"
 
 const PATH_PREFIX = "presentation.org"
 
@@ -19,18 +21,25 @@ function getOrgsFromContext(contextData: ReturnType<typeof usePresentationDataCo
 }
 
 interface OrgsIteratorDisplayProps {
-	content: React.ComponentType
+	content: SlotComponent
+	slotProps?: ReturnType<typeof slotDropZoneProps>
 }
 
-const OrgsIteratorDisplay = ({ content: Content }: OrgsIteratorDisplayProps) => {
+const OrgsIteratorDisplay = ({ content: Content, slotProps }: OrgsIteratorDisplayProps) => {
 	const contextData = usePresentationDataContext()
 	const isEditor = contextData?.isEditor === true
 	const orgs = getOrgsFromContext(contextData)
 
 	if(isEditor) {
 		return (
-			<Box style={ { position: "relative", minWidth: 25, minHeight: 25, padding: 25 } }>
-				<Content />
+			<Box
+				className={ presentationSlot }
+				style={ { position: "relative", minWidth: "100%", padding: 16 } }
+			>
+				<Content
+					className={ presentationSlot }
+					{ ...slotProps }
+				/>
 				<Box
 					component="span"
 					style={ {
@@ -83,7 +92,10 @@ export const orgsIteratorConfig: ComponentConfig<OrgsIteratorProps> = {
 	},
 	render: ({ content: Content }) => {
 		return (
-			<OrgsIteratorDisplay content={ Content } />
+			<OrgsIteratorDisplay
+				content={ Content }
+				slotProps={ slotDropZoneProps() }
+			/>
 		)
 	},
 }

@@ -2,6 +2,9 @@ import { Slot, type ComponentConfig } from "@measured/puck"
 
 import { SimpleGrid } from "@/components"
 
+import { presentationSlot } from "../Puck.css"
+import { slotDropZoneProps } from "../slotEditor"
+
 export type GridProps = {
 	content: Slot
 	columns: number
@@ -16,12 +19,19 @@ export const gridConfig: ComponentConfig<GridProps> = {
 		content: [],
 		columns: 3,
 	},
-	render: ({ content: Content, columns }) => {
+	render: ({ content: Content, columns, puck }) => {
 		return (
 			<SimpleGrid
-				component={ Content }
+				ref={ puck.dragRef }
+				className={ presentationSlot }
 				cols={ columns }
-			/>
+				w="100%"
+			>
+				<Content
+					className={ presentationSlot }
+					{ ...slotDropZoneProps() }
+				/>
+			</SimpleGrid>
 		)
 	},
 }

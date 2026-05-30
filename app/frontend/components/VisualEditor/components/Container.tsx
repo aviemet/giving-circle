@@ -10,6 +10,8 @@ import {
 } from "../fields"
 import { type AlignmentValue } from "../fields/alignment"
 import { buildLayoutStyle } from "../fields/layout"
+import { presentationSlot } from "../Puck.css"
+import { slotDropZoneProps } from "../slotEditor"
 
 export type ContainerProps = LayoutStyleProps & {
 	content: Slot
@@ -37,11 +39,16 @@ export const containerConfig: ComponentConfig<ContainerProps> = {
 		return (
 			<Container
 				ref={ puck.dragRef }
-				className={ clsx("presentation_container") }
-				component={ Content }
+				className={ clsx("presentation_container", presentationSlot) }
 				ta={ alignment }
+				w="100%"
 				style={ buildLayoutStyle(styleProps) }
-			/>
+			>
+				<Content
+					className={ presentationSlot }
+					{ ...slotDropZoneProps() }
+				/>
+			</Container>
 		)
 	},
 }

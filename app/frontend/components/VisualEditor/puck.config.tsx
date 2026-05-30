@@ -47,7 +47,15 @@ export const config: Config<{
 		},
 		render: ({ children, backgroundColor }) => {
 			return (
-				<Box style={ { backgroundColor, width: "100%", height: "100%" } } p={ 0 } m={ 0 }>
+				<Box
+					style={ {
+						backgroundColor,
+						width: "100%",
+						minHeight: "100%",
+					} }
+					p={ 0 }
+					m={ 0 }
+				>
 					{ children }
 				</Box>
 			)

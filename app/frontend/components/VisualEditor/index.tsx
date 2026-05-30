@@ -17,6 +17,7 @@ import { useMockCircle } from "@/queries"
 
 import { config } from "./puck.config"
 import * as classes from "./Puck.css"
+import { withStarterSlideContent } from "./slotEditor"
 
 const usePuck = createUsePuck()
 
@@ -96,15 +97,18 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 
 	const storageKey = useMemo(() => `puck-editor-${templateKey ?? "data"}`, [templateKey])
 	const [data] = useState<Partial<Data>>(() => {
-		if(typeof window === "undefined") return initialData ?? {}
+		if(typeof window === "undefined") {
+			return withStarterSlideContent(initialData ?? {})
+		}
 
 		try {
 			const raw = window.localStorage.getItem(storageKey)
-			if(!raw) return initialData ?? {}
-			return JSON.parse(raw) as Partial<Data>
-		} catch{
-			return initialData ?? {}
-		}
+			if(raw) {
+				return JSON.parse(raw) as Partial<Data>
+			}
+		} catch{ }
+
+		return withStarterSlideContent(initialData ?? {})
 	})
 
 	const [isDirty, setIsDirty] = useState(false)

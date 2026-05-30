@@ -7,6 +7,7 @@ export const puckDrawerItem = css``
 export const puckDrawerItemIcon = css``
 export const puckOutline = css``
 export const puckFields = css``
+export const presentationSlot = css``
 
 export const puckRoot = css`
 	--puck-font-family: inherit;
@@ -145,6 +146,40 @@ export const puckRoot = css`
 
 		.${ puckOutline } * {
 			color: var(--puck-color-black);
+		}
+
+		[class*="DropZone"]:empty {
+			border: 1px dashed var(--puck-color-azure-06);
+			border-radius: 6px;
+			background-color: color-mix(in oklch, var(--puck-color-azure-10) 55%, transparent);
+			box-sizing: border-box;
+		}
+
+		.${ presentationSlot }[class*="DropZone"],
+		.${ presentationSlot } [class*="DropZone"] {
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		.${ presentationSlot }[class*="DropZone--hasChildren"],
+		.${ presentationSlot } [class*="DropZone--hasChildren"] {
+			min-height: 40px;
+		}
+
+		[data-puck-dragging] .${ presentationSlot }[class*="DropZone--hasChildren"],
+		[data-puck-dragging] .${ presentationSlot } [class*="DropZone--hasChildren"] {
+			padding-bottom: 24px;
+		}
+
+		[class*="DropZone--isRootZone"]:empty {
+			border-style: solid;
+			border-color: var(--puck-color-grey-08);
+			background-color: color-mix(in oklch, var(--puck-color-grey-10) 40%, transparent);
+		}
+
+		[data-puck-dragging] [class*="DropZone--isDestination"]:not([class*="DropZone--isRootZone"]) {
+			border-color: var(--puck-color-azure-04);
+			background-color: color-mix(in oklch, var(--puck-color-azure-09) 70%, transparent);
 		}
 	}
 
