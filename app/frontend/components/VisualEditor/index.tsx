@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { useCallback, useMemo, useRef, useState, Suspense } from "react"
 import "@measured/puck/puck.css"
 
-import { Menu, Box, Button, Divider, AsyncBoundary, ErrorBoundary } from "@/components"
+import { Menu, Box, Button, Badge, Divider, AsyncBoundary, ErrorBoundary } from "@/components"
 import {
 	SaveIcon,
 	DownArrowIcon,
@@ -17,7 +17,7 @@ import { useMockCircle } from "@/queries"
 
 import { config } from "./puck.config"
 import * as classes from "./Puck.css"
-import { withStarterSlideContent } from "./slotEditor"
+import { clearEditorDraft, editorStorageKey, withStarterSlideContent } from "./slotEditor"
 
 const usePuck = createUsePuck()
 
@@ -43,50 +43,57 @@ function HeaderActions() {
 	const appState = usePuck((s) => s.appState)
 
 	return (
-		<Button.Group>
-			<Button
-				variant="default"
-				onClick={ () => {
-					window.sessionStorage.setItem("puck-preview-data", JSON.stringify(appState.data))
-					ui.sendToPreview({ type: "update", data: appState.data })
-					window.open("/preview/slide", "_blank")
-				} }
-			>
-				Open preview
-			</Button>
-			<Button
-				onClick={ () => ui.handleSave(appState.data) }
-				leftSection={ <SaveIcon /> }
-				disabled={ !ui.isDirty || ui.isSaving }
-				loading={ ui.isSaving }
-				style={ { borderTopRightRadius: 0, borderBottomRightRadius: 0 } }
-			>
-				Save
-			</Button>
-			<Menu position="bottom-end">
-				<Menu.Target>
-					<Button p="xs">
-						<DownArrowIcon />
-					</Button>
-				</Menu.Target>
-				<Menu.Dropdown>
-					<Menu.Item
-						disabled={ !ui.isDirty || ui.isSaving }
-						leftSection={ <SaveIcon /> }
-						onClick={ () => ui.handleSaveAndClose(appState.data) }
-					>
-						Save and Close
-					</Menu.Item>
-					<Divider />
-					<Menu.Item
-						leftSection={ <TrashIcon color="red" /> }
-						onClick={ ui.handleDiscardAndClose }
-					>
-						Discard and Close
-					</Menu.Item>
-				</Menu.Dropdown>
-			</Menu>
-		</Button.Group>
+		<Box style={ { display: "flex", alignItems: "center", gap: 8 } }>
+			{ ui.isDirty && (
+				<Badge variant="light" color="yellow" size="sm">
+					Unsaved changes
+				</Badge>
+			) }
+			<Button.Group>
+				<Button
+					variant="default"
+					onClick={ () => {
+						window.sessionStorage.setItem("puck-preview-data", JSON.stringify(appState.data))
+						ui.sendToPreview({ type: "update", data: appState.data })
+						window.open("/preview/slide", "_blank")
+					} }
+				>
+					Open preview
+				</Button>
+				<Button
+					onClick={ () => ui.handleSave(appState.data) }
+					leftSection={ <SaveIcon /> }
+					disabled={ !ui.isDirty || ui.isSaving }
+					loading={ ui.isSaving }
+					style={ { borderTopRightRadius: 0, borderBottomRightRadius: 0 } }
+				>
+					Save
+				</Button>
+				<Menu position="bottom-end">
+					<Menu.Target>
+						<Button p="xs">
+							<DownArrowIcon />
+						</Button>
+					</Menu.Target>
+					<Menu.Dropdown>
+						<Menu.Item
+							disabled={ !ui.isDirty || ui.isSaving }
+							leftSection={ <SaveIcon /> }
+							onClick={ () => ui.handleSaveAndClose(appState.data) }
+						>
+							Save and Close
+						</Menu.Item>
+						<Divider />
+						<Menu.Item
+							leftSection={ <TrashIcon color="red" /> }
+							onClick={ ui.handleDiscardAndClose }
+						>
+							Discard and Close
+						</Menu.Item>
+					</Menu.Dropdown>
+				</Menu>
+			</Button.Group>
+		</Box>
 	)
 }
 
@@ -95,7 +102,7 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 
 	const previewChannelRef = useRef<BroadcastChannel | null>(null)
 
-	const storageKey = useMemo(() => `puck-editor-${templateKey ?? "data"}`, [templateKey])
+	const storageKey = useMemo(() => editorStorageKey(templateKey), [templateKey])
 	const [data] = useState<Partial<Data>>(() => {
 		if(typeof window === "undefined") {
 			return withStarterSlideContent(initialData ?? {})
@@ -130,11 +137,12 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 		try {
 			await onSave(data)
 			setIsDirty(false)
+			clearEditorDraft(templateKey)
 			return true
 		} catch{
 			return false
 		}
-	}, [onSave])
+	}, [onSave, templateKey])
 
 	const handleSave = useCallback(async(data: Data) => {
 		await persistSave(data)
@@ -180,6 +188,8 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 	}, [persistSave, returnTo])
 
 	const handleDiscardAndClose = useCallback(() => {
+		clearEditorDraft(templateKey)
+
 		if(returnTo) {
 			router.visit(returnTo)
 			return
@@ -188,7 +198,7 @@ const VisualEditorContent = ({ initialData = {}, onSave, isSaving = false, templ
 		const currentUrl = window.location.pathname + window.location.search
 		router.visit(currentUrl, { replace: true })
 		setTimeout(() => window.history.back(), 0)
-	}, [returnTo])
+	}, [returnTo, templateKey])
 
 	const uiContextValue = useMemo(() => {
 		return {

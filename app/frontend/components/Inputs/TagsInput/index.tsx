@@ -3,7 +3,6 @@ import {
 	RichTextEditor,
 	type RichTextEditorProps as MantineRichTextEditorProps,
 } from "@mantine/tiptap"
-import clsx from "clsx"
 import { useMemo } from "react"
 
 import { parseContentToStructured } from "@/components/VisualEditor/dynamicData/contentParser"
@@ -13,7 +12,6 @@ import { StructuredContent } from "@/components/VisualEditor/dynamicData/types"
 import { type BaseInputProps } from "../index"
 import { InputWrapper } from "../InputWrapper"
 import { Label } from "../Label"
-import * as classes from "./TagsInput.css"
 import { useMentionEditor } from "./useMentionEditor"
 
 interface TagsInputProps extends Omit<MantineRichTextEditorProps, "children" | "editor" | "onChange">, BaseInputProps {
@@ -76,7 +74,7 @@ export function TagsInput({
 
 			<RichTextEditor
 				editor={ editor }
-				className={ clsx(classes.puckMentionBadge, className) }
+				className={ className }
 				{ ...props }
 			>
 				<RichTextEditor.Content />

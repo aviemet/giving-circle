@@ -24,7 +24,7 @@ const MentionCombobox = ({ items, selectedIndex, selectItem, clientRect }: Menti
 		<Combobox store={ combobox }
 			onClose={ () => setOpened(false) }
 			withinPortal={ false }
-			position="bottom-start"
+			position="bottom-end"
 			offset={ 0 }
 		>
 			<Combobox.Dropdown>

@@ -1,20 +1,18 @@
-import { Box, BoxProps } from "@mantine/core"
-import { type Ref } from "react"
+import { Box, type BoxProps } from "@mantine/core"
 import sanitizeHtml from "sanitize-html"
 
-export interface DangerousHtmlProps extends Omit<BoxProps, "dangerouslySetInnerHTML"> {
+type DangerousHtmlElement = "div" | "span"
+
+export interface DangerousHtmlProps extends Omit<BoxProps, "dangerouslySetInnerHTML" | "component"> {
 	children?: string
+	component?: DangerousHtmlElement
 }
 
-type DangerousHtmlPropsWithRef = DangerousHtmlProps & {
-	ref?: Ref<HTMLDivElement>
-}
-
-function DangerousHtml({ children, ref, ...props }: DangerousHtmlPropsWithRef) {
+function DangerousHtml({ children, component = "div", ...props }: DangerousHtmlProps) {
 	const sanitizedContent = children ? sanitizeHtml(children) : ""
 	return (
 		<Box
-			ref={ ref }
+			component={ component }
 			{ ...props }
 			dangerouslySetInnerHTML={ { __html: sanitizedContent } }
 		/>

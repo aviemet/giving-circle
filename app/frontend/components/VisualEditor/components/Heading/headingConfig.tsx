@@ -1,9 +1,7 @@
 import { type ComponentConfig } from "@measured/puck"
 
-import { Box, DangerousHtml, Title } from "@/components"
-
-import { usePresentationData } from "../dynamicData/MockData"
-import { colorField, tagsField } from "../fields"
+import { HeadingDisplay } from "./Heading"
+import { colorField, tagsField } from "../../fields"
 
 export type HeadingProps = {
 	title: string
@@ -12,19 +10,8 @@ export type HeadingProps = {
 	color: string
 }
 
-const HeadingDisplay = ({ title, padding, order, color }: HeadingProps) => {
-	const evaluatedContent = usePresentationData(title)
-
-	return (
-		<Box p={ padding }>
-			<Title order={ order } c={ color }>
-				<DangerousHtml>{ evaluatedContent }</DangerousHtml>
-			</Title>
-		</Box>
-	)
-}
-
 export const headingConfig: ComponentConfig<HeadingProps> = {
+	label: "Heading",
 	fields: {
 		title: tagsField({
 			label: "Title",

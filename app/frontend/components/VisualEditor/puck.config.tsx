@@ -86,6 +86,7 @@ export const config: Config<{
 		},
 		other: {
 			title: "All Other Components",
+			visible: true,
 		},
 	},
 }

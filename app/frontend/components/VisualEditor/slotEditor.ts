@@ -2,6 +2,18 @@ import { type Data } from "@measured/puck"
 
 export const SLOT_MIN_EMPTY_HEIGHT = 96
 
+export function editorStorageKey(templateKey?: string) {
+	return `puck-editor-${templateKey ?? "data"}`
+}
+
+export function clearEditorDraft(templateKey?: string) {
+	if(typeof window === "undefined") return
+
+	try {
+		window.localStorage.removeItem(editorStorageKey(templateKey))
+	} catch{ }
+}
+
 const STARTER_CONTAINER_ID = "starter-container"
 const STARTER_HEADING_ID = "starter-heading"
 
