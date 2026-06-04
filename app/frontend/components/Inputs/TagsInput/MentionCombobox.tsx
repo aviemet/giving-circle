@@ -2,8 +2,8 @@ import { Combobox, Text, useCombobox } from "@mantine/core"
 import { useState } from "react"
 
 interface TagOption {
+	id: string
 	label: string
-	value: string
 }
 
 interface MentionComboboxProps {
@@ -31,8 +31,8 @@ const MentionCombobox = ({ items, selectedIndex, selectItem, clientRect }: Menti
 				<Combobox.Options>
 					{ items.map((item, index) => (
 						<Combobox.Option
-							key={ item.value }
-							value={ item.value }
+							key={ item.id }
+							value={ item.id }
 							active={ index === selectedIndex }
 							onMouseDown={ (e) => {
 								e.preventDefault()

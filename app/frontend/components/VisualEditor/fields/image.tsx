@@ -1,7 +1,9 @@
-import { Field, FieldLabel } from "@measured/puck"
+import { Field } from "@measured/puck"
 
 import { DropzoneInput } from "@/components/Inputs"
 import { IMAGE_MIME_TYPE } from "@/lib"
+
+import { PuckFieldLabel } from "./PuckFieldLabel"
 
 function imageField(): Field<string>
 function imageField(params: Partial<Field<string>>): Field<string>
@@ -19,7 +21,7 @@ function imageField({ label = "Image" }: Partial<Field<string>> = {}): Field<str
 			}
 
 			return (
-				<FieldLabel label={ label }>
+				<PuckFieldLabel label={ label }>
 					<DropzoneInput
 						name={ name }
 						accept={ IMAGE_MIME_TYPE }
@@ -35,7 +37,7 @@ function imageField({ label = "Image" }: Partial<Field<string>> = {}): Field<str
 							/>
 						</div>
 					) }
-				</FieldLabel>
+				</PuckFieldLabel>
 			)
 		},
 	}
