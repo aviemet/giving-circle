@@ -124,10 +124,10 @@ export const themeObject: Partial<CustomMantineTheme> = {
 				"grey-01": "var(--mantine-color-gray-0)", // ActionBar (top bar) background
 				"grey-02": "var(--mantine-color-gray-2)", // Section header bg, right-sidebar input bg (recessed)
 				"grey-03": "var(--mantine-color-gray-7)", // LayerTree text (Outline) – readable on gray-2
-				"grey-04": "var(--mantine-color-gray-7)", // Input/field label text
+				"grey-04": "var(--mantine-color-dark-9)", // Input/field label text (on grey-02)
 				"grey-05": "var(--mantine-color-gray-8)", // ComponentList + LayerTree zone title – strong contrast
 				"grey-06": "var(--mantine-color-gray-6)", // Canvas loader, misc text
-				"grey-07": "var(--mantine-color-gray-6)", // LayerTree helper text
+				"grey-07": "var(--mantine-color-gray-7)", // Input-labelIcon, LayerTree helper (on grey-02)
 				"grey-08": "var(--mantine-color-gray-4)", // ActionBar labels, Layer icon, borders
 				"grey-09": "var(--mantine-color-gray-4)", // Input/sidebar borders, DropZone outline
 				"grey-10": "var(--mantine-color-gray-3)", // Table row borders
@@ -140,10 +140,10 @@ export const themeObject: Partial<CustomMantineTheme> = {
 				"grey-01": "var(--mantine-color-dark-8)", // ActionBar (top bar) background
 				"grey-02": "var(--mantine-color-dark-7)", // Section header bg, right-sidebar input bg (recessed)
 				"grey-03": "var(--mantine-color-dark-3)", // LayerTree text (Outline) – readable on dark-8
-				"grey-04": "var(--mantine-color-dark-4)", // Input/field label text
+				"grey-04": "var(--mantine-color-gray-1)", // Input/field label text (on grey-02)
 				"grey-05": "var(--mantine-color-gray-0)", // ComponentList + LayerTree zone title – strong contrast
 				"grey-06": "var(--mantine-color-dark-4)", // Canvas loader, misc text
-				"grey-07": "var(--mantine-color-dark-4)", // LayerTree helper text
+				"grey-07": "var(--mantine-color-gray-4)", // Input-labelIcon, LayerTree helper (on grey-02)
 				"grey-08": "var(--mantine-color-gray-5)", // ActionBar labels, Layer icon, borders
 				"grey-09": "var(--mantine-color-dark-4)", // Input/sidebar borders, DropZone outline
 				"grey-10": "var(--mantine-color-dark-5)", // Table row borders

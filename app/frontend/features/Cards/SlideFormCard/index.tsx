@@ -8,13 +8,13 @@ import { isNonEmptyString } from "@/lib"
 
 import * as classes from "./SlideFormCard.css"
 
-interface SlideCardProps {
+interface SlideFormCardProps {
 	path: string
 	removeInput: () => void
 	href?: string
 }
 
-const SlideFormCard = ({ path, removeInput, href }: SlideCardProps) => {
+export function SlideFormCard({ path, removeInput, href }: SlideFormCardProps) {
 	const handleRemoveElement = () => {
 		modals.openConfirmModal({
 			title: "Remove this slide?",
@@ -60,5 +60,3 @@ const SlideFormCard = ({ path, removeInput, href }: SlideCardProps) => {
 		</Card>
 	)
 }
-
-export { SlideFormCard }

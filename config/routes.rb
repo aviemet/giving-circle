@@ -94,7 +94,7 @@ Rails.application.routes.draw do
         resources :theme_orgs, path: :orgs, param: :slug, shallow: false, as: :org, except: [:index, :create]
 
         # Presentation routes
-        resources :presentations, param: :presentation_slug, shallow: false
+        resources :presentations, param: :presentation_slug, shallow: false, except: [:edit]
         resources :presentations, param: :slug, shallow: false, except: [:show, :edit, :new, :index, :create, :update, :destroy] do
           # Presentation builder components
           resources :presentation_slides,
@@ -130,9 +130,12 @@ Rails.application.routes.draw do
           get "admin/overview", to: "presentations/active#overview", as: :overview
           get "admin/members", to: "presentations/active#members", as: :members
           get "admin/messaging", to: "presentations/active#messaging", as: :messaging
-          get "admin/settings", to: "presentations/active#settings", as: :settings
+          get "admin/settings", to: "presentations/active#settings", as: :admin_settings
 
+          # TODO: we probably only need 1 settings path for a presentation
           get "activate", to: "presentations#activate", as: :activate
+          get "settings", to: "presentations#settings", as: :settings
+          post "save_as_template", to: "presentations#save_as_template", as: :save_as_template
         end
       end
     end

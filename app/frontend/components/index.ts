@@ -7,7 +7,7 @@ export { DropzoneComponent as Dropzone } from "./Dropzone"
 export * from "./ErrorBoundary"
 export { Flash } from "./Flash"
 export * from "./Formatters"
-export { Link, NavLink } from "./Link"
+export { Link, NavLink, ButtonLink } from "./Link"
 export { MenuComponent as Menu } from "./Menu"
 export { MoneyComponent as Money } from "./Money"
 export { Page, type PageProps } from "./Page"
@@ -16,6 +16,7 @@ export { Section } from "./Section"
 export { Table, type TableColumn, type TableProps } from "./Table"
 export { Label } from "./Label"
 export { TabsComponent as Tabs } from "./Tabs"
+export * from "./Modal"
 
 // Export UI library components as a proxy to allow easy refactoring
 export {

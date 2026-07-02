@@ -9,13 +9,18 @@
 #  status       :integer          default("draft")
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  circle_id    :uuid             not null
 #
 # Indexes
 #
-#  index_themes_on_slug  (slug) UNIQUE
+#  index_themes_on_circle_id  (circle_id)
+#  index_themes_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (circle_id => circles.id)
 #
 class Theme < ApplicationRecord
-  include Ownable
   include BooleanTimestamp
 
   extend FriendlyId
@@ -30,6 +35,8 @@ class Theme < ApplicationRecord
   resourcify
 
   validates :name, presence: true
+
+  belongs_to :circle
 
   has_many :presentations, dependent: :destroy
 
@@ -46,5 +53,5 @@ class Theme < ApplicationRecord
       }
   }, through: :themes_orgs
 
-  scope :includes_associated, -> { includes([:circle, :presentations, :orgs]) }
+  scope :includes_associated, -> { includes([:circle, :presentations, :themes_orgs, { presentations: :slides }]) }
 end

@@ -1,7 +1,9 @@
-import { Field, FieldLabel } from "@measured/puck"
+import { Field } from "@measured/puck"
 import { useState } from "react"
 
 import { NumberInput } from "@/components/Inputs"
+
+import { PuckFieldLabel } from "./PuckFieldLabel"
 
 export type SpacingGroup = {
 	top: number
@@ -206,13 +208,13 @@ function spacingField({ label = "Spacing" }: Partial<Field<SpacingGroup | undefi
 		label: label,
 		render: ({ name, onChange, value }) => {
 			return (
-				<FieldLabel label={ label }>
+				<PuckFieldLabel label={ label }>
 					<SpacingFieldControl
 						name={ name }
 						value={ value }
 						onChange={ onChange }
 					/>
-				</FieldLabel>
+				</PuckFieldLabel>
 			)
 		},
 	}

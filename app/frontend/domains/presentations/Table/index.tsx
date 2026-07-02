@@ -44,7 +44,7 @@ export function PresentationTable({ records, pagination, model }: PresentationTa
 			sortable: false,
 			render: (presentation) => (
 				<EditButton
-					href={ Routes.editThemePresentation(params.circle_slug, params.theme_slug, presentation.slug) }
+					href={ Routes.themePresentationSlides(params.circle_slug, params.theme_slug, presentation.slug) }
 				/>
 			),
 		},

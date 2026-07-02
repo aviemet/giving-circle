@@ -28,6 +28,7 @@ class TemplatesController < ApplicationController
 
     render inertia: "Templates/Index", props: {
       templates: -> { paginated_templates.render(:index) },
+      themes: -> { circle.themes.order(:name).includes(:circle).render(:index) },
       pagination: -> { {
         count: templates.size,
         **pagination_data(paginated_templates)

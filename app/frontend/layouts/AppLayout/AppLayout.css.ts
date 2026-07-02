@@ -1,5 +1,7 @@
 import { css } from "@linaria/core"
 
+import { vars } from "@/lib"
+
 export const appLayout = css`
 `
 
@@ -41,23 +43,23 @@ export const navMenu = css`
     overflow: hidden;
   }
 
-  html[data-mantine-color-scheme="light"] & [data-accordion][data-variant="separated"] > * {
-    background-color: var(--mantine-color-primary-3);
-    border-color: transparent;
+  ${ vars.lightSelector } & [data-accordion][data-variant="separated"] > * {
+    background-color: var(--mantine-color-gray-0);
+    border: 1px solid var(--mantine-color-gray-3);
   }
 
-  html[data-mantine-color-scheme="light"] & [data-accordion][data-variant="separated"] > *[data-active] {
-    background-color: var(--mantine-color-primary-3);
-    border-color: transparent;
+  ${ vars.darkSelector } & [data-accordion][data-variant="separated"] > * {
+    background-color: var(--mantine-color-dark-7);
+    border: 1px solid var(--mantine-color-dark-4);
   }
 
-  html[data-mantine-color-scheme="dark"] & [data-accordion][data-variant="separated"] > * {
-    background-color: var(--mantine-color-primary-8);
-    border-color: transparent;
+  & [data-accordion][data-variant="separated"] .mantine-NavLink-root:where(:not([data-active], [aria-current="page"])):where(:hover, :active) {
+    background-color: var(--mantine-color-gray-2);
+    color: var(--mantine-color-text);
   }
 
-  html[data-mantine-color-scheme="dark"] & [data-accordion][data-variant="separated"] > *[data-active] {
-    background-color: var(--mantine-color-primary-8);
-    border-color: transparent;
+  ${ vars.darkSelector } & [data-accordion][data-variant="separated"] .mantine-NavLink-root:where(:not([data-active], [aria-current="page"])):where(:hover, :active) {
+    background-color: var(--mantine-color-dark-5);
+    color: var(--mantine-color-text);
   }
 `

@@ -18,17 +18,6 @@ class MockCircle < Circle
 
   before_create :set_mock_data
 
-  has_many :ownerships, foreign_key: "circle_id", dependent: :destroy
-  {
-    memberships: "Membership",
-    themes: "Theme",
-    orgs: "Org",
-    templates: "Template",
-    presentations: "Presentation"
-  }.each_pair do |assoc, model|
-    has_many assoc, through: :ownerships, source: :ownable, source_type: model
-  end
-
   private
 
   def set_mock_data

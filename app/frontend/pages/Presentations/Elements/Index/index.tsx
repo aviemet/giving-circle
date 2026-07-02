@@ -12,32 +12,42 @@ interface PresentationElementIndexProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements
-// @route: themePresentationsElements
+// @route: themePresentationElements
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
-	const { params } = usePageProps<"themePresentationsElements">()
+	const { params } = usePageProps<"themePresentationElements">()
 	const title = "Element"
 
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <>
+			heading={ <>
 				<Title>{ title }</Title>
 				<Menu>
-					<Menu.Link href={ Routes.newPresentationElement() } icon={ <NewIcon /> }>
+					<Menu.Link
+						href={ Routes.newThemePresentationElement(
+							params.circle_slug,
+							params.theme_slug,
+							params.presentation_slug,
+						) }
+						icon={ <NewIcon /> }
+					>
 						New Element
 					</Menu.Link>
 				</Menu>
 			</> }
 		>
 			<IndexTableTemplate
-				title="PresentationElements"
 				model="presentation_elements"
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
 						{
 							label: "New Element",
-							href: Routes.newPresentationElement(),
+							href: Routes.newThemePresentationElement(
+								params.circle_slug,
+								params.theme_slug,
+								params.presentation_slug,
+							),
 							icon: <NewIcon />,
 						},
 					],

@@ -1,0 +1,195 @@
+import { Puck, type Data } from "@measured/puck"
+import clsx from "clsx"
+import {
+	useCallback,
+	useMemo,
+	useRef,
+	useState,
+	type Dispatch,
+	type RefObject,
+	type SetStateAction,
+} from "react"
+
+import { Box, AsyncBoundary, ErrorBoundary } from "@/components"
+import { useNavigationInterruptContext } from "@/components/Modal"
+import { PresentationDataProvider } from "@/layouts/Providers/PresentationDataProvider"
+import { useInit } from "@/lib/hooks"
+import { useMockCircle } from "@/queries"
+
+import {
+	clearEditorDraft,
+	resolveInitialEditorData,
+	slideDataEquals,
+	writeEditorDraft,
+	type EditorSaveStatus,
+} from "./editorPersistence"
+import { HeaderActions, VisualEditorUiProvider } from "./HeaderActions"
+import { config } from "./puck.config"
+import * as classes from "./Puck.css"
+
+export interface VisualEditorWorkspaceProps {
+	initialLoad: ReturnType<typeof resolveInitialEditorData>
+	isSaving: boolean
+	returnTo?: string
+	saveStatus: EditorSaveStatus
+	savedDataRef: RefObject<Data>
+	latestDataRef: RefObject<Data>
+	setSaveStatus: Dispatch<SetStateAction<EditorSaveStatus>>
+	slideKey: string
+	storageKey: string
+	persistSave: (data: Data) => Promise<boolean>
+}
+
+export function VisualEditorWorkspace({
+	initialLoad,
+	isSaving,
+	returnTo,
+	saveStatus,
+	savedDataRef,
+	latestDataRef,
+	setSaveStatus,
+	slideKey,
+	storageKey,
+	persistSave,
+}: VisualEditorWorkspaceProps) {
+	const { data: mockCircle, isLoading } = useMockCircle()
+	const { visitWithBypass, navigateBackWithBypass } = useNavigationInterruptContext()
+
+	const previewChannelRef = useRef<BroadcastChannel | null>(null)
+	const [puckData, setPuckData] = useState<Partial<Data>>(initialLoad.data)
+	const [documentKey, setDocumentKey] = useState(0)
+
+	useInit(() => {
+		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
+
+		previewChannelRef.current = new BroadcastChannel("visual-editor-preview")
+
+		return () => {
+			previewChannelRef.current?.close()
+			previewChannelRef.current = null
+		}
+	})
+
+	const handleSave = useCallback(async(data: Data) => {
+		await persistSave(data)
+	}, [persistSave])
+
+	const sendToPreview = useCallback((payload: { type: "update", data: Data }) => {
+		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
+
+		let channel = previewChannelRef.current
+		if(!channel) {
+			channel = new BroadcastChannel("visual-editor-preview")
+			previewChannelRef.current = channel
+		}
+
+		try {
+			channel.postMessage(payload)
+		} catch{
+			previewChannelRef.current = null
+			channel = new BroadcastChannel("visual-editor-preview")
+			previewChannelRef.current = channel
+
+			try {
+				channel.postMessage(payload)
+			} catch{
+				previewChannelRef.current = null
+			}
+		}
+	}, [])
+
+	const handleChange = useCallback((changed: Data) => {
+		latestDataRef.current = changed
+		const dirty = !slideDataEquals(changed, savedDataRef.current)
+		setSaveStatus(dirty ? "unsaved" : "saved")
+
+		if(dirty) {
+			writeEditorDraft(storageKey, changed)
+		} else {
+			clearEditorDraft(slideKey)
+		}
+
+		sendToPreview({ type: "update", data: changed })
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- savedDataRef and latestDataRef are stable ref objects; .current is read at call time
+	}, [sendToPreview, setSaveStatus, slideKey, storageKey])
+
+	const handleRevert = useCallback(() => {
+		clearEditorDraft(slideKey)
+		setSaveStatus("saved")
+		setPuckData({ ...savedDataRef.current })
+		latestDataRef.current = savedDataRef.current
+		setDocumentKey((previousKey) => previousKey + 1)
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- savedDataRef and latestDataRef are stable ref objects; .current is read at call time
+	}, [slideKey, setSaveStatus])
+
+	const handleSaveAndClose = useCallback(async(data: Data) => {
+		const saved = await persistSave(data)
+		if(saved && returnTo) {
+			visitWithBypass(returnTo)
+		}
+	}, [persistSave, returnTo, visitWithBypass])
+
+	const handleCloseWithoutSaving = useCallback(() => {
+		if(returnTo) {
+			visitWithBypass(returnTo)
+			return
+		}
+
+		const currentUrl = window.location.pathname + window.location.search
+		visitWithBypass(currentUrl, { replace: true })
+		setTimeout(navigateBackWithBypass, 0)
+	}, [navigateBackWithBypass, returnTo, visitWithBypass])
+
+	const uiContextValue = useMemo(() => {
+		return {
+			saveStatus,
+			isSaving,
+			handleSave,
+			handleSaveAndClose,
+			handleRevert,
+			sendToPreview,
+			handleCloseWithoutSaving,
+		}
+	}, [handleCloseWithoutSaving, handleRevert, handleSave, handleSaveAndClose, isSaving, saveStatus, sendToPreview])
+
+	const overrides = useMemo(() => {
+		return {
+			drawer: ({ children }: { children: React.ReactNode }) => (
+				<div className={ classes.puckDrawer }>{ children }</div>
+			),
+			drawerItem: ({ children }: { children: React.ReactNode }) => (
+				<div className={ classes.puckDrawerItem }>{ children }</div>
+			),
+			outline: ({ children }: { children: React.ReactNode }) => (
+				<div className={ classes.puckOutline }>{ children }</div>
+			),
+			fields: ({ children }: { children: React.ReactNode }) => (
+				<div data-testid="puck-fields-container" className={ classes.puckFields }>
+					{ children }
+				</div>
+			),
+			headerActions: () => <HeaderActions />,
+		}
+	}, [])
+
+	return (
+		<Box className={ clsx(classes.puckRoot) }>
+			<AsyncBoundary isLoading={ isLoading }>
+				<PresentationDataProvider value={ { circle: mockCircle!, isEditor: true } }>
+					<ErrorBoundary>
+						<VisualEditorUiProvider value={ uiContextValue }>
+							<Puck
+								key={ documentKey }
+								config={ config }
+								data={ puckData }
+								iframe={ { enabled: false } }
+								onChange={ handleChange }
+								overrides={ overrides }
+							/>
+						</VisualEditorUiProvider>
+					</ErrorBoundary>
+				</PresentationDataProvider>
+			</AsyncBoundary>
+		</Box>
+	)
+}

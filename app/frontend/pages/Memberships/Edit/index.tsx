@@ -5,13 +5,11 @@ import { usePageProps } from "@/lib/hooks"
 
 interface EditMembershipProps {
 	membership: Schema.MembershipsEdit
-	circle: Schema.CirclesInertiaShare
 }
 
 // @path: /:circle_slug/memberships/:slug/edit
 // @route: editMembership
 const EditMember = ({ membership }: EditMembershipProps) => {
-	// copy @route above into the generic type assertion below
 	const { params, active_circle } = usePageProps<"editMembership">()
 	const title = "Edit Member"
 

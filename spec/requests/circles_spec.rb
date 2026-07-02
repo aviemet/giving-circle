@@ -10,8 +10,6 @@ RSpec.describe "/circles", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      create(:circle)
-
       get circles_url
 
       expect(response).to be_successful

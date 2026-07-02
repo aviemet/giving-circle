@@ -5,4 +5,9 @@ class Presentations::PresentationSerializer < Presentations::PersistedSerializer
 
   has_many :slides, serializer: Slides::PresentationSerializer
   has_many :orgs, serializer: Orgs::PersistedSerializer
+
+  def orgs
+    collection = presentation.orgs.to_a
+    collection.empty? ? presentation.theme.orgs.to_a : collection
+  end
 end

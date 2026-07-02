@@ -24,18 +24,14 @@ class Circle < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :ownerships, dependent: :restrict_with_error
-  {
-    memberships: "Membership",
-    themes: "Theme",
-    orgs: "Org",
-    templates: "Template",
-    presentations: "Presentation"
-  }.each_pair do |assoc, model|
-    has_many assoc, through: :ownerships, source: :ownable, source_type: model
-  end
+  has_many :themes, dependent: :restrict_with_error
+  has_many :orgs, dependent: :restrict_with_error
+  has_many :memberships, dependent: :restrict_with_error
+  has_many :templates, dependent: :restrict_with_error
+  has_many :presentations, through: :themes
+  has_many :smtps, dependent: :destroy
 
-  scope :includes_associated, -> { includes([:themes, :presentations, :memberships, :orgs]) }
+  scope :includes_associated, -> { includes([:presentations, :memberships, :orgs, :themes]) }
 
   # MockCircle should be used if mock data is needed, these scopes separate the two models
   default_scope { where(mock_data: false) }

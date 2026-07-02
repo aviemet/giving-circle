@@ -48,19 +48,21 @@ class PresentationsController < ApplicationController
     authorize Presentation.new
 
     render inertia: "Presentations/New", props: {
-      presentation: Presentation.new.render(:form_data)
+      presentation: Presentation.new.render(:form_data),
+      templates: -> { circle.templates.includes_associated.render(:index) },
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/edit (edit_theme_presentation)
-  def edit
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/settings (theme_presentation_settings)
+  def settings
     authorize presentation
 
-    render inertia: "Presentations/Edit", props: {
-      presentation: presentation.render(:edit)
+    render inertia: "Presentations/Settings", props: {
+      presentation: presentation.render(:form_data),
     }
   end
 
+  # TODO: I think should be an API endpoint, or at the very least a POST route so it can't just be hit from the browser
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/activate (theme_presentation_activate)
   def activate
     authorize presentation
@@ -75,10 +77,10 @@ class PresentationsController < ApplicationController
     authorize Presentation.new
 
     presentation.theme = theme
-    presentation.circle = circle
 
     if presentation.save
-      redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t("presentations.notices.created")
+      presentation.copy_template_slides if presentation.template_id.present?
+      redirect_to theme_presentation_slides_path(params[:circle_slug], params[:theme_slug], presentation), notice: t("presentations.notices.created")
     else
       redirect_to new_theme_presentation_path(params[:circle_slug], params[:theme_slug]), inertia: { errors: presentation.errors }
     end
@@ -92,7 +94,7 @@ class PresentationsController < ApplicationController
     if presentation.update(presentation_params)
       redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), notice: t("presentations.notices.updated")
     else
-      redirect_to edit_theme_presentation_path, inertia: { errors: presentation.errors }
+      redirect_to theme_presentation_settings_path(params[:circle_slug], params[:theme_slug], presentation), inertia: { errors: presentation.errors }
     end
   end
 
@@ -102,5 +104,24 @@ class PresentationsController < ApplicationController
 
     presentation.destroy!
     redirect_to theme_presentations_path(params[:circle_slug], params[:theme_slug]), notice: t("presentations.notices.destroyed")
+  end
+
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/save_as_template (theme_presentation_save_as_template)
+  def save_as_template
+    authorize presentation
+
+    if params[:mode] == "update_source"
+      source_template = presentation.template
+      if source_template.nil?
+        redirect_to theme_presentation_path(params[:circle_slug], params[:theme_slug], presentation), alert: t("presentations.alerts.no_source_template")
+        return
+      end
+
+      Templates::CopyFromPresentation.call(presentation:, template: source_template)
+      redirect_to circle_template_path(params[:circle_slug], source_template), notice: t("presentations.notices.template_updated")
+    else
+      template = Templates::CopyFromPresentation.call(presentation:, name: params[:name])
+      redirect_to circle_template_path(params[:circle_slug], template), notice: t("presentations.notices.template_created")
+    end
   end
 end

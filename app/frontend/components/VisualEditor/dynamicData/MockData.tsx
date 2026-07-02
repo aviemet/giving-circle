@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react"
 
 import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
 
-import { parseContentToStructured } from "./contentParser"
+import { parseContentToStructured, renderStructuredContent } from "./contentParser"
 import { buildDataStructure, dataAccess } from "./dataAccess"
 import { useIteratorItemContext } from "./IteratorItemContext"
 
@@ -81,13 +81,8 @@ export const usePresentationData = (content: string): string => {
 		return `#${tagPath}`
 	}, [contextData, iteratorContext])
 
-	return useMemo(() => {
-		return structuredContent.blocks.map(block => {
-			if(block.type === "mention") {
-				const evaluatedValue = evaluateTag(block.tagPath)
-				return evaluatedValue
-			}
-			return block.content
-		}).join("")
-	}, [structuredContent.blocks, evaluateTag])
+	return useMemo(
+		() => renderStructuredContent(structuredContent, evaluateTag),
+		[structuredContent, evaluateTag],
+	)
 }

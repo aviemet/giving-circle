@@ -11,20 +11,21 @@
 #  slug           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  circle_id      :uuid             not null
 #  person_id      :uuid             not null
 #
 # Indexes
 #
+#  index_memberships_on_circle_id  (circle_id)
 #  index_memberships_on_person_id  (person_id)
 #  index_memberships_on_slug       (slug) UNIQUE
 #
 # Foreign Keys
 #
+#  fk_rails_...  (circle_id => circles.id)
 #  fk_rails_...  (person_id => people.id)
 #
 class Membership < ApplicationRecord
-  include Ownable
-
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
@@ -39,6 +40,8 @@ class Membership < ApplicationRecord
   after_initialize :set_default_name, if: :new_record?
 
   monetize :funds_cents
+
+  belongs_to :circle
 
   validates :name, presence: true
   validates :number, presence: true

@@ -17,4 +17,12 @@ class PresentationPolicy < ApplicationPolicy
   def overview?
     true
   end
+
+  def settings?
+    update?
+  end
+
+  def save_as_template?
+    true
+  end
 end

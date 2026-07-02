@@ -41,6 +41,7 @@ const Login = () => {
 						initialData={ defaultData }
 					>
 						<Grid>
+
 							<Grid.Col>
 								<TextInput
 									name="user.email"
@@ -48,6 +49,7 @@ const Login = () => {
 									autoComplete="Email"
 									required
 									pattern=".+@.+\..+"
+									disableAutofill={ false }
 								/>
 							</Grid.Col>
 

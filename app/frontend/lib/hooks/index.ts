@@ -9,6 +9,7 @@ export { useActionCable } from "./useActionCable"
 export { useActivePresentationChannel } from "./useActivePresentationChannel"
 export { useContrastingTextColor } from "./useContrastingTextColor"
 export { useCurrency, type UseCurrencyOptions } from "./useCurrency"
+export { useNavigationInterrupt, type UseNavigationInterruptOptions } from "./useNavigationInterrupt"
 
 export * from "@mantine/hooks"
 export { useMantineTheme as useTheme } from "@mantine/core"

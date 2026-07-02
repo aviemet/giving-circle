@@ -1,6 +1,24 @@
 ---
 en:
   circles:
+    index:
+      circlesSectionTitle: Your Circles
+      membersCount_one: 1 member
+      membersCount_other: "%{count} members"
+      newCircle: New circle
+      newCircleCard: Create a circle
+      recentThemesTitle: Recent and Upcoming Themes
+      themePublishedOn: Published %{date}
+      themePublishedUpcoming: Upcoming
+      themeStatus:
+        current: Current
+        draft: Draft
+        future: Upcoming
+        past: Past
+      themesCount_one: 1 theme
+      themesCount_other: "%{count} themes"
+      title: Dashboard
+      totalGivenPlaceholder: 'Total given: --'
     notices:
       created: Circle was successfully created.
       destroyed: Circle was successfully destroyed.

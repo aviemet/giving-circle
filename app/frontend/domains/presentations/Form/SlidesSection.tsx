@@ -1,6 +1,6 @@
 import { modals } from "@mantine/modals"
 import set from "es-toolkit/compat/set"
-import React, { useCallback, useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
 import { useFormFieldContext } from "@/components/Form"

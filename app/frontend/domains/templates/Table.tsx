@@ -1,12 +1,14 @@
-import { Button, Table, Link, Text, type TableColumn } from "@/components"
+import { Button, Group, Table, Link, Text, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
 import { NewIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
 
+import { CreatePresentationFromTemplateButton } from "./CreatePresentationFromTemplateModal"
 import { NewTemplateModal } from "./NewTemplateModal"
 
 interface TemplatesTableProps {
 	circle: Schema.CirclesOptions & { slug: string }
+	themes: Schema.ThemesIndex[]
 	records: Schema.TemplatesIndex[]
 	pagination: Schema.Pagination
 	model: string
@@ -14,6 +16,7 @@ interface TemplatesTableProps {
 
 export function TemplatesTable({
 	circle,
+	themes,
 	records,
 	pagination,
 	model,
@@ -41,7 +44,17 @@ export function TemplatesTable({
 			title: "Actions",
 			sortable: false,
 			render: (template) => (
-				<EditButton href={ Routes.editCircleTemplate(template.circle.slug, template.slug) } />
+				<Group gap="xs" wrap="nowrap">
+					<CreatePresentationFromTemplateButton
+						template={ template }
+						themes={ themes }
+						circleSlug={ circle.slug }
+					/>
+					<EditButton
+						href={ Routes.editCircleTemplate(template.circle.slug, template.slug) }
+						label={ template.name }
+					/>
+				</Group>
 			),
 		},
 	]

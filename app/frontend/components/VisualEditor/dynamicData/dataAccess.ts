@@ -1,5 +1,7 @@
 import { PresentationDataContextValue } from "@/layouts/Providers/PresentationDataProvider"
 
+import { getOrgsFromContext } from "./getOrgsFromContext"
+
 type DataAccess = {
 	model: string
 	name: string
@@ -113,7 +115,7 @@ export const buildDataStructure = (dataAccess: DataAccess[], contextData: Presen
 		theme: contextData.theme || (mockCircle?.themes?.[0]) || { name: "Sample Theme", status: "active" },
 		presentation: {
 			name: contextData.presentation?.name || "Sample Presentation",
-			org: presentation?.orgs ?? mockCircle?.orgs ?? [],
+			org: getOrgsFromContext(contextData),
 			membership: presentation?.membership ?? mockCircle?.memberships ?? [],
 		},
 	}

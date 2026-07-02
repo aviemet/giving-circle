@@ -18,6 +18,7 @@ const ignores = [
 	"app/frontend/lib/routes/urlParams.ts",
 	"app/frontend/lib/routes/routes.js",
 	"app/frontend/lib/routes/routes.d.ts",
+	"coverage/**/*",
 	"tmp/**/*",
 	"public/**/*",
 	".vscode/**/*",
@@ -25,6 +26,9 @@ const ignores = [
 ]
 
 export default [
+	{
+		ignores,
+	},
 	{
 		files: ["**/*.mjs"],
 		languageOptions: {
@@ -48,7 +52,6 @@ export default [
 	]).map((config) => ({
 		...config,
 		files: importLintGlobs,
-		ignores,
 	})),
 	// Typescript/Javascript files
 	{
@@ -57,7 +60,6 @@ export default [
 		}),
 
 		files: ["**/*.{js,jsx,ts,tsx}"],
-		ignores,
 		languageOptions: {
 			ecmaVersion: "latest",
 			sourceType: "module",
@@ -173,7 +175,7 @@ export default [
 					"balanced": true,
 				},
 			}],
-			"no-trailing-spaces": ["error", {
+			"@stylistic/no-trailing-spaces": ["error", {
 				skipBlankLines: false,
 				ignoreComments: false,
 			}],
@@ -183,7 +185,7 @@ export default [
 			}],
 			"eqeqeq": "error",
 			"no-console": "warn",
-			"eol-last": ["error", "always"],
+			"@stylistic/eol-last": ["error", "always"],
 			"import/order": ["error", {
 				"groups": [
 					"builtin",
@@ -204,7 +206,7 @@ export default [
 			"import/newline-after-import": "error",
 			"import/consistent-type-specifier-style": ["error", "prefer-inline"],
 			"import/no-named-as-default": "off",
-			"semi": ["error", "never"],
+			"@stylistic/semi": ["error", "never"],
 			"@stylistic/quotes": ["error", "double", {
 				avoidEscape: true,
 				allowTemplateLiterals: "always",
@@ -216,7 +218,6 @@ export default [
 	// Typescript declaration files
 	{
 		files: ["**/*.d.ts"],
-		ignores,
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
@@ -234,7 +235,6 @@ export default [
 	{
 		files: ["**/*.json", "**/*.jsonc", "**/*.json5"],
 		language: "json/json",
-		ignores,
 		plugins: {
 			jsonc: jsoncPlugin,
 			json,
@@ -251,7 +251,6 @@ export default [
 	// CSS-in-TS files
 	{
 		files: ["**/*.css.ts"],
-		ignores,
 		languageOptions: {
 			parser: tsParser,
 		},

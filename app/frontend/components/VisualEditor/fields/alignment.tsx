@@ -1,7 +1,9 @@
-import { Field, FieldLabel } from "@measured/puck"
+import { Field } from "@measured/puck"
 
 import { AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon } from "@/components/Icons"
 import { SegmentedControl } from "@/components/Inputs"
+
+import { PuckFieldLabel } from "./PuckFieldLabel"
 
 export type AlignmentValue = "left" | "center" | "right" | "justify"
 
@@ -13,7 +15,7 @@ function alignmentField({ label = "Alignment" }: Partial<Field<AlignmentValue>> 
 		label: label,
 		render: ({ field, name, onChange, value }) => {
 			return (
-				<FieldLabel label={ label }>
+				<PuckFieldLabel label={ label }>
 					<SegmentedControl
 						wrapper={ false }
 						name={ name }
@@ -38,7 +40,7 @@ function alignmentField({ label = "Alignment" }: Partial<Field<AlignmentValue>> 
 						] }
 						onChange={ (choice) => onChange(choice as AlignmentValue) }
 					/>
-				</FieldLabel>
+				</PuckFieldLabel>
 			)
 		},
 	}

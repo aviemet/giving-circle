@@ -28,8 +28,8 @@ class ThemesOrg < ApplicationRecord
     if: -> { theme_id.present? && org_id.present? }
   }
 
-  belongs_to :theme
-  belongs_to :org
+  belongs_to :theme, optional: false
+  belongs_to :org, optional: false
 
   monetize :ask_cents, numericality: { greater_than_or_equal_to: 0 }
 

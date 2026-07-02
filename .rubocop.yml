@@ -14,6 +14,9 @@ AllCops:
 
 Rails/HasAndBelongsToMany:
   Enabled: false
+Rails/Delegate:
+  Exclude:
+    - app/serializers/**/*
 Style/Documentation:
   Enabled: false
 Style/ExponentialNotation:

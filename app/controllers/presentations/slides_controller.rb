@@ -10,16 +10,10 @@ class Presentations::SlidesController < ApplicationController
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides (theme_presentation_slides)
   def index
-    authorize slides, policy_class: Presentation::SlidePolicy
-
-    paginated_slides = paginate(slides, :slides)
+    authorize presentation
 
     render inertia: "Presentations/Slides/Index", props: {
-      slides: -> { paginated_slides.render(:index) },
-      pagination: -> { {
-        count: slides.size,
-        **pagination_data(paginated_slides)
-      } },
+      presentation: -> { presentation.render(:show) },
     }
   end
 
@@ -78,7 +72,7 @@ class Presentations::SlidesController < ApplicationController
     authorize slide, policy_class: Presentation::SlidePolicy
 
     slide.destroy!
-    redirect_to slides_url, notice: "Slide was successfully destroyed."
+    redirect_to theme_presentation_slides_url(params[:circle_slug], params[:theme_slug], params[:presentation_slug]), notice: "Slide was successfully destroyed."
   end
 
 end

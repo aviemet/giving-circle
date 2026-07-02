@@ -3,14 +3,19 @@ import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
 import { type HTTPVerb } from "@/lib/http"
 
+interface PresentationActionResponseRecord {
+	id?: string
+	response_data?: string
+}
+
 type PresentationActionResponseFormData = {
-	presentation_action_response: Schema.PresentationActionResponsesFormData
+	presentation_action_response: PresentationActionResponseRecord
 }
 
 export interface PresentationActionResponseFormProps {
 	to: string
 	method?: HTTPVerb
-	presentation_action_response: Schema.PresentationActionResponsesFormData
+	presentation_action_response: PresentationActionResponseRecord
 }
 
 export const PresentationActionResponseForm = ({ to, method = "post", presentation_action_response }: PresentationActionResponseFormProps) => {

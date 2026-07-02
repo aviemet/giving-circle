@@ -3,7 +3,7 @@ import React from "react"
 import { describe, expect, test } from "vitest"
 
 import PublicShowPresentation from "@/pages/Presentations/Active/PublicShow"
-import { createCirclePersisted, createPresentationPresentation } from "@/tests/helpers/fixtures"
+import { createCirclePersisted, createPresentationPresentation, createThemePersisted } from "@/tests/helpers/fixtures"
 import { render } from "@/tests/helpers/utils"
 
 describe("pages/Presentations/Active/PublicShow/index", () => {
@@ -12,7 +12,11 @@ describe("pages/Presentations/Active/PublicShow/index", () => {
 		const circle = createCirclePersisted()
 
 		const { container } = render(
-			<PublicShowPresentation presentation={ presentation } circle={ circle } />,
+			<PublicShowPresentation
+				presentation={ presentation }
+				circle={ circle }
+				theme={ createThemePersisted() }
+			/>,
 		)
 
 		await waitFor(() => {

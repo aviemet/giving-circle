@@ -13,12 +13,6 @@ interface NewPresentationSlideProps {
 const NewPresentationSlide = ({ presentation_slide }: NewPresentationSlideProps) => {
 	const { params } = usePageProps<"newThemePresentationSlide">()
 	const title = "New Slide"
-	const slidesIndexHref = Routes.themePresentationSlides(
-		params.circle_slug,
-		params.theme_slug,
-		params.presentation_slug,
-	)
-	const submitHref = slidesIndexHref
 
 	const slide: Schema.SlidesEdit = {
 		id: presentation_slide.id ?? "",
@@ -29,13 +23,21 @@ const NewPresentationSlide = ({ presentation_slide }: NewPresentationSlideProps)
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Slides", href: slidesIndexHref },
+			{ title: "Slides", href: Routes.themePresentationSlides(
+				params.circle_slug,
+				params.theme_slug,
+				params.presentation_slug,
+			) },
 			{ title: "New Slide", href: window.location.href },
 		] }>
 
 			<Section>
 				<PresentationSlideForm
-					to={ submitHref }
+					to={ Routes.themePresentationSlides(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+					) }
 					slide={ slide }
 				/>
 			</Section>

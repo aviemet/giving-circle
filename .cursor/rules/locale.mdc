@@ -1,6 +1,11 @@
 ---
-description: 
-globs: *.yml, *_controller.rb
+description: i18n locale YAML and frontend export
+globs: config/locales/**/*.yml, app/frontend/**/*.tsx, app/frontend/**/*.ts
 alwaysApply: false
 ---
-When generating i18n strings for locale files, always nest them in the folder for their respective model
+When adding or changing user-visible strings:
+
+- Edit YAML under `config/locales/` (nest by model, e.g. `config/locales/circles/circles.en.yml`). Do **not** edit `app/frontend/lib/locales/*.json`; those files are generated.
+- Regenerate frontend JSON with `bundle exec rails i18n:export`.
+- For react-i18next plurals, use flat keys in YAML (`foo_one`, `foo_other`) rather than nested `foo: { one:, other: }`, so export does not produce an object that breaks `t("foo", { count })`.
+- Dynamic `t()` key paths may require `ignore_unused` in `config/i18n-tasks.yml`. Run `bundle exec rspec spec/i18n_spec.rb` after locale changes.

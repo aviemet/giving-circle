@@ -1,9 +1,8 @@
 import { useState } from "react"
 
-import { Group, Menu, Page, Title } from "@/components"
+import { Group, Page, Title } from "@/components"
 import { SwitchSlideButton } from "@/domains/presentations/Buttons/SwitchSlideButton"
-import { Routes, withLayout } from "@/lib"
-import { usePageProps } from "@/lib/hooks"
+import { withLayout } from "@/lib"
 import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
 
 interface ActivePresentationControlsProps {
@@ -13,8 +12,6 @@ interface ActivePresentationControlsProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin
 // @route: themePresentationControls
 const ActivePresentationControls = ({ presentation }: ActivePresentationControlsProps) => {
-	const { params } = usePageProps<"themePresentationControls">()
-
 	const [activeSlideId, setActiveSlideId] = useState(
 		presentation.active_slide_id || presentation.slides[0].id
 	)
@@ -31,19 +28,7 @@ const ActivePresentationControls = ({ presentation }: ActivePresentationControls
 	return (
 		<Page
 			title={ title }
-			heading={ <>
-				<Title>{ title }</Title>
-				<Group>
-					<Menu position="bottom-end">
-						<Menu.Target />
-						<Menu.Dropdown>
-							<Menu.Link href={ Routes.circlePublicPresentation(params.circle_slug, params.presentation_slug) } external>
-								Launch Presentation
-							</Menu.Link>
-						</Menu.Dropdown>
-					</Menu>
-				</Group>
-			</> }
+			heading={ <Title>{ title }</Title> }
 		>
 			<Group>{ presentation.slides && presentation.slides.map((slide) => (
 				<SwitchSlideButton

@@ -1,9 +1,9 @@
 import { Box, DangerousHtml, Title, Table } from "@/components"
 import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { Routes, withLayout } from "@/lib"
+import { withLayout } from "@/lib"
 
 interface ShowMailSettingProps {
-	smtp: Schema.Smtp
+	smtp: Schema.SmtpsShow
 }
 
 const ShowMailSetting = ({ smtp }: ShowMailSettingProps) => {

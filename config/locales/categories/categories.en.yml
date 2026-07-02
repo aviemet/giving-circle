@@ -1,0 +1,5 @@
+---
+en:
+  categories:
+    validations:
+      name_uniqueness: Category already exists for that category type

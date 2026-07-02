@@ -1,6 +1,7 @@
 class CreateMemberships < ActiveRecord::Migration[7.2]
   def change
     create_table :memberships, id: :uuid do |t|
+      t.references :circle, null: false, foreign_key: true, type: :uuid
       t.string :name, null: false
       t.string :number
       t.monetize :funds, amount: { null: false, default: 0 }

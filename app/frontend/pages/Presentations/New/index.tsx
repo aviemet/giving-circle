@@ -5,11 +5,12 @@ import { usePageProps } from "@/lib/hooks"
 
 interface NewPresentationProps {
 	presentation: Schema.PresentationsFormData
+	templates: Schema.TemplatesIndex[]
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/new
 // @route: newThemePresentation
-const NewPresentation = ({ presentation }: NewPresentationProps) => {
+const NewPresentation = ({ presentation, templates }: NewPresentationProps) => {
 	const { params, active_circle, active_theme } = usePageProps<"newThemePresentation">()
 
 	const title = "New Presentation"
@@ -32,6 +33,7 @@ const NewPresentation = ({ presentation }: NewPresentationProps) => {
 				<PresentationForm
 					to={ Routes.themePresentations(params.circle_slug, params.theme_slug) }
 					presentation={ presentation }
+					templates={ templates }
 				/>
 			</Section>
 

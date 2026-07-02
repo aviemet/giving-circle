@@ -21,3 +21,4 @@ alwaysApply: true
    - Document only (a) non-obvious quirks or gotchas tied to **this** codebase, or (b) overarching design/architectural decisions that stabilize how the app is built or operated
    - Only add information not already documented
    - Place information in the appropriate section; if no appropriate section exists, create one
+7. After you update `.cursor/giving_circle.mdx`, take a pass over the entire file and prune it based on the rules above
