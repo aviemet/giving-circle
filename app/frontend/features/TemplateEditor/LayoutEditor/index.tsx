@@ -9,7 +9,11 @@ interface LayoutEditorProps {
 	template: Schema.TemplatesFormData
 }
 
-const LayoutEditor = ({ template }: LayoutEditorProps) => {
+function isPersistedSlide(slide: Schema.SlidesFormData): slide is Schema.SlidesShow {
+	return slide.id !== undefined
+}
+
+export const LayoutEditor = ({ template }: LayoutEditorProps) => {
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const handleAddSlide = () => {
@@ -32,8 +36,8 @@ const LayoutEditor = ({ template }: LayoutEditorProps) => {
 			<Divider mt="xs" mb="sm" />
 
 			<Flex wrap="wrap" gap="sm">
-				{ template.slides?.map((slide) => (
-					<SlideCard key={ slide.id } slide={ slide } />
+				{ template.slides?.filter(isPersistedSlide).map((slide) => (
+					<SlideCard key={ slide.id } slide={ slide } editHref="#" />
 				)) }
 			</Flex>
 
@@ -45,4 +49,3 @@ const LayoutEditor = ({ template }: LayoutEditorProps) => {
 	)
 }
 
-export { LayoutEditor }

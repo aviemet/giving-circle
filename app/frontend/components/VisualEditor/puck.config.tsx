@@ -1,4 +1,5 @@
 import { type Config } from "@measured/puck"
+import clsx from "clsx"
 
 import { Box } from "@/components"
 
@@ -13,6 +14,7 @@ import {
 import {
 	colorField,
 } from "./fields"
+import * as classes from "./Puck.css"
 
 type RootProps = {
 	title: string
@@ -48,13 +50,8 @@ export const config: Config<{
 		render: ({ children, backgroundColor }) => {
 			return (
 				<Box
-					style={ {
-						backgroundColor,
-						width: "100%",
-						minHeight: "100%",
-					} }
-					p={ 0 }
-					m={ 0 }
+					className={ clsx(classes.puckSlideRoot) }
+					style={ { "--puck-slide-root-bg": backgroundColor } }
 				>
 					{ children }
 				</Box>

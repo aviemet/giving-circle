@@ -65,6 +65,8 @@ class Presentation < ApplicationRecord
 
   belongs_to :template, optional: true
 
+  after_create :sync_orgs_from_theme
+
   scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :template]) }
 
   def activate
@@ -98,6 +100,12 @@ class Presentation < ApplicationRecord
   end
 
   private
+
+  def sync_orgs_from_theme
+    return unless theme.present? && orgs.empty?
+
+    orgs << theme.orgs
+  end
 
   def owner_matches_theme_owner
     return unless circle && theme&.circle

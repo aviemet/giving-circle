@@ -16,6 +16,7 @@ export { Section } from "./Section"
 export { Table, type TableColumn, type TableProps } from "./Table"
 export { Label } from "./Label"
 export { TabsComponent as Tabs } from "./Tabs"
+export * from "./Modal"
 
 // Export UI library components as a proxy to allow easy refactoring
 export {

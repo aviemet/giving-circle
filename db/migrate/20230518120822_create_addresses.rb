@@ -8,6 +8,7 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.string :country
       t.string :postal
 
+      t.references :category, type: :uuid, null: false, foreign_key: true
       t.references :contact, type: :uuid, null: false, foreign_key: true
 
       t.timestamps

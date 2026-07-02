@@ -13,7 +13,7 @@ export function PublicPresentationLayout({ children }: LayoutProps) {
 
 	const { presentation, circle, theme } = props
 
-	if(!circle || !theme || !presentation ) {
+	if(!circle || !presentation) {
 		return <>{ children }</>
 	}
 

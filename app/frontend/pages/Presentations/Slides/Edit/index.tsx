@@ -1,7 +1,9 @@
 import { Data } from "@measured/puck"
+import { useState } from "react"
 
 import { Page, Section } from "@/components"
 import { VisualEditor } from "@/components/VisualEditor"
+import { slideTitleFromData } from "@/components/VisualEditor/editorPersistence"
 import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useUpdatePresentationSlide } from "@/queries"
@@ -17,6 +19,7 @@ interface EditPresentationSlidesProps {
 const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesProps) => {
 	const { params, active_circle, active_theme, active_presentation } = usePageProps<"editThemePresentationSlide">()
 	const toggleSidebarOpen = useLayoutStore((state) => state.toggleSidebarOpen)
+	const [slideTitle, setSlideTitle] = useState(slide?.title ?? slide?.slug ?? "")
 
 	const returnTo = Routes.themePresentationSlides(
 		params.circle_slug,
@@ -29,10 +32,13 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 	})
 
 	const handleSave = async(data: Data) => {
-		await updateSlideMutation.mutate({ data: data })
+		const title = slideTitleFromData(data) ?? slideTitle
+
+		await updateSlideMutation.mutate({ data, title })
+		setSlideTitle(title)
 	}
 
-	const title = `Slide Editor - ${slide?.title}`
+	const title = `Slide Editor - ${slideTitle}`
 
 	useInit(() => {
 		toggleSidebarOpen(false)
@@ -54,14 +60,16 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 				{ title: "Presentations", href: Routes.themePresentations(params.circle_slug, params.theme_slug) },
 				{ title: active_presentation.name, href: Routes.themePresentation(params.circle_slug, params.theme_slug, params.presentation_slug) },
 				{ title: "Slides", href: returnTo },
-				{ title: slide?.title ?? "Edit", href: window.location.href },
+				{ title: slideTitle || "Edit", href: window.location.href },
 			] }
 		>
 			<Section>
 				<VisualEditor
 					initialData={ slide?.data || {} }
+					slideTitle={ slideTitle }
 					onSave={ handleSave }
 					isSaving={ updateSlideMutation.isPending }
+					slideKey={ slide.slug ?? params.slug }
 					returnTo={ returnTo }
 				/>
 			</Section>

@@ -25,6 +25,8 @@ class Circle < ApplicationRecord
   validates :name, presence: true
 
   has_many :ownerships, dependent: :restrict_with_error
+  has_many :smtps, dependent: :destroy
+
   {
     memberships: "Membership",
     themes: "Theme",

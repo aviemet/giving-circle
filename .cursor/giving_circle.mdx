@@ -82,8 +82,9 @@
 - Internal navigation uses Inertia (`Link`, `NavLink`, `Menu.Link`, `ButtonLink`). Do not use `<Button component="a" href="...">` for in-app routes; use `ButtonLink`. Plain `<a>` / full page loads are for external URLs only (`Link external`).
 - CSS modules with Linaria
   - Files use `.css.ts` extension
-  - Imports as `import * as classes from './file.css'`
-  - Class composition with `clsx`
+  - Import styles as `import * as classes from "./Component.css"` (not named imports from `.css.ts`)
+  - Always pass `className` through `clsx(...)`, even when only one class is applied
+  - Multiple classes are composed in the same `clsx(...)` call
 - Dark/light theme support via Mantine theme system
 - Linaria styles that set surfaces or hover backgrounds must use `vars.lightSelector` / `vars.darkSelector` (or Mantine CSS variables such as `--mantine-color-default-border`), not a single light-theme gray such as `vars.colors.gray[0]`, or dark mode will look wrong.
 
@@ -95,7 +96,9 @@
 #### VisualEditor / dynamic data
 - `PresentationDataProvider` supplies either mock editor data or live presentation data (`isEditor` in the editor). Public views can lazy-load memberships via `GET /:circle_slug/p/:presentation_slug/memberships` when needed.
 - Inside iterators, `IteratorItemProvider` exposes `pathPrefix`, `currentItem`, and `index`; `usePresentationData` resolves paths like `presentation.org[].name` against `currentItem` when the path matches the iterator prefix. `buildDataStructure` prefers `contextData.presentation?.orgs` when present.
-- Puck `Render` depends on the layout's provider for dynamic resolution. Slot fields that can be empty need a tangible hit target (pass `minEmptyHeight` via `slotDropZoneProps()` in `VisualEditor/slotEditor.ts` on each slot render). `withStarterSlideContent` seeds empty slides in the editor only when there is no localStorage draft; starter `ComponentData` must include stable `props.id` values or Puck can loop `onChange` and exhaust memory.
+- Puck `Render` depends on the layout's provider for dynamic resolution. Slot fields that can be empty need a tangible hit target (pass `minEmptyHeight` via `slotDropZoneProps()` in `VisualEditor/slotEditor.ts` on each slot render). `withStarterSlideContent` seeds empty slides in the editor when server `data.content` is empty; starter `ComponentData` must include stable `props.id` values or Puck can loop `onChange` and exhaust memory. Slide editor persistence lives in `VisualEditor/editorPersistence.ts`: server data is the source of truth; `localStorage` is a per-`slideKey` recovery draft only (reload/back). On load, a differing local draft is recovered and labeled in the header; **Save** writes to the API only. **Revert to last save** resets to the last server save and clears the draft; **Close without saving** keeps the local draft for recovery. Slide display name is `slides.title`; Puck root `title` is synced from that column on load and written back on save so card view and editor sidebar match. Unsaved navigation uses `components/Modal/NavigationInterrupt` with `lib/hooks/useNavigationInterrupt` and an XState machine co-located at `components/Modal/NavigationInterrupt/navigationInterruptMachine.ts` (three-option prompt: stay, discard and leave, save and leave).
+- Puck layout `Container` must render with Mantine `component={Content}` (not `<Container><Content /></Container>`) so flex styles from `buildLayoutStyle` apply to the slot element whose children include flattened iterator output; use `fluid` for full-width slides. `SlidePresentation` wraps `Render` in `PresentationDataProvider` with live `circle` / `theme` / `presentation` props so tag resolution works on public views, not only in preview.
+- Live presentation orgs come from `Presentations::PresentationSerializer#orgs`, which falls back to `theme.orgs` when `presentations_orgs` is empty. Preview uses mock circle orgs instead; an empty `presentation.orgs` array is not the same as missing data. New presentations `after_create` sync theme orgs into `presentations_orgs`. Do not `includes(:orgs)` / `preload(:orgs)` on `Theme` for public presentation loads; lazy-load `theme.orgs` in the serializer instead.
 
 #### State management
 - Server-driven UI: Inertia. Ephemeral client state: zustand. Form field coordination: `FormFieldContext` / app `Form` (see Form implementation).

@@ -17,9 +17,7 @@ export const AddressFormatter = ({ address }: AddressFormatterProps) => {
 			state: address.region,
 			postcode: address.postal,
 			countryCode: address.country,
-			name: address?.category
-				? `${address.name} - ${address.category.name}`
-				: address.name,
+			name: address.category?.name ?? (typeof address.name === "string" ? address.name : undefined),
 		}
 
 		const formattedLines = addressFormatter.format(addressData, {

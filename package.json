@@ -15,7 +15,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "eslint:inspect": "npx @eslint/config-inspector@latest",
-    "type-check": "tsc --noEmit",
+    "tsc": "tsc --noEmit",
     "test": "vitest",
     "test:once": "vitest run",
     "test:browser": "vitest --config=vitest.browser.config.ts",

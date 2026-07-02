@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -68,6 +68,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
   create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "address"
     t.string "address_2"
+    t.uuid "category_id", null: false
     t.string "city"
     t.uuid "contact_id", null: false
     t.string "country"
@@ -75,7 +76,19 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
     t.string "postal"
     t.string "region"
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_addresses_on_category_id"
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
+  end
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "categorizable_type", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "categorizable_type"], name: "index_categories_on_name_and_categorizable_type", unique: true
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "circles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -96,10 +109,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
   end
 
   create_table "emails", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "category_id", null: false
     t.uuid "contact_id"
     t.datetime "created_at", null: false
     t.string "email"
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_emails_on_category_id"
     t.index ["contact_id"], name: "index_emails_on_contact_id"
   end
 
@@ -179,10 +194,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
   end
 
   create_table "phones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "category_id", null: false
     t.uuid "contact_id"
     t.datetime "created_at", null: false
     t.string "number"
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_phones_on_category_id"
     t.index ["contact_id"], name: "index_phones_on_contact_id"
   end
 
@@ -305,6 +322,22 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
     t.index ["source_slide_id"], name: "index_slides_on_source_slide_id"
   end
 
+  create_table "smtps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "address"
+    t.uuid "circle_id", null: false
+    t.datetime "created_at", null: false
+    t.string "domain"
+    t.string "host", null: false
+    t.string "name", null: false
+    t.text "notes"
+    t.string "password"
+    t.integer "port"
+    t.integer "security", default: 0
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.index ["circle_id"], name: "index_smtps_on_circle_id"
+  end
+
   create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -392,11 +425,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
+  add_foreign_key "emails", "categories"
   add_foreign_key "memberships", "people"
   add_foreign_key "memberships_people", "memberships"
   add_foreign_key "memberships_people", "people"
   add_foreign_key "ownerships", "circles"
+  add_foreign_key "phones", "categories"
   add_foreign_key "presentation_interaction_responses", "memberships"
   add_foreign_key "presentation_interaction_responses", "presentation_interactions"
   add_foreign_key "presentations", "slides", column: "active_slide_id"
@@ -410,6 +446,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_08_182816) do
   add_foreign_key "presentations_orgs", "presentations"
   add_foreign_key "slide_parents", "slides"
   add_foreign_key "slides", "slides", column: "source_slide_id"
+  add_foreign_key "smtps", "circles"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

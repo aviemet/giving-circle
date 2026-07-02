@@ -1,0 +1,9 @@
+---
+en:
+  navigation_interrupt:
+    modal:
+      discard: Discard changes
+      message: You have unsaved changes. Stay on this page, discard them, or save before leaving.
+      save_and_leave: Save and leave
+      stay: Stay on page
+      title: Unsaved changes

@@ -2,7 +2,7 @@ import { Slot, type ComponentConfig, type SlotComponent } from "@measured/puck"
 
 import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
 
-import { OrgsIteratorDisplay } from "./OrgsIterator"
+import { OrgsIteratorDisplay } from "./OrgsIteratorDisplay"
 import { OrgsIteratorEditor } from "./OrgsIteratorEditor"
 
 export type OrgsIteratorProps = {

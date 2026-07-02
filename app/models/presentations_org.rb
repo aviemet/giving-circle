@@ -32,11 +32,8 @@ class PresentationsOrg < ApplicationRecord
 
   def copy_ask_value
     return unless ask.nil?
-    return unless presentation&.theme
 
-    themes_org = presentation.theme.themes_orgs.find_by(org: org)
-    return unless themes_org&.ask
-
-    self.ask = themes_org.ask
+    source_ask = presentation.theme.themes_orgs.find_by(org: org)&.ask
+    self.ask = source_ask if source_ask
   end
 end

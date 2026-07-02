@@ -11,6 +11,16 @@ export const puckDrawerItemIcon = css``
 export const puckOutline = css``
 export const presentationSlot = css``
 
+export const puckSlideRoot = css`
+	width: 100%;
+	min-height: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	background-color: var(--puck-slide-root-bg, #000000);
+`
+
 const PUCK_SPACE_PX = "2px"
 
 export const puckRoot = css`

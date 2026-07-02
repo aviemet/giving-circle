@@ -29,6 +29,7 @@ export const containerConfig: ComponentConfig<ContainerProps> = {
 			display: "flex",
 			flexDirection: "column",
 			flexWrap: "nowrap",
+			overflow: "visible",
 		},
 	},
 	render: (props) => <ContainerDisplay { ...props } />,

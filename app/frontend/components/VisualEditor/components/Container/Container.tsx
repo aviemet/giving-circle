@@ -24,15 +24,13 @@ export function ContainerDisplay({
 	return (
 		<Container
 			ref={ dragRef }
+			component={ Content }
 			className={ clsx("presentation_container", classes.presentationSlot) }
 			ta={ alignment }
+			fluid
 			w="100%"
 			style={ buildLayoutStyle(styleProps) }
-		>
-			<Content
-				className={ classes.presentationSlot }
-				{ ...slotDropZoneProps() }
-			/>
-		</Container>
+			{ ...slotDropZoneProps() }
+		/>
 	)
 }

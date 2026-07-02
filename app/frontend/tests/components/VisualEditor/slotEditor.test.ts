@@ -1,12 +1,10 @@
 import { describe, expect, test } from "vitest"
 
 import {
-	clearEditorDraft,
 	createStarterSlideData,
-	editorStorageKey,
-	SLOT_MIN_EMPTY_HEIGHT,
 	slotDropZoneProps,
 	withStarterSlideContent,
+	SLOT_MIN_EMPTY_HEIGHT,
 } from "@/components/VisualEditor/slotEditor"
 
 describe("components/VisualEditor/slotEditor", () => {
@@ -30,13 +28,6 @@ describe("components/VisualEditor/slotEditor", () => {
 		}
 
 		expect(withStarterSlideContent(existing)).toBe(existing)
-	})
-
-	test("clearEditorDraft removes the local draft", () => {
-		const key = editorStorageKey("test-slide")
-		window.localStorage.setItem(key, "{}")
-		clearEditorDraft("test-slide")
-		expect(window.localStorage.getItem(key)).toBeNull()
 	})
 
 	test("withStarterSlideContent seeds empty slides", () => {

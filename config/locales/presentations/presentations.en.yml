@@ -1,6 +1,16 @@
 ---
 en:
   presentations:
+    actions:
+      form:
+        action_type: Action type
+        config: Config
+        create: Create presentation action
+        results: Results
+        slug: Slug
+        trigger_conditions: Trigger conditions
+        trigger_type: Trigger type
+        update: Update presentation action
     alerts:
       no_source_template: This presentation is not linked to a Presentation Template.
     notices:

@@ -3,19 +3,18 @@ import { SmtpForm } from "@/domains/settings/integrations/Form"
 import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
 import { Routes, withLayout } from "@/lib"
 
-
-interface SmtpFormProps {
-	smtp: Schema.Smtp
+interface NewMailProps {
+	smtp: Schema.SmtpsFormData
 }
 
-const NewMail = ({ smtp }: SmtpFormProps) => {
+const NewMail = ({ smtp }: NewMailProps) => {
 	return (
 		<SettingsLayout>
 			<Title mb={ 24 }>Mail Settings</Title>
 
 			<SmtpForm
-				data={ { smtp } }
-				to={ Routes.settingsSmtps() }
+				smtp={ smtp }
+				to={ Routes.settingsIntegrations() }
 			/>
 		</SettingsLayout>
 	)

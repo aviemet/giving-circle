@@ -82,6 +82,18 @@ export function createOrgPersisted(overrides?: Partial<Schema.OrgsPersisted>): S
 	}
 }
 
+export function createCircleMock(overrides?: Partial<Schema.CirclesMock>): Schema.CirclesMock {
+	return {
+		id: "circle-1",
+		name: "Circle 1",
+		slug: "circle-1",
+		themes: [createThemePersisted()],
+		orgs: [createOrgPersisted()],
+		memberships: [createMembershipPersisted()],
+		...overrides,
+	}
+}
+
 export function createSlideData(overrides?: Partial<SlideData>): SlideData {
 	return {
 		content: [],
