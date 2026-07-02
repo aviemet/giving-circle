@@ -16,12 +16,12 @@ if Rails.env.development?
 
     if circle.memberships.empty?
       50.times do
-        FactoryBot.create(:membership, circle: circle)
+        FactoryBot.create(:membership, circle:)
       end
     end
 
     if circle.templates.empty?
-      template = FactoryBot.create(:template, name: "Allocation Night", circle: circle)
+      template = FactoryBot.create(:template, name: "Allocation Night", circle:)
 
       slide = FactoryBot.create(:slide, {
         title: "Introduction",
@@ -57,14 +57,14 @@ if Rails.env.development?
     end
 
     if circle.themes.empty?
-      FactoryBot.create(:theme, circle: circle)
+      FactoryBot.create(:theme, circle:)
     end
 
     theme = circle.themes.first
 
     if theme&.orgs&.empty?
       10.times do
-        FactoryBot.create(:themes_org, { circle:, theme: })
+        FactoryBot.create(:themes_org, theme:)
       end
     end
 

@@ -9,15 +9,19 @@
 #  status       :integer          default("draft")
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  circle_id    :uuid             not null
 #
 # Indexes
 #
-#  index_themes_on_slug  (slug) UNIQUE
+#  index_themes_on_circle_id  (circle_id)
+#  index_themes_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (circle_id => circles.id)
 #
 
 require "rails_helper"
-
-require "models/shared/ownable"
 
 RSpec.describe Theme do
   describe "Validations" do
@@ -34,7 +38,7 @@ RSpec.describe Theme do
 
   # Associations
   describe "Associations" do
-    it_behaves_like "ownable"
+    it { is_expected.to belong_to(:circle) }
     it { is_expected.to have_many(:presentations).dependent(:destroy) }
     it { is_expected.to have_many(:themes_orgs).dependent(:destroy) }
     it { is_expected.to have_many(:orgs).through(:themes_orgs) }
@@ -54,7 +58,7 @@ RSpec.describe Theme do
 
       it "returns a successful count value" do
         theme = create(:theme)
-        create_list(:themes_org, 2, { theme:, circle: theme.circle })
+        create_list(:themes_org, 2, theme:)
         # Dummy Org:
         create(:org, circle: theme.circle)
 

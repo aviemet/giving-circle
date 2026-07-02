@@ -110,7 +110,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
 
   create_table "emails", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "category_id", null: false
-    t.uuid "contact_id"
+    t.uuid "contact_id", null: false
     t.datetime "created_at", null: false
     t.string "email"
     t.datetime "updated_at", null: false
@@ -131,6 +131,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.uuid "circle_id", null: false
     t.datetime "created_at", null: false
     t.integer "funds_cents", default: 0, null: false
     t.string "funds_currency", default: "USD", null: false
@@ -139,6 +140,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.uuid "person_id", null: false
     t.string "slug"
     t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_memberships_on_circle_id"
     t.index ["person_id"], name: "index_memberships_on_person_id"
     t.index ["slug"], name: "index_memberships_on_slug", unique: true
   end
@@ -153,24 +155,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   end
 
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "circle_id", null: false
     t.datetime "created_at", null: false
     t.string "description"
     t.string "name", null: false
     t.string "slug"
     t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_orgs_on_circle_id"
     t.index ["slug"], name: "index_orgs_on_slug", unique: true
-  end
-
-  create_table "ownerships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "circle_id", null: false
-    t.datetime "created_at", null: false
-    t.uuid "ownable_id", null: false
-    t.string "ownable_type", null: false
-    t.datetime "updated_at", null: false
-    t.index ["circle_id"], name: "index_ownerships_on_circle_id"
-    t.index ["ownable_type", "circle_id"], name: "index_ownerships_on_ownable_type_and_circle_id"
-    t.index ["ownable_type", "ownable_id"], name: "index_ownerships_on_ownable"
-    t.index ["ownable_type", "ownable_id"], name: "index_ownerships_on_ownable_type_and_ownable_id"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -195,7 +187,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
 
   create_table "phones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "category_id", null: false
-    t.uuid "contact_id"
+    t.uuid "contact_id", null: false
     t.datetime "created_at", null: false
     t.string "number"
     t.datetime "updated_at", null: false
@@ -339,22 +331,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   end
 
   create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "circle_id", null: false
     t.datetime "created_at", null: false
     t.string "name"
     t.jsonb "settings", default: {}, null: false
     t.string "slug"
     t.datetime "updated_at", null: false
     t.integer "version", default: 0, null: false
+    t.index ["circle_id"], name: "index_templates_on_circle_id"
     t.index ["slug"], name: "index_templates_on_slug", unique: true
   end
 
   create_table "themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "circle_id", null: false
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "published_at"
     t.string "slug"
     t.integer "status", default: 0
     t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_themes_on_circle_id"
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
@@ -428,11 +424,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "emails", "categories"
+  add_foreign_key "emails", "contacts"
+  add_foreign_key "memberships", "circles"
   add_foreign_key "memberships", "people"
   add_foreign_key "memberships_people", "memberships"
   add_foreign_key "memberships_people", "people"
-  add_foreign_key "ownerships", "circles"
+  add_foreign_key "orgs", "circles"
   add_foreign_key "phones", "categories"
+  add_foreign_key "phones", "contacts"
   add_foreign_key "presentation_interaction_responses", "memberships"
   add_foreign_key "presentation_interaction_responses", "presentation_interactions"
   add_foreign_key "presentations", "slides", column: "active_slide_id"
@@ -447,6 +446,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "slide_parents", "slides"
   add_foreign_key "slides", "slides", column: "source_slide_id"
   add_foreign_key "smtps", "circles"
+  add_foreign_key "templates", "circles"
+  add_foreign_key "themes", "circles"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"
   add_foreign_key "users", "people"

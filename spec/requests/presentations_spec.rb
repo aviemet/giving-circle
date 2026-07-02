@@ -10,7 +10,7 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
       get theme_presentations_url(presentation.circle, presentation.theme)
 
@@ -22,7 +22,7 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
       get theme_presentation_url(presentation.circle, presentation.theme, presentation)
 
@@ -46,7 +46,7 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
       get theme_presentation_settings_url(presentation.circle, presentation.theme, presentation)
 
@@ -156,7 +156,7 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     it "creates a new template from the presentation" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
       slide = create(:slide, title: "Event Slide")
       presentation.slides << slide
 
@@ -173,7 +173,7 @@ RSpec.describe "/presentations", type: :request do
     end
 
     it "updates the source template when mode is update_source" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
       slide = create(:slide, title: "Updated Slide")
       presentation.slides << slide
 

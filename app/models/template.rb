@@ -9,14 +9,18 @@
 #  version    :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  circle_id  :uuid             not null
 #
 # Indexes
 #
-#  index_templates_on_slug  (slug) UNIQUE
+#  index_templates_on_circle_id  (circle_id)
+#  index_templates_on_slug       (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (circle_id => circles.id)
 #
 class Template < ApplicationRecord
-  include Ownable
-
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
@@ -25,11 +29,13 @@ class Template < ApplicationRecord
     against: [:name, :settings, :slug, :slides],
   )
 
-  before_update :regenerate_slug
-
   resourcify
 
+  before_update :regenerate_slug
+
   has_many_attached :images
+
+  belongs_to :circle
 
   has_many :slide_parents, as: :parentable, dependent: :delete_all
   has_many :slides, through: :slide_parents
@@ -40,7 +46,6 @@ class Template < ApplicationRecord
     presentation = Presentation.create!({
       theme: theme,
       name: name,
-      circle: self.circle,
       template: self,
     })
     presentation.copy_template_slides

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Categorizable do
   describe "default category assignment" do
     it "assigns the Other category for addresses on create" do
-      other = create(:category, :for_address, :other)
+      other = Category.find_by!(name: "Other", categorizable_type: "Address")
       address = build(:address, category: nil)
       address.save!
 

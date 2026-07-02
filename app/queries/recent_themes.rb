@@ -17,7 +17,7 @@ class RecentThemes
   end
 
   def call
-    themes = @user.circles.includes(themes: :circle).flat_map(&:themes)
+    themes = @user.circles.includes(:themes).flat_map(&:themes)
     themes.sort_by { |theme| sort_key(theme) }.first(LIMIT)
   end
 

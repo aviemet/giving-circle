@@ -77,7 +77,6 @@ class PresentationsController < ApplicationController
     authorize Presentation.new
 
     presentation.theme = theme
-    presentation.circle = circle
 
     if presentation.save
       presentation.copy_template_slides if presentation.template_id.present?

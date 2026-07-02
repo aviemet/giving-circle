@@ -37,7 +37,7 @@ class Address < ApplicationRecord
 
   resourcify
 
-  belongs_to :contact
+  belongs_to :contact, optional: false
 
   scope :includes_associated, -> { includes([:contact, :category]) }
 end

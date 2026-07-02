@@ -17,8 +17,12 @@
 #
 FactoryBot.define do
   factory :category do
+    sequence(:name) { |index| "Category #{index}" }
     categorizable_type { "Address" }
-    name { "Home" }
+
+    trait :home do
+      name { "Home" }
+    end
 
     trait :work do
       name { "Work" }

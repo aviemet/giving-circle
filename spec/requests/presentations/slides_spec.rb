@@ -6,7 +6,7 @@ RSpec.describe "Presentations::Slides", type: :request do
     login_super_admin
 
     it "renders the presentation slide deck" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
       get theme_presentation_slides_url(
         presentation.circle,

@@ -7,7 +7,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :uuid             not null
-#  contact_id  :uuid
+#  contact_id  :uuid             not null
 #
 # Indexes
 #
@@ -17,6 +17,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (category_id => categories.id)
+#  fk_rails_...  (contact_id => contacts.id)
 #
 class Phone < ApplicationRecord
   include Categorizable
@@ -31,7 +32,7 @@ class Phone < ApplicationRecord
 
   resourcify
 
-  belongs_to :contact, optional: true
+  belongs_to :contact, optional: false
 
   scope :includes_associated, -> { includes([:contact, :category]) }
 end

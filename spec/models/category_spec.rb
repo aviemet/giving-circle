@@ -41,8 +41,8 @@ RSpec.describe Category do
     end
 
     it "does not allow duplicate names within the same categorizable_type" do
-      create(:category, name: "Home", categorizable_type: "Address")
-      duplicate = build(:category, name: "Home", categorizable_type: "Address")
+      create(:category, name: "Duplicate Name", categorizable_type: "Address")
+      duplicate = build(:category, name: "Duplicate Name", categorizable_type: "Address")
 
       expect(duplicate).not_to be_valid
     end
@@ -50,7 +50,7 @@ RSpec.describe Category do
 
   describe "#records" do
     it "returns records assigned to the category" do
-      category = create(:category, :for_address, name: "Work")
+      category = create(:category, :for_address, name: "Records Test")
       address = create(:address, category: category)
 
       expect(category.records).to contain_exactly(address)
@@ -59,9 +59,9 @@ RSpec.describe Category do
 
   describe "FriendlyId" do
     it "generates a slug from categorizable type and name" do
-      category = create(:category, :for_email, name: "Home")
+      category = create(:category, :for_email, name: "Personal")
 
-      expect(category.slug).to eq("email-home")
+      expect(category.slug).to eq("email-personal")
     end
   end
 end

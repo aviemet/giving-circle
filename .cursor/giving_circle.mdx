@@ -102,6 +102,7 @@
 
 #### State management
 - Server-driven UI: Inertia. Ephemeral client state: zustand. Form field coordination: `FormFieldContext` / app `Form` (see Form implementation).
+- For complex state transitions, use x-state. Keep state machine files colocated with the feature.
 
 #### Type system
 - No `any` / `unknown` as escape hatches. No `as` casts; fix the types instead. Avoid redundant explicit annotations when literals already satisfy the type.
@@ -135,7 +136,7 @@
 - Frontend channel hooks wrap a shared `useActionCable`; channel names and payloads must stay aligned with Ruby channel classes.
 
 ### Database query loading
-- Prefer the `includes_associated` scope (and similar patterns) when loading records for serializers to avoid N+1s; include polymorphic ownership/circle edges where serializers touch them.
+- Prefer the `includes_associated` scope (and similar patterns) when loading records for serializers to avoid N+1s; include circle associations where serializers touch them.
 - Trim redundant work from `inertia_share` (cached associations where it helps). `disable_menu_rendering` stops menu payloads on public Inertia responses. Preload what menus need on `user.circles` when menus render.
 
 ### Ruby query objects

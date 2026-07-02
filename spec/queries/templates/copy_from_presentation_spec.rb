@@ -6,7 +6,7 @@ RSpec.describe Templates::CopyFromPresentation do
       circle = create(:circle)
       theme = create(:theme, circle:)
       template = create(:template, circle:)
-      presentation = create(:presentation, theme:, template:, circle:)
+      presentation = create(:presentation, theme:, template:)
       presentation.slides << create(:slide, title: "Intro")
 
       result = described_class.call(presentation:, name: "Exported Template")
@@ -25,7 +25,7 @@ RSpec.describe Templates::CopyFromPresentation do
       circle = create(:circle)
       theme = create(:theme, circle:)
       template = create(:template, circle:)
-      presentation = create(:presentation, theme:, template:, circle:)
+      presentation = create(:presentation, theme:, template:)
       presentation.slides << create(:slide, title: "Intro")
 
       existing = create(:template, circle:, name: "Existing")
