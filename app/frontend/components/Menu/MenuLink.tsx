@@ -5,7 +5,6 @@ import React, { type Ref } from "react"
 import { Link } from "@/components"
 
 import { LinkProps } from "../Link"
-import * as classes from "./Menu.css"
 
 type DuplicateProps = "color" | "children" | "classNames" | "styles" | "variant" | "vars"
 interface MenuItemProps extends MantineItemProps, Omit<LinkProps, DuplicateProps> {
@@ -34,7 +33,7 @@ function MenuItem({
 			ref={ ref }
 			disabled={ disabled }
 			component={ Link }
-			className={ clsx(classes.menuItem, className, { disabled }) }
+			className={ clsx(className, { disabled }) }
 			leftSection={ <>{ icon && icon }{ leftSection && leftSection }</> }
 			{ ...props }
 		>

@@ -1,9 +1,2 @@
-class Circles::OptionsSerializer < ApplicationSerializer
-  object_as :circle
-
-  attributes(
-    :id,
-    :slug,
-    :name,
-  )
+class Circles::OptionsSerializer < Circles::PersistedSerializer
 end

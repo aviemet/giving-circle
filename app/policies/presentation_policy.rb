@@ -3,7 +3,7 @@ class PresentationPolicy < ApplicationPolicy
   end
 
   def activate?
-    true
+    ThemePolicy.new(user, record.theme).update?
   end
 
   def controls?
@@ -15,6 +15,14 @@ class PresentationPolicy < ApplicationPolicy
   end
 
   def overview?
+    true
+  end
+
+  def settings?
+    update?
+  end
+
+  def save_as_template?
     true
   end
 end

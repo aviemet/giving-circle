@@ -7,7 +7,7 @@ alwaysApply: false
 - I repeat: DO NOT USE TAILWIND!
 - This project uses Mantine as a component library.
 - CSS is written using CSS modules with Linaria. CSS is written in separate files with a `css.ts` extension.
-- CSS is imported into React components using `import * as classes from (filename).css`. It should always be accompanied by `import cx from clsx` and referencing classes should always use `clsx`.
+- CSS is imported into React components using `import * as classes from "./Component.css"`. Always use `import clsx from "clsx"` and pass every `className` through `clsx(...)`, even when there is only one class.
 - Mantine CSS variables are exported using Mantine's `themeToVars` which converts the base Mantine theme object into CSS variables. This list of mantine css vars is available at `app/frontent/lib`, which is aliased as `@/lib`.
 - Each css.ts file starts with the following imports:
   `import { css } from "@linaria/core"`

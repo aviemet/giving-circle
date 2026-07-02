@@ -10,7 +10,7 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
       get theme_presentations_url(presentation.circle, presentation.theme)
 
@@ -22,7 +22,7 @@ RSpec.describe "/presentations", type: :request do
     login_super_admin
 
     it "renders a successful response" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
       get theme_presentation_url(presentation.circle, presentation.theme, presentation)
 
@@ -42,13 +42,13 @@ RSpec.describe "/presentations", type: :request do
     end
   end
 
-  describe "GET /edit" do
+  describe "GET /settings" do
     login_super_admin
 
     it "renders a successful response" do
-      presentation = create(:presentation, circle: @admin.circles.first)
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
 
-      get edit_theme_presentation_url(presentation.circle, presentation.theme, presentation)
+      get theme_presentation_settings_url(presentation.circle, presentation.theme, presentation)
 
       expect(response).to be_successful
     end
@@ -68,15 +68,29 @@ RSpec.describe "/presentations", type: :request do
         }.to change(Presentation, :count).by(1)
       end
 
-      it "redirects to the created presentation" do
+      it "redirects to the presentation editor" do
         theme = create(:theme, circle: @admin.circles.first)
         template = create(:template, circle: theme.circle)
         presentation_attrs = attributes_for(:presentation).merge(template_id: template.id)
 
         post theme_presentations_url(theme.circle, theme), params: { presentation: presentation_attrs }
 
-        expect(response).to redirect_to(theme_presentation_url(theme.circle, theme, Presentation.last))
+        expect(response).to redirect_to(theme_presentation_slides_url(theme.circle, theme, Presentation.last))
         expect(flash[:notice]).to eq(I18n.t("presentations.notices.created"))
+      end
+
+      it "copies template slides when template_id is present" do
+        theme = create(:theme, circle: @admin.circles.first)
+        template = create(:template, circle: theme.circle)
+        slide = create(:slide, title: "Template Slide")
+        template.slides << slide
+        presentation_attrs = attributes_for(:presentation).merge(template_id: template.id)
+
+        post theme_presentations_url(theme.circle, theme), params: { presentation: presentation_attrs }
+
+        presentation = Presentation.last
+        expect(presentation.slides.count).to eq(1)
+        expect(presentation.slides.first.title).to eq("Template Slide")
       end
     end
 
@@ -127,14 +141,125 @@ RSpec.describe "/presentations", type: :request do
     end
 
     context "with invalid parameters" do
-      it "redirects back to the edit org page" do
+      it "redirects back to the settings page" do
         presentation = create(:presentation)
 
         patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: invalid_attributes
 
-        expect(response).to redirect_to(edit_theme_presentation_url(presentation.circle, presentation.theme, presentation))
+        expect(response).to redirect_to(theme_presentation_settings_url(presentation.circle, presentation.theme, presentation))
       end
 
+    end
+  end
+
+  describe "POST /activate" do
+    login_super_admin
+
+    it "activates an inactive presentation" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first), active: false)
+
+      post theme_presentation_activate_url(presentation.circle, presentation.theme, presentation)
+
+      expect(presentation.reload.active).to be(true)
+    end
+
+    it "redirects to the presentation controls" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first), active: false)
+
+      post theme_presentation_activate_url(presentation.circle, presentation.theme, presentation)
+
+      expect(response).to redirect_to(theme_presentation_controls_url(presentation.circle, presentation.theme, presentation))
+    end
+
+    it "redirects when already active" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first), active: true)
+
+      post theme_presentation_activate_url(presentation.circle, presentation.theme, presentation)
+
+      expect(response).to redirect_to(theme_presentation_controls_url(presentation.circle, presentation.theme, presentation))
+      expect(presentation.reload.active).to be(true)
+    end
+
+    context "when logged in as a circle admin" do
+      login_user(:admin)
+
+      it "activates the presentation" do
+        circle = @user.roles.first.resource
+        theme = create(:theme, circle:)
+        presentation = create(:presentation, theme:, active: false)
+
+        post theme_presentation_activate_url(circle, theme, presentation)
+
+        expect(presentation.reload.active).to be(true)
+      end
+    end
+
+    context "when logged in as a theme editor" do
+      it "activates the presentation" do
+        circle = create(:circle)
+        theme = create(:theme, circle:)
+        presentation = create(:presentation, theme:, active: false)
+        user = create(:user)
+        user.confirm
+        user.add_role(:editor, theme)
+        sign_in user
+
+        post theme_presentation_activate_url(circle, theme, presentation)
+
+        expect(presentation.reload.active).to be(true)
+      end
+    end
+
+    context "when not authorized" do
+      it "does not activate the presentation" do
+        presentation = create(:presentation, active: false)
+        user = create(:user)
+        user.confirm
+        sign_in user
+        referer = theme_presentation_url(presentation.circle, presentation.theme, presentation)
+
+        post theme_presentation_activate_url(presentation.circle, presentation.theme, presentation),
+          headers: { "HTTP_REFERER" => referer }
+
+        expect(response).to redirect_to(referer)
+        expect(presentation.reload.active).to be(false)
+      end
+    end
+  end
+
+  describe "POST /save_as_template" do
+    login_super_admin
+
+    it "creates a new template from the presentation" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
+      slide = create(:slide, title: "Event Slide")
+      presentation.slides << slide
+
+      expect {
+        post theme_presentation_save_as_template_url(
+          presentation.circle,
+          presentation.theme,
+          presentation,
+        ), params: { name: "Saved Template", mode: "new" }
+      }.to change(Template, :count).by(1)
+
+      expect(response).to redirect_to(circle_template_url(presentation.circle, Template.last))
+      expect(Template.last.slides.count).to eq(1)
+    end
+
+    it "updates the source template when mode is update_source" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
+      slide = create(:slide, title: "Updated Slide")
+      presentation.slides << slide
+
+      post theme_presentation_save_as_template_url(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+      ), params: { mode: "update_source" }
+
+      expect(response).to redirect_to(circle_template_url(presentation.circle, presentation.template))
+      expect(presentation.template.reload.slides.first.title).to eq("Updated Slide")
     end
   end
 

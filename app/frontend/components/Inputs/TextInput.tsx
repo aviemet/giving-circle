@@ -57,7 +57,10 @@ export function TextInput({
 				{ ...(value !== undefined && { value }) }
 				onChange={ handleChange }
 				required={ required }
-				rightSection={ !readOnly && clearable && value !== "" && value !== undefined && <CrossIcon onClick={ handleClear } /> }
+				rightSection={
+					!readOnly && clearable && value !== "" && value !== undefined &&
+					<CrossIcon onClick={ handleClear } />
+				}
 				{ ...withInjectedProps(props, {
 					disableAutofill,
 				}) }

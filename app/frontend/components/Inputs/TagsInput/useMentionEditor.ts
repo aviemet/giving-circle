@@ -3,184 +3,99 @@ import { Mention } from "@tiptap/extension-mention"
 import Paragraph from "@tiptap/extension-paragraph"
 import Text from "@tiptap/extension-text"
 import { UndoRedo } from "@tiptap/extensions"
-import { ReactRenderer, useEditor, type Editor } from "@tiptap/react"
-import { type SuggestionProps as TiptapSuggestionProps } from "@tiptap/suggestion"
+import { useEditor, type Editor } from "@tiptap/react"
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 
-import { parseContentToStructured, serializeStructuredContent } from "@/components/VisualEditor/dynamicData/contentParser"
+import {
+	normalizeTagsFieldValue,
+	parseContentToStructured,
+	serializedTagsToEditorContent,
+	structuredContentToEditorContent,
+	type TagEditorOption,
+} from "@/components/VisualEditor/dynamicData/contentParser"
 
-import { MentionCombobox } from "./MentionCombobox"
-
-interface TagOption {
-	label: string
-	value: string
-}
+import { createMentionSuggestionRender } from "./mentionSuggestionRender"
 
 type UseMentionEditor = (args: {
-	content: string
-	tagOptions: TagOption[]
+	value: string
+	tagOptions: TagEditorOption[]
 	onChange?: (value: string) => void
 }) => Editor | null
 
-const useMentionEditor: UseMentionEditor = ({ content, tagOptions, onChange }) => {
-	return useEditor({
-		extensions: [
-			Document,
-			Text,
-			UndoRedo,
-			Paragraph.extend({
-				renderHTML({ HTMLAttributes }) {
-					return ["span", HTMLAttributes, 0]
+const useMentionEditor: UseMentionEditor = ({ value, tagOptions, onChange }) => {
+	const [initialEditorContent] = useState(() =>
+		serializedTagsToEditorContent(value, tagOptions),
+	)
+	const lastEmittedRef = useRef(normalizeTagsFieldValue(value))
+	const isFocusedRef = useRef(false)
+	const onChangeRef = useRef(onChange)
+
+	useLayoutEffect(() => {
+		onChangeRef.current = onChange
+	})
+
+	const extensions = useMemo(() => [
+		Document,
+		Text,
+		UndoRedo,
+		Paragraph.extend({
+			renderHTML({ HTMLAttributes }) {
+				return ["span", HTMLAttributes, 0]
+			},
+		}),
+		Mention.configure({
+			HTMLAttributes: {
+				class: "mention",
+			},
+			renderText({ options, node }) {
+				return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`
+			},
+			suggestion: {
+				char: "#",
+				items: ({ query }) => {
+					return tagOptions.filter(option =>
+						option.value.toLowerCase().includes(query.toLowerCase())
+					).slice(0, 10).map(option => ({
+						id: option.value,
+						label: option.label,
+					}))
 				},
-			}),
-			Mention.configure({
-				HTMLAttributes: {
-					class: "mention",
-				},
-				renderText({ options, node }) {
-					return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`
-				},
-				suggestion: {
-					char: "#",
-					items: ({ query }) => {
-						return tagOptions.filter(option =>
-							option.value.toLowerCase().includes(query.toLowerCase())
-						).slice(0, 10)
-					},
+				render: createMentionSuggestionRender(),
+			},
+		}),
+	], [tagOptions])
 
-					render: () => {
-						let component: ReactRenderer
-						let selectedIndex = 0
-
-						const createSelectItem = (props: TiptapSuggestionProps<TagOption>) => (index: number) => {
-							const item = props.items[index]
-							if(item) {
-								props.command(item)
-							}
-						}
-
-						const handleClickOutside = (event: MouseEvent) => {
-							if(!component) return
-
-							const target = event.target as Node
-							const comboboxElement = component.element
-							const editorElement = document.querySelector(".ProseMirror")
-
-							const isOutsideCombobox = !comboboxElement.contains(target)
-							const isOutsideEditor = !editorElement?.contains(target)
-
-							if(isOutsideCombobox && isOutsideEditor) {
-								cleanup()
-							}
-						}
-
-						const cleanup = () => {
-							if(component) {
-								document.removeEventListener("mousedown", handleClickOutside)
-								component.element.remove()
-								component.destroy()
-							}
-						}
-
-						return {
-							onStart: props => {
-								component = new ReactRenderer(MentionCombobox, {
-									props: {
-										...props,
-										selectedIndex,
-										selectItem: createSelectItem(props),
-									},
-									editor: props.editor,
-								})
-
-								if(!props.clientRect) {
-									return
-								}
-
-								updatePosition(props)
-								document.body.appendChild(component.element)
-								document.addEventListener("mousedown", handleClickOutside)
-							},
-
-							onUpdate: props => {
-								if(!component) return
-
-								component.updateProps({
-									...props,
-									selectedIndex,
-									selectItem: createSelectItem(props),
-								})
-								updatePosition(props)
-							},
-
-							onKeyDown(props) {
-								if(props.event.key === "Escape") {
-									component.destroy()
-									return true
-								}
-
-								// Get current props from component
-								const currentProps = component.props as TiptapSuggestionProps<TagOption>
-
-								if(props.event.key === "ArrowDown") {
-									selectedIndex = Math.min(selectedIndex + 1, currentProps.items.length - 1)
-									component.updateProps({
-										...currentProps,
-										selectedIndex,
-										selectItem: createSelectItem(currentProps),
-									})
-									return true
-								}
-
-								if(props.event.key === "ArrowUp") {
-									selectedIndex = Math.max(selectedIndex - 1, 0)
-									component.updateProps({
-										...currentProps,
-										selectedIndex,
-										selectItem: createSelectItem(currentProps),
-									})
-									return true
-								}
-
-								if(props.event.key === "Enter") {
-									const item = currentProps.items[selectedIndex]
-									if(item) {
-										currentProps.command(item)
-									}
-									return true
-								}
-
-								return false
-							},
-
-							onExit() {
-								cleanup()
-							},
-						}
-
-						function updatePosition(props: TiptapSuggestionProps<TagOption>) {
-							if(!component || !props.clientRect) return
-
-							const coords = props.clientRect()
-							if(coords) {
-								const element = component.element as HTMLElement
-								element.style.position = "absolute"
-								element.style.top = `${coords.bottom + window.scrollY}px`
-								element.style.left = `${coords.left + window.scrollX}px`
-								element.style.zIndex = "1000"
-							}
-						}
-					},
-				},
-			}),
-		],
-		content,
-		onUpdate: ({ editor }) => {
-			const html = editor.getHTML()
-			const structured = parseContentToStructured(html)
-			const serialized = serializeStructuredContent(structured)
-			onChange?.(serialized)
+	const editor = useEditor({
+		extensions,
+		content: initialEditorContent,
+		shouldRerenderOnTransaction: false,
+		onFocus: () => {
+			isFocusedRef.current = true
+		},
+		onBlur: () => {
+			isFocusedRef.current = false
+		},
+		onUpdate: ({ editor: activeEditor }) => {
+			const serialized = normalizeTagsFieldValue(activeEditor.getHTML())
+			lastEmittedRef.current = serialized
+			onChangeRef.current?.(serialized)
 		},
 	})
+
+	useEffect(() => {
+		if(!editor || isFocusedRef.current) return
+
+		const valueSerialized = normalizeTagsFieldValue(value)
+		if(valueSerialized === lastEmittedRef.current) return
+
+		lastEmittedRef.current = valueSerialized
+		editor.commands.setContent(
+			structuredContentToEditorContent(parseContentToStructured(value), tagOptions),
+			{ emitUpdate: false },
+		)
+	}, [editor, value, tagOptions])
+
+	return editor
 }
 
 export { useMentionEditor }

@@ -21,9 +21,6 @@
 FactoryBot.define do
   factory :presentations_element do
     presentation
-    element do
-      circle = presentation&.circle || association(:circle)
-      association(:presentation_element, circle: circle)
-    end
+    element { association(:presentation_element) }
   end
 end

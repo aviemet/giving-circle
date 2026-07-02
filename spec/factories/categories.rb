@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id                 :uuid             not null, primary key
+#  categorizable_type :string           not null
+#  description        :text
+#  name               :string           not null
+#  slug               :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_categories_on_name_and_categorizable_type  (name,categorizable_type) UNIQUE
+#  index_categories_on_slug                         (slug) UNIQUE
+#
+FactoryBot.define do
+  factory :category do
+    sequence(:name) { |index| "Category #{index}" }
+    categorizable_type { "Address" }
+
+    trait :home do
+      name { "Home" }
+    end
+
+    trait :work do
+      name { "Work" }
+    end
+
+    trait :other do
+      name { "Other" }
+    end
+
+    trait :for_address do
+      categorizable_type { "Address" }
+    end
+
+    trait :for_email do
+      categorizable_type { "Email" }
+    end
+
+    trait :for_phone do
+      categorizable_type { "Phone" }
+    end
+  end
+end

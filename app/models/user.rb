@@ -75,7 +75,7 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def circles
-    Circle.with_roles(Circle.find_roles.pluck(:name), self).includes(:themes, :ownerships)
+    Circle.with_roles(Circle.find_roles.pluck(:name), self).includes(:themes, :memberships)
   end
 
   # Per table query limit for pagination

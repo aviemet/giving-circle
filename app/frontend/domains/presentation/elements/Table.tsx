@@ -10,7 +10,7 @@ interface PresentationElementsTableProps {
 }
 
 export function PresentationElementsTable({ records, pagination, model }: PresentationElementsTableProps) {
-	const { params } = usePageProps<"themePresentationsElements">()
+	const { params } = usePageProps<"themePresentationElements">()
 
 	const columns: TableColumn<Schema.PresentationElementsIndex>[] = [
 		{

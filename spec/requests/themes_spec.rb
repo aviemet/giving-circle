@@ -29,6 +29,16 @@ RSpec.describe "/themes", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "renders a successful response when the theme has orgs" do
+      theme = create(:theme)
+      org = create(:org, circle: theme.circle)
+      create(:themes_org, theme:, org:, ask_cents: 20_000, ask_currency: "USD")
+
+      get theme_url(theme.circle, theme)
+
+      expect(response).to be_successful
+    end
   end
 
   describe "GET /about" do

@@ -1,4 +1,4 @@
-import { Link, type InertiaLinkProps } from "@inertiajs/react"
+import { Link } from "@inertiajs/react"
 import {
 	NavLink as MantineNavLink,
 	type NavLinkProps as MantineNavLinkProps,
@@ -6,30 +6,50 @@ import {
 
 import { useLocation } from "@/lib/hooks"
 
-import * as classes from "./NavLink.css"
+import { ExternalLink, isExternalLink } from "./ExternalLink"
+import * as classes from "./Link.css"
 
-type OmittedLinkProps = "color" | "size" | "span" | "label" | "onChange" | "onClick" | "onKeyDown" | "style" | "active" | "component"
-export interface NavLinkProps
-	extends Omit<MantineNavLinkProps, "label">,
-	Omit<InertiaLinkProps, OmittedLinkProps> {}
+export interface NavLinkProps extends Omit<MantineNavLinkProps, "label" | "component"> {
+	external?: boolean
+	href: string
+	rel?: string
+	target?: string
+}
 
 export const NavLink = ({
 	children,
 	href,
 	active,
+	external,
+	target,
+	rel,
 	...props
 }: NavLinkProps) => {
 	const { pathname } = useLocation()
+
+	if(isExternalLink(href, external)) {
+		return (
+			<MantineNavLink
+				component={ ExternalLink }
+				href={ href }
+				active={ false }
+				label={ children }
+				className={ classes.navLinkInactiveHover }
+				{ ...props }
+			/>
+		)
+	}
 
 	return (
 		<MantineNavLink
 			component={ Link }
 			href={ href }
+			target={ target }
+			rel={ rel ?? (target === "_blank" ? "noreferrer" : undefined) }
 			active={ active === undefined ? pathname === href : active }
 			label={ children }
-			className={ classes.root }
+			className={ classes.navLinkInactiveHover }
 			{ ...props }
 		/>
 	)
 }
-

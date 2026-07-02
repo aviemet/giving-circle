@@ -48,11 +48,15 @@ You are an expert in Ruby on Rails and PostgreSQL
 ## Internationalization (i18n)
 
 - Properly define strings in locale yml files; use a nested directory structure for locale files to keep things organized.
-- Define strings for the frontend in yml files as well; use the i18n-js gem to generate json files for the front end.
+- Frontend JSON under `app/frontend/lib/locales/` is generated from YAML via `bundle exec rails i18n:export` (`config/i18n.yml`, `lib/tasks/i18n.rake`). Never edit the JSON by hand.
 - Implement proper locale detection.
 - Use proper number and date formatting.
 - Use proper currency formatting.
 - Implement proper RTL support.
+
+### Query objects
+
+- Ruby query objects belong in `app/queries/` and must be listed on `autoload_paths` and `eager_load_paths` in `config/application.rb` (not autoloaded by default). Example: `RecentThemes` in `app/queries/recent_themes.rb`.
 
 ### Controller Patterns
 
@@ -94,7 +98,8 @@ You are an expert in Ruby on Rails and PostgreSQL
 
   ### Inertia Testing
 
-  - Inertia has its own set of rspec assertions, use them when appropriate to test inertia specific actions. Examples below:
+  - Inertia has its own set of rspec assertions; use them when appropriate. For index pages with lazy Inertia props, assert the component name and page props (`inertia.props["circles"]`), not only `response.successful`, or autoload/serialization errors in prop procs will slip through.
+  - Examples below:
 
     ```ruby
     RSpec.describe '/events', inertia: true do

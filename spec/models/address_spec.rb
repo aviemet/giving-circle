@@ -2,23 +2,26 @@
 #
 # Table name: addresses
 #
-#  id         :uuid             not null, primary key
-#  address    :string
-#  address_2  :string
-#  city       :string
-#  country    :string
-#  postal     :string
-#  region     :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  contact_id :uuid             not null
+#  id          :uuid             not null, primary key
+#  address     :string
+#  address_2   :string
+#  city        :string
+#  country     :string
+#  postal      :string
+#  region      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :uuid             not null
+#  contact_id  :uuid             not null
 #
 # Indexes
 #
-#  index_addresses_on_contact_id  (contact_id)
+#  index_addresses_on_category_id  (category_id)
+#  index_addresses_on_contact_id   (contact_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (category_id => categories.id)
 #  fk_rails_...  (contact_id => contacts.id)
 #
 # spec/models/address_spec.rb

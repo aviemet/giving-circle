@@ -85,7 +85,7 @@ export const useSyncPresentationTemplateSlides: ReactMutationFunction<
 	return useMutation({
 		mutationFn: async(data) => {
 			const res = await axios.patch(
-				Routes.apiCirclePresentationSyncSlides(options.params.circleSlug, options.params.presentationSlug)
+				Routes.syncSlidesApiCirclePresentation(options.params.circleSlug, options.params.presentationSlug)
 			)
 			if(!isAllowedStatusCode(res.statusText, [200, 201])) {
 				throw new Error("Failed to sync slides")

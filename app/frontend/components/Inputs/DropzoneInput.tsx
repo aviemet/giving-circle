@@ -7,7 +7,7 @@ import { uploadFile } from "@/lib/files"
 
 import { CancelIcon, PhotoIcon, UploadIcon } from "../Icons"
 
-interface DropzoneInputProps extends Omit<MantineDropzoneProps, "onDrop" | "multiple"> {
+interface DropzoneInputProps extends Omit<MantineDropzoneProps, "onDrop" | "multiple" | "ref"> {
 	uploadMode?: "immediate" | "onSubmit"
 	multiple?: boolean
 	onUploadComplete?: (signedIds: string[]) => void

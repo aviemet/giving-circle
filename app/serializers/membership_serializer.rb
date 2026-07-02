@@ -11,15 +11,18 @@
 #  slug           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  circle_id      :uuid             not null
 #  person_id      :uuid             not null
 #
 # Indexes
 #
+#  index_memberships_on_circle_id  (circle_id)
 #  index_memberships_on_person_id  (person_id)
 #  index_memberships_on_slug       (slug) UNIQUE
 #
 # Foreign Keys
 #
+#  fk_rails_...  (circle_id => circles.id)
 #  fk_rails_...  (person_id => people.id)
 #
 class MembershipSerializer < ApplicationSerializer

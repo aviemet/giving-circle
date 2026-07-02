@@ -1,16 +1,16 @@
-if false && Presentation::Element.none?
-  Presentation::Element.create({
+if Presentation::Element.none?
+  Presentation::Element.create!({
     name: "Orgs Display",
-    data: {}
+    data: {},
   })
 
-  Presentation::Element.create({
+  Presentation::Element.create!({
     name: "Orgs Bar Graph",
-    data: {}
+    data: {},
   })
 
-  Presentation::Element.create({
+  Presentation::Element.create!({
     name: "Timer",
-    data: {}
+    data: {},
   })
 end

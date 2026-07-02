@@ -49,7 +49,7 @@ module InertiaShare::Menu
     inertia_share circles: lambda {
       return if instance_variable_get(:@disable_menu_rendering)
 
-      current_user&.circles&.includes(:themes, :ownerships)&.render(:inertia_share)
+      current_user&.circles&.includes(:themes)&.render(:inertia_share)
     }
   end
 

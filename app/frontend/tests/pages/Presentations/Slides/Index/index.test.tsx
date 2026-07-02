@@ -1,23 +1,37 @@
 import { screen } from "@testing-library/react"
-import React from "react"
 import { describe, test } from "vitest"
 
+import { AppHeader } from "@/layouts/AppLayout/AppHeader"
 import PresentationSlidesIndex from "@/pages/Presentations/Slides/Index"
-import { createPagination, createSlidesIndex } from "@/tests/helpers/fixtures"
+import { createPresentationsShow, createPresentationInertiaShare } from "@/tests/helpers/fixtures"
+import { inertiaPageProps } from "@/tests/helpers/mockServer"
+import { registerActiveCircleAndThemeLifecycle } from "@/tests/helpers/pageTestLifecycle"
 import { render } from "@/tests/helpers/utils"
 
 describe("pages/Presentations/Slides/Index/index", () => {
-	test("renders presentation slides index", () => {
+	registerActiveCircleAndThemeLifecycle()
+
+	test("renders slide deck", () => {
+		inertiaPageProps.active_presentation = createPresentationInertiaShare()
+
+		const presentation = createPresentationsShow({
+			slides: [{
+				id: "slide-1",
+				slug: "intro",
+				title: "Intro",
+				data: { content: [], root: { props: {} } },
+			}],
+		})
+
 		render(
-			<PresentationSlidesIndex
-				presentation_slides={ [createSlidesIndex()] }
-				pagination={ createPagination({ count: 1 }) }
-			/>,
+			<>
+				<PresentationSlidesIndex presentation={ presentation } />
+				<AppHeader />
+			</>,
 		)
 
-		screen.getByLabelText("Search")
-		screen.getByRole("button", { name: "Actions" })
-		screen.getByRole("table")
-		screen.getByRole("checkbox", { name: "Select record 1" })
+		screen.getByText("Intro")
+		screen.getByRole("link", { name: "Intro" })
+		screen.getByRole("button", { name: "Add slide" })
 	})
 })

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react"
 
 import { createContext } from "@/lib/hooks"
 
-interface TableContextValue<T extends object = Record<string, unknown>> {
+interface TableContextValue<T extends Record<string, unknown> = Record<string, unknown>> {
 	model?: string
 	searching: boolean
 	setSearching: (searching: boolean) => void
@@ -17,7 +17,7 @@ interface TableContextValue<T extends object = Record<string, unknown>> {
 const [useTableContext, TableContextProvider] = createContext<TableContextValue>()
 export { useTableContext }
 
-interface TableProviderProps<T extends object = Record<string, unknown>> {
+interface TableProviderProps<T extends Record<string, unknown> = Record<string, unknown>> {
 	children: React.ReactNode
 	model?: string
 	selectable?: boolean
@@ -26,7 +26,7 @@ interface TableProviderProps<T extends object = Record<string, unknown>> {
 	pagination?: Schema.Pagination
 }
 
-export function TableProvider<T extends object = Record<string, unknown>>({
+export function TableProvider<T extends Record<string, unknown> = Record<string, unknown>>({
 	children,
 	model,
 	selectable = false,

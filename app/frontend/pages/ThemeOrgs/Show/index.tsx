@@ -15,22 +15,26 @@ const ShowThemeOrg = ({ org }: ShowThemeOrgProps) => {
 	return (
 		<Page
 			title={ title }
-			siteTitle={ <><Title>{ title }</Title><Menu position="bottom-end">
-				<Menu.Target />
-				<Menu.Dropdown>
-					<Menu.Link
-						href={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
-					>
-						Edit Org
-					</Menu.Link>
-				</Menu.Dropdown>
-			</Menu></> }>
-			<Section>
+			heading={ <>
+				<Title>{ title }</Title><Menu position="bottom-end">
+					<Menu.Target />
+					<Menu.Dropdown>
+						<Menu.Link
+							href={ Routes.editThemeOrg(params.circle_slug, params.theme_slug, params.slug) }
+						>
+							Edit Org
+						</Menu.Link>
+					</Menu.Dropdown>
+				</Menu>
+			</> }
+		>
 
+			<Section>
 				<Text>Asking: <Money>{ org.ask }</Money></Text>
 
 				<Text>{ org.description }</Text>
 			</Section>
+
 		</Page>
 	)
 }

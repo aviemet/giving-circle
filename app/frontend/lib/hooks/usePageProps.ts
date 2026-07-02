@@ -5,7 +5,7 @@ import { FlashMessage } from "@/types"
 
 import { urlParams } from "../routes"
 
-type UrlParams = typeof urlParams;
+type UrlParams = typeof urlParams
 
 interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" | "flash"> {
 	auth: {

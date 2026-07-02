@@ -10,11 +10,11 @@ export function AppHeader() {
 		<Group h="100%" px="md">
 			<Flex align="center" gap="md" style={ { flex: 1 } }>
 				<ToggleNavbarButton hidden={ sidebarOpen } />
-				{ typeof siteTitle === "string" ?
-					<Title>{ siteTitle }</Title>
-					:
-					siteTitle
-				}
+				{ siteTitle !== null && siteTitle !== undefined && siteTitle !== "" && (
+					typeof siteTitle === "string"
+						? <Title>{ siteTitle }</Title>
+						: siteTitle
+				) }
 			</Flex>
 
 			<Box>

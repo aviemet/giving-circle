@@ -28,8 +28,6 @@
 #  fk_rails_...  (theme_id => themes.id)
 #
 class Presentation < ApplicationRecord
-  include Ownable
-
   extend FriendlyId
 
   friendly_id :name, use: [:slugged, :history]
@@ -43,9 +41,9 @@ class Presentation < ApplicationRecord
   resourcify
 
   validates :name, presence: true
-  validate :owner_matches_theme_owner
 
   belongs_to :theme, optional: false
+  delegate :circle, to: :theme, allow_nil: true
 
   has_many :presentations_orgs, dependent: :destroy
   has_many :orgs, through: :presentations_orgs
@@ -63,9 +61,11 @@ class Presentation < ApplicationRecord
   has_many :slides, through: :slide_parents, dependent: :nullify
   belongs_to :active_slide, class_name: "Slide", optional: true
 
-  belongs_to :template
+  belongs_to :template, optional: true
 
-  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides]) }
+  after_create :sync_orgs_from_theme
+
+  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :template]) }
 
   def activate
     self.update(active: true)
@@ -99,11 +99,9 @@ class Presentation < ApplicationRecord
 
   private
 
-  def owner_matches_theme_owner
-    return unless circle && theme&.circle
+  def sync_orgs_from_theme
+    return unless theme.present? && orgs.empty?
 
-    unless circle.id == theme.circle.id
-      errors.add(:owner_matches_theme_owner, "record owner and theme owner must match")
-    end
+    orgs << theme.orgs
   end
 end

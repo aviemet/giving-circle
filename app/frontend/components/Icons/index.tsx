@@ -9,7 +9,7 @@ export {
 	TbDots as DotsIcon,
 	TbFilter as FilterIcon,
 	TbArrowRightSquare as ArrowRightSquareIcon,
-	TbArrowLeftSquare as ArrowRLeftSquareIcon,
+	TbArrowLeftSquare as ArrowLeftSquareIcon,
 	TbCircleDot as CircleDotIcon,
 	TbSquarePlus as ReplenishIcon,
 	TbSun as SunIcon,
@@ -58,6 +58,7 @@ export {
 
 export {
 	RiDownload2Fill as DownloadIcon,
+	RiSlideshowLine as SlidesIcon,
 } from "react-icons/ri"
 
 export {

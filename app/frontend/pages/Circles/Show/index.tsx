@@ -65,7 +65,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 					<Title order={ 2 }>Upcoming Themes</Title>
 					<CardContainer>
 						{ circle.themes.map(theme => (
-							<ThemeCard key={ theme.id } theme={ theme } circle={ circle } />
+							<ThemeCard key={ theme.id } theme={ theme } />
 						)) }
 					</CardContainer>
 				</Container>

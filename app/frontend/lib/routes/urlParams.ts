@@ -357,13 +357,6 @@ export const urlParams = {
       "theme_slug"
     ]
   },
-  "editThemePresentation": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
   "themePresentation": {
     "params": [
       "circle_slug",
@@ -519,7 +512,7 @@ export const urlParams = {
       "presentation_slug"
     ]
   },
-  "themePresentationSettings": {
+  "themePresentationAdminSettings": {
     "params": [
       "circle_slug",
       "theme_slug",
@@ -527,6 +520,20 @@ export const urlParams = {
     ]
   },
   "themePresentationActivate": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "themePresentationSettings": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "themePresentationSaveAsTemplate": {
     "params": [
       "circle_slug",
       "theme_slug",

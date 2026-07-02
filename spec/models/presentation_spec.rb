@@ -49,10 +49,15 @@ RSpec.describe Presentation do
     it { is_expected.to have_many(:elements).through(:presentations_elements) }
   end
 
-  describe "Templates" do
-    it "works" do
-      # presentation = create(:presentation)
+  describe "org sync" do
+    it "copies theme orgs after create when presentation has none" do
+      theme = create(:theme)
+      org = create(:org, circle: theme.circle)
+      create(:themes_org, theme: theme, org: org)
 
+      presentation = create(:presentation, theme: theme)
+
+      expect(presentation.orgs).to contain_exactly(org)
     end
   end
 end

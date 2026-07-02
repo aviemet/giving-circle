@@ -1,6 +1,31 @@
 {
   "en": {
+    "categories": {
+      "validations": {
+        "name_uniqueness": "Category already exists for that category type"
+      }
+    },
     "circles": {
+      "index": {
+        "circlesSectionTitle": "Your Circles",
+        "membersCount_one": "1 member",
+        "membersCount_other": "%{count} members",
+        "newCircle": "New circle",
+        "newCircleCard": "Create a circle",
+        "recentThemesTitle": "Recent and Upcoming Themes",
+        "themePublishedOn": "Published %{date}",
+        "themePublishedUpcoming": "Upcoming",
+        "themeStatus": {
+          "current": "Current",
+          "draft": "Draft",
+          "future": "Upcoming",
+          "past": "Past"
+        },
+        "themesCount_one": "1 theme",
+        "themesCount_other": "%{count} themes",
+        "title": "Dashboard",
+        "totalGivenPlaceholder": "Total given: --"
+      },
       "notices": {
         "created": "Circle was successfully created.",
         "destroyed": "Circle was successfully destroyed.",
@@ -122,6 +147,10 @@
         "month": "Month",
         "second": "Seconds",
         "year": "Year"
+      },
+      "relative": {
+        "future": "in %{time}",
+        "past": "%{time} ago"
       }
     },
     "devise": {
@@ -229,7 +258,6 @@
         }
       }
     },
-    "hello": "Hello world",
     "helpers": {
       "page_entries_info": {
         "entry": {
@@ -262,6 +290,15 @@
         "created": "Membership was successfully created.",
         "destroyed": "Membership was successfully destroyed.",
         "updated": "Membership was successfully updated."
+      }
+    },
+    "navigation_interrupt": {
+      "modal": {
+        "discard": "Discard changes",
+        "message": "You have unsaved changes. Stay on this page, discard them, or save before leaving.",
+        "save_and_leave": "Save and leave",
+        "stay": "Stay on page",
+        "title": "Unsaved changes"
       }
     },
     "number": {
@@ -347,10 +384,162 @@
       }
     },
     "presentations": {
+      "actions": {
+        "form": {
+          "action_type": "Action type",
+          "config": "Config",
+          "create": "Create presentation action",
+          "results": "Results",
+          "slug": "Slug",
+          "trigger_conditions": "Trigger conditions",
+          "trigger_type": "Trigger type",
+          "update": "Update presentation action"
+        }
+      },
+      "alerts": {
+        "no_source_template": "This presentation is not linked to a Presentation Template."
+      },
       "notices": {
         "created": "Presentation was successfully created.",
         "destroyed": "Presentation was successfully destroyed.",
+        "template_created": "Presentation Template was successfully created.",
+        "template_updated": "Presentation Template was successfully updated.",
         "updated": "Presentation was successfully updated."
+      },
+      "show": {
+        "active": "Active",
+        "basedOnTemplate": "Based on Presentation Template:",
+        "breadcrumbs": {
+          "circles": "Circles",
+          "presentations": "Presentations",
+          "themes": "Themes"
+        },
+        "cancel": "Cancel",
+        "defaultTitle": "Presentation",
+        "inactive": "Inactive",
+        "resumePresentation": "Resume Presentation",
+        "saveAsNewTemplateModal": {
+          "confirm": "Save",
+          "defaultTemplateName": "%{name} Template",
+          "templateName": "Template name",
+          "title": "Save as new Presentation Template"
+        },
+        "settings": "Settings",
+        "slides": "Slides",
+        "slidesCount_one": "1 slide",
+        "slidesCount_other": "%{count} slides",
+        "startModal": {
+          "body": "You will open the presentation controls.",
+          "confirm": "Start",
+          "title": "Start presentation"
+        },
+        "startPresentation": "Start Presentation",
+        "syncFromTemplateModal": {
+          "body": "This removes all presentation slides and replaces them with slides from the template.",
+          "confirm": "Sync slides",
+          "title": "Sync from Presentation Template"
+        },
+        "updateSourceTemplateModal": {
+          "body": "This replaces all slides in %{templateName}. Presentation-specific data is not copied.",
+          "confirm": "Update template",
+          "title": "Update source Presentation Template"
+        }
+      },
+      "slides": {
+        "index": {
+          "addSlide": "Add slide",
+          "addSlideModal": {
+            "cancel": "Cancel",
+            "confirm": "Add",
+            "slideTitle": "Slide title",
+            "title": "Add a slide"
+          },
+          "breadcrumbs": {
+            "circles": "Circles",
+            "presentations": "Presentations",
+            "slides": "Slides",
+            "themes": "Themes"
+          },
+          "emptySlides": "No slides yet. Add one to start building this presentation.",
+          "settings": "Settings",
+          "title": "Slides"
+        }
+      }
+    },
+    "slides": {
+      "editor": {
+        "fields": {
+          "layout": {
+            "align": {
+              "center": "Center",
+              "end": "End",
+              "start": "Start",
+              "stretch": "Stretch"
+            },
+            "background_color": "Background Color",
+            "border_color": "Border Color",
+            "border_radius": "Border Radius",
+            "border_width": "Border Width",
+            "direction": {
+              "column": "Column",
+              "row": "Row"
+            },
+            "display": {
+              "block": "Block",
+              "flex": "Flex"
+            },
+            "flex": "Flex",
+            "gap": "Gap",
+            "justify": {
+              "center": "Center",
+              "end": "End",
+              "space_around": "Space Around",
+              "space_between": "Space Between",
+              "start": "Start"
+            },
+            "labels": {
+              "align": "Align",
+              "direction": "Direction",
+              "display": "Display",
+              "gap": "Gap",
+              "justify": "Justify",
+              "overflow": "Overflow",
+              "wrap": "Wrap"
+            },
+            "margin": "Margin",
+            "min_height": "Min Height",
+            "min_width": "Min Width",
+            "overflow": {
+              "auto_scroll": "Auto (scroll)",
+              "hidden": "Hidden",
+              "visible": "Visible"
+            },
+            "padding": "Padding",
+            "width": "Width",
+            "wrap": {
+              "nowrap": "Nowrap",
+              "wrap": "Wrap"
+            }
+          }
+        },
+        "header": {
+          "close": "Close",
+          "close_without_saving": "Close without saving",
+          "open_preview": "Open preview",
+          "revert": "Revert to last save",
+          "save": "Save",
+          "save_and_close": "Save and Close",
+          "save_status": {
+            "recovered": "Recovered local draft (not saved to server)",
+            "saved": "Saved to server",
+            "unsaved": "Unsaved changes (local draft only)"
+          },
+          "saving": "Saving to server..."
+        }
+      },
+      "notices": {
+        "created": "Slide was successfully created.",
+        "updated": "Slide was successfully updated."
       }
     },
     "support": {
@@ -360,12 +549,48 @@
         "words_connector": ", "
       }
     },
+    "templates": {
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "templates": "Templates"
+        },
+        "createPresentation": "Create presentation",
+        "createPresentationModal": {
+          "cancel": "Cancel",
+          "name": "Presentation name",
+          "newTheme": "New theme",
+          "noThemes": "This circle has no themes yet. Create a theme before starting a presentation.",
+          "submit": "Create presentation",
+          "theme": "Theme",
+          "title": "Create presentation from template"
+        },
+        "helperText": "Reusable slide layouts for your circle. Create a presentation from a theme to use these at an event.",
+        "newTemplate": "New Template",
+        "title": "Templates"
+      },
+      "show": {
+        "addSlide": "Add slide",
+        "addSlideModal": {
+          "cancel": "Cancel",
+          "confirm": "Add",
+          "slideTitle": "Slide title",
+          "title": "Add a slide"
+        },
+        "breadcrumbs": {
+          "circles": "Circles",
+          "templates": "Templates"
+        },
+        "defaultTitle": "Template",
+        "emptySlides": "No slides yet. Add one to start building this template.",
+        "settings": "Settings"
+      }
+    },
     "theme_orgs": {
       "notices": {
         "bulk_created": "%{count} Organizations successfully added to the theme",
         "created": "Organization was successfully added to the theme.",
-        "destroyed": "Organization was successfully removed from the theme.",
-        "updated": "Organization was successfully updated."
+        "destroyed": "Organization was successfully removed from the theme."
       },
       "validations": {
         "match_owner": "Theme owner and org owner must match",

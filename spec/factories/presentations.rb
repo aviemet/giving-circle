@@ -29,19 +29,14 @@
 #
 FactoryBot.define do
   factory :presentation do
-    transient do
-      owning_circle { association(:circle) }
-    end
-
     name { Faker::Lorem.words(number: rand(1..4)).map(&:capitalize).join(" ") }
 
-    theme { association(:theme, circle: owning_circle) }
-    template { association(:template, circle: owning_circle) }
+    theme
 
     after(:build) do |presentation|
-      if presentation.theme
-        presentation.circle = presentation.theme.circle
-      end
+      next if presentation.template.present?
+
+      presentation.template = build(:template, circle: presentation.theme.circle)
     end
   end
 end

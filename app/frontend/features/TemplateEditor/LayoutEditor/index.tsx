@@ -1,17 +1,19 @@
 import { modals } from "@mantine/modals"
-import React, { useRef } from "react"
+import { useRef } from "react"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
 import { TextInput } from "@/components/Inputs"
-import { SlideCard } from "@/features/Cards/SlideCard"
-import { Routes } from "@/lib"
+import { SlideCard } from "@/features/Cards"
 
 interface LayoutEditorProps {
-	circle: Schema.CirclesInertiaShare
 	template: Schema.TemplatesFormData
 }
 
-const LayoutEditor = ({ circle, template }: LayoutEditorProps) => {
+function isPersistedSlide(slide: Schema.SlidesFormData): slide is Schema.SlidesShow {
+	return slide.id !== undefined
+}
+
+export const LayoutEditor = ({ template }: LayoutEditorProps) => {
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const handleAddSlide = () => {
@@ -34,8 +36,8 @@ const LayoutEditor = ({ circle, template }: LayoutEditorProps) => {
 			<Divider mt="xs" mb="sm" />
 
 			<Flex wrap="wrap" gap="sm">
-				{ template.slides?.map((slide) => (
-					<SlideCard key={ slide.id } slide={ slide } />
+				{ template.slides?.filter(isPersistedSlide).map((slide) => (
+					<SlideCard key={ slide.id } slide={ slide } editHref="#" />
 				)) }
 			</Flex>
 
@@ -47,4 +49,3 @@ const LayoutEditor = ({ circle, template }: LayoutEditorProps) => {
 	)
 }
 
-export { LayoutEditor }

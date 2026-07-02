@@ -1,6 +1,8 @@
-import { Field, FieldLabel } from "@measured/puck"
+import { Field } from "@measured/puck"
 
 import { ColorInput } from "@/components/Inputs"
+
+import { PuckFieldLabel } from "./PuckFieldLabel"
 
 const swatches = [
 	"#2e2e2e",
@@ -27,14 +29,14 @@ function colorField({ label = "Color" }: Partial<Field<string>> = {}): Field<str
 		label: label,
 		render: ({ field, name, onChange, value }) => {
 			return (
-				<FieldLabel label={ label }>
+				<PuckFieldLabel label={ label }>
 					<ColorInput
 						name={ name }
 						value={ value }
 						onChange={ onChange }
 						swatches={ swatches }
 					/>
-				</FieldLabel>
+				</PuckFieldLabel>
 			)
 		},
 	}
@@ -51,14 +53,14 @@ export function optionalColorField(
 		label,
 		render: ({ name, onChange, value }) => {
 			return (
-				<FieldLabel label={ label }>
+				<PuckFieldLabel label={ label }>
 					<ColorInput
 						name={ name }
 						value={ value ?? "" }
 						onChange={ (v) => onChange(v) }
 						swatches={ swatches }
 					/>
-				</FieldLabel>
+				</PuckFieldLabel>
 			)
 		},
 	}

@@ -8,23 +8,42 @@ interface EditPresentationElementProps {
 	presentation_element: Schema.PresentationElementsEdit
 }
 
-// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:id/edit
-// @route: editThemePresentationsElement
+// @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:slug/edit
+// @route: editThemePresentationElement
 const EditPresentationElement = ({ presentation_element }: EditPresentationElementProps) => {
-	// copy @route above into the generic type assertion below
-	const { params } = usePageProps<"editThemePresentationsElement">()
+	const { params } = usePageProps<"editThemePresentationElement">()
 	const title = "Edit Element"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Elements", href: Routes.presentationElements() },
-			{ title: "PresentationElement", href: Routes.presentationElement(presentation_element.id) },
+			{
+				title: "Elements",
+				href: Routes.themePresentationElements(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+				),
+			},
+			{
+				title: "PresentationElement",
+				href: Routes.themePresentationElement(
+					params.circle_slug,
+					params.theme_slug,
+					params.presentation_slug,
+					presentation_element.slug,
+				),
+			},
 			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<PresentationElementForm
 					method="put"
-					to={ Routes.presentationElement() }
+					to={ Routes.themePresentationElement(
+						params.circle_slug,
+						params.theme_slug,
+						params.presentation_slug,
+						presentation_element.slug,
+					) }
 					presentation_element={ presentation_element }
 				/>
 			</Section>

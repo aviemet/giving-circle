@@ -22,9 +22,12 @@ module GivingCircle
     # in config/environments, which are processed later.
     #
     config.time_zone = "Pacific Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.eager_load_paths += %W[
+      #{config.root}/lib
+      #{config.root}/queries
+      #{config.root}/presenters
+    ].map { |path| Rails.root.join(path) }
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

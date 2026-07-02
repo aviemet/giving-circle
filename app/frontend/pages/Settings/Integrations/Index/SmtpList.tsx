@@ -1,31 +1,20 @@
 import { Group, Link, Table, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
 
-export interface SmtpListRecord {
-	id?: number
-	name: string
-	domain: string
-	username: string
-}
-
 interface SmtpListProps {
-	smtps: SmtpListRecord[]
+	smtps: Schema.SmtpsIndex[]
 }
 
-function mailRecordPath(id: number | undefined) {
-	if(id === undefined) return "#"
-
+function mailRecordPath(id: string) {
 	return `/settings/mail/${id}`
 }
 
-function mailEditPath(id: number | undefined) {
-	if(id === undefined) return "#"
-
+function mailEditPath(id: string) {
 	return `/settings/mail/${id}/edit`
 }
 
 const SmtpList = ({ smtps }: SmtpListProps) => {
-	const columns: TableColumn<SmtpListRecord>[] = [
+	const columns: TableColumn<Schema.SmtpsIndex>[] = [
 		{
 			accessor: "name",
 			title: "Name",
@@ -57,7 +46,7 @@ const SmtpList = ({ smtps }: SmtpListProps) => {
 	]
 
 	return (
-		<Table.TableProvider model="smtp" records={ smtps } selectable>
+		<Table.TableProvider model="smtp" selectable>
 			<Table.DataTable columns={ columns } records={ smtps } selectable />
 		</Table.TableProvider>
 	)

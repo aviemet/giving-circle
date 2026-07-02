@@ -1,12 +1,12 @@
 import { Group, Title, Menu } from "@/components"
 import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { Routes, withLayout } from "@/lib"
+import { withLayout } from "@/lib"
 
 import Empty from "./Empty"
-import SmtpList, { type SmtpListRecord } from "./SmtpList"
+import SmtpList from "./SmtpList"
 
 interface MailSettingsProps {
-	smtps: SmtpListRecord[]
+	smtps: Schema.SmtpsIndex[]
 }
 
 // @path: /settings/integrations

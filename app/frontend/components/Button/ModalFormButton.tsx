@@ -32,7 +32,8 @@ const ModalFormButton = ({
 	const handleSubmit = async(data: Record<string, unknown>) => {
 		const action = form.props.action
 		const method = form.props.method ?? "post"
-		if(!action) return
+
+		if(!action || typeof action !== "string") return
 
 		const response = await axios.request({
 			url: action,

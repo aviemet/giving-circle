@@ -5,7 +5,7 @@ interface ActivePresentationSettingsProps {
 }
 
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/settings
-// @route: themePresentationSettings
+// @route: themePresentationAdminSettings
 const ActivePresentationSettings = ({}: ActivePresentationSettingsProps) => {
 	return (
 		<>Settings</>

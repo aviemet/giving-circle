@@ -10,7 +10,6 @@
 #  updated_at :datetime         not null
 #
 class Presentation::Element < ApplicationRecord
-  include Ownable
   include PresentationFeature
   include PgSearch::Model
 

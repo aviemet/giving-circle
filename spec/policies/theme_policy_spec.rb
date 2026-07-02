@@ -1,27 +1,42 @@
 require "rails_helper"
 
 RSpec.describe ThemePolicy, type: :policy do
-  subject { described_class }
+  let(:circle) { create(:circle) }
+  let(:theme) { create(:theme, circle:) }
 
-  let(:user) { User.new }
+  describe "#update?" do
+    it "allows super admins" do
+      user = create(:user)
+      user.add_role(:super_admin)
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      expect(described_class.new(user, theme).update?).to be(true)
+    end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    it "allows circle admins" do
+      user = create(:user)
+      user.add_role(:admin, circle)
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      expect(described_class.new(user, theme).update?).to be(true)
+    end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    it "allows theme admins" do
+      user = create(:user)
+      user.add_role(:admin, theme)
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      expect(described_class.new(user, theme).update?).to be(true)
+    end
+
+    it "allows theme editors" do
+      user = create(:user)
+      user.add_role(:editor, theme)
+
+      expect(described_class.new(user, theme).update?).to be(true)
+    end
+
+    it "denies unrelated users" do
+      user = create(:user)
+
+      expect(described_class.new(user, theme).update?).to be(false)
+    end
   end
 end

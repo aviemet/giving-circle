@@ -1,5 +1,5 @@
 # if Rails.env.development?
-#   circle = Circle.find_by(slug: 'full-circle')
+#   circle = Circle.find_by(slug: "full-circle")
 #   user = User.first
 
 #   if circle.nil?
@@ -10,19 +10,19 @@
 #     user.add_role :admin, circle
 #   end
 
-#   if circle.members.count == 0
+#   if circle.memberships.empty?
 #     50.times do
-#       circle.members << FactoryBot.create(:member)
+#       FactoryBot.create(:membership, circle:)
 #     end
 #   end
 
-#   if circle.themes.count == 0
+#   if circle.themes.empty?
 #     10.times do
-#       theme = FactoryBot.create(:theme, circle: circle)
+#       theme = FactoryBot.create(:theme, circle:)
 
-#       presentation = FactoryBot.create(:presentation, theme: theme)
+#       presentation = FactoryBot.create(:presentation, theme:)
 
-#       presentation.orgs << FactoryBot.create(:org, circle: circle)
+#       presentation.orgs << FactoryBot.create(:org, circle:)
 #     end
 #   end
 # end

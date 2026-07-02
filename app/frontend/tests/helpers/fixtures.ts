@@ -9,12 +9,22 @@ export function createCirclePersisted(overrides?: Partial<Schema.CirclesPersiste
 	}
 }
 
+export function createCirclesOptions(overrides?: Partial<Schema.CirclesOptions>): Schema.CirclesOptions {
+	return {
+		id: "circle-1",
+		name: "Circle 1",
+		slug: "circle-1",
+		...overrides,
+	}
+}
+
 export function createThemePersisted(overrides?: Partial<Schema.ThemesPersisted>): Schema.ThemesPersisted {
 	return {
 		id: "theme-1",
 		name: "Theme 1",
 		slug: "theme-1",
 		status: "current",
+		circle: createCirclesOptions(),
 		...overrides,
 	}
 }
@@ -25,6 +35,7 @@ export function createThemeInertiaShare(overrides?: Partial<Schema.ThemesInertia
 		name: "Theme 1",
 		slug: "theme-1",
 		status: "current",
+		circle: createCirclesOptions(),
 		...overrides,
 	}
 }
@@ -71,12 +82,25 @@ export function createOrgPersisted(overrides?: Partial<Schema.OrgsPersisted>): S
 	}
 }
 
+export function createCircleMock(overrides?: Partial<Schema.CirclesMock>): Schema.CirclesMock {
+	return {
+		id: "circle-1",
+		name: "Circle 1",
+		slug: "circle-1",
+		themes: [createThemePersisted()],
+		orgs: [createOrgPersisted()],
+		memberships: [createMembershipPersisted()],
+		...overrides,
+	}
+}
+
 export function createSlideData(overrides?: Partial<SlideData>): SlideData {
 	return {
 		content: [],
 		root: {
-			type: "root",
-			props: {},
+			props: {
+				title: "Slide",
+			},
 		},
 		...overrides,
 	}
@@ -179,6 +203,33 @@ export function createOrgsIndex(overrides?: Partial<Schema.OrgsIndex>): Schema.O
 	}
 }
 
+export function createPresentationInertiaShare(
+	overrides?: Partial<Schema.PresentationsInertiaShare>,
+): Schema.PresentationsInertiaShare {
+	return {
+		id: "presentation-1",
+		active: false,
+		name: "Presentation 1",
+		slug: "presentation-1",
+		theme_id: "theme-1",
+		...overrides,
+	}
+}
+
+export function createPresentationsShow(overrides?: Partial<Schema.PresentationsShow>): Schema.PresentationsShow {
+	return {
+		id: "presentation-1",
+		active: false,
+		name: "Presentation 1",
+		slug: "presentation-1",
+		theme_id: "theme-1",
+		template_id: "",
+		slides: [],
+		slides_count: 0,
+		...overrides,
+	}
+}
+
 export function createThemesShow(overrides?: Partial<Schema.ThemesShow>): Schema.ThemesShow {
 	return {
 		id: "theme-1",
@@ -187,6 +238,22 @@ export function createThemesShow(overrides?: Partial<Schema.ThemesShow>): Schema
 		status: "current",
 		circle: createCirclePersisted(),
 		orgs: [],
+		orgs_count: 0,
+		presentations: [],
+		presentations_count: 0,
+		total_ask_cents: 0,
+		total_ask_currency: "USD",
+		...overrides,
+	}
+}
+
+export function createTemplatesIndex(overrides?: Partial<Schema.TemplatesIndex>): Schema.TemplatesIndex {
+	return {
+		id: "template-1",
+		circle: createCirclesOptions(),
+		name: "Template 1",
+		settings: {},
+		slug: "template-1",
 		...overrides,
 	}
 }
@@ -203,12 +270,32 @@ export function createPresentationsIndex(overrides?: Partial<Schema.Presentation
 	}
 }
 
+export function createTemplatesShow(overrides?: Partial<Schema.TemplatesShow>): Schema.TemplatesShow {
+	return {
+		...createTemplatePersisted(),
+		slides: [],
+		...overrides,
+	}
+}
+
 export function createSlidesIndex(overrides?: Partial<Schema.SlidesIndex>): Schema.SlidesIndex {
 	return {
 		id: "slide-1",
 		slug: "slide-1",
 		data: createSlideData(),
 		title: "Slide 1",
+		...overrides,
+	}
+}
+
+export function createPresentationsFormData(overrides?: Partial<Schema.PresentationsFormData>): Schema.PresentationsFormData {
+	return {
+		active: true,
+		name: "Presentation 1",
+		slides: [],
+		theme_id: "theme-1",
+		template_id: "",
+		id: "presentation-1",
 		...overrides,
 	}
 }
