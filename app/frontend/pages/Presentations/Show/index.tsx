@@ -46,7 +46,7 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 				cancel: t("presentations.show.cancel"),
 			},
 			onConfirm: () => {
-				router.visit(Routes.themePresentationActivate(
+				router.post(Routes.themePresentationActivate(
 					params.circle_slug,
 					params.theme_slug,
 					presentation.slug,
