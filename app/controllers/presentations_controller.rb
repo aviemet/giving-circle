@@ -62,8 +62,7 @@ class PresentationsController < ApplicationController
     }
   end
 
-  # TODO: I think should be an API endpoint, or at the very least a POST route so it can't just be hit from the browser
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/activate (theme_presentation_activate)
+  # @route POST /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/activate (theme_presentation_activate)
   def activate
     authorize presentation
 

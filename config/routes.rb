@@ -132,8 +132,7 @@ Rails.application.routes.draw do
           get "admin/messaging", to: "presentations/active#messaging", as: :messaging
           get "admin/settings", to: "presentations/active#settings", as: :admin_settings
 
-          # TODO: we probably only need 1 settings path for a presentation
-          get "activate", to: "presentations#activate", as: :activate
+          post "activate", to: "presentations#activate", as: :activate
           get "settings", to: "presentations#settings", as: :settings
           post "save_as_template", to: "presentations#save_as_template", as: :save_as_template
         end

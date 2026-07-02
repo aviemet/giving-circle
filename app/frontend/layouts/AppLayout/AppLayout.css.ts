@@ -34,9 +34,9 @@ export const navMenu = css`
   .mantine-Accordion-content {
     padding: 0;
 
-  .mantine-NavLink-root .mantine-NavLink-body {
-    padding-left: 0.8rem;
-  }
+    .mantine-NavLink-root .mantine-NavLink-body {
+      padding-left: 0.8rem;
+    }
   }
 
   [data-accordion][data-variant="separated"] > * {
@@ -53,7 +53,7 @@ export const navMenu = css`
     border: 1px solid var(--mantine-color-dark-4);
   }
 
-  & [data-accordion][data-variant="separated"] .mantine-NavLink-root:where(:not([data-active], [aria-current="page"])):where(:hover, :active) {
+  ${ vars.lightSelector } & [data-accordion][data-variant="separated"] .mantine-NavLink-root:where(:not([data-active], [aria-current="page"])):where(:hover, :active) {
     background-color: var(--mantine-color-gray-2);
     color: var(--mantine-color-text);
   }
