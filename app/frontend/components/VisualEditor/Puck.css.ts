@@ -11,6 +11,12 @@ export const puckDrawerItemIcon = css``
 export const puckOutline = css``
 export const presentationSlot = css``
 
+export const puckPreviewContainer = css`
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+`
+
 export const puckSlideRoot = css`
 	width: 100%;
 	min-height: 100%;
@@ -127,5 +133,17 @@ export const puckRoot = css`
 
 	& [class*="PuckLayout-inner"] {
 		height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+	}
+
+	& [data-puck-preview],
+	& [data-puck-entry],
+	& [class*="PuckPreview-frame"] {
+		height: 100%;
+		min-height: 100%;
+	}
+
+	& .${ puckSlideRoot } [class*="DropZone--isRootZone"] {
+		height: 100%;
+		min-height: 100%;
 	}
 `

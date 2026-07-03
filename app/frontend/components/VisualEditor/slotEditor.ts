@@ -1,5 +1,7 @@
 import { type Data } from "@measured/puck"
 
+import { defaultBackgroundImageValue } from "./fields/backgroundImage"
+
 export const SLOT_MIN_EMPTY_HEIGHT = 96
 
 
@@ -39,6 +41,7 @@ export function createStarterSlideData(): Partial<Data> {
 		root: {
 			props: {
 				title: "Slide",
+				backgroundImage: defaultBackgroundImageValue(),
 			},
 		},
 	}

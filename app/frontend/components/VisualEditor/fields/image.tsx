@@ -1,7 +1,7 @@
 import { Field } from "@measured/puck"
 
 import { DropzoneInput } from "@/components/Inputs"
-import { IMAGE_MIME_TYPE } from "@/lib"
+import { activeStorageBlobRedirectUrl, IMAGE_MIME_TYPE } from "@/lib"
 
 import { PuckFieldLabel } from "./PuckFieldLabel"
 
@@ -14,9 +14,7 @@ function imageField({ label = "Image" }: Partial<Field<string>> = {}): Field<str
 		render: ({ field, name, onChange, value }) => {
 			const handleUploadComplete = (signedIds: string[]) => {
 				if(signedIds.length > 0) {
-					const signedId = signedIds[0]
-					const imageUrl = `/rails/active_storage/blobs/redirect/${signedId}/image`
-					onChange(imageUrl)
+					onChange(activeStorageBlobRedirectUrl(signedIds[0]))
 				}
 			}
 

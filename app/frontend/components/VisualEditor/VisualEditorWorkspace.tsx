@@ -24,6 +24,7 @@ import {
 	type EditorSaveStatus,
 } from "./editorPersistence"
 import { HeaderActions, VisualEditorUiProvider } from "./HeaderActions"
+import { PreviewWithPageSelection } from "./PreviewWithPageSelection"
 import { config } from "./puck.config"
 import * as classes from "./Puck.css"
 
@@ -169,6 +170,9 @@ export function VisualEditorWorkspace({
 				</div>
 			),
 			headerActions: () => <HeaderActions />,
+			preview: ({ children }: { children: React.ReactNode }) => (
+				<PreviewWithPageSelection>{ children }</PreviewWithPageSelection>
+			),
 		}
 	}, [])
 
