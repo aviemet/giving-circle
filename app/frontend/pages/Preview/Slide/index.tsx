@@ -82,12 +82,14 @@ const PreviewSlide = () => {
 		<>
 			<Head title="Slide preview" />
 			<PresentationDataProvider value={ value }>
-				<div style={ { width: "100%", minHeight: "100vh", backgroundColor: "#000" } }>
-					<Render
-						config={ config as Config }
-						data={ slideData }
-						metadata={ {} }
-					/>
+				<div style={ { width: "100%", minHeight: "100vh", height: "100vh", backgroundColor: "#000", overflow: "hidden" } }>
+					<div style={ { width: "100%", height: "100%" } }>
+						<Render
+							config={ config as Config }
+							data={ slideData }
+							metadata={ {} }
+						/>
+					</div>
 				</div>
 			</PresentationDataProvider>
 		</>

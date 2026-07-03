@@ -1,7 +1,4 @@
 import { type Config } from "@measured/puck"
-import clsx from "clsx"
-
-import { Box } from "@/components"
 
 import {
 	cardConfig, type CardProps,
@@ -10,16 +7,16 @@ import {
 	headingConfig, type HeadingProps,
 	imageConfig, type ImageProps,
 	orgsIteratorConfig, type OrgsIteratorProps,
+	SlideRoot,
+	type SlideRootProps,
 } from "./components"
 import {
+	backgroundImageField,
 	colorField,
+	defaultBackgroundImageValue,
 } from "./fields"
-import * as classes from "./Puck.css"
 
-type RootProps = {
-	title: string
-	backgroundColor: string
-}
+type RootProps = SlideRootProps
 
 type ComponentProps = {
 	Grid: GridProps
@@ -42,21 +39,16 @@ export const config: Config<{
 			backgroundColor: colorField({
 				label: "Background Color",
 			}),
+			backgroundImage: backgroundImageField({
+				label: "Background Image",
+			}),
 		},
 		defaultProps: {
 			title: "Slide",
 			backgroundColor: "#000000",
+			backgroundImage: defaultBackgroundImageValue(),
 		},
-		render: ({ children, backgroundColor }) => {
-			return (
-				<Box
-					className={ clsx(classes.puckSlideRoot) }
-					style={ { "--puck-slide-root-bg": backgroundColor } }
-				>
-					{ children }
-				</Box>
-			)
-		},
+		render: (props) => <SlideRoot { ...props } />,
 	},
 
 	components: {
