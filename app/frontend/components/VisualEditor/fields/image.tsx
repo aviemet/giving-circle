@@ -3,6 +3,7 @@ import { Field } from "@measured/puck"
 import { DropzoneInput } from "@/components/Inputs"
 import { activeStorageBlobRedirectUrl, IMAGE_MIME_TYPE } from "@/lib"
 
+import * as classes from "../puckFieldStyles.css"
 import { PuckFieldLabel } from "./PuckFieldLabel"
 
 function imageField(): Field<string>
@@ -27,11 +28,11 @@ function imageField({ label = "Image" }: Partial<Field<string>> = {}): Field<str
 						onUploadComplete={ handleUploadComplete }
 					/>
 					{ value && (
-						<div style={ { marginTop: "1rem" } }>
+						<div className={ classes.puckFieldUploadedImageHost }>
 							<img
 								src={ value }
 								alt="Uploaded image"
-								style={ { maxWidth: "100%", height: "auto" } }
+								className={ classes.puckFieldUploadedImage }
 							/>
 						</div>
 					) }

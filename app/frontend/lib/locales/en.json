@@ -504,6 +504,7 @@
               "gap": "Gap",
               "justify": "Justify",
               "overflow": "Overflow",
+              "unit": "Unit",
               "wrap": "Wrap"
             },
             "margin": "Margin",

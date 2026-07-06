@@ -1,4 +1,3 @@
-export { puckFieldClassNames } from "../puckFieldStyles"
 export { PuckFieldLabel } from "./PuckFieldLabel"
 export { colorField, optionalColorField } from "./color"
 export { alignmentField } from "./alignment"

@@ -3,7 +3,7 @@ import { Field } from "@measured/puck"
 import { TagsInput } from "@/components/Inputs"
 
 import { dataAccess, getFlatOptions } from "../dynamicData/dataAccess"
-import { puckFieldClassNames } from "../puckFieldStyles"
+import * as classes from "../puckFieldStyles.css"
 import { PuckFieldLabel } from "./PuckFieldLabel"
 
 const dynamicTagOptionValues = getFlatOptions(dataAccess).map(option => option.value)
@@ -24,7 +24,7 @@ function tagsField(params?: Partial<Field<string>> & { options?: string[] }): Fi
 						key={ id }
 						name={ name }
 						wrapper={ false }
-						className={ puckFieldClassNames.tagsInput }
+						className={ classes.puckTagsInput }
 						value={ value }
 						onChange={ onChange }
 						placeholder="Type # to add hashtags..."

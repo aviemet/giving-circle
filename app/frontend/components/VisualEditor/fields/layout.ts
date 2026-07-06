@@ -4,7 +4,12 @@ import { type CSSProperties } from "react"
 import { i18n } from "@/lib/i18n"
 
 import { optionalColorField } from "./color"
-import { spacingField, type SpacingGroup } from "./spacing"
+import {
+	spacingField,
+	normalizeSpacingGroup,
+	spacingCSSValue,
+	type SpacingGroup,
+} from "./spacing"
 
 export type SpacingProps = {
 	margin?: SpacingGroup
@@ -150,25 +155,25 @@ function overflowStyle(flex: Partial<FlexProps>): CSSProperties {
 }
 
 export const buildLayoutStyle = (props: LayoutStyleProps): CSSProperties => {
-	const marginGroup = props.margin
-	const paddingGroup = props.padding
+	const marginGroup = normalizeSpacingGroup(props.margin)
+	const paddingGroup = normalizeSpacingGroup(props.padding)
 	const flex = flexFromProps(props)
 
 	return {
 		...(marginGroup
 			? {
-				marginTop: marginGroup.top,
-				marginRight: marginGroup.right,
-				marginBottom: marginGroup.bottom,
-				marginLeft: marginGroup.left,
+				marginTop: spacingCSSValue(marginGroup.top, marginGroup.unit),
+				marginRight: spacingCSSValue(marginGroup.right, marginGroup.unit),
+				marginBottom: spacingCSSValue(marginGroup.bottom, marginGroup.unit),
+				marginLeft: spacingCSSValue(marginGroup.left, marginGroup.unit),
 			}
 			: {}),
 		...(paddingGroup
 			? {
-				paddingTop: paddingGroup.top,
-				paddingRight: paddingGroup.right,
-				paddingBottom: paddingGroup.bottom,
-				paddingLeft: paddingGroup.left,
+				paddingTop: spacingCSSValue(paddingGroup.top, paddingGroup.unit),
+				paddingRight: spacingCSSValue(paddingGroup.right, paddingGroup.unit),
+				paddingBottom: spacingCSSValue(paddingGroup.bottom, paddingGroup.unit),
+				paddingLeft: spacingCSSValue(paddingGroup.left, paddingGroup.unit),
 			}
 			: {}),
 		...(props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}),

@@ -1,15 +1,67 @@
 import { Field } from "@measured/puck"
 import { useState } from "react"
 
-import { NumberInput } from "@/components/Inputs"
+import { NumberInput, Select } from "@/components/Inputs"
+import { i18n } from "@/lib/i18n"
 
 import { PuckFieldLabel } from "./PuckFieldLabel"
+import * as classes from "./spacingField.css"
 
-export type SpacingGroup = {
+export type SpacingUnit = "px" | "rem" | "em" | "%"
+
+export type SpacingSides = {
 	top: number
 	right: number
 	bottom: number
 	left: number
+}
+
+export type SpacingGroup = SpacingSides & {
+	unit?: SpacingUnit
+}
+
+const spacingUnitOptions = [
+	{ label: "px", value: "px" },
+	{ label: "rem", value: "rem" },
+	{ label: "em", value: "em" },
+	{ label: "%", value: "%" },
+] as const satisfies ReadonlyArray<{ label: string, value: SpacingUnit }>
+
+function isSpacingUnit(value: string | null): value is SpacingUnit {
+	return value === "px"
+		|| value === "rem"
+		|| value === "em"
+		|| value === "%"
+}
+
+export function normalizeSpacingGroup(
+	group: Partial<SpacingGroup> | undefined,
+): SpacingGroup | undefined {
+	if(!group) {
+		return undefined
+	}
+
+	return {
+		top: group.top ?? 0,
+		right: group.right ?? 0,
+		bottom: group.bottom ?? 0,
+		left: group.left ?? 0,
+		unit: group.unit ?? "px",
+	}
+}
+
+export function spacingCSSValue(value: number, unit: SpacingUnit = "px"): string {
+	return `${value}${unit}`
+}
+
+function defaultSpacingGroup(): SpacingGroup {
+	return {
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0,
+		unit: "px",
+	}
 }
 
 interface SpacingFieldControlProps {
@@ -20,180 +72,117 @@ interface SpacingFieldControlProps {
 
 function SpacingFieldControl({ name, value, onChange }: SpacingFieldControlProps) {
 	const [localValue, setLocalValue] = useState<SpacingGroup>(() => {
-		if(value) return value
-		return {
-			top: 0,
-			right: 0,
-			bottom: 0,
-			left: 0,
-		}
+		return normalizeSpacingGroup(value) ?? defaultSpacingGroup()
 	})
 
-	const handleSideChange = (side: keyof SpacingGroup, sideValue: string | number) => {
-		const numericValue = typeof sideValue === "number" ? sideValue : Number(sideValue)
-		const next: SpacingGroup = {
+	const updateSpacing = (patch: Partial<SpacingGroup>) => {
+		const next = {
 			...localValue,
-			[side]: Number.isNaN(numericValue) ? 0 : numericValue,
+			...patch,
 		}
 		setLocalValue(next)
 		onChange(next)
 	}
 
+	const handleSideChange = (side: keyof SpacingSides, sideValue: string | number) => {
+		const numericValue = typeof sideValue === "number" ? sideValue : Number(sideValue)
+		updateSpacing({
+			[side]: Number.isNaN(numericValue) ? 0 : numericValue,
+		})
+	}
+
+	const unitLabel = i18n.t("slides.editor.fields.layout.labels.unit")
+
 	return (
-		<div
-			style={ {
-				display: "flex",
-				flexDirection: "column",
-				rowGap: "0.5rem",
-			} }
-		>
-			<div
-				style={ {
-					display: "flex",
-					justifyContent: "center",
-				} }
-			>
-				<div
-					style={ {
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-						rowGap: "0.25rem",
-					} }
-				>
-					<div
-						style={ {
-							fontSize: "0.625rem",
-							letterSpacing: "0.06em",
-							textTransform: "uppercase",
-							opacity: 0.7,
+		<div className={ classes.spacingFieldRoot }>
+			<div className={ classes.spacingFieldUnitRow }>
+				<div className={ classes.spacingFieldUnitLabel }>
+					{ unitLabel }
+				</div>
+				<div className={ classes.spacingFieldUnitSelect }>
+					<Select
+						wrapper={ false }
+						name={ `${name}.unit` }
+						value={ localValue.unit }
+						options={ [...spacingUnitOptions] }
+						onChange={ (nextValue) => {
+							if(!nextValue || !isSpacingUnit(nextValue)) return
+
+							updateSpacing({ unit: nextValue })
 						} }
-					>
+					/>
+				</div>
+			</div>
+
+			<div className={ classes.spacingFieldRow }>
+				<div className={ classes.spacingFieldSide }>
+					<div className={ classes.spacingFieldSideLabel }>
 						Top
 					</div>
-					<NumberInput
-						wrapper={ false }
-						name={ `${name}.top` }
-						value={ localValue.top }
-						onChange={ (sideValue) => handleSideChange("top", sideValue) }
-						min={ 0 }
-						size="xs"
-						step={ 1 }
-					/>
+					<div className={ classes.spacingFieldControl }>
+						<NumberInput
+							wrapper={ false }
+							name={ `${name}.top` }
+							value={ localValue.top }
+							onChange={ (sideValue) => handleSideChange("top", sideValue) }
+							min={ 0 }
+							step={ 1 }
+						/>
+					</div>
 				</div>
 			</div>
 
-			<div
-				style={ {
-					display: "grid",
-					gridTemplateColumns: "auto minmax(0, 1fr) auto",
-					alignItems: "center",
-					columnGap: "0.5rem",
-				} }
-			>
-				<div
-					style={ {
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-						rowGap: "0.25rem",
-					} }
-				>
-					<div
-						style={ {
-							fontSize: "0.625rem",
-							letterSpacing: "0.06em",
-							textTransform: "uppercase",
-							opacity: 0.7,
-						} }
-					>
+			<div className={ classes.spacingFieldGrid }>
+				<div className={ classes.spacingFieldSide }>
+					<div className={ classes.spacingFieldSideLabel }>
 						Left
 					</div>
-					<NumberInput
-						wrapper={ false }
-						name={ `${name}.left` }
-						value={ localValue.left }
-						onChange={ (sideValue) => handleSideChange("left", sideValue) }
-						min={ 0 }
-						size="xs"
-						step={ 1 }
-					/>
+					<div className={ classes.spacingFieldControl }>
+						<NumberInput
+							wrapper={ false }
+							name={ `${name}.left` }
+							value={ localValue.left }
+							onChange={ (sideValue) => handleSideChange("left", sideValue) }
+							min={ 0 }
+							step={ 1 }
+						/>
+					</div>
 				</div>
 
-				<div
-					style={ {
-						borderRadius: "0.25rem",
-						borderWidth: 1,
-						borderStyle: "dashed",
-						borderColor: "var(--puck-color-grey-08, rgba(255,255,255,0.15))",
-						height: "2.75rem",
-						backgroundColor: "rgba(255, 255, 255, 0.02)",
-					} }
-				/>
+				<div className={ classes.spacingFieldBox } />
 
-				<div
-					style={ {
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-						rowGap: "0.25rem",
-					} }
-				>
-					<div
-						style={ {
-							fontSize: "0.625rem",
-							letterSpacing: "0.06em",
-							textTransform: "uppercase",
-							opacity: 0.7,
-						} }
-					>
+				<div className={ classes.spacingFieldSide }>
+					<div className={ classes.spacingFieldSideLabel }>
 						Right
 					</div>
-					<NumberInput
-						wrapper={ false }
-						name={ `${name}.right` }
-						value={ localValue.right }
-						onChange={ (sideValue) => handleSideChange("right", sideValue) }
-						min={ 0 }
-						size="xs"
-						step={ 1 }
-					/>
+					<div className={ classes.spacingFieldControl }>
+						<NumberInput
+							wrapper={ false }
+							name={ `${name}.right` }
+							value={ localValue.right }
+							onChange={ (sideValue) => handleSideChange("right", sideValue) }
+							min={ 0 }
+							step={ 1 }
+						/>
+					</div>
 				</div>
 			</div>
 
-			<div
-				style={ {
-					display: "flex",
-					justifyContent: "center",
-				} }
-			>
-				<div
-					style={ {
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-						rowGap: "0.25rem",
-					} }
-				>
-					<div
-						style={ {
-							fontSize: "0.625rem",
-							letterSpacing: "0.06em",
-							textTransform: "uppercase",
-							opacity: 0.7,
-						} }
-					>
+			<div className={ classes.spacingFieldRow }>
+				<div className={ classes.spacingFieldSide }>
+					<div className={ classes.spacingFieldSideLabel }>
 						Bottom
 					</div>
-					<NumberInput
-						wrapper={ false }
-						name={ `${name}.bottom` }
-						value={ localValue.bottom }
-						onChange={ (sideValue) => handleSideChange("bottom", sideValue) }
-						min={ 0 }
-						size="xs"
-						step={ 1 }
-					/>
+					<div className={ classes.spacingFieldControl }>
+						<NumberInput
+							wrapper={ false }
+							name={ `${name}.bottom` }
+							value={ localValue.bottom }
+							onChange={ (sideValue) => handleSideChange("bottom", sideValue) }
+							min={ 0 }
+							step={ 1 }
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -31,6 +31,7 @@ function colorField({ label = "Color" }: Partial<Field<string>> = {}): Field<str
 			return (
 				<PuckFieldLabel label={ label }>
 					<ColorInput
+						wrapper={ false }
 						name={ name }
 						value={ value }
 						onChange={ onChange }
@@ -55,6 +56,7 @@ export function optionalColorField(
 			return (
 				<PuckFieldLabel label={ label }>
 					<ColorInput
+						wrapper={ false }
 						name={ name }
 						value={ value ?? "" }
 						onChange={ (v) => onChange(v) }

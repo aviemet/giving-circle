@@ -1,7 +1,7 @@
 import { FieldLabel } from "@measured/puck"
 import { type ReactNode } from "react"
 
-import { puckFieldClassNames } from "../puckFieldStyles"
+import * as classes from "../puckFieldStyles.css"
 
 interface PuckFieldLabelProps {
 	label: string
@@ -17,7 +17,7 @@ export function PuckFieldLabel({ label, children, readOnly, icon }: PuckFieldLab
 			el="div"
 			readOnly={ readOnly }
 			icon={ icon }
-			className={ puckFieldClassNames.fieldLabel }
+			className={ classes.puckFieldLabel }
 		>
 			{ children }
 		</FieldLabel>
