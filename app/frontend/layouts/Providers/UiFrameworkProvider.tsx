@@ -2,22 +2,14 @@ import { MantineProvider, createTheme, px, type CSSVariablesResolver } from "@ma
 import { ModalsProvider } from "@mantine/modals"
 import { Notifications } from "@mantine/notifications"
 import { ContextMenuProvider } from "mantine-contextmenu"
-import React, { useMemo } from "react"
+import React, { useEffect, useMemo } from "react"
 
 import { Flash } from "@/components"
 import { toKebabCase } from "@/lib"
-import { useInit } from "@/lib/hooks"
+import { useInit, usePageProps } from "@/lib/hooks"
+import { defaultColor } from "@/lib/theme"
 import { EDITOR_SEMANTIC_KEYS, EDITOR_SEMANTIC_VAR_MAP, theme as themeObject, vars, type CustomThemeOther } from "@/lib/theme"
 import { useLayoutStore } from "@/store"
-
-import "./reset.css"
-import "@mantine/core/styles.css"
-import "@mantine/tiptap/styles.css"
-import "@mantine/dates/styles.css"
-import "@mantine/notifications/styles.css"
-import "mantine-contextmenu/styles.layer.css"
-import "mantine-datatable/styles.css"
-import "./global.css"
 
 function isCustomThemeOther(other: unknown): other is CustomThemeOther {
 	return (
@@ -31,9 +23,11 @@ function isCustomThemeOther(other: unknown): other is CustomThemeOther {
 
 export function UiFrameworkProvider({ children }: { children: React.ReactNode }) {
 	/**
-	 * Primary color customization
-	 */
+   * Primary color customization
+   */
+	const { auth } = usePageProps()
 	const primaryColor = useLayoutStore((state) => state.primaryColor)
+	const setPrimaryColor = useLayoutStore((state) => state.setPrimaryColor)
 
 	const theme = useMemo(() => createTheme({ ...themeObject, primaryColor }), [primaryColor])
 
@@ -85,6 +79,11 @@ export function UiFrameworkProvider({ children }: { children: React.ReactNode })
 		}
 	}, [primaryColor])
 
+
+	useEffect(() => {
+		const saved = auth.user.user_preferences?.primaryColor
+		setPrimaryColor(saved ?? defaultColor)
+	}, [auth.user.user_preferences?.primaryColor, setPrimaryColor])
 
 	useInit(() => {
 		/* eslint-disable no-console */

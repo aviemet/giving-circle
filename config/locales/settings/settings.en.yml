@@ -1,0 +1,6 @@
+---
+en:
+  settings:
+    appearance:
+      notices:
+        updated: Appearance settings successfully updated

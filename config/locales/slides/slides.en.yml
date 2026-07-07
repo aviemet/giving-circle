@@ -3,30 +3,20 @@ en:
   slides:
     editor:
       fields:
-        layout:
-          align:
-            center: Center
-            end: End
-            start: Start
-            stretch: Stretch
-          background_color: Background Color
-          border_color: Border Color
-          border_radius: Border Radius
-          border_width: Border Width
-          direction:
-            column: Column
-            row: Row
-          display:
-            block: Block
-            flex: Flex
-          flex: Flex
+        color:
+          background: Background Color
+        spacing:
+          margin: Margin
+          padding: Padding
+          labels:
+            unit: Unit
+        border:
+          width: Border Width
+          radius: Border Radius
+          color: Border Color
+        flex:
+          label: Flex
           gap: Gap
-          justify:
-            center: Center
-            end: End
-            space_around: Space Around
-            space_between: Space Between
-            start: Start
           labels:
             align: Align
             direction: Direction
@@ -34,20 +24,61 @@ en:
             gap: Gap
             justify: Justify
             overflow: Overflow
-            unit: Unit
             wrap: Wrap
-          margin: Margin
-          min_height: Min Height
-          min_width: Min Width
+          align:
+            center: Center
+            end: End
+            start: Start
+            stretch: Stretch
+          direction:
+            column: Column
+            row: Row
+          display:
+            block: Block
+            flex: Flex
+          justify:
+            center: Center
+            end: End
+            space_around: Space Around
+            space_between: Space Between
+            start: Start
           overflow:
             auto_scroll: Auto (scroll)
             hidden: Hidden
             visible: Visible
-          padding: Padding
-          width: Width
           wrap:
             nowrap: Nowrap
             wrap: Wrap
+        dimension:
+          width: Width
+          min_width: Min Width
+          min_height: Min Height
+        sizing:
+          align_self:
+            auto: Auto
+            center: Center
+            end: End
+            start: Start
+            stretch: Stretch
+          custom_placeholder: "flex: 1 1 280px; max-width: 50%"
+          fine_tune:
+            align_self: Align Self
+            flex_grow: Flex Grow
+            flex_shrink: Flex Shrink
+            title: Fine Tune
+          label: Size
+          labels:
+            clamp_max: Max
+            clamp_min: Min
+            clamp_preferred: Preferred
+            max_width: Max Width
+            width: Width
+          modes:
+            auto: Auto
+            clamp: Responsive
+            custom: Custom CSS
+            fill: Fill Space
+            fixed: Fixed Width
       header:
         close: Close
         close_without_saving: Close without saving

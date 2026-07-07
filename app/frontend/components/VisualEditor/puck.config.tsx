@@ -1,13 +1,14 @@
 import { type Config } from "@measured/puck"
 
 import {
-	cardConfig, type CardProps,
-	containerConfig, type ContainerProps,
-	gridConfig, type GridProps,
-	headingConfig, type HeadingProps,
-	imageConfig, type ImageProps,
-	orgsIteratorConfig, type OrgsIteratorProps,
+	cardConfig,
+	containerConfig,
+	gridConfig,
+	headingConfig,
+	imageConfig,
+	orgsIteratorConfig,
 	SlideRoot,
+	type PuckComponentProps,
 	type SlideRootProps,
 } from "./components"
 import {
@@ -18,17 +19,9 @@ import {
 
 type RootProps = SlideRootProps
 
-type ComponentProps = {
-	Grid: GridProps
-	Container: ContainerProps
-	Heading: HeadingProps
-	Card: CardProps
-	Image: ImageProps
-	OrgsIterator: OrgsIteratorProps
-}
 
 export const config: Config<{
-	components: ComponentProps
+	components: PuckComponentProps
 	root: RootProps
 	categories: ["layout", "content", "data", "other"]
 }> = {

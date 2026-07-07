@@ -78,6 +78,22 @@ export const urlParams = {
   "settingsNotifications": {
     "params": []
   },
+  "settingsSmtps": {
+    "params": []
+  },
+  "newSettingsSmtp": {
+    "params": []
+  },
+  "editSettingsSmtp": {
+    "params": [
+      "id"
+    ]
+  },
+  "settingsSmtp": {
+    "params": [
+      "id"
+    ]
+  },
   "apiUsers": {
     "params": []
   },
@@ -97,6 +113,11 @@ export const urlParams = {
     ]
   },
   "apiCircleMock": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiCircleSpotlights": {
     "params": [
       "circle_slug"
     ]
@@ -175,9 +196,6 @@ export const urlParams = {
     ]
   },
   "apiSearches": {
-    "params": []
-  },
-  "apiSpotlights": {
     "params": []
   },
   "previewSlide": {

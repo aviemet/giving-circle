@@ -2551,6 +2551,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/spotlight@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "@mantine/spotlight@npm:9.4.1"
+  dependencies:
+    "@mantine/store": "npm:9.4.1"
+  peerDependencies:
+    "@mantine/core": 9.4.1
+    "@mantine/hooks": 9.4.1
+    react: ^19.2.0
+    react-dom: ^19.2.0
+  checksum: 10/53a000ac83106d0af1a281b3aa95f4d6d4c0b57989f919119ba8cd9e6215aa8ec727b9d822c76909d8f8a59d45fa47a85c1a046f25bae063d86db84a4a39237c
+  languageName: node
+  linkType: hard
+
 "@mantine/ssr@npm:6.0.22":
   version: 6.0.22
   resolution: "@mantine/ssr@npm:6.0.22"
@@ -2572,6 +2586,15 @@ __metadata:
   peerDependencies:
     react: ^19.2.0
   checksum: 10/c3162bf5a378bdc8c3384ffb84045fd3917f6a7533dad4acb1e5fed4259a49cb37df05c18d3ffa24f8c744a1c1e5aaa92aba3ad828add488011f32e06b8f8b5a
+  languageName: node
+  linkType: hard
+
+"@mantine/store@npm:9.4.1":
+  version: 9.4.1
+  resolution: "@mantine/store@npm:9.4.1"
+  peerDependencies:
+    react: ^19.2.0
+  checksum: 10/fc4557d57ecee3513a9df20c85fc58b7fd3d0e66538578f12f5dc43fd5f1004207154d9f8f47d90e58f9fa307d6a16812c2ea62bf85eb380894238c5c31d8014
   languageName: node
   linkType: hard
 
@@ -7906,6 +7929,7 @@ __metadata:
     "@mantine/notifications": "npm:^9.1.1"
     "@mantine/prism": "npm:^6.0.22"
     "@mantine/rte": "npm:^5.10.5"
+    "@mantine/spotlight": "npm:^9.4.1"
     "@mantine/tiptap": "npm:^9.1.1"
     "@mantine/vanilla-extract": "npm:^9.1.1"
     "@measured/puck": "npm:^0.20.2"

@@ -2,8 +2,8 @@ import { router } from "@inertiajs/react"
 import React from "react"
 
 import { Page, Box, Section, Tabs, Paper } from "@/components"
-import { px } from "@/lib"
-import { useViewportSize, useLocation, useTheme } from "@/lib/hooks"
+import { Routes, px } from "@/lib"
+import { useViewportSize, useLocation, useTheme, usePageProps } from "@/lib/hooks"
 
 interface SettingsLayoutProps {
 	children: React.ReactNode
@@ -23,17 +23,40 @@ const tabs: Tab[] = [
 	{ name: "integrations", label: "Integrations" },
 ]
 
+const settingsTabRoutes: Record<string, () => string> = {
+	general: Routes.settingsGeneral,
+	appearance: Routes.settingsAppearance,
+	notifications: Routes.settingsNotifications,
+	integrations: Routes.settingsIntegrations,
+}
+
 function SettingsLayoutComponent({ children }: SettingsLayoutProps) {
 	const title = "Settings"
 	const { width } = useViewportSize()
 	const theme = useTheme()
+	const { params, active_circle, circles } = usePageProps()
+	const circleSlug = typeof params.circle_slug === "string"
+		? params.circle_slug
+		: active_circle?.slug ?? circles?.[0]?.slug
 	const usedWidth = width === 0 ? window.innerWidth : width
 	const isMobileSized = usedWidth < px(theme.breakpoints.sm)
 
 	const { paths } = useLocation()
 
 	const handleTabChange = (value: string | null) => {
-		router.get(`/admin/settings/${value}`, {}, { preserveState: true })
+		if(!value) return
+
+		if(value === "mail") {
+			if(!circleSlug) return
+
+			router.get(Routes.settingsSmtps({ circle_slug: circleSlug }), {}, { preserveState: true })
+			return
+		}
+
+		const routeForTab = settingsTabRoutes[value]
+		if(!routeForTab) return
+
+		router.get(routeForTab(), {}, { preserveState: true })
 	}
 
 	return (

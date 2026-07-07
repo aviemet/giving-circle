@@ -1,8 +1,6 @@
 import { Page } from "@/components"
-import { NewIcon } from "@/components/Icons"
 import { UsersTable } from "@/domains/users/Table"
 import { IndexTableTemplate } from "@/features"
-import { Routes } from "@/lib"
 
 
 interface UserIndexProps {
@@ -20,12 +18,6 @@ const UserIndex = ({ users, pagination }: UserIndexProps) => {
 			<IndexTableTemplate
 				model="users"
 				pagination={ pagination }
-			// contextMenu={ {
-			// 	deleteRoute: Routes.users(),
-			// 	options: [
-			// 		{ label: 'Invite New User', href: Routes.newUser(), icon: <NewIcon /> },
-			// 	],
-			// } }
 			>
 				<UsersTable records={ users } pagination={ pagination } model="users" />
 			</IndexTableTemplate>

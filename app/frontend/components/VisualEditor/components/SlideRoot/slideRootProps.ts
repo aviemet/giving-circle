@@ -1,4 +1,4 @@
-import type { BackgroundImageValue } from "../../fields/backgroundImage"
+import { type BackgroundImageValue } from "../../fields/backgroundImage"
 
 export type SlideRootProps = {
 	title: string

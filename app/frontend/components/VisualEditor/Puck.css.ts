@@ -3,7 +3,7 @@ import { css } from "@linaria/core"
 
 import { theme } from "@/lib"
 
-export { puckFields } from "./puckFieldStyles.css"
+export { puckFields } from "./fields/puckFieldStyles.css"
 
 export const puckDrawer = css``
 export const puckDrawerItem = css``

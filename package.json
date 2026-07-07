@@ -41,6 +41,7 @@
     "@mantine/notifications": "^9.1.1",
     "@mantine/prism": "^6.0.22",
     "@mantine/rte": "^5.10.5",
+    "@mantine/spotlight": "^9.4.1",
     "@mantine/tiptap": "^9.1.1",
     "@mantine/vanilla-extract": "^9.1.1",
     "@measured/puck": "^0.20.2",

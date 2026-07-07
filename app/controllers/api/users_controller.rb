@@ -1,6 +1,12 @@
 class Api::UsersController < Api::ApiController
   expose :user
 
+  strong_params :user, permit: [
+    :email, :password, :active,
+    person: [:first_name, :last_name],
+    user_preferences: [:colorScheme, :primaryColor]
+  ]
+
   # @route PATCH /api/users/:id (api_user)
   # @route PUT /api/users/:id (api_user)
   def update
@@ -30,12 +36,6 @@ class Api::UsersController < Api::ApiController
     )
       head :ok, content_type: "text/html"
     end
-  end
-
-  private
-
-  def user_params
-    params.expect(user: [:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme]])
   end
 
 end

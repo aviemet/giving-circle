@@ -6,6 +6,8 @@ namespace :api do
   resources :circles, param: :slug, only: [:create, :update] do
     get "mock" => "circles#mock"
 
+    resources :spotlights, only: [:index]
+
     resources :templates, param: :slug, only: [:create, :update, :destroy] do
       resources :slides, param: :slug, controller: "templates/slides", only: [:create, :update, :destroy]
     end
@@ -22,7 +24,6 @@ namespace :api do
   end
 
   resources :searches, only: [:index]
-  resources :spotlights, only: [:index]
 
   # resources :currencies, only: [:index]
 

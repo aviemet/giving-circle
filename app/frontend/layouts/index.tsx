@@ -1,3 +1,5 @@
+import { AppSpotlight } from "@/features"
+
 import { AppLayout as BareAppLayout } from "./AppLayout"
 import { AuthLayout as BareAuthLayout } from "./AuthLayout"
 import { PresentationLayout as BarePresentationLayout } from "./PresentationLayout"
@@ -44,6 +46,7 @@ export const AuthLayout = ({ children }: LayoutProps) => {
 export const AppLayout = ({ children }: LayoutProps) => {
 	return (
 		<LayoutWrapper>
+			<AppSpotlight />
 			<BareAppLayout>
 				{ children }
 			</BareAppLayout>
@@ -74,6 +77,7 @@ export const PublicPresentationLayout = ({ children }: LayoutProps) => {
 export const SettingsLayout = ({ children }: LayoutProps) => {
 	return (
 		<LayoutWrapper>
+			<AppSpotlight />
 			<BareSettingsLayout>
 				{ children }
 			</BareSettingsLayout>

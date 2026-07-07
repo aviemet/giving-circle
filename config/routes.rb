@@ -53,6 +53,8 @@ Rails.application.routes.draw do
       get path, to: "#{path}#index"
       patch path, to: "#{path}#update"
     end
+
+    resources :smtps, path: "mail", only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
   draw(:api)
