@@ -2,17 +2,27 @@ import { type ComponentConfig } from "@measured/puck"
 
 import { CardDisplay } from "./Card"
 import {
+	borderColorField,
+	borderRadiusField,
+	borderWidthField,
 	colorField,
-	layoutStyleFields,
+	flexField,
+	flexItemSizingField,
+	marginField,
+	paddingField,
+	type BorderProps,
+	type FlexItemSizing,
+	type FlexStyleInput,
+	type SpacingProps,
 	tagsField,
-	type LayoutStyleProps,
 } from "../../fields"
 
-export type CardProps = LayoutStyleProps & {
+export type CardProps = SpacingProps & BorderProps & FlexStyleInput & {
 	title: string
 	description: string
 	backgroundColor: string
 	fontColor: string
+	sizing?: FlexItemSizing
 }
 
 export const cardConfig: ComponentConfig<CardProps> = {
@@ -24,7 +34,13 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		description: tagsField({
 			label: "Description",
 		}),
-		...layoutStyleFields(),
+		sizing: flexItemSizingField(),
+		margin: marginField(),
+		padding: paddingField(),
+		borderWidth: borderWidthField(),
+		borderRadius: borderRadiusField(),
+		borderColor: borderColorField(),
+		flex: flexField(),
 		backgroundColor: colorField({
 			label: "Background Color",
 		}),
@@ -37,6 +53,7 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		description: "Topic description...",
 		backgroundColor: "#FEFEFE",
 		fontColor: "#111111",
+		sizing: { mode: "auto" },
 	},
 	render: (props) => <CardDisplay { ...props } />,
 }

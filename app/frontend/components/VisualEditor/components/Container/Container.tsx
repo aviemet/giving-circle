@@ -4,7 +4,10 @@ import clsx from "clsx"
 import { Container } from "@/components"
 
 import { ContainerProps } from "./containerConfig"
-import { buildLayoutStyle } from "../../fields/layout"
+import { buildBorderStyle } from "../../fields/border"
+import { buildDimensionStyle } from "../../fields/dimension"
+import { buildFlexStyle } from "../../fields/flex"
+import { buildSpacingStyle } from "../../fields/spacing"
 import * as classes from "../../Puck.css"
 import { slotDropZoneProps } from "../../slotEditor"
 
@@ -29,7 +32,13 @@ export function ContainerDisplay({
 			ta={ alignment }
 			fluid
 			w="100%"
-			style={ buildLayoutStyle(styleProps) }
+			style={ {
+				...buildSpacingStyle(styleProps),
+				...buildBorderStyle(styleProps),
+				...buildDimensionStyle(styleProps),
+				...buildFlexStyle(styleProps),
+				...(styleProps.backgroundColor ? { backgroundColor: styleProps.backgroundColor } : {}),
+			} }
 			{ ...slotDropZoneProps() }
 		/>
 	)

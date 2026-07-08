@@ -1,10 +1,6 @@
 import { Page } from "@/components"
-import { NewIcon } from "@/components/Icons"
 import { ThemesTable } from "@/domains/themes/Table"
 import { IndexTableTemplate } from "@/features"
-import { Routes } from "@/lib"
-import { usePageProps } from "@/lib/hooks"
-
 
 interface ThemeIndexProps {
 	themes: Schema.ThemesIndex[]
@@ -15,7 +11,6 @@ interface ThemeIndexProps {
 // @path: /:circle_slug/themes
 // @route: circleThemes
 const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
-	const { params } = usePageProps<"circleThemes">()
 
 	return (
 		<Page
@@ -24,11 +19,6 @@ const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
 			<IndexTableTemplate
 				model="themes"
 				pagination={ pagination }
-			// contextMenu={ {
-			// 	options: [
-			// 		{ label: 'New Theme', href: Routes.newCircleTheme(params.circle_slug), icon: <NewIcon /> },
-			// 	],
-			// } }
 			>
 				<ThemesTable records={ themes } pagination={ pagination } model="themes" />
 			</IndexTableTemplate>

@@ -13,6 +13,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 	registerActiveCircleAndThemeLifecycle()
 
 	beforeEach(() => {
+		window.localStorage.clear()
 		document.elementsFromPoint ??= () => []
 		inertiaPageProps.active_presentation = createPresentationInertiaShare()
 	})
@@ -71,7 +72,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 		fireEvent.scroll(fieldsContainer)
 
 		const titleInput = await waitFor(() => {
-			const input = screen.getByDisplayValue("Slide")
+			const input = screen.getByDisplayValue("My Slide")
 			if(!(input instanceof HTMLInputElement) && !(input instanceof HTMLTextAreaElement)) {
 				throw new Error("Expected a text input")
 			}

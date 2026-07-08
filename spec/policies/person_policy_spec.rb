@@ -1,27 +1,7 @@
 require "rails_helper"
 
 RSpec.describe PersonPolicy, type: :policy do
-  subject { described_class }
+  let(:record) { create(:person) }
 
-  let(:user) { User.new }
-
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  it_behaves_like "super_admin_only_policy", %i[show create update destroy]
 end

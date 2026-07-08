@@ -66,17 +66,42 @@ export const urlParams = {
   "settingsGeneral": {
     "params": []
   },
-  "settingsAppearance": {
-    "params": []
+  "settingsBranding": {
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsIntegrations": {
-    "params": []
-  },
-  "settingsLocalizations": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsNotifications": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "settingsSmtps": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newSettingsSmtp": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editSettingsSmtp": {
+    "params": [
+      "circle_slug",
+      "id"
+    ]
+  },
+  "settingsSmtp": {
+    "params": [
+      "circle_slug",
+      "id"
+    ]
   },
   "apiUsers": {
     "params": []
@@ -97,6 +122,11 @@ export const urlParams = {
     ]
   },
   "apiCircleMock": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiCircleSpotlights": {
     "params": [
       "circle_slug"
     ]
@@ -175,9 +205,6 @@ export const urlParams = {
     ]
   },
   "apiSearches": {
-    "params": []
-  },
-  "apiSpotlights": {
     "params": []
   },
   "previewSlide": {

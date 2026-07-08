@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :presentation_interaction, class: "Presentation::Interaction" do
-    slug { "MyString" }
+    sequence(:slug) { |number| "interaction-#{number}" }
     interaction_type { 1 }
     config { "" }
     results { "" }

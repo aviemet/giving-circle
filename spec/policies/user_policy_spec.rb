@@ -1,27 +1,37 @@
 require "rails_helper"
 
 RSpec.describe UserPolicy, type: :policy do
-  subject { described_class }
+  let(:record) { create(:user) }
 
-  let(:user) { User.new }
+  describe "#update_table_preferences?" do
+    it "allows super admins" do
+      user = create(:user)
+      user.add_role(:super_admin)
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+      expect(described_class.new(user, record).update_table_preferences?).to be(true)
+    end
+
+    it "denies unrelated users" do
+      user = create(:user)
+
+      expect(described_class.new(user, record).update_table_preferences?).to be(false)
+    end
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  describe "#update_user_preferences?" do
+    it "allows super admins" do
+      user = create(:user)
+      user.add_role(:super_admin)
+
+      expect(described_class.new(user, record).update_user_preferences?).to be(true)
+    end
+
+    it "denies unrelated users" do
+      user = create(:user)
+
+      expect(described_class.new(user, record).update_user_preferences?).to be(false)
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  it_behaves_like "super_admin_only_policy", %i[show create update destroy]
 end

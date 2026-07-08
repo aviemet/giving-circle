@@ -21,8 +21,8 @@
 #
 FactoryBot.define do
   factory :presentation_interaction_response, class: "Presentation::InteractionResponse" do
-    presentation_action { nil }
-    membership { nil }
-    response_data { "" }
+    presentation_interaction
+    membership
+    response_data { {} }
   end
 end

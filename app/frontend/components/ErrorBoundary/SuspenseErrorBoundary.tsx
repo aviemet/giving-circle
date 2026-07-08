@@ -52,6 +52,7 @@ class SuspenseErrorBoundary extends React.Component<
 
 		// Log to external service in production
 		if(process.env.NODE_ENV === "production") {
+			// eslint-disable-next-line no-console
 			console.error("Suspense Error Boundary caught an error:", error, errorInfo)
 		}
 	}

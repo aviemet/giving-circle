@@ -1,6 +1,6 @@
-import { type Data } from "@measured/puck"
-
 import { defaultBackgroundImageValue } from "./fields/backgroundImage"
+
+import { type PuckSlideData } from "./index"
 
 export const SLOT_MIN_EMPTY_HEIGHT = 96
 
@@ -9,7 +9,7 @@ export function slotDropZoneProps() {
 	return { minEmptyHeight: SLOT_MIN_EMPTY_HEIGHT }
 }
 
-export function createStarterSlideData(): Partial<Data> {
+export function createStarterSlideData(): PuckSlideData {
 	return {
 		content: [
 			{
@@ -41,13 +41,14 @@ export function createStarterSlideData(): Partial<Data> {
 		root: {
 			props: {
 				title: "Slide",
+				backgroundColor: "#000000",
 				backgroundImage: defaultBackgroundImageValue(),
 			},
 		},
 	}
 }
 
-export function withStarterSlideContent(data: Partial<Data>): Partial<Data> {
+export function withStarterSlideContent(data: PuckSlideData): PuckSlideData {
 	if(data.content && data.content.length > 0) {
 		return data
 	}

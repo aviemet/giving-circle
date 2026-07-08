@@ -1,15 +1,11 @@
-import { Title } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { Page } from "@/components"
 
 // @path: /settings/general
 // @route: settingsGeneral
-const General = () => {
+const GeneralSettings = () => {
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>General Settings</Title>
-		</SettingsLayout>
+		<Page title="Settings: General" />
 	)
 }
 
-export default withLayout(General, "settings")
+export default GeneralSettings

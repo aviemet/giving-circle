@@ -38,6 +38,7 @@ vi.mock("@inertiajs/react", () => {
 			delete: vi.fn(),
 			reload: vi.fn(),
 			visit: vi.fn(),
+			on: vi.fn(() => vi.fn()),
 		},
 		Head: ({ children }: { children?: React.ReactNode }) => {
 			return React.createElement(React.Fragment, null, children)

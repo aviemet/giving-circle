@@ -21,7 +21,7 @@
     "test:browser": "vitest --config=vitest.browser.config.ts",
     "test:browser:headed": "BROWSER_HEADED=1 vitest --config=vitest.browser.config.ts",
     "coverage": "vitest run --coverage",
-    "rspec": "RAILS_ENV=test bundle exec rspec --color",
+    "rspec": "RAILS_ENV=test bundle install && bundle exec rspec --color",
     "rspec:watch": "RAILS_ENV=test bundle exec rake rspec_watcher:watch",
     "verify": "yarn lint:fix && yarn test:once && yarn rspec",
     "regenerate": "rails types:generate && rails annotate:all && rails i18n:export"
@@ -41,6 +41,7 @@
     "@mantine/notifications": "^9.1.1",
     "@mantine/prism": "^6.0.22",
     "@mantine/rte": "^5.10.5",
+    "@mantine/spotlight": "^9.4.1",
     "@mantine/tiptap": "^9.1.1",
     "@mantine/vanilla-extract": "^9.1.1",
     "@measured/puck": "^0.20.2",

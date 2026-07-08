@@ -17,6 +17,7 @@ interface TestInertiaPageProps {
 			active: boolean
 			email: string
 			slug: string
+			roles?: Schema.Role[]
 		}
 	}
 	flash: {
@@ -66,6 +67,7 @@ vi.mock("@inertiajs/react", () => {
 			delete: vi.fn(),
 			reload: vi.fn(),
 			visit: vi.fn(),
+			on: vi.fn(() => vi.fn()),
 		},
 		Head: ({ children, title }: { children?: React.ReactNode, title?: string }) => {
 			return React.createElement(

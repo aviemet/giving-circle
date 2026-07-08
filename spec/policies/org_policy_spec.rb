@@ -1,27 +1,20 @@
 require "rails_helper"
 
 RSpec.describe OrgPolicy, type: :policy do
-  subject { described_class }
+  let(:org) { create(:org) }
+  let(:record) { org }
 
-  let(:user) { User.new }
-
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  describe "#about?" do
+    it "allows everyone" do
+      expect(described_class.new(nil, org).about?).to be(true)
+    end
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  describe "#import?" do
+    it "allows everyone" do
+      expect(described_class.new(nil, org).import?).to be(true)
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  it_behaves_like "super_admin_only_policy", %i[show create update destroy]
 end

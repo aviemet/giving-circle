@@ -1,6 +1,6 @@
 import { router } from "@inertiajs/react"
 import clsx from "clsx"
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 
 import { NestedURLSearchParams, isUnset } from "@/lib"
 import { useLocation } from "@/lib/hooks"
@@ -40,8 +40,6 @@ const useAdvancedSearch = (
 	type InputParamName = typeof inputParams[number]["name"]
 
 	const location = useLocation()
-
-	const [searchLink, setSearchLink] = useState(location.href)
 
 	const localInputParams = useMemo(() => {
 		const finalParams: InputParam[] = []
@@ -93,9 +91,10 @@ const useAdvancedSearch = (
 	const [values, setValues] = useState(startingValues)
 
 	// Build URL params when input values change
-	useEffect(() => {
-		setSearchLink(buildSearchLink(localInputParams, values))
-	}, [localInputParams, values])
+	const searchLink = useMemo(
+		() => buildSearchLink(localInputParams, values),
+		[localInputParams, values],
+	)
 
 	const resetValues = useCallback(() => {
 		setValues(prevValues => {
@@ -160,20 +159,6 @@ const useAdvancedSearch = (
 			} }),
 			wrapperProps: {
 				className: clsx({ highlighted: !isUnset(value) && !param?.dependent }),
-			// 	style: (theme: MantineTheme) => ({
-			// 		'&.highlighted, &.highlighted input': {
-			// 			color: theme.other.colorSchemeOption(
-			// 				theme.colors[theme.primaryColor][6],
-			// 				theme.colors[theme.primaryColor][4],
-			// 			),
-			// 		},
-			// 		'&.highlighted input': {
-			// 			outlineColor: theme.other.colorSchemeOption(
-			// 				theme.colors[theme.primaryColor][6],
-			// 				theme.colors[theme.primaryColor][4],
-			// 			),
-			// 		},
-			// 	}),
 			},
 		}
 	}

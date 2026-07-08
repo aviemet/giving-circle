@@ -40,7 +40,7 @@ const MoneyComponent = ({
 		// (when used in a table cell, always use FlexMoney. Throwing is easiest way to check context)
 		useTableSectionContext()
 		if(!inTable) setInTable(true)
-	} catch(e) {}
+	} catch{}
 
 	if(accounting || (inTable && accounting === undefined)) {
 		return (

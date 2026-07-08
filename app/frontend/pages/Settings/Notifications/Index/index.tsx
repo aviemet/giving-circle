@@ -1,15 +1,11 @@
-import { Title } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { Page } from "@/components"
 
-// @path: /settings/notifications
+// @path: /settings/:circle_slug/notifications
 // @route: settingsNotifications
-const Appearance = () => {
+const NotificationsSettings = () => {
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Notifications Settings</Title>
-		</SettingsLayout>
+		<Page title="Settings: Notifications" />
 	)
 }
 
-export default withLayout(Appearance, "settings")
+export default NotificationsSettings

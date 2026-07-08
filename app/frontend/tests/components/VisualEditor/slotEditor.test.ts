@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest"
 
+import { defaultBackgroundImageValue } from "@/components/VisualEditor/fields/backgroundImage"
 import {
 	createStarterSlideData,
 	slotDropZoneProps,
@@ -14,17 +15,35 @@ describe("components/VisualEditor/slotEditor", () => {
 
 	test("createStarterSlideData includes a container with a heading", () => {
 		const data = createStarterSlideData()
+		const container = data.content?.[0]
 
 		expect(data.content).toHaveLength(1)
-		expect(data.content?.[0]?.type).toBe("Container")
-		expect(data.content?.[0]?.props.content).toHaveLength(1)
-		expect(data.content?.[0]?.props.content[0]?.type).toBe("Heading")
+		expect(container?.type).toBe("Container")
+		if(container?.type !== "Container") return
+
+		expect(container.props.content).toHaveLength(1)
+		expect(container.props.content[0]?.type).toBe("Heading")
 	})
 
 	test("withStarterSlideContent leaves non-empty slides unchanged", () => {
 		const existing = {
-			content: [{ type: "Heading", props: { title: "Keep me" } }],
-			root: { props: { title: "Custom" } },
+			content: [{
+				type: "Heading" as const,
+				props: {
+					id: "existing-heading",
+					title: "Keep me",
+					padding: 16,
+					order: 1 as const,
+					color: "#FFFFFF",
+				},
+			}],
+			root: {
+				props: {
+					title: "Custom",
+					backgroundColor: "#000000",
+					backgroundImage: defaultBackgroundImageValue(),
+				},
+			},
 		}
 
 		expect(withStarterSlideContent(existing)).toBe(existing)
@@ -33,7 +52,13 @@ describe("components/VisualEditor/slotEditor", () => {
 	test("withStarterSlideContent seeds empty slides", () => {
 		const seeded = withStarterSlideContent({
 			content: [],
-			root: { props: { title: "My deck slide" } },
+			root: {
+				props: {
+					title: "My deck slide",
+					backgroundColor: "#000000",
+					backgroundImage: defaultBackgroundImageValue(),
+				},
+			},
 		})
 
 		expect(seeded.content).toHaveLength(1)

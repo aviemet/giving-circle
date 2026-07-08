@@ -1,0 +1,11 @@
+---
+en:
+  settings:
+    branding:
+      notices:
+        updated: Branding settings successfully updated
+    mail:
+      notices:
+        created: Mail account successfully created
+        deleted: Mail account successfully deleted
+        updated: Mail account successfully updated

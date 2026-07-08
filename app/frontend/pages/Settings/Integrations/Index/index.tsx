@@ -1,32 +1,11 @@
-import { Group, Title, Menu } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { Page } from "@/components"
 
-import Empty from "./Empty"
-import SmtpList from "./SmtpList"
-
-interface MailSettingsProps {
-	smtps: Schema.SmtpsIndex[]
-}
-
-// @path: /settings/integrations
+// @path: /settings/:circle_slug/integrations
 // @route: settingsIntegrations
-const Mail = ({ smtps }: MailSettingsProps) => {
+const IntegrationsSettings = () => {
 	return (
-		<SettingsLayout>
-			<Group>
-				<Title mb={ 24 }>Mail Settings</Title>
-				<Menu position="bottom-end">
-					<Menu.Target />
-					<Menu.Dropdown>
-						<Menu.Link href="/settings/mail/new">New Mail Connection</Menu.Link>
-					</Menu.Dropdown>
-				</Menu>
-			</Group>
-
-			{ smtps.length === 0 ? <Empty /> : <SmtpList smtps={ smtps } /> }
-		</SettingsLayout>
+		<Page title="Settings: Integrations" />
 	)
 }
 
-export default withLayout(Mail, "settings")
+export default IntegrationsSettings

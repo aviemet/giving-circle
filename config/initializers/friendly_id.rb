@@ -16,13 +16,16 @@ FriendlyId.defaults do |config|
   # undesirable to allow as slugs. Edit this list as needed for your app.
   config.use :reserved
 
-  config.reserved_words = %w[new edit index session login logout users admin stylesheets assets javascripts images]
+  config.reserved_words = %w[
+    new edit index session login logout users admin stylesheets assets javascripts images
+    general branding mail notifications integrations localizations settings
+  ]
 
   # This adds an option to treat reserved words as conflicts rather than exceptions.
   # When there is no good candidate, a UUID will be appended, matching the existing
   # conflict behavior.
 
-  # config.treat_reserved_as_conflict = true
+  config.treat_reserved_as_conflict = true
 
   #  ## Friendly Finders
   #

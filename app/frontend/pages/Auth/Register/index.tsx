@@ -3,14 +3,6 @@ import { Form, FormConsumer, Submit } from "@/components/Form"
 import { Field, PasswordInput, TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
-type RegisterFormData = {
-	user: {
-		email: string
-		password: string
-		password_confirmation: string
-	}
-}
-
 // @path: /users/register
 // @route: newUserRegistration
 const Register = () => {

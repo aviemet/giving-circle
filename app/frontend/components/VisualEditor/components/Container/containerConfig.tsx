@@ -1,14 +1,27 @@
 import { Slot, type ComponentConfig } from "@measured/puck"
 
 import { ContainerDisplay } from "./Container"
-import { type LayoutStyleProps } from "../../fields"
 import {
 	alignmentField,
-	layoutStyleFields,
+	backgroundColorField,
+	borderColorField,
+	borderRadiusField,
+	borderWidthField,
+	flexField,
+	marginField,
+	minHeightField,
+	minWidthField,
+	paddingField,
+	widthField,
+	type AlignmentValue,
+	type BorderProps,
+	type DimensionStyleProps,
+	type FlexStyleInput,
+	type SpacingProps,
 } from "../../fields"
-import { type AlignmentValue } from "../../fields/alignment"
 
-export type ContainerProps = LayoutStyleProps & {
+export type ContainerProps = SpacingProps & BorderProps & DimensionStyleProps & FlexStyleInput & {
+	backgroundColor?: string
 	content: Slot
 	alignment: AlignmentValue
 }
@@ -16,7 +29,16 @@ export type ContainerProps = LayoutStyleProps & {
 export const containerConfig: ComponentConfig<ContainerProps> = {
 	label: "Container",
 	fields: {
-		...layoutStyleFields(),
+		margin: marginField(),
+		padding: paddingField(),
+		backgroundColor: backgroundColorField(),
+		borderWidth: borderWidthField(),
+		borderRadius: borderRadiusField(),
+		borderColor: borderColorField(),
+		width: widthField(),
+		minWidth: minWidthField(),
+		minHeight: minHeightField(),
+		flex: flexField(),
 		content: { type: "slot" },
 		alignment: alignmentField({
 			label: "Alignment",

@@ -1,0 +1,1 @@
+export { PuckFieldLabel } from "./PuckFieldLabel"

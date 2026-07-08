@@ -1,4 +1,4 @@
-import { Group, rem } from "@mantine/core"
+import { Group } from "@mantine/core"
 import { Dropzone, type DropzoneProps as MantineDropzoneProps } from "@mantine/dropzone"
 import React from "react"
 

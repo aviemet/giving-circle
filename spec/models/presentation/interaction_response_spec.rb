@@ -22,5 +22,14 @@
 require "rails_helper"
 
 RSpec.describe Presentation::InteractionResponse, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Associations" do
+    it { is_expected.to belong_to(:presentation_interaction) }
+    it { is_expected.to belong_to(:membership) }
+  end
+
+  describe "validations" do
+    it "is valid with valid attributes" do
+      expect(build(:presentation_interaction_response)).to be_valid
+    end
+  end
 end

@@ -1,7 +1,7 @@
 import { screen, waitFor } from "@testing-library/react"
 import { afterEach, describe, expect, test } from "vitest"
 
-import { AppSidebarMenu } from "@/layouts/AppLayout/AppSidebar/Menu"
+import { AppSidebarMenu } from "@/layouts/AppLayout/AppSidebar/SidebarMenu"
 import { Routes } from "@/lib"
 import { useLayoutStore } from "@/store"
 import { type MenuKey } from "@/store/slices/menuSlice"
@@ -34,17 +34,20 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 	})
 
 	test("does not close other menus when deeper menu appears", async() => {
-		useLayoutStore.getState().setOpenMenus(["circle"] satisfies MenuKey[])
-
 		inertiaPageProps.active_circle = createCircleInertiaShare()
-		inertiaPageProps.active_theme = createThemeInertiaShare()
 
-		render(<AppSidebarMenu />)
+		const { rerender } = render(<AppSidebarMenu />)
 
 		await waitFor(() => {
-			const openMenus = useLayoutStore.getState().openMenus
-			expect(openMenus.has("circle")).toBe(true)
-			expect(openMenus.has("theme")).toBe(true)
+			expect(screen.getByRole("link", { name: "Members" })).toBeVisible()
+		})
+
+		inertiaPageProps.active_theme = createThemeInertiaShare()
+		rerender(<AppSidebarMenu />)
+
+		await waitFor(() => {
+			expect(screen.getByRole("link", { name: "Members" })).toBeVisible()
+			expect(screen.getByRole("link", { name: "Organizations" })).toBeVisible()
 		})
 	})
 

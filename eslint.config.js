@@ -6,7 +6,7 @@ import importPlugin from "eslint-plugin-import"
 import jsoncPlugin from "eslint-plugin-jsonc"
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y"
 import reactHooksPlugin from "eslint-plugin-react-hooks"
-import { parseForESLint } from "jsonc-eslint-parser"
+import { parseForESLint as parseJsoncForESLint } from "jsonc-eslint-parser"
 
 const importLintGlobs = [
 	"**/*.{js,cjs,mjs,jsx,ts,mts,cts,tsx}",
@@ -231,16 +231,32 @@ export default [
 			"@stylistic/ts/indent": "off",
 		},
 	},
-	// Json files
+	// JSONC files (tsconfig, etc.)
 	{
-		files: ["**/*.json", "**/*.jsonc", "**/*.json5"],
+		files: ["**/tsconfig.json", "**/tsconfig.*.json", "**/*.jsonc", "**/*.json5"],
+		plugins: {
+			jsonc: jsoncPlugin,
+		},
+		languageOptions: {
+			parser: { parseForESLint: parseJsoncForESLint },
+		},
+		rules: {
+			"jsonc/no-dupe-keys": "error",
+			"jsonc/indent": ["error", 2, { ignoredNodes: ["Property"] }],
+			"@stylistic/no-multi-spaces": "off",
+		},
+	},
+	// Strict JSON files
+	{
+		files: ["**/*.json"],
+		ignores: ["**/tsconfig.json", "**/tsconfig.*.json"],
 		language: "json/json",
 		plugins: {
 			jsonc: jsoncPlugin,
 			json,
 		},
 		languageOptions: {
-			parser: { parseForESLint },
+			parser: { parseForESLint: parseJsoncForESLint },
 		},
 		rules: {
 			"json/no-duplicate-keys": "error",

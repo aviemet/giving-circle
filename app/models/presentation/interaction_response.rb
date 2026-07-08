@@ -36,7 +36,7 @@ class Presentation::InteractionResponse < ApplicationRecord
   )
 
   resourcify
-  belongs_to :presentation_interaction
+  belongs_to :presentation_interaction, class_name: "Presentation::Interaction"
   belongs_to :membership
 
   scope :includes_associated, -> { includes([:presentation_interaction, :membership]) }

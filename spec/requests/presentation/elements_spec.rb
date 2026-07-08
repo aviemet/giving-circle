@@ -1,120 +1,198 @@
 require "rails_helper"
 require_relative "../../support/devise"
 
-xdescribe "/presentation/elements", type: :request do
+RSpec.describe "Presentations::Elements", type: :request do
+  let(:presentation) { create(:presentation, theme: create(:theme, circle: @admin.circles.first)) }
 
-  # This should return the minimal set of attributes required to create a valid
-  # Presentation::Element. As you add validations to Presentation::Element, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    attributes_for(:presentation_element)
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    { name: nil }
+  end
 
   describe "GET /index" do
+    login_super_admin
+
     it "renders a successful response" do
-      Presentation::Element.create! valid_attributes
-      get presentation_elements_url
+      create(:presentation_element)
+
+      get theme_presentation_elements_path(presentation.circle, presentation.theme, presentation)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
+    login_super_admin
+
     it "renders a successful response" do
-      element = Presentation::Element.create! valid_attributes
-      get presentation_element_url(element)
+      element = create(:presentation_element)
+
+      get theme_presentation_element_path(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+        element,
+      )
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
+    login_super_admin
+
     it "renders a successful response" do
-      get new_presentation_element_url
+      get new_theme_presentation_element_path(presentation.circle, presentation.theme, presentation)
+
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
+    login_super_admin
+
     it "renders a successful response" do
-      element = Presentation::Element.create! valid_attributes
-      get edit_presentation_element_url(element)
+      element = create(:presentation_element)
+
+      get edit_theme_presentation_element_path(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+        element,
+      )
+
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
+    login_super_admin
+
     context "with valid parameters" do
       it "creates a new Presentation::Element" do
         expect {
-          post presentation_elements_url, params: { presentation_element: valid_attributes }
+          post theme_presentation_elements_path(presentation.circle, presentation.theme, presentation),
+            params: { presentation_element: valid_attributes }
         }.to change(Presentation::Element, :count).by(1)
       end
 
       it "redirects to the created presentation_element" do
-        post presentation_elements_url, params: { presentation_element: valid_attributes }
-        expect(response).to redirect_to(presentation_element_url(Presentation::Element.last))
+        post theme_presentation_elements_path(presentation.circle, presentation.theme, presentation),
+          params: { presentation_element: valid_attributes }
+
+        expect(response).to redirect_to(
+          theme_presentation_element_path(
+            presentation.circle,
+            presentation.theme,
+            presentation,
+            Presentation::Element.last,
+          ),
+        )
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Presentation::Element" do
         expect {
-          post presentation_elements_url, params: { presentation_element: invalid_attributes }
+          post theme_presentation_elements_path(presentation.circle, presentation.theme, presentation),
+            params: { presentation_element: invalid_attributes }
         }.not_to change(Presentation::Element, :count)
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post presentation_elements_url, params: { presentation_element: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+      it "redirects back to the new element page" do
+        post theme_presentation_elements_path(presentation.circle, presentation.theme, presentation),
+          params: { presentation_element: invalid_attributes }
+
+        expect(response).to redirect_to(
+          new_theme_presentation_element_path(presentation.circle, presentation.theme, presentation),
+        )
       end
     end
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    login_super_admin
 
+    context "with valid parameters" do
       it "updates the requested presentation_element" do
-        element = Presentation::Element.create! valid_attributes
-        patch presentation_element_url(element), params: { presentation_element: new_attributes }
-        element.reload
-        skip("Add assertions for updated state")
+        element = create(:presentation_element, name: "Before")
+
+        patch theme_presentation_element_path(
+          presentation.circle,
+          presentation.theme,
+          presentation,
+          element,
+        ), params: { presentation_element: { name: "After" } }
+
+        expect(element.reload.name).to eq("After")
       end
 
       it "redirects to the presentation_element" do
-        element = Presentation::Element.create! valid_attributes
-        patch presentation_element_url(element), params: { presentation_element: new_attributes }
-        element.reload
-        expect(response).to redirect_to(presentation_element_url(element))
+        element = create(:presentation_element)
+
+        patch theme_presentation_element_path(
+          presentation.circle,
+          presentation.theme,
+          presentation,
+          element,
+        ), params: { presentation_element: valid_attributes }
+
+        expect(response).to redirect_to(
+          theme_presentation_element_path(presentation.circle, presentation.theme, presentation, element),
+        )
       end
     end
 
     context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        element = Presentation::Element.create! valid_attributes
-        patch presentation_element_url(element), params: { presentation_element: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+      it "redirects back to the edit page" do
+        element = create(:presentation_element)
+
+        patch theme_presentation_element_path(
+          presentation.circle,
+          presentation.theme,
+          presentation,
+          element,
+        ), params: { presentation_element: invalid_attributes }
+
+        expect(response).to redirect_to(
+          edit_theme_presentation_element_path(presentation.circle, presentation.theme, presentation, element),
+        )
       end
     end
   end
 
   describe "DELETE /destroy" do
+    login_super_admin
+
     it "destroys the requested presentation_element" do
-      element = Presentation::Element.create! valid_attributes
+      element = create(:presentation_element)
+
       expect {
-        delete presentation_element_url(element)
+        delete theme_presentation_element_path(
+          presentation.circle,
+          presentation.theme,
+          presentation,
+          element,
+        )
       }.to change(Presentation::Element, :count).by(-1)
     end
 
     it "redirects to the presentation_elements list" do
-      element = Presentation::Element.create! valid_attributes
-      delete presentation_element_url(element)
-      expect(response).to redirect_to(presentation_elements_url)
+      element = create(:presentation_element)
+
+      delete theme_presentation_element_path(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+        element,
+      )
+
+      expect(response).to redirect_to(
+        theme_presentation_elements_path(presentation.circle, presentation.theme, presentation),
+      )
     end
   end
 end

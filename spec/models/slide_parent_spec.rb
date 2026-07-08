@@ -23,5 +23,18 @@
 require "rails_helper"
 
 RSpec.describe SlideParent, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Associations" do
+    it { is_expected.to belong_to(:slide) }
+    it { is_expected.to belong_to(:parentable) }
+  end
+
+  describe "validations" do
+    it "is valid with a template parent" do
+      expect(build(:slide_parent)).to be_valid
+    end
+
+    it "is valid with a presentation parent" do
+      expect(build(:slide_parent, parentable: create(:presentation))).to be_valid
+    end
+  end
 end

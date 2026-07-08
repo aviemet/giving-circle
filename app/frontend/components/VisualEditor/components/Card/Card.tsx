@@ -3,13 +3,17 @@ import { isNonEmptyString } from "@/lib/strings"
 
 import { type CardProps } from "./cardConfig"
 import { usePresentationData } from "../../dynamicData/MockData"
-import { buildLayoutStyle } from "../../fields/layout"
+import { buildBorderStyle } from "../../fields/border"
+import { buildFlexStyle } from "../../fields/flex"
+import { buildFlexItemSizingStyle } from "../../fields/flexItemSizing"
+import { buildSpacingStyle } from "../../fields/spacing"
 
 export function CardDisplay({
 	title,
 	description,
 	backgroundColor,
 	fontColor,
+	sizing,
 	...styleProps
 }: CardProps) {
 	const evaluatedTitle = usePresentationData(title)
@@ -17,7 +21,16 @@ export function CardDisplay({
 	const showDescription = isNonEmptyString(description)
 
 	return (
-		<Card style={ { ...buildLayoutStyle(styleProps), backgroundColor } } padding="md">
+		<Card
+			style={ {
+				...buildSpacingStyle(styleProps),
+				...buildBorderStyle(styleProps),
+				...buildFlexStyle(styleProps),
+				...buildFlexItemSizingStyle(sizing),
+				backgroundColor,
+			} }
+			padding="md"
+		>
 			<Text fw={ 700 } size="lg" c={ fontColor } mb="xs">
 				<DangerousHtml component="span">{ evaluatedTitle }</DangerousHtml>
 			</Text>

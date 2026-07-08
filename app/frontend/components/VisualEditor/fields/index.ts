@@ -1,12 +1,9 @@
-export { puckFieldClassNames } from "../puckFieldStyles"
-export { PuckFieldLabel } from "./PuckFieldLabel"
-export { colorField, optionalColorField } from "./color"
-export { alignmentField } from "./alignment"
+export { PuckFieldLabel } from "./shared"
+export { colorField, optionalColorField, backgroundColorField } from "./color"
+export { alignmentField, type AlignmentValue } from "./alignment"
 export { tagsField } from "./tags"
 export { imageField } from "./image"
-export {
-	backgroundImageField,
-} from "./backgroundImageField"
+export { backgroundImageField } from "./backgroundImage"
 export {
 	defaultBackgroundImageValue,
 	buildBackgroundImageStyle,
@@ -14,6 +11,43 @@ export {
 	type BackgroundImageValue,
 } from "./backgroundImage"
 export {
-	layoutStyleFields,
-	type LayoutStyleProps,
-} from "./layout"
+	marginField,
+	paddingField,
+	buildSpacingStyle,
+	type SpacingProps,
+	type SpacingGroup,
+} from "./spacing"
+export {
+	borderWidthField,
+	borderRadiusField,
+	borderColorField,
+	buildBorderStyle,
+	type BorderProps,
+} from "./border"
+export {
+	flexField,
+	buildFlexStyle,
+	type FlexProps,
+	type FlexStyleInput,
+} from "./flex"
+export {
+	widthField,
+	minWidthField,
+	minHeightField,
+	buildDimensionStyle,
+	normalizeDimensionValue,
+	formatDimensionValue,
+	parseDimensionValue,
+	dimensionInputToCSSValue,
+	type DimensionStyleProps,
+	type DimensionInput,
+	type DimensionUnit,
+} from "./dimension"
+export {
+	flexItemSizingField,
+	buildFlexItemSizingStyle,
+	parseCustomCssDeclarations,
+	type FlexItemSizing,
+	type FlexItemSizingMode,
+	type FlexItemSizingFineTune,
+} from "./flexItemSizing"

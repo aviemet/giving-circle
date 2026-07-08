@@ -45,7 +45,19 @@ export function createCircleInertiaShare(overrides?: Partial<Schema.CirclesInert
 		id: "circle-1",
 		name: "Circle 1",
 		slug: "circle-1",
+		settings: {
+			primary_color: "blue",
+		},
 		themes: [createThemeInertiaShare()],
+		...overrides,
+	}
+}
+
+export function createRole(overrides?: Partial<Schema.Role>): Schema.Role {
+	return {
+		created_at: "2025-01-01T00:00:00.000Z",
+		updated_at: "2025-01-01T00:00:00.000Z",
+		users: [],
 		...overrides,
 	}
 }
