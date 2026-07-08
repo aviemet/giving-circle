@@ -7,21 +7,15 @@ interface SmtpListProps {
 	circleSlug: string | undefined
 }
 
-function mailRouteOptions(circleSlug: string) {
-	return { circle_slug: circleSlug }
-}
-
 export function SmtpList({ smtps, circleSlug }: SmtpListProps) {
 	if(!circleSlug) return null
-
-	const routeOptions = mailRouteOptions(circleSlug)
 
 	const columns: TableColumn<Schema.SmtpsIndex>[] = [
 		{
 			accessor: "name",
 			title: "Name",
 			sortable: false,
-			render: (smtp) => <Link href={ Routes.settingsSmtp(smtp.id, routeOptions) }>{ smtp.name }</Link>,
+			render: (smtp) => <Link href={ Routes.settingsSmtp(circleSlug, smtp.id) }>{ smtp.name }</Link>,
 		},
 		{
 			accessor: "domain",
@@ -41,7 +35,7 @@ export function SmtpList({ smtps, circleSlug }: SmtpListProps) {
 			sortable: false,
 			render: (smtp) => (
 				<Group gap="sm">
-					<EditButton href={ Routes.editSettingsSmtp(smtp.id, routeOptions) } label={ smtp.name } />
+					<EditButton href={ Routes.editSettingsSmtp(circleSlug, smtp.id) } label={ smtp.name } />
 				</Group>
 			),
 		},

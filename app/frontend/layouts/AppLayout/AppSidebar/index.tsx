@@ -7,11 +7,14 @@ import {
 import { SettingsIcon } from "@/components/Icons"
 import { ToggleNavbarButton } from "@/features"
 import { Routes, theme } from "@/lib"
+import { useLocation } from "@/lib/hooks"
 
 import { CircleDropdownLink } from "./CircleDropdownLink"
-import { AppSidebarMenu } from "./Menu"
+import { AppSidebarMenu } from "./SidebarMenu"
 
 export function AppSidebar() {
+	const { paths } = useLocation()
+
 	return (
 		<>
 			<AppShell.Section mb="xs">
@@ -37,6 +40,7 @@ export function AppSidebar() {
 			<AppShell.Section style={ { height: `${theme.other.footer.height - 1}px` } }>
 				<NavLink
 					href={ Routes.settings() }
+					active={ paths[0] === "settings" }
 					leftSection={ <SettingsIcon /> }
 					style={ { height: `${theme.other.footer.height - 1}px` } }
 				>

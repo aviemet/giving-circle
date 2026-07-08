@@ -2,37 +2,28 @@ require "rails_helper"
 require_relative "../../support/devise"
 
 RSpec.describe "Settings::Smtps", type: :request do
-  describe "GET /settings/mail" do
+  describe "GET /settings/:circle_slug/mail" do
     login_super_admin
 
-    it "returns smtps for the circle from the query param" do
+    it "returns smtps for the circle" do
       circle = @admin.circles.first
       smtp = create(:smtp, circle:, name: "Circle Mail")
 
-      get settings_smtps_path, params: { circle_slug: circle.slug }
+      get settings_smtps_path(circle_slug: circle.slug)
 
       expect(response).to be_successful
       expect(inertia).to render_component("Settings/Mail/Index")
       expect(inertia.props[:smtps].pluck("name")).to include(smtp.name)
     end
-
-    it "redirects to the first circle when circle_slug is omitted" do
-      circle = @admin.circles.first
-
-      get settings_smtps_path
-
-      expect(response).to redirect_to(settings_smtps_path(circle_slug: circle.slug))
-    end
   end
 
-  describe "POST /settings/mail" do
+  describe "POST /settings/:circle_slug/mail" do
     login_super_admin
 
-    it "creates an smtp for the circle from the query param" do
+    it "creates an smtp for the circle" do
       circle = @admin.circles.first
 
-      post settings_smtps_path, params: {
-        circle_slug: circle.slug,
+      post settings_smtps_path(circle_slug: circle.slug), params: {
         smtp: {
           name: "Outbound",
           host: "smtp.example.com",
@@ -44,7 +35,7 @@ RSpec.describe "Settings::Smtps", type: :request do
         },
       }
 
-      expect(response).to redirect_to(settings_smtp_path(circle.smtps.last, circle_slug: circle.slug))
+      expect(response).to redirect_to(settings_smtp_path(circle_slug: circle.slug, id: circle.smtps.last))
       expect(circle.smtps.last.name).to eq("Outbound")
     end
   end

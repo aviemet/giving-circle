@@ -1,31 +1,25 @@
-import { Title } from "@/components"
+import { Page } from "@/components"
 import { SmtpForm } from "@/domains/settings/mail/Form"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { Routes, withLayout } from "@/lib"
+import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 interface NewMailProps {
 	smtp: Schema.SmtpsFormData
 }
 
-// @path: /settings/mail/new
+// @path: /settings/:circle_slug/mail/new
 // @route: newSettingsSmtp
-const NewMail = ({ smtp }: NewMailProps) => {
-	const { params } = usePageProps()
-	const circleSlug = typeof params.circle_slug === "string" ? params.circle_slug : undefined
-
-	if(!circleSlug) return null
+const NewMailSettings = ({ smtp }: NewMailProps) => {
+	const { params } = usePageProps<"newSettingsSmtp">()
 
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Mail Settings</Title>
-
+		<Page title="Settings: Mail">
 			<SmtpForm
 				smtp={ smtp }
-				to={ Routes.settingsSmtps({ circle_slug: circleSlug }) }
+				to={ Routes.settingsSmtps(params.circle_slug) }
 			/>
-		</SettingsLayout>
+		</Page>
 	)
 }
 
-export default withLayout(NewMail, "settings")
+export default NewMailSettings

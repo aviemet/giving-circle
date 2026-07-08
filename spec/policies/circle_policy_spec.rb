@@ -1,27 +1,26 @@
 require "rails_helper"
 
 RSpec.describe CirclePolicy, type: :policy do
-  subject { described_class }
+  let(:circle) { create(:circle) }
+  let(:record) { circle }
 
-  let(:user) { User.new }
+  describe "#index?" do
+    it "allows signed-in users" do
+      user = create(:user)
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+      expect(described_class.new(user, circle).index?).to be(true)
+    end
+
+    it "denies guests" do
+      expect(described_class.new(nil, circle).index?).to be(false)
+    end
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  describe "#about?" do
+    it "allows everyone" do
+      expect(described_class.new(nil, circle).about?).to be(true)
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  it_behaves_like "super_admin_only_policy", %i[show create update destroy]
 end

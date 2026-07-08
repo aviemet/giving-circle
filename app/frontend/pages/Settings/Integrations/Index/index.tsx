@@ -1,15 +1,11 @@
-import { Title } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { Page } from "@/components"
 
-// @path: /settings/integrations
+// @path: /settings/:circle_slug/integrations
 // @route: settingsIntegrations
-const Integrations = () => {
+const IntegrationsSettings = () => {
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Integrations Settings</Title>
-		</SettingsLayout>
+		<Page title="Settings: Integrations" />
 	)
 }
 
-export default withLayout(Integrations, "settings")
+export default IntegrationsSettings

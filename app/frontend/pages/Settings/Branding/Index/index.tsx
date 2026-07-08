@@ -1,33 +1,34 @@
 import React, { useEffect, useRef } from "react"
 
-import { Box, Title } from "@/components"
+import { Box, Page, Title } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { SwatchInput } from "@/components/Inputs"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { Routes, withLayout } from "@/lib"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 import { defaultColor } from "@/lib/theme"
 import { useLayoutStore } from "@/store"
 
-interface AppearanceSettingsProps {
+interface BrandingSettingsProps {
 	settings: {
 		primary_color?: string
 	}
 }
 
-type AppearanceFormData = {
+type BrandingFormData = {
 	settings: {
 		primary_color: string
 	}
 }
 
-// @path: /settings/appearance
-// @route: settingsAppearance
-export function AppearanceSettings({ settings }: AppearanceSettingsProps) {
+// @path: /settings/:circle_slug/branding
+// @route: settingsBranding
+const BrandingSettings = ({ settings }: BrandingSettingsProps) => {
+	const { params } = usePageProps<"settingsBranding">()
 	const setPrimaryColor = useLayoutStore((state) => state.setPrimaryColor)
 	const savedColorRef = useRef(defaultColor)
 	const initialColor = settings.primary_color ?? defaultColor
 
-	const initialData: AppearanceFormData = {
+	const initialData: BrandingFormData = {
 		settings: {
 			primary_color: initialColor,
 		},
@@ -45,12 +46,11 @@ export function AppearanceSettings({ settings }: AppearanceSettingsProps) {
 	}, [setPrimaryColor])
 
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Appearance Settings</Title>
+		<Page title="Settings: Branding">
 			<Box>
 				<Title order={ 2 }>Primary Color</Title>
-				<Form<AppearanceFormData>
-					action={ Routes.settingsAppearance() }
+				<Form<BrandingFormData>
+					action={ Routes.settingsBranding(params.circle_slug) }
 					method="put"
 					initialData={ initialData }
 					onSuccess={ () => {
@@ -58,16 +58,16 @@ export function AppearanceSettings({ settings }: AppearanceSettingsProps) {
 					} }
 				>
 					<SwatchInput
-						label="Site Color"
+						label="Circle Color"
 						name="settings.primary_color"
 						initialValue={ initialColor }
 						onChange={ setPrimaryColor }
 					/>
-					<Submit>Save Appearance Settings</Submit>
+					<Submit>Save Branding Settings</Submit>
 				</Form>
 			</Box>
-		</SettingsLayout>
+		</Page>
 	)
 }
 
-export default withLayout(AppearanceSettings, "settings")
+export default BrandingSettings

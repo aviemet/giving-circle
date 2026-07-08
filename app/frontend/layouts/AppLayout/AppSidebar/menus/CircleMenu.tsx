@@ -3,7 +3,7 @@ import React from "react"
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon, ThemesIcon, UserGroupIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit, useLocation } from "@/lib/hooks"
+import { useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 interface CircleMenuProps {
@@ -13,14 +13,9 @@ interface CircleMenuProps {
 
 export function CircleMenu({ circle, style }: CircleMenuProps) {
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
-	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 	const location = useLocation()
 
-	useInit(() => {
-		toggleOpenMenu("circle", true)
-	})
-
-	if(!circle) return <></>
+	if(!circle) return null
 
 	return (
 		<Accordion.Item key={ menuKeys.circle } value={ menuKeys.circle } style={ style }>

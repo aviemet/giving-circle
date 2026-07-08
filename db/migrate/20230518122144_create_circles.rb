@@ -7,6 +7,8 @@ class CreateCircles < ActiveRecord::Migration[7.0]
 
       t.string :slug, index: { unique: true }
 
+      t.jsonb :settings, default: {}, null: false
+
       t.timestamps
     end
   end

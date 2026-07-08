@@ -1,4 +1,4 @@
-import { Title, Page, Section } from "@/components"
+import { Page, Section } from "@/components"
 import { OrgForm } from "@/domains/orgs/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"

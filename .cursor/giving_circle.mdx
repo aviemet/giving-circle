@@ -3,6 +3,7 @@
 ## Project Overview
 
 ### Model Organization
+- Circle config (e.g. branding `primary_color`) is stored in the `circles.settings` jsonb column and accessed via `circle.settings.primary_color` (`Circle::Settings` wrapper). Site-wide config belongs in `rails-settings-cached` when implemented.
 - `Theme#orgs` selects `themes_orgs.ask_cents` / `ask_currency` onto each org. Do not `includes(:orgs)` or `preload(:orgs)` on `Theme` (including `Theme.includes_associated`); Rails' separate preload query omits the join and raises `PG::UndefinedTable`. Load orgs via the association when needed (lazy load uses the correct join).
 
 ### Slide Management
@@ -28,6 +29,7 @@
 
 ### Development Guidelines
 - Changes should stay small and scoped to one concern.
+- During active development, edit the original create/alter migration instead of adding throwaway add-then-remove migrations; the database will be destroyed and rebuilt when the feature is done.
 - Frontend: named exports only (except `app/frontend/pages`, which must default-export Inertia pages). React components as `export function Name`. Barrel files use `export { X } from "./Y"`. Inertia pages may export a named `Page` from `withLayout`.
 - Prefer exact HTTP status checks (e.g. `=== 201`), not ranges.
 - TypeScript: no type assertions (`as`, `as unknown as`). Prefer fixing types (unions, generics, exports). Do not add explicit return types when inference is enough. React 19: `useRef<Handle>(null)` is `RefObject<Handle | null>` for imperative helpers; with `@types/react` 19 prefer `ReactElement` / `ReactNode` imports over bare `JSX.Element` when the global `JSX` namespace mis-resolves. `react-i18next` augments global `JSX`, which can confuse IDE navigation on `JSX`.

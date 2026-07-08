@@ -66,31 +66,40 @@ export const urlParams = {
   "settingsGeneral": {
     "params": []
   },
-  "settingsAppearance": {
-    "params": []
+  "settingsBranding": {
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsIntegrations": {
-    "params": []
-  },
-  "settingsLocalizations": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsNotifications": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsSmtps": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
   },
   "newSettingsSmtp": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
   },
   "editSettingsSmtp": {
     "params": [
+      "circle_slug",
       "id"
     ]
   },
   "settingsSmtp": {
     "params": [
+      "circle_slug",
       "id"
     ]
   },

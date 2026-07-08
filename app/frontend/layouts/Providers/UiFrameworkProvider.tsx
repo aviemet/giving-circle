@@ -25,7 +25,7 @@ export function UiFrameworkProvider({ children }: { children: React.ReactNode })
 	/**
    * Primary color customization
    */
-	const { auth } = usePageProps()
+	const { active_circle } = usePageProps()
 	const primaryColor = useLayoutStore((state) => state.primaryColor)
 	const setPrimaryColor = useLayoutStore((state) => state.setPrimaryColor)
 
@@ -81,9 +81,9 @@ export function UiFrameworkProvider({ children }: { children: React.ReactNode })
 
 
 	useEffect(() => {
-		const saved = auth.user.user_preferences?.primaryColor
-		setPrimaryColor(saved ?? defaultColor)
-	}, [auth.user.user_preferences?.primaryColor, setPrimaryColor])
+		const circleColor = active_circle?.settings.primary_color
+		setPrimaryColor(circleColor ?? defaultColor)
+	}, [active_circle?.settings.primary_color, setPrimaryColor])
 
 	useInit(() => {
 		/* eslint-disable no-console */

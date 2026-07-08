@@ -95,6 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.datetime "created_at", null: false
     t.boolean "mock_data", default: false, null: false
     t.string "name", null: false
+    t.jsonb "settings", default: {}, null: false
     t.string "slug"
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_circles_on_slug", unique: true
@@ -207,8 +208,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.datetime "created_at", null: false
     t.jsonb "data", default: {}
     t.string "name", null: false
+    t.string "slug"
     t.boolean "template", default: false, null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_presentation_elements_on_slug", unique: true
   end
 
   create_table "presentation_interaction_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

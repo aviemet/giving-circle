@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import React, { useState, useEffect, useImperativeHandle } from "react"
+import React, { useState, useImperativeHandle } from "react"
 
 import { Table, Paper, Text, Box, Flex, Badge } from "@/components"
 import { Select } from "@/components/Inputs"
@@ -167,10 +167,6 @@ const ImportMapping = <T extends Record<string, unknown>>({
 		},
 	}))
 
-	useEffect(() => {
-		if(errors.length > 0) console.error({ errors })
-	}, [errors])
-
 	return (
 		<Box>
 			<Paper>
@@ -219,8 +215,6 @@ const ImportMapping = <T extends Record<string, unknown>>({
 										const cellValue = headingMapForType?.type ? headingMapForType.type(org[heading]) : org[heading]
 
 										const error = errors[i] && errors[i].find(error => error.name === headingMapForType?.name)
-
-										if(error) console.log({ org, i, heading, headingMapForType, error: errors[i] })
 
 										return (
 											<Table.Cell key={ `${j}-${heading}` } className={ clsx({ error }) }>{ `${cellValue}` }</Table.Cell>

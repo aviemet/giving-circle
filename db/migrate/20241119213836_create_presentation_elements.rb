@@ -5,6 +5,8 @@ class CreatePresentationElements < ActiveRecord::Migration[7.2]
       t.jsonb :data, default: {}
       t.boolean :template, default: false, null: false
 
+      t.string :slug, index: { unique: true }
+
       t.timestamps
     end
   end

@@ -1,32 +1,26 @@
-import { Title } from "@/components"
+import { Page } from "@/components"
 import { SmtpForm } from "@/domains/settings/mail/Form"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { Routes, withLayout } from "@/lib"
+import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 interface EditMailProps {
 	smtp: Schema.SmtpsFormData
 }
 
-// @path: /settings/mail/:id/edit
+// @path: /settings/:circle_slug/mail/:id/edit
 // @route: editSettingsSmtp
-const EditMail = ({ smtp }: EditMailProps) => {
-	const { params } = usePageProps()
-	const circleSlug = typeof params.circle_slug === "string" ? params.circle_slug : undefined
-
-	if(!smtp.id || !circleSlug) return null
+const EditMailSettings = ({ smtp }: EditMailProps) => {
+	const { params } = usePageProps<"editSettingsSmtp">()
 
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Mail Settings</Title>
-
+		<Page title="Settings: Mail">
 			<SmtpForm
 				method="put"
 				smtp={ smtp }
-				to={ Routes.settingsSmtp(smtp.id, { circle_slug: circleSlug }) }
+				to={ Routes.settingsSmtp(params.circle_slug, params.id) }
 			/>
-		</SettingsLayout>
+		</Page>
 	)
 }
 
-export default withLayout(EditMail, "settings")
+export default EditMailSettings

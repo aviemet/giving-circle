@@ -49,12 +49,19 @@ Rails.application.routes.draw do
 
   namespace :settings do
     get "/", to: redirect("/settings/general")
-    [:general, :appearance, :integrations, :localizations, :notifications].freeze.each do |path|
+    [:general].freeze.each do |path|
       get path, to: "#{path}#index"
       patch path, to: "#{path}#update"
     end
 
-    resources :smtps, path: "mail", only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    scope ":circle_slug" do
+      [:branding, :integrations, :notifications].freeze.each do |path|
+        get path, to: "#{path}#index"
+        patch path, to: "#{path}#update"
+      end
+
+      resources :smtps, path: "mail", only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    end
   end
 
   draw(:api)

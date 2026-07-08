@@ -467,9 +467,9 @@
       }
     },
     "settings": {
-      "appearance": {
+      "branding": {
         "notices": {
-          "updated": "Appearance settings successfully updated"
+          "updated": "Branding settings successfully updated"
         }
       }
     },

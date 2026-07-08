@@ -1,17 +1,14 @@
-import { Box, DangerousHtml, Title, Table } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { Box, DangerousHtml, Page, Table } from "@/components"
 
 interface ShowMailSettingProps {
 	smtp: Schema.SmtpsShow
 }
 
-// @path: /settings/mail/:id
+// @path: /settings/:circle_slug/mail/:id
 // @route: settingsSmtp
 const ShowMailSetting = ({ smtp }: ShowMailSettingProps) => {
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Mail Settings: { smtp.name }</Title>
+		<Page title={ `Settings: ${smtp.name}` }>
 
 			<Table>
 				<Table.Body>
@@ -50,9 +47,8 @@ const ShowMailSetting = ({ smtp }: ShowMailSettingProps) => {
 
 				</Table.Body>
 			</Table>
-
-		</SettingsLayout>
+		</Page>
 	)
 }
 
-export default withLayout(ShowMailSetting, "settings")
+export default ShowMailSetting

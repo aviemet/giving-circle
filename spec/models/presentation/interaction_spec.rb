@@ -19,5 +19,19 @@
 require "rails_helper"
 
 RSpec.describe Presentation::Interaction, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    it "is valid with valid attributes" do
+      expect(build(:presentation_interaction)).to be_valid
+    end
+  end
+
+  describe "uniqueness" do
+    it "enforces unique slugs at the database level" do
+      create(:presentation_interaction, slug: "vote")
+
+      expect {
+        create(:presentation_interaction, slug: "vote")
+      }.to raise_error(ActiveRecord::RecordNotUnique)
+    end
+  end
 end

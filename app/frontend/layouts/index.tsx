@@ -6,7 +6,6 @@ import { PresentationLayout as BarePresentationLayout } from "./PresentationLayo
 import { Providers } from "./Providers"
 import { PublicLayout as BarePublicLayout } from "./PublicLayout"
 import { PublicPresentationLayout as BarePublicPresentationLayout } from "./PublicPresentationLayout"
-import { SettingsLayout as BareSettingsLayout } from "./SettingsLayout"
 import { UnformattedLayout as BareUnformattedLayout } from "./UnformattedLayout"
 
 import "@/lib/i18n"
@@ -14,7 +13,6 @@ import "@/lib/i18n"
 export const LAYOUTS = {
 	"auth": "auth",
 	"app": "app",
-	"settings": "settings",
 	"public": "public",
 	"presentation": "presentation",
 	"publicPresentation": "publicPresentation",
@@ -70,17 +68,6 @@ export const PublicPresentationLayout = ({ children }: LayoutProps) => {
 			<BarePublicPresentationLayout>
 				{ children }
 			</BarePublicPresentationLayout>
-		</LayoutWrapper>
-	)
-}
-
-export const SettingsLayout = ({ children }: LayoutProps) => {
-	return (
-		<LayoutWrapper>
-			<AppSpotlight />
-			<BareSettingsLayout>
-				{ children }
-			</BareSettingsLayout>
 		</LayoutWrapper>
 	)
 }
