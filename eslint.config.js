@@ -141,7 +141,11 @@ export default [
 				functions: "only-multiline",
 			}],
 			"@stylistic/multiline-ternary": ["error", "always-multiline"],
-			"@stylistic/space-before-function-paren": ["error", "never"],
+			"@stylistic/space-before-function-paren": ["error", {
+				anonymous: "never",
+				named: "never",
+				asyncArrow: "always",
+			}],
 			"@stylistic/arrow-spacing": "error",
 			"@stylistic/space-before-blocks": ["error", "always"],
 			"@stylistic/no-multiple-empty-lines": ["error", {
@@ -156,7 +160,7 @@ export default [
 					"!": false,
 					"!!": false,
 					"+": true,
-					"-": true,
+					"-": false,
 				},
 			}],
 			"@stylistic/comma-spacing": ["error", {

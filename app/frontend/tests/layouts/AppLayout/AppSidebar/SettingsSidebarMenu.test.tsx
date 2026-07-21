@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { afterEach, describe, test } from "vitest"
+import { afterEach, describe, expect, test } from "vitest"
 
 import { SettingsSidebarMenu } from "@/layouts/AppLayout/AppSidebar/SidebarMenu"
 import { createCircleInertiaShare, createRole } from "@/tests/helpers/fixtures"
@@ -20,7 +20,7 @@ describe("layouts/AppLayout/AppSidebar/SettingsSidebarMenu", () => {
 		}
 	})
 
-	test("renders settings accordion with general link and circle settings for admins", async() => {
+	test("renders settings accordion with general link and circle settings for admins", async () => {
 		const user = userEvent.setup()
 		const circle = createCircleInertiaShare()
 		inertiaPageProps.circles = [circle]
@@ -38,7 +38,12 @@ describe("layouts/AppLayout/AppSidebar/SettingsSidebarMenu", () => {
 
 		render(<SettingsSidebarMenu />)
 
-		await user.click(screen.getByRole("button", { name: "Settings" }))
+		const settingsHeading = screen.getByRole("button", { name: "Settings" })
+		const circleHeading = screen.getByRole("button", { name: "Circle 1" })
+		expect(settingsHeading.querySelector(".mantine-Accordion-icon")).toBeInTheDocument()
+		expect(circleHeading.querySelector(".mantine-Accordion-icon")).toBeInTheDocument()
+
+		await user.click(settingsHeading)
 		screen.getByRole("link", { name: "General", hidden: true })
 
 		screen.getByRole("link", { name: "Branding", hidden: true })

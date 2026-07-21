@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { OrgForm } from "@/domains/orgs/Form"
 import { Routes } from "@/lib"
@@ -11,18 +13,19 @@ interface EditOrgProps {
 // @path: /:circle_slug/orgs/:slug/edit
 // @route: editOrg
 const EditOrg = ({ org }: EditOrgProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle } = usePageProps<"editOrg">()
-	const title = "Edit Org"
+	const title = t("orgs.edit.title")
 
 	if(!active_circle) return <></>
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Circles", href: Routes.circles() },
+			{ title: t("orgs.index.breadcrumbs.circles"), href: Routes.circles() },
 			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-			{ title: "Organizations", href: Routes.circleOrgs(params.circle_slug) },
+			{ title: t("orgs.index.breadcrumbs.orgs"), href: Routes.circleOrgs(params.circle_slug) },
 			{ title: org.name, href: Routes.org(params.circle_slug, org.slug) },
-			{ title: "Edit", href: window.location.href },
+			{ title: t("common.actions.edit_breadcrumb"), href: window.location.href },
 		] }>
 			<Section>
 				<OrgForm

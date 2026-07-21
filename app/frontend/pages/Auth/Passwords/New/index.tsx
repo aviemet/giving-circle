@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Title, Link } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { Field, TextInput } from "@/components/Inputs"
@@ -10,23 +12,24 @@ type PasswordsNewFormData = {
 // @path: /users/password/new
 // @route: newUserPassword
 const PasswordsNew = () => {
+	const { t } = useTranslation()
 	const defaultData: { user: PasswordsNewFormData } = { user: { email: "" } }
 
 	return (
 		<Form action={ Routes.newUserPassword() } method="post" initialData={ defaultData }>
 			<div>
-				<Title>Reset Password</Title>
+				<Title>{ t("devise.ui.reset_password") }</Title>
 			</div>
 
 			<Field>
-				<TextInput name="user.email" placeholder="Email" autoComplete="Email" />
+				<TextInput name="user.email" placeholder={ t("devise.ui.email") } autoComplete="Email" />
 			</Field>
 
 			<Field>
-				<Submit>Send Reset Instructions</Submit>
+				<Submit>{ t("devise.ui.send_reset") }</Submit>
 			</Field>
 
-			<Link href={ Routes.newUserSession() }>Log In</Link>
+			<Link href={ Routes.newUserSession() }>{ t("devise.ui.log_in") }</Link>
 		</Form>
 	)
 }

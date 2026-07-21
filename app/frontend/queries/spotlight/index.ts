@@ -23,7 +23,7 @@ export const useGetSpotlightResults: ReactQueryFunction<SpotlightSearchValues, S
 ) => {
 	return useQuery({
 		queryKey: ["spotlight", circleSlug],
-		queryFn: async() => {
+		queryFn: async () => {
 			const res = await axios.get(Routes.apiCircleSpotlights(circleSlug))
 
 			if(!isAllowedStatusCode(res.statusText, [200])) {

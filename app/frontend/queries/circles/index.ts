@@ -8,7 +8,7 @@ import { ReactQueryFunction } from ".."
 export const useMockCircle: ReactQueryFunction<Schema.CirclesMock> = (options) => {
 	return useQuery({
 		queryKey: ["mock-circle"],
-		queryFn: async() => {
+		queryFn: async () => {
 			const res = await axios.get(Routes.apiCircleMock("mock-circle"))
 
 			if(!isAllowedStatusCode(res.statusText, [200])) {

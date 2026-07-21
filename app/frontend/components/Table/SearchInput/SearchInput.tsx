@@ -4,6 +4,7 @@ import { ActionIcon, Box } from "@mantine/core"
 import { useSessionStorage } from "@mantine/hooks"
 import { debounce } from "lodash"
 import { useMemo, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import { SearchIcon, CrossIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
@@ -32,6 +33,7 @@ export function SearchInput({
 	placeholder,
 	debounceMs = 500,
 }: SearchInputProps) {
+	const { t } = useTranslation()
 	const context = useTableContext(false)
 	const model = modelProp ?? context?.model
 	const setSearching = context?.setSearching
@@ -137,7 +139,7 @@ export function SearchInput({
 				leftSectionPointerEvents="none"
 				className={ classes.searchInput }
 				wrapper={ false }
-				aria-label="Search"
+				aria-label={ t("common.table.search") }
 			/>
 		</Box>
 	)

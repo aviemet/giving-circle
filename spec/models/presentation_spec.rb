@@ -47,6 +47,42 @@ RSpec.describe Presentation do
     it { is_expected.to have_many(:memberships).through(:presentations_memberships) }
     it { is_expected.to have_many(:orgs).through(:presentations_orgs) }
     it { is_expected.to have_many(:elements).through(:presentations_elements) }
+
+    describe "#orgs" do
+      it "includes ask_cents and ask_currency from the join table" do
+        presentation = create(:presentation)
+        org = create(:org, circle: presentation.circle)
+        create(:presentations_org, presentation: presentation, org: org, ask_cents: 20_000, ask_currency: "USD")
+
+        loaded = presentation.orgs.find { |presentation_org| presentation_org.id == org.id }
+
+        expect(loaded.ask_cents).to eq(20_000)
+        expect(loaded.ask_currency).to eq("USD")
+      end
+
+      it "returns a successful count value" do
+        presentation = create(:presentation)
+        first_org = create(:org, circle: presentation.circle)
+        second_org = create(:org, circle: presentation.circle)
+        create(:presentations_org, presentation: presentation, org: first_org)
+        create(:presentations_org, presentation: presentation, org: second_org)
+        create(:org, circle: presentation.circle)
+
+        expect(presentation.orgs.count).to eq(2)
+      end
+
+      it "loads ask values when accessed after includes_associated" do
+        presentation = create(:presentation)
+        org = create(:org, circle: presentation.circle)
+        create(:presentations_org, presentation: presentation, org: org, ask_cents: 20_000, ask_currency: "USD")
+
+        loaded = described_class.includes_associated.find(presentation.id)
+        presentation_org = loaded.orgs.find { |candidate| candidate.id == org.id }
+
+        expect(presentation_org.ask_cents).to eq(20_000)
+        expect(presentation_org.ask_currency).to eq("USD")
+      end
+    end
   end
 
   describe "org sync" do

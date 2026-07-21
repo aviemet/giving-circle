@@ -121,6 +121,9 @@ export const urlParams = {
       "id"
     ]
   },
+  "apiPresentationElementTemplates": {
+    "params": []
+  },
   "apiCircleMock": {
     "params": [
       "circle_slug"
@@ -299,6 +302,28 @@ export const urlParams = {
       "slug"
     ]
   },
+  "circleInteractionTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newCircleInteractionTemplate": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editCircleInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "circleInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
   "circleTemplatesEditSlide": {
     "params": [
       "circle_slug",
@@ -421,6 +446,56 @@ export const urlParams = {
       "slug"
     ]
   },
+  "openResponsesThemePresentationInteraction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "closeResponsesThemePresentationInteraction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "themePresentationInteractionResponses": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug"
+    ]
+  },
+  "newThemePresentationInteractionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug"
+    ]
+  },
+  "editThemePresentationInteractionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug",
+      "id"
+    ]
+  },
+  "themePresentationInteractionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug",
+      "id"
+    ]
+  },
   "themePresentationInteractions": {
     "params": [
       "circle_slug",
@@ -444,36 +519,6 @@ export const urlParams = {
     ]
   },
   "themePresentationInteraction": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "slug"
-    ]
-  },
-  "themePresentationInteractionResponses": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationInteractionResponse": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationInteractionResponse": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "slug"
-    ]
-  },
-  "themePresentationInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",

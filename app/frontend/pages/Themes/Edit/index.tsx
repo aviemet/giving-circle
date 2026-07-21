@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { ThemeForm } from "@/domains/themes/Form"
 import { Routes } from "@/lib"
@@ -11,8 +13,9 @@ interface EditThemeProps {
 // @path: /:circle_slug/themes/:theme_slug/edit
 // @route: editTheme
 const EditTheme = ({ theme }: EditThemeProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"editTheme">()
-	const title = "Edit Theme"
+	const title = t("themes.edit.title")
 
 	return (
 		<Page title={ title }>

@@ -1,9 +1,12 @@
+import { useTranslation } from "react-i18next"
+
 import { Badge, ButtonLink, Container, Divider, Group, Menu, Page, Section, Title } from "@/components"
 import { HelpingIcon, OrgsIcon, PresentationIcon } from "@/components/Icons"
 import { StatTile } from "@/domains/circles/StatTile"
 import { CardContainer, OrgCard, PresentationCard, STATUS_BADGE_COLOR } from "@/features/Cards"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
+import { intlLocale } from "@/lib/locale"
 
 interface ShowThemeProps {
 	theme: Schema.ThemesShow
@@ -13,15 +16,16 @@ function formatTotalAsk(theme: Schema.ThemesShow): string {
 	const cents = theme.total_ask_cents ?? 0
 	const currency = theme.total_ask_currency ?? "USD"
 	const amount = cents / 100
-	return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(amount)
+	return new Intl.NumberFormat(intlLocale(), { style: "currency", currency }).format(amount)
 }
 
 // @path: /:circle_slug/themes/:theme_slug
 // @route: theme
 const ShowTheme = ({ theme }: ShowThemeProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle } = usePageProps<"theme">()
 
-	const title = theme.name || "Theme"
+	const title = theme.name || t("themes.show.default_title")
 
 	if(!active_circle) return <></>
 
@@ -40,16 +44,16 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link href={ Routes.editTheme(params.circle_slug, params.theme_slug) }>
-								Edit Theme
+								{ t("themes.show.edit") }
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
 			</> }
 			breadcrumbs={ [
-				{ title: "Circles", href: Routes.circles() },
+				{ title: t("themes.show.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: "Themes", href: Routes.circleThemes(params.circle_slug) },
+				{ title: t("themes.show.breadcrumbs.themes"), href: Routes.circleThemes(params.circle_slug) },
 				{ title, href: window.location.href },
 			] }
 		>
@@ -57,26 +61,26 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 				<Section py="md">
 					<Group grow>
 						<StatTile
-							heading="Organizations"
+							heading={ t("themes.show.organizations") }
 							value={ theme.orgs_count ?? theme.orgs.length }
 							icon={ <OrgsIcon /> }
 							color="green"
 						/>
 						<StatTile
-							heading="Total Ask"
+							heading={ t("themes.show.total_ask") }
 							value={ formatTotalAsk(theme) }
 							icon={ <HelpingIcon /> }
 							color="purple"
 						/>
 						<StatTile
-							heading="Presentations"
+							heading={ t("themes.show.presentations") }
 							value={ theme.presentations_count ?? theme.presentations?.length ?? 0 }
 							icon={ <PresentationIcon /> }
 							color="orange"
 						/>
 						<StatTile
-							heading="Member Funds"
-							value="Not tracked yet"
+							heading={ t("themes.show.member_funds") }
+							value={ t("themes.show.member_funds_placeholder") }
 							icon={ <HelpingIcon /> }
 							color="gray"
 						/>
@@ -86,9 +90,9 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 				{ /* Organizations */ }
 				<Section mb="xl">
 					<Group justify="space-between" my="xs">
-						<Title order={ 2 }>Organizations</Title>
+						<Title order={ 2 }>{ t("themes.show.organizations") }</Title>
 						<ButtonLink variant="subtle" href={ Routes.themeOrgs(params.circle_slug, params.theme_slug) }>
-							View all
+							{ t("themes.show.view_all") }
 						</ButtonLink>
 					</Group>
 					<Divider my="xs" />
@@ -102,9 +106,9 @@ const ShowTheme = ({ theme }: ShowThemeProps) => {
 				{ /* Presentations */ }
 				<Section mb="xl">
 					<Group justify="space-between" my="xs">
-						<Title order={ 2 }>Presentations</Title>
+						<Title order={ 2 }>{ t("themes.show.presentations") }</Title>
 						<ButtonLink href={ Routes.newThemePresentation(params.circle_slug, params.theme_slug) }>
-							New Presentation
+							{ t("themes.show.new_presentation") }
 						</ButtonLink>
 					</Group>
 					<Divider my="xs" />

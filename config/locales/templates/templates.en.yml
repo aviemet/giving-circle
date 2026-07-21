@@ -1,6 +1,13 @@
 ---
 en:
   templates:
+    edit:
+      title: Edit Template
+    form:
+      create: Create Template
+      get_started: Let's Get Started!
+      name: Name
+      update: Update Template
     index:
       breadcrumbs:
         circles: Circles
@@ -17,6 +24,10 @@ en:
       helperText: Reusable slide layouts for your circle. Create a presentation from a theme to use these at an event.
       newTemplate: New Template
       title: Templates
+    notices:
+      created: Template was successfully created.
+      destroyed: Template was successfully destroyed.
+      updated: Template was successfully updated.
     show:
       addSlide: Add slide
       addSlideModal:

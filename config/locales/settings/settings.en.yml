@@ -2,10 +2,55 @@
 en:
   settings:
     branding:
+      circle_color: Circle Color
+      index:
+        title: 'Settings: Branding'
       notices:
         updated: Branding settings successfully updated
+      primary_color: Primary Color
+      save: Save Branding Settings
+    general:
+      index:
+        title: 'Settings: General'
+    integrations:
+      index:
+        title: 'Settings: Integrations'
     mail:
+      edit:
+        title: 'Settings: Mail'
+      form:
+        address: Reply-To Address
+        address_placeholder: If not provided, will default to your username
+        create: Create Mail Account
+        domain: Email Domain
+        domain_placeholder: e.g. mycompany.com
+        host: SMTP Server Address
+        name: Name
+        notes: Notes
+        password: Password
+        port: Port Number
+        save: Save SMTP Settings
+        security: Security
+        security_none: None
+        security_ssl: SSL
+        security_tls: TLS
+        update: Update Mail Account
+        username: Username
+      index:
+        newAccount: New Mail Account
+        newConnection: New Mail Connection
+        title: 'Settings: Mail'
+      new:
+        title: 'Settings: Mail'
       notices:
         created: Mail account successfully created
         deleted: Mail account successfully deleted
         updated: Mail account successfully updated
+      smtp:
+        test:
+          authentication_failed: 'Authentication failed: %{message}'
+          error: 'An error occurred: %{message}'
+          success: Authentication successful
+    notifications:
+      index:
+        title: 'Settings: Notifications'

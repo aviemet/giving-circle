@@ -36,6 +36,8 @@ describe("components/VisualEditor/fields/flexItemSizing", () => {
 			flexShrink: 1,
 			flexBasis: 0,
 			minWidth: 0,
+			minHeight: 0,
+			alignSelf: "stretch",
 			maxWidth: "50%",
 		})
 	})

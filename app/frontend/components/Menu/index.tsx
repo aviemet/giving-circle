@@ -16,5 +16,6 @@ MenuComponent.Label = Menu.Label
 MenuComponent.Item = MenuItem
 MenuComponent.Link = MenuLink
 MenuComponent.Divider = Menu.Divider
+MenuComponent.Sub = Menu.Sub
 
 export { MenuComponent }

@@ -3,7 +3,8 @@ import { useState } from "react"
 import { Group, Page, Title } from "@/components"
 import { SwitchSlideButton } from "@/domains/presentations/Buttons/SwitchSlideButton"
 import { withLayout } from "@/lib"
-import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
+
+import { useActivePresentationChannel } from "../useActivePresentationChannel"
 
 interface ActivePresentationControlsProps {
 	presentation: Schema.PresentationsPresentation

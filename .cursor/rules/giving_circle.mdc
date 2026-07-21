@@ -1,16 +1,16 @@
 ---
-description: 
-globs: 
+description: Required session habits and when to update giving_circle.mdx
 alwaysApply: true
 ---
+
 # REQUIRED FOR EVERY INTERACTION
 
-1. Read .cursor/giving_circle.mdx at the start of each interaction
+1. Read `.cursor/giving_circle.mdx` at the start of each interaction.
 2. **Testing:** When you add or change behavior (new code, bug fixes, refactors), you MUST:
    - Add or update specs that cover the behavior (or the fix). Do not leave new/changed code untested.
    - Run the relevant specs (and any obviously related specs) before finishing. Fix any failures.
    - Prefer adding a focused spec file for new services/features; run the full spec suite for the touched area.
-3. Before ending ANY response, if you've learned anything useful about project-specific architectural details that are NOT immediately obvious from reading the code, you MUST update .cursor/giving_circle.mdx with this information
+3. Before ending ANY response, if you've learned anything useful about project-specific architectural details that are NOT immediately obvious from reading the code, you MUST update `.cursor/giving_circle.mdx` with this information.
 4. **`.cursor/giving_circle.mdx` updates (high bar, opt-in):** Add to this file **only** when you learned something **specific to this application or this repo's conventions** that a competent reader would **not** reasonably infer from reading the relevant code paths in a few minutes. When in doubt, **do not** add a note. Silence is correct for most tasks.
 5. **Never** put the following in `.cursor/giving_circle.mdx` (these are obvious, universal, or belong in normal code/commits, not project lore):
    - Language, framework, or package-manager defaults and hygiene (e.g. direct imports need declared dependencies, how Yarn/npm works, generic Vitest/Vite behavior)

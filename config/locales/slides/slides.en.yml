@@ -2,7 +2,60 @@
 en:
   slides:
     editor:
+      components:
+        bar_graph:
+          award_image: Award Image
+          bar_color: Bar Color
+          funded_bar_color: Funded Bar Color
+          grid_color: Grid Color
+          label: Bar Graph
+          need_color: Need Color
+          text_color: Text Color
+        card:
+          background_color: Background Color
+          default_description: Topic description...
+          default_title: Topic Title
+          description: Description
+          font_color: Font Color
+          label: Card
+          title: Title
+        container:
+          alignment: Alignment
+          label: Container
+        grid:
+          label: Grid
+        heading:
+          default_title: Heading
+          label: Heading
+          level: Heading Level
+          padding: Padding
+          text_color: Text Color
+          title: Title
+        image:
+          border_color: Border Color
+          default_title: Image
+          label: Image
+        orgs_iterator:
+          label: Orgs Iterator
       fields:
+        background_image:
+          attachment: Attachment
+          attachment_fixed: Fixed
+          attachment_scroll: Scroll
+          custom_size: Custom size
+          label: Background Image
+          offset_x: Offset X
+          offset_y: Offset Y
+          remove_image: Remove image
+          repeat: Repeat
+          repeat_no: No repeat
+          repeat_x: Repeat X
+          repeat_y: Repeat Y
+          size: Size
+          size_auto: Auto
+          size_contain: Contain
+          size_cover: Cover
+          size_custom: Custom
         border:
           color: Border Color
           radius: Border Radius
@@ -73,7 +126,7 @@ en:
             clamp: Responsive
             custom: Custom CSS
             fill: Fill Space
-            fixed: Fixed Width
+            fixed: Fixed Size
         spacing:
           labels:
             unit: Unit
@@ -91,6 +144,22 @@ en:
           saved: Saved to server
           unsaved: Unsaved changes (local draft only)
         saving: Saving to server...
+    form:
+      add_to_presentation: Add a slide to this presentation
+      add_to_template: Add a slide to this template
+      create: Create Slide
+      data: Data
+      name: Name
+      new_slide_title: New Slide Title
+      order: Order
+      template: Template
+      update: Update Slide
+    new:
+      title: New Slide
     notices:
       created: Slide was successfully created.
+      destroyed: Slide was successfully destroyed.
       updated: Slide was successfully updated.
+    show:
+      edit: Edit Slide
+      title: Slide

@@ -31,7 +31,7 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 		params: { circleSlug: params.circle_slug, presentationSlug: params.presentation_slug, slideSlug: params.slug },
 	})
 
-	const handleSave = async(data: Data) => {
+	const handleSave = async (data: Data) => {
 		const title = slideTitleFromData(data) ?? slideTitle
 
 		await updateSlideMutation.mutate({ data, title })
@@ -67,6 +67,7 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 				<VisualEditor
 					initialData={ slide?.data || {} }
 					slideTitle={ slideTitle }
+					presentation={ active_presentation }
 					onSave={ handleSave }
 					isSaving={ updateSlideMutation.isPending }
 					slideKey={ slide.slug ?? params.slug }

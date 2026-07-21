@@ -12,7 +12,7 @@ import {
 
 import { Box, AsyncBoundary, ErrorBoundary } from "@/components"
 import { useNavigationInterruptContext } from "@/components/Modal"
-import { PresentationDataProvider } from "@/layouts/Providers/PresentationDataProvider"
+import { PresentationDataProvider, type PresentationDataPresentation } from "@/layouts/Providers/PresentationDataProvider"
 import { useInit } from "@/lib/hooks"
 import { useMockCircle } from "@/queries"
 
@@ -39,6 +39,7 @@ export interface VisualEditorWorkspaceProps {
 	slideKey: string
 	storageKey: string
 	persistSave: (data: Data) => Promise<boolean>
+	presentation?: PresentationDataPresentation
 }
 
 export function VisualEditorWorkspace({
@@ -52,6 +53,7 @@ export function VisualEditorWorkspace({
 	slideKey,
 	storageKey,
 	persistSave,
+	presentation,
 }: VisualEditorWorkspaceProps) {
 	const { data: mockCircle, isLoading } = useMockCircle()
 	const { visitWithBypass, navigateBackWithBypass } = useNavigationInterruptContext()
@@ -71,7 +73,7 @@ export function VisualEditorWorkspace({
 		}
 	})
 
-	const handleSave = useCallback(async(data: Data) => {
+	const handleSave = useCallback(async (data: Data) => {
 		await persistSave(data)
 	}, [persistSave])
 
@@ -123,7 +125,7 @@ export function VisualEditorWorkspace({
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- savedDataRef and latestDataRef are stable ref objects; .current is read at call time
 	}, [slideKey, setSaveStatus])
 
-	const handleSaveAndClose = useCallback(async(data: Data) => {
+	const handleSaveAndClose = useCallback(async (data: Data) => {
 		const saved = await persistSave(data)
 		if(saved && returnTo) {
 			visitWithBypass(returnTo)
@@ -179,7 +181,7 @@ export function VisualEditorWorkspace({
 	return (
 		<Box className={ clsx(classes.puckRoot) }>
 			<AsyncBoundary isLoading={ isLoading }>
-				<PresentationDataProvider value={ { circle: mockCircle!, isEditor: true } }>
+				<PresentationDataProvider value={ { circle: mockCircle!, presentation, isEditor: true } }>
 					<ErrorBoundary>
 						<VisualEditorUiProvider value={ uiContextValue }>
 							<Puck

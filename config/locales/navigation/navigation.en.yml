@@ -1,0 +1,24 @@
+---
+en:
+  navigation:
+    circles: Circles
+    currentLanguage: Current language
+    dashboard: Dashboard
+    exitPresentationControls: Exit presentation controls
+    general: General
+    givingCircles: Giving Circles
+    interactionTemplates: Interaction Templates
+    language: Language
+    languageSearch: Search languages
+    members: Members
+    more: more...
+    orgs: Orgs
+    preferences: Preferences
+    presentationTemplates: Presentation Templates
+    settings: Settings
+    signIn: Sign In
+    signOut: Sign Out
+    themes: Themes
+    toggleColorScheme: Toggle color scheme
+    toggleColorSchemeToDark: Toggle color scheme to dark mode
+    toggleColorSchemeToLight: Toggle color scheme to light mode

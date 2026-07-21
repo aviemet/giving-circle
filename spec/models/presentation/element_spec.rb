@@ -25,9 +25,10 @@ RSpec.describe Presentation::Element, type: :model do
   describe "scopes" do
     it "filters template elements" do
       template_element = create(:presentation_element, template: true)
-      create(:presentation_element, template: false)
+      non_template_element = create(:presentation_element, template: false)
 
-      expect(described_class.templates).to contain_exactly(template_element)
+      expect(described_class.templates).to include(template_element)
+      expect(described_class.templates).not_to include(non_template_element)
     end
   end
 

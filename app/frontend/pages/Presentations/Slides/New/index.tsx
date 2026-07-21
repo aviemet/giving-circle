@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { PresentationSlideForm } from "@/domains/presentation/slides/Form"
 import { Routes } from "@/lib"
@@ -11,8 +13,9 @@ interface NewPresentationSlideProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/new
 // @route: newThemePresentationSlide
 const NewPresentationSlide = ({ presentation_slide }: NewPresentationSlideProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"newThemePresentationSlide">()
-	const title = "New Slide"
+	const title = t("slides.new.title")
 
 	const slide: Schema.SlidesEdit = {
 		id: presentation_slide.id ?? "",
@@ -23,12 +26,12 @@ const NewPresentationSlide = ({ presentation_slide }: NewPresentationSlideProps)
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Slides", href: Routes.themePresentationSlides(
+			{ title: t("presentations.slides.index.title"), href: Routes.themePresentationSlides(
 				params.circle_slug,
 				params.theme_slug,
 				params.presentation_slug,
 			) },
-			{ title: "New Slide", href: window.location.href },
+			{ title, href: window.location.href },
 		] }>
 
 			<Section>

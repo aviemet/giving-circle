@@ -1,0 +1,213 @@
+{
+  "dz": {
+    "date": {
+      "abbr_day_names": [
+        "གཟའ་ཟླཝ",
+        "གཟའ་མིག་དམར",
+        "གཟའ་ལྷགཔ",
+        "གཟའ་ཕུརཔ",
+        "གཟའ་པ་སངས",
+        "གཟའ་སྤེན་པ",
+        "གཟའ་ཉིམ"
+      ],
+      "abbr_month_names": [
+        null,
+        "ཟླཝ་དང་པ",
+        "ཟླཝ་གཉིས་པ",
+        "ཟླཝ་གསུམ་པ",
+        "ཟླཝ་བཞི་པ",
+        "ཟླཝ་ལྔ་པ",
+        "ཟླཝ་དྲུག་པ",
+        "ཟླཝ་བདུན་པ",
+        "ཟླཝ་བརྒྱད་པ",
+        "ཟླཝ་དགུ་པ",
+        "ཟླཝ་བཅུ་པ",
+        "ཟླཝ་བཅུ་གཅིག་པ",
+        "ཟླཝ་བཅུ་གཉིས་པ"
+      ],
+      "day_names": [
+        "གཟའ་ཟླཝ",
+        "གཟའ་མིག་དམར",
+        "གཟའ་ལྷག་པ",
+        "གཟའ་ཕུརཔ",
+        "གཟའ་པ་སངས",
+        "གཟའ་སྤེན་པ",
+        "གཟའ་ཉི་མ"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%d %B %Y",
+        "short": "%d %b"
+      },
+      "month_names": [
+        null,
+        "ཟླཝ་དང་པ",
+        "ཟླཝ་གཉིས་པ",
+        "ཟླཝ་གསུམ་པ",
+        "ཟླཝ་བཞི་པ",
+        "ཟླཝ་ལྔ་པ",
+        "ཟླཝ་དྲུག་པ",
+        "ཟླཝ་བདུན་པ",
+        "ཟླཝ་བརྒྱད་པ",
+        "ཟླཝ་དགུ་པ",
+        "ཟླཝ་བཅུ་པ",
+        "ཟླཝ་བཅུ་གཅིག་པ",
+        "ཟླཝ་བཅུ་གཉིས་པ"
+      ],
+      "order": [
+        "ལོ",
+        "ཟླཝ",
+        "ཉིནམ"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "ཆུ་ཚོད་ ༡ ་དེ་ཅིག",
+          "other": "ཆུ་ཚོད་ %{count} དེ་ཅིག"
+        },
+        "about_x_months": {
+          "one": "ཟླཝ་ ༡ ་དེ་ཅིག",
+          "other": "ཟླཝ་ %{count} དེ་ཅིག"
+        },
+        "about_x_years": {
+          "one": "ལོ་ ༡ ་དེ་ཅིག",
+          "other": "ལོ་ %{count} དེ་ཅིག"
+        },
+        "almost_x_years": "ལོ %{count} མ་ལྷགཔ་ཅིག",
+        "half_a_minute": "སྐར་མ་ཕྱེད་ཀ",
+        "less_than_x_minutes": {
+          "one": "སྐར་མ་ ༡ ་ལས་ཉུངམ",
+          "other": "སྐར་མ %{count} ལས་ཉུངམ"
+        },
+        "less_than_x_seconds": {
+          "one": "སྐར་ཆ་ ༡ ་ལས་ཉུངམ",
+          "other": "སྐར་ཆ %{count} ལས་ཉུངམ"
+        },
+        "over_x_years": {
+          "one": "ལོ་ ༡ ་ལྷག",
+          "other": "ལོ་%{count}ལས་ལྷག"
+        },
+        "x_days": {
+          "one": "ཉིནམ་གཅིག",
+          "other": "ཉིནམ %{count}"
+        },
+        "x_minutes": {
+          "one": "སྐར་མ་གཅིག",
+          "other": "སྐར་མ %{count}"
+        },
+        "x_months": {
+          "one": "ཟླཝ་གཅིག",
+          "other": "ཟླཝ %{count}"
+        },
+        "x_seconds": {
+          "one": "སྐར་ཆ་གཅིག",
+          "other": "སྐར་ཆ %{count}"
+        },
+        "x_years": {
+          "one": "ལོ་གཅིག",
+          "other": "ལོ %{count}"
+        }
+      },
+      "prompts": {
+        "day": "ཉིནམ",
+        "hour": "ཆུ་ཚོད",
+        "minute": "སྐར་མ",
+        "month": "ཟླཝ",
+        "second": "སྐར་ཆ",
+        "year": "ལོ"
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "གདམ་ཁ་རྐྱབ"
+      },
+      "submit": {
+        "create": "%{model} གསར་སྤྲིན་འབད",
+        "submit": "%{model} བསྡུ་བཞག་འབད",
+        "update": "%{model} དུས་མཐུན་ཁ་གསོ་འབད"
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u%n",
+          "precision": "༢",
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "$"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": "༣",
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "ཐེར་འབུམ",
+            "million": "ས་ཡ",
+            "quadrillion": "Quadrillion",
+            "thousand": "སྟོང་ཕྲག",
+            "trillion": "ཁྲག་ཁྲིག་ཆེན་པོ",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": "༣",
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Bytes"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", དང ",
+        "two_words_connector": " དང ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "དྲོ་པ་གི་ཆུ་ཚོད་་",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%d %B %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "ཕྱི་རུ་གི་ཆུ་ཚོད་"
+    }
+  }
+}

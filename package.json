@@ -24,7 +24,8 @@
     "rspec": "RAILS_ENV=test bundle install && bundle exec rspec --color",
     "rspec:watch": "RAILS_ENV=test bundle exec rake rspec_watcher:watch",
     "verify": "yarn lint:fix && yarn test:once && yarn rspec",
-    "regenerate": "rails types:generate && rails annotate:all && rails i18n:export"
+    "regenerate": "rails prepare",
+    "locale:registry": "node scripts/generate-locale-registry.mjs"
   },
   "dependencies": {
     "@fragaria/address-formatter": "^6.7.1",
@@ -64,6 +65,7 @@
     "@xstate/react": "^6.1.0",
     "axios": "^1.15.2",
     "clsx": "^2.1.1",
+    "country-flag-icons": "^1.6.20",
     "dayjs": "^1.11.20",
     "dinero.js": "^2.0.2",
     "dmeditor": "^0.2.4",

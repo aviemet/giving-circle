@@ -1,0 +1,399 @@
+{
+  "sr": {
+    "date": {
+      "abbr_day_names": [
+        "Нед",
+        "Пон",
+        "Уто",
+        "Сре",
+        "Чет",
+        "Пет",
+        "Суб"
+      ],
+      "abbr_month_names": [
+        null,
+        "Јан",
+        "Феб",
+        "Мар",
+        "Апр",
+        "Мај",
+        "Јун",
+        "Јул",
+        "Авг",
+        "Сеп",
+        "Окт",
+        "Нов",
+        "Дец"
+      ],
+      "day_names": [
+        "Недеља",
+        "Понедељак",
+        "Уторак",
+        "Среда",
+        "Четвртак",
+        "Петак",
+        "Субота"
+      ],
+      "formats": {
+        "default": "%d. %m. %Y",
+        "long": "%-d. %B %Y",
+        "short": "%-d. %b"
+      },
+      "month_names": [
+        null,
+        "Јануар",
+        "Фебруар",
+        "Март",
+        "Април",
+        "Мај",
+        "Јун",
+        "Јул",
+        "Август",
+        "Септембар",
+        "Октобар",
+        "Новембар",
+        "Децембар"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "few": "око %{count} сата",
+          "many": "око %{count} сати",
+          "one": "око %{count} сат",
+          "other": "око %{count} сати"
+        },
+        "about_x_months": {
+          "few": "око %{count} месеца",
+          "many": "око %{count} месеци",
+          "one": "око %{count} месец",
+          "other": "око %{count} месеци"
+        },
+        "about_x_years": {
+          "few": "око %{count} године",
+          "many": "око %{count} година",
+          "one": "око %{count} године",
+          "other": "око %{count} година"
+        },
+        "almost_x_years": {
+          "few": "скоро %{count} године",
+          "many": "скоро %{count} година",
+          "one": "скоро %{count} година",
+          "other": "скоро %{count} година"
+        },
+        "half_a_minute": "пола минуте",
+        "less_than_x_minutes": {
+          "few": "мање од %{count} минута",
+          "many": "мање од %{count} минута",
+          "one": "мање од %{count} минут",
+          "other": "мање од %{count} минута"
+        },
+        "less_than_x_seconds": {
+          "few": "мање од %{count} секунде",
+          "many": "мање од %{count} секунди",
+          "one": "мање од %{count} секунд",
+          "other": "мање од %{count} секунди"
+        },
+        "over_x_years": {
+          "few": "преко %{count} године",
+          "many": "преко %{count} година",
+          "one": "преко %{count} године",
+          "other": "преко %{count} година"
+        },
+        "x_days": {
+          "few": "%{count} дана",
+          "many": "%{count} дана",
+          "one": "%{count} дан",
+          "other": "%{count} дана"
+        },
+        "x_minutes": {
+          "few": "%{count} минута",
+          "many": "%{count} минута",
+          "one": "%{count} минут",
+          "other": "%{count} минута"
+        },
+        "x_months": {
+          "few": "%{count} месеца",
+          "many": "%{count} месеци",
+          "one": "%{count} месец",
+          "other": "%{count} месеци"
+        },
+        "x_seconds": {
+          "few": "%{count} секунде",
+          "many": "%{count} секунди",
+          "one": "%{count} секунда",
+          "other": "%{count} секунди"
+        }
+      },
+      "prompts": {
+        "day": "Дан",
+        "hour": "Сат",
+        "minute": "Минут",
+        "month": "Месец",
+        "second": "Секунд",
+        "year": "Година"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Vaš nalog je uspešno potvrđen. Sada ste prijavljeni.",
+        "new": {
+          "resend_confirmation_instructions": null
+        },
+        "send_instructions": "U roku od nekoliko minuta primićete ePoruku sa uputstvom za potvrdu Vašeg naloga.",
+        "send_paranoid_instructions": "Ukoliko se Vaša adresa ePošte nalazi u našoj bazi u roku od nekoliko minuta primićete ePoruku sa uputstvom kako potvrditi Vaš nalog."
+      },
+      "failure": {
+        "already_authenticated": "Već ste prijavljeni.",
+        "inactive": "Vaš nalog još nije aktiviran.",
+        "invalid": null,
+        "last_attempt": "Imate još jedan pokušaj pre nego što Vaš nalog bude zaključan.",
+        "locked": "Vaš nalog je zaključan.",
+        "not_found_in_database": null,
+        "timeout": "Vreme trajanja Vaše sesije je isteklo. Za nastavak prijavite se ponovo.",
+        "unauthenticated": "Za nastavak se morate prijaviti ili registrovati.",
+        "unconfirmed": "Pre nastavka morate potvrditi svoj nalog."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Potvrdi moj malog",
+          "greeting": "Dobrodošli %{recipient}!",
+          "instruction": "Možete potvrditi adresu e-pošte za vaš nalog na linku ispod:",
+          "subject": "Uputstvo za potvrdu"
+        },
+        "email_changed": {
+          "greeting": "Zdravo %{recipient}!",
+          "message": "Obaveštavamo vas da je vaša adresa e-pošte promenjena u %{email}.",
+          "message_unconfirmed": "Obaveštavamo vas da je vaša adresa e-pošte promenjena u %{email}.",
+          "subject": "Promenjena adresa e-pošte"
+        },
+        "password_change": {
+          "greeting": "Zdravo %{recipient}!",
+          "message": "Obaveštavamo vas da je vaša lozinka promenjena.",
+          "subject": "Lozinka promenjena"
+        },
+        "reset_password_instructions": {
+          "action": "Promeni moju lozinku",
+          "greeting": "Zdravo %{recipient}!",
+          "instruction": "Neko je zatražio link za promenu vaše lozinke. To možete učiniti na linku ispod.",
+          "instruction_2": "Ukoliko niste vi ovo zatražili, molim vas ignorišite ovu e-poruku.",
+          "instruction_3": "Vaša lozinka neće biti promenjena dok ne pristupite linku iznad i napravite novu.",
+          "subject": "Uputstvo za promenu lozinke"
+        },
+        "unlock_instructions": {
+          "action": "Otključaj moj nalog",
+          "greeting": "Zdravo %{recipient}!",
+          "instruction": "Klikni na link ispod za otključavanje svog naloga:",
+          "message": null,
+          "subject": "Uputstvo za otključavanje korisničkog naloga"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Nismo u mogućnosti autorizovati Vas sa %{kind} nalogom zbog \"%{reason}\".",
+        "success": "Uspešna autorizacija sa %{kind} naloga."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Izmeni moju lozinku",
+          "change_your_password": "Izmeni tvoju lozinku",
+          "confirm_new_password": "Potvrdi novu lozinku",
+          "new_password": "Nova lozinka"
+        },
+        "new": {
+          "forgot_your_password": "Zaboravljena lozinka?",
+          "send_me_reset_password_instructions": null
+        },
+        "no_token": "Ne možete pristupiti ovoj stranici ako niste škljocnuli na vezu u ePoruci za resetovanje lozinke.",
+        "send_instructions": "U roku od nekoliko minuta primitićete ePoruku sa uputstvom za promenu Vaše lozinke.",
+        "send_paranoid_instructions": "Ukoliko se Vaša adresa ePošte nalazi u našoj bazi, na istu ćete u roku od nekoliko minuta primiti link za resetovanje lozinke.",
+        "updated": "Vaša lozinka je uspešno promenjena. Sada ste prijavljeni.",
+        "updated_not_active": "Vaša lozinka je uspešno promenjena."
+      },
+      "registrations": {
+        "destroyed": "Pozdrav! Vaš nalog je uspešno obrisan. Nadamo se da ćete se uskoro vratiti.",
+        "edit": {
+          "are_you_sure": "Da li ste sigurni?",
+          "cancel_my_account": "Otkaži moj nalog",
+          "currently_waiting_confirmation_for_email": null,
+          "leave_blank_if_you_don_t_want_to_change_it": null,
+          "title": null,
+          "unhappy": "Nezadovoljni?",
+          "update": "Izmeni",
+          "we_need_your_current_password_to_confirm_your_changes": null
+        },
+        "new": {
+          "sign_up": "Registruj se"
+        },
+        "signed_up": "Dobrodošli! Uspešno ste se registrovali.",
+        "signed_up_but_inactive": "Uspešno ste se registrovali. Doduše, ne možete se prijaviti na sistem zato što Vaš nalog još nije aktiviran.",
+        "signed_up_but_locked": "Uspešno ste se registrovali. Nažalost ne možete se prijaviti jer Vam je nalog zaključan.",
+        "signed_up_but_unconfirmed": "Poruka s linkom za potvrdu je poslata na Vašu adresu ePošte. Kliknite na vezu da aktivirate svoj nalog.",
+        "update_needs_confirmation": "Uspešno ste ažurirali svoj nalog, ali trebamo potvrditi Vašu adresu ePošte. Proverite svoje sanduče sa porukama i kliknite na vezu za potvrdu.",
+        "updated": "Uspešno ste izmenili svoj nalog.",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": null,
+        "new": {
+          "sign_in": "Prijavi se"
+        },
+        "signed_in": "Uspešno ste se prijavili.",
+        "signed_out": "Uspešno ste se odjavili."
+      },
+      "shared": {
+        "links": {
+          "back": null,
+          "didn_t_receive_confirmation_instructions": null,
+          "didn_t_receive_unlock_instructions": null,
+          "forgot_your_password": null,
+          "sign_in": "Prijavi se",
+          "sign_in_with_provider": null,
+          "sign_up": null
+        },
+        "minimum_password_length": {
+          "few": null,
+          "one": null,
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": null
+        },
+        "send_instructions": "U roku od nekoliko minuta ćete primiti ePoruku sa uputstvom za otključavanje Vašeg naloga.",
+        "send_paranoid_instructions": "Ako Vaš nalog postoji, na adresu svoje ePošte ćete u roku od nekoliko minuta primiti uputstvo kako ga otključati.",
+        "unlocked": "Vaš nalog je uspešno otključan. Sada se možete prijaviti."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Изаберите"
+      },
+      "submit": {
+        "create": "Направи %{model}",
+        "submit": "Сачувај %{model}",
+        "update": "Измени %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "few",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "РСД"
+        }
+      },
+      "format": {
+        "delimiter": ".",
+        "precision": 3,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": {
+              "few": "милијарде",
+              "many": "милијарди",
+              "one": "милијарда",
+              "other": "милијарди"
+            },
+            "million": {
+              "few": "милиона",
+              "many": "милиона",
+              "one": "милион",
+              "other": "милиона"
+            },
+            "quadrillion": {
+              "few": "квадрилиона",
+              "many": "квадрилиона",
+              "one": "квадрилион",
+              "other": "квадрилиона"
+            },
+            "thousand": {
+              "few": "хиљаде",
+              "many": "хиљада",
+              "one": "хиљада",
+              "other": "хиљада"
+            },
+            "trillion": {
+              "few": "трилиона",
+              "many": "трилиона",
+              "one": "трилион",
+              "other": "трилиона"
+            },
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "few": "бајта",
+              "many": "бајтова",
+              "one": "бајт",
+              "other": "бајтова"
+            },
+            "gb": "ГБ",
+            "kb": "КБ",
+            "mb": "МБ",
+            "tb": "ТБ"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", и ",
+        "two_words_connector": " и ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "АМ",
+      "formats": {
+        "default": "%a %d %b %Y %H:%M:%S %Z",
+        "long": "%d %B %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "ПМ"
+    }
+  }
+}

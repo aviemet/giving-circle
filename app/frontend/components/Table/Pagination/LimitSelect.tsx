@@ -1,6 +1,7 @@
 import { router } from "@inertiajs/react"
 import { Select, type SelectProps } from "@mantine/core"
 import clsx from "clsx"
+import { useTranslation } from "react-i18next"
 
 import { useLocation, usePageProps } from "@/lib/hooks"
 import { useUpdateTablePreferences } from "@/queries"
@@ -14,6 +15,7 @@ interface LimitSelectProps extends SelectProps {
 }
 
 export function LimitSelect({ pagination, model, className }: LimitSelectProps) {
+	const { t } = useTranslation()
 	const { auth: { user } } = usePageProps()
 	const location = useLocation()
 	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
@@ -61,7 +63,7 @@ export function LimitSelect({ pagination, model, className }: LimitSelectProps) 
 				{ value: "100", label: "100" },
 			] }
 			onChange={ handleLimitChange }
-			aria-label="rows per page"
+			aria-label={ t("common.table.rows_per_page") }
 		/>
 	)
 }

@@ -22,7 +22,7 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 		useLayoutStore.getState().setOpenMenus(allMenus)
 	})
 
-	test("accordion uses separated variant for grouped nav", async() => {
+	test("accordion uses separated variant for grouped nav", async () => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
 
 		const { container } = render(<AppSidebarMenu />)
@@ -33,7 +33,7 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 		})
 	})
 
-	test("does not close other menus when deeper menu appears", async() => {
+	test("does not close other menus when deeper menu appears", async () => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
 
 		const { rerender } = render(<AppSidebarMenu />)
@@ -51,7 +51,7 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 		})
 	})
 
-	test("renders presentation menu links", async() => {
+	test("renders presentation menu links", async () => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
 		inertiaPageProps.active_theme = createThemeInertiaShare()
 		inertiaPageProps.active_presentation = createPresentationInertiaShare()
@@ -66,6 +66,10 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 			expect(screen.getByRole("link", { name: "Slides" })).toHaveAttribute(
 				"href",
 				Routes.themePresentationSlides("circle-1", "theme-1", "presentation-1"),
+			)
+			expect(screen.getByRole("link", { name: "Interactions" })).toHaveAttribute(
+				"href",
+				Routes.themePresentationInteractions("circle-1", "theme-1", "presentation-1"),
 			)
 			expect(screen.getByRole("link", { name: "Settings" })).toHaveAttribute(
 				"href",

@@ -4,7 +4,7 @@ import { describe, expect, test } from "vitest"
 import { SlidePresentation } from "@/components/SlidePresentation"
 import {
 	createCirclePersisted,
-	createOrgPersisted,
+	createPresentationOrgPersisted,
 	createPresentationPresentation,
 	createSlideData,
 	createSlidePresentation,
@@ -53,7 +53,7 @@ describe("components/SlidePresentation", () => {
 	})
 
 	test("renders org iterator content with resolved org names", () => {
-		const org = createOrgPersisted({ id: "org-1", name: "River Conservancy" })
+		const org = createPresentationOrgPersisted({ id: "org-1", name: "River Conservancy" })
 		const theme = createThemePersisted({ name: "Theme" })
 		const circle = createCirclePersisted()
 		const presentation = createPresentationPresentation({ orgs: [org] })

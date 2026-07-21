@@ -7,7 +7,7 @@ import { createCirclePersisted, createPresentationPresentation, createThemePersi
 import { render } from "@/tests/helpers/utils"
 
 describe("pages/Presentations/Active/PublicShow/index", () => {
-	test("renders public presentation", async() => {
+	test("renders public presentation", async () => {
 		const presentation = createPresentationPresentation()
 		const circle = createCirclePersisted()
 

@@ -27,7 +27,7 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 		params: { circleSlug: params.circle_slug, templateSlug: params.template_slug, slideSlug: params.slug },
 	})
 
-	const handleSave = async(data: Data) => {
+	const handleSave = async (data: Data) => {
 		const title = slideTitleFromData(data) ?? slideTitle
 
 		await updateSlideMutation.mutate({ data, title })

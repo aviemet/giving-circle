@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { PresentationForm } from "@/domains/presentations/Form"
 import { Routes } from "@/lib"
@@ -11,9 +13,10 @@ interface NewPresentationProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/new
 // @route: newThemePresentation
 const NewPresentation = ({ presentation, templates }: NewPresentationProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle, active_theme } = usePageProps<"newThemePresentation">()
 
-	const title = "New Presentation"
+	const title = t("presentations.new.title")
 
 	if(!active_circle || !active_theme) return <></>
 
@@ -21,12 +24,12 @@ const NewPresentation = ({ presentation, templates }: NewPresentationProps) => {
 		<Page
 			title={ title }
 			breadcrumbs={ [
-				{ title: "Circles", href: Routes.circles() },
+				{ title: t("presentations.index.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: "Themes", href: Routes.circleThemes(params.circle_slug) },
+				{ title: t("presentations.index.breadcrumbs.themes"), href: Routes.circleThemes(params.circle_slug) },
 				{ title: active_theme.name, href: Routes.theme(params.circle_slug, params.theme_slug) },
-				{ title: "Presentations", href: Routes.themePresentations(params.circle_slug, params.theme_slug) },
-				{ title: "New", href: window.location.href },
+				{ title: t("presentations.index.breadcrumbs.presentations"), href: Routes.themePresentations(params.circle_slug, params.theme_slug) },
+				{ title: t("common.actions.new"), href: window.location.href },
 			] }
 		>
 			<Section>

@@ -19,7 +19,7 @@ export const useCreatePresentationSlide: ReactMutationFunction<
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: async(data) => {
+		mutationFn: async (data) => {
 			const res = await axios.post(
 				Routes.apiCirclePresentationSlides(options.params.circleSlug, options.params.presentationSlug),
 				{ slide: data },
@@ -52,7 +52,7 @@ export const useUpdatePresentationSlide: ReactMutationFunction<
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: async(data) => {
+		mutationFn: async (data) => {
 			const res = await axios.patch(
 				Routes.apiCirclePresentationSlide(options.params.circleSlug, options.params.presentationSlug, options.params.slideSlug),
 				{
@@ -83,7 +83,7 @@ export const useSyncPresentationTemplateSlides: ReactMutationFunction<
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: async(data) => {
+		mutationFn: async (data) => {
 			const res = await axios.patch(
 				Routes.syncSlidesApiCirclePresentation(options.params.circleSlug, options.params.presentationSlug)
 			)

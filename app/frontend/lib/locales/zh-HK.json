@@ -1,8 +1,110 @@
 {
   "zh-HK": {
+    "date": {
+      "abbr_day_names": [
+        "週日",
+        "週一",
+        "週二",
+        "週三",
+        "週四",
+        "週五",
+        "週六"
+      ],
+      "abbr_month_names": [
+        null,
+        "1月",
+        "2月",
+        "3月",
+        "4月",
+        "5月",
+        "6月",
+        "7月",
+        "8月",
+        "9月",
+        "10月",
+        "11月",
+        "12月"
+      ],
+      "day_names": [
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%Y年%m月%d日",
+        "short": "%m月%d日"
+      },
+      "month_names": [
+        null,
+        "一月",
+        "二月",
+        "三月",
+        "四月",
+        "五月",
+        "六月",
+        "七月",
+        "八月",
+        "九月",
+        "十月",
+        "十一月",
+        "十二月"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": "約%{count}小時",
+        "about_x_months": "約%{count}個月",
+        "about_x_years": "約%{count}年",
+        "almost_x_years": "接近%{count}年",
+        "half_a_minute": "半分鐘",
+        "less_than_x_minutes": "不到%{count}分鐘",
+        "less_than_x_seconds": "不到%{count}秒",
+        "over_x_years": "超過%{count}年",
+        "x_days": "%{count}天",
+        "x_minutes": "%{count}分鐘",
+        "x_months": "%{count}個月",
+        "x_seconds": "%{count}秒",
+        "x_years": "%{count}年"
+      },
+      "prompts": {
+        "day": "日",
+        "hour": "時",
+        "minute": "分",
+        "month": "月",
+        "second": "秒",
+        "year": "年"
+      }
+    },
     "devise": {
+      "confirmations": {
+        "confirmed": "啟用同埋登入咗帳戶。",
+        "new": {
+          "resend_confirmation_instructions": null
+        },
+        "send_instructions": "幾分鐘之後，你會收到一封電郵，入面有啟用帳戶嘅步驟。",
+        "send_paranoid_instructions": "如果我哋既紀錄入面有呢個電郵的話，幾分鐘之後，你會收到一封電郵，入面有啟用帳戶嘅步驟。"
+      },
       "failure": {
-        "invited": "你有一個待處理的邀請, 請接受它以完成創建您的帳戶。"
+        "already_authenticated": "已經登入咗。",
+        "inactive": "帳戶未啟用。",
+        "invalid": null,
+        "invited": "你有一個待處理的邀請, 請接受它以完成創建您的帳戶。",
+        "last_attempt": "你仲有一次嘗試正確密碼嘅機會，過後你嘅帳戶會被鎖住。",
+        "locked": "你個帳戶已經鎖咗。",
+        "not_found_in_database": null,
+        "timeout": "超時，請重新登入。",
+        "unauthenticated": "請登入，或者開個帳戶。",
+        "unconfirmed": "帳戶未啟用。"
       },
       "invitations": {
         "edit": {
@@ -21,6 +123,18 @@
         "updated_not_active": "你嘅密碼設置成功。"
       },
       "mailer": {
+        "confirmation_instructions": {
+          "action": null,
+          "greeting": null,
+          "instruction": null,
+          "subject": "啟用帳戶"
+        },
+        "email_changed": {
+          "greeting": null,
+          "message": null,
+          "message_unconfirmed": null,
+          "subject": null
+        },
         "invitation_instructions": {
           "accept": "接受邀請",
           "accept_until": "此邀請就喺%{due_date} 中到期。",
@@ -28,19 +142,205 @@
           "ignore": "如果你唔想接受邀請, 請忽略此電子郵件。 系你訪問上面的連結並設置密碼之前, 不會創建您的帳戶。",
           "someone_invited_you": "有人邀請你去%{url}, 你可以通過下面嘅連結接受它。",
           "subject": "邀請指示"
+        },
+        "password_change": {
+          "greeting": null,
+          "message": null,
+          "subject": null
+        },
+        "reset_password_instructions": {
+          "action": null,
+          "greeting": null,
+          "instruction": null,
+          "instruction_2": null,
+          "instruction_3": null,
+          "subject": "重設密碼"
+        },
+        "unlock_instructions": {
+          "action": null,
+          "greeting": null,
+          "instruction": null,
+          "message": null,
+          "subject": "帳戶解鎖"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "由%{kind}登入唔到，原因︰%{reason}。",
+        "success": "%{kind}登入成功。"
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": null,
+          "change_your_password": null,
+          "confirm_new_password": null,
+          "new_password": null
+        },
+        "new": {
+          "forgot_your_password": null,
+          "send_me_reset_password_instructions": null
+        },
+        "no_token": "請肯定網址係密碼重設電郵入面嗰個。唔經呢封電郵睇唔到呢版。",
+        "send_instructions": "幾分鐘之後，你會收到一封電郵，入面有重設密碼嘅步驟。",
+        "send_paranoid_instructions": "如果我哋既紀錄入面有呢個電郵的話，幾分鐘之後，你會收到一封電郵，入面有重設密碼嘅步驟。",
+        "updated": "成功改咗密碼；重新登入咗。",
+        "updated_not_active": "成功改咗密碼。"
+      },
+      "registrations": {
+        "destroyed": "帳戶已經註銷。有緣再會。",
+        "edit": {
+          "are_you_sure": null,
+          "cancel_my_account": null,
+          "currently_waiting_confirmation_for_email": null,
+          "leave_blank_if_you_don_t_want_to_change_it": null,
+          "title": null,
+          "unhappy": null,
+          "update": null,
+          "we_need_your_current_password_to_confirm_your_changes": null
+        },
+        "new": {
+          "sign_up": null
+        },
+        "signed_up": "註冊咗。歡迎！",
+        "signed_up_but_inactive": "註冊咗；不過要啟用埋帳戶先可以登入。",
+        "signed_up_but_locked": "註冊咗；不過帳戶鎖咗，未可以登入住。",
+        "signed_up_but_unconfirmed": "註冊咗；你會收到封電郵，入面有啟用帳戶嘅步驟。",
+        "update_needs_confirmation": "更新咗帳戶。你會喺新電郵地址收到封電郵，入面有確認新電郵步驟。",
+        "updated": "更新咗帳戶。",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": "登出成功。",
+        "new": {
+          "sign_in": null
+        },
+        "signed_in": "登入咗。",
+        "signed_out": "登出咗。"
+      },
+      "shared": {
+        "links": {
+          "back": null,
+          "didn_t_receive_confirmation_instructions": null,
+          "didn_t_receive_unlock_instructions": null,
+          "forgot_your_password": null,
+          "sign_in": null,
+          "sign_in_with_provider": null,
+          "sign_up": null
+        },
+        "minimum_password_length": {
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": null
+        },
+        "send_instructions": "幾分鐘之後，你會收到一封電郵，入面有帳戶解鎖嘅步驟。",
+        "send_paranoid_instructions": "如果我哋既紀錄入面有呢個帳戶的話，幾分鐘之後，你會收到一封電郵，入面有帳戶解鎖嘅步驟。",
+        "unlocked": "帳戶解咗鎖；請重新登入。"
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "請選擇"
+      },
+      "submit": {
+        "create": "新增%{model}",
+        "submit": "儲存%{model}",
+        "update": "更新%{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u %n",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "HK$"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "十億",
+            "million": "百萬",
+            "quadrillion": "千兆",
+            "thousand": "千",
+            "trillion": "兆",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": false,
+          "strip_insignificant_zeros": false
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Bytes"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
         }
       }
     },
+    "support": {
+      "array": {
+        "last_word_connector": "、",
+        "two_words_connector": "和",
+        "words_connector": "、"
+      }
+    },
     "time": {
+      "am": "上午",
       "formats": {
+        "default": "%Y年%m月%d日 %A %H:%M:%S %Z",
         "devise": {
           "mailer": {
             "invitation_instructions": {
               "accept_until_format": "%B %d, %Y %I:%M %p"
             }
           }
-        }
-      }
+        },
+        "long": "%Y年%m月%d日 %H:%M",
+        "short": "%m月%d日 %H:%M"
+      },
+      "pm": "下午"
     }
   }
 }

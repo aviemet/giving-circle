@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Table, Link, type TableColumn } from "@/components"
 import { EditButton } from "@/components/Button"
 import { Routes } from "@/lib"
@@ -10,12 +12,13 @@ interface PresentationElementsTableProps {
 }
 
 export function PresentationElementsTable({ records, pagination, model }: PresentationElementsTableProps) {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"themePresentationElements">()
 
 	const columns: TableColumn<Schema.PresentationElementsIndex>[] = [
 		{
 			accessor: "data",
-			title: "Data",
+			title: t("presentations.elements.table.data"),
 			sortable: true,
 			render: (presentation_element) => (
 				<Link href={ Routes.themePresentationElement(
@@ -31,7 +34,7 @@ export function PresentationElementsTable({ records, pagination, model }: Presen
 		},
 		{
 			accessor: "name",
-			title: "Name",
+			title: t("presentations.elements.table.name"),
 			sortable: true,
 			render: (presentation_element) => (
 				<Link href={ Routes.themePresentationElement(
@@ -47,7 +50,7 @@ export function PresentationElementsTable({ records, pagination, model }: Presen
 		},
 		{
 			accessor: "template",
-			title: "Template",
+			title: t("presentations.elements.table.template"),
 			sortable: true,
 			render: (presentation_element) => (
 				<Link href={ Routes.themePresentationElement(
@@ -63,7 +66,7 @@ export function PresentationElementsTable({ records, pagination, model }: Presen
 		},
 		{
 			accessor: "actions",
-			title: "Actions",
+			title: t("presentations.elements.table.actions"),
 			sortable: false,
 			render: (presentation_element) => (
 				<EditButton

@@ -1,6 +1,7 @@
 import { Loader } from "@mantine/core"
 import { Spotlight } from "@mantine/spotlight"
 import { useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { usePageProps } from "@/lib/hooks"
 import { useGetSpotlightResults } from "@/queries"
@@ -12,6 +13,7 @@ import {
 } from "./spotlightActions"
 
 export function AppSpotlight() {
+	const { t } = useTranslation()
 	const { params, active_circle, circles } = usePageProps()
 	const circleSlug = typeof params.circle_slug === "string"
 		? params.circle_slug
@@ -60,12 +62,12 @@ export function AppSpotlight() {
 			actions={ actions }
 			disabled={ !circleSlug && searching }
 			limit={ 8 }
-			nothingFound={ loading && searching ? <Loader /> : "Nothing found..." }
+			nothingFound={ loading && searching ? <Loader /> : t("spotlight.nothing_found") }
 			onQueryChange={ handleQueryChange }
 			query={ query }
 			searchProps={ {
 				leftSection: <SearchIcon size={ 28 } />,
-				placeholder: circleSlug ? "Search this circle..." : "Select a circle to search records",
+				placeholder: circleSlug ? t("spotlight.search_circle") : t("spotlight.search_select_circle"),
 			} }
 		/>
 	)

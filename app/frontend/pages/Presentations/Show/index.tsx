@@ -221,6 +221,16 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 							{ t("presentations.show.slides") }
 						</ButtonLink>
 						<ButtonLink
+							variant="default"
+							href={ Routes.themePresentationInteractions(
+								params.circle_slug,
+								params.theme_slug,
+								presentation.slug,
+							) }
+						>
+							Interactions
+						</ButtonLink>
+						<ButtonLink
 							variant="subtle"
 							href={ Routes.themePresentationSettings(params.circle_slug, params.theme_slug, presentation.slug) }
 						>

@@ -1,6 +1,12 @@
 ---
 en:
   circles:
+    edit:
+      title: Edit Circle
+    form:
+      create: Create Circle
+      name: Name
+      update: Update Circle
     index:
       circlesSectionTitle: Your Circles
       membersCount_one: 1 member
@@ -19,7 +25,15 @@ en:
       themesCount_other: "%{count} themes"
       title: Dashboard
       totalGivenPlaceholder: 'Total given: --'
+    new:
+      title: New Circle
     notices:
       created: Circle was successfully created.
       destroyed: Circle was successfully destroyed.
       updated: Circle was successfully updated.
+    show:
+      activeMembers: Active Members
+      editCircle: Edit Circle
+      organizationsFunded: Organizations Funded
+      totalDonated: Total Donated
+      upcomingThemes: Upcoming Themes

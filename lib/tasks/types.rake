@@ -1,7 +1,6 @@
 namespace :types do
-  desc "Annotate models and fixtures with database schema"
+  desc "Generate TypeScript interfaces from serializers"
   task :generate => [:environment] do
     system("rails types_from_serializers:generate")
-    system("rails annotate:models")
   end
 end

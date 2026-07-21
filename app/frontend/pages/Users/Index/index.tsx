@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page } from "@/components"
 import { UsersTable } from "@/domains/users/Table"
 import { IndexTableTemplate } from "@/features"
@@ -11,9 +13,11 @@ interface UserIndexProps {
 // @path: /users
 // @route: users
 const UserIndex = ({ users, pagination }: UserIndexProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Page
-			title="Users"
+			title={ t("users.index.title") }
 		>
 			<IndexTableTemplate
 				model="users"

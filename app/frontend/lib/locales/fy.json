@@ -1,0 +1,224 @@
+{
+  "fy": {
+    "date": {
+      "abbr_day_names": [
+        "si",
+        "mo",
+        "ti",
+        "wo",
+        "to",
+        "fr",
+        "so"
+      ],
+      "abbr_month_names": [
+        null,
+        "jan",
+        "feb",
+        "mrt",
+        "apr",
+        "mai",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov",
+        "des"
+      ],
+      "day_names": [
+        "snein",
+        "moandei",
+        "tiisdei",
+        "woansdei",
+        "tongersdei",
+        "freed",
+        "sneon"
+      ],
+      "formats": {
+        "default": "%d-%m-%Y",
+        "long": "%e %B %Y",
+        "short": "%e %b"
+      },
+      "month_names": [
+        null,
+        "jannewaris",
+        "febrewaris",
+        "maart",
+        "april",
+        "maaie",
+        "juny",
+        "july",
+        "augustus",
+        "septimber",
+        "oktober",
+        "novimber",
+        "desimber"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "likernôch 1 oere",
+          "other": "likernôch %{count} oeren"
+        },
+        "about_x_months": {
+          "one": "likernôch 1 moanne",
+          "other": "likernôch %{count} moannen"
+        },
+        "about_x_years": {
+          "one": "likernôch 1 jier",
+          "other": "likernôch %{count} jier"
+        },
+        "almost_x_years": {
+          "one": "hast 1 jier",
+          "other": "hast %{count} jier"
+        },
+        "half_a_minute": "in heale minút",
+        "less_than_x_minutes": {
+          "one": "minder as in minút",
+          "other": "minder as %{count} minuten"
+        },
+        "less_than_x_seconds": {
+          "one": "minder as 1 sekonde",
+          "other": "minder as %{count} sekonden"
+        },
+        "over_x_years": {
+          "one": "mear as 1 jier",
+          "other": "mear as %{count} jier"
+        },
+        "x_days": {
+          "one": "1 dei",
+          "other": "%{count} dagen"
+        },
+        "x_minutes": {
+          "one": "1 minút",
+          "other": "%{count} minuten"
+        },
+        "x_months": {
+          "one": "1 moanne",
+          "other": "%{count} moannen"
+        },
+        "x_seconds": {
+          "one": "1 sekonde",
+          "other": "%{count} sekonden"
+        },
+        "x_years": {
+          "one": "1 jier",
+          "other": "%{count} jier"
+        }
+      },
+      "prompts": {
+        "day": "dei",
+        "hour": "oere",
+        "minute": "minút",
+        "month": "moanne",
+        "second": "sekonde",
+        "year": "jier"
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Meitsje in kar"
+      },
+      "submit": {
+        "create": "%{model} oanmeitsje",
+        "submit": "%{model} fêstlizze",
+        "update": "%{model} bywurkje"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ".",
+          "format": "%u %n",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "€"
+        }
+      },
+      "format": {
+        "delimiter": ".",
+        "precision": 3,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "miljard",
+            "million": "miljoen",
+            "quadrillion": "biljard",
+            "thousand": "tûzen",
+            "trillion": "biljoen",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "byte",
+              "other": "bytes"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " en ",
+        "two_words_connector": " en ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "fm.",
+      "formats": {
+        "default": "%a %e %b %Y %H.%M:%S %z",
+        "long": "%e %B %Y om %H.%M oere",
+        "short": "%e %b, %H.%M o."
+      },
+      "pm": "nm."
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import { useTableSectionContext } from "@/components/Table"
 import { useCurrency, type UseCurrencyOptions } from "@/lib/hooks"
+import { intlLocale } from "@/lib/locale"
 import { type Money } from "@/types"
 
 import { FlexCurrencyFormatter } from "./FlexCurrency"
@@ -17,7 +18,7 @@ interface CurrencyFormatterProps {
 export const CurrencyFormatter = ({
 	children,
 	currency = "USD",
-	locale = "en-US",
+	locale = intlLocale(),
 	accounting = false,
 	options = {},
 }: CurrencyFormatterProps) => {

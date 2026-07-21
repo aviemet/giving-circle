@@ -1,0 +1,369 @@
+{
+  "hu": {
+    "date": {
+      "abbr_day_names": [
+        "v.",
+        "h.",
+        "k.",
+        "sze.",
+        "cs.",
+        "p.",
+        "szo."
+      ],
+      "abbr_month_names": [
+        null,
+        "jan.",
+        "febr.",
+        "márc.",
+        "ápr.",
+        "máj.",
+        "jún.",
+        "júl.",
+        "aug.",
+        "szept.",
+        "okt.",
+        "nov.",
+        "dec."
+      ],
+      "day_names": [
+        "vasárnap",
+        "hétfő",
+        "kedd",
+        "szerda",
+        "csütörtök",
+        "péntek",
+        "szombat"
+      ],
+      "formats": {
+        "default": "%Y.%m.%d.",
+        "long": "%Y. %B %e.",
+        "short": "%b %e."
+      },
+      "month_names": [
+        null,
+        "január",
+        "február",
+        "március",
+        "április",
+        "május",
+        "június",
+        "július",
+        "augusztus",
+        "szeptember",
+        "október",
+        "november",
+        "december"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "kb. %{count} órája",
+          "other": "kb. %{count} órája"
+        },
+        "about_x_months": {
+          "one": "kb. %{count} hónapja",
+          "other": "kb. %{count} hónapja"
+        },
+        "about_x_years": {
+          "one": "kb. %{count} éve",
+          "other": "kb. %{count} éve"
+        },
+        "almost_x_years": {
+          "one": "majdnem %{count} éve",
+          "other": "majdnem %{count} éve"
+        },
+        "half_a_minute": "fél perce",
+        "less_than_x_minutes": {
+          "one": "kevesebb, mint %{count} perce",
+          "other": "kevesebb, mint %{count} perce"
+        },
+        "less_than_x_seconds": {
+          "one": "kevesebb, mint %{count} másodperce",
+          "other": "kevesebb, mint %{count} másodperce"
+        },
+        "over_x_years": {
+          "one": "több, mint %{count} éve",
+          "other": "több, mint %{count} éve"
+        },
+        "x_days": {
+          "one": "%{count} napja",
+          "other": "%{count} napja"
+        },
+        "x_minutes": {
+          "one": "%{count} perce",
+          "other": "%{count} perce"
+        },
+        "x_months": {
+          "one": "%{count} hónapja",
+          "other": "%{count} hónapja"
+        },
+        "x_seconds": {
+          "one": "%{count} másodperce",
+          "other": "%{count} másodperce"
+        }
+      },
+      "prompts": {
+        "day": "Nap",
+        "hour": "Óra",
+        "minute": "Perc",
+        "month": "Hónap",
+        "second": "Másodperc",
+        "year": "Év"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Fiók megerősítve. Bejelentkezve a felhasználói fiókba.",
+        "new": {
+          "resend_confirmation_instructions": "Megerősítő levél újraküldése"
+        },
+        "send_instructions": "A megadott címre egy email érkezik a megerősítő linkkel.",
+        "send_paranoid_instructions": "Ha az email cím már létezik az adatbázisban, egy emailt küldtünk a további teendőkkel a fiók megerősítéséhez."
+      },
+      "failure": {
+        "already_authenticated": "Már belépett.",
+        "inactive": "A fiók még nincs aktiválva.",
+        "invalid": null,
+        "last_attempt": "Már csak egy próbálkozási lehetőség maradt, mielőtt a fiók zárolásra kerül.",
+        "locked": "A fiók zárolva lett.",
+        "not_found_in_database": null,
+        "timeout": "A munkafolyamat lejárt. Újboli bejelentkezés szükséges.",
+        "unauthenticated": "A folytatáshoz bejelentkezés szükséges.",
+        "unconfirmed": "A folytatáshoz az email cím megerősítése szükséges."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Fiók megerősítése",
+          "greeting": "Kedves %{recipient}!",
+          "instruction": "A fiók megerősítéséhez rá kell kattintani az alábbi linkre:",
+          "subject": "Email cím megerősítés"
+        },
+        "email_changed": {
+          "greeting": null,
+          "message": null,
+          "message_unconfirmed": null,
+          "subject": null
+        },
+        "password_change": {
+          "greeting": null,
+          "message": null,
+          "subject": null
+        },
+        "reset_password_instructions": {
+          "action": "Jelszó megváltoztatása",
+          "greeting": "Kedves %{recipient}!",
+          "instruction": "Ön, vagy valaki más az ön nevében jelszóváltoztatást kérvényezett, mely a lenti linkre kattintva lehetséges.",
+          "instruction_2": "Amennyiben ön nem kezdeményezte a jelszavának megváltoztatását, kérem hagyja figyelmen kívül ezt a levelet.",
+          "instruction_3": "Amennyiben nem kattint az alábbi linkre, jelszava továbbra is ugyanaz marad, mint eddig.",
+          "subject": "Jelszó megváltoztatása"
+        },
+        "unlock_instructions": {
+          "action": "Zárolás feloldása",
+          "greeting": "Kedves %{recipient}!",
+          "instruction": "A zárolás feloldásához az alábbi linkre kell kattintani:",
+          "message": "A felhasználói fiókja zárolva lett túl sok sikertelen belépési kísérlet miatt.",
+          "subject": "Fiók zárolásának megszüntetése"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Nem sikerült azonosítani %{kind} fiókkal, az ok: \"%{reason}\".",
+        "success": "Sikeres azonosítás %{kind} fiókkal."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Jelszó megváltoztatása",
+          "change_your_password": "Jelszó megváltoztatása",
+          "confirm_new_password": "Jelszó megerősítése",
+          "new_password": "Új jelszó"
+        },
+        "new": {
+          "forgot_your_password": "Elfelejtette a jelszavát?",
+          "send_me_reset_password_instructions": "Jelszóviszaállítási teendők küldése"
+        },
+        "no_token": "Ezt az oldalt csak a jelszóváltoztató e-mailben küldött linkre kattintva lehet elérni, és ellenőrizni kell, hogy a címsorban az e-mailben található teljes webcím szerepel-e.",
+        "send_instructions": "A megadott címre egy email érkezik hamarosan a további teendőkről.",
+        "send_paranoid_instructions": "Ha az email cím már létezik az adatbázisban, egy jelszó-visszaállító emailt küldtünk a megadott címre.",
+        "updated": "A jelszó megváltozott. Bejelentkezve a felhasználói fiókba",
+        "updated_not_active": "A jelszó megváltozott"
+      },
+      "registrations": {
+        "destroyed": "Felhasználói fiók törölve. Reméljük, még visszatér hozzánk.",
+        "edit": {
+          "are_you_sure": "Biztos benne?",
+          "cancel_my_account": "Fiók megszüntetése",
+          "currently_waiting_confirmation_for_email": "Még várjuk a következő e-mail cím megerősítését: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "csak változás esetén kitöltendő",
+          "title": "%{resource} módosítása",
+          "unhappy": "Szomorú",
+          "update": "Módosítás",
+          "we_need_your_current_password_to_confirm_your_changes": "a változtatás végrehajtásához szükséges a jelenlegi jelszó"
+        },
+        "new": {
+          "sign_up": "Regisztráció"
+        },
+        "signed_up": "Sikeres regisztráció.",
+        "signed_up_but_inactive": "A regisztráció sikerült, azonban a bejelentkezés még nem lehetséges, mert a fiók nincs aktiválva.",
+        "signed_up_but_locked": "A regisztráció sikerült, azonban a bejelentkezés még nem lehetséges, mert a fiók zárolt.",
+        "signed_up_but_unconfirmed": "Egy megerősítő linket küldtünk a megadott e-mail címre. Nézze meg az e-mailjeit, és kattintson a küldött linkre a fiók aktiválásához.",
+        "update_needs_confirmation": "A fiók módosítása sikeres, de meg kell erősíteni az e-mail címet. Nézze meg az e-mailjeit, és kattintson a küldött linkre hogy megerősítse az e-mail cím létezését.",
+        "updated": "Sikeres fiók módosítás.",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": "A kijelentkezés már megtörtént.",
+        "new": {
+          "sign_in": "Belépés"
+        },
+        "signed_in": "Sikeres bejelentkezés.",
+        "signed_out": "A kijelentkezés sikeres."
+      },
+      "shared": {
+        "links": {
+          "back": "Vissza",
+          "didn_t_receive_confirmation_instructions": "Nem kapta meg a megerősítő levelet?",
+          "didn_t_receive_unlock_instructions": "Nem kapta meg a feloldáshoz a levelet?",
+          "forgot_your_password": "Elfelejtette a jelszavát?",
+          "sign_in": "Belépés",
+          "sign_in_with_provider": "%{provider} belépés",
+          "sign_up": "Regisztráció"
+        },
+        "minimum_password_length": {
+          "one": null,
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Feloldási teendők újraküldése"
+        },
+        "send_instructions": "Hamarosan a megadott címre érkezik egy email a fiók zárolásának megszüntetésével kapcsolatban.",
+        "send_paranoid_instructions": "Ha a fiók létezik, egy emailt küldtünk a további teendőkkel a fiók zárolásának megszüntetéséhez.",
+        "unlocked": "A felhasználói fiók zárolása megszűnt. Bejelentkezve a felhasználói fiókba."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Válasszon"
+      },
+      "submit": {
+        "create": "Új %{model}",
+        "submit": "%{model} mentése",
+        "update": "%{model} módosítása"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      },
+      "transliterate": {
+        "rule": {
+          "Á": "A",
+          "É": "E",
+          "Í": "I",
+          "Ó": "O",
+          "Ö": "O",
+          "Ú": "U",
+          "Ü": "U",
+          "á": "a",
+          "é": "e",
+          "í": "i",
+          "ó": "o",
+          "ö": "o",
+          "ú": "u",
+          "ü": "u",
+          "Ő": "O",
+          "ő": "o",
+          "Ű": "U",
+          "ű": "u"
+        }
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": "",
+          "format": "%n %u",
+          "precision": 0,
+          "separator": ",",
+          "significant": true,
+          "strip_insignificant_zeros": true,
+          "unit": "Ft"
+        }
+      },
+      "format": {
+        "delimiter": " ",
+        "precision": 2,
+        "separator": ",",
+        "significant": true,
+        "strip_insignificant_zeros": true
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "milliárd",
+            "million": "millió",
+            "quadrillion": "billiárd",
+            "thousand": "ezer",
+            "trillion": "billió",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "bájt",
+              "other": "bájt"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": ""
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " és ",
+        "two_words_connector": " és ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "de.",
+      "formats": {
+        "default": "%Y. %b %e., %H:%M",
+        "long": "%Y. %B %e., %A, %H:%M",
+        "short": "%b %e., %H:%M"
+      },
+      "pm": "du."
+    }
+  }
+}

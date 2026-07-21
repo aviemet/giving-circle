@@ -26,6 +26,11 @@
 #  fk_rails_...  (person_id => people.id)
 #
 class Membership < ApplicationRecord
+  ###
+  # A Membership models the relationship of 1 or more People as a single Membership entity
+  # This allows joint membership relationships for families
+  ###
+
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 

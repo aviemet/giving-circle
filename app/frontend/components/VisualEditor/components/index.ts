@@ -1,3 +1,4 @@
+import { type BarGraphAllocatedTotalsProps } from "./BarGraphAllocatedTotals/barGraphAllocatedTotalsConfig"
 import { type CardProps } from "./Card/cardConfig"
 import { type ContainerProps } from "./Container/containerConfig"
 import { type GridProps } from "./Grid/gridConfig"
@@ -12,6 +13,7 @@ export type PuckComponentProps = {
 	Card: CardProps
 	Image: ImageProps
 	OrgsIterator: OrgsIteratorProps
+	BarGraphAllocatedTotals: BarGraphAllocatedTotalsProps
 }
 
 export * from "./Card"
@@ -20,4 +22,5 @@ export * from "./Grid"
 export * from "./Heading"
 export * from "./Image"
 export * from "./OrgsIterator"
+export * from "./BarGraphAllocatedTotals"
 export * from "./SlideRoot"

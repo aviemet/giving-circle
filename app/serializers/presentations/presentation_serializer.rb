@@ -4,7 +4,7 @@ class Presentations::PresentationSerializer < Presentations::PersistedSerializer
   )
 
   has_many :slides, serializer: Slides::PresentationSerializer
-  has_many :orgs, serializer: Orgs::PersistedSerializer
+  has_many :orgs, serializer: Presentations::Orgs::PersistedSerializer
 
   def orgs
     collection = presentation.orgs.to_a

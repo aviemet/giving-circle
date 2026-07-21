@@ -1,5 +1,7 @@
 import { Slot, type ComponentConfig } from "@measured/puck"
 
+import { i18n } from "@/lib/i18n"
+
 import { GridDisplay } from "./Grid"
 
 export type GridProps = {
@@ -7,8 +9,10 @@ export type GridProps = {
 	columns: number
 }
 
+const t = i18n.t.bind(i18n)
+
 export const gridConfig: ComponentConfig<GridProps> = {
-	label: "Grid",
+	label: t("slides.editor.components.grid.label"),
 	fields: {
 		content: { type: "slot" },
 		columns: { type: "number" },

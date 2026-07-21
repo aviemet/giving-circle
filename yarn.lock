@@ -6033,6 +6033,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"country-flag-icons@npm:^1.6.20":
+  version: 1.6.20
+  resolution: "country-flag-icons@npm:1.6.20"
+  checksum: 10/1dfeae93049ef3a9f4382fca99dd42995ec339f16f9425654240ebae0a552d971e89f016789d04064611cc75f18a697334041470b53373370d5322280824d762
+  languageName: node
+  linkType: hard
+
 "create-require@npm:^1.1.0":
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
@@ -7981,6 +7988,7 @@ __metadata:
     clsx: "npm:^2.1.1"
     commitizen: "npm:^4.3.1"
     commitlint: "npm:^20.5.2"
+    country-flag-icons: "npm:^1.6.20"
     dayjs: "npm:^1.11.20"
     dinero.js: "npm:^2.0.2"
     dmeditor: "npm:^0.2.4"

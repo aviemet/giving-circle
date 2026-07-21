@@ -29,6 +29,5 @@ describe("layouts/PresentationLayout/PresentationSidebar/Menu", () => {
 		const link = screen.getByRole("link", { name: "Presentation" })
 		expect(link).toHaveAttribute("href", "/circle-1/p/presentation-1")
 		expect(link).toHaveAttribute("target", "_blank")
-		expect(link).toHaveAttribute("rel", "noreferrer")
 	})
 })

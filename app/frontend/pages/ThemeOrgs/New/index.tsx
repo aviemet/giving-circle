@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Title, Page, Section } from "@/components"
 import { ThemeOrgForm } from "@/domains/themeOrgs/Form"
 import { Routes } from "@/lib"
@@ -11,8 +13,9 @@ interface NewThemeOrgProps {
 // @path: /:circle_slug/themes/:theme_slug/orgs/new
 // @route: newThemeOrg
 const NewThemeOrg = ({ org }: NewThemeOrgProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"newThemeOrg">()
-	const title = "New Org"
+	const title = t("theme_orgs.new.title")
 
 	return (
 		<Page title={ title }>

@@ -1,6 +1,23 @@
 ---
 en:
   memberships:
+    edit:
+      title: Edit Member
+    form:
+      active: Active
+      create: Create Membership
+      funds: Funds
+      name: Name
+      number: Number
+      update: Update Membership
+    index:
+      breadcrumbs:
+        circles: Circles
+        members: Members
+      newMember: New Member
+      title: Members
+    new:
+      title: New Member
     notices:
       created: Membership was successfully created.
       destroyed: Membership was successfully destroyed.

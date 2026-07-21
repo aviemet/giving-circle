@@ -1,8 +1,146 @@
 {
   "tr": {
+    "date": {
+      "abbr_day_names": [
+        "Pzr",
+        "Pzt",
+        "Sal",
+        "Çrş",
+        "Prş",
+        "Cum",
+        "Cts"
+      ],
+      "abbr_month_names": [
+        null,
+        "Oca",
+        "Şub",
+        "Mar",
+        "Nis",
+        "May",
+        "Haz",
+        "Tem",
+        "Ağu",
+        "Eyl",
+        "Eki",
+        "Kas",
+        "Ara"
+      ],
+      "day_names": [
+        "Pazar",
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi"
+      ],
+      "formats": {
+        "default": "%d.%m.%Y",
+        "long": "%e %B %Y %A",
+        "short": "%e %b"
+      },
+      "month_names": [
+        null,
+        "Ocak",
+        "Şubat",
+        "Mart",
+        "Nisan",
+        "Mayıs",
+        "Haziran",
+        "Temmuz",
+        "Ağustos",
+        "Eylül",
+        "Ekim",
+        "Kasım",
+        "Aralık"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "yaklaşık %{count} saat",
+          "other": "yaklaşık %{count} saat"
+        },
+        "about_x_months": {
+          "one": "yaklaşık %{count} ay",
+          "other": "yaklaşık %{count} ay"
+        },
+        "about_x_years": {
+          "one": "yaklaşık %{count} yıl",
+          "other": "yaklaşık %{count} yıl"
+        },
+        "almost_x_years": {
+          "one": "neredeyse %{count} yıl",
+          "other": "neredeyse %{count} yıl"
+        },
+        "half_a_minute": "yarım dakika",
+        "less_than_x_minutes": {
+          "one": "%{count} dakikadan az",
+          "other": "%{count} dakikadan az"
+        },
+        "less_than_x_seconds": {
+          "one": "%{count} saniyeden az",
+          "other": "%{count} saniyeden az"
+        },
+        "over_x_years": {
+          "one": "%{count} yıldan fazla",
+          "other": "%{count} yıldan fazla"
+        },
+        "x_days": {
+          "one": "%{count} gün",
+          "other": "%{count} gün"
+        },
+        "x_minutes": {
+          "one": "%{count} dakika",
+          "other": "%{count} dakika"
+        },
+        "x_months": {
+          "one": "%{count} ay",
+          "other": "%{count} ay"
+        },
+        "x_seconds": {
+          "one": "%{count} saniye",
+          "other": "%{count} saniye"
+        },
+        "x_years": {
+          "one": "%{count} yıl",
+          "other": "%{count} yıl"
+        }
+      },
+      "prompts": {
+        "day": "Gün",
+        "hour": "Saat",
+        "minute": "Dakika",
+        "month": "Ay",
+        "second": "Saniye",
+        "year": "Yıl"
+      }
+    },
     "devise": {
+      "confirmations": {
+        "confirmed": "Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.",
+        "new": {
+          "resend_confirmation_instructions": "Onaylama talimatlarını tekrar gönder"
+        },
+        "send_instructions": "Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.",
+        "send_paranoid_instructions": "Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız."
+      },
       "failure": {
-        "invited": "Hesap oluşturmak için bekleyen davetiyenizi kabul edin"
+        "already_authenticated": "Zaten giriş yaptınız.",
+        "inactive": "Hesabınız daha aktifleştirilmemiş.",
+        "invalid": "Geçersiz %{authentication_keys} veya parola.",
+        "invited": "Hesap oluşturmak için bekleyen davetiyenizi kabul edin",
+        "last_attempt": "Hesabınız askıya alınmadan önce son bir deneme hakkınız kaldı.",
+        "locked": "Hesabınız kilitlendi.",
+        "not_found_in_database": "Geçersiz %{authentication_keys} veya parola.",
+        "timeout": "Oturumunuz sonlandı. Devam etmek için, lütfen yeniden giriş yapınız.",
+        "unauthenticated": "Devam etmeden önce giriş yapmanız veya kayıt olmanız gereklidir.",
+        "unconfirmed": "Devam etmeden önce hesabınızı onaylamalısınız."
       },
       "invitations": {
         "edit": {
@@ -21,14 +159,218 @@
         "updated_not_active": "Şifreniz başarıyla oluşturuldu."
       },
       "mailer": {
+        "confirmation_instructions": {
+          "action": "Hesabımı onayla",
+          "greeting": "Hoşgeldiniz %{recipient}!",
+          "instruction": "E-postanızı aşağıdaki bağlantıyı takip ederek onaylayabilirsiniz:",
+          "subject": "Onaylama talimatları"
+        },
+        "email_changed": {
+          "greeting": "Merhaba %{recipient}!",
+          "message": "E-posta adresin %{email} değiştirildiğinde seni bilgilendirmek için iletişime geçeceğiz.",
+          "message_unconfirmed": "E-posta adresiniz %{email} olarak değiştirildiğinde sizi bilgilendirmek için iletişime geçeceğiz.",
+          "subject": "E-posta Değiştirildi"
+        },
         "invitation_instructions": {
           "accept": "Daveti kabul et",
           "hello": "Merhaba %{email}",
           "ignore": "Daveti kabul etmek istemiyorsanız bu maili yoksayabilirsiniz.<br />Aşağıdaki linke tıklayıp şifrenizi oluşturmadan hesabınız oluşturulmayacaktır.",
           "someone_invited_you": "%{url} adresine davet edildiniz. Kabul etmek için aşağıdaki linke tıklayınız.",
           "subject": "Davetiye adımları"
+        },
+        "password_change": {
+          "greeting": "Merhaba %{recipient}!",
+          "message": "Parolanız değiştirildiğinde seni bilgilendirmek için iletişime geçeceğiz.",
+          "subject": "Parola Değişti"
+        },
+        "reset_password_instructions": {
+          "action": "Parolamı değiştir",
+          "greeting": "Merhaba %{recipient}!",
+          "instruction": "Birisi parolanızı değiştirmek için bir istek gönderdi, aşağıdaki bağlantıyı kullanarak bunu yapabilirsiniz.",
+          "instruction_2": "Eğer bu isteği siz yapmadıysanız, bu e-postayı görmezden gelebilirsiniz.",
+          "instruction_3": "Parolanız yukarıdaki bağlantıyı kullanıp, yeni bir parola oluşturmadığınız sürece değişmeyecektir.",
+          "subject": "Parola sıfırlama talimatları"
+        },
+        "unlock_instructions": {
+          "action": "Hesabımı geri aç",
+          "greeting": "Merhaba %{recipient}!",
+          "instruction": "Hesabınızı geri açmak için aşağıdaki bağlantıyı tıklayınız:",
+          "message": "Hesabınız çok fazla başarısız giriş denemesinden dolayı kilitlenmiştir.",
+          "subject": "Kilit açma talimatları"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Sizi %{kind} aracılığıyla tanıyamadık çünkü \"%{reason}\".",
+        "success": "%{kind} aracılığıyla onaylandınız."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Parolamı değiştir",
+          "change_your_password": "Parolanı değiştir",
+          "confirm_new_password": "Yeni parolanı doğrula",
+          "new_password": "Yeni Parola"
+        },
+        "new": {
+          "forgot_your_password": "Parolanızı mı unuttunuz?",
+          "send_me_reset_password_instructions": "Parola yenileme talimatlarını gönder"
+        },
+        "no_token": "Bu sayfaya parola sıfırlama e-postasındaki bağlantıya tıklayarak gelmeniz gerekmektedir. Bağlantıya tıklamak yerine kopyaladıysanız, hata yapmış olabilirsiniz. Lütfen parola sıfırlama e-postasındaki bağlantıya tıklayın.",
+        "send_instructions": "Birkaç dakika içinde parolanızı nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız.",
+        "send_paranoid_instructions": "Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde parolanızı nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız.",
+        "updated": "Parolanız başarıyla güncellendi. Şu an giriş yapmış bulunuyorsunuz.",
+        "updated_not_active": "Parolanız başarıyla güncellendi."
+      },
+      "registrations": {
+        "destroyed": "Hesabınız başarıyla kapatıldı. En kısa sürede görüşmek üzere!",
+        "edit": {
+          "are_you_sure": "Emin misiniz?",
+          "cancel_my_account": "Hesabımı iptal et",
+          "currently_waiting_confirmation_for_email": "Doğrulama için bekleniyor : %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "değiştirmek istemiyorsanız boş bırakın",
+          "title": "%{resource} düzenle",
+          "unhappy": "Mutsuz",
+          "update": "Güncelle",
+          "we_need_your_current_password_to_confirm_your_changes": "değişikleri onaylamak için şu anki parolanız gerekli"
+        },
+        "new": {
+          "sign_up": "Kaydol"
+        },
+        "signed_up": "Başarıyla giriş yaptınız. Hoşgeldiniz!",
+        "signed_up_but_inactive": "Kaydınız başarıyla gerçekleşti. Fakat, hesabınız aktifleştirilmediği için siteye giriş yapamadınız.",
+        "signed_up_but_locked": "Kaydınız başarıyla gerçekleşti. Fakat, hesabınız kilitlendiği için siteye giriş yapamadınız.",
+        "signed_up_but_unconfirmed": "E-posta adresinize hesap aktifleştirme bağlantısını içeren bir e-posta gönderdik. Hesabınızı aktifleştirmek için lütfen e-posta ile gönderdiğimiz bağlantıyı açın.",
+        "update_needs_confirmation": "Hesabınızı başarıyla güncellediniz, fakat yeni e-posta adresinizin onaylanması gerek. Yeni e-posta hesabınızın onaylanması için lütfen size gönderdiğimiz e-postada bulunan onay bağlantısını açın.",
+        "updated": "Hesabınız başarıyla güncellendi.",
+        "updated_but_not_signed_in": "Hesabınız başarıyla güncellendi, ancak parola değiştirildiğinde yeniden giriş yapmalısınız"
+      },
+      "sessions": {
+        "already_signed_out": "Başarıyla çıkış yapıldı.",
+        "new": {
+          "sign_in": "Giriş yap"
+        },
+        "signed_in": "Başarıyla giriş yapıldı.",
+        "signed_out": "Başarıyla çıkış yapıldı."
+      },
+      "shared": {
+        "links": {
+          "back": "Geri",
+          "didn_t_receive_confirmation_instructions": "Onaylama talimatlarını almadınız mı?",
+          "didn_t_receive_unlock_instructions": "Hesap geri açma talimatlarını almadınız mı?",
+          "forgot_your_password": "Parolanızı mı unuttunuz?",
+          "sign_in": "Giriş yap",
+          "sign_in_with_provider": "%{provider} ile giriş yap",
+          "sign_up": "Kaydol"
+        },
+        "minimum_password_length": {
+          "one": "(Minimum %{count} karakter)",
+          "other": "(Minimum %{count} karakter)"
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Hesap geri açma talimatlarını tekrar gönder"
+        },
+        "send_instructions": "Birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.",
+        "send_paranoid_instructions": "Eğer hesabınız varsa, birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.",
+        "unlocked": "Hesabınızın kilidi başarıyla açıldı. Devam etmek için lütfen giriş yapın."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Lütfen seçiniz"
+      },
+      "submit": {
+        "create": "%{model} Ekle",
+        "submit": "%{model} Kaydet",
+        "update": "%{model} Güncelle"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ".",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "₺"
+        }
+      },
+      "format": {
+        "delimiter": ".",
+        "precision": 2,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "Milyar",
+            "million": "Milyon",
+            "quadrillion": "Katrilyon",
+            "thousand": "Bin",
+            "trillion": "Trilyon",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": ".",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Bayt",
+              "other": "Bayt"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%%n"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": "."
         }
       }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " ve ",
+        "two_words_connector": " ve ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "öğleden önce",
+      "formats": {
+        "default": "%a %d.%b.%y %H:%M",
+        "long": "%e %B %Y, %A, %H:%M",
+        "short": "%e %B, %H:%M"
+      },
+      "pm": "öğleden sonra"
     }
   }
 }

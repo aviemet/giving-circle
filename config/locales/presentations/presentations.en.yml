@@ -13,12 +13,196 @@ en:
         update: Update presentation action
     alerts:
       no_source_template: This presentation is not linked to a Presentation Template.
+    elements:
+      edit:
+        title: Edit Element
+      form:
+        create: Create Element
+        data: Data
+        name: Name
+        template: Template
+        update: Update Element
+      index:
+        newElement: New Element
+        title: Elements
+      new:
+        title: New Element
+      notices:
+        created: Element was successfully created.
+        destroyed: Element was successfully destroyed.
+        updated: Element was successfully updated.
+      show:
+        breadcrumb: Element
+        edit: Edit Element
+        title: Element
+      table:
+        actions: Actions
+        data: Data
+        name: Name
+        template: Template
+    form:
+      blank_presentation: Blank presentation
+      create: Create Presentation
+      name: Name
+      start_from_template: Start from Presentation Template
+      update: Update Presentation
+    index:
+      breadcrumbs:
+        circles: Circles
+        presentations: Presentations
+        themes: Themes
+      newPresentation: New Presentation
+      title: Presentations
+    interaction_responses:
+      edit:
+        title: Edit Response
+      form:
+        amount_cents: "%{label} (cents)"
+        create: Save Response
+        currency: Currency
+        member: Member
+        response: Response
+        update: Update Response
+      index:
+        newResponse: New Response
+        title: "%{name} Responses"
+        title_short: Responses
+      new:
+        title: New Response
+      notices:
+        created: Response was successfully saved.
+        destroyed: Response was successfully destroyed.
+        updated: Response was successfully updated.
+      show:
+        title: Response
+      table:
+        actions: Actions
+        member: Member
+        total_allocated: Total allocated (cents)
+      validations:
+        membership_belongs_to_presentation: Must belong to this presentation
+        response_data:
+          amount_cents_integer: "%{prefix}.amount_cents must be an integer"
+          at_least: "%{prefix} must be at least %{min}"
+          at_most: "%{prefix} must be at most %{max}"
+          currency_string: "%{prefix}.currency must be a string"
+          entry_amount_cents_integer: "%{prefix}[%{index}].amount_cents must be an integer"
+          fields_must_be_array: Interaction config fields must be an array
+          group_must_be_object: "%{prefix}[%{group_index}] must be an object"
+          invalid_choices: "%{prefix} contains invalid choices"
+          max_entries: "%{prefix} must have at most %{max} entries"
+          min_entries: "%{prefix} must have at least %{min} entries"
+          must_be_array: "%{prefix} must be an array"
+          must_be_choice: "%{prefix} must be one of the configured choices"
+          must_be_money: "%{prefix} must be a money object"
+          must_be_number: "%{prefix} must be a number"
+          must_be_object: "%{prefix}[%{index}] must be an object"
+          must_be_org_id: "%{prefix} must be an org id string"
+          must_be_string: "%{prefix} must be a string"
+          must_be_string_array: "%{prefix} must be an array of strings"
+          org_id_required: "%{prefix}[%{index}].org_id is required"
+          rank_integer: "%{prefix}[%{index}].rank must be an integer"
+          required: "%{prefix} is required"
+          unknown_field: Unknown field '%{key}' in response data
+          unknown_type: "%{prefix} has unknown field type '%{type}'"
+    interactions:
+      edit:
+        breadcrumb: Edit
+      form:
+        create: Create Interaction
+        data_points: Data points
+        field_builder:
+          add_field: Add field
+          choices: Choices (comma separated)
+          field_n: Field %{index}
+          key: Key
+          label: Label
+          max: Max
+          max_entries: Max entries
+          min: Min
+          min_entries: Min entries
+          nested_fields: Nested fields
+          remove: Remove
+          repeatable: Repeatable
+          type: Type
+        name: Name
+        output_builder:
+          add_output: Add output
+          metric: Metric
+          no_compatible_reducers: This field type has no compatible reducers.
+          output_n: Output %{index}
+          reducer: Reducer
+          remove: Remove
+          select_field: Select a field
+          select_source_first: Select a source field first.
+          source_field: Source field
+        outputs: Outputs
+        slide: Slide
+        template: Template
+        template_blank: Blank
+        trigger_manual: Manual
+        trigger_slide: Slide
+        trigger_type: Trigger type
+        update: Update Interaction
+      index:
+        newInteraction: New Interaction
+        title: Interactions
+      new:
+        title: New Interaction
+      notices:
+        accepting: Interaction is now accepting responses.
+        created: Interaction was successfully created.
+        destroyed: Interaction was successfully destroyed.
+        not_accepting: Interaction is no longer accepting responses.
+        updated: Interaction was successfully updated.
+      show:
+        accepting_responses: Accepting responses
+        close_responses: Close responses
+        closed: Closed
+        data_points_configured: "%{count} data points configured"
+        edit: Edit Interaction
+        open_responses: Open responses
+        responses: Responses
+      table:
+        actions: Actions
+        name: Name
+        trigger: Trigger
+      validations:
+        config:
+          choices_format: "%{path}.options.choices must be an array of non-empty strings"
+          choices_required: "%{path}.options must include choices"
+          field_group_fields: "%{path}.fields must be a non-empty array for field_group"
+          key_format: "%{path}.key must be lowercase alphanumeric with underscores"
+          key_required: "%{path}.key is required"
+          key_unique: "%{path}.key '%{key}' must be unique"
+          label_required: "%{path}.label is required"
+          max_must_be_integer: "%{path}.options.max must be an integer"
+          max_must_be_number: "%{path}.options.max must be a number"
+          metric_required: "%{path}.metric is required"
+          min_lte_max: "%{path}.options.min must be less than or equal to max"
+          min_must_be_integer: "%{path}.options.min must be an integer"
+          min_must_be_number: "%{path}.options.min must be a number"
+          must_be_array: "%{path} must be an array"
+          must_be_object: "%{path} must be an object"
+          reducer_incompatible: "%{path}.reducer '%{reducer}' is not compatible with field type '%{field_type}'"
+          reducer_required: "%{path}.reducer is required"
+          repeatable_boolean: "%{path}.options.repeatable must be a boolean"
+          source_field_missing: "%{path}.source_field '%{source_field}' does not reference a field"
+          source_field_required: "%{path}.source_field is required"
+          unknown_metric: "%{path}.metric '%{metric}' is not a known metric"
+          unknown_reducer: "%{path}.reducer '%{reducer}' is not a known reducer"
+          unknown_type: "%{path}.type '%{type}' is not a known field type"
+        slide_slug_required: Must include slide_slug when trigger type is slide
+    new:
+      title: New Presentation
     notices:
       created: Presentation was successfully created.
       destroyed: Presentation was successfully destroyed.
       template_created: Presentation Template was successfully created.
       template_updated: Presentation Template was successfully updated.
       updated: Presentation was successfully updated.
+    settings:
+      title: Settings
     show:
       active: Active
       basedOnTemplate: 'Based on Presentation Template:'
@@ -68,3 +252,5 @@ en:
         emptySlides: No slides yet. Add one to start building this presentation.
         settings: Settings
         title: Slides
+      preview:
+        title: Slide preview

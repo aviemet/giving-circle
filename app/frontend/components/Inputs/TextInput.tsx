@@ -4,6 +4,8 @@ import {
 } from "@mantine/core"
 import React from "react"
 
+import { useFormFieldError } from "@/components/Form"
+
 import { InputWrapper } from "./InputWrapper"
 import { Label } from "./Label"
 import { CrossIcon } from "../Icons"
@@ -27,9 +29,11 @@ export function TextInput({
 	onChange,
 	readOnly,
 	disableAutofill = true,
+	error,
 	ref,
 	...props
 }: TextInputProps) {
+	const fieldError = useFormFieldError(name)
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		onChange?.(e)
 	}
@@ -57,6 +61,7 @@ export function TextInput({
 				{ ...(value !== undefined && { value }) }
 				onChange={ handleChange }
 				required={ required }
+				error={ error ?? fieldError }
 				rightSection={
 					!readOnly && clearable && value !== "" && value !== undefined &&
 					<CrossIcon onClick={ handleClear } />

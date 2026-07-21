@@ -4,7 +4,7 @@ class Presentations::ActiveController < ApplicationController
 
   expose :presentations, -> { search(theme.presentations.includes_associated) }
   expose :presentation, id: -> { params[:presentation_slug] }, scope: -> { theme.presentations.includes_associated }, find_by: :slug
-  expose :public_presentation, -> { Presentation.includes(:orgs, :slides, :theme).find_by(slug: params[:presentation_slug]) }
+  expose :public_presentation, -> { Presentation.includes(:slides, :theme).find_by(slug: params[:presentation_slug]) }
 
   strong_params :presentation, permit: [:name]
 

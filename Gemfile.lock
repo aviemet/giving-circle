@@ -141,6 +141,9 @@ GEM
       railties (>= 7.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.16.0)
+      devise (>= 5.0.0)
+      rails-i18n
     devise_invitable (2.0.11)
       actionmailer (>= 5.0)
       devise (>= 4.6)
@@ -455,6 +458,10 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
+    redis (5.4.1)
+      redis-client (>= 0.22.0)
+    redis-client (0.30.0)
+      connection_pool
     regexp_parser (2.12.0)
     reline (0.6.3)
       io-console (~> 0.5)
@@ -647,6 +654,7 @@ DEPENDENCIES
   debug
   decent_exposure (~> 3.0)
   devise (~> 5.0)
+  devise-i18n (~> 1.16)
   devise_invitable (~> 2.0)
   dotenv-rails (~> 3.1)
   factory_bot (>= 6.4)
@@ -676,7 +684,9 @@ DEPENDENCIES
   pundit-matchers (~> 4.0)
   rack-livereload (>= 0.3.17)
   rails (~> 8.1.2)
+  rails-i18n (~> 8.1)
   rails-settings-cached (~> 2.9)
+  redis (~> 5.4)
   rolify (~> 6.0)
   rspec-rails (~> 8.0)
   rspec-watcher (~> 0.3.3)

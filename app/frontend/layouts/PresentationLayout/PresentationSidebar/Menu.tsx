@@ -27,7 +27,6 @@ export function PresentationSidebarMenu() {
 			<NavLink
 				href={ Routes.circlePublicPresentation(active_circle.slug, active_presentation.slug) }
 				target="_blank"
-				rel="noreferrer"
 				active={ false }
 			>
 				Presentation

@@ -29,7 +29,7 @@ const ModalFormButton = ({
 
 	const theme = useMantineTheme()
 
-	const handleSubmit = async(data: Record<string, unknown>) => {
+	const handleSubmit = async (data: Record<string, unknown>) => {
 		const action = form.props.action
 		const method = form.props.method ?? "post"
 

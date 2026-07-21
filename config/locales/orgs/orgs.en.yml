@@ -1,6 +1,21 @@
 ---
 en:
   orgs:
+    edit:
+      title: Edit Org
+    form:
+      create: Create Org
+      description: Description
+      name: Name
+      update: Update Org
+    index:
+      breadcrumbs:
+        circles: Circles
+        orgs: Organizations
+      newOrg: New Org
+      title: Organizations
+    new:
+      title: New Organization
     notices:
       created: Org was successfully created.
       destroyed: Org was successfully destroyed.

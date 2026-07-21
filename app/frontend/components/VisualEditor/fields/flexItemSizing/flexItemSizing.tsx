@@ -111,7 +111,7 @@ export function parseCustomCssDeclarations(custom: string): CSSProperties {
 		}
 
 		const separatorIndex = trimmed.indexOf(":")
-		if(separatorIndex === - 1) {
+		if(separatorIndex === -1) {
 			continue
 		}
 
@@ -171,6 +171,8 @@ export function buildFlexItemSizingStyle(sizing: FlexItemSizing | undefined): CS
 			flexShrink: 1,
 			flexBasis: 0,
 			minWidth: 0,
+			minHeight: 0,
+			alignSelf: "stretch",
 		}
 		const maxWidth = dimensionInputToCSSValue(normalized.maxWidth)
 		if(maxWidth) {

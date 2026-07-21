@@ -1,6 +1,20 @@
 import { type JSONContent } from "@tiptap/core"
 
-import { ContentBlock, StructuredContent, TagMention, TextContent } from "./types"
+export interface TagMention {
+	type: "mention"
+	tagPath: string
+}
+
+export interface TextContent {
+	type: "text"
+	content: string
+}
+
+export type ContentBlock = TagMention | TextContent
+
+export interface StructuredContent {
+	blocks: ContentBlock[]
+}
 
 export interface TagEditorOption {
 	value: string

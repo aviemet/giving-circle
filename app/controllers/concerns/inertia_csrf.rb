@@ -18,7 +18,7 @@ module InertiaCsrf
     before_action :set_csrf_cookie
 
     rescue_from ActionController::InvalidAuthenticityToken do
-      redirect_back_or_to("/", notice: "The page expired, please try again.")
+      redirect_back_or_to("/", notice: I18n.t("common.notices.page_expired"))
     end
   end
 

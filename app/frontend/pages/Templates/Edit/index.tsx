@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { TemplateForm } from "@/domains/templates/Form"
 import { Routes } from "@/lib"
@@ -11,9 +13,10 @@ interface EditTemplateProps {
 // @path: /:circle_slug/templates/:slug/edit
 // @route: editCircleTemplate
 const EditTemplate = ({ template }: EditTemplateProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle } = usePageProps<"editCircleTemplate">()
 
-	const title = "Edit Template"
+	const title = t("templates.edit.title")
 
 	if(!active_circle) return <></>
 
@@ -21,10 +24,10 @@ const EditTemplate = ({ template }: EditTemplateProps) => {
 		<Page
 			title={ title }
 			breadcrumbs={ [
-				{ title: "Circles", href: Routes.circles() },
+				{ title: t("templates.index.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: "Templates", href: Routes.circleTemplates(params.circle_slug) },
-				{ title: "Edit", href: window.location.href },
+				{ title: t("templates.index.breadcrumbs.templates"), href: Routes.circleTemplates(params.circle_slug) },
+				{ title: t("common.actions.edit_breadcrumb"), href: window.location.href },
 			] }
 		>
 			<Section>

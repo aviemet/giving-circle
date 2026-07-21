@@ -18,7 +18,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 		inertiaPageProps.active_presentation = createPresentationInertiaShare()
 	})
 
-	test("renders slide visual editor", async() => {
+	test("renders slide visual editor", async () => {
 		const presentation: Schema.PresentationsFormData = {
 			active: true,
 			name: "Presentation",
@@ -41,7 +41,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 		}, { timeout: 30000 })
 	}, 35000)
 
-	test("keeps focus on title input while editing", async() => {
+	test("keeps focus on title input while editing", async () => {
 		const presentation: Schema.PresentationsFormData = {
 			active: true,
 			name: "Presentation",

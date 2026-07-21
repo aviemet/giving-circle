@@ -18,6 +18,7 @@ interface TestInertiaPageProps {
 			email: string
 			slug: string
 			roles?: Schema.Role[]
+			circles?: Schema.CirclesPersisted[]
 		}
 	}
 	flash: {
@@ -39,6 +40,7 @@ export const inertiaPageProps: TestInertiaPageProps = {
 			active: true,
 			email: "user@example.com",
 			slug: "user-1",
+			circles: [],
 		},
 	},
 	flash: {
@@ -136,7 +138,7 @@ vi.mock("@inertiajs/react", () => {
 	}
 })
 
-vi.mock("@/lib/hooks/useActivePresentationChannel", () => {
+vi.mock("@/pages/Presentations/Active/useActivePresentationChannel", () => {
 	return {
 		useActivePresentationChannel: () => {
 			return { switchSlide: vi.fn() }
