@@ -91,6 +91,7 @@
   - Import styles as `import * as classes from "./Component.css"` (not named imports from `.css.ts`)
   - Always pass `className` through `clsx(...)`, even when only one class is applied
   - Multiple classes are composed in the same `clsx(...)` call
+  - Import `theme` / `vars` from `@/lib/theme`, not `@/lib`. WyW evaluates `.css.ts` in Node; the `@/lib` barrel re-exports browser-only modules (`files` -> ActiveStorage) and kills the eval runner.
 - Dark/light theme support via Mantine theme system
 - Linaria styles that set surfaces or hover backgrounds must use `vars.lightSelector` / `vars.darkSelector` (or Mantine CSS variables such as `--mantine-color-default-border`), not a single light-theme gray such as `vars.colors.gray[0]`, or dark mode will look wrong.
 

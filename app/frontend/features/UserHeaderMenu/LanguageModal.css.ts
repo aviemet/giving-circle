@@ -1,6 +1,6 @@
 import { css } from "@linaria/core"
 
-import { vars } from "@/lib"
+import { vars } from "@/lib/theme"
 
 export const currentLocale = css`
 	padding: 0.75rem;

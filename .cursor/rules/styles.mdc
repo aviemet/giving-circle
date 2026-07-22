@@ -8,8 +8,9 @@ alwaysApply: false
 - This project uses Mantine as a component library (proxied from `app/frontend/components`).
 - CSS is written using CSS modules with Linaria in separate files with a `css.ts` extension, colocated with the component.
 - CSS is imported into React components using `import * as classes from "./Component.css"`. Always use `import clsx from "clsx"` and pass every `className` through `clsx(...)`, even when there is only one class.
-- Mantine CSS variables are exported using Mantine's `themeToVars`. Use them via `vars` from `@/lib`.
+- Mantine CSS variables are exported using Mantine's `themeToVars`. Use them via `vars` from `@/lib/theme`.
 - Each `css.ts` file starts with:
   `import { css } from "@linaria/core"`
-  `import { vars } from "@/lib"`
+  `import { vars } from "@/lib/theme"`
+- Import `theme` / `vars` from `@/lib/theme`, never from the `@/lib` barrel. Linaria/WyW evaluates `.css.ts` in Node; the barrel pulls browser-only modules (`@rails/activestorage`, etc.) and crashes eval.
 - Styles in `css.ts` files are built using the `css` function from Linaria with string template literals.
