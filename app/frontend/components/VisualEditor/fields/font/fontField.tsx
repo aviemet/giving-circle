@@ -1,4 +1,4 @@
-import { Field } from "@measured/puck"
+import { Field } from "@puckeditor/core"
 import clsx from "clsx"
 import { useState } from "react"
 

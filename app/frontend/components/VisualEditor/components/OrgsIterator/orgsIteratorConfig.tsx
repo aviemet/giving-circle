@@ -1,4 +1,4 @@
-import { Slot, type ComponentConfig, type SlotComponent } from "@measured/puck"
+import { Slot, type ComponentConfig, type SlotComponent } from "@puckeditor/core"
 
 import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
 import { i18n } from "@/lib/i18n"

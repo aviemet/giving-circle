@@ -1,6 +1,6 @@
-import { type Data } from "@measured/puck"
+import { type Data } from "@puckeditor/core"
 import { Suspense } from "react"
-import "@measured/puck/puck.css"
+import "@puckeditor/core/puck.css"
 
 import { type PuckComponentProps, type SlideRootProps } from "./components"
 import { VisualEditorContent, type VisualEditorProps } from "./VisualEditorContent"

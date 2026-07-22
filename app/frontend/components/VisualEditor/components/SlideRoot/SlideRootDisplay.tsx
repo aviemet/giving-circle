@@ -1,4 +1,4 @@
-import { type DefaultRootRenderProps } from "@measured/puck"
+import { type DefaultRootRenderProps } from "@puckeditor/core"
 import clsx from "clsx"
 
 import { Box } from "@/components"

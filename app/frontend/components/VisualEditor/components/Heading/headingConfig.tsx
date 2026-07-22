@@ -1,4 +1,4 @@
-import { type ComponentConfig } from "@measured/puck"
+import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 

@@ -1,4 +1,4 @@
-import { Field } from "@measured/puck"
+import { Field } from "@puckeditor/core"
 import { type TFunction } from "i18next"
 import { useState } from "react"
 import { type CSSProperties } from "react"

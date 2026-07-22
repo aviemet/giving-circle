@@ -1,4 +1,4 @@
-import { Puck, type Data } from "@measured/puck"
+import { Puck, legacySideBarPlugin, type Data } from "@puckeditor/core"
 import clsx from "clsx"
 import {
 	useCallback,
@@ -9,6 +9,8 @@ import {
 	type RefObject,
 	type SetStateAction,
 } from "react"
+
+const legacySideBar = legacySideBarPlugin()
 
 import { Box, AsyncBoundary, ErrorBoundary } from "@/components"
 import { useNavigationInterruptContext } from "@/components/Modal"
@@ -191,6 +193,7 @@ export function VisualEditorWorkspace({
 								iframe={ { enabled: false } }
 								onChange={ handleChange }
 								overrides={ overrides }
+								plugins={ [legacySideBar] }
 							/>
 						</VisualEditorUiProvider>
 					</ErrorBoundary>

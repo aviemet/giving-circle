@@ -1,4 +1,4 @@
-import { PuckContext, SlotComponent } from "@measured/puck"
+import { PuckContext, SlotComponent } from "@puckeditor/core"
 import clsx from "clsx"
 
 import { Container } from "@/components"

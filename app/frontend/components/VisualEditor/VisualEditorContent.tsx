@@ -1,4 +1,4 @@
-import { type Data } from "@measured/puck"
+import { type Data } from "@puckeditor/core"
 import { useCallback, useMemo, useRef, useState } from "react"
 
 import { NavigationInterrupt } from "@/components/Modal"

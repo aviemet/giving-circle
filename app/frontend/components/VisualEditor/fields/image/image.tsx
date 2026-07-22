@@ -1,4 +1,4 @@
-import { Field } from "@measured/puck"
+import { Field } from "@puckeditor/core"
 
 import { DropzoneInput } from "@/components/Inputs"
 import { activeStorageBlobRedirectUrl, IMAGE_MIME_TYPE } from "@/lib"

@@ -15,7 +15,7 @@ const puckFieldInputStyles = `
 
 const puckFieldFocusStyles = `
 	outline: none;
-	border-color: var(--puck-color-azure-05);
+	border-color: var(--puck-color-focus-ring);
 	box-shadow: var(--puck-field-focus-ring);
 `
 
@@ -30,7 +30,7 @@ export const puckFieldImagePreview = css`
 	height: 96px;
 	border-radius: var(--puck-field-radius, 3px);
 	overflow: hidden;
-	background-color: var(--puck-color-grey-10);
+	background-color: var(--puck-color-border-muted);
 	background-size: cover;
 	background-position: center;
 `
@@ -71,7 +71,7 @@ export const puckFields = css`
 	--puck-field-control-height: 28px;
 	--puck-field-radius: 3px;
 	--puck-field-section-gap: 4px;
-	--puck-field-focus-ring: 0 0 0 2px color-mix(in oklch, var(--puck-color-azure-05) 25%, transparent);
+	--puck-field-focus-ring: 0 0 0 2px color-mix(in oklch, var(--puck-color-focus-ring) 25%, transparent);
 
 	padding: 0 4px;
 
@@ -210,7 +210,7 @@ export const puckFields = css`
 	}
 
 	& .mantine-NumberInput-control:hover {
-		background-color: color-mix(in oklch, var(--editor-input-bg) 75%, var(--puck-color-grey-09));
+		background-color: color-mix(in oklch, var(--editor-input-bg) 75%, var(--puck-color-border));
 	}
 
 	& .mantine-SegmentedControl-root {
@@ -243,7 +243,7 @@ export const puckFields = css`
 	}
 
 	& .mantine-SegmentedControl-indicator {
-		background-color: var(--puck-color-white);
+		background-color: var(--puck-color-surface);
 		border: 1px solid var(--editor-input-border);
 		border-radius: calc(var(--puck-field-radius) - 1px);
 		box-shadow: none;
@@ -301,7 +301,7 @@ export const puckTagsInput = css`
 
 	&.mantine-RichTextEditor-root:focus-within {
 		outline: none;
-		border-color: var(--puck-color-azure-05);
+		border-color: var(--puck-color-focus-ring);
 		box-shadow: var(--puck-field-focus-ring);
 	}
 

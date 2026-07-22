@@ -1,4 +1,4 @@
-import { createUsePuck } from "@measured/puck"
+import { createUsePuck } from "@puckeditor/core"
 import clsx from "clsx"
 import { useEffect, useRef, type ReactNode } from "react"
 

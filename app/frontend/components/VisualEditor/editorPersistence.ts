@@ -1,4 +1,4 @@
-import { type Data } from "@measured/puck"
+import { type Data } from "@puckeditor/core"
 import { isEqual } from "es-toolkit/compat"
 
 import { withStarterSlideContent } from "./slotEditor"

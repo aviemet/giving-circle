@@ -1,4 +1,4 @@
-import { type Field } from "@measured/puck"
+import { type Field } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 

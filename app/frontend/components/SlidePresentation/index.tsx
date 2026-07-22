@@ -1,6 +1,6 @@
 import { PageProps } from "@inertiajs/core"
 import { usePage } from "@inertiajs/react"
-import { Render } from "@measured/puck"
+import { Render } from "@puckeditor/core"
 import { motion, AnimatePresence } from "motion/react"
 
 import { Box } from "@/components"

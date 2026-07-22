@@ -45,7 +45,7 @@
     "@mantine/spotlight": "^9.4.2",
     "@mantine/tiptap": "^9.4.2",
     "@mantine/vanilla-extract": "^9.4.2",
-    "@measured/puck": "^0.20.2",
+    "@puckeditor/core": "^0.22.2",
     "@rails/actioncable": "^8.1.300",
     "@rails/activestorage": "^8.1.300",
     "@tanstack/react-query": "^5.101.4",

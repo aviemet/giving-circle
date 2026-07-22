@@ -1,4 +1,4 @@
-import { Data } from "@measured/puck"
+import { Data } from "@puckeditor/core"
 import { useState } from "react"
 
 import { Page, Section } from "@/components"

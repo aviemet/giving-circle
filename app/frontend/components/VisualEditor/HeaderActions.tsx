@@ -1,4 +1,4 @@
-import { createUsePuck, Data } from "@measured/puck"
+import { createUsePuck, Data } from "@puckeditor/core"
 import { useTranslation } from "react-i18next"
 
 import { Badge, Box, Button, Divider, Menu } from "@/components"

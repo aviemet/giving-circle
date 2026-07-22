@@ -1,4 +1,4 @@
-import { type PuckContext, type SlotComponent } from "@measured/puck"
+import { type PuckContext, type SlotComponent } from "@puckeditor/core"
 import clsx from "clsx"
 
 import { SimpleGrid } from "@/components"

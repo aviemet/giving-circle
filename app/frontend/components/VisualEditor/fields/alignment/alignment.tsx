@@ -1,4 +1,4 @@
-import { Field } from "@measured/puck"
+import { Field } from "@puckeditor/core"
 
 import { AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon } from "@/components/Icons"
 import { SegmentedControl } from "@/components/Inputs"

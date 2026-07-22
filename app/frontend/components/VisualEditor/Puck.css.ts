@@ -1,6 +1,5 @@
 import { css } from "@linaria/core"
 
-
 import { theme } from "@/lib/theme"
 
 import * as layoutChrome from "./layoutChrome.editor.css"
@@ -37,15 +36,31 @@ export const puckPreviewContainer = css`
 	min-height: 100%;
 `
 
-const PUCK_SPACE_PX = "2px"
-
 export const puckRoot = css`
 	--puck-font-family: inherit;
+	--puck-space-1: 2px;
+	--puck-space-2: 4px;
+	--puck-space-3: 6px;
+	--puck-space-4: 8px;
+	--puck-space-5: 12px;
+	--puck-space-chrome-gutter: 0px;
+	--puck-drawer-item-space: 4px;
+	--puck-field-space-y: 4px;
+	--puck-field-space-x: 6px;
+	--puck-field-label-space-y: 2px;
+	--puck-field-space-surface-y: 6px;
+	--puck-field-space-surface-x: 6px;
+	--puck-slot-min-empty-height: 48px;
 	position: relative;
 	height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+	max-height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+	min-height: 0;
+	overflow: hidden;
 
 	& .Puck {
-		--puck-space-px: ${ PUCK_SPACE_PX };
+		height: 100%;
+		min-height: 0;
+		overflow: hidden;
 
 		input,
 		select {
@@ -55,49 +70,49 @@ export const puckRoot = css`
 		}
 
 		.${ puckDrawer } [class*="ComponentList-title"] {
-			background-color: var(--puck-color-grey-03);
+			background-color: var(--puck-color-interactive-subtle);
 			border-radius: 4px;
-			margin-bottom: 4px;
-			padding: 6px 8px 0 8px;
+			margin-bottom: 2px;
+			padding: 4px 6px 0 6px;
 		}
 
 		.${ puckDrawer } [data-puck-drawer="true"] {
-			gap: 4px;
+			gap: 2px;
 		}
 
 		.${ puckDrawerItem } [class*="DrawerItem-draggable"] {
 			display: flex;
 			align-items: center;
-			gap: 6px;
-			background-color: var(--puck-color-white);
-			border: 1px solid var(--puck-color-grey-09);
-			padding: 2px 8px 0px 8px;
+			gap: 4px;
+			background-color: var(--puck-color-surface);
+			border: 1px solid var(--puck-color-border);
+			padding: 1px 6px;
 		}
 
 		.${ puckDrawerItem } .${ puckDrawerItemIcon } {
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			width: 18px;
-			height: 18px;
-			color: var(--puck-color-grey-10);
+			width: 16px;
+			height: 16px;
+			color: var(--puck-color-text-subtle);
 		}
 
 		.${ puckOutline } {
-			background-color: var(--puck-color-grey-02);
+			background-color: var(--puck-color-surface-subtle);
 			border-radius: 4px;
-			padding: 8px;
-			margin-top: 4px;
+			padding: 4px;
+			margin-top: 2px;
 		}
 
 		.${ puckOutline } * {
-			color: var(--puck-color-black);
+			color: var(--puck-color-text);
 		}
 
 		[class*="DropZone--isRootZone"]:not([class*="DropZone--hasChildren"]) {
-			border: 1px solid var(--puck-color-grey-08);
+			border: 1px solid var(--puck-color-border);
 			border-radius: 6px;
-			background-color: color-mix(in oklch, var(--puck-color-grey-10) 40%, transparent);
+			background-color: color-mix(in oklch, var(--puck-color-border-muted) 40%, transparent);
 			box-sizing: border-box;
 		}
 
@@ -109,13 +124,13 @@ export const puckRoot = css`
 			align-items: center;
 			justify-content: center;
 			pointer-events: none;
-			color: var(--puck-color-grey-06);
+			color: var(--puck-color-text-muted);
 			font-size: 0.8125rem;
 		}
 
 		[data-puck-dragging] [class*="DropZone--isDestination"]:not([class*="DropZone--isRootZone"]) {
-			border-color: var(--puck-color-azure-04);
-			background-color: color-mix(in oklch, var(--puck-color-azure-09) 70%, transparent);
+			border-color: var(--puck-color-selection-border);
+			background-color: var(--puck-color-selection-bg);
 		}
 
 		[data-puck-dragging] .${ layoutChrome.frame } {
@@ -146,8 +161,29 @@ export const puckRoot = css`
 		}
 	}
 
+	& [class*="PuckHeader-inner"] {
+		padding: 4px 8px;
+	}
+
+	& [class*="SidebarSection-content"] {
+		padding: 6px;
+	}
+
+	& [class*="PuckLayout"] {
+		height: 100% !important;
+		max-height: 100%;
+		min-height: 0;
+		overflow: hidden;
+	}
+
 	& [class*="PuckLayout-inner"] {
-		height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+		height: 100%;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	& [class*="PuckCanvas"] {
+		overflow: auto;
 	}
 
 	& [data-puck-preview],

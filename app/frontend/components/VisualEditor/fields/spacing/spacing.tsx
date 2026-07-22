@@ -1,4 +1,4 @@
-import { Field } from "@measured/puck"
+import { Field } from "@puckeditor/core"
 import { useState } from "react"
 
 import { NumberInput, Select } from "@/components/Inputs"

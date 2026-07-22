@@ -1,5 +1,5 @@
 import { Head } from "@inertiajs/react"
-import { Config, Render } from "@measured/puck"
+import { Config, Render } from "@puckeditor/core"
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
