@@ -1,6 +1,6 @@
 import { css } from "@linaria/core"
 
-import { vars } from "@/lib"
+import { vars } from "@/lib/theme"
 
 export const appLayout = css`
 `
@@ -18,16 +18,8 @@ export const circleMenuGroup = css`
   width: 100%;
 `
 
-export const circleMenuButton = css`
+export const circleMenuLink = css`
   flex: 1;
-  
-  span {
-    justify-content: start;
-
-    .mantine-Button-label {
-      flex: 1;
-    }
-  }
 `
 
 export const navMenu = css`

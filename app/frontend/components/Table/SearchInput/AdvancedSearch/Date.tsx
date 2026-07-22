@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import { DateInput, type DateInputValue } from "@/components/Inputs"
 
@@ -8,6 +9,7 @@ export function DateRangeDate({
 	advancedSearch,
 	name,
 }: AdvancedInputProps) {
+	const { t } = useTranslation()
 	const { values, inputProps, setInputValue } = advancedSearch
 
 	const { mb, wrapperProps, value } = inputProps<DateInputValue>(`${name}[start]`)
@@ -34,7 +36,7 @@ export function DateRangeDate({
 
 	return (
 		<DateInput
-			label="Date"
+			label={ t("common.table.date") }
 			{ ...{ mb, wrapperProps, value } }
 			onChange={ handleChange }
 			type={ type === "range" ? "range" : "default" }

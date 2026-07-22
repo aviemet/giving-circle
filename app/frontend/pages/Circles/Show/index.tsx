@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Container, Group, Title, Menu, Page, Section } from "@/components"
 import { CoinsIcon, HelpingIcon, MembersIcon } from "@/components/Icons"
 import { StatTile } from "@/domains/circles/StatTile"
@@ -13,6 +15,7 @@ interface ShowCircleProps {
 // @path: /:circle_slug
 // @route: circle
 const ShowCircle = ({ circle }: ShowCircleProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"circle">()
 	const title = circle.name || "Circle"
 
@@ -26,14 +29,14 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link href={ Routes.editCircle(params.circle_slug) }>
-								Edit Circle
+								{ t("circles.show.editCircle") }
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
 			) }
 			breadcrumbs={ [
-				{ title: "Circles", href: Routes.circles() },
+				{ title: t("navigation.circles"), href: Routes.circles() },
 				{ title, href: Routes.circle(params.circle_slug) },
 			] }
 		>
@@ -42,19 +45,19 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 					<Section py="md">
 						<Group grow>
 							<StatTile
-								heading="Total Donated"
+								heading={ t("circles.show.totalDonated") }
 								value="$10"
 								icon={ <CoinsIcon /> }
 								color="purple"
 							/>
 							<StatTile
-								heading="Organizations Funded"
+								heading={ t("circles.show.organizationsFunded") }
 								value="6"
 								icon={ <HelpingIcon /> }
 								color="green"
 							/>
 							<StatTile
-								heading="Active Members"
+								heading={ t("circles.show.activeMembers") }
 								value={ circle.memberships.length }
 								icon={ <MembersIcon /> }
 								color="orange"
@@ -62,7 +65,7 @@ const ShowCircle = ({ circle }: ShowCircleProps) => {
 						</Group>
 					</Section>
 
-					<Title order={ 2 }>Upcoming Themes</Title>
+					<Title order={ 2 }>{ t("circles.show.upcomingThemes") }</Title>
 					<CardContainer>
 						{ circle.themes.map(theme => (
 							<ThemeCard key={ theme.id } theme={ theme } />

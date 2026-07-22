@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
@@ -14,6 +16,8 @@ export interface TemplateFormProps {
 }
 
 export const TemplateForm = ({ to, method = "post", template }: TemplateFormProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Form<TemplateFormData>
 			action={ to }
@@ -22,11 +26,13 @@ export const TemplateForm = ({ to, method = "post", template }: TemplateFormProp
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="template.name" label="Name" />
+					<TextInput name="template.name" label={ t("templates.form.name") } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ template.id ? "Update" : "Create" } Template</Submit>
+					<Submit>
+						{ template.id ? t("templates.form.update") : t("templates.form.create") }
+					</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

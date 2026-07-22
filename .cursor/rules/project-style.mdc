@@ -1,0 +1,32 @@
+---
+description: Non-negotiable Giving Circle style and module interface rules
+alwaysApply: true
+---
+
+# This project's style wins
+
+Ignore generic JS/TS internet habits when they conflict with this repo. If a convention is documented here, in `.cursor/rules/`, or in `.cursor/giving_circle.mdx`, follow it. Do not invent alternate "cleaner" patterns.
+
+## Equality
+
+- Never use `==` or `!=`.
+- Use `===` and `!==` only.
+- Do not use the `!= null` / `== null` idiom. Check null and undefined with strict equality, or structure the code so the type already excludes them.
+
+## Types live with what they describe
+
+- Define types/interfaces in the same module as the value, component, hook, or function they describe.
+- Do not create `types.ts` (or similar) dump files for a feature folder.
+- Shared types belong only when they are truly shared across modules; put those in an intentional shared location, not a local barrel of leftovers.
+
+## Barrels are public API only
+
+- A folder `index.ts` exports only what outside callers should use.
+- Do not re-export internal helpers, private subcomponents, or channel/transport details "just in case".
+- If a helper is useful outside the feature, move it to a shared module (`lib/`, shared utilities). Do not leak internals through the barrel.
+
+## Components and files
+
+- Deliver React components in their own files from the start (`export function Name`), not one mega-file to split later.
+- Colocate CSS modules as `Name.css.ts` next to the component.
+- Keep styling in CSS classes; do not leave static layout styles as inline objects when a classname belongs there.

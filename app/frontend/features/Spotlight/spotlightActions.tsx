@@ -12,6 +12,7 @@ import {
 	UserGroupIcon,
 } from "@/components/Icons"
 import { Routes } from "@/lib"
+import { i18n } from "@/lib/i18n"
 import { type SpotlightSearchValues } from "@/queries/spotlight"
 
 function matchesQuery(value: string | undefined, query: string) {
@@ -57,20 +58,21 @@ export function filterSpotlightValues(values: SpotlightSearchValues, query: stri
 }
 
 export function buildDefaultActions(circleSlug: string | undefined): SpotlightActionData[] {
+	const t = i18n.t.bind(i18n)
 	const actions: SpotlightActionData[] = [
 		{
 			id: "circles",
-			label: "Giving Circles",
-			description: "Choose a giving circle",
-			group: "Navigation",
+			label: t("spotlight.giving_circles"),
+			description: t("spotlight.giving_circles_description"),
+			group: t("spotlight.navigation"),
 			onClick: () => router.get(Routes.circles()),
 			leftSection: <DashboardIcon size={ 18 } />,
 		},
 		{
 			id: "settings",
-			label: "Settings",
-			description: "Site configuration and preferences",
-			group: "Settings",
+			label: t("spotlight.settings"),
+			description: t("spotlight.settings_description"),
+			group: t("spotlight.settings"),
 			onClick: () => router.get(Routes.settingsGeneral()),
 			leftSection: <SettingsIcon size={ 18 } />,
 		},
@@ -81,41 +83,41 @@ export function buildDefaultActions(circleSlug: string | undefined): SpotlightAc
 	return [
 		{
 			id: "circle-dashboard",
-			label: "Circle Dashboard",
-			description: "Overview for the active giving circle",
-			group: "Circle",
+			label: t("spotlight.circle_dashboard"),
+			description: t("spotlight.circle_dashboard_description"),
+			group: t("spotlight.circle"),
 			onClick: () => router.get(Routes.circle(circleSlug)),
 			leftSection: <DashboardIcon size={ 18 } />,
 		},
 		{
 			id: "memberships",
-			label: "Members",
-			description: "View circle memberships",
-			group: "Circle",
+			label: t("navigation.members"),
+			description: t("spotlight.members_description"),
+			group: t("spotlight.circle"),
 			onClick: () => router.get(Routes.circleMemberships(circleSlug)),
 			leftSection: <UserGroupIcon size={ 18 } />,
 		},
 		{
 			id: "orgs",
-			label: "Orgs",
-			description: "View circle organizations",
-			group: "Circle",
+			label: t("navigation.orgs"),
+			description: t("spotlight.orgs_description"),
+			group: t("spotlight.circle"),
 			onClick: () => router.get(Routes.circleOrgs(circleSlug)),
 			leftSection: <OrgsIcon size={ 18 } />,
 		},
 		{
 			id: "templates",
-			label: "Presentation Templates",
-			description: "View presentation templates",
-			group: "Circle",
+			label: t("spotlight.presentation_templates"),
+			description: t("spotlight.presentation_templates_description"),
+			group: t("spotlight.circle"),
 			onClick: () => router.get(Routes.circleTemplates(circleSlug)),
 			leftSection: <PresentationIcon size={ 18 } />,
 		},
 		{
 			id: "themes",
-			label: "Themes",
-			description: "View circle themes",
-			group: "Circle",
+			label: t("navigation.themes"),
+			description: t("spotlight.themes_description"),
+			group: t("spotlight.circle"),
 			onClick: () => router.get(Routes.circleThemes(circleSlug)),
 			leftSection: <ThemesIcon size={ 18 } />,
 		},
@@ -129,12 +131,14 @@ export function generateSearchActions(
 ): SpotlightActionData[] {
 	if(!values) return []
 
+	const t = i18n.t.bind(i18n)
+
 	return [
 		...values.orgs.map((org) => ({
 			id: `org-${org.id}`,
 			label: org.name,
 			description: org.description || org.slug,
-			group: "Orgs",
+			group: t("navigation.orgs"),
 			onClick: () => router.get(Routes.org(circleSlug, org.slug)),
 			leftSection: <OrgsIcon size={ 18 } />,
 			keywords: ["org", "orgs", "organization"],
@@ -143,7 +147,7 @@ export function generateSearchActions(
 			id: `theme-${theme.id}`,
 			label: theme.name,
 			description: theme.status,
-			group: "Themes",
+			group: t("navigation.themes"),
 			onClick: () => router.get(Routes.theme(circleSlug, theme.slug)),
 			leftSection: <ThemesIcon size={ 18 } />,
 			keywords: ["theme", "themes"],
@@ -152,7 +156,7 @@ export function generateSearchActions(
 			id: `membership-${membership.id}`,
 			label: membership.name,
 			description: membership.person.name,
-			group: "Members",
+			group: t("navigation.members"),
 			onClick: () => router.get(Routes.membership(circleSlug, membership.slug)),
 			leftSection: <MembersIcon size={ 18 } />,
 			keywords: ["member", "members", "membership"],
@@ -161,7 +165,7 @@ export function generateSearchActions(
 			id: `template-${template.id}`,
 			label: template.name || template.slug,
 			description: template.slug,
-			group: "Templates",
+			group: t("templates.index.breadcrumbs.templates"),
 			onClick: () => router.get(Routes.circleTemplate(circleSlug, template.slug)),
 			leftSection: <PresentationIcon size={ 18 } />,
 			keywords: ["template", "templates"],
@@ -170,7 +174,7 @@ export function generateSearchActions(
 			id: `presentation-${presentation.id}`,
 			label: presentation.name,
 			description: presentation.theme.name,
-			group: "Presentations",
+			group: t("presentations.index.breadcrumbs.presentations"),
 			onClick: () => router.get(Routes.themePresentation(circleSlug, presentation.theme.slug, presentation.slug)),
 			leftSection: <PresentationIcon size={ 18 } />,
 			keywords: ["presentation", "presentations"],

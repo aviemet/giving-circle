@@ -131,7 +131,8 @@ search:
 #   #   Keep in mind the context of all the strings for a more accurate translation.
 
 ## Do not consider these keys missing:
-# ignore_missing:
+ignore_missing:
+  - "{choices_format,choices_required,field_group_fields,key_format,key_required,key_unique,label_required,max_must_be_integer,max_must_be_number,metric_required,min_lte_max,min_must_be_integer,min_must_be_number,must_be_array,must_be_object,reducer_incompatible,reducer_required,repeatable_boolean,source_field_missing,source_field_required,unknown_metric,unknown_reducer,unknown_type}"
 # - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
 # - '{devise,simple_form}.*'
 
@@ -140,7 +141,13 @@ ignore_unused:
   - "activerecord.attributes.*"
   - "devise.*"
   - "errors.messages.*"
+  - "errors.format"
   - "people.*"
+  - "presentations.interactions.validations.*"
+  - "presentations.interaction_responses.validations.*"
+  - "settings.mail.smtp.test.*"
+  - "theme_orgs.validations.*"
+  - "categories.validations.*"
 
 ## Exclude these keys from the `i18n-tasks eq-base' report:
 # ignore_eq_base:

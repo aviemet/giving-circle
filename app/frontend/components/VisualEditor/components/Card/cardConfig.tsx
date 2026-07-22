@@ -1,5 +1,7 @@
 import { type ComponentConfig } from "@measured/puck"
 
+import { i18n } from "@/lib/i18n"
+
 import { CardDisplay } from "./Card"
 import {
 	borderColorField,
@@ -25,14 +27,16 @@ export type CardProps = SpacingProps & BorderProps & FlexStyleInput & {
 	sizing?: FlexItemSizing
 }
 
+const t = i18n.t.bind(i18n)
+
 export const cardConfig: ComponentConfig<CardProps> = {
-	label: "Card",
+	label: t("slides.editor.components.card.label"),
 	fields: {
 		title: tagsField({
-			label: "Title",
+			label: t("slides.editor.components.card.title"),
 		}),
 		description: tagsField({
-			label: "Description",
+			label: t("slides.editor.components.card.description"),
 		}),
 		sizing: flexItemSizingField(),
 		margin: marginField(),
@@ -42,15 +46,15 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		borderColor: borderColorField(),
 		flex: flexField(),
 		backgroundColor: colorField({
-			label: "Background Color",
+			label: t("slides.editor.components.card.background_color"),
 		}),
 		fontColor: colorField({
-			label: "Font Color",
+			label: t("slides.editor.components.card.font_color"),
 		}),
 	},
 	defaultProps: {
-		title: "Topic Title",
-		description: "Topic description...",
+		title: t("slides.editor.components.card.default_title"),
+		description: t("slides.editor.components.card.default_description"),
 		backgroundColor: "#FEFEFE",
 		fontColor: "#111111",
 		sizing: { mode: "auto" },

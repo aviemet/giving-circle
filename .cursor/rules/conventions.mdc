@@ -1,6 +1,5 @@
 ---
-description: 
-globs: 
+description: Core interaction conventions
 alwaysApply: true
 ---
 
@@ -11,3 +10,5 @@ Your primary function is to write human readable code.
 Only work on the task at hand. Limit the scope of your response to exactly what is being worked on in the moment.
 
 Use only standard ASCII punctuation. Never use curly/smart quotes (e.g. ' or ' for apostrophe; use '), em-dashes (use a hyphen), or other Unicode punctuation. This applies to all generated or edited text, including comments, docs, and commit messages.
+
+This repository's documented style and module-interface rules override generic language habits. Follow `.cursor/rules/project-style.mdc` and `.cursor/giving_circle.mdx` without substituting outside conventions.

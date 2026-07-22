@@ -1,0 +1,2 @@
+class InteractionConfigTemplates::EditSerializer < InteractionConfigTemplates::FormDataSerializer
+end

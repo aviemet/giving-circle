@@ -1,5 +1,6 @@
 import { router } from "@inertiajs/react"
 import React, { useState, useEffect, useRef, useMemo } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Button, Code, Dropzone, Page, Text, Title, type FileWithPath } from "@/components"
 import { ImportMapping, TriggerHandle, triggerRefAction } from "@/domains/themeOrgs/ImportMapping"
@@ -18,6 +19,7 @@ interface OrgsImportProps {
 // @path: /:circle_slug/themes/:theme_slug/orgs/import
 // @route: themeOrgsImport
 const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"themeOrgsImport">()
 
 	const sidebarVisible = useLayoutStore((state) => state.sidebarVisible)
@@ -87,7 +89,7 @@ const ThemeOrgsImport = ({ circle, theme }: OrgsImportProps) => {
 
 	return (
 		<Page
-			title="Orgs Import"
+			title={ t("theme_orgs.index.import_title") }
 			heading={ siteTitle }
 		>
 			{ displayImportTable

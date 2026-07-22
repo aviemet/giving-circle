@@ -1,0 +1,371 @@
+{
+  "lt": {
+    "date": {
+      "abbr_day_names": [
+        "Sek",
+        "Pir",
+        "Ant",
+        "Tre",
+        "Ket",
+        "Pen",
+        "Šeš"
+      ],
+      "abbr_month_names": [
+        null,
+        "Sau",
+        "Vas",
+        "Kov",
+        "Bal",
+        "Geg",
+        "Bir",
+        "Lie",
+        "Rgp",
+        "Rgs",
+        "Spa",
+        "Lap",
+        "Grd"
+      ],
+      "day_names": [
+        "sekmadienis",
+        "pirmadienis",
+        "antradienis",
+        "trečiadienis",
+        "ketvirtadienis",
+        "penktadienis",
+        "šeštadienis"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%Y m. %B %d d.",
+        "short": "%b %d"
+      },
+      "month_names": [
+        null,
+        "sausio",
+        "vasario",
+        "kovo",
+        "balandžio",
+        "gegužės",
+        "birželio",
+        "liepos",
+        "rugpjūčio",
+        "rugsėjo",
+        "spalio",
+        "lapkričio",
+        "gruodžio"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "few": "apie %{count} valandas",
+          "one": "apie %{count} valandą",
+          "other": "apie %{count} valandų"
+        },
+        "about_x_months": {
+          "few": "apie %{count} mėnesius",
+          "one": "apie %{count} mėnesį",
+          "other": "apie %{count} mėnesių"
+        },
+        "about_x_years": {
+          "few": "apie %{count} metus",
+          "one": "apie %{count} metus",
+          "other": "apie %{count} metų"
+        },
+        "almost_x_years": {
+          "few": "beveik %{count} metai",
+          "one": "beveik %{count} metai",
+          "other": "beveik %{count} metų"
+        },
+        "half_a_minute": "pusė minutės",
+        "less_than_x_minutes": {
+          "few": "mažiau nei %{count} minutės",
+          "one": "mažiau nei %{count} minutė",
+          "other": "mažiau nei %{count} minučių"
+        },
+        "less_than_x_seconds": {
+          "few": "mažiau nei %{count} sekundės",
+          "one": "mažiau nei %{count} sekundė",
+          "other": "mažiau nei %{count} sekundžių"
+        },
+        "over_x_years": {
+          "few": "virš %{count} metų",
+          "one": "virš %{count} metų",
+          "other": "virš %{count} metų"
+        },
+        "x_days": {
+          "few": "%{count} dienos",
+          "one": "%{count} diena",
+          "other": "%{count} dienų"
+        },
+        "x_minutes": {
+          "few": "%{count} minutės",
+          "one": "%{count} minutė",
+          "other": "%{count} minučių"
+        },
+        "x_months": {
+          "few": "%{count} mėnesiai",
+          "one": "%{count} mėnesis",
+          "other": "%{count} mėnesių"
+        },
+        "x_seconds": {
+          "few": "%{count} sekundės",
+          "one": "%{count} sekundė",
+          "other": "%{count} sekundžių"
+        },
+        "x_years": {
+          "few": "%{count} metai",
+          "one": "%{count} metai",
+          "other": "%{count} metai"
+        }
+      },
+      "prompts": {
+        "day": "Diena",
+        "hour": "Valanda",
+        "minute": "Minutė",
+        "month": "Mėnuo",
+        "second": "Sekundės",
+        "year": "Metai"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Jūsų el. pašto adresas sėkmingai patvirtintas.",
+        "new": {
+          "resend_confirmation_instructions": null
+        },
+        "send_instructions": "Už keleto minučių sulauksite elektroninio laiško su instrukcijomis kaip patvirtinti jūsų vartotojo paskyrą.",
+        "send_paranoid_instructions": "Jei esatę prisiregistravę šiuo e-pašto adresu, už keleto minučių sulauksite elektroninio laiško su instrukcijomis kaip patvirtinti jūsų vartotojo paskyrą"
+      },
+      "failure": {
+        "already_authenticated": "Jūs jau prisijungęs.",
+        "inactive": "Jūsų paskyra dar neaktyvuota.",
+        "invalid": "Nevalidus slaptažodis arba %{authentication_keys}.",
+        "last_attempt": "Jums liko paskutinis bandymas prieš užblokuojant paskyrą.",
+        "locked": "Jūsų paskyra laikinai užblokuota.",
+        "not_found_in_database": "Nevalidus slaptažodis arba  %{authentication_keys}.",
+        "timeout": "Jūsų sesija baigta. Prisijunkite iš naujo norėdami tęsti.",
+        "unauthenticated": "Būtina prisijungti arba prisiregistruoti prieš tęsiant.",
+        "unconfirmed": "Būtina patvirtinti e-pašto adresą prieš tęsiant."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Patvirtinti mano paskyrą",
+          "greeting": "Sveiki %{recipient}!",
+          "instruction": null,
+          "subject": "Paskyros patvirtinimo instrukcijos"
+        },
+        "email_changed": {
+          "greeting": "Sveiki %{recipient}!",
+          "message": null,
+          "message_unconfirmed": null,
+          "subject": "El. paštas pakeistas"
+        },
+        "password_change": {
+          "greeting": "Sveiki %{recipient}!",
+          "message": null,
+          "subject": "Slaptažodis pakeistas"
+        },
+        "reset_password_instructions": {
+          "action": "Pakeisti mano slaptažodį",
+          "greeting": null,
+          "instruction": null,
+          "instruction_2": null,
+          "instruction_3": null,
+          "subject": "Slaptažodžio keitimo instrukcijos"
+        },
+        "unlock_instructions": {
+          "action": null,
+          "greeting": null,
+          "instruction": null,
+          "message": null,
+          "subject": "Paskyros atblokavimo instrukcijos"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Nepavyko autentikaciją per %{kind}, klaida: \"%{reason}\".",
+        "success": "Sėkmingai prisijungėte su savo %{kind} paskyra."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": null,
+          "change_your_password": null,
+          "confirm_new_password": null,
+          "new_password": null
+        },
+        "new": {
+          "forgot_your_password": null,
+          "send_me_reset_password_instructions": null
+        },
+        "no_token": "Jūs negalite pasiekti šio puslapio tiesiogiai, tą turite padaryti iš slaptažodžio keitimo laiško. Jei jūs atėjote naudodami nuorodą, pateiktą slaptažodžio keitimo laiške, įsitikinkite, kad nukopijavote ją visą.",
+        "send_instructions": "Jūs gausite el. laišką su slaptažodžio pakeitimo instrukcijomis netrukus.",
+        "send_paranoid_instructions": "Jei prisiregistravote šiuo e-pašto adresu, netrukus gausite el. laišką su slaptažodžio pakeitimo instrukcijomis.",
+        "updated": "Jūsų slaptažodis pakeistas sėkmingai. Jūs esate prisijungę.",
+        "updated_not_active": "Jūsų slaptažodis pakeistas sėkmingai."
+      },
+      "registrations": {
+        "destroyed": "Iki! Jūsų paskyra dabar yra panaikinta. Tikimės, kad ateityje sugrįšite.",
+        "edit": {
+          "are_you_sure": null,
+          "cancel_my_account": null,
+          "currently_waiting_confirmation_for_email": null,
+          "leave_blank_if_you_don_t_want_to_change_it": null,
+          "title": null,
+          "unhappy": null,
+          "update": null,
+          "we_need_your_current_password_to_confirm_your_changes": null
+        },
+        "new": {
+          "sign_up": null
+        },
+        "signed_up": "Sveiki, jūs sėkmingai prisiregistravote.",
+        "signed_up_but_inactive": "Jūs sėkmingai prisiregistravote. Deja dar negalime jūsų prijungti, nes jūsų paskyra nėra aktyvuota.",
+        "signed_up_but_locked": "Jūs sėkmingai prisiregistravote. Deja dar negalime jūsų prijungti, nes jūsų paskyra laikinai užblokuota.",
+        "signed_up_but_unconfirmed": "El. laiškas buvo išsiųstas jūsų pateiktu adresu. Sekite nuorodą laiške paskyrai aktyvuoti.",
+        "update_needs_confirmation": "Jūsų paskyra sėkmingai atnaujinta, tačiau mums reikia patvirtinti jūsų naują el. pašto adresą. Prašome pasitikrinkite savo e-paštą ir sekite instrukcijas laiške.",
+        "updated": "Jūsų duomenys sėkmingai atnaujinti.",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": "Jau esate atsijungę.",
+        "new": {
+          "sign_in": null
+        },
+        "signed_in": "Jūs prisijungėte.",
+        "signed_out": "Sėkmingai atsijungėte iš savo paskyros."
+      },
+      "shared": {
+        "links": {
+          "back": null,
+          "didn_t_receive_confirmation_instructions": null,
+          "didn_t_receive_unlock_instructions": null,
+          "forgot_your_password": null,
+          "sign_in": null,
+          "sign_in_with_provider": null,
+          "sign_up": null
+        },
+        "minimum_password_length": {
+          "few": null,
+          "many": null,
+          "one": null,
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": null
+        },
+        "send_instructions": "Netrukus sulauksite el. laiško su instrukcijomis, kaip atblokuoti paskyrą.",
+        "send_paranoid_instructions": "Jei registracijai naudojote šį e-pašto adresą, netrukus sulauksite el. laiško su instrukcijomis, kaip atblokuoti paskyrą.",
+        "unlocked": "Jūsų paskyra atblokuota. Prisijunkite prie paskyros darbui tęsti."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Prašom pasirinkti"
+      },
+      "submit": {
+        "create": "Sukurti %{model}",
+        "submit": "Išsaugoti %{model}",
+        "update": "Atnaujinti %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "few",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": " ",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "€"
+        }
+      },
+      "format": {
+        "delimiter": " ",
+        "precision": 3,
+        "round_mode": "default",
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "Milijardas",
+            "million": "Milijonas",
+            "quadrillion": "Kvadrilijonas",
+            "thousand": "Tūkstantis",
+            "trillion": "Trilijonas",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "few": "Baitai",
+              "one": "Baitas",
+              "other": "Baitų"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " ir ",
+        "two_words_connector": " ir ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "am",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%Y %B %d %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "pm"
+    }
+  }
+}

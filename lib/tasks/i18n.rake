@@ -7,5 +7,11 @@ namespace :i18n do
     FileUtils.rm_rf(Dir.glob("#{locales_path}/*"))
 
     system("bundle exec i18n export")
+    system("node scripts/generate-locale-registry.mjs")
+  end
+
+  desc "Regenerate the frontend locale registry from exported JSON locales"
+  task locale_registry: :environment do
+    system("node scripts/generate-locale-registry.mjs")
   end
 end

@@ -5,15 +5,18 @@ import { createChannel } from "../actioncable"
 interface UseActionCableOptions<T = unknown> {
 	channelName: string
 	params?: Record<string, unknown>
+	enabled?: boolean
 	onReceived?: (data: T) => void
 	onConnected?: () => void
 	onDisconnected?: () => void
 }
 
-export const useActionCable = <T = unknown>({ channelName, params, onReceived, onConnected, onDisconnected }: UseActionCableOptions<T>) => {
+export const useActionCable = <T = unknown>({ channelName, params, enabled = true, onReceived, onConnected, onDisconnected }: UseActionCableOptions<T>) => {
 	const subscriptionRef = useRef<ReturnType<typeof createChannel> | null>(null)
 
 	useEffect(() => {
+		if(!enabled) return
+
 		subscriptionRef.current = createChannel(channelName, {
 			received: onReceived,
 			connected: onConnected,
@@ -23,9 +26,10 @@ export const useActionCable = <T = unknown>({ channelName, params, onReceived, o
 		return () => {
 			if(subscriptionRef.current) {
 				subscriptionRef.current.unsubscribe()
+				subscriptionRef.current = null
 			}
 		}
-	}, [channelName, params, onReceived, onConnected, onDisconnected])
+	}, [channelName, enabled, params, onReceived, onConnected, onDisconnected])
 
 	const perform = (action: string, data?: Record<string, unknown>) => {
 		if(subscriptionRef.current) {

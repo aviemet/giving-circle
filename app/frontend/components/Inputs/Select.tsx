@@ -6,6 +6,7 @@ import {
 } from "@mantine/core"
 import React from "react"
 
+import { useFormFieldError } from "@/components/Form"
 import { coerceArray } from "@/lib"
 
 import { InputWrapper } from "./InputWrapper"
@@ -31,10 +32,12 @@ export function Select({
 	wrapper,
 	wrapperProps,
 	disableAutofill = true,
+	error,
 	ref,
 	...props
 }: SelectInputProps) {
 	const inputId = id || name
+	const fieldError = useFormFieldError(name)
 
 	const handleDropdownOpen = () => {
 		if(fetchOnOpen) {
@@ -57,6 +60,7 @@ export function Select({
 				name={ name }
 				data={ options }
 				required={ required }
+				error={ error ?? fieldError }
 				maxDropdownHeight={ maxDropdownHeight }
 				onDropdownOpen={ handleDropdownOpen }
 				nothingFoundMessage="No Results"

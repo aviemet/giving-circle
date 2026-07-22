@@ -3,6 +3,8 @@ namespace :api do
   patch "users/:id/update_table_preferences" => "users#update_table_preferences", as: :update_table_preferences
   patch "users/:id/update_user_preferences" => "users#update_user_preferences", as: :update_user_preferences
 
+  get "presentation_elements/templates" => "presentation_elements#templates", as: :presentation_element_templates
+
   resources :circles, param: :slug, only: [:create, :update] do
     get "mock" => "circles#mock"
 

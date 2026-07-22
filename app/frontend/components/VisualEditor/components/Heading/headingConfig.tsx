@@ -1,5 +1,7 @@
 import { type ComponentConfig } from "@measured/puck"
 
+import { i18n } from "@/lib/i18n"
+
 import { HeadingDisplay } from "./Heading"
 import { colorField, tagsField } from "../../fields"
 
@@ -10,16 +12,18 @@ export type HeadingProps = {
 	color: string
 }
 
+const t = i18n.t.bind(i18n)
+
 export const headingConfig: ComponentConfig<HeadingProps> = {
-	label: "Heading",
+	label: t("slides.editor.components.heading.label"),
 	fields: {
 		title: tagsField({
-			label: "Title",
+			label: t("slides.editor.components.heading.title"),
 		}),
-		padding: { type: "number", label: "Padding" },
+		padding: { type: "number", label: t("slides.editor.components.heading.padding") },
 		order: {
 			type: "select",
-			label: "Heading Level",
+			label: t("slides.editor.components.heading.level"),
 			options: [
 				{ label: "1", value: 1 },
 				{ label: "2", value: 2 },
@@ -30,12 +34,12 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 			],
 		},
 		color: colorField({
-			label: "Text Color",
+			label: t("slides.editor.components.heading.text_color"),
 		}),
 	},
 
 	defaultProps: {
-		title: "Heading",
+		title: t("slides.editor.components.heading.default_title"),
 		padding: 16,
 		order: 1,
 		color: "#FFFFFF",

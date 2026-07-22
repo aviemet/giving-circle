@@ -5,3 +5,14 @@ en:
       created: Person was successfully created.
       destroyed: Person was successfully destroyed.
       updated: Person was successfully updated.
+  users:
+    form:
+      first_name: First Name
+      last_name: Last Name
+      number: Number
+      update: Update User
+    index:
+      title: Users
+    notices:
+      destroyed: User was successfully destroyed.
+      updated: User was successfully updated.

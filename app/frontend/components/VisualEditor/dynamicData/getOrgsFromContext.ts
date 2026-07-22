@@ -1,9 +1,13 @@
 import { PresentationDataContextValue } from "@/layouts/Providers/PresentationDataProvider"
 
-export function getOrgsFromContext(contextData: PresentationDataContextValue | null | undefined): Schema.OrgsPersisted[] {
-	const presentationOrgs = contextData?.presentation?.orgs
-	if(presentationOrgs && presentationOrgs.length > 0) {
-		return presentationOrgs
+export type ContextOrg =
+	| Schema.OrgsPersisted
+	| Schema.PresentationsOrgsPersisted
+
+export function getOrgsFromContext(contextData: PresentationDataContextValue | null | undefined): ContextOrg[] {
+	const presentation = contextData?.presentation
+	if(presentation && "orgs" in presentation && Array.isArray(presentation.orgs) && presentation.orgs.length > 0) {
+		return presentation.orgs
 	}
 
 	if(contextData?.circle && "orgs" in contextData.circle && Array.isArray(contextData.circle.orgs)) {

@@ -1,7 +1,34 @@
 ---
 en:
   themes:
+    edit:
+      title: Edit Theme
+    form:
+      create: Create Theme
+      name: Name
+      update: Update Theme
+    index:
+      breadcrumbs:
+        circles: Circles
+        themes: Themes
+      newTheme: New Theme
+      title: Themes
+    new:
+      title: New Theme
     notices:
       created: Theme was successfully created.
       destroyed: Theme was successfully destroyed.
       updated: Theme was successfully updated.
+    show:
+      breadcrumbs:
+        circles: Circles
+        themes: Themes
+      default_title: Theme
+      edit: Edit Theme
+      member_funds: Member Funds
+      member_funds_placeholder: Not tracked yet
+      new_presentation: New Presentation
+      organizations: Organizations
+      presentations: Presentations
+      total_ask: Total Ask
+      view_all: View all

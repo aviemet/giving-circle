@@ -1,0 +1,21 @@
+---
+en:
+  spotlight:
+    actions: Actions
+    circle: Circle
+    circle_dashboard: Circle Dashboard
+    circle_dashboard_description: Overview for the active giving circle
+    giving_circles: Giving Circles
+    giving_circles_description: Choose a giving circle
+    members_description: View circle memberships
+    navigation: Navigation
+    nothing_found: Nothing found...
+    orgs_description: View circle organizations
+    presentation_templates: Presentation Templates
+    presentation_templates_description: View presentation templates
+    search_circle: Search this circle...
+    search_select_circle: Select a circle to search records
+    settings: Settings
+    settings_description: Site configuration and preferences
+    slides: Slides
+    themes_description: View circle themes

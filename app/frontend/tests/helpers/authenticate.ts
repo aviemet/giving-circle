@@ -1,7 +1,7 @@
 import axios from "axios"
 import { beforeAll } from "vitest"
 
-beforeAll(async() => {
+beforeAll(async () => {
 	await axios.post("http://localhost:3000/test/login", {
 		email: "aviemet@gmail.com",
 		password: "Complex1!",

@@ -52,7 +52,7 @@ vi.mock("@inertiajs/react", () => {
 	}
 })
 
-vi.mock("@/lib/hooks/useActivePresentationChannel", () => {
+vi.mock("@/pages/Presentations/Active/useActivePresentationChannel", () => {
 	return {
 		useActivePresentationChannel: () => {
 			return { switchSlide: vi.fn() }
@@ -77,7 +77,7 @@ if(!("BroadcastChannel" in globalThis)) {
 	globalThis.BroadcastChannel = BroadcastChannelMock
 }
 
-beforeAll(async() => {
+beforeAll(async () => {
 	return
 })
 

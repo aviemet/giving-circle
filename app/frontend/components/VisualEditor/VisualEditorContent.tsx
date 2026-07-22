@@ -2,6 +2,7 @@ import { type Data } from "@measured/puck"
 import { useCallback, useMemo, useRef, useState } from "react"
 
 import { NavigationInterrupt } from "@/components/Modal"
+import { type PresentationDataPresentation } from "@/layouts/Providers/PresentationDataProvider"
 
 import {
 	applySlideTitleToData,
@@ -17,6 +18,7 @@ import { VisualEditorWorkspace } from "./VisualEditorWorkspace"
 export interface VisualEditorProps {
 	initialData?: Partial<Data>
 	slideTitle: string
+	presentation?: PresentationDataPresentation
 	onSave?: (data: Data) => void | Promise<void>
 	isSaving?: boolean
 	slideKey: string
@@ -26,6 +28,7 @@ export interface VisualEditorProps {
 export function VisualEditorContent({
 	initialData = {},
 	slideTitle,
+	presentation,
 	onSave,
 	isSaving = false,
 	slideKey,
@@ -49,7 +52,7 @@ export function VisualEditorContent({
 	const latestDataRef = useRef<Data>(initialLoad.data as Data)
 	const [saveStatus, setSaveStatus] = useState<EditorSaveStatus>(initialLoad.saveStatus)
 
-	const persistSave = useCallback(async(data: Data): Promise<boolean> => {
+	const persistSave = useCallback(async (data: Data): Promise<boolean> => {
 		if(!onSave) return false
 
 		try {
@@ -85,6 +88,7 @@ export function VisualEditorContent({
 				slideKey={ slideKey }
 				storageKey={ storageKey }
 				persistSave={ persistSave }
+				presentation={ presentation }
 			/>
 		</NavigationInterrupt>
 	)

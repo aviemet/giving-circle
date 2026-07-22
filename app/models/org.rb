@@ -33,6 +33,7 @@ class Org < ApplicationRecord
   validates :name, presence: true
 
   attribute :ask_cents
+  attribute :ask_currency
   monetize :ask_cents, allow_blank: true, allow_nil: true, numericality: { greater_than_or_equal_to: 0 }
 
   belongs_to :circle

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Grid, Link, Text } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
@@ -17,6 +19,8 @@ export interface ThemeMemberFormProps {
 }
 
 export const ThemeMemberForm = ({ to, method = "post", membership, circle, theme }: ThemeMemberFormProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Form<ThemeMemberFormData>
 			action={ to }
@@ -25,22 +29,30 @@ export const ThemeMemberForm = ({ to, method = "post", membership, circle, theme
 		>
 			<Grid>
 				<Text>
-					Creating a brand new member and adding them to the <Link href={ Routes.theme(circle.slug, theme.slug) }><strong>{ theme.name }</strong></Link> Theme
+					{ t("theme_memberships.form.helper_prefix") }
+					{ " " }
+					<Link href={ Routes.theme(circle.slug, theme.slug) }>
+						<strong>{ theme.name }</strong>
+					</Link>
+					{ " " }
+					{ t("theme_memberships.form.helper_suffix") }
 				</Text>
 				<Grid.Col>
-					<TextInput name="membership.first_name" label="First Name" />
+					<TextInput name="membership.first_name" label={ t("theme_memberships.form.first_name") } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<TextInput name="membership.last_name" label="Last Name" />
+					<TextInput name="membership.last_name" label={ t("theme_memberships.form.last_name") } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<TextInput name="membership.number" label="Number" />
+					<TextInput name="membership.number" label={ t("theme_memberships.form.number") } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ membership?.id ? "Update" : "Create" } Member</Submit>
+					<Submit>
+						{ membership?.id ? t("theme_memberships.form.update") : t("theme_memberships.form.create") }
+					</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

@@ -88,6 +88,11 @@ Rails.application.routes.draw do
       end
 
       resources :templates, param: :slug, shallow: false
+      resources :interaction_config_templates,
+        path: "interaction_templates",
+        param: :slug,
+        as: :interaction_templates,
+        shallow: false
       namespace :templates do
         get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
         post ":template_slug/slides", to: "slides#create", as: :create_slide
@@ -118,14 +123,18 @@ Rails.application.routes.draw do
             param: :slug,
             shallow: false,
             as: :interactions,
-            controller: "presentations/interactions"
+            controller: "presentations/interactions" do
+            member do
+              post :open_responses
+              post :close_responses
+            end
 
-          resources :interaction_responses,
-            path: "interaction_responses",
-            param: :slug,
-            shallow: false,
-            as: :interaction_responses,
-            controller: "presentations/interaction_responses"
+            resources :interaction_responses,
+              path: "responses",
+              shallow: false,
+              as: :responses,
+              controller: "presentations/interaction_responses"
+          end
 
           resources :presentation_elements,
             path: "elements",

@@ -94,6 +94,22 @@ export function createOrgPersisted(overrides?: Partial<Schema.OrgsPersisted>): S
 	}
 }
 
+export function createPresentationOrgPersisted(
+	overrides?: Partial<Schema.PresentationsOrgsPersisted>,
+): Schema.PresentationsOrgsPersisted {
+	return {
+		id: "org-1",
+		name: "Org 1",
+		slug: "org-1",
+		ask: {
+			amount: 1000,
+			cents: 100_000,
+			currency_iso: "USD",
+		},
+		...overrides,
+	}
+}
+
 export function createCircleMock(overrides?: Partial<Schema.CirclesMock>): Schema.CirclesMock {
 	return {
 		id: "circle-1",
@@ -135,7 +151,7 @@ export function createPresentationPresentation(overrides?: Partial<Schema.Presen
 		name: "Presentation 1",
 		slug: "presentation-1",
 		theme_id: "theme-1",
-		orgs: [createOrgPersisted()],
+		orgs: [createPresentationOrgPersisted()],
 		slides: [createSlidePresentation()],
 		active_slide_id: "slide-1",
 		...overrides,

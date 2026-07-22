@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { ThemeMemberForm } from "@/domains/themeMemberships/Form"
 import { Routes } from "@/lib"
@@ -12,8 +14,9 @@ interface NewThemeMemberProps {
 // @path: /:circle_slug/themes/:theme_slug/memberships/new
 // @route: newThemeMembership
 const NewThemeMember = ({ member, theme }: NewThemeMemberProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle } = usePageProps()
-	const title = "New Member"
+	const title = t("theme_memberships.new.title")
 
 	if(!active_circle) return <></>
 

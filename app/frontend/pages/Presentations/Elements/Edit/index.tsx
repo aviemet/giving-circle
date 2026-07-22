@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { PresentationElementForm } from "@/domains/presentation/elements/Form"
 import { Routes } from "@/lib"
@@ -11,13 +13,14 @@ interface EditPresentationElementProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:slug/edit
 // @route: editThemePresentationElement
 const EditPresentationElement = ({ presentation_element }: EditPresentationElementProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"editThemePresentationElement">()
-	const title = "Edit Element"
+	const title = t("presentations.elements.edit.title")
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{
-				title: "Elements",
+				title: t("presentations.elements.index.title"),
 				href: Routes.themePresentationElements(
 					params.circle_slug,
 					params.theme_slug,
@@ -25,7 +28,7 @@ const EditPresentationElement = ({ presentation_element }: EditPresentationEleme
 				),
 			},
 			{
-				title: "PresentationElement",
+				title: presentation_element.name || t("presentations.elements.show.title"),
 				href: Routes.themePresentationElement(
 					params.circle_slug,
 					params.theme_slug,

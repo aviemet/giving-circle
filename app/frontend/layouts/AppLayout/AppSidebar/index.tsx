@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next"
+
 import {
 	AppShell,
 	Divider,
 	Flex,
 	NavLink,
+	ScrollArea,
 } from "@/components"
 import { SettingsIcon } from "@/components/Icons"
 import { ToggleNavbarButton } from "@/features"
@@ -13,6 +16,7 @@ import { CircleDropdownLink } from "./CircleDropdownLink"
 import { AppSidebarMenu } from "./SidebarMenu"
 
 export function AppSidebar() {
+	const { t } = useTranslation()
 	const { paths } = useLocation()
 
 	return (
@@ -30,7 +34,7 @@ export function AppSidebar() {
 			<Divider />
 
 			{ /* Nav menu portal */ }
-			<AppShell.Section grow px="xs" pt="sm">
+			<AppShell.Section grow component={ ScrollArea } type="auto" scrollbars="y" px="xs" pt="sm">
 				<AppSidebarMenu />
 			</AppShell.Section>
 
@@ -44,7 +48,7 @@ export function AppSidebar() {
 					leftSection={ <SettingsIcon /> }
 					style={ { height: `${theme.other.footer.height - 1}px` } }
 				>
-					Settings
+					{ t("navigation.settings") }
 				</NavLink>
 			</AppShell.Section>
 		</>

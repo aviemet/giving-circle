@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react"
 
 import { Accordion } from "@/components"
+import { SettingsIcon } from "@/components/Icons"
 import { useLocation, usePageProps } from "@/lib/hooks"
 import { administrableCircles } from "@/lib/roles"
 
@@ -51,7 +52,7 @@ export function SettingsSidebarMenu() {
 
 			{ circlesForSettings.map((circle) => (
 				<Accordion.Item key={ circle.slug } value={ circle.slug }>
-					<Accordion.Control>{ circle.name }</Accordion.Control>
+					<Accordion.Control icon={ <SettingsIcon /> }>{ circle.name }</Accordion.Control>
 					<Accordion.Panel>
 						<CircleSettingsMenu circle={ circle } />
 					</Accordion.Panel>

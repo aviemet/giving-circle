@@ -1,4 +1,5 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 import {
 	Form,
@@ -18,20 +19,22 @@ export interface UserFormProps {
 }
 
 const UserForm = ({ to, method = "post", user }: UserFormProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Form<UserFormData>
 			action={ to }
 			initialData={ { user } }
 			method={ method }
 		>
-			<TextInput name="user.first_name" label="First Name" required />
+			<TextInput name="user.first_name" label={ t("users.form.first_name") } required />
 
-			<TextInput name="user.last_name" label="Last Name" required />
+			<TextInput name="user.last_name" label={ t("users.form.last_name") } required />
 
-			<TextInput name="user.number" label="Number" required />
+			<TextInput name="user.number" label={ t("users.form.number") } required />
 
 			<Submit>
-				{ user.id ? "Update" : "Create" } User
+				{ t("users.form.update") }
 			</Submit>
 		</Form>
 	)

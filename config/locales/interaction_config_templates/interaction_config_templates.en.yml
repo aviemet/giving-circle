@@ -1,0 +1,26 @@
+---
+en:
+  interaction_config_templates:
+    edit:
+      title: Edit %{name}
+    form:
+      create: Create Template
+      data_points: Data points
+      name: Name
+      outputs: Outputs
+      update: Update Template
+    index:
+      breadcrumbs:
+        circles: Circles
+        templates: Interaction Templates
+      columns:
+        actions: Actions
+        name: Name
+      newTemplate: New Template
+      title: Interaction Templates
+    new:
+      title: New Interaction Template
+    notices:
+      created: Interaction template was successfully created.
+      destroyed: Interaction template was successfully destroyed.
+      updated: Interaction template was successfully updated.

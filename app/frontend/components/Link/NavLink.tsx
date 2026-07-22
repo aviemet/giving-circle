@@ -12,7 +12,6 @@ import * as classes from "./Link.css"
 export interface NavLinkProps extends Omit<MantineNavLinkProps, "label" | "component"> {
 	external?: boolean
 	href: string
-	rel?: string
 	target?: string
 }
 
@@ -22,7 +21,6 @@ export const NavLink = ({
 	active,
 	external,
 	target,
-	rel,
 	...props
 }: NavLinkProps) => {
 	const { pathname } = useLocation()
@@ -40,12 +38,24 @@ export const NavLink = ({
 		)
 	}
 
+	if(target === "_blank") {
+		return (
+			<MantineNavLink
+				component="a"
+				href={ href }
+				target={ target }
+				active={ active === undefined ? pathname === href : active }
+				label={ children }
+				className={ classes.navLinkInactiveHover }
+				{ ...props }
+			/>
+		)
+	}
+
 	return (
 		<MantineNavLink
 			component={ Link }
 			href={ href }
-			target={ target }
-			rel={ rel ?? (target === "_blank" ? "noreferrer" : undefined) }
 			active={ active === undefined ? pathname === href : active }
 			label={ children }
 			className={ classes.navLinkInactiveHover }

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { CircleForm } from "@/domains/circles/Form"
 import { Routes } from "@/lib"
@@ -10,12 +12,13 @@ interface NewCircleProps {
 // @path: /circles/new
 // @route: newCircle
 const NewCircle = (data: NewCircleProps) => {
-	const title = "New Circle"
+	const { t } = useTranslation()
+	const title = t("circles.new.title")
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Circles", href: Routes.circles() },
-			{ title: "New Circle", href: Routes.newCircle() },
+			{ title: t("navigation.circles"), href: Routes.circles() },
+			{ title, href: Routes.newCircle() },
 		] }>
 
 			<Section>

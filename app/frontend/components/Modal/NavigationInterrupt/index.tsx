@@ -44,12 +44,12 @@ export function NavigationInterrupt({
 		stayOnPage()
 	}, [stayOnPage])
 
-	const handleDiscard = useCallback(async() => {
+	const handleDiscard = useCallback(async () => {
 		await onDiscard()
 		leaveAfterAction()
 	}, [leaveAfterAction, onDiscard])
 
-	const handleSaveAndLeave = useCallback(async() => {
+	const handleSaveAndLeave = useCallback(async () => {
 		if(!onSaveAndLeave) {
 			return false
 		}

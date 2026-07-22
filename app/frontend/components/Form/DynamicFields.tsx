@@ -2,6 +2,7 @@ import clsx from "clsx"
 import get from "es-toolkit/compat/get"
 import set from "es-toolkit/compat/set"
 import { useCallback, useState, type ReactNode } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Box, Button, Flex, Paper } from "@/components"
 import { flattenToPaths } from "@/lib"
@@ -30,6 +31,7 @@ export function DynamicFields({
 	initialCount = 0,
 	label,
 }: DynamicFieldsProps) {
+	const { t } = useTranslation()
 	const { getFormData, setValue, clearPathsStartingWith } = useFormFieldContext()
 	const [count, setCount] = useState(initialCount)
 
@@ -55,7 +57,7 @@ export function DynamicFields({
 			{ label && (
 				<Flex>
 					<Box style={ { flex: 1 } }>{ label }</Box>
-					<Button onClick={ handleAdd } size="xs" mb="xs" mr="xs" aria-label="Add item">
+					<Button onClick={ handleAdd } size="xs" mb="xs" mr="xs" aria-label={ t("common.dynamic_fields.add_item") }>
 						<PlusIcon />
 					</Button>
 				</Flex>
@@ -67,14 +69,14 @@ export function DynamicFields({
 					</Paper>
 					<Button
 						onClick={ () => handleRemove(index) }
-						aria-label={ `Remove item ${index + 1}` }
+						aria-label={ t("common.dynamic_fields.remove_item", { index: index + 1 }) }
 					>
 						<MinusCircleIcon />
 					</Button>
 				</Box>
 			)) }
 			{ !label && (
-				<Button onClick={ handleAdd } aria-label="Add item">
+				<Button onClick={ handleAdd } aria-label={ t("common.dynamic_fields.add_item") }>
 					<PlusIcon />
 				</Button>
 			) }

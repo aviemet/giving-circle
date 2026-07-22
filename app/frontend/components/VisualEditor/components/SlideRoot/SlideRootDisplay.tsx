@@ -5,12 +5,14 @@ import { Box } from "@/components"
 
 import { type SlideRootProps } from "./slideRootProps"
 import { buildBackgroundImageStyle } from "../../fields/backgroundImage"
+import { buildFlexStyle } from "../../fields/flex"
 import * as classes from "../../Puck.css"
 
 export function SlideRootDisplay({
 	children,
 	backgroundColor,
 	backgroundImage,
+	flex,
 }: DefaultRootRenderProps<SlideRootProps>) {
 	return (
 		<Box
@@ -18,6 +20,7 @@ export function SlideRootDisplay({
 			style={ {
 				"--puck-slide-root-bg": backgroundColor,
 				...buildBackgroundImageStyle(backgroundImage),
+				...buildFlexStyle({ flex }),
 			} }
 		>
 			{ children }

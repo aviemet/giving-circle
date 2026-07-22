@@ -3,6 +3,7 @@ import { ModalsProvider } from "@mantine/modals"
 import { Notifications } from "@mantine/notifications"
 import { ContextMenuProvider } from "mantine-contextmenu"
 import React, { useEffect, useMemo } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Flash } from "@/components"
 import { toKebabCase } from "@/lib"
@@ -25,6 +26,7 @@ export function UiFrameworkProvider({ children }: { children: React.ReactNode })
 	/**
    * Primary color customization
    */
+	const { t } = useTranslation()
 	const { active_circle } = usePageProps()
 	const primaryColor = useLayoutStore((state) => state.primaryColor)
 	const setPrimaryColor = useLayoutStore((state) => state.setPrimaryColor)
@@ -105,7 +107,7 @@ export function UiFrameworkProvider({ children }: { children: React.ReactNode })
 			cssVariablesResolver={ cssVariablesResolver }
 		>
 			<ContextMenuProvider>
-				<ModalsProvider labels={ { confirm: "Submit", cancel: "Cancel" } }>
+				<ModalsProvider labels={ { confirm: t("common.actions.submit"), cancel: t("common.actions.cancel") } }>
 					<Notifications />
 					<Flash />
 					{ children }

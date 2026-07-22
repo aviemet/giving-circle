@@ -1,8 +1,146 @@
 {
   "et": {
+    "date": {
+      "abbr_day_names": [
+        "P",
+        "E",
+        "T",
+        "K",
+        "N",
+        "R",
+        "L"
+      ],
+      "abbr_month_names": [
+        null,
+        "jaan.",
+        "veebr.",
+        "märts",
+        "apr.",
+        "mai",
+        "juuni",
+        "juuli",
+        "aug.",
+        "sept.",
+        "okt.",
+        "nov.",
+        "dets."
+      ],
+      "day_names": [
+        "pühapäev",
+        "esmaspäev",
+        "teisipäev",
+        "kolmapäev",
+        "neljapäev",
+        "reede",
+        "laupäev"
+      ],
+      "formats": {
+        "default": "%d.%m.%Y",
+        "long": "%d. %B %Y",
+        "short": "%d.%m.%y"
+      },
+      "month_names": [
+        null,
+        "jaanuar",
+        "veebruar",
+        "märts",
+        "aprill",
+        "mai",
+        "juuni",
+        "juuli",
+        "august",
+        "september",
+        "oktoober",
+        "november",
+        "detsember"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "umbes %{count} tund",
+          "other": "umbes %{count} tundi"
+        },
+        "about_x_months": {
+          "one": "umbes %{count} kuu",
+          "other": "umbes %{count} kuud"
+        },
+        "about_x_years": {
+          "one": "umbes %{count} aasta",
+          "other": "umbes %{count} aastat"
+        },
+        "almost_x_years": {
+          "one": "peaaegu üks aasta",
+          "other": "peaaegu %{count} aastat"
+        },
+        "half_a_minute": "pool minutit",
+        "less_than_x_minutes": {
+          "one": "vähem kui %{count} minut",
+          "other": "vähem kui %{count} minutit"
+        },
+        "less_than_x_seconds": {
+          "one": "vähem kui %{count} sekund",
+          "other": "vähem kui %{count} sekundit"
+        },
+        "over_x_years": {
+          "one": "üle %{count} aasta",
+          "other": "üle %{count} aasta"
+        },
+        "x_days": {
+          "one": "%{count} päev",
+          "other": "%{count} päeva"
+        },
+        "x_minutes": {
+          "one": "%{count} minut",
+          "other": "%{count} minutit"
+        },
+        "x_months": {
+          "one": "%{count} kuu",
+          "other": "%{count} kuud"
+        },
+        "x_seconds": {
+          "one": "%{count} sekund",
+          "other": "%{count} sekundit"
+        },
+        "x_years": {
+          "one": "%{count} aasta",
+          "other": "%{count} aastat"
+        }
+      },
+      "prompts": {
+        "day": "Päev",
+        "hour": "Tunde",
+        "minute": "Minutit",
+        "month": "Kuu",
+        "second": "Sekundit",
+        "year": "Aasta"
+      }
+    },
     "devise": {
+      "confirmations": {
+        "confirmed": "Sinu konto on edukalt kinnitatud.",
+        "new": {
+          "resend_confirmation_instructions": "Saada kinnitusjuhend uuesti"
+        },
+        "send_instructions": "Mõne minuti jooksul saad sa e-kirja juhistega oma konto kinnitamiseks.",
+        "send_paranoid_instructions": "Kui sinu e-post on meie andmebaasis, saad varsti e-kirja juhistega, kuidas oma konto kinnitada."
+      },
       "failure": {
-        "invited": "Sul on kutse ootel - aktsepteeri, et konto loomine lõpule viia."
+        "already_authenticated": "Oled juba sisse loginud.",
+        "inactive": "Sinu konto polnud veel aktiveeritud.",
+        "invalid": "Vale %{authentication_keys} või salasõna",
+        "invited": "Sul on kutse ootel - aktsepteeri, et konto loomine lõpule viia.",
+        "last_attempt": "Sinul on jäänud veel üks katse enne kui su konto lukustatakse.",
+        "locked": "Sinu konto lukustati.",
+        "not_found_in_database": "Vale %{authentication_keys} või salasõna",
+        "timeout": "Sinu sessioon on aegunud, jätkamiseks logi palun sisse.",
+        "unauthenticated": "Sa pead sisse logima või registreeruma enne jätkamist.",
+        "unconfirmed": "Sa pead oma konto kinnitama, enne jätkamist."
       },
       "invitations": {
         "edit": {
@@ -20,14 +158,218 @@
         "updated": "Sinu salasõna on edukalt sätitud. Oled nüüd sisse logitud."
       },
       "mailer": {
+        "confirmation_instructions": {
+          "action": "Kinnita konto",
+          "greeting": "Teretulemast %{recipient}!",
+          "instruction": "Oma konto saad kinnitada alloleva lingi kaudu:",
+          "subject": "Kinnitamise juhised"
+        },
+        "email_changed": {
+          "greeting": "Tere %{recipient}!",
+          "message": "Sinu e-posti aadress on muudetud järgmiseks: %{email}.",
+          "message_unconfirmed": "Sinu e-posti aadressi muudetakse järgmiseks: %{email}.",
+          "subject": "E-posti on muudetud"
+        },
         "invitation_instructions": {
           "accept": "Võta kutse vastu",
           "hello": "Tere, %{email}",
           "ignore": "Kui Sa ei soovi kutset vastu võtta, siis lihtsalt ignoreeri seda emaili.<br />Sinu kontot ei looda enne, kui oled ülalolevat linki külastanud ja oma salasõna määranud.",
           "someone_invited_you": "Keegi kutsus Sind aadressile %{url}. Kutse saad vastu võtta allolevalt lingilt.",
           "subject": "Kutse juhised"
+        },
+        "password_change": {
+          "greeting": "Tere %{recipient}!",
+          "message": "Anname teada, et sinu parool on ära muudetud.",
+          "subject": "Parool muudetud"
+        },
+        "reset_password_instructions": {
+          "action": "Muuda parooli",
+          "greeting": "Tere %{recipient}!",
+          "instruction": "Keegi on soovinud muuta sinu parooli, saad seda teha alloleva lingi kaudu.",
+          "instruction_2": "Kui sa ei ole seda soovinud, palun ignoreeri seda kirja.",
+          "instruction_3": "Sinu parool ei muutu enne kui sa oled külastanud eelolevat linki ja uue parooli sisestanud.",
+          "subject": "Salasõna taastamise juhised"
+        },
+        "unlock_instructions": {
+          "action": "Ava konto",
+          "greeting": "Tere %{recipient}!",
+          "instruction": "Vajuta allolevale lingile, et oma konto avada",
+          "message": "Sinu konto on lukustatud liigsete ebaõnnestunud sisselogimiskatsete tõttu",
+          "subject": "Lukust vabastamise juhised"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Ei õnnestunud autoriseerida %{kind}-kontot, põhjus \"%{reason}\".",
+        "success": "Edukalt autoriseeritud %{kind}-konto."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Muuda parooli",
+          "change_your_password": "Muuda oma parool",
+          "confirm_new_password": "Kinnita uus parool",
+          "new_password": "Uus parool"
+        },
+        "new": {
+          "forgot_your_password": "Unustasid oma parooli?",
+          "send_me_reset_password_instructions": "Saada parooli ennistamise juhend"
+        },
+        "no_token": "Sa ei saa seda lehte külastada mujalt kui salasõna taastamise e-kirjast. Kui sa tuled salasõna taastamise e-kirjast, palun kontrolli, et sa kasutasid täielikku URLi.",
+        "send_instructions": "Mõne minuti jooksul saad sa kirja juhistega, kuidas oma salasõna taastada.",
+        "send_paranoid_instructions": "Kui su e-post on meie andmebaasis, saad varsti e-kirja salasõna taastamise lingiga.",
+        "updated": "Sinu salasõna vahetati edukalt. Oled nüüd sisse logitud.",
+        "updated_not_active": "Sinu salasõna vahetati edukalt."
+      },
+      "registrations": {
+        "destroyed": "Nägemist! Sinu konto on edukalt tühistatud. Loodame sind peagi uuesti näha.",
+        "edit": {
+          "are_you_sure": "Oled sa kindel?",
+          "cancel_my_account": "Kustuta konto",
+          "currently_waiting_confirmation_for_email": "Kinnituse ootel: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "jäta tühjaks, kui sa ei soovi seda muuta",
+          "title": "Muuda %{resource}",
+          "unhappy": "Õnnetu",
+          "update": "Uuenda",
+          "we_need_your_current_password_to_confirm_your_changes": "meil on vaja sinu praegust parooli, et muutused kinnitada"
+        },
+        "new": {
+          "sign_up": "Loo konto"
+        },
+        "signed_up": "Tere tulemast! Sa registreerusid edukalt.",
+        "signed_up_but_inactive": "Sa registreerusid edukalt. Siiski ei saa me sind sisse logida, sest su konto pole veel aktiveeritud.",
+        "signed_up_but_locked": "Sa registreerusid edukalt. Siiski ei saa me sind sisse logida, sest su konto on lukus.",
+        "signed_up_but_unconfirmed": "Kiri kinnituslingiga on saadetud sinu e-posti aadressile. Palun ava see link oma konto kinnitamiseks.",
+        "update_needs_confirmation": "Sa uuendasid edukalt oma kontot, kuid me peame kontrollima sinu e-posti aadressi. Palun kontrolli oma e-posti ja ava kinnitamise link, et viia lõpule aadressi kinnitamine.",
+        "updated": "Sa uuendasid edukalt oma kontot.",
+        "updated_but_not_signed_in": "Sinu konto on edukalt uuendatud, kuid kuna parool on muudetud, pead uuesti sisse logima."
+      },
+      "sessions": {
+        "already_signed_out": "Edukalt välja logitud.",
+        "new": {
+          "sign_in": "Logi sisse"
+        },
+        "signed_in": "Edukalt sisse logitud.",
+        "signed_out": "Edukalt välja logitud."
+      },
+      "shared": {
+        "links": {
+          "back": "Tagasi",
+          "didn_t_receive_confirmation_instructions": "Ei saanud kinnitusjuhiseid?",
+          "didn_t_receive_unlock_instructions": "Ei saanud konto avamise juhiseid?",
+          "forgot_your_password": "Unustasid oma parooli?",
+          "sign_in": "Logi sisse",
+          "sign_in_with_provider": "Logi sisse %{provider}-ga",
+          "sign_up": "Loo konto"
+        },
+        "minimum_password_length": {
+          "one": "(vähemalt %{count} tähemärk)",
+          "other": "(vähemalt %{count} tähemärki)"
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Saada konto avamise juhised uuesti"
+        },
+        "send_instructions": "Sa saad mõne minuti jooksul e-kirja juhistega, kuidas oma konto lukust vabastada.",
+        "send_paranoid_instructions": "Kui su konto eksisteerib, saad sa mõne minuti jooksul e-kirja juhistega, kuidas oma konto lukust vabastada.",
+        "unlocked": "Sinu konto on edukalt lukust vabastatud. Jätkamiseks palun logi sisse."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Palun vali"
+      },
+      "submit": {
+        "create": "Loo uus %{model}",
+        "submit": "Salvesta %{model}",
+        "update": "Uuenda objekti %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": " ",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "€"
+        }
+      },
+      "format": {
+        "delimiter": " ",
+        "precision": 2,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "miljard",
+            "million": "miljon",
+            "quadrillion": "kvadriljon",
+            "thousand": "tuhat",
+            "trillion": "triljon",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "bait",
+              "other": "baiti"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
         }
       }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " ja ",
+        "two_words_connector": " ja ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "enne lõunat",
+      "formats": {
+        "default": "%d. %B %Y, %H:%M",
+        "long": "%a, %d. %b %Y, %H:%M:%S %z",
+        "short": "%d.%m.%y, %H:%M"
+      },
+      "pm": "pärast lõunat"
     }
   }
 }

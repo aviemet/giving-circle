@@ -1,7 +1,7 @@
 import { css } from "@linaria/core"
 
 
-import { theme } from "@/lib"
+import { theme } from "@/lib/theme"
 
 export { puckFields } from "./fields/puckFieldStyles.css"
 
@@ -24,7 +24,33 @@ export const puckSlideRoot = css`
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
+	box-sizing: border-box;
 	background-color: var(--puck-slide-root-bg, #000000);
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+
+	& > * {
+		flex: 1 1 auto;
+		min-height: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: inherit;
+		align-items: stretch;
+	}
+`
+
+export const presentationContainer = css`
+	flex: 1 1 auto;
+	min-height: 0;
+	width: 100%;
+	align-self: stretch;
+`
+
+export const presentationHeading = css`
+	flex: 0 0 auto;
+	align-self: stretch;
 `
 
 const PUCK_SPACE_PX = "2px"
@@ -45,7 +71,7 @@ export const puckRoot = css`
 		}
 
 		.${ puckDrawer } [class*="ComponentList-title"] {
-			background-color: var(--puck-color-grey-02);
+			background-color: var(--puck-color-grey-03);
 			border-radius: 4px;
 			margin-bottom: 4px;
 			padding: 6px 8px 0 8px;
@@ -145,5 +171,18 @@ export const puckRoot = css`
 	& .${ puckSlideRoot } [class*="DropZone--isRootZone"] {
 		height: 100%;
 		min-height: 100%;
+		display: flex;
+		flex-direction: inherit;
+		align-items: stretch;
+	}
+
+	& .${ presentationContainer }[class*="DropZone"],
+	& .${ presentationContainer } [class*="DropZone"] {
+		flex: 1 1 auto;
+		min-height: 0;
+		height: 100%;
+		display: flex;
+		flex-direction: inherit;
+		align-items: stretch;
 	}
 `

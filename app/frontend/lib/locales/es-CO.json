@@ -1,0 +1,362 @@
+{
+  "es-CO": {
+    "date": {
+      "abbr_day_names": [
+        "dom",
+        "lun",
+        "mar",
+        "mié",
+        "jue",
+        "vie",
+        "sáb"
+      ],
+      "abbr_month_names": [
+        null,
+        "ene",
+        "feb",
+        "mar",
+        "abr",
+        "may",
+        "jun",
+        "jul",
+        "ago",
+        "sep",
+        "oct",
+        "nov",
+        "dic"
+      ],
+      "day_names": [
+        "domingo",
+        "lunes",
+        "martes",
+        "miércoles",
+        "jueves",
+        "viernes",
+        "sábado"
+      ],
+      "formats": {
+        "default": "%d/%m/%Y",
+        "long": "%A, %d de %B de %Y",
+        "short": "%d de %b"
+      },
+      "month_names": [
+        null,
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "cerca de %{count} hora",
+          "other": "cerca de %{count} horas"
+        },
+        "about_x_months": {
+          "one": "cerca de %{count} mes",
+          "other": "cerca de %{count} meses"
+        },
+        "about_x_years": {
+          "one": "cerca de %{count} año",
+          "other": "cerca de %{count} años"
+        },
+        "almost_x_years": {
+          "one": "casi %{count} año",
+          "other": "casi %{count} años"
+        },
+        "half_a_minute": "medio minuto",
+        "less_than_x_minutes": {
+          "one": "menos de %{count} minuto",
+          "other": "menos de %{count} minutos"
+        },
+        "less_than_x_seconds": {
+          "one": "menos de %{count} segundo",
+          "other": "menos de %{count} segundos"
+        },
+        "over_x_years": {
+          "one": "más de %{count} año",
+          "other": "más de %{count} años"
+        },
+        "x_days": {
+          "one": "%{count} día",
+          "other": "%{count} días"
+        },
+        "x_minutes": {
+          "one": "%{count} minuto",
+          "other": "%{count} minutos"
+        },
+        "x_months": {
+          "one": "%{count} mes",
+          "other": "%{count} meses"
+        },
+        "x_seconds": {
+          "one": "%{count} segundo",
+          "other": "%{count} segundos"
+        },
+        "x_years": {
+          "one": "%{count} año",
+          "other": "%{count} años"
+        }
+      },
+      "prompts": {
+        "day": "Día",
+        "hour": "Hora",
+        "minute": "Minuto",
+        "month": "Mes",
+        "second": "Segundo",
+        "year": "Año"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Tu dirección de correo electrónico se ha confirmado correctamente.",
+        "new": {
+          "resend_confirmation_instructions": "Reenviar instrucciones de confirmación"
+        },
+        "send_instructions": "En unos minutos recibirás un correo electrónico con instrucciones sobre cómo confirmar tu correo electrónico.",
+        "send_paranoid_instructions": "Si tu correo electrónico ya existe en nuestra base de datos, en unos minutos recibirás un correo electrónico con instrucciones de como confirmar tu correo electrónico."
+      },
+      "failure": {
+        "already_authenticated": "Ya has iniciado sesión.",
+        "inactive": "Tu cuenta aún no está activa.",
+        "invalid": "%{authentication_keys} o contraseña inválida.",
+        "last_attempt": "Tienes un intento más antes de que tu cuenta sea bloqueada.",
+        "locked": "Tu cuenta está bloqueada.",
+        "not_found_in_database": "%{authentication_keys} o contraseña inválida.",
+        "timeout": "Tu sesión ha expirado. Por favor, inicia sesión nuevamente para continuar.",
+        "unauthenticated": "Tienes que iniciar sesión o registrarte para poder continuar.",
+        "unconfirmed": "Tienes que confirmar tu correo electrónico para poder continuar."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Confirmar mi cuenta",
+          "greeting": "¡Bienvenido %{recipient}!",
+          "instruction": "Puedes confirmar tu correo electrónico a través del siguiente enlace:",
+          "subject": "Instrucciones de confirmación"
+        },
+        "email_changed": {
+          "greeting": "Hola %{recipient}!",
+          "message": "Te estamos contactando para notificarte que tu correo electrónico a cambiado a %{email}.",
+          "message_unconfirmed": "Te estamos contactando para notificarte que tu correo electrónico fue cambiado a %{email}.",
+          "subject": "El correo electrónico cambió"
+        },
+        "password_change": {
+          "greeting": "¡Hola %{recipient}!",
+          "message": "Te estamos contactando para notificarte que tu contraseña ha sido cambiada.",
+          "subject": "Contraseña cambiada"
+        },
+        "reset_password_instructions": {
+          "action": "Cambiar mi contraseña",
+          "greeting": "¡Hola %{recipient}!",
+          "instruction": "Alguien ha solicitado un enlace para cambiar tu contraseña. Puedes hacerlo a través del siguiente enlace.",
+          "instruction_2": "Si no solicitaste esto, por favor ignora este correo electrónico.",
+          "instruction_3": "Tu contraseña no será cambiada hasta que usted acceda al enlace y cree una nueva contraseña.",
+          "subject": "Instrucciones de recuperación de contraseña"
+        },
+        "unlock_instructions": {
+          "action": "Desbloquear mi cuenta",
+          "greeting": "¡Hola %{recipient}!",
+          "instruction": "Haz click en el siguiente enlace para desbloquear tu cuenta:",
+          "message": "Su cuenta ha sido bloqueada debido a una cantidad excesiva de intentos fallidos para iniciar sesión.",
+          "subject": "Instrucciones para desbloquear tu cuenta"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "No has sido autorizado en la cuenta %{kind} porque \"%{reason}\".",
+        "success": "Has sido autenticado exitosamente desde la cuenta de %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Cambiar mi contraseña",
+          "change_your_password": "Cambie su contraseña",
+          "confirm_new_password": "Confirme la nueva contraseña",
+          "new_password": "Contraseña nueva"
+        },
+        "new": {
+          "forgot_your_password": "¿Ha olvidado su contraseña?",
+          "send_me_reset_password_instructions": "Enviarme instrucciones para restablecer la contraseña"
+        },
+        "no_token": "No puedes acceder a esta página si no es a través de un enlace para restablecer tu contraseña. Si has llegado hasta aquí desde el correo para restablecer tu contraseña, por favor asegúrese de que la URL introducida está completa.",
+        "send_instructions": "En unos minutos recibirás un correo con instrucciones sobre cómo restablecer tu contraseña.",
+        "send_paranoid_instructions": "Si tu correo existe en nuestra base de datos, recibirás un correo electrónico con instrucciones sobre cómo restablecer tu contraseña.",
+        "updated": "Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión.",
+        "updated_not_active": "Tu contraseña ha sido cambiada."
+      },
+      "registrations": {
+        "destroyed": "¡Adiós! Tu cuenta ha sido cancelada exitosamente. Esperamos verte pronto.",
+        "edit": {
+          "are_you_sure": "¿Está usted seguro?",
+          "cancel_my_account": "Eliminar mi cuenta",
+          "currently_waiting_confirmation_for_email": "Actualmente esperando la confirmación de: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "dejar en blanco si no desea cambiarlo",
+          "title": "Editar %{resource}",
+          "unhappy": "No se encuentra feliz",
+          "update": "Actualizar",
+          "we_need_your_current_password_to_confirm_your_changes": "necesitamos su contraseña actual para confirmar los cambios"
+        },
+        "new": {
+          "sign_up": "Registrarse"
+        },
+        "signed_up": "Bienvenido. Tu cuenta ha sido creada.",
+        "signed_up_but_inactive": "Tu cuenta ha sido creada exitosamente. Sin embargo, no puedes iniciar sesión ya que tu cuenta aún no está activada.",
+        "signed_up_but_locked": "Tu cuenta ha sido creada correctamente. Sin embargo, no es posible iniciar la sesión porque que tu cuenta se encuentra bloqueada.",
+        "signed_up_but_unconfirmed": "Se ha enviado un mensaje con un enlace de confirmación a tu correo electrónico. Ingresa al enlace para activar tu cuenta.",
+        "update_needs_confirmation": "Has actualizado tu cuenta exitosamente; pero es necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo electrónico e ingresa al enlace de confirmación para finalizar la comprobación del nuevo correo electrónico.",
+        "updated": "Tu cuenta ha sido actualizada exitosamente.",
+        "updated_but_not_signed_in": "Tu cuenta ha sido actualizada exitosamente; pero, como tu contraseña cambió, necesitas iniciar sesión nuevamente."
+      },
+      "sessions": {
+        "already_signed_out": "Se ha cerrado la sesión con éxito.",
+        "new": {
+          "sign_in": "Iniciar sesión"
+        },
+        "signed_in": "Sesión iniciada.",
+        "signed_out": "Sesión finalizada."
+      },
+      "shared": {
+        "links": {
+          "back": "Regresar",
+          "didn_t_receive_confirmation_instructions": "¿No ha recibido las instrucciones de confirmación?",
+          "didn_t_receive_unlock_instructions": "¿No ha recibido instrucciones para desbloquear su cuenta?",
+          "forgot_your_password": "¿Ha olvidado su contraseña?",
+          "sign_in": "Iniciar sesión",
+          "sign_in_with_provider": "Iniciar sesión con %{provider}",
+          "sign_up": "Registrarse"
+        },
+        "minimum_password_length": {
+          "many": null,
+          "one": null,
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Reenviar instrucciones para desbloquear la cuenta"
+        },
+        "send_instructions": "En unos minutos recibirás instrucciones para desbloquear tu cuenta.",
+        "send_paranoid_instructions": "Si tu cuenta existe, en unos minutos recibirás instrucciones para desbloquear tu cuenta.",
+        "unlocked": "Tu cuenta ha sido desbloqueada. Ya puedes iniciar sesión."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Por favor selecciona"
+      },
+      "submit": {
+        "create": "Crear %{model}",
+        "submit": "Guardar %{model}",
+        "update": "Actualizar %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ".",
+          "format": "%u%n",
+          "precision": 0,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "$"
+        }
+      },
+      "format": {
+        "delimiter": ".",
+        "precision": 2,
+        "round_mode": "default",
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "mil millones",
+            "million": {
+              "one": "millón",
+              "other": "millones"
+            },
+            "quadrillion": "mil billones",
+            "thousand": "mil",
+            "trillion": {
+              "one": "billón",
+              "other": "billones"
+            },
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Bytes"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " y ",
+        "two_words_connector": " y ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "am",
+      "formats": {
+        "default": "%a, %d de %b de %Y a las %H:%M:%S %Z",
+        "long": "%A, %d de %B de %Y a las %I:%M %p",
+        "short": "%d de %b a las %H:%M hrs"
+      },
+      "pm": "pm"
+    }
+  }
+}

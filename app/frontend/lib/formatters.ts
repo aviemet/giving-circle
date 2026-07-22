@@ -1,18 +1,56 @@
-import dayjs from "dayjs"
+import { type Money } from "@/types"
 
 import { ensureDate } from "./dates"
+import { dayjs } from "./dayjs"
+import { intlLocale } from "./locale"
+import { isMoney } from "./money"
 
-export const currency = (amount: number, currency = "USD") => {
-	const formatter = new Intl.NumberFormat("en-US", {
+const DEFAULT_CURRENCY = "USD"
+
+type CurrencyFormatOptions = Omit<Intl.NumberFormatOptions, "style" | "currency">
+type CurrencyInput = number | Money
+
+function resolveCurrencyInput(value: CurrencyInput, currencyIso?: string): [number, string] {
+	if(isMoney(value)) {
+		return [value.amount, currencyIso ?? value.currency_iso]
+	}
+
+	return [value, currencyIso ?? DEFAULT_CURRENCY]
+}
+
+const formatCurrency = (
+	value: CurrencyInput,
+	currencyIso: string | undefined,
+	options: CurrencyFormatOptions = {},
+	locale = intlLocale(),
+) => {
+	const [amount, resolvedCurrency] = resolveCurrencyInput(value, currencyIso)
+
+	return new Intl.NumberFormat(locale, {
 		style: "currency",
-		currency,
-	})
-	return formatter.format(amount)
+		currency: resolvedCurrency,
+		...options,
+	}).format(amount)
+}
+
+export const currency = {
+	format: (value: CurrencyInput, currencyIso?: string, locale = intlLocale()) =>
+		formatCurrency(value, currencyIso, {}, locale),
+	whole: (value: CurrencyInput, currencyIso?: string, locale = intlLocale()) =>
+		formatCurrency(value, currencyIso, { maximumFractionDigits: 0 }, locale),
+	compact: (value: CurrencyInput, currencyIso?: string, locale = intlLocale()) =>
+		formatCurrency(value, currencyIso, {
+			notation: "compact",
+			maximumFractionDigits: 0,
+		}, locale),
 }
 
 export const number = {
-	decimal: (value: number, fractionDigits = 1) =>
-		new Intl.NumberFormat("en-US", { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits }).format(value),
+	decimal: (value: number, fractionDigits = 1, locale = intlLocale()) =>
+		new Intl.NumberFormat(locale, {
+			minimumFractionDigits: fractionDigits,
+			maximumFractionDigits: fractionDigits,
+		}).format(value),
 }
 
 export const datetime = {

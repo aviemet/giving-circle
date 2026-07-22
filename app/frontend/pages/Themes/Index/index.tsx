@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page } from "@/components"
 import { ThemesTable } from "@/domains/themes/Table"
 import { IndexTableTemplate } from "@/features"
@@ -11,10 +13,11 @@ interface ThemeIndexProps {
 // @path: /:circle_slug/themes
 // @route: circleThemes
 const ThemesIndex = ({ themes, pagination, circle }: ThemeIndexProps) => {
+	const { t } = useTranslation()
 
 	return (
 		<Page
-			title="Themes"
+			title={ t("themes.index.title") }
 		>
 			<IndexTableTemplate
 				model="themes"

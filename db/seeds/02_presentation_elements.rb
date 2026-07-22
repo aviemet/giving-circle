@@ -1,16 +1,17 @@
 if Presentation::Element.none?
   Presentation::Element.create!({
-    name: "Orgs Display",
-    data: {},
-  })
-
-  Presentation::Element.create!({
     name: "Orgs Bar Graph",
-    data: {},
+    slug: "orgs-bar-graph",
+    data: {
+      type: "bar_graph_allocated_totals",
+      title: "Allocated Totals",
+    },
+    template: true,
   })
 
   Presentation::Element.create!({
     name: "Timer",
-    data: {},
+    data: { type: "timer" },
+    template: true,
   })
 end

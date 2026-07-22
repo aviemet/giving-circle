@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def update
     authorize user
     if user.update(user_params)
-      redirect_to user, notice: "User was successfully updated."
+      redirect_to user, notice: t("users.notices.updated")
     else
       redirect_to edit_user_path(user), inertia: { errors: user.errors }
     end
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     authorize user
     user.destroy
     respond_to do
-      redirect_to users_url, notice: "User was successfully destroyed."
+      redirect_to users_url, notice: t("users.notices.destroyed")
     end
   end
 end

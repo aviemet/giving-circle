@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
@@ -14,6 +16,8 @@ export interface PresentationElementFormProps {
 }
 
 export const PresentationElementForm = ({ to, method = "post", presentation_element }: PresentationElementFormProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Form<PresentationElementFormData>
 			action={ to }
@@ -23,16 +27,29 @@ export const PresentationElementForm = ({ to, method = "post", presentation_elem
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="presentation_element.data" label="Data" />
+					<TextInput
+						name="presentation_element.data"
+						label={ t("presentations.elements.form.data") }
+					/>
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="presentation_element.name" label="Name" />
+					<TextInput
+						name="presentation_element.name"
+						label={ t("presentations.elements.form.name") }
+					/>
 				</Grid.Col>
 				<Grid.Col>
-					<TextInput name="presentation_element.template" label="Template" />
+					<TextInput
+						name="presentation_element.template"
+						label={ t("presentations.elements.form.template") }
+					/>
 				</Grid.Col>
 				<Grid.Col>
-					<Submit>{ presentation_element.id ? "Update" : "Create" } PresentationElement</Submit>
+					<Submit>
+						{ presentation_element.id
+							? t("presentations.elements.form.update")
+							: t("presentations.elements.form.create") }
+					</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

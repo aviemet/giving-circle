@@ -1,0 +1,253 @@
+{
+  "gd": {
+    "date": {
+      "abbr_day_names": [
+        "DiD",
+        "DiL",
+        "DiM",
+        "DiC",
+        "Dia",
+        "Dih",
+        "DiS"
+      ],
+      "abbr_month_names": [
+        null,
+        "Faoi",
+        "Gearr",
+        "Màrt",
+        "Gibl",
+        "Cèit",
+        "Ògmh",
+        "Iuch",
+        "Lùna",
+        "Sult",
+        "Dàmh",
+        "Samh",
+        "Dùbh"
+      ],
+      "day_names": [
+        "DiDòmhnaich",
+        "DiLuain",
+        "DiMàirt",
+        "DiCiadain",
+        "DiarDaoin",
+        "DihAoine",
+        "DiSathairne"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%d %B %Y",
+        "short": "%d %b"
+      },
+      "month_names": [
+        null,
+        "Am Faoilleach",
+        "An Gearran",
+        "Am Màrt",
+        "An Giblean",
+        "An Cèitean",
+        "An t-Ògmhios",
+        "An t-Iuchar",
+        "An Lùnastal",
+        "An t-Sultain",
+        "An Dàmhair",
+        "An t-Samhain",
+        "An Dùbhlachd"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "few": "mu %{count} uairean a thìde",
+          "one": "mu %{count} uair a thìde",
+          "other": "mu %{count} uair a thìde",
+          "two": "mu %{count} uair a thìde"
+        },
+        "about_x_months": {
+          "few": "mu %{count} mìosan",
+          "one": "mu %{count} mhìos",
+          "other": "mu %{count} mìos",
+          "two": "mu %{count} mhìos"
+        },
+        "about_x_years": {
+          "few": "mu %{count} bliadhnaichean",
+          "one": "mu %{count} bhliadhna",
+          "other": "mu %{count} bliadhna",
+          "two": "mu %{count} bhliadhna"
+        },
+        "almost_x_years": {
+          "few": "cha mhòr %{count} bliadhnaichean",
+          "one": "cha mhòr %{count} bhliadhna",
+          "other": "cha mhòr %{count} bliadhna",
+          "two": "cha mhòr %{count} bhliadhna"
+        },
+        "half_a_minute": "leth-mhionaid",
+        "less_than_x_minutes": {
+          "few": "nas lugha na %{count} mionaidean",
+          "one": "nas lugha na mionaid",
+          "other": "nas lugha na %{count} mionaid",
+          "two": "nas lugha na %{count} mhionaid"
+        },
+        "less_than_x_seconds": {
+          "few": "nas lugha na %{count} diogan",
+          "one": "nas lugha na %{count} diog",
+          "other": "nas lugha na %{count} diog",
+          "two": "nas lugha na %{count} dhiog"
+        },
+        "over_x_years": {
+          "few": "còrr is %{count} bliadhnaichean",
+          "one": "còrr is %{count} bhliadhna",
+          "other": "còrr is %{count} bliadhna",
+          "two": "còrr is %{count} bhliadhna"
+        },
+        "x_days": {
+          "few": "%{count} làithean",
+          "one": "%{count} latha",
+          "other": "%{count} latha",
+          "two": "%{count} latha"
+        },
+        "x_minutes": {
+          "few": "%{count} mionaidean",
+          "one": "%{count} mhionaid",
+          "other": "%{count} mionaid",
+          "two": "%{count} mhionaid"
+        },
+        "x_months": {
+          "few": "%{count} mìosan",
+          "one": "%{count} mhìos",
+          "other": "%{count} mìos",
+          "two": "%{count} mhìos"
+        },
+        "x_seconds": {
+          "few": "%{count} diogan",
+          "one": "%{count} diog",
+          "other": "%{count} diog",
+          "two": "%{count} dhiog"
+        },
+        "x_years": {
+          "few": "%{count} bliadhnaichean",
+          "one": "%{count} bhliadhna",
+          "other": "%{count} bliadhna",
+          "two": "%{count} bhliadhna"
+        }
+      },
+      "prompts": {
+        "day": "Latha",
+        "hour": "Uair a thìde",
+        "minute": "Mionaid",
+        "month": "Mìos",
+        "second": "Diog",
+        "year": "Bliadhna"
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Tagh"
+      },
+      "submit": {
+        "create": "Cruthaich %{model}",
+        "submit": "Sàbhail %{model}",
+        "update": "Ùraich %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "two",
+          "few",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u%n",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "£"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "round_mode": "default",
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "billean",
+            "million": "millean",
+            "quadrillion": "quadrillean",
+            "thousand": "mìle",
+            "trillion": "trillean",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "few": "baidhtean",
+              "one": "bhaidht",
+              "other": "baidht",
+              "two": "bhaidht"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " agus ",
+        "two_words_connector": " agus ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "m",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%d %b %Y, %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "f"
+    }
+  }
+}

@@ -55,7 +55,7 @@ class Presentations::ElementsController < ApplicationController
     authorize Presentation::Element.new, policy_class: Presentation::ElementPolicy
     if presentation_element.save
       redirect_to theme_presentation_element_path(presentation.circle, presentation.theme, presentation, presentation_element),
-        notice: "Element was successfully created."
+        notice: t("presentations.elements.notices.created")
     else
       redirect_to new_theme_presentation_element_path(presentation.circle, presentation.theme, presentation),
         inertia: { errors: presentation_element.errors }
@@ -68,7 +68,7 @@ class Presentations::ElementsController < ApplicationController
     authorize presentation_element, policy_class: Presentation::ElementPolicy
     if presentation_element.update(presentation_element_params)
       redirect_to theme_presentation_element_path(presentation.circle, presentation.theme, presentation, presentation_element),
-        notice: "Element was successfully updated."
+        notice: t("presentations.elements.notices.updated")
     else
       redirect_to edit_theme_presentation_element_path(presentation.circle, presentation.theme, presentation, presentation_element),
         inertia: { errors: presentation_element.errors }
@@ -80,7 +80,7 @@ class Presentations::ElementsController < ApplicationController
     authorize presentation_element, policy_class: Presentation::ElementPolicy
     presentation_element.destroy!
     redirect_to theme_presentation_elements_path(presentation.circle, presentation.theme, presentation),
-      notice: "Element was successfully destroyed."
+      notice: t("presentations.elements.notices.destroyed")
   end
 
 end

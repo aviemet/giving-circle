@@ -3,8 +3,8 @@ import { useState } from "react"
 
 import { SlidePresentation } from "@/components/SlidePresentation"
 import { withLayout } from "@/lib"
-import { useActivePresentationChannel } from "@/lib/hooks/useActivePresentationChannel"
 
+import { useActivePresentationChannel } from "../useActivePresentationChannel"
 
 interface PublicShowPresentationProps {
 	presentation: Schema.PresentationsPresentation

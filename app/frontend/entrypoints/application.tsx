@@ -1,10 +1,9 @@
 import { createInertiaApp, router } from "@inertiajs/react"
 import * as ActiveStorage from "@rails/activestorage"
-import dayjs from "dayjs"
-import duration from "dayjs/plugin/duration"
-import localizedFormat from "dayjs/plugin/localizedFormat"
-import relativeTime from "dayjs/plugin/relativeTime"
 import { createRoot } from "react-dom/client"
+
+import "@/lib/dayjs"
+import { bindLocaleStoreToI18n } from "@/store"
 
 import {
 	applyPropsMiddleware,
@@ -14,10 +13,7 @@ import {
 } from "./middleware"
 
 ActiveStorage.start()
-
-dayjs.extend(localizedFormat)
-dayjs.extend(duration)
-dayjs.extend(relativeTime)
+bindLocaleStoreToI18n()
 
 const SITE_TITLE = "Giving Circle"
 
@@ -34,7 +30,7 @@ setupInertiaListeners(router)
 
 createInertiaApp({
 	title: title => `${SITE_TITLE} - ${title}`,
-	resolve: async(name) => {
+	resolve: async (name) => {
 		const pageImporter = pages[`../pages/${name}/index.tsx`]
 
 		const module = await pageImporter()

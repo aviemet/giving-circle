@@ -1,6 +1,7 @@
 import { type Config } from "@measured/puck"
 
 import {
+	barGraphAllocatedTotalsConfig,
 	cardConfig,
 	containerConfig,
 	gridConfig,
@@ -15,6 +16,7 @@ import {
 	backgroundImageField,
 	colorField,
 	defaultBackgroundImageValue,
+	flexField,
 } from "./fields"
 
 type RootProps = SlideRootProps
@@ -23,7 +25,7 @@ type RootProps = SlideRootProps
 export const config: Config<{
 	components: PuckComponentProps
 	root: RootProps
-	categories: ["layout", "content", "data", "other"]
+	categories: ["layout", "content", "data", "elements", "other"]
 }> = {
 	root: {
 		inline: true,
@@ -35,11 +37,21 @@ export const config: Config<{
 			backgroundImage: backgroundImageField({
 				label: "Background Image",
 			}),
+			flex: flexField(),
 		},
 		defaultProps: {
 			title: "Slide",
 			backgroundColor: "#000000",
 			backgroundImage: defaultBackgroundImageValue(),
+			flex: {
+				display: "flex",
+				flexDirection: "column",
+				flexWrap: "nowrap",
+				alignItems: "stretch",
+				justifyContent: "flex-start",
+				overflow: "hidden",
+				gap: 0,
+			},
 		},
 		render: (props) => <SlideRoot { ...props } />,
 	},
@@ -51,6 +63,7 @@ export const config: Config<{
 		Card: cardConfig,
 		Image: imageConfig,
 		OrgsIterator: orgsIteratorConfig,
+		BarGraphAllocatedTotals: barGraphAllocatedTotalsConfig,
 	},
 
 	categories: {
@@ -65,6 +78,10 @@ export const config: Config<{
 		data: {
 			title: "Data",
 			components: ["OrgsIterator"],
+		},
+		elements: {
+			title: "Elements",
+			components: ["BarGraphAllocatedTotals"],
 		},
 		other: {
 			title: "All Other Components",

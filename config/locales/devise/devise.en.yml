@@ -48,6 +48,23 @@ en:
       already_signed_out: Signed out successfully.
       signed_in: Signed in successfully.
       signed_out: Signed out successfully.
+    ui:
+      app_name: Giving Circle
+      check_email: Please check your email
+      check_email_body: An email has been sent to the address provided. Please follow the link to confirm your account.
+      check_email_resend: If you don't receive an email, use the form below to resend it.
+      confirm_password: Confirm Password
+      email: Email
+      log_in: Log In
+      log_in_instead: Log In Instead
+      password: Password
+      passwords_must_match: Passwords must match
+      register: Register
+      remember_me: Remember Me
+      resend_confirmation: Resend confirmation instructions
+      reset_password: Reset Password
+      send_reset: Send Reset Instructions
+      sign_up: Sign Up
     unlocks:
       send_instructions: You will receive an email with instructions for how to unlock your account in a few minutes.
       send_paranoid_instructions: If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.

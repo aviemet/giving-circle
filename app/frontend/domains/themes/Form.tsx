@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
@@ -14,6 +16,8 @@ export interface ThemeFormProps {
 }
 
 export function ThemeForm({ to, method = "post", theme }: ThemeFormProps) {
+	const { t } = useTranslation()
+
 	return (
 		<Form<ThemeFormData>
 			action={ to }
@@ -22,11 +26,13 @@ export function ThemeForm({ to, method = "post", theme }: ThemeFormProps) {
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="theme.name" label="Name" />
+					<TextInput name="theme.name" label={ t("themes.form.name") } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ theme.id ? "Update" : "Create" } Theme</Submit>
+					<Submit>
+						{ theme.id ? t("themes.form.update") : t("themes.form.create") }
+					</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

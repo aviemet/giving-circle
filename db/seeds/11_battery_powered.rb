@@ -90,5 +90,23 @@ if Rails.env.development?
       presentation.orgs << theme.orgs
     end
 
+    if presentation.present?
+      InteractionConfigTemplateDefaults.seed_for_circle!(circle)
+      finalist_template = circle.interaction_config_templates.find_by!(slug: "finalist-vote")
+
+      presentation.interactions.find_or_create_by!(slug: "finalist-vote") do |interaction|
+        interaction.name = finalist_template.name
+        interaction.config = finalist_template.config.deep_dup
+        interaction.trigger_type = :manual
+        interaction.trigger_conditions = {}
+        interaction.results = {}
+      end
+
+      vote_budgets = [5, 10, 15, 20]
+      presentation.presentations_memberships.find_each.with_index do |presentations_membership, index|
+        presentations_membership.update!(funds_cents: vote_budgets[index % vote_budgets.length])
+      end
+    end
+
   end
 end
