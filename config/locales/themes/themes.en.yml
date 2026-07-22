@@ -5,6 +5,8 @@ en:
       title: Edit Theme
     form:
       create: Create Theme
+      description: Description
+      heading: Heading
       name: Name
       update: Update Theme
     index:

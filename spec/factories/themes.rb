@@ -3,6 +3,8 @@
 # Table name: themes
 #
 #  id           :uuid             not null, primary key
+#  description  :text
+#  heading      :string
 #  name         :string           not null
 #  published_at :datetime
 #  slug         :string
@@ -23,6 +25,8 @@
 FactoryBot.define do
   factory :theme do
     name { Faker::Book.title }
+    heading { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     status { "draft" }
 
     circle

@@ -25,12 +25,44 @@ en:
         grid:
           label: Grid
         heading:
+          alignment: Alignment
           default_title: Heading
+          fs: Font Style
+          fw: Font Weight
           label: Heading
           level: Heading Level
+          line_clamp: Line Clamp
           padding: Padding
+          size: Size
+          td: Text Decoration
           text_color: Text Color
+          text_wrap: Text Wrap
           title: Title
+          tt: Text Transform
+        text:
+          alignment: Alignment
+          boolean:
+            "no": "No"
+            "yes": "Yes"
+          color: Color
+          content: Content
+          default_content: Text
+          fs: Font Style
+          fw: Font Weight
+          inherit: Inherit
+          inline: Inline
+          label: Text
+          line_clamp: Line Clamp
+          size: Size
+          span: Span
+          td: Text Decoration
+          text_wrap: Text Wrap
+          truncate: Truncate
+          truncate_options:
+            end: End
+            none: None
+            start: Start
+          tt: Text Transform
         image:
           border_color: Border Color
           default_title: Image
@@ -108,7 +140,7 @@ en:
             end: End
             start: Start
             stretch: Stretch
-          custom_placeholder: 'flex: 1 1 280px; max-width: 50%'
+          custom_placeholder: "flex: 1 1 280px; max-width: 50%"
           fine_tune:
             align_self: Align Self
             flex_grow: Flex Grow
@@ -132,6 +164,26 @@ en:
             unit: Unit
           margin: Margin
           padding: Padding
+        typography:
+          decoration:
+            line_through: Line Through
+            none: None
+            overline: Overline
+            underline: Underline
+          fs: Font Style
+          fw: Font Weight
+          size: Size
+          size_auto: Auto (from level)
+          style:
+            italic: Italic
+            normal: Normal
+          td: Text Decoration
+          transform:
+            capitalize: Capitalize
+            lowercase: Lowercase
+            none: None
+            uppercase: Uppercase
+          tt: Text Transform
       header:
         close: Close
         close_without_saving: Close without saving

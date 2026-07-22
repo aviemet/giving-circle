@@ -5,12 +5,21 @@ import {
 	createStarterSlideData,
 	slotDropZoneProps,
 	withStarterSlideContent,
+	DRAG_HITBOX_HEIGHT_PX,
+	DRAG_SLOT_GAP_PX,
+	DRAG_SLOT_GUTTER_PX,
 	SLOT_MIN_EMPTY_HEIGHT,
 } from "@/components/VisualEditor/slotEditor"
 
 describe("components/VisualEditor/slotEditor", () => {
 	test("slotDropZoneProps sets minEmptyHeight for Puck slots", () => {
 		expect(slotDropZoneProps()).toEqual({ minEmptyHeight: SLOT_MIN_EMPTY_HEIGHT })
+	})
+
+	test("drag drop gutters are large enough for nested container targeting", () => {
+		expect(DRAG_SLOT_GUTTER_PX).toBeGreaterThanOrEqual(32)
+		expect(DRAG_SLOT_GAP_PX).toBeGreaterThanOrEqual(24)
+		expect(DRAG_HITBOX_HEIGHT_PX).toBeGreaterThanOrEqual(32)
 	})
 
 	test("createStarterSlideData includes a container with a heading", () => {

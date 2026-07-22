@@ -5,11 +5,13 @@ import { type GridProps } from "./Grid/gridConfig"
 import { type HeadingProps } from "./Heading/headingConfig"
 import { type ImageProps } from "./Image/imageConfig"
 import { type OrgsIteratorProps } from "./OrgsIterator/orgsIteratorConfig"
+import { type TextComponentProps } from "./Text/textConfig"
 
 export type PuckComponentProps = {
 	Grid: GridProps
 	Container: ContainerProps
 	Heading: HeadingProps
+	Text: TextComponentProps
 	Card: CardProps
 	Image: ImageProps
 	OrgsIterator: OrgsIteratorProps
@@ -24,3 +26,4 @@ export * from "./Image"
 export * from "./OrgsIterator"
 export * from "./BarGraphAllocatedTotals"
 export * from "./SlideRoot"
+export * from "./Text"

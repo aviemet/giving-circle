@@ -9,7 +9,7 @@ class ThemesController < ApplicationController
     scope: -> { Circle.find_by(slug: params[:circle_slug]).themes.includes_associated },
     find_by: :slug
 
-  strong_params :theme, permit: [:name, :status, :slug]
+  strong_params :theme, permit: [:name, :heading, :description, :status, :slug]
 
   sortable_fields %w(title status slug)
 

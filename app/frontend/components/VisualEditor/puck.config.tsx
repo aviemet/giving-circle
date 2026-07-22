@@ -9,6 +9,7 @@ import {
 	imageConfig,
 	orgsIteratorConfig,
 	SlideRoot,
+	textConfig,
 	type PuckComponentProps,
 	type SlideRootProps,
 } from "./components"
@@ -58,6 +59,7 @@ export const config: Config<{
 
 	components: {
 		Heading: headingConfig,
+		Text: textConfig,
 		Container: containerConfig,
 		Grid: gridConfig,
 		Card: cardConfig,
@@ -73,7 +75,7 @@ export const config: Config<{
 		},
 		content: {
 			title: "Content",
-			components: ["Heading", "Card", "Image"],
+			components: ["Heading", "Text", "Card", "Image"],
 		},
 		data: {
 			title: "Data",

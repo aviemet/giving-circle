@@ -1031,12 +1031,20 @@
             "label": "Grid"
           },
           "heading": {
+            "alignment": "Alignment",
             "default_title": "Heading",
+            "fs": "Font Style",
+            "fw": "Font Weight",
             "label": "Heading",
             "level": "Heading Level",
+            "line_clamp": "Line Clamp",
             "padding": "Padding",
+            "size": "Size",
+            "td": "Text Decoration",
             "text_color": "Text Color",
-            "title": "Title"
+            "text_wrap": "Text Wrap",
+            "title": "Title",
+            "tt": "Text Transform"
           },
           "image": {
             "border_color": "Border Color",
@@ -1045,6 +1053,33 @@
           },
           "orgs_iterator": {
             "label": "Orgs Iterator"
+          },
+          "text": {
+            "alignment": "Alignment",
+            "boolean": {
+              "no": "No",
+              "yes": "Yes"
+            },
+            "color": "Color",
+            "content": "Content",
+            "default_content": "Text",
+            "fs": "Font Style",
+            "fw": "Font Weight",
+            "inherit": "Inherit",
+            "inline": "Inline",
+            "label": "Text",
+            "line_clamp": "Line Clamp",
+            "size": "Size",
+            "span": "Span",
+            "td": "Text Decoration",
+            "text_wrap": "Text Wrap",
+            "truncate": "Truncate",
+            "truncate_options": {
+              "end": "End",
+              "none": "None",
+              "start": "Start"
+            },
+            "tt": "Text Transform"
           }
         },
         "fields": {
@@ -1160,6 +1195,30 @@
             },
             "margin": "Margin",
             "padding": "Padding"
+          },
+          "typography": {
+            "decoration": {
+              "line_through": "Line Through",
+              "none": "None",
+              "overline": "Overline",
+              "underline": "Underline"
+            },
+            "fs": "Font Style",
+            "fw": "Font Weight",
+            "size": "Size",
+            "size_auto": "Auto (from level)",
+            "style": {
+              "italic": "Italic",
+              "normal": "Normal"
+            },
+            "td": "Text Decoration",
+            "transform": {
+              "capitalize": "Capitalize",
+              "lowercase": "Lowercase",
+              "none": "None",
+              "uppercase": "Uppercase"
+            },
+            "tt": "Text Transform"
           }
         },
         "header": {
@@ -1354,6 +1413,8 @@
       },
       "form": {
         "create": "Create Theme",
+        "description": "Description",
+        "heading": "Heading",
         "name": "Name",
         "update": "Update Theme"
       },

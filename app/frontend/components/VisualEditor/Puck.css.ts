@@ -3,54 +3,38 @@ import { css } from "@linaria/core"
 
 import { theme } from "@/lib/theme"
 
+import * as layoutChrome from "./layoutChrome.editor.css"
+import {
+	DRAG_HITBOX_HEIGHT_PX,
+	DRAG_SLOT_EDGE_PX,
+	DRAG_SLOT_GAP_PX,
+	DRAG_SLOT_GUTTER_PX,
+} from "./slotEditor"
+
 export { puckFields } from "./fields/puckFieldStyles.css"
 
 export const puckDrawer = css``
 export const puckDrawerItem = css``
 export const puckDrawerItemIcon = css``
 export const puckOutline = css``
-export const presentationSlot = css``
+
+export const presentationSlot = css`
+	&[class*="DropZone"],
+	& [class*="DropZone"] {
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	&[class*="DropZone--hasChildren"],
+	& [class*="DropZone--hasChildren"] {
+		min-height: 40px;
+	}
+`
 
 export const puckPreviewContainer = css`
 	width: 100%;
 	height: 100%;
 	min-height: 100%;
-`
-
-export const puckSlideRoot = css`
-	width: 100%;
-	min-height: 100%;
-	height: 100%;
-	overflow: hidden;
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	background-color: var(--puck-slide-root-bg, #000000);
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-
-	& > * {
-		flex: 1 1 auto;
-		min-height: 0;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: inherit;
-		align-items: stretch;
-	}
-`
-
-export const presentationContainer = css`
-	flex: 1 1 auto;
-	min-height: 0;
-	width: 100%;
-	align-self: stretch;
-`
-
-export const presentationHeading = css`
-	flex: 0 0 auto;
-	align-self: stretch;
 `
 
 const PUCK_SPACE_PX = "2px"
@@ -110,14 +94,14 @@ export const puckRoot = css`
 			color: var(--puck-color-black);
 		}
 
-		[class*="DropZone"]:empty {
-			border: 1px dashed var(--puck-color-azure-06);
+		[class*="DropZone--isRootZone"]:not([class*="DropZone--hasChildren"]) {
+			border: 1px solid var(--puck-color-grey-08);
 			border-radius: 6px;
-			background-color: color-mix(in oklch, var(--puck-color-azure-10) 55%, transparent);
+			background-color: color-mix(in oklch, var(--puck-color-grey-10) 40%, transparent);
 			box-sizing: border-box;
 		}
 
-		[class*="DropZone"]:empty::after {
+		[class*="DropZone--isRootZone"]:not([class*="DropZone--hasChildren"])::after {
 			content: "Drop blocks here";
 			position: absolute;
 			inset: 0;
@@ -129,31 +113,36 @@ export const puckRoot = css`
 			font-size: 0.8125rem;
 		}
 
-		.${ presentationSlot }[class*="DropZone"],
-		.${ presentationSlot } [class*="DropZone"] {
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		.${ presentationSlot }[class*="DropZone--hasChildren"],
-		.${ presentationSlot } [class*="DropZone--hasChildren"] {
-			min-height: 40px;
-		}
-
-		[data-puck-dragging] .${ presentationSlot }[class*="DropZone--hasChildren"],
-		[data-puck-dragging] .${ presentationSlot } [class*="DropZone--hasChildren"] {
-			padding-bottom: 24px;
-		}
-
-		[class*="DropZone--isRootZone"]:empty {
-			border-style: solid;
-			border-color: var(--puck-color-grey-08);
-			background-color: color-mix(in oklch, var(--puck-color-grey-10) 40%, transparent);
-		}
-
 		[data-puck-dragging] [class*="DropZone--isDestination"]:not([class*="DropZone--isRootZone"]) {
 			border-color: var(--puck-color-azure-04);
 			background-color: color-mix(in oklch, var(--puck-color-azure-09) 70%, transparent);
+		}
+
+		[data-puck-dragging] .${ layoutChrome.frame } {
+			box-sizing: border-box;
+			padding-block: ${ DRAG_SLOT_GUTTER_PX }px !important;
+			padding-inline: ${ DRAG_SLOT_EDGE_PX }px !important;
+			gap: ${ DRAG_SLOT_GAP_PX }px !important;
+			min-height: ${ DRAG_SLOT_GUTTER_PX * 2 + 48 }px;
+			background-color: color-mix(in oklch, #38bdf8 8%, transparent);
+		}
+
+		[data-puck-dragging] .${ layoutChrome.frame }[class*="DropZone--isEnabled"],
+		[data-puck-dragging] .${ layoutChrome.frame }[class*="DropZone--isDestination"] {
+			background-color: color-mix(in oklch, #38bdf8 18%, transparent);
+		}
+
+		[data-puck-dragging] [class*="DropZone--isRootZone"] {
+			box-sizing: border-box;
+			padding-block: ${ DRAG_SLOT_GUTTER_PX }px;
+			padding-inline: ${ DRAG_SLOT_EDGE_PX }px;
+			gap: ${ DRAG_SLOT_GAP_PX }px;
+		}
+
+		[data-puck-dragging] [class*="DropZone-hitbox"] {
+			bottom: -${ Math.round(DRAG_HITBOX_HEIGHT_PX / 2) }px;
+			height: ${ DRAG_HITBOX_HEIGHT_PX }px;
+			z-index: 4;
 		}
 	}
 
@@ -166,23 +155,5 @@ export const puckRoot = css`
 	& [class*="PuckPreview-frame"] {
 		height: 100%;
 		min-height: 100%;
-	}
-
-	& .${ puckSlideRoot } [class*="DropZone--isRootZone"] {
-		height: 100%;
-		min-height: 100%;
-		display: flex;
-		flex-direction: inherit;
-		align-items: stretch;
-	}
-
-	& .${ presentationContainer }[class*="DropZone"],
-	& .${ presentationContainer } [class*="DropZone"] {
-		flex: 1 1 auto;
-		min-height: 0;
-		height: 100%;
-		display: flex;
-		flex-direction: inherit;
-		align-items: stretch;
 	}
 `
