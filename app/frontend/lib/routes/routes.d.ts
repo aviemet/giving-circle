@@ -114,6 +114,18 @@ export const apiCircle: ((
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/fonts(.:format)
+ * @param {any} circleSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircleFonts: ((
+  circleSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/mock(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options

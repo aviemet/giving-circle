@@ -1158,6 +1158,20 @@
               "wrap": "Wrap"
             }
           },
+          "font": {
+            "dropzone": "Drag font file here or click to select",
+            "generics": {
+              "cursive": "Cursive",
+              "fantasy": "Fantasy",
+              "monospace": "Monospace",
+              "sans_serif": "Sans Serif",
+              "serif": "Serif"
+            },
+            "inherit": "Inherit",
+            "label": "Font",
+            "placeholder": "Select a font",
+            "system_default": "System default"
+          },
           "sizing": {
             "align_self": {
               "auto": "Auto",

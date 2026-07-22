@@ -8,6 +8,8 @@ namespace :api do
   resources :circles, param: :slug, only: [:create, :update] do
     get "mock" => "circles#mock"
 
+    resources :fonts, only: [:index, :create], controller: "circles/fonts"
+
     resources :spotlights, only: [:index]
 
     resources :templates, param: :slug, only: [:create, :update, :destroy] do

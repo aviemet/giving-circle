@@ -19,6 +19,7 @@ describe("components/VisualEditor/components/Heading", () => {
 			"td",
 			"tt",
 			"fs",
+			"font",
 			"alignment",
 			"lineClamp",
 			"textWrap",
@@ -29,6 +30,7 @@ describe("components/VisualEditor/components/Heading", () => {
 		expect(fields.td).toMatchObject({ type: "select", label: "Text Decoration" })
 		expect(fields.tt).toMatchObject({ type: "select", label: "Text Transform" })
 		expect(fields.fs).toMatchObject({ type: "select", label: "Font Style" })
+		expect(fields.font).toMatchObject({ type: "custom", label: "Font" })
 		expect(fields.alignment).toMatchObject({ type: "custom", label: "Alignment" })
 		expect(fields.lineClamp).toMatchObject({ type: "number", label: "Line Clamp" })
 		expect(fields.textWrap).toMatchObject({ type: "select", label: "Text Wrap" })
@@ -42,6 +44,7 @@ describe("components/VisualEditor/components/Heading", () => {
 			td: "none",
 			tt: "none",
 			fs: "normal",
+			font: { family: "", url: "" },
 			alignment: "left",
 			lineClamp: 0,
 			textWrap: "wrap",

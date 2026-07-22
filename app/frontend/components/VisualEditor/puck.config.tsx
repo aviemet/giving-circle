@@ -17,7 +17,9 @@ import {
 	backgroundImageField,
 	colorField,
 	defaultBackgroundImageValue,
+	defaultFontValue,
 	flexField,
+	fontField,
 } from "./fields"
 
 type RootProps = SlideRootProps
@@ -38,12 +40,16 @@ export const config: Config<{
 			backgroundImage: backgroundImageField({
 				label: "Background Image",
 			}),
+			font: fontField({
+				allowInherit: false,
+			}),
 			flex: flexField(),
 		},
 		defaultProps: {
 			title: "Slide",
 			backgroundColor: "#000000",
 			backgroundImage: defaultBackgroundImageValue(),
+			font: defaultFontValue(),
 			flex: {
 				display: "flex",
 				flexDirection: "column",

@@ -33,6 +33,8 @@ class Circle < ApplicationRecord
   has_many :presentations, through: :themes
   has_many :smtps, dependent: :destroy
 
+  has_many_attached :fonts
+
   scope :includes_associated, -> { includes([:presentations, :memberships, :orgs, :themes]) }
 
   def settings

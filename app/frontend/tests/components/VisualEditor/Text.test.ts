@@ -17,6 +17,7 @@ describe("components/VisualEditor/components/Text", () => {
 			"td",
 			"tt",
 			"fs",
+			"font",
 			"alignment",
 			"lineClamp",
 			"truncate",
@@ -32,6 +33,7 @@ describe("components/VisualEditor/components/Text", () => {
 		expect(fields.td).toMatchObject({ type: "select", label: "Text Decoration" })
 		expect(fields.tt).toMatchObject({ type: "select", label: "Text Transform" })
 		expect(fields.fs).toMatchObject({ type: "select", label: "Font Style" })
+		expect(fields.font).toMatchObject({ type: "custom", label: "Font" })
 		expect(fields.alignment).toMatchObject({ type: "custom", label: "Alignment" })
 		expect(fields.lineClamp).toMatchObject({ type: "number", label: "Line Clamp" })
 		expect(fields.truncate).toMatchObject({ type: "select", label: "Truncate" })
@@ -48,6 +50,7 @@ describe("components/VisualEditor/components/Text", () => {
 			td: "none",
 			tt: "none",
 			fs: "normal",
+			font: { family: "", url: "" },
 			alignment: "left",
 			lineClamp: 0,
 			truncate: "none",

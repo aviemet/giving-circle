@@ -6,6 +6,8 @@ import { TextDisplay } from "./Text"
 import {
 	alignmentField,
 	colorField,
+	defaultFontValue,
+	fontField,
 	fontSizeField,
 	fontStyleField,
 	fontWeightField,
@@ -15,6 +17,7 @@ import {
 	type AlignmentValue,
 	type FontSizeValue,
 	type FontStyleValue,
+	type FontValue,
 	type FontWeightValue,
 	type TextDecorationValue,
 	type TextTransformValue,
@@ -28,6 +31,7 @@ export type TextComponentProps = {
 	td: TextDecorationValue
 	tt: TextTransformValue
 	fs: FontStyleValue
+	font: FontValue
 	alignment: AlignmentValue
 	lineClamp: number
 	truncate: "none" | "end" | "start"
@@ -67,6 +71,9 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 		}),
 		fs: fontStyleField({
 			label: t("slides.editor.components.text.fs"),
+		}),
+		font: fontField({
+			allowInherit: true,
 		}),
 		alignment: alignmentField({
 			label: t("slides.editor.components.text.alignment"),
@@ -120,6 +127,7 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 		td: "none",
 		tt: "none",
 		fs: "normal",
+		font: defaultFontValue(),
 		alignment: "left",
 		lineClamp: 0,
 		truncate: "none",

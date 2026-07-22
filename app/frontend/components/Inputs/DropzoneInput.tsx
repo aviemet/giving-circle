@@ -12,6 +12,7 @@ interface DropzoneInputProps extends Omit<MantineDropzoneProps, "onDrop" | "mult
 	multiple?: boolean
 	onUploadComplete?: (signedIds: string[]) => void
 	onDrop?: (files: FileWithPath[]) => void
+	prompt?: string
 }
 
 export type DropzoneInputHandle = {
@@ -22,6 +23,8 @@ type DropzoneInputPropsWithRef = DropzoneInputProps & {
 	ref?: Ref<DropzoneInputHandle>
 }
 
+const DEFAULT_IMAGE_PROMPT = "Drag image here or click to select files"
+
 export function DropzoneInput({
 	id,
 	name,
@@ -30,10 +33,12 @@ export function DropzoneInput({
 	multiple = false,
 	onUploadComplete,
 	onDrop,
+	prompt = DEFAULT_IMAGE_PROMPT,
 	...props
 }: DropzoneInputPropsWithRef) {
 	const inputId = id || name
 	const [files, setFiles] = useState<FileWithPath[]>([])
+	const IdleIcon = prompt === DEFAULT_IMAGE_PROMPT ? PhotoIcon : UploadIcon
 
 	const handleDrop = (acceptedFiles: FileWithPath[]) => {
 		onDrop?.(acceptedFiles)
@@ -94,12 +99,12 @@ export function DropzoneInput({
 					<CancelIcon size={ 52 } color="var(--mantine-color-red-6)" />
 				</Dropzone.Reject>
 				<Dropzone.Idle>
-					<PhotoIcon size={ 52 } color="var(--mantine-color-dimmed)" />
+					<IdleIcon size={ 52 } color="var(--mantine-color-dimmed)" />
 				</Dropzone.Idle>
 
 				<div>
 					<Text size="xl" inline>
-						Drag image here or click to select files
+						{ prompt }
 					</Text>
 				</div>
 			</Group>

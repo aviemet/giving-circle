@@ -5,6 +5,8 @@ import { DangerousHtml, Text } from "@/components"
 import * as classes from "./Text.css"
 import { type TextComponentProps } from "./textConfig"
 import { usePresentationData } from "../../dynamicData/MockData"
+import { componentFontFamilyCss } from "../../fields/font"
+import { SlideFontFace } from "../../SlideFontFace"
 
 export function TextDisplay({
 	content,
@@ -14,6 +16,7 @@ export function TextDisplay({
 	td,
 	tt,
 	fs,
+	font,
 	alignment,
 	lineClamp,
 	truncate,
@@ -27,23 +30,27 @@ export function TextDisplay({
 	const truncateValue = truncate === "none" ? undefined : truncate
 
 	return (
-		<Text
-			className={ clsx(classes.text) }
-			size={ size }
-			c={ color }
-			fw={ fw }
-			td={ td }
-			tt={ tt }
-			fs={ fs }
-			ta={ alignment }
-			lineClamp={ hasLineClamp ? lineClamp : undefined }
-			truncate={ truncateValue }
-			inline={ inline }
-			inherit={ inherit }
-			span={ span }
-			textWrap={ textWrap }
-		>
-			<DangerousHtml component="span">{ evaluatedContent }</DangerousHtml>
-		</Text>
+		<>
+			<SlideFontFace font={ font } />
+			<Text
+				className={ clsx(classes.text) }
+				size={ size }
+				c={ color }
+				fw={ fw }
+				td={ td }
+				tt={ tt }
+				fs={ fs }
+				ff={ componentFontFamilyCss(font) }
+				ta={ alignment }
+				lineClamp={ hasLineClamp ? lineClamp : undefined }
+				truncate={ truncateValue }
+				inline={ inline }
+				inherit={ inherit }
+				span={ span }
+				textWrap={ textWrap }
+			>
+				<DangerousHtml component="span">{ evaluatedContent }</DangerousHtml>
+			</Text>
+		</>
 	)
 }

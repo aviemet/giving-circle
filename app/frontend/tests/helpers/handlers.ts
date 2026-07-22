@@ -38,4 +38,7 @@ export const handlers = [
 	http.get(Routes.apiCircleMock("mock-circle"), () => {
 		return HttpResponse.json(mockCircleResponse("mock-circle"))
 	}),
+	http.get(/\/api\/circles\/[^/]+\/fonts$/, () => {
+		return HttpResponse.json([])
+	}),
 ]

@@ -6,6 +6,8 @@ import { HeadingDisplay } from "./Heading"
 import {
 	alignmentField,
 	colorField,
+	defaultFontValue,
+	fontField,
 	fontStyleField,
 	fontWeightField,
 	tagsField,
@@ -14,6 +16,7 @@ import {
 	titleSizeField,
 	type AlignmentValue,
 	type FontStyleValue,
+	type FontValue,
 	type FontWeightValue,
 	type TextDecorationValue,
 	type TextTransformValue,
@@ -30,6 +33,7 @@ export type HeadingProps = {
 	td: TextDecorationValue
 	tt: TextTransformValue
 	fs: FontStyleValue
+	font: FontValue
 	alignment: AlignmentValue
 	lineClamp: number
 	textWrap: "wrap" | "nowrap" | "balance" | "pretty" | "stable"
@@ -74,6 +78,9 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		fs: fontStyleField({
 			label: t("slides.editor.components.heading.fs"),
 		}),
+		font: fontField({
+			allowInherit: true,
+		}),
 		alignment: alignmentField({
 			label: t("slides.editor.components.heading.alignment"),
 		}),
@@ -104,6 +111,7 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		td: "none",
 		tt: "none",
 		fs: "normal",
+		font: defaultFontValue(),
 		alignment: "left",
 		lineClamp: 0,
 		textWrap: "wrap",
