@@ -22,7 +22,8 @@
 #
 FactoryBot.define do
   factory :slide_parent do
-    slide { nil }
-    parentable { nil }
+    slide
+    parentable { association(:template) }
+    order { 1 }
   end
 end

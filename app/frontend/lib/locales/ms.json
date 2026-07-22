@@ -1,0 +1,345 @@
+{
+  "ms": {
+    "date": {
+      "abbr_day_names": [
+        "Ahd",
+        "Isn",
+        "Sel",
+        "Rab",
+        "Kha",
+        "Jum",
+        "Sab"
+      ],
+      "abbr_month_names": [
+        null,
+        "Jan",
+        "Feb",
+        "Mac",
+        "Apr",
+        "Mei",
+        "Jun",
+        "Jul",
+        "Ogo",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Dis"
+      ],
+      "day_names": [
+        "Ahad",
+        "Isnin",
+        "Selasa",
+        "Rabu",
+        "Khamis",
+        "Jumaat",
+        "Sabtu"
+      ],
+      "formats": {
+        "default": "%d-%m-%Y",
+        "long": "%d %B, %Y",
+        "short": "%d %b"
+      },
+      "month_names": [
+        null,
+        "Januari",
+        "Febuari",
+        "Mac",
+        "April",
+        "Mei",
+        "Jun",
+        "Julai",
+        "Ogos",
+        "September",
+        "Oktober",
+        "November",
+        "Disember"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "lebih kurang %{count} jam",
+          "other": "lebih kurang %{count} jam"
+        },
+        "about_x_months": {
+          "one": "lebih kurang %{count} bulan",
+          "other": "lebih kurang %{count} bulan"
+        },
+        "about_x_years": {
+          "one": "lebih kurang %{count} tahun",
+          "other": "lebih kurang %{count} tahun"
+        },
+        "almost_x_years": {
+          "one": "hampir %{count} tahun",
+          "other": "hampir %{count} tahun"
+        },
+        "half_a_minute": "setengah minit",
+        "less_than_x_minutes": {
+          "one": "kurang dari satu minit",
+          "other": "kurang dari %{count} minit"
+        },
+        "less_than_x_seconds": {
+          "one": "kurang dari satu saat",
+          "other": "kurang dari %{count} saat"
+        },
+        "over_x_years": {
+          "one": "lebih %{count} tahun",
+          "other": "lebih %{count} tahun"
+        },
+        "x_days": {
+          "one": "%{count} hari",
+          "other": "%{count} hari"
+        },
+        "x_minutes": {
+          "one": "%{count} minit",
+          "other": "%{count} minit"
+        },
+        "x_months": {
+          "one": "%{count} bulan",
+          "other": "%{count} bulan"
+        },
+        "x_seconds": {
+          "one": "%{count} saat",
+          "other": "%{count} saat"
+        }
+      },
+      "prompts": {
+        "day": "Hari",
+        "hour": "Jam",
+        "minute": "Minit",
+        "month": "Bulan",
+        "second": "Saat",
+        "year": "Tahun"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Alamat e-mel anda telah berjaya disahkan.",
+        "new": {
+          "resend_confirmation_instructions": "Hantar semula pengesahan arahan"
+        },
+        "send_instructions": "Anda akan menerima e-mel dengan arahan untuk bagaimana untuk mengesahkan alamat e-mel anda dalam beberapa minit.",
+        "send_paranoid_instructions": "Jika emel anda wujud di dalam pangkalan data kami, anda akan menerima e-mel dengan arahan untuk bagaimana mengesahkan alamat e-mel anda dalam beberapa minit."
+      },
+      "failure": {
+        "already_authenticated": "Anda telah log masuk.",
+        "inactive": "Akaun anda belum diaktifkan lagi.",
+        "invalid": null,
+        "last_attempt": "Anda ada satu lagi percubaan sebelum akaun anda dikunci.",
+        "locked": "Akaun anda telah dikunci.",
+        "not_found_in_database": null,
+        "timeout": "Sesi anda telah tamat. Sila log masuk lagi untuk meneruskan.",
+        "unauthenticated": "Anda perlu log masuk atau daftar sebelum meneruskan.",
+        "unconfirmed": "Anda perlu mengesahkan alamat e-mel anda sebelum meneruskan."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Sahkan akaun saya",
+          "greeting": "Selamat datang %{recipient}!",
+          "instruction": "Anda boleh mengesahkan akaun e-mel anda melalui pautan di bawah:",
+          "subject": "Arahan pengesahan"
+        },
+        "email_changed": {
+          "greeting": null,
+          "message": null,
+          "message_unconfirmed": null,
+          "subject": null
+        },
+        "password_change": {
+          "greeting": "Helo %{recipient}!",
+          "message": "Kami sedang menghubungi anda untuk memberitahu anda bahawa kata laluan anda telah ditukar.",
+          "subject": "Kata Laluan Ditukar"
+        },
+        "reset_password_instructions": {
+          "action": "Tukar kata laluan saya",
+          "greeting": "Helo %{recipient}!",
+          "instruction": "Seseorang telah meminta sebuah pautan untuk menukar kata laluan anda dan anda boleh melakukannya melalui pautan di bawah.",
+          "instruction_2": "Jika anda tidak meminta ini, sila abaikan e-mel ini.",
+          "instruction_3": "Kata laluan anda tidak akan ditukar sehingga anda mengakses pautan di atas dan membuat yang baru.",
+          "subject": "Arahan kata laluan set semula"
+        },
+        "unlock_instructions": {
+          "action": "Buka akaun saya",
+          "greeting": "Helo %{recipient}!",
+          "instruction": "Klik pautan di bawah untuk membuka akaun anda:",
+          "message": "Akaun anda telah dikunci disebabkan terlalu banyak kegagalan percubaan log masuk.",
+          "subject": "Arahan membuka"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Tidak dapat mengesahkan anda daripada %{kind} kerana \"%{reason}\".",
+        "success": "Berjaya mengesahkan daripada akaun %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Tukar kata laluan saya",
+          "change_your_password": "Tukar kata laluan anda",
+          "confirm_new_password": "Sahkan kata laluan baru",
+          "new_password": "Kata laluan baru"
+        },
+        "new": {
+          "forgot_your_password": "Lupa kata laluan anda?",
+          "send_me_reset_password_instructions": "Hantar saya arahan kata laluan set semula"
+        },
+        "no_token": "Anda tidak boleh mengakses halaman ini tanpa didatangi daripada e-mel kata laluan set semula. Jika anda datang daripada e-mel kata laluan set semula, sila pastikan anda telah menggunakan URL penuh yang diberikan.",
+        "send_instructions": "Anda akan menerima sebuah e-mel dengan arahan mengenai bagaimana untuk menetapkan semula kata laluan anda dalam beberapa minit.",
+        "send_paranoid_instructions": "Jika alamat e-mel anda wujud di dalam pangkalan data kami, anda akan menerima sebuah pemulihan kata laluan di alamat e-mel anda dalam beberapa minit.",
+        "updated": "Kata laluan anda telah berjaya ditukar. Anda kini telah log masuk.",
+        "updated_not_active": "Kata laluan anda telah berjaya ditukar"
+      },
+      "registrations": {
+        "destroyed": "Selamat tinggal! Akaun anda telah berjaya dibatalkan. Kami berharap untuk berjumpa dengan anda lagi.",
+        "edit": {
+          "are_you_sure": "Adakah anda pasti?",
+          "cancel_my_account": "Batalkan akaun saya",
+          "currently_waiting_confirmation_for_email": "Kini menunggu pengesahan untuk: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "tinggalkan kosong jika anda tidak ingin untuk mengubahnya",
+          "title": "Edit %{resource}",
+          "unhappy": "Tidak Gembira?",
+          "update": "Kemas Kini",
+          "we_need_your_current_password_to_confirm_your_changes": "kami memerlukan kata laluan anda yang kini untuk mengesahkan perubahan anda"
+        },
+        "new": {
+          "sign_up": "Daftar"
+        },
+        "signed_up": "Selamat datang! Anda telah berjaya mendaftar.",
+        "signed_up_but_inactive": "Anda telah berjaya mendaftar. Namun, kami tidak dapat melog masuk anda kerana akaun anda belum diaktifkan.",
+        "signed_up_but_locked": "Anda telah berjaya mendaftar. Namun, kami tidak dapat melog masuk anda kerana akaun anda telah dikunci.",
+        "signed_up_but_unconfirmed": "Sebuah mesej dengan pautan pengesahan telah dihantar ke alamat e-mel anda. Sila ikuti pautan tersebut untuk mengaktifkan akaun anda.",
+        "update_needs_confirmation": "Anda telah mengemas kini akaun anda dengan berjaya, tetapi kami perlu mengesahkan alamat e-mel anda yang baharu. Sila periksa e-mel anda dan ikuti pautan pengesahan untuk mengesahkan alamat e-mel anda yang baharu.",
+        "updated": "Akaun anda telah berjaya dikemaskinikan.",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": "Berjaya dilog keluar.",
+        "new": {
+          "sign_in": "Log masuk"
+        },
+        "signed_in": "Berjaya dilog masuk.",
+        "signed_out": "Berjaya dilog keluar."
+      },
+      "shared": {
+        "links": {
+          "back": "Kembali",
+          "didn_t_receive_confirmation_instructions": "Tidak mendapat arahan pengesahan?",
+          "didn_t_receive_unlock_instructions": "Tidak mendapat arahan membuka akaun?",
+          "forgot_your_password": "Lupa kata laluan anda?",
+          "sign_in": "Log masuk",
+          "sign_in_with_provider": "Log masuk dengan %{provider}",
+          "sign_up": "Daftar"
+        },
+        "minimum_password_length": {
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Hantar semula arahan buka akaun"
+        },
+        "send_instructions": "Anda akan menerima sebuah e-mel dengan arahan untuk bagaimana untuk membuka akaun anda dalam beberapa minit.",
+        "send_paranoid_instructions": "Jika akaun anda wujud, anda akan menerima sebuah e-mel dengan arahan untuk bagaimana untuk membukanya dalam beberapa minit.",
+        "unlocked": "Akaun anda telah berjaya dibuka. Sila log masuk untuk meneruskan."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Sila pilih"
+      },
+      "submit": {
+        "create": "Cipta %{model}",
+        "submit": "Simpan %{model}",
+        "update": "Kemaskini %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u%n",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "RM"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "Ribu Juta",
+            "million": "Juta",
+            "quadrillion": "Juta-juta",
+            "thousand": "Ribu",
+            "trillion": "Trilion",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Bait",
+              "other": "Bait"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": ""
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", dan ",
+        "two_words_connector": " dan ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "am",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%d %B, %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "pm"
+    }
+  }
+}

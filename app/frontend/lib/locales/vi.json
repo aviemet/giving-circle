@@ -1,8 +1,109 @@
 {
   "vi": {
+    "date": {
+      "abbr_day_names": [
+        "CN",
+        "Thứ 2",
+        "Thứ 3",
+        "Thứ 4",
+        "Thứ 5",
+        "Thứ 6",
+        "Thứ 7"
+      ],
+      "abbr_month_names": [
+        null,
+        "Thg 1",
+        "Thg 2",
+        "Thg 3",
+        "Thg 4",
+        "Thg 5",
+        "Thg 6",
+        "Thg 7",
+        "Thg 8",
+        "Thg 9",
+        "Thg 10",
+        "Thg 11",
+        "Thg 12"
+      ],
+      "day_names": [
+        "Chủ nhật",
+        "Thứ hai",
+        "Thứ ba",
+        "Thứ tư",
+        "Thứ năm",
+        "Thứ sáu",
+        "Thứ bảy"
+      ],
+      "formats": {
+        "default": "%d-%m-%Y",
+        "long": "%d %B, %Y",
+        "short": "%d %b"
+      },
+      "month_names": [
+        null,
+        "Tháng một",
+        "Tháng hai",
+        "Tháng ba",
+        "Tháng tư",
+        "Tháng năm",
+        "Tháng sáu",
+        "Tháng bảy",
+        "Tháng tám",
+        "Tháng chín",
+        "Tháng mười",
+        "Tháng mười một",
+        "Tháng mười hai"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": "khoảng %{count} giờ",
+        "about_x_months": "khoảng %{count} tháng",
+        "about_x_years": "khoảng %{count} năm",
+        "almost_x_years": "gần %{count} năm",
+        "half_a_minute": "30 giây",
+        "less_than_x_minutes": "chưa tới %{count} phút",
+        "less_than_x_seconds": "chưa tới %{count} giây",
+        "over_x_years": "hơn %{count} năm",
+        "x_days": "%{count} ngày",
+        "x_minutes": "%{count} phút",
+        "x_months": "%{count} tháng",
+        "x_seconds": "%{count} giây"
+      },
+      "prompts": {
+        "day": "Ngày",
+        "hour": "Giờ",
+        "minute": "Phút",
+        "month": "Tháng",
+        "second": "Giây",
+        "year": "Năm"
+      }
+    },
     "devise": {
+      "confirmations": {
+        "confirmed": "Xác nhận tài khoản thành công! Bạn hiện đang đăng nhập.",
+        "new": {
+          "resend_confirmation_instructions": "Gửi lại hướng dẫn xác nhận tài khoản"
+        },
+        "send_instructions": "Bạn sẽ nhận được email hướng dẫn xác nhận tài khoản trong vài phút nữa.",
+        "send_paranoid_instructions": "Nếu email của bạn có trong hệ thống, bạn sẽ nhận được email hướng dẫn xác nhận tài khoản trong một vài phút nữa."
+      },
       "failure": {
-        "invited": "Bạn có một lời mời đang ở trạng thái chờ, hãy xác nhận nó để tạo tài khoản của bạn."
+        "already_authenticated": "Bạn đã đăng nhập.",
+        "inactive": "Tài khoản của bạn chưa được kích hoạt.",
+        "invalid": "Tài khoản hay mật khẩu %{authentication_keys} không hợp lệ",
+        "invited": "Bạn có một lời mời đang ở trạng thái chờ, hãy xác nhận nó để tạo tài khoản của bạn.",
+        "last_attempt": "Bạn còn một lần thử đăng nhập nữa trước khi tài khoản của bạn bị khóa.",
+        "locked": "Tài khoản của bạn đã bị khóa.",
+        "not_found_in_database": "Tài khoản hay mật khẩu %{authentication_keys} không hợp lệ",
+        "timeout": "Phiên làm việc của bạn đã kết thúc, bạn cần đăng nhập lại để tiếp tục.",
+        "unauthenticated": "Bạn cần phải đăng nhập hoặc đăng ký trước khi tiếp tục.",
+        "unconfirmed": "Bạn cần phải xác nhận tài khoản trước khi tiếp tục."
       },
       "invitations": {
         "edit": {
@@ -22,14 +123,354 @@
         "updated_not_active": "Mật khẩu của bạn đã được thiết lập thành công."
       },
       "mailer": {
+        "confirmation_instructions": {
+          "action": "Xác nhận tài khoản",
+          "greeting": "Chào mừng %{recipient}!",
+          "instruction": "Bạn có thể xác nhận tài khoản email bằng liên kết dưới đây:",
+          "subject": "Hướng dẫn xác nhận tài khoản"
+        },
+        "email_changed": {
+          "greeting": "Xin chào %{recipient}!",
+          "message": "Chúng tôi liên hệ với bạn để thông báo cho bạn biết rằng email của bạn đang được thay đổi thành %{email}.",
+          "message_unconfirmed": "Chúng tôi đang liên hệ với bạn để thông báo rằng email của bạn đang được thay đổi thành %{email}.",
+          "subject": "Email đã được thay đổi."
+        },
         "invitation_instructions": {
           "accept": "Chấp nhận lời mời",
           "hello": "Xin chào %{email}",
           "ignore": "Nếu bạn không muốn chấp nhận lời mời, xin vui lòng bỏ qua email này.<br />Tài khoản của bạn sẽ không được khởi tạo cho đến khi bạn truy cập vào đường dẫn ở trên và đặt mật khẩu cho tài khoản của bạn.",
           "someone_invited_you": "Có một ai đó đã mời bạn ghé thăm %{url}, Bạn có thể chấp nhận lời mời này thông qua đường dẫn bên dưới.",
           "subject": "Hướng dẫn"
+        },
+        "password_change": {
+          "greeting": "Xin chào %{recipient}!",
+          "message": "Chúng tôi thông báo với bạn là mật khẩu của bạn đã được thay đổi. ",
+          "subject": "Mật khẩu đã được thay đổi. "
+        },
+        "reset_password_instructions": {
+          "action": "Thay đổi mật khẩu",
+          "greeting": "Xin chào %{recipient}!",
+          "instruction": "Có ai đó yêu cầu liên kết thay đổi mật khẩu, bạn có thể thay đổi mật khẩu bằng liên kết dưới đây.",
+          "instruction_2": "Nếu bạn không yêu cầu, vui lòng bỏ qua email này.",
+          "instruction_3": "Mật khẩu của bạn sẽ không thay đổi cho đến khi bạn ấn vào liên kết trên và tạo mật khẩu mới.",
+          "subject": "Hướng dẫn thiết lập lại mật khẩu"
+        },
+        "unlock_instructions": {
+          "action": "Mở khoá tài khoản",
+          "greeting": "Xin chào %{recipient}!",
+          "instruction": "Hãy nhấn vào liên kết dưới đây để mở khoá tài khoản:",
+          "message": "Tài khoản của bạn đã bị khoá do vượt quá giới hạn số lần đăng nhập không thành công.",
+          "subject": "Hướng dẫn mở khóa tài khoản"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Không thể đăng nhập qua tài khoản %{kind} vì \"%{reason}\".",
+        "success": "Đăng nhập thành công bằng tài khoản %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Thay đổi mật khẩu",
+          "change_your_password": "Thay đổi mật khẩu",
+          "confirm_new_password": "Xác nhận mật khẩu mới",
+          "new_password": "Mật khẩu mới"
+        },
+        "new": {
+          "forgot_your_password": "Quên mật khẩu?",
+          "send_me_reset_password_instructions": "Gửi cho tôi hướng dẫn cài đặt lại mật khẩu"
+        },
+        "no_token": "Bạn chỉ có thể truy cập trang này từ email đặt lại mật khẩu. Nếu bạn truy cập từ email đặt lại mật khẩu, xin chắc chắn rằng bạn dùng đường dẫn đầy đủ trong email.",
+        "send_instructions": "Bạn sẽ nhận được email hướng dẫn thiết lập lại mật khẩu trong vài phút nữa.",
+        "send_paranoid_instructions": "Nếu email của bạn có trong hệ thống, bạn sẽ nhận được đường dẫn khôi phục mật khẩu trong vài phút nữa qua email.",
+        "updated": "Đổi mật khẩu thành công! Bạn hiện đang đăng nhập.",
+        "updated_not_active": "Mật khẩu của bạn đã được thay đổi thành công."
+      },
+      "registrations": {
+        "destroyed": "Tạm biệt! Tài khoản của bạn đã được xóa. Chúng tôi hy vọng sẽ sớm gặp lại bạn.",
+        "edit": {
+          "are_you_sure": "Bạn có chắc?",
+          "cancel_my_account": "Xoá tài khoản",
+          "currently_waiting_confirmation_for_email": "Đang đợi xác nhận tài khoản email: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "để trống nếu bạn không muốn thay đổi mật khẩu",
+          "title": "Cập nhật %{resource}",
+          "unhappy": "Không hài lòng",
+          "update": "Cập nhật",
+          "we_need_your_current_password_to_confirm_your_changes": "we need your current password to confirm your changes"
+        },
+        "new": {
+          "sign_up": "Đăng ký"
+        },
+        "signed_up": "Xin chào! Bạn đã đăng ký thành công.",
+        "signed_up_but_inactive": "Bạn đã đăng ký thành công. Tuy nhiên, bạn cần phải kích hoạt tài khoản trước khi có thể đăng nhập được.",
+        "signed_up_but_locked": "Bạn đã đăng ký thành công. Tuy nhiên tài khoản của bạn đã bị khóa nên không thể đăng nhập được.",
+        "signed_up_but_unconfirmed": "Một email chứa đường dẫn xác nhận tài khoản đã được gửi cho bạn. Bạn vui lòng kiểm tra email.",
+        "update_needs_confirmation": "Tài khoản của bạn được cập nhật thành công, nhưng bạn cần xác nhận địa chỉ email mới. Vui lòng kiểm tra email và nhấn vào đường dẫn xác nhận tài khoản để hoàn tất việc thay đổi địa chỉ email.",
+        "updated": "Cập nhật tài khoản thành công.",
+        "updated_but_not_signed_in": "Tài khoản của bạn đã được cập nhật thành công, nhưng vì mật khẩu của bạn đã bị thay đổi, bạn cần đăng nhập lại."
+      },
+      "sessions": {
+        "already_signed_out": "Đăng xuất thành công.",
+        "new": {
+          "sign_in": "Đăng nhập"
+        },
+        "signed_in": "Đăng nhập thành công.",
+        "signed_out": "Đăng xuất thành công."
+      },
+      "shared": {
+        "links": {
+          "back": "Trở về",
+          "didn_t_receive_confirmation_instructions": "Không nhận được hướng dẫn xác nhận tài khoản?",
+          "didn_t_receive_unlock_instructions": "Không nhận được hướng dẫn mở khoá tài khoản?",
+          "forgot_your_password": "Quên mật khẩu?",
+          "sign_in": "Đăng nhập",
+          "sign_in_with_provider": "Đăng nhập với %{provider}",
+          "sign_up": "Đăng ký"
+        },
+        "minimum_password_length": {
+          "other": "(Tối thiểu %{count} ký tự)"
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Gửi lại hướng dẫn mở khoá tài khoản"
+        },
+        "send_instructions": "Bạn sẽ nhận được email hướng dẫn cách mở khóa tài khoản trong vài phút nữa.",
+        "send_paranoid_instructions": "Nếu tài khoản của bạn tồn tại, bạn sẽ nhận được email hướng dẫn cách mở khóa tài khoản trong vài phút nữa.",
+        "unlocked": "Tài khoản của bạn đã được mở khóa thành công. Vui lòng đăng nhập để tiếp tục."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Vui lòng chọn"
+      },
+      "submit": {
+        "create": "Tạo %{model}",
+        "submit": "Lưu %{model}",
+        "update": "Cập nhật %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "other"
+        ]
+      },
+      "transliterate": {
+        "rule": {
+          "À": "A",
+          "Á": "A",
+          "Â": "A",
+          "Ã": "A",
+          "È": "E",
+          "É": "E",
+          "Ê": "E",
+          "Ì": "I",
+          "Í": "I",
+          "Ò": "O",
+          "Ó": "O",
+          "Ô": "O",
+          "Õ": "O",
+          "Ù": "U",
+          "Ú": "U",
+          "Ý": "Y",
+          "à": "a",
+          "á": "a",
+          "â": "a",
+          "ã": "a",
+          "è": "e",
+          "é": "e",
+          "ê": "e",
+          "ì": "i",
+          "í": "i",
+          "ò": "o",
+          "ó": "o",
+          "ô": "o",
+          "õ": "o",
+          "ù": "u",
+          "ú": "u",
+          "ý": "y",
+          "Ă": "A",
+          "ă": "a",
+          "Đ": "D",
+          "đ": "d",
+          "Ĩ": "I",
+          "ĩ": "i",
+          "Ũ": "U",
+          "ũ": "u",
+          "Ơ": "O",
+          "ơ": "o",
+          "Ư": "U",
+          "ư": "u",
+          "Ạ": "A",
+          "ạ": "a",
+          "Ả": "A",
+          "ả": "a",
+          "Ấ": "A",
+          "ấ": "a",
+          "Ầ": "A",
+          "ầ": "a",
+          "Ẩ": "A",
+          "ẩ": "a",
+          "Ẫ": "A",
+          "ẫ": "a",
+          "Ậ": "A",
+          "ậ": "a",
+          "Ắ": "A",
+          "ắ": "a",
+          "Ằ": "A",
+          "ằ": "a",
+          "Ẳ": "A",
+          "ẳ": "a",
+          "Ẵ": "A",
+          "ẵ": "a",
+          "Ặ": "A",
+          "ặ": "a",
+          "Ẹ": "E",
+          "ẹ": "e",
+          "Ẻ": "E",
+          "ẻ": "e",
+          "Ẽ": "E",
+          "ẽ": "e",
+          "Ế": "E",
+          "ế": "e",
+          "Ề": "E",
+          "ề": "e",
+          "Ể": "E",
+          "ể": "e",
+          "Ễ": "E",
+          "ễ": "e",
+          "Ệ": "E",
+          "ệ": "e",
+          "Ỉ": "I",
+          "ỉ": "i",
+          "Ị": "I",
+          "ị": "i",
+          "Ọ": "O",
+          "ọ": "o",
+          "Ỏ": "O",
+          "ỏ": "o",
+          "Ố": "O",
+          "ố": "o",
+          "Ồ": "O",
+          "ồ": "o",
+          "Ổ": "O",
+          "ổ": "o",
+          "Ỗ": "O",
+          "ỗ": "o",
+          "Ộ": "O",
+          "ộ": "o",
+          "Ớ": "O",
+          "ớ": "o",
+          "Ờ": "O",
+          "ờ": "o",
+          "Ở": "O",
+          "ở": "o",
+          "Ỡ": "O",
+          "ỡ": "o",
+          "Ợ": "O",
+          "ợ": "o",
+          "Ụ": "U",
+          "ụ": "u",
+          "Ủ": "U",
+          "ủ": "u",
+          "Ứ": "U",
+          "ứ": "u",
+          "Ừ": "U",
+          "ừ": "u",
+          "Ử": "U",
+          "ử": "u",
+          "Ữ": "U",
+          "ữ": "u",
+          "Ự": "U",
+          "ự": "u",
+          "Ỳ": "Y",
+          "ỳ": "y",
+          "Ỵ": "Y",
+          "ỵ": "y",
+          "Ỷ": "Y",
+          "ỷ": "y",
+          "Ỹ": "Y",
+          "ỹ": "y"
         }
       }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ".",
+          "format": "%n %u",
+          "precision": 0,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "VNĐ"
+        }
+      },
+      "format": {
+        "delimiter": ".",
+        "precision": 3,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "Tỷ",
+            "million": "Triệu",
+            "quadrillion": "Triệu tỷ",
+            "thousand": "Nghìn",
+            "trillion": "Nghìn tỷ",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Byte"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", và ",
+        "two_words_connector": " và ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "sáng",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%d %B, %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "chiều"
     }
   }
 }

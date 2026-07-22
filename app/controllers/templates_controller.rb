@@ -75,7 +75,7 @@ class TemplatesController < ApplicationController
     template.circle = circle
 
     if template.save
-      redirect_to edit_circle_template_path(circle.slug, template.id), notice: "Template was successfully created."
+      redirect_to edit_circle_template_path(circle.slug, template.id), notice: t("templates.notices.created")
     else
       redirect_to new_circle_template_path(circle.slug, template.id), inertia: { errors: template.errors }
     end
@@ -87,7 +87,7 @@ class TemplatesController < ApplicationController
     authorize template
 
     if template.update(template_params)
-      redirect_to edit_circle_template_path(circle, template), notice: "Template was successfully updated."
+      redirect_to edit_circle_template_path(circle, template), notice: t("templates.notices.updated")
     else
       redirect_to edit_circle_template_path(circle, template), inertia: { errors: template.errors }
     end
@@ -98,7 +98,7 @@ class TemplatesController < ApplicationController
     authorize template
 
     template.destroy!
-    redirect_to circle_templates_path(circle), notice: "Template was successfully destroyed."
+    redirect_to circle_templates_path(circle), notice: t("templates.notices.destroyed")
   end
 
 end

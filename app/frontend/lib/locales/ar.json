@@ -1,8 +1,186 @@
 {
   "ar": {
+    "date": {
+      "abbr_day_names": [
+        "الأحد",
+        "الإثنين",
+        "الثّلاثاء",
+        "الأربعاء",
+        "الخميس",
+        "الجمعة",
+        "السّبت"
+      ],
+      "abbr_month_names": [
+        null,
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر"
+      ],
+      "day_names": [
+        "الأحد",
+        "الإثنين",
+        "الثّلاثاء",
+        "الأربعاء",
+        "الخميس",
+        "الجمعة",
+        "السّبت"
+      ],
+      "formats": {
+        "default": "%d-%m-%Y",
+        "long": "%e %B، %Y",
+        "short": "%e %b"
+      },
+      "month_names": [
+        null,
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "few": "حوالي %{count} ساعات",
+          "many": "حوالي %{count} ساعة",
+          "one": "حوالي ساعة واحدة",
+          "other": "حوالي %{count} ساعة",
+          "two": "حوالي ساعتان",
+          "zero": "حوالي صفر ساعات"
+        },
+        "about_x_months": {
+          "few": "حوالي %{count} أشهر",
+          "many": "حوالي %{count} شهر",
+          "one": "حوالي شهر واحد",
+          "other": "حوالي %{count} شهر",
+          "two": "حوالي شهران",
+          "zero": "حوالي صفر أشهر"
+        },
+        "about_x_years": {
+          "few": "حوالي %{count} سنوات",
+          "many": "حوالي %{count} سنة",
+          "one": "حوالي سنة",
+          "other": "حوالي %{count} سنة",
+          "two": "حوالي سنتان",
+          "zero": "حوالي صفر سنوات"
+        },
+        "almost_x_years": {
+          "few": "ما يقرب من %{count} سنوات",
+          "many": "ما يقرب من %{count} سنة",
+          "one": "تقريبا سنة واحدة",
+          "other": "ما يقرب من %{count} سنة",
+          "two": "ما يقرب من سنتين",
+          "zero": "ما يقرب من صفر سنوات"
+        },
+        "half_a_minute": "نصف دقيقة",
+        "less_than_x_minutes": {
+          "few": "أقل من %{count} دقائق",
+          "many": "أقل من %{count} دقيقة",
+          "one": "أقل من دقيقة",
+          "other": "أقل من %{count} دقيقة",
+          "two": "أقل من دقيقتان",
+          "zero": "أقل من صفر دقائق"
+        },
+        "less_than_x_seconds": {
+          "few": "أقل من %{count} ثوان",
+          "many": "أقل من %{count} ثانية",
+          "one": "أقل من ثانية",
+          "other": "أقل من %{count} ثانية",
+          "two": "أقل من ثانيتان",
+          "zero": "أقل من صفر ثواني"
+        },
+        "over_x_years": {
+          "few": "أكثر من %{count} سنوات",
+          "many": "أكثر من %{count} سنة",
+          "one": "أكثر من سنة",
+          "other": "أكثر من %{count} سنة",
+          "two": "أكثر من سنتين",
+          "zero": "أكثر من صفر سنوات"
+        },
+        "x_days": {
+          "few": "%{count} أيام",
+          "many": "%{count} يوم",
+          "one": "يوم واحد",
+          "other": "%{count} يوم",
+          "two": "يومان",
+          "zero": "صفر أيام"
+        },
+        "x_minutes": {
+          "few": "%{count} دقائق",
+          "many": "%{count} دقيقة",
+          "one": "دقيقة واحدة",
+          "other": "%{count} دقيقة",
+          "two": "دقيقتان",
+          "zero": "صفر دقائق"
+        },
+        "x_months": {
+          "few": "%{count} أشهر",
+          "many": "%{count} شهر",
+          "one": "شهر واحد",
+          "other": "%{count} شهر",
+          "two": "شهران",
+          "zero": "صفر أشهر"
+        },
+        "x_seconds": {
+          "few": "%{count} ثوان",
+          "many": "%{count} ثانية",
+          "one": "ثانية واحدة",
+          "other": "%{count} ثانية",
+          "two": "ثانيتان",
+          "zero": "صفر ثواني"
+        }
+      },
+      "prompts": {
+        "day": "اليوم",
+        "hour": "ساعة",
+        "minute": "دقيقة",
+        "month": "الشهر",
+        "second": "ثانية",
+        "year": "السنة"
+      }
+    },
     "devise": {
+      "confirmations": {
+        "confirmed": "تم تأكيد عنوان بريدك الإلكتروني بنجاح.",
+        "new": {
+          "resend_confirmation_instructions": "إعادة إرسال تعليمات التأكيد"
+        },
+        "send_instructions": "ستتلقى رسالة بريد إلكتروني بها تعليمات عن كيفية تأكيد عنوان بريدك الإلكتروني في غضون بضع دقائق.",
+        "send_paranoid_instructions": "إذا كان بريدك الإلكتروني موجود في قاعدة البيانات لدينا، ستتلقى رسالة بريد إلكتروني بها تعليمات عن كيفية تأكيد عنوان بريدك الإلكتروني في بضع دقائق."
+      },
       "failure": {
-        "invited": "لديك دعوة معلّقة، يجب عليك قبولها للإنتهاء من إنشاء حسابك."
+        "already_authenticated": "لقد قمت بتسجيل الدخول بالفعل.",
+        "inactive": "لم يتم تفعيل حسابك بعد.",
+        "invalid": "خطأ في إسم المستخدم او كلمة المرور",
+        "invited": "لديك دعوة معلّقة، يجب عليك قبولها للإنتهاء من إنشاء حسابك.",
+        "last_attempt": "لديك محاولة أو أكثر قبل غلق حسابك.",
+        "locked": "تم غلق حسابك.",
+        "not_found_in_database": "اسم المستخدم غير موجود",
+        "timeout": "انتهى الوقت المخصص للجلسة. الرجاء تسجيل الدخول مرة أخرى للمتابعة.",
+        "unauthenticated": "تحتاج إلى تسجيل الدخول أو التسجيل قبل المتابعة.",
+        "unconfirmed": "تحتاج إلى تأكيد عنوان بريدك الإلكتروني قبل المتابعة."
       },
       "invitations": {
         "edit": {
@@ -20,19 +198,230 @@
         "updated": "تم تحديد كلمة المرور الخاص بك، انت الآن مسجل دخول."
       },
       "mailer": {
+        "confirmation_instructions": {
+          "action": "تأكيد حسابي",
+          "greeting": "مرحباً %{recipient}",
+          "instruction": "يُمكنك تأكيد بريدك الإلكتروني من خلال الرابط أدناه:",
+          "subject": "تعليمات التأكيد"
+        },
+        "email_changed": {
+          "greeting": "أهلا %{recipient} !",
+          "message": "نتصل بك لإخبارك أنّ عنوان بريدك الإلكتروني قد تم تغييره إلى %{email}.",
+          "message_unconfirmed": "نقوم بالتواصل معك لإعلامك بتغيير بريدك الإلكتروني إلى %{email}.",
+          "subject": "تم تغيير عنوان البريد الإلكتروني"
+        },
         "invitation_instructions": {
           "accept": "قبول الدعوة",
           "hello": "مرحبا %{email}",
           "ignore": "إذا كنت لا تريد قبول الدعوة، الرجاء تجاهل هذا البريد.<br />لن يتم إنشاء حساب خاص بك إلا إذا دخلت على الرابط أعلاه وحددت كلمة مرور خاص بك.",
           "someone_invited_you": "تم إرسال دعوة لك إلى %{url}, يمكنك الموافقة من خلال الرابط في الأسفل",
           "subject": "تعليمات الدعوة"
+        },
+        "password_change": {
+          "greeting": "مرحباً %{recipient}",
+          "message": "لقد قمنا بالاتصال بك لإخبارك أنه قد تم تغيير كلمة مرورك.",
+          "subject": "تم تغيير كلمة المرور"
+        },
+        "reset_password_instructions": {
+          "action": "تغيير كلمة مروري",
+          "greeting": "مرحباً %{recipient}",
+          "instruction": "لقد طلب شخص ما رابط لتغيير كلمة مرورك، ويُمكنك القيام بذلك من خلال الرابط أدناه.",
+          "instruction_2": "إذا لم تقم بطلب ذلك، الرجاء تجاهل هذه الرسالة.",
+          "instruction_3": "لن يتم تغيير كلمة مرورك حتى تقوم بفتح الرابط أعلاه وإنشاء كلمة مرور جديدة.",
+          "subject": "تعليمات إعادة تعيين كلمة المرور"
+        },
+        "unlock_instructions": {
+          "action": "إلغاء قفل حسابي",
+          "greeting": "مرحباً %{recipient}",
+          "instruction": "انقر فوق الرابط أدناه لإلغاء قفل حسابك:",
+          "message": "تم غلق حسابك بسبب العدد الكبير من محاولات تسجيل الدخول غير الناجحة.",
+          "subject": "تعليمات إلغاء القفل"
         }
+      },
+      "omniauth_callbacks": {
+        "failure": "تعذر التحقق منك من %{kind} بسبب \"%{reason}\".",
+        "success": "تمت المصادقة بنجاح من حساب %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "تغيير كلمة مروري",
+          "change_your_password": "تغيير كلمة مرورك",
+          "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+          "new_password": "كلمة المرور الجديدة"
+        },
+        "new": {
+          "forgot_your_password": "نسيت كلمة مرورك؟",
+          "send_me_reset_password_instructions": "أرسل لي تعليمات إعادة تعيين كلمة المرور"
+        },
+        "no_token": "لا يُمكنك الوصول إلى هذه الصفحة دون تأكيد رسالة البريد الإلكتروني المحتوية على إعادة تعيين كلمة المرور. إذا كنت قد انتقلت من رسالة تعيين كلمة المرور، الرجاء التأكد من أنك استخدمت رابط URL الكامل الموجود في الرسالة.",
+        "send_instructions": "ستتلقى رسالة بريد إلكرتوني بها تعليمات ععن كيفية إعادة تعيين كلمة مرورك في غضون بضع دقائق.",
+        "send_paranoid_instructions": "إذا كان بريدك الإلكتروني موجود في قاعدة البيانات لدينا، ستتلقى رابط استعادة كلمة المرور على عنوان بريدك الإلكتروني في غضون بضع دقائق.",
+        "updated": "تم تغيير كلمة مرورك بنجاح. أنت الآن مُسجِّل الدخول.",
+        "updated_not_active": "تم تغيير كلمة مرورك بنجاح."
+      },
+      "registrations": {
+        "destroyed": "وداعاً! تم إلغاء حسابك بنجاح. نأمل أن نراك مرة أخرى في القريب العاجل.",
+        "edit": {
+          "are_you_sure": "هل أنت متأكد؟",
+          "cancel_my_account": "إلغاء حسابي",
+          "currently_waiting_confirmation_for_email": "قيد انتظار التأكيد حالياً لـ: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "اتركه فارغاً إذا كنت لا ترغب في تغييره",
+          "title": "تحرير %{resource}",
+          "unhappy": "غير سعيد؟",
+          "update": "تحديث",
+          "we_need_your_current_password_to_confirm_your_changes": "نحتاج إلى كلمة مرورك الحالية لتأكيد التغيرات التي قمت بها"
+        },
+        "new": {
+          "sign_up": "التسجيل"
+        },
+        "signed_up": "مرحباً! لقد قمت بالتسجيل بنجاح.",
+        "signed_up_but_inactive": "لقد قمت بالتسجيل بنجاح. ومع ذلك، لن نتمكن من تسجيل دخولك لحسابك لأن حسابك لم يتم تفعيله بعد.",
+        "signed_up_but_locked": "لقد قمت بالتسجيل بنجاح. ومع ذلك، لن نتمكن من تسجيل دخولك لحسابك لأن حسابك مغلق.",
+        "signed_up_but_unconfirmed": "تم إرسال رسالة بها رابط التأكيد إلى عنوان بريدك الإلكتروني. الرجاء اتباع الرابط لتفعيل حسابك.",
+        "update_needs_confirmation": "لقد قمت بتحديث حسابك بنجاح، ولكن نحتاج إلى تأكيد عنوان بريدك الإلكتروني الجديد. الرجاء التحقق من بريدك الإلكتروني واتباع رابط التأكيد لتأكيد عنوان بريدك الإلكتروني الجديد.",
+        "updated": "تم تحديث حسابك بنجاح.",
+        "updated_but_not_signed_in": "تمت عملية تغيير معلومات حسابك بنجاح، و لأنك قمت بتغيير كلمة المرور نرجو منك تسجيل الدخول مرة أخرى."
+      },
+      "sessions": {
+        "already_signed_out": "تم تسجيل الخروج بنجاح.",
+        "new": {
+          "sign_in": "تسجيل الدخول"
+        },
+        "signed_in": "تم تسجيل الدخول بنجاح.",
+        "signed_out": "تم تسجيل الخروج بنجاح."
+      },
+      "shared": {
+        "links": {
+          "back": "رجوع",
+          "didn_t_receive_confirmation_instructions": "لم تتلقى تعليمات التأكيد؟",
+          "didn_t_receive_unlock_instructions": "لم تتلقى تعليمات إلغاء القفل؟",
+          "forgot_your_password": "نسيت كلمة مرورك؟",
+          "sign_in": "تسجيل الدخول",
+          "sign_in_with_provider": "تسجيل الدخول باستخدام %{provider}",
+          "sign_up": "التسجيل"
+        },
+        "minimum_password_length": {
+          "few": null,
+          "many": null,
+          "one": null,
+          "other": null,
+          "two": null,
+          "zero": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "إعادة إرسال تعليمات إلغاء القفل"
+        },
+        "send_instructions": "ستتلقى رسالة بريد إلكتروني بها تعليمات عن كيفية إلغاء قفل حسابك في غضون بضع دقائق.",
+        "send_paranoid_instructions": "إذا كان حسابك موجود، ستتلقى رسالة بريد إلكتروني بها تعليمات عن كيفية إلغاء القفلل غي غضون دقائق.",
+        "unlocked": "تم إلغاء قفل حسابك بنجاح. الرجاء تسجيل الدخول للمتابعة."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "يُرجى الاختيار"
+      },
+      "submit": {
+        "create": "%{model} إنشاء",
+        "submit": "%{model} حِفظ",
+        "update": "%{model} تحديث"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "zero",
+          "one",
+          "two",
+          "few",
+          "many",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u %n",
+          "precision": 3,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "KWD"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "مليار",
+            "million": "مليون",
+            "quadrillion": "كدريليون",
+            "thousand": "ألفّ",
+            "trillion": "تريليون",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "few": "Bytes",
+              "many": "Bytes",
+              "one": "Byte",
+              "other": "Bytes",
+              "two": "Bytes",
+              "zero": "Bytes"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " و ",
+        "two_words_connector": " و ",
+        "words_connector": " ، "
       }
     },
     "time": {
       "am": "صباحًا",
-      "formats": "%m/%d/%Y %I:%M %p",
-      "pm": "مساءًا"
+      "formats": {
+        "default": "%a %d %b %Y %H:%M:%S %Z",
+        "long": "%d %B %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "مساءً"
     }
   }
 }

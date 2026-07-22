@@ -66,17 +66,42 @@ export const urlParams = {
   "settingsGeneral": {
     "params": []
   },
-  "settingsAppearance": {
-    "params": []
+  "settingsBranding": {
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsIntegrations": {
-    "params": []
-  },
-  "settingsLocalizations": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
   },
   "settingsNotifications": {
-    "params": []
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "settingsSmtps": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newSettingsSmtp": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editSettingsSmtp": {
+    "params": [
+      "circle_slug",
+      "id"
+    ]
+  },
+  "settingsSmtp": {
+    "params": [
+      "circle_slug",
+      "id"
+    ]
   },
   "apiUsers": {
     "params": []
@@ -96,7 +121,15 @@ export const urlParams = {
       "id"
     ]
   },
+  "apiPresentationElementTemplates": {
+    "params": []
+  },
   "apiCircleMock": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "apiCircleSpotlights": {
     "params": [
       "circle_slug"
     ]
@@ -175,9 +208,6 @@ export const urlParams = {
     ]
   },
   "apiSearches": {
-    "params": []
-  },
-  "apiSpotlights": {
     "params": []
   },
   "previewSlide": {
@@ -267,6 +297,28 @@ export const urlParams = {
     ]
   },
   "circleTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "circleInteractionTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newCircleInteractionTemplate": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editCircleInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "circleInteractionTemplate": {
     "params": [
       "circle_slug",
       "slug"
@@ -394,6 +446,56 @@ export const urlParams = {
       "slug"
     ]
   },
+  "openResponsesThemePresentationInteraction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "closeResponsesThemePresentationInteraction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "themePresentationInteractionResponses": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug"
+    ]
+  },
+  "newThemePresentationInteractionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug"
+    ]
+  },
+  "editThemePresentationInteractionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug",
+      "id"
+    ]
+  },
+  "themePresentationInteractionResponse": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "interaction_slug",
+      "id"
+    ]
+  },
   "themePresentationInteractions": {
     "params": [
       "circle_slug",
@@ -417,36 +519,6 @@ export const urlParams = {
     ]
   },
   "themePresentationInteraction": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "slug"
-    ]
-  },
-  "themePresentationInteractionResponses": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "newThemePresentationInteractionResponse": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug"
-    ]
-  },
-  "editThemePresentationInteractionResponse": {
-    "params": [
-      "circle_slug",
-      "theme_slug",
-      "presentation_slug",
-      "slug"
-    ]
-  },
-  "themePresentationInteractionResponse": {
     "params": [
       "circle_slug",
       "theme_slug",

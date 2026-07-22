@@ -2,24 +2,82 @@
 en:
   slides:
     editor:
+      components:
+        bar_graph:
+          award_image: Award Image
+          bar_color: Bar Color
+          funded_bar_color: Funded Bar Color
+          grid_color: Grid Color
+          label: Bar Graph
+          need_color: Need Color
+          text_color: Text Color
+        card:
+          background_color: Background Color
+          default_description: Topic description...
+          default_title: Topic Title
+          description: Description
+          font_color: Font Color
+          label: Card
+          title: Title
+        container:
+          alignment: Alignment
+          label: Container
+        grid:
+          label: Grid
+        heading:
+          default_title: Heading
+          label: Heading
+          level: Heading Level
+          padding: Padding
+          text_color: Text Color
+          title: Title
+        image:
+          border_color: Border Color
+          default_title: Image
+          label: Image
+        orgs_iterator:
+          label: Orgs Iterator
       fields:
-        layout:
+        background_image:
+          attachment: Attachment
+          attachment_fixed: Fixed
+          attachment_scroll: Scroll
+          custom_size: Custom size
+          label: Background Image
+          offset_x: Offset X
+          offset_y: Offset Y
+          remove_image: Remove image
+          repeat: Repeat
+          repeat_no: No repeat
+          repeat_x: Repeat X
+          repeat_y: Repeat Y
+          size: Size
+          size_auto: Auto
+          size_contain: Contain
+          size_cover: Cover
+          size_custom: Custom
+        border:
+          color: Border Color
+          radius: Border Radius
+          width: Border Width
+        color:
+          background: Background Color
+        dimension:
+          min_height: Min Height
+          min_width: Min Width
+          width: Width
+        flex:
           align:
             center: Center
             end: End
             start: Start
             stretch: Stretch
-          background_color: Background Color
-          border_color: Border Color
-          border_radius: Border Radius
-          border_width: Border Width
           direction:
             column: Column
             row: Row
           display:
             block: Block
             flex: Flex
-          flex: Flex
           gap: Gap
           justify:
             center: Center
@@ -27,6 +85,7 @@ en:
             space_around: Space Around
             space_between: Space Between
             start: Start
+          label: Flex
           labels:
             align: Align
             direction: Direction
@@ -35,18 +94,44 @@ en:
             justify: Justify
             overflow: Overflow
             wrap: Wrap
-          margin: Margin
-          min_height: Min Height
-          min_width: Min Width
           overflow:
             auto_scroll: Auto (scroll)
             hidden: Hidden
             visible: Visible
-          padding: Padding
-          width: Width
           wrap:
             nowrap: Nowrap
             wrap: Wrap
+        sizing:
+          align_self:
+            auto: Auto
+            center: Center
+            end: End
+            start: Start
+            stretch: Stretch
+          custom_placeholder: 'flex: 1 1 280px; max-width: 50%'
+          fine_tune:
+            align_self: Align Self
+            flex_grow: Flex Grow
+            flex_shrink: Flex Shrink
+            title: Fine Tune
+          label: Size
+          labels:
+            clamp_max: Max
+            clamp_min: Min
+            clamp_preferred: Preferred
+            max_width: Max Width
+            width: Width
+          modes:
+            auto: Auto
+            clamp: Responsive
+            custom: Custom CSS
+            fill: Fill Space
+            fixed: Fixed Size
+        spacing:
+          labels:
+            unit: Unit
+          margin: Margin
+          padding: Padding
       header:
         close: Close
         close_without_saving: Close without saving
@@ -59,6 +144,22 @@ en:
           saved: Saved to server
           unsaved: Unsaved changes (local draft only)
         saving: Saving to server...
+    form:
+      add_to_presentation: Add a slide to this presentation
+      add_to_template: Add a slide to this template
+      create: Create Slide
+      data: Data
+      name: Name
+      new_slide_title: New Slide Title
+      order: Order
+      template: Template
+      update: Update Slide
+    new:
+      title: New Slide
     notices:
       created: Slide was successfully created.
+      destroyed: Slide was successfully destroyed.
       updated: Slide was successfully updated.
+    show:
+      edit: Edit Slide
+      title: Slide

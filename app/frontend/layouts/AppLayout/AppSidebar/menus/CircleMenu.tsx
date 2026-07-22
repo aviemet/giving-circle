@@ -1,9 +1,10 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon, ThemesIcon, UserGroupIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit, useLocation } from "@/lib/hooks"
+import { useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 interface CircleMenuProps {
@@ -12,15 +13,11 @@ interface CircleMenuProps {
 }
 
 export function CircleMenu({ circle, style }: CircleMenuProps) {
+	const { t } = useTranslation()
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
-	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 	const location = useLocation()
 
-	useInit(() => {
-		toggleOpenMenu("circle", true)
-	})
-
-	if(!circle) return <></>
+	if(!circle) return null
 
 	return (
 		<Accordion.Item key={ menuKeys.circle } value={ menuKeys.circle } style={ style }>
@@ -31,7 +28,7 @@ export function CircleMenu({ circle, style }: CircleMenuProps) {
 					href={ Routes.circle(circle.slug) }
 					leftSection={ <DashboardIcon /> }
 				>
-					Dashboard
+					{ t("navigation.dashboard") }
 				</NavLink>
 
 				<NavLink
@@ -39,7 +36,7 @@ export function CircleMenu({ circle, style }: CircleMenuProps) {
 					active={ location.paths[1] === "memberships" }
 					leftSection={ <UserGroupIcon /> }
 				>
-					Members
+					{ t("navigation.members") }
 				</NavLink>
 
 				<NavLink
@@ -47,7 +44,7 @@ export function CircleMenu({ circle, style }: CircleMenuProps) {
 					active={ location.paths[1] === "orgs" }
 					leftSection={ <OrgsIcon /> }
 				>
-					Orgs
+					{ t("navigation.orgs") }
 				</NavLink>
 
 				<NavLink
@@ -55,7 +52,15 @@ export function CircleMenu({ circle, style }: CircleMenuProps) {
 					active={ location.paths[1] === "templates" }
 					leftSection={ <PresentationIcon /> }
 				>
-					Presentation Templates
+					{ t("navigation.presentationTemplates") }
+				</NavLink>
+
+				<NavLink
+					href={ Routes.circleInteractionTemplates(circle.slug) }
+					active={ location.paths[1] === "interaction_templates" }
+					leftSection={ <PresentationIcon /> }
+				>
+					{ t("navigation.interactionTemplates") }
 				</NavLink>
 
 				<NavLink
@@ -63,7 +68,7 @@ export function CircleMenu({ circle, style }: CircleMenuProps) {
 					active={ location.paths[1] === "themes" }
 					leftSection={ <ThemesIcon /> }
 				>
-					Themes
+					{ t("navigation.themes") }
 				</NavLink>
 			</Accordion.Panel>
 		</Accordion.Item>

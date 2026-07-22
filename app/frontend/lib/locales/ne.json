@@ -1,0 +1,217 @@
+{
+  "ne": {
+    "date": {
+      "abbr_day_names": [
+        "आईत",
+        "सोम",
+        "मंगल",
+        "बुध",
+        "बिही",
+        "शुक्र",
+        "शनि"
+      ],
+      "abbr_month_names": [
+        null,
+        "जन.",
+        "फेब्रु.",
+        "मार्च",
+        "अप्रिल",
+        "मई",
+        "जुन",
+        "जुलाई",
+        "अगष्ट",
+        "सेप्ट.",
+        "अक्टो.",
+        "नोभ.",
+        "डिसे."
+      ],
+      "day_names": [
+        "आईतबार",
+        "सोमबार",
+        "मंगलबार",
+        "बुधबार",
+        "बिहीबार",
+        "शुक्रबार",
+        "शनिबार"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%d %B %Y",
+        "short": "%d %b"
+      },
+      "month_names": [
+        null,
+        "जनवरी",
+        "फेब्रुवरी",
+        "मार्च",
+        "अप्रिल",
+        "मई",
+        "जुन",
+        "जुलाई",
+        "अगष्ट",
+        "सेप्टेम्बार",
+        "अक्टोबर",
+        "नोभेम्बर",
+        "डिसेम्बर"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "लगभग %{count} घण्टा",
+          "other": "लगभग %{count} घण्टा"
+        },
+        "about_x_months": {
+          "one": "लगभग %{count} महिना",
+          "other": "लगभग %{count} महिना"
+        },
+        "about_x_years": {
+          "one": "लगभग %{count} बर्ष",
+          "other": "लगभग %{count} बर्ष"
+        },
+        "almost_x_years": {
+          "one": "झण्डै %{count} बर्ष",
+          "other": "झण्डै %{count} बर्ष"
+        },
+        "half_a_minute": "आधा मिनेट",
+        "less_than_x_minutes": {
+          "one": "%{count} मिनेटभन्दा कम्ति",
+          "other": "%{count} मिनेटभन्दा कम्ति"
+        },
+        "less_than_x_seconds": {
+          "one": "%{count} सेकेण्डभन्दा कम्ति",
+          "other": "%{count} सेकेण्डभन्दा कम्ति"
+        },
+        "over_x_years": {
+          "one": "%{count} बर्षभन्दा बढी",
+          "other": "%{count} बर्षभन्दा बेसी"
+        },
+        "x_days": {
+          "one": "%{count} दिन",
+          "other": "%{count} दिन"
+        },
+        "x_minutes": {
+          "one": "%{count} मिनेट",
+          "other": "%{count} मिनेट"
+        },
+        "x_months": {
+          "one": "%{count} महिना",
+          "other": "%{count} महिना"
+        },
+        "x_seconds": {
+          "one": "%{count} सेकेण्ड",
+          "other": "%{count} सेकेण्ड"
+        }
+      },
+      "prompts": {
+        "day": "दिन",
+        "hour": "घण्टा",
+        "minute": "मिनेट",
+        "month": "महिना",
+        "second": "सेकेण्ड",
+        "year": "बर्ष"
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "कृपया छान्नुहोस्"
+      },
+      "submit": {
+        "create": "नयाँ %{model} बनाउ",
+        "submit": "%{model} सुरक्षित गर",
+        "update": "%{model} सामयिक बनाउ"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%u%n",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "रू"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "अर्ब",
+            "million": "Million",
+            "quadrillion": "Quadrillion",
+            "thousand": "हजार",
+            "trillion": "Trillion",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Bytes"
+            },
+            "gb": "जि.बी.",
+            "kb": "के.बी.",
+            "mb": "एम.बी",
+            "tb": "टि.बी"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": ""
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", र ",
+        "two_words_connector": " र ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "बिहान",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%d %B %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "बेलुका"
+    }
+  }
+}

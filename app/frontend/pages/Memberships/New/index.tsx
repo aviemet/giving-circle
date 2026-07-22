@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page, Section } from "@/components"
 import { MembershipForm } from "@/domains/memberships/Form"
 import { Routes } from "@/lib"
@@ -10,19 +12,19 @@ interface NewMembershipProps {
 // @path: /:circle_slug/memberships/new
 // @route: newCircleMembership
 const NewMembership = ({ ...data }: NewMembershipProps) => {
-	// copy @route above into the generic type assertion below
+	const { t } = useTranslation()
 	const { params, active_circle } = usePageProps<"newCircleMembership">()
 
 	if(!active_circle) return <></>
 
-	const title = "New Member"
+	const title = t("memberships.new.title")
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: "Circles", href: Routes.circles() },
+			{ title: t("memberships.index.breadcrumbs.circles"), href: Routes.circles() },
 			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-			{ title: "Members", href: Routes.circleMemberships(params.circle_slug) },
-			{ title: "New Member", href: window.location.href },
+			{ title: t("memberships.index.breadcrumbs.members"), href: Routes.circleMemberships(params.circle_slug) },
+			{ title, href: window.location.href },
 		] }>
 
 			<Section>

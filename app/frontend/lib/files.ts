@@ -10,6 +10,10 @@ export {
 	EXE_MIME_TYPE,
 } from "@mantine/dropzone"
 
+export function activeStorageBlobRedirectUrl(signedId: string, filename = "image") {
+	return `/rails/active_storage/blobs/redirect/${signedId}/${filename}`
+}
+
 export const uploadFile = (file: File, onSuccess: (signedId: string) => void, onError: (error: Error) => void) => {
 	const upload = new DirectUpload(file, "/rails/active_storage/direct_uploads")
 

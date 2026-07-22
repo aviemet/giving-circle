@@ -13,6 +13,37 @@ export function useSlotProps() {
 	return useFormFieldContext().slotProps
 }
 
+export function formFieldErrorMessage(
+	errors: Record<string, string | string[]> | undefined,
+	name: string,
+): string | undefined {
+	if(!errors) return undefined
+
+	const segments = name.split(".")
+	const candidates: string[] = []
+
+	for(let start = 0; start < segments.length; start++) {
+		for(let end = segments.length; end > start; end--) {
+			candidates.push(segments.slice(start, end).join("."))
+		}
+	}
+
+	for(const key of candidates) {
+		const value = errors[key]
+		if(typeof value === "string" && value.trim() !== "") return value
+		if(Array.isArray(value) && typeof value[0] === "string" && value[0].trim() !== "") return value[0]
+	}
+
+	return undefined
+}
+
+export function useFormFieldError(name?: string): string | undefined {
+	const context = useFormFieldContext(false)
+	if(!name || !context) return undefined
+
+	return formFieldErrorMessage(context.slotProps?.errors, name)
+}
+
 export function useFormField(path: string): [unknown, (value: unknown) => void] {
 	const { subscribe, getValue, setValue } = useFormFieldContext()
 	const [value, setState] = useState(() => getValue(path))

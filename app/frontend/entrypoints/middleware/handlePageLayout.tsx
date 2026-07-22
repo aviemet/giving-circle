@@ -3,7 +3,6 @@ import {
 	AuthLayout,
 	PublicLayout,
 	AppLayout,
-	SettingsLayout,
 	PresentationLayout,
 	LayoutProps,
 	UnformattedLayout,
@@ -14,7 +13,6 @@ const LAYOUT_COMPONENTS: Record<keyof typeof LAYOUTS, ({ children }: LayoutProps
 	"auth": AuthLayout,
 	"app": AppLayout,
 	"presentation": PresentationLayout,
-	"settings": SettingsLayout,
 	"public": PublicLayout,
 	"publicPresentation": PublicPresentationLayout,
 	"unformatted": UnformattedLayout,
@@ -34,5 +32,3 @@ export const handlePageLayout = (page: PageComponent) => {
 
 	return page
 }
-
-

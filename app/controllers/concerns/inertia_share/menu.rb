@@ -49,7 +49,12 @@ module InertiaShare::Menu
     inertia_share circles: lambda {
       return if instance_variable_get(:@disable_menu_rendering)
 
-      current_user&.circles&.includes(:themes)&.render(:inertia_share)
+      scope = if current_user&.has_role?(:super_admin)
+                Circle.order(:name)
+              else
+                current_user&.circles
+              end
+      scope&.includes(:themes)&.render(:inertia_share)
     }
   end
 

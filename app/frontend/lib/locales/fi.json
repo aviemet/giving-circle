@@ -1,0 +1,351 @@
+{
+  "fi": {
+    "date": {
+      "abbr_day_names": [
+        "su",
+        "ma",
+        "ti",
+        "ke",
+        "to",
+        "pe",
+        "la"
+      ],
+      "abbr_month_names": [
+        null,
+        "tammi",
+        "helmi",
+        "maalis",
+        "huhti",
+        "touko",
+        "kesä",
+        "heinä",
+        "elo",
+        "syys",
+        "loka",
+        "marras",
+        "joulu"
+      ],
+      "day_names": [
+        "sunnuntai",
+        "maanantai",
+        "tiistai",
+        "keskiviikko",
+        "torstai",
+        "perjantai",
+        "lauantai"
+      ],
+      "formats": {
+        "default": "%-d.%-m.%Y",
+        "long": "%d. %Bta %Y",
+        "short": "%d. %b"
+      },
+      "month_names": [
+        null,
+        "tammikuu",
+        "helmikuu",
+        "maaliskuu",
+        "huhtikuu",
+        "toukokuu",
+        "kesäkuu",
+        "heinäkuu",
+        "elokuu",
+        "syyskuu",
+        "lokakuu",
+        "marraskuu",
+        "joulukuu"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "noin tunti",
+          "other": "noin %{count} tuntia"
+        },
+        "about_x_months": {
+          "one": "noin kuukausi",
+          "other": "noin %{count} kuukautta"
+        },
+        "about_x_years": {
+          "one": "vuosi",
+          "other": "noin %{count} vuotta"
+        },
+        "almost_x_years": {
+          "one": "melkein yksi vuosi",
+          "other": "melkein %{count} vuotta"
+        },
+        "half_a_minute": "puoli minuuttia",
+        "less_than_x_minutes": {
+          "one": "alle minuutti",
+          "other": "alle %{count} minuuttia"
+        },
+        "less_than_x_seconds": {
+          "one": "alle sekunti",
+          "other": "alle %{count} sekuntia"
+        },
+        "over_x_years": {
+          "one": "yli vuosi",
+          "other": "yli %{count} vuotta"
+        },
+        "x_days": {
+          "one": "päivä",
+          "other": "%{count} päivää"
+        },
+        "x_minutes": {
+          "one": "minuutti",
+          "other": "%{count} minuuttia"
+        },
+        "x_months": {
+          "one": "kuukausi",
+          "other": "%{count} kuukautta"
+        },
+        "x_seconds": {
+          "one": "sekunti",
+          "other": "%{count} sekuntia"
+        },
+        "x_years": {
+          "one": "vuosi",
+          "other": "%{count} vuotta"
+        }
+      },
+      "prompts": {
+        "day": "Päivä",
+        "hour": "Tunti",
+        "minute": "Minuutti",
+        "month": "Kuukausi",
+        "second": "Sekunti",
+        "year": "Vuosi"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Sähköpostiosoitteesi on nyt vahvistettu.",
+        "new": {
+          "resend_confirmation_instructions": "Uudelleenlähetä vahvistusohjeet"
+        },
+        "send_instructions": "Saat hetken kuluttua sähköpostiisi ohjeet sähköpostiosoitteesi vahvistamiseen.",
+        "send_paranoid_instructions": "Mikäli sähköpostiosoitteesi on tallennettu järjestelmäämme, lähetämme sinulle ohjeet sähköpostiosoitteesi vahvistamiseksi muutaman minuutin kuluessa."
+      },
+      "failure": {
+        "already_authenticated": "Olet jo kirjautunut sisään.",
+        "inactive": "Tunnustasi ei ole vielä aktivoitu.",
+        "invalid": "Väärä %{authentication_keys} tai salasana.",
+        "last_attempt": "Käyttäjätunnuksesi lukitaan seuraavan epäonnistuneen kirjautumisen jälkeen.",
+        "locked": "Tunnuksesi on lukittu.",
+        "not_found_in_database": "Väärä %{authentication_keys} tai salasana.",
+        "timeout": "Istuntosi on vanhentunut, ole hyvä ja kirjaudu sisään jatkaaksesi.",
+        "unauthenticated": "Sinun pitää kirjautua sisään tai rekisteröityä ennen kuin voit jatkaa.",
+        "unconfirmed": "Sinun täytyy vahvistaa sähköpostiosoitteesi ennen kuin voit jatkaa."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Vahvista käyttäjätunnukseni",
+          "greeting": "Tervetuloa, %{recipient}!",
+          "instruction": "Vahvista sähköpostisi painamalla alla olevaa linkkiä:",
+          "subject": "Vahvistusohjeet"
+        },
+        "email_changed": {
+          "greeting": "Hei %{recipient}!",
+          "message": "Tämä on ilmoitus siitä, että sähköpostiosoitteenne on vaihdettu osoitteeksi %{email}.",
+          "message_unconfirmed": "Tämä on ilmoitus siitä, että sähköpostiosoitteenne on vaihtumassa osoitteeksi %{email}.",
+          "subject": "Sähköpostiosoite vaihdettu"
+        },
+        "password_change": {
+          "greeting": "Hei %{recipient}!",
+          "message": "Tämä on ilmoitus salasananne vaihtumisesta.",
+          "subject": "Salasana vaihdettu"
+        },
+        "reset_password_instructions": {
+          "action": "Vaihda salasanani",
+          "greeting": "Hei, %{recipient}!",
+          "instruction": "Joku on pyytänyt käyttäjätunnuksesi salasanan vaihtoa. Tämä voidaan suorittaa painamalla linkkiä alla.",
+          "instruction_2": "Jos et pyytänyt tätä, voit jättää tämän sähköpostin huomiotta.",
+          "instruction_3": "Salasanaasi ei vaihdeta ennen kuin painat yllä olevaa linkkiä ja syötät uuden salasanan.",
+          "subject": "Ohjeet salasanan vaihtoon"
+        },
+        "unlock_instructions": {
+          "action": "Poista käyttäjätunnukseni lukitus",
+          "greeting": "Hei, %{recipient}!",
+          "instruction": "Paina alla olevaa linkkiä poistaaksesi lukituksen:",
+          "message": "Käyttäjätunnuksesi on lukittu johtuen liian monesta epäonnistuneesta kirjautumisyrityksestä.",
+          "subject": "Ohjeet tunnuksen lukituksen poistoon"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Valtuutus käyttäen palvelua %{kind} epäonnistui, koska \"%{reason}\".",
+        "success": "Onnistuneesti valtuutettu käyttäen palvelua %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Vaihda salasanani",
+          "change_your_password": "Vaihda salasanasi",
+          "confirm_new_password": "Vahvista uusi salasana",
+          "new_password": "Uusi salasana"
+        },
+        "new": {
+          "forgot_your_password": "Unohditko salasanasi?",
+          "send_me_reset_password_instructions": "Lähetä minulle salasanan vaihto-ohjeet"
+        },
+        "no_token": "Et voi päästä tälle sivulle tulematta salasanannollaussähköpostin kautta. Mikäli tulet salasanannollaussähköpostiviestistä, varmista että syötit koko verkko-osoitteen osoiteriville.",
+        "send_instructions": "Saat hetken kuluttua sähköpostiisi ohjeet salasanan vaihtoon.",
+        "send_paranoid_instructions": "Mikäli sähköpostiosoitteesi on tallennettu järjestelmäämme, lähetämme salasananpalautuslinkin sähköpostiisi muutaman minuutin kuluessa.",
+        "updated": "Salasanasi on nyt vaihdettu. Olet kirjautuneena sisälle.",
+        "updated_not_active": "Salasanasi on vaihdettu."
+      },
+      "registrations": {
+        "destroyed": "Näkemiin! Käyttäjätunnuksesi on nyt poistettu. Toivottavasti näemme sinut vielä uudelleen.",
+        "edit": {
+          "are_you_sure": "Oletko varma?",
+          "cancel_my_account": "Poista käyttäjätunnukseni",
+          "currently_waiting_confirmation_for_email": "Odotetaan vahvistusta sähköpostille: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "jätä tämä tyhjäksi, mikäli et halua vaihtaa",
+          "title": "Muokkaa %{resource}",
+          "unhappy": "Onneton?",
+          "update": "Päivitä",
+          "we_need_your_current_password_to_confirm_your_changes": "tarvitsemme nykyisen salasanasi muutoksien vahvistamiseen"
+        },
+        "new": {
+          "sign_up": "Rekisteröidy"
+        },
+        "signed_up": "Tervetuloa! Rekisteröintisi onnistui.",
+        "signed_up_but_inactive": "Olet rekisteröitynyt onnistuneesti. Et kuitenkaan voi kirjautua ennen kuin käyttäjätunnuksesi on aktivoitu.",
+        "signed_up_but_locked": "Olet rekisteröitynyt onnistuneesti. Et kuitenkaan voi kirjautua, koska käyttäjätunnuksesi on lukittu.",
+        "signed_up_but_unconfirmed": "Sähköpostiisi on lähetetty vahvistusviesti. Avaa viestissä oleva linkki aktivoidaksesi käyttäjätunnuksesi.",
+        "update_needs_confirmation": "Tiedot päivitettiin onnistuneesti, mutta meidän täytyy vielä varmistaa uusi sähköpostiosoitteesi. Tarkista sähköpostisi ja klikkaa varmistuslinkkiä varmistaaksesi uuden sähköpostiosoitteesti.",
+        "updated": "Käyttäjätunnuksesi on päivitetty.",
+        "updated_but_not_signed_in": "Käyttäjätunnuksesi on päivitetty, mutta koska salasanasi on vaihdettu, pitää sinun kirjautua sisään uudelleen"
+      },
+      "sessions": {
+        "already_signed_out": "Kirjauduttu ulos onnistuneesti.",
+        "new": {
+          "sign_in": "Kirjaudu sisään"
+        },
+        "signed_in": "Sisäänkirjautuminen onnistui.",
+        "signed_out": "Uloskirjautuminen onnistui."
+      },
+      "shared": {
+        "links": {
+          "back": "Takaisin",
+          "didn_t_receive_confirmation_instructions": "Vahvistusviesti ei saapunut perille?",
+          "didn_t_receive_unlock_instructions": "Salasanan vaihto -ohjeet eivät saapuneet perille?",
+          "forgot_your_password": "Unohditko salasanasi?",
+          "sign_in": "Kirjaudu sisään",
+          "sign_in_with_provider": "Kirjaudu sisään (%{provider})",
+          "sign_up": "Rekisteröidy"
+        },
+        "minimum_password_length": {
+          "one": "(vähimmäispituus on %{count} merkki)",
+          "other": "(vähimmäispituus on %{count} merkkiä)"
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Uudelleenlähetä lukituksen poisto -ohjeet"
+        },
+        "send_instructions": "Saat hetken kuluttua sähköpostiisi ohjeet käyttäjätunnuksesi lukituksen poistoon.",
+        "send_paranoid_instructions": "Jos käyttäjätunnuksesi on olemassa, lähetämme ohjeet lukituksen poistamiseksi sähköpostiisi muutaman minuutin kuluessa.",
+        "unlocked": "Käyttäjätunnuksesi on nyt avattu. Olet kirjautuneena sisälle."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Valitse"
+      },
+      "submit": {
+        "create": "Luo %{model}",
+        "submit": "Tallenna %{model}",
+        "update": "Päivitä %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": " ",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "€"
+        }
+      },
+      "format": {
+        "delimiter": " ",
+        "precision": 3,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "miljardia",
+            "million": "miljoonaa",
+            "quadrillion": "tuhatta biljoonaa",
+            "thousand": "tuhatta",
+            "trillion": "biljoonaa",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "tavu",
+              "other": "tavua"
+            },
+            "gb": "Gt",
+            "kb": "kt",
+            "mb": "Mt",
+            "tb": "Tt"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": ""
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " ja ",
+        "two_words_connector": " ja ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "aamupäivä",
+      "formats": {
+        "default": "%A %e. %Bta %Y %H:%M:%S %z",
+        "long": "%e. %Bta %Y %H.%M",
+        "short": "%e.%m. %H.%M"
+      },
+      "pm": "iltapäivä"
+    }
+  }
+}

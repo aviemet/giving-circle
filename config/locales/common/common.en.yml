@@ -1,0 +1,30 @@
+---
+en:
+  common:
+    actions:
+      cancel: Cancel
+      confirm: Confirm
+      delete: Delete
+      edit: Edit
+      edit_breadcrumb: Edit
+      new: New
+      save: Save
+      search: Search
+      submit: Submit
+    dynamic_fields:
+      add_item: Add item
+      remove_item: Remove item %{index}
+    notices:
+      circle_access_denied: You have not been granted access to that Giving Circle
+      page_expired: The page expired, please try again.
+      resource_not_found: The resource you are trying to access does not exist
+    table:
+      advanced_search: Advanced Search
+      after: After
+      before: Before
+      between: Between
+      creation_date: Creation Date
+      date: Date
+      exact_date: Exact Date
+      rows_per_page: rows per page
+      search: Search

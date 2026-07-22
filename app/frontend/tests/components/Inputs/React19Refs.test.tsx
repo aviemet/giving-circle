@@ -6,7 +6,7 @@ import { describe, expect, test } from "vitest"
 import { ColorInput, FileInput, Radio } from "@/components/Inputs"
 
 describe("components/Inputs React 19 refs", () => {
-	test("ColorInput accepts ref as a prop", async() => {
+	test("ColorInput accepts ref as a prop", async () => {
 		const inputRef = React.createRef<HTMLInputElement>()
 
 		render(
@@ -20,7 +20,7 @@ describe("components/Inputs React 19 refs", () => {
 		})
 	})
 
-	test("FileInput accepts ref as a prop", async() => {
+	test("FileInput accepts ref as a prop", async () => {
 		const buttonRef = React.createRef<HTMLButtonElement>()
 
 		render(
@@ -34,7 +34,7 @@ describe("components/Inputs React 19 refs", () => {
 		})
 	})
 
-	test("Radio accepts ref as a prop", async() => {
+	test("Radio accepts ref as a prop", async () => {
 		const radioRef = React.createRef<HTMLInputElement>()
 
 		render(

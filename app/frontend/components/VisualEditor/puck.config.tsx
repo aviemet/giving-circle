@@ -1,39 +1,31 @@
 import { type Config } from "@measured/puck"
-import clsx from "clsx"
-
-import { Box } from "@/components"
 
 import {
-	cardConfig, type CardProps,
-	containerConfig, type ContainerProps,
-	gridConfig, type GridProps,
-	headingConfig, type HeadingProps,
-	imageConfig, type ImageProps,
-	orgsIteratorConfig, type OrgsIteratorProps,
+	barGraphAllocatedTotalsConfig,
+	cardConfig,
+	containerConfig,
+	gridConfig,
+	headingConfig,
+	imageConfig,
+	orgsIteratorConfig,
+	SlideRoot,
+	type PuckComponentProps,
+	type SlideRootProps,
 } from "./components"
 import {
+	backgroundImageField,
 	colorField,
+	defaultBackgroundImageValue,
+	flexField,
 } from "./fields"
-import * as classes from "./Puck.css"
 
-type RootProps = {
-	title: string
-	backgroundColor: string
-}
+type RootProps = SlideRootProps
 
-type ComponentProps = {
-	Grid: GridProps
-	Container: ContainerProps
-	Heading: HeadingProps
-	Card: CardProps
-	Image: ImageProps
-	OrgsIterator: OrgsIteratorProps
-}
 
 export const config: Config<{
-	components: ComponentProps
+	components: PuckComponentProps
 	root: RootProps
-	categories: ["layout", "content", "data", "other"]
+	categories: ["layout", "content", "data", "elements", "other"]
 }> = {
 	root: {
 		inline: true,
@@ -42,21 +34,26 @@ export const config: Config<{
 			backgroundColor: colorField({
 				label: "Background Color",
 			}),
+			backgroundImage: backgroundImageField({
+				label: "Background Image",
+			}),
+			flex: flexField(),
 		},
 		defaultProps: {
 			title: "Slide",
 			backgroundColor: "#000000",
+			backgroundImage: defaultBackgroundImageValue(),
+			flex: {
+				display: "flex",
+				flexDirection: "column",
+				flexWrap: "nowrap",
+				alignItems: "stretch",
+				justifyContent: "flex-start",
+				overflow: "hidden",
+				gap: 0,
+			},
 		},
-		render: ({ children, backgroundColor }) => {
-			return (
-				<Box
-					className={ clsx(classes.puckSlideRoot) }
-					style={ { "--puck-slide-root-bg": backgroundColor } }
-				>
-					{ children }
-				</Box>
-			)
-		},
+		render: (props) => <SlideRoot { ...props } />,
 	},
 
 	components: {
@@ -66,6 +63,7 @@ export const config: Config<{
 		Card: cardConfig,
 		Image: imageConfig,
 		OrgsIterator: orgsIteratorConfig,
+		BarGraphAllocatedTotals: barGraphAllocatedTotalsConfig,
 	},
 
 	categories: {
@@ -80,6 +78,10 @@ export const config: Config<{
 		data: {
 			title: "Data",
 			components: ["OrgsIterator"],
+		},
+		elements: {
+			title: "Elements",
+			components: ["BarGraphAllocatedTotals"],
 		},
 		other: {
 			title: "All Other Components",

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Title, Page, Section } from "@/components"
 import { ThemeForm } from "@/domains/themes/Form"
 import { Routes } from "@/lib"
@@ -12,9 +14,10 @@ interface NewThemeProps {
 // @path: /:circle_slug/themes/new
 // @route: newCircleTheme
 const NewTheme = ({ circle, ...data }: NewThemeProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"newCircleTheme">()
 
-	const title = "New Theme"
+	const title = t("themes.new.title")
 
 	return (
 		<Page title={ title }>

@@ -38,6 +38,7 @@ vi.mock("@inertiajs/react", () => {
 			delete: vi.fn(),
 			reload: vi.fn(),
 			visit: vi.fn(),
+			on: vi.fn(() => vi.fn()),
 		},
 		Head: ({ children }: { children?: React.ReactNode }) => {
 			return React.createElement(React.Fragment, null, children)
@@ -51,7 +52,7 @@ vi.mock("@inertiajs/react", () => {
 	}
 })
 
-vi.mock("@/lib/hooks/useActivePresentationChannel", () => {
+vi.mock("@/pages/Presentations/Active/useActivePresentationChannel", () => {
 	return {
 		useActivePresentationChannel: () => {
 			return { switchSlide: vi.fn() }
@@ -76,7 +77,7 @@ if(!("BroadcastChannel" in globalThis)) {
 	globalThis.BroadcastChannel = BroadcastChannelMock
 }
 
-beforeAll(async() => {
+beforeAll(async () => {
 	return
 })
 

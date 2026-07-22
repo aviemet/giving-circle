@@ -1,13 +1,12 @@
 import clsx from "clsx"
-import { isEmpty } from "es-toolkit/compat"
+import { useTranslation } from "react-i18next"
 
 import {
 	Link,
 	Menu,
 	Avatar,
 	Group,
-	Box,
-	Button,
+	ActionIcon,
 } from "@/components"
 import { DownArrowIcon } from "@/components/Icons"
 import { initials, Routes } from "@/lib"
@@ -16,50 +15,56 @@ import { usePageProps } from "@/lib/hooks"
 import * as classes from "../AppLayout.css"
 
 export function CircleDropdownLink() {
-	const { auth, active_circle } = usePageProps()
+	const { t } = useTranslation()
+	const { auth, active_circle, circles } = usePageProps()
+	const circle = active_circle ?? circles?.[0]
 
-	if(isEmpty(active_circle)) {
-		return <Box>Giving Circles</Box>
+	if(!circle) {
+		return (
+			<Link href={ Routes.circles() } underline="never">
+				{ t("navigation.givingCircles") }
+			</Link>
+		)
 	}
 
 	const hasMultipleCircles = auth.user.circles.length > 1
 
 	return (
-		<>
-			<Group
-				justify="space-between"
-				className={ clsx(classes.circleMenuGroup) }
+		<Group
+			justify="space-between"
+			className={ clsx(classes.circleMenuGroup) }
+		>
+			<Link
+				href={ Routes.circle(circle.slug) }
+				underline="never"
+				className={ clsx(classes.circleMenuLink) }
 			>
-				<Link href={ Routes.circle(active_circle.slug) } underline="never">
-					<Group justify="space-between">
-						<Avatar size="sm">{ initials(active_circle.name) }</Avatar>
-					</Group>
-				</Link>
-				<Menu offset={ 9 } position="bottom-end" withArrow disabled={ !hasMultipleCircles }>
+				<Group gap="xs" wrap="nowrap">
+					<Avatar size="sm">{ initials(circle.name) }</Avatar>
+					{ circle.name }
+				</Group>
+			</Link>
+			{ hasMultipleCircles && (
+				<Menu offset={ 9 } position="bottom-end" withArrow>
 					<Menu.Target>
-						<Button
-							p={ 0 }
-							variant="transparent"
-							className={ clsx(classes.circleMenuButton) }
-							rightSection={ hasMultipleCircles && <DownArrowIcon /> }
-						>
-							{ active_circle.name }
-						</Button>
+						<ActionIcon variant="transparent">
+							<DownArrowIcon />
+						</ActionIcon>
 					</Menu.Target>
 
 					<Menu.Dropdown>
-						{ auth.user.circles.map(circle => (
+						{ auth.user.circles.map(circleOption => (
 							<Menu.Item
-								key={ circle.id }
+								key={ circleOption.id }
 								component={ Link }
-								href={ Routes.circle(circle.slug) }
+								href={ Routes.circle(circleOption.slug) }
 							>
-								{ circle.name }
+								{ circleOption.name }
 							</Menu.Item>
 						)) }
 					</Menu.Dropdown>
 				</Menu>
-			</Group>
-		</>
+			) }
+		</Group>
 	)
 }

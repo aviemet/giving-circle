@@ -1,9 +1,9 @@
 import React from "react"
 
 import { Accordion, NavLink } from "@/components"
-import { DashboardIcon, SettingsIcon, SlidesIcon } from "@/components/Icons"
+import { DashboardIcon, CircleDotIcon, SettingsIcon, SlidesIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit } from "@/lib/hooks"
+import { useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 interface PresentationMenuProps {
@@ -15,13 +15,9 @@ interface PresentationMenuProps {
 
 export function PresentationMenu({ circle, theme, presentation, style }: PresentationMenuProps) {
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
-	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
+	const location = useLocation()
 
-	useInit(() => {
-		toggleOpenMenu("presentation", true)
-	})
-
-	if(!circle || !theme || !presentation) return <></>
+	if(!circle || !theme || !presentation) return null
 
 	return (
 		<Accordion.Item key={ menuKeys.presentation } value={ menuKeys.presentation } style={ style }>
@@ -43,8 +39,21 @@ export function PresentationMenu({ circle, theme, presentation, style }: Present
 						circle.slug,
 						theme.slug,
 						presentation.slug
-					) }>
+					) }
+					active={ location.paths[5] === "slides" }
+				>
 					Slides
+				</NavLink>
+				<NavLink
+					leftSection={ <CircleDotIcon /> }
+					href={ Routes.themePresentationInteractions(
+						circle.slug,
+						theme.slug,
+						presentation.slug
+					) }
+					active={ location.paths[5] === "interactions" }
+				>
+					Interactions
 				</NavLink>
 				<NavLink
 					leftSection={ <SettingsIcon /> }
@@ -52,7 +61,9 @@ export function PresentationMenu({ circle, theme, presentation, style }: Present
 						circle.slug,
 						theme.slug,
 						presentation.slug
-					) }>
+					) }
+					active={ location.paths[5] === "settings" }
+				>
 					Settings
 				</NavLink>
 			</Accordion.Panel>

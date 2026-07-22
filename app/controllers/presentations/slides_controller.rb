@@ -49,7 +49,7 @@ class Presentations::SlidesController < ApplicationController
     authorize Slide.new, policy_class: Presentation::SlidePolicy
 
     if slide.save
-      redirect_to slide, notice: "Slide was successfully created."
+      redirect_to slide, notice: t("slides.notices.created")
     else
       redirect_to new_slide_path, inertia: { errors: slide.errors }
     end
@@ -61,7 +61,7 @@ class Presentations::SlidesController < ApplicationController
     authorize slide, policy_class: Presentation::SlidePolicy
 
     if slide.update(slide_params)
-      redirect_to slide, notice: "Slide was successfully updated."
+      redirect_to slide, notice: t("slides.notices.updated")
     else
       redirect_to edit_slide_path, inertia: { errors: slide.errors }
     end
@@ -72,7 +72,7 @@ class Presentations::SlidesController < ApplicationController
     authorize slide, policy_class: Presentation::SlidePolicy
 
     slide.destroy!
-    redirect_to theme_presentation_slides_url(params[:circle_slug], params[:theme_slug], params[:presentation_slug]), notice: "Slide was successfully destroyed."
+    redirect_to theme_presentation_slides_url(params[:circle_slug], params[:theme_slug], params[:presentation_slug]), notice: t("slides.notices.destroyed")
   end
 
 end

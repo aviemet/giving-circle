@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Group, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
@@ -9,13 +11,14 @@ interface ShowPresentationElementProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements/:slug
 // @route: themePresentationElement
 const ShowPresentationElement = ({ presentation_element }: ShowPresentationElementProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"themePresentationElement">()
-	const title = "PresentationElement"
+	const title = presentation_element.name || t("presentations.elements.show.title")
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{
-				title: "Element",
+				title: t("presentations.elements.show.breadcrumb"),
 				href: Routes.themePresentationElements(
 					params.circle_slug,
 					params.theme_slug,
@@ -35,7 +38,7 @@ const ShowPresentationElement = ({ presentation_element }: ShowPresentationEleme
 								params.presentation_slug,
 								presentation_element.slug,
 							) }>
-								Edit PresentationElement
+								{ t("presentations.elements.show.edit") }
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>

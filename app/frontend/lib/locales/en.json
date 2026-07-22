@@ -6,6 +6,14 @@
       }
     },
     "circles": {
+      "edit": {
+        "title": "Edit Circle"
+      },
+      "form": {
+        "create": "Create Circle",
+        "name": "Name",
+        "update": "Update Circle"
+      },
       "index": {
         "circlesSectionTitle": "Your Circles",
         "membersCount_one": "1 member",
@@ -26,10 +34,53 @@
         "title": "Dashboard",
         "totalGivenPlaceholder": "Total given: --"
       },
+      "new": {
+        "title": "New Circle"
+      },
       "notices": {
         "created": "Circle was successfully created.",
         "destroyed": "Circle was successfully destroyed.",
         "updated": "Circle was successfully updated."
+      },
+      "show": {
+        "activeMembers": "Active Members",
+        "editCircle": "Edit Circle",
+        "organizationsFunded": "Organizations Funded",
+        "totalDonated": "Total Donated",
+        "upcomingThemes": "Upcoming Themes"
+      }
+    },
+    "common": {
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "delete": "Delete",
+        "edit": "Edit",
+        "edit_breadcrumb": "Edit",
+        "new": "New",
+        "save": "Save",
+        "search": "Search",
+        "submit": "Submit"
+      },
+      "dynamic_fields": {
+        "add_item": "Add item",
+        "remove_item": "Remove item %{index}"
+      },
+      "notices": {
+        "circle_access_denied": "You have not been granted access to that Giving Circle",
+        "page_expired": "The page expired, please try again.",
+        "resource_not_found": "The resource you are trying to access does not exist"
+      },
+      "table": {
+        "advanced_search": "Advanced Search",
+        "after": "After",
+        "before": "Before",
+        "between": "Between",
+        "creation_date": "Creation Date",
+        "date": "Date",
+        "exact_date": "Exact Date",
+        "rows_per_page": "rows per page",
+        "search": "Search"
       }
     },
     "date": {
@@ -95,19 +146,19 @@
     "datetime": {
       "distance_in_words": {
         "about_x_hours": {
-          "one": "about 1 hour",
+          "one": "about %{count} hour",
           "other": "about %{count} hours"
         },
         "about_x_months": {
-          "one": "about 1 month",
+          "one": "about %{count} month",
           "other": "about %{count} months"
         },
         "about_x_years": {
-          "one": "about 1 year",
+          "one": "about %{count} year",
           "other": "about %{count} years"
         },
         "almost_x_years": {
-          "one": "almost 1 year",
+          "one": "almost %{count} year",
           "other": "almost %{count} years"
         },
         "half_a_minute": "half a minute",
@@ -116,28 +167,32 @@
           "other": "less than %{count} minutes"
         },
         "less_than_x_seconds": {
-          "one": "less than 1 second",
+          "one": "less than %{count} second",
           "other": "less than %{count} seconds"
         },
         "over_x_years": {
-          "one": "over 1 year",
+          "one": "over %{count} year",
           "other": "over %{count} years"
         },
         "x_days": {
-          "one": "1 day",
+          "one": "%{count} day",
           "other": "%{count} days"
         },
         "x_minutes": {
-          "one": "1 minute",
+          "one": "%{count} minute",
           "other": "%{count} minutes"
         },
         "x_months": {
-          "one": "1 month",
+          "one": "%{count} month",
           "other": "%{count} months"
         },
         "x_seconds": {
-          "one": "1 second",
+          "one": "%{count} second",
           "other": "%{count} seconds"
+        },
+        "x_years": {
+          "one": "%{count} year",
+          "other": "%{count} years"
         }
       },
       "prompts": {
@@ -156,6 +211,9 @@
     "devise": {
       "confirmations": {
         "confirmed": "Your email address has been successfully confirmed.",
+        "new": {
+          "resend_confirmation_instructions": "Resend confirmation instructions"
+        },
         "send_instructions": "You will receive an email with instructions for how to confirm your email address in a few minutes.",
         "send_paranoid_instructions": "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
       },
@@ -189,9 +247,15 @@
       },
       "mailer": {
         "confirmation_instructions": {
+          "action": "Confirm my account",
+          "greeting": "Welcome %{recipient}!",
+          "instruction": "You can confirm your account email through the link below:",
           "subject": "Confirmation instructions"
         },
         "email_changed": {
+          "greeting": "Hello %{recipient}!",
+          "message": "We're contacting you to notify you that your email has been changed to %{email}.",
+          "message_unconfirmed": "We're contacting you to notify you that your email is being changed to %{email}.",
           "subject": "Email Changed"
         },
         "invitation_instructions": {
@@ -203,12 +267,23 @@
           "subject": "Invitation instructions"
         },
         "password_change": {
+          "greeting": "Hello %{recipient}!",
+          "message": "We're contacting you to notify you that your password has been changed.",
           "subject": "Password Changed"
         },
         "reset_password_instructions": {
+          "action": "Change my password",
+          "greeting": "Hello %{recipient}!",
+          "instruction": "Someone has requested a link to change your password. You can do this through the link below.",
+          "instruction_2": "If you didn't request this, please ignore this email.",
+          "instruction_3": "Your password won't change until you access the link above and create a new one.",
           "subject": "Reset password instructions"
         },
         "unlock_instructions": {
+          "action": "Unlock my account",
+          "greeting": "Hello %{recipient}!",
+          "instruction": "Click the link below to unlock your account:",
+          "message": "Your account has been locked due to an excessive number of unsuccessful sign in attempts.",
           "subject": "Unlock instructions"
         }
       },
@@ -217,6 +292,16 @@
         "success": "Successfully authenticated from %{kind} account."
       },
       "passwords": {
+        "edit": {
+          "change_my_password": "Change my password",
+          "change_your_password": "Change your password",
+          "confirm_new_password": "Confirm new password",
+          "new_password": "New password"
+        },
+        "new": {
+          "forgot_your_password": "Forgot your password?",
+          "send_me_reset_password_instructions": "Send me password reset instructions"
+        },
         "no_token": "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
         "send_instructions": "You will receive an email with instructions on how to reset your password in a few minutes.",
         "send_paranoid_instructions": "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",
@@ -225,6 +310,19 @@
       },
       "registrations": {
         "destroyed": "Bye! Your account has been successfully cancelled. We hope to see you again soon.",
+        "edit": {
+          "are_you_sure": "Are you sure?",
+          "cancel_my_account": "Cancel my account",
+          "currently_waiting_confirmation_for_email": "Currently waiting confirmation for: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "leave blank if you don't want to change it",
+          "title": "Edit %{resource}",
+          "unhappy": "Unhappy?",
+          "update": "Update",
+          "we_need_your_current_password_to_confirm_your_changes": "we need your current password to confirm your changes"
+        },
+        "new": {
+          "sign_up": "Sign up"
+        },
         "signed_up": "Welcome! You have signed up successfully.",
         "signed_up_but_inactive": "You have signed up successfully. However, we could not sign you in because your account is not yet activated.",
         "signed_up_but_locked": "You have signed up successfully. However, we could not sign you in because your account is locked.",
@@ -235,10 +333,49 @@
       },
       "sessions": {
         "already_signed_out": "Signed out successfully.",
+        "new": {
+          "sign_in": "Log in"
+        },
         "signed_in": "Signed in successfully.",
         "signed_out": "Signed out successfully."
       },
+      "shared": {
+        "links": {
+          "back": "Back",
+          "didn_t_receive_confirmation_instructions": "Didn't receive confirmation instructions?",
+          "didn_t_receive_unlock_instructions": "Didn't receive unlock instructions?",
+          "forgot_your_password": "Forgot your password?",
+          "sign_in": "Log in",
+          "sign_in_with_provider": "Sign in with %{provider}",
+          "sign_up": "Sign up"
+        },
+        "minimum_password_length": {
+          "one": "(%{count} character minimum)",
+          "other": "(%{count} characters minimum)"
+        }
+      },
+      "ui": {
+        "app_name": "Giving Circle",
+        "check_email": "Please check your email",
+        "check_email_body": "An email has been sent to the address provided. Please follow the link to confirm your account.",
+        "check_email_resend": "If you don't receive an email, use the form below to resend it.",
+        "confirm_password": "Confirm Password",
+        "email": "Email",
+        "log_in": "Log In",
+        "log_in_instead": "Log In Instead",
+        "password": "Password",
+        "passwords_must_match": "Passwords must match",
+        "register": "Register",
+        "remember_me": "Remember Me",
+        "resend_confirmation": "Resend confirmation instructions",
+        "reset_password": "Reset Password",
+        "send_reset": "Send Reset Instructions",
+        "sign_up": "Sign Up"
+      },
       "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Resend unlock instructions"
+        },
         "send_instructions": "You will receive an email with instructions for how to unlock your account in a few minutes.",
         "send_paranoid_instructions": "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.",
         "unlocked": "Your account has been unlocked successfully. Please sign in to continue."
@@ -285,12 +422,97 @@
         "update": "Update %{model}"
       }
     },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "interaction_config_templates": {
+      "edit": {
+        "title": "Edit %{name}"
+      },
+      "form": {
+        "create": "Create Template",
+        "data_points": "Data points",
+        "name": "Name",
+        "outputs": "Outputs",
+        "update": "Update Template"
+      },
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "templates": "Interaction Templates"
+        },
+        "columns": {
+          "actions": "Actions",
+          "name": "Name"
+        },
+        "newTemplate": "New Template",
+        "title": "Interaction Templates"
+      },
+      "new": {
+        "title": "New Interaction Template"
+      },
+      "notices": {
+        "created": "Interaction template was successfully created.",
+        "destroyed": "Interaction template was successfully destroyed.",
+        "updated": "Interaction template was successfully updated."
+      }
+    },
     "memberships": {
+      "edit": {
+        "title": "Edit Member"
+      },
+      "form": {
+        "active": "Active",
+        "create": "Create Membership",
+        "funds": "Funds",
+        "name": "Name",
+        "number": "Number",
+        "update": "Update Membership"
+      },
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "members": "Members"
+        },
+        "newMember": "New Member",
+        "title": "Members"
+      },
+      "new": {
+        "title": "New Member"
+      },
       "notices": {
         "created": "Membership was successfully created.",
         "destroyed": "Membership was successfully destroyed.",
         "updated": "Membership was successfully updated."
       }
+    },
+    "navigation": {
+      "circles": "Circles",
+      "currentLanguage": "Current language",
+      "dashboard": "Dashboard",
+      "exitPresentationControls": "Exit presentation controls",
+      "general": "General",
+      "givingCircles": "Giving Circles",
+      "interactionTemplates": "Interaction Templates",
+      "language": "Language",
+      "languageSearch": "Search languages",
+      "members": "Members",
+      "more": "more...",
+      "orgs": "Orgs",
+      "preferences": "Preferences",
+      "presentationTemplates": "Presentation Templates",
+      "settings": "Settings",
+      "signIn": "Sign In",
+      "signOut": "Sign Out",
+      "themes": "Themes",
+      "toggleColorScheme": "Toggle color scheme",
+      "toggleColorSchemeToDark": "Toggle color scheme to dark mode",
+      "toggleColorSchemeToLight": "Toggle color scheme to light mode"
     },
     "navigation_interrupt": {
       "modal": {
@@ -370,6 +592,26 @@
       }
     },
     "orgs": {
+      "edit": {
+        "title": "Edit Org"
+      },
+      "form": {
+        "create": "Create Org",
+        "description": "Description",
+        "name": "Name",
+        "update": "Update Org"
+      },
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "orgs": "Organizations"
+        },
+        "newOrg": "New Org",
+        "title": "Organizations"
+      },
+      "new": {
+        "title": "New Organization"
+      },
       "notices": {
         "created": "Org was successfully created.",
         "destroyed": "Org was successfully destroyed.",
@@ -399,12 +641,231 @@
       "alerts": {
         "no_source_template": "This presentation is not linked to a Presentation Template."
       },
+      "elements": {
+        "edit": {
+          "title": "Edit Element"
+        },
+        "form": {
+          "create": "Create Element",
+          "data": "Data",
+          "name": "Name",
+          "template": "Template",
+          "update": "Update Element"
+        },
+        "index": {
+          "newElement": "New Element",
+          "title": "Elements"
+        },
+        "new": {
+          "title": "New Element"
+        },
+        "notices": {
+          "created": "Element was successfully created.",
+          "destroyed": "Element was successfully destroyed.",
+          "updated": "Element was successfully updated."
+        },
+        "show": {
+          "breadcrumb": "Element",
+          "edit": "Edit Element",
+          "title": "Element"
+        },
+        "table": {
+          "actions": "Actions",
+          "data": "Data",
+          "name": "Name",
+          "template": "Template"
+        }
+      },
+      "form": {
+        "blank_presentation": "Blank presentation",
+        "create": "Create Presentation",
+        "name": "Name",
+        "start_from_template": "Start from Presentation Template",
+        "update": "Update Presentation"
+      },
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "presentations": "Presentations",
+          "themes": "Themes"
+        },
+        "newPresentation": "New Presentation",
+        "title": "Presentations"
+      },
+      "interaction_responses": {
+        "edit": {
+          "title": "Edit Response"
+        },
+        "form": {
+          "amount_cents": "%{label} (cents)",
+          "create": "Save Response",
+          "currency": "Currency",
+          "member": "Member",
+          "response": "Response",
+          "update": "Update Response"
+        },
+        "index": {
+          "newResponse": "New Response",
+          "title": "%{name} Responses",
+          "title_short": "Responses"
+        },
+        "new": {
+          "title": "New Response"
+        },
+        "notices": {
+          "created": "Response was successfully saved.",
+          "destroyed": "Response was successfully destroyed.",
+          "updated": "Response was successfully updated."
+        },
+        "show": {
+          "title": "Response"
+        },
+        "table": {
+          "actions": "Actions",
+          "member": "Member",
+          "total_allocated": "Total allocated (cents)"
+        },
+        "validations": {
+          "membership_belongs_to_presentation": "Must belong to this presentation",
+          "response_data": {
+            "amount_cents_integer": "%{prefix}.amount_cents must be an integer",
+            "at_least": "%{prefix} must be at least %{min}",
+            "at_most": "%{prefix} must be at most %{max}",
+            "currency_string": "%{prefix}.currency must be a string",
+            "entry_amount_cents_integer": "%{prefix}[%{index}].amount_cents must be an integer",
+            "fields_must_be_array": "Interaction config fields must be an array",
+            "group_must_be_object": "%{prefix}[%{group_index}] must be an object",
+            "invalid_choices": "%{prefix} contains invalid choices",
+            "max_entries": "%{prefix} must have at most %{max} entries",
+            "min_entries": "%{prefix} must have at least %{min} entries",
+            "must_be_array": "%{prefix} must be an array",
+            "must_be_choice": "%{prefix} must be one of the configured choices",
+            "must_be_money": "%{prefix} must be a money object",
+            "must_be_number": "%{prefix} must be a number",
+            "must_be_object": "%{prefix}[%{index}] must be an object",
+            "must_be_org_id": "%{prefix} must be an org id string",
+            "must_be_string": "%{prefix} must be a string",
+            "must_be_string_array": "%{prefix} must be an array of strings",
+            "org_id_required": "%{prefix}[%{index}].org_id is required",
+            "rank_integer": "%{prefix}[%{index}].rank must be an integer",
+            "required": "%{prefix} is required",
+            "unknown_field": "Unknown field '%{key}' in response data",
+            "unknown_type": "%{prefix} has unknown field type '%{type}'"
+          }
+        }
+      },
+      "interactions": {
+        "edit": {
+          "breadcrumb": "Edit"
+        },
+        "form": {
+          "create": "Create Interaction",
+          "data_points": "Data points",
+          "field_builder": {
+            "add_field": "Add field",
+            "choices": "Choices (comma separated)",
+            "field_n": "Field %{index}",
+            "key": "Key",
+            "label": "Label",
+            "max": "Max",
+            "max_entries": "Max entries",
+            "min": "Min",
+            "min_entries": "Min entries",
+            "nested_fields": "Nested fields",
+            "remove": "Remove",
+            "repeatable": "Repeatable",
+            "type": "Type"
+          },
+          "name": "Name",
+          "output_builder": {
+            "add_output": "Add output",
+            "metric": "Metric",
+            "no_compatible_reducers": "This field type has no compatible reducers.",
+            "output_n": "Output %{index}",
+            "reducer": "Reducer",
+            "remove": "Remove",
+            "select_field": "Select a field",
+            "select_source_first": "Select a source field first.",
+            "source_field": "Source field"
+          },
+          "outputs": "Outputs",
+          "slide": "Slide",
+          "template": "Template",
+          "template_blank": "Blank",
+          "trigger_manual": "Manual",
+          "trigger_slide": "Slide",
+          "trigger_type": "Trigger type",
+          "update": "Update Interaction"
+        },
+        "index": {
+          "newInteraction": "New Interaction",
+          "title": "Interactions"
+        },
+        "new": {
+          "title": "New Interaction"
+        },
+        "notices": {
+          "accepting": "Interaction is now accepting responses.",
+          "created": "Interaction was successfully created.",
+          "destroyed": "Interaction was successfully destroyed.",
+          "not_accepting": "Interaction is no longer accepting responses.",
+          "updated": "Interaction was successfully updated."
+        },
+        "show": {
+          "accepting_responses": "Accepting responses",
+          "close_responses": "Close responses",
+          "closed": "Closed",
+          "data_points_configured": "%{count} data points configured",
+          "edit": "Edit Interaction",
+          "open_responses": "Open responses",
+          "responses": "Responses"
+        },
+        "table": {
+          "actions": "Actions",
+          "name": "Name",
+          "trigger": "Trigger"
+        },
+        "validations": {
+          "config": {
+            "choices_format": "%{path}.options.choices must be an array of non-empty strings",
+            "choices_required": "%{path}.options must include choices",
+            "field_group_fields": "%{path}.fields must be a non-empty array for field_group",
+            "key_format": "%{path}.key must be lowercase alphanumeric with underscores",
+            "key_required": "%{path}.key is required",
+            "key_unique": "%{path}.key '%{key}' must be unique",
+            "label_required": "%{path}.label is required",
+            "max_must_be_integer": "%{path}.options.max must be an integer",
+            "max_must_be_number": "%{path}.options.max must be a number",
+            "metric_required": "%{path}.metric is required",
+            "min_lte_max": "%{path}.options.min must be less than or equal to max",
+            "min_must_be_integer": "%{path}.options.min must be an integer",
+            "min_must_be_number": "%{path}.options.min must be a number",
+            "must_be_array": "%{path} must be an array",
+            "must_be_object": "%{path} must be an object",
+            "reducer_incompatible": "%{path}.reducer '%{reducer}' is not compatible with field type '%{field_type}'",
+            "reducer_required": "%{path}.reducer is required",
+            "repeatable_boolean": "%{path}.options.repeatable must be a boolean",
+            "source_field_missing": "%{path}.source_field '%{source_field}' does not reference a field",
+            "source_field_required": "%{path}.source_field is required",
+            "unknown_metric": "%{path}.metric '%{metric}' is not a known metric",
+            "unknown_reducer": "%{path}.reducer '%{reducer}' is not a known reducer",
+            "unknown_type": "%{path}.type '%{type}' is not a known field type"
+          },
+          "slide_slug_required": "Must include slide_slug when trigger type is slide"
+        }
+      },
+      "new": {
+        "title": "New Presentation"
+      },
       "notices": {
         "created": "Presentation was successfully created.",
         "destroyed": "Presentation was successfully destroyed.",
         "template_created": "Presentation Template was successfully created.",
         "template_updated": "Presentation Template was successfully updated.",
         "updated": "Presentation was successfully updated."
+      },
+      "settings": {
+        "title": "Settings"
       },
       "show": {
         "active": "Active",
@@ -463,23 +924,169 @@
           "emptySlides": "No slides yet. Add one to start building this presentation.",
           "settings": "Settings",
           "title": "Slides"
+        },
+        "preview": {
+          "title": "Slide preview"
+        }
+      }
+    },
+    "settings": {
+      "branding": {
+        "circle_color": "Circle Color",
+        "index": {
+          "title": "Settings: Branding"
+        },
+        "notices": {
+          "updated": "Branding settings successfully updated"
+        },
+        "primary_color": "Primary Color",
+        "save": "Save Branding Settings"
+      },
+      "general": {
+        "index": {
+          "title": "Settings: General"
+        }
+      },
+      "integrations": {
+        "index": {
+          "title": "Settings: Integrations"
+        }
+      },
+      "mail": {
+        "edit": {
+          "title": "Settings: Mail"
+        },
+        "form": {
+          "address": "Reply-To Address",
+          "address_placeholder": "If not provided, will default to your username",
+          "create": "Create Mail Account",
+          "domain": "Email Domain",
+          "domain_placeholder": "e.g. mycompany.com",
+          "host": "SMTP Server Address",
+          "name": "Name",
+          "notes": "Notes",
+          "password": "Password",
+          "port": "Port Number",
+          "save": "Save SMTP Settings",
+          "security": "Security",
+          "security_none": "None",
+          "security_ssl": "SSL",
+          "security_tls": "TLS",
+          "update": "Update Mail Account",
+          "username": "Username"
+        },
+        "index": {
+          "newAccount": "New Mail Account",
+          "newConnection": "New Mail Connection",
+          "title": "Settings: Mail"
+        },
+        "new": {
+          "title": "Settings: Mail"
+        },
+        "notices": {
+          "created": "Mail account successfully created",
+          "deleted": "Mail account successfully deleted",
+          "updated": "Mail account successfully updated"
+        },
+        "smtp": {
+          "test": {
+            "authentication_failed": "Authentication failed: %{message}",
+            "error": "An error occurred: %{message}",
+            "success": "Authentication successful"
+          }
+        }
+      },
+      "notifications": {
+        "index": {
+          "title": "Settings: Notifications"
         }
       }
     },
     "slides": {
       "editor": {
+        "components": {
+          "bar_graph": {
+            "award_image": "Award Image",
+            "bar_color": "Bar Color",
+            "funded_bar_color": "Funded Bar Color",
+            "grid_color": "Grid Color",
+            "label": "Bar Graph",
+            "need_color": "Need Color",
+            "text_color": "Text Color"
+          },
+          "card": {
+            "background_color": "Background Color",
+            "default_description": "Topic description...",
+            "default_title": "Topic Title",
+            "description": "Description",
+            "font_color": "Font Color",
+            "label": "Card",
+            "title": "Title"
+          },
+          "container": {
+            "alignment": "Alignment",
+            "label": "Container"
+          },
+          "grid": {
+            "label": "Grid"
+          },
+          "heading": {
+            "default_title": "Heading",
+            "label": "Heading",
+            "level": "Heading Level",
+            "padding": "Padding",
+            "text_color": "Text Color",
+            "title": "Title"
+          },
+          "image": {
+            "border_color": "Border Color",
+            "default_title": "Image",
+            "label": "Image"
+          },
+          "orgs_iterator": {
+            "label": "Orgs Iterator"
+          }
+        },
         "fields": {
-          "layout": {
+          "background_image": {
+            "attachment": "Attachment",
+            "attachment_fixed": "Fixed",
+            "attachment_scroll": "Scroll",
+            "custom_size": "Custom size",
+            "label": "Background Image",
+            "offset_x": "Offset X",
+            "offset_y": "Offset Y",
+            "remove_image": "Remove image",
+            "repeat": "Repeat",
+            "repeat_no": "No repeat",
+            "repeat_x": "Repeat X",
+            "repeat_y": "Repeat Y",
+            "size": "Size",
+            "size_auto": "Auto",
+            "size_contain": "Contain",
+            "size_cover": "Cover",
+            "size_custom": "Custom"
+          },
+          "border": {
+            "color": "Border Color",
+            "radius": "Border Radius",
+            "width": "Border Width"
+          },
+          "color": {
+            "background": "Background Color"
+          },
+          "dimension": {
+            "min_height": "Min Height",
+            "min_width": "Min Width",
+            "width": "Width"
+          },
+          "flex": {
             "align": {
               "center": "Center",
               "end": "End",
               "start": "Start",
               "stretch": "Stretch"
             },
-            "background_color": "Background Color",
-            "border_color": "Border Color",
-            "border_radius": "Border Radius",
-            "border_width": "Border Width",
             "direction": {
               "column": "Column",
               "row": "Row"
@@ -488,7 +1095,6 @@
               "block": "Block",
               "flex": "Flex"
             },
-            "flex": "Flex",
             "gap": "Gap",
             "justify": {
               "center": "Center",
@@ -497,6 +1103,7 @@
               "space_between": "Space Between",
               "start": "Start"
             },
+            "label": "Flex",
             "labels": {
               "align": "Align",
               "direction": "Direction",
@@ -506,20 +1113,53 @@
               "overflow": "Overflow",
               "wrap": "Wrap"
             },
-            "margin": "Margin",
-            "min_height": "Min Height",
-            "min_width": "Min Width",
             "overflow": {
               "auto_scroll": "Auto (scroll)",
               "hidden": "Hidden",
               "visible": "Visible"
             },
-            "padding": "Padding",
-            "width": "Width",
             "wrap": {
               "nowrap": "Nowrap",
               "wrap": "Wrap"
             }
+          },
+          "sizing": {
+            "align_self": {
+              "auto": "Auto",
+              "center": "Center",
+              "end": "End",
+              "start": "Start",
+              "stretch": "Stretch"
+            },
+            "custom_placeholder": "flex: 1 1 280px; max-width: 50%",
+            "fine_tune": {
+              "align_self": "Align Self",
+              "flex_grow": "Flex Grow",
+              "flex_shrink": "Flex Shrink",
+              "title": "Fine Tune"
+            },
+            "label": "Size",
+            "labels": {
+              "clamp_max": "Max",
+              "clamp_min": "Min",
+              "clamp_preferred": "Preferred",
+              "max_width": "Max Width",
+              "width": "Width"
+            },
+            "modes": {
+              "auto": "Auto",
+              "clamp": "Responsive",
+              "custom": "Custom CSS",
+              "fill": "Fill Space",
+              "fixed": "Fixed Size"
+            }
+          },
+          "spacing": {
+            "labels": {
+              "unit": "Unit"
+            },
+            "margin": "Margin",
+            "padding": "Padding"
           }
         },
         "header": {
@@ -537,10 +1177,49 @@
           "saving": "Saving to server..."
         }
       },
+      "form": {
+        "add_to_presentation": "Add a slide to this presentation",
+        "add_to_template": "Add a slide to this template",
+        "create": "Create Slide",
+        "data": "Data",
+        "name": "Name",
+        "new_slide_title": "New Slide Title",
+        "order": "Order",
+        "template": "Template",
+        "update": "Update Slide"
+      },
+      "new": {
+        "title": "New Slide"
+      },
       "notices": {
         "created": "Slide was successfully created.",
+        "destroyed": "Slide was successfully destroyed.",
         "updated": "Slide was successfully updated."
+      },
+      "show": {
+        "edit": "Edit Slide",
+        "title": "Slide"
       }
+    },
+    "spotlight": {
+      "actions": "Actions",
+      "circle": "Circle",
+      "circle_dashboard": "Circle Dashboard",
+      "circle_dashboard_description": "Overview for the active giving circle",
+      "giving_circles": "Giving Circles",
+      "giving_circles_description": "Choose a giving circle",
+      "members_description": "View circle memberships",
+      "navigation": "Navigation",
+      "nothing_found": "Nothing found...",
+      "orgs_description": "View circle organizations",
+      "presentation_templates": "Presentation Templates",
+      "presentation_templates_description": "View presentation templates",
+      "search_circle": "Search this circle...",
+      "search_select_circle": "Select a circle to search records",
+      "settings": "Settings",
+      "settings_description": "Site configuration and preferences",
+      "slides": "Slides",
+      "themes_description": "View circle themes"
     },
     "support": {
       "array": {
@@ -550,6 +1229,15 @@
       }
     },
     "templates": {
+      "edit": {
+        "title": "Edit Template"
+      },
+      "form": {
+        "create": "Create Template",
+        "get_started": "Let's Get Started!",
+        "name": "Name",
+        "update": "Update Template"
+      },
       "index": {
         "breadcrumbs": {
           "circles": "Circles",
@@ -569,6 +1257,11 @@
         "newTemplate": "New Template",
         "title": "Templates"
       },
+      "notices": {
+        "created": "Template was successfully created.",
+        "destroyed": "Template was successfully destroyed.",
+        "updated": "Template was successfully updated."
+      },
       "show": {
         "addSlide": "Add slide",
         "addSlideModal": {
@@ -586,7 +1279,65 @@
         "settings": "Settings"
       }
     },
+    "theme_memberships": {
+      "edit": {
+        "title": "Edit Membership"
+      },
+      "form": {
+        "create": "Create Member",
+        "first_name": "First Name",
+        "helper_prefix": "Creating a brand new member and adding them to the",
+        "helper_suffix": "Theme",
+        "last_name": "Last Name",
+        "number": "Number",
+        "update": "Update Member"
+      },
+      "index": {
+        "add_existing": "Add Existing Member To Theme",
+        "add_label": "Add Memberships to Theme",
+        "add_new": "Add New Membership To Theme",
+        "breadcrumbs": {
+          "circles": "Circles",
+          "members": "Members",
+          "themes": "Themes"
+        },
+        "newMember": "New Member",
+        "title": "Memberships"
+      },
+      "new": {
+        "title": "New Member"
+      },
+      "notices": {
+        "created": "Member was successfully created.",
+        "destroyed": "Member was successfully destroyed.",
+        "updated": "Member was successfully updated."
+      }
+    },
     "theme_orgs": {
+      "form": {
+        "create": "Create Org",
+        "description": "Description",
+        "name": "Name",
+        "update": "Update Org"
+      },
+      "index": {
+        "add_existing": "Add Existing Org To Theme",
+        "add_label": "Add Orgs to Theme",
+        "add_new": "Add New Org To Theme",
+        "breadcrumbs": {
+          "circles": "Circles",
+          "orgs": "Organizations",
+          "themes": "Themes"
+        },
+        "import": "Import",
+        "import_from_file": "Import Orgs From File",
+        "import_title": "Orgs Import",
+        "newOrg": "New Organization",
+        "title": "Theme Organizations"
+      },
+      "new": {
+        "title": "New Org"
+      },
       "notices": {
         "bulk_created": "%{count} Organizations successfully added to the theme",
         "created": "Organization was successfully added to the theme.",
@@ -598,14 +1349,48 @@
       }
     },
     "themes": {
+      "edit": {
+        "title": "Edit Theme"
+      },
+      "form": {
+        "create": "Create Theme",
+        "name": "Name",
+        "update": "Update Theme"
+      },
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "themes": "Themes"
+        },
+        "newTheme": "New Theme",
+        "title": "Themes"
+      },
+      "new": {
+        "title": "New Theme"
+      },
       "notices": {
         "created": "Theme was successfully created.",
         "destroyed": "Theme was successfully destroyed.",
         "updated": "Theme was successfully updated."
+      },
+      "show": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "themes": "Themes"
+        },
+        "default_title": "Theme",
+        "edit": "Edit Theme",
+        "member_funds": "Member Funds",
+        "member_funds_placeholder": "Not tracked yet",
+        "new_presentation": "New Presentation",
+        "organizations": "Organizations",
+        "presentations": "Presentations",
+        "total_ask": "Total Ask",
+        "view_all": "View all"
       }
     },
     "time": {
-      "am": "AM",
+      "am": "am",
       "formats": {
         "default": "%a, %d %b %Y %H:%M:%S %z",
         "devise": {
@@ -619,7 +1404,22 @@
         "short": "%d %b %H:%M",
         "us": "%m/%d/%Y %I:%M %p"
       },
-      "pm": "PM"
+      "pm": "pm"
+    },
+    "users": {
+      "form": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "number": "Number",
+        "update": "Update User"
+      },
+      "index": {
+        "title": "Users"
+      },
+      "notices": {
+        "destroyed": "User was successfully destroyed.",
+        "updated": "User was successfully updated."
+      }
     },
     "views": {
       "pagination": {

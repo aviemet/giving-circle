@@ -95,6 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.datetime "created_at", null: false
     t.boolean "mock_data", default: false, null: false
     t.string "name", null: false
+    t.jsonb "settings", default: {}, null: false
     t.string "slug"
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_circles_on_slug", unique: true
@@ -127,6 +128,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "interaction_config_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "circle_id", null: false
+    t.jsonb "config", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id", "slug"], name: "index_interaction_config_templates_on_circle_id_and_slug", unique: true
+    t.index ["circle_id"], name: "index_interaction_config_templates_on_circle_id"
   end
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -207,30 +219,36 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.datetime "created_at", null: false
     t.jsonb "data", default: {}
     t.string "name", null: false
+    t.string "slug"
     t.boolean "template", default: false, null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_presentation_elements_on_slug", unique: true
   end
 
   create_table "presentation_interaction_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "membership_id", null: false
     t.uuid "presentation_interaction_id", null: false
-    t.jsonb "response_data"
+    t.jsonb "response_data", default: {}, null: false
     t.datetime "updated_at", null: false
     t.index ["membership_id"], name: "index_presentation_interaction_responses_on_membership_id"
+    t.index ["presentation_interaction_id", "membership_id"], name: "idx_pres_interaction_responses_on_interaction_and_membership"
     t.index ["presentation_interaction_id"], name: "idx_on_presentation_interaction_id_d5003055ab"
   end
 
   create_table "presentation_interactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.jsonb "config"
+    t.boolean "accepting_responses", default: false, null: false
+    t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
-    t.integer "interaction_type"
-    t.jsonb "results"
-    t.string "slug"
-    t.jsonb "trigger_conditions"
-    t.integer "trigger_type"
+    t.string "name", null: false
+    t.uuid "presentation_id", null: false
+    t.jsonb "results", default: {}, null: false
+    t.string "slug", null: false
+    t.jsonb "trigger_conditions", default: {}, null: false
+    t.integer "trigger_type", default: 0, null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_presentation_interactions_on_slug", unique: true
+    t.index ["presentation_id", "slug"], name: "index_presentation_interactions_on_presentation_id_and_slug", unique: true
+    t.index ["presentation_id"], name: "index_presentation_interactions_on_presentation_id"
   end
 
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -425,6 +443,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "addresses", "contacts"
   add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"
+  add_foreign_key "interaction_config_templates", "circles"
   add_foreign_key "memberships", "circles"
   add_foreign_key "memberships", "people"
   add_foreign_key "memberships_people", "memberships"
@@ -434,6 +453,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "phones", "contacts"
   add_foreign_key "presentation_interaction_responses", "memberships"
   add_foreign_key "presentation_interaction_responses", "presentation_interactions"
+  add_foreign_key "presentation_interactions", "presentations"
   add_foreign_key "presentations", "slides", column: "active_slide_id"
   add_foreign_key "presentations", "templates"
   add_foreign_key "presentations", "themes"

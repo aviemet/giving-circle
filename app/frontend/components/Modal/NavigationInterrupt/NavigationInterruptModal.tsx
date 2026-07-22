@@ -56,7 +56,7 @@ export function NavigationInterruptModal({
 					{ onSaveAndLeave && (
 						<Button
 							loading={ isSaving }
-							onClick={ async() => {
+							onClick={ async () => {
 								setIsSaving(true)
 								try {
 									const saved = await onSaveAndLeave()

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Section, Page } from "@/components"
 import { ThemeMemberForm } from "@/domains/themeMemberships/Form"
 import { Routes } from "@/lib"
@@ -11,11 +13,12 @@ interface EditThemeMembershipProps {
 // @path: /:circle_slug/themes/:theme_slug/memberships/:slug/edit
 // @route: editThemeMembership
 const EditThemeMembership = ({ membership }: EditThemeMembershipProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle, active_theme } = usePageProps<"editThemeMembership">()
 
 	if(!active_circle || !active_theme) return <></>
 
-	const title = "Edit Membership"
+	const title = t("theme_memberships.edit.title")
 
 	return (
 		<Page title={ title }>

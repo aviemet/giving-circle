@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { PresentationTable } from "@/domains/presentations/Table"
@@ -15,19 +17,20 @@ interface PresentationIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations
 // @route: themePresentations
 const PresentationsIndex = ({ presentations, pagination, circle, theme }: PresentationIndexProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle, active_theme } = usePageProps<"themePresentations">()
 
 	if(!active_circle || !active_theme) return <></>
 
 	return (
 		<Page
-			title="Presentations"
+			title={ t("presentations.index.title") }
 			breadcrumbs={ [
-				{ title: "Circles", href: Routes.circles() },
+				{ title: t("presentations.index.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: "Themes", href: Routes.circleThemes(params.circle_slug) },
+				{ title: t("presentations.index.breadcrumbs.themes"), href: Routes.circleThemes(params.circle_slug) },
 				{ title: active_theme.name, href: Routes.theme(params.circle_slug, params.theme_slug) },
-				{ title: "Presentations", href: window.location.href },
+				{ title: t("presentations.index.breadcrumbs.presentations"), href: window.location.href },
 			] }
 		>
 			<IndexTableTemplate
@@ -35,7 +38,11 @@ const PresentationsIndex = ({ presentations, pagination, circle, theme }: Presen
 				pagination={ pagination }
 				contextMenu={ {
 					options: [
-						{ label: "New Presentation", href: Routes.newThemePresentation(params.circle_slug, params.theme_slug), icon: <NewIcon /> },
+						{
+							label: t("presentations.index.newPresentation"),
+							href: Routes.newThemePresentation(params.circle_slug, params.theme_slug),
+							icon: <NewIcon />,
+						},
 					],
 				} }
 			>

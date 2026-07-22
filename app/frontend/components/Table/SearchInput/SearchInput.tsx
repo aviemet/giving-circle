@@ -3,7 +3,8 @@ import { router } from "@inertiajs/react"
 import { ActionIcon, Box } from "@mantine/core"
 import { useSessionStorage } from "@mantine/hooks"
 import { debounce } from "lodash"
-import React, { useMemo, useEffect } from "react"
+import { useMemo, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import { SearchIcon, CrossIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
@@ -32,12 +33,11 @@ export function SearchInput({
 	placeholder,
 	debounceMs = 500,
 }: SearchInputProps) {
+	const { t } = useTranslation()
 	const context = useTableContext(false)
 	const model = modelProp ?? context?.model
 	const setSearching = context?.setSearching
-	const [internalSearching, setInternalSearching] = React.useState(false)
-	const searching = context ? context.searching : internalSearching
-	const handleSetSearching = context ? setSearching : setInternalSearching
+	const handleSetSearching = setSearching
 
 	const location = useLocation()
 	const [internalValue, setInternalValue] = useSessionStorage({
@@ -139,7 +139,7 @@ export function SearchInput({
 				leftSectionPointerEvents="none"
 				className={ classes.searchInput }
 				wrapper={ false }
-				aria-label="Search"
+				aria-label={ t("common.table.search") }
 			/>
 		</Box>
 	)

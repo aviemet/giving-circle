@@ -13,11 +13,12 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 	registerActiveCircleAndThemeLifecycle()
 
 	beforeEach(() => {
+		window.localStorage.clear()
 		document.elementsFromPoint ??= () => []
 		inertiaPageProps.active_presentation = createPresentationInertiaShare()
 	})
 
-	test("renders slide visual editor", async() => {
+	test("renders slide visual editor", async () => {
 		const presentation: Schema.PresentationsFormData = {
 			active: true,
 			name: "Presentation",
@@ -40,7 +41,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 		}, { timeout: 30000 })
 	}, 35000)
 
-	test("keeps focus on title input while editing", async() => {
+	test("keeps focus on title input while editing", async () => {
 		const presentation: Schema.PresentationsFormData = {
 			active: true,
 			name: "Presentation",
@@ -71,7 +72,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 		fireEvent.scroll(fieldsContainer)
 
 		const titleInput = await waitFor(() => {
-			const input = screen.getByDisplayValue("Slide")
+			const input = screen.getByDisplayValue("My Slide")
 			if(!(input instanceof HTMLInputElement) && !(input instanceof HTMLTextAreaElement)) {
 				throw new Error("Expected a text input")
 			}

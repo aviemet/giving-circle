@@ -1,7 +1,7 @@
 import { screen, waitFor } from "@testing-library/react"
 import { afterEach, describe, expect, test } from "vitest"
 
-import { AppSidebarMenu } from "@/layouts/AppLayout/AppSidebar/Menu"
+import { AppSidebarMenu } from "@/layouts/AppLayout/AppSidebar/SidebarMenu"
 import { Routes } from "@/lib"
 import { useLayoutStore } from "@/store"
 import { type MenuKey } from "@/store/slices/menuSlice"
@@ -22,7 +22,7 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 		useLayoutStore.getState().setOpenMenus(allMenus)
 	})
 
-	test("accordion uses separated variant for grouped nav", async() => {
+	test("accordion uses separated variant for grouped nav", async () => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
 
 		const { container } = render(<AppSidebarMenu />)
@@ -33,22 +33,25 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 		})
 	})
 
-	test("does not close other menus when deeper menu appears", async() => {
-		useLayoutStore.getState().setOpenMenus(["circle"] satisfies MenuKey[])
-
+	test("does not close other menus when deeper menu appears", async () => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
-		inertiaPageProps.active_theme = createThemeInertiaShare()
 
-		render(<AppSidebarMenu />)
+		const { rerender } = render(<AppSidebarMenu />)
 
 		await waitFor(() => {
-			const openMenus = useLayoutStore.getState().openMenus
-			expect(openMenus.has("circle")).toBe(true)
-			expect(openMenus.has("theme")).toBe(true)
+			expect(screen.getByRole("link", { name: "Members" })).toBeVisible()
+		})
+
+		inertiaPageProps.active_theme = createThemeInertiaShare()
+		rerender(<AppSidebarMenu />)
+
+		await waitFor(() => {
+			expect(screen.getByRole("link", { name: "Members" })).toBeVisible()
+			expect(screen.getByRole("link", { name: "Organizations" })).toBeVisible()
 		})
 	})
 
-	test("renders presentation menu links", async() => {
+	test("renders presentation menu links", async () => {
 		inertiaPageProps.active_circle = createCircleInertiaShare()
 		inertiaPageProps.active_theme = createThemeInertiaShare()
 		inertiaPageProps.active_presentation = createPresentationInertiaShare()
@@ -63,6 +66,10 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 			expect(screen.getByRole("link", { name: "Slides" })).toHaveAttribute(
 				"href",
 				Routes.themePresentationSlides("circle-1", "theme-1", "presentation-1"),
+			)
+			expect(screen.getByRole("link", { name: "Interactions" })).toHaveAttribute(
+				"href",
+				Routes.themePresentationInteractions("circle-1", "theme-1", "presentation-1"),
 			)
 			expect(screen.getByRole("link", { name: "Settings" })).toHaveAttribute(
 				"href",

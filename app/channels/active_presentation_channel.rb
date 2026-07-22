@@ -2,6 +2,11 @@ class ActivePresentationChannel < ApplicationCable::Channel
   def subscribed
     presentation = Presentation.find(params[:presentation_id])
     stream_for presentation
+
+    transmit({
+      type: "active_presentation_updated",
+      active_presentation: ActivePresentation::Cache.fetch(presentation.id),
+    })
   end
 
   def unsubscribed
@@ -30,6 +35,13 @@ class ActivePresentationChannel < ApplicationCable::Channel
       type: "slide_updated",
       slide_id: slide.id,
       content: slide.content
+    })
+  end
+
+  def self.broadcast_state(presentation, snapshot)
+    broadcast_to(presentation, {
+      type: "active_presentation_updated",
+      active_presentation: snapshot,
     })
   end
 end

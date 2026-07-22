@@ -3,6 +3,7 @@ export {
 	TbUsers as PeopleIcon,
 	TbUserCircle as UsersIcon,
 	TbSettings as SettingsIcon,
+	TbLanguage as LanguageIcon,
 	TbX as CrossIcon,
 	TbChevronsRight as LastIcon,
 	TbChevronsLeft as FirstIcon,

@@ -1,15 +1,15 @@
-import { Title } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { useTranslation } from "react-i18next"
 
-// @path: /settings/notifications
+import { Page } from "@/components"
+
+// @path: /settings/:circle_slug/notifications
 // @route: settingsNotifications
-const Appearance = () => {
+const NotificationsSettings = () => {
+	const { t } = useTranslation()
+
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>Notifications Settings</Title>
-		</SettingsLayout>
+		<Page title={ t("settings.notifications.index.title") } />
 	)
 }
 
-export default withLayout(Appearance, "settings")
+export default NotificationsSettings

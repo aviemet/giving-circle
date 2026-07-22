@@ -5,6 +5,7 @@
 #  id         :uuid             not null, primary key
 #  mock_data  :boolean          default(FALSE), not null
 #  name       :string           not null
+#  settings   :jsonb            not null
 #  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -16,6 +17,23 @@
 require "rails_helper"
 
 RSpec.describe Circle do
+  describe "settings" do
+    it "defaults primary_color to blue" do
+      circle = build(:circle)
+
+      expect(circle.settings.primary_color).to eq("blue")
+    end
+
+    it "persists primary_color in the settings jsonb column" do
+      circle = create(:circle)
+      circle.settings.primary_color = "grape"
+      circle.save!
+
+      expect(circle.reload.settings.primary_color).to eq("grape")
+      expect(circle.read_attribute(:settings)["primary_color"]).to eq("grape")
+    end
+  end
+
   describe "Validations" do
     it "is valid with valid attributes" do
       expect(build_stubbed(:circle)).to be_valid

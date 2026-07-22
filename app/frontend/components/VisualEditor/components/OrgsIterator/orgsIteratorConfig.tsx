@@ -1,6 +1,7 @@
 import { Slot, type ComponentConfig, type SlotComponent } from "@measured/puck"
 
 import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
+import { i18n } from "@/lib/i18n"
 
 import { OrgsIteratorDisplay } from "./OrgsIteratorDisplay"
 import { OrgsIteratorEditor } from "./OrgsIteratorEditor"
@@ -24,8 +25,10 @@ function OrgsIteratorComponent({ content }: OrgsIteratorComponentProps) {
 	return <OrgsIteratorDisplay content={ content } />
 }
 
+const t = i18n.t.bind(i18n)
+
 export const orgsIteratorConfig: ComponentConfig<OrgsIteratorProps> = {
-	label: "Orgs Iterator",
+	label: t("slides.editor.components.orgs_iterator.label"),
 	fields: {
 		content: { type: "slot" },
 	},

@@ -1,0 +1,347 @@
+{
+  "tl": {
+    "date": {
+      "abbr_day_names": [
+        "Lin",
+        "Lun",
+        "Mar",
+        "Miy",
+        "Huw",
+        "Biy",
+        "Sab"
+      ],
+      "abbr_month_names": [
+        null,
+        "Ene",
+        "Peb",
+        "Mar",
+        "Abr",
+        "May",
+        "Hun",
+        "Hul",
+        "Ago",
+        "Set",
+        "Okt",
+        "Nob",
+        "Dis"
+      ],
+      "day_names": [
+        "Linggo",
+        "Lunes",
+        "Martes",
+        "Miyerkules",
+        "Huwebes",
+        "Biyernes",
+        "Sabado"
+      ],
+      "formats": {
+        "default": "%d/%m/%Y",
+        "long": "ika-%d ng %B, %Y",
+        "short": "ika-%d ng %b"
+      },
+      "month_names": [
+        null,
+        "Enero",
+        "Pebrero",
+        "Marso",
+        "Abril",
+        "Mayo",
+        "Hunyo",
+        "Hulyo",
+        "Agosto",
+        "Setyembre",
+        "Oktubre",
+        "Nobyembre",
+        "Disyembre"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "humigit-kumulang isang oras",
+          "other": "humigit-kumulang %{count} oras"
+        },
+        "about_x_months": {
+          "one": "humigit-kumulang isang buwan",
+          "other": "humigit-kumulang %{count} buwan"
+        },
+        "about_x_years": {
+          "one": "humigit-kumulang isang taon",
+          "other": "humigit-kumulang %{count} taon"
+        },
+        "almost_x_years": {
+          "one": "halos isang taon",
+          "other": "halos %{count} taon"
+        },
+        "half_a_minute": "kalahating minuto",
+        "less_than_x_minutes": {
+          "one": "mas mababa sa isang minuto",
+          "other": "mas mababa sa %{count} minuto"
+        },
+        "less_than_x_seconds": {
+          "one": "mas mababa sa isang segundo",
+          "other": "mas mababa sa %{count} segundo"
+        },
+        "over_x_years": {
+          "one": "higit sa isang taon",
+          "other": "higit %{count} taon"
+        },
+        "x_days": {
+          "one": "isang araw",
+          "other": "%{count} araw"
+        },
+        "x_minutes": {
+          "one": "isang minuto",
+          "other": "%{count} minuto"
+        },
+        "x_months": {
+          "one": "isang buwan",
+          "other": "%{count} buwan"
+        },
+        "x_seconds": {
+          "one": "isang segundo",
+          "other": "%{count} segundo"
+        }
+      },
+      "prompts": {
+        "day": "araw",
+        "hour": "oras",
+        "minute": "minuto",
+        "month": "buwan",
+        "second": "segundo",
+        "year": "taon"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Ang iyong email address ay matagumpay na nakumpirma.",
+        "new": {
+          "resend_confirmation_instructions": "Muling ipadala ang mga tagubilin sa pagkumpirma."
+        },
+        "send_instructions": "Makakatanggap ka ng isang email na may instructions kung paano kukumpirmahin ang iyong email address san loob ng mga ilang minuto.",
+        "send_paranoid_instructions": "Kung ang iyong email address ay nakikita sa aming database, makakatanggap ka ng isang email na may instructions kung paano kukumpirmahin ang iyong email address sa loob ng mga ilang minuto."
+      },
+      "failure": {
+        "already_authenticated": "Naka-sign in ka na.",
+        "inactive": "Hindi pa na-activate ang iyong account.",
+        "invalid": null,
+        "last_attempt": "Mayroon kang isa pang pagtatangka bago mai-lock ang iyong account.",
+        "locked": "Naka-lock ang iyong account.",
+        "not_found_in_database": null,
+        "timeout": "Na-expire na ang iyong session. Mag-sign in ulit para magpatuloy.",
+        "unauthenticated": "Kailangan mong mag-sign in o mag-sign up bago magpatuloy.",
+        "unconfirmed": "Kailangan mong kumpirmahin ang iyong email address bago magpatuloy."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Ikumpirma ang aking account",
+          "greeting": "Maligayang pagdating %{recipient}!",
+          "instruction": "Maaari mong kumpirmahin ang iyong account email sa pamamagitan ng link sa ibaba:",
+          "subject": "Mga Tagubilin ng Pagkumpirma"
+        },
+        "email_changed": {
+          "greeting": null,
+          "message": null,
+          "message_unconfirmed": null,
+          "subject": null
+        },
+        "password_change": {
+          "greeting": "Hello %{recipient}!",
+          "message": "Kami'y nakikipag-ugnay sa iyo para abisuhan (notify) ka na nabago ang iyong password.",
+          "subject": "Nabago ang Password"
+        },
+        "reset_password_instructions": {
+          "action": "Baguhin ang aking password",
+          "greeting": "Hello %{recipient}!",
+          "instruction": "May isang tao na humiling ng isang link upang baguhin ang iyong password, at magagawa mo ito sa pamamagitan ng link sa ibaba.",
+          "instruction_2": "Kung hindi mo hiniling ito, huwag pansinin ang email na ito.",
+          "instruction_3": "Ang iyong password ay hindi magbabago hanggang ia-access mo ang link sa itaas at lumikha ng bago.",
+          "subject": "I-reset ang mga tagubilin tungkol sa password"
+        },
+        "unlock_instructions": {
+          "action": "I-unlock ang aking account",
+          "greeting": "Hello %{recipient}!",
+          "instruction": "I-click ang link sa ibaba upang i-unlock ang iyong account:",
+          "message": "Na-lock ang iyong account dahil sa labis na dami ng hindi matagumpay na mga pagtatangka sa pag-sign in.",
+          "subject": "Mga tagubilin sa pag-unlock"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Hindi ka ma-authenticate galing sa %{kind} dahil \"%{reason}\".",
+        "success": "Matagumpay na na-authenticate galing sa %{kind} na account."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Baguhin ang aking password",
+          "change_your_password": "Baguhin ang iyong password",
+          "confirm_new_password": "Kumpirmahin ang bagong password",
+          "new_password": "Bagong password"
+        },
+        "new": {
+          "forgot_your_password": "Nakalimutang ang iyong password?",
+          "send_me_reset_password_instructions": "Padalhan mo ako ng mga tagubilin sa pag-reset ng password"
+        },
+        "no_token": "Hindi mo ma-access ang pahinang ito nang hindi nanggagaling sa isang email sa pag-reset ng password. Kung ikaw ay nagmula sa isang email ng pag-reset ng password, siguraduhin na ginamit mo ang buong URL na ibinigay.",
+        "send_instructions": "Makakatanggap ka ng isang email na may mga tagubilin kung paano i-reset ang iyong password sa loob ng mga ilang minuto.",
+        "send_paranoid_instructions": "Kung ang iyong email address ay nakikita sa aming database, makakatanggap ng isang password recovery link sa iyong email address sa loob ng mga ilang minuto.",
+        "updated": "Matagumpay na nabago ang iyong password. Naka-sign in ka na ngayon.",
+        "updated_not_active": "Matagumpay na nabago ang iyong password."
+      },
+      "registrations": {
+        "destroyed": "Paalam! Matagumpay na na-kansela ang iyong account. Inaasahan naming makita ka muli sa lalong madaling panahon.",
+        "edit": {
+          "are_you_sure": "Sigurado ka ba?",
+          "cancel_my_account": "Ikansela ang aking account",
+          "currently_waiting_confirmation_for_email": "Kasalukuyang naghihintay ng kumpirmasyon para kay/sa: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "iwanang blangko kung ayaw mong baguhin ito",
+          "title": "I-edit ang %{resource}",
+          "unhappy": "Hindi masaya?",
+          "update": "I-update",
+          "we_need_your_current_password_to_confirm_your_changes": "kailangan namin ang iyong kasalukuyang password para makumpirma ang iyong mga pagbabago"
+        },
+        "new": {
+          "sign_up": "Mag-sign up"
+        },
+        "signed_up": "Maligayang pagdating! Matagumpay kang nakapag-sign up.",
+        "signed_up_but_inactive": "Matagumpay kang nakapag-sign up. Gayunpaman, hindi ka namin mai-sign in dahil hindi pa na-activate ang iyong account.",
+        "signed_up_but_locked": "Matagumpay kang nakapag-sign up. Gayunpaman, hindi ka namin mai-sign in dahil naka-lock ang iyong account.",
+        "signed_up_but_unconfirmed": "Isang mensahe na may link sa pagkumpirma ay ipinadala sa iyong email address. Paki-sundan ang link upang maisaaktibo ang iyong account.",
+        "update_needs_confirmation": "Matagumpay mong na-update ang iyong account, ngunit kailangan naming i-verify ang iyong bagong email address. Paki-suri ng iyong email at sundin ang link ng kumpirmasyon upang kumpirmahin ang iyong bagong email address..",
+        "updated": "Matagumpay na na-update ang iyong account.",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": "Matagumpay na nakapag-sign out.",
+        "new": {
+          "sign_in": "Mag-sign in"
+        },
+        "signed_in": "Matagumpay na nakapag-sign in.",
+        "signed_out": "Matagumpay na nakapag-sign out."
+      },
+      "shared": {
+        "links": {
+          "back": "Bumalik",
+          "didn_t_receive_confirmation_instructions": "Hindi nakatanggap ng mga tagubilin sa pagkumpirma?",
+          "didn_t_receive_unlock_instructions": "Hindi nakatanggap ng mga tagubilin sa pag-unlock?",
+          "forgot_your_password": "Nakalimutang ang iyong password?",
+          "sign_in": "Mag-sign in",
+          "sign_in_with_provider": "Mag-sign in gamit ang %{provider}",
+          "sign_up": "Mag-sign up"
+        },
+        "minimum_password_length": {
+          "one": null,
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Muling ipadala ang mga tagubilin sa pag-unlock"
+        },
+        "send_instructions": "Makakatanggap kayo ng isang email na may tagubilin kung paano i-unlock ang iyong account sa loob ng mga ilang minuto.",
+        "send_paranoid_instructions": "Kung ang iyong account ay nag-eexist, makakatanggap kayo ng isang email na may tagubilin kung paano i-unlock ang iyong account sa ilang minuto.",
+        "unlocked": "Ang iyong account ay matagumpay na nai-unlock. Mag-sign in para magpatuloy."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Mangyaring pumili"
+      },
+      "submit": {
+        "create": "lumikha ng %{model}",
+        "submit": "isumite ang %{model}",
+        "update": "i-update ang %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "₱"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "bilyon",
+            "million": "milyon",
+            "quadrillion": "kuwadrilyon",
+            "thousand": "libo",
+            "trillion": "trilyon",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Byte",
+              "other": "Bytes"
+            },
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": ""
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", at",
+        "two_words_connector": " at ",
+        "words_connector": ","
+      }
+    },
+    "time": {
+      "am": "AM",
+      "formats": {
+        "default": "%A, ika-%d ng %B ng %Y %H:%M:%S %z",
+        "long": "ika-%d ng %B ng %Y %H:%M",
+        "short": "%d ng %b %H:%M"
+      },
+      "pm": "PM"
+    }
+  }
+}

@@ -1,9 +1,16 @@
 ---
-description: Typescript Rules
-globs: *.ts, *.tsx
+description: Giving Circle TypeScript / React conventions
+globs: "**/*.ts,**/*.tsx"
 alwaysApply: false
 ---
-You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Mantine, TanStack Query, CSS, HTML, UI and UX.
+
+This repository's style guide overrides generic TypeScript advice. When in conflict, follow `.cursor/rules/project-style.mdc` and `.cursor/giving_circle.mdx`.
+
+## Equality (mandatory)
+
+- Forbidden: `==`, `!=` (including `!= null` / `== null`).
+- Required: `===`, `!==`.
+- For "present" checks on nullable values, write `value !== null && value !== undefined`, narrow the type, or use optional chaining / early returns that stay strict.
 
 ## Typecasting
 
@@ -18,136 +25,75 @@ Consider the keyword `any` to be forbidden, with NO EXCEPTIONS!
 ### TypeScript Usage
 
 - Use TypeScript for all javascript code; prefer interfaces over types.
-- DO NOT USE `any`, ever! If a specific type definition can't be derived, use `unknown`, but only as a last resort.
-- Write concise, technical TypeScript code with accurate examples.
+- DO NOT USE `any`, ever! Do not use `unknown` as an escape hatch either; fix the types.
 - Avoid enums; use maps instead.
 - Use functional components with TypeScript interfaces.
 - Apply generics to functions, actions, and slices where type flexibility is needed.
 - Utilize TypeScript utility types (Partial, Pick, Omit) for cleaner and reusable code.
-- Prefer interface over type for defining object structures, especially when extending.
 - Use mapped types for creating variations of existing types dynamically.
 - Let TypeScript infer return types when the return value is obvious.
   - Only specify an explicit return type when inference is ambiguous or you need to constrain a public API surface.
+- Define types next to the module they describe. Never add a feature-local `types.ts` barrel.
+
+## Module interfaces and files
+
+- Folder `index.ts` files are the public interface only. Export the main component/hook and types callers need. Do not export internal helpers or private subcomponents.
+- If logic is reused outside the feature, place it in a shared module under `app/frontend/lib` (or another intentional shared location). Do not re-export internals from the feature barrel.
+- Put each React component in its own file when you create it (`export function Name`). Do not ship multi-component mega-files and split later.
 
 ## Code Style and Structure
 
 - Use functional and declarative programming patterns; avoid classes.
 - Prefer iteration and modularization over code duplication.
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
-- Consider edge cases and error scenarios, for simple edge cases, use the "return early" pattern to avoid nesting.
-- Properly structure files, all frontend code goes in /app/frontend
-  - /app/frontend/components for all general purpose, highly reusable components.
-  - /app/frontend/domains for all domain specific components.
-  - /app/frontend/features for all feature specific components.
-  - /app/frontend/layouts for all layout components.
-  - /app/frontend/lib for all non-react code.
-  - /app/frontend/pages for all top-level Inertia pages. These components are the entry point for each route from the server.
-  - /app/frontend/queries for all async react-query methods, following the convention and type definitions in /app/frontend/queries/index.ts.
-  - /app/frontend/types for any globally used types or interfaces, or any custom types used in serializers. (Do no modify anything in types/serializers as it is all auto generated)
-- Avoid default exports.
+- Consider edge cases and error scenarios; for simple edge cases, use the "return early" pattern to avoid nesting.
+- Properly structure files; all frontend code goes in `/app/frontend`:
+  - `/app/frontend/components` for general purpose, highly reusable components.
+  - `/app/frontend/domains` for domain specific components.
+  - `/app/frontend/features` for feature specific components.
+  - `/app/frontend/layouts` for layout components.
+  - `/app/frontend/lib` for non-react code.
+  - `/app/frontend/pages` for top-level Inertia pages (entry point for each route from the server).
+  - `/app/frontend/queries` for async react-query methods, following `/app/frontend/queries/index.ts`.
+  - `/app/frontend/types` for globally used types or serializer custom types. Do not modify `types/serializers` (auto generated).
+- Avoid default exports everywhere else. Inertia page entry components under `app/frontend/pages` MUST use a default export — the `urlParams` type generators depend on that pattern.
 
-  ### React Component Architecture
+### React Component Architecture
 
-  - Use functional components with TypeScript interfaces.
-  - Define components using `export function`.
-  - Extract reusable logic into custom hooks.
-  - Implement proper component composition.
-  - Implement proper cleanup in useEffect hooks.
-  - Use React 19 new features:
-    - Pass `ref` as a normal prop, and always refactor `forwardRef` to use normal props when you encounter it
+- Use functional components with TypeScript interfaces.
+- Define components using `export function`.
+- Extract reusable logic into custom hooks.
+- Implement proper component composition.
+- Implement proper cleanup in useEffect hooks.
+- React 19: pass `ref` as a normal prop; refactor `forwardRef` when you encounter it.
 
-  ### React Performance Optimization
+### Variable and Function Naming Patterns
 
-  - Use `useCallback` for memoizing expensive callback functions.
-  - Implement `useMemo` for expensive computations.
-  - Avoid inline function definitions in JSX.
-  - Implement code splitting using dynamic imports.
-  - Implement proper key props in lists (avoid using index as key).
-  
-  ### Variable and Function Naming Patterns
-
-  - Prefix event handlers with 'handle': handleClick, handleSubmit
-  - Prefix boolean variables with verbs: isLoading, hasError, canSubmit
-  - Prefix custom hooks with 'use': useAuth, useForm
-  - Use complete words over abbreviations except for:
-    - err (error)
-    - req (request)
-    - res (response)
-    - props (properties)
-    - ref (reference)
-
-  ### File Naming Conventions
-
-  - Use lowercase with dashes for directories (e.g., components/auth-wizard).
-  - Favor named exports for components.
-
-## Syntax and Formatting
-
-- Use the "function" keyword for pure functions.
-- Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
-- Use declarative JSX.
+- Prefix event handlers with `handle`: handleClick, handleSubmit
+- Prefix boolean variables with verbs: isLoading, hasError, canSubmit
+- Prefix custom hooks with `use`: useAuth, useForm
+- Use complete words over abbreviations except for: err, req, res, props, ref
 
 ## Testing
 
-- Write tests using Vitest and React-Testing-Library and Playwright.
-- Put test files in app/frontend/tests in a folder structure which matches the file's location.
-
-  ### Unit Testing
-
-  - Write thorough unit tests to validate individual functions and components.
-  - Use Vitest and React Testing Library for reliable and efficient testing of React components.
-  - Follow patterns like Arrange-Act-Assert to ensure clarity and consistency in tests.
-  - Mock external dependencies and API calls to isolate unit tests.
-
-  ### Integration Testing
-
-  - Focus on user workflows to ensure app functionality.
-  - Set up and tear down test environments properly to maintain test independence.
-  - Use snapshot testing selectively to catch unintended UI changes without over-relying on it.
-  - Leverage testing utilities (e.g., screen in RTL) for cleaner and more readable tests.
-
-  ### E2E Testing
-
-  - Use Playwright to write end to end tests, putting test files in app/frontend/tests/e2e.
-  - Don't mock the server, assume that the server will be running in a test environment during when running e2e tests.
-
-## Accessibility (a11y)
-
-- Rely primarily on existing accessibility in Mantine.
-- Use semantic HTML for meaningful structure.
-- Apply accurate ARIA attributes where needed.
-- Ensure full keyboard navigation support.
-- Manage focus order and visibility effectively.
-- Maintain accessible color contrast ratios.
-- Follow a logical heading hierarchy.
-- Make all interactive elements accessible.
-- Provide clear and accessible error feedback.
+- Write tests using Vitest, React Testing Library, and Playwright.
+- Put test files in `app/frontend/tests` in a folder structure which matches the file's location.
+- Playwright e2e tests go in `app/frontend/tests/e2e`. Do not mock the server; assume it runs in the test environment.
 
 ## Internationalization (i18n)
 
 - Use `react-i18next` (`useTranslation`, `t()`) in components.
 - Do not edit `app/frontend/lib/locales/*.json`; define strings in `config/locales/**/*.yml` and run `bundle exec rails i18n:export`.
-- Implement proper locale detection.
-- Use proper number and date formatting.
-- Use proper currency formatting.
-- Implement proper RTL support.
 
 ## UI and Styling
 
-- Use proxied Mantine components for styling. Mantine proxy files are located in app/frontend/Components.
-- Use CSS modules for styling, name CSS files using the same name as the root component with the extension ".css.ts". CSS module files use Linaria and should import the "css" method from "@/lib".
-- Implement responsive design; use a mobile-first approach.
-- Use Mantine's dark mode methods for implementing visual themes in CSS files.
-- Import Linaria/CSS module classes as `import * as classes from "./Component.css"`. Always use `clsx` to wrap CSS classes passed to a `className` prop, even when there is only one class.
+- Use proxied Mantine components from `app/frontend/components`.
+- Use CSS modules with Linaria; name files `Component.css.ts` next to the component.
+- Import as `import * as classes from "./Component.css"`. Always wrap `className` values with `clsx`, even for a single class.
+- No Tailwind.
 
 ## Global State
 
 - Use zustand for global state.
 - Don't store values in global state unless they are truly frontend only. Most state should be managed on the server.
 - Avoid large, all-encompassing slices; separate concerns by feature.
-
-## Performance Optimization
-
-- Minimize 'useEffect', and 'setState'.
-- Wrap client components in Suspense with fallback.
-- Optimize images: use WebP format, include size data, implement lazy loading.

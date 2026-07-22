@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Menu, Page, Title } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { PresentationElementsTable } from "@/domains/presentation/elements/Table"
@@ -14,8 +16,9 @@ interface PresentationElementIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/elements
 // @route: themePresentationElements
 const PresentationElementsIndex = ({ presentation_elements, pagination }: PresentationElementIndexProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"themePresentationElements">()
-	const title = "Element"
+	const title = t("presentations.elements.index.title")
 
 	return (
 		<Page
@@ -31,7 +34,7 @@ const PresentationElementsIndex = ({ presentation_elements, pagination }: Presen
 						) }
 						icon={ <NewIcon /> }
 					>
-						New Element
+						{ t("presentations.elements.index.newElement") }
 					</Menu.Link>
 				</Menu>
 			</> }
@@ -42,7 +45,7 @@ const PresentationElementsIndex = ({ presentation_elements, pagination }: Presen
 				contextMenu={ {
 					options: [
 						{
-							label: "New Element",
+							label: t("presentations.elements.index.newElement"),
 							href: Routes.newThemePresentationElement(
 								params.circle_slug,
 								params.theme_slug,

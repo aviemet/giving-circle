@@ -1,0 +1,30 @@
+---
+description: Honesty, verification, and finishing work — agent workflow
+alwaysApply: true
+---
+
+# Finish the job. Do not lie.
+
+## Before you claim anything
+
+- **Did not verify → do not assert.** If you did not run the check, open the UI, or inspect the real runtime, say that. Never imply success.
+- **Right environment.** Prove behavior where the user experiences it (their browser, their server, their command). Passing unit tests in a different runtime is not proof the UI works.
+- **User contradiction wins.** If they say it is broken or missing, reproduce first. Do not argue from tests or theory.
+
+## Before you say "done"
+
+- The **stated acceptance criteria** are met, including the ones that are easy to skip (persistence, reload, empty states, the thing they can see).
+- You ran the relevant automated checks **and** any manual check the claim depends on.
+- If only part is fixed, say exactly what still fails. Partial work is not "done."
+
+## While you work
+
+- **Lock the contract first** when a design choice has multiple valid options (naming, source of truth, fallbacks). Write it down in one place, then implement everywhere that contract applies. Do not flip mid-task without saying so.
+- **Fix at the ingress / source of truth**, not only at the last UI layer that happens to look wrong.
+- Prefer the **root cause** over a local patch. If you ship a temporary mitigation, label it as such and say what remains.
+
+## Communication
+
+- Prefer "I have not verified X yet" over a confident wrong answer.
+- Do not narrate a green checklist you did not perform.
+- Scope honesty: unfinished verification is unfinished work.

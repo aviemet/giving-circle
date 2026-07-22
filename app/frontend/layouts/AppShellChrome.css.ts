@@ -1,6 +1,6 @@
 import { css } from "@linaria/core"
 
-import { theme } from "@/lib"
+import { theme } from "@/lib/theme"
 
 export const shellRootKeepsHeaderScrollSlot = css`
   --app-shell-header-offset: ${ theme.other.header.height }px !important;

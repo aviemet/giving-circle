@@ -7,7 +7,11 @@ import { UiFrameworkProvider } from "./UiFrameworkProvider"
 import "./reset.css"
 import "@mantine/core/styles.css"
 import "@mantine/tiptap/styles.css"
-import "@mantine/dropzone/styles.css"
+import "@mantine/dates/styles.css"
+import "@mantine/notifications/styles.css"
+import "@mantine/spotlight/styles.css"
+import "mantine-contextmenu/styles.layer.css"
+import "mantine-datatable/styles.css"
 import "./global.css"
 
 interface ProviderProps {

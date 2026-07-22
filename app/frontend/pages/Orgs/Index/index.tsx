@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { OrgTable } from "@/domains/orgs/Table"
@@ -14,15 +16,16 @@ interface OrgIndexProps {
 // @path: /:circle_slug/orgs
 // @route: circleOrgs
 const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
+	const { t } = useTranslation()
 	const { params, active_circle } = usePageProps<"circleOrgs">()
 
 	if(!active_circle) return <></>
 
 	return (
-		<Page title="Orgs" breadcrumbs={ [
-			{ title: "Circles", href: Routes.circles() },
+		<Page title={ t("orgs.index.title") } breadcrumbs={ [
+			{ title: t("orgs.index.breadcrumbs.circles"), href: Routes.circles() },
 			{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-			{ title: "Organizations", href: Routes.circleOrgs(params.circle_slug) },
+			{ title: t("orgs.index.breadcrumbs.orgs"), href: Routes.circleOrgs(params.circle_slug) },
 		] }>
 			<IndexTableTemplate
 				model="orgs"
@@ -30,7 +33,7 @@ const OrgsIndex = ({ orgs, pagination }: OrgIndexProps) => {
 				contextMenu={ {
 					options: [
 						{
-							label: "New Org",
+							label: t("orgs.index.newOrg"),
 							href: Routes.newCircleOrg(params.circle_slug),
 							icon: <NewIcon />,
 						},

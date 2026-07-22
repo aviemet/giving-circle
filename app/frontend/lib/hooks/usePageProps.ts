@@ -24,9 +24,7 @@ interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" |
 }
 
 // Helper type to extract params array and convert it to an object type with string values
-type ParamsObject<T extends readonly string[]> = {
-	[K in T[number]]: string
-}
+type ParamsObject<T extends readonly string[]> = Record<T[number], string>
 
 interface UsePagePropsParams<T extends keyof UrlParams> extends InitialInertiaShareProps {
 	params: ParamsObject<UrlParams[T]["params"]>

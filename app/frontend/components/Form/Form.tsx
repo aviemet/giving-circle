@@ -81,7 +81,9 @@ function FormInner<TFormData extends Record<string, unknown>>({
 	}, [railsAttributes, transform])
 
 	const wrapperRef = useRef<HTMLDivElement>(null)
-	const appliedInitialDataRef = useRef(false)
+	const initialSnapshotRef = useRef(initialData)
+	const hasAppliedInitialDataRef = useRef(false)
+	const appliedRememberKeyRef = useRef<string | undefined>(undefined)
 	const { registerForm, handleFormChange, setSlotProps, applyInitialData, subscribeFormData } = useFormFieldContext()
 	const slotProps = useSlotProps()
 	const latestSlotPropsRef = useRef<FormComponentSlotProps | null>(null)
@@ -93,10 +95,13 @@ function FormInner<TFormData extends Record<string, unknown>>({
 		const form = wrapperRef.current?.querySelector("form") ?? null
 		registerForm(form)
 
-		if(!appliedInitialDataRef.current) {
-			appliedInitialDataRef.current = true
+		const shouldApplyInitialData = !hasAppliedInitialDataRef.current || appliedRememberKeyRef.current !== rememberKey
+
+		if(shouldApplyInitialData) {
+			hasAppliedInitialDataRef.current = true
+			appliedRememberKeyRef.current = rememberKey
 			const dataToApply = rememberKey ? loadRememberedData(rememberKey) : undefined
-			const data = dataToApply ?? initialData
+			const data = dataToApply ?? initialSnapshotRef.current
 
 			if(data) {
 				const id = requestAnimationFrame(() => {
@@ -107,16 +112,14 @@ function FormInner<TFormData extends Record<string, unknown>>({
 				return () => {
 					cancelAnimationFrame(id)
 					registerForm(null)
-					appliedInitialDataRef.current = false
 				}
 			}
 		}
 
 		return () => {
 			registerForm(null)
-			appliedInitialDataRef.current = false
 		}
-	}, [registerForm, initialData, rememberKey, applyInitialData])
+	}, [registerForm, rememberKey, applyInitialData])
 
 	useEffect(() => {
 		if(!rememberKey) return

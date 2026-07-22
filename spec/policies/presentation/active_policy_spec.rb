@@ -1,27 +1,37 @@
 require "rails_helper"
 
 RSpec.describe Presentation::ActivePolicy, type: :policy do
-  subject { described_class }
+  let(:circle) { create(:circle) }
+  let(:theme) { create(:theme, circle:) }
+  let(:presentation) { create(:presentation, theme:, active: true) }
 
-  let(:user) { User.new }
+  describe "#public_show?" do
+    it "denies inactive presentations" do
+      inactive = create(:presentation, theme:, active: false)
+      user = create(:user)
+      user.add_role(:super_admin)
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      expect(described_class.new(user, inactive).public_show?).to be(false)
+    end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    it "allows super admins for active presentations" do
+      user = create(:user)
+      user.add_role(:super_admin)
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      expect(described_class.new(user, presentation).public_show?).to be(true)
+    end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    it "allows circle members for active presentations" do
+      user = create(:user)
+      user.add_role(:editor, circle)
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      expect(described_class.new(user, presentation).public_show?).to be(true)
+    end
+
+    it "denies outsiders for active presentations" do
+      user = create(:user)
+
+      expect(described_class.new(user, presentation).public_show?).to be(false)
+    end
   end
 end

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
@@ -14,6 +16,8 @@ export interface CircleFormProps {
 }
 
 export const CircleForm = ({ to, method = "post", circle }: CircleFormProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Form<CircleFormData>
 			action={ to }
@@ -22,11 +26,13 @@ export const CircleForm = ({ to, method = "post", circle }: CircleFormProps) => 
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="circle.name" label="Name" />
+					<TextInput name="circle.name" label={ t("circles.form.name") } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ circle?.id ? "Update" : "Create" } Circle</Submit>
+					<Submit>
+						{ circle?.id ? t("circles.form.update") : t("circles.form.create") }
+					</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

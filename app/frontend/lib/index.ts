@@ -10,6 +10,7 @@ export * from "./forms"
 export * from "./files"
 export * from "./theme"
 export * from "./units"
+export * from "./money"
 export * from "./withLayout"
 export * from "./statusCodes"
 

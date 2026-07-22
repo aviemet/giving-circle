@@ -14,12 +14,12 @@ class Api::SmtpsController < Api::ApiController
     smtp_client.enable_starttls if smtp.tls?
 
     smtp_client.start(smtp.domain, smtp.username, smtp.password) do
-      { success: true, message: "Authentication successful" }
+      { success: true, message: I18n.t("settings.mail.smtp.test.success") }
     end
   rescue Net::SMTPAuthenticationError => e
-    { success: false, message: "Authentication failed: #{e.message}" }
+    { success: false, message: I18n.t("settings.mail.smtp.test.authentication_failed", message: e.message) }
   rescue StandardError => e
-    { success: false, message: "An error occurred: #{e.message}" }
+    { success: false, message: I18n.t("settings.mail.smtp.test.error", message: e.message) }
   end
 
   def smtp_params

@@ -5,6 +5,7 @@
 #  id         :uuid             not null, primary key
 #  mock_data  :boolean          default(FALSE), not null
 #  name       :string           not null
+#  settings   :jsonb            not null
 #  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

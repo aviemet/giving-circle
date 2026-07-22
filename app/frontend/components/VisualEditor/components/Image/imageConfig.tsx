@@ -1,5 +1,7 @@
 import { type ComponentConfig } from "@measured/puck"
 
+import { i18n } from "@/lib/i18n"
+
 import { ImageDisplay } from "./Image"
 import { colorField, imageField } from "../../fields"
 
@@ -14,8 +16,10 @@ export type ImageProps = {
 	src: string
 }
 
+const t = i18n.t.bind(i18n)
+
 export const imageConfig: ComponentConfig<ImageProps> = {
-	label: "Image",
+	label: t("slides.editor.components.image.label"),
 	fields: {
 		title: { type: "text" },
 		src: imageField(),
@@ -25,12 +29,12 @@ export const imageConfig: ComponentConfig<ImageProps> = {
 		height: { type: "number" },
 		borderWidth: { type: "number" },
 		borderColor: colorField({
-			label: "Border Color",
+			label: t("slides.editor.components.image.border_color"),
 		}),
 	},
 
 	defaultProps: {
-		title: "Image",
+		title: t("slides.editor.components.image.default_title"),
 		src: "",
 		margin: 4,
 		padding: 0,

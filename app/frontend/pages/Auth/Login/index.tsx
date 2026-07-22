@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { useTranslation } from "react-i18next"
 
 import { Title, Link, Box, Paper, SimpleGrid, Grid, Flex } from "@/components"
 import { Form, Submit } from "@/components/Form"
@@ -26,13 +27,15 @@ const defaultData: LoginFormData = {
 // @path: /login
 // @route: newUserSession
 const Login = () => {
+	const { t } = useTranslation()
+
 	return (
 		<SimpleGrid cols={ { sm: 1, md: 2 } } spacing={ 0 } className={ clsx(classes.authLayout) }>
 			<Box id="auth-layout-left">
 				<Paper shadow="lg" radius="lg" p="xl" withBorder>
 
 					<Box mb="md">
-						<Title>Giving Circle</Title>
+						<Title>{ t("devise.ui.app_name") }</Title>
 					</Box>
 
 					<Form<LoginFormData>
@@ -45,7 +48,7 @@ const Login = () => {
 							<Grid.Col>
 								<TextInput
 									name="user.email"
-									placeholder="Email"
+									placeholder={ t("devise.ui.email") }
 									autoComplete="Email"
 									required
 									pattern=".+@.+\..+"
@@ -56,25 +59,25 @@ const Login = () => {
 							<Grid.Col>
 								<PasswordInput
 									name="user.password"
-									placeholder="Password"
+									placeholder={ t("devise.ui.password") }
 									autoComplete="current-password"
 									required
 								/>
 							</Grid.Col>
 
 							<Grid.Col>
-								<Submit>Log In</Submit>
+								<Submit>{ t("devise.ui.log_in") }</Submit>
 							</Grid.Col>
 
 							<Grid.Col>
-								<Checkbox name="user.remember_me" label="Remember Me" />
+								<Checkbox name="user.remember_me" label={ t("devise.ui.remember_me") } />
 							</Grid.Col>
 
 						</Grid>
 
 						<Flex mt="lg" className={ clsx(classes.bottomLinks) }>
-							<Link href={ Routes.newUserPassword() }>Reset Password</Link>
-							<Link href={ Routes.newUserRegistration() }>Register</Link>
+							<Link href={ Routes.newUserPassword() }>{ t("devise.ui.reset_password") }</Link>
+							<Link href={ Routes.newUserRegistration() }>{ t("devise.ui.register") }</Link>
 						</Flex>
 
 					</Form>

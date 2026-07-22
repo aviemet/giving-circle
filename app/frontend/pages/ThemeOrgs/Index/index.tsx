@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Page } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { ThemeOrgTable } from "@/domains/themeOrgs/Table"
@@ -16,26 +18,27 @@ interface OrgIndexProps {
 // @path: /:circle_slug/themes/:theme_slug/orgs
 // @route: themeOrgs
 const ThemeOrgsIndex = ({ orgs, pagination, theme, circle }: OrgIndexProps) => {
+	const { t } = useTranslation()
 	const { params } = usePageProps<"themeOrgs">()
 
 	return (
-		<Page title="Theme Organizations">
+		<Page title={ t("theme_orgs.index.title") }>
 			<IndexTableTemplate
 				model="theme_orgs"
 				pagination={ pagination }
 				contextMenu={ {
-					label: "Add Orgs to Theme",
+					label: t("theme_orgs.index.add_label"),
 					options: [
 						{
-							label: "Add New Org To Theme",
+							label: t("theme_orgs.index.add_new"),
 							href: Routes.newThemeOrg(params.circle_slug, params.theme_slug), icon: <NewIcon />,
 						},
 						{
-							label: "Add Existing Org To Theme",
+							label: t("theme_orgs.index.add_existing"),
 							href: Routes.newThemeOrg(params.circle_slug, params.theme_slug), icon: <NewIcon />,
 						},
 						{
-							label: "Import Orgs From File",
+							label: t("theme_orgs.index.import_from_file"),
 							href: Routes.themeOrgsImport(params.circle_slug, params.theme_slug), icon: <NewIcon />,
 						},
 					],

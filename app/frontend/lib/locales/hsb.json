@@ -1,0 +1,14 @@
+{
+  "hsb": {
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "two",
+          "few",
+          "other"
+        ]
+      }
+    }
+  }
+}

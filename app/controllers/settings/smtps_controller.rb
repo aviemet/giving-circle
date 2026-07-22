@@ -1,64 +1,63 @@
 module Admin
-  class Settings::SmtpsController < ApplicationController
-    expose :smtps, -> { @active_company.smtps }
-    expose :smtp
+  class Settings::SmtpsController < Settings::CircleSettingsController
+    expose :smtps, -> { circle.smtps }
+    expose :smtp, id: -> { params[:id] }, scope: -> { circle.smtps }
 
-    # GET /settings/mail
+    strong_params :smtp, permit: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
+
+    # @route GET /settings/:circle_slug/mail (settings_smtps)
     def index
       render inertia: "Settings/Mail/Index", props: {
-        smtps: smtps.render
+        smtps: -> { smtps.render(:index) },
       }
     end
 
-    # GET /settings/mail/:id
+    # @route GET /settings/:circle_slug/mail/:id (settings_smtp)
     def show
       render inertia: "Settings/Mail/Show", props: {
-        smtp: smtp.render
+        smtp: smtp.render(:show),
       }
     end
 
-    # GET /settings/mail/new
+    # @route GET /settings/:circle_slug/mail/new (new_settings_smtp)
     def new
       render inertia: "Settings/Mail/New", props: {
-        smtp: Smtp.new(security: :tls).render(:form_data)
+        smtp: Smtp.new(security: :tls).render(:form_data),
       }
     end
 
-    # GET /settings/mail/:id/edit
+    # @route GET /settings/:circle_slug/mail/:id/edit (edit_settings_smtp)
     def edit
       render inertia: "Settings/Mail/Edit", props: {
-        smtp: smtp.render(:form_data)
+        smtp: smtp.render(:form_data),
       }
     end
 
-    # POST /settings/mail
+    # @route POST /settings/:circle_slug/mail (settings_smtps)
     def create
-      smtp.company = @active_company
+      smtp.circle = circle
+
       if smtp.save
-        redirect_to settings_smtp_url(smtp), notice: "Mail acccount successfully created"
+        redirect_to settings_smtp_path(smtp, circle_slug: circle.slug), notice: t("settings.mail.notices.created")
       else
-        redirect_to new_settings_mail_path, inertia: { errors: smtp.errors }
+        redirect_to new_settings_smtp_path(circle_slug: circle.slug), inertia: { errors: smtp.errors }
       end
     end
 
-    # PUT /settings/mail/:id
+    # @route PATCH /settings/:circle_slug/mail/:id (settings_smtp)
+    # @route PUT /settings/:circle_slug/mail/:id (settings_smtp)
     def update
       if smtp.update(smtp_params)
-        redirect_to settings_smtp_url(smtp), notice: "Mail acccount successfully updated"
+        redirect_to settings_smtp_path(smtp, circle_slug: circle.slug), notice: t("settings.mail.notices.updated")
       else
-        redirect_to edit_settings_mail_path, inertia: { errors: smtp.errors }
+        redirect_to edit_settings_smtp_path(smtp, circle_slug: circle.slug), inertia: { errors: smtp.errors }
       end
     end
 
-    # DELETE /settings/mail/:id
+    # @route DELETE /settings/:circle_slug/mail/:id (settings_smtp)
     def destroy
+      smtp.destroy
+      redirect_to settings_smtps_path(circle_slug: circle.slug), notice: t("settings.mail.notices.deleted")
     end
-
-    private
-
-    def smtp_params
-      params.expect(smtp: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes])
-    end
-
   end
 end

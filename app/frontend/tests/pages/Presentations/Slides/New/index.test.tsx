@@ -15,6 +15,6 @@ describe("pages/Presentations/Slides/New/index", () => {
 		render(<NewPresentationSlide presentation_slide={ presentation_slide } />)
 
 		screen.getByLabelText("Name")
-		screen.getByRole("button", { name: "Create PresentationSlide" })
+		screen.getByRole("button", { name: "Create Slide" })
 	})
 })

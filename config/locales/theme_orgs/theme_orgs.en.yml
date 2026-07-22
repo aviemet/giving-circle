@@ -1,6 +1,26 @@
 ---
 en:
   theme_orgs:
+    form:
+      create: Create Org
+      description: Description
+      name: Name
+      update: Update Org
+    index:
+      add_existing: Add Existing Org To Theme
+      add_label: Add Orgs to Theme
+      add_new: Add New Org To Theme
+      breadcrumbs:
+        circles: Circles
+        orgs: Organizations
+        themes: Themes
+      import: Import
+      import_from_file: Import Orgs From File
+      import_title: Orgs Import
+      newOrg: New Organization
+      title: Theme Organizations
+    new:
+      title: New Org
     notices:
       bulk_created: "%{count} Organizations successfully added to the theme"
       created: Organization was successfully added to the theme.

@@ -1,19 +1,14 @@
+import { useTranslation } from "react-i18next"
+
 import { Box, Title, Link } from "@/components"
 import { Form, FormConsumer, Submit } from "@/components/Form"
 import { Field, PasswordInput, TextInput } from "@/components/Inputs"
 import { Routes, withLayout } from "@/lib"
 
-type RegisterFormData = {
-	user: {
-		email: string
-		password: string
-		password_confirmation: string
-	}
-}
-
 // @path: /users/register
 // @route: newUserRegistration
 const Register = () => {
+	const { t } = useTranslation()
 	const isRecord = (value: unknown): value is Record<string, unknown> => (
 		value !== null && typeof value === "object" && !Array.isArray(value)
 	)
@@ -38,7 +33,7 @@ const Register = () => {
 					const confirmation = typeof user?.password_confirmation === "string" ? user.password_confirmation : ""
 
 					if(password !== "" && confirmation !== "" && password !== confirmation) {
-						slotProps?.setError("user.password_confirmation", "Passwords must match")
+						slotProps?.setError("user.password_confirmation", t("devise.ui.passwords_must_match"))
 					} else {
 						slotProps?.clearErrors("user.password_confirmation")
 					}
@@ -46,13 +41,13 @@ const Register = () => {
 			/>
 
 			<Box>
-				<Title>Sign Up</Title>
+				<Title>{ t("devise.ui.sign_up") }</Title>
 			</Box>
 
 			<Field>
 				<TextInput
 					name="user.email"
-					placeholder="Email"
+					placeholder={ t("devise.ui.email") }
 					autoComplete="Email"
 					required
 				/>
@@ -61,7 +56,7 @@ const Register = () => {
 			<Field>
 				<PasswordInput
 					name="user.password"
-					placeholder="Password"
+					placeholder={ t("devise.ui.password") }
 					autoComplete="new-password"
 					required
 				/>
@@ -70,17 +65,17 @@ const Register = () => {
 			<Field>
 				<PasswordInput
 					name="user.password_confirmation"
-					placeholder="Confirm Password"
+					placeholder={ t("devise.ui.confirm_password") }
 					autoComplete="new-password"
 					required
 				/>
 			</Field>
 
 			<Field mb={ 16 }>
-				<Submit className="large">Sign Up</Submit>
+				<Submit className="large">{ t("devise.ui.sign_up") }</Submit>
 			</Field>
 
-			<Link href={ Routes.newUserSession() }>Log In Instead</Link>
+			<Link href={ Routes.newUserSession() }>{ t("devise.ui.log_in_instead") }</Link>
 
 		</Form>
 	)

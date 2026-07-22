@@ -3,7 +3,7 @@ import React from "react"
 import { Accordion, NavLink } from "@/components"
 import { DashboardIcon, OrgsIcon, PresentationIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
-import { useInit, useLocation } from "@/lib/hooks"
+import { useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
 
 
@@ -15,14 +15,9 @@ interface ThemeMenuProps {
 
 export function ThemeMenu({ circle, theme, style }: ThemeMenuProps) {
 	const menuKeys = useLayoutStore((state) => state.menuKeys)
-	const toggleOpenMenu = useLayoutStore((state) => state.toggleOpenMenu)
 	const location = useLocation()
 
-	useInit(() => {
-		toggleOpenMenu("theme", true)
-	})
-
-	if(!circle || !theme) return <></>
+	if(!circle || !theme) return null
 
 	return (
 		<Accordion.Item key={ menuKeys.theme } value={ menuKeys.theme } style={ style }>

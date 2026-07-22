@@ -1,15 +1,15 @@
-import { Title } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { useTranslation } from "react-i18next"
+
+import { Page } from "@/components"
 
 // @path: /settings/general
 // @route: settingsGeneral
-const General = () => {
+const GeneralSettings = () => {
+	const { t } = useTranslation()
+
 	return (
-		<SettingsLayout>
-			<Title mb={ 24 }>General Settings</Title>
-		</SettingsLayout>
+		<Page title={ t("settings.general.index.title") } />
 	)
 }
 
-export default withLayout(General, "settings")
+export default GeneralSettings

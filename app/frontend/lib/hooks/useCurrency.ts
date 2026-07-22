@@ -1,3 +1,4 @@
+import { intlLocale } from "@/lib/locale"
 import { type Money } from "@/types"
 
 export type UseCurrencyOptions = Omit<Intl.NumberFormatOptions, "style" | "currency">
@@ -14,7 +15,7 @@ type OmittedOptions = Pick<Intl.NumberFormatOptions, "style" | "currency">
 export const useCurrency = ({
 	amount,
 	currency = "USD",
-	locale = "en-US",
+	locale = intlLocale(),
 	options = {},
 }: UseCurrencyProps): [amount: number, formatter: Intl.NumberFormat] => {
 	let currencyIso = currency

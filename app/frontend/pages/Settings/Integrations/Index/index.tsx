@@ -1,32 +1,15 @@
-import { Group, Title, Menu } from "@/components"
-import { SettingsLayout } from "@/layouts/AppLayout/SettingsLayout"
-import { withLayout } from "@/lib"
+import { useTranslation } from "react-i18next"
 
-import Empty from "./Empty"
-import SmtpList from "./SmtpList"
+import { Page } from "@/components"
 
-interface MailSettingsProps {
-	smtps: Schema.SmtpsIndex[]
-}
-
-// @path: /settings/integrations
+// @path: /settings/:circle_slug/integrations
 // @route: settingsIntegrations
-const Mail = ({ smtps }: MailSettingsProps) => {
-	return (
-		<SettingsLayout>
-			<Group>
-				<Title mb={ 24 }>Mail Settings</Title>
-				<Menu position="bottom-end">
-					<Menu.Target />
-					<Menu.Dropdown>
-						<Menu.Link href="/settings/mail/new">New Mail Connection</Menu.Link>
-					</Menu.Dropdown>
-				</Menu>
-			</Group>
+const IntegrationsSettings = () => {
+	const { t } = useTranslation()
 
-			{ smtps.length === 0 ? <Empty /> : <SmtpList smtps={ smtps } /> }
-		</SettingsLayout>
+	return (
+		<Page title={ t("settings.integrations.index.title") } />
 	)
 }
 
-export default withLayout(Mail, "settings")
+export default IntegrationsSettings

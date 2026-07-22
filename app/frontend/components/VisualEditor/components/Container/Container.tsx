@@ -4,7 +4,11 @@ import clsx from "clsx"
 import { Container } from "@/components"
 
 import { ContainerProps } from "./containerConfig"
-import { buildLayoutStyle } from "../../fields/layout"
+import { buildBorderStyle } from "../../fields/border"
+import { buildDimensionStyle } from "../../fields/dimension"
+import { buildFlexStyle } from "../../fields/flex"
+import { buildFlexItemSizingStyle } from "../../fields/flexItemSizing"
+import { buildSpacingStyle } from "../../fields/spacing"
 import * as classes from "../../Puck.css"
 import { slotDropZoneProps } from "../../slotEditor"
 
@@ -16,6 +20,7 @@ export type ContainerComponentProps = Omit<ContainerProps, "content"> & {
 export function ContainerDisplay({
 	content: Content,
 	alignment,
+	sizing,
 	puck,
 	...styleProps
 }: ContainerComponentProps) {
@@ -25,11 +30,18 @@ export function ContainerDisplay({
 		<Container
 			ref={ dragRef }
 			component={ Content }
-			className={ clsx("presentation_container", classes.presentationSlot) }
+			className={ clsx(classes.presentationSlot, classes.presentationContainer) }
 			ta={ alignment }
 			fluid
 			w="100%"
-			style={ buildLayoutStyle(styleProps) }
+			style={ {
+				...buildSpacingStyle(styleProps),
+				...buildBorderStyle(styleProps),
+				...buildDimensionStyle(styleProps),
+				...buildFlexStyle(styleProps),
+				...buildFlexItemSizingStyle(sizing ?? { mode: "fill" }),
+				...(styleProps.backgroundColor ? { backgroundColor: styleProps.backgroundColor } : {}),
+			} }
 			{ ...slotDropZoneProps() }
 		/>
 	)

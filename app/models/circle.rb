@@ -5,6 +5,7 @@
 #  id         :uuid             not null, primary key
 #  mock_data  :boolean          default(FALSE), not null
 #  name       :string           not null
+#  settings   :jsonb            not null
 #  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -28,10 +29,19 @@ class Circle < ApplicationRecord
   has_many :orgs, dependent: :restrict_with_error
   has_many :memberships, dependent: :restrict_with_error
   has_many :templates, dependent: :restrict_with_error
+  has_many :interaction_config_templates, dependent: :restrict_with_error
   has_many :presentations, through: :themes
   has_many :smtps, dependent: :destroy
 
   scope :includes_associated, -> { includes([:presentations, :memberships, :orgs, :themes]) }
+
+  def settings
+    Circle::Settings.new(self)
+  end
+
+  def settings=(value)
+    write_attribute(:settings, value.to_h.stringify_keys)
+  end
 
   # MockCircle should be used if mock data is needed, these scopes separate the two models
   default_scope { where(mock_data: false) }

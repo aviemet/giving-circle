@@ -1,6 +1,6 @@
 import { css } from "@linaria/core"
 
-import { vars, theme } from "@/lib"
+import { theme } from "@/lib/theme"
 
 export const presentationLayout = css`
 `

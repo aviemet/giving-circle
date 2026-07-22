@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import { useTableSectionContext } from "@/components/Table"
 import { useCurrency, type UseCurrencyOptions } from "@/lib/hooks"
+import { intlLocale } from "@/lib/locale"
 import { type Money } from "@/types"
 
 import { FlexMoney } from "./FlexMoney"
@@ -17,7 +18,7 @@ interface MoneyProps {
 const MoneyComponent = ({
 	children,
 	currency = "USD",
-	locale = "en-US",
+	locale = intlLocale(),
 	accounting = false,
 	options = {},
 }: MoneyProps) => {
@@ -40,7 +41,7 @@ const MoneyComponent = ({
 		// (when used in a table cell, always use FlexMoney. Throwing is easiest way to check context)
 		useTableSectionContext()
 		if(!inTable) setInTable(true)
-	} catch(e) {}
+	} catch{}
 
 	if(accounting || (inTable && accounting === undefined)) {
 		return (

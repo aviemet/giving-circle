@@ -29,7 +29,7 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, uniqueness: {
     scope: :categorizable_type,
-    message: I18n.t("categories.validations.name_uniqueness"),
+    message: ->(_object, _data) { I18n.t("categories.validations.name_uniqueness") },
   }
   validates :categorizable_type, presence: true, inclusion: { in: CATEGORIZABLE_TYPES }
 

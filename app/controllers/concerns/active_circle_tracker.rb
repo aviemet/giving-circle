@@ -18,13 +18,13 @@ module ActiveCircleTracker
         current_user.active_circle.slug != params[:circle_slug] &&
         !current_user.update!(active_circle: Circle.find_by(slug: params[:circle_slug]))
 
-      redirect_to "/circles", notice: "The resource you are trying to access does not exist"
+      redirect_to "/circles", notice: I18n.t("common.notices.resource_not_found")
     end
 
     if current_user.active_circle
       @active_circle = current_user.active_circle
     elsif ["/circles", "/logout"].exclude?(request.path)
-      redirect_to "/circles", notice: "You have not been granted access to that Giving Circle"
+      redirect_to "/circles", notice: I18n.t("common.notices.circle_access_denied")
     end
   end
 end

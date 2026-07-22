@@ -1,6 +1,7 @@
 import { modals } from "@mantine/modals"
 import set from "es-toolkit/compat/set"
 import { useCallback, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
 import { useFormFieldContext } from "@/components/Form"
@@ -15,6 +16,7 @@ interface SlidesSectionProps {
 }
 
 export const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
+	const { t } = useTranslation()
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 	const { getFormData, setValue, clearPathsStartingWith } = useFormFieldContext()
 	const [count, setCount] = useState(template.slides?.length ?? 0)
@@ -50,11 +52,11 @@ export const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 
 	const handleAddSlide = () => {
 		modals.openConfirmModal({
-			title: "Add a slide to this template",
+			title: t("slides.form.add_to_template"),
 			children: (
-				<TextInput label="New Slide Title" ref={ newSlideInputRef } />
+				<TextInput label={ t("slides.form.new_slide_title") } ref={ newSlideInputRef } />
 			),
-			labels: { confirm: "Confirm", cancel: "Cancel" },
+			labels: { confirm: t("common.actions.confirm"), cancel: t("common.actions.cancel") },
 			onConfirm: () => {
 				addTemplateSlideMutation.mutate({
 					title: newSlideInputRef.current!.value,

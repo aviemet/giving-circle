@@ -11,6 +11,7 @@ import {
 import { useClickOutside } from "@mantine/hooks"
 import clsx from "clsx"
 import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { DoubleDownArrowIcon } from "@/components/Icons"
 import { useBooleanToggle } from "@/lib/hooks"
@@ -40,6 +41,7 @@ interface AdvancedSearchProps {
 }
 
 export function AdvancedSearch({ children }: AdvancedSearchProps) {
+	const { t } = useTranslation()
 	const sidebarOpen = useLayoutStore(state => state.sidebarOpen)
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? "open" : "closed"]
@@ -74,7 +76,7 @@ export function AdvancedSearch({ children }: AdvancedSearchProps) {
 		<>
 			<Tooltip
 				withArrow
-				label="Advanced Search"
+				label={ t("common.table.advanced_search") }
 				color={ primaryColor }
 				position="left"
 			>

@@ -1,0 +1,351 @@
+{
+  "pap-CW": {
+    "date": {
+      "abbr_day_names": [
+        "dum",
+        "lun",
+        "mar",
+        "ras",
+        "wep",
+        "biè",
+        "sab"
+      ],
+      "abbr_month_names": [
+        null,
+        "yan",
+        "feb",
+        "mar",
+        "apr",
+        "mei",
+        "yün",
+        "yül",
+        "oug",
+        "sèp",
+        "òkt",
+        "nov",
+        "des"
+      ],
+      "day_names": [
+        "djadumingu",
+        "djaluna",
+        "djamars",
+        "djárason",
+        "djaweps",
+        "djabièrnè",
+        "djasabra"
+      ],
+      "formats": {
+        "default": "%Y-%m-%d",
+        "long": "%B di %d, %Y",
+        "short": "%b di %d"
+      },
+      "month_names": [
+        null,
+        "yanüari",
+        "febrüari",
+        "mart",
+        "aprel",
+        "mei",
+        "yüni",
+        "yüli",
+        "ougùstùs",
+        "sèptèmber",
+        "òktober",
+        "novèmber",
+        "desèmber"
+      ],
+      "order": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "mas o ménos %{count} ora",
+          "other": "mas o ménos %{count} ora"
+        },
+        "about_x_months": {
+          "one": "mas o ménos %{count} luna",
+          "other": "mas o ménos %{count} luna"
+        },
+        "about_x_years": {
+          "one": "mas o ménos %{count} aña",
+          "other": "mas o ménos %{count} aña"
+        },
+        "almost_x_years": {
+          "one": "kasi %{count} aña",
+          "other": "kasi %{count} aña"
+        },
+        "half_a_minute": "mei minüt",
+        "less_than_x_minutes": {
+          "one": "ménos ku %{count} minüt",
+          "other": "ménos ku %{count} minüt"
+        },
+        "less_than_x_seconds": {
+          "one": "ménos ku %{count} sekònde",
+          "other": "ménos ku %{count} sekònde"
+        },
+        "over_x_years": {
+          "one": "mas ku %{count} aña",
+          "other": "mas ku %{count} aña"
+        },
+        "x_days": {
+          "one": "%{count} dia",
+          "other": "%{count} dia"
+        },
+        "x_minutes": {
+          "one": "%{count} minüt",
+          "other": "%{count} minüt"
+        },
+        "x_months": {
+          "one": "%{count} luna",
+          "other": "%{count} luna"
+        },
+        "x_seconds": {
+          "one": "%{count} sekònde",
+          "other": "%{count} sekònde"
+        },
+        "x_years": {
+          "one": "%{count} year",
+          "other": "%{count} years"
+        }
+      },
+      "prompts": {
+        "day": "Dia",
+        "hour": "Ora",
+        "minute": "Minüt",
+        "month": "Luna",
+        "second": "Sekònde",
+        "year": "Aña"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Bo kuenta ta konfirmá.",
+        "new": {
+          "resend_confirmation_instructions": "manda instrukshon di konfirmashon atrobe"
+        },
+        "send_instructions": "Djis akí lo bo risibí un e-mail ku instrukshon tokante kon konirmá bo kuenta.",
+        "send_paranoid_instructions": "Si bo e-mail ta den nos banko di dato, lo bo haña un mensage djis akí via e-mail ku instrukshon pa konfirmá bo kuenta."
+      },
+      "failure": {
+        "already_authenticated": "Bo seshon a kuminsá kaba.",
+        "inactive": "Bo kuenta no ta aktivá ainda.",
+        "invalid": "%{authentication_keys} òf kódigo di akseso inbálido.",
+        "last_attempt": "Bo a sobra un intento promé ku bo kuenta bira inaksesibel.",
+        "locked": "Bo kuenta ta inaksesibel.",
+        "not_found_in_database": "%{authentication_keys} òf kódigo di akseso inbálido.",
+        "timeout": "Bo seshon a kaduká, por fabor kuminsá un seshon nobo pa por sigui.",
+        "unauthenticated": "Pa haña akseso, bo mester kuminsá un seshon òf registrá.",
+        "unconfirmed": "Bo mester konfirmá bo kuenta di e-mail promé ku sigui."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Konfirmá mi kuenta.",
+          "greeting": "Bonbiní %{recipient}!",
+          "instruction": "Bo por konfirmá bo kuenta di e-mail via e lenk aki bou:",
+          "subject": "Instrukshon pa konfirmashon"
+        },
+        "email_changed": {
+          "greeting": "Saludo %{recipient}!",
+          "message": "Nos ta tuma kontakto awor pa informábo ku nos ta den proseso di kambia bo e-mail pa %{email}.",
+          "subject": "E-mail a kambia"
+        },
+        "password_change": {
+          "greeting": "Saludo %{recipient}!",
+          "message": "Nos ta tuma kontakto awor pa informábo ku bo e-mail a kambia.",
+          "subject": "E-mail a kambia"
+        },
+        "reset_password_instructions": {
+          "action": "Kambia mi e-mail",
+          "greeting": "Saludo %{recipient}!",
+          "instruction": "Un hende a pidi un lenk pa kambia bo kódigo di akseso, i bo por hasi esaki via e lenk abou.",
+          "instruction_2": "Si bo no a pidi esaki, por fabor no paga tinu na e mail akí.",
+          "instruction_3": "Bo kódigo di akseso lo no kambia te ora bo usa e lenk indiká ariba i krea unu nobo.",
+          "subject": "Instrukshon pa re-establesé kódigo di akseso"
+        },
+        "unlock_instructions": {
+          "action": "Krea akseso na mi kuenta",
+          "greeting": "Saludo %{recipient}!",
+          "instruction": "Klek riba e lenk abou pa haña akseso na bo kuenta:",
+          "message": "A eliminá akseso na bo kuenta pa motibu di un kantidat eksesivo di intento frakasá pa kuminsá un seshon.",
+          "subject": "Instrukshon pa re-establesé akseso."
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "No por a sertifikábo for di %{kind} pasobra \"%{reason}\".",
+        "success": "Sertifiká for di kuenta %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Kambia mi kódigo di akseso",
+          "change_your_password": "Kambia bo kódigo di akseso",
+          "confirm_new_password": "Konfirmá kódigo di akseso nobo",
+          "new_password": "Kódigo di akseso nobo"
+        },
+        "new": {
+          "forgot_your_password": "Bo a lubidá bo kódigo di akseso?",
+          "send_me_reset_password_instructions": "Manda instrukshon pa mi pa re-establesé kódigo di akseso."
+        },
+        "no_token": "Bo no tin akseso na e página akí si bo no bini di un e-mail pa re-establesé bo kódigo di akseso. Si bo ta bin di un e-mail pa re-establesé kódigo di akseso, por fabor chèk si bo a usa e URL ku bo a haña den su forma kompletu.",
+        "send_instructions": "Lo bo haña un e-mail djis akí ku instrukshon pa re-establesé bo kódigo di akseso.",
+        "send_paranoid_instructions": "Si bo e-mail ta den nos banko di dato,lo bo haña un lenk djis akí via e-mail pa rekuperá bo kódigo di akseso.",
+        "updated": "Bo kódigo di akseso a kambia. Awor bo seshon a kuminsá.",
+        "updated_not_active": "Bo kódigo di akseso a kambia."
+      },
+      "registrations": {
+        "destroyed": "Ayó! Bo a kanselá bo kuenta. Nos ta spera di mirabo bèk prònto.",
+        "edit": {
+          "are_you_sure": "Bo ta sigur?",
+          "cancel_my_account": "Kanselá mi kuenta.",
+          "currently_waiting_confirmation_for_email": "Nos ta warda konfirmashon pa: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "lag'é sin yena si bo no ke kambié",
+          "title": "Redaktá %{resource}",
+          "unhappy": "Bo no ta satisfecho?",
+          "update": "Aktualisá",
+          "we_need_your_current_password_to_confirm_your_changes": "nos mester di bo kódigo aktual pa konfirmá bo kambionan"
+        },
+        "new": {
+          "sign_up": "Habri un kuenta nobo"
+        },
+        "signed_up": "Bonbiní! Bo a kuminsá un seshon.",
+        "signed_up_but_inactive": "Bo a logra habri un kuenta. Pero nos no por a kuminsá un seshon pasobra bo kuenta no ta aktivo ainda.",
+        "signed_up_but_locked": "Bo a logra habri un kuenta. Pero nos no por a kuminsá un seshon pasobra bo kuenta no ta aksesibel.",
+        "signed_up_but_unconfirmed": "Nos a manda un mensage, ku un lenk pa konfirmashon, na bo e-mail. Por fabor, habri e lenk pa aktivá bo kuenta.",
+        "update_needs_confirmation": "Bo a aktualisá bo kuenta, pero nos mester verifiká bo e-mail nobo. Por fabor chèk bo e-mail i klek riba e lenk di konfirmashon pa por kaba di konfirmá bo kuenta di e-mail nobo.",
+        "updated": "Bo a aktualisá bo kuenta."
+      },
+      "sessions": {
+        "already_signed_out": "Bo a finalisá bo seshon.",
+        "new": {
+          "sign_in": "Kuminsá un seshon"
+        },
+        "signed_in": "Bo a kuminsá un seshon.",
+        "signed_out": "Bo a finalisá un seshon."
+      },
+      "shared": {
+        "links": {
+          "back": "Bai bèk",
+          "didn_t_receive_confirmation_instructions": "Bo no a haña instrukshon pa konfirmashon?",
+          "didn_t_receive_unlock_instructions": "Bo no a haña instrushon pa krea akseso na e kuenta?",
+          "forgot_your_password": "Bo a lubidá bo kódigo di akseso?",
+          "sign_in": "Kuminsá un seshon",
+          "sign_in_with_provider": "Kuminsá un seshon ku %{provider}",
+          "sign_up": "Habri un kuenta nobo"
+        },
+        "minimum_password_length": {
+          "one": "(%{count} lèter mínimo)",
+          "other": "(%{count} lèter mínimo)"
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Bolbe manda instrukshon pa krea akseso"
+        },
+        "send_instructions": "Djis akí lo bo haña un mail ku instrukshon pa krea akseso na bo kuenta.",
+        "send_paranoid_instructions": "Si bo kuenta ta eksistí, djis akí lo bo haña un e-mail ku instrukshon pa krea akseso na bo kuenta.",
+        "unlocked": "Bo tin akseso atrobe na bo kuenta. Por fabor kuminsá un seshon pa por sigui."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Por fabor skohe"
+      },
+      "submit": {
+        "create": "Krea %{model}",
+        "submit": "Warda %{model}",
+        "update": "Aktualisá %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ".",
+          "format": "%u%n",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "ANG"
+        }
+      },
+      "format": {
+        "delimiter": ".",
+        "precision": 3,
+        "separator": ",",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "bion",
+            "million": "mion",
+            "quadrillion": "kuatrion",
+            "thousand": "mil",
+            "trillion": "trion",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": "bèrdat",
+          "strip_insignificant_zeros": "bèrdat"
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "Bait",
+              "other": "Bait"
+            },
+            "eb": "EB",
+            "gb": "GB",
+            "kb": "KB",
+            "mb": "MB",
+            "pb": "PB",
+            "tb": "TB"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": ", i ",
+        "two_words_connector": " i ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "am",
+      "formats": {
+        "default": "%a, %d %b %Y %H.%M.%S %z",
+        "long": "%d %B %Y %H.%M",
+        "short": "%d %b %H.%M"
+      },
+      "pm": "pm"
+    }
+  }
+}

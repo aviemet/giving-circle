@@ -1,0 +1,29 @@
+---
+en:
+  theme_memberships:
+    edit:
+      title: Edit Membership
+    form:
+      create: Create Member
+      first_name: First Name
+      helper_prefix: Creating a brand new member and adding them to the
+      helper_suffix: Theme
+      last_name: Last Name
+      number: Number
+      update: Update Member
+    index:
+      add_existing: Add Existing Member To Theme
+      add_label: Add Memberships to Theme
+      add_new: Add New Membership To Theme
+      breadcrumbs:
+        circles: Circles
+        members: Members
+        themes: Themes
+      newMember: New Member
+      title: Memberships
+    new:
+      title: New Member
+    notices:
+      created: Member was successfully created.
+      destroyed: Member was successfully destroyed.
+      updated: Member was successfully updated.

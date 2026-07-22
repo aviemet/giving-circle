@@ -1,8 +1,8 @@
+import { useTranslation } from "react-i18next"
+
 import { Page } from "@/components"
-import { NewIcon } from "@/components/Icons"
 import { UsersTable } from "@/domains/users/Table"
 import { IndexTableTemplate } from "@/features"
-import { Routes } from "@/lib"
 
 
 interface UserIndexProps {
@@ -13,19 +13,15 @@ interface UserIndexProps {
 // @path: /users
 // @route: users
 const UserIndex = ({ users, pagination }: UserIndexProps) => {
+	const { t } = useTranslation()
+
 	return (
 		<Page
-			title="Users"
+			title={ t("users.index.title") }
 		>
 			<IndexTableTemplate
 				model="users"
 				pagination={ pagination }
-			// contextMenu={ {
-			// 	deleteRoute: Routes.users(),
-			// 	options: [
-			// 		{ label: 'Invite New User', href: Routes.newUser(), icon: <NewIcon /> },
-			// 	],
-			// } }
 			>
 				<UsersTable records={ users } pagination={ pagination } model="users" />
 			</IndexTableTemplate>

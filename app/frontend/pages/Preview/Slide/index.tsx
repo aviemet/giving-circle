@@ -1,6 +1,7 @@
 import { Head } from "@inertiajs/react"
 import { Config, Render } from "@measured/puck"
 import { useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Box, Text } from "@/components"
 import { config } from "@/components/VisualEditor/puck.config"
@@ -29,6 +30,7 @@ function getInitialSlideData(): Record<string, unknown> | undefined {
 }
 
 const PreviewSlide = () => {
+	const { t } = useTranslation()
 	const { data: mockCircle, isLoading } = useMockCircle()
 	const [slideData, setSlideData] = useState<Record<string, unknown> | undefined>(getInitialSlideData)
 
@@ -60,7 +62,7 @@ const PreviewSlide = () => {
 	if(!slideData) {
 		return (
 			<>
-				<Head title="Slide preview" />
+				<Head title={ t("presentations.slides.preview.title") } />
 				<Box p="xl" style={ { minHeight: "100vh" } }>
 					<Text>No preview data. Edit a slide and use “Open preview” to see it here.</Text>
 				</Box>
@@ -80,14 +82,16 @@ const PreviewSlide = () => {
 
 	return (
 		<>
-			<Head title="Slide preview" />
+			<Head title={ t("presentations.slides.preview.title") } />
 			<PresentationDataProvider value={ value }>
-				<div style={ { width: "100%", minHeight: "100vh", backgroundColor: "#000" } }>
-					<Render
-						config={ config as Config }
-						data={ slideData }
-						metadata={ {} }
-					/>
+				<div style={ { width: "100%", minHeight: "100vh", height: "100vh", backgroundColor: "#000", overflow: "hidden" } }>
+					<div style={ { width: "100%", height: "100%" } }>
+						<Render
+							config={ config as Config }
+							data={ slideData }
+							metadata={ {} }
+						/>
+					</div>
 				</div>
 			</PresentationDataProvider>
 		</>

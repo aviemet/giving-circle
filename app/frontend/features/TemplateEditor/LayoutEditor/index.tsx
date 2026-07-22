@@ -1,5 +1,6 @@
 import { modals } from "@mantine/modals"
 import { useRef } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Button, Divider, Flex, Group, Title } from "@/components"
 import { TextInput } from "@/components/Inputs"
@@ -14,22 +15,23 @@ function isPersistedSlide(slide: Schema.SlidesFormData): slide is Schema.SlidesS
 }
 
 export const LayoutEditor = ({ template }: LayoutEditorProps) => {
+	const { t } = useTranslation()
 	const newSlideInputRef = useRef<HTMLInputElement>(null)
 
 	const handleAddSlide = () => {
 		modals.openConfirmModal({
-			title: "Add a slide to this template",
+			title: t("slides.form.add_to_template"),
 			children: (
-				<TextInput label="New Slide Title" ref={ newSlideInputRef } />
+				<TextInput label={ t("slides.form.new_slide_title") } ref={ newSlideInputRef } />
 			),
-			labels: { confirm: "Confirm", cancel: "Cancel" },
+			labels: { confirm: t("common.actions.confirm"), cancel: t("common.actions.cancel") },
 		})
 	}
 
 	return (
 		<>
 			<Group>
-				<Title order={ 3 }>Slides</Title>
+				<Title order={ 3 }>{ t("spotlight.slides") }</Title>
 				<Button onClick={ handleAddSlide }>+</Button>
 			</Group>
 
@@ -41,11 +43,10 @@ export const LayoutEditor = ({ template }: LayoutEditorProps) => {
 				)) }
 			</Flex>
 
-			<Title mt="sm" order={ 3 }>Actions</Title>
+			<Title mt="sm" order={ 3 }>{ t("spotlight.actions") }</Title>
 
 			<Divider mt="xs" mb="sm" />
 
 		</>
 	)
 }
-

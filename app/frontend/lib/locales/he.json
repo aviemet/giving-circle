@@ -1,0 +1,350 @@
+{
+  "he": {
+    "date": {
+      "abbr_day_names": [
+        "א",
+        "ב",
+        "ג",
+        "ד",
+        "ה",
+        "ו",
+        "ש"
+      ],
+      "abbr_month_names": [
+        null,
+        "ינו",
+        "פבר",
+        "מרץ",
+        "אפר",
+        "מאי",
+        "יונ",
+        "יול",
+        "אוג",
+        "ספט",
+        "אוק",
+        "נוב",
+        "דצמ"
+      ],
+      "day_names": [
+        "ראשון",
+        "שני",
+        "שלישי",
+        "רביעי",
+        "חמישי",
+        "שישי",
+        "שבת"
+      ],
+      "formats": {
+        "default": "%d-%m-%Y",
+        "long": "%e ב%B, %Y",
+        "short": "%e %b"
+      },
+      "month_names": [
+        null,
+        "ינואר",
+        "פברואר",
+        "מרץ",
+        "אפריל",
+        "מאי",
+        "יוני",
+        "יולי",
+        "אוגוסט",
+        "ספטמבר",
+        "אוקטובר",
+        "נובמבר",
+        "דצמבר"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "one": "בערך שעה אחת",
+          "other": "בערך %{count} שעות"
+        },
+        "about_x_months": {
+          "one": "בערך חודש אחד",
+          "other": "בערך %{count} חודשים"
+        },
+        "about_x_years": {
+          "one": "בערך שנה אחת",
+          "other": "בערך %{count} שנים"
+        },
+        "almost_x_years": {
+          "one": "כמעט שנה",
+          "other": "כמעט %{count} שנים"
+        },
+        "half_a_minute": "חצי דקה",
+        "less_than_x_minutes": {
+          "one": "פחות מדקה אחת",
+          "other": "פחות מ- %{count} דקות",
+          "zero": "פחות מדקה אחת"
+        },
+        "less_than_x_seconds": {
+          "one": "פחות משניה אחת",
+          "other": "פחות מ- %{count} שניות",
+          "zero": "פחות משניה אחת"
+        },
+        "over_x_years": {
+          "one": "מעל שנה אחת",
+          "other": "מעל %{count} שנים"
+        },
+        "x_days": {
+          "one": "יום אחד",
+          "other": "%{count} ימים"
+        },
+        "x_minutes": {
+          "one": "דקה אחת",
+          "other": "%{count} דקות"
+        },
+        "x_months": {
+          "one": "חודש אחד",
+          "other": "%{count} חודשים"
+        },
+        "x_seconds": {
+          "one": "שניה אחת",
+          "other": "%{count} שניות"
+        }
+      },
+      "prompts": {
+        "day": "יום",
+        "hour": "שעה",
+        "minute": "דקה",
+        "month": "חודש",
+        "second": "שניות",
+        "year": "שנה"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "חשבונך אושר בהצלחה.",
+        "new": {
+          "resend_confirmation_instructions": "שלח מחדש הוראות אישור"
+        },
+        "send_instructions": "בדקות הקרובות יגיע אליך אימייל עם הנחיות כיצד לאשר את הרשמתך.",
+        "send_paranoid_instructions": "אם האימייל שלך נמצא במאגר נתונים שלנו, נשלח לך אימייל עם הוראות כיצד לאשר את החשבון שלך בעוד כמה דקות."
+      },
+      "failure": {
+        "already_authenticated": "את/ה כבר מחובר/ת",
+        "inactive": "חשבונך טרם הופעל.",
+        "invalid": "%{authentication_keys} או סיסמא שגויים",
+        "last_attempt": "יש לך עוד ניסיון אחד לפני שהחשבון שלך ינעל.",
+        "locked": "חשבונך ננעל.",
+        "not_found_in_database": "%{authentication_keys} או סיסמא שגויים",
+        "timeout": "פג תוקף החיבור לאתר, אנא התחבר מחדש.",
+        "unauthenticated": "עליך להתחבר או להרשם על-מנת להמשיך.",
+        "unconfirmed": "עליך לאשר את הרשמתך לפני שתוכל להמשיך."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "אשר את החשבון שלי",
+          "greeting": "ברוך הבא %{recipient}!",
+          "instruction": "אתה יכול לאשר את כתובת האימייל שלך בעזרת הקישור הנֿֿ״ל:",
+          "subject": "הוראות לאישור הרשמה"
+        },
+        "email_changed": {
+          "greeting": "שלום %{recipient}!",
+          "message": "אנו כותבים אליך כדי ליידע אותך שהאימייל שלך שונה ל-%{email}.",
+          "message_unconfirmed": "אנו כותבים אליך כדי ליידע אותך שאנחנו משנים את אימייל שלך ל-%{email}.",
+          "subject": "אימייל שונה"
+        },
+        "password_change": {
+          "greeting": "שלום %{recipient}!",
+          "message": "אנו כותבים אליך כדי ליידע אותך שהסיסמא שלך שונתה.",
+          "subject": "סיסמא שונתה"
+        },
+        "reset_password_instructions": {
+          "action": "שנה סיסמא",
+          "greeting": "שלום %{recipient}!",
+          "instruction": "נתקבלה בקשה לשינוי הסיסמא שלך וביכולתך לעשות זאת בעזרת הקישור המוצג למטה.",
+          "instruction_2": "אם אתה לא ביקשת זאת, אנא התעלם מאימייל זה.",
+          "instruction_3": "סיסמאתך תוחלף רק אם תלחץ על הקישור המוצג מעל ותיצור סיסמא חדשה.",
+          "subject": "הוראות לאיפוס סיסמא"
+        },
+        "unlock_instructions": {
+          "action": "בטל נעילת חשבון",
+          "greeting": "שלום %{recipient}!",
+          "instruction": "לחץ על הלינק המוצג למטה בכדי לבטל את נעילת חשבונך:",
+          "message": "חשבונך ננעל עקב מספר רב של ניסיונות כניסה כושלים.",
+          "subject": "הוראות להסרת נעילה"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "לא הצלחנו לאמת את זהותך מסוג %{kind} בגלל \"%{reason}\"",
+        "success": "אומת בהצלה מחשבון %{kind}"
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "שנה סיסמא",
+          "change_your_password": "שינוי סיסמא",
+          "confirm_new_password": "אישור סיסמא חדשה",
+          "new_password": "סיסמא חדשה"
+        },
+        "new": {
+          "forgot_your_password": "שכחת סיסמא?",
+          "send_me_reset_password_instructions": "שלח לי הוראות שיחזור סיסמא"
+        },
+        "no_token": "אינך יכול/ה לגשת לעמוד זה אם לא הופנת מאימייל לשינוי סיסמא. אם את/ה כן מגיע משם, אנא ודא/י שהשתמשת בכתובת אינטרנט המלאה.",
+        "send_instructions": "בדקות הקרובות יגיע אליך אימייל עם הנחיות כיצד לאפס את סיסמתך.",
+        "send_paranoid_instructions": "אם האימייל שלך קיים במאגר, אנו נשלח לך לינק לחידוש סיסמא באימייל.",
+        "updated": "סיסמתך שונתה בהצלחה. כעת הנך מחובר/ת.",
+        "updated_not_active": "הסיסמא שלך שונתה בהצלחה."
+      },
+      "registrations": {
+        "destroyed": "חשבונך נמחק בהצלחה. מקווים לראותך בעתיד.",
+        "edit": {
+          "are_you_sure": "האם את בטוח?",
+          "cancel_my_account": "בטל את החשבון שלי",
+          "currently_waiting_confirmation_for_email": "ממתין לאישור של הכתובת: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "השאר ריק אם אין ברצונך לשנותו",
+          "title": "ערוך %{resource}",
+          "unhappy": "לא מרוצה",
+          "update": "עדכן",
+          "we_need_your_current_password_to_confirm_your_changes": "אנחנו זקוקים לסיסמאתך הנוכחית על מנת לבצע את השינויים שביקשת"
+        },
+        "new": {
+          "sign_up": "הרשמה"
+        },
+        "signed_up": "נרשמת בהצלחה. אם נדרש, יישלח אליך אימייל לאישור הרשמתך.",
+        "signed_up_but_inactive": "ההרשמה בוצעה בהצלחה, אך לא יכולנו להכניס אותך למערכת מכיוון שעוד לא הפעלת את חשבונך",
+        "signed_up_but_locked": "ההרשמה בוצעה בהצלחה, אך לא יכולנו להכניס אותך למערכת מכיוון שחשבונתך נעול.",
+        "signed_up_but_unconfirmed": "הודעה עם לינק לאישור חשבונך נשלח לאימייל שלך. אנא פתח/י את הלינק על מנת להפעיל את חשבונך.",
+        "update_needs_confirmation": "עידכנת את חשבונך בהצלחה, אבל אנחנו צריכים לאשר את האימייל החדש שלך. אנא בדק/י את האימייל שלך ולחצ/י על הלינק על מנת לאשר את חשבון האימייל החדש.",
+        "updated": "עדכנת בהצלחה את חשבונך.",
+        "updated_but_not_signed_in": "חשבונך עודכן בהצלחה, אך מכיוון שהסיסמא שונתה עלייך להזדהות מחדש"
+      },
+      "sessions": {
+        "already_signed_out": "התנתקות מוצלחת",
+        "new": {
+          "sign_in": "כניסה"
+        },
+        "signed_in": "התחברת בהצלחה",
+        "signed_out": "התנתקת בהצלחה."
+      },
+      "shared": {
+        "links": {
+          "back": "חזור",
+          "didn_t_receive_confirmation_instructions": "לא קיבלת את הוראות האישור?",
+          "didn_t_receive_unlock_instructions": "לא קיבלת את הוראות ביטול הנעילה?",
+          "forgot_your_password": "שכחת סיסמא?",
+          "sign_in": "כניסה",
+          "sign_in_with_provider": "כניסה באמצעות %{provider}",
+          "sign_up": "הרשמה"
+        },
+        "minimum_password_length": {
+          "one": null,
+          "other": null,
+          "two": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "שלח שוב הוראות ביטול נעילה"
+        },
+        "send_instructions": "בדקות הקרובות יישלח אליך אימייל עם הנחיות כיצד להסיר את הנעילה מחשבונך.",
+        "send_paranoid_instructions": "אם חשבונך קיים, את/ה תקבל/י אימייל עם הוראות כיצד להפעיל מחדש את חשבונך.",
+        "unlocked": "הנעילה הוסרה בהצלחה. כעת הנך מחובר/ת."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "נא לבחור"
+      },
+      "submit": {
+        "create": "יצירת %{model}",
+        "submit": "שמור %{model}",
+        "update": "עדכון %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": ",",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ".",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "₪"
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": "מיליארד",
+            "million": "מיליון",
+            "quadrillion": "קודריליון",
+            "thousand": "אלף",
+            "trillion": "טריליון",
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 3,
+          "significant": true,
+          "strip_insignificant_zeros": true
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "one": "בייט",
+              "other": "בתים"
+            },
+            "gb": "ג'יגה-בייט",
+            "kb": "קילו-בייט",
+            "mb": "מגה-בייט",
+            "tb": "טרה-בייט"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": ""
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " ו",
+        "two_words_connector": " ו",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "am",
+      "formats": {
+        "default": "%a %d %b %H:%M:%S %Z %Y",
+        "long": "%d ב%B, %Y %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "pm"
+    }
+  }
+}

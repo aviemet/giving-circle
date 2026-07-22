@@ -46,7 +46,14 @@ class Presentation < ApplicationRecord
   delegate :circle, to: :theme, allow_nil: true
 
   has_many :presentations_orgs, dependent: :destroy
-  has_many :orgs, through: :presentations_orgs
+  has_many :orgs, -> {
+    select("orgs.*, presentations_orgs.ask_cents as ask_cents, presentations_orgs.ask_currency as ask_currency")
+      .extending {
+        def count(args = :all)
+          except(:select).calculate(:count, args)
+        end
+      }
+  }, through: :presentations_orgs
 
   has_many :presentations_memberships, dependent: :destroy
   has_many :memberships, through: :presentations_memberships
@@ -57,6 +64,8 @@ class Presentation < ApplicationRecord
   has_many :presentations_elements, dependent: :destroy
   has_many :elements, through: :presentations_elements, dependent: :nullify
 
+  has_many :interactions, class_name: "Presentation::Interaction", dependent: :destroy
+
   has_many :slide_parents, as: :parentable, dependent: :delete_all
   has_many :slides, through: :slide_parents, dependent: :nullify
   belongs_to :active_slide, class_name: "Slide", optional: true
@@ -65,7 +74,7 @@ class Presentation < ApplicationRecord
 
   after_create :sync_orgs_from_theme
 
-  scope :includes_associated, -> { includes([:theme, :memberships, :orgs, :slides, :template]) }
+  scope :includes_associated, -> { includes([:theme, :memberships, :presentations_orgs, :slides, :template]) }
 
   def activate
     self.update(active: true)

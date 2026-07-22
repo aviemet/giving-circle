@@ -1,35 +1,69 @@
 import { Slot, type ComponentConfig } from "@measured/puck"
 
+import { i18n } from "@/lib/i18n"
+
 import { ContainerDisplay } from "./Container"
-import { type LayoutStyleProps } from "../../fields"
 import {
 	alignmentField,
-	layoutStyleFields,
+	backgroundColorField,
+	borderColorField,
+	borderRadiusField,
+	borderWidthField,
+	flexField,
+	flexItemSizingField,
+	marginField,
+	minHeightField,
+	minWidthField,
+	paddingField,
+	widthField,
+	type AlignmentValue,
+	type BorderProps,
+	type DimensionStyleProps,
+	type FlexItemSizing,
+	type FlexStyleInput,
+	type SpacingProps,
 } from "../../fields"
-import { type AlignmentValue } from "../../fields/alignment"
 
-export type ContainerProps = LayoutStyleProps & {
+export type ContainerProps = SpacingProps & BorderProps & DimensionStyleProps & FlexStyleInput & {
+	backgroundColor?: string
 	content: Slot
 	alignment: AlignmentValue
+	sizing?: FlexItemSizing
 }
 
+const t = i18n.t.bind(i18n)
+
 export const containerConfig: ComponentConfig<ContainerProps> = {
-	label: "Container",
+	label: t("slides.editor.components.container.label"),
 	fields: {
-		...layoutStyleFields(),
+		sizing: flexItemSizingField(),
+		margin: marginField(),
+		padding: paddingField(),
+		backgroundColor: backgroundColorField(),
+		borderWidth: borderWidthField(),
+		borderRadius: borderRadiusField(),
+		borderColor: borderColorField(),
+		width: widthField(),
+		minWidth: minWidthField(),
+		minHeight: minHeightField(),
+		flex: flexField(),
 		content: { type: "slot" },
 		alignment: alignmentField({
-			label: "Alignment",
+			label: t("slides.editor.components.container.alignment"),
 		}),
 	},
 	defaultProps: {
 		content: [],
 		alignment: "left",
+		sizing: { mode: "fill" },
 		flex: {
 			display: "flex",
 			flexDirection: "column",
 			flexWrap: "nowrap",
-			overflow: "visible",
+			alignItems: "stretch",
+			justifyContent: "flex-start",
+			overflow: "hidden",
+			gap: 0,
 		},
 	},
 	render: (props) => <ContainerDisplay { ...props } />,

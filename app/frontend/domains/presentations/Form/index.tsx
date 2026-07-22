@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { Select, TextInput } from "@/components/Inputs"
@@ -15,6 +17,7 @@ export interface PresentationFormProps {
 }
 
 export const PresentationForm = ({ to, method = "post", presentation, templates }: PresentationFormProps) => {
+	const { t } = useTranslation()
 	const isNew = !presentation.id
 	const templateOptions = (templates ?? []).map((template) => ({
 		value: template.id,
@@ -29,15 +32,15 @@ export const PresentationForm = ({ to, method = "post", presentation, templates 
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="presentation.name" label="Name" />
+					<TextInput name="presentation.name" label={ t("presentations.form.name") } />
 				</Grid.Col>
 
 				{ isNew && templateOptions.length > 0 && (
 					<Grid.Col>
 						<Select
 							name="presentation.template_id"
-							label="Start from Presentation Template"
-							placeholder="Blank presentation"
+							label={ t("presentations.form.start_from_template") }
+							placeholder={ t("presentations.form.blank_presentation") }
 							options={ templateOptions }
 							clearable
 						/>
@@ -45,7 +48,9 @@ export const PresentationForm = ({ to, method = "post", presentation, templates 
 				) }
 
 				<Grid.Col>
-					<Submit>{ presentation.id ? "Update" : "Create" } Presentation</Submit>
+					<Submit>
+						{ presentation.id ? t("presentations.form.update") : t("presentations.form.create") }
+					</Submit>
 				</Grid.Col>
 			</Grid>
 		</Form>

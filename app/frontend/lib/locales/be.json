@@ -1,0 +1,409 @@
+{
+  "be": {
+    "date": {
+      "abbr_day_names": [
+        "Пан",
+        "Аўт",
+        "Сер",
+        "Чцв",
+        "Пят",
+        "Суб",
+        "Ндз"
+      ],
+      "abbr_month_names": [
+        null,
+        "Сту",
+        "Лют",
+        "Сак",
+        "Кра",
+        "Тра",
+        "Чэр",
+        "Ліп",
+        "Жні",
+        "Вер",
+        "Кас",
+        "Ліс",
+        "Сне"
+      ],
+      "day_names": [
+        "Нядзеля",
+        "Панядзелак",
+        "Аўторак",
+        "Серада",
+        "Чацвер",
+        "Пятніца",
+        "Субота"
+      ],
+      "formats": {
+        "default": "%d.%m.%Y",
+        "long": "%-d %B %Y",
+        "short": "%-d %b"
+      },
+      "month_names": [
+        null,
+        "Студзень",
+        "Люты",
+        "Сакавік",
+        "Красавік",
+        "Травень",
+        "Чэрвень",
+        "Ліпень",
+        "Жнівень",
+        "Верасень",
+        "Кастрычнік",
+        "Лістапад",
+        "Снежань"
+      ],
+      "order": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "datetime": {
+      "distance_in_words": {
+        "about_x_hours": {
+          "few": "каля %{count} гадзін",
+          "many": "каля %{count} гадзін",
+          "one": "каля %{count} гадзіны",
+          "other": "каля %{count} гадзін"
+        },
+        "about_x_months": {
+          "few": "каля %{count} месяцаў",
+          "many": "каля %{count} месяцаў",
+          "one": "каля %{count} месяца",
+          "other": "каля %{count} месяцаў"
+        },
+        "about_x_years": {
+          "few": "каля %{count} гадоў",
+          "many": "каля %{count} гадоў",
+          "one": "каля %{count} года",
+          "other": "каля %{count} гадоў"
+        },
+        "almost_x_years": {
+          "few": "амаль %{count} гады",
+          "many": "амаль %{count} гадоў",
+          "one": "амаль %{count} год",
+          "other": "амаль %{count} гадоў"
+        },
+        "half_a_minute": "палова хвіліны",
+        "less_than_x_minutes": {
+          "few": "меней за %{count} хвіліны",
+          "many": "меней за %{count} хвілін",
+          "one": "меней за %{count} хвіліну",
+          "other": "меней за %{count} хвіліны"
+        },
+        "less_than_x_seconds": {
+          "few": "меней за %{count} секунды",
+          "many": "меней за %{count} секунд",
+          "one": "меней за %{count} секунду",
+          "other": "меней за %{count} секунды"
+        },
+        "over_x_years": {
+          "few": "болей за %{count} гады",
+          "many": "болей за %{count} гадоў",
+          "one": "болей за %{count} год",
+          "other": "болей за %{count} года"
+        },
+        "x_days": {
+          "few": "%{count} дні",
+          "many": "%{count} дзён",
+          "one": "%{count} дзень",
+          "other": "%{count} дня"
+        },
+        "x_minutes": {
+          "few": "%{count} хвіліны",
+          "many": "%{count} хвілін",
+          "one": "%{count} хвіліна",
+          "other": "%{count} хвіліны"
+        },
+        "x_months": {
+          "few": "%{count} месяцы",
+          "many": "%{count} месяцаў",
+          "one": "%{count} месяц",
+          "other": "%{count} месяца"
+        },
+        "x_seconds": {
+          "few": "%{count} секунды",
+          "many": "%{count} секунд",
+          "one": "%{count} секунда",
+          "other": "%{count} секунды"
+        },
+        "x_years": {
+          "few": "%{count} гады",
+          "many": "%{count} гадоў",
+          "one": "%{count} год",
+          "other": "%{count} года"
+        }
+      },
+      "prompts": {
+        "day": "Дзень",
+        "hour": "Гадзіна",
+        "minute": "Хвіліна",
+        "month": "Месяц",
+        "second": "Секунда",
+        "year": "Год"
+      }
+    },
+    "devise": {
+      "confirmations": {
+        "confirmed": "Ваш адрас эл. пошты паспяхова пацверджаны.",
+        "new": {
+          "resend_confirmation_instructions": "Выслаць паўторна ліст з актывацыяй"
+        },
+        "send_instructions": "Цягам некалькіх хвілін вы атрымаеце ліст з інструкцыямі па пацверджанні адраса эл. пошты.",
+        "send_paranoid_instructions": "Калі ваш адрас эл. пошты ёсть y сістэме, то цягам некалькіх хвілін вы атрымаеце ліст з інструкцыямі па яго пацверджанні."
+      },
+      "failure": {
+        "already_authenticated": "Вы ўжо ўвайшлі ў сістэму.",
+        "inactive": "Ваш уліковы запіс яшчэ не актываваны.",
+        "invalid": null,
+        "last_attempt": "У вас засталася апошняя спроба ўводу пароля да блакавання ўліковага запісу.",
+        "locked": "Ваш уліковы запіс заблакаваны.",
+        "not_found_in_database": null,
+        "timeout": "Ваш сеанс скончыўся. Калі ласка, увайдзіце ў сістэму зноў.",
+        "unauthenticated": "Вам трэба ўвайсці ў сістэму ці зарэгістравацца",
+        "unconfirmed": "Вы павінны пацвердзіць ваш уліковы запіс."
+      },
+      "mailer": {
+        "confirmation_instructions": {
+          "action": "Актываваць",
+          "greeting": "Прывітанні, %{recipient} !",
+          "instruction": "Вы можаце актываваць свой уліковы запіс, націснуўшы спасылку знізу:",
+          "subject": "Інструкцыі па пацверджанні ўліковага запісу"
+        },
+        "email_changed": {
+          "greeting": null,
+          "message": null,
+          "message_unconfirmed": null,
+          "subject": null
+        },
+        "password_change": {
+          "greeting": "Вітаны, %{recipient}!",
+          "message": "Мы спрабуем звязацца з вамі, каб паведаміць, што ваш пароль быў зменены.",
+          "subject": "Пароль зменены"
+        },
+        "reset_password_instructions": {
+          "action": "Змяніць пароль",
+          "greeting": "Прывітанні, %{recipient}!",
+          "instruction": "Вы (ці нехта яшчэ) запыталі змену пароля. Для змены пароля націсніце спасылку ніжэй:",
+          "instruction_2": "Калі вы не запытвалі змену пароля - праігнаруйце гэта паведамленне",
+          "instruction_3": "Ваш пароль не зменіцца пакуль вы не націснеце на спасылку і не ўведзяце новы.",
+          "subject": "Інструкцыі па аднаўленні пароля"
+        },
+        "unlock_instructions": {
+          "action": "Разблакаваць уліковы запіс",
+          "greeting": "Добры дзень, %{recipient}!",
+          "instruction": "Націсніце спасылку для актывацыі ўліковага запісу:",
+          "message": "Ваш уліковы запіс быў заблакаваны ў звязку з перавышэннем ліміту няўдалых спроб уваходу.",
+          "subject": "Інструкцыі па разблакоўцы ўліковага запісу"
+        }
+      },
+      "omniauth_callbacks": {
+        "failure": "Вы не можаце ўвайсці ў сістэму з уліковым запісам з %{kind}, бо \"%{reason}\".",
+        "success": "Уваход у сістэму выкананы з уліковым запісам з %{kind}."
+      },
+      "passwords": {
+        "edit": {
+          "change_my_password": "Змяніць мой пароль",
+          "change_your_password": "Змяніць пароль",
+          "confirm_new_password": "Паўторыце новы пароль",
+          "new_password": "Новы пароль"
+        },
+        "new": {
+          "forgot_your_password": "Забыліся пароль?",
+          "send_me_reset_password_instructions": "Выслаць новы пароль"
+        },
+        "no_token": "Доступ да гэтай старонкі магчымы толькі па спасылцы з ліста пра аднаўленне пароля. Калі вы прыйшлі па такой спасылцы, калі ласка, пераканаецеся, што Вы скапіявалі ўсю спасылку цаліком.",
+        "send_instructions": "Цягам некалькіх хвілін вы атрымаеце ліст з інструкцыямі па аднаўленні пароля.",
+        "send_paranoid_instructions": "Калі ваш адрас эл. пошты ёсць у сістэме, то цягам некалькіх хвілін вы атрымаеце ліст з інструкцыямі па аднаўленні пароля.",
+        "updated": "Ваш пароль зменены. Зараз вы ўвайшлі ў сістэму.",
+        "updated_not_active": "Ваш пароль зменены."
+      },
+      "registrations": {
+        "destroyed": "Да спаткання! Ваш уліковы запіс выдалены. Спадзяёмся зноў убачыць вас.",
+        "edit": {
+          "are_you_sure": "Вы ўпэўнены?",
+          "cancel_my_account": "Выдаліць уліковы запіс",
+          "currently_waiting_confirmation_for_email": "Чакаецца пацверджанне адрасаE-mail: %{email}",
+          "leave_blank_if_you_don_t_want_to_change_it": "пакіньце крысу пустым, калі не хочаце яго змяняць",
+          "title": "Рэдагаваць %{resource}",
+          "unhappy": "Расчараваны",
+          "update": "Абнавіць",
+          "we_need_your_current_password_to_confirm_your_changes": "увядзіце бягучы пароль для пацверджання змен"
+        },
+        "new": {
+          "sign_up": "Рэгістрацыя"
+        },
+        "signed_up": "Сардэчна запрашаем! Вы паспяхова зарэгістраваліся.",
+        "signed_up_but_inactive": "Вы паспяхова зарэгістраваны. Аднак, вы не можаце ўвайсці ў сістэму, таму што ваш уліковы запіс не актываваны.",
+        "signed_up_but_locked": "Вы паспяхова зарэгістраваны. Аднак, вы не можаце ўвайсці ў сістэму, таму што ваш уліковы запіс заблакаваны.",
+        "signed_up_but_unconfirmed": "Ліст са спасылкай для пацверджання быў адпраўлена на ваш адрас эл. пошты. Калі ласка, перайдзіце па спасылцы, каб пацвердзіць уліковы запіс.",
+        "update_needs_confirmation": "Вы паспяхова абнавілі дадзеныя ўліковага запісу, але трэба пацвердзіць новы адрас эл. пошты. Калі ласка, праверце паштовую скрынку і перайдзіце па спасылцы, каб скончыць працэдуру праверкі новага адраса",
+        "updated": "Ваш уліковы запіс зменены.",
+        "updated_but_not_signed_in": null
+      },
+      "sessions": {
+        "already_signed_out": "Выйсце з сістэмы ўжо выкананае.",
+        "new": {
+          "sign_in": "Увайсці"
+        },
+        "signed_in": "Уваход у сістэму выкананы.",
+        "signed_out": "Выхад з сістэмы выкананы."
+      },
+      "shared": {
+        "links": {
+          "back": "Назад",
+          "didn_t_receive_confirmation_instructions": "Не атрымалі пацверджанне?",
+          "didn_t_receive_unlock_instructions": "Не атрымалі кодаў разблакоўкі?",
+          "forgot_your_password": "Забыліся пароль?",
+          "sign_in": "Увайсці",
+          "sign_in_with_provider": "Увайсці з дапамогай:  %{provider}",
+          "sign_up": "Рэгістрацыя"
+        },
+        "minimum_password_length": {
+          "few": null,
+          "many": null,
+          "one": null,
+          "other": null
+        }
+      },
+      "unlocks": {
+        "new": {
+          "resend_unlock_instructions": "Выслаць пацверджанне зноўку"
+        },
+        "send_instructions": "Цягам некалькіх хвілін вы атрымаеце ліст з інструкцыямі па разблакоўцы ўліковага запісу.",
+        "send_paranoid_instructions": "Калі ваш уліковы запіс існуе, то цягам некалькіх хвілін вы атрымаеце ліст з інструкцыямі па яе разблакоўцы.",
+        "unlocked": "Ваш уліковы запіс разблакаваны. Зараз вы можаце ўвайсці ў сістэму."
+      }
+    },
+    "helpers": {
+      "select": {
+        "prompt": "Калі ласка, абярыце"
+      },
+      "submit": {
+        "create": "Стварыць %{model}",
+        "submit": "Захаваць %{model}",
+        "update": "Абнавіць %{model}"
+      }
+    },
+    "i18n": {
+      "plural": {
+        "keys": [
+          "one",
+          "few",
+          "many",
+          "other"
+        ]
+      }
+    },
+    "number": {
+      "currency": {
+        "format": {
+          "delimiter": " ",
+          "format": "%n %u",
+          "precision": 2,
+          "separator": ",",
+          "significant": false,
+          "strip_insignificant_zeros": false,
+          "unit": "руб."
+        }
+      },
+      "format": {
+        "delimiter": ",",
+        "precision": 3,
+        "separator": ".",
+        "significant": false,
+        "strip_insignificant_zeros": false
+      },
+      "human": {
+        "decimal_units": {
+          "format": "%n %u",
+          "units": {
+            "billion": {
+              "few": "мільярда",
+              "many": "мільярдаў",
+              "one": "мільярд",
+              "other": "мільярда"
+            },
+            "million": {
+              "few": "мільёна",
+              "many": "мільёнаў",
+              "one": "мільён",
+              "other": "мільёна"
+            },
+            "quadrillion": {
+              "few": "квадрыльёна",
+              "many": "квадрыльёнаў",
+              "one": "квадрыльён",
+              "other": "квадрыльёна"
+            },
+            "thousand": {
+              "few": "тысячы",
+              "many": "тысяч",
+              "one": "тысяча",
+              "other": "тысячы"
+            },
+            "trillion": {
+              "few": "трыльёна",
+              "many": "трыльёнаў",
+              "one": "трыльён",
+              "other": "трыльёна"
+            },
+            "unit": ""
+          }
+        },
+        "format": {
+          "delimiter": "",
+          "precision": 1,
+          "significant": false,
+          "strip_insignificant_zeros": false
+        },
+        "storage_units": {
+          "format": "%n %u",
+          "units": {
+            "byte": {
+              "few": "байта",
+              "many": "байтаў",
+              "one": "байт",
+              "other": "байта"
+            },
+            "eb": "ЭБ",
+            "gb": "ГБ",
+            "kb": "КБ",
+            "mb": "МБ",
+            "pb": "ПБ",
+            "tb": "ТБ"
+          }
+        }
+      },
+      "percentage": {
+        "format": {
+          "delimiter": "",
+          "format": "%n%"
+        }
+      },
+      "precision": {
+        "format": {
+          "delimiter": ""
+        }
+      }
+    },
+    "support": {
+      "array": {
+        "last_word_connector": " і ",
+        "two_words_connector": " і ",
+        "words_connector": ", "
+      }
+    },
+    "time": {
+      "am": "раніцы",
+      "formats": {
+        "default": "%a, %d %b %Y %H:%M:%S %z",
+        "long": "%d %B %Y, %H:%M",
+        "short": "%d %b %H:%M"
+      },
+      "pm": "вечара"
+    }
+  }
+}
