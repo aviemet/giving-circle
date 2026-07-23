@@ -1,41 +1,110 @@
-import { type Data } from "@measured/puck"
+import { type Data } from "@puckeditor/core"
 import { isEqual } from "es-toolkit/compat"
 
+import { type PuckComponentProps, type SlideRootProps } from "./components"
 import { withStarterSlideContent } from "./slotEditor"
+
+export type PuckSlideData = Partial<Data<PuckComponentProps, Partial<SlideRootProps>>>
 
 export type EditorLoadSource = "server" | "localDraft"
 
 export type EditorSaveStatus = "saved" | "unsaved" | "recovered"
 
-// Namespaced key so each slide's recovery draft does not collide in localStorage.
+const DRAFT_ENVELOPE_VERSION = 1
+
+interface EditorDraftEnvelope {
+	v: typeof DRAFT_ENVELOPE_VERSION
+	basedOn: string
+	data: PuckSlideData
+}
+
 export function editorStorageKey(slideKey: string) {
 	return `puck-editor-${slideKey}`
 }
 
-// Reads a recovery draft after reload or accidental navigation; absent or corrupt storage means no draft to restore.
-export function readEditorDraft(storageKey: string): Partial<Data> | null {
+export function slideDataFingerprint(data: PuckSlideData) {
+	return JSON.stringify(data)
+}
+
+function isPlainObject(value: object | string | number | boolean | null | undefined): value is Record<string, object | string | number | boolean | null | undefined> {
+	return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+function isEditorDraftEnvelope(value: object): value is EditorDraftEnvelope {
+	if(!isPlainObject(value)) {
+		return false
+	}
+
+	if(value.v !== DRAFT_ENVELOPE_VERSION) {
+		return false
+	}
+
+	if(typeof value.basedOn !== "string") {
+		return false
+	}
+
+	if(!isPlainObject(value.data)) {
+		return false
+	}
+
+	return true
+}
+
+function isLegacyDraftData(value: object): value is PuckSlideData {
+	if(!isPlainObject(value)) {
+		return false
+	}
+
+	return "content" in value || "root" in value
+}
+
+export function readEditorDraft(storageKey: string): { data: PuckSlideData, basedOn: string | null } | null {
 	if(typeof window === "undefined") return null
 
 	try {
 		const raw = window.localStorage.getItem(storageKey)
 		if(!raw) return null
 
-		return JSON.parse(raw) as Partial<Data>
+		const parsed = JSON.parse(raw)
+
+		if(typeof parsed !== "object" || parsed === null) {
+			return null
+		}
+
+		if(isEditorDraftEnvelope(parsed)) {
+			return {
+				data: parsed.data,
+				basedOn: parsed.basedOn,
+			}
+		}
+
+		if(isLegacyDraftData(parsed)) {
+			return {
+				data: parsed,
+				basedOn: null,
+			}
+		}
+
+		return null
 	} catch{
 		return null
 	}
 }
 
-// Persists in-progress edits locally so a refresh or back navigation can recover work before the user saves to the server.
-export function writeEditorDraft(storageKey: string, data: Data) {
+export function writeEditorDraft(storageKey: string, data: PuckSlideData, basedOn: string) {
 	if(typeof window === "undefined") return
 
+	const envelope: EditorDraftEnvelope = {
+		v: DRAFT_ENVELOPE_VERSION,
+		basedOn,
+		data,
+	}
+
 	try {
-		window.localStorage.setItem(storageKey, JSON.stringify(data))
+		window.localStorage.setItem(storageKey, JSON.stringify(envelope))
 	} catch{ }
 }
 
-// Drops the recovery draft once changes are saved, reverted, or confirmed discarded so stale drafts are not offered again.
 export function clearEditorDraft(slideKey: string) {
 	if(typeof window === "undefined") return
 
@@ -44,13 +113,11 @@ export function clearEditorDraft(slideKey: string) {
 	} catch{ }
 }
 
-// Ensures empty slides still have editable starter content so the editor is usable before the first server save.
-export function normalizeSavedSlideData(data: Partial<Data>): Data {
-	return withStarterSlideContent(data ?? {}) as Data
+export function normalizeSavedSlideData(data: PuckSlideData) {
+	return withStarterSlideContent(data ?? {})
 }
 
-// Keeps Puck's root title aligned with the slide record so display name and editor state stay in sync on load.
-export function applySlideTitleToData(data: Partial<Data>, slideTitle: string): Partial<Data> {
+export function applySlideTitleToData(data: PuckSlideData, slideTitle: string): PuckSlideData {
 	if(slideTitle.length === 0) {
 		return data
 	}
@@ -67,8 +134,7 @@ export function applySlideTitleToData(data: Partial<Data>, slideTitle: string): 
 	}
 }
 
-// Reads the title back out for persistence so saves can update the slide record from editor data.
-export function slideTitleFromData(data: Partial<Data>): string | undefined {
+export function slideTitleFromData(data: PuckSlideData): string | undefined {
 	const title = data.root?.props?.title
 
 	if(typeof title !== "string") {
@@ -80,27 +146,52 @@ export function slideTitleFromData(data: Partial<Data>): string | undefined {
 	return trimmed.length > 0 ? trimmed : undefined
 }
 
-// Deep comparison avoids treating equivalent JSON as dirty, which would trigger false unsaved state and draft writes.
-export function slideDataEquals(first: Partial<Data>, second: Partial<Data>) {
+export function slideDataEquals(first: PuckSlideData, second: PuckSlideData) {
 	return isEqual(first, second)
 }
 
-// Navigation guards only apply while there is unsaved work and a save is not already in flight.
 export function shouldPromptForUnsavedEditorNavigation(saveStatus: EditorSaveStatus, isSaving: boolean) {
 	return saveStatus !== "saved" && !isSaving
 }
 
-// Chooses server data or a recovered local draft on open and sets the initial save badge so the user knows what they are editing.
+export function nextEditorChangeState(params: {
+	changed: PuckSlideData
+	saved: PuckSlideData
+	adoptResolvedBaseline: boolean
+}): {
+	saved: PuckSlideData
+	saveStatus: EditorSaveStatus
+	shouldWriteDraft: boolean
+} {
+	if(params.adoptResolvedBaseline) {
+		return {
+			saved: params.changed,
+			saveStatus: "saved",
+			shouldWriteDraft: false,
+		}
+	}
+
+	const dirty = !slideDataEquals(params.changed, params.saved)
+
+	return {
+		saved: params.saved,
+		saveStatus: dirty ? "unsaved" : "saved",
+		shouldWriteDraft: dirty,
+	}
+}
+
 export function resolveInitialEditorData(params: {
-	savedData: Partial<Data>
+	savedData: PuckSlideData
 	storageKey: string
 	slideKey: string
 }): {
-	data: Partial<Data>
+	data: PuckSlideData
 	loadSource: EditorLoadSource
 	saveStatus: EditorSaveStatus
+	serverFingerprint: string
 } {
 	const saved = normalizeSavedSlideData(params.savedData)
+	const savedFingerprint = slideDataFingerprint(saved)
 	const draft = readEditorDraft(params.storageKey)
 
 	if(!draft) {
@@ -108,22 +199,36 @@ export function resolveInitialEditorData(params: {
 			data: saved,
 			loadSource: "server",
 			saveStatus: "saved",
+			serverFingerprint: savedFingerprint,
 		}
 	}
 
-	if(slideDataEquals(draft, saved)) {
+	if(draft.basedOn === null || draft.basedOn !== savedFingerprint) {
 		clearEditorDraft(params.slideKey)
 
 		return {
 			data: saved,
 			loadSource: "server",
 			saveStatus: "saved",
+			serverFingerprint: savedFingerprint,
+		}
+	}
+
+	if(slideDataEquals(draft.data, saved)) {
+		clearEditorDraft(params.slideKey)
+
+		return {
+			data: saved,
+			loadSource: "server",
+			saveStatus: "saved",
+			serverFingerprint: savedFingerprint,
 		}
 	}
 
 	return {
-		data: draft,
+		data: draft.data,
 		loadSource: "localDraft",
 		saveStatus: "recovered",
+		serverFingerprint: savedFingerprint,
 	}
 }

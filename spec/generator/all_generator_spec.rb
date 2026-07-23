@@ -13,8 +13,10 @@ RSpec.describe AllGenerator, type: :generator do
   it "creates a pundit policy and serializer" do
     root = Rails.root.join("tmp/generators")
 
-    Rails::Generators.invoke("pundit:policy", ["widget"], destination_root: root)
-    Rails::Generators.invoke("serializer", ["widget"], destination_root: root)
+    capture(:stdout) do
+      Rails::Generators.invoke("pundit:policy", ["widget"], destination_root: root)
+      Rails::Generators.invoke("serializer", ["widget"], destination_root: root)
+    end
 
     assert_file "app/policies/widget_policy.rb"
     assert_file "app/serializers/widget_serializer.rb"

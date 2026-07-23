@@ -41,6 +41,7 @@ const PresentationSlidesIndex = ({ presentation }: PresentationSlidesIndexProps)
 			children: (
 				<TextInput
 					label={ t("presentations.slides.index.addSlideModal.slideTitle") }
+					data-autofocus
 					onChange={ (event) => { slideTitle = event.currentTarget.value } }
 				/>
 			),

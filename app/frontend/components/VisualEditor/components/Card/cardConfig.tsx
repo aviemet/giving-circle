@@ -1,4 +1,4 @@
-import { type ComponentConfig } from "@measured/puck"
+import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
@@ -7,12 +7,12 @@ import {
 	borderColorField,
 	borderRadiusField,
 	borderWidthField,
+	boxModelField,
 	colorField,
 	flexField,
 	flexItemSizingField,
-	marginField,
-	paddingField,
 	type BorderProps,
+	type BoxModelValue,
 	type FlexItemSizing,
 	type FlexStyleInput,
 	type SpacingProps,
@@ -25,6 +25,7 @@ export type CardProps = SpacingProps & BorderProps & FlexStyleInput & {
 	backgroundColor: string
 	fontColor: string
 	sizing?: FlexItemSizing
+	spacing?: BoxModelValue
 }
 
 const t = i18n.t.bind(i18n)
@@ -39,8 +40,7 @@ export const cardConfig: ComponentConfig<CardProps> = {
 			label: t("slides.editor.components.card.description"),
 		}),
 		sizing: flexItemSizingField(),
-		margin: marginField(),
-		padding: paddingField(),
+		spacing: boxModelField(),
 		borderWidth: borderWidthField(),
 		borderRadius: borderRadiusField(),
 		borderColor: borderColorField(),
@@ -58,6 +58,19 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		backgroundColor: "#FEFEFE",
 		fontColor: "#111111",
 		sizing: { mode: "auto" },
+		spacing: {
+			margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
+			padding: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
+		},
+		flex: {
+			display: "flex",
+			flexDirection: "column",
+			flexWrap: "nowrap",
+			alignItems: "stretch",
+			justifyContent: "flex-start",
+			overflow: "visible",
+			gap: 0,
+		},
 	},
 	render: (props) => <CardDisplay { ...props } />,
 }

@@ -3,6 +3,8 @@ class CreateThemes < ActiveRecord::Migration[7.0]
     create_table :themes, id: :uuid do |t|
       t.references :circle, null: false, foreign_key: true, type: :uuid
       t.string :name, null: false
+      t.string :heading
+      t.text :description
       t.datetime :published_at
       t.integer :status, default: 0
 

@@ -129,6 +129,11 @@ export const urlParams = {
       "circle_slug"
     ]
   },
+  "apiCircleFonts": {
+    "params": [
+      "circle_slug"
+    ]
+  },
   "apiCircleSpotlights": {
     "params": [
       "circle_slug"

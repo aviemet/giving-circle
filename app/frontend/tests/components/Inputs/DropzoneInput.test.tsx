@@ -21,5 +21,16 @@ describe("components/Inputs/DropzoneInput", () => {
 			expect(typeof dropzoneRef.current?.upload).toBe("function")
 		})
 	})
+
+	test("renders a custom prompt instead of the default image copy", () => {
+		const { getByText, queryByText } = render(
+			<MantineProvider>
+				<DropzoneInput name="font-upload" prompt="Drag font file here or click to select" />
+			</MantineProvider>
+		)
+
+		expect(getByText("Drag font file here or click to select")).toBeInTheDocument()
+		expect(queryByText("Drag image here or click to select files")).not.toBeInTheDocument()
+	})
 })
 

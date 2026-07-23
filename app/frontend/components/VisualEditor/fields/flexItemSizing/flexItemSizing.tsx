@@ -1,5 +1,4 @@
-import { Field } from "@measured/puck"
-import { type TFunction } from "i18next"
+import { Field } from "@puckeditor/core"
 import { useState } from "react"
 import { type CSSProperties } from "react"
 
@@ -7,12 +6,14 @@ import { NumberInput, Select, Textarea } from "@/components/Inputs"
 import { i18n } from "@/lib/i18n"
 
 import {
+	dimensionInputOrOmit,
 	dimensionInputToCSSValue,
+	parseNumberInputAmount,
 	type DimensionInput,
 	type DimensionUnit,
 } from "../dimension"
 import * as classes from "./flexItemSizing.css"
-import { PuckFieldLabel } from "../shared/PuckFieldLabel"
+import { IconSegmented, PuckFieldLabel } from "../shared"
 
 export type FlexItemSizingMode = "auto" | "fixed" | "fill" | "clamp" | "custom"
 
@@ -33,7 +34,9 @@ export type FlexItemClampSizing = {
 export type FlexItemSizing = {
 	mode: FlexItemSizingMode
 	width?: DimensionInput
+	height?: DimensionInput
 	maxWidth?: DimensionInput
+	maxHeight?: DimensionInput
 	clamp?: FlexItemClampSizing
 	custom?: string
 	fineTune?: FlexItemSizingFineTune
@@ -41,10 +44,33 @@ export type FlexItemSizing = {
 
 const DIMENSION_UNITS: DimensionUnit[] = ["px", "%", "vh", "vw", "rem", "auto"]
 
+function isDimensionUnit(value: string): value is DimensionUnit {
+	return DIMENSION_UNITS.some((unit) => unit === value)
+}
+
+function isFlexItemSizingMode(value: string): value is FlexItemSizingMode {
+	return value === "auto"
+		|| value === "fixed"
+		|| value === "fill"
+		|| value === "clamp"
+		|| value === "custom"
+}
+
+function isFlexItemAlignSelf(value: string): value is FlexItemAlignSelf {
+	return value === "auto"
+		|| value === "flex-start"
+		|| value === "center"
+		|| value === "flex-end"
+		|| value === "stretch"
+}
+
 const FLEX_ITEM_CSS_PROPERTIES = new Set([
 	"width",
+	"height",
 	"minwidth",
+	"minheight",
 	"maxwidth",
+	"maxheight",
 	"flex",
 	"flexgrow",
 	"flexshrink",
@@ -54,13 +80,16 @@ const FLEX_ITEM_CSS_PROPERTIES = new Set([
 
 const DIMENSION_CSS_PROPERTIES = new Set([
 	"width",
+	"height",
 	"minwidth",
+	"minheight",
 	"maxwidth",
+	"maxheight",
 	"flexbasis",
 ])
 
-function sizingText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.sizing.${key}`)
+function sizingText(key: string) {
+	return i18n.t(`slides.editor.fields.sizing.${key}`)
 }
 
 function defaultDimensionInput(): DimensionInput {
@@ -151,7 +180,10 @@ export function buildFlexItemSizingStyle(sizing: FlexItemSizing | undefined): CS
 	const normalized = normalizeSizingValue(sizing)
 
 	if(normalized.mode === "auto") {
-		return fineTuneStyle(normalized.fineTune)
+		return {
+			...explicitDimensionStyle(normalized),
+			...fineTuneStyle(normalized.fineTune),
+		}
 	}
 
 	let style: CSSProperties = {}
@@ -198,15 +230,32 @@ export function buildFlexItemSizingStyle(sizing: FlexItemSizing | undefined): CS
 
 	return {
 		...style,
+		...explicitDimensionStyle(normalized),
 		...fineTuneStyle(normalized.fineTune),
 	}
+}
+
+function explicitDimensionStyle(sizing: FlexItemSizing): CSSProperties {
+	const style: CSSProperties = {}
+	const height = dimensionInputToCSSValue(sizing.height)
+	const maxHeight = dimensionInputToCSSValue(sizing.maxHeight)
+
+	if(height) {
+		style.height = height
+	}
+
+	if(maxHeight) {
+		style.maxHeight = maxHeight
+	}
+
+	return style
 }
 
 interface DimensionInputControlProps {
 	label: string
 	name: string
 	value: DimensionInput
-	onChange: (value: DimensionInput) => void
+	onChange: (value: DimensionInput | undefined) => void
 	allowAuto?: boolean
 }
 
@@ -225,11 +274,10 @@ function DimensionInputControl({ label, name, value, onChange, allowAuto = false
 					name={ `${name}.amount` }
 					value={ value.amount }
 					onChange={ (nextAmount) => {
-						const numericValue = typeof nextAmount === "number" ? nextAmount : Number(nextAmount)
-						onChange({
+						onChange(dimensionInputOrOmit({
 							...value,
-							amount: Number.isNaN(numericValue) ? undefined : numericValue,
-						})
+							amount: parseNumberInputAmount(nextAmount),
+						}))
 					} }
 					min={ 0 }
 					step={ 1 }
@@ -240,13 +288,13 @@ function DimensionInputControl({ label, name, value, onChange, allowAuto = false
 				name={ `${name}.unit` }
 				value={ value.unit }
 				onChange={ (nextUnit) => {
-					if(!nextUnit) {
+					if(!nextUnit || !isDimensionUnit(nextUnit)) {
 						return
 					}
-					onChange({
+					onChange(dimensionInputOrOmit({
 						...value,
-						unit: nextUnit as DimensionUnit,
-					})
+						unit: nextUnit,
+					}))
 				} }
 				options={ units.map((unit) => ({ value: unit, label: unit })) }
 			/>
@@ -258,10 +306,9 @@ interface FlexItemSizingFieldControlProps {
 	name: string
 	value: FlexItemSizing | undefined
 	onChange: (value: FlexItemSizing) => void
-	t: TFunction
 }
 
-function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizingFieldControlProps) {
+function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFieldControlProps) {
 	const [localValue, setLocalValue] = useState<FlexItemSizing>(() => normalizeSizingValue(value))
 
 	const updateValue = (patch: Partial<FlexItemSizing>) => {
@@ -279,97 +326,152 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 		})
 	}
 
-	const updateClamp = (key: keyof FlexItemClampSizing, dimension: DimensionInput) => {
+	const updateClamp = (key: keyof FlexItemClampSizing, dimension: DimensionInput | undefined) => {
 		updateValue({
 			clamp: {
 				...(localValue.clamp ?? defaultClampSizing()),
-				[key]: dimension,
+				[key]: dimension ?? defaultDimensionInput(),
 			},
 		})
 	}
 
 	const modeOptions = [
-		{ value: "auto", label: sizingText(t, "modes.auto") },
-		{ value: "fixed", label: sizingText(t, "modes.fixed") },
-		{ value: "fill", label: sizingText(t, "modes.fill") },
-		{ value: "clamp", label: sizingText(t, "modes.clamp") },
-		{ value: "custom", label: sizingText(t, "modes.custom") },
+		{ value: "auto", label: sizingText("modes.short.auto") },
+		{ value: "fixed", label: sizingText("modes.short.fixed") },
+		{ value: "fill", label: sizingText("modes.short.fill") },
+		{ value: "clamp", label: sizingText("modes.short.clamp") },
+		{ value: "custom", label: sizingText("modes.short.custom") },
 	]
 
 	const alignSelfOptions = [
-		{ value: "auto", label: sizingText(t, "align_self.auto") },
-		{ value: "flex-start", label: sizingText(t, "align_self.start") },
-		{ value: "center", label: sizingText(t, "align_self.center") },
-		{ value: "flex-end", label: sizingText(t, "align_self.end") },
-		{ value: "stretch", label: sizingText(t, "align_self.stretch") },
+		{ value: "auto", label: sizingText("align_self.auto") },
+		{ value: "flex-start", label: sizingText("align_self.start") },
+		{ value: "center", label: sizingText("align_self.center") },
+		{ value: "flex-end", label: sizingText("align_self.end") },
+		{ value: "stretch", label: sizingText("align_self.stretch") },
 	]
 
 	return (
 		<div className={ classes.sizingFieldRoot }>
-			<Select
-				wrapper={ false }
+			<IconSegmented
+				className={ classes.modeSegmented }
 				name={ `${name}.mode` }
 				value={ localValue.mode }
+				options={ modeOptions }
 				onChange={ (nextMode) => {
-					if(!nextMode) {
+					if(!isFlexItemSizingMode(nextMode)) {
 						return
 					}
-					updateValue({ mode: nextMode as FlexItemSizingMode })
+					updateValue({ mode: nextMode })
 				} }
-				options={ modeOptions }
 			/>
 
 			{ localValue.mode === "fixed" && (
-				<div className={ classes.sizingFieldSection }>
+				<div className={ classes.dimensionStack }>
 					<DimensionInputControl
-						label={ sizingText(t, "labels.width") }
+						label={ sizingText("labels.width") }
 						name={ `${name}.width` }
 						value={ localValue.width ?? defaultDimensionInput() }
 						onChange={ (width) => updateValue({ width }) }
 					/>
 					<DimensionInputControl
-						label={ sizingText(t, "labels.max_width") }
+						label={ sizingText("labels.height") }
+						name={ `${name}.height` }
+						value={ localValue.height ?? defaultDimensionInput() }
+						onChange={ (height) => updateValue({ height }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_width") }
 						name={ `${name}.maxWidth` }
 						value={ localValue.maxWidth ?? defaultDimensionInput() }
 						onChange={ (maxWidth) => updateValue({ maxWidth }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_height") }
+						name={ `${name}.maxHeight` }
+						value={ localValue.maxHeight ?? defaultDimensionInput() }
+						onChange={ (maxHeight) => updateValue({ maxHeight }) }
 					/>
 				</div>
 			) }
 
 			{ localValue.mode === "fill" && (
-				<DimensionInputControl
-					label={ sizingText(t, "labels.max_width") }
-					name={ `${name}.maxWidth` }
-					value={ localValue.maxWidth ?? defaultDimensionInput() }
-					onChange={ (maxWidth) => updateValue({ maxWidth }) }
-				/>
+				<div className={ classes.dimensionStack }>
+					<DimensionInputControl
+						label={ sizingText("labels.height") }
+						name={ `${name}.height` }
+						value={ localValue.height ?? defaultDimensionInput() }
+						onChange={ (height) => updateValue({ height }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_width") }
+						name={ `${name}.maxWidth` }
+						value={ localValue.maxWidth ?? defaultDimensionInput() }
+						onChange={ (maxWidth) => updateValue({ maxWidth }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_height") }
+						name={ `${name}.maxHeight` }
+						value={ localValue.maxHeight ?? defaultDimensionInput() }
+						onChange={ (maxHeight) => updateValue({ maxHeight }) }
+					/>
+				</div>
 			) }
 
 			{ localValue.mode === "clamp" && (
-				<div className={ classes.sizingFieldSection }>
+				<div className={ classes.dimensionStack }>
 					<DimensionInputControl
-						label={ sizingText(t, "labels.clamp_min") }
+						label={ sizingText("labels.clamp_min") }
 						name={ `${name}.clamp.min` }
 						value={ localValue.clamp?.min ?? defaultClampSizing().min }
 						onChange={ (min) => updateClamp("min", min) }
 					/>
 					<DimensionInputControl
-						label={ sizingText(t, "labels.clamp_preferred") }
+						label={ sizingText("labels.clamp_preferred") }
 						name={ `${name}.clamp.preferred` }
 						value={ localValue.clamp?.preferred ?? defaultClampSizing().preferred }
 						onChange={ (preferred) => updateClamp("preferred", preferred) }
 					/>
 					<DimensionInputControl
-						label={ sizingText(t, "labels.clamp_max") }
+						label={ sizingText("labels.clamp_max") }
 						name={ `${name}.clamp.max` }
 						value={ localValue.clamp?.max ?? defaultClampSizing().max }
 						onChange={ (max) => updateClamp("max", max) }
 					/>
 					<DimensionInputControl
-						label={ sizingText(t, "labels.max_width") }
+						label={ sizingText("labels.height") }
+						name={ `${name}.height` }
+						value={ localValue.height ?? defaultDimensionInput() }
+						onChange={ (height) => updateValue({ height }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_width") }
 						name={ `${name}.maxWidth` }
 						value={ localValue.maxWidth ?? defaultDimensionInput() }
 						onChange={ (maxWidth) => updateValue({ maxWidth }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_height") }
+						name={ `${name}.maxHeight` }
+						value={ localValue.maxHeight ?? defaultDimensionInput() }
+						onChange={ (maxHeight) => updateValue({ maxHeight }) }
+					/>
+				</div>
+			) }
+
+			{ localValue.mode === "auto" && (
+				<div className={ classes.dimensionStack }>
+					<DimensionInputControl
+						label={ sizingText("labels.height") }
+						name={ `${name}.height` }
+						value={ localValue.height ?? defaultDimensionInput() }
+						onChange={ (height) => updateValue({ height }) }
+					/>
+					<DimensionInputControl
+						label={ sizingText("labels.max_height") }
+						name={ `${name}.maxHeight` }
+						value={ localValue.maxHeight ?? defaultDimensionInput() }
+						onChange={ (maxHeight) => updateValue({ maxHeight }) }
 					/>
 				</div>
 			) }
@@ -380,18 +482,18 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 					name={ `${name}.custom` }
 					value={ localValue.custom ?? "" }
 					onChange={ (event) => updateValue({ custom: event.currentTarget.value }) }
-					placeholder={ sizingText(t, "custom_placeholder") }
+					placeholder={ sizingText("custom_placeholder") }
 					minRows={ 2 }
 					autosize
 				/>
 			) }
 
 			<details className={ classes.fineTune }>
-				<summary>{ sizingText(t, "fine_tune.title") }</summary>
+				<summary>{ sizingText("fine_tune.title") }</summary>
 				<div className={ classes.fineTunePanel }>
 					<div className={ classes.fineTuneRow }>
 						<div className={ classes.dimensionRowLabel }>
-							{ sizingText(t, "fine_tune.flex_grow") }
+							{ sizingText("fine_tune.flex_grow") }
 						</div>
 						<NumberInput
 							wrapper={ false }
@@ -409,7 +511,7 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 					</div>
 					<div className={ classes.fineTuneRow }>
 						<div className={ classes.dimensionRowLabel }>
-							{ sizingText(t, "fine_tune.flex_shrink") }
+							{ sizingText("fine_tune.flex_shrink") }
 						</div>
 						<NumberInput
 							wrapper={ false }
@@ -427,17 +529,17 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 					</div>
 					<div className={ classes.fineTuneRow }>
 						<div className={ classes.dimensionRowLabel }>
-							{ sizingText(t, "fine_tune.align_self") }
+							{ sizingText("fine_tune.align_self") }
 						</div>
 						<Select
 							wrapper={ false }
 							name={ `${name}.fineTune.alignSelf` }
 							value={ localValue.fineTune?.alignSelf ?? "auto" }
 							onChange={ (nextValue) => {
-								if(!nextValue) {
+								if(!nextValue || !isFlexItemAlignSelf(nextValue)) {
 									return
 								}
-								updateFineTune({ alignSelf: nextValue as FlexItemAlignSelf })
+								updateFineTune({ alignSelf: nextValue })
 							} }
 							options={ alignSelfOptions }
 						/>
@@ -453,8 +555,7 @@ function flexItemSizingField(params: Partial<Field<FlexItemSizing | undefined>>)
 function flexItemSizingField(
 	{ label }: Partial<Field<FlexItemSizing | undefined>> = {},
 ): Field<FlexItemSizing | undefined> {
-	const t = i18n.t.bind(i18n)
-	const resolvedLabel = label ?? sizingText(t, "label")
+	const resolvedLabel = label ?? sizingText("label")
 
 	return {
 		type: "custom",
@@ -466,7 +567,6 @@ function flexItemSizingField(
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)

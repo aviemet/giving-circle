@@ -1,20 +1,29 @@
-import { PuckContext, SlotComponent } from "@measured/puck"
+import { PuckContext, SlotComponent } from "@puckeditor/core"
 import clsx from "clsx"
 
 import { Container } from "@/components"
 
+import { buildContainerStyle } from "./buildContainerStyle"
+import * as classes from "./Container.css"
+import * as editorClasses from "./Container.editor.css"
 import { ContainerProps } from "./containerConfig"
-import { buildBorderStyle } from "../../fields/border"
-import { buildDimensionStyle } from "../../fields/dimension"
-import { buildFlexStyle } from "../../fields/flex"
-import { buildFlexItemSizingStyle } from "../../fields/flexItemSizing"
-import { buildSpacingStyle } from "../../fields/spacing"
-import * as classes from "../../Puck.css"
+import * as layoutChrome from "../../layoutChrome.editor.css"
+import * as puckClasses from "../../Puck.css"
 import { slotDropZoneProps } from "../../slotEditor"
 
 export type ContainerComponentProps = Omit<ContainerProps, "content"> & {
 	content: SlotComponent
 	puck: PuckContext
+}
+
+export function containerClassName(isEditing: boolean) {
+	return clsx(
+		classes.container,
+		isEditing && editorClasses.container,
+		isEditing && layoutChrome.frame,
+		isEditing && layoutChrome.labelContainer,
+		isEditing && puckClasses.presentationSlot,
+	)
 }
 
 export function ContainerDisplay({
@@ -24,24 +33,17 @@ export function ContainerDisplay({
 	puck,
 	...styleProps
 }: ContainerComponentProps) {
-	const { dragRef } = puck
+	const { dragRef, isEditing } = puck
 
 	return (
 		<Container
 			ref={ dragRef }
 			component={ Content }
-			className={ clsx(classes.presentationSlot, classes.presentationContainer) }
+			className={ containerClassName(isEditing) }
 			ta={ alignment }
 			fluid
 			w="100%"
-			style={ {
-				...buildSpacingStyle(styleProps),
-				...buildBorderStyle(styleProps),
-				...buildDimensionStyle(styleProps),
-				...buildFlexStyle(styleProps),
-				...buildFlexItemSizingStyle(sizing ?? { mode: "fill" }),
-				...(styleProps.backgroundColor ? { backgroundColor: styleProps.backgroundColor } : {}),
-			} }
+			style={ buildContainerStyle(styleProps, sizing, isEditing) }
 			{ ...slotDropZoneProps() }
 		/>
 	)

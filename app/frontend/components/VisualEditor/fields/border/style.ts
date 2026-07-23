@@ -7,9 +7,15 @@ export type BorderProps = {
 }
 
 export function buildBorderStyle(props: BorderProps): CSSProperties {
-	return {
+	const style: CSSProperties = {
 		...(props.borderWidth !== undefined ? { borderWidth: props.borderWidth } : {}),
 		...(props.borderRadius !== undefined ? { borderRadius: props.borderRadius } : {}),
 		...(props.borderColor ? { borderColor: props.borderColor } : {}),
 	}
+
+	if(props.borderWidth !== undefined && props.borderWidth > 0) {
+		style.borderStyle = "solid"
+	}
+
+	return style
 }

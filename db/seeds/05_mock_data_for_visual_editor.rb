@@ -4,6 +4,8 @@ if MockCircle.none?
 
     theme = Theme.create!(
       name: "Mock Theme",
+      heading: "Mock Theme Heading",
+      description: "This is a mock theme description for visual editor testing",
       circle:,
     )
 

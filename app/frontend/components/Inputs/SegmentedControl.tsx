@@ -1,6 +1,5 @@
 import {
 	SegmentedControl as MantineSegmentedControl,
-	useMantineTheme,
 	type SegmentedControlProps as MantineSegmentedControlProps,
 	type SegmentedControlItem,
 } from "@mantine/core"
@@ -35,10 +34,9 @@ export function SegmentedControl({
 	onChange,
 	wrapper,
 	ref,
+	color,
 	...props
 }: SegmentedControlProps) {
-	const theme = useMantineTheme()
-
 	return (
 		<InputWrapper wrapper={ wrapper }>
 			{ label && labelPosition === "start" &&
@@ -51,7 +49,7 @@ export function SegmentedControl({
 					onChange?.(choice)
 				} }
 				data={ options }
-				color={ theme.primaryColor }
+				color={ color }
 				{ ...props }
 			/>
 			{ label && labelPosition === "end" &&

@@ -29,6 +29,36 @@ export function formatDimensionValue(amount: number | undefined, unit: Dimension
 	return `${amount}${unit}`
 }
 
+export function parseNumberInputAmount(nextAmount: string | number | null | undefined): number | undefined {
+	if(nextAmount === "" || nextAmount === null || nextAmount === undefined) {
+		return undefined
+	}
+
+	if(typeof nextAmount === "number") {
+		return Number.isNaN(nextAmount) ? undefined : nextAmount
+	}
+
+	const trimmed = nextAmount.trim()
+	if(trimmed.length === 0) {
+		return undefined
+	}
+
+	const numericValue = Number(trimmed)
+	return Number.isNaN(numericValue) ? undefined : numericValue
+}
+
+export function dimensionInputOrOmit(input: DimensionInput): DimensionInput | undefined {
+	if(input.unit === "auto") {
+		return input
+	}
+
+	if(input.amount === undefined) {
+		return undefined
+	}
+
+	return input
+}
+
 export function parseDimensionValue(value: string | undefined): ParsedDimension | undefined {
 	if(!value || value.trim() === "") {
 		return undefined

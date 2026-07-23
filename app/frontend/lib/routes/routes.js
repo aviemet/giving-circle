@@ -612,6 +612,15 @@ export const apiCircle = /*#__PURE__*/ __route({"slug":{"r":true},"format":{}}, 
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/fonts(.:format)
+ * @param {any} circleSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCircleFonts = /*#__PURE__*/ __route({"circle_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"fonts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/mock(.:format)
  * @param {any} circleSlug
  * @param {object | undefined} options

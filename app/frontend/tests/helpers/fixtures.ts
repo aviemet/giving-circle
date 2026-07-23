@@ -22,6 +22,8 @@ export function createThemePersisted(overrides?: Partial<Schema.ThemesPersisted>
 	return {
 		id: "theme-1",
 		name: "Theme 1",
+		heading: "Theme Heading",
+		description: "Theme description for tests",
 		slug: "theme-1",
 		status: "current",
 		circle: createCirclesOptions(),
@@ -33,6 +35,8 @@ export function createThemeInertiaShare(overrides?: Partial<Schema.ThemesInertia
 	return {
 		id: "theme-1",
 		name: "Theme 1",
+		heading: "Theme Heading",
+		description: "Theme description for tests",
 		slug: "theme-1",
 		status: "current",
 		circle: createCirclesOptions(),
@@ -262,6 +266,8 @@ export function createThemesShow(overrides?: Partial<Schema.ThemesShow>): Schema
 	return {
 		id: "theme-1",
 		name: "Theme 1",
+		heading: "Theme Heading",
+		description: "Theme description for tests",
 		slug: "theme-1",
 		status: "current",
 		circle: createCirclePersisted(),

@@ -24,9 +24,9 @@ export type EditorSemanticColors = {
 export type EditorSemanticVarMap = Record<keyof EditorSemanticColors["light"], string[]>
 
 export const EDITOR_SEMANTIC_VAR_MAP: EditorSemanticVarMap = {
-	inputBorder: ["--editor-input-border", "--puck-color-grey-09", "--puck-color-grey-08"],
-	inputBg: ["--editor-input-bg"],
-	inputText: ["--editor-input-text"],
+	inputBorder: ["--editor-input-border", "--puck-color-border", "--puck-field-color-border"],
+	inputBg: ["--editor-input-bg", "--puck-field-color-bg"],
+	inputText: ["--editor-input-text", "--puck-field-color-text"],
 }
 
 export const EDITOR_SEMANTIC_KEYS: (keyof EditorSemanticColors["light"])[] = ["inputBorder", "inputBg", "inputText"]
@@ -119,43 +119,49 @@ export const themeObject: Partial<CustomMantineTheme> = {
 		},
 		puck: {
 			light: {
-				white: "var(--mantine-color-gray-0)", // DrawerItem, right sidebar, input surfaces
-				black: "var(--mantine-color-dark-9)", // Primary text
-				"grey-01": "var(--mantine-color-gray-0)", // ActionBar (top bar) background
-				"grey-02": "var(--mantine-color-gray-2)", // Section header bg, right-sidebar input bg (recessed)
-				"grey-03": "var(--mantine-color-gray-7)", // LayerTree text (Outline) – readable on gray-2
-				"grey-04": "var(--mantine-color-dark-9)", // Input/field label text (on grey-02)
-				"grey-05": "var(--mantine-color-gray-8)", // ComponentList + LayerTree zone title – strong contrast
-				"grey-06": "var(--mantine-color-gray-6)", // Canvas loader, misc text
-				"grey-07": "var(--mantine-color-gray-7)", // Input-labelIcon, LayerTree helper (on grey-02)
-				"grey-08": "var(--mantine-color-gray-4)", // ActionBar labels, Layer icon, borders
-				"grey-09": "var(--mantine-color-gray-4)", // Input/sidebar borders, DropZone outline
-				"grey-10": "var(--mantine-color-gray-3)", // Table row borders
-				"grey-11": "var(--mantine-color-gray-1)", // ViewportControls, PuckCanvas bg
-				"grey-12": "var(--mantine-color-gray-2)", // Left sidebar (tinted so white items pop)
+				surface: "var(--mantine-color-gray-0)",
+				"surface-muted": "var(--mantine-color-gray-1)",
+				"surface-subtle": "var(--mantine-color-gray-2)",
+				"surface-inverse": "var(--mantine-color-gray-0)",
+				border: "var(--mantine-color-gray-4)",
+				"border-hover": "var(--mantine-color-gray-8)",
+				"border-muted": "var(--mantine-color-gray-3)",
+				"border-inverse": "var(--mantine-color-gray-4)",
+				text: "var(--mantine-color-dark-9)",
+				"text-secondary": "var(--mantine-color-dark-9)",
+				"text-muted": "var(--mantine-color-gray-8)",
+				"text-subtle": "var(--mantine-color-gray-7)",
+				"text-inverse": "var(--mantine-color-gray-0)",
+				"text-disabled": "var(--mantine-color-gray-7)",
+				"interactive-neutral-hover": "var(--mantine-color-gray-3)",
+				"bg-disabled": "var(--mantine-color-gray-7)",
 			},
 			dark: {
-				white: "var(--mantine-color-dark-6)", // DrawerItem, right sidebar, input surfaces
-				black: "var(--mantine-color-white)", // Primary text
-				"grey-01": "var(--mantine-color-dark-8)", // ActionBar (top bar) background
-				"grey-02": "var(--mantine-color-dark-7)", // Section header bg, right-sidebar input bg (recessed)
-				"grey-03": "var(--mantine-color-dark-3)", // LayerTree text (Outline) – readable on dark-8
-				"grey-04": "var(--mantine-color-gray-1)", // Input/field label text (on grey-02)
-				"grey-05": "var(--mantine-color-gray-0)", // ComponentList + LayerTree zone title – strong contrast
-				"grey-06": "var(--mantine-color-dark-4)", // Canvas loader, misc text
-				"grey-07": "var(--mantine-color-gray-4)", // Input-labelIcon, LayerTree helper (on grey-02)
-				"grey-08": "var(--mantine-color-gray-5)", // ActionBar labels, Layer icon, borders
-				"grey-09": "var(--mantine-color-dark-4)", // Input/sidebar borders, DropZone outline
-				"grey-10": "var(--mantine-color-dark-5)", // Table row borders
-				"grey-11": "var(--mantine-color-dark-6)", // ViewportControls bg, PuckCanvas bg
-				"grey-12": "var(--mantine-color-dark-8)", // Left sidebar (darker than white = items pop)
-				"azure-04": "var(--mantine-color-primary-4)", // ComponentList/DrawerItem hover text, selection accent
-				"azure-05": "var(--mantine-color-primary-5)", // Focus outline, selection border
-				"azure-08": "var(--mantine-color-dark-4)", // DropZone dashed outline when selected/hover
-				"azure-09": "var(--mantine-color-dark-5)", // DropZone selected/hover background (color-mix)
-				"azure-10": "var(--mantine-color-dark-5)", // ComponentList title active state
-				"azure-11": "var(--mantine-color-dark-5)", // ComponentList/DrawerItem hover & selected bg, ArrayField expanded
-				"azure-12": "var(--mantine-color-dark-6)", // Hover tint, select dropdown hover
+				surface: "var(--mantine-color-dark-6)",
+				"surface-muted": "var(--mantine-color-dark-6)",
+				"surface-subtle": "var(--mantine-color-dark-8)",
+				"surface-inverse": "var(--mantine-color-dark-8)",
+				border: "var(--mantine-color-dark-4)",
+				"border-hover": "var(--mantine-color-gray-0)",
+				"border-muted": "var(--mantine-color-dark-5)",
+				"border-inverse": "var(--mantine-color-gray-5)",
+				text: "var(--mantine-color-white)",
+				"text-secondary": "var(--mantine-color-gray-1)",
+				"text-muted": "var(--mantine-color-gray-0)",
+				"text-subtle": "var(--mantine-color-gray-4)",
+				"text-inverse": "var(--mantine-color-dark-6)",
+				"text-disabled": "var(--mantine-color-dark-3)",
+				interactive: "var(--mantine-color-primary-4)",
+				"interactive-hover": "var(--mantine-color-primary-5)",
+				"interactive-active": "var(--mantine-color-primary-6)",
+				"interactive-subtle": "var(--mantine-color-dark-5)",
+				"interactive-soft": "var(--mantine-color-dark-5)",
+				"interactive-soft-hover": "var(--mantine-color-dark-6)",
+				"interactive-neutral-hover": "var(--mantine-color-dark-5)",
+				"focus-ring": "var(--mantine-color-primary-5)",
+				"selection-border": "var(--mantine-color-dark-4)",
+				"selection-bg": "color-mix(in srgb, var(--mantine-color-dark-5) 30%, transparent)",
+				"bg-disabled": "var(--mantine-color-gray-4)",
 			},
 		},
 	},

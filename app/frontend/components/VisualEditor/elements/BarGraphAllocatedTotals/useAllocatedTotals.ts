@@ -1,15 +1,14 @@
-import { useCallback, useMemo, useState } from "react"
+import { useMemo } from "react"
 
-import { type PresentationValuesPayload } from "@/features/presentation"
-import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
+import { usePresentationDataContext } from "@/features/presentation"
 import { fromCents } from "@/lib/money"
 import { type Money } from "@/types"
 
 import { type AllocatedTotalEntry } from "./BarGraphAllocatedTotals"
-import { usePresentationValuesChannel } from "./usePresentationValuesChannel"
 import { getOrgsFromContext } from "../../dynamicData/getOrgsFromContext"
 
 type ContextOrg = ReturnType<typeof getOrgsFromContext>[number]
+type PresentationValues = NonNullable<ReturnType<typeof usePresentationDataContext>>["values"]
 
 function orgAsk(org: ContextOrg): Money | undefined {
 	if("ask" in org && org.ask !== null && org.ask !== undefined) {
@@ -19,15 +18,22 @@ function orgAsk(org: ContextOrg): Money | undefined {
 	return undefined
 }
 
-function randomNeedCents() {
-	return 50_000 + Math.floor(Math.random() * 200_001)
+export function stableMockNeedCents(orgId: string) {
+	let hash = 2166136261
+
+	for(let index = 0; index < orgId.length; index++) {
+		hash ^= orgId.charCodeAt(index)
+		hash = Math.imul(hash, 16777619)
+	}
+
+	return 50_000 + (hash >>> 0) % 200_001
 }
 
 function buildMockTotals(orgs: ContextOrg[]): AllocatedTotalEntry[] {
 	return orgs.map((org, index) => {
 		const ask = orgAsk(org)
 		const currencyIso = ask?.currency_iso ?? "USD"
-		const need = ask ?? fromCents(randomNeedCents(), currencyIso)
+		const need = ask ?? fromCents(stableMockNeedCents(org.id), currencyIso)
 		const allocated = fromCents((index + 1) * 25_000, currencyIso)
 
 		return {
@@ -41,7 +47,7 @@ function buildMockTotals(orgs: ContextOrg[]): AllocatedTotalEntry[] {
 
 function mergeTotalsWithOrgs(
 	orgs: ContextOrg[],
-	values: PresentationValuesPayload | undefined,
+	values: PresentationValues,
 ): AllocatedTotalEntry[] {
 	const totalsByOrgId = new Map(
 		(values?.allocated_totals ?? []).map((total) => [total.org_id, total]),
@@ -51,7 +57,7 @@ function mergeTotalsWithOrgs(
 		const total = totalsByOrgId.get(org.id)
 		const ask = orgAsk(org)
 		const currencyIso = total?.currency ?? ask?.currency_iso ?? "USD"
-		const need = ask ?? fromCents(randomNeedCents(), currencyIso)
+		const need = ask ?? fromCents(stableMockNeedCents(org.id), currencyIso)
 		const allocated = fromCents(total?.allocated_cents ?? 0, currencyIso)
 
 		return {
@@ -66,29 +72,17 @@ function mergeTotalsWithOrgs(
 export function useAllocatedTotals(): AllocatedTotalEntry[] {
 	const contextData = usePresentationDataContext()
 	const orgs = useMemo(() => getOrgsFromContext(contextData), [contextData])
-	const presentationId = contextData?.presentation?.id
-	const isEditor = contextData?.isEditor === true
+	const presentationId = contextData.presentation && "id" in contextData.presentation
+		? contextData.presentation.id
+		: undefined
+	const isEditor = contextData.isEditor === true
+	const liveValues = contextData.values
 
 	const mockTotals = useMemo(() => buildMockTotals(orgs), [orgs])
-	const [liveValues, setLiveValues] = useState<PresentationValuesPayload | undefined>(undefined)
-
-	const handlePresentationValuesUpdated = useCallback((values: PresentationValuesPayload) => {
-		setLiveValues(values)
-	}, [])
-
-	usePresentationValuesChannel({
-		presentationId: presentationId ?? "",
-		enabled: !isEditor && Boolean(presentationId),
-		onPresentationValuesUpdated: handlePresentationValuesUpdated,
-	})
 
 	if(isEditor || !presentationId) {
 		return mockTotals
 	}
 
-	if(liveValues) {
-		return mergeTotalsWithOrgs(orgs, liveValues)
-	}
-
-	return mergeTotalsWithOrgs(orgs, undefined)
+	return mergeTotalsWithOrgs(orgs, liveValues)
 }

@@ -39,7 +39,10 @@ const PublicShowPresentation = ({ presentation, circle, theme, meta }: PublicSho
 				presentation={ presentation }
 				circle={ circle }
 				theme={ theme }
-				activeSlide={ presentation.slides.find(slide => slide.id === activeSlideId)! }
+				activeSlide={
+					presentation.slides.find(slide => slide.id === activeSlideId)
+					?? presentation.slides[0]
+				}
 				transitionType="fade"
 				transitionDuration={ 0.33 }
 			/>

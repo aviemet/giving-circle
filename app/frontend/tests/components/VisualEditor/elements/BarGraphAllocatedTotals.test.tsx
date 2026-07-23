@@ -95,7 +95,11 @@ describe("components/VisualEditor/puck.config elements category", () => {
 		const { config } = await import("@/components/VisualEditor/puck.config")
 
 		expect(config.categories?.elements?.title).toBe("Elements")
-		expect(config.categories?.elements?.components).toEqual(["BarGraphAllocatedTotals"])
+		expect(config.categories?.elements?.components).toEqual([
+			"BarGraphAllocatedTotals",
+			"LeverageBar",
+			"Timer",
+		])
 		expect(config.components?.BarGraphAllocatedTotals).toBeDefined()
 	}, 35000)
 })

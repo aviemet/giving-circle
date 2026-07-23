@@ -1,15 +1,30 @@
 import { type CSSProperties } from "react"
 
-import { normalizeSpacingGroup, spacingCSSValue, type SpacingGroup } from "./spacing"
+import {
+	normalizeSpacingGroup,
+	spacingCSSValue,
+	type BoxModelValue,
+	type SpacingGroup,
+} from "./spacing"
 
 export type SpacingProps = {
 	margin?: SpacingGroup
 	padding?: SpacingGroup
+	spacing?: BoxModelValue
+}
+
+export function resolveSpacingGroups(props: SpacingProps): {
+	margin: SpacingGroup | undefined
+	padding: SpacingGroup | undefined
+} {
+	return {
+		margin: normalizeSpacingGroup(props.spacing?.margin ?? props.margin),
+		padding: normalizeSpacingGroup(props.spacing?.padding ?? props.padding),
+	}
 }
 
 export function buildSpacingStyle(props: SpacingProps): CSSProperties {
-	const marginGroup = normalizeSpacingGroup(props.margin)
-	const paddingGroup = normalizeSpacingGroup(props.padding)
+	const { margin: marginGroup, padding: paddingGroup } = resolveSpacingGroups(props)
 
 	return {
 		...(marginGroup

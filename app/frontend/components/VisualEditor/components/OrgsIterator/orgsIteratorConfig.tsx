@@ -1,6 +1,6 @@
-import { Slot, type ComponentConfig, type SlotComponent } from "@measured/puck"
+import { Slot, type ComponentConfig, type SlotComponent } from "@puckeditor/core"
 
-import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
+import { usePresentationDataContext } from "@/features/presentation"
 import { i18n } from "@/lib/i18n"
 
 import { OrgsIteratorDisplay } from "./OrgsIteratorDisplay"
