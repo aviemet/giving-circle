@@ -1,6 +1,5 @@
 import { css } from "@linaria/core"
 
-import { theme } from "@/lib/theme"
 
 import * as layoutChrome from "./layoutChrome.editor.css"
 import {
@@ -9,6 +8,8 @@ import {
 	DRAG_SLOT_GAP_PX,
 	DRAG_SLOT_GUTTER_PX,
 } from "./slotEditor"
+
+import { theme } from "@/lib/theme"
 
 export { puckFields } from "./fields/puckFieldStyles.css"
 
@@ -45,11 +46,25 @@ export const puckRoot = css`
 	--puck-space-5: 12px;
 	--puck-space-chrome-gutter: 0px;
 	--puck-drawer-item-space: 4px;
+	--puck-radius-m: 3px;
+	--puck-field-radius: 3px;
+	--puck-field-font-size: 0.8125rem;
 	--puck-field-space-y: 4px;
 	--puck-field-space-x: 6px;
 	--puck-field-label-space-y: 2px;
+	--puck-field-label-font-size: 0.8125rem;
 	--puck-field-space-surface-y: 6px;
 	--puck-field-space-surface-x: 6px;
+	--puck-field-control-height: 28px;
+	--puck-field-section-gap: 4px;
+	--puck-field-label-font-size: 0.8125rem;
+	--puck-field-label-font-weight: 700;
+	--puck-field-prop-label-font-size: 0.6875rem;
+	--puck-field-prop-label-font-weight: 600;
+	--puck-field-prop-label-color: #d97706;
+	--puck-field-selected-bg: color-mix(in oklch, var(--mantine-color-blue-6) 42%, var(--puck-field-color-bg, var(--editor-input-bg)));
+	--puck-field-selected-border: color-mix(in oklch, var(--mantine-color-blue-5) 55%, var(--puck-field-color-border, var(--editor-input-border)));
+	--puck-field-control-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
 	--puck-slot-min-empty-height: 48px;
 	position: relative;
 	height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
@@ -64,9 +79,9 @@ export const puckRoot = css`
 
 		input,
 		select {
-			color: var(--editor-input-text);
-			background-color: var(--editor-input-bg);
-			border-color: var(--editor-input-border);
+			color: var(--puck-field-color-text, var(--editor-input-text));
+			background-color: var(--puck-field-color-bg, var(--editor-input-bg));
+			border-color: var(--puck-field-color-border, var(--editor-input-border));
 		}
 
 		.${ puckDrawer } [class*="ComponentList-title"] {
@@ -184,6 +199,18 @@ export const puckRoot = css`
 
 	& [class*="PuckCanvas"] {
 		overflow: auto;
+	}
+
+	& [class*="ActionBar"] {
+		--puck-actionbar-color-text: #ffffff;
+		--puck-actionbar-color-action-disabled: #ffffff;
+		--puck-actionbar-color-action-active: #ffffff;
+		--puck-actionbar-color-separator: rgba(255, 255, 255, 0.4);
+		color: #ffffff;
+	}
+
+	& [class*="ActionBar"] svg {
+		color: inherit;
 	}
 
 	& [data-puck-preview],

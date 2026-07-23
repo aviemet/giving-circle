@@ -5,38 +5,50 @@ import { i18n } from "@/lib/i18n"
 import { HeadingDisplay } from "./Heading"
 import {
 	alignmentField,
-	colorField,
-	defaultFontValue,
-	fontField,
-	fontStyleField,
-	fontWeightField,
+	defaultHeadingMetrics,
+	defaultTextFlow,
+	defaultTextFontValue,
+	defaultTypeStyle,
+	headingMetricsField,
+	normalizeHeadingMetrics,
+	normalizeTextFlow,
+	normalizeTextFontValue,
+	normalizeTypeStyle,
 	tagsField,
-	textDecorationField,
-	textTransformField,
-	titleSizeField,
+	textFlowField,
+	textFontField,
+	typeStyleField,
 	type AlignmentValue,
 	type FontStyleValue,
-	type FontValue,
 	type FontWeightValue,
+	type HeadingMetricsValue,
+	type HeadingOrder,
 	type TextDecorationValue,
+	type TextFlowValue,
+	type TextFontValue,
 	type TextTransformValue,
+	type TextWrapValue,
 	type TitleSizeValue,
+	type TypeStyleValue,
 } from "../../fields"
 
 export type HeadingProps = {
 	title: string
-	padding: number
-	order: 1 | 2 | 3 | 4 | 5 | 6
-	size: TitleSizeValue
-	color: string
-	fw: FontWeightValue
-	td: TextDecorationValue
-	tt: TextTransformValue
-	fs: FontStyleValue
-	font: FontValue
+	metrics?: HeadingMetricsValue
+	order?: HeadingOrder
+	size?: TitleSizeValue
+	padding?: number
+	color?: string
+	font?: TextFontValue
+	typeStyle?: TypeStyleValue
+	fw?: FontWeightValue
+	td?: TextDecorationValue
+	tt?: TextTransformValue
+	fs?: FontStyleValue
 	alignment: AlignmentValue
-	lineClamp: number
-	textWrap: "wrap" | "nowrap" | "balance" | "pretty" | "stable"
+	flow?: TextFlowValue
+	lineClamp?: number
+	textWrap?: TextWrapValue
 }
 
 const t = i18n.t.bind(i18n)
@@ -47,74 +59,71 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		title: tagsField({
 			label: t("slides.editor.components.heading.title"),
 		}),
-		padding: { type: "number", label: t("slides.editor.components.heading.padding") },
-		order: {
-			type: "select",
-			label: t("slides.editor.components.heading.level"),
-			options: [
-				{ label: "1", value: 1 },
-				{ label: "2", value: 2 },
-				{ label: "3", value: 3 },
-				{ label: "4", value: 4 },
-				{ label: "5", value: 5 },
-				{ label: "6", value: 6 },
-			],
-		},
-		size: titleSizeField({
-			label: t("slides.editor.components.heading.size"),
-		}),
-		color: colorField({
-			label: t("slides.editor.components.heading.text_color"),
-		}),
-		fw: fontWeightField({
-			label: t("slides.editor.components.heading.fw"),
-		}),
-		td: textDecorationField({
-			label: t("slides.editor.components.heading.td"),
-		}),
-		tt: textTransformField({
-			label: t("slides.editor.components.heading.tt"),
-		}),
-		fs: fontStyleField({
-			label: t("slides.editor.components.heading.fs"),
-		}),
-		font: fontField({
+		metrics: headingMetricsField(),
+		font: textFontField({
 			allowInherit: true,
+			allowAutoSize: true,
+			fallbackColor: "#FFFFFF",
+			fallbackSizePreset: "auto",
 		}),
+		typeStyle: typeStyleField({ fallbackWeight: 700 }),
 		alignment: alignmentField({
 			label: t("slides.editor.components.heading.alignment"),
 		}),
-		lineClamp: {
-			type: "number",
-			label: t("slides.editor.components.heading.line_clamp"),
-		},
-		textWrap: {
-			type: "select",
-			label: t("slides.editor.components.heading.text_wrap"),
-			options: [
-				{ label: "wrap", value: "wrap" },
-				{ label: "nowrap", value: "nowrap" },
-				{ label: "balance", value: "balance" },
-				{ label: "pretty", value: "pretty" },
-				{ label: "stable", value: "stable" },
-			],
-		},
+		flow: textFlowField(),
 	},
 
 	defaultProps: {
 		title: t("slides.editor.components.heading.default_title"),
-		padding: 16,
-		order: 1,
-		size: "auto",
-		color: "#FFFFFF",
-		fw: 700,
-		td: "none",
-		tt: "none",
-		fs: "normal",
-		font: defaultFontValue(),
+		metrics: defaultHeadingMetrics(),
+		font: defaultTextFontValue({
+			color: "#FFFFFF",
+			sizePreset: "auto",
+		}),
+		typeStyle: defaultTypeStyle(700),
 		alignment: "left",
-		lineClamp: 0,
-		textWrap: "wrap",
+		flow: defaultTextFlow(),
+	},
+
+	resolveData: ({ props }) => {
+		const legacySize = typeof props.size === "string"
+			? props.size
+			: undefined
+		const legacyMetricsSize = props.metrics !== undefined && "size" in props.metrics
+			? String(props.metrics.size)
+			: undefined
+
+		return {
+			props: {
+				...props,
+				metrics: normalizeHeadingMetrics(props.metrics, {
+					order: props.order,
+					padding: props.padding,
+				}),
+				font: normalizeTextFontValue(
+					props.font,
+					{
+						font: props.font,
+						color: props.color,
+						size: legacySize ?? legacyMetricsSize,
+					},
+					{
+						color: "#FFFFFF",
+						sizePreset: "auto",
+					},
+				),
+				typeStyle: normalizeTypeStyle(props.typeStyle, {
+					fw: props.fw,
+					td: props.td,
+					tt: props.tt,
+					fs: props.fs,
+				}, 700),
+				flow: normalizeTextFlow(props.flow, {
+					lineClamp: props.lineClamp,
+					textWrap: props.textWrap,
+				}),
+			},
+		}
 	},
 
 	render: (props) => <HeadingDisplay { ...props } />,

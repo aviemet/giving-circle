@@ -1,1 +1,1 @@
-export { type Data as SlideData } from "@puckeditor/core"
+export type { PuckSlideData as SlideData } from "@/components/VisualEditor/editorPersistence"

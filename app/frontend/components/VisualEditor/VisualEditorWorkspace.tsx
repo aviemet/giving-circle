@@ -1,7 +1,8 @@
-import { Puck, legacySideBarPlugin, type Data } from "@puckeditor/core"
+import { Puck, legacySideBarPlugin } from "@puckeditor/core"
 import clsx from "clsx"
 import {
 	useCallback,
+	useEffect,
 	useMemo,
 	useRef,
 	useState,
@@ -20,14 +21,16 @@ import { useMockCircle } from "@/queries"
 
 import {
 	clearEditorDraft,
+	nextEditorChangeState,
 	resolveInitialEditorData,
-	slideDataEquals,
+	slideDataFingerprint,
 	writeEditorDraft,
 	type EditorSaveStatus,
+	type PuckSlideData,
 } from "./editorPersistence"
 import { HeaderActions, VisualEditorUiProvider } from "./HeaderActions"
 import { PreviewWithPageSelection } from "./PreviewWithPageSelection"
-import { config } from "./puck.config"
+import { config, type EditorConfig } from "./puck.config"
 import * as classes from "./Puck.css"
 
 export interface VisualEditorWorkspaceProps {
@@ -35,12 +38,12 @@ export interface VisualEditorWorkspaceProps {
 	isSaving: boolean
 	returnTo?: string
 	saveStatus: EditorSaveStatus
-	savedDataRef: RefObject<Data>
-	latestDataRef: RefObject<Data>
+	savedDataRef: RefObject<PuckSlideData>
+	latestDataRef: RefObject<PuckSlideData>
 	setSaveStatus: Dispatch<SetStateAction<EditorSaveStatus>>
 	slideKey: string
 	storageKey: string
-	persistSave: (data: Data) => Promise<boolean>
+	persistSave: (data: PuckSlideData) => Promise<boolean>
 	presentation?: PresentationDataPresentation
 }
 
@@ -61,7 +64,10 @@ export function VisualEditorWorkspace({
 	const { visitWithBypass, navigateBackWithBypass } = useNavigationInterruptContext()
 
 	const previewChannelRef = useRef<BroadcastChannel | null>(null)
-	const [puckData, setPuckData] = useState<Partial<Data>>(initialLoad.data)
+	const closingRef = useRef(false)
+	const adoptResolvedBaselineRef = useRef(initialLoad.loadSource === "server")
+	const serverFingerprintRef = useRef(initialLoad.serverFingerprint)
+	const [puckData, setPuckData] = useState<PuckSlideData>(initialLoad.data)
 	const [documentKey, setDocumentKey] = useState(0)
 
 	useInit(() => {
@@ -75,11 +81,36 @@ export function VisualEditorWorkspace({
 		}
 	})
 
-	const handleSave = useCallback(async (data: Data) => {
-		await persistSave(data)
+	useEffect(() => {
+		if(initialLoad.loadSource !== "server") {
+			return
+		}
+
+		if(isLoading) {
+			return
+		}
+
+		const timeoutId = window.setTimeout(() => {
+			adoptResolvedBaselineRef.current = false
+			savedDataRef.current = latestDataRef.current
+			setSaveStatus("saved")
+			clearEditorDraft(slideKey)
+		}, 0)
+
+		return () => {
+			window.clearTimeout(timeoutId)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- refs are stable; wait for mock circle so Puck can mount and resolve
+	}, [initialLoad.loadSource, isLoading, setSaveStatus, slideKey])
+
+	const handleSave = useCallback(async (data: PuckSlideData) => {
+		const saved = await persistSave(data)
+		if(saved) {
+			serverFingerprintRef.current = slideDataFingerprint(data)
+		}
 	}, [persistSave])
 
-	const sendToPreview = useCallback((payload: { type: "update", data: Data }) => {
+	const sendToPreview = useCallback((payload: { type: "update", data: PuckSlideData }) => {
 		if(typeof window === "undefined" || !("BroadcastChannel" in window)) return
 
 		let channel = previewChannelRef.current
@@ -103,13 +134,24 @@ export function VisualEditorWorkspace({
 		}
 	}, [])
 
-	const handleChange = useCallback((changed: Data) => {
-		latestDataRef.current = changed
-		const dirty = !slideDataEquals(changed, savedDataRef.current)
-		setSaveStatus(dirty ? "unsaved" : "saved")
+	const handleChange = useCallback((changed: PuckSlideData) => {
+		if(closingRef.current) {
+			return
+		}
 
-		if(dirty) {
-			writeEditorDraft(storageKey, changed)
+		latestDataRef.current = changed
+
+		const nextState = nextEditorChangeState({
+			changed,
+			saved: savedDataRef.current,
+			adoptResolvedBaseline: adoptResolvedBaselineRef.current,
+		})
+
+		savedDataRef.current = nextState.saved
+		setSaveStatus(nextState.saveStatus)
+
+		if(nextState.shouldWriteDraft) {
+			writeEditorDraft(storageKey, changed, serverFingerprintRef.current)
 		} else {
 			clearEditorDraft(slideKey)
 		}
@@ -127,14 +169,22 @@ export function VisualEditorWorkspace({
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- savedDataRef and latestDataRef are stable ref objects; .current is read at call time
 	}, [slideKey, setSaveStatus])
 
-	const handleSaveAndClose = useCallback(async (data: Data) => {
+	const handleSaveAndClose = useCallback(async (data: PuckSlideData) => {
 		const saved = await persistSave(data)
+		if(saved) {
+			serverFingerprintRef.current = slideDataFingerprint(data)
+		}
 		if(saved && returnTo) {
+			closingRef.current = true
 			visitWithBypass(returnTo)
 		}
 	}, [persistSave, returnTo, visitWithBypass])
 
 	const handleCloseWithoutSaving = useCallback(() => {
+		closingRef.current = true
+		clearEditorDraft(slideKey)
+		setSaveStatus("saved")
+
 		if(returnTo) {
 			visitWithBypass(returnTo)
 			return
@@ -143,7 +193,7 @@ export function VisualEditorWorkspace({
 		const currentUrl = window.location.pathname + window.location.search
 		visitWithBypass(currentUrl, { replace: true })
 		setTimeout(navigateBackWithBypass, 0)
-	}, [navigateBackWithBypass, returnTo, visitWithBypass])
+	}, [navigateBackWithBypass, returnTo, setSaveStatus, slideKey, visitWithBypass])
 
 	const uiContextValue = useMemo(() => {
 		return {
@@ -186,7 +236,7 @@ export function VisualEditorWorkspace({
 				<PresentationDataProvider value={ { circle: mockCircle!, presentation, isEditor: true } }>
 					<ErrorBoundary>
 						<VisualEditorUiProvider value={ uiContextValue }>
-							<Puck
+							<Puck<EditorConfig>
 								key={ documentKey }
 								config={ config }
 								data={ puckData }

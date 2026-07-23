@@ -9,6 +9,7 @@ export default defineConfig((env) => mergeConfig(
 			fileParallelism: true,
 			globals: true,
 			environment: "jsdom",
+			execArgv: ["--no-webstorage"],
 			coverage: {
 				include: ["app/frontend/**/*.test.{ts,tsx}"],
 			},

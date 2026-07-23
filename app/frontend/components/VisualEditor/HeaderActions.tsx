@@ -1,19 +1,19 @@
-import { createUsePuck, Data } from "@puckeditor/core"
 import { useTranslation } from "react-i18next"
 
 import { Badge, Box, Button, Divider, Menu } from "@/components"
 import { createContext } from "@/lib/hooks"
 
-import { EditorSaveStatus } from "./editorPersistence"
+import { EditorSaveStatus, type PuckSlideData } from "./editorPersistence"
+import { useEditorPuck } from "./useEditorPuck"
 import { ArrowLeftSquareIcon, DownArrowIcon, SaveIcon } from "../Icons"
 
 const [useVisualEditorUi, VisualEditorUiProvider] = createContext<{
 	saveStatus: EditorSaveStatus
 	isSaving: boolean
-	handleSave: (data: Data) => void | Promise<void>
-	handleSaveAndClose: (data: Data) => void | Promise<void>
+	handleSave: (data: PuckSlideData) => void | Promise<void>
+	handleSaveAndClose: (data: PuckSlideData) => void | Promise<void>
 	handleRevert: () => void
-	sendToPreview: (payload: { type: "update", data: Data }) => void
+	sendToPreview: (payload: { type: "update", data: PuckSlideData }) => void
 	handleCloseWithoutSaving: () => void
 }>()
 export { VisualEditorUiProvider }
@@ -24,13 +24,11 @@ const saveStatusColors = {
 	recovered: "orange",
 } satisfies Record<EditorSaveStatus, string>
 
-const usePuck = createUsePuck()
-
 export function HeaderActions() {
 	const { t } = useTranslation()
 	const ui = useVisualEditorUi()
 
-	const appState = usePuck((s) => s.appState)
+	const appState = useEditorPuck((s) => s.appState)
 	const isDirty = ui.saveStatus !== "saved"
 	const badgeStatus = ui.isSaving ? "unsaved" : ui.saveStatus
 	const badgeColor = ui.isSaving ? "blue" : saveStatusColors[badgeStatus]

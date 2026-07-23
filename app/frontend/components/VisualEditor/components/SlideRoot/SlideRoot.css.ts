@@ -8,7 +8,7 @@ export const slideRoot = css`
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	background-color: var(--puck-slide-root-bg, #000000);
+	background-color: var(--puck-slide-root-bg, transparent);
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;

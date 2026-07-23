@@ -1,5 +1,7 @@
 import { type Config } from "@puckeditor/core"
 
+import { i18n } from "@/lib/i18n"
+
 import {
 	barGraphAllocatedTotalsConfig,
 	cardConfig,
@@ -14,42 +16,46 @@ import {
 	type SlideRootProps,
 } from "./components"
 import {
-	backgroundImageField,
-	colorField,
-	defaultBackgroundImageValue,
+	backgroundField,
+	boxModelField,
+	defaultBackgroundValue,
 	defaultFontValue,
 	flexField,
 	fontField,
+	normalizeBackgroundValue,
 } from "./fields"
 
 type RootProps = SlideRootProps
 
-
-export const config: Config<{
+export type EditorConfig = Config<{
 	components: PuckComponentProps
 	root: RootProps
 	categories: ["layout", "content", "data", "elements", "other"]
-}> = {
+}>
+
+export const config: EditorConfig = {
 	root: {
 		inline: true,
 		fields: {
-			title: { type: "text" },
-			backgroundColor: colorField({
-				label: "Background Color",
-			}),
-			backgroundImage: backgroundImageField({
-				label: "Background Image",
-			}),
+			title: {
+				type: "text",
+				label: i18n.t("slides.editor.root.title"),
+			},
+			background: backgroundField(),
 			font: fontField({
 				allowInherit: false,
 			}),
+			spacing: boxModelField(),
 			flex: flexField(),
 		},
 		defaultProps: {
 			title: "Slide",
-			backgroundColor: "#000000",
-			backgroundImage: defaultBackgroundImageValue(),
+			background: defaultBackgroundValue("#000000"),
 			font: defaultFontValue(),
+			spacing: {
+				margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
+				padding: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
+			},
 			flex: {
 				display: "flex",
 				flexDirection: "column",
@@ -59,6 +65,21 @@ export const config: Config<{
 				overflow: "hidden",
 				gap: 0,
 			},
+		},
+		resolveData: ({ props }) => {
+			if(props === undefined) {
+				return {}
+			}
+
+			return {
+				props: {
+					...props,
+					background: normalizeBackgroundValue(props.background, {
+						color: props.backgroundColor,
+						image: props.backgroundImage,
+					}),
+				},
+			}
 		},
 		render: (props) => <SlideRoot { ...props } />,
 	},

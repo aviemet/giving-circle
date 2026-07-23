@@ -19,6 +19,26 @@ export {
 	TbAlignCenter as AlignCenterIcon,
 	TbAlignRight as AlignRightIcon,
 	TbAlignJustified as AlignJustifyIcon,
+	TbArrowRight as FlexRowIcon,
+	TbArrowDown as FlexColumnIcon,
+	TbArrowAutofitWidth as FlexWrapIcon,
+	TbTextWrap as TextWrapIcon,
+	TbTextWrapDisabled as TextNowrapIcon,
+	TbScale as TextWrapBalanceIcon,
+	TbSparkles as TextWrapPrettyIcon,
+	TbAnchor as TextWrapStableIcon,
+	TbEye as OverflowVisibleIcon,
+	TbArrowsMaximize as OverflowAutoIcon,
+	TbEyeOff as OverflowHiddenIcon,
+	TbBold as FontBoldIcon,
+	TbItalic as FontItalicIcon,
+	TbUnderline as FontUnderlineIcon,
+	TbStrikethrough as FontStrikeIcon,
+	TbOverline as FontOverlineIcon,
+	TbLetterCaseUpper as TextUppercaseIcon,
+	TbLetterCaseLower as TextLowercaseIcon,
+	TbLetterCase as TextCapitalizeIcon,
+	TbTextSize as FontNormalIcon,
 } from "react-icons/tb"
 
 export {
@@ -80,6 +100,15 @@ export {
 	TbChevronDown as DownArrowIcon,
 	TbUpload as UploadIcon,
 	TbPhoto as PhotoIcon,
+	TbPhoto as ImageScaleNaturalIcon,
+	TbArrowAutofitWidth as ImageScaleWidthIcon,
+	TbArrowAutofitHeight as ImageScaleHeightIcon,
+	TbAspectRatio as ImageScaleBoxIcon,
+	TbCrop as ObjectFitCoverIcon,
+	TbArrowAutofitContent as ObjectFitContainIcon,
+	TbBoxModel as ObjectFitFillIcon,
+	TbAspectRatioOff as ObjectFitNoneIcon,
+	TbArrowsMinimize as ObjectFitScaleDownIcon,
 } from "react-icons/tb"
 
 export {

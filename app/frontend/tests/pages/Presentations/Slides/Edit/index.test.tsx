@@ -1,13 +1,26 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import React from "react"
-import { beforeEach, describe, test } from "vitest"
+import { beforeEach, describe, expect, test } from "vitest"
 
 import EditPresentationSlides from "@/pages/Presentations/Slides/Edit"
 import { createPresentationInertiaShare, createSlideData } from "@/tests/helpers/fixtures"
 import { inertiaPageProps } from "@/tests/helpers/mockServer"
 import { registerActiveCircleAndThemeLifecycle } from "@/tests/helpers/pageTestLifecycle"
 import { render } from "@/tests/helpers/utils"
+
+async function waitForSaveButton() {
+	return screen.findByRole("button", { name: "Save", hidden: true }, { timeout: 30000 })
+}
+
+function firstFieldsContainer() {
+	const containers = screen.getAllByTestId("puck-fields-container")
+	const container = containers[0]
+	if(container === undefined) {
+		throw new Error("Expected a fields container")
+	}
+	return container
+}
 
 describe("pages/Presentations/Slides/Edit/index", () => {
 	registerActiveCircleAndThemeLifecycle()
@@ -36,9 +49,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 
 		render(<EditPresentationSlides presentation={ presentation } slide={ slide } />)
 
-		await waitFor(() => {
-			screen.getByRole("button", { name: "Save" })
-		}, { timeout: 30000 })
+		await waitForSaveButton()
 	}, 35000)
 
 	test("keeps focus on title input while editing", async () => {
@@ -59,20 +70,18 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 
 		render(<EditPresentationSlides presentation={ presentation } slide={ slide } />)
 
-		await waitFor(() => {
-			screen.getByRole("button", { name: "Save" })
-		}, { timeout: 30000 })
+		await waitForSaveButton()
 
 		const user = userEvent.setup()
 
-		await user.click(screen.getByRole("button", { name: "Toggle right sidebar" }))
+		await user.click(screen.getByRole("button", { name: "Toggle right sidebar", hidden: true }))
 
-		const fieldsContainer = await screen.findByTestId("puck-fields-container")
+		const fieldsContainer = await waitFor(() => firstFieldsContainer())
 		fieldsContainer.scrollTop = 100
 		fireEvent.scroll(fieldsContainer)
 
 		const titleInput = await waitFor(() => {
-			const input = screen.getByDisplayValue("My Slide")
+			const input = screen.getAllByDisplayValue("My Slide")[0]
 			if(!(input instanceof HTMLInputElement) && !(input instanceof HTMLTextAreaElement)) {
 				throw new Error("Expected a text input")
 			}
@@ -83,5 +92,5 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 		await user.type(titleInput, "a")
 
 		expect(fieldsContainer.scrollTop).toBe(100)
-	})
+	}, 35000)
 })

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest"
 
-import { defaultBackgroundImageValue } from "@/components/VisualEditor/fields/backgroundImage"
+import { defaultBackgroundValue } from "@/components/VisualEditor/fields/backgroundImage"
 import {
 	createStarterSlideData,
 	slotDropZoneProps,
@@ -32,6 +32,7 @@ describe("components/VisualEditor/slotEditor", () => {
 
 		expect(container.props.content).toHaveLength(1)
 		expect(container.props.content[0]?.type).toBe("Heading")
+		expect(container.props.content[0]?.props).toMatchObject({ alignment: "left" })
 	})
 
 	test("withStarterSlideContent leaves non-empty slides unchanged", () => {
@@ -44,13 +45,13 @@ describe("components/VisualEditor/slotEditor", () => {
 					padding: 16,
 					order: 1 as const,
 					color: "#FFFFFF",
+					alignment: "left" as const,
 				},
 			}],
 			root: {
 				props: {
 					title: "Custom",
-					backgroundColor: "#000000",
-					backgroundImage: defaultBackgroundImageValue(),
+					background: defaultBackgroundValue("#000000"),
 				},
 			},
 		}
@@ -64,8 +65,7 @@ describe("components/VisualEditor/slotEditor", () => {
 			root: {
 				props: {
 					title: "My deck slide",
-					backgroundColor: "#000000",
-					backgroundImage: defaultBackgroundImageValue(),
+					background: defaultBackgroundValue("#000000"),
 				},
 			},
 		})

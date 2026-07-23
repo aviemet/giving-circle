@@ -12,3 +12,9 @@ export {
 	type FontSizeValue,
 	type TitleSizeValue,
 } from "./fields"
+export { typeStyleField } from "./typeStyleField"
+export {
+	defaultTypeStyle,
+	normalizeTypeStyle,
+	type TypeStyleValue,
+} from "./typeStyle"

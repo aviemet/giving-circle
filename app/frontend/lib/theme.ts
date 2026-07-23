@@ -24,9 +24,9 @@ export type EditorSemanticColors = {
 export type EditorSemanticVarMap = Record<keyof EditorSemanticColors["light"], string[]>
 
 export const EDITOR_SEMANTIC_VAR_MAP: EditorSemanticVarMap = {
-	inputBorder: ["--editor-input-border", "--puck-color-border"],
-	inputBg: ["--editor-input-bg"],
-	inputText: ["--editor-input-text"],
+	inputBorder: ["--editor-input-border", "--puck-color-border", "--puck-field-color-border"],
+	inputBg: ["--editor-input-bg", "--puck-field-color-bg"],
+	inputText: ["--editor-input-text", "--puck-field-color-text"],
 }
 
 export const EDITOR_SEMANTIC_KEYS: (keyof EditorSemanticColors["light"])[] = ["inputBorder", "inputBg", "inputText"]

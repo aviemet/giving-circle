@@ -1,9 +1,8 @@
-import { Data } from "@puckeditor/core"
 import { useState } from "react"
 
 import { Page, Section } from "@/components"
 import { VisualEditor } from "@/components/VisualEditor"
-import { slideTitleFromData } from "@/components/VisualEditor/editorPersistence"
+import { slideTitleFromData, type PuckSlideData } from "@/components/VisualEditor/editorPersistence"
 import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useUpdatePresentationSlide } from "@/queries"
@@ -31,7 +30,7 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 		params: { circleSlug: params.circle_slug, presentationSlug: params.presentation_slug, slideSlug: params.slug },
 	})
 
-	const handleSave = async (data: Data) => {
+	const handleSave = async (data: PuckSlideData) => {
 		const title = slideTitleFromData(data) ?? slideTitle
 
 		await updateSlideMutation.mutate({ data, title })

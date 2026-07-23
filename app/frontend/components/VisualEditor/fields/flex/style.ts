@@ -11,7 +11,7 @@ export type FlexProps = {
 }
 
 export type FlexStyleInput = Partial<FlexProps> & {
-	flex?: Partial<FlexProps>
+	flex: FlexProps
 }
 
 function flexFromProps(props: FlexStyleInput): Partial<FlexProps> {

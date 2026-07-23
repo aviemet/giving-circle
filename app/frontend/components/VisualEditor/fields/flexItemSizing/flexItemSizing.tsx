@@ -12,7 +12,7 @@ import {
 	type DimensionUnit,
 } from "../dimension"
 import * as classes from "./flexItemSizing.css"
-import { PuckFieldLabel } from "../shared/PuckFieldLabel"
+import { IconSegmented, PuckFieldLabel } from "../shared"
 
 export type FlexItemSizingMode = "auto" | "fixed" | "fill" | "clamp" | "custom"
 
@@ -40,6 +40,26 @@ export type FlexItemSizing = {
 }
 
 const DIMENSION_UNITS: DimensionUnit[] = ["px", "%", "vh", "vw", "rem", "auto"]
+
+function isDimensionUnit(value: string): value is DimensionUnit {
+	return DIMENSION_UNITS.some((unit) => unit === value)
+}
+
+function isFlexItemSizingMode(value: string): value is FlexItemSizingMode {
+	return value === "auto"
+		|| value === "fixed"
+		|| value === "fill"
+		|| value === "clamp"
+		|| value === "custom"
+}
+
+function isFlexItemAlignSelf(value: string): value is FlexItemAlignSelf {
+	return value === "auto"
+		|| value === "flex-start"
+		|| value === "center"
+		|| value === "flex-end"
+		|| value === "stretch"
+}
 
 const FLEX_ITEM_CSS_PROPERTIES = new Set([
 	"width",
@@ -240,12 +260,12 @@ function DimensionInputControl({ label, name, value, onChange, allowAuto = false
 				name={ `${name}.unit` }
 				value={ value.unit }
 				onChange={ (nextUnit) => {
-					if(!nextUnit) {
+					if(!nextUnit || !isDimensionUnit(nextUnit)) {
 						return
 					}
 					onChange({
 						...value,
-						unit: nextUnit as DimensionUnit,
+						unit: nextUnit,
 					})
 				} }
 				options={ units.map((unit) => ({ value: unit, label: unit })) }
@@ -289,11 +309,11 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 	}
 
 	const modeOptions = [
-		{ value: "auto", label: sizingText(t, "modes.auto") },
-		{ value: "fixed", label: sizingText(t, "modes.fixed") },
-		{ value: "fill", label: sizingText(t, "modes.fill") },
-		{ value: "clamp", label: sizingText(t, "modes.clamp") },
-		{ value: "custom", label: sizingText(t, "modes.custom") },
+		{ value: "auto", label: sizingText(t, "modes.short.auto") },
+		{ value: "fixed", label: sizingText(t, "modes.short.fixed") },
+		{ value: "fill", label: sizingText(t, "modes.short.fill") },
+		{ value: "clamp", label: sizingText(t, "modes.short.clamp") },
+		{ value: "custom", label: sizingText(t, "modes.short.custom") },
 	]
 
 	const alignSelfOptions = [
@@ -306,21 +326,21 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 
 	return (
 		<div className={ classes.sizingFieldRoot }>
-			<Select
-				wrapper={ false }
+			<IconSegmented
+				className={ classes.modeSegmented }
 				name={ `${name}.mode` }
 				value={ localValue.mode }
+				options={ modeOptions }
 				onChange={ (nextMode) => {
-					if(!nextMode) {
+					if(!isFlexItemSizingMode(nextMode)) {
 						return
 					}
-					updateValue({ mode: nextMode as FlexItemSizingMode })
+					updateValue({ mode: nextMode })
 				} }
-				options={ modeOptions }
 			/>
 
 			{ localValue.mode === "fixed" && (
-				<div className={ classes.sizingFieldSection }>
+				<div className={ classes.dimensionStack }>
 					<DimensionInputControl
 						label={ sizingText(t, "labels.width") }
 						name={ `${name}.width` }
@@ -346,7 +366,7 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 			) }
 
 			{ localValue.mode === "clamp" && (
-				<div className={ classes.sizingFieldSection }>
+				<div className={ classes.dimensionStack }>
 					<DimensionInputControl
 						label={ sizingText(t, "labels.clamp_min") }
 						name={ `${name}.clamp.min` }
@@ -434,10 +454,10 @@ function FlexItemSizingFieldControl({ name, value, onChange, t }: FlexItemSizing
 							name={ `${name}.fineTune.alignSelf` }
 							value={ localValue.fineTune?.alignSelf ?? "auto" }
 							onChange={ (nextValue) => {
-								if(!nextValue) {
+								if(!nextValue || !isFlexItemAlignSelf(nextValue)) {
 									return
 								}
-								updateFineTune({ alignSelf: nextValue as FlexItemAlignSelf })
+								updateFineTune({ alignSelf: nextValue })
 							} }
 							options={ alignSelfOptions }
 						/>

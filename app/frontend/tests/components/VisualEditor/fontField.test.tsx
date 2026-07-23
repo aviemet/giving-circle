@@ -50,8 +50,8 @@ describe("components/VisualEditor/fields/font", () => {
 
 describe("components/VisualEditor/puck.config root font", () => {
 	test("root exposes font field and default", () => {
-		expect(config.root.fields?.font).toMatchObject({ type: "custom", label: "Font" })
-		expect(config.root.defaultProps).toMatchObject({
+		expect(config.root?.fields?.font).toMatchObject({ type: "custom", label: "Font" })
+		expect(config.root?.defaultProps).toMatchObject({
 			font: { family: "", url: "" },
 		})
 	})

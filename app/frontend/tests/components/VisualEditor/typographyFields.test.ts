@@ -10,44 +10,27 @@ import {
 } from "@/components/VisualEditor/fields"
 
 describe("components/VisualEditor/fields/typography", () => {
-	test("fontWeightField exposes numeric weight options", () => {
+	test("fontWeightField is a custom control", () => {
 		const field = fontWeightField()
-		expect(field).toMatchObject({ type: "select", label: "Font Weight" })
-		if(field.type !== "select") return
-		expect(field.options.map(option => option.value)).toEqual([100, 200, 300, 400, 500, 600, 700, 800, 900])
+		expect(field).toMatchObject({ type: "custom", label: "Font weight" })
 	})
 
-	test("textDecorationField includes underline", () => {
+	test("textDecorationField is a custom icon control", () => {
 		const field = textDecorationField()
-		expect(field).toMatchObject({ type: "select", label: "Text Decoration" })
-		if(field.type !== "select") return
-		expect(field.options.map(option => option.value)).toEqual([
-			"none",
-			"underline",
-			"line-through",
-			"overline",
-		])
+		expect(field).toMatchObject({ type: "custom", label: "Text decoration" })
 	})
 
-	test("textTransformField and fontStyleField expose style options", () => {
+	test("textTransformField and fontStyleField are custom controls", () => {
 		const transform = textTransformField()
 		const style = fontStyleField()
-		if(transform.type !== "select" || style.type !== "select") return
-		expect(transform.options.map(option => option.value)).toEqual([
-			"none",
-			"uppercase",
-			"lowercase",
-			"capitalize",
-		])
-		expect(style.options.map(option => option.value)).toEqual(["normal", "italic"])
+		expect(transform.type).toBe("custom")
+		expect(style.type).toBe("custom")
 	})
 
-	test("fontSizeField and titleSizeField expose size scales", () => {
+	test("fontSizeField and titleSizeField remain selectable size controls", () => {
 		const fontSize = fontSizeField()
 		const titleSize = titleSizeField()
-		if(fontSize.type !== "select" || titleSize.type !== "select") return
-		expect(fontSize.options.map(option => option.value)).toEqual(["xs", "sm", "md", "lg", "xl"])
-		expect(titleSize.options[0]).toMatchObject({ value: "auto", label: "Auto (from level)" })
-		expect(titleSize.options.map(option => option.value)).toContain("h1")
+		expect(fontSize.type).toBe("custom")
+		expect(titleSize.type).toBe("custom")
 	})
 })
