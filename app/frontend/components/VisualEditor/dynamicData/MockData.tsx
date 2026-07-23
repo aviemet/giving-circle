@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react"
 
-import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
+import { usePresentationDataContext } from "@/features/presentation"
 
 import { parseContentToStructured, renderStructuredContent } from "./contentParser"
 import { buildDataStructure, dataAccess } from "./dataAccess"

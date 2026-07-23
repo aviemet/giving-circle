@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import { i18n } from "@/lib/i18n"
@@ -16,8 +15,8 @@ export type HeadingMetricsValue = {
 
 const HEADING_ORDERS: HeadingOrder[] = [1, 2, 3, 4, 5, 6]
 
-function metricsText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.heading_metrics.${key}`)
+function metricsText(key: string) {
+	return i18n.t(`slides.editor.fields.heading_metrics.${key}`)
 }
 
 function isHeadingOrder(value: string): value is `${HeadingOrder}` {
@@ -67,10 +66,9 @@ interface HeadingMetricsFieldControlProps {
 	name: string
 	value: HeadingMetricsValue | undefined
 	onChange: (value: HeadingMetricsValue) => void
-	t: TFunction
 }
 
-function HeadingMetricsFieldControl({ name, value, onChange, t }: HeadingMetricsFieldControlProps) {
+function HeadingMetricsFieldControl({ name, value, onChange }: HeadingMetricsFieldControlProps) {
 	const [localValue, setLocalValue] = useState<HeadingMetricsValue>(() => normalizeHeadingMetrics(value))
 
 	const updateValue = (patch: Partial<HeadingMetricsValue>) => {
@@ -84,7 +82,7 @@ function HeadingMetricsFieldControl({ name, value, onChange, t }: HeadingMetrics
 
 	return (
 		<div className={ classes.metricsRoot }>
-			<FieldRow label={ metricsText(t, "labels.level") }>
+			<FieldRow label={ metricsText("labels.level") }>
 				<IconSegmented
 					className={ classes.levelSegmented }
 					name={ `${name}.order` }
@@ -102,7 +100,7 @@ function HeadingMetricsFieldControl({ name, value, onChange, t }: HeadingMetrics
 				/>
 			</FieldRow>
 
-			<FieldRow label={ metricsText(t, "labels.padding") }>
+			<FieldRow label={ metricsText("labels.padding") }>
 				<UnitNumber
 					name={ `${name}.padding` }
 					value={ localValue.padding }
@@ -113,8 +111,8 @@ function HeadingMetricsFieldControl({ name, value, onChange, t }: HeadingMetrics
 	)
 }
 
-function headingMetricsField(t: TFunction = i18n.t.bind(i18n)): Field<HeadingMetricsValue | undefined> {
-	const label = metricsText(t, "label")
+export function headingMetricsField(): Field<HeadingMetricsValue | undefined> {
+	const label = metricsText("label")
 	return {
 		type: "custom",
 		label,
@@ -125,12 +123,9 @@ function headingMetricsField(t: TFunction = i18n.t.bind(i18n)): Field<HeadingMet
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)
 		},
 	}
 }
-
-export { headingMetricsField }

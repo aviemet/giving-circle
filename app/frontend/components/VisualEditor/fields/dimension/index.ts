@@ -2,6 +2,8 @@ export {
 	normalizeDimensionValue,
 	formatDimensionValue,
 	parseDimensionValue,
+	parseNumberInputAmount,
+	dimensionInputOrOmit,
 	dimensionInputToCSSValue,
 	dimensionInputFromParsed,
 	type DimensionInput,

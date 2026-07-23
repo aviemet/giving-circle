@@ -1,6 +1,5 @@
 import { Field } from "@puckeditor/core"
 import clsx from "clsx"
-import { type TFunction } from "i18next"
 import { useRef, useState, type ChangeEvent } from "react"
 
 import { TrashIcon, UploadIcon } from "@/components/Icons"
@@ -10,18 +9,17 @@ import { i18n } from "@/lib/i18n"
 import * as classes from "./imageField.css"
 import { FieldRow, IconControlTooltip, PuckFieldLabel } from "../shared"
 
-function imageText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.image.${key}`)
+function imageText(key: string) {
+	return i18n.t(`slides.editor.fields.image.${key}`)
 }
 
 interface ImageFieldControlProps {
 	name: string
 	value: string | undefined
 	onChange: (value: string) => void
-	t: TFunction
 }
 
-function ImageFieldControl({ name, value, onChange, t }: ImageFieldControlProps) {
+function ImageFieldControl({ name, value, onChange }: ImageFieldControlProps) {
 	const [isUploading, setIsUploading] = useState(false)
 	const fileInputRef = useRef<HTMLInputElement>(null)
 	const hasImage = typeof value === "string" && value.length > 0
@@ -52,7 +50,7 @@ function ImageFieldControl({ name, value, onChange, t }: ImageFieldControlProps)
 
 	return (
 		<div className={ clsx(classes.imageFieldRoot) }>
-			<FieldRow label={ imageText(t, "source") }>
+			<FieldRow label={ imageText("source") }>
 				{ hasImage
 					? (
 						<div className={ clsx(classes.imageRow) }>
@@ -63,18 +61,18 @@ function ImageFieldControl({ name, value, onChange, t }: ImageFieldControlProps)
 							<button
 								type="button"
 								className={ clsx(classes.uploadButton) }
-								aria-label={ imageText(t, "replace") }
+								aria-label={ imageText("replace") }
 								disabled={ isUploading }
 								onClick={ openFilePicker }
 							>
 								<UploadIcon />
-								{ imageText(t, "replace") }
+								{ imageText("replace") }
 							</button>
-							<IconControlTooltip label={ imageText(t, "remove") }>
+							<IconControlTooltip label={ imageText("remove") }>
 								<button
 									type="button"
 									className={ clsx(classes.iconButton) }
-									aria-label={ imageText(t, "remove") }
+									aria-label={ imageText("remove") }
 									disabled={ isUploading }
 									onClick={ () => onChange("") }
 								>
@@ -88,12 +86,12 @@ function ImageFieldControl({ name, value, onChange, t }: ImageFieldControlProps)
 							<button
 								type="button"
 								className={ clsx(classes.uploadButton) }
-								aria-label={ imageText(t, "upload") }
+								aria-label={ imageText("upload") }
 								disabled={ isUploading }
 								onClick={ openFilePicker }
 							>
 								<UploadIcon />
-								{ imageText(t, "upload") }
+								{ imageText("upload") }
 							</button>
 						</div>
 					) }
@@ -114,8 +112,7 @@ function ImageFieldControl({ name, value, onChange, t }: ImageFieldControlProps)
 function imageField(): Field<string>
 function imageField(params: Partial<Field<string>>): Field<string>
 function imageField({ label }: Partial<Field<string>> = {}): Field<string> {
-	const t = i18n.t.bind(i18n)
-	const resolvedLabel = label ?? imageText(t, "label")
+	const resolvedLabel = label ?? imageText("label")
 
 	return {
 		type: "custom",
@@ -127,7 +124,6 @@ function imageField({ label }: Partial<Field<string>> = {}): Field<string> {
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)

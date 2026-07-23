@@ -15,7 +15,7 @@ const legacySideBar = legacySideBarPlugin()
 
 import { Box, AsyncBoundary, ErrorBoundary } from "@/components"
 import { useNavigationInterruptContext } from "@/components/Modal"
-import { PresentationDataProvider, type PresentationDataPresentation } from "@/layouts/Providers/PresentationDataProvider"
+import { PresentationDataProvider, type PresentationDataPresentation } from "@/features/presentation"
 import { useInit } from "@/lib/hooks"
 import { useMockCircle } from "@/queries"
 

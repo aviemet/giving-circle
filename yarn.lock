@@ -8719,8 +8719,10 @@ __metadata:
     react: "npm:^19.2.8"
     react-dom: "npm:^19.2.8"
     react-error-boundary: "npm:^6.1.2"
+    react-flip-cards: "npm:^1.0.9"
     react-html-props: "npm:^2.1.1"
     react-icons: "npm:^5.7.0"
+    react-led-digit: "npm:^0.0.21"
     react-use-url: "npm:^1.0.5"
     sanitize-html: "npm:^2.17.6"
     stylelint: "npm:^17.14.1"
@@ -12357,6 +12359,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-flip-cards@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "react-flip-cards@npm:1.0.9"
+  dependencies:
+    clsx: "npm:^2.1.1"
+  peerDependencies:
+    react: ">=16.13.0"
+    react-dom: ">=16.13.0"
+  checksum: 10/fca0eeb3f2798e6a2004e6beb13590397aa004c52399413a83fd8150095ca93fa52a404b1643249a63b14b6ca4667fa33a7e5b9310354835b96238421a0a9503
+  languageName: node
+  linkType: hard
+
 "react-hotkeys-hook@npm:^4.6.1":
   version: 4.6.2
   resolution: "react-hotkeys-hook@npm:4.6.2"
@@ -12429,6 +12443,18 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10/73b36281e58eeb27c9cc6031301b6ae19ecdc9f18ae2d518bdb39b0ac564e65c5779405d623f1df9abf378a13858b79442480244bd579968afc1faf9a2ce5e05
+  languageName: node
+  linkType: hard
+
+"react-led-digit@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "react-led-digit@npm:0.0.21"
+  dependencies:
+    clsx: "npm:^2.1.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10/d34f6d1f73c5a76c9fe8e83786219b5beddcf86eab4c0429bfe43e873aca2e58d11fffd6bf434863671e3afa02e9c518bc3bc4c0558a82bed1864a15db0f2c64
   languageName: node
   linkType: hard
 

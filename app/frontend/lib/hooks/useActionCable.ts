@@ -11,17 +11,44 @@ interface UseActionCableOptions<T = unknown> {
 	onDisconnected?: () => void
 }
 
-export const useActionCable = <T = unknown>({ channelName, params, enabled = true, onReceived, onConnected, onDisconnected }: UseActionCableOptions<T>) => {
+export const useActionCable = <T = unknown>({
+	channelName,
+	params,
+	enabled = true,
+	onReceived,
+	onConnected,
+	onDisconnected,
+}: UseActionCableOptions<T>) => {
 	const subscriptionRef = useRef<ReturnType<typeof createChannel> | null>(null)
+	const onReceivedRef = useRef(onReceived)
+	const onConnectedRef = useRef(onConnected)
+	const onDisconnectedRef = useRef(onDisconnected)
+	const paramsRef = useRef(params)
+	const paramsKey = JSON.stringify(params ?? {})
 
 	useEffect(() => {
-		if(!enabled) return
+		onReceivedRef.current = onReceived
+		onConnectedRef.current = onConnected
+		onDisconnectedRef.current = onDisconnected
+		paramsRef.current = params
+	})
+
+	useEffect(() => {
+		if(!enabled) {
+			return
+		}
 
 		subscriptionRef.current = createChannel(channelName, {
-			received: onReceived,
-			connected: onConnected,
-			disconnected: onDisconnected,
-		}, params)
+			received: (data) => {
+				onReceivedRef.current?.(data)
+			},
+			connected: () => {
+				onConnectedRef.current?.()
+			},
+			disconnected: () => {
+				onDisconnectedRef.current?.()
+			},
+		}, paramsRef.current)
 
 		return () => {
 			if(subscriptionRef.current) {
@@ -29,7 +56,7 @@ export const useActionCable = <T = unknown>({ channelName, params, enabled = tru
 				subscriptionRef.current = null
 			}
 		}
-	}, [channelName, enabled, params, onReceived, onConnected, onDisconnected])
+	}, [channelName, enabled, paramsKey])
 
 	const perform = (action: string, data?: Record<string, unknown>) => {
 		if(subscriptionRef.current) {

@@ -1,4 +1,4 @@
-import { type TFunction } from "i18next"
+import { i18n } from "@/lib/i18n"
 
 export type FontWeightValue = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 
@@ -29,9 +29,9 @@ export function parseFontWeight(value: string): FontWeightValue | undefined {
 	return undefined
 }
 
-export function fontWeightSelectOptions(t: TFunction) {
+export function fontWeightSelectOptions() {
 	return FONT_WEIGHTS.map((weight) => ({
 		value: String(weight),
-		label: t(`slides.editor.fields.typography.weights.${weight}`),
+		label: i18n.t(`slides.editor.fields.typography.weights.${weight}`),
 	}))
 }

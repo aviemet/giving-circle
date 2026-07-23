@@ -9,9 +9,11 @@ import {
 	gridConfig,
 	headingConfig,
 	imageConfig,
+	leverageBarConfig,
 	orgsIteratorConfig,
 	SlideRoot,
 	textConfig,
+	timerConfig,
 	type PuckComponentProps,
 	type SlideRootProps,
 } from "./components"
@@ -93,6 +95,8 @@ export const config: EditorConfig = {
 		Image: imageConfig,
 		OrgsIterator: orgsIteratorConfig,
 		BarGraphAllocatedTotals: barGraphAllocatedTotalsConfig,
+		LeverageBar: leverageBarConfig,
+		Timer: timerConfig,
 	},
 
 	categories: {
@@ -110,7 +114,7 @@ export const config: EditorConfig = {
 		},
 		elements: {
 			title: "Elements",
-			components: ["BarGraphAllocatedTotals"],
+			components: ["BarGraphAllocatedTotals", "LeverageBar", "Timer"],
 		},
 		other: {
 			title: "All Other Components",

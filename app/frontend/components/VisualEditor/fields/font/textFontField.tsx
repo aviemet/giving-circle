@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import { ColorInput } from "@/components/Inputs"
@@ -36,15 +35,14 @@ const COLOR_SWATCHES = [
 	"#000000",
 ]
 
-function fontText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.font.${key}`)
+function fontText(key: string) {
+	return i18n.t(`slides.editor.fields.font.${key}`)
 }
 
 interface TextFontFieldControlProps {
 	name: string
 	value: TextFontValue | undefined
 	onChange: (value: TextFontValue) => void
-	t: TFunction
 	allowInherit: boolean
 	allowAutoSize: boolean
 	fallbackColor: string
@@ -55,7 +53,6 @@ function TextFontFieldControl({
 	name,
 	value,
 	onChange,
-	t,
 	allowInherit,
 	allowAutoSize,
 	fallbackColor,
@@ -83,7 +80,7 @@ function TextFontFieldControl({
 
 	return (
 		<div className={ classes.textFontRoot }>
-			<FieldRow label={ fontText(t, "labels.family") }>
+			<FieldRow label={ fontText("labels.family") }>
 				<FontFamilyControls
 					name={ `${name}.family` }
 					value={ {
@@ -99,7 +96,6 @@ function TextFontFieldControl({
 				name={ `${name}.size` }
 				value={ localValue.size }
 				allowAuto={ allowAutoSize }
-				t={ t }
 				onChange={ (size) => {
 					commit({
 						...localValue,
@@ -108,7 +104,7 @@ function TextFontFieldControl({
 				} }
 			/>
 
-			<FieldRow label={ fontText(t, "labels.color") }>
+			<FieldRow label={ fontText("labels.color") }>
 				<ColorInput
 					wrapper={ false }
 					name={ `${name}.color` }
@@ -128,19 +124,17 @@ function TextFontFieldControl({
 }
 
 function textFontField(params: {
-	t?: TFunction
 	allowInherit?: boolean
 	allowAutoSize?: boolean
 	fallbackColor?: string
 	fallbackSizePreset?: FontSizePreset
 } = {}): Field<TextFontValue | undefined> {
-	const t = params.t ?? i18n.t.bind(i18n)
 	const allowInherit = params.allowInherit ?? true
 	const allowAutoSize = params.allowAutoSize ?? false
 	const fallbackColor = params.fallbackColor ?? "#FFFFFF"
 	const fallbackSizePreset = params.fallbackSizePreset
 		?? (allowAutoSize ? "auto" : "md")
-	const label = fontText(t, "label")
+	const label = fontText("label")
 
 	return {
 		type: "custom",
@@ -155,7 +149,6 @@ function textFontField(params: {
 							sizePreset: fallbackSizePreset,
 						}) }
 						onChange={ onChange }
-						t={ t }
 						allowInherit={ allowInherit }
 						allowAutoSize={ allowAutoSize }
 						fallbackColor={ fallbackColor }

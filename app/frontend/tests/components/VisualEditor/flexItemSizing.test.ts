@@ -16,20 +16,25 @@ describe("components/VisualEditor/fields/flexItemSizing", () => {
 		})
 	})
 
-	test("fixed mode sets width and optional max width", () => {
+	test("fixed mode sets width, height, and max bounds", () => {
 		expect(buildFlexItemSizingStyle({
 			mode: "fixed",
 			width: { amount: 48, unit: "%" },
+			height: { amount: 28, unit: "px" },
 			maxWidth: { amount: 400, unit: "px" },
+			maxHeight: { amount: 64, unit: "px" },
 		})).toEqual({
 			width: "48%",
+			height: "28px",
 			maxWidth: "400px",
+			maxHeight: "64px",
 		})
 	})
 
-	test("fill mode sets flex child defaults with optional max width", () => {
+	test("fill mode sets flex child defaults with optional height and max width", () => {
 		expect(buildFlexItemSizingStyle({
 			mode: "fill",
+			height: { amount: 28, unit: "px" },
 			maxWidth: { amount: 50, unit: "%" },
 		})).toEqual({
 			flexGrow: 1,
@@ -38,7 +43,31 @@ describe("components/VisualEditor/fields/flexItemSizing", () => {
 			minWidth: 0,
 			minHeight: 0,
 			alignSelf: "stretch",
+			height: "28px",
 			maxWidth: "50%",
+		})
+	})
+
+	test("omits height when amount is unset", () => {
+		expect(buildFlexItemSizingStyle({
+			mode: "fill",
+			height: { unit: "px" },
+		})).toEqual({
+			flexGrow: 1,
+			flexShrink: 1,
+			flexBasis: 0,
+			minWidth: 0,
+			minHeight: 0,
+			alignSelf: "stretch",
+		})
+	})
+
+	test("auto mode applies height without flex fill defaults", () => {
+		expect(buildFlexItemSizingStyle({
+			mode: "auto",
+			height: { amount: 32, unit: "px" },
+		})).toEqual({
+			height: "32px",
 		})
 	})
 
@@ -82,8 +111,9 @@ describe("components/VisualEditor/fields/flexItemSizing", () => {
 	})
 
 	test("parseCustomCssDeclarations normalizes bare numeric values", () => {
-		expect(parseCustomCssDeclarations("width: 300; flex-grow: 1")).toEqual({
+		expect(parseCustomCssDeclarations("width: 300; height: 28; flex-grow: 1")).toEqual({
 			width: "300px",
+			height: "28px",
 			flexGrow: "1",
 		})
 	})

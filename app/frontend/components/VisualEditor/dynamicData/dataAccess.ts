@@ -1,4 +1,4 @@
-import { PresentationDataContextValue } from "@/layouts/Providers/PresentationDataProvider"
+import { type PresentationDataContextValue } from "@/features/presentation"
 
 import { getOrgsFromContext } from "./getOrgsFromContext"
 

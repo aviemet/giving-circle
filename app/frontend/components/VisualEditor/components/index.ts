@@ -4,8 +4,10 @@ import { type ContainerProps } from "./Container/containerConfig"
 import { type GridProps } from "./Grid/gridConfig"
 import { type HeadingProps } from "./Heading/headingConfig"
 import { type ImageProps } from "./Image/imageConfig"
+import { type LeverageBarProps } from "./LeverageBar/leverageBarConfig"
 import { type OrgsIteratorProps } from "./OrgsIterator/orgsIteratorConfig"
 import { type TextComponentProps } from "./Text/textConfig"
+import { type TimerProps } from "./Timer/timerConfig"
 
 export type PuckComponentProps = {
 	Grid: GridProps
@@ -16,6 +18,8 @@ export type PuckComponentProps = {
 	Image: ImageProps
 	OrgsIterator: OrgsIteratorProps
 	BarGraphAllocatedTotals: BarGraphAllocatedTotalsProps
+	LeverageBar: LeverageBarProps
+	Timer: TimerProps
 }
 
 export * from "./Card"
@@ -25,5 +29,7 @@ export * from "./Heading"
 export * from "./Image"
 export * from "./OrgsIterator"
 export * from "./BarGraphAllocatedTotals"
+export * from "./LeverageBar"
+export * from "./Timer"
 export * from "./SlideRoot"
 export * from "./Text"

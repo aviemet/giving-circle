@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react"
 import { describe, expect, test } from "vitest"
 
 import { SlidePresentation } from "@/components/SlidePresentation"
+import { PresentationDataProvider } from "@/features/presentation"
 import {
 	createCirclePersisted,
 	createPresentationOrgPersisted,
@@ -31,6 +32,31 @@ function createSlideWithHeading(title: string) {
 }
 
 describe("components/SlidePresentation", () => {
+	test("renders without crashing when active slide data is null", () => {
+		const theme = createThemePersisted()
+		const circle = createCirclePersisted()
+		const presentation = createPresentationPresentation()
+		const activeSlide = {
+			...createSlidePresentation(),
+			data: null,
+		}
+
+		const { container } = render(
+			<PresentationDataProvider value={ { circle, theme, presentation } }>
+				<SlidePresentation
+					presentation={ presentation }
+					circle={ circle }
+					theme={ theme }
+					activeSlide={ activeSlide }
+					transitionType="none"
+					transitionDuration={ 0 }
+				/>
+			</PresentationDataProvider>,
+		)
+
+		expect(container.firstChild).toBeTruthy()
+	})
+
 	test("resolves theme tags when presentation context is provided", () => {
 		const theme = createThemePersisted({ name: "Allocation Night Theme" })
 		const circle = createCirclePersisted({ name: "Battery Powered" })
@@ -40,14 +66,16 @@ describe("components/SlidePresentation", () => {
 		})
 
 		render(
-			<SlidePresentation
-				presentation={ presentation }
-				circle={ circle }
-				theme={ theme }
-				activeSlide={ activeSlide }
-				transitionType="none"
-				transitionDuration={ 0 }
-			/>,
+			<PresentationDataProvider value={ { circle, theme, presentation } }>
+				<SlidePresentation
+					presentation={ presentation }
+					circle={ circle }
+					theme={ theme }
+					activeSlide={ activeSlide }
+					transitionType="none"
+					transitionDuration={ 0 }
+				/>
+			</PresentationDataProvider>,
 		)
 
 		expect(screen.getByText("Allocation Night Theme")).toBeInTheDocument()
@@ -90,14 +118,16 @@ describe("components/SlidePresentation", () => {
 		})
 
 		render(
-			<SlidePresentation
-				presentation={ presentation }
-				circle={ circle }
-				theme={ theme }
-				activeSlide={ activeSlide }
-				transitionType="none"
-				transitionDuration={ 0 }
-			/>,
+			<PresentationDataProvider value={ { circle, theme, presentation } }>
+				<SlidePresentation
+					presentation={ presentation }
+					circle={ circle }
+					theme={ theme }
+					activeSlide={ activeSlide }
+					transitionType="none"
+					transitionDuration={ 0 }
+				/>
+			</PresentationDataProvider>,
 		)
 
 		expect(screen.getByText("River Conservancy")).toBeInTheDocument()

@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import { i18n } from "@/lib/i18n"
@@ -13,8 +12,8 @@ export type TextLayoutValue = {
 	span: boolean
 }
 
-function layoutText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.text_layout.${key}`)
+function layoutText(key: string) {
+	return i18n.t(`slides.editor.fields.text_layout.${key}`)
 }
 
 export function defaultTextLayout(): TextLayoutValue {
@@ -45,10 +44,9 @@ interface TextLayoutFieldControlProps {
 	name: string
 	value: TextLayoutValue | undefined
 	onChange: (value: TextLayoutValue) => void
-	t: TFunction
 }
 
-function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldControlProps) {
+function TextLayoutFieldControl({ name, value, onChange }: TextLayoutFieldControlProps) {
 	const [localValue, setLocalValue] = useState<TextLayoutValue>(() => normalizeTextLayout(value))
 
 	const updateValue = (patch: Partial<TextLayoutValue>) => {
@@ -63,8 +61,8 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 	return (
 		<div className={ classes.layoutRoot }>
 			<FieldRow
-				label={ layoutText(t, "labels.inline") }
-				tooltip={ layoutText(t, "hints.inline") }
+				label={ layoutText("labels.inline") }
+				tooltip={ layoutText("hints.inline") }
 			>
 				<IconSegmented
 					className={ classes.layoutToggles }
@@ -73,13 +71,13 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 					options={ [
 						{
 							value: "false",
-							label: layoutText(t, "boolean.off"),
-							tooltip: layoutText(t, "inline_hints.off"),
+							label: layoutText("boolean.off"),
+							tooltip: layoutText("inline_hints.off"),
 						},
 						{
 							value: "true",
-							label: layoutText(t, "boolean.on"),
-							tooltip: layoutText(t, "inline_hints.on"),
+							label: layoutText("boolean.on"),
+							tooltip: layoutText("inline_hints.on"),
 						},
 					] }
 					onChange={ (nextValue) => {
@@ -88,8 +86,8 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 				/>
 			</FieldRow>
 			<FieldRow
-				label={ layoutText(t, "labels.inherit") }
-				tooltip={ layoutText(t, "hints.inherit") }
+				label={ layoutText("labels.inherit") }
+				tooltip={ layoutText("hints.inherit") }
 			>
 				<IconSegmented
 					className={ classes.layoutToggles }
@@ -98,13 +96,13 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 					options={ [
 						{
 							value: "false",
-							label: layoutText(t, "boolean.off"),
-							tooltip: layoutText(t, "inherit_hints.off"),
+							label: layoutText("boolean.off"),
+							tooltip: layoutText("inherit_hints.off"),
 						},
 						{
 							value: "true",
-							label: layoutText(t, "boolean.on"),
-							tooltip: layoutText(t, "inherit_hints.on"),
+							label: layoutText("boolean.on"),
+							tooltip: layoutText("inherit_hints.on"),
 						},
 					] }
 					onChange={ (nextValue) => {
@@ -113,8 +111,8 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 				/>
 			</FieldRow>
 			<FieldRow
-				label={ layoutText(t, "labels.span") }
-				tooltip={ layoutText(t, "hints.span") }
+				label={ layoutText("labels.span") }
+				tooltip={ layoutText("hints.span") }
 			>
 				<IconSegmented
 					className={ classes.layoutToggles }
@@ -123,13 +121,13 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 					options={ [
 						{
 							value: "false",
-							label: layoutText(t, "boolean.off"),
-							tooltip: layoutText(t, "span_hints.off"),
+							label: layoutText("boolean.off"),
+							tooltip: layoutText("span_hints.off"),
 						},
 						{
 							value: "true",
-							label: layoutText(t, "boolean.on"),
-							tooltip: layoutText(t, "span_hints.on"),
+							label: layoutText("boolean.on"),
+							tooltip: layoutText("span_hints.on"),
 						},
 					] }
 					onChange={ (nextValue) => {
@@ -141,8 +139,8 @@ function TextLayoutFieldControl({ name, value, onChange, t }: TextLayoutFieldCon
 	)
 }
 
-function textLayoutField(t: TFunction = i18n.t.bind(i18n)): Field<TextLayoutValue | undefined> {
-	const label = layoutText(t, "label")
+export function textLayoutField(): Field<TextLayoutValue | undefined> {
+	const label = layoutText("label")
 	return {
 		type: "custom",
 		label,
@@ -153,12 +151,9 @@ function textLayoutField(t: TFunction = i18n.t.bind(i18n)): Field<TextLayoutValu
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)
 		},
 	}
 }
-
-export { textLayoutField }

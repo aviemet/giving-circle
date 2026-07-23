@@ -25,10 +25,8 @@ export type FontStyleValue = "normal" | "italic"
 export type FontSizeValue = "xs" | "sm" | "md" | "lg" | "xl"
 export type TitleSizeValue = "auto" | FontSizeValue | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 
-const t = i18n.t.bind(i18n)
-
 function fieldLabel(key: string) {
-	return t(`slides.editor.fields.typography.${key}`)
+	return i18n.t(`slides.editor.fields.typography.${key}`)
 }
 
 function isTextDecorationValue(value: string): value is TextDecorationValue {
@@ -108,7 +106,7 @@ function fontWeightField(params: Partial<Field<FontWeightValue>> = {}): Field<Fo
 						wrapper={ false }
 						name={ name }
 						value={ value === undefined ? undefined : String(value) }
-						options={ fontWeightSelectOptions(t) }
+						options={ fontWeightSelectOptions() }
 						onChange={ (nextValue) => {
 							if(nextValue === null) {
 								return

@@ -1,5 +1,4 @@
 import { type Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import {
@@ -26,8 +25,8 @@ import { defaultTypeStyle, normalizeTypeStyle, type TypeStyleValue } from "./typ
 import * as classes from "./typographyControls.css"
 import { FieldRow, IconSegmented, PuckFieldLabel } from "../shared"
 
-function styleText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.typography.${key}`)
+function styleText(key: string) {
+	return i18n.t(`slides.editor.fields.typography.${key}`)
 }
 
 function isTextDecorationValue(value: string): value is TextDecorationValue {
@@ -52,7 +51,6 @@ interface TypeStyleFieldControlProps {
 	name: string
 	value: TypeStyleValue | undefined
 	onChange: (value: TypeStyleValue) => void
-	t: TFunction
 	fallbackWeight: FontWeightValue
 }
 
@@ -60,7 +58,6 @@ function TypeStyleFieldControl({
 	name,
 	value,
 	onChange,
-	t,
 	fallbackWeight,
 }: TypeStyleFieldControlProps) {
 	const [localValue, setLocalValue] = useState<TypeStyleValue>(() => {
@@ -78,12 +75,12 @@ function TypeStyleFieldControl({
 
 	return (
 		<div className={ classes.typographyStack }>
-			<FieldRow label={ styleText(t, "labels.weight") }>
+			<FieldRow label={ styleText("labels.weight") }>
 				<Select
 					wrapper={ false }
 					name={ `${name}.fw` }
 					value={ String(localValue.fw) }
-					options={ fontWeightSelectOptions(t) }
+					options={ fontWeightSelectOptions() }
 					onChange={ (nextValue) => {
 						if(nextValue === null) {
 							return
@@ -96,16 +93,16 @@ function TypeStyleFieldControl({
 				/>
 			</FieldRow>
 
-			<FieldRow label={ styleText(t, "labels.decoration") }>
+			<FieldRow label={ styleText("labels.decoration") }>
 				<IconSegmented
 					className={ classes.typographyIcons }
 					name={ `${name}.td` }
 					value={ localValue.td }
 					options={ [
-						{ value: "none", label: <FontNormalIcon />, tooltip: styleText(t, "decoration.none") },
-						{ value: "underline", label: <FontUnderlineIcon />, tooltip: styleText(t, "decoration.underline") },
-						{ value: "line-through", label: <FontStrikeIcon />, tooltip: styleText(t, "decoration.line_through") },
-						{ value: "overline", label: <FontOverlineIcon />, tooltip: styleText(t, "decoration.overline") },
+						{ value: "none", label: <FontNormalIcon />, tooltip: styleText("decoration.none") },
+						{ value: "underline", label: <FontUnderlineIcon />, tooltip: styleText("decoration.underline") },
+						{ value: "line-through", label: <FontStrikeIcon />, tooltip: styleText("decoration.line_through") },
+						{ value: "overline", label: <FontOverlineIcon />, tooltip: styleText("decoration.overline") },
 					] }
 					onChange={ (nextValue) => {
 						if(isTextDecorationValue(nextValue)) {
@@ -115,16 +112,16 @@ function TypeStyleFieldControl({
 				/>
 			</FieldRow>
 
-			<FieldRow label={ styleText(t, "labels.transform") }>
+			<FieldRow label={ styleText("labels.transform") }>
 				<IconSegmented
 					className={ classes.typographyIcons }
 					name={ `${name}.tt` }
 					value={ localValue.tt }
 					options={ [
-						{ value: "none", label: <FontNormalIcon />, tooltip: styleText(t, "transform.none") },
-						{ value: "uppercase", label: <TextUppercaseIcon />, tooltip: styleText(t, "transform.uppercase") },
-						{ value: "lowercase", label: <TextLowercaseIcon />, tooltip: styleText(t, "transform.lowercase") },
-						{ value: "capitalize", label: <TextCapitalizeIcon />, tooltip: styleText(t, "transform.capitalize") },
+						{ value: "none", label: <FontNormalIcon />, tooltip: styleText("transform.none") },
+						{ value: "uppercase", label: <TextUppercaseIcon />, tooltip: styleText("transform.uppercase") },
+						{ value: "lowercase", label: <TextLowercaseIcon />, tooltip: styleText("transform.lowercase") },
+						{ value: "capitalize", label: <TextCapitalizeIcon />, tooltip: styleText("transform.capitalize") },
 					] }
 					onChange={ (nextValue) => {
 						if(isTextTransformValue(nextValue)) {
@@ -134,14 +131,14 @@ function TypeStyleFieldControl({
 				/>
 			</FieldRow>
 
-			<FieldRow label={ styleText(t, "labels.style") }>
+			<FieldRow label={ styleText("labels.style") }>
 				<IconSegmented
 					className={ classes.typographyIcons }
 					name={ `${name}.fs` }
 					value={ localValue.fs }
 					options={ [
-						{ value: "normal", label: <FontNormalIcon />, tooltip: styleText(t, "style.normal") },
-						{ value: "italic", label: <FontItalicIcon />, tooltip: styleText(t, "style.italic") },
+						{ value: "normal", label: <FontNormalIcon />, tooltip: styleText("style.normal") },
+						{ value: "italic", label: <FontItalicIcon />, tooltip: styleText("style.italic") },
 					] }
 					onChange={ (nextValue) => {
 						if(isFontStyleValue(nextValue)) {
@@ -155,12 +152,10 @@ function TypeStyleFieldControl({
 }
 
 function typeStyleField(params: {
-	t?: TFunction
 	fallbackWeight?: FontWeightValue
 } = {}): Field<TypeStyleValue | undefined> {
-	const t = params.t ?? i18n.t.bind(i18n)
 	const fallbackWeight = params.fallbackWeight ?? 400
-	const label = styleText(t, "label")
+	const label = styleText("label")
 
 	return {
 		type: "custom",
@@ -172,7 +167,6 @@ function typeStyleField(params: {
 						name={ name }
 						value={ value ?? defaultTypeStyle(fallbackWeight) }
 						onChange={ onChange }
-						t={ t }
 						fallbackWeight={ fallbackWeight }
 					/>
 				</PuckFieldLabel>

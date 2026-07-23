@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useRef, useState, type ChangeEvent } from "react"
 
 import { TrashIcon, UploadIcon } from "@/components/Icons"
@@ -20,22 +19,20 @@ import {
 } from "./backgroundImage"
 import { FieldRow, IconControlTooltip, IconSegmented, PuckFieldLabel } from "../shared"
 
-function backgroundText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.background.${key}`)
+function backgroundText(key: string) {
+	return i18n.t(`slides.editor.fields.background.${key}`)
 }
 
 interface BackgroundFieldControlProps {
 	name: string
 	value: BackgroundValue | undefined
 	onChange: (value: BackgroundValue) => void
-	t: TFunction
 }
 
 function BackgroundFieldControl({
 	name,
 	value,
 	onChange,
-	t,
 }: BackgroundFieldControlProps) {
 	const [localValue, setLocalValue] = useState<BackgroundValue>(() => normalizeBackgroundValue(value))
 	const [isUploading, setIsUploading] = useState(false)
@@ -109,7 +106,7 @@ function BackgroundFieldControl({
 
 	return (
 		<div className={ classes.backgroundRoot }>
-			<FieldRow label={ backgroundText(t, "color") }>
+			<FieldRow label={ backgroundText("color") }>
 				<ColorInput
 					wrapper={ false }
 					name={ `${name}.color` }
@@ -135,7 +132,7 @@ function BackgroundFieldControl({
 				/>
 			</FieldRow>
 
-			<FieldRow label={ backgroundText(t, "image") }>
+			<FieldRow label={ backgroundText("image") }>
 				{ hasImage
 					? (
 						<div className={ classes.imageRow }>
@@ -146,18 +143,18 @@ function BackgroundFieldControl({
 							<button
 								type="button"
 								className={ classes.uploadButton }
-								aria-label={ backgroundText(t, "replace") }
+								aria-label={ backgroundText("replace") }
 								disabled={ isUploading }
 								onClick={ openFilePicker }
 							>
 								<UploadIcon />
-								{ backgroundText(t, "replace") }
+								{ backgroundText("replace") }
 							</button>
-							<IconControlTooltip label={ backgroundText(t, "remove") }>
+							<IconControlTooltip label={ backgroundText("remove") }>
 								<button
 									type="button"
 									className={ classes.iconButton }
-									aria-label={ backgroundText(t, "remove") }
+									aria-label={ backgroundText("remove") }
 									disabled={ isUploading }
 									onClick={ removeImage }
 								>
@@ -171,12 +168,12 @@ function BackgroundFieldControl({
 							<button
 								type="button"
 								className={ classes.uploadButton }
-								aria-label={ backgroundText(t, "upload") }
+								aria-label={ backgroundText("upload") }
 								disabled={ isUploading }
 								onClick={ openFilePicker }
 							>
 								<UploadIcon />
-								{ backgroundText(t, "upload") }
+								{ backgroundText("upload") }
 							</button>
 						</div>
 					) }
@@ -193,15 +190,15 @@ function BackgroundFieldControl({
 
 			{ hasImage && (
 				<>
-					<FieldRow label={ backgroundText(t, "size") }>
+					<FieldRow label={ backgroundText("size") }>
 						<IconSegmented
 							name={ `${name}.size` }
 							value={ localValue.image.size }
 							options={ [
-								{ value: "cover", label: backgroundText(t, "size_cover") },
-								{ value: "contain", label: backgroundText(t, "size_contain") },
-								{ value: "auto", label: backgroundText(t, "size_auto") },
-								{ value: "custom", label: backgroundText(t, "size_custom") },
+								{ value: "cover", label: backgroundText("size_cover") },
+								{ value: "contain", label: backgroundText("size_contain") },
+								{ value: "auto", label: backgroundText("size_auto") },
+								{ value: "custom", label: backgroundText("size_custom") },
 							] }
 							onChange={ (nextValue) => {
 								if(isBackgroundImageSize(nextValue)) {
@@ -212,7 +209,7 @@ function BackgroundFieldControl({
 					</FieldRow>
 
 					{ localValue.image.size === "custom" && (
-						<FieldRow label={ backgroundText(t, "custom_size") }>
+						<FieldRow label={ backgroundText("custom_size") }>
 							<TextInput
 								wrapper={ false }
 								name={ `${name}.customSize` }
@@ -222,34 +219,34 @@ function BackgroundFieldControl({
 						</FieldRow>
 					) }
 
-					<FieldRow label={ backgroundText(t, "position") }>
+					<FieldRow label={ backgroundText("position") }>
 						<div className={ classes.offsetPair }>
 							<TextInput
 								wrapper={ false }
 								name={ `${name}.offsetX` }
 								value={ localValue.image.offsetX }
-								placeholder={ backgroundText(t, "offset_x") }
+								placeholder={ backgroundText("offset_x") }
 								onChange={ (event) => updateImage({ offsetX: event.currentTarget.value }) }
 							/>
 							<TextInput
 								wrapper={ false }
 								name={ `${name}.offsetY` }
 								value={ localValue.image.offsetY }
-								placeholder={ backgroundText(t, "offset_y") }
+								placeholder={ backgroundText("offset_y") }
 								onChange={ (event) => updateImage({ offsetY: event.currentTarget.value }) }
 							/>
 						</div>
 					</FieldRow>
 
-					<FieldRow label={ backgroundText(t, "repeat") }>
+					<FieldRow label={ backgroundText("repeat") }>
 						<IconSegmented
 							name={ `${name}.repeat` }
 							value={ localValue.image.repeat }
 							options={ [
-								{ value: "no-repeat", label: backgroundText(t, "repeat_no") },
-								{ value: "repeat", label: backgroundText(t, "repeat_all") },
-								{ value: "repeat-x", label: backgroundText(t, "repeat_x") },
-								{ value: "repeat-y", label: backgroundText(t, "repeat_y") },
+								{ value: "no-repeat", label: backgroundText("repeat_no") },
+								{ value: "repeat", label: backgroundText("repeat_all") },
+								{ value: "repeat-x", label: backgroundText("repeat_x") },
+								{ value: "repeat-y", label: backgroundText("repeat_y") },
 							] }
 							onChange={ (nextValue) => {
 								if(isBackgroundImageRepeat(nextValue)) {
@@ -259,13 +256,13 @@ function BackgroundFieldControl({
 						/>
 					</FieldRow>
 
-					<FieldRow label={ backgroundText(t, "attachment") }>
+					<FieldRow label={ backgroundText("attachment") }>
 						<IconSegmented
 							name={ `${name}.attachment` }
 							value={ localValue.image.attachment }
 							options={ [
-								{ value: "scroll", label: backgroundText(t, "attachment_scroll") },
-								{ value: "fixed", label: backgroundText(t, "attachment_fixed") },
+								{ value: "scroll", label: backgroundText("attachment_scroll") },
+								{ value: "fixed", label: backgroundText("attachment_fixed") },
 							] }
 							onChange={ (nextValue) => {
 								if(isBackgroundImageAttachment(nextValue)) {
@@ -285,18 +282,15 @@ function backgroundField(params: Partial<Field<BackgroundValue | undefined>>): F
 function backgroundField({
 	label = i18n.t("slides.editor.fields.background.label"),
 }: Partial<Field<BackgroundValue | undefined>> = {}): Field<BackgroundValue | undefined> {
-	const t = i18n.t.bind(i18n)
-
 	return {
 		type: "custom",
 		label,
 		render: ({ name, value, onChange }) => (
-			<PuckFieldLabel label={ label ?? backgroundText(t, "label") }>
+			<PuckFieldLabel label={ label ?? backgroundText("label") }>
 				<BackgroundFieldControl
 					name={ name }
 					value={ value }
 					onChange={ onChange }
-					t={ t }
 				/>
 			</PuckFieldLabel>
 		),

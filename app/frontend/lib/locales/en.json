@@ -1052,6 +1052,10 @@
             "label": "Image",
             "title": "Title"
           },
+          "leverage_bar": {
+            "currency_format": "Currency format",
+            "label": "Leverage Bar"
+          },
           "orgs_iterator": {
             "label": "Orgs Iterator"
           },
@@ -1081,6 +1085,9 @@
               "start": "Start"
             },
             "tt": "Text transform"
+          },
+          "timer": {
+            "label": "Timer"
           }
         },
         "fields": {
@@ -1123,6 +1130,14 @@
           },
           "color": {
             "background": "Background color"
+          },
+          "currency_format": {
+            "label": "Currency format",
+            "options": {
+              "compact": "Compact ($60k)",
+              "format": "Exact ($60,000.00)",
+              "whole": "Whole dollars ($60,000)"
+            }
           },
           "dimension": {
             "min_height": "Min height",
@@ -1295,6 +1310,14 @@
               "width": "Width"
             }
           },
+          "leverage_colors": {
+            "label": "Colors",
+            "labels": {
+              "radius": "Radius",
+              "remaining": "Remaining",
+              "track": "Track"
+            }
+          },
           "sizing": {
             "align_self": {
               "auto": "Auto",
@@ -1315,6 +1338,8 @@
               "clamp_max": "Max",
               "clamp_min": "Min",
               "clamp_preferred": "Preferred",
+              "height": "Height",
+              "max_height": "Max Height",
               "max_width": "Max Width",
               "width": "Width"
             },
@@ -1410,6 +1435,50 @@
             "span_hints": {
               "off": "Render as a paragraph (Text).",
               "on": "Render as an inline span element."
+            }
+          },
+          "timer_colors": {
+            "label": "Colors",
+            "labels": {
+              "ring_progress": "Progress",
+              "ring_track": "Track"
+            }
+          },
+          "timer_display": {
+            "hints": {
+              "circle": "Time inside a circular progress ring",
+              "digital": "Large digits only",
+              "flip": "Wafer flip-clock cards",
+              "seven_segment": "Classic LED seven-segment digits"
+            },
+            "label": "Display",
+            "options": {
+              "circle": "Circle",
+              "digital": "Digital",
+              "flip": "Flip",
+              "seven_segment": "7-seg"
+            }
+          },
+          "timer_duration": {
+            "label": "Duration",
+            "labels": {
+              "minutes": "Min",
+              "seconds": "Sec"
+            }
+          },
+          "timer_exhausted": {
+            "hints": {
+              "message": "Show a custom message when time runs out",
+              "zero": "Show 0:00 when time runs out"
+            },
+            "label": "When timer ends",
+            "labels": {
+              "message": "Message",
+              "mode": "Mode"
+            },
+            "modes": {
+              "message": "Message",
+              "zero": "0:00"
             }
           },
           "typography": {

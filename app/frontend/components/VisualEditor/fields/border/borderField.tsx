@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import { ColorInput } from "@/components/Inputs"
@@ -10,22 +9,20 @@ import * as classes from "./borderField.css"
 import { type BorderProps } from "./style"
 import { FieldRow, PuckFieldLabel, UnitNumber } from "../shared"
 
-function borderText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.border.${key}`)
+function borderText(key: string) {
+	return i18n.t(`slides.editor.fields.border.${key}`)
 }
 
 interface BorderFieldControlProps {
 	name: string
 	value: Partial<BorderProps> | undefined
 	onChange: (value: BorderProps) => void
-	t: TFunction
 }
 
 function BorderFieldControl({
 	name,
 	value,
 	onChange,
-	t,
 }: BorderFieldControlProps) {
 	const [localValue, setLocalValue] = useState<BorderProps>(() => normalizeBorderValue(value))
 
@@ -40,7 +37,7 @@ function BorderFieldControl({
 
 	return (
 		<div className={ classes.borderRoot }>
-			<FieldRow label={ borderText(t, "width") }>
+			<FieldRow label={ borderText("width") }>
 				<UnitNumber
 					name={ `${name}.borderWidth` }
 					value={ localValue.borderWidth }
@@ -48,7 +45,7 @@ function BorderFieldControl({
 				/>
 			</FieldRow>
 
-			<FieldRow label={ borderText(t, "radius") }>
+			<FieldRow label={ borderText("radius") }>
 				<UnitNumber
 					name={ `${name}.borderRadius` }
 					value={ localValue.borderRadius }
@@ -56,7 +53,7 @@ function BorderFieldControl({
 				/>
 			</FieldRow>
 
-			<FieldRow label={ borderText(t, "color") }>
+			<FieldRow label={ borderText("color") }>
 				<ColorInput
 					wrapper={ false }
 					name={ `${name}.borderColor` }
@@ -90,19 +87,16 @@ function borderField(params: { label?: string }): Field<BorderProps | undefined>
 function borderField({
 	label,
 }: { label?: string } = {}): Field<BorderProps | undefined> {
-	const t = i18n.t.bind(i18n)
-
 	return {
 		type: "custom",
-		label: label ?? borderText(t, "label"),
+		label: label ?? borderText("label"),
 		render: ({ name, onChange, value }) => {
 			return (
-				<PuckFieldLabel label={ label ?? borderText(t, "label") }>
+				<PuckFieldLabel label={ label ?? borderText("label") }>
 					<BorderFieldControl
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)

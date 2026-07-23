@@ -1,6 +1,5 @@
 import { Field } from "@puckeditor/core"
 import clsx from "clsx"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import {
@@ -31,13 +30,14 @@ import {
 import * as classes from "./imageSizeField.css"
 import { ObjectPositionGrid } from "./ObjectPositionGrid"
 import {
+	parseNumberInputAmount,
 	type DimensionInput,
 	type DimensionUnit,
 } from "../dimension"
 import { FieldRow, IconSegmented, PuckFieldLabel } from "../shared"
 
-function sizeText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.image_size.${key}`)
+function sizeText(key: string) {
+	return i18n.t(`slides.editor.fields.image_size.${key}`)
 }
 
 function isDimensionUnit(value: string): value is DimensionUnit {
@@ -63,10 +63,9 @@ function DimensionControl({ name, value, onChange }: DimensionControlProps) {
 					min={ 0 }
 					step={ 1 }
 					onChange={ (nextAmount) => {
-						const numericValue = typeof nextAmount === "number" ? nextAmount : Number(nextAmount)
 						onChange({
 							...value,
-							amount: Number.isNaN(numericValue) ? undefined : numericValue,
+							amount: parseNumberInputAmount(nextAmount),
 						})
 					} }
 				/>
@@ -98,10 +97,9 @@ interface ImageSizeFieldControlProps {
 	name: string
 	value: ImageSizeValue | undefined
 	onChange: (value: ImageSizeValue) => void
-	t: TFunction
 }
 
-function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldControlProps) {
+function ImageSizeFieldControl({ name, value, onChange }: ImageSizeFieldControlProps) {
 	const [localValue, setLocalValue] = useState<ImageSizeValue>(() => normalizeImageSize(value))
 
 	const commit = (next: ImageSizeValue) => {
@@ -124,68 +122,68 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 		{
 			value: "natural",
 			label: <ImageScaleNaturalIcon />,
-			tooltip: `${sizeText(t, "modes.natural")} — ${sizeText(t, "mode_hints.natural")}`,
+			tooltip: `${sizeText("modes.natural")} — ${sizeText("mode_hints.natural")}`,
 		},
 		{
 			value: "width",
 			label: <ImageScaleWidthIcon />,
-			tooltip: `${sizeText(t, "modes.width")} — ${sizeText(t, "mode_hints.width")}`,
+			tooltip: `${sizeText("modes.width")} — ${sizeText("mode_hints.width")}`,
 		},
 		{
 			value: "height",
 			label: <ImageScaleHeightIcon />,
-			tooltip: `${sizeText(t, "modes.height")} — ${sizeText(t, "mode_hints.height")}`,
+			tooltip: `${sizeText("modes.height")} — ${sizeText("mode_hints.height")}`,
 		},
 		{
 			value: "box",
 			label: <ImageScaleBoxIcon />,
-			tooltip: `${sizeText(t, "modes.box")} — ${sizeText(t, "mode_hints.box")}`,
+			tooltip: `${sizeText("modes.box")} — ${sizeText("mode_hints.box")}`,
 		},
 	]
 
 	const aspectOptions = [
-		{ value: "auto", label: sizeText(t, "aspect.auto") },
-		{ value: "1 / 1", label: sizeText(t, "aspect.square") },
-		{ value: "4 / 3", label: sizeText(t, "aspect.landscape_4_3") },
-		{ value: "3 / 4", label: sizeText(t, "aspect.portrait_3_4") },
-		{ value: "16 / 9", label: sizeText(t, "aspect.wide_16_9") },
-		{ value: "9 / 16", label: sizeText(t, "aspect.tall_9_16") },
-		{ value: "custom", label: sizeText(t, "aspect.custom") },
+		{ value: "auto", label: sizeText("aspect.auto") },
+		{ value: "1 / 1", label: sizeText("aspect.square") },
+		{ value: "4 / 3", label: sizeText("aspect.landscape_4_3") },
+		{ value: "3 / 4", label: sizeText("aspect.portrait_3_4") },
+		{ value: "16 / 9", label: sizeText("aspect.wide_16_9") },
+		{ value: "9 / 16", label: sizeText("aspect.tall_9_16") },
+		{ value: "custom", label: sizeText("aspect.custom") },
 	]
 
 	const fitOptions = [
 		{
 			value: "cover",
 			label: <ObjectFitCoverIcon />,
-			tooltip: `${sizeText(t, "fit.cover")} — ${sizeText(t, "fit_hints.cover")}`,
+			tooltip: `${sizeText("fit.cover")} — ${sizeText("fit_hints.cover")}`,
 		},
 		{
 			value: "contain",
 			label: <ObjectFitContainIcon />,
-			tooltip: `${sizeText(t, "fit.contain")} — ${sizeText(t, "fit_hints.contain")}`,
+			tooltip: `${sizeText("fit.contain")} — ${sizeText("fit_hints.contain")}`,
 		},
 		{
 			value: "fill",
 			label: <ObjectFitFillIcon />,
-			tooltip: `${sizeText(t, "fit.fill")} — ${sizeText(t, "fit_hints.fill")}`,
+			tooltip: `${sizeText("fit.fill")} — ${sizeText("fit_hints.fill")}`,
 		},
 		{
 			value: "scale-down",
 			label: <ObjectFitScaleDownIcon />,
-			tooltip: `${sizeText(t, "fit.scale_down")} — ${sizeText(t, "fit_hints.scale_down")}`,
+			tooltip: `${sizeText("fit.scale_down")} — ${sizeText("fit_hints.scale_down")}`,
 		},
 		{
 			value: "none",
 			label: <ObjectFitNoneIcon />,
-			tooltip: `${sizeText(t, "fit.none")} — ${sizeText(t, "fit_hints.none")}`,
+			tooltip: `${sizeText("fit.none")} — ${sizeText("fit_hints.none")}`,
 		},
 	]
 
 	return (
 		<div className={ clsx(classes.imageSizeRoot) }>
 			<FieldRow
-				label={ sizeText(t, "labels.mode") }
-				tooltip={ sizeText(t, "mode_hints.overview") }
+				label={ sizeText("labels.mode") }
+				tooltip={ sizeText("mode_hints.overview") }
 			>
 				<IconSegmented
 					name={ `${name}.mode` }
@@ -201,7 +199,7 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 			</FieldRow>
 
 			{ showWidth && (
-				<FieldRow label={ sizeText(t, "labels.width") }>
+				<FieldRow label={ sizeText("labels.width") }>
 					<DimensionControl
 						name={ `${name}.width` }
 						value={ localValue.width }
@@ -211,7 +209,7 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 			) }
 
 			{ showHeight && (
-				<FieldRow label={ sizeText(t, "labels.height") }>
+				<FieldRow label={ sizeText("labels.height") }>
 					<DimensionControl
 						name={ `${name}.height` }
 						value={ localValue.height }
@@ -220,7 +218,7 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 				</FieldRow>
 			) }
 
-			<FieldRow label={ sizeText(t, "labels.max_width") }>
+			<FieldRow label={ sizeText("labels.max_width") }>
 				<DimensionControl
 					name={ `${name}.maxWidth` }
 					value={ localValue.maxWidth }
@@ -228,7 +226,7 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 				/>
 			</FieldRow>
 
-			<FieldRow label={ sizeText(t, "labels.max_height") }>
+			<FieldRow label={ sizeText("labels.max_height") }>
 				<DimensionControl
 					name={ `${name}.maxHeight` }
 					value={ localValue.maxHeight }
@@ -237,8 +235,8 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 			</FieldRow>
 
 			<FieldRow
-				label={ sizeText(t, "labels.aspect") }
-				tooltip={ sizeText(t, "aspect_hint") }
+				label={ sizeText("labels.aspect") }
+				tooltip={ sizeText("aspect_hint") }
 			>
 				<Select
 					wrapper={ false }
@@ -255,12 +253,12 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 			</FieldRow>
 
 			{ localValue.aspectRatio === "custom" && (
-				<FieldRow label={ sizeText(t, "labels.custom_aspect") }>
+				<FieldRow label={ sizeText("labels.custom_aspect") }>
 					<TextInput
 						wrapper={ false }
 						name={ `${name}.customAspectRatio` }
 						value={ localValue.customAspectRatio }
-						placeholder={ sizeText(t, "custom_aspect_placeholder") }
+						placeholder={ sizeText("custom_aspect_placeholder") }
 						onChange={ (event) => updateValue({ customAspectRatio: event.currentTarget.value }) }
 					/>
 				</FieldRow>
@@ -268,7 +266,7 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 
 			{ showCropControls && (
 				<>
-					<FieldRow label={ sizeText(t, "labels.fit") }>
+					<FieldRow label={ sizeText("labels.fit") }>
 						<IconSegmented
 							name={ `${name}.objectFit` }
 							value={ localValue.objectFit }
@@ -282,7 +280,7 @@ function ImageSizeFieldControl({ name, value, onChange, t }: ImageSizeFieldContr
 						/>
 					</FieldRow>
 
-					<FieldRow label={ sizeText(t, "labels.position") }>
+					<FieldRow label={ sizeText("labels.position") }>
 						<ObjectPositionGrid
 							objectPositionX={ localValue.objectPositionX }
 							objectPositionY={ localValue.objectPositionY }
@@ -302,8 +300,7 @@ function imageSizeField(params: Partial<Field<ImageSizeValue | undefined>>): Fie
 function imageSizeField({
 	label,
 }: Partial<Field<ImageSizeValue | undefined>> = {}): Field<ImageSizeValue | undefined> {
-	const t = i18n.t.bind(i18n)
-	const resolvedLabel = label ?? sizeText(t, "label")
+	const resolvedLabel = label ?? sizeText("label")
 
 	return {
 		type: "custom",
@@ -315,7 +312,6 @@ function imageSizeField({
 						name={ name }
 						value={ value ?? defaultImageSize() }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)

@@ -1,6 +1,5 @@
-import { type TFunction } from "i18next"
-
 import { Select, TextInput } from "@/components/Inputs"
+import { i18n } from "@/lib/i18n"
 
 import {
 	isFontSizeModeValue,
@@ -11,15 +10,14 @@ import {
 import * as classes from "./fontSizeControl.css"
 import { FieldRow, IconSegmented } from "../shared"
 
-function sizeText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.font.size.${key}`)
+function sizeText(key: string) {
+	return i18n.t(`slides.editor.fields.font.size.${key}`)
 }
 
 interface FontSizeControlProps {
 	name: string
 	value: FlexibleFontSize
 	onChange: (value: FlexibleFontSize) => void
-	t: TFunction
 	allowAuto: boolean
 }
 
@@ -27,11 +25,10 @@ export function FontSizeControl({
 	name,
 	value,
 	onChange,
-	t,
 	allowAuto,
 }: FontSizeControlProps) {
 	const presetOptions: { label: string, value: FontSizePreset }[] = [
-		...(allowAuto ? [{ label: sizeText(t, "presets.auto"), value: "auto" as const }] : []),
+		...(allowAuto ? [{ label: sizeText("presets.auto"), value: "auto" as const }] : []),
 		{ label: "xs", value: "xs" },
 		{ label: "sm", value: "sm" },
 		{ label: "md", value: "md" },
@@ -51,8 +48,8 @@ export function FontSizeControl({
 	return (
 		<div className={ classes.sizeStack }>
 			<FieldRow
-				label={ sizeText(t, "labels.mode") }
-				tooltip={ sizeText(t, "hints.mode") }
+				label={ sizeText("labels.mode") }
+				tooltip={ sizeText("hints.mode") }
 			>
 				<IconSegmented
 					name={ `${name}.mode` }
@@ -60,18 +57,18 @@ export function FontSizeControl({
 					options={ [
 						{
 							value: "preset",
-							label: sizeText(t, "modes.preset"),
-							tooltip: sizeText(t, "mode_hints.preset"),
+							label: sizeText("modes.preset"),
+							tooltip: sizeText("mode_hints.preset"),
 						},
 						{
 							value: "custom",
-							label: sizeText(t, "modes.custom"),
-							tooltip: sizeText(t, "mode_hints.custom"),
+							label: sizeText("modes.custom"),
+							tooltip: sizeText("mode_hints.custom"),
 						},
 						{
 							value: "clamp",
-							label: sizeText(t, "modes.clamp"),
-							tooltip: sizeText(t, "mode_hints.clamp"),
+							label: sizeText("modes.clamp"),
+							tooltip: sizeText("mode_hints.clamp"),
 						},
 					] }
 					onChange={ (nextValue) => {
@@ -86,7 +83,7 @@ export function FontSizeControl({
 			</FieldRow>
 
 			{ value.mode === "preset" && (
-				<FieldRow label={ sizeText(t, "labels.preset") }>
+				<FieldRow label={ sizeText("labels.preset") }>
 					<Select
 						wrapper={ false }
 						name={ `${name}.preset` }
@@ -106,14 +103,14 @@ export function FontSizeControl({
 
 			{ value.mode === "custom" && (
 				<FieldRow
-					label={ sizeText(t, "labels.custom") }
-					tooltip={ sizeText(t, "hints.custom") }
+					label={ sizeText("labels.custom") }
+					tooltip={ sizeText("hints.custom") }
 				>
 					<TextInput
 						wrapper={ false }
 						name={ `${name}.custom` }
 						value={ value.custom }
-						placeholder={ sizeText(t, "custom_placeholder") }
+						placeholder={ sizeText("custom_placeholder") }
 						onChange={ (event) => {
 							onChange({
 								...value,
@@ -127,8 +124,8 @@ export function FontSizeControl({
 			{ value.mode === "clamp" && (
 				<>
 					<FieldRow
-						label={ sizeText(t, "labels.min") }
-						tooltip={ sizeText(t, "hints.min") }
+						label={ sizeText("labels.min") }
+						tooltip={ sizeText("hints.min") }
 					>
 						<TextInput
 							wrapper={ false }
@@ -144,8 +141,8 @@ export function FontSizeControl({
 						/>
 					</FieldRow>
 					<FieldRow
-						label={ sizeText(t, "labels.preferred") }
-						tooltip={ sizeText(t, "hints.preferred") }
+						label={ sizeText("labels.preferred") }
+						tooltip={ sizeText("hints.preferred") }
 					>
 						<TextInput
 							wrapper={ false }
@@ -161,8 +158,8 @@ export function FontSizeControl({
 						/>
 					</FieldRow>
 					<FieldRow
-						label={ sizeText(t, "labels.max") }
-						tooltip={ sizeText(t, "hints.max") }
+						label={ sizeText("labels.max") }
+						tooltip={ sizeText("hints.max") }
 					>
 						<TextInput
 							wrapper={ false }

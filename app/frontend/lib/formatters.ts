@@ -44,6 +44,7 @@ export const currency = {
 			maximumFractionDigits: 0,
 		}, locale),
 }
+export type CurrencyFormatMode = keyof typeof currency
 
 export const number = {
 	decimal: (value: number, fractionDigits = 1, locale = intlLocale()) =>
@@ -52,6 +53,7 @@ export const number = {
 			maximumFractionDigits: fractionDigits,
 		}).format(value),
 }
+export type NumberFormatMode = keyof typeof number
 
 export const datetime = {
 	// Date formatters
@@ -98,3 +100,4 @@ export const datetime = {
 		return `${startStr} - ${endStr}`
 	},
 }
+export type DateTimeFormatMode = keyof typeof datetime

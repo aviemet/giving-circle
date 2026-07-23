@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from "react"
 
 import { NavigationInterrupt } from "@/components/Modal"
-import { type PresentationDataPresentation } from "@/layouts/Providers/PresentationDataProvider"
+import { type PresentationDataPresentation } from "@/features/presentation"
 
 import {
 	applySlideTitleToData,

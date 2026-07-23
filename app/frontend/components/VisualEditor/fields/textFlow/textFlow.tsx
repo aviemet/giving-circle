@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import {
@@ -23,8 +22,8 @@ export type TextFlowValue = {
 	truncate?: TruncateValue
 }
 
-function flowText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.text_flow.${key}`)
+function flowText(key: string) {
+	return i18n.t(`slides.editor.fields.text_flow.${key}`)
 }
 
 function isTextWrapValue(value: string): value is TextWrapValue {
@@ -70,7 +69,6 @@ interface TextFlowFieldControlProps {
 	name: string
 	value: TextFlowValue | undefined
 	onChange: (value: TextFlowValue) => void
-	t: TFunction
 	includeTruncate: boolean
 }
 
@@ -78,7 +76,6 @@ function TextFlowFieldControl({
 	name,
 	value,
 	onChange,
-	t,
 	includeTruncate,
 }: TextFlowFieldControlProps) {
 	const [localValue, setLocalValue] = useState<TextFlowValue>(() => {
@@ -97,8 +94,8 @@ function TextFlowFieldControl({
 	return (
 		<div className={ classes.flowRoot }>
 			<FieldRow
-				label={ flowText(t, "labels.clamp") }
-				tooltip={ flowText(t, "hints.clamp") }
+				label={ flowText("labels.clamp") }
+				tooltip={ flowText("hints.clamp") }
 			>
 				<UnitNumber
 					name={ `${name}.lineClamp` }
@@ -109,8 +106,8 @@ function TextFlowFieldControl({
 			</FieldRow>
 
 			<FieldRow
-				label={ flowText(t, "labels.wrap") }
-				tooltip={ flowText(t, "hints.wrap") }
+				label={ flowText("labels.wrap") }
+				tooltip={ flowText("hints.wrap") }
 			>
 				<IconSegmented
 					className={ classes.wrapSegmented }
@@ -120,27 +117,27 @@ function TextFlowFieldControl({
 						{
 							value: "wrap",
 							label: <TextWrapIcon />,
-							tooltip: `${flowText(t, "wrap.wrap")} — ${flowText(t, "wrap_hints.wrap")}`,
+							tooltip: `${flowText("wrap.wrap")} — ${flowText("wrap_hints.wrap")}`,
 						},
 						{
 							value: "nowrap",
 							label: <TextNowrapIcon />,
-							tooltip: `${flowText(t, "wrap.nowrap")} — ${flowText(t, "wrap_hints.nowrap")}`,
+							tooltip: `${flowText("wrap.nowrap")} — ${flowText("wrap_hints.nowrap")}`,
 						},
 						{
 							value: "balance",
 							label: <TextWrapBalanceIcon />,
-							tooltip: `${flowText(t, "wrap.balance")} — ${flowText(t, "wrap_hints.balance")}`,
+							tooltip: `${flowText("wrap.balance")} — ${flowText("wrap_hints.balance")}`,
 						},
 						{
 							value: "pretty",
 							label: <TextWrapPrettyIcon />,
-							tooltip: `${flowText(t, "wrap.pretty")} — ${flowText(t, "wrap_hints.pretty")}`,
+							tooltip: `${flowText("wrap.pretty")} — ${flowText("wrap_hints.pretty")}`,
 						},
 						{
 							value: "stable",
 							label: <TextWrapStableIcon />,
-							tooltip: `${flowText(t, "wrap.stable")} — ${flowText(t, "wrap_hints.stable")}`,
+							tooltip: `${flowText("wrap.stable")} — ${flowText("wrap_hints.stable")}`,
 						},
 					] }
 					onChange={ (nextValue) => {
@@ -153,8 +150,8 @@ function TextFlowFieldControl({
 
 			{ includeTruncate && (
 				<FieldRow
-					label={ flowText(t, "labels.truncate") }
-					tooltip={ flowText(t, "hints.truncate") }
+					label={ flowText("labels.truncate") }
+					tooltip={ flowText("hints.truncate") }
 				>
 					<IconSegmented
 						name={ `${name}.truncate` }
@@ -162,18 +159,18 @@ function TextFlowFieldControl({
 						options={ [
 							{
 								value: "none",
-								label: flowText(t, "truncate.none"),
-								tooltip: flowText(t, "truncate_hints.none"),
+								label: flowText("truncate.none"),
+								tooltip: flowText("truncate_hints.none"),
 							},
 							{
 								value: "end",
-								label: flowText(t, "truncate.end"),
-								tooltip: flowText(t, "truncate_hints.end"),
+								label: flowText("truncate.end"),
+								tooltip: flowText("truncate_hints.end"),
 							},
 							{
 								value: "start",
-								label: flowText(t, "truncate.start"),
-								tooltip: flowText(t, "truncate_hints.start"),
+								label: flowText("truncate.start"),
+								tooltip: flowText("truncate_hints.start"),
 							},
 						] }
 						onChange={ (nextValue) => {
@@ -190,11 +187,9 @@ function TextFlowFieldControl({
 
 function textFlowField(params: {
 	includeTruncate?: boolean
-	t?: TFunction
 } = {}): Field<TextFlowValue | undefined> {
-	const t = params.t ?? i18n.t.bind(i18n)
 	const includeTruncate = params.includeTruncate ?? false
-	const label = flowText(t, "label")
+	const label = flowText("label")
 
 	return {
 		type: "custom",
@@ -206,7 +201,6 @@ function textFlowField(params: {
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 						includeTruncate={ includeTruncate }
 					/>
 				</PuckFieldLabel>

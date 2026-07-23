@@ -1,6 +1,6 @@
 import { usePage } from "@inertiajs/react"
 
-import { PresentationDataProvider } from "@/layouts/Providers/PresentationDataProvider"
+import { PresentationDataProvider } from "@/features/presentation"
 
 import { LayoutProps } from ".."
 

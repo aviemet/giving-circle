@@ -1,5 +1,4 @@
 import { Field } from "@puckeditor/core"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import {
@@ -24,8 +23,8 @@ import {
 	justifySelectOptions,
 } from "../shared"
 
-function flexText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.flex.${key}`)
+function flexText(key: string) {
+	return i18n.t(`slides.editor.fields.flex.${key}`)
 }
 
 function defaultFlexValue(): FlexProps {
@@ -81,10 +80,9 @@ interface FlexFieldControlProps {
 	name: string
 	value: FlexProps | undefined
 	onChange: (value: FlexProps) => void
-	t: TFunction
 }
 
-function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
+function FlexFieldControl({ name, value, onChange }: FlexFieldControlProps) {
 	const [localValue, setLocalValue] = useState<FlexProps>(() => normalizeFlexValue(value))
 
 	const updateValue = (patch: Partial<FlexProps>) => {
@@ -98,14 +96,14 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 
 	const justifyOptions = justifySelectOptions().map((option) => ({
 		value: option.value,
-		label: flexText(t, `justify.${option.labelKey}`),
+		label: flexText(`justify.${option.labelKey}`),
 	}))
 
 	const alignOptions = [
-		{ value: "flex-start", label: flexText(t, "align.start") },
-		{ value: "center", label: flexText(t, "align.center") },
-		{ value: "flex-end", label: flexText(t, "align.end") },
-		{ value: "stretch", label: flexText(t, "align.stretch") },
+		{ value: "flex-start", label: flexText("align.start") },
+		{ value: "center", label: flexText("align.center") },
+		{ value: "flex-end", label: flexText("align.end") },
+		{ value: "stretch", label: flexText("align.stretch") },
 	]
 
 	const direction = localValue.flexDirection ?? "row"
@@ -114,13 +112,13 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 
 	return (
 		<div className={ classes.flexFieldRoot }>
-			<FieldRow label={ flexText(t, "labels.display") }>
+			<FieldRow label={ flexText("labels.display") }>
 				<IconSegmented
 					name={ `${name}.display` }
 					value={ localValue.display }
 					options={ [
-						{ value: "block", label: flexText(t, "display.block") },
-						{ value: "flex", label: flexText(t, "display.flex") },
+						{ value: "block", label: flexText("display.block") },
+						{ value: "flex", label: flexText("display.flex") },
 					] }
 					onChange={ (nextValue) => {
 						if(isDisplayValue(nextValue)) {
@@ -132,7 +130,7 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 
 			{ localValue.display === "flex" && (
 				<>
-					<FieldRow label={ flexText(t, "labels.direction") }>
+					<FieldRow label={ flexText("labels.direction") }>
 						<div className={ classes.flexDirectionGroup }>
 							<IconSegmented
 								name={ `${name}.flexDirection` }
@@ -141,12 +139,12 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 									{
 										value: "row",
 										label: <FlexRowIcon />,
-										tooltip: `${flexText(t, "direction.row")} — ${flexText(t, "direction.row_hint")}`,
+										tooltip: `${flexText("direction.row")} — ${flexText("direction.row_hint")}`,
 									},
 									{
 										value: "column",
 										label: <FlexColumnIcon />,
-										tooltip: `${flexText(t, "direction.column")} — ${flexText(t, "direction.column_hint")}`,
+										tooltip: `${flexText("direction.column")} — ${flexText("direction.column_hint")}`,
 									},
 								] }
 								onChange={ (nextValue) => {
@@ -157,14 +155,14 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 							/>
 							<IconControlTooltip
 								label={ localValue.flexWrap === "wrap"
-									? `${flexText(t, "wrap.wrap")} — ${flexText(t, "wrap.wrap_hint")}`
-									: `${flexText(t, "wrap.nowrap")} — ${flexText(t, "wrap.wrap_off_hint")}` }
+									? `${flexText("wrap.wrap")} — ${flexText("wrap.wrap_hint")}`
+									: `${flexText("wrap.nowrap")} — ${flexText("wrap.wrap_off_hint")}` }
 							>
 								<button
 									type="button"
 									className={ classes.flexWrapToggle }
 									data-active={ localValue.flexWrap === "wrap" ? "true" : "false" }
-									aria-label={ flexText(t, "labels.wrap") }
+									aria-label={ flexText("labels.wrap") }
 									aria-pressed={ localValue.flexWrap === "wrap" }
 									onClick={ () => {
 										updateValue({
@@ -178,7 +176,7 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 						</div>
 					</FieldRow>
 
-					<FieldRow label={ flexText(t, "labels.align") }>
+					<FieldRow label={ flexText("labels.align") }>
 						<AlignMatrix
 							name={ `${name}.align` }
 							flexDirection={ localValue.flexDirection }
@@ -198,7 +196,7 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 						/>
 					</FieldRow>
 
-					<FieldRow label={ flexText(t, "labels.gap") }>
+					<FieldRow label={ flexText("labels.gap") }>
 						<UnitNumber
 							name={ `${name}.gap` }
 							value={ localValue.gap }
@@ -208,7 +206,7 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 				</>
 			) }
 
-			<FieldRow label={ flexText(t, "labels.overflow") }>
+			<FieldRow label={ flexText("labels.overflow") }>
 				<IconSegmented
 					name={ `${name}.overflow` }
 					value={ localValue.overflow }
@@ -216,17 +214,17 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 						{
 							value: "visible",
 							label: <OverflowVisibleIcon />,
-							tooltip: `${flexText(t, "overflow.visible")} — ${flexText(t, "overflow.visible_hint")}`,
+							tooltip: `${flexText("overflow.visible")} — ${flexText("overflow.visible_hint")}`,
 						},
 						{
 							value: "auto",
 							label: <OverflowAutoIcon />,
-							tooltip: `${flexText(t, "overflow.auto")} — ${flexText(t, "overflow.auto_hint")}`,
+							tooltip: `${flexText("overflow.auto")} — ${flexText("overflow.auto_hint")}`,
 						},
 						{
 							value: "hidden",
 							label: <OverflowHiddenIcon />,
-							tooltip: `${flexText(t, "overflow.hidden")} — ${flexText(t, "overflow.hidden_hint")}`,
+							tooltip: `${flexText("overflow.hidden")} — ${flexText("overflow.hidden_hint")}`,
 						},
 					] }
 					onChange={ (nextValue) => {
@@ -240,8 +238,8 @@ function FlexFieldControl({ name, value, onChange, t }: FlexFieldControlProps) {
 	)
 }
 
-function flexField(t: TFunction = i18n.t.bind(i18n)): Field<FlexProps> {
-	const label = flexText(t, "label")
+function flexField(): Field<FlexProps> {
+	const label = flexText("label")
 	return {
 		type: "custom",
 		label,
@@ -252,7 +250,6 @@ function flexField(t: TFunction = i18n.t.bind(i18n)): Field<FlexProps> {
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)

@@ -1,6 +1,5 @@
 import { Field } from "@puckeditor/core"
 import clsx from "clsx"
-import { type TFunction } from "i18next"
 import { useState } from "react"
 
 import { NumberInput, Select } from "@/components/Inputs"
@@ -88,8 +87,8 @@ export function normalizeBoxModelValue(
 	}
 }
 
-function spacingText(t: TFunction, key: string) {
-	return t(`slides.editor.fields.spacing.${key}`)
+function spacingText(key: string) {
+	return i18n.t(`slides.editor.fields.spacing.${key}`)
 }
 
 type SpacingSide = keyof SpacingSides
@@ -127,14 +126,13 @@ interface BoxModelFieldControlProps {
 	name: string
 	value: BoxModelValue | undefined
 	onChange: (value: BoxModelValue) => void
-	t: TFunction
 }
 
-function sideLabel(t: TFunction, region: "margin" | "padding", side: SpacingSide) {
-	return `${spacingText(t, region)} ${spacingText(t, `labels.${side}`)}`
+function sideLabel(region: "margin" | "padding", side: SpacingSide) {
+	return `${spacingText(region)} ${spacingText(`labels.${side}`)}`
 }
 
-function BoxModelFieldControl({ name, value, onChange, t }: BoxModelFieldControlProps) {
+function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlProps) {
 	const [localValue, setLocalValue] = useState<BoxModelValue>(() => normalizeBoxModelValue(value))
 
 	const margin = localValue.margin ?? defaultSpacingGroup()
@@ -171,7 +169,7 @@ function BoxModelFieldControl({ name, value, onChange, t }: BoxModelFieldControl
 		<div className={ clsx(classes.boxModelRoot) }>
 			<div className={ clsx(classes.boxModelUnitRow) }>
 				<span className={ clsx(classes.boxModelUnitLabel) }>
-					{ spacingText(t, "labels.unit") }
+					{ spacingText("labels.unit") }
 				</span>
 				<div className={ clsx(classes.boxModelUnitSelect) }>
 					<Select
@@ -191,55 +189,55 @@ function BoxModelFieldControl({ name, value, onChange, t }: BoxModelFieldControl
 
 			<div className={ clsx(classes.boxModelMargin) }>
 				<span className={ clsx(classes.boxModelRegionLabel) }>
-					{ spacingText(t, "margin") }
+					{ spacingText("margin") }
 				</span>
 				<SideInput
 					name={ `${name}.margin.top` }
 					value={ margin.top }
 					className={ classes.boxModelTop }
-					ariaLabel={ sideLabel(t, "margin", "top") }
+					ariaLabel={ sideLabel("margin", "top") }
 					onChange={ (top) => updateMargin({ top }) }
 				/>
 				<SideInput
 					name={ `${name}.margin.left` }
 					value={ margin.left }
 					className={ classes.boxModelLeft }
-					ariaLabel={ sideLabel(t, "margin", "left") }
+					ariaLabel={ sideLabel("margin", "left") }
 					onChange={ (left) => updateMargin({ left }) }
 				/>
 				<div className={ clsx(classes.boxModelPadding) }>
 					<span className={ clsx(classes.boxModelRegionLabel) }>
-						{ spacingText(t, "padding") }
+						{ spacingText("padding") }
 					</span>
 					<SideInput
 						name={ `${name}.padding.top` }
 						value={ padding.top }
 						className={ classes.boxModelTop }
-						ariaLabel={ sideLabel(t, "padding", "top") }
+						ariaLabel={ sideLabel("padding", "top") }
 						onChange={ (top) => updatePadding({ top }) }
 					/>
 					<SideInput
 						name={ `${name}.padding.left` }
 						value={ padding.left }
 						className={ classes.boxModelLeft }
-						ariaLabel={ sideLabel(t, "padding", "left") }
+						ariaLabel={ sideLabel("padding", "left") }
 						onChange={ (left) => updatePadding({ left }) }
 					/>
 					<div className={ clsx(classes.boxModelCore) }>
-						{ spacingText(t, "content") }
+						{ spacingText("content") }
 					</div>
 					<SideInput
 						name={ `${name}.padding.right` }
 						value={ padding.right }
 						className={ classes.boxModelRight }
-						ariaLabel={ sideLabel(t, "padding", "right") }
+						ariaLabel={ sideLabel("padding", "right") }
 						onChange={ (right) => updatePadding({ right }) }
 					/>
 					<SideInput
 						name={ `${name}.padding.bottom` }
 						value={ padding.bottom }
 						className={ classes.boxModelBottom }
-						ariaLabel={ sideLabel(t, "padding", "bottom") }
+						ariaLabel={ sideLabel("padding", "bottom") }
 						onChange={ (bottom) => updatePadding({ bottom }) }
 					/>
 				</div>
@@ -247,14 +245,14 @@ function BoxModelFieldControl({ name, value, onChange, t }: BoxModelFieldControl
 					name={ `${name}.margin.right` }
 					value={ margin.right }
 					className={ classes.boxModelRight }
-					ariaLabel={ sideLabel(t, "margin", "right") }
+					ariaLabel={ sideLabel("margin", "right") }
 					onChange={ (right) => updateMargin({ right }) }
 				/>
 				<SideInput
 					name={ `${name}.margin.bottom` }
 					value={ margin.bottom }
 					className={ classes.boxModelBottom }
-					ariaLabel={ sideLabel(t, "margin", "bottom") }
+					ariaLabel={ sideLabel("margin", "bottom") }
 					onChange={ (bottom) => updateMargin({ bottom }) }
 				/>
 			</div>
@@ -262,8 +260,8 @@ function BoxModelFieldControl({ name, value, onChange, t }: BoxModelFieldControl
 	)
 }
 
-function boxModelField(t: TFunction = i18n.t.bind(i18n)): Field<BoxModelValue | undefined> {
-	const label = spacingText(t, "label")
+function boxModelField(): Field<BoxModelValue | undefined> {
+	const label = spacingText("label")
 	return {
 		type: "custom",
 		label,
@@ -274,7 +272,6 @@ function boxModelField(t: TFunction = i18n.t.bind(i18n)): Field<BoxModelValue | 
 						name={ name }
 						value={ value }
 						onChange={ onChange }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)
@@ -285,12 +282,11 @@ function boxModelField(t: TFunction = i18n.t.bind(i18n)): Field<BoxModelValue | 
 function spacingField(): Field<SpacingGroup | undefined>
 function spacingField(params: Partial<Field<SpacingGroup | undefined>>): Field<SpacingGroup | undefined>
 function spacingField({ label = "Spacing" }: Partial<Field<SpacingGroup | undefined>> = {}): Field<SpacingGroup | undefined> {
-	const t = i18n.t.bind(i18n)
 	return {
 		type: "custom",
 		label,
 		render: ({ name, onChange, value }) => {
-			const boxValue: BoxModelValue = label === spacingText(t, "padding")
+			const boxValue: BoxModelValue = label === spacingText("padding")
 				? { padding: value }
 				: { margin: value }
 
@@ -300,13 +296,12 @@ function spacingField({ label = "Spacing" }: Partial<Field<SpacingGroup | undefi
 						name={ name }
 						value={ boxValue }
 						onChange={ (next) => {
-							if(label === spacingText(t, "padding")) {
+							if(label === spacingText("padding")) {
 								onChange(next.padding)
 								return
 							}
 							onChange(next.margin)
 						} }
-						t={ t }
 					/>
 				</PuckFieldLabel>
 			)
