@@ -1,5 +1,5 @@
 import { Head } from "@inertiajs/react"
-import { Config, Render } from "@measured/puck"
+import { Config, Render } from "@puckeditor/core"
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -7,8 +7,8 @@ import { Box, Text } from "@/components"
 import { config } from "@/components/VisualEditor/puck.config"
 import {
 	PresentationDataProvider,
-	type PresentationDataContextValue,
-} from "@/layouts/Providers/PresentationDataProvider"
+	type PresentationDataValue,
+} from "@/features/presentation"
 import { withLayout } from "@/lib"
 import { useMockCircle } from "@/queries"
 
@@ -71,7 +71,7 @@ const PreviewSlide = () => {
 	}
 
 	const circleMock = mockCircle as Schema.CirclesMock
-	const value: PresentationDataContextValue = {
+	const value: PresentationDataValue = {
 		circle: circleMock,
 		theme: circleMock?.themes?.[0],
 		presentation: {

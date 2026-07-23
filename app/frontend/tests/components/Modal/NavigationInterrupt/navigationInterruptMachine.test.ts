@@ -1,4 +1,5 @@
-import { describe, expect, test } from "vitest"
+import { router } from "@inertiajs/react"
+import { describe, expect, test, vi } from "vitest"
 import { createActor } from "xstate"
 
 import {
@@ -60,6 +61,8 @@ describe("components/Modal/NavigationInterrupt/navigationInterruptMachine", () =
 	})
 
 	test("PREPARE_LEAVE clears pending navigation and enables bypass", () => {
+		const visitSpy = vi.spyOn(router, "visit").mockImplementation(() => undefined)
+
 		const actor = createActor(navigationInterruptMachine)
 		actor.start()
 
@@ -70,9 +73,12 @@ describe("components/Modal/NavigationInterrupt/navigationInterruptMachine", () =
 
 		actor.send({ type: "PREPARE_LEAVE" })
 
+		expect(visitSpy).toHaveBeenCalledWith("/slides", {})
 		expect(actor.getSnapshot().matches("idle")).toBe(true)
 		expect(actor.getSnapshot().context.pending).toBeNull()
 		expect(actor.getSnapshot().context.bypass).toBe(true)
+
+		visitSpy.mockRestore()
 	})
 
 	test("CONSUME_BYPASS clears bypass after a guarded navigation completes", () => {

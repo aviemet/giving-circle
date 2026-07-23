@@ -106,7 +106,7 @@ export const navigationInterruptMachine = setup({
 				},
 				PREPARE_LEAVE: {
 					target: "idle",
-					actions: ["navigatePending", "clearPending", "enableBypass"],
+					actions: ["enableBypass", "navigatePending", "clearPending"],
 				},
 				REQUEST_INTERRUPT: {
 					actions: "assignPending",

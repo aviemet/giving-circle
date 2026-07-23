@@ -1,10 +1,12 @@
 import { describe, expect, test } from "vitest"
 
 import {
+	dimensionInputOrOmit,
 	dimensionInputToCSSValue,
 	formatDimensionValue,
 	normalizeDimensionValue,
 	parseDimensionValue,
+	parseNumberInputAmount,
 } from "@/components/VisualEditor/fields/dimension"
 
 describe("components/VisualEditor/fields/dimension", () => {
@@ -38,5 +40,23 @@ describe("components/VisualEditor/fields/dimension", () => {
 	test("dimensionInputToCSSValue formats stored inputs", () => {
 		expect(dimensionInputToCSSValue({ amount: 30, unit: "%" })).toBe("30%")
 		expect(dimensionInputToCSSValue({ unit: "auto" })).toBe("auto")
+		expect(dimensionInputToCSSValue({ amount: undefined, unit: "px" })).toBeUndefined()
+	})
+
+	test("parseNumberInputAmount treats cleared inputs as unset, not zero", () => {
+		expect(parseNumberInputAmount("")).toBeUndefined()
+		expect(parseNumberInputAmount("   ")).toBeUndefined()
+		expect(parseNumberInputAmount(null)).toBeUndefined()
+		expect(parseNumberInputAmount(undefined)).toBeUndefined()
+		expect(parseNumberInputAmount(0)).toBe(0)
+		expect(parseNumberInputAmount("28")).toBe(28)
+		expect(parseNumberInputAmount(28)).toBe(28)
+	})
+
+	test("dimensionInputOrOmit drops empty amounts", () => {
+		expect(dimensionInputOrOmit({ unit: "px" })).toBeUndefined()
+		expect(dimensionInputOrOmit({ amount: undefined, unit: "px" })).toBeUndefined()
+		expect(dimensionInputOrOmit({ amount: 28, unit: "px" })).toEqual({ amount: 28, unit: "px" })
+		expect(dimensionInputOrOmit({ unit: "auto" })).toEqual({ unit: "auto" })
 	})
 })

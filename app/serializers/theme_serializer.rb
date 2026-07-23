@@ -3,6 +3,8 @@
 # Table name: themes
 #
 #  id           :uuid             not null, primary key
+#  description  :text
+#  heading      :string
 #  name         :string           not null
 #  published_at :datetime
 #  slug         :string
@@ -27,6 +29,8 @@ class ThemeSerializer < ApplicationSerializer
 
   attributes(
     :name,
+    :heading,
+    :description,
     :published_at,
     :status,
   )

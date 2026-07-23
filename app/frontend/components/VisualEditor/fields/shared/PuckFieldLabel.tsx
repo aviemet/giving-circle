@@ -1,4 +1,4 @@
-import { FieldLabel } from "@measured/puck"
+import { FieldLabel } from "@puckeditor/core"
 import { type ReactNode } from "react"
 
 import * as classes from "../puckFieldStyles.css"

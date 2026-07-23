@@ -22,6 +22,21 @@ describe("lib/hooks/useNavigationInterrupt", () => {
 		pushState.mockRestore()
 	})
 
+	test("does not push a second history guard when one is already present", () => {
+		const pushState = vi.spyOn(window.history, "pushState")
+		window.history.replaceState({ navigationInterrupt: "slide-1" }, "")
+
+		renderHook(() =>
+			useNavigationInterrupt({
+				enabled: true,
+				historyGuardKey: "slide-1",
+			}),
+		)
+
+		expect(pushState).not.toHaveBeenCalled()
+		pushState.mockRestore()
+	})
+
 	test("does not register listeners when disabled", () => {
 		vi.mocked(router.on).mockClear()
 
@@ -51,5 +66,54 @@ describe("lib/hooks/useNavigationInterrupt", () => {
 		})
 
 		expect(removeBeforeListener).toHaveBeenCalled()
+	})
+
+	test("armed leave allows the pending inertia visit through the before guard", () => {
+		const preventDefault = vi.fn()
+		const beforeHandler = vi.fn()
+
+		vi.mocked(router.on).mockImplementation((eventName, handler) => {
+			if(eventName === "before") {
+				beforeHandler.mockImplementation((event) => handler(event))
+			}
+
+			return vi.fn()
+		})
+
+		const visitSpy = vi.spyOn(router, "visit").mockImplementation((url) => {
+			beforeHandler({
+				preventDefault,
+				detail: { visit: { url: String(url) } },
+			})
+		})
+
+		const { result } = renderHook(() =>
+			useNavigationInterrupt({
+				enabled: true,
+				historyGuardKey: "slide-1",
+			}),
+		)
+
+		act(() => {
+			beforeHandler({
+				preventDefault,
+				detail: { visit: { url: "/slides" } },
+			})
+		})
+
+		expect(result.current.promptOpen).toBe(true)
+		expect(preventDefault).toHaveBeenCalled()
+
+		preventDefault.mockClear()
+
+		act(() => {
+			result.current.leaveAfterAction()
+		})
+
+		expect(visitSpy).toHaveBeenCalledWith("/slides", {})
+		expect(preventDefault).not.toHaveBeenCalled()
+		expect(result.current.promptOpen).toBe(false)
+
+		visitSpy.mockRestore()
 	})
 })

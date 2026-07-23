@@ -1,15 +1,54 @@
-import { type ComponentConfig } from "@measured/puck"
+import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
 import { HeadingDisplay } from "./Heading"
-import { colorField, tagsField } from "../../fields"
+import {
+	alignmentField,
+	defaultHeadingMetrics,
+	defaultTextFlow,
+	defaultTextFontValue,
+	defaultTypeStyle,
+	headingMetricsField,
+	normalizeHeadingMetrics,
+	normalizeTextFlow,
+	normalizeTextFontValue,
+	normalizeTypeStyle,
+	tagsField,
+	textFlowField,
+	textFontField,
+	typeStyleField,
+	type AlignmentValue,
+	type FontStyleValue,
+	type FontWeightValue,
+	type HeadingMetricsValue,
+	type HeadingOrder,
+	type TextDecorationValue,
+	type TextFlowValue,
+	type TextFontValue,
+	type TextTransformValue,
+	type TextWrapValue,
+	type TitleSizeValue,
+	type TypeStyleValue,
+} from "../../fields"
 
 export type HeadingProps = {
 	title: string
-	padding: number
-	order: 1 | 2 | 3 | 4 | 5 | 6
-	color: string
+	metrics?: HeadingMetricsValue
+	order?: HeadingOrder
+	size?: TitleSizeValue
+	padding?: number
+	color?: string
+	font?: TextFontValue
+	typeStyle?: TypeStyleValue
+	fw?: FontWeightValue
+	td?: TextDecorationValue
+	tt?: TextTransformValue
+	fs?: FontStyleValue
+	alignment: AlignmentValue
+	flow?: TextFlowValue
+	lineClamp?: number
+	textWrap?: TextWrapValue
 }
 
 const t = i18n.t.bind(i18n)
@@ -20,29 +59,71 @@ export const headingConfig: ComponentConfig<HeadingProps> = {
 		title: tagsField({
 			label: t("slides.editor.components.heading.title"),
 		}),
-		padding: { type: "number", label: t("slides.editor.components.heading.padding") },
-		order: {
-			type: "select",
-			label: t("slides.editor.components.heading.level"),
-			options: [
-				{ label: "1", value: 1 },
-				{ label: "2", value: 2 },
-				{ label: "3", value: 3 },
-				{ label: "4", value: 4 },
-				{ label: "5", value: 5 },
-				{ label: "6", value: 6 },
-			],
-		},
-		color: colorField({
-			label: t("slides.editor.components.heading.text_color"),
+		metrics: headingMetricsField(),
+		font: textFontField({
+			allowInherit: true,
+			allowAutoSize: true,
+			fallbackColor: "#FFFFFF",
+			fallbackSizePreset: "auto",
 		}),
+		typeStyle: typeStyleField({ fallbackWeight: 700 }),
+		alignment: alignmentField({
+			label: t("slides.editor.components.heading.alignment"),
+		}),
+		flow: textFlowField(),
 	},
 
 	defaultProps: {
 		title: t("slides.editor.components.heading.default_title"),
-		padding: 16,
-		order: 1,
-		color: "#FFFFFF",
+		metrics: defaultHeadingMetrics(),
+		font: defaultTextFontValue({
+			color: "#FFFFFF",
+			sizePreset: "auto",
+		}),
+		typeStyle: defaultTypeStyle(700),
+		alignment: "left",
+		flow: defaultTextFlow(),
+	},
+
+	resolveData: ({ props }) => {
+		const legacySize = typeof props.size === "string"
+			? props.size
+			: undefined
+		const legacyMetricsSize = props.metrics !== undefined && "size" in props.metrics
+			? String(props.metrics.size)
+			: undefined
+
+		return {
+			props: {
+				...props,
+				metrics: normalizeHeadingMetrics(props.metrics, {
+					order: props.order,
+					padding: props.padding,
+				}),
+				font: normalizeTextFontValue(
+					props.font,
+					{
+						font: props.font,
+						color: props.color,
+						size: legacySize ?? legacyMetricsSize,
+					},
+					{
+						color: "#FFFFFF",
+						sizePreset: "auto",
+					},
+				),
+				typeStyle: normalizeTypeStyle(props.typeStyle, {
+					fw: props.fw,
+					td: props.td,
+					tt: props.tt,
+					fs: props.fs,
+				}, 700),
+				flow: normalizeTextFlow(props.flow, {
+					lineClamp: props.lineClamp,
+					textWrap: props.textWrap,
+				}),
+			},
+		}
 	},
 
 	render: (props) => <HeadingDisplay { ...props } />,

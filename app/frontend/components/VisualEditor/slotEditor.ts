@@ -1,8 +1,13 @@
-import { defaultBackgroundImageValue } from "./fields/backgroundImage"
+import { type PuckSlideData } from "./editorPersistence"
+import { defaultBackgroundValue } from "./fields/backgroundImage"
 
-import { type PuckSlideData } from "./index"
 
 export const SLOT_MIN_EMPTY_HEIGHT = 96
+
+export const DRAG_SLOT_GUTTER_PX = 40
+export const DRAG_SLOT_EDGE_PX = 20
+export const DRAG_SLOT_GAP_PX = 36
+export const DRAG_HITBOX_HEIGHT_PX = 44
 
 
 export function slotDropZoneProps() {
@@ -25,6 +30,7 @@ export function createStarterSlideData(): PuckSlideData {
 								padding: 16,
 								order: 1,
 								color: "#FFFFFF",
+								alignment: "left",
 							},
 						},
 					],
@@ -41,8 +47,7 @@ export function createStarterSlideData(): PuckSlideData {
 		root: {
 			props: {
 				title: "Slide",
-				backgroundColor: "#000000",
-				backgroundImage: defaultBackgroundImageValue(),
+				background: defaultBackgroundValue("#000000"),
 			},
 		},
 	}

@@ -1,4 +1,10 @@
-export { backgroundImageField } from "./field"
+export { backgroundField } from "./field"
+export {
+	defaultBackgroundValue,
+	normalizeBackgroundValue,
+	hasBackgroundColor,
+	type BackgroundValue,
+} from "./background"
 export {
 	defaultBackgroundImageValue,
 	buildBackgroundImageStyle,

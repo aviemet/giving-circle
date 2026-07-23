@@ -1,11 +1,11 @@
 import { PageProps } from "@inertiajs/core"
 import { usePage } from "@inertiajs/react"
-import { Render } from "@measured/puck"
+import { Render } from "@puckeditor/core"
 import { motion, AnimatePresence } from "motion/react"
 
 import { Box } from "@/components"
-import { PresentationDataProvider } from "@/layouts/Providers/PresentationDataProvider"
 
+import { renderableSlideData } from "./renderableSlideData"
 import { config } from "../VisualEditor/puck.config"
 
 export type TransitionType = "fade" | "slide" | "slideUp" | "slideDown" | "scale" | "none"
@@ -18,7 +18,9 @@ interface SlidePresentationPageProps extends PageProps {
 
 interface SlidePresentationProps {
 	presentation?: Schema.PresentationsPresentation
-	activeSlide: Schema.SlidesPresentation
+	activeSlide: Omit<Schema.SlidesPresentation, "data"> & {
+		data: Schema.SlidesPresentation["data"] | null
+	}
 	circle?: Schema.CirclesPersisted
 	theme?: Schema.ThemesPersisted
 	transitionType?: TransitionType
@@ -68,21 +70,20 @@ const transitionVariants = {
 	},
 }
 
-const SlidePresentation = ({
+export function SlidePresentation({
 	presentation: presentationProp,
 	activeSlide,
 	circle: circleProp,
 	theme: themeProp,
 	transitionType = "fade",
 	transitionDuration = 0.3,
-}: SlidePresentationProps) => {
-	const { circle, theme, presentation } = useSlidePresentationContext({
+}: SlidePresentationProps) {
+	const { circle, presentation } = useSlidePresentationContext({
 		presentation: presentationProp,
 		activeSlide,
 		circle: circleProp,
 		theme: themeProp,
 	})
-	const variants = transitionVariants[transitionType]
 
 	if(!circle || !presentation) {
 		return (
@@ -90,28 +91,26 @@ const SlidePresentation = ({
 		)
 	}
 
+	const variants = transitionVariants[transitionType]
+
 	return (
-		<PresentationDataProvider value={ { circle, theme, presentation } }>
-			<Box style={ { width: "100%", height: "100vh", backgroundColor: "#000", overflow: "hidden" } }>
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={ activeSlide.id }
-						initial={ variants.initial }
-						animate={ variants.animate }
-						exit={ variants.exit }
-						transition={ { duration: transitionDuration } }
-						style={ { width: "100%", height: "100%", overflow: "hidden" } }
-					>
-						<Render
-							config={ config }
-							data={ activeSlide.data }
-							metadata={ {} }
-						/>
-					</motion.div>
-				</AnimatePresence>
-			</Box>
-		</PresentationDataProvider>
+		<Box style={ { width: "100%", height: "100vh", backgroundColor: "#000", overflow: "hidden" } }>
+			<AnimatePresence mode="wait">
+				<motion.div
+					key={ activeSlide.id }
+					initial={ variants.initial }
+					animate={ variants.animate }
+					exit={ variants.exit }
+					transition={ { duration: transitionDuration } }
+					style={ { width: "100%", height: "100%", overflow: "hidden" } }
+				>
+					<Render
+						config={ config }
+						data={ renderableSlideData(activeSlide.data) }
+						metadata={ {} }
+					/>
+				</motion.div>
+			</AnimatePresence>
+		</Box>
 	)
 }
-
-export { SlidePresentation }

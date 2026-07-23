@@ -1,9 +1,9 @@
 import clsx from "clsx"
 
 import { Box } from "@/components"
-import { usePresentationDataContext } from "@/layouts/Providers/PresentationDataProvider"
+import { usePresentationDataContext } from "@/features/presentation"
 
-import * as classes from "./orgItemLayout.css"
+import * as classes from "./OrgsIterator.css"
 import { type OrgsIteratorComponentProps } from "./orgsIteratorConfig"
 import { getOrgsFromContext } from "../../dynamicData/getOrgsFromContext"
 import { IteratorItemProvider } from "../../dynamicData/IteratorItemContext"

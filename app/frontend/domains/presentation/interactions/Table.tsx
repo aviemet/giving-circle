@@ -54,6 +54,7 @@ export function PresentationInteractionsTable({ records, pagination, model }: Pr
 				/>
 			),
 		},
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	], [params.circle_slug, params.presentation_slug, params.theme_slug])
 
 	return (

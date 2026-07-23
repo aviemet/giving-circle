@@ -1006,20 +1006,20 @@
       "editor": {
         "components": {
           "bar_graph": {
-            "award_image": "Award Image",
-            "bar_color": "Bar Color",
-            "funded_bar_color": "Funded Bar Color",
-            "grid_color": "Grid Color",
+            "award_image": "Award image",
+            "bar_color": "Bar color",
+            "funded_bar_color": "Funded bar color",
+            "grid_color": "Grid color",
             "label": "Bar Graph",
-            "need_color": "Need Color",
-            "text_color": "Text Color"
+            "need_color": "Need color",
+            "text_color": "Text color"
           },
           "card": {
-            "background_color": "Background Color",
+            "background_color": "Background color",
             "default_description": "Topic description...",
             "default_title": "Topic Title",
             "description": "Description",
-            "font_color": "Font Color",
+            "font_color": "Font color",
             "label": "Card",
             "title": "Title"
           },
@@ -1031,53 +1031,117 @@
             "label": "Grid"
           },
           "heading": {
+            "alignment": "Alignment",
             "default_title": "Heading",
+            "fs": "Font style",
+            "fw": "Font weight",
             "label": "Heading",
-            "level": "Heading Level",
+            "level": "Heading level",
+            "line_clamp": "Line clamp",
             "padding": "Padding",
-            "text_color": "Text Color",
-            "title": "Title"
+            "size": "Size",
+            "td": "Text decoration",
+            "text_color": "Text color",
+            "text_wrap": "Text wrap",
+            "title": "Title",
+            "tt": "Text transform"
           },
           "image": {
-            "border_color": "Border Color",
+            "alignment": "Alignment",
             "default_title": "Image",
-            "label": "Image"
+            "label": "Image",
+            "title": "Title"
+          },
+          "leverage_bar": {
+            "currency_format": "Currency format",
+            "label": "Leverage Bar"
           },
           "orgs_iterator": {
             "label": "Orgs Iterator"
+          },
+          "text": {
+            "alignment": "Alignment",
+            "boolean": {
+              "no": "No",
+              "yes": "Yes"
+            },
+            "color": "Color",
+            "content": "Content",
+            "default_content": "Text",
+            "fs": "Font style",
+            "fw": "Font weight",
+            "inherit": "Inherit",
+            "inline": "Inline",
+            "label": "Text",
+            "line_clamp": "Line clamp",
+            "size": "Size",
+            "span": "Span",
+            "td": "Text decoration",
+            "text_wrap": "Text wrap",
+            "truncate": "Truncate",
+            "truncate_options": {
+              "end": "End",
+              "none": "None",
+              "start": "Start"
+            },
+            "tt": "Text transform"
+          },
+          "timer": {
+            "label": "Timer"
           }
         },
         "fields": {
-          "background_image": {
-            "attachment": "Attachment",
+          "alignment": {
+            "center": "Center",
+            "justify": "Justify",
+            "left": "Left",
+            "right": "Right"
+          },
+          "background": {
+            "attachment": "Attach",
             "attachment_fixed": "Fixed",
             "attachment_scroll": "Scroll",
-            "custom_size": "Custom size",
-            "label": "Background Image",
-            "offset_x": "Offset X",
-            "offset_y": "Offset Y",
-            "remove_image": "Remove image",
+            "color": "Color",
+            "custom_size": "Custom",
+            "image": "Image",
+            "label": "Background",
+            "offset_x": "X",
+            "offset_y": "Y",
+            "position": "Position",
+            "remove": "Remove image",
             "repeat": "Repeat",
-            "repeat_no": "No repeat",
-            "repeat_x": "Repeat X",
-            "repeat_y": "Repeat Y",
+            "repeat_all": "All",
+            "repeat_no": "None",
+            "repeat_x": "X",
+            "repeat_y": "Y",
+            "replace": "Replace",
             "size": "Size",
             "size_auto": "Auto",
-            "size_contain": "Contain",
+            "size_contain": "Fit",
             "size_cover": "Cover",
-            "size_custom": "Custom"
+            "size_custom": "CSS",
+            "upload": "Upload image"
           },
           "border": {
-            "color": "Border Color",
-            "radius": "Border Radius",
-            "width": "Border Width"
+            "color": "Color",
+            "label": "Border",
+            "radius": "Radius",
+            "width": "Width"
           },
           "color": {
-            "background": "Background Color"
+            "background": "Background color"
+          },
+          "currency_format": {
+            "label": "Currency format",
+            "options": {
+              "compact": "Compact ($60k)",
+              "format": "Exact ($60,000.00)",
+              "whole": "Whole dollars ($60,000)"
+            }
           },
           "dimension": {
-            "min_height": "Min Height",
-            "min_width": "Min Width",
+            "min_height": "Min height",
+            "min_width": "Min width",
             "width": "Width"
           },
           "flex": {
@@ -1087,9 +1151,12 @@
               "start": "Start",
               "stretch": "Stretch"
             },
+            "align_cell_hint": "%{x} %{y}",
             "direction": {
               "column": "Column",
-              "row": "Row"
+              "column_hint": "Stack children vertically",
+              "row": "Row",
+              "row_hint": "Arrange children horizontally"
             },
             "display": {
               "block": "Block",
@@ -1099,11 +1166,11 @@
             "justify": {
               "center": "Center",
               "end": "End",
-              "space_around": "Space Around",
-              "space_between": "Space Between",
+              "space_around": "Space around",
+              "space_between": "Space between",
               "start": "Start"
             },
-            "label": "Flex",
+            "label": "Layout",
             "labels": {
               "align": "Align",
               "direction": "Direction",
@@ -1114,13 +1181,141 @@
               "wrap": "Wrap"
             },
             "overflow": {
-              "auto_scroll": "Auto (scroll)",
+              "auto": "Auto",
+              "auto_hint": "Scroll when content overflows",
               "hidden": "Hidden",
-              "visible": "Visible"
+              "hidden_hint": "Clip overflowing content",
+              "visible": "Visible",
+              "visible_hint": "Show overflowing content"
             },
             "wrap": {
               "nowrap": "Nowrap",
-              "wrap": "Wrap"
+              "wrap": "Wrap",
+              "wrap_hint": "Allow items to wrap onto multiple lines",
+              "wrap_off_hint": "Keep items on a single line"
+            }
+          },
+          "font": {
+            "generics": {
+              "cursive": "Cursive",
+              "fantasy": "Fantasy",
+              "monospace": "Monospace",
+              "sans_serif": "Sans serif",
+              "serif": "Serif"
+            },
+            "inherit": "Inherit",
+            "label": "Font",
+            "labels": {
+              "color": "Color",
+              "family": "Family"
+            },
+            "placeholder": "Select a font",
+            "size": {
+              "custom_placeholder": "48px, 3rem, or 10vw",
+              "hints": {
+                "custom": "Any CSS length (px, rem, vw, or expressions).",
+                "max": "Largest size clamp is allowed to reach.",
+                "min": "Smallest size clamp is allowed to reach.",
+                "mode": "Choose preset tokens, a raw CSS size, or fluid clamp().",
+                "preferred": "Ideal middle size, often a viewport unit like 5vw."
+              },
+              "labels": {
+                "custom": "Value",
+                "max": "Max",
+                "min": "Min",
+                "mode": "Mode",
+                "preferred": "Ideal",
+                "preset": "Preset"
+              },
+              "mode_hints": {
+                "clamp": "Fluid type that scales between a min and max.",
+                "custom": "Type any CSS font-size value.",
+                "preset": "Theme and display size tokens."
+              },
+              "modes": {
+                "clamp": "Clamp",
+                "custom": "Custom",
+                "preset": "Preset"
+              },
+              "presets": {
+                "auto": "Auto (from level)"
+              }
+            },
+            "system_default": "System default",
+            "upload": "Upload font"
+          },
+          "heading_metrics": {
+            "label": "Heading",
+            "labels": {
+              "level": "Level",
+              "padding": "Padding"
+            }
+          },
+          "image": {
+            "label": "Image",
+            "remove": "Remove image",
+            "replace": "Replace",
+            "source": "Source",
+            "upload": "Upload image"
+          },
+          "image_size": {
+            "aspect": {
+              "auto": "Auto",
+              "custom": "Custom",
+              "landscape_4_3": "4:3",
+              "portrait_3_4": "3:4",
+              "square": "1:1",
+              "tall_9_16": "9:16",
+              "wide_16_9": "16:9"
+            },
+            "aspect_hint": "Forces a box ratio; Fit and Position apply when a crop box exists",
+            "custom_aspect_placeholder": "16 / 9",
+            "fit": {
+              "contain": "Contain",
+              "cover": "Cover",
+              "fill": "Fill",
+              "none": "None",
+              "scale_down": "Scale down"
+            },
+            "fit_hints": {
+              "contain": "Fit entire image inside the box",
+              "cover": "Fill the box and crop overflow",
+              "fill": "Stretch to fill the box",
+              "none": "Keep the image's intrinsic size",
+              "scale_down": "Like contain, but never upscale"
+            },
+            "label": "Size",
+            "labels": {
+              "aspect": "Aspect",
+              "custom_aspect": "Ratio",
+              "fit": "Fit",
+              "height": "Height",
+              "max_height": "Max Height",
+              "max_width": "Max Width",
+              "mode": "Scale",
+              "position": "Position",
+              "width": "Width"
+            },
+            "mode_hints": {
+              "box": "Set both axes; use Fit to crop or stretch",
+              "height": "Set height only; width follows the image ratio",
+              "natural": "Use the image's intrinsic pixel size",
+              "overview": "Set one axis to keep the image's aspect ratio",
+              "width": "Set width only; height follows the image ratio"
+            },
+            "modes": {
+              "box": "Both",
+              "height": "Height",
+              "natural": "Natural",
+              "width": "Width"
+            }
+          },
+          "leverage_colors": {
+            "label": "Colors",
+            "labels": {
+              "radius": "Radius",
+              "remaining": "Remaining",
+              "track": "Track"
             }
           },
           "sizing": {
@@ -1133,16 +1328,18 @@
             },
             "custom_placeholder": "flex: 1 1 280px; max-width: 50%",
             "fine_tune": {
-              "align_self": "Align Self",
-              "flex_grow": "Flex Grow",
-              "flex_shrink": "Flex Shrink",
-              "title": "Fine Tune"
+              "align_self": "Align self",
+              "flex_grow": "Flex grow",
+              "flex_shrink": "Flex shrink",
+              "title": "Fine tune"
             },
             "label": "Size",
             "labels": {
               "clamp_max": "Max",
               "clamp_min": "Min",
               "clamp_preferred": "Preferred",
+              "height": "Height",
+              "max_height": "Max Height",
               "max_width": "Max Width",
               "width": "Width"
             },
@@ -1150,16 +1347,182 @@
               "auto": "Auto",
               "clamp": "Responsive",
               "custom": "Custom CSS",
-              "fill": "Fill Space",
-              "fixed": "Fixed Size"
+              "fill": "Fill space",
+              "fixed": "Fixed size",
+              "short": {
+                "auto": "Auto",
+                "clamp": "Clamp",
+                "custom": "CSS",
+                "fill": "Fill",
+                "fixed": "Fixed"
+              }
             }
           },
           "spacing": {
+            "content": "Content",
+            "label": "Spacing",
             "labels": {
+              "bottom": "Bottom",
+              "left": "Left",
+              "right": "Right",
+              "top": "Top",
               "unit": "Unit"
             },
             "margin": "Margin",
             "padding": "Padding"
+          },
+          "text_flow": {
+            "hints": {
+              "clamp": "Max lines to show. 0 means no limit.",
+              "truncate": "Ellipsis when text overflows a single line.",
+              "wrap": "How lines break across the available width."
+            },
+            "label": "Flow",
+            "labels": {
+              "clamp": "Clamp",
+              "truncate": "Truncate",
+              "wrap": "Wrap"
+            },
+            "truncate": {
+              "end": "End",
+              "none": "None",
+              "start": "Start"
+            },
+            "truncate_hints": {
+              "end": "Cut off at the end with an ellipsis.",
+              "none": "Never truncate with an ellipsis.",
+              "start": "Cut off at the start with an ellipsis."
+            },
+            "wrap": {
+              "balance": "Balance",
+              "nowrap": "Nowrap",
+              "pretty": "Pretty",
+              "stable": "Stable",
+              "wrap": "Wrap"
+            },
+            "wrap_hints": {
+              "balance": "Even out line lengths for short headings.",
+              "nowrap": "Keep text on one line.",
+              "pretty": "Avoid awkward last-line orphans when possible.",
+              "stable": "Prefer stable line breaks when content reflows.",
+              "wrap": "Break onto multiple lines as needed."
+            }
+          },
+          "text_layout": {
+            "boolean": {
+              "off": "Off",
+              "on": "On"
+            },
+            "hints": {
+              "inherit": "Pull typography from the parent instead of this text's size.",
+              "inline": "Whether the text sits in the surrounding line or on its own.",
+              "span": "Render as a span instead of a paragraph-like block."
+            },
+            "inherit_hints": {
+              "off": "Use this text's own size and styles.",
+              "on": "Inherit font size and styles from the parent."
+            },
+            "inline_hints": {
+              "off": "Block box on its own line.",
+              "on": "Flows with surrounding text on the same line."
+            },
+            "label": "Layout",
+            "labels": {
+              "inherit": "Inherit",
+              "inline": "Inline",
+              "span": "Span"
+            },
+            "span_hints": {
+              "off": "Render as a paragraph (Text).",
+              "on": "Render as an inline span element."
+            }
+          },
+          "timer_colors": {
+            "label": "Colors",
+            "labels": {
+              "ring_progress": "Progress",
+              "ring_track": "Track"
+            }
+          },
+          "timer_display": {
+            "hints": {
+              "circle": "Time inside a circular progress ring",
+              "digital": "Large digits only",
+              "flip": "Wafer flip-clock cards",
+              "seven_segment": "Classic LED seven-segment digits"
+            },
+            "label": "Display",
+            "options": {
+              "circle": "Circle",
+              "digital": "Digital",
+              "flip": "Flip",
+              "seven_segment": "7-seg"
+            }
+          },
+          "timer_duration": {
+            "label": "Duration",
+            "labels": {
+              "minutes": "Min",
+              "seconds": "Sec"
+            }
+          },
+          "timer_exhausted": {
+            "hints": {
+              "message": "Show a custom message when time runs out",
+              "zero": "Show 0:00 when time runs out"
+            },
+            "label": "When timer ends",
+            "labels": {
+              "message": "Message",
+              "mode": "Mode"
+            },
+            "modes": {
+              "message": "Message",
+              "zero": "0:00"
+            }
+          },
+          "typography": {
+            "decoration": {
+              "line_through": "Strikethrough",
+              "none": "No decoration",
+              "overline": "Overline",
+              "underline": "Underline"
+            },
+            "fs": "Font style",
+            "fw": "Font weight",
+            "fw_bold": "Bold (700)",
+            "label": "Style",
+            "labels": {
+              "decoration": "Decoration",
+              "style": "Style",
+              "transform": "Transform",
+              "weight": "Weight"
+            },
+            "size": "Size",
+            "size_auto": "Auto (from level)",
+            "style": {
+              "italic": "Italic",
+              "normal": "Upright"
+            },
+            "td": "Text decoration",
+            "transform": {
+              "capitalize": "Capitalize each word",
+              "lowercase": "Lowercase",
+              "none": "As typed",
+              "uppercase": "Uppercase"
+            },
+            "tt": "Text transform",
+            "weights": {
+              "100": "Thin (100)",
+              "200": "Extra light (200)",
+              "300": "Light (300)",
+              "400": "Regular (400)",
+              "500": "Medium (500)",
+              "600": "Semibold (600)",
+              "700": "Bold (700)",
+              "800": "Extra bold (800)",
+              "900": "Black (900)"
+            }
           }
         },
         "header": {
@@ -1168,13 +1531,16 @@
           "open_preview": "Open preview",
           "revert": "Revert to last save",
           "save": "Save",
-          "save_and_close": "Save and Close",
+          "save_and_close": "Save and close",
           "save_status": {
             "recovered": "Recovered local draft (not saved to server)",
             "saved": "Saved to server",
             "unsaved": "Unsaved changes (local draft only)"
           },
           "saving": "Saving to server..."
+        },
+        "root": {
+          "title": "Title"
         }
       },
       "form": {
@@ -1183,7 +1549,7 @@
         "create": "Create Slide",
         "data": "Data",
         "name": "Name",
-        "new_slide_title": "New Slide Title",
+        "new_slide_title": "New slide title",
         "order": "Order",
         "template": "Template",
         "update": "Update Slide"
@@ -1354,6 +1720,8 @@
       },
       "form": {
         "create": "Create Theme",
+        "description": "Description",
+        "heading": "Heading",
         "name": "Name",
         "update": "Update Theme"
       },

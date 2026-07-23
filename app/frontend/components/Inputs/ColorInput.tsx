@@ -10,7 +10,7 @@ import { type BaseInputProps } from "."
 export interface ColorPickerInputProps
 	extends
 	Omit<BaseInputProps, "disableAutofill">,
-	ColorInputProps
+	Omit<ColorInputProps, "__clearable">
 {
 	ref?: Ref<HTMLInputElement>
 	label?: React.ReactNode
@@ -19,6 +19,7 @@ export interface ColorPickerInputProps
 	id?: string
 	onChange?: (color: string) => void
 	onFocus?: () => void
+	clearable?: boolean
 	wrapperProps?: Record<string, any>
 	children?: React.ReactNode
 }
@@ -32,6 +33,7 @@ export function ColorPickerInput({
 	onChange,
 	onFocus,
 	value,
+	clearable,
 	wrapper = true,
 	wrapperProps,
 	children,
@@ -57,6 +59,7 @@ export function ColorPickerInput({
 				name={ name }
 				value={ currentValue }
 				onChange={ handleChange }
+				__clearable={ clearable }
 				{ ...props }
 			/>
 

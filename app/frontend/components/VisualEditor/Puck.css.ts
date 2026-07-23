@@ -1,5 +1,12 @@
 import { css } from "@linaria/core"
 
+import * as layoutChrome from "./layoutChrome.editor.css"
+import {
+	DRAG_HITBOX_HEIGHT_PX,
+	DRAG_SLOT_EDGE_PX,
+	DRAG_SLOT_GAP_PX,
+	DRAG_SLOT_GUTTER_PX,
+} from "./slotEditor"
 
 import { theme } from "@/lib/theme"
 
@@ -9,7 +16,19 @@ export const puckDrawer = css``
 export const puckDrawerItem = css``
 export const puckDrawerItemIcon = css``
 export const puckOutline = css``
-export const presentationSlot = css``
+
+export const presentationSlot = css`
+	&[class*="DropZone"],
+	& [class*="DropZone"] {
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	&[class*="DropZone--hasChildren"],
+	& [class*="DropZone--hasChildren"] {
+		min-height: 40px;
+	}
+`
 
 export const puckPreviewContainer = css`
 	width: 100%;
@@ -17,107 +36,101 @@ export const puckPreviewContainer = css`
 	min-height: 100%;
 `
 
-export const puckSlideRoot = css`
-	width: 100%;
-	min-height: 100%;
-	height: 100%;
-	overflow: hidden;
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	background-color: var(--puck-slide-root-bg, #000000);
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-
-	& > * {
-		flex: 1 1 auto;
-		min-height: 0;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: inherit;
-		align-items: stretch;
-	}
-`
-
-export const presentationContainer = css`
-	flex: 1 1 auto;
-	min-height: 0;
-	width: 100%;
-	align-self: stretch;
-`
-
-export const presentationHeading = css`
-	flex: 0 0 auto;
-	align-self: stretch;
-`
-
-const PUCK_SPACE_PX = "2px"
-
 export const puckRoot = css`
 	--puck-font-family: inherit;
+	--puck-space-1: 2px;
+	--puck-space-2: 4px;
+	--puck-space-3: 6px;
+	--puck-space-4: 8px;
+	--puck-space-5: 12px;
+	--puck-space-chrome-gutter: 0px;
+	--puck-drawer-item-space: 4px;
+	--puck-radius-m: 3px;
+	--puck-field-radius: 3px;
+	--puck-field-font-size: 0.8125rem;
+	--puck-field-space-y: 4px;
+	--puck-field-space-x: 6px;
+	--puck-field-label-space-y: 2px;
+	--puck-field-label-font-size: 0.8125rem;
+	--puck-field-space-surface-y: 6px;
+	--puck-field-space-surface-x: 6px;
+	--puck-field-control-height: 28px;
+	--puck-field-section-gap: 4px;
+	--puck-field-label-font-size: 0.8125rem;
+	--puck-field-label-font-weight: 700;
+	--puck-field-prop-label-font-size: 0.6875rem;
+	--puck-field-prop-label-font-weight: 600;
+	--puck-field-prop-label-color: #d97706;
+	--puck-field-selected-bg: color-mix(in oklch, var(--mantine-color-blue-6) 42%, var(--puck-field-color-bg, var(--editor-input-bg)));
+	--puck-field-selected-border: color-mix(in oklch, var(--mantine-color-blue-5) 55%, var(--puck-field-color-border, var(--editor-input-border)));
+	--puck-field-control-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+	--puck-slot-min-empty-height: 48px;
 	position: relative;
 	height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+	max-height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+	min-height: 0;
+	overflow: hidden;
 
 	& .Puck {
-		--puck-space-px: ${ PUCK_SPACE_PX };
+		height: 100%;
+		min-height: 0;
+		overflow: hidden;
 
 		input,
 		select {
-			color: var(--editor-input-text);
-			background-color: var(--editor-input-bg);
-			border-color: var(--editor-input-border);
+			color: var(--puck-field-color-text, var(--editor-input-text));
+			background-color: var(--puck-field-color-bg, var(--editor-input-bg));
+			border-color: var(--puck-field-color-border, var(--editor-input-border));
 		}
 
 		.${ puckDrawer } [class*="ComponentList-title"] {
-			background-color: var(--puck-color-grey-03);
+			background-color: var(--puck-color-interactive-subtle);
 			border-radius: 4px;
-			margin-bottom: 4px;
-			padding: 6px 8px 0 8px;
+			margin-bottom: 2px;
+			padding: 4px 6px 0 6px;
 		}
 
 		.${ puckDrawer } [data-puck-drawer="true"] {
-			gap: 4px;
+			gap: 2px;
 		}
 
 		.${ puckDrawerItem } [class*="DrawerItem-draggable"] {
 			display: flex;
 			align-items: center;
-			gap: 6px;
-			background-color: var(--puck-color-white);
-			border: 1px solid var(--puck-color-grey-09);
-			padding: 2px 8px 0px 8px;
+			gap: 4px;
+			background-color: var(--puck-color-surface);
+			border: 1px solid var(--puck-color-border);
+			padding: 1px 6px;
 		}
 
 		.${ puckDrawerItem } .${ puckDrawerItemIcon } {
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			width: 18px;
-			height: 18px;
-			color: var(--puck-color-grey-10);
+			width: 16px;
+			height: 16px;
+			color: var(--puck-color-text-subtle);
 		}
 
 		.${ puckOutline } {
-			background-color: var(--puck-color-grey-02);
+			background-color: var(--puck-color-surface-subtle);
 			border-radius: 4px;
-			padding: 8px;
-			margin-top: 4px;
+			padding: 4px;
+			margin-top: 2px;
 		}
 
 		.${ puckOutline } * {
-			color: var(--puck-color-black);
+			color: var(--puck-color-text);
 		}
 
-		[class*="DropZone"]:empty {
-			border: 1px dashed var(--puck-color-azure-06);
+		[class*="DropZone--isRootZone"]:not([class*="DropZone--hasChildren"]) {
+			border: 1px solid var(--puck-color-border);
 			border-radius: 6px;
-			background-color: color-mix(in oklch, var(--puck-color-azure-10) 55%, transparent);
+			background-color: color-mix(in oklch, var(--puck-color-border-muted) 40%, transparent);
 			box-sizing: border-box;
 		}
 
-		[class*="DropZone"]:empty::after {
+		[class*="DropZone--isRootZone"]:not([class*="DropZone--hasChildren"])::after {
 			content: "Drop blocks here";
 			position: absolute;
 			inset: 0;
@@ -125,40 +138,78 @@ export const puckRoot = css`
 			align-items: center;
 			justify-content: center;
 			pointer-events: none;
-			color: var(--puck-color-grey-06);
+			color: var(--puck-color-text-muted);
 			font-size: 0.8125rem;
 		}
 
-		.${ presentationSlot }[class*="DropZone"],
-		.${ presentationSlot } [class*="DropZone"] {
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		.${ presentationSlot }[class*="DropZone--hasChildren"],
-		.${ presentationSlot } [class*="DropZone--hasChildren"] {
-			min-height: 40px;
-		}
-
-		[data-puck-dragging] .${ presentationSlot }[class*="DropZone--hasChildren"],
-		[data-puck-dragging] .${ presentationSlot } [class*="DropZone--hasChildren"] {
-			padding-bottom: 24px;
-		}
-
-		[class*="DropZone--isRootZone"]:empty {
-			border-style: solid;
-			border-color: var(--puck-color-grey-08);
-			background-color: color-mix(in oklch, var(--puck-color-grey-10) 40%, transparent);
-		}
-
 		[data-puck-dragging] [class*="DropZone--isDestination"]:not([class*="DropZone--isRootZone"]) {
-			border-color: var(--puck-color-azure-04);
-			background-color: color-mix(in oklch, var(--puck-color-azure-09) 70%, transparent);
+			border-color: var(--puck-color-selection-border);
+			background-color: var(--puck-color-selection-bg);
+		}
+
+		[data-puck-dragging] .${ layoutChrome.frame } {
+			box-sizing: border-box;
+			padding-block: ${ DRAG_SLOT_GUTTER_PX }px !important;
+			padding-inline: ${ DRAG_SLOT_EDGE_PX }px !important;
+			gap: ${ DRAG_SLOT_GAP_PX }px !important;
+			min-height: ${ DRAG_SLOT_GUTTER_PX * 2 + 48 }px;
+			background-color: color-mix(in oklch, #38bdf8 8%, transparent);
+		}
+
+		[data-puck-dragging] .${ layoutChrome.frame }[class*="DropZone--isEnabled"],
+		[data-puck-dragging] .${ layoutChrome.frame }[class*="DropZone--isDestination"] {
+			background-color: color-mix(in oklch, #38bdf8 18%, transparent);
+		}
+
+		[data-puck-dragging] [class*="DropZone--isRootZone"] {
+			box-sizing: border-box;
+			padding-block: ${ DRAG_SLOT_GUTTER_PX }px;
+			padding-inline: ${ DRAG_SLOT_EDGE_PX }px;
+			gap: ${ DRAG_SLOT_GAP_PX }px;
+		}
+
+		[data-puck-dragging] [class*="DropZone-hitbox"] {
+			bottom: -${ Math.round(DRAG_HITBOX_HEIGHT_PX / 2) }px;
+			height: ${ DRAG_HITBOX_HEIGHT_PX }px;
+			z-index: 4;
 		}
 	}
 
+	& [class*="PuckHeader-inner"] {
+		padding: 4px 8px;
+	}
+
+	& [class*="SidebarSection-content"] {
+		padding: 6px;
+	}
+
+	& [class*="PuckLayout"] {
+		height: 100% !important;
+		max-height: 100%;
+		min-height: 0;
+		overflow: hidden;
+	}
+
 	& [class*="PuckLayout-inner"] {
-		height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
+		height: 100%;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	& [class*="PuckCanvas"] {
+		overflow: auto;
+	}
+
+	& [class*="ActionBar"] {
+		--puck-actionbar-color-text: #ffffff;
+		--puck-actionbar-color-action-disabled: #ffffff;
+		--puck-actionbar-color-action-active: #ffffff;
+		--puck-actionbar-color-separator: rgba(255, 255, 255, 0.4);
+		color: #ffffff;
+	}
+
+	& [class*="ActionBar"] svg {
+		color: inherit;
 	}
 
 	& [data-puck-preview],
@@ -166,23 +217,5 @@ export const puckRoot = css`
 	& [class*="PuckPreview-frame"] {
 		height: 100%;
 		min-height: 100%;
-	}
-
-	& .${ puckSlideRoot } [class*="DropZone--isRootZone"] {
-		height: 100%;
-		min-height: 100%;
-		display: flex;
-		flex-direction: inherit;
-		align-items: stretch;
-	}
-
-	& .${ presentationContainer }[class*="DropZone"],
-	& .${ presentationContainer } [class*="DropZone"] {
-		flex: 1 1 auto;
-		min-height: 0;
-		height: 100%;
-		display: flex;
-		flex-direction: inherit;
-		align-items: stretch;
 	}
 `

@@ -131,18 +131,24 @@ export const bar = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	container-type: inline-size;
+	container-name: allocated-bar;
+	overflow: hidden;
 	transition: height 0.45s ease, background-color 0.6s ease;
 `
 
 export const barValue = css`
 	position: relative;
 	z-index: 1;
-	font-size: clamp(1.15rem, 2.4vw, 2.5rem);
+	max-width: 100%;
+	font-size: clamp(0.5rem, 38cqi, 2.25rem);
 	font-weight: 700;
 	text-align: center;
-	line-height: 1.05;
-	padding: 0.4rem 0.25rem;
-	word-break: break-word;
+	line-height: 1;
+	padding-inline: 0.08em;
+	padding-block: 0.12em;
+	white-space: nowrap;
+	overflow: hidden;
 `
 
 export const labels = css`

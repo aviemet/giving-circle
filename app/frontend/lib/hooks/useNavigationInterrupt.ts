@@ -1,7 +1,7 @@
 import { type VisitOptions } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
 import { useMachine } from "@xstate/react"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 import {
 	navigationInterruptMachine,
@@ -14,26 +14,42 @@ export interface UseNavigationInterruptOptions {
 	onNavigationBlocked?: () => void
 }
 
+function isNavigationInterruptState(state: object | null, historyGuardKey: string) {
+	if(state === null || typeof state !== "object") {
+		return false
+	}
+
+	if(!("navigationInterrupt" in state)) {
+		return false
+	}
+
+	return state.navigationInterrupt === historyGuardKey
+}
+
 export function useNavigationInterrupt({
 	enabled,
 	historyGuardKey,
 	onNavigationBlocked,
 }: UseNavigationInterruptOptions) {
 	const [snapshot, send, actorRef] = useMachine(navigationInterruptMachine)
+	const allowNextNavigationRef = useRef(false)
 
 	const stayOnPage = useCallback(() => {
 		send({ type: "STAY" })
 	}, [send])
 
 	const leaveAfterAction = useCallback(() => {
+		allowNextNavigationRef.current = true
 		send({ type: "PREPARE_LEAVE" })
 	}, [send])
 
 	const visitWithBypass = useCallback((url: string, options?: VisitOptions) => {
+		allowNextNavigationRef.current = true
 		send({ type: "VISIT_WITH_BYPASS", url, options })
 	}, [send])
 
 	const navigateBackWithBypass = useCallback(() => {
+		allowNextNavigationRef.current = true
 		send({ type: "BACK_WITH_BYPASS" })
 	}, [send])
 
@@ -42,12 +58,17 @@ export function useNavigationInterrupt({
 			return
 		}
 
-		window.history.pushState({ navigationInterrupt: historyGuardKey }, "")
+		const guardState = { navigationInterrupt: historyGuardKey }
+
+		if(!isNavigationInterruptState(window.history.state, historyGuardKey)) {
+			window.history.pushState(guardState, "")
+		}
 
 		const removeBeforeListener = router.on("before", (event) => {
 			const { context } = actorRef.getSnapshot()
 
-			if(context.bypass) {
+			if(allowNextNavigationRef.current || context.bypass) {
+				allowNextNavigationRef.current = false
 				send({ type: "CONSUME_BYPASS" })
 				return
 			}
@@ -66,12 +87,16 @@ export function useNavigationInterrupt({
 		const handlePopState = () => {
 			const { context } = actorRef.getSnapshot()
 
-			if(context.bypass) {
+			if(allowNextNavigationRef.current || context.bypass) {
+				allowNextNavigationRef.current = false
 				send({ type: "CONSUME_BYPASS" })
 				return
 			}
 
-			window.history.pushState({ navigationInterrupt: historyGuardKey }, "")
+			if(!isNavigationInterruptState(window.history.state, historyGuardKey)) {
+				window.history.pushState(guardState, "")
+			}
+
 			send({ type: "REQUEST_INTERRUPT", pending: { type: "historyBack" } })
 			onNavigationBlocked?.()
 		}
@@ -98,4 +123,3 @@ export function useNavigationInterrupt({
 		navigateBackWithBypass,
 	}
 }
-

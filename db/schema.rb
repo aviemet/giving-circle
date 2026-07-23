@@ -363,6 +363,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   create_table "themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "circle_id", null: false
     t.datetime "created_at", null: false
+    t.text "description"
+    t.string "heading"
     t.string "name", null: false
     t.datetime "published_at"
     t.string "slug"

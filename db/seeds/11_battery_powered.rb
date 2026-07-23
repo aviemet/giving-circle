@@ -23,37 +23,45 @@ if Rails.env.development?
     if circle.templates.empty?
       template = FactoryBot.create(:template, name: "Allocation Night", circle:)
 
-      slide = FactoryBot.create(:slide, {
-        title: "Introduction",
-        data: {
-          content: [
-            {
-              type: "Heading",
+      [
+        "Introduction",
+        "All Orgs",
+        "Timer",
+        "Finalist Orgs",
+        "Allocation",
+        "Results",
+      ].each_with_index do |title, index|
+        slide = FactoryBot.create(:slide, {
+          title:,
+          data: {
+            content: [
+              {
+                type: "Heading",
+                props: {
+                  title:,
+                  padding: 16,
+                  order: 1,
+                  color: "#FFFFFF",
+                  id: "Heading-#{SecureRandom.uuid}",
+                },
+              },
+            ],
+            root: {
               props: {
-                title: "Introduction",
-                padding: 16,
-                order: 1,
-                color: "#FFFFFF",
-                id: "Heading-#{SecureRandom.uuid}"
+                title:,
+                backgroundColor: "#000000",
               },
             },
-          ],
-          root: {
-            props: {
-              title: "Introduction",
-              backgroundColor:  "#000000",
-            },
+            zones: {},
           },
-          zones: {}
-        }
-      })
+        })
 
-      FactoryBot.create(:slide_parent, {
-        slide: slide,
-        parentable: template,
-        order: 1,
-      })
-
+        FactoryBot.create(:slide_parent, {
+          slide:,
+          parentable: template,
+          order: index + 1,
+        })
+      end
     end
 
     if circle.themes.empty?

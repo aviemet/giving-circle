@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
-import { TextInput } from "@/components/Inputs"
+import { Textarea, TextInput } from "@/components/Inputs"
 import { type HTTPVerb } from "@/lib/http"
 
 type ThemeFormData = {
@@ -27,6 +27,12 @@ export function ThemeForm({ to, method = "post", theme }: ThemeFormProps) {
 			<Grid>
 				<Grid.Col>
 					<TextInput name="theme.name" label={ t("themes.form.name") } />
+				</Grid.Col>
+				<Grid.Col>
+					<TextInput name="theme.heading" label={ t("themes.form.heading") } />
+				</Grid.Col>
+				<Grid.Col>
+					<Textarea name="theme.description" label={ t("themes.form.description") } />
 				</Grid.Col>
 
 				<Grid.Col>

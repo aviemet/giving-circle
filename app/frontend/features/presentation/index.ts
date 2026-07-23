@@ -2,7 +2,16 @@ export {
 	isFullyFunded,
 	fundedPercent,
 	remainingNeed,
-	type AllocatedNeedAmounts,
-	type PresentationValuesAllocatedTotal,
-	type PresentationValuesPayload,
-} from "./values"
+} from "./values/allocatedTotals"
+export {
+	PresentationDataProvider,
+	usePresentationDataContext,
+	type PresentationDataContextValue,
+	type PresentationDataPresentation,
+	type PresentationDataValue,
+} from "./PresentationDataProvider"
+export {
+	useLeverageTotals,
+	leverageFilledPercent,
+	type LeverageTotals,
+} from "./values/leverageTotals"

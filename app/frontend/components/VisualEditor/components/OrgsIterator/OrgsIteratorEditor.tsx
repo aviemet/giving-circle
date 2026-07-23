@@ -1,29 +1,20 @@
+import clsx from "clsx"
+
 import { Box } from "@/components"
 
+import * as editorClasses from "./OrgsIterator.editor.css"
 import { type OrgsIteratorComponentProps } from "./orgsIteratorConfig"
-import { presentationSlot } from "../../Puck.css"
+import * as puckClasses from "../../Puck.css"
 import { slotDropZoneProps } from "../../slotEditor"
 
 export function OrgsIteratorEditor({ content: Content }: OrgsIteratorComponentProps) {
 	return (
-		<Box
-			className={ presentationSlot }
-			style={ { position: "relative", minWidth: "100%", padding: 16 } }
-		>
+		<Box className={ clsx(editorClasses.editor, puckClasses.presentationSlot) }>
 			<Content
-				className={ presentationSlot }
+				className={ clsx(puckClasses.presentationSlot) }
 				{ ...slotDropZoneProps() }
 			/>
-			<Box
-				component="span"
-				style={ {
-					position: "absolute",
-					bottom: 0,
-					left: 0,
-					fontSize: "0.75rem",
-					opacity: 0.7,
-				} }
-			>
+			<Box component="span" className={ clsx(editorClasses.hint) }>
 				Repeats for each organization
 			</Box>
 		</Box>

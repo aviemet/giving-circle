@@ -1,4 +1,4 @@
-import { PresentationDataContextValue } from "@/layouts/Providers/PresentationDataProvider"
+import { type PresentationDataContextValue } from "@/features/presentation"
 
 import { getOrgsFromContext } from "./getOrgsFromContext"
 
@@ -25,6 +25,8 @@ export const dataAccess: DataAccess[] = [
 		name: "Theme",
 		fields: {
 			name: "string",
+			heading: "string",
+			description: "string",
 			status: "string",
 		},
 	},
@@ -94,6 +96,8 @@ interface DataStructure {
 	circle: Schema.CirclesMock | Schema.CirclesPersisted
 	theme: {
 		name: string
+		heading?: string
+		description?: string
 		status: string
 	}
 	presentation: {
@@ -112,7 +116,12 @@ export const buildDataStructure = (dataAccess: DataAccess[], contextData: Presen
 
 	const structure: DataStructure = {
 		circle: contextData.circle,
-		theme: contextData.theme || (mockCircle?.themes?.[0]) || { name: "Sample Theme", status: "active" },
+		theme: contextData.theme || (mockCircle?.themes?.[0]) || {
+			name: "Sample Theme",
+			heading: "Sample Heading",
+			description: "Sample theme description",
+			status: "active",
+		},
 		presentation: {
 			name: contextData.presentation?.name || "Sample Presentation",
 			org: getOrgsFromContext(contextData),

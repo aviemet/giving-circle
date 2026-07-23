@@ -1,14 +1,12 @@
-import { createUsePuck } from "@measured/puck"
 import clsx from "clsx"
 import { useEffect, useRef, type ReactNode } from "react"
 
 import { isSlideRootClickTarget } from "./components/SlideRoot/slideRootSelection"
 import * as classes from "./Puck.css"
-
-const usePuck = createUsePuck()
+import { useEditorPuck } from "./useEditorPuck"
 
 export function PreviewWithPageSelection({ children }: { children: ReactNode }) {
-	const dispatch = usePuck((state) => state.dispatch)
+	const dispatch = useEditorPuck((state) => state.dispatch)
 	const previewRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {

@@ -7,6 +7,10 @@ import { type AdvancedInputProps } from "."
 
 type DateRangeType = "exact" | "before" | "after" | "range"
 
+function isDateRangeType(value: string): value is DateRangeType {
+	return value === "exact" || value === "before" || value === "after" || value === "range"
+}
+
 const DateRangeType = ({
 	advancedSearch,
 	name,
@@ -21,8 +25,10 @@ const DateRangeType = ({
 		{ label: t("common.table.between"), value: "range" },
 	]
 
-	const handleChange = (value: DateRangeType | null) => {
-		if(!value) return
+	const handleChange = (value: string | null) => {
+		if(value === null || !isDateRangeType(value)) {
+			return
+		}
 
 		setInputValue(`${name}[type]`, value)
 	}

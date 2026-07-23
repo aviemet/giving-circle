@@ -1,1 +1,1 @@
-export { type Data as SlideData } from "@measured/puck"
+export type { PuckSlideData as SlideData } from "@/components/VisualEditor/editorPersistence"

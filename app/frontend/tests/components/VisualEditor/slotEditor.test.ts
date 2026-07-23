@@ -1,16 +1,25 @@
 import { describe, expect, test } from "vitest"
 
-import { defaultBackgroundImageValue } from "@/components/VisualEditor/fields/backgroundImage"
+import { defaultBackgroundValue } from "@/components/VisualEditor/fields/backgroundImage"
 import {
 	createStarterSlideData,
 	slotDropZoneProps,
 	withStarterSlideContent,
+	DRAG_HITBOX_HEIGHT_PX,
+	DRAG_SLOT_GAP_PX,
+	DRAG_SLOT_GUTTER_PX,
 	SLOT_MIN_EMPTY_HEIGHT,
 } from "@/components/VisualEditor/slotEditor"
 
 describe("components/VisualEditor/slotEditor", () => {
 	test("slotDropZoneProps sets minEmptyHeight for Puck slots", () => {
 		expect(slotDropZoneProps()).toEqual({ minEmptyHeight: SLOT_MIN_EMPTY_HEIGHT })
+	})
+
+	test("drag drop gutters are large enough for nested container targeting", () => {
+		expect(DRAG_SLOT_GUTTER_PX).toBeGreaterThanOrEqual(32)
+		expect(DRAG_SLOT_GAP_PX).toBeGreaterThanOrEqual(24)
+		expect(DRAG_HITBOX_HEIGHT_PX).toBeGreaterThanOrEqual(32)
 	})
 
 	test("createStarterSlideData includes a container with a heading", () => {
@@ -23,6 +32,7 @@ describe("components/VisualEditor/slotEditor", () => {
 
 		expect(container.props.content).toHaveLength(1)
 		expect(container.props.content[0]?.type).toBe("Heading")
+		expect(container.props.content[0]?.props).toMatchObject({ alignment: "left" })
 	})
 
 	test("withStarterSlideContent leaves non-empty slides unchanged", () => {
@@ -35,13 +45,13 @@ describe("components/VisualEditor/slotEditor", () => {
 					padding: 16,
 					order: 1 as const,
 					color: "#FFFFFF",
+					alignment: "left" as const,
 				},
 			}],
 			root: {
 				props: {
 					title: "Custom",
-					backgroundColor: "#000000",
-					backgroundImage: defaultBackgroundImageValue(),
+					background: defaultBackgroundValue("#000000"),
 				},
 			},
 		}
@@ -55,8 +65,7 @@ describe("components/VisualEditor/slotEditor", () => {
 			root: {
 				props: {
 					title: "My deck slide",
-					backgroundColor: "#000000",
-					backgroundImage: defaultBackgroundImageValue(),
+					background: defaultBackgroundValue("#000000"),
 				},
 			},
 		})

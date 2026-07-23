@@ -1,8 +1,7 @@
-import { type Data } from "@measured/puck"
 import { useCallback, useMemo, useRef, useState } from "react"
 
 import { NavigationInterrupt } from "@/components/Modal"
-import { type PresentationDataPresentation } from "@/layouts/Providers/PresentationDataProvider"
+import { type PresentationDataPresentation } from "@/features/presentation"
 
 import {
 	applySlideTitleToData,
@@ -12,14 +11,15 @@ import {
 	resolveInitialEditorData,
 	shouldPromptForUnsavedEditorNavigation,
 	type EditorSaveStatus,
+	type PuckSlideData,
 } from "./editorPersistence"
 import { VisualEditorWorkspace } from "./VisualEditorWorkspace"
 
 export interface VisualEditorProps {
-	initialData?: Partial<Data>
+	initialData?: PuckSlideData
 	slideTitle: string
 	presentation?: PresentationDataPresentation
-	onSave?: (data: Data) => void | Promise<void>
+	onSave?: (data: PuckSlideData) => void | Promise<void>
 	isSaving?: boolean
 	slideKey: string
 	returnTo?: string
@@ -48,11 +48,11 @@ export function VisualEditorContent({
 		})
 	}, [serverSavedData, slideKey, storageKey])
 
-	const savedDataRef = useRef<Data>(serverSavedData)
-	const latestDataRef = useRef<Data>(initialLoad.data as Data)
+	const savedDataRef = useRef<PuckSlideData>(serverSavedData)
+	const latestDataRef = useRef<PuckSlideData>(initialLoad.data)
 	const [saveStatus, setSaveStatus] = useState<EditorSaveStatus>(initialLoad.saveStatus)
 
-	const persistSave = useCallback(async (data: Data): Promise<boolean> => {
+	const persistSave = useCallback(async (data: PuckSlideData): Promise<boolean> => {
 		if(!onSave) return false
 
 		try {
@@ -73,7 +73,10 @@ export function VisualEditorContent({
 		<NavigationInterrupt
 			enabled={ navigationEnabled }
 			historyGuardKey={ slideKey }
-			onDiscard={ () => clearEditorDraft(slideKey) }
+			onDiscard={ () => {
+				clearEditorDraft(slideKey)
+				setSaveStatus("saved")
+			} }
 			onSaveAndLeave={ () => persistSave(latestDataRef.current) }
 			message="You have changes that are not saved to the server. Stay on this page, discard them, or save before leaving."
 		>
