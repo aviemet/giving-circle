@@ -39,7 +39,8 @@ class Presentations::ActiveController < ApplicationController
     authorize presentation
 
     render inertia: "Presentations/Active/Index", props: {
-      presentation: presentation.render(:show)
+      presentation: -> { presentation.render(:show) },
+      interactions: -> { presentation.interactions.order(:created_at).render(:controls) },
     }
   end
 
@@ -54,7 +55,19 @@ class Presentations::ActiveController < ApplicationController
   def members
     authorize presentation
 
-    render inertia: "Presentations/Active/Members", props: {}
+    finalist_interaction = PresentationValues::Finalists.finalist_source_interaction(presentation)
+    finalist_interaction&.sync_interaction_memberships!
+
+    presentation_memberships = presentation.presentations_memberships
+      .includes(membership: { person: :user })
+      .joins(:membership)
+      .order("memberships.name ASC")
+
+    render inertia: "Presentations/Active/Members", props: {
+      presentation: -> { presentation.render(:persisted) },
+      members: -> { Presentations::Active::MemberSerializer.render(presentation_memberships) },
+      finalist_interaction_slug: -> { finalist_interaction&.slug },
+    }
   end
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/messaging (theme_presentation_messaging)

@@ -80,6 +80,29 @@ class Presentation < ApplicationRecord
     self.update(active: true)
   end
 
+  def accepting_interaction
+    interactions.accepting_responses.first
+  end
+
+  def membership_for_user(user)
+    return if user.blank? || user.person_id.blank?
+
+    memberships
+      .left_outer_joins(:memberships_people)
+      .where(
+        "memberships.person_id = :person_id OR memberships_people.person_id = :person_id",
+        person_id: user.person_id,
+      )
+      .distinct
+      .first
+  end
+
+  def available_funds_for(membership)
+    return if membership.blank?
+
+    presentations_memberships.find_by(membership_id: membership.id)&.funds
+  end
+
   def copy_template_slides
     return unless template
 

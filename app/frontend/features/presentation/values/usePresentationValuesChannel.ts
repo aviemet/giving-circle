@@ -23,9 +23,16 @@ interface PresentationValuesRankTotal {
 
 export interface PresentationValuesPayload {
 	allocated_totals: PresentationValuesAllocatedTotal[]
+	org_vote_totals: PresentationValuesOrgVoteTotal[]
+	finalist_org_ids: string[]
 	money_totals: PresentationValuesMoneyTotal[]
 	vote_counts: PresentationValuesVoteCount[]
 	rank_totals: PresentationValuesRankTotal[]
+}
+
+interface PresentationValuesOrgVoteTotal {
+	org_id: string
+	votes: number
 }
 
 interface PresentationValuesMessage {

@@ -3,6 +3,7 @@ module Presentation::Interaction::Registry
     text
     number
     money
+    boolean
     single_select
     multi_select
     org_reference
@@ -16,6 +17,7 @@ module Presentation::Interaction::Registry
 
   METRICS = %w[
     allocated_totals
+    org_vote_totals
     vote_counts
     money_totals
     rank_totals

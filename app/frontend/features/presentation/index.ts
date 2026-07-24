@@ -4,6 +4,10 @@ export {
 	remainingNeed,
 } from "./values/allocatedTotals"
 export {
+	isFinalistOrgId,
+	useFinalistOrgIds,
+} from "./values/finalists"
+export {
 	PresentationDataProvider,
 	usePresentationDataContext,
 	type PresentationDataContextValue,
@@ -15,3 +19,9 @@ export {
 	leverageFilledPercent,
 	type LeverageTotals,
 } from "./values/leverageTotals"
+export {
+	IdleState,
+	MemberInteractForm,
+	type ActiveInteractionProps,
+	type MemberInteractFormProps,
+} from "./interact"

@@ -1,7 +1,6 @@
-import { router } from "@inertiajs/react"
 import { useTranslation } from "react-i18next"
 
-import { Badge, Button, Group, Menu, Page, Section, Stack, Text } from "@/components"
+import { Badge, Group, Menu, Page, Section, Stack, Text } from "@/components"
 import { interactionConfigFrom } from "@/domains/presentation/interactions/Form/interactionConfig"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
@@ -63,38 +62,6 @@ const ShowPresentationInteraction = ({ presentation_interaction }: ShowPresentat
 								</Menu.Link>
 							</Menu.Dropdown>
 						</Menu>
-					</Group>
-					<Group>
-						{ acceptingResponses
-							? (
-								<Button
-									color="red"
-									onClick={ () => {
-										router.post(Routes.closeResponsesThemePresentationInteraction(
-											params.circle_slug,
-											params.theme_slug,
-											params.presentation_slug,
-											presentation_interaction.slug,
-										))
-									} }
-								>
-									{ t("presentations.interactions.show.close_responses") }
-								</Button>
-							)
-							: (
-								<Button
-									onClick={ () => {
-										router.post(Routes.openResponsesThemePresentationInteraction(
-											params.circle_slug,
-											params.theme_slug,
-											params.presentation_slug,
-											presentation_interaction.slug,
-										))
-									} }
-								>
-									{ t("presentations.interactions.show.open_responses") }
-								</Button>
-							) }
 					</Group>
 					<Text size="sm" c="dimmed">
 						{ t("presentations.interactions.show.data_points_configured", { count: fieldCount }) }

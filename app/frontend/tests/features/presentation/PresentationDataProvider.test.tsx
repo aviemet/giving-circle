@@ -44,7 +44,7 @@ describe("features/presentation/PresentationDataProvider", () => {
 		const {
 			PresentationDataProvider,
 			usePresentationDataContext,
-		} = await import("@/features/presentation")
+		} = await import("@/features/presentation/PresentationDataProvider")
 
 		const wrapper = ({ children }: { children: ReactNode }) => (
 			<PresentationDataProvider value={ {
@@ -88,7 +88,7 @@ describe("features/presentation/PresentationDataProvider", () => {
 		const {
 			PresentationDataProvider,
 			usePresentationDataContext,
-		} = await import("@/features/presentation")
+		} = await import("@/features/presentation/PresentationDataProvider")
 
 		const wrapper = ({ children }: { children: ReactNode }) => (
 			<PresentationDataProvider value={ {

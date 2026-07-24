@@ -68,8 +68,10 @@ Rails.application.routes.draw do
 
   get "/preview/slide", to: "preview#slide", as: :preview_slide
 
-  # Public presentation route (shorter URL)
+  # Public presentation routes (shorter URL)
   get "/:circle_slug/p/:presentation_slug", to: "presentations/active#public_show", as: :circle_public_presentation
+  get "/:circle_slug/p/:presentation_slug/interact", to: "presentations/interact#show", as: :circle_presentation_interact
+  patch "/:circle_slug/p/:presentation_slug/interact", to: "presentations/interact#upsert"
 
   # :circle_slug being a param in the first position needs to come after any other first position routing names
   resources :circles, param: :circle_slug, only: [:new, :create, :index]

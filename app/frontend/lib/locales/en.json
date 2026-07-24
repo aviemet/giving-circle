@@ -638,6 +638,28 @@
           "update": "Update presentation action"
         }
       },
+      "active": {
+        "controls": {
+          "interactions": "Interactions",
+          "no_interactions": "No interactions configured for this presentation.",
+          "slides": "Slides"
+        },
+        "members": {
+          "actions": {
+            "interactions": "Interactions"
+          },
+          "columns": {
+            "actions": "Actions",
+            "available": "Available",
+            "email": "Email",
+            "funds": "Funds",
+            "name": "Name",
+            "number": "Number",
+            "votes": "Votes"
+          },
+          "title": "Members"
+        }
+      },
       "alerts": {
         "no_source_template": "This presentation is not linked to a Presentation Template."
       },
@@ -692,6 +714,42 @@
         "newPresentation": "New Presentation",
         "title": "Presentations"
       },
+      "interact": {
+        "form": {
+          "closed": "This interaction is no longer accepting responses.",
+          "finalize": "Finalize Vote",
+          "funds_left": "Funds left to allocate: %{amount}",
+          "missing_field": "This interaction is missing its vote field configuration.",
+          "partial_submit": "Submit without allocating all funds",
+          "partial_votes_submit": "Submit without using all votes",
+          "submit": "Submit",
+          "toggle_keyboard": "Enter amount with keyboard",
+          "toggle_slider": "Adjust amount with slider",
+          "update": "Update vote",
+          "votes_left": "Votes left: %{votes}"
+        },
+        "idle": {
+          "body": "An interaction will appear here when the host opens one.",
+          "title": "Waiting for the next activity"
+        },
+        "notices": {
+          "not_accepting": "No interaction is currently accepting responses.",
+          "saved": "Your response was saved."
+        },
+        "pledges": {
+          "amount_placeholder": "Pledge Amount",
+          "anonymous": "Anonymous",
+          "clear": "Clear",
+          "finalists": "Finalists",
+          "multi_org": "Select multiple organizations",
+          "runners_up": "Runners Up",
+          "submit": "Submit Pledge",
+          "subtitle": "Pledges will be matched from remaining leverage. Help organizations reach full funding.",
+          "thanks_body": "Your pledge was recorded. Returning to the pledge form.",
+          "thanks_title": "Thank you!",
+          "title": "If you feel like giving more"
+        }
+      },
       "interaction_responses": {
         "edit": {
           "title": "Edit Response"
@@ -733,12 +791,16 @@
             "at_most": "%{prefix} must be at most %{max}",
             "currency_string": "%{prefix}.currency must be a string",
             "entry_amount_cents_integer": "%{prefix}[%{index}].amount_cents must be an integer",
+            "exceeds_available_funds": "%{prefix} total exceeds available funds (%{available_cents} cents)",
+            "exceeds_available_votes": "%{prefix} total exceeds available votes (%{available_votes})",
+            "exceeds_org_ask": "%{prefix}[%{index}] would exceed the organization ask",
             "fields_must_be_array": "Interaction config fields must be an array",
             "group_must_be_object": "%{prefix}[%{group_index}] must be an object",
             "invalid_choices": "%{prefix} contains invalid choices",
             "max_entries": "%{prefix} must have at most %{max} entries",
             "min_entries": "%{prefix} must have at least %{min} entries",
             "must_be_array": "%{prefix} must be an array",
+            "must_be_boolean": "%{prefix} must be a boolean",
             "must_be_choice": "%{prefix} must be one of the configured choices",
             "must_be_money": "%{prefix} must be a money object",
             "must_be_number": "%{prefix} must be a number",
@@ -747,6 +809,8 @@
             "must_be_string": "%{prefix} must be a string",
             "must_be_string_array": "%{prefix} must be an array of strings",
             "org_id_required": "%{prefix}[%{index}].org_id is required",
+            "org_not_allowed": "%{prefix}[%{index}] is not an allowed organization",
+            "pledge_amount_required": "%{prefix} requires a positive pledge amount",
             "rank_integer": "%{prefix}[%{index}].rank must be an integer",
             "required": "%{prefix} is required",
             "unknown_field": "Unknown field '%{key}' in response data",
@@ -789,12 +853,19 @@
             "source_field": "Source field"
           },
           "outputs": "Outputs",
+          "settings": {
+            "allow_non_finalists": "Allow pledges to non-finalists",
+            "allow_over_ask": "Allow pledges over organization ask",
+            "default_votes": "Default votes per member",
+            "finalist_count": "Number of finalists"
+          },
           "slide": "Slide",
           "template": "Template",
           "template_blank": "Blank",
           "trigger_manual": "Manual",
           "trigger_slide": "Slide",
           "trigger_type": "Trigger type",
+          "ui_template": "Member UI",
           "update": "Update Interaction"
         },
         "index": {

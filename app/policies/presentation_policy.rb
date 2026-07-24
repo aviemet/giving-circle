@@ -18,6 +18,14 @@ class PresentationPolicy < ApplicationPolicy
     true
   end
 
+  def members?
+    true
+  end
+
+  def messaging?
+    true
+  end
+
   def settings?
     update?
   end

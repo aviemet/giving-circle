@@ -15,6 +15,10 @@ class Presentation::Interactions::FormDataSerializer < Presentation::Interaction
     Presentation::Interaction::Registry::REDUCERS
   end
 
+  has_many :interaction_ui_templates, serializer: InteractionUiTemplates::PersistedSerializer do
+    InteractionUiTemplate.order(:name)
+  end
+
   has_many :interaction_config_templates, serializer: InteractionConfigTemplates::PersistedSerializer do
     circle = @object.presentation&.circle
     circle ? circle.interaction_config_templates.order(:name) : InteractionConfigTemplate.none

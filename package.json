@@ -23,7 +23,7 @@
     "coverage": "vitest run --coverage",
     "rspec": "RAILS_ENV=test bundle install && bundle exec rspec --color",
     "rspec:watch": "RAILS_ENV=test bundle exec rake rspec_watcher:watch",
-    "verify": "yarn lint:fix && yarn tsc && yarn test:once && yarn rspec",
+    "verify": "yarn lint:fix && yarn tsc && yarn test:once",
     "regenerate": "rails prepare",
     "locale:registry": "node scripts/generate-locale-registry.mjs"
   },

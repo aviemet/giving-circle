@@ -41,6 +41,14 @@ class Presentation::InteractionResponse::DataValidator
     @errors.each { |message| @response.errors.add(:response_data, message) }
   end
 
+  def ui_template_slug
+    @interaction.interaction_ui_template&.slug.to_s
+  end
+
+  def settings
+    (@interaction.config.with_indifferent_access[:settings] || {}).with_indifferent_access
+  end
+
   def validate_field_value(field, value, prefix:, required: true)
     field = field.with_indifferent_access
     type = field[:type]
@@ -60,6 +68,8 @@ class Presentation::InteractionResponse::DataValidator
       validate_number(value, prefix, options)
     when "money"
       validate_money(value, prefix)
+    when "boolean"
+      validate_boolean(value, prefix)
     when "single_select"
       validate_single_select(value, prefix, options)
     when "multi_select"
@@ -85,6 +95,13 @@ class Presentation::InteractionResponse::DataValidator
     unless value.is_a?(String)
       @errors << I18n.t("presentations.interaction_responses.validations.response_data.must_be_string", prefix: prefix)
     end
+  end
+
+  def validate_boolean(value, prefix)
+    return if [true, false].include?(value)
+    return if ["true", "false"].include?(value)
+
+    @errors << I18n.t("presentations.interaction_responses.validations.response_data.must_be_boolean", prefix: prefix)
   end
 
   def validate_number(value, prefix, options)
@@ -177,13 +194,130 @@ class Presentation::InteractionResponse::DataValidator
           index: index,
         )
       end
-      unless entry[:amount_cents].is_a?(Integer) || entry[:amount_cents].to_s.match?(/\A-?\d+\z/)
-        @errors << I18n.t(
-          "presentations.interaction_responses.validations.response_data.entry_amount_cents_integer",
-          prefix: prefix,
-          index: index,
-        )
-      end
+      next if entry[:amount_cents].is_a?(Integer) || entry[:amount_cents].to_s.match?(/\A-?\d+\z/)
+
+      @errors << I18n.t(
+        "presentations.interaction_responses.validations.response_data.entry_amount_cents_integer",
+        prefix: prefix,
+        index: index,
+      )
+    end
+
+    case ui_template_slug
+    when "finalist_vote"
+      validate_org_vote_map_budget(value, prefix)
+    when "pledges"
+      validate_pledges_map(value, prefix)
+    else
+      validate_org_money_map_budget(value, prefix)
+    end
+  end
+
+  def validate_org_money_map_budget(value, prefix)
+    membership = @response.membership
+    presentation = @interaction&.presentation
+    return if membership.blank? || presentation.blank?
+
+    available = presentation.available_funds_for(membership)
+    return if available.nil?
+
+    total_cents = sum_amount_cents(value)
+    return if total_cents <= available.cents
+
+    @errors << I18n.t(
+      "presentations.interaction_responses.validations.response_data.exceeds_available_funds",
+      prefix: prefix,
+      available_cents: available.cents,
+    )
+  end
+
+  def validate_org_vote_map_budget(value, prefix)
+    membership = @response.membership
+    return if membership.blank? || @interaction.blank?
+
+    available = @interaction.available_votes_for(membership)
+    available_votes = available.nil? ? 0 : available.to_i
+    total_votes = sum_amount_cents(value)
+    return if total_votes <= available_votes
+
+    @errors << I18n.t(
+      "presentations.interaction_responses.validations.response_data.exceeds_available_votes",
+      prefix: prefix,
+      available_votes: available_votes,
+    )
+  end
+
+  def validate_pledges_map(value, prefix)
+    presentation = @interaction&.presentation
+    return if presentation.blank?
+
+    if value.empty? || sum_amount_cents(value) <= 0
+      @errors << I18n.t("presentations.interaction_responses.validations.response_data.pledge_amount_required", prefix: prefix)
+      return
+    end
+
+    allowed_org_ids = allowed_pledge_org_ids(presentation)
+    value.each_with_index do |entry, index|
+      next unless entry.is_a?(Hash)
+
+      org_id = entry.with_indifferent_access[:org_id]
+      next if org_id.blank?
+      next if allowed_org_ids.include?(org_id)
+
+      @errors << I18n.t(
+        "presentations.interaction_responses.validations.response_data.org_not_allowed",
+        prefix: prefix,
+        index: index,
+      )
+    end
+
+    return if settings[:allow_over_ask] == true
+
+    allocated_by_org = current_allocated_cents_by_org(presentation)
+    ask_by_org = presentation.orgs.index_by(&:id).transform_values { |org| org.ask_cents.to_i }
+
+    value.each_with_index do |entry, index|
+      next unless entry.is_a?(Hash)
+
+      entry = entry.with_indifferent_access
+      org_id = entry[:org_id]
+      amount_cents = entry[:amount_cents].to_i
+      next if org_id.blank?
+
+      ask_cents = ask_by_org[org_id]
+      next if ask_cents.nil? || ask_cents <= 0
+
+      projected = allocated_by_org.fetch(org_id, 0) + amount_cents
+      next if projected <= ask_cents
+
+      @errors << I18n.t(
+        "presentations.interaction_responses.validations.response_data.exceeds_org_ask",
+        prefix: prefix,
+        index: index,
+      )
+    end
+  end
+
+  def allowed_pledge_org_ids(presentation)
+    snapshot = PresentationValues::Aggregator.call(presentation)
+    finalist_ids = snapshot[:finalist_org_ids] || []
+    return presentation.orgs.map(&:id) if settings[:allow_non_finalists] == true
+
+    finalist_ids
+  end
+
+  def current_allocated_cents_by_org(presentation)
+    snapshot = PresentationValues::Aggregator.call(presentation)
+    (snapshot[:allocated_totals] || []).each_with_object({}) do |entry, totals|
+      totals[entry[:org_id]] = entry[:allocated_cents].to_i
+    end
+  end
+
+  def sum_amount_cents(value)
+    value.sum do |entry|
+      next 0 unless entry.is_a?(Hash)
+
+      entry.with_indifferent_access[:amount_cents].to_i
     end
   end
 
@@ -211,13 +345,13 @@ class Presentation::InteractionResponse::DataValidator
           index: index,
         )
       end
-      unless entry[:rank].is_a?(Integer) || entry[:rank].to_s.match?(/\A\d+\z/)
-        @errors << I18n.t(
-          "presentations.interaction_responses.validations.response_data.rank_integer",
-          prefix: prefix,
-          index: index,
-        )
-      end
+      next if entry[:rank].is_a?(Integer) || entry[:rank].to_s.match?(/\A\d+\z/)
+
+      @errors << I18n.t(
+        "presentations.interaction_responses.validations.response_data.rank_integer",
+        prefix: prefix,
+        index: index,
+      )
     end
   end
 

@@ -60,4 +60,32 @@ RSpec.describe PresentationValues::Aggregator do
       },
     )
   end
+
+  it "includes org_vote_totals and finalist_org_ids for finalist vote responses" do
+    finalist = create(
+      :presentation_interaction,
+      presentation: presentation,
+      interaction_ui_template: create(:interaction_ui_template, :finalist_vote),
+      config: InteractionConfigFixtures::FINALIST_VOTE,
+    )
+    finalist.sync_interaction_memberships!
+    create(
+      :presentation_interaction_response,
+      presentation_interaction: finalist,
+      membership: membership,
+      response_data: {
+        votes: [
+          { org_id: org.id, amount_cents: 4 },
+        ],
+      },
+    )
+
+    values = described_class.call(presentation.reload)
+
+    expect(values[:org_vote_totals]).to contain_exactly(
+      { org_id: org.id, votes: 4 },
+    )
+    expect(values[:finalist_org_ids]).to eq([org.id])
+    expect(values[:allocated_totals]).to eq([])
+  end
 end

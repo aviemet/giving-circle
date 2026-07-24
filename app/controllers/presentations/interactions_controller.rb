@@ -13,6 +13,7 @@ class Presentations::InteractionsController < ApplicationController
     :results,
     :trigger_type,
     :accepting_responses,
+    :interaction_ui_template_id,
     { config: {} },
     { trigger_conditions: [:slide_slug] },
   ]

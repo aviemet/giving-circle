@@ -176,6 +176,21 @@ export const urlParams = {
       "slug"
     ]
   },
+  "apiCirclePresentationInteractionMembership": {
+    "params": [
+      "circle_slug",
+      "presentation_slug",
+      "interaction_slug",
+      "id"
+    ]
+  },
+  "apiCirclePresentationInteraction": {
+    "params": [
+      "circle_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
   "syncSlidesApiCirclePresentation": {
     "params": [
       "circle_slug",
@@ -219,6 +234,12 @@ export const urlParams = {
     "params": []
   },
   "circlePublicPresentation": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "circlePresentationInteract": {
     "params": [
       "circle_slug",
       "presentation_slug"
