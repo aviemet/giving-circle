@@ -14,11 +14,11 @@ interface ShowTemplateProps {
 	template: Schema.TemplatesShow
 }
 
-// @path: /:circle_slug/templates/:slug
-// @route: circleTemplate
+// @path: /settings/:circle_slug/templates/:slug
+// @route: settingsTemplate
 const ShowTemplate = ({ template }: ShowTemplateProps) => {
 	const { t } = useTranslation()
-	const { params, active_circle } = usePageProps<"circleTemplate">()
+	const { params, active_circle } = usePageProps<"settingsTemplate">()
 
 	const addSlideMutation = useCreateTemplateSlide({
 		params: { circleSlug: params.circle_slug, templateSlug: template.slug },
@@ -66,7 +66,7 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editCircleTemplate(template.circle.slug, template.slug) }>
+							<Menu.Link href={ Routes.editSettingsTemplate(template.circle.slug, template.slug) }>
 								{ t("templates.show.settings") }
 							</Menu.Link>
 						</Menu.Dropdown>
@@ -76,14 +76,14 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 			breadcrumbs={ [
 				{ title: t("templates.show.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: t("templates.show.breadcrumbs.templates"), href: Routes.circleTemplates(params.circle_slug) },
+				{ title: t("templates.show.breadcrumbs.templates"), href: Routes.settingsTemplates(params.circle_slug) },
 				{ title, href: window.location.href },
 			] }
 		>
 			<Section>
 				<Stack gap="md">
 					<Group>
-						<ButtonLink href={ Routes.editCircleTemplate(template.circle.slug, template.slug) }>
+						<ButtonLink href={ Routes.editSettingsTemplate(template.circle.slug, template.slug) }>
 							{ t("templates.show.settings") }
 						</ButtonLink>
 					</Group>
@@ -98,7 +98,7 @@ const ShowTemplate = ({ template }: ShowTemplateProps) => {
 									<SlideCard
 										key={ slide.id }
 										slide={ slide }
-										editHref={ Routes.circleTemplatesEditSlide(
+										editHref={ Routes.settingsTemplatesEditSlide(
 											params.circle_slug,
 											template.slug,
 											slide.slug,

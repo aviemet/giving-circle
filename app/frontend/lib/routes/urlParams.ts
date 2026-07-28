@@ -103,6 +103,63 @@ export const urlParams = {
       "id"
     ]
   },
+  "settingsTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newSettingsTemplate": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editSettingsTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "settingsTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "settingsInteractionTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newSettingsInteractionTemplate": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editSettingsInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "settingsInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "settingsTemplatesEditSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug",
+      "slug"
+    ]
+  },
+  "settingsTemplatesCreateSlide": {
+    "params": [
+      "circle_slug",
+      "template_slug"
+    ]
+  },
   "apiUsers": {
     "params": []
   },
@@ -306,61 +363,14 @@ export const urlParams = {
       "slug"
     ]
   },
-  "circleTemplates": {
+  "templatesCircle": {
     "params": [
       "circle_slug"
     ]
   },
-  "newCircleTemplate": {
+  "interactionTemplatesCircle": {
     "params": [
       "circle_slug"
-    ]
-  },
-  "editCircleTemplate": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleTemplate": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleInteractionTemplates": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "newCircleInteractionTemplate": {
-    "params": [
-      "circle_slug"
-    ]
-  },
-  "editCircleInteractionTemplate": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleInteractionTemplate": {
-    "params": [
-      "circle_slug",
-      "slug"
-    ]
-  },
-  "circleTemplatesEditSlide": {
-    "params": [
-      "circle_slug",
-      "template_slug",
-      "slug"
-    ]
-  },
-  "circleTemplatesCreateSlide": {
-    "params": [
-      "circle_slug",
-      "template_slug"
     ]
   },
   "circleThemes": {

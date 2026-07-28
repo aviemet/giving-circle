@@ -11,7 +11,7 @@ RSpec.describe "/templates", type: :request do
       slide = create(:slide, title: "Intro")
       template.slides << slide
 
-      get circle_template_url(circle, template)
+      get settings_template_url(circle, template)
 
       expect(response).to be_successful
     end
@@ -27,9 +27,22 @@ RSpec.describe "/templates", type: :request do
       create(:themes_org, theme:, org:)
       create(:template, circle:)
 
-      get circle_templates_url(circle)
+      get settings_templates_url(circle)
 
       expect(response).to be_successful
+    end
+  end
+
+  describe "GET old circle templates path" do
+    login_super_admin
+
+    it "redirects to settings templates" do
+      circle = @admin.circles.first
+
+      get "/#{circle.slug}/templates"
+
+      expect(response).to redirect_to("/settings/#{circle.slug}/templates")
+      expect(response).to have_http_status(:moved_permanently)
     end
   end
 end

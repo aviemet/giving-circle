@@ -8,7 +8,7 @@ RSpec.describe "InteractionConfigTemplates", type: :request do
 
   describe "GET index" do
     it "is successful" do
-      get circle_interaction_templates_path(circle)
+      get settings_interaction_templates_path(circle)
 
       expect(response).to be_successful
       expect(inertia).to render_component("InteractionConfigTemplates/Index")
@@ -18,7 +18,7 @@ RSpec.describe "InteractionConfigTemplates", type: :request do
   describe "POST create" do
     it "creates a template" do
       expect {
-        post circle_interaction_templates_path(circle), params: {
+        post settings_interaction_templates_path(circle), params: {
           interaction_config_template: {
             name: "Allocation round",
             config: InteractionConfigFixtures::ALLOCATION_ROUND,
@@ -26,7 +26,7 @@ RSpec.describe "InteractionConfigTemplates", type: :request do
         }
       }.to change(InteractionConfigTemplate, :count).by(1)
 
-      expect(response).to redirect_to(edit_circle_interaction_template_path(
+      expect(response).to redirect_to(edit_settings_interaction_template_path(
         circle,
         InteractionConfigTemplate.last,
       ))
@@ -34,7 +34,7 @@ RSpec.describe "InteractionConfigTemplates", type: :request do
 
     it "redirects back with validation errors" do
       expect {
-        post circle_interaction_templates_path(circle), params: {
+        post settings_interaction_templates_path(circle), params: {
           interaction_config_template: {
             name: "",
             config: InteractionConfigFixtures::ALLOCATION_ROUND,
@@ -42,7 +42,7 @@ RSpec.describe "InteractionConfigTemplates", type: :request do
         }
       }.not_to change(InteractionConfigTemplate, :count)
 
-      expect(response).to redirect_to(new_circle_interaction_template_path(circle))
+      expect(response).to redirect_to(new_settings_interaction_template_path(circle))
     end
   end
 end

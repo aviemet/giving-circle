@@ -3,27 +3,25 @@ import { css } from "@linaria/core"
 import { vars } from "@/lib/theme"
 
 export const root = css`
-	display: flex;
-	flex-direction: column;
 	min-height: 100dvh;
 	background-color: ${ vars.colors.dark[9] };
 	color: ${ vars.colors.white };
 `
 
-export const header = css`
+export const titleSection = css`
 	padding: ${ vars.spacing.lg } ${ vars.spacing.md } ${ vars.spacing.md };
 	text-align: center;
 `
 
 export const title = css`
-	margin: 0 0 ${ vars.spacing.sm };
+	margin: 0;
 	font-size: 1.75rem;
 	font-weight: 700;
 	line-height: 1.2;
 `
 
 export const subtitle = css`
-	margin: 0 auto ${ vars.spacing.md };
+	margin-inline: auto;
 	max-width: 28rem;
 	font-size: ${ vars.fontSizes.sm };
 	line-height: 1.45;
@@ -31,28 +29,20 @@ export const subtitle = css`
 `
 
 export const toolbar = css`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: ${ vars.spacing.md };
 	flex-wrap: wrap;
 `
 
 export const clear = css`
-	padding: ${ vars.spacing.xs } ${ vars.spacing.sm };
 	border: 1px solid ${ vars.colors.green[6] };
-	border-radius: ${ vars.radius.sm };
 	background: ${ vars.colors.green[7] };
 	color: ${ vars.colors.white };
 	font-size: ${ vars.fontSizes.xs };
 	font-weight: 700;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
-	cursor: pointer;
 
 	&:disabled {
 		opacity: 0.5;
-		cursor: not-allowed;
 	}
 `
 
@@ -61,7 +51,7 @@ export const section = css`
 `
 
 export const sectionTitle = css`
-	margin: 0 0 ${ vars.spacing.sm };
+	margin: 0;
 	font-size: ${ vars.fontSizes.sm };
 	font-weight: 700;
 	letter-spacing: 0.08em;
@@ -69,12 +59,10 @@ export const sectionTitle = css`
 	text-align: center;
 `
 
-export const grid = css`
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: ${ vars.spacing.sm };
+export const orgs = css`
 	max-width: 36rem;
 	margin-inline: auto;
+	width: 100%;
 
 	& > *:nth-child(odd):last-child {
 		grid-column: 1 / -1;
@@ -83,13 +71,10 @@ export const grid = css`
 	}
 `
 
-export const footer = css`
+export const actions = css`
 	position: sticky;
 	bottom: 0;
 	z-index: 2;
-	display: flex;
-	flex-direction: column;
-	gap: ${ vars.spacing.sm };
 	padding: ${ vars.spacing.md };
 	padding-bottom: calc(${ vars.spacing.md } + env(safe-area-inset-bottom, 0px));
 	background-color: ${ vars.colors.dark[9] };
@@ -101,7 +86,7 @@ export const amountInput = css`
 	width: 100%;
 	margin-inline: auto;
 
-	:global(.mantine-NumberInput-input) {
+	& .mantine-NumberInput-input {
 		background-color: ${ vars.colors.white };
 		color: ${ vars.colors.dark[9] };
 		min-height: 3rem;
@@ -120,18 +105,14 @@ export const submit = css`
 `
 
 export const interactionName = css`
-	margin: 0;
 	text-align: center;
 	font-size: ${ vars.fontSizes.xs };
 	color: ${ vars.colors.dark[2] };
 `
 
 export const thanks = css`
-	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: ${ vars.spacing.md };
 	min-height: 100dvh;
 	padding: ${ vars.spacing.xl };
 	text-align: center;

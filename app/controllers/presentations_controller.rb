@@ -117,10 +117,10 @@ class PresentationsController < ApplicationController
       end
 
       Templates::CopyFromPresentation.call(presentation:, template: source_template)
-      redirect_to circle_template_path(params[:circle_slug], source_template), notice: t("presentations.notices.template_updated")
+      redirect_to settings_template_path(params[:circle_slug], source_template), notice: t("presentations.notices.template_updated")
     else
       template = Templates::CopyFromPresentation.call(presentation:, name: params[:name])
-      redirect_to circle_template_path(params[:circle_slug], template), notice: t("presentations.notices.template_created")
+      redirect_to settings_template_path(params[:circle_slug], template), notice: t("presentations.notices.template_created")
     end
   end
 end

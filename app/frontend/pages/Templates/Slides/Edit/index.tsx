@@ -13,14 +13,14 @@ interface EditSlidesProps {
 	slide: Schema.SlidesFormData
 }
 
-// @path: /:circle_slug/templates/:template_slug/slides/:slug/edit
-// @route: circleTemplatesEditSlide
+// @path: /settings/:circle_slug/templates/:template_slug/slides/:slug/edit
+// @route: settingsTemplatesEditSlide
 const EditSlides = ({ template, slide }: EditSlidesProps) => {
-	const { params } = usePageProps<"circleTemplatesEditSlide">()
+	const { params } = usePageProps<"settingsTemplatesEditSlide">()
 	const toggleSidebarOpen = useLayoutStore((state) => state.toggleSidebarOpen)
 	const [slideTitle, setSlideTitle] = useState(slide?.title ?? slide?.slug ?? "")
 
-	const returnTo = Routes.circleTemplate(params.circle_slug, params.template_slug)
+	const returnTo = Routes.settingsTemplate(params.circle_slug, params.template_slug)
 
 	const updateSlideMutation = useUpdateTemplateSlide({
 		params: { circleSlug: params.circle_slug, templateSlug: params.template_slug, slideSlug: params.slug },

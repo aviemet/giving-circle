@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event"
 import React, { type ReactNode } from "react"
 import { describe, expect, test, vi } from "vitest"
 
-import { PledgesForm } from "@/features/presentation/interact/pledges/PledgesForm"
+import { PledgesForm } from "@/features/presentation/interactions/pledges/PledgesForm"
 import {
 	createCirclePersisted,
 	createPresentationOrgPersisted,
@@ -44,7 +44,7 @@ vi.mock("@/features/presentation/PresentationDataProvider", () => {
 	}
 })
 
-describe("features/presentation/interact/pledges/PledgesForm", () => {
+describe("features/presentation/interactions/pledges/PledgesForm", () => {
 	const circle = createCirclePersisted({ id: "circle-1", slug: "circle-1" })
 	const presentation = createPresentationPresentation({
 		id: "presentation-1",
@@ -64,11 +64,27 @@ describe("features/presentation/interact/pledges/PledgesForm", () => {
 				presentationSlug="presentation-1"
 				circle={ circle }
 				presentation={ presentation }
-				interactionName="Pledges"
-				context={ {
-					presentation_orgs: orgs,
-					finalist_org_ids: ["org-1", "org-2"],
-					settings: {},
+				availableFunds={ null }
+				availableVotes={ null }
+				activeInteraction={ {
+					id: "interaction-pledges",
+					name: "Pledges",
+					slug: "pledges",
+					accepting_responses: true,
+					interaction_ui_template: {
+						id: "ui-pledges",
+						slug: "pledges",
+						name: "Pledges",
+					},
+					config: {
+						fields: [],
+						outputs: [],
+					},
+					context: {
+						presentation_orgs: orgs,
+						finalist_org_ids: ["org-1", "org-2"],
+						settings: {},
+					},
 				} }
 			/>,
 		)

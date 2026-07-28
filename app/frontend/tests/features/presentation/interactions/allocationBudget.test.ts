@@ -9,7 +9,7 @@ import {
 	orgSliderMaxCents,
 	remainingCents,
 	sumAllocatedCents,
-} from "@/features/presentation/interact/allocation/allocationBudget"
+} from "@/features/presentation/interactions/allocation/allocationBudget"
 
 describe("allocationBudget", () => {
 	test("sums and remaining cents", () => {

@@ -1,8 +1,7 @@
-import { Slider } from "@mantine/core"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { CurrencyFormatter, Text } from "@/components"
+import { ActionIcon, Box, CurrencyFormatter, Group, Slider, Text } from "@/components"
 import { InfoIcon, KeyboardIcon } from "@/components/Icons"
 import { CurrencyInput } from "@/components/Inputs"
 import { amountOf, fromCents } from "@/lib/money"
@@ -33,11 +32,12 @@ export function OrgAllocationCard({
 	const amountDollars = amountOf(amountMoney)
 
 	return (
-		<article className={ classes.card }>
-			<div className={ classes.header }>
-				<button
-					type="button"
+		<Box className={ classes.card }>
+			<Group className={ classes.header } justify="space-between">
+				<ActionIcon
 					className={ classes.iconButton }
+					variant="transparent"
+					color="white"
 					aria-label={ keyboardMode
 						? t("presentations.interact.form.toggle_slider")
 						: t("presentations.interact.form.toggle_keyboard") }
@@ -45,17 +45,17 @@ export function OrgAllocationCard({
 					onClick={ () => setKeyboardMode((current) => !current) }
 				>
 					<KeyboardIcon size={ 22 } />
-				</button>
-				<span className={ classes.iconButton } aria-hidden="true">
+				</ActionIcon>
+				<Box className={ classes.iconButton } aria-hidden="true">
 					<InfoIcon size={ 20 } />
-				</span>
-			</div>
+				</Box>
+			</Group>
 
-			<div className={ classes.amount }>
+			<Text className={ classes.amount }>
 				<CurrencyFormatter currency={ currencyIso }>
 					{ amountMoney }
 				</CurrencyFormatter>
-			</div>
+			</Text>
 
 			{ keyboardMode
 				? (
@@ -91,6 +91,6 @@ export function OrgAllocationCard({
 				) }
 
 			<Text className={ classes.orgName }>{ orgName }</Text>
-		</article>
+		</Box>
 	)
 }

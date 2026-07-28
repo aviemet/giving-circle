@@ -1,8 +1,7 @@
-import { Slider } from "@mantine/core"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Text } from "@/components"
+import { ActionIcon, Box, Group, Slider, Text } from "@/components"
 import { KeyboardIcon } from "@/components/Icons"
 import { NumberInput } from "@/components/Inputs"
 
@@ -25,11 +24,12 @@ export function OrgVoteCard({
 	const [keyboardMode, setKeyboardMode] = useState(false)
 
 	return (
-		<article className={ classes.card }>
-			<div className={ classes.header }>
-				<button
-					type="button"
+		<Box className={ classes.card }>
+			<Group className={ classes.header } justify="flex-end">
+				<ActionIcon
 					className={ classes.iconButton }
+					variant="transparent"
+					color="white"
 					aria-label={ keyboardMode
 						? t("presentations.interact.form.toggle_slider")
 						: t("presentations.interact.form.toggle_keyboard") }
@@ -37,12 +37,12 @@ export function OrgVoteCard({
 					onClick={ () => setKeyboardMode((current) => !current) }
 				>
 					<KeyboardIcon size={ 22 } />
-				</button>
-			</div>
+				</ActionIcon>
+			</Group>
 
-			<div className={ classes.amount }>
+			<Text className={ classes.amount }>
 				{ votes }
-			</div>
+			</Text>
 
 			{ keyboardMode
 				? (
@@ -73,6 +73,6 @@ export function OrgVoteCard({
 				) }
 
 			<Text className={ classes.orgName }>{ orgName }</Text>
-		</article>
+		</Box>
 	)
 }

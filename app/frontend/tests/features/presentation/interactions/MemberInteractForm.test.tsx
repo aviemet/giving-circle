@@ -23,7 +23,7 @@ const presentation = createPresentationPresentation({
 	active: true,
 })
 
-describe("features/presentation/interact", () => {
+describe("features/presentation/interactions", () => {
 	test("IdleState renders waiting copy", () => {
 		render(<IdleState />)
 
@@ -207,5 +207,37 @@ describe("features/presentation/interact", () => {
 
 		expect(screen.queryByRole("heading", { name: "Finalist Vote" })).toBeNull()
 		expect(screen.queryByText(/votes left/i)).toBeNull()
+	})
+
+	test("MemberInteractForm shows unsupported copy for unknown ui slug", () => {
+		render(
+			<MemberInteractForm
+				circleSlug="circle-1"
+				presentationSlug="presentation-1"
+				circle={ circle }
+				presentation={ presentation }
+				availableFunds={ null }
+				availableVotes={ null }
+				activeInteraction={ {
+					id: "interaction-3",
+					name: "Custom Interaction",
+					slug: "custom",
+					accepting_responses: true,
+					interaction_ui_template: {
+						id: "ui-3",
+						slug: "not_a_real_ui",
+						name: "Unknown",
+					},
+					config: {
+						fields: [],
+						outputs: [],
+					},
+					context: {},
+				} }
+			/>,
+		)
+
+		expect(screen.getByRole("heading", { name: "Custom Interaction" })).toBeTruthy()
+		expect(screen.getByText(/interaction ui is not available/i)).toBeTruthy()
 	})
 })

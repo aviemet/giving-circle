@@ -144,7 +144,7 @@ class Presentation::InteractionResponse::DataValidator
     end
 
     choices = options[:choices]
-    if choices.is_a?(Array) && !choices.include?(value)
+    if choices.is_a?(Array) && choices.exclude?(value)
       @errors << I18n.t("presentations.interaction_responses.validations.response_data.must_be_choice", prefix: prefix)
     end
   end
@@ -308,8 +308,8 @@ class Presentation::InteractionResponse::DataValidator
 
   def current_allocated_cents_by_org(presentation)
     snapshot = PresentationValues::Aggregator.call(presentation)
-    (snapshot[:allocated_totals] || []).each_with_object({}) do |entry, totals|
-      totals[entry[:org_id]] = entry[:allocated_cents].to_i
+    (snapshot[:allocated_totals] || []).to_h do |entry|
+      [entry[:org_id], entry[:allocated_cents].to_i]
     end
   end
 

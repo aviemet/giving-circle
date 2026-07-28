@@ -61,6 +61,17 @@ Rails.application.routes.draw do
       end
 
       resources :smtps, path: "mail", only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
+      resources :templates, param: :slug, shallow: false
+      resources :interaction_config_templates,
+        path: "interaction_templates",
+        param: :slug,
+        as: :interaction_templates,
+        shallow: false
+      namespace :templates do
+        get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
+        post ":template_slug/slides", to: "slides#create", as: :create_slide
+      end
     end
   end
 
@@ -89,16 +100,18 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :templates, param: :slug, shallow: false
-      resources :interaction_config_templates,
-        path: "interaction_templates",
-        param: :slug,
-        as: :interaction_templates,
-        shallow: false
-      namespace :templates do
-        get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
-        post ":template_slug/slides", to: "slides#create", as: :create_slide
-      end
+      get "templates", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/templates"
+      }
+      get "templates/*path", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/templates/#{params[:path]}"
+      }
+      get "interaction_templates", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/interaction_templates"
+      }
+      get "interaction_templates/*path", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/interaction_templates/#{params[:path]}"
+      }
 
       resources :themes, param: :theme_slug
       resources :themes, param: :slug, except: [:show, :edit, :new, :index, :create, :update, :destroy] do

@@ -24,4 +24,4 @@ export {
 	MemberInteractForm,
 	type ActiveInteractionProps,
 	type MemberInteractFormProps,
-} from "./interact"
+} from "./interactions"

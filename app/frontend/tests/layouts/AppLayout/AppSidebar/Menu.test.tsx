@@ -77,4 +77,17 @@ describe("layouts/AppLayout/AppSidebar/Menu", () => {
 			)
 		})
 	})
+
+	test("does not list template links in circle main nav", async () => {
+		inertiaPageProps.active_circle = createCircleInertiaShare()
+
+		render(<AppSidebarMenu />)
+
+		await waitFor(() => {
+			expect(screen.getByRole("link", { name: "Members" })).toBeVisible()
+		})
+
+		expect(screen.queryByRole("link", { name: "Presentation Templates" })).not.toBeInTheDocument()
+		expect(screen.queryByRole("link", { name: "Interaction Templates" })).not.toBeInTheDocument()
+	})
 })

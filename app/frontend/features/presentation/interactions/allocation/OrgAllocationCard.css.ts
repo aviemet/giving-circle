@@ -17,7 +17,7 @@ export const card = css`
 export const header = css`
 	display: flex;
 	align-items: flex-start;
-	justify-content: flex-end;
+	justify-content: space-between;
 	gap: ${ vars.spacing.xs };
 `
 
@@ -74,8 +74,8 @@ export const slider = css`
 	}
 `
 
-export const numberInput = css`
-	:global(.mantine-NumberInput-input) {
+export const currencyInput = css`
+	& .mantine-NumberInput-input {
 		background-color: rgba(0, 0, 0, 0.2);
 		border-color: rgba(255, 255, 255, 0.5);
 		color: ${ vars.colors.white };
@@ -83,5 +83,9 @@ export const numberInput = css`
 		font-size: 1.25rem;
 		font-weight: 700;
 		min-height: 2.75rem;
+	}
+
+	& .mantine-NumberInput-section {
+		color: ${ vars.colors.white };
 	}
 `

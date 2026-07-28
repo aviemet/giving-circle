@@ -11,7 +11,7 @@ RSpec.describe "Templates::Slides", type: :request do
       slide = create(:slide, title: "Intro")
       template.slides << slide
 
-      get circle_templates_edit_slide_path(circle, template, slide)
+      get settings_templates_edit_slide_path(circle, template, slide)
 
       expect(response).to be_successful
     end

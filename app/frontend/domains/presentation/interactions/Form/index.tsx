@@ -1,12 +1,11 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Grid, Stack, Text } from "@/components"
+import { Grid, Text } from "@/components"
 import { Form, Submit, useFormField, useFormFieldError } from "@/components/Form"
 import { Checkbox, NumberInput, Select, TextInput } from "@/components/Inputs"
 import { type HTTPVerb } from "@/lib/http"
 
-import { FieldBuilder } from "./FieldBuilder"
 import {
 	interactionConfigFrom,
 	interactionConfigFromTemplate,
@@ -14,7 +13,8 @@ import {
 	type InteractionConfig,
 	type InteractionSettings,
 } from "./interactionConfig"
-import { OutputBuilder, sanitizeOutputs } from "./OutputBuilder"
+import { InteractionConfigPipeline } from "./InteractionConfigPipeline"
+import { sanitizeOutputs } from "./OutputBuilder"
 
 type PresentationInteractionFormData = {
 	presentation_interaction: Schema.PresentationInteractionsFormData
@@ -60,11 +60,6 @@ export function PresentationInteractionForm({
 		{ label: t("presentations.interactions.form.trigger_manual"), value: "manual" },
 		{ label: t("presentations.interactions.form.trigger_slide"), value: "slide" },
 	]
-
-	const uiTemplateOptions = interaction_ui_templates.map((template) => ({
-		label: template.name,
-		value: template.id,
-	}))
 
 	const updateConfig = (nextConfig: InteractionConfig) => {
 		setConfig({
@@ -150,20 +145,7 @@ export function PresentationInteractionForm({
 					/>
 				</Grid.Col>
 
-				<Grid.Col span={ { base: 12, sm: 6 } }>
-					<input type="hidden" name="presentation_interaction.interaction_ui_template_id" value={ uiTemplateId } />
-					<Select
-						label={ t("presentations.interactions.form.ui_template") }
-						options={ uiTemplateOptions }
-						value={ uiTemplateId }
-						onChange={ (value) => {
-							if(value) {
-								setUiTemplateId(value)
-							}
-						} }
-						required
-					/>
-				</Grid.Col>
+				<input type="hidden" name="presentation_interaction.interaction_ui_template_id" value={ uiTemplateId } />
 
 				{ uiSlug === "finalist_vote" && (
 					<>
@@ -223,40 +205,24 @@ export function PresentationInteractionForm({
 					</>
 				) }
 
-				{ !curated && (
-					<>
-						<Grid.Col span={ 12 }>
-							<Stack gap="md">
-								<Text size="sm" fw={ 500 }>{ t("presentations.interactions.form.data_points") }</Text>
-								<ConfigError />
-								<FieldBuilder
-									fields={ config.fields }
-									fieldTypes={ field_types }
-									onChange={ (fields) => {
-										updateConfig({ ...config, fields })
-									} }
-								/>
-							</Stack>
-						</Grid.Col>
-
-						<Grid.Col span={ 12 }>
-							<Stack gap="md">
-								<Text size="sm" fw={ 500 }>{ t("presentations.interactions.form.outputs") }</Text>
-								<OutputBuilder
-									outputs={ config.outputs }
-									fields={ config.fields }
-									metrics={ metrics }
-									reducers={ reducers }
-									onChange={ (outputs) => {
-										updateConfig({ ...config, outputs })
-									} }
-								/>
-							</Stack>
-						</Grid.Col>
-					</>
-				) }
-
-				{ curated && <ConfigError /> }
+				<Grid.Col span={ 12 }>
+					<InteractionConfigPipeline
+						fields={ config.fields }
+						outputs={ config.outputs }
+						fieldTypes={ field_types }
+						metrics={ metrics }
+						reducers={ reducers }
+						uiTemplateId={ uiTemplateId }
+						uiTemplates={ interaction_ui_templates }
+						onUiTemplateChange={ setUiTemplateId }
+						uiTemplateRequired
+						showAnswerPipeline={ !curated }
+						headerExtra={ <ConfigError /> }
+						onConfigChange={ ({ fields, outputs }) => {
+							updateConfig({ ...config, fields, outputs })
+						} }
+					/>
+				</Grid.Col>
 
 				<Grid.Col>
 					<Submit>

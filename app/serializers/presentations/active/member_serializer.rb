@@ -48,14 +48,17 @@ class Presentations::Active::MemberSerializer < ApplicationSerializer
   end
 
   def finalist_interaction
-    @finalist_interaction ||= PresentationValues::Finalists.finalist_source_interaction(@object.presentation)
+    memo.fetch(:finalist_interaction) do
+      PresentationValues::Finalists.finalist_source_interaction(@object.presentation)
+    end
   end
 
   def finalist_interaction_membership
     return if finalist_interaction.blank?
 
-    @finalist_interaction_membership ||= finalist_interaction.interaction_memberships
-      .find_by(membership_id: membership.id)
+    memo.fetch(:finalist_interaction_membership) do
+      finalist_interaction.interaction_memberships.find_by(membership_id: membership.id)
+    end
   end
 
   def finalist_votes_for(membership_record)

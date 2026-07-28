@@ -41,7 +41,7 @@ class InteractionConfigTemplate < ApplicationRecord
   validates :config, presence: true
   validate :validate_config_structure
 
-  scope :includes_associated, -> { includes([:circle]) }
+  scope :includes_associated, -> { includes([:circle, :interaction_ui_template]) }
 
   def should_generate_new_friendly_id?
     name_changed? || super

@@ -1,14 +1,16 @@
+import clsx from "clsx"
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Grid, Stack, Text } from "@/components"
+import { Box, Grid, Text } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { TextInput } from "@/components/Inputs"
 import { type HTTPVerb } from "@/lib/http"
 
-import { FieldBuilder } from "../presentation/interactions/Form/FieldBuilder"
+import * as classes from "../presentation/interactions/Form/flowLane.css"
 import { interactionConfigFrom, type InteractionConfig } from "../presentation/interactions/Form/interactionConfig"
-import { OutputBuilder, sanitizeOutputs } from "../presentation/interactions/Form/OutputBuilder"
+import { InteractionConfigPipeline } from "../presentation/interactions/Form/InteractionConfigPipeline"
+import { sanitizeOutputs } from "../presentation/interactions/Form/OutputBuilder"
 
 type InteractionConfigTemplateFormInput = {
 	id?: string
@@ -17,12 +19,15 @@ type InteractionConfigTemplateFormInput = {
 	field_types?: string[]
 	metrics?: string[]
 	reducers?: string[]
+	interaction_ui_template?: { id: string, name: string, slug: string }
+	interaction_ui_templates?: Array<{ id: string, name: string, slug: string }>
 }
 
 type InteractionConfigTemplateFormData = {
 	interaction_config_template: {
 		id?: string
 		name: string
+		interaction_ui_template_id?: string
 	}
 }
 
@@ -53,11 +58,15 @@ export function InteractionConfigTemplateForm({
 	const fieldTypes = interaction_config_template.field_types ?? []
 	const metrics = interaction_config_template.metrics ?? []
 	const reducers = interaction_config_template.reducers ?? []
+	const uiTemplates = interaction_config_template.interaction_ui_templates ?? []
 	const initialConfig = useMemo(
 		() => interactionConfigFrom(interaction_config_template.config),
 		[interaction_config_template.config],
 	)
 	const [config, setConfig] = useState(initialConfig)
+	const [uiTemplateId, setUiTemplateId] = useState(
+		() => interaction_config_template.interaction_ui_template?.id ?? "",
+	)
 
 	const updateConfig = (nextConfig: InteractionConfig) => {
 		setConfig({
@@ -74,6 +83,7 @@ export function InteractionConfigTemplateForm({
 				interaction_config_template: {
 					id: interaction_config_template.id,
 					name: interaction_config_template.name,
+					interaction_ui_template_id: uiTemplateId,
 				},
 			} }
 			transform={ (data) => {
@@ -83,44 +93,47 @@ export function InteractionConfigTemplateForm({
 				return {
 					interaction_config_template: {
 						name: template.name,
+						interaction_ui_template_id: uiTemplateId,
 						config,
 					},
 				}
 			} }
 		>
+			<input
+				type="hidden"
+				name="interaction_config_template.interaction_ui_template_id"
+				value={ uiTemplateId }
+			/>
 			<Grid>
+				<Grid.Col span={ 12 }>
+					<Box className={ clsx(classes.leadStrip) }>
+						<Text size="sm">
+							{ t("interaction_config_templates.form.intro") }
+						</Text>
+					</Box>
+				</Grid.Col>
 				<Grid.Col span={ 12 }>
 					<TextInput
 						name="interaction_config_template.name"
 						label={ t("interaction_config_templates.form.name") }
+						description={ t("interaction_config_templates.form.name_description") }
 						required
 					/>
 				</Grid.Col>
 				<Grid.Col span={ 12 }>
-					<Stack gap="md">
-						<Text size="sm" fw={ 500 }>{ t("interaction_config_templates.form.data_points") }</Text>
-						<FieldBuilder
-							fields={ config.fields }
-							fieldTypes={ fieldTypes }
-							onChange={ (fields) => {
-								updateConfig({ ...config, fields })
-							} }
-						/>
-					</Stack>
-				</Grid.Col>
-				<Grid.Col span={ 12 }>
-					<Stack gap="md">
-						<Text size="sm" fw={ 500 }>{ t("interaction_config_templates.form.outputs") }</Text>
-						<OutputBuilder
-							outputs={ config.outputs }
-							fields={ config.fields }
-							metrics={ metrics }
-							reducers={ reducers }
-							onChange={ (outputs) => {
-								updateConfig({ ...config, outputs })
-							} }
-						/>
-					</Stack>
+					<InteractionConfigPipeline
+						fields={ config.fields }
+						outputs={ config.outputs }
+						fieldTypes={ fieldTypes }
+						metrics={ metrics }
+						reducers={ reducers }
+						uiTemplateId={ uiTemplateId }
+						uiTemplates={ uiTemplates }
+						onUiTemplateChange={ setUiTemplateId }
+						onConfigChange={ ({ fields, outputs }) => {
+							updateConfig({ ...config, fields, outputs })
+						} }
+					/>
 				</Grid.Col>
 				<Grid.Col>
 					<Submit>

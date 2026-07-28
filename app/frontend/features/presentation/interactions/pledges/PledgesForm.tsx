@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Title } from "@/components"
+import { Button, Group, SimpleGrid, Stack, Text, Title } from "@/components"
 import { Form, Submit } from "@/components/Form"
 import { Checkbox, CurrencyInput, Switch } from "@/components/Inputs"
 import {
@@ -18,17 +18,7 @@ import { fromCents } from "@/lib/money"
 
 import { PledgeOrgCard } from "./PledgeOrgCard"
 import * as classes from "./PledgesForm.css"
-
-interface PledgesFormProps {
-	circleSlug: string
-	presentationSlug: string
-	circle: Schema.CirclesPersisted
-	theme?: Schema.ThemesPersisted
-	presentation: Schema.PresentationsPresentation
-	interactionName: string
-	context: unknown
-	readOnly?: boolean
-}
+import { type MemberInteractionUiProps } from "../memberInteractionUi"
 
 type FormPayload = {
 	presentation_interaction_response: {
@@ -42,13 +32,11 @@ type FormPayload = {
 function PledgesFormInner({
 	circleSlug,
 	presentationSlug,
-	interactionName,
-	context,
-	readOnly = false,
-}: Omit<PledgesFormProps, "circle" | "theme" | "presentation">) {
+	activeInteraction,
+}: Pick<MemberInteractionUiProps, "circleSlug" | "presentationSlug" | "activeInteraction">) {
 	const { t } = useTranslation()
 	const { values } = usePresentationDataContext()
-	const formContext = interactionFormContextFrom(context)
+	const formContext = interactionFormContextFrom(activeInteraction.context)
 	const orgs = useMemo(
 		() => formContext.presentation_orgs ?? [],
 		[formContext.presentation_orgs],
@@ -97,7 +85,7 @@ function PledgesFormInner({
 		org_id: orgId,
 		amount_cents: amountCents,
 	}))
-	const canSubmit = selectedOrgIds.length > 0 && amountCents > 0 && !readOnly
+	const canSubmit = selectedOrgIds.length > 0 && amountCents > 0
 
 	const toggleOrg = (orgId: string) => {
 		setSelectedOrgIds((current) => {
@@ -132,12 +120,12 @@ function PledgesFormInner({
 
 	if(showThanks) {
 		return (
-			<div className={ classes.root }>
-				<div className={ classes.thanks }>
+			<Stack className={ classes.root } gap={ 0 }>
+				<Stack className={ classes.thanks } gap="md">
 					<Title order={ 2 }>{ t("presentations.interact.pledges.thanks_title") }</Title>
-					<p>{ t("presentations.interact.pledges.thanks_body") }</p>
-				</div>
-			</div>
+					<Text>{ t("presentations.interact.pledges.thanks_body") }</Text>
+				</Stack>
+			</Stack>
 		)
 	}
 
@@ -170,19 +158,18 @@ function PledgesFormInner({
 				setShowThanks(true)
 			} }
 		>
-			<header className={ classes.header }>
+			<Stack className={ classes.titleSection } gap="sm">
 				<Title order={ 2 } className={ classes.title }>
 					{ t("presentations.interact.pledges.title") }
 				</Title>
-				<p className={ classes.subtitle }>
+				<Text className={ classes.subtitle }>
 					{ t("presentations.interact.pledges.subtitle") }
-				</p>
-				<div className={ classes.toolbar }>
+				</Text>
+				<Group className={ classes.toolbar } justify="center" gap="md">
 					<Checkbox
 						wrapper={ false }
 						label={ t("presentations.interact.pledges.anonymous") }
 						checked={ anonymous }
-						disabled={ readOnly }
 						onChange={ (event) => {
 							setAnonymous(event.currentTarget.checked)
 						} }
@@ -191,27 +178,26 @@ function PledgesFormInner({
 						wrapper={ false }
 						label={ t("presentations.interact.pledges.multi_org") }
 						checked={ multiOrgSelect }
-						disabled={ readOnly }
 						onChange={ (event) => {
 							handleMultiOrgSelectChange(event.currentTarget.checked)
 						} }
 					/>
-					<button
+					<Button
 						type="button"
 						className={ classes.clear }
-						disabled={ readOnly }
+						variant="filled"
 						onClick={ clearForm }
 					>
 						{ t("presentations.interact.pledges.clear") }
-					</button>
-				</div>
-			</header>
+					</Button>
+				</Group>
+			</Stack>
 
-			<section className={ classes.section }>
-				<h3 className={ classes.sectionTitle }>
+			<Stack className={ classes.section } gap="sm">
+				<Title order={ 3 } className={ classes.sectionTitle }>
 					{ t("presentations.interact.pledges.finalists") }
-				</h3>
-				<div className={ classes.grid }>
+				</Title>
+				<SimpleGrid cols={ 2 } spacing="sm" className={ classes.orgs }>
 					{ finalistOrgs.map((org) => {
 						const ask = org.ask
 						const allocatedCents = allocatedByOrg.get(org.id) ?? 0
@@ -228,22 +214,21 @@ function PledgesFormInner({
 								orgName={ org.name }
 								selected={ selectedOrgIds.includes(org.id) }
 								fullyFunded={ funded }
-								disabled={ readOnly }
 								onToggle={ () => {
 									toggleOrg(org.id)
 								} }
 							/>
 						)
 					}) }
-				</div>
-			</section>
+				</SimpleGrid>
+			</Stack>
 
 			{ runnerUpOrgs.length > 0 && (
-				<section className={ classes.section }>
-					<h3 className={ classes.sectionTitle }>
+				<Stack className={ classes.section } gap="sm">
+					<Title order={ 3 } className={ classes.sectionTitle }>
 						{ t("presentations.interact.pledges.runners_up") }
-					</h3>
-					<div className={ classes.grid }>
+					</Title>
+					<SimpleGrid cols={ 2 } spacing="sm" className={ classes.orgs }>
 						{ runnerUpOrgs.map((org) => {
 							const ask = org.ask
 							const allocatedCents = allocatedByOrg.get(org.id) ?? 0
@@ -260,24 +245,22 @@ function PledgesFormInner({
 									orgName={ org.name }
 									selected={ selectedOrgIds.includes(org.id) }
 									fullyFunded={ funded }
-									disabled={ readOnly }
 									onToggle={ () => {
 										toggleOrg(org.id)
 									} }
 								/>
 							)
 						}) }
-					</div>
-				</section>
+					</SimpleGrid>
+				</Stack>
 			) }
 
-			<footer className={ classes.footer }>
+			<Stack className={ classes.actions } gap="sm">
 				<CurrencyInput
 					className={ classes.amountInput }
 					wrapper={ false }
 					placeholder={ t("presentations.interact.pledges.amount_placeholder") }
 					value={ amountCents > 0 ? amountCents / 100 : undefined }
-					disabled={ readOnly }
 					decimalScale={ 2 }
 					fixedDecimalScale
 					onChange={ (value) => {
@@ -292,12 +275,12 @@ function PledgesFormInner({
 				<Submit className={ classes.submit } disabled={ !canSubmit }>
 					{ t("presentations.interact.pledges.submit") }
 				</Submit>
-				{ interactionName
+				{ activeInteraction.name
 					? (
-						<p className={ classes.interactionName }>{ interactionName }</p>
+						<Text className={ classes.interactionName }>{ activeInteraction.name }</Text>
 					)
 					: null }
-			</footer>
+			</Stack>
 		</Form>
 	)
 }
@@ -306,8 +289,10 @@ export function PledgesForm({
 	circle,
 	theme,
 	presentation,
-	...props
-}: PledgesFormProps) {
+	circleSlug,
+	presentationSlug,
+	activeInteraction,
+}: MemberInteractionUiProps) {
 	return (
 		<PresentationDataProvider
 			value={ {
@@ -317,7 +302,11 @@ export function PledgesForm({
 				isEditor: false,
 			} }
 		>
-			<PledgesFormInner { ...props } />
+			<PledgesFormInner
+				circleSlug={ circleSlug }
+				presentationSlug={ presentationSlug }
+				activeInteraction={ activeInteraction }
+			/>
 		</PresentationDataProvider>
 	)
 }

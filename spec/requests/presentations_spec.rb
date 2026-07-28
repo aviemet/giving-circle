@@ -195,7 +195,7 @@ RSpec.describe "/presentations", type: :request do
     end
 
     context "when logged in as a theme editor" do
-      it "activates the presentation" do
+      it "does not activate the presentation" do
         circle = create(:circle)
         theme = create(:theme, circle:)
         presentation = create(:presentation, theme:, active: false)
@@ -203,10 +203,13 @@ RSpec.describe "/presentations", type: :request do
         user.confirm
         user.add_role(:editor, theme)
         sign_in user
+        referer = theme_presentation_url(circle, theme, presentation)
 
-        post theme_presentation_activate_url(circle, theme, presentation)
+        post theme_presentation_activate_url(circle, theme, presentation),
+          headers: { "HTTP_REFERER" => referer }
 
-        expect(presentation.reload.active).to be(true)
+        expect(response).to redirect_to(referer)
+        expect(presentation.reload.active).to be(false)
       end
     end
 
@@ -243,7 +246,7 @@ RSpec.describe "/presentations", type: :request do
         ), params: { name: "Saved Template", mode: "new" }
       }.to change(Template, :count).by(1)
 
-      expect(response).to redirect_to(circle_template_url(presentation.circle, Template.last))
+      expect(response).to redirect_to(settings_template_url(presentation.circle, Template.last))
       expect(Template.last.slides.count).to eq(1)
     end
 
@@ -258,7 +261,7 @@ RSpec.describe "/presentations", type: :request do
         presentation,
       ), params: { mode: "update_source" }
 
-      expect(response).to redirect_to(circle_template_url(presentation.circle, presentation.template))
+      expect(response).to redirect_to(settings_template_url(presentation.circle, presentation.template))
       expect(presentation.template.reload.slides.first.title).to eq("Updated Slide")
     end
   end

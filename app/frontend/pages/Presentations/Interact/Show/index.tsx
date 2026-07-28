@@ -59,7 +59,6 @@ const ShowPresentationInteract = ({
 			responseData={ presentation_interaction_response?.response_data }
 			availableFunds={ available_funds }
 			availableVotes={ available_votes }
-			readOnly={ !active_interaction.accepting_responses }
 		/>
 	)
 }

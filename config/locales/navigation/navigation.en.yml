@@ -18,6 +18,8 @@ en:
     settings: Settings
     signIn: Sign In
     signOut: Sign Out
+    switchCircle: Switch circle
+    templates: Templates
     themes: Themes
     toggleColorScheme: Toggle color scheme
     toggleColorSchemeToDark: Toggle color scheme to dark mode

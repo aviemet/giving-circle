@@ -56,10 +56,10 @@ class Presentations::InteractController < ApplicationController
     end
 
     response_record = if pledges_interaction?(interaction)
-      interaction.interaction_responses.build(membership_id: membership.id)
-    else
-      interaction.interaction_responses.find_or_initialize_by(membership_id: membership.id)
-    end
+                        interaction.interaction_responses.build(membership_id: membership.id)
+                      else
+                        interaction.interaction_responses.find_or_initialize_by(membership_id: membership.id)
+                      end
     response_record.assign_attributes(presentation_interaction_response_params)
 
     if response_record.save

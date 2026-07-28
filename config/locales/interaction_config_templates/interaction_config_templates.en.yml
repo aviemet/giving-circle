@@ -5,9 +5,9 @@ en:
       title: Edit %{name}
     form:
       create: Create Template
-      data_points: Data points
+      intro: An interaction template defines the member form, what answers it collects, and which live results appear on the presentation. Reuse it when you create interactions for a presentation.
       name: Name
-      outputs: Outputs
+      name_description: A short name so you can find this template later (for example, Allocation round).
       update: Update Template
     index:
       breadcrumbs:
