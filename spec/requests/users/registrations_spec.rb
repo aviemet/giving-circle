@@ -40,5 +40,21 @@ RSpec.describe "Users::Registrations", type: :request do
 
       expect(response).to redirect_to(new_user_registration_path)
     end
+
+    it "signs up immediately when the user is active for authentication" do
+      allow_any_instance_of(User).to receive(:active_for_authentication?).and_return(true)
+
+      expect {
+        post user_registration_path, params: {
+          user: {
+            email: "active.member@example.com",
+            password: "Password1!",
+            password_confirmation: "Password1!",
+          },
+        }
+      }.to change(User, :count).by(1)
+
+      expect(response).to be_redirect
+    end
   end
 end

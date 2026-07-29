@@ -25,4 +25,16 @@ RSpec.describe ActivePresentationChannel, type: :channel do
 
     expect(presentation.reload.active_slide).to eq(slide)
   end
+
+  it "updates slide content" do
+    subscribe(presentation_id: presentation.id)
+
+    perform :update_slide, {
+      "presentation_id" => presentation.id,
+      "slide_id" => slide.id,
+      "content" => { "root" => { "props" => {} } },
+    }
+
+    expect(slide.reload.data).to eq({ "root" => { "props" => {} } })
+  end
 end

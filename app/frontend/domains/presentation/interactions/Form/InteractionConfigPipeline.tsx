@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import type { ReactNode } from "react"
+import { type ReactNode } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Box, Button, Stack, Text } from "@/components"
@@ -7,8 +7,8 @@ import { Box, Button, Stack, Text } from "@/components"
 import { AnswerResultPair } from "./AnswerResultPair"
 import { defaultField, type InteractionFieldConfig } from "./FieldBuilder"
 import { FlowConnector } from "./FlowConnector"
-import { FlowStep } from "./FlowStep"
 import * as classes from "./flowLane.css"
+import { FlowStep } from "./FlowStep"
 import { MemberFormStep } from "./MemberFormStep"
 import { OrphanResults } from "./OrphanResults"
 import {

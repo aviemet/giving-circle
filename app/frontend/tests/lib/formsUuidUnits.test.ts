@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest"
 
 import { isUnset } from "@/lib/forms"
-import { decodeId, encodeId } from "@/lib/uuid"
 import { px } from "@/lib/units"
+import { decodeId, encodeId } from "@/lib/uuid"
 
 describe("lib/forms isUnset", () => {
 	test("detects empty values", () => {

@@ -222,4 +222,52 @@ RSpec.describe PresentationValues::Aggregator do
     expect(values[:vote_counts]).to eq([])
     expect(values[:allocated_totals]).to eq([])
   end
+
+  it "indexes nested field_group fields for outputs" do
+    presentation, org, membership = setup_presentation
+    interaction = create(
+      :presentation_interaction,
+      presentation: presentation,
+      config: {
+        "fields" => [
+          {
+            "key" => "group",
+            "type" => "field_group",
+            "label" => "Group",
+            "fields" => [
+              { "key" => "allocations", "type" => "org_money_map", "label" => "Allocate" },
+            ],
+          },
+        ],
+        "outputs" => [
+          {
+            "metric" => "allocated_totals",
+            "source_field" => "allocations",
+            "reducer" => "sum_by_org",
+          },
+        ],
+      },
+    )
+    response_record = build(
+      :presentation_interaction_response,
+      presentation_interaction: interaction,
+      membership: membership,
+      response_data: {},
+    )
+    response_record.save!(validate: false)
+    response_record.update_column(
+      :response_data,
+      {
+        "allocations" => [
+          { "org_id" => org.id, "amount_cents" => 500 },
+        ],
+      },
+    )
+
+    values = described_class.call(presentation.reload)
+
+    expect(values[:allocated_totals]).to include(
+      hash_including(org_id: org.id, allocated_cents: 500),
+    )
+  end
 end

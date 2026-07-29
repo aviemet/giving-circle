@@ -5,7 +5,7 @@ module Admin
     expose :slides, -> { template.slides.includes_associated }
     expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }, find_by: :slug
 
-    strong_params :slide, permit: [:name, :data]
+    strong_params :slide, permit: [:title, :data]
 
     sortable_fields %w(name)
 

@@ -212,4 +212,76 @@ RSpec.describe Presentation::Interaction::ConfigValidator do
     expect(messages).to include("repeatable")
     expect(messages).to include("integer")
   end
+
+  it "rejects blank field keys" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          { "key" => "", "type" => "text", "label" => "Note" },
+        ],
+        "outputs" => [],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    expect(interaction.errors[:config].join).to include("key")
+  end
+
+  it "rejects blank reducers when source field exists" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          { "key" => "note", "type" => "text", "label" => "Note" },
+        ],
+        "outputs" => [
+          {
+            "metric" => "allocated_totals",
+            "source_field" => "note",
+            "reducer" => "",
+          },
+        ],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    expect(interaction.errors[:config].join).to include("reducer")
+  end
+
+  it "rejects non-string select choices and blank metric source and unknown reducer" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          {
+            "key" => "choice",
+            "type" => "single_select",
+            "label" => "Choice",
+            "options" => { "choices" => [1, "ok"] },
+          },
+          { "key" => "note", "type" => "text", "label" => "Note" },
+        ],
+        "outputs" => [
+          { "metric" => "", "source_field" => "note", "reducer" => "sum_money" },
+          { "metric" => "allocated_totals", "source_field" => "", "reducer" => "sum_by_org" },
+          {
+            "metric" => "allocated_totals",
+            "source_field" => "note",
+            "reducer" => "not_a_reducer",
+          },
+        ],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    messages = interaction.errors[:config].join(" ")
+    expect(messages).to include("choices")
+    expect(messages).to include("metric")
+    expect(messages).to include("source_field")
+    expect(messages).to include("reducer")
+  end
 end

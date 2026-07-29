@@ -1,4 +1,4 @@
-import { screen, waitFor } from "@testing-library/react"
+import { act, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import React from "react"
 import { describe, expect, test, vi } from "vitest"
@@ -92,15 +92,17 @@ describe("domains/presentations/active/InteractionToggles", () => {
 
 		expect(screen.getByRole("switch", { name: "Finalist vote" })).toBeChecked()
 
-		mutationCallbacks.onSuccess?.({
-			interactions: [
-				{
-					id: "1",
-					slug: "finalist-vote",
-					name: "Finalist vote",
-					accepting_responses: true,
-				},
-			],
+		act(() => {
+			mutationCallbacks.onSuccess?.({
+				interactions: [
+					{
+						id: "1",
+						slug: "finalist-vote",
+						name: "Finalist vote",
+						accepting_responses: true,
+					},
+				],
+			})
 		})
 
 		await waitFor(() => {

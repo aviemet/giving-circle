@@ -38,6 +38,58 @@ RSpec.describe "Api::Templates::Slides", type: :request do
       expect(response).to have_http_status(:accepted)
       expect(slide.reload.title).to eq("Updated")
     end
+
+    it "returns unprocessable when update fails" do
+      circle = @admin.circles.first
+      template = create(:template, circle:)
+      slide = create(:slide, title: "Intro")
+      template.slides << slide
+      allow_any_instance_of(Slide).to receive(:update).and_return(false)
+      allow_any_instance_of(Slide).to receive(:errors).and_return(
+        ActiveModel::Errors.new(slide).tap { |errors| errors.add(:title, "invalid") },
+      )
+
+      patch api_circle_template_slide_path(
+        circle_slug: circle.slug,
+        template_slug: template.slug,
+        slug: slide.slug,
+      ), params: { slide: { title: "Updated", data: { "root" => {} } } }
+
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+  end
+
+  describe "POST create failure" do
+    it "returns unprocessable when save fails" do
+      circle = @admin.circles.first
+      template = create(:template, circle:)
+      allow_any_instance_of(Slide).to receive(:save).and_return(false)
+
+      post api_circle_template_slides_path(
+        circle_slug: circle.slug,
+        template_slug: template.slug,
+      ), params: { slide: { title: "New Slide", data: {} } }
+
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+  end
+
+  describe "POST create failure" do
+    it "returns unprocessable when save fails" do
+      circle = @admin.circles.first
+      template = create(:template, circle:)
+      allow_any_instance_of(Slide).to receive(:save).and_return(false)
+      allow_any_instance_of(Slide).to receive(:errors).and_return(
+        ActiveModel::Errors.new(Slide.new).tap { |errors| errors.add(:title, "invalid") },
+      )
+
+      post api_circle_template_slides_path(
+        circle_slug: circle.slug,
+        template_slug: template.slug,
+      ), params: { slide: { title: "New Slide", data: {} } }
+
+      expect(response).to have_http_status(:unprocessable_content)
+    end
   end
 
   describe "DELETE /api/circles/:circle_slug/templates/:template_slug/slides/:slug" do

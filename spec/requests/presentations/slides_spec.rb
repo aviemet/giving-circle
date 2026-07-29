@@ -103,6 +103,24 @@ RSpec.describe "Presentations::Slides", type: :request do
         theme_presentation_slide_url(presentation.circle, presentation.theme, presentation, slide),
       )
     end
+
+    it "redirects with errors when save fails" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
+      allow_any_instance_of(Slide).to receive(:save).and_return(false)
+      allow_any_instance_of(Slide).to receive_message_chain(:errors).and_return(
+        ActiveModel::Errors.new(Slide.new).tap { |errors| errors.add(:title, "invalid") },
+      )
+
+      post theme_presentation_slides_url(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+      ), params: { slide: { title: "New Slide", data: {} } }
+
+      expect(response).to redirect_to(
+        new_theme_presentation_slide_url(presentation.circle, presentation.theme, presentation),
+      )
+    end
   end
 
   describe "PATCH /update" do
@@ -121,6 +139,27 @@ RSpec.describe "Presentations::Slides", type: :request do
       expect(slide.reload.title).to eq("Updated Intro")
       expect(response).to redirect_to(
         theme_presentation_slide_url(presentation.circle, presentation.theme, presentation, slide),
+      )
+    end
+
+    it "redirects with errors when update fails" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
+      slide = create(:slide, title: "Intro")
+      presentation.slides << slide
+      allow_any_instance_of(Slide).to receive(:update).and_return(false)
+      allow_any_instance_of(Slide).to receive(:errors).and_return(
+        ActiveModel::Errors.new(slide).tap { |errors| errors.add(:title, "invalid") },
+      )
+
+      patch theme_presentation_slide_url(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+        slide,
+      ), params: { slide: { title: "Updated Intro", data: { "root" => {} } } }
+
+      expect(response).to redirect_to(
+        edit_theme_presentation_slide_url(presentation.circle, presentation.theme, presentation, slide),
       )
     end
   end

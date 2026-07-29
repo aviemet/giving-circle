@@ -1,14 +1,14 @@
 import { describe, expect, test } from "vitest"
 
 import {
+	defaultTimerColors,
+	normalizeTimerColors,
+} from "@/components/VisualEditor/fields/timerColors/timerColors"
+import {
 	defaultTimerDuration,
 	normalizeTimerDuration,
 	timerDurationToSeconds,
 } from "@/components/VisualEditor/fields/timerDuration/timerDuration"
-import {
-	defaultTimerColors,
-	normalizeTimerColors,
-} from "@/components/VisualEditor/fields/timerColors/timerColors"
 import {
 	defaultTimerExhausted,
 	normalizeTimerExhausted,

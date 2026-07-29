@@ -1,0 +1,13 @@
+# Project Goals
+
+Product and architecture intent that is not yet fully realized in the current UI or data model. Prefer updating this file when a goal is adopted, narrowed, or completed.
+
+## Interactions: form and response config as one authoring surface
+
+**Status:** Interim — not done yet.
+
+Member-facing Interaction Forms (`InteractionUiTemplate` / slug → React UI today) and Interaction Config (`config.fields` / `config.outputs` that shape `presentation_interaction_responses.response_data`) are tightly coupled: every input on the form should correspond to the response data we define, and vice versa.
+
+Today those concerns are split (config authored in Settings templates / interaction forms; member UI selected by template slug and resolved via an in-memory component map). That split is acceptable as a stopgap.
+
+**Goal:** Author the member form and the response-data definitions in the same place, at the same time — eventually a single WYSIWYG-style designer — so form inputs and response schema cannot drift apart.

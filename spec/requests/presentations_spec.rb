@@ -264,6 +264,22 @@ RSpec.describe "/presentations", type: :request do
       expect(response).to redirect_to(settings_template_url(presentation.circle, presentation.template))
       expect(presentation.template.reload.slides.first.title).to eq("Updated Slide")
     end
+
+    it "alerts when update_source has no source template" do
+      presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
+      presentation.update_column(:template_id, nil)
+
+      post theme_presentation_save_as_template_url(
+        presentation.circle,
+        presentation.theme,
+        presentation,
+      ), params: { mode: "update_source" }
+
+      expect(response).to redirect_to(
+        theme_presentation_path(presentation.circle, presentation.theme, presentation),
+      )
+      expect(flash[:alert]).to eq(I18n.t("presentations.alerts.no_source_template"))
+    end
   end
 
   describe "DELETE /destroy" do

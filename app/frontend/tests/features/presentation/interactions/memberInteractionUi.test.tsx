@@ -3,9 +3,9 @@ import React from "react"
 import { describe, expect, test } from "vitest"
 
 import { MemberInteractForm } from "@/features/presentation"
-import { memberInteractionUiBySlug } from "@/features/presentation/interactions/memberInteractionUi"
 import { AllocationVoteForm } from "@/features/presentation/interactions/allocation/AllocationVoteForm"
 import { FinalistVoteForm } from "@/features/presentation/interactions/finalistVote/FinalistVoteForm"
+import { memberInteractionUiBySlug } from "@/features/presentation/interactions/memberInteractionUi"
 import { PledgesForm } from "@/features/presentation/interactions/pledges/PledgesForm"
 import {
 	createCirclePersisted,

@@ -6,7 +6,7 @@ import { afterAll, afterEach, beforeAll, vi } from "vitest"
 
 import { handlers } from "./handlers"
 
-const server = setupServer(...handlers)
+export const server = setupServer(...handlers)
 
 const TestInertiaFormContext = React.createContext<Record<string, unknown> | undefined>(undefined)
 

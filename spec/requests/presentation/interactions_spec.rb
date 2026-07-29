@@ -24,6 +24,26 @@ RSpec.describe "Presentations::Interactions", type: :request do
     end
   end
 
+  describe "GET show" do
+    it "is successful" do
+      interaction = create(:presentation_interaction, presentation: presentation)
+
+      get theme_presentation_interaction_path(circle, theme, presentation, interaction)
+
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET edit" do
+    it "is successful" do
+      interaction = create(:presentation_interaction, presentation: presentation)
+
+      get edit_theme_presentation_interaction_path(circle, theme, presentation, interaction)
+
+      expect(response).to be_successful
+    end
+  end
+
   describe "POST create" do
     it "creates an interaction" do
       expect {

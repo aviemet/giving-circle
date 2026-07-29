@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next"
 import { Box, Button, Stack, Text } from "@/components"
 
 import { type InteractionFieldConfig } from "./FieldBuilder"
-import { FlowSurface } from "./FlowSurface"
 import * as classes from "./flowLane.css"
+import { FlowSurface } from "./FlowSurface"
 import { type InteractionOutputConfig } from "./OutputBuilder"
 import { ResultCard } from "./ResultCard"
 

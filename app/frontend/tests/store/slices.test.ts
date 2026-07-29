@@ -1,5 +1,5 @@
-import { create } from "zustand"
 import { describe, expect, test } from "vitest"
+import { create } from "zustand"
 
 import { createHeaderSlice, type HeaderSlice } from "@/store/slices/headerSlice"
 import { createMenuSlice, type MenuSlice } from "@/store/slices/menuSlice"

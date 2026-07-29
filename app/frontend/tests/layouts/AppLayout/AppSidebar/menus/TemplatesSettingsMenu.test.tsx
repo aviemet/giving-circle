@@ -1,9 +1,9 @@
-import { Accordion } from "@/components"
 import { screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import React from "react"
 import { afterEach, beforeEach, describe, expect, test } from "vitest"
 
+import { Accordion } from "@/components"
 import {
 	TemplatesSettingsMenu,
 } from "@/layouts/AppLayout/AppSidebar/menus/TemplatesSettingsMenu"

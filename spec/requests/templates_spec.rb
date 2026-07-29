@@ -82,6 +82,20 @@ RSpec.describe "/templates", type: :request do
       expect(template.name).to eq("Kickoff deck")
       expect(response).to redirect_to(edit_settings_template_path(circle.slug, template))
     end
+
+    it "redirects with errors when save fails" do
+      circle = @admin.circles.first
+      allow_any_instance_of(Template).to receive(:save).and_return(false)
+      allow_any_instance_of(Template).to receive(:errors).and_return(
+        ActiveModel::Errors.new(Template.new).tap { |errors| errors.add(:name, "invalid") },
+      )
+
+      post settings_templates_url(circle), params: {
+        template: { name: "Kickoff deck" },
+      }
+
+      expect(response).to redirect_to(new_settings_template_path(circle.slug))
+    end
   end
 
   describe "PATCH /update" do
@@ -96,6 +110,21 @@ RSpec.describe "/templates", type: :request do
       }
 
       expect(template.reload.name).to eq("Renamed")
+      expect(response).to redirect_to(edit_settings_template_path(circle, template))
+    end
+
+    it "redirects with errors when update fails" do
+      circle = @admin.circles.first
+      template = create(:template, circle:, name: "Original")
+      allow_any_instance_of(Template).to receive(:update).and_return(false)
+      allow_any_instance_of(Template).to receive(:errors).and_return(
+        ActiveModel::Errors.new(template).tap { |errors| errors.add(:name, "invalid") },
+      )
+
+      patch settings_template_url(circle, template), params: {
+        template: { name: "Renamed" },
+      }
+
       expect(response).to redirect_to(edit_settings_template_path(circle, template))
     end
   end

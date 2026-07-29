@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next"
 
 import { Box, Text, UnstyledButton } from "@/components"
 
-import { FlowSurface } from "./FlowSurface"
 import * as classes from "./flowLane.css"
+import { FlowSurface } from "./FlowSurface"
 
 interface MemberFormStepProps {
 	uiTemplateId: string

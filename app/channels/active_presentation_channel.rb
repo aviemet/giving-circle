@@ -29,12 +29,12 @@ class ActivePresentationChannel < ApplicationCable::Channel
     presentation = Presentation.find(data["presentation_id"])
     slide = presentation.slides.find(data["slide_id"])
 
-    slide.update!(content: data["content"])
+    slide.update!(data: data["content"] || data["data"])
 
     ActivePresentationChannel.broadcast_to(presentation, {
       type: "slide_updated",
       slide_id: slide.id,
-      content: slide.content
+      content: slide.data
     })
   end
 
