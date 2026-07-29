@@ -23,4 +23,6 @@
 class PresentationsMembership < ApplicationRecord
   belongs_to :presentation
   belongs_to :membership
+
+  monetize :funds_cents, allow_nil: true
 end

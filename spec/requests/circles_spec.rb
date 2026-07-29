@@ -132,4 +132,16 @@ RSpec.describe "/circles", type: :request do
       expect(flash[:notice]).to eq(I18n.t("circles.notices.destroyed"))
     end
   end
+
+  describe "GET /about" do
+    login_super_admin
+
+    it "renders the public about page" do
+      circle = @admin.circles.first
+
+      get about_circle_url(circle)
+
+      expect(response).to be_successful
+    end
+  end
 end

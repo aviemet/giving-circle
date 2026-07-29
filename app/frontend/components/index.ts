@@ -46,6 +46,7 @@ export {
 	ScrollArea, type ScrollAreaProps,
 	SimpleGrid, type SimpleGridProps,
 	Skeleton, type SkeletonProps,
+	Slider, type SliderProps,
 	Stack, type StackProps,
 	Text, type TextProps,
 	Title, type TitleProps,

@@ -101,3 +101,13 @@ export const useSyncPresentationTemplateSlides: ReactMutationFunction<
 	})
 }
 
+export {
+	useTogglePresentationInteraction,
+	type PresentationInteractionControlsState,
+	type TogglePresentationInteractionResult,
+} from "./interactions"
+
+export {
+	useUpdateInteractionMembershipVotes,
+} from "./interactionMemberships"
+

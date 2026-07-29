@@ -110,7 +110,7 @@ export function buildDefaultActions(circleSlug: string | undefined): SpotlightAc
 			label: t("spotlight.presentation_templates"),
 			description: t("spotlight.presentation_templates_description"),
 			group: t("spotlight.circle"),
-			onClick: () => router.get(Routes.circleTemplates(circleSlug)),
+			onClick: () => router.get(Routes.settingsTemplates(circleSlug)),
 			leftSection: <PresentationIcon size={ 18 } />,
 		},
 		{
@@ -166,7 +166,7 @@ export function generateSearchActions(
 			label: template.name || template.slug,
 			description: template.slug,
 			group: t("templates.index.breadcrumbs.templates"),
-			onClick: () => router.get(Routes.circleTemplate(circleSlug, template.slug)),
+			onClick: () => router.get(Routes.settingsTemplate(circleSlug, template.slug)),
 			leftSection: <PresentationIcon size={ 18 } />,
 			keywords: ["template", "templates"],
 		})),

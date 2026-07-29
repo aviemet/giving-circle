@@ -4,9 +4,9 @@ class Presentations::SlidesController < ApplicationController
   expose :slides, ->{ search(presentation.slides.includes_associated) }
   expose :slide, id: ->{ params[:slug] }, scope: ->{ presentation.slides }, find_by: :slug
 
-  strong_params :slide, permit: %i(name data order template)
+  strong_params :slide, permit: [:title, data: {}]
 
-  sortable_fields %w(name data order template)
+  sortable_fields %w(title data)
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides (theme_presentation_slides)
   def index
@@ -28,10 +28,10 @@ class Presentations::SlidesController < ApplicationController
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/slides/new (new_theme_presentation_slide)
   def new
-    authorize Presentation::Slide.new
+    authorize Slide.new, policy_class: Presentation::SlidePolicy
 
     render inertia: "Presentations/Slides/New", props: {
-      slide: Presentation::Slide.new.render(:form_data)
+      slide: Slide.new.render(:form_data)
     }
   end
 
@@ -48,10 +48,21 @@ class Presentations::SlidesController < ApplicationController
   def create
     authorize Slide.new, policy_class: Presentation::SlidePolicy
 
+    slide.presentation = presentation
+
     if slide.save
-      redirect_to slide, notice: t("slides.notices.created")
+      redirect_to theme_presentation_slide_url(
+        params[:circle_slug],
+        params[:theme_slug],
+        params[:presentation_slug],
+        slide,
+      ), notice: t("slides.notices.created")
     else
-      redirect_to new_slide_path, inertia: { errors: slide.errors }
+      redirect_to new_theme_presentation_slide_url(
+        params[:circle_slug],
+        params[:theme_slug],
+        params[:presentation_slug],
+      ), inertia: { errors: slide.errors }
     end
   end
 
@@ -61,9 +72,19 @@ class Presentations::SlidesController < ApplicationController
     authorize slide, policy_class: Presentation::SlidePolicy
 
     if slide.update(slide_params)
-      redirect_to slide, notice: t("slides.notices.updated")
+      redirect_to theme_presentation_slide_url(
+        params[:circle_slug],
+        params[:theme_slug],
+        params[:presentation_slug],
+        slide,
+      ), notice: t("slides.notices.updated")
     else
-      redirect_to edit_slide_path, inertia: { errors: slide.errors }
+      redirect_to edit_theme_presentation_slide_url(
+        params[:circle_slug],
+        params[:theme_slug],
+        params[:presentation_slug],
+        slide,
+      ), inertia: { errors: slide.errors }
     end
   end
 

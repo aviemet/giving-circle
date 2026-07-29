@@ -353,3 +353,266 @@ export function createPresentationsEdit(overrides?: Partial<Schema.Presentations
 	}
 }
 
+export function createInteractionUiTemplate(
+	overrides?: Partial<Schema.InteractionUiTemplatesPersisted>,
+): Schema.InteractionUiTemplatesPersisted {
+	return {
+		id: "ui-1",
+		name: "Allocation",
+		slug: "allocation",
+		...overrides,
+	}
+}
+
+export function createInteractionConfigTemplatePersisted(
+	overrides?: Partial<Schema.InteractionConfigTemplatesPersisted>,
+): Schema.InteractionConfigTemplatesPersisted {
+	return {
+		id: "ict-1",
+		name: "Allocation template",
+		slug: "allocation-template",
+		config: {},
+		interaction_ui_template: createInteractionUiTemplate(),
+		...overrides,
+	}
+}
+
+export function createInteractionConfigTemplatesIndex(
+	overrides?: Partial<Schema.InteractionConfigTemplatesIndex>,
+): Schema.InteractionConfigTemplatesIndex {
+	return {
+		id: "ict-1",
+		name: "Allocation template",
+		slug: "allocation-template",
+		config: {},
+		circle: createCirclePersisted(),
+		interaction_ui_template: createInteractionUiTemplate(),
+		...overrides,
+	}
+}
+
+export function createInteractionConfigTemplatesFormData(
+	overrides?: Partial<Schema.InteractionConfigTemplatesFormData>,
+): Schema.InteractionConfigTemplatesFormData {
+	const uiTemplate = createInteractionUiTemplate()
+	return {
+		name: "Allocation template",
+		config: {},
+		field_types: ["text", "number", "money", "org_money_map", "org_reference", "single_select"],
+		metrics: ["allocated_totals"],
+		reducers: ["sum_by_org"],
+		interaction_ui_template: uiTemplate,
+		interaction_ui_templates: [uiTemplate],
+		...overrides,
+	}
+}
+
+export function createInteractionConfigTemplatesEdit(
+	overrides?: Partial<Schema.InteractionConfigTemplatesEdit>,
+): Schema.InteractionConfigTemplatesEdit {
+	return {
+		...createInteractionConfigTemplatesFormData(),
+		id: "ict-1",
+		slug: "allocation-template",
+		...overrides,
+	}
+}
+
+export function createPresentationInteractionsFormData(
+	overrides?: Partial<Schema.PresentationInteractionsFormData>,
+): Schema.PresentationInteractionsFormData {
+	const uiTemplate = createInteractionUiTemplate()
+	const configTemplate = createInteractionConfigTemplatePersisted({
+		interaction_ui_template: uiTemplate,
+	})
+	return {
+		accepting_responses: false,
+		config: {},
+		field_types: ["text", "number", "money", "org_money_map", "org_reference", "single_select", "field_group"],
+		interaction_config_templates: [configTemplate],
+		interaction_ui_template: uiTemplate,
+		interaction_ui_templates: [
+			uiTemplate,
+			createInteractionUiTemplate({ id: "ui-2", name: "Finalist vote", slug: "finalist_vote" }),
+			createInteractionUiTemplate({ id: "ui-3", name: "Pledges", slug: "pledges" }),
+		],
+		metrics: ["allocated_totals", "org_vote_totals"],
+		name: "Allocation Round",
+		reducers: ["sum_by_org", "count"],
+		results: {},
+		slides: [createSlidePresentation()],
+		trigger_conditions: {},
+		trigger_type: "manual",
+		...overrides,
+	}
+}
+
+export function createPresentationInteractionsIndex(
+	overrides?: Partial<Schema.PresentationInteractionsIndex>,
+): Schema.PresentationInteractionsIndex {
+	return {
+		id: "interaction-1",
+		accepting_responses: true,
+		config: {},
+		interaction_ui_template: createInteractionUiTemplate(),
+		name: "Allocation Round",
+		results: {},
+		slug: "allocation-round",
+		trigger_conditions: {},
+		trigger_type: "manual",
+		...overrides,
+	}
+}
+
+export function createPresentationInteractionsShow(
+	overrides?: Partial<Schema.PresentationInteractionsShow>,
+): Schema.PresentationInteractionsShow {
+	return {
+		...createPresentationInteractionsIndex(),
+		...overrides,
+	}
+}
+
+export function createPresentationInteractionsEdit(
+	overrides?: Partial<Schema.PresentationInteractionsEdit>,
+): Schema.PresentationInteractionsEdit {
+	return {
+		...createPresentationInteractionsFormData(),
+		id: "interaction-1",
+		...overrides,
+	}
+}
+
+export function createThemesIndex(overrides?: Partial<Schema.ThemesIndex>): Schema.ThemesIndex {
+	return {
+		id: "theme-1",
+		circle: createCirclesOptions(),
+		name: "Theme 1",
+		slug: "theme-1",
+		status: "current",
+		...overrides,
+	}
+}
+
+export function createTemplatesEdit(overrides?: Partial<Schema.TemplatesEdit>): Schema.TemplatesEdit {
+	return {
+		id: "template-1",
+		circle: createCirclePersisted(),
+		name: "Template 1",
+		settings: {},
+		slides: [],
+		slug: "template-1",
+		...overrides,
+	}
+}
+
+export function createThemesFormData(overrides?: Partial<Schema.ThemesFormData>): Schema.ThemesFormData {
+	return {
+		name: "Theme 1",
+		heading: "Theme Heading",
+		description: "Theme description",
+		status: "draft",
+		...overrides,
+	}
+}
+
+export function createThemesEdit(overrides?: Partial<Schema.ThemesEdit>): Schema.ThemesEdit {
+	return {
+		id: "theme-1",
+		circle: createCirclesOptions(),
+		name: "Theme 1",
+		heading: "Theme Heading",
+		description: "Theme description",
+		slug: "theme-1",
+		status: "current",
+		...overrides,
+	}
+}
+
+export function createThemesOrgsShow(overrides?: Partial<Schema.ThemesOrgsShow>): Schema.ThemesOrgsShow {
+	return {
+		id: "org-1",
+		ask: { amount: 1000, cents: 100_000, currency_iso: "USD" },
+		circle: createCirclePersisted(),
+		description: "Org description",
+		name: "Org 1",
+		slug: "org-1",
+		...overrides,
+	}
+}
+
+export function createOrgsFormData(overrides?: Partial<Schema.OrgsFormData>): Schema.OrgsFormData {
+	return {
+		name: "Org 1",
+		description: "Org description",
+		...overrides,
+	}
+}
+
+export function createOrgsEdit(overrides?: Partial<Schema.OrgsEdit>): Schema.OrgsEdit {
+	return {
+		id: "org-1",
+		name: "Org 1",
+		slug: "org-1",
+		description: "Org description",
+		...overrides,
+	}
+}
+
+export function createUsersIndex(overrides?: Partial<Schema.UsersIndex>): Schema.UsersIndex {
+	return {
+		id: "user-1",
+		active: true,
+		circles: [createCirclePersisted()],
+		created_at: "2025-01-01T00:00:00.000Z",
+		email: "user@example.com",
+		person: {
+			id: "person-1",
+			active: true,
+			name: "Person One",
+			slug: "person-1",
+		},
+		roles: [],
+		slug: "user-1",
+		table_preferences: {},
+		updated_at: "2025-01-01T00:00:00.000Z",
+		user_preferences: {},
+		...overrides,
+	}
+}
+
+export function createSmtpsIndex(overrides?: Partial<Schema.SmtpsIndex>): Schema.SmtpsIndex {
+	return {
+		id: "smtp-1",
+		host: "smtp.example.com",
+		name: "Primary SMTP",
+		security: "tls",
+		port: 587,
+		...overrides,
+	}
+}
+
+export function createSmtpsFormData(overrides?: Partial<Schema.SmtpsFormData>): Schema.SmtpsFormData {
+	return {
+		host: "smtp.example.com",
+		name: "Primary SMTP",
+		security: "tls",
+		port: 587,
+		...overrides,
+	}
+}
+
+export function createSmtpsShow(overrides?: Partial<Schema.SmtpsShow>): Schema.SmtpsShow {
+	return {
+		id: "smtp-1",
+		host: "smtp.example.com",
+		name: "Primary SMTP",
+		security: "tls",
+		port: 587,
+		domain: "example.com",
+		address: "noreply@example.com",
+		notes: "<p>Notes</p>",
+		...overrides,
+	}
+}
+

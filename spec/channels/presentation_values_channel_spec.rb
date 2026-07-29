@@ -33,6 +33,8 @@ RSpec.describe PresentationValuesChannel, type: :channel do
         "vote_counts" => [],
         "money_totals" => [],
         "rank_totals" => [],
+        "org_vote_totals" => [],
+        "finalist_org_ids" => [org.id],
       },
     )
   end

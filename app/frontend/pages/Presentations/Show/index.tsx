@@ -192,7 +192,7 @@ const ShowPresentation = ({ presentation }: ShowPresentationProps) => {
 					{ presentation.template && (
 						<Text size="sm" c="dimmed">
 							{ t("presentations.show.basedOnTemplate") }{ " " }
-							<Link href={ Routes.circleTemplate(params.circle_slug, presentation.template.slug) }>
+							<Link href={ Routes.settingsTemplate(params.circle_slug, presentation.template.slug) }>
 								{ presentation.template.name }
 							</Link>
 						</Text>

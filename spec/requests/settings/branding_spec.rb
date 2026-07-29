@@ -34,5 +34,17 @@ RSpec.describe "/settings/branding", type: :request do
       expect(response).to redirect_to(settings_branding_path(circle_slug: circle.slug))
       expect(circle.reload.settings.primary_color).to eq("blue")
     end
+
+    it "redirects with errors when circle save fails" do
+      circle = @admin.circles.first
+      allow_any_instance_of(Circle).to receive(:save).and_return(false)
+      allow_any_instance_of(Circle).to receive(:errors).and_return(
+        ActiveModel::Errors.new(circle).tap { |errors| errors.add(:name, "invalid") },
+      )
+
+      patch settings_branding_path(circle_slug: circle.slug), params: { settings: { primary_color: "grape" } }
+
+      expect(response).to redirect_to(settings_branding_path(circle_slug: circle.slug))
+    end
   end
 end

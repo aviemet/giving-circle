@@ -22,7 +22,7 @@ export const NewTemplateModal = ({ children, circle }: NewTemplateModalProps) =>
 			title: "Create New Presentation Template",
 			children:
 			<Form<NewTemplateFormData>
-				action={ Routes.circleTemplates(circle.slug) }
+				action={ Routes.settingsTemplates(circle.slug) }
 				method="post"
 				initialData={ {
 					template: {

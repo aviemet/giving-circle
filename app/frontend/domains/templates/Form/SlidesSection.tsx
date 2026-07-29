@@ -80,7 +80,7 @@ export const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 						key={ index }
 						path={ `template.slides_attributes.${index}` }
 						removeInput={ () => handleRemoveSlide(index) }
-						href={ template.slug ? Routes.circleTemplatesEditSlide(circle.slug, template.slug, String(index)) : undefined }
+						href={ template.slug ? Routes.settingsTemplatesEditSlide(circle.slug, template.slug, String(index)) : undefined }
 					/>
 				)) }
 			</Flex>

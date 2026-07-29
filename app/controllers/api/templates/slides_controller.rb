@@ -15,7 +15,7 @@ class Api::Templates::SlidesController < Api::ApiController
     if slide.save
       render json: slide, status: :created
     else
-      render json: { errors: user.errors }, status: :unprocessable_content
+      render json: { errors: slide.errors }, status: :unprocessable_content
     end
   end
 
@@ -27,7 +27,7 @@ class Api::Templates::SlidesController < Api::ApiController
     if slide.update(slide_params)
       render json: slide, status: :accepted
     else
-      render json: { errors: user.errors }, status: :unprocessable_content
+      render json: { errors: slide.errors }, status: :unprocessable_content
     end
   end
 

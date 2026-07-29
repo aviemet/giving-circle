@@ -50,6 +50,17 @@ describe("lib/formatters datetime", () => {
 		expect(datetime.dateEnglish(sampleDate)).toBe("01/15/2024")
 		expect(datetime.dateShort(sampleDate)).toBe("1/15/24")
 		expect(datetime.dateUrl(sampleDate)).toBe("2024-01-15")
+		expect(datetime.dateLong(sampleDate)).toContain("2024")
+		expect(datetime.dateWithWeekday(sampleDate)).toContain("Jan")
+	})
+
+	test("formats times", () => {
+		expect(datetime.timeLong(sampleDate)).toMatch(/PM|AM/)
+		expect(datetime.timeFull(sampleDate)).toContain(":")
+		expect(datetime.timeShort(sampleDate)).toMatch(/a|p/)
+		expect(datetime.dateTimeShort(sampleDate)).toContain("/")
+		expect(datetime.dateTimeLong(sampleDate)).toContain("/")
+		expect(datetime.dateTimeFull(sampleDate)).toContain("/")
 	})
 
 	test("formats a date range", () => {
@@ -62,5 +73,9 @@ describe("lib/formatters datetime", () => {
 		const past = new Date(Date.now() - 60 * 60 * 1000)
 		expect(datetime.fromNow(past)).toBe("an hour ago")
 		expect(datetime.duration(past)).toBe("an hour")
+		expect(datetime.toNow(past)).toBeTruthy()
+		expect(datetime.fromNow(past, new Date())).toBeTruthy()
+		expect(datetime.toNow(past, new Date())).toBeTruthy()
+		expect(datetime.duration(past, new Date())).toBeTruthy()
 	})
 })

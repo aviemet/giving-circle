@@ -24,6 +24,26 @@ RSpec.describe "Presentations::Interactions", type: :request do
     end
   end
 
+  describe "GET show" do
+    it "is successful" do
+      interaction = create(:presentation_interaction, presentation: presentation)
+
+      get theme_presentation_interaction_path(circle, theme, presentation, interaction)
+
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET edit" do
+    it "is successful" do
+      interaction = create(:presentation_interaction, presentation: presentation)
+
+      get edit_theme_presentation_interaction_path(circle, theme, presentation, interaction)
+
+      expect(response).to be_successful
+    end
+  end
+
   describe "POST create" do
     it "creates an interaction" do
       expect {
@@ -103,6 +123,89 @@ RSpec.describe "Presentations::Interactions", type: :request do
       }.not_to change(Presentation::Interaction, :count)
 
       expect(response).to redirect_to(new_theme_presentation_interaction_path(circle, theme, presentation))
+    end
+  end
+
+  describe "PATCH update" do
+    it "updates an interaction" do
+      interaction = create(:presentation_interaction, presentation: presentation, name: "Original")
+
+      patch theme_presentation_interaction_path(circle, theme, presentation, interaction), params: {
+        presentation_interaction: {
+          name: "Renamed Round",
+        },
+      }
+
+      interaction.reload
+      expect(response).to redirect_to(theme_presentation_interaction_path(circle, theme, presentation, interaction))
+      expect(interaction.name).to eq("Renamed Round")
+    end
+
+    it "returns validation errors for invalid update params" do
+      interaction = create(:presentation_interaction, presentation: presentation, name: "Original")
+
+      patch theme_presentation_interaction_path(circle, theme, presentation, interaction), params: {
+        presentation_interaction: {
+          name: "Original",
+          config: {
+            "fields" => [
+              { "key" => "amount", "type" => "number", "label" => "Amount" },
+            ],
+            "outputs" => [
+              { "metric" => "allocated_totals", "source_field" => "amount", "reducer" => "sum_by_org" },
+            ],
+          },
+        },
+      }
+
+      expect(response).to redirect_to(edit_theme_presentation_interaction_path(circle, theme, presentation, interaction))
+      expect(interaction.reload.config).to eq(InteractionConfigFixtures::ALLOCATION_ROUND)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "destroys an interaction" do
+      interaction = create(:presentation_interaction, presentation: presentation)
+
+      expect {
+        delete theme_presentation_interaction_path(circle, theme, presentation, interaction)
+      }.to change(Presentation::Interaction, :count).by(-1)
+
+      expect(response).to redirect_to(theme_presentation_interactions_path(circle, theme, presentation))
+    end
+  end
+
+  describe "POST open_responses" do
+    it "opens the interaction for responses" do
+      interaction = create(
+        :presentation_interaction,
+        presentation: presentation,
+        accepting_responses: false,
+      )
+
+      post open_responses_theme_presentation_interaction_path(circle, theme, presentation, interaction)
+
+      expect(response).to redirect_to(
+        theme_presentation_interaction_path(circle, theme, presentation, interaction),
+      )
+      expect(interaction.reload.accepting_responses).to be(true)
+    end
+  end
+
+  describe "POST close_responses" do
+    it "closes the interaction for responses" do
+      interaction = create(
+        :presentation_interaction,
+        presentation: presentation,
+        accepting_responses: true,
+      )
+
+      post close_responses_theme_presentation_interaction_path(circle, theme, presentation, interaction)
+
+      expect(response).to redirect_to(
+        theme_presentation_interaction_path(circle, theme, presentation, interaction),
+      )
+      expect(interaction.reload.accepting_responses).to be(false)
     end
   end
 end

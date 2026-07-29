@@ -1,7 +1,6 @@
-import { router } from "@inertiajs/react"
 import { useTranslation } from "react-i18next"
 
-import { Badge, Button, Group, Menu, Page, Section, Stack, Text } from "@/components"
+import { Badge, Container, Group, Menu, Page, Section, Stack, Text } from "@/components"
 import { interactionConfigFrom } from "@/domains/presentation/interactions/Form/interactionConfig"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
@@ -34,73 +33,43 @@ const ShowPresentationInteraction = ({ presentation_interaction }: ShowPresentat
 				{ title, href: window.location.href },
 			] }
 		>
-			<Section>
-				<Stack gap="md">
-					<Group justify="space-between">
-						<Badge color={ acceptingResponses ? "green" : "gray" }>
-							{ acceptingResponses
-								? t("presentations.interactions.show.accepting_responses")
-								: t("presentations.interactions.show.closed") }
-						</Badge>
-						<Menu position="bottom-end">
-							<Menu.Target />
-							<Menu.Dropdown>
-								<Menu.Link href={ Routes.editThemePresentationInteraction(
-									params.circle_slug,
-									params.theme_slug,
-									params.presentation_slug,
-									presentation_interaction.slug,
-								) }>
-									{ t("presentations.interactions.show.edit") }
-								</Menu.Link>
-								<Menu.Link href={ Routes.themePresentationInteractionResponses(
-									params.circle_slug,
-									params.theme_slug,
-									params.presentation_slug,
-									presentation_interaction.slug,
-								) }>
-									{ t("presentations.interactions.show.responses") }
-								</Menu.Link>
-							</Menu.Dropdown>
-						</Menu>
-					</Group>
-					<Group>
-						{ acceptingResponses
-							? (
-								<Button
-									color="red"
-									onClick={ () => {
-										router.post(Routes.closeResponsesThemePresentationInteraction(
-											params.circle_slug,
-											params.theme_slug,
-											params.presentation_slug,
-											presentation_interaction.slug,
-										))
-									} }
-								>
-									{ t("presentations.interactions.show.close_responses") }
-								</Button>
-							)
-							: (
-								<Button
-									onClick={ () => {
-										router.post(Routes.openResponsesThemePresentationInteraction(
-											params.circle_slug,
-											params.theme_slug,
-											params.presentation_slug,
-											presentation_interaction.slug,
-										))
-									} }
-								>
-									{ t("presentations.interactions.show.open_responses") }
-								</Button>
-							) }
-					</Group>
-					<Text size="sm" c="dimmed">
-						{ t("presentations.interactions.show.data_points_configured", { count: fieldCount }) }
-					</Text>
-				</Stack>
-			</Section>
+			<Container>
+				<Section>
+					<Stack gap="md">
+						<Group justify="space-between">
+							<Badge color={ acceptingResponses ? "green" : "gray" }>
+								{ acceptingResponses
+									? t("presentations.interactions.show.accepting_responses")
+									: t("presentations.interactions.show.closed") }
+							</Badge>
+							<Menu position="bottom-end">
+								<Menu.Target />
+								<Menu.Dropdown>
+									<Menu.Link href={ Routes.editThemePresentationInteraction(
+										params.circle_slug,
+										params.theme_slug,
+										params.presentation_slug,
+										presentation_interaction.slug,
+									) }>
+										{ t("presentations.interactions.show.edit") }
+									</Menu.Link>
+									<Menu.Link href={ Routes.themePresentationInteractionResponses(
+										params.circle_slug,
+										params.theme_slug,
+										params.presentation_slug,
+										presentation_interaction.slug,
+									) }>
+										{ t("presentations.interactions.show.responses") }
+									</Menu.Link>
+								</Menu.Dropdown>
+							</Menu>
+						</Group>
+						<Text size="sm" c="dimmed">
+							{ t("presentations.interactions.show.member_answers_configured", { count: fieldCount }) }
+						</Text>
+					</Stack>
+				</Section>
+			</Container>
 		</Page>
 	)
 }

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   include Contactable
 
-  expose :users, -> { search(User.all.includes_associated) }
-  expose :user, id: -> { params[:slug] }, scope: -> { Circle.includes_associated }, find_by: :slug
+  expose :users, -> { search(User.all) }
+  expose :user, id: -> { params[:id] }, scope: -> { User.all }, find_by: :slug
 
   strong_params :user, permit: [:email, :password, :active, :first_name, :last_name, :number]
 
@@ -62,8 +62,6 @@ class UsersController < ApplicationController
   def destroy
     authorize user
     user.destroy
-    respond_to do
-      redirect_to users_url, notice: t("users.notices.destroyed")
-    end
+    redirect_to users_url, notice: t("users.notices.destroyed")
   end
 end

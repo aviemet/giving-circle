@@ -130,7 +130,7 @@ class Presentation::Interaction::ConfigValidator
   end
 
   def validate_group_options(options, path)
-    if options.key?(:repeatable) && [true, false].exclude(options[:repeatable])
+    if options.key?(:repeatable) && [true, false].exclude?(options[:repeatable])
       @errors << t(:repeatable_boolean, path: path)
     end
 

@@ -39,6 +39,8 @@ export {
 	TbLetterCaseLower as TextLowercaseIcon,
 	TbLetterCase as TextCapitalizeIcon,
 	TbTextSize as FontNormalIcon,
+	TbKeyboard as KeyboardIcon,
+	TbInfoCircle as InfoIcon,
 } from "react-icons/tb"
 
 export {

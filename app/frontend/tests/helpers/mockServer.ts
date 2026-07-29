@@ -6,7 +6,7 @@ import { afterAll, afterEach, beforeAll, vi } from "vitest"
 
 import { handlers } from "./handlers"
 
-const server = setupServer(...handlers)
+export const server = setupServer(...handlers)
 
 const TestInertiaFormContext = React.createContext<Record<string, unknown> | undefined>(undefined)
 
@@ -54,6 +54,7 @@ export const inertiaPageProps: TestInertiaPageProps = {
 		circle_slug: "circle-1",
 		theme_slug: "theme-1",
 		presentation_slug: "presentation-1",
+		interaction_slug: "allocation-round",
 		slug: "slug-1",
 		id: "id-1",
 	},

@@ -4,3 +4,4 @@ export { PresentationMenu } from "./PresentationMenu"
 export { ThemeMenu } from "./ThemeMenu"
 
 export { SettingsMenu } from "./SettingsMenu"
+export { TemplatesSettingsMenu } from "./TemplatesSettingsMenu"

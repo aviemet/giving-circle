@@ -12,6 +12,7 @@ class Presentations::InteractionResponsesController < ApplicationController
   }
 
   expose :presentation_interaction_response,
+    model: "Presentation::InteractionResponse",
     scope: -> { presentation_interaction.interaction_responses.includes_associated },
     find: ->(id, scope) { scope.find(id) }
 

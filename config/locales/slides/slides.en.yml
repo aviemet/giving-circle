@@ -52,8 +52,8 @@ en:
         text:
           alignment: Alignment
           boolean:
-            "no": "No"
-            "yes": "Yes"
+            'no': 'No'
+            'yes': 'Yes'
           color: Color
           content: Content
           default_content: Text
@@ -220,11 +220,11 @@ en:
           aspect:
             auto: Auto
             custom: Custom
-            landscape_4_3: "4:3"
-            portrait_3_4: "3:4"
-            square: "1:1"
-            tall_9_16: "9:16"
-            wide_16_9: "16:9"
+            landscape_4_3: '4:3'
+            portrait_3_4: '3:4'
+            square: '1:1'
+            tall_9_16: '9:16'
+            wide_16_9: '16:9'
           aspect_hint: Forces a box ratio; Fit and Position apply when a crop box exists
           custom_aspect_placeholder: 16 / 9
           fit:
@@ -261,6 +261,12 @@ en:
             height: Height
             natural: Natural
             width: Width
+        leverage_colors:
+          label: Colors
+          labels:
+            radius: Radius
+            remaining: Remaining
+            track: Track
         sizing:
           align_self:
             auto: Auto
@@ -268,7 +274,7 @@ en:
             end: End
             start: Start
             stretch: Stretch
-          custom_placeholder: "flex: 1 1 280px; max-width: 50%"
+          custom_placeholder: 'flex: 1 1 280px; max-width: 50%'
           fine_tune:
             align_self: Align self
             flex_grow: Flex grow
@@ -338,37 +344,31 @@ en:
             wrap: Break onto multiple lines as needed.
         text_layout:
           boolean:
-            "off": "Off"
-            "on": "On"
+            'off': 'Off'
+            'on': 'On'
           hints:
             inherit: Pull typography from the parent instead of this text's size.
             inline: Whether the text sits in the surrounding line or on its own.
             span: Render as a span instead of a paragraph-like block.
           inherit_hints:
-            "off": Use this text's own size and styles.
-            "on": Inherit font size and styles from the parent.
+            'off': Use this text's own size and styles.
+            'on': Inherit font size and styles from the parent.
           inline_hints:
-            "off": Block box on its own line.
-            "on": Flows with surrounding text on the same line.
+            'off': Block box on its own line.
+            'on': Flows with surrounding text on the same line.
           label: Layout
           labels:
             inherit: Inherit
             inline: Inline
             span: Span
           span_hints:
-            "off": Render as a paragraph (Text).
-            "on": Render as an inline span element.
+            'off': Render as a paragraph (Text).
+            'on': Render as an inline span element.
         timer_colors:
           label: Colors
           labels:
             ring_progress: Progress
             ring_track: Track
-        leverage_colors:
-          label: Colors
-          labels:
-            remaining: Remaining
-            track: Track
-            radius: Radius
         timer_display:
           hints:
             circle: Time inside a circular progress ring
@@ -396,7 +396,7 @@ en:
             mode: Mode
           modes:
             message: Message
-            zero: "0:00"
+            zero: '0:00'
         typography:
           decoration:
             line_through: Strikethrough
@@ -425,15 +425,15 @@ en:
             uppercase: Uppercase
           tt: Text transform
           weights:
-            "100": Thin (100)
-            "200": Extra light (200)
-            "300": Light (300)
-            "400": Regular (400)
-            "500": Medium (500)
-            "600": Semibold (600)
-            "700": Bold (700)
-            "800": Extra bold (800)
-            "900": Black (900)
+            '100': Thin (100)
+            '200': Extra light (200)
+            '300': Light (300)
+            '400': Regular (400)
+            '500': Medium (500)
+            '600': Semibold (600)
+            '700': Bold (700)
+            '800': Extra bold (800)
+            '900': Black (900)
       header:
         close: Close
         close_without_saving: Close without saving

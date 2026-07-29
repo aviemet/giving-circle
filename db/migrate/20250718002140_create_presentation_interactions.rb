@@ -2,6 +2,7 @@ class CreatePresentationInteractions < ActiveRecord::Migration[8.0]
   def change
     create_table :presentation_interactions, id: :uuid do |t|
       t.references :presentation, null: false, foreign_key: true, type: :uuid
+      t.references :interaction_ui_template, null: false, foreign_key: true, type: :uuid
       t.string :slug, null: false
       t.string :name, null: false
       t.jsonb :config, null: false, default: {}

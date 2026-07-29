@@ -432,13 +432,13 @@
     },
     "interaction_config_templates": {
       "edit": {
-        "title": "Edit %{name}"
+        "title": "%{name}: Edit"
       },
       "form": {
         "create": "Create Template",
-        "data_points": "Data points",
+        "intro": "An interaction template defines the member form, what answers it collects, and which live results appear on the presentation. Reuse it when you create interactions for a presentation.",
         "name": "Name",
-        "outputs": "Outputs",
+        "name_description": "A short name so you can find this template later (for example, Allocation round).",
         "update": "Update Template"
       },
       "index": {
@@ -509,6 +509,8 @@
       "settings": "Settings",
       "signIn": "Sign In",
       "signOut": "Sign Out",
+      "switchCircle": "Switch circle",
+      "templates": "Templates",
       "themes": "Themes",
       "toggleColorScheme": "Toggle color scheme",
       "toggleColorSchemeToDark": "Toggle color scheme to dark mode",
@@ -638,6 +640,28 @@
           "update": "Update presentation action"
         }
       },
+      "active": {
+        "controls": {
+          "interactions": "Interactions",
+          "no_interactions": "No interactions configured for this presentation.",
+          "slides": "Slides"
+        },
+        "members": {
+          "actions": {
+            "interactions": "Interactions"
+          },
+          "columns": {
+            "actions": "Actions",
+            "available": "Available",
+            "email": "Email",
+            "funds": "Funds",
+            "name": "Name",
+            "number": "Number",
+            "votes": "Votes"
+          },
+          "title": "Members"
+        }
+      },
       "alerts": {
         "no_source_template": "This presentation is not linked to a Presentation Template."
       },
@@ -692,6 +716,42 @@
         "newPresentation": "New Presentation",
         "title": "Presentations"
       },
+      "interact": {
+        "form": {
+          "finalize": "Finalize Vote",
+          "funds_left": "Funds left to allocate: %{amount}",
+          "missing_field": "This interaction is missing its vote field configuration.",
+          "partial_submit": "Submit without allocating all funds",
+          "partial_votes_submit": "Submit without using all votes",
+          "submit": "Submit",
+          "toggle_keyboard": "Enter amount with keyboard",
+          "toggle_slider": "Adjust amount with slider",
+          "unsupported": "This interaction UI is not available.",
+          "update": "Update vote",
+          "votes_left": "Votes left: %{votes}"
+        },
+        "idle": {
+          "body": "An interaction will appear here when the host opens one.",
+          "title": "Waiting for the next activity"
+        },
+        "notices": {
+          "not_accepting": "No interaction is currently accepting responses.",
+          "saved": "Your response was saved."
+        },
+        "pledges": {
+          "amount_placeholder": "Pledge Amount",
+          "anonymous": "Anonymous",
+          "clear": "Clear",
+          "finalists": "Finalists",
+          "multi_org": "Select multiple organizations",
+          "runners_up": "Runners Up",
+          "submit": "Submit Pledge",
+          "subtitle": "Pledges will be matched from remaining leverage. Help organizations reach full funding.",
+          "thanks_body": "Your pledge was recorded. Returning to the pledge form.",
+          "thanks_title": "Thank you!",
+          "title": "If you feel like giving more"
+        }
+      },
       "interaction_responses": {
         "edit": {
           "title": "Edit Response"
@@ -733,12 +793,16 @@
             "at_most": "%{prefix} must be at most %{max}",
             "currency_string": "%{prefix}.currency must be a string",
             "entry_amount_cents_integer": "%{prefix}[%{index}].amount_cents must be an integer",
+            "exceeds_available_funds": "%{prefix} total exceeds available funds (%{available_cents} cents)",
+            "exceeds_available_votes": "%{prefix} total exceeds available votes (%{available_votes})",
+            "exceeds_org_ask": "%{prefix}[%{index}] would exceed the organization ask",
             "fields_must_be_array": "Interaction config fields must be an array",
             "group_must_be_object": "%{prefix}[%{group_index}] must be an object",
             "invalid_choices": "%{prefix} contains invalid choices",
             "max_entries": "%{prefix} must have at most %{max} entries",
             "min_entries": "%{prefix} must have at least %{min} entries",
             "must_be_array": "%{prefix} must be an array",
+            "must_be_boolean": "%{prefix} must be a boolean",
             "must_be_choice": "%{prefix} must be one of the configured choices",
             "must_be_money": "%{prefix} must be a money object",
             "must_be_number": "%{prefix} must be a number",
@@ -747,6 +811,8 @@
             "must_be_string": "%{prefix} must be a string",
             "must_be_string_array": "%{prefix} must be an array of strings",
             "org_id_required": "%{prefix}[%{index}].org_id is required",
+            "org_not_allowed": "%{prefix}[%{index}] is not an allowed organization",
+            "pledge_amount_required": "%{prefix} requires a positive pledge amount",
             "rank_integer": "%{prefix}[%{index}].rank must be an integer",
             "required": "%{prefix} is required",
             "unknown_field": "Unknown field '%{key}' in response data",
@@ -760,41 +826,109 @@
         },
         "form": {
           "create": "Create Interaction",
-          "data_points": "Data points",
           "field_builder": {
-            "add_field": "Add field",
+            "add_field": "Add answer",
+            "answer_n": "Answer %{index}",
             "choices": "Choices (comma separated)",
-            "field_n": "Field %{index}",
-            "key": "Key",
-            "label": "Label",
-            "max": "Max",
-            "max_entries": "Max entries",
-            "min": "Min",
-            "min_entries": "Min entries",
-            "nested_fields": "Nested fields",
-            "remove": "Remove",
-            "repeatable": "Repeatable",
-            "type": "Type"
+            "choices_description": "List each choice, separated by commas.",
+            "key": "Reference name",
+            "key_description": "A short internal name used to connect this answer to live results. Keep it simple and unique. Usually filled in for you from the prompt.",
+            "label": "Question / prompt",
+            "label_description": "The text members see when they answer.",
+            "max": "Maximum",
+            "max_description": "Highest number allowed.",
+            "max_entries": "Maximum entries",
+            "max_entries_description": "Most times this group can be repeated.",
+            "min": "Minimum",
+            "min_description": "Lowest number allowed.",
+            "min_entries": "Minimum entries",
+            "min_entries_description": "Fewest times this group must be filled in.",
+            "nested_fields": "Answers in this group",
+            "remove": "Remove answer",
+            "repeatable": "Allow multiple entries",
+            "type": "Answer type",
+            "type_description": "What kind of answer members give."
+          },
+          "live_results": "Live results",
+          "live_results_description": "How those answers become totals shown on the presentation.",
+          "member_answers": "Member answers",
+          "member_answers_description": "What people fill in during the interaction.",
+          "metrics": {
+            "allocated_totals": "Allocated totals",
+            "money_totals": "Money totals",
+            "org_vote_totals": "Organization vote totals",
+            "rank_totals": "Rank totals",
+            "vote_counts": "Vote counts"
           },
           "name": "Name",
           "output_builder": {
-            "add_output": "Add output",
-            "metric": "Metric",
-            "no_compatible_reducers": "This field type has no compatible reducers.",
-            "output_n": "Output %{index}",
-            "reducer": "Reducer",
-            "remove": "Remove",
-            "select_field": "Select a field",
-            "select_source_first": "Select a source field first.",
-            "source_field": "Source field"
+            "add_output": "Add result",
+            "metric": "Result shown",
+            "metric_description": "Which live total on the presentation this updates.",
+            "no_compatible_reducers": "This answer type cannot be turned into a live result yet.",
+            "output_n": "Result %{index}",
+            "reducer": "How to combine",
+            "reducer_description": "How many members' answers become one total.",
+            "remove": "Remove result",
+            "select_field": "Choose an answer",
+            "select_source_first": "Choose which answer to use first.",
+            "source_field": "From answer",
+            "source_field_description": "Which member answer feeds this result."
           },
-          "outputs": "Outputs",
+          "pipeline": {
+            "add_answer": "Add another answer",
+            "add_live_result": "Add live result",
+            "advanced": "Advanced",
+            "collects_answers": "Collects answers",
+            "feeds_live_result": "Feeds live result",
+            "flow": "Flow",
+            "flow_description": "Members fill a form, those answers feed live totals on the presentation.",
+            "live_result_badge": "Live on presentation",
+            "member_answer_badge": "Member answer",
+            "member_form_badge": "Member form",
+            "member_form_description": "Pick the screen members open on their phones while this interaction is accepting responses.",
+            "member_form_label": "Member form",
+            "member_form_title": "Member screen",
+            "screen_hints": {
+              "allocation": "Split funds across organizations",
+              "default": "Member input screen",
+              "finalist_vote": "Vote for finalist organizations",
+              "pledges": "Make pledges to organizations"
+            },
+            "unlinked_results": "Unlinked results",
+            "unlinked_results_description": "These results no longer point at an answer. Fix or remove them."
+          },
+          "reducers": {
+            "count_by_value": "Count by choice",
+            "rank_aggregate": "Combine ranks",
+            "sum_by_org": "Sum by organization",
+            "sum_money": "Sum money"
+          },
+          "settings": {
+            "allow_non_finalists": "Allow pledges to non-finalists",
+            "allow_over_ask": "Allow pledges over organization ask",
+            "default_votes": "Default votes per member",
+            "finalist_count": "Number of finalists"
+          },
           "slide": "Slide",
           "template": "Template",
           "template_blank": "Blank",
           "trigger_manual": "Manual",
           "trigger_slide": "Slide",
           "trigger_type": "Trigger type",
+          "types": {
+            "boolean": "Yes/No",
+            "field_group": "Group of answers",
+            "money": "Money",
+            "multi_select": "Multiple choice",
+            "number": "Number",
+            "org_money_map": "Money per organization",
+            "org_ranked_list": "Ranked organizations",
+            "org_reference": "Organization",
+            "single_select": "Single choice",
+            "text": "Text"
+          },
+          "ui_template": "Member UI",
           "update": "Update Interaction"
         },
         "index": {
@@ -815,8 +949,8 @@
           "accepting_responses": "Accepting responses",
           "close_responses": "Close responses",
           "closed": "Closed",
-          "data_points_configured": "%{count} data points configured",
           "edit": "Edit Interaction",
+          "member_answers_configured": "%{count} member answers configured",
           "open_responses": "Open responses",
           "responses": "Responses"
         },

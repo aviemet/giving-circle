@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     get "/", to: redirect("/settings/general")
-    [:general].freeze.each do |path|
+    [:general, :localizations].freeze.each do |path|
       get path, to: "#{path}#index"
       patch path, to: "#{path}#update"
     end
@@ -61,6 +61,17 @@ Rails.application.routes.draw do
       end
 
       resources :smtps, path: "mail", only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
+      resources :templates, param: :slug, shallow: false
+      resources :interaction_config_templates,
+        path: "interaction_templates",
+        param: :slug,
+        as: :interaction_templates,
+        shallow: false
+      namespace :templates do
+        get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
+        post ":template_slug/slides", to: "slides#create", as: :create_slide
+      end
     end
   end
 
@@ -68,8 +79,11 @@ Rails.application.routes.draw do
 
   get "/preview/slide", to: "preview#slide", as: :preview_slide
 
-  # Public presentation route (shorter URL)
+  # Public presentation routes (shorter URL)
   get "/:circle_slug/p/:presentation_slug", to: "presentations/active#public_show", as: :circle_public_presentation
+  get "/:circle_slug/p/:presentation_slug/memberships", to: "presentations/active#public_memberships", as: :circle_public_presentation_memberships
+  get "/:circle_slug/p/:presentation_slug/interact", to: "presentations/interact#show", as: :circle_presentation_interact
+  patch "/:circle_slug/p/:presentation_slug/interact", to: "presentations/interact#upsert"
 
   # :circle_slug being a param in the first position needs to come after any other first position routing names
   resources :circles, param: :circle_slug, only: [:new, :create, :index]
@@ -87,16 +101,18 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :templates, param: :slug, shallow: false
-      resources :interaction_config_templates,
-        path: "interaction_templates",
-        param: :slug,
-        as: :interaction_templates,
-        shallow: false
-      namespace :templates do
-        get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
-        post ":template_slug/slides", to: "slides#create", as: :create_slide
-      end
+      get "templates", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/templates"
+      }
+      get "templates/*path", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/templates/#{params[:path]}"
+      }
+      get "interaction_templates", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/interaction_templates"
+      }
+      get "interaction_templates/*path", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/interaction_templates/#{params[:path]}"
+      }
 
       resources :themes, param: :theme_slug
       resources :themes, param: :slug, except: [:show, :edit, :new, :index, :create, :update, :destroy] do

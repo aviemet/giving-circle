@@ -2,7 +2,7 @@ require "securerandom"
 
 if Rails.env.development?
   circle = Circle.find_by(slug: "battery-powered")
-  user = User.first
+  user = User.find_by(email: "aviemet@gmail.com") || User.first
 
   Circle.transaction do
 
@@ -11,12 +11,31 @@ if Rails.env.development?
         name: "Battery Powered",
       })
 
-      user.add_role :admin, circle
+      user&.add_role :admin, circle
     end
 
     if circle.memberships.empty?
       50.times do
         FactoryBot.create(:membership, circle:)
+      end
+    end
+
+    if user.present?
+      if user.person.blank?
+        user.update!(person: Person.create!({
+          first_name: "Avi",
+          last_name: "Admin",
+        }))
+      end
+
+      admin_membership = circle.memberships.find_by(person_id: user.person_id)
+      if admin_membership.nil?
+        FactoryBot.create(:membership, {
+          circle:,
+          person: user.person,
+          name: user.person.name,
+          funds_cents: 100_000,
+        })
       end
     end
 
@@ -94,25 +113,38 @@ if Rails.env.development?
       presentation.memberships << circle.memberships
     end
 
+    if presentation.present? && user&.person_id.present?
+      admin_membership = circle.memberships.find_by(person_id: user.person_id)
+      if admin_membership.present? && !presentation.memberships.exists?(admin_membership.id)
+        presentation.memberships << admin_membership
+      end
+    end
+
     if presentation&.orgs&.empty?
       presentation.orgs << theme.orgs
     end
 
     if presentation.present?
       InteractionConfigTemplateDefaults.seed_for_circle!(circle)
-      finalist_template = circle.interaction_config_templates.find_by!(slug: "finalist-vote")
 
-      presentation.interactions.find_or_create_by!(slug: "finalist-vote") do |interaction|
-        interaction.name = finalist_template.name
-        interaction.config = finalist_template.config.deep_dup
-        interaction.trigger_type = :manual
-        interaction.trigger_conditions = {}
-        interaction.results = {}
+      %w[allocation-round finalist-vote pledges].each do |config_slug|
+        config_template = circle.interaction_config_templates.find_by!(slug: config_slug)
+        interaction = presentation.interactions.find_or_create_by!(slug: config_slug) do |record|
+          record.name = config_template.name
+          record.config = config_template.config.deep_dup
+          record.trigger_type = :manual
+          record.trigger_conditions = {}
+          record.results = {}
+          record.interaction_ui_template = config_template.interaction_ui_template
+        end
+        interaction.sync_interaction_memberships!
       end
 
-      vote_budgets = [5, 10, 15, 20]
-      presentation.presentations_memberships.find_each.with_index do |presentations_membership, index|
-        presentations_membership.update!(funds_cents: vote_budgets[index % vote_budgets.length])
+      presentation.presentations_memberships.includes(:membership).find_each do |presentations_membership|
+        presentations_membership.update!(
+          funds_cents: presentations_membership.membership.funds_cents,
+          funds_currency: presentations_membership.membership.funds_currency,
+        )
       end
     end
 
