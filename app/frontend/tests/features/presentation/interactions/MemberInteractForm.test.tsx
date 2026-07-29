@@ -240,4 +240,178 @@ describe("features/presentation/interactions", () => {
 		expect(screen.getByRole("heading", { name: "Custom Interaction" })).toBeTruthy()
 		expect(screen.getByText(/interaction ui is not available/i)).toBeTruthy()
 	})
+
+	test("AllocationVoteForm shows update label when response already exists", () => {
+		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
+
+		render(
+			<MemberInteractForm
+				circleSlug="circle-1"
+				presentationSlug="presentation-1"
+				circle={ circle }
+				presentation={ presentation }
+				availableFunds={ { amount: 100, cents: 10_000, currency_iso: "USD" } }
+				availableVotes={ null }
+				responseData={ {
+					allocations: [{ org_id: "org-1", amount_cents: 10_000 }],
+				} }
+				activeInteraction={ {
+					id: "interaction-1",
+					name: "Allocation Round",
+					slug: "allocation-round",
+					accepting_responses: true,
+					interaction_ui_template: {
+						id: "ui-1",
+						slug: "allocation",
+						name: "Allocation",
+					},
+					config: {
+						fields: [
+							{
+								key: "allocations",
+								type: "org_money_map",
+								label: "Allocate to organizations",
+							},
+						],
+						outputs: [],
+					},
+					context: {
+						presentation_orgs: [org],
+					},
+				} }
+			/>,
+		)
+
+		expect(screen.getByRole("button", { name: /update vote/i })).toBeEnabled()
+	})
+
+	test("AllocationVoteForm returns nothing without allocations field", () => {
+		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
+
+		render(
+			<MemberInteractForm
+				circleSlug="circle-1"
+				presentationSlug="presentation-1"
+				circle={ circle }
+				presentation={ presentation }
+				availableFunds={ { amount: 100, cents: 10_000, currency_iso: "USD" } }
+				availableVotes={ null }
+				activeInteraction={ {
+					id: "interaction-1",
+					name: "Allocation Round",
+					slug: "allocation-round",
+					accepting_responses: true,
+					interaction_ui_template: {
+						id: "ui-1",
+						slug: "allocation",
+						name: "Allocation",
+					},
+					config: {
+						fields: [],
+						outputs: [],
+					},
+					context: {
+						presentation_orgs: [org],
+					},
+				} }
+			/>,
+		)
+
+		expect(screen.queryByRole("heading", { name: "Allocation Round" })).toBeNull()
+	})
+
+	test("FinalistVoteForm enables submit when partial votes allowed", async () => {
+		const user = userEvent.setup()
+		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
+
+		render(
+			<MemberInteractForm
+				circleSlug="circle-1"
+				presentationSlug="presentation-1"
+				circle={ circle }
+				presentation={ presentation }
+				availableFunds={ null }
+				availableVotes={ 10 }
+				activeInteraction={ {
+					id: "interaction-2",
+					name: "Finalist Vote",
+					slug: "finalist-vote",
+					accepting_responses: true,
+					interaction_ui_template: {
+						id: "ui-2",
+						slug: "finalist_vote",
+						name: "Finalist vote",
+					},
+					config: {
+						fields: [
+							{
+								key: "votes",
+								type: "org_money_map",
+								label: "Cast your votes",
+							},
+						],
+						outputs: [],
+						settings: { finalist_count: 5, default_votes: 10 },
+					},
+					context: {
+						presentation_orgs: [org],
+						settings: { finalist_count: 5 },
+					},
+				} }
+			/>,
+		)
+
+		const finalize = screen.getByRole("button", { name: /finalize vote/i })
+		expect(finalize).toBeDisabled()
+
+		await user.click(screen.getByLabelText(/submit without using all votes/i))
+
+		expect(finalize).toBeEnabled()
+	})
+
+	test("FinalistVoteForm shows update label when response already exists", () => {
+		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
+
+		render(
+			<MemberInteractForm
+				circleSlug="circle-1"
+				presentationSlug="presentation-1"
+				circle={ circle }
+				presentation={ presentation }
+				availableFunds={ null }
+				availableVotes={ 10 }
+				responseData={ {
+					votes: [{ org_id: "org-1", amount_cents: 10 }],
+				} }
+				activeInteraction={ {
+					id: "interaction-2",
+					name: "Finalist Vote",
+					slug: "finalist-vote",
+					accepting_responses: true,
+					interaction_ui_template: {
+						id: "ui-2",
+						slug: "finalist_vote",
+						name: "Finalist vote",
+					},
+					config: {
+						fields: [
+							{
+								key: "votes",
+								type: "org_money_map",
+								label: "Cast your votes",
+							},
+						],
+						outputs: [],
+						settings: { finalist_count: 5, default_votes: 10 },
+					},
+					context: {
+						presentation_orgs: [org],
+						settings: { finalist_count: 5 },
+					},
+				} }
+			/>,
+		)
+
+		expect(screen.getByRole("button", { name: /update vote/i })).toBeEnabled()
+	})
 })

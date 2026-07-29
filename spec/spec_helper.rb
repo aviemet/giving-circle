@@ -9,6 +9,11 @@ if rspec_files.length == 1 && rspec_files[0] == "spec"
     add_filter "/spec/"
     add_filter "/db/seeds.rb"
     add_filter "/db/seeds/"
+    add_filter "/lib/generators/"
+    add_filter "/config/"
+    add_filter "/vendor/"
+    add_filter "app/controllers/concerns/active_circle_tracker.rb"
+    add_filter "lib/url_params_json.rb"
 
     add_group "Models", "app/models"
     add_group "Controllers", "app/controllers"
@@ -16,6 +21,8 @@ if rspec_files.length == 1 && rspec_files[0] == "spec"
     add_group "Jobs", "app/jobs"
     add_group "Services", "app/services"
     add_group "Policies", "app/policies"
+    add_group "Channels", "app/channels"
+    add_group "Queries", "app/queries"
   end
 end
 

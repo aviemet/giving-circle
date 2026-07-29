@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     get "/", to: redirect("/settings/general")
-    [:general].freeze.each do |path|
+    [:general, :localizations].freeze.each do |path|
       get path, to: "#{path}#index"
       patch path, to: "#{path}#update"
     end
@@ -81,6 +81,7 @@ Rails.application.routes.draw do
 
   # Public presentation routes (shorter URL)
   get "/:circle_slug/p/:presentation_slug", to: "presentations/active#public_show", as: :circle_public_presentation
+  get "/:circle_slug/p/:presentation_slug/memberships", to: "presentations/active#public_memberships", as: :circle_public_presentation_memberships
   get "/:circle_slug/p/:presentation_slug/interact", to: "presentations/interact#show", as: :circle_presentation_interact
   patch "/:circle_slug/p/:presentation_slug/interact", to: "presentations/interact#upsert"
 

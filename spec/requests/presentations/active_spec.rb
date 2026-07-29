@@ -37,4 +37,55 @@ RSpec.describe "Presentations::Active", type: :request do
       expect(member_row["presentation_funds"]["cents"]).to eq(25_000)
     end
   end
+
+  describe "GET overview" do
+    it "renders the overview page" do
+      get theme_presentation_overview_path(circle, theme, presentation)
+
+      expect(response).to be_successful
+      expect(inertia).to render_component("Presentations/Active/Overview")
+    end
+  end
+
+  describe "GET messaging" do
+    it "renders the messaging page" do
+      get theme_presentation_messaging_path(circle, theme, presentation)
+
+      expect(response).to be_successful
+      expect(inertia).to render_component("Presentations/Active/Messaging")
+    end
+  end
+
+  describe "GET settings" do
+    it "renders the admin settings page" do
+      get theme_presentation_admin_settings_path(circle, theme, presentation)
+
+      expect(response).to be_successful
+      expect(inertia).to render_component("Presentations/Active/Settings")
+    end
+  end
+
+  describe "GET public_show" do
+    it "renders the public presentation view" do
+      get circle_public_presentation_path(circle_slug: circle.slug, presentation_slug: presentation.slug)
+
+      expect(response).to be_successful
+      expect(inertia).to render_component("Presentations/Active/PublicShow")
+    end
+  end
+
+  describe "GET public_memberships" do
+    it "returns presentation memberships as json" do
+      membership = create(:membership, circle: circle)
+      create(:presentations_membership, presentation: presentation, membership: membership)
+
+      get circle_public_presentation_memberships_path(
+        circle_slug: circle.slug,
+        presentation_slug: presentation.slug,
+      )
+
+      expect(response).to be_successful
+      expect(response.parsed_body["memberships"].pluck("id")).to include(membership.id)
+    end
+  end
 end

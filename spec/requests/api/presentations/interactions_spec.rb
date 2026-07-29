@@ -45,5 +45,19 @@ RSpec.describe "Api::Presentations::Interactions", type: :request do
       expect(response).to have_http_status(:accepted)
       expect(second_interaction.reload.accepting_responses).to be(false)
     end
+
+    it "returns unprocessable content when accepting_responses is missing" do
+      patch api_circle_presentation_interaction_path(
+        circle_slug: circle.slug,
+        presentation_slug: presentation.slug,
+        slug: first_interaction.slug,
+      ), params: {
+        presentation_interaction: { accepting_responses: nil },
+      }
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(response.parsed_body["errors"]).to eq("accepting_responses" => ["is required"])
+      expect(first_interaction.reload.accepting_responses).to be(false)
+    end
   end
 end

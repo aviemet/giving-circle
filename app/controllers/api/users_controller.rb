@@ -1,5 +1,5 @@
 class Api::UsersController < Api::ApiController
-  expose :user
+  expose :user, id: -> { params[:id] }, find_by: :slug
 
   strong_params :user, permit: [
     :email, :password, :active,

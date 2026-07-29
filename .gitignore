@@ -57,9 +57,6 @@ node_modules
 !.yarn/versions
 yarn-error.log
 
-# VSCode files
-.vscode
-
 # Test results output
 spec/examples.txt
 coverage

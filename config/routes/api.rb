@@ -38,8 +38,8 @@ namespace :api do
 
   resources :searches, only: [:index]
 
-  # resources :currencies, only: [:index]
+  resources :currencies, only: [:index]
 
   ## SETTINGS ##
-  # post "smtp/test" => "smtps#test", as: :smtp_test
+  post "smtp/test" => "smtps#test", as: :smtp_test
 end

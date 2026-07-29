@@ -1,12 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Presentation::Interaction::ConfigValidator do
-  let(:presentation) { create(:presentation) }
-
   it "accepts a valid allocation round config" do
     interaction = build(
       :presentation_interaction,
-      presentation: presentation,
+      presentation: create(:presentation),
       config: InteractionConfigFixtures::ALLOCATION_ROUND,
     )
 
@@ -16,17 +14,36 @@ RSpec.describe Presentation::Interaction::ConfigValidator do
   it "accepts a valid finalist vote config" do
     interaction = build(
       :presentation_interaction,
-      presentation: presentation,
+      presentation: create(:presentation),
       config: InteractionConfigFixtures::FINALIST_VOTE,
     )
 
     expect(interaction).to be_valid
   end
 
+  it "rejects blank config" do
+    interaction = create(:presentation_interaction)
+    interaction.update_column(:config, {})
+
+    expect(interaction).not_to be_valid
+    expect(interaction.errors[:config]).to be_present
+  end
+
+  it "rejects when fields are not an array" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: { "fields" => {}, "outputs" => [] },
+    )
+
+    expect(interaction).not_to be_valid
+    expect(interaction.errors[:config].join).to include("must be an array")
+  end
+
   it "rejects duplicate field keys" do
     interaction = build(
       :presentation_interaction,
-      presentation: presentation,
+      presentation: create(:presentation),
       config: {
         "fields" => [
           { "key" => "vote", "type" => "text", "label" => "Vote" },
@@ -40,10 +57,94 @@ RSpec.describe Presentation::Interaction::ConfigValidator do
     expect(interaction.errors[:config]).to be_present
   end
 
+  it "rejects invalid key format, blank label, and unknown type" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          { "key" => "Bad-Key", "type" => "not_real", "label" => "" },
+        ],
+        "outputs" => [],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    messages = interaction.errors[:config].join(" ")
+    expect(messages).to include("key")
+    expect(messages).to include("label")
+    expect(messages).to include("not a known field type")
+  end
+
+  it "rejects number bounds and select choice option errors" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          {
+            "key" => "count",
+            "type" => "number",
+            "label" => "Count",
+            "options" => { "min" => 10, "max" => 1 },
+          },
+          {
+            "key" => "choice",
+            "type" => "single_select",
+            "label" => "Choice",
+            "options" => { "choices" => [] },
+          },
+        ],
+        "outputs" => [],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    messages = interaction.errors[:config].join(" ")
+    expect(messages).to include("less than or equal")
+    expect(messages).to include("choices")
+  end
+
+  it "rejects field groups without nested fields" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          {
+            "key" => "group",
+            "type" => "field_group",
+            "label" => "Group",
+            "options" => { "min" => 1 },
+            "fields" => [],
+          },
+        ],
+        "outputs" => [],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    expect(interaction.errors[:config].join).to include("fields")
+  end
+
+  it "rejects when outputs are not an array" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [{ "key" => "note", "type" => "text", "label" => "Note" }],
+        "outputs" => {},
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    expect(interaction.errors[:config].join).to include("config.outputs")
+  end
+
   it "rejects incompatible reducer and field type" do
     interaction = build(
       :presentation_interaction,
-      presentation: presentation,
+      presentation: create(:presentation),
       config: {
         "fields" => [
           { "key" => "note", "type" => "text", "label" => "Note" },
@@ -60,5 +161,55 @@ RSpec.describe Presentation::Interaction::ConfigValidator do
 
     expect(interaction).not_to be_valid
     expect(interaction.errors[:config].join).to include("not compatible")
+  end
+
+  it "rejects missing source fields and unknown metrics" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          { "key" => "note", "type" => "text", "label" => "Note" },
+        ],
+        "outputs" => [
+          {
+            "metric" => "not_a_metric",
+            "source_field" => "missing",
+            "reducer" => "sum_money",
+          },
+        ],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    messages = interaction.errors[:config].join(" ")
+    expect(messages).to include("not a known metric")
+    expect(messages).to include("source_field")
+  end
+
+  it "rejects non-boolean repeatable and non-integer group bounds" do
+    interaction = build(
+      :presentation_interaction,
+      presentation: create(:presentation),
+      config: {
+        "fields" => [
+          {
+            "key" => "group",
+            "type" => "field_group",
+            "label" => "Group",
+            "options" => { "repeatable" => "yes", "min" => "1", "max" => 2.5 },
+            "fields" => [
+              { "key" => "note", "type" => "text", "label" => "Note" },
+            ],
+          },
+        ],
+        "outputs" => [],
+      },
+    )
+
+    expect(interaction).not_to be_valid
+    messages = interaction.errors[:config].join(" ")
+    expect(messages).to include("repeatable")
+    expect(messages).to include("integer")
   end
 end
