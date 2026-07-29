@@ -1,17 +1,92 @@
 import { describe, expect, test } from "vitest"
 
-import { formFieldErrorMessage, nameToPath } from "@/components/Form"
+import {
+	formFieldErrorMessage,
+	getFormValueByName,
+	getInputValue,
+	nameToPath,
+	setFormValue,
+} from "@/components/Form/formFieldUtils"
 
 describe("components/Form/formFieldUtils", () => {
-	test("nameToPath converts rails-style names to dot paths", () => {
-		expect(nameToPath("user.email")).toBe("user.email")
-		expect(nameToPath("template.slides_attributes[0].title")).toBe("template.slides_attributes.0.title")
+	test("nameToPath converts bracket paths", () => {
+		expect(nameToPath("user[name]")).toBe("user.name")
+		expect(nameToPath("a.b.c")).toBe("a.b.c")
 	})
 
-	test("formFieldErrorMessage matches dotted names and Rails attribute keys", () => {
-		expect(formFieldErrorMessage({ "user.email": "Is invalid" }, "user.email")).toBe("Is invalid")
-		expect(formFieldErrorMessage({ name: ["Can't be blank"] }, "presentation_interaction.name")).toBe("Can't be blank")
-		expect(formFieldErrorMessage({ config: "Is invalid" }, "presentation_interaction.config")).toBe("Is invalid")
-		expect(formFieldErrorMessage({ name: "Can't be blank" }, "presentation_interaction.trigger_type")).toBeUndefined()
+	test("formFieldErrorMessage finds nested errors", () => {
+		expect(formFieldErrorMessage(undefined, "a")).toBeUndefined()
+		expect(formFieldErrorMessage({ "user.name": "Required" }, "user.name")).toBe("Required")
+		expect(formFieldErrorMessage({ name: ["Bad"] }, "user.name")).toBe("Bad")
+		expect(formFieldErrorMessage({ other: "x" }, "user.name")).toBeUndefined()
+		expect(formFieldErrorMessage({ name: "  " }, "user.name")).toBeUndefined()
+	})
+
+	test("getInputValue and form value helpers", () => {
+		document.body.innerHTML = `
+			<form id="f">
+				<input name="text" value="hello" />
+				<input name="check" type="checkbox" checked />
+				<input name="choice" type="radio" value="a" checked />
+				<input name="choice" type="radio" value="b" />
+				<select name="multi" multiple>
+					<option value="1" selected>1</option>
+					<option value="2">2</option>
+					<option value="3" selected>3</option>
+				</select>
+				<textarea name="body">notes</textarea>
+			</form>
+		`
+		const form = document.getElementById("f")
+		expect(form).toBeTruthy()
+		if(!(form instanceof HTMLFormElement)) {
+			expect.unreachable()
+			return
+		}
+
+		const text = form.elements.namedItem("text")
+		if(!(text instanceof HTMLInputElement)) {
+			expect.unreachable()
+			return
+		}
+		expect(getInputValue(text)).toBe("hello")
+
+		const check = form.elements.namedItem("check")
+		if(!(check instanceof HTMLInputElement)) {
+			expect.unreachable()
+			return
+		}
+		expect(getInputValue(check)).toBe(true)
+
+		const multi = form.elements.namedItem("multi")
+		if(!(multi instanceof HTMLSelectElement)) {
+			expect.unreachable()
+			return
+		}
+		expect(getInputValue(multi)).toEqual(["1", "3"])
+
+		expect(getFormValueByName(form, "text")).toBe("hello")
+		expect(getFormValueByName(form, "choice")).toBe("a")
+		expect(getFormValueByName(form, "missing")).toBeUndefined()
+
+		setFormValue(form, "text", "world")
+		expect(text.value).toBe("world")
+
+		setFormValue(form, "check", false)
+		expect(check.checked).toBe(false)
+
+		setFormValue(form, "multi", ["2"])
+		expect(Array.from(multi.selectedOptions).map(option => option.value)).toEqual(["2"])
+
+		const body = form.elements.namedItem("body")
+		if(!(body instanceof HTMLTextAreaElement)) {
+			expect.unreachable()
+			return
+		}
+		setFormValue(form, "body", "updated")
+		expect(body.value).toBe("updated")
+
+		setFormValue(form, "choice", "b")
+		expect(getFormValueByName(form, "choice")).toBe("b")
 	})
 })

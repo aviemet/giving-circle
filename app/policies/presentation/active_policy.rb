@@ -10,4 +10,8 @@ class Presentation::ActivePolicy < ApplicationPolicy
 
     user.circles.include?(record.circle)
   end
+
+  def public_memberships?
+    public_show?
+  end
 end

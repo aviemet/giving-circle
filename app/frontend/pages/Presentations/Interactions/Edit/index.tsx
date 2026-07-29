@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { Page, Section } from "@/components"
+import { Container, Page, Section } from "@/components"
 import { PresentationInteractionForm } from "@/domains/presentation/interactions/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
@@ -40,18 +40,20 @@ const EditPresentationInteraction = ({ presentation_interaction }: EditPresentat
 				{ title, href: window.location.href },
 			] }
 		>
-			<Section>
-				<PresentationInteractionForm
-					to={ Routes.themePresentationInteraction(
-						params.circle_slug,
-						params.theme_slug,
-						params.presentation_slug,
-						params.slug,
-					) }
-					method="patch"
-					presentation_interaction={ presentation_interaction }
-				/>
-			</Section>
+			<Container>
+				<Section>
+					<PresentationInteractionForm
+						to={ Routes.themePresentationInteraction(
+							params.circle_slug,
+							params.theme_slug,
+							params.presentation_slug,
+							params.slug,
+						) }
+						method="patch"
+						presentation_interaction={ presentation_interaction }
+					/>
+				</Section>
+			</Container>
 		</Page>
 	)
 }

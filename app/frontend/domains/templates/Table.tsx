@@ -36,7 +36,7 @@ export function TemplatesTable({
 			title: "Name",
 			sortable: true,
 			render: (template) => (
-				<Link href={ Routes.circleTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
+				<Link href={ Routes.settingsTemplate(template.circle.slug, template.slug) }>{ template.name }</Link>
 			),
 		},
 		{
@@ -51,7 +51,7 @@ export function TemplatesTable({
 						circleSlug={ circle.slug }
 					/>
 					<EditButton
-						href={ Routes.editCircleTemplate(template.circle.slug, template.slug) }
+						href={ Routes.editSettingsTemplate(template.circle.slug, template.slug) }
 						label={ template.name }
 					/>
 				</Group>

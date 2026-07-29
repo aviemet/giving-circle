@@ -10,11 +10,11 @@ interface EditTemplateProps {
 	template: Schema.TemplatesEdit
 }
 
-// @path: /:circle_slug/templates/:slug/edit
-// @route: editCircleTemplate
+// @path: /settings/:circle_slug/templates/:slug/edit
+// @route: editSettingsTemplate
 const EditTemplate = ({ template }: EditTemplateProps) => {
 	const { t } = useTranslation()
-	const { params, active_circle } = usePageProps<"editCircleTemplate">()
+	const { params, active_circle } = usePageProps<"editSettingsTemplate">()
 
 	const title = t("templates.edit.title")
 
@@ -26,14 +26,14 @@ const EditTemplate = ({ template }: EditTemplateProps) => {
 			breadcrumbs={ [
 				{ title: t("templates.index.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: t("templates.index.breadcrumbs.templates"), href: Routes.circleTemplates(params.circle_slug) },
+				{ title: t("templates.index.breadcrumbs.templates"), href: Routes.settingsTemplates(params.circle_slug) },
 				{ title: t("common.actions.edit_breadcrumb"), href: window.location.href },
 			] }
 		>
 			<Section>
 				<TemplateForm
 					method="put"
-					to={ Routes.circleTemplate(template.circle.slug, template.slug) }
+					to={ Routes.settingsTemplate(template.circle.slug, template.slug) }
 					template={ template }
 				/>
 			</Section>

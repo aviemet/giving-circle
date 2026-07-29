@@ -1,0 +1,20 @@
+{
+	"GitHooks.hooksDirectory": ".git/hooks",
+	"i18n-ally.localesPaths": [
+		"config/locales"
+	],
+	"i18n-ally.pathMatcher": "{namespaces}.{locale}.yml",
+	"i18n-ally.dirStructure": "file",
+	"i18n-ally.keystyle": "nested",
+	"i18n-ally.namespace": false,
+	"i18n-ally.sourceLanguage": "en",
+	"i18n-ally.displayLanguage": "en",
+	"i18n-ally.enabledFrameworks": [
+		"react-i18next",
+		"i18next",
+		"ruby-rails"
+	],
+	"i18n-ally.enabledParsers": [
+		"yaml"
+	]
+}

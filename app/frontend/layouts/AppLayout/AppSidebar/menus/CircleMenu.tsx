@@ -2,7 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 
 import { Accordion, NavLink } from "@/components"
-import { DashboardIcon, OrgsIcon, PresentationIcon, ThemesIcon, UserGroupIcon } from "@/components/Icons"
+import { DashboardIcon, OrgsIcon, ThemesIcon, UserGroupIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
 import { useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
@@ -45,22 +45,6 @@ export function CircleMenu({ circle, style }: CircleMenuProps) {
 					leftSection={ <OrgsIcon /> }
 				>
 					{ t("navigation.orgs") }
-				</NavLink>
-
-				<NavLink
-					href={ Routes.circleTemplates(circle.slug) }
-					active={ location.paths[1] === "templates" }
-					leftSection={ <PresentationIcon /> }
-				>
-					{ t("navigation.presentationTemplates") }
-				</NavLink>
-
-				<NavLink
-					href={ Routes.circleInteractionTemplates(circle.slug) }
-					active={ location.paths[1] === "interaction_templates" }
-					leftSection={ <PresentationIcon /> }
-				>
-					{ t("navigation.interactionTemplates") }
 				</NavLink>
 
 				<NavLink

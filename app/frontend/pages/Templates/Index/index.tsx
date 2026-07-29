@@ -15,11 +15,11 @@ interface TemplateIndexProps {
 	circle: Schema.CirclesOptions
 }
 
-// @path: /:circle_slug/templates
-// @route: circleTemplates
+// @path: /settings/:circle_slug/templates
+// @route: settingsTemplates
 const TemplatesIndex = ({ templates, themes, pagination, circle }: TemplateIndexProps) => {
 	const { t } = useTranslation()
-	const { params, active_circle } = usePageProps<"circleTemplates">()
+	const { params, active_circle } = usePageProps<"settingsTemplates">()
 
 	if(!active_circle) return <></>
 
@@ -29,7 +29,7 @@ const TemplatesIndex = ({ templates, themes, pagination, circle }: TemplateIndex
 			breadcrumbs={ [
 				{ title: t("templates.index.breadcrumbs.circles"), href: Routes.circles() },
 				{ title: active_circle.name, href: Routes.circle(params.circle_slug) },
-				{ title: t("templates.index.breadcrumbs.templates"), href: Routes.circleTemplates(params.circle_slug) },
+				{ title: t("templates.index.breadcrumbs.templates"), href: Routes.settingsTemplates(params.circle_slug) },
 			] }
 		>
 			<Text size="sm" c="dimmed" mb="md">
@@ -39,9 +39,9 @@ const TemplatesIndex = ({ templates, themes, pagination, circle }: TemplateIndex
 				model="templates"
 				pagination={ pagination }
 				contextMenu={ {
-					deleteRoute: Routes.circleTemplates(circle.slug),
+					deleteRoute: Routes.settingsTemplates(circle.slug),
 					options: [
-						{ label: t("templates.index.newTemplate"), href: Routes.newCircleTemplate(circle.slug), icon: <NewIcon /> },
+						{ label: t("templates.index.newTemplate"), href: Routes.newSettingsTemplate(circle.slug), icon: <NewIcon /> },
 					],
 				} }
 			>

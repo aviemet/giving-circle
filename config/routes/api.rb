@@ -18,6 +18,15 @@ namespace :api do
 
     resources :presentations, param: :slug, only: [:create, :update, :destroy] do
       resources :slides, param: :slug, controller: "presentations/slides", only: [:create, :update, :destroy]
+      resources :interactions,
+        param: :slug,
+        controller: "presentations/interactions",
+        only: [:update] do
+        resources :memberships,
+          param: :id,
+          controller: "presentations/interaction_memberships",
+          only: [:update]
+      end
 
       member do
         patch :sync_slides
@@ -29,8 +38,8 @@ namespace :api do
 
   resources :searches, only: [:index]
 
-  # resources :currencies, only: [:index]
+  resources :currencies, only: [:index]
 
   ## SETTINGS ##
-  # post "smtp/test" => "smtps#test", as: :smtp_test
+  post "smtp/test" => "smtps#test", as: :smtp_test
 end

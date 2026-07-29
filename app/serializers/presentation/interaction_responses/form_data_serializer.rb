@@ -8,6 +8,6 @@ class Presentation::InteractionResponses::FormDataSerializer < Presentation::Int
     interaction = @object.presentation_interaction
     next {} unless interaction&.presentation
 
-    Presentation::Interaction::ContextLoader.load(interaction.presentation, interaction.config)
+    Presentation::Interaction::ContextLoader.load(interaction)
   end
 end

@@ -13,11 +13,11 @@ export function PresentationSidebarMenu() {
 		<>{ active_circle && active_theme && active_presentation && <>
 			<NavLink href={ Routes.themePresentationControls(active_circle.slug, active_theme.slug, active_presentation.slug) }>Controls</NavLink>
 			<NavLink href={ Routes.themePresentationOverview(active_circle.slug, active_theme.slug, active_presentation.slug) }>Overview</NavLink>
-			<NavLink href="">Members</NavLink>
+			<NavLink href={ Routes.themePresentationMembers(active_circle.slug, active_theme.slug, active_presentation.slug) }>Members</NavLink>
 
 			<Divider />
 
-			<NavLink href="">Messaging</NavLink>
+			<NavLink href={ Routes.themePresentationMessaging(active_circle.slug, active_theme.slug, active_presentation.slug) }>Messaging</NavLink>
 
 			<Divider />
 
@@ -30,6 +30,13 @@ export function PresentationSidebarMenu() {
 				active={ false }
 			>
 				Presentation
+			</NavLink>
+			<NavLink
+				href={ Routes.circlePresentationInteract(active_circle.slug, active_presentation.slug) }
+				target="_blank"
+				active={ false }
+			>
+				Member interactions
 			</NavLink>
 		</> }</>
 	)

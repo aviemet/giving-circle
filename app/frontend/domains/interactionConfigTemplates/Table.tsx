@@ -17,7 +17,7 @@ export function InteractionConfigTemplatesTable({
 	model,
 }: InteractionConfigTemplatesTableProps) {
 	const { t } = useTranslation()
-	const { params } = usePageProps<"circleInteractionTemplates">()
+	const { params } = usePageProps<"settingsInteractionTemplates">()
 
 	const columns: TableColumn<Schema.InteractionConfigTemplatesIndex>[] = [
 		{
@@ -25,7 +25,7 @@ export function InteractionConfigTemplatesTable({
 			title: t("interaction_config_templates.index.columns.name"),
 			sortable: true,
 			render: (row) => (
-				<Link href={ Routes.editCircleInteractionTemplate(params.circle_slug, row.slug) }>
+				<Link href={ Routes.editSettingsInteractionTemplate(params.circle_slug, row.slug) }>
 					{ row.name }
 				</Link>
 			),
@@ -35,7 +35,7 @@ export function InteractionConfigTemplatesTable({
 			title: t("interaction_config_templates.index.columns.actions"),
 			sortable: false,
 			render: (row) => (
-				<EditButton href={ Routes.editCircleInteractionTemplate(params.circle_slug, row.slug) } />
+				<EditButton href={ Routes.editSettingsInteractionTemplate(params.circle_slug, row.slug) } />
 			),
 		},
 	]

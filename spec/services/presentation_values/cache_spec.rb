@@ -32,4 +32,29 @@ RSpec.describe PresentationValues::Cache do
       }.not_to have_enqueued_job(PresentationValues::RefreshJob)
     end
   end
+
+  describe ".fetch" do
+    it "returns cached json when present" do
+      presentation = create(:presentation, active: true)
+      payload = { allocated_totals: [{ org_id: "1" }] }
+      described_class.write_if_changed(presentation.id, payload)
+
+      expect(described_class.fetch(presentation.id)).to eq(payload)
+    end
+  end
+
+  describe ".within_debounce_window? and .reschedule_if_too_soon" do
+    it "detects the debounce window and reschedules" do
+      presentation = create(:presentation, active: true)
+      described_class.schedule_refresh(presentation.id)
+      dirty_at = described_class.read_dirty_at(presentation.id)
+      described_class.acquire_lock(presentation.id)
+
+      expect(described_class.within_debounce_window?(presentation.id, dirty_at)).to be(true)
+
+      expect {
+        described_class.reschedule_if_too_soon(presentation.id, dirty_at)
+      }.to have_enqueued_job(PresentationValues::RefreshJob).with(presentation.id)
+    end
+  end
 end

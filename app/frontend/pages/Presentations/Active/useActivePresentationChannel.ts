@@ -1,16 +1,28 @@
 import { useActionCable } from "@/lib/hooks/useActionCable"
 
+interface ActivePresentationInteractionSnapshot {
+	id: string
+	slug: string
+	accepting_responses: boolean
+}
+
+interface ActivePresentationSnapshot {
+	interactions?: ActivePresentationInteractionSnapshot[]
+}
+
 interface ActivePresentationMessage {
 	type: "slide_switched" | "slide_updated" | "active_presentation_updated"
 	active_slide?: string
 	slide_id?: string
 	content?: string
+	active_presentation?: ActivePresentationSnapshot
 }
 
 interface UseActivePresentationChannelOptions {
 	presentationId: string
 	onSlideSwitched?: (slideId: string) => void
 	onSlideUpdated?: (slideId: string, content: string) => void
+	onActivePresentationUpdated?: (snapshot: ActivePresentationSnapshot) => void
 	onConnected?: () => void
 	onDisconnected?: () => void
 }
@@ -19,6 +31,7 @@ export const useActivePresentationChannel = ({
 	presentationId,
 	onSlideSwitched,
 	onSlideUpdated,
+	onActivePresentationUpdated,
 	onConnected,
 	onDisconnected,
 }: UseActivePresentationChannelOptions) => {
@@ -37,6 +50,11 @@ export const useActivePresentationChannel = ({
 				case "slide_updated":
 					if(data.slide_id && data.content && onSlideUpdated) {
 						onSlideUpdated(data.slide_id, data.content)
+					}
+					break
+				case "active_presentation_updated":
+					if(data.active_presentation && onActivePresentationUpdated) {
+						onActivePresentationUpdated(data.active_presentation)
 					}
 					break
 			}

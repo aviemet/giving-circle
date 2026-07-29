@@ -19,6 +19,7 @@ const ignores = [
 	"app/frontend/lib/routes/routes.js",
 	"app/frontend/lib/routes/routes.d.ts",
 	"coverage/**/*",
+	"app/frontend/coverage/**/*",
 	"tmp/**/*",
 	"public/**/*",
 	".vscode/**/*",

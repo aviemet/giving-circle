@@ -11,6 +11,10 @@ class InteractionConfigTemplates::FormDataSerializer < InteractionConfigTemplate
     Presentation::Interaction::Registry::REDUCERS
   end
 
+  has_many :interaction_ui_templates, serializer: InteractionUiTemplates::PersistedSerializer do
+    InteractionUiTemplate.order(:name)
+  end
+
   attribute :config do
     @object.config.presence || Presentation::Interaction::BLANK_CONFIG
   end

@@ -20,5 +20,16 @@ RSpec.describe "Api::Presentations", type: :request do
       expect(response).to have_http_status(:ok)
       expect(presentation.reload.slides.first.title).to eq("Updated Template Slide")
     end
+
+    it "returns unprocessable when sync fails" do
+      circle = @admin.circles.first
+      theme = create(:theme, circle:)
+      presentation = create(:presentation, theme:)
+      allow_any_instance_of(Presentation).to receive(:sync_template_slides).and_return(false)
+
+      patch sync_slides_api_circle_presentation_path(circle_slug: circle.slug, slug: presentation.slug)
+
+      expect(response).to have_http_status(:unprocessable_content)
+    end
   end
 end

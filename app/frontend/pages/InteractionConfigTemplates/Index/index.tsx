@@ -12,15 +12,15 @@ interface InteractionConfigTemplatesIndexProps {
 	circle: Schema.CirclesOptions
 }
 
-// @path: /:circle_slug/interaction_templates
-// @route: circleInteractionTemplates
+// @path: /settings/:circle_slug/interaction_templates
+// @route: settingsInteractionTemplates
 const InteractionConfigTemplatesIndex = ({
 	interaction_config_templates,
 	pagination,
 	circle,
 }: InteractionConfigTemplatesIndexProps) => {
 	const { t } = useTranslation()
-	const { params, active_circle } = usePageProps<"circleInteractionTemplates">()
+	const { params, active_circle } = usePageProps<"settingsInteractionTemplates">()
 	const title = t("interaction_config_templates.index.title")
 
 	if(!active_circle) return <></>
@@ -40,11 +40,11 @@ const InteractionConfigTemplatesIndex = ({
 					model="interaction_config_templates"
 					pagination={ pagination }
 					contextMenu={ {
-						deleteRoute: Routes.circleInteractionTemplates(circle.slug),
+						deleteRoute: Routes.settingsInteractionTemplates(circle.slug),
 						options: [
 							{
 								label: t("interaction_config_templates.index.newTemplate"),
-								href: Routes.newCircleInteractionTemplate(circle.slug),
+								href: Routes.newSettingsInteractionTemplate(circle.slug),
 							},
 						],
 					} }

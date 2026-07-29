@@ -60,6 +60,42 @@ RSpec.describe "ThemeOrgs", type: :request do
     end
   end
 
+  describe "GET /import" do
+    login_super_admin
+
+    it "renders a successful response" do
+      theme = create(:theme, circle: @admin.circles.first)
+
+      get theme_orgs_import_url(theme.circle, theme)
+
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /index with search and sort" do
+    login_super_admin
+
+    it "filters and sorts orgs" do
+      theme = create(:theme, circle: @admin.circles.first)
+      matching = create(:org, circle: @admin.circles.first, name: "Alpha Search Org")
+      other = create(:org, circle: @admin.circles.first, name: "Beta Other Org")
+      create(:themes_org, theme:, org: matching)
+      create(:themes_org, theme:, org: other)
+
+      get theme_orgs_url(theme.circle, theme), params: { search: "Alpha", sort: "name", direction: "desc" }
+
+      expect(response).to be_successful
+    end
+
+    it "strips empty query params and direction without sort" do
+      theme = create(:theme, circle: @admin.circles.first)
+
+      get theme_orgs_url(theme.circle, theme), params: { search: "", direction: "asc" }
+
+      expect(response).to redirect_to("#{theme_orgs_url(theme.circle, theme)}?")
+    end
+  end
+
   describe "POST /create" do
     login_super_admin
 

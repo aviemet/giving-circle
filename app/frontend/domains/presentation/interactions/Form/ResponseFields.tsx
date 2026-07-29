@@ -4,10 +4,13 @@ import { Grid, Stack } from "@/components"
 import { NumberInput, Select, TextInput } from "@/components/Inputs"
 
 import { type InteractionFieldConfig } from "./FieldBuilder"
+import { type InteractionSettings } from "./interactionConfig"
 
 export type InteractionFormContext = {
-	presentation_orgs?: Schema.OrgsPersisted[]
+	presentation_orgs?: Schema.PresentationsOrgsPersisted[]
 	choices?: Record<string, string[]>
+	settings?: InteractionSettings
+	finalist_org_ids?: string[]
 }
 
 export type MoneyValue = {
@@ -28,6 +31,7 @@ export type OrgRankEntry = {
 export type ResponseFieldValue =
 	| string
 	| number
+	| boolean
 	| string[]
 	| MoneyValue
 	| OrgMoneyMapEntry[]
@@ -62,7 +66,7 @@ function isOrgRankEntry(value: unknown): value is OrgRankEntry {
 
 function isResponseFieldValue(value: unknown): value is ResponseFieldValue {
 	if(value === undefined) return true
-	if(typeof value === "string" || typeof value === "number") return true
+	if(typeof value === "string" || typeof value === "number" || typeof value === "boolean") return true
 	if(Array.isArray(value)) {
 		if(value.every((item) => typeof item === "string")) return true
 		if(value.every(isOrgMoneyMapEntry)) return true
@@ -106,9 +110,32 @@ export function interactionFormContextFrom(value: unknown): InteractionFormConte
 	}
 
 	return {
-		presentation_orgs: Array.isArray(value.presentation_orgs) ? value.presentation_orgs : undefined,
+		presentation_orgs: Array.isArray(value.presentation_orgs)
+			? value.presentation_orgs.filter(isPresentationOrg)
+			: undefined,
 		choices: parsedChoices,
+		settings: isRecord(value.settings) ? interactionSettingsFromContext(value.settings) : undefined,
+		finalist_org_ids: Array.isArray(value.finalist_org_ids)
+			? value.finalist_org_ids.filter((entry): entry is string => typeof entry === "string")
+			: undefined,
 	}
+}
+
+function isPresentationOrg(value: unknown): value is Schema.PresentationsOrgsPersisted {
+	if(!isRecord(value)) return false
+	if(typeof value.id !== "string") return false
+	if(typeof value.name !== "string") return false
+	if(typeof value.slug !== "string") return false
+	return true
+}
+
+function interactionSettingsFromContext(value: Record<string, unknown>): InteractionSettings {
+	const settings: InteractionSettings = {}
+	if(typeof value.finalist_count === "number") settings.finalist_count = value.finalist_count
+	if(typeof value.default_votes === "number") settings.default_votes = value.default_votes
+	if(typeof value.allow_non_finalists === "boolean") settings.allow_non_finalists = value.allow_non_finalists
+	if(typeof value.allow_over_ask === "boolean") settings.allow_over_ask = value.allow_over_ask
+	return settings
 }
 
 type ResponseFieldProps = {

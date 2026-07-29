@@ -18,7 +18,7 @@ describe("interaction config helpers", () => {
 	})
 
 	it("returns blank config for invalid values", () => {
-		expect(interactionConfigFrom(null)).toEqual({ fields: [], outputs: [] })
+		expect(interactionConfigFrom(null)).toEqual({ fields: [], outputs: [], settings: {} })
 	})
 
 	it("normalizes form context from loose values", () => {
