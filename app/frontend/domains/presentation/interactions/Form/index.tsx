@@ -56,11 +56,6 @@ export function PresentationInteractionForm({
 	const uiSlug = uiTemplateSlugForId(uiTemplateId, interaction_ui_templates)
 	const curated = uiSlug !== undefined && CURATED_UI_SLUGS.has(uiSlug)
 
-	const triggerTypeOptions = [
-		{ label: t("presentations.interactions.form.trigger_manual"), value: "manual" },
-		{ label: t("presentations.interactions.form.trigger_slide"), value: "slide" },
-	]
-
 	const updateConfig = (nextConfig: InteractionConfig) => {
 		setConfig({
 			...nextConfig,
@@ -120,7 +115,10 @@ export function PresentationInteractionForm({
 					<Select
 						name="presentation_interaction.trigger_type"
 						label={ t("presentations.interactions.form.trigger_type") }
-						options={ triggerTypeOptions }
+						options={ [
+							{ label: t("presentations.interactions.form.trigger_manual"), value: "manual" },
+							{ label: t("presentations.interactions.form.trigger_slide"), value: "slide" },
+						] }
 						required
 					/>
 				</Grid.Col>

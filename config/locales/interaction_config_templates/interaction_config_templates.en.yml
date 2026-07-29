@@ -2,7 +2,7 @@
 en:
   interaction_config_templates:
     edit:
-      title: Edit %{name}
+      title: "%{name}: Edit"
     form:
       create: Create Template
       intro: An interaction template defines the member form, what answers it collects, and which live results appear on the presentation. Reuse it when you create interactions for a presentation.
