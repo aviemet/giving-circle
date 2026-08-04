@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include Contactable
+  include ContactableParams
 
   expose :users, -> { search(User.all) }
   expose :user, id: -> { params[:id] }, scope: -> { User.all }, find_by: :slug

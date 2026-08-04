@@ -5,6 +5,8 @@ import {
 	parseContentToStructured,
 	serializedTagsToEditorContent,
 	serializeStructuredContent,
+	serializeRichTextTagMentions,
+	hydrateRichTextTagMentions,
 } from "@/components/VisualEditor/dynamicData/contentParser"
 
 describe("components/VisualEditor/dynamicData/contentParser", () => {
@@ -77,5 +79,24 @@ describe("components/VisualEditor/dynamicData/contentParser", () => {
 				},
 			},
 		])
+	})
+
+	test("serializeRichTextTagMentions keeps HTML and replaces mention nodes with #path", () => {
+		const html = "<p>Hi <span data-type=\"mention\" class=\"mention\" data-id=\"membership.name\" data-label=\"Member - name\">#Member - name</span></p>"
+
+		expect(serializeRichTextTagMentions(html)).toBe("<p>Hi #membership.name</p>")
+	})
+
+	test("hydrateRichTextTagMentions rebuilds mention markup from #path tokens in HTML", () => {
+		const options = [{ value: "membership.name", label: "Member - name" }]
+		const hydrated = hydrateRichTextTagMentions(
+			"<p>Hi <strong>#membership.name</strong></p>",
+			options,
+		)
+
+		expect(hydrated).toContain("data-type=\"mention\"")
+		expect(hydrated).toContain("data-id=\"membership.name\"")
+		expect(hydrated).toContain("<strong>")
+		expect(serializeRichTextTagMentions(hydrated)).toBe("<p>Hi <strong>#membership.name</strong></p>")
 	})
 })

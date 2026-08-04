@@ -1,14 +1,29 @@
 import { screen } from "@testing-library/react"
-import React from "react"
-import { describe, test } from "vitest"
+import { describe, expect, test } from "vitest"
 
 import ActivePresentationMessaging from "@/pages/Presentations/Active/Messaging"
+import {
+	createCirclePersisted,
+	createPresentationMessagesIndex,
+	createPresentationsShow,
+	createThemePersisted,
+} from "@/tests/helpers/fixtures"
 import { render } from "@/tests/helpers/utils"
 
 describe("pages/Presentations/Active/Messaging/index", () => {
-	test("renders messaging", () => {
-		render(<ActivePresentationMessaging />)
+	test("loads active messaging", () => {
+		render(
+			<ActivePresentationMessaging
+				circle={ createCirclePersisted() }
+				theme={ createThemePersisted() }
+				presentation={ createPresentationsShow() }
+				presentation_messages={ [
+					createPresentationMessagesIndex({ name: "Welcome email" }),
+				] }
+			/>,
+		)
 
-		screen.getByText("Messaging")
+		expect(screen.getByTestId("inertia-head")).toHaveAttribute("data-title", "Messaging")
+		expect(screen.getByText("Welcome email")).toBeTruthy()
 	})
 })

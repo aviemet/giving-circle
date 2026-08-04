@@ -13,7 +13,7 @@ RSpec.describe PresentationValues::Finalists do
   end
 
   it "returns all org ids when no finalist source interaction exists" do
-    expect(described_class.call(presentation)).to match_array([org_a.id, org_b.id, org_c.id])
+    expect(described_class.call(presentation)).to contain_exactly(org_a.id, org_b.id, org_c.id)
   end
 
   it "returns all org ids when finalist interaction has no responses" do
@@ -24,7 +24,7 @@ RSpec.describe PresentationValues::Finalists do
       config: InteractionConfigFixtures::FINALIST_VOTE,
     )
 
-    expect(described_class.call(presentation)).to match_array([org_a.id, org_b.id, org_c.id])
+    expect(described_class.call(presentation)).to contain_exactly(org_a.id, org_b.id, org_c.id)
   end
 
   it "returns top n orgs by vote totals with stable tie-break" do

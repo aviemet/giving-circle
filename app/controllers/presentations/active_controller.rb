@@ -24,6 +24,7 @@ class Presentations::ActiveController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/p/:presentation_slug/memberships (circle_public_presentation_memberships)
   def public_memberships
     authorize public_presentation, policy_class: Presentation::ActivePolicy
 
@@ -70,11 +71,16 @@ class Presentations::ActiveController < ApplicationController
     }
   end
 
-  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/messaging (theme_presentation_messaging)
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/messaging (theme_presentation_admin_messaging)
   def messaging
-    authorize presentation
+    authorize presentation, :messaging?
 
-    render inertia: "Presentations/Active/Messaging", props: {}
+    render inertia: "Presentations/Active/Messaging", props: {
+      presentation: -> { presentation.render(:persisted) },
+      presentation_messages: -> { presentation.messages.order(created_at: :desc).render(:index) },
+      circle: -> { circle.render(:persisted) },
+      theme: -> { theme.render(:persisted) },
+    }
   end
 
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/admin/settings (theme_presentation_admin_settings)

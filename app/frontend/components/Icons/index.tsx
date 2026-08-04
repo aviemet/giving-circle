@@ -5,6 +5,7 @@ export {
 	TbSettings as SettingsIcon,
 	TbLanguage as LanguageIcon,
 	TbX as CrossIcon,
+	TbMail as MailIcon,
 	TbChevronsRight as LastIcon,
 	TbChevronsLeft as FirstIcon,
 	TbDots as DotsIcon,

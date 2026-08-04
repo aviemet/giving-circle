@@ -8,7 +8,7 @@ module FriendlyIdHistory
       define_method :handle_historical_slug_redirect do
         return unless params[slug_param]
 
-        record = model_class.friendly.find(params[slug_param])
+        record = model_class.friendly.find(params.expect(slug_param))
 
         # Let the controller decide if a redirect is needed
         if should_redirect_for_historical_slug?(record, slug_param)

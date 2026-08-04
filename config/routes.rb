@@ -55,18 +55,27 @@ Rails.application.routes.draw do
     end
 
     scope ":circle_slug" do
-      [:branding, :integrations, :notifications].freeze.each do |path|
+      [:branding, :notifications].freeze.each do |path|
         get path, to: "#{path}#index"
         patch path, to: "#{path}#update"
       end
 
-      resources :smtps, path: "mail", only: [:index, :show, :new, :create, :edit, :update, :destroy]
+      resources :integrations, only: [:index, :new, :create, :edit, :update, :destroy]
+      get "mail", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/integrations"
+      }
+      get "mail/*path", to: redirect(status: 301) { |params, _req|
+        "/settings/#{params[:circle_slug]}/integrations"
+      }
 
       resources :templates, param: :slug, shallow: false
       resources :interaction_config_templates,
         path: "interaction_templates",
         param: :slug,
         as: :interaction_templates,
+        shallow: false
+      resources :message_templates,
+        param: :slug,
         shallow: false
       namespace :templates do
         get ":template_slug/slides/:slug/edit", to: "slides#edit", as: :edit_slide
@@ -159,11 +168,23 @@ Rails.application.routes.draw do
             as: :elements,
             controller: "presentations/elements"
 
+          get "messaging", to: "presentations/messages#index", as: :messaging
+          resources :presentation_messages,
+            path: "messaging/messages",
+            param: :slug,
+            as: :messages,
+            controller: "presentations/messages",
+            except: [:index, :show] do
+            member do
+              post :send_message, as: :send
+            end
+          end
+
           # Active Presentation
           get "admin", as: :controls, to: "presentations/active#index"
           get "admin/overview", to: "presentations/active#overview", as: :overview
           get "admin/members", to: "presentations/active#members", as: :members
-          get "admin/messaging", to: "presentations/active#messaging", as: :messaging
+          get "admin/messaging", to: "presentations/active#messaging", as: :admin_messaging
           get "admin/settings", to: "presentations/active#settings", as: :admin_settings
 
           post "activate", to: "presentations#activate", as: :activate

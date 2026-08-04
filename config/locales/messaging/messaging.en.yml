@@ -1,0 +1,12 @@
+---
+en:
+  messaging:
+    form:
+      body: Body
+      medium: Message medium
+      medium_email: Email
+      medium_sms: SMS
+      name: Name
+      preview: Preview
+      preview_empty: Start writing to see a preview.
+      subject: Subject

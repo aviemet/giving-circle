@@ -3,13 +3,18 @@ import {
 	RichTextEditor,
 	type RichTextEditorProps as MantineRichTextEditorProps,
 } from "@mantine/tiptap"
+import clsx from "clsx"
 import { useMemo } from "react"
 
+import { useFormField, useFormFieldContext } from "@/components/Form"
+import { type TagEditorOption } from "@/components/VisualEditor/dynamicData/contentParser"
 import { dataAccess, getFlatOptions } from "@/components/VisualEditor/dynamicData/dataAccess"
 
+import { HiddenInput } from "../HiddenInput"
 import { type BaseInputProps } from "../index"
 import { InputWrapper } from "../InputWrapper"
 import { Label } from "../Label"
+import * as classes from "./index.css"
 import { useMentionEditor } from "./useMentionEditor"
 
 interface TagsInputProps extends Omit<MantineRichTextEditorProps, "children" | "editor" | "onChange">, BaseInputProps {
@@ -21,10 +26,34 @@ interface TagsInputProps extends Omit<MantineRichTextEditorProps, "children" | "
 	readOnly?: boolean
 	wrapperProps?: React.ComponentPropsWithoutRef<"div"> & DataAttributes
 	className?: string
-	options?: string[]
+	options?: Array<string | TagEditorOption>
 }
 
-export function TagsInput({
+function useTagOptions(options: TagsInputProps["options"]) {
+	const hasCustomOptions = options !== undefined
+	const optionsKey = hasCustomOptions
+		? options.map(option => (
+			typeof option === "string" ? option : `${option.value}\u0000${option.label}`
+		)).join("\u0001")
+		: undefined
+
+	const defaultTagOptions = useMemo(() => getFlatOptions(dataAccess), [])
+	return useMemo(() => {
+		if(hasCustomOptions) {
+			const values = optionsKey ? optionsKey.split("\u0001") : []
+			return values.map(entry => {
+				if(entry.includes("\u0000")) {
+					const [value, label] = entry.split("\u0000")
+					return { value, label }
+				}
+				return { value: entry, label: entry }
+			})
+		}
+		return defaultTagOptions
+	}, [defaultTagOptions, hasCustomOptions, optionsKey])
+}
+
+function TagsInputEditor({
 	label,
 	required = false,
 	id,
@@ -36,26 +65,15 @@ export function TagsInput({
 	readOnly = false,
 	className,
 	options,
+	bound,
 	...props
-}: TagsInputProps) {
-
+}: TagsInputProps & { bound: boolean }) {
 	const inputId = id || name
-	const defaultTagOptions = useMemo(() => getFlatOptions(dataAccess), [])
-	const hasCustomOptions = options !== undefined
-	const optionsKey = hasCustomOptions ? options.join("\u0000") : undefined
-
-	const tagOptions = useMemo(() => {
-		if(hasCustomOptions) {
-			const values = optionsKey ? optionsKey.split("\u0000") : []
-			return values.map(opt => ({ value: opt, label: opt }))
-		}
-		return defaultTagOptions
-	}, [defaultTagOptions, hasCustomOptions, optionsKey])
-
+	const tagOptions = useTagOptions(options)
 	const editor = useMentionEditor({
 		value,
 		tagOptions,
-		onChange,
+		onChange: readOnly ? undefined : onChange,
 	})
 
 	return (
@@ -65,14 +83,42 @@ export function TagsInput({
 					{ label }
 				</Label>
 			) }
-
+			{ bound && name !== undefined && (
+				<HiddenInput name={ name } value={ value } id={ inputId } />
+			) }
 			<RichTextEditor
 				editor={ editor }
-				className={ className }
+				className={ clsx(classes.tagsInput, className) }
 				{ ...props }
 			>
 				<RichTextEditor.Content />
 			</RichTextEditor>
 		</InputWrapper>
 	)
+}
+
+function TagsInputFormField(props: TagsInputProps & { name: string }) {
+	const [fieldValue, setFieldValue] = useFormField(props.name)
+	const value = typeof fieldValue === "string" ? fieldValue : ""
+
+	return (
+		<TagsInputEditor
+			{ ...props }
+			bound
+			value={ value }
+			onChange={ (next: string) => {
+				setFieldValue(next)
+				props.onChange?.(next)
+			} }
+		/>
+	)
+}
+
+export function TagsInput(props: TagsInputProps) {
+	const formContext = useFormFieldContext(false)
+	if(props.name !== undefined && props.name.length > 0 && formContext !== null) {
+		return <TagsInputFormField { ...props } name={ props.name } />
+	}
+
+	return <TagsInputEditor { ...props } bound={ false } />
 }

@@ -63,7 +63,6 @@ class Presentation::Interaction < ApplicationRecord
   validates :slug, presence: true, uniqueness: { scope: :presentation_id }
   validates :trigger_type, presence: true
   validates :config, presence: true
-  validates :interaction_ui_template, presence: true
   validate :slide_trigger_requires_slide_slug, if: :trigger_type_slide?
   validate :validate_config_structure
 
@@ -125,7 +124,6 @@ class Presentation::Interaction < ApplicationRecord
     self.config = BLANK_CONFIG.deep_dup if config.blank?
     self.results = {} if results.nil?
     self.trigger_conditions = {} if trigger_conditions.nil?
-    self.interaction_ui_template ||= InteractionUiTemplateDefaults.allocation
   end
 
   def validate_config_structure

@@ -27,6 +27,15 @@ namespace :api do
           controller: "presentations/interaction_memberships",
           only: [:update]
       end
+      resources :messages,
+        param: :slug,
+        controller: "presentations/messages",
+        only: [:show] do
+        member do
+          post :send_message, as: :send
+          get :preview_recipients
+        end
+      end
 
       member do
         patch :sync_slides
@@ -39,7 +48,4 @@ namespace :api do
   resources :searches, only: [:index]
 
   resources :currencies, only: [:index]
-
-  ## SETTINGS ##
-  post "smtp/test" => "smtps#test", as: :smtp_test
 end

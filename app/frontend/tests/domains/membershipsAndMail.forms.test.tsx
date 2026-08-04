@@ -3,8 +3,8 @@ import React from "react"
 import { describe, expect, test } from "vitest"
 
 import { MembershipForm } from "@/domains/memberships/Form"
-import { SmtpForm } from "@/domains/settings/mail/Form"
-import { createSmtpsFormData } from "@/tests/helpers/fixtures"
+import { IntegrationForm } from "@/domains/settings/integrations/Form"
+import { createIntegrationsFormData } from "@/tests/helpers/fixtures"
 import { render } from "@/tests/helpers/utils"
 
 describe("domains/memberships and settings forms", () => {
@@ -23,9 +23,9 @@ describe("domains/memberships and settings forms", () => {
 		screen.getByRole("button")
 	})
 
-	test("renders SmtpForm", () => {
+	test("renders IntegrationForm", () => {
 		render(
-			<SmtpForm to="/settings/mail" smtp={ createSmtpsFormData() } />,
+			<IntegrationForm to="/settings/integrations" integration={ createIntegrationsFormData() } />,
 		)
 		expect(screen.getAllByRole("button").length).toBeGreaterThan(0)
 	})

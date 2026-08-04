@@ -37,23 +37,24 @@ export function SegmentedControl({
 	color,
 	...props
 }: SegmentedControlProps) {
+	const inputId = id || name
+
 	return (
 		<InputWrapper wrapper={ wrapper }>
 			{ label && labelPosition === "start" &&
-				<Label required={ required } htmlFor={ id }>{ label }</Label>
+				<Label required={ required } htmlFor={ inputId }>{ label }</Label>
 			}
 			<MantineSegmentedControl
 				ref={ ref }
+				name={ name }
 				value={ value }
-				onChange={ (choice: string) => {
-					onChange?.(choice)
-				} }
+				onChange={ onChange }
 				data={ options }
 				color={ color }
 				{ ...props }
 			/>
 			{ label && labelPosition === "end" &&
-				<Label required={ required } htmlFor={ id }>{ label }</Label>
+				<Label required={ required } htmlFor={ inputId }>{ label }</Label>
 			}
 		</InputWrapper>
 	)

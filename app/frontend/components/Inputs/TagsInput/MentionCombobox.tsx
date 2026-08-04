@@ -1,6 +1,8 @@
 import { Combobox, Text, useCombobox } from "@mantine/core"
 import { useState } from "react"
 
+import * as classes from "./index.css"
+
 interface TagOption {
 	id: string
 	label: string
@@ -27,7 +29,7 @@ const MentionCombobox = ({ items, selectedIndex, selectItem, clientRect }: Menti
 			position="bottom-end"
 			offset={ 0 }
 		>
-			<Combobox.Dropdown>
+			<Combobox.Dropdown className={ classes.mentionComboboxDropdown }>
 				<Combobox.Options>
 					{ items.map((item, index) => (
 						<Combobox.Option

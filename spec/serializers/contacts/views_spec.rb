@@ -44,9 +44,7 @@ RSpec.describe "Contact serializers" do
     stub_email_attrs(email)
     stub_phone_attrs(phone)
 
-    allow(contact).to receive(:addresses).and_return([address])
-    allow(contact).to receive(:emails).and_return([email])
-    allow(contact).to receive(:phones).and_return([phone])
+    allow(contact).to receive_messages(addresses: [address], emails: [email], phones: [phone])
 
     payload = Contacts::PersistedSerializer.one(contact)
     expect(payload[:contactable_id] || payload["contactable_id"]).to eq(contact.contactable_id)

@@ -66,12 +66,10 @@ export const urlParams = {
   "settingsGeneral": {
     "params": []
   },
-  "settingsBranding": {
-    "params": [
-      "circle_slug"
-    ]
+  "settingsLocalizations": {
+    "params": []
   },
-  "settingsIntegrations": {
+  "settingsBranding": {
     "params": [
       "circle_slug"
     ]
@@ -81,26 +79,31 @@ export const urlParams = {
       "circle_slug"
     ]
   },
-  "settingsSmtps": {
+  "settingsIntegrations": {
     "params": [
       "circle_slug"
     ]
   },
-  "newSettingsSmtp": {
+  "newSettingsIntegration": {
     "params": [
       "circle_slug"
     ]
   },
-  "editSettingsSmtp": {
+  "editSettingsIntegration": {
     "params": [
       "circle_slug",
       "id"
     ]
   },
-  "settingsSmtp": {
+  "settingsIntegration": {
     "params": [
       "circle_slug",
       "id"
+    ]
+  },
+  "settingsMail": {
+    "params": [
+      "circle_slug"
     ]
   },
   "settingsTemplates": {
@@ -142,6 +145,28 @@ export const urlParams = {
     ]
   },
   "settingsInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "settingsMessageTemplates": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "newSettingsMessageTemplate": {
+    "params": [
+      "circle_slug"
+    ]
+  },
+  "editSettingsMessageTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
+  "settingsMessageTemplate": {
     "params": [
       "circle_slug",
       "slug"
@@ -248,6 +273,27 @@ export const urlParams = {
       "slug"
     ]
   },
+  "sendApiCirclePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "previewRecipientsApiCirclePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "apiCirclePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
   "syncSlidesApiCirclePresentation": {
     "params": [
       "circle_slug",
@@ -287,10 +333,19 @@ export const urlParams = {
   "apiSearches": {
     "params": []
   },
+  "apiCurrencies": {
+    "params": []
+  },
   "previewSlide": {
     "params": []
   },
   "circlePublicPresentation": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
+    ]
+  },
+  "circlePublicPresentationMemberships": {
     "params": [
       "circle_slug",
       "presentation_slug"
@@ -592,6 +647,51 @@ export const urlParams = {
       "slug"
     ]
   },
+  "themePresentationMessaging": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "sendThemePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "themePresentationMessages": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "newThemePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug"
+    ]
+  },
+  "editThemePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "themePresentationMessage": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
   "themePresentationControls": {
     "params": [
       "circle_slug",
@@ -613,7 +713,7 @@ export const urlParams = {
       "presentation_slug"
     ]
   },
-  "themePresentationMessaging": {
+  "themePresentationAdminMessaging": {
     "params": [
       "circle_slug",
       "theme_slug",

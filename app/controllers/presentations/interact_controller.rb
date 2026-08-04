@@ -1,7 +1,7 @@
 class Presentations::InteractController < ApplicationController
   expose :circle, id: -> { params[:circle_slug] }, find_by: :slug
   expose :presentation, -> {
-    Presentation.includes(:slides, :theme, :interactions).find_by!(slug: params[:presentation_slug])
+    Presentation.includes(:slides, :theme, :interactions).find_by!(slug: params.expect(:presentation_slug))
   }
 
   strong_params :presentation_interaction_response, permit: [
@@ -15,9 +15,7 @@ class Presentations::InteractController < ApplicationController
 
     membership = presentation.membership_for_user(current_user)
     active_interaction = presentation.accepting_interaction
-    if active_interaction
-      active_interaction.sync_interaction_memberships!
-    end
+    active_interaction&.sync_interaction_memberships!
     response_record = nil
     if active_interaction && membership && !pledges_interaction?(active_interaction)
       response_record = active_interaction.interaction_responses

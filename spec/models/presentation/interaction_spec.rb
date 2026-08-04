@@ -85,19 +85,11 @@ RSpec.describe Presentation::Interaction, type: :model do
   end
 
   describe "interaction_ui_template" do
-    it "defaults to the allocation ui template on create when blank" do
-      InteractionUiTemplateDefaults.seed!
+    it "requires an interaction_ui_template" do
       interaction = build(:presentation_interaction, interaction_ui_template: nil)
 
-      expect(interaction).to be_valid
-      expect(interaction.interaction_ui_template.slug).to eq("allocation")
-    end
-
-    it "maps config template slugs to ui templates" do
-      expect(InteractionUiTemplateDefaults.for_config_slug("allocation-round").slug).to eq("allocation")
-      expect(InteractionUiTemplateDefaults.for_config_slug("org-vote").slug).to eq("org_vote")
-      expect(InteractionUiTemplateDefaults.for_config_slug("finalist-vote").slug).to eq("finalist_vote")
-      expect(InteractionUiTemplateDefaults.for_config_slug("pledges").slug).to eq("pledges")
+      expect(interaction).not_to be_valid
+      expect(interaction.errors[:interaction_ui_template]).to be_present
     end
   end
 
