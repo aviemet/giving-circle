@@ -11,8 +11,18 @@ import { TextStyle } from "@tiptap/extension-text-style"
 import { type Editor, useEditor } from "@tiptap/react"
 import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus"
 import { StarterKit } from "@tiptap/starter-kit"
-import { useEffect, type Ref } from "react"
+import clsx from "clsx"
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type Ref } from "react"
 
+
+import { createTagMentionExtension } from "@/components/Inputs/TagsInput/createTagMentionExtension"
+import {
+	hydrateRichTextTagMentions,
+	serializeRichTextTagMentions,
+	type TagEditorOption,
+} from "@/components/VisualEditor/dynamicData/contentParser"
+
+import * as classes from "./index.css"
 import { DEFAULT_LABELS } from "./tiptapLabels"
 
 const ColorPickerControl = () => (
@@ -40,15 +50,51 @@ export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, "c
 	children?: string
 	onChange?: (value: string) => void
 	onEditorReady?: (editor: Editor | null) => void
+	tagOptions?: TagEditorOption[]
 }
 
 type RichTextEditorPropsWithRef = RichTextEditorProps & {
 	ref?: Ref<HTMLDivElement>
 }
 
-function RichTextEditorComponent({ children, onChange, onEditorReady, ref }: RichTextEditorPropsWithRef) {
-	const editor = useEditor({
-		extensions: [
+function RichTextEditorComponent({
+	children,
+	onChange,
+	onEditorReady,
+	tagOptions,
+	className,
+	ref,
+}: RichTextEditorPropsWithRef) {
+	const hasTagOptions = tagOptions !== undefined && tagOptions.length > 0
+	const tagOptionsKey = hasTagOptions
+		? tagOptions.map(option => `${option.value}\u0000${option.label}`).join("\u0001")
+		: ""
+	const resolvedTagOptions = useMemo(() => {
+		if(!hasTagOptions) return []
+		return tagOptionsKey.split("\u0001").map(entry => {
+			const [value, label] = entry.split("\u0000")
+			return { value, label }
+		})
+	}, [hasTagOptions, tagOptionsKey])
+
+	const [initialContent] = useState(() => {
+		const html = children ?? ""
+		if(!hasTagOptions) return html
+		return hydrateRichTextTagMentions(html, resolvedTagOptions)
+	})
+
+	const lastEmittedRef = useRef(
+		hasTagOptions ? serializeRichTextTagMentions(children ?? "") : (children ?? ""),
+	)
+	const isFocusedRef = useRef(false)
+	const onChangeRef = useRef(onChange)
+
+	useLayoutEffect(() => {
+		onChangeRef.current = onChange
+	})
+
+	const extensions = useMemo(() => {
+		const base = [
 			StarterKit,
 			Superscript,
 			Subscript,
@@ -56,10 +102,29 @@ function RichTextEditorComponent({ children, onChange, onEditorReady, ref }: Ric
 			TextStyle,
 			Color,
 			TextAlign.configure({ types: ["heading", "paragraph"] }),
-		],
-		content: children,
-		onUpdate: ({ editor }) => {
-			if(onChange) onChange(editor.getHTML())
+		]
+
+		if(hasTagOptions) {
+			return [...base, createTagMentionExtension(resolvedTagOptions)]
+		}
+
+		return base
+	}, [hasTagOptions, resolvedTagOptions])
+
+	const editor = useEditor({
+		extensions,
+		content: initialContent,
+		onFocus: () => {
+			isFocusedRef.current = true
+		},
+		onBlur: () => {
+			isFocusedRef.current = false
+		},
+		onUpdate: ({ editor: activeEditor }) => {
+			const html = activeEditor.getHTML()
+			const serialized = hasTagOptions ? serializeRichTextTagMentions(html) : html
+			lastEmittedRef.current = serialized
+			onChangeRef.current?.(serialized)
 		},
 	})
 
@@ -67,11 +132,26 @@ function RichTextEditorComponent({ children, onChange, onEditorReady, ref }: Ric
 		onEditorReady?.(editor)
 	}, [editor, onEditorReady])
 
+	useEffect(() => {
+		if(!editor || isFocusedRef.current) return
+
+		const nextValue = children ?? ""
+		const serialized = hasTagOptions ? serializeRichTextTagMentions(nextValue) : nextValue
+		if(serialized === lastEmittedRef.current) return
+
+		lastEmittedRef.current = serialized
+		const content = hasTagOptions
+			? hydrateRichTextTagMentions(nextValue, resolvedTagOptions)
+			: nextValue
+		editor.commands.setContent(content, { emitUpdate: false })
+	}, [children, editor, hasTagOptions, resolvedTagOptions])
+
 	return (
 		<RichTextEditor
 			ref={ ref }
 			editor={ editor }
 			labels={ DEFAULT_LABELS }
+			className={ clsx(classes.richTextEditor, className) }
 		>
 			<RichTextEditor.Toolbar sticky stickyOffset={ 60 }>
 				<RichTextEditor.ControlsGroup>

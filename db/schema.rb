@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_04_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -130,6 +130,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "integrations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.uuid "circle_id", null: false
+    t.datetime "created_at", null: false
+    t.text "credentials", default: "{}", null: false
+    t.string "medium", null: false
+    t.string "name", null: false
+    t.string "provider", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id", "medium"], name: "index_integrations_on_circle_id_and_medium"
+    t.index ["circle_id", "provider"], name: "index_integrations_on_circle_id_and_provider"
+    t.index ["circle_id"], name: "index_integrations_on_circle_id"
+  end
+
   create_table "interaction_config_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "circle_id", null: false
     t.jsonb "config", default: {}, null: false
@@ -174,6 +188,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.datetime "updated_at", null: false
     t.index ["membership_id"], name: "index_memberships_people_on_membership_id"
     t.index ["person_id"], name: "index_memberships_people_on_person_id"
+  end
+
+  create_table "message_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "body", default: "", null: false
+    t.uuid "circle_id", null: false
+    t.datetime "created_at", null: false
+    t.string "medium", null: false
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "subject"
+    t.datetime "updated_at", null: false
+    t.index ["circle_id", "slug"], name: "index_message_templates_on_circle_id_and_slug", unique: true
+    t.index ["circle_id"], name: "index_message_templates_on_circle_id"
   end
 
   create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -274,6 +301,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.index ["presentation_id"], name: "index_presentation_interactions_on_presentation_id"
   end
 
+  create_table "presentation_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "body", default: "", null: false
+    t.datetime "created_at", null: false
+    t.jsonb "delivery_results", default: {}, null: false
+    t.uuid "integration_id"
+    t.string "medium", null: false
+    t.uuid "message_template_id"
+    t.string "name", null: false
+    t.uuid "presentation_id", null: false
+    t.uuid "skip_interaction_id"
+    t.string "slug", null: false
+    t.string "status", default: "ready", null: false
+    t.string "subject"
+    t.datetime "updated_at", null: false
+    t.index ["integration_id"], name: "index_presentation_messages_on_integration_id"
+    t.index ["message_template_id"], name: "index_presentation_messages_on_message_template_id"
+    t.index ["presentation_id", "slug"], name: "index_presentation_messages_on_presentation_id_and_slug", unique: true
+    t.index ["presentation_id"], name: "index_presentation_messages_on_presentation_id"
+    t.index ["skip_interaction_id"], name: "index_presentation_messages_on_skip_interaction_id"
+  end
+
   create_table "presentations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active", default: false, null: false
     t.uuid "active_slide_id"
@@ -355,22 +403,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.index ["source_slide_id"], name: "index_slides_on_source_slide_id"
   end
 
-  create_table "smtps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "address"
-    t.uuid "circle_id", null: false
-    t.datetime "created_at", null: false
-    t.string "domain"
-    t.string "host", null: false
-    t.string "name", null: false
-    t.text "notes"
-    t.string "password"
-    t.integer "port"
-    t.integer "security", default: 0
-    t.datetime "updated_at", null: false
-    t.string "username"
-    t.index ["circle_id"], name: "index_smtps_on_circle_id"
-  end
-
   create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "circle_id", null: false
     t.datetime "created_at", null: false
@@ -381,6 +413,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
     t.integer "version", default: 0, null: false
     t.index ["circle_id"], name: "index_templates_on_circle_id"
     t.index ["slug"], name: "index_templates_on_slug", unique: true
+  end
+
+  create_table "templates_message_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "message_template_id", null: false
+    t.uuid "template_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_template_id"], name: "index_templates_message_templates_on_message_template_id"
+    t.index ["template_id", "message_template_id"], name: "index_templates_message_templates_uniqueness", unique: true
+    t.index ["template_id"], name: "index_templates_message_templates_on_template_id"
   end
 
   create_table "themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -468,12 +510,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "addresses", "contacts"
   add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"
+  add_foreign_key "integrations", "circles"
   add_foreign_key "interaction_config_templates", "circles"
   add_foreign_key "interaction_config_templates", "interaction_ui_templates"
   add_foreign_key "memberships", "circles"
   add_foreign_key "memberships", "people"
   add_foreign_key "memberships_people", "memberships"
   add_foreign_key "memberships_people", "people"
+  add_foreign_key "message_templates", "circles"
   add_foreign_key "orgs", "circles"
   add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"
@@ -483,6 +527,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "presentation_interaction_responses", "presentation_interactions"
   add_foreign_key "presentation_interactions", "interaction_ui_templates"
   add_foreign_key "presentation_interactions", "presentations"
+  add_foreign_key "presentation_messages", "integrations"
+  add_foreign_key "presentation_messages", "message_templates"
+  add_foreign_key "presentation_messages", "presentation_interactions", column: "skip_interaction_id"
+  add_foreign_key "presentation_messages", "presentations"
   add_foreign_key "presentations", "slides", column: "active_slide_id"
   add_foreign_key "presentations", "templates"
   add_foreign_key "presentations", "themes"
@@ -494,8 +542,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_120000) do
   add_foreign_key "presentations_orgs", "presentations"
   add_foreign_key "slide_parents", "slides"
   add_foreign_key "slides", "slides", column: "source_slide_id"
-  add_foreign_key "smtps", "circles"
   add_foreign_key "templates", "circles"
+  add_foreign_key "templates_message_templates", "message_templates"
+  add_foreign_key "templates_message_templates", "templates"
   add_foreign_key "themes", "circles"
   add_foreign_key "themes_orgs", "orgs"
   add_foreign_key "themes_orgs", "themes"

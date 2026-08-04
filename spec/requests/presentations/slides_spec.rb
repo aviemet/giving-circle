@@ -107,7 +107,7 @@ RSpec.describe "Presentations::Slides", type: :request do
     it "redirects with errors when save fails" do
       presentation = create(:presentation, theme: create(:theme, circle: @admin.circles.first))
       allow_any_instance_of(Slide).to receive(:save).and_return(false)
-      allow_any_instance_of(Slide).to receive_message_chain(:errors).and_return(
+      allow_any_instance_of(Slide).to receive(:errors).and_return(
         ActiveModel::Errors.new(Slide.new).tap { |errors| errors.add(:title, "invalid") },
       )
 

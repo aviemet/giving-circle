@@ -63,11 +63,13 @@ module PresentationValues
     )
       config = interaction.config.with_indifferent_access
       outputs = config[:outputs]
-      return {
-        tracks_allocated_totals: false,
-        tracks_org_vote_totals: false,
-        money_totals_cents: money_totals_cents,
-      } unless outputs.is_a?(Array)
+      unless outputs.is_a?(Array)
+        return {
+          tracks_allocated_totals: false,
+          tracks_org_vote_totals: false,
+          money_totals_cents: money_totals_cents,
+        }
+      end
 
       field_index = index_fields(config[:fields])
       tracks_allocated_totals = false

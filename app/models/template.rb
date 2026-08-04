@@ -40,7 +40,10 @@ class Template < ApplicationRecord
   has_many :slide_parents, as: :parentable, dependent: :delete_all
   has_many :slides, through: :slide_parents
 
-  scope :includes_associated, -> { includes([:slides]) }
+  has_many :templates_message_templates, dependent: :delete_all
+  has_many :message_templates, through: :templates_message_templates
+
+  scope :includes_associated, -> { includes([:slides, :message_templates]) }
 
   def create_presentation(name, theme)
     presentation = Presentation.create!({
@@ -49,6 +52,7 @@ class Template < ApplicationRecord
       template: self,
     })
     presentation.copy_template_slides
+    presentation.copy_template_messages
     presentation
   end
 

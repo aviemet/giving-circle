@@ -19,6 +19,7 @@ class Person < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
+  include Contactable
   include PgSearchable
   pg_search_config(
     against: [:first_name, :last_name, :middle_name],

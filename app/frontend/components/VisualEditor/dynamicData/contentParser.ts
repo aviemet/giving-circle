@@ -21,7 +21,7 @@ export interface TagEditorOption {
 	label: string
 }
 
-const TAG_TOKEN = /#([^#\s]+)/g
+const TAG_TOKEN = /#([a-z0-9_.[\]]+)/gi
 
 /** TipTap mention markup is not uniform; we still need to spot chips in saved HTML. */
 const isMentionElement = (element: Element): boolean => (
@@ -188,4 +188,82 @@ export const renderStructuredContent = (structured: StructuredContent, evaluateT
 		}
 		return block.content
 	}).join("")
+}
+
+/** Email HTML stores #path text; mentions in the editor become those tokens on save. */
+export const serializeRichTextTagMentions = (html: string): string => {
+	if(!html) return ""
+
+	const document = new DOMParser().parseFromString(html, "text/html")
+	const mentions = document.body.querySelectorAll('[data-type="mention"], .mention')
+
+	mentions.forEach(element => {
+		const tagPath = tagPathFromMentionElement(element)
+		element.replaceWith(document.createTextNode(`#${tagPath}`))
+	})
+
+	return document.body.innerHTML
+}
+
+/** Rebuild atomic mention nodes from stored #path tokens inside rich HTML. */
+export const hydrateRichTextTagMentions = (
+	html: string,
+	tagOptions?: TagEditorOption[],
+): string => {
+	if(!html) return ""
+
+	const document = new DOMParser().parseFromString(html, "text/html")
+
+	const replaceTagTokensInTextNode = (textNode: Text): void => {
+		const parent = textNode.parentElement
+		if(parent && isMentionElement(parent)) return
+
+		const text = textNode.textContent ?? ""
+		const tokenPattern = /#([a-z0-9_.[\]]+)/gi
+		if(!tokenPattern.test(text)) return
+		tokenPattern.lastIndex = 0
+
+		const fragment = document.createDocumentFragment()
+		let cursor = 0
+
+		for(const match of text.matchAll(tokenPattern)) {
+			const index = match.index ?? 0
+			if(index > cursor) {
+				fragment.appendChild(document.createTextNode(text.slice(cursor, index)))
+			}
+
+			const tagPath = match[1]
+			const option = tagOptions?.find(tagOption => tagOption.value === tagPath)
+			const label = option?.label ?? tagPath
+			const mention = document.createElement("span")
+			mention.setAttribute("data-type", "mention")
+			mention.classList.add("mention")
+			mention.setAttribute("data-id", tagPath)
+			mention.setAttribute("data-label", label)
+			mention.textContent = `#${label}`
+			fragment.appendChild(mention)
+			cursor = index + match[0].length
+		}
+
+		if(cursor < text.length) {
+			fragment.appendChild(document.createTextNode(text.slice(cursor)))
+		}
+
+		textNode.parentNode?.replaceChild(fragment, textNode)
+	}
+
+	const walk = (node: Node): void => {
+		if(node.nodeType === Node.TEXT_NODE) {
+			replaceTagTokensInTextNode(node as Text)
+			return
+		}
+
+		if(node.nodeType !== Node.ELEMENT_NODE) return
+		if(isMentionElement(node as Element)) return
+
+		Array.from(node.childNodes).forEach(child => walk(child))
+	}
+
+	Array.from(document.body.childNodes).forEach(child => walk(child))
+	return document.body.innerHTML
 }

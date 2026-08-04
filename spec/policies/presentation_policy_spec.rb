@@ -43,7 +43,7 @@ RSpec.describe PresentationPolicy, type: :policy do
 
   %i[activate? controls? index? overview? members? messaging? settings?].each do |action|
     describe "##{action}" do
-      include_examples "circle admin only", action
+      it_behaves_like "circle admin only", action
     end
   end
 end

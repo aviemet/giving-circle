@@ -1,5 +1,4 @@
 import Document from "@tiptap/extension-document"
-import { Mention } from "@tiptap/extension-mention"
 import Paragraph from "@tiptap/extension-paragraph"
 import Text from "@tiptap/extension-text"
 import { UndoRedo } from "@tiptap/extensions"
@@ -14,7 +13,7 @@ import {
 	type TagEditorOption,
 } from "@/components/VisualEditor/dynamicData/contentParser"
 
-import { createMentionSuggestionRender } from "./mentionSuggestionRender"
+import { createTagMentionExtension } from "./createTagMentionExtension"
 
 type UseMentionEditor = (args: {
 	value: string
@@ -43,26 +42,7 @@ const useMentionEditor: UseMentionEditor = ({ value, tagOptions, onChange }) => 
 				return ["span", HTMLAttributes, 0]
 			},
 		}),
-		Mention.configure({
-			HTMLAttributes: {
-				class: "mention",
-			},
-			renderText({ options, node }) {
-				return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`
-			},
-			suggestion: {
-				char: "#",
-				items: ({ query }) => {
-					return tagOptions.filter(option =>
-						option.value.toLowerCase().includes(query.toLowerCase())
-					).slice(0, 10).map(option => ({
-						id: option.value,
-						label: option.label,
-					}))
-				},
-				render: createMentionSuggestionRender(),
-			},
-		}),
+		createTagMentionExtension(tagOptions),
 	], [tagOptions])
 
 	const editor = useEditor({

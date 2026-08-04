@@ -1,0 +1,55 @@
+---
+en:
+  integrations:
+    edit:
+      title: Edit %{name}
+    form:
+      active: Active
+      auth_profile_hint: "Authentication: %{profile}"
+      auth_profiles:
+        api_token: API token
+        basic_auth: Username and password
+        smtp: SMTP
+      create: Create Integration
+      credentials: Credentials
+      credential_fields:
+        account_sid: Account SID
+        api_token: API Token
+        auth_id: Auth ID
+        auth_token: Auth Token
+        from_email: From Email
+        from_number: From Number
+        host: Host
+        password: Password
+        port: Port
+        username: Username
+      medium: Message Medium
+      mediums:
+        email: Email
+        sms: SMS
+      name: Name
+      provider: Provider
+      providers:
+        mailerlite: MailerLite
+        plivo: Plivo
+        smtp: SMTP
+        twilio: Twilio
+      save: Save Integration
+      update: Update Integration
+    index:
+      active_no: Inactive
+      active_yes: Active
+      columns:
+        actions: Actions
+        active: Active
+        medium: Medium
+        name: Name
+        provider: Provider
+      newIntegration: New Integration
+      title: Integrations
+    new:
+      title: New Integration
+    notices:
+      created: Integration was successfully created.
+      destroyed: Integration was successfully destroyed.
+      updated: Integration was successfully updated.

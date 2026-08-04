@@ -49,6 +49,10 @@ describe("layouts/AppLayout/AppSidebar/menus/PresentationMenu", () => {
 				"href",
 				Routes.themePresentationInteractions(circle.slug, theme.slug, presentation.slug),
 			)
+			expect(screen.getByRole("link", { name: "Messages" })).toHaveAttribute(
+				"href",
+				Routes.themePresentationMessaging(circle.slug, theme.slug, presentation.slug),
+			)
 		})
 	})
 })

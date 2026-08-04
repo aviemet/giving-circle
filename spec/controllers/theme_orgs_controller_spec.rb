@@ -5,17 +5,10 @@ RSpec.describe ThemeOrgsController, type: :controller do
     it "covers create_single_record success and failure paths" do
       circle = create(:circle)
       theme = create(:theme, circle: circle)
-      controller = ThemeOrgsController.new
+      controller = described_class.new
       without_partial_double_verification do
-        allow(controller).to receive(:params).and_return(
-          ActionController::Parameters.new(theme_slug: theme.slug, circle_slug: circle.slug),
-        )
-        allow(controller).to receive(:circle).and_return(circle)
-        allow(controller).to receive(:org_params).and_return({ "name" => "Saved Org" })
-        allow(controller).to receive(:circle_theme_orgs_path).and_return("/ok")
-        allow(controller).to receive(:new_circle_theme_org_path).and_return("/new")
         allow(controller).to receive(:redirect_to)
-        allow(controller).to receive(:t).and_return("notice")
+        allow(controller).to receive_messages(params: ActionController::Parameters.new(theme_slug: theme.slug, circle_slug: circle.slug), circle: circle, org_params: { "name" => "Saved Org" }, circle_theme_orgs_path: "/ok", new_circle_theme_org_path: "/new", t: "notice")
 
         saved = build(:org, circle: circle, name: "Saved Org")
         allow(saved).to receive(:save).and_return(true)
@@ -38,18 +31,10 @@ RSpec.describe ThemeOrgsController, type: :controller do
     it "covers create_bulk_records success and failure paths" do
       circle = create(:circle)
       theme = create(:theme, circle: circle)
-      controller = ThemeOrgsController.new
+      controller = described_class.new
       without_partial_double_verification do
-        allow(controller).to receive(:params).and_return(
-          ActionController::Parameters.new(theme_slug: theme.slug, circle_slug: circle.slug),
-        )
-        allow(controller).to receive(:circle).and_return(circle)
-        allow(controller).to receive(:ask_value).and_return(0)
-        allow(controller).to receive(:orgs_params).and_return([{ "name" => "Bulk", "description" => "d" }])
-        allow(controller).to receive(:circle_theme_orgs_path).and_return("/ok")
-        allow(controller).to receive(:circle_theme_orgs_import_path).and_return("/import")
         allow(controller).to receive(:redirect_to)
-        allow(controller).to receive(:t).and_return("notice")
+        allow(controller).to receive_messages(params: ActionController::Parameters.new(theme_slug: theme.slug, circle_slug: circle.slug), circle: circle, ask_value: 0, orgs_params: [{ "name" => "Bulk", "description" => "d" }], circle_theme_orgs_path: "/ok", circle_theme_orgs_import_path: "/import", t: "notice")
 
         org_model = Org.new(name: "Bulk", circle: circle)
         association = double("themes_org")
@@ -68,7 +53,7 @@ RSpec.describe ThemeOrgsController, type: :controller do
     end
 
     it "maps orgs_params through strong params" do
-      controller = ThemeOrgsController.new
+      controller = described_class.new
       allow(controller).to receive(:params).and_return(
         ActionController::Parameters.new(
           orgs: [{ name: "One", ask: "10", description: "d", extra: "x" }],

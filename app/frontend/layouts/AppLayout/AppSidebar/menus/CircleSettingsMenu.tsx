@@ -20,10 +20,10 @@ export function CircleSettingsMenu({ circle }: CircleSettingsMenuProps) {
 			</NavLink>
 
 			<NavLink
-				href={ Routes.settingsSmtps(circle.slug) }
-				active={ isThisCircle && paths[2] === "mail" }
+				href={ Routes.settingsIntegrations(circle.slug) }
+				active={ isThisCircle && paths[2] === "integrations" }
 			>
-				Mail
+				Integrations
 			</NavLink>
 
 			<NavLink
@@ -31,13 +31,6 @@ export function CircleSettingsMenu({ circle }: CircleSettingsMenuProps) {
 				active={ isThisCircle && paths[2] === "notifications" }
 			>
 				Notifications
-			</NavLink>
-
-			<NavLink
-				href={ Routes.settingsIntegrations(circle.slug) }
-				active={ isThisCircle && paths[2] === "integrations" }
-			>
-				Integrations
 			</NavLink>
 		</>
 	)

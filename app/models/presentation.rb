@@ -65,6 +65,7 @@ class Presentation < ApplicationRecord
   has_many :elements, through: :presentations_elements, dependent: :nullify
 
   has_many :interactions, class_name: "Presentation::Interaction", dependent: :destroy
+  has_many :messages, class_name: "Presentation::Message", dependent: :destroy
 
   has_many :slide_parents, as: :parentable, dependent: :delete_all
   has_many :slides, through: :slide_parents, dependent: :nullify
@@ -118,6 +119,17 @@ class Presentation < ApplicationRecord
       end
 
       update(template_version: template.version)
+    end
+  end
+
+  def copy_template_messages
+    return unless template
+
+    template.message_templates.each do |message_template|
+      Presentation::Message.copy_from_template!(
+        presentation: self,
+        message_template: message_template,
+      )
     end
   end
 

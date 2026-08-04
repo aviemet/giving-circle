@@ -19,11 +19,11 @@ function settingsPathForCircle(paths: string[], circleSlug: string) {
 	const section = paths[2]
 
 	if(section === "branding") return Routes.settingsBranding(circleSlug)
-	if(section === "mail") return Routes.settingsSmtps(circleSlug)
+	if(section === "mail" || section === "integrations") return Routes.settingsIntegrations(circleSlug)
 	if(section === "notifications") return Routes.settingsNotifications(circleSlug)
-	if(section === "integrations") return Routes.settingsIntegrations(circleSlug)
 	if(section === "templates") return Routes.settingsTemplates(circleSlug)
 	if(section === "interaction_templates") return Routes.settingsInteractionTemplates(circleSlug)
+	if(section === "message_templates") return Routes.settingsMessageTemplates(circleSlug)
 
 	return Routes.settingsBranding(circleSlug)
 }

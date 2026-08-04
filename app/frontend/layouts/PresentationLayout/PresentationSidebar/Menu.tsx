@@ -17,7 +17,7 @@ export function PresentationSidebarMenu() {
 
 			<Divider />
 
-			<NavLink href={ Routes.themePresentationMessaging(active_circle.slug, active_theme.slug, active_presentation.slug) }>Messaging</NavLink>
+			<NavLink href={ Routes.themePresentationAdminMessaging(active_circle.slug, active_theme.slug, active_presentation.slug) }>Messaging</NavLink>
 
 			<Divider />
 
