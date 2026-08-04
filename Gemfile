@@ -6,8 +6,8 @@ ruby "3.4.8"
 # Server
 gem "rails", "~> 8.1.2"
 gem "pg", "~> 1.5"
-gem "puma", "~> 7.0"
-gem "redis", "~> 5.4"
+gem "puma", "~> 8.0"
+gem "redis", "~> 6.0"
 
 # Assets
 gem "inertia_rails", ">= 3.1"
@@ -42,7 +42,7 @@ gem "amazing_print", "~> 2.0"
 gem "good_job", "~> 4.7"
 gem "activerecord-import", "~> 2.2"
 gem "mini_magick", "~> 5.1"
-gem "active_storage_validations", "~> 3.0"
+gem "active_storage_validations", "~> 4.0"
 gem "thor", "~> 1.3"
 
 gem "tzinfo-data"
@@ -114,11 +114,11 @@ group :test do
 
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "~> 4.0.0"
   gem "webdrivers"
   gem "generator_spec", ">= 0.9.4"
   gem "database_cleaner-active_record", "~> 2.0"
-  gem "shoulda-matchers", "~> 7.0.0"
-  gem "simplecov", "~> 0.22.0"
+  gem "shoulda-matchers", "~> 8.0.0"
+  gem "simplecov", "~> 1.0.0"
   gem "pundit-matchers", "~> 4.0"
 end
