@@ -43,6 +43,10 @@ describe("layouts/AppLayout/AppSidebar/menus/TemplatesSettingsMenu", () => {
 				"href",
 				Routes.settingsInteractionTemplates(circle.slug),
 			)
+			expect(screen.getByRole("link", { name: "Message Templates" })).toHaveAttribute(
+				"href",
+				Routes.settingsMessageTemplates(circle.slug),
+			)
 		})
 	})
 })

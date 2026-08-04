@@ -49,9 +49,10 @@ describe("layouts/AppLayout/AppSidebar/SettingsSidebarMenu", () => {
 
 		expect(screen.getByRole("link", { name: "General" })).toBeVisible()
 		expect(screen.getByRole("link", { name: "Branding" })).toBeVisible()
-		expect(screen.getByRole("link", { name: "Mail" })).toBeVisible()
+		expect(screen.getByRole("link", { name: "Integrations" })).toBeVisible()
 		expect(screen.getByRole("link", { name: "Presentation Templates" })).toBeVisible()
 		expect(screen.getByRole("link", { name: "Interaction Templates" })).toBeVisible()
+		expect(screen.getByRole("link", { name: "Message Templates" })).toBeVisible()
 		expect(screen.getByRole("link", { name: "Presentation Templates" })).toHaveAttribute(
 			"href",
 			Routes.settingsTemplates(circle.slug),
@@ -59,6 +60,10 @@ describe("layouts/AppLayout/AppSidebar/SettingsSidebarMenu", () => {
 		expect(screen.getByRole("link", { name: "Interaction Templates" })).toHaveAttribute(
 			"href",
 			Routes.settingsInteractionTemplates(circle.slug),
+		)
+		expect(screen.getByRole("link", { name: "Message Templates" })).toHaveAttribute(
+			"href",
+			Routes.settingsMessageTemplates(circle.slug),
 		)
 	})
 

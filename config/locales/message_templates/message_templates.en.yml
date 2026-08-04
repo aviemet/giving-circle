@@ -1,0 +1,24 @@
+---
+en:
+  message_templates:
+    edit:
+      title: "%{name}: Edit"
+    form:
+      create: Create Template
+      update: Update Template
+    index:
+      breadcrumbs:
+        circles: Circles
+        templates: Message Templates
+      columns:
+        actions: Actions
+        medium: Medium
+        name: Name
+      newTemplate: New Template
+      title: Message Templates
+    new:
+      title: New Message Template
+    notices:
+      created: Message template was successfully created.
+      destroyed: Message template was successfully destroyed.
+      updated: Message template was successfully updated.

@@ -17,13 +17,13 @@ describe("layouts/AppLayout/AppSidebar/menus/CircleSettingsMenu", () => {
 			"href",
 			Routes.settingsBranding(circle.slug),
 		)
-		expect(screen.getByRole("link", { name: "Mail" })).toHaveAttribute(
-			"href",
-			Routes.settingsSmtps(circle.slug),
-		)
 		expect(screen.getByRole("link", { name: "Integrations" })).toHaveAttribute(
 			"href",
 			Routes.settingsIntegrations(circle.slug),
+		)
+		expect(screen.getByRole("link", { name: "Notifications" })).toHaveAttribute(
+			"href",
+			Routes.settingsNotifications(circle.slug),
 		)
 	})
 })

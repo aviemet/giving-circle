@@ -30,6 +30,7 @@ interface TestInertiaPageProps {
 	active_theme?: Schema.ThemesInertiaShare
 	active_presentation?: Schema.PresentationsInertiaShare
 	circles?: Schema.CirclesInertiaShare[]
+	app_url: string
 	params: Record<string, string>
 }
 
@@ -48,6 +49,7 @@ export const inertiaPageProps: TestInertiaPageProps = {
 		alert: null,
 	},
 	errors: {},
+	app_url: "http://localhost:3000",
 	active_presentation: undefined,
 	circles: undefined,
 	params: {

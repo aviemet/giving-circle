@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Accordion, NavLink } from "@/components"
-import { DashboardIcon, CircleDotIcon, SettingsIcon, SlidesIcon } from "@/components/Icons"
+import { DashboardIcon, CircleDotIcon, MailIcon, SettingsIcon, SlidesIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
 import { useLocation } from "@/lib/hooks"
 import { useLayoutStore } from "@/store"
@@ -54,6 +54,17 @@ export function PresentationMenu({ circle, theme, presentation, style }: Present
 					active={ location.paths[5] === "interactions" }
 				>
 					Interactions
+				</NavLink>
+				<NavLink
+					leftSection={ <MailIcon /> }
+					href={ Routes.themePresentationMessaging(
+						circle.slug,
+						theme.slug,
+						presentation.slug
+					) }
+					active={ location.paths[5] === "messaging" }
+				>
+					Messages
 				</NavLink>
 				<NavLink
 					leftSection={ <SettingsIcon /> }

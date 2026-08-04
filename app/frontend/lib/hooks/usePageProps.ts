@@ -19,6 +19,7 @@ interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" |
 	active_theme: Schema.ThemesInertiaShare | undefined
 	active_presentation: Schema.PresentationsInertiaShare | undefined
 	circles: Schema.CirclesInertiaShare[] | undefined
+	app_url: string
 
 	params: Record<string, string>
 }

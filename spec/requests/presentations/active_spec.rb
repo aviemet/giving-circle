@@ -48,8 +48,8 @@ RSpec.describe "Presentations::Active", type: :request do
   end
 
   describe "GET messaging" do
-    it "renders the messaging page" do
-      get theme_presentation_messaging_path(circle, theme, presentation)
+    it "renders the active messaging send page" do
+      get theme_presentation_admin_messaging_path(circle, theme, presentation)
 
       expect(response).to be_successful
       expect(inertia).to render_component("Presentations/Active/Messaging")

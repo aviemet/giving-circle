@@ -581,38 +581,156 @@ export function createUsersIndex(overrides?: Partial<Schema.UsersIndex>): Schema
 	}
 }
 
-export function createSmtpsIndex(overrides?: Partial<Schema.SmtpsIndex>): Schema.SmtpsIndex {
+export function createIntegrationsPersisted(
+	overrides?: Partial<Schema.IntegrationsPersisted>,
+): Schema.IntegrationsPersisted {
 	return {
-		id: "smtp-1",
-		host: "smtp.example.com",
-		name: "Primary SMTP",
-		security: "tls",
-		port: 587,
+		id: "integration-1",
+		active: true,
+		credentials: {},
+		medium: "email",
+		name: "SMTP",
+		provider: "smtp",
 		...overrides,
 	}
 }
 
-export function createSmtpsFormData(overrides?: Partial<Schema.SmtpsFormData>): Schema.SmtpsFormData {
+export function createPresentationMessagesIndex(
+	overrides?: Partial<Schema.PresentationMessagesIndex>,
+): Schema.PresentationMessagesIndex {
 	return {
-		host: "smtp.example.com",
-		name: "Primary SMTP",
-		security: "tls",
-		port: 587,
+		id: "presentation-message-1",
+		body: "Hello",
+		delivery_results: {},
+		medium: "email",
+		name: "Welcome email",
+		slug: "welcome-email",
+		status: "ready",
+		subject: "Welcome",
 		...overrides,
 	}
 }
 
-export function createSmtpsShow(overrides?: Partial<Schema.SmtpsShow>): Schema.SmtpsShow {
+export function createMessageTemplatesPersisted(
+	overrides?: Partial<Schema.MessageTemplatesPersisted>,
+): Schema.MessageTemplatesPersisted {
 	return {
-		id: "smtp-1",
-		host: "smtp.example.com",
-		name: "Primary SMTP",
-		security: "tls",
-		port: 587,
-		domain: "example.com",
-		address: "noreply@example.com",
-		notes: "<p>Notes</p>",
+		id: "message-template-1",
+		body: "Hello #membership.name",
+		medium: "email",
+		name: "Welcome template",
+		slug: "welcome-template",
+		subject: "Welcome",
 		...overrides,
 	}
 }
+
+export function createMessageTemplatesFormData(
+	overrides?: Partial<Schema.MessageTemplatesFormData>,
+): Schema.MessageTemplatesFormData {
+	return {
+		name: "Welcome template",
+		medium: "email",
+		mediums: ["email", "sms"],
+		body: "<p>Hello</p>",
+		subject: "Hello",
+		...overrides,
+	}
+}
+
+export function createPresentationMessagesFormData(
+	overrides?: Partial<Schema.PresentationMessagesFormData>,
+): Schema.PresentationMessagesFormData {
+	return {
+		name: "Welcome email",
+		medium: "email",
+		mediums: ["email", "sms"],
+		body: "<p>Hello</p>",
+		subject: "Hello",
+		status: "ready",
+		delivery_results: {},
+		integrations: [createIntegrationsPersisted()],
+		interactions: [],
+		message_templates: [],
+		...overrides,
+	}
+}
+
+export function createIntegrationsIndex(overrides?: Partial<Schema.IntegrationsIndex>): Schema.IntegrationsIndex {
+	return {
+		id: "integration-1",
+		name: "Primary SMTP",
+		provider: "smtp",
+		medium: "email",
+		active: true,
+		credentials: {},
+		...overrides,
+	}
+}
+
+export function createIntegrationsFormData(overrides?: Partial<Schema.IntegrationsFormData>): Schema.IntegrationsFormData {
+	return {
+		name: "Primary SMTP",
+		provider: "smtp",
+		medium: "email",
+		active: true,
+		credentials: {
+			host: "smtp.example.com",
+			port: "587",
+			username: "user@example.com",
+			password: "secret",
+		},
+		providers: ["smtp", "mailerlite", "twilio", "plivo"],
+		providers_by_medium: {
+			email: ["smtp", "mailerlite"],
+			sms: ["twilio", "plivo"],
+		},
+		credential_fields: {
+			smtp: ["host", "port", "username", "password"],
+			twilio: ["account_sid", "auth_token", "from_number"],
+			plivo: ["auth_id", "auth_token", "from_number"],
+			mailerlite: ["api_token", "from_email"],
+		},
+		presets: {
+			smtp: {
+				medium: "email",
+				auth_profile: "smtp",
+				fields: [
+					{ key: "host", secret: false },
+					{ key: "port", secret: false },
+					{ key: "username", secret: false },
+					{ key: "password", secret: true },
+				],
+			},
+			mailerlite: {
+				medium: "email",
+				auth_profile: "api_token",
+				fields: [
+					{ key: "api_token", secret: true },
+					{ key: "from_email", secret: false },
+				],
+			},
+			twilio: {
+				medium: "sms",
+				auth_profile: "basic_auth",
+				fields: [
+					{ key: "account_sid", secret: false },
+					{ key: "auth_token", secret: true },
+					{ key: "from_number", secret: false },
+				],
+			},
+			plivo: {
+				medium: "sms",
+				auth_profile: "basic_auth",
+				fields: [
+					{ key: "auth_id", secret: false },
+					{ key: "auth_token", secret: true },
+					{ key: "from_number", secret: false },
+				],
+			},
+		},
+		...overrides,
+	}
+}
+
 

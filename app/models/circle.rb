@@ -30,8 +30,9 @@ class Circle < ApplicationRecord
   has_many :memberships, dependent: :restrict_with_error
   has_many :templates, dependent: :restrict_with_error
   has_many :interaction_config_templates, dependent: :restrict_with_error
+  has_many :message_templates, dependent: :restrict_with_error
+  has_many :integrations, dependent: :destroy
   has_many :presentations, through: :themes
-  has_many :smtps, dependent: :destroy
 
   has_many_attached :fonts
 

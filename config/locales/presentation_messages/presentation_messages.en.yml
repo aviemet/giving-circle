@@ -1,0 +1,53 @@
+---
+en:
+  presentation_messages:
+    edit:
+      title: "%{name}"
+    form:
+      create: Create Message
+      finished: Finished
+      integration: Integration
+      ready: Send
+      sending: Sending
+      skip_interaction: Skip members who responded to
+      skip_interaction_none: Do not skip
+      template: From template
+      update: Update Message
+    index:
+      choose_template_modal:
+        empty: No message templates are available yet. Create one in Settings.
+        title: Choose a message template
+      columns:
+        name: Name
+      empty: No messages have been set up for this presentation yet.
+      from_template: New Message from Template
+      new_message: New Message
+      new_message_options: More new message options
+      title: Messaging
+    active:
+      columns:
+        medium: Medium
+        name: Name
+        send: Send
+        status: Status
+      empty: No messages have been set up for this presentation yet.
+      statuses:
+        finished: Finished
+        ready: Ready
+        sending: Sending
+      title: Messaging
+    new:
+      title: New Presentation Message
+    notices:
+      created: Presentation message was successfully created.
+      destroyed: Presentation message was successfully destroyed.
+      locked: This message has already been sent and cannot be edited.
+      sending: Message send started.
+      updated: Presentation message was successfully updated.
+    results:
+      code: Code
+      error: Error
+      member: Member
+      recipient: Recipient
+      status: Status
+      title: Delivery results

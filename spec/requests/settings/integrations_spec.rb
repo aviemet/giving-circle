@@ -2,26 +2,43 @@ require "rails_helper"
 require_relative "../../support/devise"
 
 RSpec.describe "Settings::Integrations", type: :request do
-  login_super_admin
-
   describe "GET /settings/:circle_slug/integrations" do
-    it "renders the integrations settings page" do
-      circle = @admin.circles.first
+    login_super_admin
 
-      get settings_integrations_path(circle_slug: circle.slug)
+    it "renders a successful response" do
+      circle = @admin.circles.first
+      create(:integration, circle: circle)
+
+      get settings_integrations_path(circle)
 
       expect(response).to be_successful
-      expect(inertia).to render_component("Settings/Integrations/Index")
     end
   end
 
-  describe "PATCH /settings/:circle_slug/integrations" do
-    it "hits the stub update action" do
+  describe "POST /settings/:circle_slug/integrations" do
+    login_super_admin
+
+    it "creates an integration" do
       circle = @admin.circles.first
 
-      patch settings_integrations_path(circle_slug: circle.slug)
+      expect {
+        post settings_integrations_path(circle), params: {
+          integration: {
+            name: "Circle SMTP",
+            provider: "smtp",
+            medium: "email",
+            active: true,
+            credentials: {
+              host: "smtp.example.com",
+              port: "587",
+              username: "user",
+              password: "secret",
+            },
+          },
+        }
+      }.to change(Integration, :count).by(1)
 
-      expect(response.status).to be_between(200, 204).or eq(302)
+      expect(response).to redirect_to(edit_settings_integration_path(circle, Integration.last))
     end
   end
 end

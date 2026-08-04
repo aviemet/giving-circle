@@ -430,6 +430,70 @@
         ]
       }
     },
+    "integrations": {
+      "edit": {
+        "title": "Edit %{name}"
+      },
+      "form": {
+        "active": "Active",
+        "auth_profile_hint": "Authentication: %{profile}",
+        "auth_profiles": {
+          "api_token": "API token",
+          "basic_auth": "Username and password",
+          "smtp": "SMTP"
+        },
+        "create": "Create Integration",
+        "credential_fields": {
+          "account_sid": "Account SID",
+          "api_token": "API Token",
+          "auth_id": "Auth ID",
+          "auth_token": "Auth Token",
+          "from_email": "From Email",
+          "from_number": "From Number",
+          "host": "Host",
+          "password": "Password",
+          "port": "Port",
+          "username": "Username"
+        },
+        "credentials": "Credentials",
+        "medium": "Message Medium",
+        "mediums": {
+          "email": "Email",
+          "sms": "SMS"
+        },
+        "name": "Name",
+        "provider": "Provider",
+        "providers": {
+          "mailerlite": "MailerLite",
+          "plivo": "Plivo",
+          "smtp": "SMTP",
+          "twilio": "Twilio"
+        },
+        "save": "Save Integration",
+        "update": "Update Integration"
+      },
+      "index": {
+        "active_no": "Inactive",
+        "active_yes": "Active",
+        "columns": {
+          "actions": "Actions",
+          "active": "Active",
+          "medium": "Medium",
+          "name": "Name",
+          "provider": "Provider"
+        },
+        "newIntegration": "New Integration",
+        "title": "Integrations"
+      },
+      "new": {
+        "title": "New Integration"
+      },
+      "notices": {
+        "created": "Integration was successfully created.",
+        "destroyed": "Integration was successfully destroyed.",
+        "updated": "Integration was successfully updated."
+      }
+    },
     "interaction_config_templates": {
       "edit": {
         "title": "%{name}: Edit"
@@ -491,6 +555,48 @@
         "updated": "Membership was successfully updated."
       }
     },
+    "message_templates": {
+      "edit": {
+        "title": "%{name}: Edit"
+      },
+      "form": {
+        "create": "Create Template",
+        "update": "Update Template"
+      },
+      "index": {
+        "breadcrumbs": {
+          "circles": "Circles",
+          "templates": "Message Templates"
+        },
+        "columns": {
+          "actions": "Actions",
+          "medium": "Medium",
+          "name": "Name"
+        },
+        "newTemplate": "New Template",
+        "title": "Message Templates"
+      },
+      "new": {
+        "title": "New Message Template"
+      },
+      "notices": {
+        "created": "Message template was successfully created.",
+        "destroyed": "Message template was successfully destroyed.",
+        "updated": "Message template was successfully updated."
+      }
+    },
+    "messaging": {
+      "form": {
+        "body": "Body",
+        "medium": "Message medium",
+        "medium_email": "Email",
+        "medium_sms": "SMS",
+        "name": "Name",
+        "preview": "Preview",
+        "preview_empty": "Start writing to see a preview.",
+        "subject": "Subject"
+      }
+    },
     "navigation": {
       "circles": "Circles",
       "currentLanguage": "Current language",
@@ -502,6 +608,7 @@
       "language": "Language",
       "languageSearch": "Search languages",
       "members": "Members",
+      "messageTemplates": "Message Templates",
       "more": "more...",
       "orgs": "Orgs",
       "preferences": "Preferences",
@@ -625,6 +732,69 @@
         "created": "Person was successfully created.",
         "destroyed": "Person was successfully destroyed.",
         "updated": "Person was successfully updated."
+      }
+    },
+    "presentation_messages": {
+      "active": {
+        "columns": {
+          "medium": "Medium",
+          "name": "Name",
+          "send": "Send",
+          "status": "Status"
+        },
+        "empty": "No messages have been set up for this presentation yet.",
+        "statuses": {
+          "finished": "Finished",
+          "ready": "Ready",
+          "sending": "Sending"
+        },
+        "title": "Messaging"
+      },
+      "edit": {
+        "title": "%{name}"
+      },
+      "form": {
+        "create": "Create Message",
+        "finished": "Finished",
+        "integration": "Integration",
+        "ready": "Send",
+        "sending": "Sending",
+        "skip_interaction": "Skip members who responded to",
+        "skip_interaction_none": "Do not skip",
+        "template": "From template",
+        "update": "Update Message"
+      },
+      "index": {
+        "choose_template_modal": {
+          "empty": "No message templates are available yet. Create one in Settings.",
+          "title": "Choose a message template"
+        },
+        "columns": {
+          "name": "Name"
+        },
+        "empty": "No messages have been set up for this presentation yet.",
+        "from_template": "New Message from Template",
+        "new_message": "New Message",
+        "new_message_options": "More new message options",
+        "title": "Messaging"
+      },
+      "new": {
+        "title": "New Presentation Message"
+      },
+      "notices": {
+        "created": "Presentation message was successfully created.",
+        "destroyed": "Presentation message was successfully destroyed.",
+        "locked": "This message has already been sent and cannot be edited.",
+        "sending": "Message send started.",
+        "updated": "Presentation message was successfully updated."
+      },
+      "results": {
+        "code": "Code",
+        "error": "Error",
+        "member": "Member",
+        "recipient": "Recipient",
+        "status": "Status",
+        "title": "Delivery results"
       }
     },
     "presentations": {
@@ -1084,50 +1254,6 @@
       "integrations": {
         "index": {
           "title": "Settings: Integrations"
-        }
-      },
-      "mail": {
-        "edit": {
-          "title": "Settings: Mail"
-        },
-        "form": {
-          "address": "Reply-To Address",
-          "address_placeholder": "If not provided, will default to your username",
-          "create": "Create Mail Account",
-          "domain": "Email Domain",
-          "domain_placeholder": "e.g. mycompany.com",
-          "host": "SMTP Server Address",
-          "name": "Name",
-          "notes": "Notes",
-          "password": "Password",
-          "port": "Port Number",
-          "save": "Save SMTP Settings",
-          "security": "Security",
-          "security_none": "None",
-          "security_ssl": "SSL",
-          "security_tls": "TLS",
-          "update": "Update Mail Account",
-          "username": "Username"
-        },
-        "index": {
-          "newAccount": "New Mail Account",
-          "newConnection": "New Mail Connection",
-          "title": "Settings: Mail"
-        },
-        "new": {
-          "title": "Settings: Mail"
-        },
-        "notices": {
-          "created": "Mail account successfully created",
-          "deleted": "Mail account successfully deleted",
-          "updated": "Mail account successfully updated"
-        },
-        "smtp": {
-          "test": {
-            "authentication_failed": "Authentication failed: %{message}",
-            "error": "An error occurred: %{message}",
-            "success": "Authentication successful"
-          }
         }
       },
       "notifications": {

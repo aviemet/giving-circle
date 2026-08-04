@@ -31,6 +31,8 @@ module UrlParamsJson
     #   @route: editUser
     ###
     def self.generate
+      Rails.application.reload_routes!
+
       url_params = {}
 
       Rails.application.routes.named_routes.to_a.each do |route|

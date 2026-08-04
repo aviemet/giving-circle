@@ -35,6 +35,13 @@ export function TemplatesSettingsMenu({ circle }: TemplatesSettingsMenuProps) {
 				>
 					{ t("navigation.interactionTemplates") }
 				</NavLink>
+
+				<NavLink
+					href={ Routes.settingsMessageTemplates(circle.slug) }
+					active={ isThisCircle && paths[2] === "message_templates" }
+				>
+					{ t("navigation.messageTemplates") }
+				</NavLink>
 			</Accordion.Panel>
 		</Accordion.Item>
 	)

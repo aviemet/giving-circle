@@ -12,7 +12,7 @@ module PresentationValues
         outputs = config[:outputs]
         settings = config[:settings] || {}
         next false unless outputs.is_a?(Array)
-        next false unless settings[:finalist_count].present?
+        next false if settings[:finalist_count].blank?
 
         outputs.any? { |output| output.with_indifferent_access[:metric] == "org_vote_totals" }
       end
