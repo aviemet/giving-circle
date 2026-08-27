@@ -57,9 +57,11 @@ export function TextDisplay({
 	const truncateValue = resolvedFlow.truncate === "none" || resolvedFlow.truncate === undefined
 		? undefined
 		: resolvedFlow.truncate
-	const textStyle: CSSProperties | undefined = resolvedSize.fontSize === undefined
-		? undefined
-		: { fontSize: resolvedSize.fontSize }
+	const fontFamily = componentFontFamilyCss(resolvedFont)
+	const textStyle: CSSProperties = { fontFamily }
+	if(resolvedSize.fontSize !== undefined) {
+		textStyle.fontSize = resolvedSize.fontSize
+	}
 
 	return (
 		<>
@@ -72,7 +74,7 @@ export function TextDisplay({
 				td={ resolvedTypeStyle.td }
 				tt={ resolvedTypeStyle.tt }
 				fs={ resolvedTypeStyle.fs }
-				ff={ componentFontFamilyCss(resolvedFont) }
+				ff={ fontFamily }
 				ta={ alignment }
 				lineClamp={ hasLineClamp ? resolvedFlow.lineClamp : undefined }
 				truncate={ truncateValue }

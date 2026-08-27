@@ -126,6 +126,8 @@ export {
 	hasCustomFont,
 	hasFontFamily,
 	isGenericFontFamily,
+	matchingCircleFont,
+	signedIdFromFontUrl,
 	type FontValue,
 	type TextFontValue,
 	type FlexibleFontSize,

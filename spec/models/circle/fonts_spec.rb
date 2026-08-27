@@ -24,4 +24,60 @@ RSpec.describe Circle::Fonts do
       expect(described_class.allowed_content_type?("text/plain", "notes.txt")).to be(false)
     end
   end
+
+  describe ".find_or_attach!" do
+    it "attaches a new font blob" do
+      circle = create(:circle)
+      blob = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes"),
+        filename: "Brand.woff2",
+        content_type: "font/woff2",
+      )
+
+      attachment, created = described_class.find_or_attach!(circle, blob)
+
+      expect(created).to be(true)
+      expect(attachment.blob_id).to eq(blob.id)
+      expect(circle.fonts.count).to eq(1)
+    end
+
+    it "reuses an existing attachment for the same blob" do
+      circle = create(:circle)
+      blob = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes"),
+        filename: "Brand.woff2",
+        content_type: "font/woff2",
+      )
+      circle.fonts.attach(blob)
+
+      attachment, created = described_class.find_or_attach!(circle, blob)
+
+      expect(created).to be(false)
+      expect(attachment.blob_id).to eq(blob.id)
+      expect(circle.fonts.count).to eq(1)
+    end
+
+    it "reuses an existing font with the same checksum and purges the duplicate blob" do
+      circle = create(:circle)
+      original = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes"),
+        filename: "Brand.woff2",
+        content_type: "font/woff2",
+      )
+      circle.fonts.attach(original)
+      duplicate = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes"),
+        filename: "Brand Copy.woff2",
+        content_type: "font/woff2",
+      )
+      duplicate_id = duplicate.id
+
+      attachment, created = described_class.find_or_attach!(circle, duplicate)
+
+      expect(created).to be(false)
+      expect(attachment.blob_id).to eq(original.id)
+      expect(circle.fonts.count).to eq(1)
+      expect(ActiveStorage::Blob.exists?(duplicate_id)).to be(false)
+    end
+  end
 end

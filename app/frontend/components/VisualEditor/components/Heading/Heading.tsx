@@ -48,9 +48,11 @@ export function HeadingDisplay({
 	const resolvedFlow = normalizeTextFlow(flow, { lineClamp, textWrap })
 	const resolvedSize = resolveFontSize(resolvedFont.size)
 	const hasLineClamp = resolvedFlow.lineClamp > 0
-	const titleStyle: CSSProperties | undefined = resolvedSize.fontSize === undefined
-		? undefined
-		: { fontSize: resolvedSize.fontSize }
+	const fontFamily = componentFontFamilyCss(resolvedFont)
+	const titleStyle: CSSProperties = { fontFamily }
+	if(resolvedSize.fontSize !== undefined) {
+		titleStyle.fontSize = resolvedSize.fontSize
+	}
 
 	return (
 		<>
@@ -64,7 +66,7 @@ export function HeadingDisplay({
 					td={ resolvedTypeStyle.td }
 					tt={ resolvedTypeStyle.tt }
 					fs={ resolvedTypeStyle.fs }
-					ff={ componentFontFamilyCss(resolvedFont) }
+					ff={ fontFamily }
 					ta={ alignment }
 					lineClamp={ hasLineClamp ? resolvedFlow.lineClamp : undefined }
 					textWrap={ resolvedFlow.textWrap }

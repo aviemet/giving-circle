@@ -10,17 +10,18 @@ import { useAttachCircleFont, useCircleFonts } from "@/queries"
 
 import * as classes from "./fontField.css"
 import {
+	fontSelectOptions,
+	fontSelectValue,
+	fontValueFromSelect,
+} from "./fontSelect"
+import {
 	defaultFontValue,
-	GENERIC_FONT_FAMILIES,
 	type GenericFontFamily,
-	isGenericFontFamily,
 	type FontValue,
 } from "./fontValue"
 import { IconControlTooltip } from "../shared/IconControlTooltip"
 
 const t = i18n.t.bind(i18n)
-
-const INHERIT_VALUE = ""
 
 const GENERIC_FONT_LABEL_KEYS = {
 	serif: "slides.editor.fields.font.generics.serif",
@@ -43,7 +44,7 @@ export function FontFamilyControls({
 	onChange,
 	allowInherit,
 }: FontFamilyControlsProps) {
-	const { active_circle, params } = usePageProps<"editThemePresentationSlide">()
+	const { active_circle, params } = usePageProps<"editThemePresentationSlide" | "settingsTemplatesEditSlide">()
 	const circleSlug = active_circle?.slug ?? params.circle_slug ?? ""
 	const fontValue = value ?? defaultFontValue()
 	const [isUploading, setIsUploading] = useState(false)
@@ -58,54 +59,32 @@ export function FontFamilyControls({
 		},
 	})
 
-	const genericOptions = GENERIC_FONT_FAMILIES.map((family) => ({
-		value: family,
-		label: t(GENERIC_FONT_LABEL_KEYS[family]),
-	}))
-
-	const fontOptions = (fontsQuery.data ?? []).map((font) => ({
-		value: font.signed_id,
-		label: font.family,
-	}))
-
+	const circleFonts = fontsQuery.data ?? []
+	const genericLabels = {
+		serif: t(GENERIC_FONT_LABEL_KEYS.serif),
+		"sans-serif": t(GENERIC_FONT_LABEL_KEYS["sans-serif"]),
+		monospace: t(GENERIC_FONT_LABEL_KEYS.monospace),
+		cursive: t(GENERIC_FONT_LABEL_KEYS.cursive),
+		fantasy: t(GENERIC_FONT_LABEL_KEYS.fantasy),
+	}
 	const emptyOptionLabel = allowInherit
 		? t("slides.editor.fields.font.inherit")
 		: t("slides.editor.fields.font.system_default")
-
-	const selectOptions = [
-		{ value: INHERIT_VALUE, label: emptyOptionLabel },
-		...genericOptions,
-		...fontOptions,
-	]
-
-	let selectedValue = INHERIT_VALUE
-	if(fontValue.family.length > 0) {
-		if(fontValue.url.length === 0 && isGenericFontFamily(fontValue.family)) {
-			selectedValue = fontValue.family
-		} else {
-			selectedValue = (fontsQuery.data ?? []).find((font) => {
-				return font.url === fontValue.url && font.family === fontValue.family
-			})?.signed_id ?? INHERIT_VALUE
-		}
-	}
+	const selectOptions = fontSelectOptions(
+		circleFonts,
+		fontValue,
+		genericLabels,
+		emptyOptionLabel,
+	)
+	const selectedValue = fontSelectValue(fontValue, circleFonts)
 
 	const handleSelectChange = (nextValue: string | null) => {
-		if(nextValue === null || nextValue === INHERIT_VALUE) {
-			onChange(defaultFontValue())
+		const nextFont = fontValueFromSelect(nextValue, circleFonts, fontValue)
+		if(nextFont === undefined) {
 			return
 		}
 
-		if(isGenericFontFamily(nextValue)) {
-			onChange({ family: nextValue, url: "" })
-			return
-		}
-
-		const selected = (fontsQuery.data ?? []).find((font) => font.signed_id === nextValue)
-		if(selected === undefined) {
-			return
-		}
-
-		onChange({ family: selected.family, url: selected.url })
+		onChange(nextFont)
 	}
 
 	const isBusy = fontsQuery.isLoading || isUploading || attachFont.isPending

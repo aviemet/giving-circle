@@ -35,4 +35,20 @@ module Circle::Fonts
   def blob_redirect_url(signed_id, filename)
     "/rails/active_storage/blobs/redirect/#{signed_id}/#{ERB::Util.url_encode(filename)}"
   end
+
+  def find_or_attach!(circle, blob)
+    existing_attachment = circle.fonts.attachments.find_by(blob_id: blob.id)
+    return [existing_attachment, false] if existing_attachment
+
+    duplicate_attachment = circle.fonts.attachments.joins(:blob).find_by(
+      active_storage_blobs: { checksum: blob.checksum },
+    )
+    if duplicate_attachment
+      blob.purge if blob.id != duplicate_attachment.blob_id
+      return [duplicate_attachment, false]
+    end
+
+    circle.fonts.attach(blob)
+    [circle.fonts.attachments.find_by!(blob_id: blob.id), true]
+  end
 end
