@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { Page, Section } from "@/components"
-import { VisualEditor } from "@/components/VisualEditor"
+import { VisualEditor, type SlideSaveExtras } from "@/components/VisualEditor"
 import { slideTitleFromData, type PuckSlideData } from "@/components/VisualEditor/editorPersistence"
 import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
@@ -26,10 +26,10 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 		params: { circleSlug: params.circle_slug, templateSlug: params.template_slug, slideSlug: params.slug },
 	})
 
-	const handleSave = async (data: PuckSlideData) => {
+	const handleSave = async (data: PuckSlideData, extras?: SlideSaveExtras) => {
 		const title = slideTitleFromData(data) ?? slideTitle
 
-		await updateSlideMutation.mutate({ data, title })
+		await updateSlideMutation.mutate({ data, title, thumbnail: extras?.thumbnail })
 		setSlideTitle(title)
 	}
 

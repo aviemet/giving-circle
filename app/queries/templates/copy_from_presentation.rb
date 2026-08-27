@@ -45,6 +45,7 @@ class Templates::CopyFromPresentation
       new_slide.slug = nil
       template.slides << new_slide
       new_slide.save!
+      new_slide.copy_thumbnail_from(slide)
     end
   end
 end

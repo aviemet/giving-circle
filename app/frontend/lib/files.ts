@@ -42,3 +42,9 @@ export const uploadFile = (file: File, onSuccess: (signedId: string) => void, on
 		}
 	})
 }
+
+export function uploadFileAsPromise(file: File) {
+	return new Promise<string>((resolve, reject) => {
+		uploadFile(file, resolve, reject)
+	})
+}

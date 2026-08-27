@@ -96,4 +96,25 @@ RSpec.describe Presentation do
       expect(presentation.orgs).to contain_exactly(org)
     end
   end
+
+  describe "#copy_template_slides" do
+    it "copies slide thumbnails from the template" do
+      template = create(:template)
+      slide = create(:slide, title: "Intro")
+      slide.thumbnail.attach(
+        io: StringIO.new("img"),
+        filename: "thumb.jpg",
+        content_type: "image/jpeg",
+      )
+      template.slides << slide
+      theme = create(:theme, circle: template.circle)
+      presentation = create(:presentation, theme:, template:)
+
+      presentation.copy_template_slides
+
+      copied = presentation.slides.find_by!(title: "Intro")
+      expect(copied.thumbnail).to be_attached
+      expect(copied.thumbnail.blob).to eq(slide.thumbnail.blob)
+    end
+  end
 end

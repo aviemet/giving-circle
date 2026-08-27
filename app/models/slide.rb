@@ -37,6 +37,7 @@ class Slide < ApplicationRecord
   resourcify # rolify
 
   has_many_attached :images
+  has_one_attached :thumbnail
 
   has_one :slide_parent, dependent: :delete
   has_one :template, through: :slide_parent, source: :parentable, source_type: "Template"
@@ -44,10 +45,16 @@ class Slide < ApplicationRecord
 
   belongs_to :source_slide, class_name: "Slide", optional: true
 
-  scope :includes_associated, -> { includes([:slide_parent, :template, :presentation]) }
+  scope :includes_associated, -> { includes([:slide_parent, :template, :presentation, { thumbnail_attachment: :blob }]) }
 
   def parent
     template || presentation
+  end
+
+  def copy_thumbnail_from(source)
+    return unless source.thumbnail.attached?
+
+    thumbnail.attach(source.thumbnail.blob)
   end
 
   before_destroy :nullify_active_slide_references

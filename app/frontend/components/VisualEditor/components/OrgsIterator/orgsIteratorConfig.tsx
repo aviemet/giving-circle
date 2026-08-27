@@ -1,4 +1,4 @@
-import { Slot, type ComponentConfig, type SlotComponent } from "@puckeditor/core"
+import { Slot, type ComponentConfig, type PuckContext, type SlotComponent } from "@puckeditor/core"
 
 import { usePresentationDataContext } from "@/features/presentation"
 import { i18n } from "@/lib/i18n"
@@ -14,12 +14,16 @@ export type OrgsIteratorComponentProps = {
 	content: SlotComponent
 }
 
-function OrgsIteratorComponent({ content }: OrgsIteratorComponentProps) {
+export type OrgsIteratorEditorProps = OrgsIteratorComponentProps & {
+	puck: PuckContext
+}
+
+function OrgsIteratorComponent({ content, puck }: OrgsIteratorEditorProps) {
 	const contextData = usePresentationDataContext()
 	const isEditor = contextData?.isEditor === true
 
 	if(isEditor) {
-		return <OrgsIteratorEditor content={ content } />
+		return <OrgsIteratorEditor content={ content } puck={ puck } />
 	}
 
 	return <OrgsIteratorDisplay content={ content } />
@@ -29,6 +33,7 @@ const t = i18n.t.bind(i18n)
 
 export const orgsIteratorConfig: ComponentConfig<OrgsIteratorProps> = {
 	label: t("slides.editor.components.orgs_iterator.label"),
+	inline: true,
 	fields: {
 		content: { type: "slot" },
 	},

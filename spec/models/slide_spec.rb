@@ -27,6 +27,7 @@ RSpec.describe Slide, type: :model do
     it { is_expected.to have_one(:template).through(:slide_parent) }
     it { is_expected.to have_one(:presentation).through(:slide_parent) }
     it { is_expected.to belong_to(:source_slide).optional }
+    it { is_expected.to have_one_attached(:thumbnail) }
   end
 
   describe "slide parents" do

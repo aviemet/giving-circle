@@ -1,8 +1,10 @@
 import { modals } from "@mantine/modals"
 
-import { ActionIcon, Card, Group, Image, Link, Menu, Text } from "@/components"
+import { ActionIcon, Card, Group, Link, Menu, Text } from "@/components"
 import { DotsIcon, EditIcon, TrashIcon } from "@/components/Icons"
 import { rem } from "@/lib"
+
+import { SlideThumbnail } from "../SlideThumbnail"
 
 interface SlideCardProps {
 	slide: Schema.SlidesShow
@@ -65,7 +67,10 @@ export function SlideCard({ slide, editHref, onDelete }: SlideCardProps) {
 			</Card.Section>
 
 			<Card.Section>
-				<Image src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png" />
+				<SlideThumbnail
+					src={ slide.thumbnail_url }
+					alt=""
+				/>
 			</Card.Section>
 		</Card>
 	)

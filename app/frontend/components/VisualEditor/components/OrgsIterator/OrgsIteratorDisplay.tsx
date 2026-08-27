@@ -1,6 +1,5 @@
 import clsx from "clsx"
 
-import { Box } from "@/components"
 import { usePresentationDataContext } from "@/features/presentation"
 
 import * as classes from "./OrgsIterator.css"
@@ -29,10 +28,7 @@ export function OrgsIteratorDisplay({ content: Content }: OrgsIteratorComponentP
 						index,
 					} }
 				>
-					<Box
-						component={ Content }
-						className={ clsx(classes.orgIteratorItem) }
-					/>
+					<Content className={ clsx(classes.orgIteratorItem) } />
 				</IteratorItemProvider>
 			) ) }
 		</>

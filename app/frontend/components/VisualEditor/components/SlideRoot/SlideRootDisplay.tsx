@@ -40,6 +40,7 @@ export function SlideRootDisplay({
 			<SlideFontFace font={ font } />
 			<Box
 				className={ clsx(classes.slideRoot, isEditing && editorClasses.slideRoot) }
+				data-slide-snapshot-root=""
 				style={ {
 					...(hasBackgroundColor(resolvedBackground.color)
 						? { "--puck-slide-root-bg": resolvedBackground.color }

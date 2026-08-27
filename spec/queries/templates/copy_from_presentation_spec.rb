@@ -7,7 +7,13 @@ RSpec.describe Templates::CopyFromPresentation do
       theme = create(:theme, circle:)
       template = create(:template, circle:)
       presentation = create(:presentation, theme:, template:)
-      presentation.slides << create(:slide, title: "Intro")
+      source_slide = create(:slide, title: "Intro")
+      source_slide.thumbnail.attach(
+        io: StringIO.new("img"),
+        filename: "thumb.jpg",
+        content_type: "image/jpeg",
+      )
+      presentation.slides << source_slide
 
       result = described_class.call(presentation:, name: "Exported Template")
 
@@ -17,6 +23,8 @@ RSpec.describe Templates::CopyFromPresentation do
       expect(result.slides.count).to eq(1)
       expect(result.slides.first.title).to eq("Intro")
       expect(result.slides.first.source_slide_id).to be_nil
+      expect(result.slides.first.thumbnail).to be_attached
+      expect(result.slides.first.thumbnail.blob).to eq(source_slide.thumbnail.blob)
     end
   end
 

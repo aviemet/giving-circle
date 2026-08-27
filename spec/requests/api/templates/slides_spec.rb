@@ -39,6 +39,28 @@ RSpec.describe "Api::Templates::Slides", type: :request do
       expect(slide.reload.title).to eq("Updated")
     end
 
+    it "attaches a thumbnail from a signed blob id" do
+      circle = @admin.circles.first
+      template = create(:template, circle:)
+      slide = create(:slide, title: "Intro")
+      template.slides << slide
+      blob = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("img"),
+        filename: "thumb.jpg",
+        content_type: "image/jpeg",
+      )
+
+      patch api_circle_template_slide_path(
+        circle_slug: circle.slug,
+        template_slug: template.slug,
+        slug: slide.slug,
+      ), params: { slide: { title: "Updated", data: { "root" => {} }, thumbnail: blob.signed_id } }
+
+      expect(response).to have_http_status(:accepted)
+      expect(slide.reload.thumbnail).to be_attached
+      expect(slide.thumbnail.blob).to eq(blob)
+    end
+
     it "returns unprocessable when update fails" do
       circle = @admin.circles.first
       template = create(:template, circle:)

@@ -3,6 +3,7 @@ import { useCallback, useMemo, useRef, useState } from "react"
 import { NavigationInterrupt } from "@/components/Modal"
 import { type PresentationDataPresentation } from "@/features/presentation"
 
+import { slideSaveExtras, type SlideSaveExtras } from "./captureSlideSnapshot"
 import {
 	applySlideTitleToData,
 	clearEditorDraft,
@@ -15,11 +16,13 @@ import {
 } from "./editorPersistence"
 import { VisualEditorWorkspace } from "./VisualEditorWorkspace"
 
+export type { SlideSaveExtras }
+
 export interface VisualEditorProps {
 	initialData?: PuckSlideData
 	slideTitle: string
 	presentation?: PresentationDataPresentation
-	onSave?: (data: PuckSlideData) => void | Promise<void>
+	onSave?: (data: PuckSlideData, extras?: SlideSaveExtras) => void | Promise<void>
 	isSaving?: boolean
 	slideKey: string
 	returnTo?: string
@@ -56,7 +59,8 @@ export function VisualEditorContent({
 		if(!onSave) return false
 
 		try {
-			await onSave(data)
+			const extras = await slideSaveExtras()
+			await onSave(data, extras)
 			savedDataRef.current = data
 			latestDataRef.current = data
 			setSaveStatus("saved")

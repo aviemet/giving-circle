@@ -116,6 +116,7 @@ class Presentation < ApplicationRecord
         new_slide.source_slide = slide
         new_slide.slug = nil
         new_slide.save!
+        new_slide.copy_thumbnail_from(slide)
       end
 
       update(template_version: template.version)

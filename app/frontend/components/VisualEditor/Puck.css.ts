@@ -35,6 +35,24 @@ export const puckPreviewContainer = css`
 	width: 100%;
 	height: 100%;
 	min-height: 100%;
+
+	&[data-slide-snapshot-capturing] .${ layoutChrome.frame }::before,
+	&[data-slide-snapshot-capturing] .${ layoutChrome.frame }::after {
+		content: none !important;
+		display: none !important;
+	}
+
+	&[data-slide-snapshot-capturing] [class*="ActionBar"] {
+		display: none !important;
+	}
+
+	&[data-slide-snapshot-capturing] [class*="DropZone-hitbox"] {
+		display: none !important;
+	}
+
+	&[data-slide-snapshot-capturing] [class*="DropZone--isRootZone"]:not([class*="DropZone--hasChildren"])::after {
+		content: none !important;
+	}
 `
 
 export const puckRoot = css`

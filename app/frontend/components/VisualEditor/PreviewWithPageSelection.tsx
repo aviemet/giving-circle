@@ -27,7 +27,11 @@ export function PreviewWithPageSelection({ children }: { children: ReactNode }) 
 	}, [dispatch])
 
 	return (
-		<div ref={ previewRef } className={ clsx(classes.puckPreviewContainer) }>
+		<div
+			ref={ previewRef }
+			className={ clsx(classes.puckPreviewContainer) }
+			data-slide-snapshot-host=""
+		>
 			{ children }
 		</div>
 	)
