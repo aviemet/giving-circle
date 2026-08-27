@@ -1,4 +1,5 @@
 export { Breadcrumbs } from "./Breadcrumbs"
+export { Burger, type BurgerProps } from "./Burger"
 export * from "./Button"
 export { ColorPickerComponent as ColorPicker } from "./ColorPicker"
 export { ConditionalWrapper } from "./ConditionalWrapper"
@@ -28,7 +29,6 @@ export {
 	Avatar, type AvatarProps,
 	Badge, type BadgeProps,
 	Box, type BoxProps,
-	Burger, type BurgerProps,
 	Card, type CardProps,
 	Center, type CenterProps,
 	Chip, type ChipProps,
