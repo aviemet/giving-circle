@@ -177,10 +177,19 @@ function fineTuneStyle(fineTune: FlexItemSizingFineTune | undefined): CSSPropert
 }
 
 export function buildFlexItemSizingStyle(sizing: FlexItemSizing | undefined): CSSProperties {
+	if(sizing === undefined) {
+		return {}
+	}
+
 	const normalized = normalizeSizingValue(sizing)
 
 	if(normalized.mode === "auto") {
 		return {
+			flexGrow: 0,
+			flexShrink: 0,
+			flexBasis: "auto",
+			height: "auto",
+			minHeight: "auto",
 			...explicitDimensionStyle(normalized),
 			...fineTuneStyle(normalized.fineTune),
 		}
@@ -336,11 +345,31 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 	}
 
 	const modeOptions = [
-		{ value: "auto", label: sizingText("modes.short.auto") },
-		{ value: "fixed", label: sizingText("modes.short.fixed") },
-		{ value: "fill", label: sizingText("modes.short.fill") },
-		{ value: "clamp", label: sizingText("modes.short.clamp") },
-		{ value: "custom", label: sizingText("modes.short.custom") },
+		{
+			value: "auto",
+			label: sizingText("modes.short.auto"),
+			tooltip: sizingText("mode_hints.auto"),
+		},
+		{
+			value: "fixed",
+			label: sizingText("modes.short.fixed"),
+			tooltip: sizingText("mode_hints.fixed"),
+		},
+		{
+			value: "fill",
+			label: sizingText("modes.short.fill"),
+			tooltip: sizingText("mode_hints.fill"),
+		},
+		{
+			value: "clamp",
+			label: sizingText("modes.short.clamp"),
+			tooltip: sizingText("mode_hints.clamp"),
+		},
+		{
+			value: "custom",
+			label: sizingText("modes.short.custom"),
+			tooltip: sizingText("mode_hints.custom"),
+		},
 	]
 
 	const alignSelfOptions = [

@@ -36,7 +36,7 @@ describe("components/VisualEditor/components/Text", () => {
 		expect(textConfig.defaultProps).toMatchObject({
 			font: defaultTextFontValue({
 				color: "#FFFFFF",
-				sizePreset: "md",
+				sizePreset: "xl",
 			}),
 			typeStyle: { fw: 400, td: "none", tt: "none", fs: "normal" },
 			alignment: "left",

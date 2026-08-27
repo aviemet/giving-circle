@@ -1,3 +1,5 @@
+import { type HeadingOrder } from "../headingMetrics"
+
 export type FontSizeMode = "preset" | "custom" | "clamp"
 
 export type FontSizePreset =
@@ -10,6 +12,8 @@ export type FontSizePreset =
 	| "2xl"
 	| "3xl"
 	| "4xl"
+	| "5xl"
+	| "6xl"
 	| "h1"
 	| "h2"
 	| "h3"
@@ -26,25 +30,35 @@ export type FlexibleFontSize = {
 	clampMax: string
 }
 
-const DISPLAY_PRESET_CSS: Record<"2xl" | "3xl" | "4xl", string> = {
+export const HEADING_LEVEL_FONT_SIZE = {
+	1: "4.25rem",
+	2: "3.25rem",
+	3: "2.5rem",
+	4: "2rem",
+	5: "1.5rem",
+	6: "1.25rem",
+} as const satisfies Record<HeadingOrder, string>
+
+const HEADING_PRESET_ORDER = {
+	h1: 1,
+	h2: 2,
+	h3: 3,
+	h4: 4,
+	h5: 5,
+	h6: 6,
+} as const satisfies Record<"h1" | "h2" | "h3" | "h4" | "h5" | "h6", HeadingOrder>
+
+const DISPLAY_PRESET_CSS: Record<"2xl" | "3xl" | "4xl" | "5xl" | "6xl", string> = {
 	"2xl": "2.25rem",
 	"3xl": "3rem",
 	"4xl": "4.5rem",
+	"5xl": "6rem",
+	"6xl": "8rem",
 }
 
-const MANTINE_PRESETS = new Set([
-	"xs",
-	"sm",
-	"md",
-	"lg",
-	"xl",
-	"h1",
-	"h2",
-	"h3",
-	"h4",
-	"h5",
-	"h6",
-])
+const MANTINE_PRESETS = new Set(["xs", "sm", "md", "lg", "xl"])
+
+const DISPLAY_PRESETS = new Set(["2xl", "3xl", "4xl", "5xl", "6xl"])
 
 export function defaultFlexibleFontSize(preset: FontSizePreset = "md"): FlexibleFontSize {
 	return {
@@ -71,6 +85,8 @@ function isFontSizePreset(value: string): value is FontSizePreset {
 		|| value === "2xl"
 		|| value === "3xl"
 		|| value === "4xl"
+		|| value === "5xl"
+		|| value === "6xl"
 		|| value === "h1"
 		|| value === "h2"
 		|| value === "h3"
@@ -79,12 +95,29 @@ function isFontSizePreset(value: string): value is FontSizePreset {
 		|| value === "h6"
 }
 
+function isHeadingSizePreset(value: string): value is keyof typeof HEADING_PRESET_ORDER {
+	return value === "h1"
+		|| value === "h2"
+		|| value === "h3"
+		|| value === "h4"
+		|| value === "h5"
+		|| value === "h6"
+}
+
+function isDisplayPreset(value: string): value is keyof typeof DISPLAY_PRESET_CSS {
+	return DISPLAY_PRESETS.has(value)
+}
+
 export function isFontSizeModeValue(value: string): value is FontSizeMode {
 	return isFontSizeMode(value)
 }
 
 export function isFontSizePresetValue(value: string): value is FontSizePreset {
 	return isFontSizePreset(value)
+}
+
+export function isHeadingSizePresetValue(value: string): value is keyof typeof HEADING_PRESET_ORDER {
+	return isHeadingSizePreset(value)
 }
 
 export function normalizeFlexibleFontSize(
@@ -116,7 +149,10 @@ export type ResolvedFontSize = {
 	fontSize?: string
 }
 
-export function resolveFontSize(size: FlexibleFontSize): ResolvedFontSize {
+export function resolveFontSize(
+	size: FlexibleFontSize,
+	headingOrder?: HeadingOrder,
+): ResolvedFontSize {
 	if(size.mode === "custom") {
 		const custom = size.custom.trim()
 		if(custom.length === 0) {
@@ -133,10 +169,17 @@ export function resolveFontSize(size: FlexibleFontSize): ResolvedFontSize {
 	}
 
 	if(size.preset === "auto") {
-		return {}
+		if(headingOrder === undefined) {
+			return {}
+		}
+		return { fontSize: HEADING_LEVEL_FONT_SIZE[headingOrder] }
 	}
 
-	if(size.preset === "2xl" || size.preset === "3xl" || size.preset === "4xl") {
+	if(isHeadingSizePreset(size.preset)) {
+		return { fontSize: HEADING_LEVEL_FONT_SIZE[HEADING_PRESET_ORDER[size.preset]] }
+	}
+
+	if(isDisplayPreset(size.preset)) {
 		return { fontSize: DISPLAY_PRESET_CSS[size.preset] }
 	}
 

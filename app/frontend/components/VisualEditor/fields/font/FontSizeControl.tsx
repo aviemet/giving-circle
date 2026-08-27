@@ -4,6 +4,7 @@ import { i18n } from "@/lib/i18n"
 import {
 	isFontSizeModeValue,
 	isFontSizePresetValue,
+	isHeadingSizePresetValue,
 	type FlexibleFontSize,
 	type FontSizePreset,
 } from "./fontSize"
@@ -37,13 +38,13 @@ export function FontSizeControl({
 		{ label: "2xl", value: "2xl" },
 		{ label: "3xl", value: "3xl" },
 		{ label: "4xl", value: "4xl" },
-		{ label: "h1", value: "h1" },
-		{ label: "h2", value: "h2" },
-		{ label: "h3", value: "h3" },
-		{ label: "h4", value: "h4" },
-		{ label: "h5", value: "h5" },
-		{ label: "h6", value: "h6" },
+		{ label: "5xl", value: "5xl" },
+		{ label: "6xl", value: "6xl" },
 	]
+
+	if(isHeadingSizePresetValue(value.preset)) {
+		presetOptions.push({ label: value.preset, value: value.preset })
+	}
 
 	return (
 		<div className={ classes.sizeStack }>

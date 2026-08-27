@@ -9,4 +9,10 @@ describe("components/VisualEditor/layoutChrome", () => {
 		expect(typeof layoutChrome.labelContainer).toBe("string")
 		expect(typeof layoutChrome.labelGrid).toBe("string")
 	})
+
+	test("frame chrome is distinct from label classes", () => {
+		expect(layoutChrome.frame).not.toBe(layoutChrome.labelContainer)
+		expect(layoutChrome.frame).not.toBe(layoutChrome.labelGrid)
+		expect(layoutChrome.labelContainer).not.toBe(layoutChrome.labelGrid)
+	})
 })

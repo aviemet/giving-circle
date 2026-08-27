@@ -148,6 +148,7 @@ describe("components/VisualEditor/heading inherit", () => {
 		expect(headingConfig.defaultProps?.font).toMatchObject({
 			family: "",
 			url: "",
+			size: { mode: "preset", preset: "auto" },
 		})
 		expect(componentFontFamilyCss(headingConfig.defaultProps?.font)).toBe("inherit")
 	})

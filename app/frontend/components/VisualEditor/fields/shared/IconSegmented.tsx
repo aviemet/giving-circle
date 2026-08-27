@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { type ReactNode } from "react"
+import { useId, type ReactNode } from "react"
 
 import { SegmentedControl } from "@/components/Inputs"
 
@@ -39,13 +39,15 @@ export function IconSegmented({
 	onChange,
 	className,
 }: IconSegmentedProps) {
+	const instanceId = useId()
+
 	return (
 		<SegmentedControl
 			wrapper={ false }
 			className={ clsx(classes.iconSegmented, className) }
 			fullWidth
 			withItemsBorders={ false }
-			name={ name }
+			name={ `${name}${instanceId}` }
 			value={ value }
 			options={ options.map((option) => ({
 				value: option.value,

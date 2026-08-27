@@ -42,7 +42,7 @@ export function TextDisplay({
 		},
 		{
 			color: "#FFFFFF",
-			sizePreset: "md",
+			sizePreset: "xl",
 		},
 	)
 	const resolvedTypeStyle = normalizeTypeStyle(typeStyle, { fw, td, tt, fs }, 400)

@@ -46,7 +46,7 @@ export function HeadingDisplay({
 	)
 	const resolvedTypeStyle = normalizeTypeStyle(typeStyle, { fw, td, tt, fs }, 700)
 	const resolvedFlow = normalizeTextFlow(flow, { lineClamp, textWrap })
-	const resolvedSize = resolveFontSize(resolvedFont.size)
+	const resolvedSize = resolveFontSize(resolvedFont.size, resolvedMetrics.order)
 	const hasLineClamp = resolvedFlow.lineClamp > 0
 	const fontFamily = componentFontFamilyCss(resolvedFont)
 	const titleStyle: CSSProperties = { fontFamily }

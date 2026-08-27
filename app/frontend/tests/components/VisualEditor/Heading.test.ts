@@ -5,6 +5,7 @@ import {
 	defaultTextFontValue,
 	normalizeTextFontValue,
 	resolveFontSize,
+	defaultFlexibleFontSize,
 } from "@/components/VisualEditor/fields/font"
 import { normalizeHeadingMetrics } from "@/components/VisualEditor/fields/headingMetrics"
 import { normalizeTextFlow } from "@/components/VisualEditor/fields/textFlow"
@@ -93,6 +94,18 @@ describe("components/VisualEditor/components/Heading", () => {
 		})).toEqual({
 			fontSize: "4.5rem",
 		})
+	})
+
+	test("resolveFontSize maps Auto and legacy heading presets through the slide scale", () => {
+		const autoSize = defaultFlexibleFontSize("auto")
+
+		expect(resolveFontSize(autoSize, 1)).toEqual({ fontSize: "4.25rem" })
+		expect(resolveFontSize(autoSize, 3)).toEqual({ fontSize: "2.5rem" })
+		expect(resolveFontSize(autoSize)).toEqual({})
+
+		expect(resolveFontSize(defaultFlexibleFontSize("h1"))).toEqual({ fontSize: "4.25rem" })
+		expect(resolveFontSize(defaultFlexibleFontSize("5xl"))).toEqual({ fontSize: "6rem" })
+		expect(resolveFontSize(defaultFlexibleFontSize("6xl"))).toEqual({ fontSize: "8rem" })
 	})
 
 	test("normalizeTypeStyle prefers grouped values over legacy props", () => {

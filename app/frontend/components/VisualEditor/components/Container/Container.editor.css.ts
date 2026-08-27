@@ -1,12 +1,14 @@
 import { css } from "@linaria/core"
 
+import { SLOT_MIN_EMPTY_HEIGHT } from "../../slotEditor"
+
 export const container = css`
-	&[class*="DropZone"],
-	& [class*="DropZone"] {
-		flex: 1 1 auto;
-		height: 100%;
+	min-height: ${ SLOT_MIN_EMPTY_HEIGHT }px;
+
+	&[class*="DropZone"] {
 		display: flex;
 		flex-direction: inherit;
 		align-items: stretch;
+		min-height: inherit;
 	}
 `

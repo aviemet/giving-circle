@@ -8,18 +8,26 @@ import {
 	DRAG_HITBOX_HEIGHT_PX,
 	DRAG_SLOT_GAP_PX,
 	DRAG_SLOT_GUTTER_PX,
+	LAYOUT_CHROME_LABEL_SPACE_PX,
+	LAYOUT_CHROME_PAD_PX,
 	SLOT_MIN_EMPTY_HEIGHT,
 } from "@/components/VisualEditor/slotEditor"
 
 describe("components/VisualEditor/slotEditor", () => {
 	test("slotDropZoneProps sets minEmptyHeight for Puck slots", () => {
 		expect(slotDropZoneProps()).toEqual({ minEmptyHeight: SLOT_MIN_EMPTY_HEIGHT })
+		expect(SLOT_MIN_EMPTY_HEIGHT).toBeGreaterThanOrEqual(96)
 	})
 
 	test("drag drop gutters are large enough for nested container targeting", () => {
 		expect(DRAG_SLOT_GUTTER_PX).toBeGreaterThanOrEqual(32)
 		expect(DRAG_SLOT_GAP_PX).toBeGreaterThanOrEqual(24)
 		expect(DRAG_HITBOX_HEIGHT_PX).toBeGreaterThanOrEqual(32)
+	})
+
+	test("layout chrome padding leaves a host grab ring around children", () => {
+		expect(LAYOUT_CHROME_PAD_PX).toBeGreaterThanOrEqual(12)
+		expect(LAYOUT_CHROME_LABEL_SPACE_PX).toBeGreaterThan(LAYOUT_CHROME_PAD_PX)
 	})
 
 	test("createStarterSlideData includes a container with a heading", () => {

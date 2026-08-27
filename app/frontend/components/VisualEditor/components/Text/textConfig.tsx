@@ -65,7 +65,7 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 			allowInherit: true,
 			allowAutoSize: false,
 			fallbackColor: "#FFFFFF",
-			fallbackSizePreset: "md",
+			fallbackSizePreset: "xl",
 		}),
 		typeStyle: typeStyleField({ fallbackWeight: 400 }),
 		alignment: alignmentField({
@@ -79,7 +79,7 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 		content: t("slides.editor.components.text.default_content"),
 		font: defaultTextFontValue({
 			color: "#FFFFFF",
-			sizePreset: "md",
+			sizePreset: "xl",
 		}),
 		typeStyle: defaultTypeStyle(400),
 		alignment: "left",
@@ -100,7 +100,7 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 					},
 					{
 						color: "#FFFFFF",
-						sizePreset: "md",
+						sizePreset: "xl",
 					},
 				),
 				typeStyle: normalizeTypeStyle(props.typeStyle, {

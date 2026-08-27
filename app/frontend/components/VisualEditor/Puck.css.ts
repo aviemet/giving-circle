@@ -6,6 +6,7 @@ import {
 	DRAG_SLOT_EDGE_PX,
 	DRAG_SLOT_GAP_PX,
 	DRAG_SLOT_GUTTER_PX,
+	SLOT_MIN_EMPTY_HEIGHT,
 } from "./slotEditor"
 
 import { theme } from "@/lib/theme"
@@ -64,7 +65,7 @@ export const puckRoot = css`
 	--puck-field-selected-bg: color-mix(in oklch, var(--mantine-color-blue-6) 42%, var(--puck-field-color-bg, var(--editor-input-bg)));
 	--puck-field-selected-border: color-mix(in oklch, var(--mantine-color-blue-5) 55%, var(--puck-field-color-border, var(--editor-input-border)));
 	--puck-field-control-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
-	--puck-slot-min-empty-height: 48px;
+	--puck-slot-min-empty-height: ${ SLOT_MIN_EMPTY_HEIGHT }px;
 	position: relative;
 	height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
 	max-height: calc(100dvh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px);
@@ -76,7 +77,7 @@ export const puckRoot = css`
 		min-height: 0;
 		overflow: hidden;
 
-		input,
+		input:not([type="radio"]),
 		select {
 			color: var(--puck-field-color-text, var(--editor-input-text));
 			background-color: var(--puck-field-color-bg, var(--editor-input-bg));
@@ -154,6 +155,13 @@ export const puckRoot = css`
 			gap: ${ DRAG_SLOT_GAP_PX }px !important;
 			min-height: ${ DRAG_SLOT_GUTTER_PX * 2 + 48 }px;
 			background-color: color-mix(in oklch, #38bdf8 8%, transparent);
+		}
+
+		[data-puck-dragging] .${ layoutChrome.frame }:not([class*="DropZone--hasChildren"]) {
+			height: auto !important;
+			flex-grow: 0 !important;
+			flex-shrink: 0 !important;
+			min-height: ${ SLOT_MIN_EMPTY_HEIGHT + DRAG_SLOT_GUTTER_PX * 2 }px !important;
 		}
 
 		[data-puck-dragging] .${ layoutChrome.frame }[class*="DropZone--isEnabled"],

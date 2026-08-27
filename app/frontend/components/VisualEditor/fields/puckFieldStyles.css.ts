@@ -124,8 +124,8 @@ export const puckFields = css`
 		margin-inline-end: 0;
 	}
 
-	& [class*="Input-input"]:not(.mantine-ColorInput-input):not(.mantine-NumberInput-input),
-	& input:not(.mantine-ColorInput-input):not(.mantine-NumberInput-input),
+	& [class*="Input-input"]:not(.mantine-ColorInput-input):not(.mantine-NumberInput-input):not(.mantine-SegmentedControl-input),
+	& input:not([type="radio"]):not(.mantine-ColorInput-input):not(.mantine-NumberInput-input),
 	& select,
 	& .mantine-TextInput-input,
 	& .mantine-Select-input,
@@ -133,8 +133,8 @@ export const puckFields = css`
 		${ puckFieldInputStyles }
 	}
 
-	& [class*="Input-input"]:not(.mantine-ColorInput-input):not(.mantine-NumberInput-input):focus,
-	& input:not(.mantine-ColorInput-input):not(.mantine-NumberInput-input):focus,
+	& [class*="Input-input"]:not(.mantine-ColorInput-input):not(.mantine-NumberInput-input):not(.mantine-SegmentedControl-input):focus,
+	& input:not([type="radio"]):not(.mantine-ColorInput-input):not(.mantine-NumberInput-input):focus,
 	& select:focus,
 	& .mantine-TextInput-input:focus,
 	& .mantine-Select-input:focus,

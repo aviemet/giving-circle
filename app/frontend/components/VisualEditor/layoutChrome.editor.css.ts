@@ -1,5 +1,11 @@
 import { css } from "@linaria/core"
 
+import {
+	LAYOUT_CHROME_LABEL_SPACE_PX,
+	LAYOUT_CHROME_PAD_PX,
+	SLOT_MIN_EMPTY_HEIGHT,
+} from "./slotEditor"
+
 import { vars } from "@/lib/theme"
 
 const depth0 = "color-mix(in oklch, #38bdf8 88%, transparent)"
@@ -15,13 +21,20 @@ const label3 = "#34d399"
 export const frame = css`
 	position: relative;
 	isolation: isolate;
+	box-sizing: border-box;
+	overflow: visible !important;
+	padding-top: ${ LAYOUT_CHROME_LABEL_SPACE_PX }px;
+	padding-right: ${ LAYOUT_CHROME_PAD_PX }px;
+	padding-bottom: ${ LAYOUT_CHROME_PAD_PX }px;
+	padding-left: ${ LAYOUT_CHROME_PAD_PX }px;
 
 	&::before {
 		position: absolute;
 		top: 3px;
 		left: 3px;
 		z-index: 6;
-		pointer-events: none;
+		pointer-events: auto;
+		cursor: grab;
 		font-family: ${ vars.fontFamily };
 		font-size: 0.625rem;
 		font-weight: 700;
@@ -83,6 +96,13 @@ export const frame = css`
 	& & & &::after {
 		border-color: ${ depth3 };
 		box-shadow: inset 0 0 0 1px color-mix(in oklch, ${ depth3 } 35%, transparent);
+	}
+
+	&:not([class*="DropZone--hasChildren"]) {
+		height: auto !important;
+		flex-grow: 0 !important;
+		flex-shrink: 0 !important;
+		min-height: ${ SLOT_MIN_EMPTY_HEIGHT }px !important;
 	}
 
 	&[class*="DropZone"]:not([class*="DropZone--hasChildren"]),

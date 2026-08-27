@@ -11,7 +11,7 @@ import { buildDimensionStyle } from "../../fields/dimension"
 import { buildFlexStyle } from "../../fields/flex"
 import { buildFlexItemSizingStyle, type FlexItemSizing } from "../../fields/flexItemSizing"
 import { buildSpacingStyle } from "../../fields/spacing"
-import { SLOT_MIN_EMPTY_HEIGHT } from "../../slotEditor"
+import { SLOT_MIN_EMPTY_HEIGHT, withEditorLayoutChromePadding } from "../../slotEditor"
 
 type ContainerStyleProps = Omit<ContainerProps, "content" | "alignment" | "sizing"> & {
 	sizing?: FlexItemSizing
@@ -45,12 +45,13 @@ export function buildContainerStyle(
 
 	if(isEditing) {
 		const authorMinHeight = buildDimensionStyle(styleProps).minHeight
-		const sizingMode = sizing?.mode ?? "fill"
 		if(authorMinHeight !== undefined) {
 			style.minHeight = authorMinHeight
-		} else if(sizingMode !== "fill") {
+		} else {
 			style.minHeight = `${ SLOT_MIN_EMPTY_HEIGHT }px`
 		}
+
+		return withEditorLayoutChromePadding(style)
 	}
 
 	return style

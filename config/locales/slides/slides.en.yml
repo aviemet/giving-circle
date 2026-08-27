@@ -281,6 +281,12 @@ en:
             flex_shrink: Flex shrink
             title: Fine tune
           label: Size
+          mode_hints:
+            auto: Size to content. Does not grow to fill leftover space.
+            clamp: Width follows a min / preferred / max clamp.
+            custom: Raw flex-item CSS declarations.
+            fill: Grow to fill leftover space in the parent.
+            fixed: Set an explicit width and height.
           labels:
             clamp_max: Max
             clamp_min: Min
