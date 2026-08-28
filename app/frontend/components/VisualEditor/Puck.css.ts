@@ -95,7 +95,7 @@ export const puckRoot = css`
 		min-height: 0;
 		overflow: hidden;
 
-		input:not([type="radio"]),
+		input:not([type="radio"]):not(.mantine-ColorInput-input):not(.mantine-NumberInput-input):not(.mantine-SegmentedControl-input),
 		select {
 			color: var(--puck-field-color-text, var(--editor-input-text));
 			background-color: var(--puck-field-color-bg, var(--editor-input-bg));

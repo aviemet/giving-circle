@@ -108,8 +108,9 @@ const t = i18n.t.bind(i18n)
 export const timerConfig: ComponentConfig<TimerProps> = {
 	label: t("slides.editor.components.timer.label"),
 	fields: {
-		sizing: flexItemSizingField(),
 		displayType: timerDisplayField(),
+		exhausted: timerExhaustedField(),
+		sizing: flexItemSizingField(),
 		duration: timerDurationField(),
 		colors: timerColorsField(),
 		font: textFontField({
@@ -118,18 +119,17 @@ export const timerConfig: ComponentConfig<TimerProps> = {
 			fallbackColor: "#FFFFFF",
 			fallbackSizePreset: "4xl",
 		}),
-		exhausted: timerExhaustedField(),
 	},
 	defaultProps: {
-		sizing: { mode: "fill" },
 		displayType: "circle",
+		exhausted: defaultTimerExhausted(),
+		sizing: { mode: "fill" },
 		duration: defaultTimerDuration(),
 		colors: defaultTimerColors(),
 		font: defaultTextFontValue({
 			color: "#FFFFFF",
 			sizePreset: "4xl",
 		}),
-		exhausted: defaultTimerExhausted(),
 	},
 	resolveData: ({ props }) => {
 		if(props === undefined) {

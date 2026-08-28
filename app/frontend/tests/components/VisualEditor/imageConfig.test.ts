@@ -193,7 +193,7 @@ describe("components/VisualEditor/imageConfig", () => {
 				objectFit: "cover",
 			},
 			border: {
-				borderWidth: 1,
+				borderWidth: { amount: 1, unit: "px" },
 				borderColor: "#ff0000",
 			},
 		})

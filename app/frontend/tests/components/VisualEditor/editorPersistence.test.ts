@@ -3,6 +3,7 @@ import { describe, expect, test, beforeEach } from "vitest"
 import {
 	applySlideTitleToData,
 	clearEditorDraft,
+	cloneSlideData,
 	editorStorageKey,
 	nextEditorChangeState,
 	resolveInitialEditorData,
@@ -206,5 +207,55 @@ describe("components/VisualEditor/editorPersistence", () => {
 		expect(nextState.saveStatus).toBe("unsaved")
 		expect(nextState.shouldWriteDraft).toBe(true)
 		expect(nextState.saved).toEqual(saved)
+	})
+
+	test("nextEditorChangeState clones the hydration baseline so later puck mutations stay unsaved", () => {
+		const saved = createStarterSlideData()
+		const resolved: PuckSlideData = {
+			...saved,
+			root: {
+				props: {
+					...saved.root?.props,
+					title: "Resolved",
+				},
+			},
+		}
+
+		const adopted = nextEditorChangeState({
+			changed: resolved,
+			saved,
+			adoptResolvedBaseline: true,
+		})
+
+		if(resolved.root?.props) {
+			resolved.root.props.title = "Mutated in place"
+		}
+
+		expect(adopted.saved.root?.props?.title).toBe("Resolved")
+		expect(slideDataEquals(adopted.saved, resolved)).toBe(false)
+
+		const afterMutation = nextEditorChangeState({
+			changed: resolved,
+			saved: adopted.saved,
+			adoptResolvedBaseline: false,
+		})
+
+		expect(afterMutation.saveStatus).toBe("unsaved")
+		expect(afterMutation.shouldWriteDraft).toBe(true)
+		expect(afterMutation.saved).toEqual(adopted.saved)
+	})
+
+	test("nextEditorChangeState greys save only when the document matches the db baseline", () => {
+		const saved = createStarterSlideData()
+		const changed = cloneSlideData(saved)
+
+		const nextState = nextEditorChangeState({
+			changed,
+			saved,
+			adoptResolvedBaseline: false,
+		})
+
+		expect(nextState.saveStatus).toBe("saved")
+		expect(nextState.shouldWriteDraft).toBe(false)
 	})
 })

@@ -17,9 +17,16 @@ import {
 	type TextFontValue,
 } from "../../fields"
 import { SlideFontFace } from "../../SlideFontFace"
+import {
+	BORDER_RADIUS_UNITS,
+	coerceLength,
+	lengthCss,
+	type BorderRadiusUnit,
+	type LengthValue,
+} from "../../fields/shared/length"
 
 export type LeverageBarColors = Pick<LeverageColorsValue, "remainingColor" | "trackColor"> & {
-	borderRadius?: number
+	borderRadius?: LengthValue<BorderRadiusUnit> | number
 }
 
 export interface LeverageBarProps {
@@ -45,7 +52,11 @@ export function LeverageBar({
 	})
 	const resolvedSize = resolveFontSize(resolvedFont.size)
 	const filledPercent = leverageFilledPercent(totals)
-	const borderRadius = colors.borderRadius ?? 0
+	const borderRadius = lengthCss(coerceLength(
+		colors.borderRadius ?? 0,
+		BORDER_RADIUS_UNITS,
+		"px",
+	))
 	const labelStyle: CSSProperties = {
 		color: resolvedFont.color.length > 0 ? resolvedFont.color : "#FFFFFF",
 		fontFamily: componentFontFamilyCss(resolvedFont),

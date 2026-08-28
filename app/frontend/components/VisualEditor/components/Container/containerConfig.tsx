@@ -12,8 +12,11 @@ import {
 	defaultBorderValue,
 	flexField,
 	flexItemSizingField,
+	iterateField,
+	ITERATE_NONE,
 	normalizeBackgroundValue,
 	normalizeBorderValue,
+	normalizeIterateValue,
 	type AlignmentValue,
 	type BackgroundValue,
 	type BorderProps,
@@ -21,6 +24,7 @@ import {
 	type DimensionStyleProps,
 	type FlexItemSizing,
 	type FlexStyleInput,
+	type IterateValue,
 	type SpacingProps,
 } from "../../fields"
 
@@ -32,6 +36,7 @@ export type ContainerProps = SpacingProps & DimensionStyleProps & FlexStyleInput
 	alignment: AlignmentValue
 	sizing?: FlexItemSizing
 	spacing?: BoxModelValue
+	iterate?: IterateValue
 }
 
 const t = i18n.t.bind(i18n)
@@ -40,6 +45,7 @@ export const containerConfig: ComponentConfig<ContainerProps> = {
 	label: t("slides.editor.components.container.label"),
 	inline: true,
 	fields: {
+		iterate: iterateField(),
 		sizing: flexItemSizingField(),
 		spacing: boxModelField(),
 		background: backgroundField(),
@@ -53,6 +59,7 @@ export const containerConfig: ComponentConfig<ContainerProps> = {
 	defaultProps: {
 		content: [],
 		alignment: "left",
+		iterate: ITERATE_NONE,
 		sizing: { mode: "fill" },
 		spacing: {
 			margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
@@ -74,6 +81,7 @@ export const containerConfig: ComponentConfig<ContainerProps> = {
 		return {
 			props: {
 				...props,
+				iterate: normalizeIterateValue(props.iterate),
 				background: normalizeBackgroundValue(props.background, {
 					color: props.backgroundColor,
 				}),

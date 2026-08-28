@@ -1,5 +1,6 @@
 import { type DefaultRootRenderProps } from "@puckeditor/core"
 import clsx from "clsx"
+import { cloneElement, isValidElement, type ReactNode } from "react"
 
 import { Box } from "@/components"
 
@@ -15,6 +16,20 @@ import { buildFlexStyle } from "../../fields/flex"
 import { fontFamilyCss } from "../../fields/font"
 import { buildSpacingStyle } from "../../fields/spacing"
 import { SlideFontFace } from "../../SlideFontFace"
+
+interface RootZoneChildProps {
+	className?: string
+}
+
+function liveRootZone(children: ReactNode) {
+	if(!isValidElement<RootZoneChildProps>(children)) {
+		return children
+	}
+
+	return cloneElement(children, {
+		className: clsx(children.props.className, classes.rootZoneContents),
+	})
+}
 
 export function SlideRootDisplay({
 	children,
@@ -51,7 +66,7 @@ export function SlideRootDisplay({
 					...buildFlexStyle({ flex }),
 				} }
 			>
-				{ children }
+				{ isEditing ? children : liveRootZone(children) }
 			</Box>
 		</>
 	)

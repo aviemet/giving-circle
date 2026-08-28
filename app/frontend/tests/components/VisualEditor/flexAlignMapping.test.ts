@@ -52,7 +52,7 @@ describe("components/VisualEditor/fields/flex align mapping", () => {
 		expect(normalizeFlexValue(undefined)).toMatchObject({
 			display: "flex",
 			flexDirection: "column",
-			gap: 0,
+			gap: { amount: 0, unit: "px" },
 		})
 		expect(normalizeFlexValue({ display: "block" })).toMatchObject({
 			display: "block",

@@ -1,4 +1,17 @@
 export { PuckFieldLabel } from "./shared"
+export {
+	iterateField,
+	ITERATE_NONE,
+	ITERATE_ORGS,
+	ORG_ITERATE_PATH_PREFIX,
+	getIterateItems,
+	isIterateOn,
+	isOrgIterate,
+	normalizeIterateValue,
+	RepeatedSlot,
+	IterateHint,
+	type IterateValue,
+} from "./iterate"
 export { colorField, optionalColorField, backgroundColorField } from "./color"
 export { alignmentField, type AlignmentValue } from "./alignment"
 export { tagsField } from "./tags"
@@ -51,6 +64,13 @@ export {
 	type FlexProps,
 	type FlexStyleInput,
 } from "./flex"
+export {
+	gridField,
+	buildGridLayoutStyle,
+	defaultGridLayoutValue,
+	normalizeGridLayoutValue,
+	type GridLayoutValue,
+} from "./grid"
 export {
 	widthField,
 	minWidthField,
@@ -156,6 +176,18 @@ export {
 	normalizeLeverageColors,
 	type LeverageColorsValue,
 } from "./leverageColors"
+export {
+	leverageBarSizeField,
+	defaultLeverageBarSize,
+	normalizeLeverageBarSize,
+	resolveLeverageBarSize,
+	buildLeverageBarSizeStyle,
+	LEVERAGE_BAR_WIDTH_UNITS,
+	LEVERAGE_BAR_HEIGHT_UNITS,
+	type LeverageBarSizeValue,
+	type LeverageBarWidthUnit,
+	type LeverageBarHeightUnit,
+} from "./leverageBarSize"
 export {
 	timerDisplayField,
 } from "./timerDisplay"

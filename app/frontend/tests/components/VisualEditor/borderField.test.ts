@@ -14,8 +14,8 @@ describe("components/VisualEditor/fields/border", () => {
 			{ borderWidth: 4, borderRadius: 8, borderColor: "#112233" },
 			{ borderWidth: 1, borderRadius: 2, borderColor: "#abcdef" },
 		)).toEqual({
-			borderWidth: 4,
-			borderRadius: 8,
+			borderWidth: { amount: 4, unit: "px" },
+			borderRadius: { amount: 8, unit: "px" },
 			borderColor: "#112233",
 		})
 
@@ -23,7 +23,7 @@ describe("components/VisualEditor/fields/border", () => {
 			borderWidth: 3,
 			borderColor: "#000000",
 		})).toEqual({
-			borderWidth: 3,
+			borderWidth: { amount: 3, unit: "px" },
 			borderRadius: undefined,
 			borderColor: "#000000",
 		})
@@ -31,7 +31,17 @@ describe("components/VisualEditor/fields/border", () => {
 
 	test("buildBorderStyle sets solid style when width is positive", () => {
 		expect(buildBorderStyle({ borderWidth: 2, borderColor: "#fff" })).toEqual({
-			borderWidth: 2,
+			borderWidth: "2px",
+			borderColor: "#fff",
+			borderStyle: "solid",
+		})
+		expect(buildBorderStyle({
+			borderWidth: { amount: 0.25, unit: "rem" },
+			borderRadius: { amount: 50, unit: "%" },
+			borderColor: "#fff",
+		})).toEqual({
+			borderWidth: "0.25rem",
+			borderRadius: "50%",
 			borderColor: "#fff",
 			borderStyle: "solid",
 		})
@@ -78,8 +88,8 @@ describe("components/VisualEditor/Container fields", () => {
 		)
 
 		expect(style.backgroundColor).toBe("#112233")
-		expect(style.borderWidth).toBe(2)
-		expect(style.borderRadius).toBe(4)
+		expect(style.borderWidth).toBe("2px")
+		expect(style.borderRadius).toBe("4px")
 		expect(style.borderColor).toBe("#ffffff")
 		expect(style.borderStyle).toBe("solid")
 	})
@@ -100,7 +110,7 @@ describe("components/VisualEditor/Container fields", () => {
 		)
 
 		expect(style.backgroundColor).toBe("#abcdef")
-		expect(style.borderWidth).toBe(1)
+		expect(style.borderWidth).toBe("1px")
 		expect(style.borderColor).toBe("#000000")
 	})
 })

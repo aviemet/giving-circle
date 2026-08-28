@@ -1318,9 +1318,6 @@
             "currency_format": "Currency format",
             "label": "Leverage Bar"
           },
-          "orgs_iterator": {
-            "label": "Orgs Iterator"
-          },
           "text": {
             "alignment": "Alignment",
             "boolean": {
@@ -1506,6 +1503,41 @@
             "system_default": "System default",
             "upload": "Upload font"
           },
+          "grid": {
+            "align": {
+              "center": "Center",
+              "center_hint": "Center items in their row",
+              "end": "End",
+              "end_hint": "Align items to the end of their row",
+              "start": "Start",
+              "start_hint": "Align items to the start of their row",
+              "stretch": "Stretch",
+              "stretch_hint": "Stretch items to fill the row height"
+            },
+            "label": "Layout",
+            "labels": {
+              "align": "Align",
+              "columns": "Columns",
+              "gap": "Gap",
+              "last_row": "Last row",
+              "overflow": "Overflow"
+            },
+            "last_row": {
+              "center": "Centered",
+              "center_hint": "Center leftover items when the last row is not full",
+              "hint": "Controls leftover items when they do not fill the last row",
+              "start": "Packed",
+              "start_hint": "Keep leftover items at the start of the last row"
+            },
+            "overflow": {
+              "auto": "Auto",
+              "auto_hint": "Scroll when content overflows",
+              "hidden": "Hidden",
+              "hidden_hint": "Clip overflowing content",
+              "visible": "Visible",
+              "visible_hint": "Show overflowing content"
+            }
+          },
           "heading_metrics": {
             "label": "Heading",
             "labels": {
@@ -1569,6 +1601,22 @@
               "box": "Both",
               "height": "Height",
               "natural": "Natural",
+              "width": "Width"
+            }
+          },
+          "iterate": {
+            "hint": "Iterates for each organization",
+            "label": "Iterate",
+            "organizations": "Organizations",
+            "over": "Over",
+            "toggle": "Enabled",
+            "toggle_off": "Off",
+            "toggle_on": "On"
+          },
+          "leverage_bar_size": {
+            "label": "Size",
+            "labels": {
+              "height": "Height",
               "width": "Width"
             }
           },

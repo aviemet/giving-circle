@@ -29,7 +29,7 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 	const handleSave = async (data: PuckSlideData, extras?: SlideSaveExtras) => {
 		const title = slideTitleFromData(data) ?? slideTitle
 
-		await updateSlideMutation.mutate({ data, title, thumbnail: extras?.thumbnail })
+		await updateSlideMutation.mutateAsync({ data, title, thumbnail: extras?.thumbnail })
 		setSlideTitle(title)
 	}
 

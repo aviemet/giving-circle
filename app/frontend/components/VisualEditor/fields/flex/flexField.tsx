@@ -22,6 +22,11 @@ import {
 	UnitNumber,
 	justifySelectOptions,
 } from "../shared"
+import {
+	GAP_UNITS,
+	coerceLength,
+	isLengthUnit,
+} from "../shared/length"
 
 function flexText(key: string) {
 	return i18n.t(`slides.editor.fields.flex.${key}`)
@@ -34,7 +39,7 @@ function defaultFlexValue(): FlexProps {
 		flexWrap: "nowrap",
 		justifyContent: "flex-start",
 		alignItems: "stretch",
-		gap: 0,
+		gap: { amount: 0, unit: "px" },
 		overflow: "visible",
 	}
 }
@@ -43,9 +48,13 @@ function normalizeFlexValue(value: FlexProps | undefined): FlexProps {
 	if(!value) {
 		return defaultFlexValue()
 	}
-	return {
+	const merged = {
 		...defaultFlexValue(),
 		...value,
+	}
+	return {
+		...merged,
+		gap: coerceLength(merged.gap ?? 0, GAP_UNITS, "px"),
 	}
 }
 
@@ -109,6 +118,7 @@ function FlexFieldControl({ name, value, onChange }: FlexFieldControlProps) {
 	const direction = localValue.flexDirection ?? "row"
 	const xOptions = direction === "column" ? alignOptions : justifyOptions
 	const yOptions = direction === "column" ? justifyOptions : alignOptions
+	const gap = coerceLength(localValue.gap ?? 0, GAP_UNITS, "px")
 
 	return (
 		<div className={ classes.flexFieldRoot }>
@@ -199,8 +209,20 @@ function FlexFieldControl({ name, value, onChange }: FlexFieldControlProps) {
 					<FieldRow label={ flexText("labels.gap") }>
 						<UnitNumber
 							name={ `${name}.gap` }
-							value={ localValue.gap }
-							onChange={ (gap) => updateValue({ gap }) }
+							value={ gap.amount }
+							unit={ gap.unit }
+							units={ GAP_UNITS }
+							onChange={ (amount) => updateValue({
+								gap: { amount, unit: gap.unit },
+							}) }
+							onUnitChange={ (unit) => {
+								if(!isLengthUnit(unit, GAP_UNITS)) {
+									return
+								}
+								updateValue({
+									gap: { amount: gap.amount, unit },
+								})
+							} }
 						/>
 					</FieldRow>
 				</>

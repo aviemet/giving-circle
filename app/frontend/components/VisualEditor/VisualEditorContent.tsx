@@ -7,6 +7,7 @@ import { slideSaveExtras, type SlideSaveExtras } from "./captureSlideSnapshot"
 import {
 	applySlideTitleToData,
 	clearEditorDraft,
+	cloneSlideData,
 	editorStorageKey,
 	normalizeSavedSlideData,
 	resolveInitialEditorData,
@@ -51,7 +52,7 @@ export function VisualEditorContent({
 		})
 	}, [serverSavedData, slideKey, storageKey])
 
-	const savedDataRef = useRef<PuckSlideData>(serverSavedData)
+	const savedDataRef = useRef<PuckSlideData>(cloneSlideData(serverSavedData))
 	const latestDataRef = useRef<PuckSlideData>(initialLoad.data)
 	const [saveStatus, setSaveStatus] = useState<EditorSaveStatus>(initialLoad.saveStatus)
 
@@ -61,7 +62,7 @@ export function VisualEditorContent({
 		try {
 			const extras = await slideSaveExtras()
 			await onSave(data, extras)
-			savedDataRef.current = data
+			savedDataRef.current = cloneSlideData(data)
 			latestDataRef.current = data
 			setSaveStatus("saved")
 			clearEditorDraft(slideKey)

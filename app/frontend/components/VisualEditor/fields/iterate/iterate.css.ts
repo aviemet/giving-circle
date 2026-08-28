@@ -1,5 +1,5 @@
 import { css } from "@linaria/core"
 
-export const orgIteratorItem = css`
+export const iterateItem = css`
 	display: contents;
 `

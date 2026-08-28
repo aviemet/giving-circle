@@ -14,6 +14,7 @@ vi.mock("@/queries", async () => {
 		...actual,
 		useUpdateTemplateSlide: () => ({
 			mutate: vi.fn(),
+			mutateAsync: vi.fn().mockResolvedValue({}),
 			isPending: false,
 		}),
 	}

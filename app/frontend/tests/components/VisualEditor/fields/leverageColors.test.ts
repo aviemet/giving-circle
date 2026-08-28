@@ -10,7 +10,7 @@ describe("components/VisualEditor/fields/leverageColors", () => {
 		expect(defaultLeverageColors()).toEqual({
 			remainingColor: "#7CFF2B",
 			trackColor: "#1B2A4A",
-			borderRadius: 0,
+			borderRadius: { amount: 0, unit: "px" },
 		})
 	})
 
@@ -22,7 +22,7 @@ describe("components/VisualEditor/fields/leverageColors", () => {
 		})).toEqual({
 			remainingColor: "#111111",
 			trackColor: "#222222",
-			borderRadius: 8,
+			borderRadius: { amount: 8, unit: "px" },
 		})
 	})
 })

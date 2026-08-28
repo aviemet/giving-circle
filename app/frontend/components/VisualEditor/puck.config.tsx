@@ -10,7 +10,6 @@ import {
 	headingConfig,
 	imageConfig,
 	leverageBarConfig,
-	orgsIteratorConfig,
 	SlideRoot,
 	textConfig,
 	timerConfig,
@@ -32,7 +31,7 @@ type RootProps = SlideRootProps
 export type EditorConfig = Config<{
 	components: PuckComponentProps
 	root: RootProps
-	categories: ["layout", "content", "data", "elements", "other"]
+	categories: ["layout", "content", "elements", "other"]
 }>
 
 export const config: EditorConfig = {
@@ -93,7 +92,6 @@ export const config: EditorConfig = {
 		Grid: gridConfig,
 		Card: cardConfig,
 		Image: imageConfig,
-		OrgsIterator: orgsIteratorConfig,
 		BarGraphAllocatedTotals: barGraphAllocatedTotalsConfig,
 		LeverageBar: leverageBarConfig,
 		Timer: timerConfig,
@@ -107,10 +105,6 @@ export const config: EditorConfig = {
 		content: {
 			title: "Content",
 			components: ["Heading", "Text", "Card", "Image"],
-		},
-		data: {
-			title: "Data",
-			components: ["OrgsIterator"],
 		},
 		elements: {
 			title: "Elements",

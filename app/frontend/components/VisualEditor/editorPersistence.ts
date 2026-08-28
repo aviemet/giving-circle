@@ -18,18 +18,22 @@ interface EditorDraftEnvelope {
 	data: PuckSlideData
 }
 
+// drafts must be keyed per slide so one editor cannot overwrite another.
 export function editorStorageKey(slideKey: string) {
 	return `puck-editor-${slideKey}`
 }
 
+// compare a draft against the server snapshot it was made from, so stale recoveries are discarded.
 export function slideDataFingerprint(data: PuckSlideData) {
 	return JSON.stringify(data)
 }
 
+// localStorage JSON is untrusted; reject arrays and primitives before reading fields.
 function isPlainObject(value: object | string | number | boolean | null | undefined): value is Record<string, object | string | number | boolean | null | undefined> {
 	return typeof value === "object" && value !== null && !Array.isArray(value)
 }
 
+// only restore drafts that still carry a server fingerprint we can validate.
 function isEditorDraftEnvelope(value: object): value is EditorDraftEnvelope {
 	if(!isPlainObject(value)) {
 		return false
@@ -50,6 +54,7 @@ function isEditorDraftEnvelope(value: object): value is EditorDraftEnvelope {
 	return true
 }
 
+// old unversioned blobs have no fingerprint, so they must be treated as stale.
 function isLegacyDraftData(value: object): value is PuckSlideData {
 	if(!isPlainObject(value)) {
 		return false
@@ -58,6 +63,7 @@ function isLegacyDraftData(value: object): value is PuckSlideData {
 	return "content" in value || "root" in value
 }
 
+// recover unsaved work after a reload without treating garbage storage as a slide.
 export function readEditorDraft(storageKey: string): { data: PuckSlideData, basedOn: string | null } | null {
 	if(typeof window === "undefined") return null
 
@@ -91,6 +97,7 @@ export function readEditorDraft(storageKey: string): { data: PuckSlideData, base
 	}
 }
 
+// keep unsaved edits across reload; Save still goes to the server, not here.
 export function writeEditorDraft(storageKey: string, data: PuckSlideData, basedOn: string) {
 	if(typeof window === "undefined") return
 
@@ -105,6 +112,7 @@ export function writeEditorDraft(storageKey: string, data: PuckSlideData, basedO
 	} catch{ }
 }
 
+// revert and close-without-saving must not resurrect abandoned work later.
 export function clearEditorDraft(slideKey: string) {
 	if(typeof window === "undefined") return
 
@@ -113,10 +121,12 @@ export function clearEditorDraft(slideKey: string) {
 	} catch{ }
 }
 
+// an empty server document needs starter blocks or Puck has nothing to edit.
 export function normalizeSavedSlideData(data: PuckSlideData) {
 	return withStarterSlideContent(data ?? {})
 }
 
+// the slide card title and the editor Page title are the same field and must stay in sync.
 export function applySlideTitleToData(data: PuckSlideData, slideTitle: string): PuckSlideData {
 	if(slideTitle.length === 0) {
 		return data
@@ -134,6 +144,7 @@ export function applySlideTitleToData(data: PuckSlideData, slideTitle: string): 
 	}
 }
 
+// persist the editor Page title back onto the slide record on save.
 export function slideTitleFromData(data: PuckSlideData): string | undefined {
 	const title = data.root?.props?.title
 
@@ -146,14 +157,21 @@ export function slideTitleFromData(data: PuckSlideData): string | undefined {
 	return trimmed.length > 0 ? trimmed : undefined
 }
 
+export function cloneSlideData(data: PuckSlideData) {
+	return structuredClone(data)
+}
+
+// dirty checks cannot use reference equality; Puck rebuilds the tree constantly.
 export function slideDataEquals(first: PuckSlideData, second: PuckSlideData) {
 	return isEqual(first, second)
 }
 
+// block leave-with-unsaved-work, but not while a save is already in flight.
 export function shouldPromptForUnsavedEditorNavigation(saveStatus: EditorSaveStatus, isSaving: boolean) {
 	return saveStatus !== "saved" && !isSaving
 }
 
+// Puck's hydrate/resolveData onChange is not a user edit and must not mark the slide dirty.
 export function nextEditorChangeState(params: {
 	changed: PuckSlideData
 	saved: PuckSlideData
@@ -165,7 +183,7 @@ export function nextEditorChangeState(params: {
 } {
 	if(params.adoptResolvedBaseline) {
 		return {
-			saved: params.changed,
+			saved: cloneSlideData(params.changed),
 			saveStatus: "saved",
 			shouldWriteDraft: false,
 		}
@@ -180,6 +198,7 @@ export function nextEditorChangeState(params: {
 	}
 }
 
+// open the server slide unless a draft is provably for this exact saved version.
 export function resolveInitialEditorData(params: {
 	savedData: PuckSlideData
 	storageKey: string

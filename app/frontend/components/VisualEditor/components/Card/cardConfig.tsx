@@ -4,13 +4,13 @@ import { i18n } from "@/lib/i18n"
 
 import { CardDisplay } from "./Card"
 import {
-	borderColorField,
-	borderRadiusField,
-	borderWidthField,
+	borderField,
 	boxModelField,
 	colorField,
+	defaultBorderValue,
 	flexField,
 	flexItemSizingField,
+	normalizeBorderValue,
 	type BorderProps,
 	type BoxModelValue,
 	type FlexItemSizing,
@@ -26,6 +26,7 @@ export type CardProps = SpacingProps & BorderProps & FlexStyleInput & {
 	fontColor: string
 	sizing?: FlexItemSizing
 	spacing?: BoxModelValue
+	border?: BorderProps
 }
 
 const t = i18n.t.bind(i18n)
@@ -41,9 +42,7 @@ export const cardConfig: ComponentConfig<CardProps> = {
 		}),
 		sizing: flexItemSizingField(),
 		spacing: boxModelField(),
-		borderWidth: borderWidthField(),
-		borderRadius: borderRadiusField(),
-		borderColor: borderColorField(),
+		border: borderField(),
 		flex: flexField(),
 		backgroundColor: colorField({
 			label: t("slides.editor.components.card.background_color"),
@@ -71,6 +70,19 @@ export const cardConfig: ComponentConfig<CardProps> = {
 			overflow: "visible",
 			gap: 0,
 		},
+		border: defaultBorderValue(),
+	},
+	resolveData: ({ props }) => {
+		return {
+			props: {
+				...props,
+				border: normalizeBorderValue(props.border, {
+					borderWidth: props.borderWidth,
+					borderRadius: props.borderRadius,
+					borderColor: props.borderColor,
+				}),
+			},
+		}
 	},
 	render: (props) => <CardDisplay { ...props } />,
 }

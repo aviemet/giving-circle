@@ -1,4 +1,9 @@
 import { type BorderProps } from "./style"
+import {
+	BORDER_RADIUS_UNITS,
+	BORDER_WIDTH_UNITS,
+	normalizeOptionalLength,
+} from "../shared/length"
 
 export function defaultBorderValue(): BorderProps {
 	return {}
@@ -9,8 +14,16 @@ export function normalizeBorderValue(
 	legacy?: BorderProps,
 ): BorderProps {
 	return {
-		borderWidth: value?.borderWidth ?? legacy?.borderWidth,
-		borderRadius: value?.borderRadius ?? legacy?.borderRadius,
+		borderWidth: normalizeOptionalLength(
+			value?.borderWidth ?? legacy?.borderWidth,
+			BORDER_WIDTH_UNITS,
+			"px",
+		),
+		borderRadius: normalizeOptionalLength(
+			value?.borderRadius ?? legacy?.borderRadius,
+			BORDER_RADIUS_UNITS,
+			"px",
+		),
 		borderColor: value?.borderColor ?? legacy?.borderColor,
 	}
 }

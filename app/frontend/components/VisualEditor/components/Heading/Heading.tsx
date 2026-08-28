@@ -8,6 +8,7 @@ import { type HeadingProps } from "./headingConfig"
 import { usePresentationData } from "../../dynamicData/MockData"
 import { componentFontFamilyCss, normalizeTextFontValue, resolveFontSize } from "../../fields/font"
 import { normalizeHeadingMetrics } from "../../fields/headingMetrics"
+import { lengthCss, SPACING_LENGTH_UNITS, coerceLength } from "../../fields/shared/length"
 import { normalizeTextFlow } from "../../fields/textFlow"
 import { normalizeTypeStyle } from "../../fields/typography"
 import { SlideFontFace } from "../../SlideFontFace"
@@ -50,6 +51,7 @@ export function HeadingDisplay({
 	const hasLineClamp = resolvedFlow.lineClamp > 0
 	const fontFamily = componentFontFamilyCss(resolvedFont)
 	const titleStyle: CSSProperties = { fontFamily }
+	
 	if(resolvedSize.fontSize !== undefined) {
 		titleStyle.fontSize = resolvedSize.fontSize
 	}
@@ -57,7 +59,10 @@ export function HeadingDisplay({
 	return (
 		<>
 			<SlideFontFace font={ resolvedFont } />
-			<Box p={ resolvedMetrics.padding } className={ clsx(classes.heading) }>
+			<Box
+				p={ lengthCss(coerceLength(resolvedMetrics.padding, SPACING_LENGTH_UNITS, "px")) }
+				className={ clsx(classes.heading) }
+			>
 				<Title
 					order={ resolvedMetrics.order }
 					size={ resolvedSize.mantineSize }

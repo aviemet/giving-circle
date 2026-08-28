@@ -90,9 +90,17 @@ describe("components/SlidePresentation", () => {
 			data: createSlideData({
 				content: [
 					{
-						type: "OrgsIterator",
+						type: "Container",
 						props: {
-							id: "iterator-1",
+							id: "container-1",
+							iterate: "presentation.org",
+							alignment: "left",
+							flex: {
+								display: "flex",
+								flexDirection: "column",
+								flexWrap: "nowrap",
+								overflow: "visible",
+							},
 							content: [
 								{
 									type: "Card",

@@ -1,4 +1,4 @@
-import { type ComponentConfig } from "@puckeditor/core"
+import { type ComponentConfig, type PuckContext } from "@puckeditor/core"
 import clsx from "clsx"
 
 import { Box } from "@/components"
@@ -8,20 +8,22 @@ import { i18n } from "@/lib/i18n"
 
 import * as classes from "./LeverageBar.css"
 import { LeverageBar } from "../../elements/LeverageBar"
-import * as elementClasses from "../../elements/LeverageBar/LeverageBar.css"
 import {
+	buildLeverageBarSizeStyle,
 	currencyFormatField,
+	defaultLeverageBarSize,
 	defaultLeverageColors,
 	defaultTextFontValue,
-	flexItemSizingField,
+	leverageBarSizeField,
 	leverageColorsField,
 	normalizeLeverageColors,
+	resolveLeverageBarSize,
 	textFontField,
 	type FlexItemSizing,
+	type LeverageBarSizeValue,
 	type LeverageColorsValue,
 	type TextFontValue,
 } from "../../fields"
-import { buildFlexItemSizingStyle } from "../../fields/flexItemSizing"
 
 export type LeverageBarProps = {
 	colors?: LeverageColorsValue
@@ -30,7 +32,12 @@ export type LeverageBarProps = {
 	borderRadius?: number
 	font?: TextFontValue
 	currencyFormat: CurrencyFormatMode
+	size?: LeverageBarSizeValue
 	sizing?: FlexItemSizing
+}
+
+type LeverageBarComponentProps = LeverageBarProps & {
+	puck: PuckContext
 }
 
 function LeverageBarDisplay({
@@ -40,19 +47,23 @@ function LeverageBarDisplay({
 	borderRadius,
 	font,
 	currencyFormat,
+	size,
 	sizing,
-}: LeverageBarProps) {
+	puck,
+}: LeverageBarComponentProps) {
 	const totals = useLeverageTotals()
 	const resolvedColors = normalizeLeverageColors(colors, {
 		remainingColor,
 		trackColor,
 		borderRadius,
 	})
+	const resolvedSize = resolveLeverageBarSize({ size, sizing })
 
 	return (
 		<Box
-			className={ clsx(classes.host, elementClasses.host) }
-			style={ buildFlexItemSizingStyle(sizing ?? { mode: "fill" }) }
+			ref={ puck.dragRef }
+			className={ clsx(classes.host) }
+			style={ buildLeverageBarSizeStyle(resolvedSize) }
 		>
 			<LeverageBar
 				totals={ totals }
@@ -68,8 +79,9 @@ const t = i18n.t.bind(i18n)
 
 export const leverageBarConfig: ComponentConfig<LeverageBarProps> = {
 	label: t("slides.editor.components.leverage_bar.label"),
+	inline: true,
 	fields: {
-		sizing: flexItemSizingField(),
+		size: leverageBarSizeField(),
 		colors: leverageColorsField(),
 		font: textFontField({
 			allowInherit: false,
@@ -82,10 +94,7 @@ export const leverageBarConfig: ComponentConfig<LeverageBarProps> = {
 		}),
 	},
 	defaultProps: {
-		sizing: {
-			mode: "fill",
-			height: { amount: 36, unit: "px" },
-		},
+		size: defaultLeverageBarSize(),
 		colors: defaultLeverageColors(),
 		font: defaultTextFontValue({
 			color: "#FFFFFF",
@@ -101,6 +110,7 @@ export const leverageBarConfig: ComponentConfig<LeverageBarProps> = {
 		return {
 			props: {
 				...props,
+				size: resolveLeverageBarSize(props),
 				colors: normalizeLeverageColors(props.colors, {
 					remainingColor: props.remainingColor,
 					trackColor: props.trackColor,

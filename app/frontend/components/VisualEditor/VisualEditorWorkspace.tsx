@@ -92,16 +92,12 @@ export function VisualEditorWorkspace({
 
 		const timeoutId = window.setTimeout(() => {
 			adoptResolvedBaselineRef.current = false
-			savedDataRef.current = latestDataRef.current
-			setSaveStatus("saved")
-			clearEditorDraft(slideKey)
 		}, 0)
 
 		return () => {
 			window.clearTimeout(timeoutId)
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- refs are stable; wait for mock circle so Puck can mount and resolve
-	}, [initialLoad.loadSource, isLoading, setSaveStatus, slideKey])
+	}, [initialLoad.loadSource, isLoading])
 
 	const handleSave = useCallback(async (data: PuckSlideData) => {
 		const saved = await persistSave(data)

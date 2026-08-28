@@ -7,6 +7,19 @@ describe("components/VisualEditor/fields/flex/style", () => {
 		expect(buildFlexStyle({ flex: { display: "flex" } })).not.toHaveProperty("overflow", "auto")
 	})
 
+	test("applies gap as a CSS length string", () => {
+		expect(buildFlexStyle({
+			flex: { display: "flex", gap: { amount: 1, unit: "rem" } },
+		})).toMatchObject({
+			gap: "1rem",
+		})
+		expect(buildFlexStyle({
+			flex: { display: "flex", gap: 8 },
+		})).toMatchObject({
+			gap: "8px",
+		})
+	})
+
 	test("applies minHeight zero only when overflow is auto or hidden", () => {
 		expect(buildFlexStyle({ flex: { display: "flex", overflow: "auto" } })).toMatchObject({
 			overflow: "auto",

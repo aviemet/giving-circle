@@ -39,7 +39,7 @@ describe("components/VisualEditor/components/Heading", () => {
 
 	test("defaults nest color and auto size under font", () => {
 		expect(headingConfig.defaultProps).toMatchObject({
-			metrics: { order: 1, padding: 16 },
+			metrics: { order: 1, padding: { amount: 16, unit: "px" } },
 			font: defaultTextFontValue({
 				color: "#FFFFFF",
 				sizePreset: "auto",
@@ -54,12 +54,12 @@ describe("components/VisualEditor/components/Heading", () => {
 		expect(normalizeHeadingMetrics(
 			{ order: 3, padding: 8 },
 			{ order: 1, padding: 16 },
-		)).toEqual({ order: 3, padding: 8 })
+		)).toEqual({ order: 3, padding: { amount: 8, unit: "px" } })
 
 		expect(normalizeHeadingMetrics(undefined, {
 			order: 2,
 			padding: 24,
-		})).toEqual({ order: 2, padding: 24 })
+		})).toEqual({ order: 2, padding: { amount: 24, unit: "px" } })
 	})
 
 	test("normalizeTextFontValue and resolveFontSize support clamp", () => {
@@ -162,7 +162,7 @@ describe("components/VisualEditor/components/Heading", () => {
 			return
 		}
 
-		expect(props.metrics).toEqual({ order: 2, padding: 24 })
+		expect(props.metrics).toEqual({ order: 2, padding: { amount: 24, unit: "px" } })
 		expect(props.font).toMatchObject({
 			family: "",
 			url: "",

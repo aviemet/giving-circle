@@ -1,19 +1,42 @@
 import { type CSSProperties } from "react"
 
+import {
+	BORDER_RADIUS_UNITS,
+	BORDER_WIDTH_UNITS,
+	lengthAmount,
+	lengthToCss,
+	normalizeOptionalLength,
+	type BorderRadiusUnit,
+	type BorderWidthUnit,
+	type LengthValue,
+} from "../shared/length"
+
 export type BorderProps = {
-	borderWidth?: number
-	borderRadius?: number
+	borderWidth?: LengthValue<BorderWidthUnit> | number
+	borderRadius?: LengthValue<BorderRadiusUnit> | number
 	borderColor?: string
 }
 
 export function buildBorderStyle(props: BorderProps): CSSProperties {
+	const borderWidth = lengthToCss(normalizeOptionalLength(
+		props.borderWidth,
+		BORDER_WIDTH_UNITS,
+		"px",
+	))
+	const borderRadius = lengthToCss(normalizeOptionalLength(
+		props.borderRadius,
+		BORDER_RADIUS_UNITS,
+		"px",
+	))
+	const widthAmount = lengthAmount(props.borderWidth)
+
 	const style: CSSProperties = {
-		...(props.borderWidth !== undefined ? { borderWidth: props.borderWidth } : {}),
-		...(props.borderRadius !== undefined ? { borderRadius: props.borderRadius } : {}),
+		...(borderWidth !== undefined ? { borderWidth } : {}),
+		...(borderRadius !== undefined ? { borderRadius } : {}),
 		...(props.borderColor ? { borderColor: props.borderColor } : {}),
 	}
 
-	if(props.borderWidth !== undefined && props.borderWidth > 0) {
+	if(widthAmount !== undefined && widthAmount > 0) {
 		style.borderStyle = "solid"
 	}
 

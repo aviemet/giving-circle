@@ -8,6 +8,13 @@ import { normalizeBorderValue } from "./border"
 import * as classes from "./borderField.css"
 import { type BorderProps } from "./style"
 import { FieldRow, PuckFieldLabel, UnitNumber } from "../shared"
+import {
+	BORDER_RADIUS_UNITS,
+	BORDER_WIDTH_UNITS,
+	coerceLength,
+	isLengthUnit,
+	lengthAmount,
+} from "../shared/length"
 
 function borderText(key: string) {
 	return i18n.t(`slides.editor.fields.border.${key}`)
@@ -35,21 +42,48 @@ function BorderFieldControl({
 		onChange(next)
 	}
 
+	const borderWidth = coerceLength(localValue.borderWidth ?? 0, BORDER_WIDTH_UNITS, "px")
+	const borderRadius = coerceLength(localValue.borderRadius ?? 0, BORDER_RADIUS_UNITS, "px")
+
 	return (
 		<div className={ classes.borderRoot }>
 			<FieldRow label={ borderText("width") }>
 				<UnitNumber
 					name={ `${name}.borderWidth` }
-					value={ localValue.borderWidth }
-					onChange={ (borderWidth) => updateValue({ borderWidth }) }
+					value={ lengthAmount(borderWidth) }
+					unit={ borderWidth.unit }
+					units={ BORDER_WIDTH_UNITS }
+					onChange={ (amount) => updateValue({
+						borderWidth: { amount, unit: borderWidth.unit },
+					}) }
+					onUnitChange={ (unit) => {
+						if(!isLengthUnit(unit, BORDER_WIDTH_UNITS)) {
+							return
+						}
+						updateValue({
+							borderWidth: { amount: borderWidth.amount, unit },
+						})
+					} }
 				/>
 			</FieldRow>
 
 			<FieldRow label={ borderText("radius") }>
 				<UnitNumber
 					name={ `${name}.borderRadius` }
-					value={ localValue.borderRadius }
-					onChange={ (borderRadius) => updateValue({ borderRadius }) }
+					value={ lengthAmount(borderRadius) }
+					unit={ borderRadius.unit }
+					units={ BORDER_RADIUS_UNITS }
+					onChange={ (amount) => updateValue({
+						borderRadius: { amount, unit: borderRadius.unit },
+					}) }
+					onUnitChange={ (unit) => {
+						if(!isLengthUnit(unit, BORDER_RADIUS_UNITS)) {
+							return
+						}
+						updateValue({
+							borderRadius: { amount: borderRadius.amount, unit },
+						})
+					} }
 				/>
 			</FieldRow>
 
