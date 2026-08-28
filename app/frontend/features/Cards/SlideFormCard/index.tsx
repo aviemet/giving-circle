@@ -52,7 +52,6 @@ export function SlideFormCard({ path, removeInput, href, thumbnailUrl }: SlideFo
 					<SlideThumbnail
 						src={ thumbnailUrl }
 						alt=""
-						height={ 140 }
 					/>
 				</ConditionalWrapper>
 			</Card.Section>

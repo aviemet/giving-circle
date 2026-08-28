@@ -1,13 +1,17 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Group, Page, Section, Stack, Title } from "@/components"
+import clsx from "clsx"
+
+import { Box, Page, Section, Stack, Title } from "@/components"
 import { InteractionToggles } from "@/domains/presentations/active/InteractionToggles"
 import { SwitchSlideButton } from "@/domains/presentations/Buttons/SwitchSlideButton"
 import { withLayout } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 import { useActivePresentationChannel } from "../useActivePresentationChannel"
+
+import * as classes from "./Index.css"
 
 interface ActivePresentationControlsProps {
 	presentation: Schema.PresentationsShow
@@ -54,14 +58,16 @@ const ActivePresentationControls = ({
 				<Section>
 					<Stack gap="md">
 						<Title order={ 3 }>{ t("presentations.active.controls.slides") }</Title>
-						<Group>{ presentation.slides && presentation.slides.map((slide) => (
-							<SwitchSlideButton
-								key={ slide.id }
-								slide={ slide }
-								active={ activeSlideId === slide.id }
-								onClick={ () => switchSlide(slide.id) }
-							/>
-						)) }</Group>
+						<Box className={ clsx(classes.slides) }>
+							{ presentation.slides && presentation.slides.map((slide) => (
+								<SwitchSlideButton
+									key={ slide.id }
+									slide={ slide }
+									active={ activeSlideId === slide.id }
+									onClick={ () => switchSlide(slide.id) }
+								/>
+							)) }
+						</Box>
 					</Stack>
 				</Section>
 

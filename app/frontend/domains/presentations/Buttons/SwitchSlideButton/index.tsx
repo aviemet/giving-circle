@@ -15,7 +15,7 @@ export const SwitchSlideButton = ({ slide, onClick, active }: SwitchSlideButtonP
 	return (
 		<Card
 			withBorder
-			shadow={ active ? "lg" : "xs" }
+			shadow="none"
 			radius="md"
 			onClick={ onClick }
 			className={ clsx(classes.buttonCard, { active }) }
@@ -24,7 +24,6 @@ export const SwitchSlideButton = ({ slide, onClick, active }: SwitchSlideButtonP
 				<SlideThumbnail
 					src={ slide.thumbnail_url }
 					alt=""
-					height={ 140 }
 				/>
 			</Card.Section>
 
