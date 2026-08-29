@@ -69,27 +69,29 @@ export function IterateFieldControl({
 					} }
 				/>
 			</FieldRow>
-			{ iterating ? (
-				<FieldRow label={ iterateText("over") }>
-					<Select
-						wrapper={ false }
-						name={ `${name}.collection` }
-						value={ collection }
-						allowDeselect={ false }
-						aria-label={ iterateText("over") }
-						options={ collectionOptions() }
-						onChange={ (nextValue) => {
-							if(nextValue === null) {
-								return
-							}
+			{ iterating
+				? (
+					<FieldRow label={ iterateText("over") }>
+						<Select
+							wrapper={ false }
+							name={ `${name}.collection` }
+							value={ collection }
+							allowDeselect={ false }
+							aria-label={ iterateText("over") }
+							options={ collectionOptions() }
+							onChange={ (nextValue) => {
+								if(nextValue === null) {
+									return
+								}
 
-							if(isIterateCollection(nextValue)) {
-								onChange(nextValue)
-							}
-						} }
-					/>
-				</FieldRow>
-			) : null }
+								if(isIterateCollection(nextValue)) {
+									onChange(nextValue)
+								}
+							} }
+						/>
+					</FieldRow>
+				)
+				: null }
 		</div>
 	)
 }

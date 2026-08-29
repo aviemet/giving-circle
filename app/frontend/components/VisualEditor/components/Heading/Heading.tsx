@@ -51,7 +51,7 @@ export function HeadingDisplay({
 	const hasLineClamp = resolvedFlow.lineClamp > 0
 	const fontFamily = componentFontFamilyCss(resolvedFont)
 	const titleStyle: CSSProperties = { fontFamily }
-	
+
 	if(resolvedSize.fontSize !== undefined) {
 		titleStyle.fontSize = resolvedSize.fontSize
 	}

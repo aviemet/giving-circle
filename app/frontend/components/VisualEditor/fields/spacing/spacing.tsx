@@ -260,7 +260,7 @@ function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlPro
 	)
 }
 
-function boxModelField(): Field<BoxModelValue | undefined> {
+export function boxModelField(): Field<BoxModelValue | undefined> {
 	const label = spacingText("label")
 	return {
 		type: "custom",
@@ -278,35 +278,3 @@ function boxModelField(): Field<BoxModelValue | undefined> {
 		},
 	}
 }
-
-function spacingField(): Field<SpacingGroup | undefined>
-function spacingField(params: Partial<Field<SpacingGroup | undefined>>): Field<SpacingGroup | undefined>
-function spacingField({ label = "Spacing" }: Partial<Field<SpacingGroup | undefined>> = {}): Field<SpacingGroup | undefined> {
-	return {
-		type: "custom",
-		label,
-		render: ({ name, onChange, value }) => {
-			const boxValue: BoxModelValue = label === spacingText("padding")
-				? { padding: value }
-				: { margin: value }
-
-			return (
-				<PuckFieldLabel label={ label }>
-					<BoxModelFieldControl
-						name={ name }
-						value={ boxValue }
-						onChange={ (next) => {
-							if(label === spacingText("padding")) {
-								onChange(next.padding)
-								return
-							}
-							onChange(next.margin)
-						} }
-					/>
-				</PuckFieldLabel>
-			)
-		},
-	}
-}
-
-export { boxModelField, spacingField }

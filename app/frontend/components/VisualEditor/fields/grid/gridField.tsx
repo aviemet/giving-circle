@@ -2,8 +2,8 @@ import { Field } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
-import { GridFieldControl } from "./GridFieldControl"
 import { type GridLayoutValue } from "./grid"
+import { GridFieldControl } from "./GridFieldControl"
 import { PuckFieldLabel } from "../shared"
 
 function gridText(key: string) {

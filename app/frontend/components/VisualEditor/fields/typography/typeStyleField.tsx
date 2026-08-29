@@ -15,10 +15,10 @@ import { Select } from "@/components/Inputs"
 import { i18n } from "@/lib/i18n"
 
 import {
-	type FontStyleValue,
+	isFontStyleValue,
+	isTextDecorationValue,
+	isTextTransformValue,
 	type FontWeightValue,
-	type TextDecorationValue,
-	type TextTransformValue,
 } from "./fields"
 import { fontWeightSelectOptions, parseFontWeight } from "./fontWeightOptions"
 import { defaultTypeStyle, normalizeTypeStyle, type TypeStyleValue } from "./typeStyle"
@@ -27,24 +27,6 @@ import { FieldRow, IconSegmented, PuckFieldLabel } from "../shared"
 
 function styleText(key: string) {
 	return i18n.t(`slides.editor.fields.typography.${key}`)
-}
-
-function isTextDecorationValue(value: string): value is TextDecorationValue {
-	return value === "none"
-		|| value === "underline"
-		|| value === "line-through"
-		|| value === "overline"
-}
-
-function isTextTransformValue(value: string): value is TextTransformValue {
-	return value === "none"
-		|| value === "uppercase"
-		|| value === "lowercase"
-		|| value === "capitalize"
-}
-
-function isFontStyleValue(value: string): value is FontStyleValue {
-	return value === "normal" || value === "italic"
 }
 
 interface TypeStyleFieldControlProps {
@@ -151,7 +133,7 @@ function TypeStyleFieldControl({
 	)
 }
 
-function typeStyleField(params: {
+export function typeStyleField(params: {
 	fallbackWeight?: FontWeightValue
 } = {}): Field<TypeStyleValue | undefined> {
 	const fallbackWeight = params.fallbackWeight ?? 400
@@ -174,5 +156,3 @@ function typeStyleField(params: {
 		},
 	}
 }
-
-export { typeStyleField }

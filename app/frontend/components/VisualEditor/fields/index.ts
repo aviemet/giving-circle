@@ -3,16 +3,11 @@ export {
 	iterateField,
 	ITERATE_NONE,
 	ITERATE_ORGS,
-	ORG_ITERATE_PATH_PREFIX,
-	getIterateItems,
 	isIterateOn,
-	isOrgIterate,
 	normalizeIterateValue,
-	RepeatedSlot,
-	IterateHint,
 	type IterateValue,
 } from "./iterate"
-export { colorField, optionalColorField, backgroundColorField } from "./color"
+export { colorField, optionalColorField } from "./color"
 export { alignmentField, type AlignmentValue } from "./alignment"
 export { tagsField } from "./tags"
 export { imageField } from "./image"
@@ -38,8 +33,6 @@ export {
 	type BackgroundImageValue,
 } from "./backgroundImage"
 export {
-	marginField,
-	paddingField,
 	boxModelField,
 	buildSpacingStyle,
 	resolveSpacingGroups,
@@ -50,9 +43,6 @@ export {
 } from "./spacing"
 export {
 	borderField,
-	borderWidthField,
-	borderRadiusField,
-	borderColorField,
 	buildBorderStyle,
 	defaultBorderValue,
 	normalizeBorderValue,
@@ -72,9 +62,6 @@ export {
 	type GridLayoutValue,
 } from "./grid"
 export {
-	widthField,
-	minWidthField,
-	minHeightField,
 	buildDimensionStyle,
 	normalizeDimensionValue,
 	formatDimensionValue,
@@ -87,18 +74,11 @@ export {
 export {
 	flexItemSizingField,
 	buildFlexItemSizingStyle,
-	parseCustomCssDeclarations,
 	type FlexItemSizing,
 	type FlexItemSizingMode,
 	type FlexItemSizingFineTune,
 } from "./flexItemSizing"
 export {
-	fontWeightField,
-	textDecorationField,
-	textTransformField,
-	fontStyleField,
-	fontSizeField,
-	titleSizeField,
 	typeStyleField,
 	defaultTypeStyle,
 	normalizeTypeStyle,

@@ -121,11 +121,6 @@ export function clearEditorDraft(slideKey: string) {
 	} catch{ }
 }
 
-// an empty server document needs starter blocks or Puck has nothing to edit.
-export function normalizeSavedSlideData(data: PuckSlideData) {
-	return withStarterSlideContent(data ?? {})
-}
-
 // the slide card title and the editor Page title are the same field and must stay in sync.
 export function applySlideTitleToData(data: PuckSlideData, slideTitle: string): PuckSlideData {
 	if(slideTitle.length === 0) {
@@ -157,20 +152,6 @@ export function slideTitleFromData(data: PuckSlideData): string | undefined {
 	return trimmed.length > 0 ? trimmed : undefined
 }
 
-export function cloneSlideData(data: PuckSlideData) {
-	return structuredClone(data)
-}
-
-// dirty checks cannot use reference equality; Puck rebuilds the tree constantly.
-export function slideDataEquals(first: PuckSlideData, second: PuckSlideData) {
-	return isEqual(first, second)
-}
-
-// block leave-with-unsaved-work, but not while a save is already in flight.
-export function shouldPromptForUnsavedEditorNavigation(saveStatus: EditorSaveStatus, isSaving: boolean) {
-	return saveStatus !== "saved" && !isSaving
-}
-
 // Puck's hydrate/resolveData onChange is not a user edit and must not mark the slide dirty.
 export function nextEditorChangeState(params: {
 	changed: PuckSlideData
@@ -183,13 +164,13 @@ export function nextEditorChangeState(params: {
 } {
 	if(params.adoptResolvedBaseline) {
 		return {
-			saved: cloneSlideData(params.changed),
+			saved: structuredClone(params.changed),
 			saveStatus: "saved",
 			shouldWriteDraft: false,
 		}
 	}
 
-	const dirty = !slideDataEquals(params.changed, params.saved)
+	const dirty = !isEqual(params.changed, params.saved)
 
 	return {
 		saved: params.saved,
@@ -209,7 +190,7 @@ export function resolveInitialEditorData(params: {
 	saveStatus: EditorSaveStatus
 	serverFingerprint: string
 } {
-	const saved = normalizeSavedSlideData(params.savedData)
+	const saved = withStarterSlideContent(params.savedData ?? {})
 	const savedFingerprint = slideDataFingerprint(saved)
 	const draft = readEditorDraft(params.storageKey)
 
@@ -233,7 +214,7 @@ export function resolveInitialEditorData(params: {
 		}
 	}
 
-	if(slideDataEquals(draft.data, saved)) {
+	if(isEqual(draft.data, saved)) {
 		clearEditorDraft(params.slideKey)
 
 		return {

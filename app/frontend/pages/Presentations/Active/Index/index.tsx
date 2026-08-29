@@ -1,7 +1,7 @@
+import clsx from "clsx"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import clsx from "clsx"
 
 import { Box, Page, Section, Stack, Title } from "@/components"
 import { InteractionToggles } from "@/domains/presentations/active/InteractionToggles"
@@ -10,7 +10,6 @@ import { withLayout } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 import { useActivePresentationChannel } from "../useActivePresentationChannel"
-
 import * as classes from "./Index.css"
 
 interface ActivePresentationControlsProps {

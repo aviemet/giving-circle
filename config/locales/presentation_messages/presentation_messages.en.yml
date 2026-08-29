@@ -1,6 +1,18 @@
 ---
 en:
   presentation_messages:
+    active:
+      columns:
+        medium: Medium
+        name: Name
+        send: Send
+        status: Status
+      empty: No messages have been set up for this presentation yet.
+      statuses:
+        finished: Finished
+        ready: Ready
+        sending: Sending
+      title: Messaging
     edit:
       title: "%{name}"
     form:
@@ -23,18 +35,6 @@ en:
       from_template: New Message from Template
       new_message: New Message
       new_message_options: More new message options
-      title: Messaging
-    active:
-      columns:
-        medium: Medium
-        name: Name
-        send: Send
-        status: Status
-      empty: No messages have been set up for this presentation yet.
-      statuses:
-        finished: Finished
-        ready: Ready
-        sending: Sending
       title: Messaging
     new:
       title: New Presentation Message

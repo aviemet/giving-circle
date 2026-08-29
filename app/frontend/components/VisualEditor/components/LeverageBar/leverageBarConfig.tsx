@@ -58,10 +58,11 @@ function LeverageBarDisplay({
 		borderRadius,
 	})
 	const resolvedSize = resolveLeverageBarSize({ size, sizing })
+	const { dragRef } = puck
 
 	return (
 		<Box
-			ref={ puck.dragRef }
+			ref={ dragRef }
 			className={ clsx(classes.host) }
 			style={ buildLeverageBarSizeStyle(resolvedSize) }
 		>

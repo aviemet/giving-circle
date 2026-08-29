@@ -8,14 +8,14 @@ import { buildContainerStyle } from "./buildContainerStyle"
 import * as classes from "./Container.css"
 import * as editorClasses from "./Container.editor.css"
 import { ContainerProps } from "./containerConfig"
-import * as iterateEditorClasses from "../../fields/iterate/iterate.editor.css"
 import {
 	getIterateItems,
 	isIterateOn,
 	IterateHint,
 	ORG_ITERATE_PATH_PREFIX,
 	RepeatedSlot,
-} from "../../fields"
+} from "../../fields/iterate"
+import * as iterateEditorClasses from "../../fields/iterate/iterate.editor.css"
 import * as layoutChrome from "../../layoutChrome.editor.css"
 import * as puckClasses from "../../Puck.css"
 import { slotDropZoneProps } from "../../slotEditor"

@@ -16,7 +16,6 @@ import {
 	type LeverageColorsValue,
 	type TextFontValue,
 } from "../../fields"
-import { SlideFontFace } from "../../SlideFontFace"
 import {
 	BORDER_RADIUS_UNITS,
 	coerceLength,
@@ -24,6 +23,7 @@ import {
 	type BorderRadiusUnit,
 	type LengthValue,
 } from "../../fields/shared/length"
+import { SlideFontFace } from "../../SlideFontFace"
 
 export type LeverageBarColors = Pick<LeverageColorsValue, "remainingColor" | "trackColor"> & {
 	borderRadius?: LengthValue<BorderRadiusUnit> | number

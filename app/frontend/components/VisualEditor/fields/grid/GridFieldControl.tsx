@@ -7,13 +7,13 @@ import {
 } from "@/components/Icons"
 import { i18n } from "@/lib/i18n"
 
-import * as classes from "./gridField.css"
 import {
 	isGridAlignItems,
 	isGridOverflow,
 	normalizeGridLayoutValue,
 	type GridLayoutValue,
 } from "./grid"
+import * as classes from "./gridField.css"
 import {
 	FieldRow,
 	IconSegmented,

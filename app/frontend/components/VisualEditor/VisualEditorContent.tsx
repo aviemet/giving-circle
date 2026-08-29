@@ -7,14 +7,12 @@ import { slideSaveExtras, type SlideSaveExtras } from "./captureSlideSnapshot"
 import {
 	applySlideTitleToData,
 	clearEditorDraft,
-	cloneSlideData,
 	editorStorageKey,
-	normalizeSavedSlideData,
 	resolveInitialEditorData,
-	shouldPromptForUnsavedEditorNavigation,
 	type EditorSaveStatus,
 	type PuckSlideData,
 } from "./editorPersistence"
+import { withStarterSlideContent } from "./slotEditor"
 import { VisualEditorWorkspace } from "./VisualEditorWorkspace"
 
 export type { SlideSaveExtras }
@@ -39,7 +37,7 @@ export function VisualEditorContent({
 	returnTo,
 }: VisualEditorProps) {
 	const serverSavedData = useMemo(() => {
-		return normalizeSavedSlideData(applySlideTitleToData(initialData, slideTitle))
+		return withStarterSlideContent(applySlideTitleToData(initialData, slideTitle) ?? {})
 	}, [initialData, slideTitle])
 
 	const storageKey = useMemo(() => editorStorageKey(slideKey), [slideKey])
@@ -52,7 +50,7 @@ export function VisualEditorContent({
 		})
 	}, [serverSavedData, slideKey, storageKey])
 
-	const savedDataRef = useRef<PuckSlideData>(cloneSlideData(serverSavedData))
+	const savedDataRef = useRef<PuckSlideData>(structuredClone(serverSavedData))
 	const latestDataRef = useRef<PuckSlideData>(initialLoad.data)
 	const [saveStatus, setSaveStatus] = useState<EditorSaveStatus>(initialLoad.saveStatus)
 
@@ -62,7 +60,7 @@ export function VisualEditorContent({
 		try {
 			const extras = await slideSaveExtras()
 			await onSave(data, extras)
-			savedDataRef.current = cloneSlideData(data)
+			savedDataRef.current = structuredClone(data)
 			latestDataRef.current = data
 			setSaveStatus("saved")
 			clearEditorDraft(slideKey)
@@ -72,7 +70,7 @@ export function VisualEditorContent({
 		}
 	}, [onSave, slideKey])
 
-	const navigationEnabled = shouldPromptForUnsavedEditorNavigation(saveStatus, isSaving)
+	const navigationEnabled = saveStatus !== "saved" && !isSaving
 
 	return (
 		<NavigationInterrupt

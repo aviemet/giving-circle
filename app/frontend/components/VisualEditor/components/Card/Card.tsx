@@ -1,9 +1,6 @@
-import clsx from "clsx"
-
 import { Card, DangerousHtml, Text } from "@/components"
 import { isNonEmptyString } from "@/lib/strings"
 
-import * as classes from "./Card.css"
 import { type CardProps } from "./cardConfig"
 import { usePresentationData } from "../../dynamicData/MockData"
 import { normalizeBorderValue, buildBorderStyle } from "../../fields/border"
@@ -34,7 +31,6 @@ export function CardDisplay({
 
 	return (
 		<Card
-			className={ clsx(classes.card) }
 			padding="md"
 			style={ {
 				...buildSpacingStyle(styleProps),

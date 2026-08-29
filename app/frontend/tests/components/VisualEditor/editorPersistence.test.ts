@@ -1,14 +1,12 @@
+import { isEqual } from "es-toolkit/compat"
 import { describe, expect, test, beforeEach } from "vitest"
 
 import {
 	applySlideTitleToData,
 	clearEditorDraft,
-	cloneSlideData,
 	editorStorageKey,
 	nextEditorChangeState,
 	resolveInitialEditorData,
-	shouldPromptForUnsavedEditorNavigation,
-	slideDataEquals,
 	slideDataFingerprint,
 	slideTitleFromData,
 	writeEditorDraft,
@@ -130,26 +128,11 @@ describe("components/VisualEditor/editorPersistence", () => {
 		expect(window.localStorage.getItem(storageKey)).toBeNull()
 	})
 
-	test("slideDataEquals compares slide documents", () => {
-		const first = createStarterSlideData()
-		const second = createStarterSlideData()
-
-		expect(slideDataEquals(first, second)).toBe(true)
-		expect(slideDataEquals(first, { ...first, root: { props: { title: "Different" } } })).toBe(false)
-	})
-
 	test("applySlideTitleToData sets the puck root title from the slide record", () => {
 		const data = headingSlide("Body")
 		const merged = applySlideTitleToData(data, "Card title")
 
 		expect(merged.root?.props?.title).toBe("Card title")
-	})
-
-	test("shouldPromptForUnsavedEditorNavigation is true only for unsaved, idle editors", () => {
-		expect(shouldPromptForUnsavedEditorNavigation("saved", false)).toBe(false)
-		expect(shouldPromptForUnsavedEditorNavigation("unsaved", true)).toBe(false)
-		expect(shouldPromptForUnsavedEditorNavigation("unsaved", false)).toBe(true)
-		expect(shouldPromptForUnsavedEditorNavigation("recovered", false)).toBe(true)
 	})
 
 	test("slideTitleFromData reads the puck root title", () => {
@@ -232,7 +215,7 @@ describe("components/VisualEditor/editorPersistence", () => {
 		}
 
 		expect(adopted.saved.root?.props?.title).toBe("Resolved")
-		expect(slideDataEquals(adopted.saved, resolved)).toBe(false)
+		expect(isEqual(adopted.saved, resolved)).toBe(false)
 
 		const afterMutation = nextEditorChangeState({
 			changed: resolved,
@@ -247,7 +230,7 @@ describe("components/VisualEditor/editorPersistence", () => {
 
 	test("nextEditorChangeState greys save only when the document matches the db baseline", () => {
 		const saved = createStarterSlideData()
-		const changed = cloneSlideData(saved)
+		const changed = structuredClone(saved)
 
 		const nextState = nextEditorChangeState({
 			changed,

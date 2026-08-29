@@ -1,10 +1,9 @@
 import { type ComponentConfig } from "@puckeditor/core"
-import clsx from "clsx"
+import { clsx } from "clsx"
 
 import { Box } from "@/components"
 import { i18n } from "@/lib/i18n"
 
-import * as classes from "./BarGraphAllocatedTotals.css"
 import { BarGraphAllocatedTotals, useAllocatedTotals } from "../../elements/BarGraphAllocatedTotals"
 import * as elementClasses from "../../elements/BarGraphAllocatedTotals/BarGraphAllocatedTotals.css"
 import { colorField, flexItemSizingField, imageField, type FlexItemSizing } from "../../fields"
@@ -33,7 +32,7 @@ function BarGraphAllocatedTotalsDisplay({
 
 	return (
 		<Box
-			className={ clsx(classes.host, elementClasses.host) }
+			className={ clsx(elementClasses.host) }
 			style={ buildFlexItemSizingStyle(sizing ?? { mode: "fill" }) }
 		>
 			<BarGraphAllocatedTotals

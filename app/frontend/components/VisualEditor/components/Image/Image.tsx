@@ -1,12 +1,10 @@
 import { type PuckContext } from "@puckeditor/core"
-import clsx from "clsx"
 import { type CSSProperties } from "react"
 
 import { Image } from "@/components"
 import placeholderImage from "@/images/placeholder_image.jpeg"
 import { isNonEmptyString } from "@/lib/strings"
 
-import * as classes from "./Image.css"
 import { type ImageProps } from "./imageConfig"
 import { type AlignmentValue } from "../../fields/alignment"
 import { normalizeBorderValue, buildBorderStyle } from "../../fields/border"
@@ -18,19 +16,17 @@ export type ImageComponentProps = ImageProps & {
 }
 
 function alignmentStyle(alignment: AlignmentValue): CSSProperties {
-	if(alignment === "center") {
-		return { alignSelf: "center" }
+	switch(alignment) {
+		case "center":
+			return { alignSelf: "center" }
+		case "right":
+			return { alignSelf: "flex-end" }
+		case "justify":
+			return { alignSelf: "stretch" }
+		case "left":
+		default:
+			return { alignSelf: "flex-start" }
 	}
-
-	if(alignment === "right") {
-		return { alignSelf: "flex-end" }
-	}
-
-	if(alignment === "justify") {
-		return { alignSelf: "stretch" }
-	}
-
-	return { alignSelf: "flex-start" }
 }
 
 export function ImageDisplay({
@@ -60,7 +56,6 @@ export function ImageDisplay({
 	return (
 		<Image
 			ref={ dragRef }
-			className={ clsx(classes.image) }
 			src={ isNonEmptyString(src) ? src : placeholderImage }
 			alt={ title }
 			style={ {

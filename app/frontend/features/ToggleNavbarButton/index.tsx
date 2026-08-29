@@ -16,7 +16,7 @@ export function ToggleNavbarButton(props: ToggleNavBarButton) {
 		return null
 	}
 
-	const ariaLabel = sidebarOpen 
+	const ariaLabel = sidebarOpen
 		? t("navigation.collapseSidebar")
 		: t("navigation.expandSidebar")
 

@@ -1,5 +1,4 @@
 export {
-	spacingField,
 	boxModelField,
 	normalizeSpacingGroup,
 	normalizeBoxModelValue,
@@ -9,5 +8,4 @@ export {
 	type SpacingGroup,
 	type BoxModelValue,
 } from "./spacing"
-export { marginField, paddingField } from "./fields"
 export { buildSpacingStyle, resolveSpacingGroups, type SpacingProps } from "./style"

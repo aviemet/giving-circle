@@ -80,7 +80,7 @@ RSpec.describe "Api::Circles::Fonts", type: :request do
 
       expect {
         post api_circle_fonts_path(circle_slug: circle.slug), params: { signed_id: duplicate.signed_id }
-      }.not_to change { circle.fonts.count }
+      }.not_to(change { circle.fonts.count })
 
       expect(response).to have_http_status(:ok)
       expect(response.parsed_body).to include(

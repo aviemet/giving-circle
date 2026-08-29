@@ -1,9 +1,9 @@
 import { type SlotComponent } from "@puckeditor/core"
 import clsx from "clsx"
 
+import * as classes from "./iterate.css"
 import { type ContextOrg } from "../../dynamicData/getOrgsFromContext"
 import { IteratorItemProvider } from "../../dynamicData/IteratorItemContext"
-import * as classes from "./iterate.css"
 
 export function RepeatedSlot({
 	content: Content,

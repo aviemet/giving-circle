@@ -15,7 +15,6 @@ export { puckFields } from "./fields/puckFieldStyles.css"
 
 export const puckDrawer = css``
 export const puckDrawerItem = css``
-export const puckDrawerItemIcon = css``
 export const puckOutline = css``
 
 export const presentationSlot = css`
@@ -120,15 +119,6 @@ export const puckRoot = css`
 			background-color: var(--puck-color-surface);
 			border: 1px solid var(--puck-color-border);
 			padding: 1px 6px;
-		}
-
-		.${ puckDrawerItem } .${ puckDrawerItemIcon } {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			width: 16px;
-			height: 16px;
-			color: var(--puck-color-text-subtle);
 		}
 
 		.${ puckOutline } {

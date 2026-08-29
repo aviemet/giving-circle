@@ -8,15 +8,15 @@ import { buildGridStyle } from "./buildGridStyle"
 import * as classes from "./Grid.css"
 import * as editorClasses from "./Grid.editor.css"
 import { GridProps } from "./gridConfig"
-import * as iterateEditorClasses from "../../fields/iterate/iterate.editor.css"
+import { normalizeGridLayoutValue } from "../../fields/grid"
 import {
 	getIterateItems,
 	isIterateOn,
 	IterateHint,
-	normalizeGridLayoutValue,
 	ORG_ITERATE_PATH_PREFIX,
 	RepeatedSlot,
-} from "../../fields"
+} from "../../fields/iterate"
+import * as iterateEditorClasses from "../../fields/iterate/iterate.editor.css"
 import * as layoutChrome from "../../layoutChrome.editor.css"
 import * as puckClasses from "../../Puck.css"
 import { slotDropZoneProps } from "../../slotEditor"

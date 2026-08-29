@@ -1,10 +1,4 @@
 export {
-	fontWeightField,
-	textDecorationField,
-	textTransformField,
-	fontStyleField,
-	fontSizeField,
-	titleSizeField,
 	type FontWeightValue,
 	type TextDecorationValue,
 	type TextTransformValue,

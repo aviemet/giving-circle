@@ -26,12 +26,10 @@ import {
 	normalizeBackgroundValue,
 } from "./fields"
 
-type RootProps = SlideRootProps
-
 export type EditorConfig = Config<{
 	components: PuckComponentProps
-	root: RootProps
-	categories: ["layout", "content", "elements", "other"]
+	root: SlideRootProps
+	categories: ["layout", "content", "elements"]
 }>
 
 export const config: EditorConfig = {
@@ -109,10 +107,6 @@ export const config: EditorConfig = {
 		elements: {
 			title: "Elements",
 			components: ["BarGraphAllocatedTotals", "LeverageBar", "Timer"],
-		},
-		other: {
-			title: "All Other Components",
-			visible: true,
 		},
 	},
 }

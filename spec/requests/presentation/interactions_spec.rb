@@ -7,6 +7,7 @@ RSpec.describe "Presentations::Interactions", type: :request do
   let(:presentation) { create(:presentation, theme: create(:theme, circle: @admin.circles.first)) }
   let(:circle) { presentation.circle }
   let(:theme) { presentation.theme }
+  let(:interaction_ui_template) { create(:interaction_ui_template, :allocation) }
 
   describe "GET index" do
     it "is successful" do
@@ -52,6 +53,7 @@ RSpec.describe "Presentations::Interactions", type: :request do
             name: "Allocation Round",
             trigger_type: "manual",
             trigger_conditions: {},
+            interaction_ui_template_id: interaction_ui_template.id,
             config: InteractionConfigFixtures::ALLOCATION_ROUND,
             results: {},
           },
@@ -73,6 +75,7 @@ RSpec.describe "Presentations::Interactions", type: :request do
             name: "Allocation Round",
             trigger_type: "manual",
             trigger_conditions: {},
+            interaction_ui_template_id: interaction_ui_template.id,
             results: {},
           },
         }

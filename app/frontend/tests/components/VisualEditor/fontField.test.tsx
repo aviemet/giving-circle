@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, test } from "vitest"
 
+import { headingConfig } from "@/components/VisualEditor/components/Heading"
 import {
 	componentFontFamilyCss,
 	defaultFontValue,
@@ -20,7 +21,6 @@ import {
 	fontValueFromSelect,
 } from "@/components/VisualEditor/fields/font/fontSelect"
 import { config } from "@/components/VisualEditor/puck.config"
-import { headingConfig } from "@/components/VisualEditor/components/Heading"
 import { SlideFontFace } from "@/components/VisualEditor/SlideFontFace"
 
 describe("components/VisualEditor/fields/font", () => {

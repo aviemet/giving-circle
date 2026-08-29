@@ -49,7 +49,7 @@ export function buildGridStyle(
 
 	if(isEditing) {
 		const authorMinHeight = buildDimensionStyle(styleProps).minHeight
-		
+
 		if(authorMinHeight !== undefined) {
 			style.minHeight = authorMinHeight
 		} else {

@@ -156,7 +156,7 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
-    "typescript": "^7.0.2",
+    "typescript": "~6.0.3",
     "vite": "^8.2.0",
     "vite-plugin-dynamic-import": "^1.6.0",
     "vite-plugin-full-reload": "^1.2.0",
