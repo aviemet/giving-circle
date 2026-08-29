@@ -75,7 +75,7 @@
   - `/lib`: Non-React code and utilities
   - `/pages`: Top-level Inertia pages (entry points for routes)
   - `/queries`: Async react-query methods (not Ruby query objects; see **Ruby query objects** below)
-  - `/types`: Global types and interfaces
+  - `/types`: Wire-format types named by Ruby serializers (`type: "..."` on oj_serializers attributes; see types_from_serializers). Hand-written `.ts` files here exist only for those serializer references (e.g. `Money.ts`, `ElementControlsPayload.ts`). All other types belong in the module that uses them.
 
 #### Icons
 - Icons are centrally exported from `@/components/Icons`

@@ -4,6 +4,7 @@ import { Render } from "@puckeditor/core"
 import { motion, AnimatePresence } from "motion/react"
 
 import { Box } from "@/components"
+import { ActiveSlideProvider } from "@/features/presentation/ActiveSlideProvider"
 
 import { renderableSlideData } from "./renderableSlideData"
 import { config } from "../VisualEditor/puck.config"
@@ -104,11 +105,13 @@ export function SlidePresentation({
 					transition={ { duration: transitionDuration } }
 					style={ { width: "100%", height: "100%", overflow: "hidden" } }
 				>
-					<Render
-						config={ config }
-						data={ renderableSlideData(activeSlide.data) }
-						metadata={ {} }
-					/>
+					<ActiveSlideProvider slideId={ activeSlide.id }>
+						<Render
+							config={ config }
+							data={ renderableSlideData(activeSlide.data) }
+							metadata={ {} }
+						/>
+					</ActiveSlideProvider>
 				</motion.div>
 			</AnimatePresence>
 		</Box>

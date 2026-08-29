@@ -142,6 +142,15 @@ class Presentation < ApplicationRecord
     copy_template_slides
   end
 
+  def merge_element_control!(slide_id:, element_id:, element_type:, control:, value:)
+    controls = element_controls.deep_dup
+    controls[slide_id] ||= {}
+    controls[slide_id][element_id] ||= {}
+    controls[slide_id][element_id][element_type] ||= {}
+    controls[slide_id][element_id][element_type][control] = value
+    update!(element_controls: controls)
+  end
+
   private
 
   def sync_orgs_from_theme

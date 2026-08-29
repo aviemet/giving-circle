@@ -814,6 +814,15 @@
       },
       "active": {
         "controls": {
+          "element_controls": {
+            "timer": {
+              "duration_override": "Duration override",
+              "label": "Timer",
+              "minutes": "Minutes",
+              "seconds": "Seconds",
+              "total_seconds": "{{count}} seconds total"
+            }
+          },
           "interactions": "Interactions",
           "no_interactions": "No interactions configured for this presentation.",
           "slides": "Slides"

@@ -640,6 +640,16 @@ export const apiCirclePresentation = /*#__PURE__*/ __route({"circle_slug":{"r":t
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/presentations/:presentation_slug/element_controls(.:format)
+ * @param {any} circleSlug
+ * @param {any} presentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCirclePresentationElementControls = /*#__PURE__*/ __route({"circle_slug":{"r":true},"presentation_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"circles"],[2,[7,"/"],[2,[3,"circle_slug"],[2,[7,"/"],[2,[6,"presentations"],[2,[7,"/"],[2,[3,"presentation_slug"],[2,[7,"/"],[2,[6,"element_controls"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/presentations/:presentation_slug/interactions/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} presentationSlug

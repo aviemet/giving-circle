@@ -1,5 +1,5 @@
 export { Timer, type TimerProps } from "./Timer"
-export { useTimerCountdown } from "./useTimerCountdown"
+export { useTimerCountdown, useTimerEffectiveDurationSeconds } from "./useTimerCountdown"
 export {
 	flipClockDigits,
 	formatTimerSeconds,

@@ -18,6 +18,7 @@ namespace :api do
 
     resources :presentations, param: :slug, only: [:create, :update, :destroy] do
       resources :slides, param: :slug, controller: "presentations/slides", only: [:create, :update, :destroy]
+      patch "element_controls" => "presentations/element_controls#update"
       resources :interactions,
         param: :slug,
         controller: "presentations/interactions",

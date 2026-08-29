@@ -5,9 +5,11 @@ import { useTranslation } from "react-i18next"
 
 import { Box, Page, Section, Stack, Title } from "@/components"
 import { InteractionToggles } from "@/domains/presentations/active/InteractionToggles"
-import { SwitchSlideButton } from "@/domains/presentations/Buttons/SwitchSlideButton"
+import { SlideControlColumn } from "@/domains/presentations/active/SlideControlColumn"
+import { useElementControlsState } from "@/domains/presentations/active/useElementControlsState"
 import { withLayout } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
+import { type ElementControlsPayload } from "@/types/ElementControlsPayload"
 
 import { useActivePresentationChannel } from "../useActivePresentationChannel"
 import * as classes from "./Index.css"
@@ -33,6 +35,12 @@ const ActivePresentationControls = ({
 		slug: string
 		accepting_responses: boolean
 	}> | undefined>()
+	const [cableElementControls, setCableElementControls] = useState<ElementControlsPayload | undefined>()
+
+	const { elementControls, setMutationSnapshot } = useElementControlsState(
+		presentation.element_controls,
+		cableElementControls,
+	)
 
 	const { switchSlide } = useActivePresentationChannel({
 		presentationId: presentation.id,
@@ -42,6 +50,9 @@ const ActivePresentationControls = ({
 		onActivePresentationUpdated: (snapshot) => {
 			if(snapshot.interactions) {
 				setCableInteractions(snapshot.interactions)
+			}
+			if(snapshot.element_controls) {
+				setCableElementControls(snapshot.element_controls)
 			}
 		},
 	})
@@ -59,11 +70,15 @@ const ActivePresentationControls = ({
 						<Title order={ 3 }>{ t("presentations.active.controls.slides") }</Title>
 						<Box className={ clsx(classes.slides) }>
 							{ presentation.slides && presentation.slides.map((slide) => (
-								<SwitchSlideButton
+								<SlideControlColumn
 									key={ slide.id }
 									slide={ slide }
 									active={ activeSlideId === slide.id }
-									onClick={ () => switchSlide(slide.id) }
+									onSwitch={ () => switchSlide(slide.id) }
+									elementControls={ elementControls }
+									circleSlug={ params.circle_slug }
+									presentationSlug={ params.presentation_slug }
+									onElementControlsUpdated={ setMutationSnapshot }
 								/>
 							)) }
 						</Box>

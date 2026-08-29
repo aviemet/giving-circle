@@ -100,13 +100,15 @@ describe("features/presentation/PresentationDataProvider", () => {
 			</PresentationDataProvider>
 		)
 
-		const { result } = renderHook(() => usePresentationDataContext().values, { wrapper })
+		const { result } = renderHook(() => usePresentationDataContext(), { wrapper })
 
-		expect(result.current).toBeUndefined()
+		expect(result.current.values).toBeUndefined()
+		expect(result.current.elementControls).toEqual({})
 		expect(useActionCableMock).toHaveBeenCalledWith(expect.objectContaining({
 			enabled: false,
 		}))
 	})
+
 })
 
 describe("features/presentation/values/leverageTotals", () => {

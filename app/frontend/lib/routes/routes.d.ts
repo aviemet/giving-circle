@@ -152,6 +152,20 @@ export const apiCirclePresentation: ((
 
 /**
  * Generates rails route to
+ * /api/circles/:circle_slug/presentations/:presentation_slug/element_controls(.:format)
+ * @param {any} circleSlug
+ * @param {any} presentationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCirclePresentationElementControls: ((
+  circleSlug: RequiredRouteParameter,
+  presentationSlug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/circles/:circle_slug/presentations/:presentation_slug/interactions/:slug(.:format)
  * @param {any} circleSlug
  * @param {any} presentationSlug

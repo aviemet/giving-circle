@@ -9,7 +9,7 @@
 #  results                    :jsonb            not null
 #  slug                       :string           not null
 #  trigger_conditions         :jsonb            not null
-#  trigger_type               :integer          default("manual"), not null
+#  trigger_type               :integer          default(0), not null
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  interaction_ui_template_id :uuid             not null

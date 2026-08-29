@@ -14,6 +14,12 @@ export {
 	type PresentationDataPresentation,
 	type PresentationDataValue,
 } from "./PresentationDataProvider"
+export { ActiveSlideProvider, useActiveSlideId } from "./ActiveSlideProvider"
+export {
+	scanSlideElements,
+	readElementControlValue,
+	useTimerDurationOverrideSeconds,
+} from "./elementControls"
 export {
 	useLeverageTotals,
 	leverageFilledPercent,

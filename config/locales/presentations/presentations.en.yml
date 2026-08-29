@@ -13,6 +13,12 @@ en:
         update: Update presentation action
     active:
       controls:
+        element_controls:
+          timer:
+            duration_override: Duration override
+            label: Timer
+            minutes: Minutes
+            seconds: Seconds
         interactions: Interactions
         no_interactions: No interactions configured for this presentation.
         slides: Slides
@@ -73,7 +79,7 @@ en:
     interact:
       form:
         finalize: Finalize Vote
-        funds_left: 'Funds left to allocate: %{amount}'
+        funds_left: "Funds left to allocate: %{amount}"
         missing_field: This interaction is missing its vote field configuration.
         partial_submit: Submit without allocating all funds
         partial_votes_submit: Submit without using all votes
@@ -82,7 +88,7 @@ en:
         toggle_slider: Adjust amount with slider
         unsupported: This interaction UI is not available.
         update: Update vote
-        votes_left: 'Votes left: %{votes}'
+        votes_left: "Votes left: %{votes}"
       idle:
         body: An interaction will appear here when the host opens one.
         title: Waiting for the next activity
@@ -321,7 +327,7 @@ en:
       title: Settings
     show:
       active: Active
-      basedOnTemplate: 'Based on Presentation Template:'
+      basedOnTemplate: "Based on Presentation Template:"
       breadcrumbs:
         circles: Circles
         presentations: Presentations

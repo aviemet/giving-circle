@@ -7,6 +7,7 @@ import { i18n } from "@/lib/i18n"
 import {
 	Timer,
 	useTimerCountdown,
+	useTimerEffectiveDurationSeconds,
 	type TimerDisplayType,
 } from "../../elements/Timer"
 import * as elementClasses from "../../elements/Timer/Timer.css"
@@ -50,6 +51,7 @@ export type TimerProps = {
 }
 
 function TimerDisplay({
+	id: elementId,
 	displayType,
 	duration,
 	durationMinutes,
@@ -63,7 +65,7 @@ function TimerDisplay({
 	exhaustedMode,
 	exhaustedMessage,
 	sizing,
-}: TimerProps) {
+}: TimerProps & { id: string }) {
 	const resolvedDuration = normalizeTimerDuration(duration, {
 		durationMinutes,
 		durationSeconds,
@@ -82,7 +84,14 @@ function TimerDisplay({
 		sizePreset: "4xl",
 	})
 	const durationTotalSeconds = timerDurationToSeconds(resolvedDuration)
-	const remainingSeconds = useTimerCountdown(durationTotalSeconds)
+	const effectiveDurationSeconds = useTimerEffectiveDurationSeconds({
+		elementId,
+		designedDurationSeconds: durationTotalSeconds,
+	})
+	const remainingSeconds = useTimerCountdown({
+		elementId,
+		designedDurationSeconds: durationTotalSeconds,
+	})
 
 	return (
 		<Box
@@ -91,7 +100,7 @@ function TimerDisplay({
 		>
 			<Timer
 				remainingSeconds={ remainingSeconds }
-				durationSeconds={ durationTotalSeconds }
+				durationSeconds={ effectiveDurationSeconds }
 				displayType={ displayType }
 				colors={ resolvedColors }
 				font={ resolvedFont }

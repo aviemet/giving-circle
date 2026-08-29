@@ -1,3 +1,7 @@
+import { defaultTextFontValue } from "@/components/VisualEditor/fields/font/textFont"
+import { defaultTimerColors } from "@/components/VisualEditor/fields/timerColors/timerColors"
+import { defaultTimerDuration } from "@/components/VisualEditor/fields/timerDuration/timerDuration"
+import { defaultTimerExhausted } from "@/components/VisualEditor/fields/timerExhausted/timerExhausted"
 import { type SlideData } from "@/types/SlideData"
 
 export function createCirclePersisted(overrides?: Partial<Schema.CirclesPersisted>): Schema.CirclesPersisted {
@@ -126,6 +130,23 @@ export function createCircleMock(overrides?: Partial<Schema.CirclesMock>): Schem
 	}
 }
 
+export function createTimerPuckNode(elementId: string, displayType: "circle" | "digital" | "flip" | "sevenSegment" = "circle") {
+	return {
+		type: "Timer" as const,
+		props: {
+			id: elementId,
+			displayType,
+			duration: defaultTimerDuration(),
+			colors: defaultTimerColors(),
+			exhausted: defaultTimerExhausted(),
+			font: defaultTextFontValue({
+				color: "#FFFFFF",
+				sizePreset: "4xl",
+			}),
+		},
+	}
+}
+
 export function createSlideData(overrides?: Partial<SlideData>): SlideData {
 	return {
 		content: [],
@@ -158,6 +179,7 @@ export function createPresentationPresentation(overrides?: Partial<Schema.Presen
 		orgs: [createPresentationOrgPersisted()],
 		slides: [createSlidePresentation()],
 		active_slide_id: "slide-1",
+		element_controls: {},
 		...overrides,
 	}
 }
@@ -258,6 +280,7 @@ export function createPresentationsShow(overrides?: Partial<Schema.Presentations
 		template_id: "",
 		slides: [],
 		slides_count: 0,
+		element_controls: {},
 		...overrides,
 	}
 }

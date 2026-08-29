@@ -326,6 +326,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_04_140000) do
     t.boolean "active", default: false, null: false
     t.uuid "active_slide_id"
     t.datetime "created_at", null: false
+    t.jsonb "element_controls", default: {}, null: false
     t.string "name", null: false
     t.jsonb "settings", default: {}
     t.string "slug"

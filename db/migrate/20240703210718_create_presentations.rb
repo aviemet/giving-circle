@@ -4,6 +4,7 @@ class CreatePresentations < ActiveRecord::Migration[7.1]
       t.string :name, null: false
       t.boolean :active, null: false, default: false
       t.jsonb :settings, default: {}
+      t.jsonb :element_controls, null: false, default: {}
       t.integer :template_version
 
       t.references :active_slide, type: :uuid, foreign_key: { to_table: :slides }
