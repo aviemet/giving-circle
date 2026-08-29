@@ -1,0 +1,931 @@
+[
+  {
+    "title": "Introduction",
+    "data": {
+      "root": {
+        "props": {
+          "flex": {
+            "gap": 0,
+            "display": "flex",
+            "flexWrap": "nowrap",
+            "overflow": "hidden",
+            "alignItems": "stretch",
+            "flexDirection": "column",
+            "justifyContent": "flex-start"
+          },
+          "font": {
+            "url": "seed://Linotype - TradeGothicLTStd.otf",
+            "family": "Linotype - TradeGothicLTStd"
+          },
+          "title": "Introduction",
+          "spacing": {
+            "margin": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            },
+            "padding": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "background": {
+            "color": "#000000",
+            "image": {
+              "url": "",
+              "size": "cover",
+              "repeat": "no-repeat",
+              "offsetX": "center",
+              "offsetY": "center",
+              "attachment": "scroll",
+              "customSize": "100% 100%"
+            }
+          },
+          "backgroundColor": "#000000"
+        }
+      },
+      "zones": {},
+      "content": [
+        {
+          "type": "Container",
+          "props": {
+            "id": "Container-23e1921b-cb72-4313-b167-f2198759757f",
+            "flex": {
+              "gap": 16,
+              "display": "flex",
+              "flexWrap": "nowrap",
+              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "column",
+              "justifyContent": "space-around"
+            },
+            "border": {},
+            "sizing": {
+              "mode": "fill"
+            },
+            "content": [
+              {
+                "type": "Container",
+                "props": {
+                  "id": "Container-4d971fe3-cebe-4c03-8f7f-23fea8a86d8f",
+                  "flex": {
+                    "gap": 0,
+                    "display": "block",
+                    "flexWrap": "nowrap",
+                    "overflow": "visible",
+                    "alignItems": "stretch",
+                    "flexDirection": "column",
+                    "justifyContent": "flex-start"
+                  },
+                  "border": {},
+                  "sizing": {
+                    "mode": "auto",
+                    "clamp": {
+                      "max": {
+                        "unit": "px",
+                        "amount": 200
+                      },
+                      "min": {
+                        "unit": "px",
+                        "amount": 200
+                      },
+                      "preferred": {
+                        "unit": "%",
+                        "amount": 30
+                      }
+                    }
+                  },
+                  "content": [
+                    {
+                      "type": "Heading",
+                      "props": {
+                        "id": "Heading-ecadbdf4-10ac-4d9e-9df2-f66f1b214832",
+                        "flow": {
+                          "textWrap": "balance",
+                          "lineClamp": 0
+                        },
+                        "font": {
+                          "url": "seed://BentonModDisp Regular.TTF",
+                          "size": {
+                            "mode": "preset",
+                            "custom": "",
+                            "preset": "auto",
+                            "clampMax": "3rem",
+                            "clampMin": "1rem",
+                            "clampPreferred": "5vw"
+                          },
+                          "color": "#FFFFFF",
+                          "family": "BentonModDisp Regular"
+                        },
+                        "color": "#FFFFFF",
+                        "order": 1,
+                        "title": "Allocation Night",
+                        "metrics": {
+                          "order": 1,
+                          "padding": 16
+                        },
+                        "padding": 16,
+                        "alignment": "center",
+                        "typeStyle": {
+                          "fs": "normal",
+                          "fw": 700,
+                          "td": "none",
+                          "tt": "uppercase"
+                        }
+                      }
+                    }
+                  ],
+                  "spacing": {
+                    "margin": {
+                      "top": 0,
+                      "left": 0,
+                      "unit": "px",
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "padding": {
+                      "top": 0,
+                      "left": 0,
+                      "unit": "px",
+                      "right": 0,
+                      "bottom": 0
+                    }
+                  },
+                  "alignment": "center",
+                  "background": {
+                    "color": "",
+                    "image": {
+                      "url": "",
+                      "size": "cover",
+                      "repeat": "no-repeat",
+                      "offsetX": "center",
+                      "offsetY": "center",
+                      "attachment": "scroll",
+                      "customSize": "100% 100%"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Heading",
+                "props": {
+                  "id": "Heading-cd9990fb-b160-4a63-9a15-9a6610b5ab3d",
+                  "flow": {
+                    "textWrap": "wrap",
+                    "lineClamp": 0
+                  },
+                  "font": {
+                    "url": "",
+                    "size": {
+                      "mode": "preset",
+                      "custom": "",
+                      "preset": "auto",
+                      "clampMax": "3rem",
+                      "clampMin": "1rem",
+                      "clampPreferred": "5vw"
+                    },
+                    "color": "#FFFFFF",
+                    "family": ""
+                  },
+                  "title": "#theme.name ",
+                  "metrics": {
+                    "order": 2,
+                    "padding": 16
+                  },
+                  "alignment": "center",
+                  "typeStyle": {
+                    "fs": "normal",
+                    "fw": 700,
+                    "td": "underline",
+                    "tt": "uppercase"
+                  }
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "id": "Text-3b7728cc-3dd4-481e-9eab-9e1df3e98365",
+                  "flow": {
+                    "textWrap": "wrap",
+                    "truncate": "none",
+                    "lineClamp": 0
+                  },
+                  "font": {
+                    "url": "",
+                    "size": {
+                      "mode": "preset",
+                      "custom": "",
+                      "preset": "2xl",
+                      "clampMax": "3rem",
+                      "clampMin": "1rem",
+                      "clampPreferred": "5vw"
+                    },
+                    "color": "#FFFFFF",
+                    "family": ""
+                  },
+                  "layout": {
+                    "span": false,
+                    "inline": false,
+                    "inherit": false
+                  },
+                  "content": "#theme.description ",
+                  "alignment": "center",
+                  "typeStyle": {
+                    "fs": "normal",
+                    "fw": 400,
+                    "td": "none",
+                    "tt": "uppercase"
+                  }
+                }
+              },
+              {
+                "type": "Image",
+                "props": {
+                  "id": "Image-2cc7b6bb-8e03-4b12-be04-eafc566d4576",
+                  "src": "seed://BPlogo_White.png",
+                  "size": {
+                    "mode": "width",
+                    "width": {
+                      "unit": "px",
+                      "amount": 260
+                    },
+                    "height": {
+                      "unit": "auto"
+                    },
+                    "maxWidth": {
+                      "unit": "%",
+                      "amount": 100
+                    },
+                    "maxHeight": {
+                      "unit": "auto"
+                    },
+                    "objectFit": "cover",
+                    "aspectRatio": "auto",
+                    "objectPositionX": "50%",
+                    "objectPositionY": "50%",
+                    "customAspectRatio": "16 / 9"
+                  },
+                  "title": "Image",
+                  "border": {},
+                  "spacing": {
+                    "margin": {
+                      "top": 4,
+                      "left": 4,
+                      "unit": "px",
+                      "right": 4,
+                      "bottom": 4
+                    },
+                    "padding": {
+                      "top": 0,
+                      "left": 0,
+                      "unit": "px",
+                      "right": 0,
+                      "bottom": 0
+                    }
+                  },
+                  "alignment": "center"
+                }
+              }
+            ],
+            "spacing": {
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "unit": "rem",
+                "right": 0,
+                "bottom": 0
+              },
+              "padding": {
+                "top": 1,
+                "left": 0,
+                "unit": "rem",
+                "right": 0,
+                "bottom": 1
+              }
+            },
+            "alignment": "center",
+            "background": {
+              "color": "",
+              "image": {
+                "url": "",
+                "size": "cover",
+                "repeat": "no-repeat",
+                "offsetX": "center",
+                "offsetY": "center",
+                "attachment": "scroll",
+                "customSize": "100% 100%"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "title": "All Orgs",
+    "data": {
+      "root": {
+        "props": {
+          "flex": {
+            "gap": 0,
+            "display": "flex",
+            "flexWrap": "nowrap",
+            "overflow": "hidden",
+            "alignItems": "stretch",
+            "flexDirection": "column",
+            "justifyContent": "flex-start"
+          },
+          "font": {
+            "url": "seed://Linotype - TradeGothicLTStd.otf",
+            "family": "Linotype - TradeGothicLTStd"
+          },
+          "title": "All Orgs",
+          "spacing": {
+            "margin": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            },
+            "padding": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "background": {
+            "color": "#000000",
+            "image": {
+              "url": "",
+              "size": "cover",
+              "repeat": "no-repeat",
+              "offsetX": "center",
+              "offsetY": "center",
+              "attachment": "scroll",
+              "customSize": "100% 100%"
+            }
+          },
+          "backgroundColor": "#000000"
+        }
+      },
+      "zones": {},
+      "content": [
+        {
+          "type": "Heading",
+          "props": {
+            "id": "Heading-89e76c18-b12a-4aae-bfc6-3fb4eab40780",
+            "flow": {
+              "textWrap": "wrap",
+              "lineClamp": 0
+            },
+            "font": {
+              "url": "",
+              "size": {
+                "mode": "preset",
+                "custom": "",
+                "preset": "auto",
+                "clampMax": "3rem",
+                "clampMin": "1rem",
+                "clampPreferred": "5vw"
+              },
+              "color": "#FFFFFF",
+              "family": ""
+            },
+            "color": "#FFFFFF",
+            "order": 1,
+            "title": "Participating Organizations",
+            "metrics": {
+              "order": 1,
+              "padding": 16
+            },
+            "padding": 16,
+            "alignment": "center",
+            "typeStyle": {
+              "fs": "normal",
+              "fw": 700,
+              "td": "none",
+              "tt": "uppercase"
+            }
+          }
+        },
+        {
+          "type": "Container",
+          "props": {
+            "id": "Container-c8ab1888-cbcc-459f-a24c-27cf77485a8f",
+            "flex": {
+              "gap": 0,
+              "display": "flex",
+              "flexWrap": "nowrap",
+              "overflow": "hidden",
+              "alignItems": "stretch",
+              "flexDirection": "column",
+              "justifyContent": "flex-start"
+            },
+            "border": {},
+            "sizing": {
+              "mode": "fill"
+            },
+            "content": [
+              {
+                "type": "Grid",
+                "props": {
+                  "id": "Grid-a00f3171-ebce-4b73-84f8-7c53540e0cb6",
+                  "grid": {
+                    "gap": 16,
+                    "columns": 3,
+                    "overflow": "visible",
+                    "alignItems": "stretch",
+                    "centerLastRow": true
+                  },
+                  "border": {},
+                  "columns": 3,
+                  "content": [
+                    {
+                      "type": "Card",
+                      "props": {
+                        "id": "Card-075707da-1c69-4ced-aa33-a72e88b5c2b9",
+                        "flex": {
+                          "gap": 0,
+                          "display": "flex",
+                          "flexWrap": "nowrap",
+                          "overflow": "visible",
+                          "alignItems": "center",
+                          "flexDirection": "column",
+                          "justifyContent": "center"
+                        },
+                        "title": "#presentation.org[].name ",
+                        "border": {
+                          "borderColor": "#fefefe",
+                          "borderWidth": 3,
+                          "borderRadius": 3
+                        },
+                        "sizing": {
+                          "mode": "fill",
+                          "clamp": {
+                            "max": {
+                              "unit": "rem",
+                              "amount": 20
+                            },
+                            "min": {
+                              "unit": "rem",
+                              "amount": 10
+                            },
+                            "preferred": {
+                              "unit": "rem",
+                              "amount": 15
+                            }
+                          },
+                          "height": {
+                            "unit": "rem",
+                            "amount": 9
+                          }
+                        },
+                        "spacing": {
+                          "margin": {
+                            "top": 0,
+                            "left": 0,
+                            "unit": "px",
+                            "right": 0,
+                            "bottom": 0
+                          },
+                          "padding": {
+                            "top": 8,
+                            "left": 8,
+                            "unit": "px",
+                            "right": 8,
+                            "bottom": 8
+                          }
+                        },
+                        "fontColor": "#fefefe",
+                        "borderColor": "#fefefe",
+                        "description": "",
+                        "backgroundColor": "#0c8744"
+                      }
+                    }
+                  ],
+                  "iterate": "presentation.org",
+                  "background": {
+                    "color": "#000000",
+                    "image": {
+                      "url": "",
+                      "size": "cover",
+                      "repeat": "no-repeat",
+                      "offsetX": "center",
+                      "offsetY": "center",
+                      "attachment": "scroll",
+                      "customSize": "100% 100%"
+                    }
+                  }
+                }
+              }
+            ],
+            "iterate": "none",
+            "spacing": {
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "unit": "rem",
+                "right": 0,
+                "bottom": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 2,
+                "unit": "rem",
+                "right": 2,
+                "bottom": 0
+              }
+            },
+            "alignment": "left",
+            "background": {
+              "color": "",
+              "image": {
+                "url": "",
+                "size": "cover",
+                "repeat": "no-repeat",
+                "offsetX": "center",
+                "offsetY": "center",
+                "attachment": "scroll",
+                "customSize": "100% 100%"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "title": "Timer",
+    "data": {
+      "root": {
+        "props": {
+          "flex": {
+            "gap": 0,
+            "display": "flex",
+            "flexWrap": "nowrap",
+            "overflow": "hidden",
+            "alignItems": "stretch",
+            "flexDirection": "column",
+            "justifyContent": "flex-start"
+          },
+          "font": {
+            "url": "",
+            "family": ""
+          },
+          "title": "Timer",
+          "spacing": {
+            "margin": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            },
+            "padding": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "background": {
+            "color": "#000000",
+            "image": {
+              "url": "",
+              "size": "cover",
+              "repeat": "no-repeat",
+              "offsetX": "center",
+              "offsetY": "center",
+              "attachment": "scroll",
+              "customSize": "100% 100%"
+            }
+          },
+          "backgroundColor": "#000000"
+        }
+      },
+      "zones": {},
+      "content": [
+        {
+          "type": "Container",
+          "props": {
+            "id": "Container-d296ca8e-b630-4972-a1e8-6e18d816c8f9",
+            "flex": {
+              "gap": 0,
+              "display": "flex",
+              "flexWrap": "nowrap",
+              "overflow": "hidden",
+              "alignItems": "stretch",
+              "flexDirection": "column",
+              "justifyContent": "flex-start"
+            },
+            "border": {},
+            "sizing": {
+              "mode": "fill"
+            },
+            "content": [
+              {
+                "type": "Timer",
+                "props": {
+                  "id": "Timer-4e0c7d88-fb05-41ad-8907-e6606a9d718c",
+                  "font": {
+                    "url": "",
+                    "size": {
+                      "mode": "preset",
+                      "custom": "",
+                      "preset": "4xl",
+                      "clampMax": "3rem",
+                      "clampMin": "1rem",
+                      "clampPreferred": "5vw"
+                    },
+                    "color": "#FFFFFF",
+                    "family": ""
+                  },
+                  "colors": {
+                    "ringTrackColor": "#333333",
+                    "ringProgressColor": "#FFFFFF"
+                  },
+                  "sizing": {
+                    "mode": "fill"
+                  },
+                  "duration": {
+                    "minutes": 10,
+                    "seconds": 0
+                  },
+                  "exhausted": {
+                    "mode": "message",
+                    "message": "Thank you for Voting!"
+                  },
+                  "displayType": "circle"
+                }
+              }
+            ],
+            "iterate": "none",
+            "spacing": {
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "unit": "px",
+                "right": 0,
+                "bottom": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "unit": "px",
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            "alignment": "left",
+            "background": {
+              "color": "",
+              "image": {
+                "url": "",
+                "size": "cover",
+                "repeat": "no-repeat",
+                "offsetX": "center",
+                "offsetY": "center",
+                "attachment": "scroll",
+                "customSize": "100% 100%"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "title": "Finalist Orgs",
+    "data": {
+      "root": {
+        "props": {
+          "title": "Finalist Orgs",
+          "backgroundColor": "#000000"
+        }
+      },
+      "zones": {},
+      "content": [
+        {
+          "type": "Heading",
+          "props": {
+            "id": "Heading-e44bbd03-1ed1-4ee2-ac9c-5b30768c718f",
+            "color": "#FFFFFF",
+            "order": 1,
+            "title": "Finalist Orgs",
+            "padding": 16
+          }
+        }
+      ]
+    }
+  },
+  {
+    "title": "Allocation",
+    "data": {
+      "root": {
+        "props": {
+          "flex": {
+            "gap": {
+              "unit": "px",
+              "amount": 0
+            },
+            "display": "flex",
+            "flexWrap": "nowrap",
+            "overflow": "hidden",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center"
+          },
+          "font": {
+            "url": "",
+            "family": ""
+          },
+          "title": "Allocation",
+          "spacing": {
+            "margin": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            },
+            "padding": {
+              "top": 0,
+              "left": 0,
+              "unit": "px",
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "background": {
+            "color": "#000000",
+            "image": {
+              "url": "",
+              "size": "cover",
+              "repeat": "no-repeat",
+              "offsetX": "center",
+              "offsetY": "center",
+              "attachment": "scroll",
+              "customSize": "100% 100%"
+            }
+          },
+          "backgroundColor": "#000000"
+        }
+      },
+      "zones": {},
+      "content": [
+        {
+          "type": "Container",
+          "props": {
+            "id": "Container-ef13f849-ff39-47bf-8511-b3835d8b21d0",
+            "flex": {
+              "gap": 0,
+              "display": "flex",
+              "flexWrap": "nowrap",
+              "overflow": "hidden",
+              "alignItems": "stretch",
+              "flexDirection": "column",
+              "justifyContent": "flex-start"
+            },
+            "border": {},
+            "sizing": {
+              "mode": "fill",
+              "maxWidth": {
+                "unit": "%",
+                "amount": 90
+              },
+              "maxHeight": {
+                "unit": "%",
+                "amount": 95
+              }
+            },
+            "content": [
+              {
+                "type": "BarGraphAllocatedTotals",
+                "props": {
+                  "id": "BarGraphAllocatedTotals-20534838-9972-48b2-b2f8-4684ba3650a8",
+                  "sizing": {
+                    "mode": "fill"
+                  },
+                  "barColor": "#1B2A4A",
+                  "gridColor": "#FFFFFF",
+                  "needColor": "#7CFF2B",
+                  "textColor": "#FFFFFF",
+                  "awardImageSrc": "",
+                  "fundedBarColor": "#7CFF2B"
+                }
+              },
+              {
+                "type": "LeverageBar",
+                "props": {
+                  "id": "LeverageBar-db865efe-014e-4c4b-bac2-9915f9dd3399",
+                  "font": {
+                    "url": "",
+                    "size": {
+                      "mode": "preset",
+                      "custom": "",
+                      "preset": "xl",
+                      "clampMax": "3rem",
+                      "clampMin": "1rem",
+                      "clampPreferred": "5vw"
+                    },
+                    "color": "#FFFFFF",
+                    "family": ""
+                  },
+                  "size": {
+                    "width": {
+                      "unit": "%",
+                      "amount": 100
+                    },
+                    "height": {
+                      "unit": "px",
+                      "amount": 36
+                    }
+                  },
+                  "colors": {
+                    "trackColor": "#1B2A4A",
+                    "borderRadius": {
+                      "unit": "px",
+                      "amount": 0
+                    },
+                    "remainingColor": "#7CFF2B"
+                  },
+                  "sizing": {
+                    "mode": "fill",
+                    "height": {
+                      "unit": "px",
+                      "amount": 36
+                    }
+                  },
+                  "currencyFormat": "compact"
+                }
+              }
+            ],
+            "iterate": "none",
+            "spacing": {
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "unit": "px",
+                "right": 0,
+                "bottom": 0
+              },
+              "padding": {
+                "top": 48,
+                "left": 48,
+                "unit": "px",
+                "right": 48,
+                "bottom": 48
+              }
+            },
+            "alignment": "left",
+            "background": {
+              "color": "",
+              "image": {
+                "url": "",
+                "size": "cover",
+                "repeat": "no-repeat",
+                "offsetX": "center",
+                "offsetY": "center",
+                "attachment": "scroll",
+                "customSize": "100% 100%"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "title": "Results",
+    "data": {
+      "root": {
+        "props": {
+          "title": "Results",
+          "backgroundColor": "#000000"
+        }
+      },
+      "zones": {},
+      "content": [
+        {
+          "type": "Heading",
+          "props": {
+            "id": "Heading-cfddcce4-9408-4d6f-8a4e-bf721712ac3c",
+            "color": "#FFFFFF",
+            "order": 1,
+            "title": "Results",
+            "padding": 16
+          }
+        }
+      ]
+    }
+  }
+]

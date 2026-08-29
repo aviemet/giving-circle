@@ -1,5 +1,3 @@
-require "securerandom"
-
 if Rails.env.development?
   circle = Circle.find_by!(slug: "battery-powered")
 
@@ -32,37 +30,52 @@ if Rails.env.development?
       template = FactoryBot.create(:template, name: "Allocation Night", circle:)
       template.message_templates = [interact_invitation, interact_invitation_sms]
 
-      [
-        "Introduction",
-        "All Orgs",
-        "Timer",
-        "Finalist Orgs",
-        "Allocation",
-        "Results",
-      ].each_with_index do |title, index|
+      assets_dir = Rails.root.join("db/seeds/assets/allocation_night")
+      slides_path = Rails.root.join("db/seeds/data/allocation_night_slides.json")
+
+      attach_seed_blob = lambda do |filename, content_type, attach_to_circle: false|
+        path = assets_dir.join(filename)
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: File.open(path),
+          filename: filename,
+          content_type: content_type,
+        )
+
+        if attach_to_circle
+          attachment, = Circle::Fonts.find_or_attach!(circle, blob)
+          blob = attachment.blob
+        end
+
+        Circle::Fonts.blob_redirect_url(blob.signed_id, filename)
+      end
+
+      asset_urls = {
+        "Linotype - TradeGothicLTStd.otf" => attach_seed_blob.call("Linotype - TradeGothicLTStd.otf", "font/otf", attach_to_circle: true),
+        "BentonModDisp Regular.TTF" => attach_seed_blob.call("BentonModDisp Regular.TTF", "font/ttf", attach_to_circle: true),
+        "BPlogo_White.png" => attach_seed_blob.call("BPlogo_White.png", "image/png"),
+      }
+
+      resolve_seed_urls = lambda do |data|
+        case data
+        when Hash
+          data.transform_values { |value| resolve_seed_urls.call(value) }
+        when Array
+          data.map { |value| resolve_seed_urls.call(value) }
+        when String
+          if data.start_with?("seed://")
+            asset_urls.fetch(data.delete_prefix("seed://"))
+          else
+            data
+          end
+        else
+          data
+        end
+      end
+
+      JSON.parse(File.read(slides_path)).each_with_index do |slide_definition, index|
         slide = FactoryBot.create(:slide, {
-          title:,
-          data: {
-            content: [
-              {
-                type: "Heading",
-                props: {
-                  title:,
-                  padding: 16,
-                  order: 1,
-                  color: "#FFFFFF",
-                  id: "Heading-#{SecureRandom.uuid}",
-                },
-              },
-            ],
-            root: {
-              props: {
-                title:,
-                backgroundColor: "#000000",
-              },
-            },
-            zones: {},
-          },
+          title: slide_definition.fetch("title"),
+          data: resolve_seed_urls.call(slide_definition.fetch("data")),
         })
 
         FactoryBot.create(:slide_parent, {
