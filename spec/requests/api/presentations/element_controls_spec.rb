@@ -41,6 +41,32 @@ RSpec.describe "Api::Presentations::ElementControls", type: :request do
       expect(response.parsed_body["element_controls"]).to eq(presentation.element_controls)
     end
 
+    it "persists a leverage bar visibility override" do
+      patch api_circle_presentation_element_controls_path(
+        circle_slug: circle.slug,
+        presentation_slug: presentation.slug,
+      ), params: {
+        element_control: {
+          slide_id: slide.id,
+          element_id: "leverage-bar-1",
+          element_type: "LeverageBar",
+          control: "visibility",
+          value: { visible: false },
+        },
+      }, as: :json
+
+      expect(response).to have_http_status(:accepted)
+      expect(presentation.reload.element_controls).to eq(
+        slide.id => {
+          "leverage-bar-1" => {
+            "LeverageBar" => {
+              "visibility" => { "visible" => false },
+            },
+          },
+        },
+      )
+    end
+
     it "returns unprocessable content when required params are missing" do
       patch api_circle_presentation_element_controls_path(
         circle_slug: circle.slug,

@@ -3,8 +3,6 @@ import duration from "dayjs/plugin/duration"
 import localizedFormat from "dayjs/plugin/localizedFormat"
 import relativeTime from "dayjs/plugin/relativeTime"
 
-import { dayjsLocale, resolveLocale } from "./locale"
-
 dayjs.extend(localizedFormat)
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -16,28 +14,25 @@ function dayjsLocaleLoader(dayjsId: string) {
 	return dayjsLocaleLoaders[key]
 }
 
-export async function applyDayjsLocale(appLocale?: string) {
-	const resolvedAppLocale = resolveLocale(appLocale)
-	const localeId = dayjsLocale(resolvedAppLocale)
+export async function applyDayjsLocale(locale = "en") {
+	const normalized = locale.replaceAll("_", "-").toLowerCase()
+	const language = normalized.split("-")[0]
 
-	if(localeId === "en") {
-		dayjs.locale("en")
-		return
-	}
+	for(const localeId of [normalized, language]) {
+		if(localeId === "en") {
+			dayjs.locale("en")
+			return
+		}
 
-	const loader = dayjsLocaleLoader(localeId)
-	if(loader !== undefined) {
+		const loader = dayjsLocaleLoader(localeId)
+		if(loader === undefined) continue
+
 		await loader()
 		dayjs.locale(localeId)
 		return
 	}
 
-	try {
-		await import(/* @vite-ignore */ `dayjs/locale/${localeId}.js`)
-		dayjs.locale(localeId)
-	} catch{
-		dayjs.locale("en")
-	}
+	dayjs.locale("en")
 }
 
 export { dayjs }

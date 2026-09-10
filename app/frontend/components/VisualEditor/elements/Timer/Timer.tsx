@@ -19,7 +19,7 @@ import {
 	type TextFontValue,
 	type TimerColorsValue,
 } from "../../fields"
-import { SlideFontFace } from "../../SlideFontFace"
+import { SlideFontFace } from "../../lib/SlideFontFace"
 
 export interface TimerProps {
 	remainingSeconds: number
@@ -43,7 +43,7 @@ export function Timer({
 	exhaustedMode,
 	exhaustedMessage,
 }: TimerProps) {
-	const resolvedFont = normalizeTextFontValue(font, undefined, {
+	const resolvedFont = normalizeTextFontValue(font, {
 		color: "#FFFFFF",
 		sizePreset: "4xl",
 	})

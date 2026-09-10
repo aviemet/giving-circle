@@ -6,7 +6,7 @@ import { createTagMentionExtension } from "@/components/Inputs/TagsInput/createT
 import {
 	hydrateRichTextTagMentions,
 	serializeRichTextTagMentions,
-} from "@/components/VisualEditor/dynamicData/contentParser"
+} from "@/components/VisualEditor/lib/dynamicData"
 
 const tagOptions = [
 	{ value: "membership.name", label: "Member - name" },

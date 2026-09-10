@@ -4,6 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  active           :boolean          default(FALSE), not null
+#  element_controls :jsonb            not null
 #  name             :string           not null
 #  settings         :jsonb
 #  slug             :string

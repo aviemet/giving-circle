@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest"
 
 import { scanSlideElements } from "@/features/presentation/elementControls"
-import { createSlideData, createTimerPuckNode } from "@/tests/helpers/fixtures"
+import { createLeverageBarPuckNode, createSlideData, createTimerPuckNode } from "@/tests/helpers/fixtures"
 
 describe("features/presentation/elementControls/scanSlideElements", () => {
 	test("finds a top-level Timer", () => {
@@ -11,6 +11,16 @@ describe("features/presentation/elementControls/scanSlideElements", () => {
 
 		expect(scanSlideElements(slideData)).toEqual([
 			{ elementId: "timer-top", elementType: "Timer" },
+		])
+	})
+
+	test("finds a top-level LeverageBar", () => {
+		const slideData = createSlideData({
+			content: [createLeverageBarPuckNode("leverage-bar-top")],
+		})
+
+		expect(scanSlideElements(slideData)).toEqual([
+			{ elementId: "leverage-bar-top", elementType: "LeverageBar" },
 		])
 	})
 

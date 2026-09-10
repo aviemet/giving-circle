@@ -67,12 +67,11 @@ export function isGridOverflow(value: string): value is GridOverflow {
 
 export function normalizeGridLayoutValue(
 	value: Partial<GridLayoutValue> | undefined,
-	legacy?: { columns?: number },
 ): GridLayoutValue {
 	const defaults = defaultGridLayoutValue()
 
 	return {
-		columns: normalizeGridColumns(value?.columns ?? legacy?.columns),
+		columns: normalizeGridColumns(value?.columns),
 		gap: normalizeGridGap(value?.gap),
 		alignItems: value?.alignItems !== undefined && isGridAlignItems(value.alignItems)
 			? value.alignItems

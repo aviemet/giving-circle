@@ -8,18 +8,21 @@ const mockCircleResponse = (slug: string): Schema.CirclesMock => ({
 	id: slug,
 	name: "Circle 1",
 	slug,
+	finalist_count: 5,
 	themes: [
 		createThemePersisted({
 			circle: createCirclesOptions({ id: slug, slug }),
 		}),
 	],
-	orgs: [
-		{
-			id: "org-1",
-			name: "Org 1",
-			slug: "org-1",
-		},
-	],
+	orgs: Array.from({ length: 10 }, (_, index) => {
+		const orgNumber = index + 1
+
+		return {
+			id: `mock-org-${orgNumber}`,
+			name: `Mock Org ${orgNumber}`,
+			slug: `mock-org-${orgNumber}`,
+		}
+	}),
 	memberships: [
 		{
 			id: "membership-1",

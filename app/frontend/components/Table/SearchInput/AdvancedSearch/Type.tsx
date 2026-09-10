@@ -33,10 +33,17 @@ const DateRangeType = ({
 		setInputValue(`${name}[type]`, value)
 	}
 
+	const typeProps = inputProps(`${name}[type]`)
+	const selectValue = typeof typeProps.value === "string" ? typeProps.value : ""
+
 	return (
 		<Select
 			label={ t("common.table.creation_date") }
-			{ ...inputProps(`${name}[type]`) }
+			name={ typeProps.name }
+			value={ selectValue }
+			mb={ typeProps.mb }
+			wrapperProps={ typeProps.wrapperProps }
+			onKeyUp={ typeProps.onKeyUp }
 			onChange={ handleChange }
 			options={ dateRangeOptions }
 		/>

@@ -1,6 +1,6 @@
 import { css } from "@linaria/core"
 
-import { SLOT_MIN_EMPTY_HEIGHT } from "../../slotEditor"
+import { SLOT_MIN_EMPTY_HEIGHT } from "../../lib/slotEditor"
 
 export const iterateSlot = css`
 	flex: 1 1 auto;

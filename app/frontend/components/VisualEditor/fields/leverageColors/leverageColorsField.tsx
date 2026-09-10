@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { ColorInput } from "@/components/Inputs"
@@ -67,7 +68,7 @@ function LeverageColorsFieldControl({
 	const borderRadius = coerceLength(localValue.borderRadius, BORDER_RADIUS_UNITS, "px")
 
 	return (
-		<div className={ classes.colorsRoot }>
+		<div className={ clsx(classes.colorsRoot) }>
 			<FieldRow label={ colorsText("labels.remaining") }>
 				<ColorInput
 					wrapper={ false }
@@ -120,7 +121,7 @@ function leverageColorsField(): Field<LeverageColorsValue | undefined> {
 				<PuckFieldLabel label={ label }>
 					<LeverageColorsFieldControl
 						name={ name }
-						value={ value ?? defaultLeverageColors() }
+						value={ value ?? defaultLeverageColors }
 						onChange={ onChange }
 					/>
 				</PuckFieldLabel>

@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
 import { Box, Image, Text } from "@/components"
-import { fundedPercent, isFullyFunded } from "@/features/presentation"
+import { fundedPercent, isFullyFunded } from "@/features/presentation/values/allocatedTotals"
 import { currency } from "@/lib/formatters"
 
 import { type AllocatedTotalEntry, type BarGraphColors } from "./BarGraphAllocatedTotals"

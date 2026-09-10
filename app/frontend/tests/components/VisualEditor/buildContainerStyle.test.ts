@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest"
 
-import { buildContainerStyle } from "@/components/VisualEditor/components/Container/buildContainerStyle"
+import { buildContainerEditorStyle, buildContainerStyle } from "@/components/VisualEditor/components/Container/buildContainerStyle"
 import { containerConfig } from "@/components/VisualEditor/components/Container/containerConfig"
 import {
 	LAYOUT_CHROME_LABEL_SPACE_PX,
 	LAYOUT_CHROME_PAD_PX,
 	SLOT_MIN_EMPTY_HEIGHT,
 	withEditorLayoutChromePadding,
-} from "@/components/VisualEditor/slotEditor"
+} from "@/components/VisualEditor/lib/slotEditor"
 
 describe("components/VisualEditor/buildContainerStyle", () => {
 	test("presentation fill keeps collapsing minHeight", () => {
@@ -20,14 +20,13 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "fill" },
-			false,
 		)
 
 		expect(style.minHeight).toBe(0)
 	})
 
 	test("editor fill keeps a slot floor so empty drop zones cannot collapse", () => {
-		const style = buildContainerStyle(
+		const style = buildContainerEditorStyle(
 			{
 				flex: {
 					display: "flex",
@@ -36,7 +35,6 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "fill" },
-			true,
 		)
 
 		expect(style.minHeight).toBe(`${ SLOT_MIN_EMPTY_HEIGHT }px`)
@@ -45,7 +43,7 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 	})
 
 	test("editor applies slot floor for auto sizing", () => {
-		const style = buildContainerStyle(
+		const style = buildContainerEditorStyle(
 			{
 				flex: {
 					display: "flex",
@@ -54,7 +52,6 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "auto" },
-			true,
 		)
 
 		expect(style.minHeight).toBe(`${ SLOT_MIN_EMPTY_HEIGHT }px`)
@@ -72,7 +69,6 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "auto" },
-			false,
 		)
 
 		expect(style.flexGrow).toBe(0)
@@ -82,24 +78,8 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 		expect(style.minHeight).toBe("auto")
 	})
 
-	test("editor keeps author minHeight when set", () => {
-		const style = buildContainerStyle(
-			{
-				minHeight: "200px",
-				flex: {
-					display: "flex",
-					overflow: "hidden",
-				},
-			},
-			{ mode: "fill" },
-			true,
-		)
-
-		expect(style.minHeight).toBe("200px")
-	})
-
 	test("editor adds layout chrome padding on top of author padding", () => {
-		const style = buildContainerStyle(
+		const style = buildContainerEditorStyle(
 			{
 				spacing: {
 					margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
@@ -111,7 +91,6 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "fill" },
-			true,
 		)
 
 		expect(style.paddingTop).toBe(`calc(8px + ${ LAYOUT_CHROME_LABEL_SPACE_PX }px)`)
@@ -132,7 +111,6 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "fill" },
-			false,
 		)
 
 		expect(style.paddingTop).toBe("8px")

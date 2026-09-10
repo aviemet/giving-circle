@@ -4,6 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  active           :boolean          default(FALSE), not null
+#  element_controls :jsonb            not null
 #  name             :string           not null
 #  settings         :jsonb
 #  slug             :string
@@ -41,6 +42,7 @@ class Presentation < ApplicationRecord
   resourcify
 
   validates :name, presence: true
+  validate :finalist_count_must_be_positive
 
   belongs_to :theme, optional: false
   delegate :circle, to: :theme, allow_nil: true
@@ -151,7 +153,31 @@ class Presentation < ApplicationRecord
     update!(element_controls: controls)
   end
 
+  def settings
+    Presentation::Settings.new(self)
+  end
+
+  def settings=(value)
+    merged = data_settings.merge(value.to_h.stringify_keys)
+    write_attribute(:settings, merged)
+  end
+
   private
+
+  def data_settings
+    raw = self[:settings]
+    raw.is_a?(Hash) ? raw.stringify_keys : {}
+  end
+
+  def finalist_count_must_be_positive
+    raw = self[:settings]
+    return unless raw.is_a?(Hash) && raw.key?("finalist_count")
+
+    parsed = raw["finalist_count"].to_i
+    return if parsed >= 1
+
+    errors.add(:settings, :finalist_count_must_be_positive)
+  end
 
   def sync_orgs_from_theme
     return unless theme.present? && orgs.empty?

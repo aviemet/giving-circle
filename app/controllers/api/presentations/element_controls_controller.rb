@@ -5,7 +5,7 @@ class Api::Presentations::ElementControlsController < Api::ApiController
     scope: -> { circle.presentations },
     find_by: :slug
 
-  strong_params :element_control, permit: [:slide_id, :element_id, :element_type, :control, { value: [:minutes, :seconds] }]
+  strong_params :element_control, permit: [:slide_id, :element_id, :element_type, :control, { value: [:minutes, :seconds, :visible] }]
 
   # @route PATCH /api/circles/:circle_slug/presentations/:presentation_slug/element_controls (api_circle_presentation_element_controls)
   # @route PUT /api/circles/:circle_slug/presentations/:presentation_slug/element_controls (api_circle_presentation_element_controls)

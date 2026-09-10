@@ -1,42 +1,13 @@
 import { useTranslation } from "react-i18next"
 
 import { Menu, Money, Table, type TableColumn } from "@/components"
-import { NumberInput } from "@/components/Inputs"
 import { Routes } from "@/lib"
-import { useUpdateInteractionMembershipVotes } from "@/queries"
 
 interface MembersTableProps {
 	circleSlug: string
 	presentationSlug: string
 	finalistInteractionSlug?: string | null
 	records: Schema.PresentationsActiveMember[]
-}
-
-function VotesCell({
-	member,
-	onSave,
-}: {
-	member: Schema.PresentationsActiveMember
-	onSave: (membershipId: string, votes: number) => void
-}) {
-	const membershipId = member.finalist_interaction_membership_id
-	if(membershipId === undefined || membershipId === null || membershipId === "") {
-		return null
-	}
-
-	return (
-		<NumberInput
-			wrapper={ false }
-			min={ 0 }
-			defaultValue={ member.finalist_votes ?? 0 }
-			onBlur={ (event) => {
-				const next = Number(event.currentTarget.value)
-				if(!Number.isFinite(next)) return
-
-				onSave(membershipId, Math.round(next))
-			} }
-		/>
-	)
 }
 
 export function MembersTable({
@@ -46,13 +17,6 @@ export function MembersTable({
 	records,
 }: MembersTableProps) {
 	const { t } = useTranslation()
-	const updateVotes = useUpdateInteractionMembershipVotes({
-		params: {
-			circleSlug,
-			presentationSlug,
-			interactionSlug: finalistInteractionSlug ?? "",
-		},
-	})
 
 	const columns: TableColumn<Schema.PresentationsActiveMember>[] = [
 		{
@@ -88,14 +52,6 @@ export function MembersTable({
 			accessor: "finalist_votes",
 			title: t("presentations.active.members.columns.votes"),
 			sortable: false,
-			render: (member) => (
-				<VotesCell
-					member={ member }
-					onSave={ (membershipId, votes) => {
-						updateVotes.mutate({ membershipId, votes })
-					} }
-				/>
-			),
 		})
 	}
 

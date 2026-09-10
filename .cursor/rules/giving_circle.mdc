@@ -1,5 +1,5 @@
 ---
-description: Required session habits and when to update giving_circle.mdx
+description: Session habits; giving_circle.mdx is almost never updated
 alwaysApply: true
 ---
 
@@ -9,16 +9,26 @@ alwaysApply: true
 2. **Testing:** When you add or change behavior (new code, bug fixes, refactors), you MUST:
    - Add or update specs that cover the behavior (or the fix). Do not leave new/changed code untested.
    - Run the relevant specs (and any obviously related specs) before finishing. Fix any failures.
-   - Prefer adding a focused spec file for new services/features; run the full spec suite for the touched area.
-3. Before ending ANY response, if you've learned anything useful about project-specific architectural details that are NOT immediately obvious from reading the code, you MUST update `.cursor/giving_circle.mdx` with this information.
-4. **`.cursor/giving_circle.mdx` updates (high bar, opt-in):** Add to this file **only** when you learned something **specific to this application or this repo's conventions** that a competent reader would **not** reasonably infer from reading the relevant code paths in a few minutes. When in doubt, **do not** add a note. Silence is correct for most tasks.
-5. **Never** put the following in `.cursor/giving_circle.mdx` (these are obvious, universal, or belong in normal code/commits, not project lore):
-   - Language, framework, or package-manager defaults and hygiene (e.g. direct imports need declared dependencies, how Yarn/npm works, generic Vitest/Vite behavior)
-   - Anything that restates what the code or `package.json` already says plainly
-   - Bug fix or incident play-by-play ("we forgot X, then added Y") unless it encodes a **lasting** domain or integration rule for this repo
-   - Variable names, field names, one-off flows, or details that will churn with the next refactor
-6. When you **do** update `.cursor/giving_circle.mdx` (per item 4):
-   - Document only (a) non-obvious quirks or gotchas tied to **this** codebase, or (b) overarching design/architectural decisions that stabilize how the app is built or operated
-   - Only add information not already documented
-   - Place information in the appropriate section; if no appropriate section exists, create one
-7. After you update `.cursor/giving_circle.mdx`, take a pass over the entire file and prune it based on the rules above
+
+## `.cursor/giving_circle.mdx`
+
+Add a note to `.cursor/giving_circle.mdx` **only** if every condition is true:
+
+- A future agent would make a **wrong product or architecture decision** without it (not merely work a bit slower).
+- It is a **stable invariant** of this app: where truth lives, which surface owns a behavior, a constraint that is invisible in the code, or a trap that looks correct and is not.
+- It will still matter after the next rename, file split, or CSS/Puck/field refactor.
+- It is **not** already in `.cursor/giving_circle.mdx`, `.cursor/project_goals.mdx`, or `.cursor/rules/`.
+- A competent reader would **not** get it by opening the relevant code or config for a few minutes.
+
+Unshipped product intent goes in `.cursor/project_goals.mdx`, not this file.
+
+### Never record
+
+- How you fixed a bug, what you tried, or "we used to X then Y"
+- File paths, component splits, helper/type/field names, CSS, flex/grid math, Puck internals, save/dirty/draft mechanics
+- Anything already stated by code, `package.json`, config, or another `.cursor/rules/` file
+- Framework, library, or tooling defaults (Rails, React, Vitest, Vite, ESLint, Node, Linaria, i18n)
+
+### If you do add a note
+
+One or two sentences in the matching section. Do not narrate. Do not add a section for a one-off. Then **delete** any existing bullets that fail the test above. Never expand a bullet into a paragraph. Prefer deleting over rewriting.

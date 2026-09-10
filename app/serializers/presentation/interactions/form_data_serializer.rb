@@ -4,15 +4,15 @@ class Presentation::Interactions::FormDataSerializer < Presentation::Interaction
   end
 
   attribute :field_types, type: "string[]" do
-    Presentation::Interaction::Registry::FIELD_TYPES
+    Interactions::Registry::FIELD_TYPES
   end
 
   attribute :metrics, type: "string[]" do
-    Presentation::Interaction::Registry::METRICS
+    Interactions::Registry::METRICS
   end
 
   attribute :reducers, type: "string[]" do
-    Presentation::Interaction::Registry::REDUCERS
+    Interactions::Registry::REDUCERS
   end
 
   has_many :interaction_ui_templates, serializer: InteractionUiTemplates::PersistedSerializer do
@@ -26,5 +26,9 @@ class Presentation::Interactions::FormDataSerializer < Presentation::Interaction
 
   attribute :config do
     @object.config.presence || Presentation::Interaction::BLANK_CONFIG
+  end
+
+  attribute :finalist_count, type: :number do
+    @object.presentation&.settings&.finalist_count || Presentation::Settings::FINALIST_COUNT_DEFAULT
   end
 end

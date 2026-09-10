@@ -1,4 +1,5 @@
 import { Link } from "@inertiajs/react"
+import clsx from "clsx"
 import { useTranslation } from "react-i18next"
 
 import { Avatar, Card, Group, Stack, Text } from "@/components"
@@ -26,7 +27,7 @@ export function CircleCard({ circle }: CircleCardProps) {
 			p="xl"
 			radius="md"
 			withBorder
-			className={ classes.dashboardCard }
+			className={ clsx(classes.dashboardCard) }
 			component={ Link }
 			href={ Routes.circle(circle.slug) }
 		>
@@ -36,7 +37,7 @@ export function CircleCard({ circle }: CircleCardProps) {
 				</Avatar>
 
 				<Stack gap="sm" style={ { flex: 1, minWidth: 0 } }>
-					<Text fw={ 600 } size="lg" className={ classes.cardTitle }>
+					<Text fw={ 600 } size="lg" className={ clsx(classes.cardTitle) }>
 						{ circle.name }
 					</Text>
 					<Text size="sm" c="dimmed">
@@ -44,7 +45,7 @@ export function CircleCard({ circle }: CircleCardProps) {
 							? t("circles.index.membersCount_one")
 							: t("circles.index.membersCount_other", { count: circle.memberships_count }) }
 					</Text>
-					<Text size="sm" c="dimmed" className={ classes.cardMetaLine }>
+					<Text size="sm" c="dimmed" className={ clsx(classes.cardMetaLine) }>
 						{ t("circles.index.totalGivenPlaceholder") }
 					</Text>
 				</Stack>

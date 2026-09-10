@@ -36,12 +36,7 @@ export function TestResponseButton({ children = "Test", endpoint, method = "get"
 	const [errorMessage, setErrorMessage] = useState("")
 
 	const testMachine = useMemo(() => {
-		return setup({
-			types: {
-				context: {} as StateMachineContext,
-				events: {} as StateMachineEvents,
-			},
-		}).createMachine({
+		return setup<StateMachineContext, StateMachineEvents>({}).createMachine({
 			id: "testResponse",
 			initial: "inactive",
 			context: {

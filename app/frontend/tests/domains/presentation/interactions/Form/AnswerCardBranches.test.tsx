@@ -2,9 +2,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, test, vi } from "vitest"
 
-import { AnswerCard } from "@/domains/presentation/interactions/Form/AnswerCard"
-import { InteractionConfigPipeline } from "@/domains/presentation/interactions/Form/InteractionConfigPipeline"
-import { OrphanResults } from "@/domains/presentation/interactions/Form/OrphanResults"
+import { AnswerCard, AnswerPipeline, OrphanResults } from "@/domains/presentation/interactions/Form/AnswerPipeline"
 import { render } from "@/tests/helpers/utils"
 
 describe("AnswerCard options branches", () => {
@@ -117,10 +115,10 @@ describe("OrphanResults", () => {
 	})
 })
 
-describe("InteractionConfigPipeline remaining branches", () => {
-	test("hides answer pipeline when showAnswerPipeline is false", () => {
+describe("AnswerPipeline remaining branches", () => {
+	test("hides answer pipeline when showAnswers is false", () => {
 		render(
-			<InteractionConfigPipeline
+			<AnswerPipeline
 				fields={ [{
 					key: "allocations",
 					type: "org_money_map",
@@ -134,12 +132,12 @@ describe("InteractionConfigPipeline remaining branches", () => {
 				uiTemplates={ [{ id: "ui-1", name: "Allocation", slug: "allocation" }] }
 				onUiTemplateChange={ vi.fn() }
 				onConfigChange={ vi.fn() }
-				showAnswerPipeline={ false }
+				showTypePicker
+				showAnswers={ false }
 			/>,
 		)
 
-		expect(screen.getByText("Member screen")).toBeTruthy()
-		expect(screen.queryByText("Collects answers")).toBeNull()
+		expect(screen.getByRole("option", { name: /Allocation/i })).toBeTruthy()
 		expect(screen.queryByText("Answer 1")).toBeNull()
 	})
 
@@ -148,7 +146,7 @@ describe("InteractionConfigPipeline remaining branches", () => {
 		const onConfigChange = vi.fn()
 
 		render(
-			<InteractionConfigPipeline
+			<AnswerPipeline
 				fields={ [] }
 				outputs={ [] }
 				fieldTypes={ ["text"] }
@@ -173,7 +171,7 @@ describe("InteractionConfigPipeline remaining branches", () => {
 		const onUiTemplateChange = vi.fn()
 
 		render(
-			<InteractionConfigPipeline
+			<AnswerPipeline
 				fields={ [] }
 				outputs={ [] }
 				fieldTypes={ ["text"] }
@@ -186,6 +184,7 @@ describe("InteractionConfigPipeline remaining branches", () => {
 				] }
 				onUiTemplateChange={ onUiTemplateChange }
 				onConfigChange={ vi.fn() }
+				showTypePicker
 			/>,
 		)
 

@@ -4,6 +4,7 @@ export {
 	remainingNeed,
 } from "./values/allocatedTotals"
 export {
+	filterFinalistOrgs,
 	isFinalistOrgId,
 	useFinalistOrgIds,
 } from "./values/finalists"
@@ -15,11 +16,6 @@ export {
 	type PresentationDataValue,
 } from "./PresentationDataProvider"
 export { ActiveSlideProvider, useActiveSlideId } from "./ActiveSlideProvider"
-export {
-	scanSlideElements,
-	readElementControlValue,
-	useTimerDurationOverrideSeconds,
-} from "./elementControls"
 export {
 	useLeverageTotals,
 	leverageFilledPercent,

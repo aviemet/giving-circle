@@ -6,7 +6,6 @@ import {
 	buildImageSizeStyle,
 	defaultImageSize,
 	normalizeImageSize,
-	resolveImageSize,
 } from "@/components/VisualEditor/fields/imageSize"
 
 describe("components/VisualEditor/fields/imageSize", () => {
@@ -87,25 +86,14 @@ describe("components/VisualEditor/fields/imageSize", () => {
 		})
 	})
 
-	test("resolveImageSize hydrates legacy width height and fixed sizing", () => {
-		expect(resolveImageSize({
-			width: 320,
-			height: 240,
+	test("normalizeImageSize infers box mode from width and height", () => {
+		expect(normalizeImageSize({
+			width: { amount: 320, unit: "px" },
+			height: { amount: 240, unit: "px" },
 		})).toMatchObject({
 			mode: "box",
 			width: { amount: 320, unit: "px" },
 			height: { amount: 240, unit: "px" },
-		})
-
-		expect(resolveImageSize({
-			sizing: {
-				mode: "fixed",
-				width: { amount: 640, unit: "px" },
-			},
-		})).toMatchObject({
-			mode: "width",
-			width: { amount: 640, unit: "px" },
-			height: { unit: "auto" },
 		})
 
 		expect(normalizeImageSize({
@@ -151,7 +139,7 @@ describe("components/VisualEditor/imageConfig", () => {
 		})
 	})
 
-	test("resolveData hydrates legacy flat margin padding width height and border", async () => {
+	test("resolveData normalizes the current image size spacing and border", async () => {
 		const resolveData = imageConfig.resolveData
 		expect(resolveData).toBeTypeOf("function")
 		if(!resolveData) {
@@ -160,16 +148,24 @@ describe("components/VisualEditor/imageConfig", () => {
 
 		const resolved = await resolveData({
 			props: {
-				id: "image-legacy",
-				title: "Legacy",
+				id: "image-current",
+				title: "Image",
 				src: "",
 				alignment: "left",
-				margin: 8,
-				padding: 2,
-				width: 320,
-				height: 240,
-				borderWidth: 1,
-				borderColor: "#ff0000",
+				size: {
+					...defaultImageSize(),
+					mode: "box",
+					width: { amount: 320, unit: "px" },
+					height: { amount: 240, unit: "px" },
+				},
+				spacing: {
+					margin: { top: 8, right: 8, bottom: 8, left: 8, unit: "px" },
+					padding: { top: 2, right: 2, bottom: 2, left: 2, unit: "px" },
+				},
+				border: {
+					borderWidth: 1,
+					borderColor: "#ff0000",
+				},
 			},
 		}, {
 			changed: {},

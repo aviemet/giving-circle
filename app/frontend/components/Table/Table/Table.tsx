@@ -23,7 +23,7 @@ export function Table({
 	return (
 		<ConditionalWrapper
 			condition={ wrapper }
-			wrapper={ children => <Box className={ classes.wrapper }>{ children }</Box> }
+			wrapper={ children => <Box className={ clsx(classes.wrapper) }>{ children }</Box> }
 		>
 			<MantineTable
 				striped={ striped }

@@ -4,10 +4,10 @@ import { Render } from "@puckeditor/core"
 import { motion, AnimatePresence } from "motion/react"
 
 import { Box } from "@/components"
+import { config } from "@/components/VisualEditor/config"
 import { ActiveSlideProvider } from "@/features/presentation/ActiveSlideProvider"
 
 import { renderableSlideData } from "./renderableSlideData"
-import { config } from "../VisualEditor/puck.config"
 
 export type TransitionType = "fade" | "slide" | "slideUp" | "slideDown" | "scale" | "none"
 

@@ -38,7 +38,7 @@ const ColorPickerComponent = ({
 				onChange={ onChange }
 				{ ...props }
 			/>
-			{ withPreview === true && <ColorSwatch className={ classes.colorSwatch } color={ value } size={ vars.spacing.lg } radius="sm" /> }
+			{ withPreview === true && <ColorSwatch className={ clsx(classes.colorSwatch) } color={ value } size={ vars.spacing.lg } radius="sm" /> }
 		</Box>
 	)
 }

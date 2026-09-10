@@ -1,2 +1,2 @@
 export { textConfig } from "./textConfig"
-export { type TextComponentProps } from "./textConfig"
+export { Text, type TextProps } from "./Text"

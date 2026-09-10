@@ -38,6 +38,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 			slides: [],
 			template_id: "",
 			theme_id: "theme-1",
+			settings: { finalist_count: 5 },
 		}
 
 		const slide: Schema.SlidesFormData = {
@@ -59,6 +60,7 @@ describe("pages/Presentations/Slides/Edit/index", () => {
 			slides: [],
 			template_id: "",
 			theme_id: "theme-1",
+			settings: { finalist_count: 5 },
 		}
 
 		const slide: Schema.SlidesFormData = {

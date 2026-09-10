@@ -1,4 +1,6 @@
 import { defaultTextFontValue } from "@/components/VisualEditor/fields/font/textFont"
+import { defaultLeverageBarSize } from "@/components/VisualEditor/fields/leverageBarSize/leverageBarSize"
+import { defaultLeverageColors } from "@/components/VisualEditor/fields/leverageColors/leverageColors"
 import { defaultTimerColors } from "@/components/VisualEditor/fields/timerColors/timerColors"
 import { defaultTimerDuration } from "@/components/VisualEditor/fields/timerDuration/timerDuration"
 import { defaultTimerExhausted } from "@/components/VisualEditor/fields/timerExhausted/timerExhausted"
@@ -123,10 +125,27 @@ export function createCircleMock(overrides?: Partial<Schema.CirclesMock>): Schem
 		id: "circle-1",
 		name: "Circle 1",
 		slug: "circle-1",
+		finalist_count: 5,
 		themes: [createThemePersisted()],
 		orgs: [createOrgPersisted()],
 		memberships: [createMembershipPersisted()],
 		...overrides,
+	}
+}
+
+export function createLeverageBarPuckNode(elementId: string) {
+	return {
+		type: "LeverageBar" as const,
+		props: {
+			id: elementId,
+			currencyFormat: "compact" as const,
+			size: defaultLeverageBarSize(),
+			colors: defaultLeverageColors,
+			font: defaultTextFontValue({
+				color: "#FFFFFF",
+				sizePreset: "xl",
+			}),
+		},
 	}
 }
 
@@ -176,6 +195,9 @@ export function createPresentationPresentation(overrides?: Partial<Schema.Presen
 		name: "Presentation 1",
 		slug: "presentation-1",
 		theme_id: "theme-1",
+		settings: {
+			finalist_count: 5,
+		},
 		orgs: [createPresentationOrgPersisted()],
 		slides: [createSlidePresentation()],
 		active_slide_id: "slide-1",
@@ -264,6 +286,9 @@ export function createPresentationInertiaShare(
 		id: "presentation-1",
 		active: false,
 		name: "Presentation 1",
+		settings: {
+			finalist_count: 5,
+		},
 		slug: "presentation-1",
 		theme_id: "theme-1",
 		...overrides,
@@ -275,6 +300,9 @@ export function createPresentationsShow(overrides?: Partial<Schema.Presentations
 		id: "presentation-1",
 		active: false,
 		name: "Presentation 1",
+		settings: {
+			finalist_count: 5,
+		},
 		slug: "presentation-1",
 		theme_id: "theme-1",
 		template_id: "",
@@ -320,6 +348,9 @@ export function createPresentationsIndex(overrides?: Partial<Schema.Presentation
 		id: "presentation-1",
 		active: true,
 		name: "Presentation 1",
+		settings: {
+			finalist_count: 5,
+		},
 		slug: "presentation-1",
 		theme_id: "theme-1",
 		theme: createThemesShow(),
@@ -349,6 +380,9 @@ export function createPresentationsFormData(overrides?: Partial<Schema.Presentat
 	return {
 		active: true,
 		name: "Presentation 1",
+		settings: {
+			finalist_count: 5,
+		},
 		slides: [],
 		theme_id: "theme-1",
 		template_id: "",
@@ -369,6 +403,9 @@ export function createPresentationsEdit(overrides?: Partial<Schema.Presentations
 		id: "presentation-1",
 		active: true,
 		name: "Presentation 1",
+		settings: {
+			finalist_count: 5,
+		},
 		slug: "presentation-1",
 		theme_id: "theme-1",
 		slides: [slideEdit],
@@ -395,6 +432,7 @@ export function createInteractionConfigTemplatePersisted(
 		name: "Allocation template",
 		slug: "allocation-template",
 		config: {},
+		member_ui: {},
 		interaction_ui_template: createInteractionUiTemplate(),
 		...overrides,
 	}
@@ -408,6 +446,7 @@ export function createInteractionConfigTemplatesIndex(
 		name: "Allocation template",
 		slug: "allocation-template",
 		config: {},
+		member_ui: {},
 		circle: createCirclePersisted(),
 		interaction_ui_template: createInteractionUiTemplate(),
 		...overrides,
@@ -421,6 +460,7 @@ export function createInteractionConfigTemplatesFormData(
 	return {
 		name: "Allocation template",
 		config: {},
+		member_ui: {},
 		field_types: ["text", "number", "money", "org_money_map", "org_reference", "single_select"],
 		metrics: ["allocated_totals"],
 		reducers: ["sum_by_org"],
@@ -451,6 +491,7 @@ export function createPresentationInteractionsFormData(
 	return {
 		accepting_responses: false,
 		config: {},
+		member_ui: {},
 		field_types: ["text", "number", "money", "org_money_map", "org_reference", "single_select", "field_group"],
 		interaction_config_templates: [configTemplate],
 		interaction_ui_template: uiTemplate,
@@ -466,6 +507,7 @@ export function createPresentationInteractionsFormData(
 		slides: [createSlidePresentation()],
 		trigger_conditions: {},
 		trigger_type: "manual",
+		finalist_count: 5,
 		...overrides,
 	}
 }
@@ -477,6 +519,7 @@ export function createPresentationInteractionsIndex(
 		id: "interaction-1",
 		accepting_responses: true,
 		config: {},
+		member_ui: {},
 		interaction_ui_template: createInteractionUiTemplate(),
 		name: "Allocation Round",
 		results: {},
@@ -756,4 +799,76 @@ export function createIntegrationsFormData(overrides?: Partial<Schema.Integratio
 	}
 }
 
+export function createAllocationMemberUi(): Record<string, unknown> {
+	return {
+		content: [
+			{
+				type: "InteractionOrgMoneyMap",
+				props: {
+					id: "interaction-allocations",
+					fieldKey: "allocations",
+					label: "Allocate to organizations",
+					outputMetric: "allocated_totals",
+					widget: "cards",
+				},
+			},
+		],
+		root: {
+			props: {
+				title: "Allocation",
+			},
+		},
+	}
+}
 
+export function createFinalistVoteMemberUi(): Record<string, unknown> {
+	return {
+		content: [
+			{
+				type: "InteractionOrgMoneyMap",
+				props: {
+					id: "interaction-votes",
+					fieldKey: "votes",
+					label: "Cast your votes for organizations",
+					outputMetric: "org_vote_totals",
+					widget: "cards",
+				},
+			},
+		],
+		root: {
+			props: {
+				title: "Finalist vote",
+			},
+		},
+	}
+}
+
+export function createPledgesMemberUi(): Record<string, unknown> {
+	return {
+		content: [
+			{
+				type: "InteractionOrgMoneyMap",
+				props: {
+					id: "interaction-pledges",
+					fieldKey: "pledges",
+					label: "Pledge to organizations",
+					outputMetric: "pledge_totals",
+					widget: "cards",
+				},
+			},
+			{
+				type: "InteractionBooleanInput",
+				props: {
+					id: "interaction-anonymous",
+					fieldKey: "anonymous",
+					label: "Anonymous",
+				},
+			},
+		],
+		root: {
+			props: {
+				title: "Pledges",
+			},
+		},
+	}
+}

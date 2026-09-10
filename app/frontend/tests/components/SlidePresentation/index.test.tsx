@@ -140,4 +140,66 @@ describe("components/SlidePresentation", () => {
 
 		expect(screen.getByText("River Conservancy")).toBeInTheDocument()
 	})
+
+	test("renders finalist org iterator content with resolved org names", () => {
+		const finalistOrg = createPresentationOrgPersisted({ id: "org-1", name: "River Conservancy" })
+		const otherOrg = createPresentationOrgPersisted({ id: "org-2", name: "Coastal Trust" })
+		const theme = createThemePersisted({ name: "Theme" })
+		const circle = createCirclePersisted()
+		const presentation = createPresentationPresentation({ orgs: [finalistOrg, otherOrg] })
+		const activeSlide = createSlidePresentation({
+			data: createSlideData({
+				content: [
+					{
+						type: "Container",
+						props: {
+							id: "container-1",
+							iterate: "presentation.finalist_org",
+							alignment: "left",
+							flex: {
+								display: "flex",
+								flexDirection: "column",
+								flexWrap: "nowrap",
+								overflow: "visible",
+							},
+							content: [
+								{
+									type: "Card",
+									props: {
+										id: "card-1",
+										title: "#presentation.finalist_org[].name",
+										description: "",
+										backgroundColor: "#008000",
+										fontColor: "#ffffff",
+										flex: {
+											display: "flex",
+											flexDirection: "column",
+											flexWrap: "nowrap",
+											overflow: "visible",
+										},
+									},
+								},
+							],
+						},
+					},
+				],
+			}),
+		})
+
+		render(
+			<PresentationDataProvider value={ { circle, theme, presentation } }>
+				<SlidePresentation
+					presentation={ presentation }
+					circle={ circle }
+					theme={ theme }
+					activeSlide={ activeSlide }
+					transitionType="none"
+					transitionDuration={ 0 }
+				/>
+			</PresentationDataProvider>,
+		)
+
+		expect(screen.getByText("River Conservancy")).toBeInTheDocument()
+		expect(screen.getByText("Coastal Trust")).toBeInTheDocument()
+	})
 })

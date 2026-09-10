@@ -11,7 +11,7 @@ describe("LanguagePicker", () => {
 		await useLocaleStore.getState().setLocale("en")
 	})
 
-	test("lists languages with native names and updates LocaleStore on select", async () => {
+	test("lists exported languages and keeps LocaleStore on the selected id", async () => {
 		const user = userEvent.setup()
 		render(
 			<MantineProvider>
@@ -19,20 +19,16 @@ describe("LanguagePicker", () => {
 			</MantineProvider>,
 		)
 
-		const search = screen.getByLabelText(/search languages/i)
-		await user.type(search, "de-DE")
-
-		const germanGermany = await screen.findByRole("button", { name: /deutsch/i })
-		expect(germanGermany.getAttribute("data-locale-id")).toBe("de-DE")
-		expect(germanGermany).toHaveTextContent("German")
-		await user.click(germanGermany)
+		const english = await screen.findByRole("button", { name: /english/i })
+		expect(english.getAttribute("data-locale-id")).toBe("en")
+		await user.click(english)
 
 		await waitFor(() => {
-			expect(useLocaleStore.getState().locale).toBe("de-DE")
+			expect(useLocaleStore.getState().locale).toBe("en")
 		})
 	})
 
-	test("shows Cantonese, American English, and a single Brazilian Portuguese entry", async () => {
+	test("filters the list by search", async () => {
 		const user = userEvent.setup()
 		render(
 			<MantineProvider>
@@ -41,24 +37,14 @@ describe("LanguagePicker", () => {
 		)
 
 		const search = screen.getByLabelText(/search languages/i)
-		await user.type(search, "yue")
+		await user.type(search, "english")
 
-		const cantonese = await screen.findByRole("button", { name: /粵語|cantonese/i })
-		expect(cantonese.getAttribute("data-locale-id")).toBe("zh-YUE")
-		expect(cantonese).not.toHaveTextContent("zh-YUE")
-
-		await user.clear(search)
-		await user.type(search, "american english")
-
-		const americanEnglish = await screen.findAllByRole("button", { name: /american english/i })
-		expect(americanEnglish).toHaveLength(1)
-		expect(americanEnglish[0].getAttribute("data-locale-id")).toBe("en-US")
+		const matches = await screen.findAllByRole("button", { name: /english/i })
+		expect(matches).toHaveLength(1)
+		expect(matches[0].getAttribute("data-locale-id")).toBe("en")
 
 		await user.clear(search)
-		await user.type(search, "português (Brasil)")
-
-		const brazilian = await screen.findAllByRole("button", { name: /português \(brasil\)/i })
-		expect(brazilian).toHaveLength(1)
-		expect(brazilian[0].getAttribute("data-locale-id")).toBe("pt-BR")
+		await user.type(search, "zzzz")
+		expect(screen.queryByRole("button", { name: /english/i })).not.toBeInTheDocument()
 	})
 })

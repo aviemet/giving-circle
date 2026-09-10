@@ -1,4 +1,4 @@
-import cx from "clsx"
+import clsx from "clsx"
 
 import * as classes from "./Loading.css"
 
@@ -9,9 +9,9 @@ interface LoadingProps {
 
 export const Loading = ({ text, className }: LoadingProps) => {
 	return (
-		<div className={ cx(classes.container, className) }>
-			<div className={ classes.spinner } />
-			{ text && <span className={ classes.text }>{ text }</span> }
+		<div className={ clsx(classes.container, className) }>
+			<div className={ clsx(classes.spinner) } />
+			{ text && <span className={ clsx(classes.text) }>{ text }</span> }
 		</div>
 	)
 }

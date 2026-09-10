@@ -149,6 +149,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_04_140000) do
     t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.uuid "interaction_ui_template_id"
+    t.jsonb "member_ui", default: {}, null: false
     t.string "name", null: false
     t.string "slug", null: false
     t.datetime "updated_at", null: false
@@ -289,6 +290,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_04_140000) do
     t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.uuid "interaction_ui_template_id", null: false
+    t.jsonb "member_ui", default: {}, null: false
     t.string "name", null: false
     t.uuid "presentation_id", null: false
     t.jsonb "results", default: {}, null: false

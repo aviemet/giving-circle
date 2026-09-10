@@ -81,7 +81,7 @@ describe("features/presentation/PresentationDataProvider", () => {
 		})).toBe(true)
 	})
 
-	test("does not subscribe in the editor", async () => {
+	test("does not subscribe in the editor and seeds mock finalist values", async () => {
 		useActionCableMock.mockClear()
 		useActionCableMock.mockImplementation(() => ({ perform: vi.fn(), send: vi.fn() }))
 
@@ -102,7 +102,18 @@ describe("features/presentation/PresentationDataProvider", () => {
 
 		const { result } = renderHook(() => usePresentationDataContext(), { wrapper })
 
-		expect(result.current.values).toBeUndefined()
+		expect(result.current.values).toEqual({
+			finalist_org_ids: ["org-1"],
+			allocated_totals: [],
+			pledge_totals: [],
+			funding_totals: [],
+			funded_org_ids: [],
+			leverage: null,
+			org_vote_totals: [],
+			money_totals: [],
+			vote_counts: [],
+			rank_totals: [],
+		})
 		expect(result.current.elementControls).toEqual({})
 		expect(useActionCableMock).toHaveBeenCalledWith(expect.objectContaining({
 			enabled: false,

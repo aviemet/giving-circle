@@ -1,7 +1,6 @@
 export {
 	defaultLeverageBarSize,
 	normalizeLeverageBarSize,
-	resolveLeverageBarSize,
 	buildLeverageBarSizeStyle,
 	LEVERAGE_BAR_WIDTH_UNITS,
 	LEVERAGE_BAR_HEIGHT_UNITS,

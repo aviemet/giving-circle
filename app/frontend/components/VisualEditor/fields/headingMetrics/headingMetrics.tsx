@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { i18n } from "@/lib/i18n"
@@ -57,16 +58,12 @@ export function defaultHeadingMetrics(): HeadingMetricsValue {
 
 export function normalizeHeadingMetrics(
 	metrics: Partial<HeadingMetricsValue> | undefined,
-	legacy?: {
-		order?: HeadingOrder
-		padding?: LengthValue<SpacingLengthUnit> | number
-	},
 ): HeadingMetricsValue {
 	const defaults = defaultHeadingMetrics()
 	return {
-		order: metrics?.order ?? legacy?.order ?? defaults.order,
+		order: metrics?.order ?? defaults.order,
 		padding: coerceLength(
-			metrics?.padding ?? legacy?.padding ?? defaults.padding,
+			metrics?.padding ?? defaults.padding,
 			SPACING_LENGTH_UNITS,
 			"px",
 		),
@@ -94,10 +91,10 @@ function HeadingMetricsFieldControl({ name, value, onChange }: HeadingMetricsFie
 	const padding = coerceLength(localValue.padding, SPACING_LENGTH_UNITS, "px")
 
 	return (
-		<div className={ classes.metricsRoot }>
+		<div className={ clsx(classes.metricsRoot) }>
 			<FieldRow label={ metricsText("labels.level") }>
 				<IconSegmented
-					className={ classes.levelSegmented }
+					className={ clsx(classes.levelSegmented) }
 					name={ `${name}.order` }
 					value={ String(localValue.order) }
 					options={ HEADING_ORDERS.map((order) => ({

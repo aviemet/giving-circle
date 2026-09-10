@@ -1,3 +1,5 @@
+import clsx from "clsx"
+
 import { Select, TextInput } from "@/components/Inputs"
 import { i18n } from "@/lib/i18n"
 
@@ -47,7 +49,7 @@ export function FontSizeControl({
 	}
 
 	return (
-		<div className={ classes.sizeStack }>
+		<div className={ clsx(classes.sizeStack) }>
 			<FieldRow
 				label={ sizeText("labels.mode") }
 				tooltip={ sizeText("hints.mode") }

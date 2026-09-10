@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { ColorInput } from "@/components/Inputs"
@@ -46,7 +47,7 @@ function BorderFieldControl({
 	const borderRadius = coerceLength(localValue.borderRadius ?? 0, BORDER_RADIUS_UNITS, "px")
 
 	return (
-		<div className={ classes.borderRoot }>
+		<div className={ clsx(classes.borderRoot) }>
 			<FieldRow label={ borderText("width") }>
 				<UnitNumber
 					name={ `${name}.borderWidth` }
@@ -92,7 +93,6 @@ function BorderFieldControl({
 					wrapper={ false }
 					name={ `${name}.borderColor` }
 					value={ localValue.borderColor ?? "" }
-					clearable
 					onChange={ (borderColor) => updateValue({ borderColor }) }
 					swatches={ [
 						"#2e2e2e",

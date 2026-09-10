@@ -24,8 +24,7 @@
     "rspec": "RAILS_ENV=test bundle install && bundle exec rspec --color",
     "rspec:watch": "RAILS_ENV=test bundle exec rake rspec_watcher:watch",
     "verify": "yarn lint:fix && yarn tsc && bundle exec rubocop -A",
-    "regenerate": "rails prepare",
-    "locale:registry": "node scripts/generate-locale-registry.mjs"
+    "regenerate": "rails prepare"
   },
   "dependencies": {
     "@fragaria/address-formatter": "^7.0.0",

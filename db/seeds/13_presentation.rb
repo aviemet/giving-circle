@@ -10,6 +10,7 @@ if Rails.env.development?
       presentation.settings = {
         question: Faker::ChuckNorris.fact,
         matched_funds_multiplier: 2,
+        finalist_count: 5,
       }
       presentation.save!
     end
@@ -37,7 +38,7 @@ if Rails.env.development?
         interaction = presentation.interactions.create!({
           slug: config_slug,
           name: config_template.name,
-          config: config_template.config.deep_dup,
+          member_ui: config_template.member_ui.deep_dup,
           trigger_type: :manual,
           trigger_conditions: {},
           results: {},

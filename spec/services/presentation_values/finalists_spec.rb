@@ -28,12 +28,15 @@ RSpec.describe PresentationValues::Finalists do
   end
 
   it "returns top n orgs by vote totals with stable tie-break" do
+    presentation.settings.finalist_count = 2
+    presentation.save!
+
     interaction = create(
       :presentation_interaction,
       presentation: presentation,
       interaction_ui_template: create(:interaction_ui_template, :finalist_vote),
       config: InteractionConfigFixtures::FINALIST_VOTE.merge(
-        "settings" => { "finalist_count" => 2, "default_votes" => 10 },
+        "settings" => { "default_votes" => 10 },
       ),
     )
     membership = create(:membership, circle: presentation.circle)

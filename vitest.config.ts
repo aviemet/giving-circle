@@ -69,7 +69,6 @@ export default defineConfig({
 		hookTimeout: 30000,
 		coverage: {
 			provider: "v8",
-			all: true,
 			include: [
 				"components/**/*.{ts,tsx}",
 				"domains/**/*.{ts,tsx}",

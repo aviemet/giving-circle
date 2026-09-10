@@ -1,53 +1,26 @@
-import {
-	NumberInput as MantineNumberInput,
-	type NumberInputProps,
-} from "@mantine/core"
 import React from "react"
+import { useTranslation } from "react-i18next"
 
-import { InputWrapper } from "./InputWrapper"
-import { Label } from "./Label"
+import { NumberInput, type NumberInputProps } from "./NumberInput"
 
-import { withInjectedProps, type BaseInputProps } from "."
+import { type BaseInputProps } from "."
 
-export interface CurrencyInputProps
-	extends
-	NumberInputProps,
-	BaseInputProps {
+export interface CurrencyInputProps extends NumberInputProps, BaseInputProps {
 	ref?: React.Ref<HTMLInputElement>
 	symbol?: string | React.ReactNode
 }
 
 export function CurrencyInput({
-	label,
-	name,
-	required = false,
-	id,
-	pattern,
-	symbol = "$",
-	wrapper,
-	wrapperProps,
-	disableAutofill = true,
-	ref,
+	symbol,
 	...props
 }: CurrencyInputProps) {
-	const inputId = id || name
+	const { t } = useTranslation()
 
 	return (
-		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
-			{ label && <Label required={ required } htmlFor={ inputId }>
-				{ label }
-			</Label> }
-			<MantineNumberInput
-				id={ inputId }
-				required={ required }
-				ref={ ref }
-				name={ name }
-				leftSection={ symbol }
-				hideControls
-				{ ...withInjectedProps(props, {
-					disableAutofill,
-				}) }
-			/>
-		</InputWrapper>
+		<NumberInput
+			leftSection={ symbol ?? t("number.currency.format.unit") }
+			hideControls
+			{ ...props }
+		/>
 	)
 }

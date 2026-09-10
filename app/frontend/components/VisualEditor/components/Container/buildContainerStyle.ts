@@ -1,17 +1,16 @@
 import { type CSSProperties } from "react"
 
-import { type ContainerProps } from "./containerConfig"
+import { type ContainerProps } from "./Container"
 import {
 	buildBackgroundImageStyle,
 	hasBackgroundColor,
 	normalizeBackgroundValue,
 } from "../../fields/backgroundImage"
 import { normalizeBorderValue, buildBorderStyle } from "../../fields/border"
-import { buildDimensionStyle } from "../../fields/dimension"
 import { buildFlexStyle } from "../../fields/flex"
 import { buildFlexItemSizingStyle, type FlexItemSizing } from "../../fields/flexItemSizing"
 import { buildSpacingStyle } from "../../fields/spacing"
-import { SLOT_MIN_EMPTY_HEIGHT, withEditorLayoutChromePadding } from "../../slotEditor"
+import { SLOT_MIN_EMPTY_HEIGHT, withEditorLayoutChromePadding } from "../../lib/slotEditor"
 
 type ContainerStyleProps = Omit<ContainerProps, "content" | "alignment" | "sizing"> & {
 	sizing?: FlexItemSizing
@@ -20,21 +19,13 @@ type ContainerStyleProps = Omit<ContainerProps, "content" | "alignment" | "sizin
 export function buildContainerStyle(
 	styleProps: ContainerStyleProps,
 	sizing: FlexItemSizing | undefined,
-	isEditing: boolean,
 ): CSSProperties {
-	const background = normalizeBackgroundValue(styleProps.background, {
-		color: styleProps.backgroundColor,
-	})
-	const border = normalizeBorderValue(styleProps.border, {
-		borderWidth: styleProps.borderWidth,
-		borderRadius: styleProps.borderRadius,
-		borderColor: styleProps.borderColor,
-	})
+	const background = normalizeBackgroundValue(styleProps.background)
+	const border = normalizeBorderValue(styleProps.border)
 
-	const style: CSSProperties = {
+	return {
 		...buildSpacingStyle(styleProps),
 		...buildBorderStyle(border),
-		...buildDimensionStyle(styleProps),
 		...buildFlexStyle(styleProps),
 		...buildFlexItemSizingStyle(sizing ?? { mode: "fill" }),
 		...(hasBackgroundColor(background.color)
@@ -42,17 +33,14 @@ export function buildContainerStyle(
 			: {}),
 		...buildBackgroundImageStyle(background.image),
 	}
+}
 
-	if(isEditing) {
-		const authorMinHeight = buildDimensionStyle(styleProps).minHeight
-		if(authorMinHeight !== undefined) {
-			style.minHeight = authorMinHeight
-		} else {
-			style.minHeight = `${ SLOT_MIN_EMPTY_HEIGHT }px`
-		}
+export function buildContainerEditorStyle(
+	styleProps: ContainerStyleProps,
+	sizing: FlexItemSizing | undefined,
+): CSSProperties {
+	const style = buildContainerStyle(styleProps, sizing)
+	style.minHeight = `${ SLOT_MIN_EMPTY_HEIGHT }px`
 
-		return withEditorLayoutChromePadding(style)
-	}
-
-	return style
+	return withEditorLayoutChromePadding(style)
 }

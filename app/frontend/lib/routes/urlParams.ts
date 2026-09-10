@@ -128,6 +128,12 @@ export const urlParams = {
       "slug"
     ]
   },
+  "editMemberUiSettingsInteractionTemplate": {
+    "params": [
+      "circle_slug",
+      "slug"
+    ]
+  },
   "settingsInteractionTemplates": {
     "params": [
       "circle_slug"
@@ -256,6 +262,12 @@ export const urlParams = {
       "circle_slug",
       "presentation_slug",
       "slug"
+    ]
+  },
+  "apiCirclePresentationElementControls": {
+    "params": [
+      "circle_slug",
+      "presentation_slug"
     ]
   },
   "apiCirclePresentationInteractionMembership": {
@@ -546,6 +558,14 @@ export const urlParams = {
     ]
   },
   "closeResponsesThemePresentationInteraction": {
+    "params": [
+      "circle_slug",
+      "theme_slug",
+      "presentation_slug",
+      "slug"
+    ]
+  },
+  "editMemberUiThemePresentationInteraction": {
     "params": [
       "circle_slug",
       "theme_slug",

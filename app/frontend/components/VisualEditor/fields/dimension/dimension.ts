@@ -12,6 +12,10 @@ export type ParsedDimension =
 
 const SIMPLE_DIMENSION_PATTERN = /^([\d.]+)(px|%|vh|vw|rem)$/
 
+function isSimpleDimensionUnit(value: string): value is Exclude<DimensionUnit, "auto"> {
+	return value === "px" || value === "%" || value === "vh" || value === "vw" || value === "rem"
+}
+
 export function normalizeDimensionValue(value: string): string {
 	if(/^\d+$/.test(value)) {
 		return `${value}px`
@@ -71,10 +75,15 @@ export function parseDimensionValue(value: string | undefined): ParsedDimension 
 
 	const simpleMatch = trimmed.match(SIMPLE_DIMENSION_PATTERN)
 	if(simpleMatch) {
+		const unit = simpleMatch[2]
+		if(!isSimpleDimensionUnit(unit)) {
+			return { kind: "advanced", value: trimmed }
+		}
+
 		return {
 			kind: "simple",
 			amount: parseFloat(simpleMatch[1]),
-			unit: simpleMatch[2] as Exclude<DimensionUnit, "auto">,
+			unit,
 		}
 	}
 

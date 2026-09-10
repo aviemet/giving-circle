@@ -122,25 +122,21 @@ export function isHeadingSizePresetValue(value: string): value is keyof typeof H
 
 export function normalizeFlexibleFontSize(
 	value: Partial<FlexibleFontSize> | undefined,
-	legacyPreset?: string,
+	fallback: FlexibleFontSize = defaultFlexibleFontSize(),
 ): FlexibleFontSize {
-	const defaults = defaultFlexibleFontSize(
-		legacyPreset !== undefined && isFontSizePreset(legacyPreset) ? legacyPreset : "md",
-	)
-
 	if(value === undefined) {
-		return defaults
+		return fallback
 	}
 
 	return {
-		mode: value.mode !== undefined && isFontSizeMode(value.mode) ? value.mode : defaults.mode,
+		mode: value.mode !== undefined && isFontSizeMode(value.mode) ? value.mode : fallback.mode,
 		preset: value.preset !== undefined && isFontSizePreset(value.preset)
 			? value.preset
-			: defaults.preset,
-		custom: value.custom ?? defaults.custom,
-		clampMin: value.clampMin ?? defaults.clampMin,
-		clampPreferred: value.clampPreferred ?? defaults.clampPreferred,
-		clampMax: value.clampMax ?? defaults.clampMax,
+			: fallback.preset,
+		custom: value.custom ?? fallback.custom,
+		clampMin: value.clampMin ?? fallback.clampMin,
+		clampPreferred: value.clampPreferred ?? fallback.clampPreferred,
+		clampMax: value.clampMax ?? fallback.clampMax,
 	}
 }
 

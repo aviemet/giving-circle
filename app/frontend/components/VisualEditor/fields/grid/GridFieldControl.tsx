@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { useState } from "react"
 
 import {
@@ -53,7 +54,7 @@ export function GridFieldControl({ name, value, onChange }: GridFieldControlProp
 	const gap = coerceLength(localValue.gap, GAP_UNITS, "px")
 
 	return (
-		<div className={ classes.gridFieldRoot }>
+		<div className={ clsx(classes.gridFieldRoot) }>
 			<FieldRow label={ gridText("labels.columns") }>
 				<UnitNumber
 					name={ `${name}.columns` }

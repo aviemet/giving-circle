@@ -19,7 +19,7 @@ describe("domains/presentations/Form", () => {
 		screen.getByRole("button", { name: "Create Presentation" })
 	})
 
-	test("renders update presentation form", () => {
+	test("renders update presentation form with finalist count", () => {
 		render(
 			<PresentationForm
 				to="/presentations/1"
@@ -28,5 +28,6 @@ describe("domains/presentations/Form", () => {
 			/>,
 		)
 		screen.getByRole("button", { name: "Update Presentation" })
+		screen.getByLabelText("Number of finalists")
 	})
 })

@@ -1,56 +1,28 @@
-import { Card, DangerousHtml, Text } from "@/components"
-import { isNonEmptyString } from "@/lib/strings"
+import { PuckComponent } from "@puckeditor/core"
 
-import { type CardProps } from "./cardConfig"
-import { usePresentationData } from "../../dynamicData/MockData"
-import { normalizeBorderValue, buildBorderStyle } from "../../fields/border"
-import { buildFlexStyle } from "../../fields/flex"
-import { buildFlexItemSizingStyle } from "../../fields/flexItemSizing"
-import { buildSpacingStyle } from "../../fields/spacing"
+import { CardDisplay } from "./CardDisplay"
+import { CardEditor } from "./CardEditor"
+import {
+	type BorderProps,
+	type BoxModelValue,
+	type FlexItemSizing,
+	type FlexStyleInput,
+} from "../../fields"
 
-export function CardDisplay({
-	title,
-	description,
-	backgroundColor,
-	fontColor,
-	sizing,
-	border,
-	borderWidth,
-	borderRadius,
-	borderColor,
-	...styleProps
-}: CardProps) {
-	const evaluatedTitle = usePresentationData(title)
-	const evaluatedDescription = usePresentationData(description)
-	const showDescription = isNonEmptyString(description)
-	const resolvedBorder = normalizeBorderValue(border, {
-		borderWidth,
-		borderRadius,
-		borderColor,
-	})
+export type CardProps = FlexStyleInput & {
+	title: string
+	description: string
+	backgroundColor: string
+	fontColor: string
+	sizing?: FlexItemSizing
+	spacing?: BoxModelValue
+	border?: BorderProps
+}
 
-	return (
-		<Card
-			padding="md"
-			style={ {
-				...buildSpacingStyle(styleProps),
-				...buildBorderStyle(resolvedBorder),
-				...buildFlexStyle(styleProps),
-				...buildFlexItemSizingStyle(sizing),
-				backgroundColor,
-			} }
-		>
+export type CardComponentProps = Parameters<PuckComponent<CardProps>>[0]
 
-			<Text fw={ 700 } size="lg" c={ fontColor } mb="xs">
-				<DangerousHtml component="span">{ evaluatedTitle }</DangerousHtml>
-			</Text>
-
-			{ showDescription && (
-				<Text c={ fontColor }>
-					<DangerousHtml component="span">{ evaluatedDescription }</DangerousHtml>
-				</Text>
-			) }
-
-		</Card>
-	)
+export function Card(props: CardComponentProps) {
+	return props.puck.isEditing
+		? <CardEditor { ...props } />
+		: <CardDisplay { ...props } />
 }

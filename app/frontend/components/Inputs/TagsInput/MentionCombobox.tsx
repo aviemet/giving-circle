@@ -1,4 +1,5 @@
 import { Combobox, Text, useCombobox } from "@mantine/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import * as classes from "./index.css"
@@ -29,7 +30,7 @@ const MentionCombobox = ({ items, selectedIndex, selectItem, clientRect }: Menti
 			position="bottom-end"
 			offset={ 0 }
 		>
-			<Combobox.Dropdown className={ classes.mentionComboboxDropdown }>
+			<Combobox.Dropdown className={ clsx(classes.mentionComboboxDropdown) }>
 				<Combobox.Options>
 					{ items.map((item, index) => (
 						<Combobox.Option

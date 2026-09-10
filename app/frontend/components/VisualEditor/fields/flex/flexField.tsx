@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import {
@@ -121,7 +122,7 @@ function FlexFieldControl({ name, value, onChange }: FlexFieldControlProps) {
 	const gap = coerceLength(localValue.gap ?? 0, GAP_UNITS, "px")
 
 	return (
-		<div className={ classes.flexFieldRoot }>
+		<div className={ clsx(classes.flexFieldRoot) }>
 			<FieldRow label={ flexText("labels.display") }>
 				<IconSegmented
 					name={ `${name}.display` }
@@ -141,7 +142,7 @@ function FlexFieldControl({ name, value, onChange }: FlexFieldControlProps) {
 			{ localValue.display === "flex" && (
 				<>
 					<FieldRow label={ flexText("labels.direction") }>
-						<div className={ classes.flexDirectionGroup }>
+						<div className={ clsx(classes.flexDirectionGroup) }>
 							<IconSegmented
 								name={ `${name}.flexDirection` }
 								value={ localValue.flexDirection }
@@ -170,7 +171,7 @@ function FlexFieldControl({ name, value, onChange }: FlexFieldControlProps) {
 							>
 								<button
 									type="button"
-									className={ classes.flexWrapToggle }
+									className={ clsx(classes.flexWrapToggle) }
 									data-active={ localValue.flexWrap === "wrap" ? "true" : "false" }
 									aria-label={ flexText("labels.wrap") }
 									aria-pressed={ localValue.flexWrap === "wrap" }

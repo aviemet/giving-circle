@@ -18,7 +18,7 @@ describe("VisualEditor timer helpers", () => {
 	test("normalizes duration and converts to seconds", () => {
 		expect(defaultTimerDuration()).toEqual({ minutes: 10, seconds: 0 })
 		expect(normalizeTimerDuration({ minutes: 1, seconds: 90 })).toEqual({ minutes: 1, seconds: 59 })
-		expect(normalizeTimerDuration(undefined, { durationMinutes: 2, durationSeconds: 15 })).toEqual({
+		expect(normalizeTimerDuration({ minutes: 2, seconds: 15 })).toEqual({
 			minutes: 2,
 			seconds: 15,
 		})
@@ -28,7 +28,7 @@ describe("VisualEditor timer helpers", () => {
 	test("normalizes timer colors", () => {
 		expect(defaultTimerColors().ringTrackColor).toBe("#333333")
 		expect(normalizeTimerColors({ ringProgressColor: "#ABC" }).ringProgressColor).toBe("#ABC")
-		expect(normalizeTimerColors(undefined, { ringTrackColor: "#111" }).ringTrackColor).toBe("#111")
+		expect(normalizeTimerColors({ ringTrackColor: "#111" }).ringTrackColor).toBe("#111")
 	})
 
 	test("normalizes exhausted mode", () => {
@@ -37,9 +37,9 @@ describe("VisualEditor timer helpers", () => {
 			mode: "message",
 			message: "Done",
 		})
-		expect(normalizeTimerExhausted(undefined, {
-			exhaustedMode: "message",
-			exhaustedMessage: "Over",
+		expect(normalizeTimerExhausted({
+			mode: "message",
+			message: "Over",
 		}).message).toBe("Over")
 	})
 })

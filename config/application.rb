@@ -22,6 +22,8 @@ module GivingCircle
     # in config/environments, which are processed later.
     #
     config.time_zone = "Pacific Time (US & Canada)"
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, :es, :fr, :de, "pt-BR"]
 
     config.eager_load_paths += %W[
       #{config.root}/lib

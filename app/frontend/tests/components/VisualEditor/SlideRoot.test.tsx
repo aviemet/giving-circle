@@ -1,12 +1,13 @@
 import { type PuckContext, Render } from "@puckeditor/core"
 import { screen } from "@testing-library/react"
+import clsx from "clsx"
 import { describe, expect, test, vi } from "vitest"
 
-import * as slideRootClasses from "@/components/VisualEditor/components/SlideRoot/SlideRoot.css"
-import { SlideRootDisplay } from "@/components/VisualEditor/components/SlideRoot/SlideRootDisplay"
+import { config } from "@/components/VisualEditor/config"
 import { defaultFlexValue, type FlexProps } from "@/components/VisualEditor/fields/flex"
 import { defaultFontValue } from "@/components/VisualEditor/fields/font"
-import { config } from "@/components/VisualEditor/puck.config"
+import { SlideRoot } from "@/components/VisualEditor/lib/SlideRoot"
+import * as slideRootClasses from "@/components/VisualEditor/lib/SlideRoot/SlideRoot.css"
 import { PresentationDataProvider } from "@/features/presentation"
 import {
 	createCirclePersisted,
@@ -34,14 +35,14 @@ function renderSlideRoot({
 	flex?: FlexProps
 }) {
 	return render(
-		<SlideRootDisplay
+		<SlideRoot
 			title="Slide"
 			flex={ flex }
 			font={ defaultFontValue() }
 			puck={ puckContext(isEditing) }
 		>
-			<div data-testid="root-zone" className={ childClassName }>zone</div>
-		</SlideRootDisplay>,
+			<div data-testid="root-zone" className={ clsx(childClassName) }>zone</div>
+		</SlideRoot>,
 	)
 }
 

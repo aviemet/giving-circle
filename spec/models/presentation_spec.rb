@@ -4,6 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  active           :boolean          default(FALSE), not null
+#  element_controls :jsonb            not null
 #  name             :string           not null
 #  settings         :jsonb
 #  slug             :string
@@ -35,10 +36,16 @@ RSpec.describe Presentation do
       expect(build(:presentation)).to be_valid
     end
 
+    it "is invalid when finalist_count is not positive" do
+      presentation = build(:presentation)
+      presentation.settings = { finalist_count: 0 }
+
+      expect(presentation).not_to be_valid
+      expect(presentation.errors[:settings]).to be_present
+    end
+
     it "is invalid with invalid attributes" do
-      %i(name).each do |attr|
-        expect(build(:presentation, attr => nil)).not_to be_valid
-      end
+      expect(build(:presentation, name: nil)).not_to be_valid
     end
   end
 

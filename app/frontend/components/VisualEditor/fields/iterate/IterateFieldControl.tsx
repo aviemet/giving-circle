@@ -6,6 +6,7 @@ import { i18n } from "@/lib/i18n"
 import {
 	isIterateCollection,
 	isIterateOn,
+	ITERATE_FINALIST_ORGS,
 	ITERATE_NONE,
 	ITERATE_ORGS,
 	type IterateValue,
@@ -25,6 +26,10 @@ function collectionOptions() {
 		{
 			value: ITERATE_ORGS,
 			label: iterateText("organizations"),
+		},
+		{
+			value: ITERATE_FINALIST_ORGS,
+			label: iterateText("finalist_organizations"),
 		},
 	]
 }

@@ -29,7 +29,7 @@ describe("components/VisualEditor/components/Card", () => {
 		expect(cardConfig.defaultProps?.border).toEqual(defaultBorderValue())
 	})
 
-	test("resolveData hydrates legacy flat border props into the grouped field", async () => {
+	test("resolveData normalizes the current grouped border", async () => {
 		const resolveData = cardConfig.resolveData
 		expect(resolveData).toBeTypeOf("function")
 		if(!resolveData) {
@@ -43,15 +43,17 @@ describe("components/VisualEditor/components/Card", () => {
 
 		const resolved = await resolveData({
 			props: {
-				id: "card-legacy",
+				id: "card-current",
 				title: "Topic Title",
 				description: "Topic description...",
 				backgroundColor: "#FEFEFE",
 				fontColor: "#111111",
 				flex: defaultFlex,
-				borderWidth: 2,
-				borderRadius: 8,
-				borderColor: "#112233",
+				border: {
+					borderWidth: 2,
+					borderRadius: 8,
+					borderColor: "#112233",
+				},
 			},
 		}, {
 			changed: {},

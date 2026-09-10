@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest"
 
-import { getOrgsFromContext } from "@/components/VisualEditor/dynamicData/getOrgsFromContext"
+import { getOrgsFromContext } from "@/components/VisualEditor/lib/dynamicData"
 import {
 	createCircleMock,
 	createOrgPersisted,
@@ -9,7 +9,7 @@ import {
 	createPresentationPresentation,
 } from "@/tests/helpers/fixtures"
 
-describe("components/VisualEditor/dynamicData/getOrgsFromContext", () => {
+describe("components/VisualEditor/lib/dynamicData/getOrgsFromContext", () => {
 	test("returns presentation orgs when present", () => {
 		const org = createPresentationOrgPersisted({ id: "org-a", name: "Org A" })
 		const presentation = createPresentationPresentation({ orgs: [org] })

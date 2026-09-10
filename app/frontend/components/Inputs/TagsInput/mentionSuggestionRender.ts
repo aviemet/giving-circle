@@ -8,9 +8,17 @@ interface MentionSuggestionItem {
 	label: string
 }
 
+interface MentionComboboxRenderProps {
+	items: MentionSuggestionItem[]
+	selectedIndex: number
+	selectItem: (index: number) => void
+	clientRect: () => DOMRect | null
+}
+
 export const createMentionSuggestionRender = () => {
-	let component: ReactRenderer
+	let component: ReactRenderer<unknown, MentionComboboxRenderProps>
 	let selectedIndex = 0
+	let latestProps: TiptapSuggestionProps<MentionSuggestionItem> | undefined
 
 	const createSelectItem = (props: TiptapSuggestionProps<MentionSuggestionItem>) => (index: number) => {
 		const item = props.items[index]
@@ -22,7 +30,9 @@ export const createMentionSuggestionRender = () => {
 	const handleClickOutside = (event: MouseEvent) => {
 		if(!component) return
 
-		const target = event.target as Node
+		const target = event.target
+		if(!(target instanceof Node)) return
+
 		const comboboxElement = component.element
 		const editorElement = document.querySelector(".ProseMirror")
 
@@ -47,7 +57,7 @@ export const createMentionSuggestionRender = () => {
 
 		const coords = props.clientRect()
 		if(coords) {
-			const element = component.element as HTMLElement
+			const element = component.element
 			element.style.position = "absolute"
 			element.style.top = `${coords.bottom + window.scrollY}px`
 			element.style.left = `${coords.left + window.scrollX}px`
@@ -57,6 +67,7 @@ export const createMentionSuggestionRender = () => {
 
 	return () => ({
 		onStart: (props: TiptapSuggestionProps<MentionSuggestionItem>) => {
+			latestProps = props
 			component = new ReactRenderer(MentionCombobox, {
 				props: {
 					...props,
@@ -78,6 +89,7 @@ export const createMentionSuggestionRender = () => {
 		onUpdate: (props: TiptapSuggestionProps<MentionSuggestionItem>) => {
 			if(!component) return
 
+			latestProps = props
 			component.updateProps({
 				...props,
 				selectedIndex,
@@ -92,7 +104,11 @@ export const createMentionSuggestionRender = () => {
 				return true
 			}
 
-			const currentProps = component.props as TiptapSuggestionProps<MentionSuggestionItem>
+			if(latestProps === undefined) {
+				return false
+			}
+
+			const currentProps = latestProps
 
 			if(props.event.key === "ArrowDown") {
 				selectedIndex = Math.min(selectedIndex + 1, currentProps.items.length - 1)

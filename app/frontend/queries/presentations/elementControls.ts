@@ -11,7 +11,7 @@ export interface UpdateElementControlData {
 	elementId: string
 	elementType: string
 	control: string
-	value: Record<string, number | string>
+	value: Record<string, number | string | boolean>
 }
 
 export interface UpdateElementControlResult {

@@ -9,7 +9,6 @@ import {
 	LEVERAGE_BAR_HEIGHT_UNITS,
 	LEVERAGE_BAR_WIDTH_UNITS,
 	normalizeLeverageBarSize,
-	resolveLeverageBarSize,
 	type LeverageBarSizeValue,
 } from "@/components/VisualEditor/fields/leverageBarSize"
 import { i18n } from "@/lib/i18n"
@@ -71,28 +70,10 @@ describe("components/VisualEditor/fields/leverageBarSize", () => {
 		})
 	})
 
-	test("resolve hydrates legacy flex-item height into the dedicated size field", () => {
-		expect(resolveLeverageBarSize({
-			sizing: {
-				mode: "fill",
-				height: { amount: 28, unit: "px" },
-			},
-		})).toEqual({
-			width: { amount: 100, unit: "%" },
-			height: { amount: 28, unit: "px" },
-		})
-	})
-
-	test("resolve prefers the dedicated size field over leftover sizing", () => {
-		expect(resolveLeverageBarSize({
-			size: {
-				width: { amount: 240, unit: "px" },
-				height: { amount: 20, unit: "px" },
-			},
-			sizing: {
-				mode: "fill",
-				height: { amount: 36, unit: "px" },
-			},
+	test("normalize uses the dedicated size field", () => {
+		expect(normalizeLeverageBarSize({
+			width: { amount: 240, unit: "px" },
+			height: { amount: 20, unit: "px" },
 		})).toEqual({
 			width: { amount: 240, unit: "px" },
 			height: { amount: 20, unit: "px" },

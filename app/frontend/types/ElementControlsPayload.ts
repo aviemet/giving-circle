@@ -5,3 +5,5 @@ export type ElementInstanceControls = Record<string, Record<string, ElementContr
 export type SlideElementControls = Record<string, ElementInstanceControls>
 
 export type ElementControlsPayload = Record<string, SlideElementControls>
+
+export type { ElementControlsPayload as default }

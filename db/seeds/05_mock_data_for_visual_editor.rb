@@ -12,13 +12,16 @@ if MockCircle.none?
     presentation = Presentation.create!(
       name: "Mock Presentation",
       theme:,
+      settings: {
+        finalist_count: 5,
+      },
     )
 
     5.times do
       FactoryBot.create(:membership, circle:)
     end
 
-    (1..10).each do |index|
+    (1..12).each do |index|
       org = Org.create!(
         name: "Mock Org #{index}",
         description: "This is mock organization #{index} for testing purposes",

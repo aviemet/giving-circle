@@ -2,14 +2,7 @@ import dayjs from "dayjs"
 import { create } from "zustand"
 
 import { applyDayjsLocale } from "@/lib/dayjs"
-import { i18n } from "@/lib/i18n"
-import {
-	DEFAULT_APP_LOCALE,
-	resolveLocale,
-	setCurrentAppLocale,
-} from "@/lib/locale"
-
-const LOCALE_STORAGE_KEY = "giving-circle.locale"
+import { DEFAULT_LOCALE, i18n } from "@/lib/i18n"
 
 interface LocaleStoreState {
 	locale: string
@@ -17,14 +10,15 @@ interface LocaleStoreState {
 	hydrateFromI18n: () => Promise<void>
 }
 
-function persistLocale(locale: string) {
-	if(typeof localStorage === "undefined") return
-	localStorage.setItem(LOCALE_STORAGE_KEY, locale)
-}
+async function syncToResolved(locale?: string) {
+	if(locale !== undefined) {
+		await i18n.changeLanguage(locale)
+	}
 
-async function applyLocale(locale: string) {
-	const resolved = resolveLocale(locale)
-	setCurrentAppLocale(resolved)
+	const resolved = i18n.resolvedLanguage || i18n.language || DEFAULT_LOCALE
+	if(i18n.language !== resolved) {
+		await i18n.changeLanguage(resolved)
+	}
 
 	try {
 		await applyDayjsLocale(resolved)
@@ -32,24 +26,16 @@ async function applyLocale(locale: string) {
 		dayjs.locale("en")
 	}
 
-	if(i18n.language !== resolved) {
-		await i18n.changeLanguage(resolved)
-	}
-
-	persistLocale(resolved)
-
 	return resolved
 }
 
 export const useLocaleStore = create<LocaleStoreState>()((set) => ({
-	locale: DEFAULT_APP_LOCALE,
+	locale: DEFAULT_LOCALE,
 	setLocale: async (locale) => {
-		const resolved = await applyLocale(locale)
-		set({ locale: resolved })
+		set({ locale: await syncToResolved(locale) })
 	},
 	hydrateFromI18n: async () => {
-		const resolved = await applyLocale(i18n.resolvedLanguage || i18n.language || DEFAULT_APP_LOCALE)
-		set({ locale: resolved })
+		set({ locale: await syncToResolved() })
 	},
 }))
 
@@ -70,19 +56,11 @@ export function bindLocaleStoreToI18n() {
 	}
 
 	i18n.on("languageChanged", (language) => {
-		const resolved = resolveLocale(language)
-		setCurrentAppLocale(resolved)
-		void applyDayjsLocale(resolved).catch(() => {
+		void applyDayjsLocale(language).catch(() => {
 			dayjs.locale("en")
 		})
-		persistLocale(resolved)
-
-		if(useLocaleStore.getState().locale !== resolved) {
-			useLocaleStore.setState({ locale: resolved })
-		}
-
-		if(language !== resolved) {
-			void i18n.changeLanguage(resolved)
+		if(useLocaleStore.getState().locale !== language) {
+			useLocaleStore.setState({ locale: language })
 		}
 	})
 }

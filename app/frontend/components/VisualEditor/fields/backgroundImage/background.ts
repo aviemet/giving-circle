@@ -25,22 +25,16 @@ export function normalizeBackgroundValue(
 		color?: string
 		image?: Partial<BackgroundImageValue>
 	} | undefined,
-	legacy?: {
-		color?: string
-		image?: Partial<BackgroundImageValue>
-	},
 ): BackgroundValue {
 	const defaults = defaultBackgroundValue()
 	let color = defaults.color
 
 	if(value !== undefined && "color" in value) {
 		color = value.color ?? ""
-	} else if(legacy?.color !== undefined) {
-		color = legacy.color
 	}
 
 	return {
 		color,
-		image: normalizeBackgroundImageValue(value?.image ?? legacy?.image),
+		image: normalizeBackgroundImageValue(value?.image),
 	}
 }

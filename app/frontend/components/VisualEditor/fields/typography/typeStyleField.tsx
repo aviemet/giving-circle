@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import {
@@ -43,7 +44,7 @@ function TypeStyleFieldControl({
 	fallbackWeight,
 }: TypeStyleFieldControlProps) {
 	const [localValue, setLocalValue] = useState<TypeStyleValue>(() => {
-		return normalizeTypeStyle(value, undefined, fallbackWeight)
+		return normalizeTypeStyle(value, fallbackWeight)
 	})
 
 	const updateValue = (patch: Partial<TypeStyleValue>) => {
@@ -56,7 +57,7 @@ function TypeStyleFieldControl({
 	}
 
 	return (
-		<div className={ classes.typographyStack }>
+		<div className={ clsx(classes.typographyStack) }>
 			<FieldRow label={ styleText("labels.weight") }>
 				<Select
 					wrapper={ false }
@@ -77,7 +78,7 @@ function TypeStyleFieldControl({
 
 			<FieldRow label={ styleText("labels.decoration") }>
 				<IconSegmented
-					className={ classes.typographyIcons }
+					className={ clsx(classes.typographyIcons) }
 					name={ `${name}.td` }
 					value={ localValue.td }
 					options={ [
@@ -96,7 +97,7 @@ function TypeStyleFieldControl({
 
 			<FieldRow label={ styleText("labels.transform") }>
 				<IconSegmented
-					className={ classes.typographyIcons }
+					className={ clsx(classes.typographyIcons) }
 					name={ `${name}.tt` }
 					value={ localValue.tt }
 					options={ [
@@ -115,7 +116,7 @@ function TypeStyleFieldControl({
 
 			<FieldRow label={ styleText("labels.style") }>
 				<IconSegmented
-					className={ classes.typographyIcons }
+					className={ clsx(classes.typographyIcons) }
 					name={ `${name}.fs` }
 					value={ localValue.fs }
 					options={ [

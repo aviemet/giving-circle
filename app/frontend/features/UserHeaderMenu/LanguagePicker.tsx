@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { Box, Group, LocaleFlag, ScrollArea, Stack, Text, UnstyledButton } from "@/components"
 import { SearchIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
-import { flagRegion, intlLocale, localeDisplayName, localeLabelsDiffer, localeOptions } from "@/lib/locale"
+import { flagRegion, localeDisplayName, localeIds } from "@/lib/locale"
 import { useLocaleStore } from "@/store"
 
 import * as classes from "./LanguageModal.css"
@@ -20,15 +20,17 @@ export function LanguagePicker({ onSelect }: LanguagePickerProps) {
 	const setLocale = useLocaleStore(state => state.setLocale)
 	const [languageFilter, setLanguageFilter] = useState("")
 
-	const options = useMemo(() => localeOptions(locale), [locale])
-	const currentIntlLocale = useMemo(() => intlLocale(locale), [locale])
+	const options = useMemo(() => localeIds.map(id => ({
+		id,
+		label: localeDisplayName(id, id),
+		flagRegion: flagRegion(id),
+	})), [])
 
 	const filteredOptions = useMemo(() => {
 		const query = languageFilter.trim().toLowerCase()
 		if(query === "") return options
 		return options.filter(option =>
-			option.nativeLabel.toLowerCase().includes(query) ||
-			option.translatedLabel.toLowerCase().includes(query) ||
+			option.label.toLowerCase().includes(query) ||
 			option.id.toLowerCase().includes(query),
 		)
 	}, [options, languageFilter])
@@ -55,30 +57,21 @@ export function LanguagePicker({ onSelect }: LanguagePickerProps) {
 			/>
 			<ScrollArea.Autosize mah={ 360 } type="scroll">
 				<Stack gap={ 4 }>
-					{ filteredOptions.map(option => {
-						const isActive = intlLocale(option.id) === currentIntlLocale
-
-						return (
-							<UnstyledButton
-								key={ option.id }
-								type="button"
-								onClick={ () => { void handleSelectLocale(option.id) } }
-								data-locale-id={ option.id }
-								data-active={ isActive ? "true" : undefined }
-								className={ clsx(classes.option, isActive && classes.activeOption) }
-							>
-								<Group gap="sm" wrap="nowrap">
-									<LocaleFlag region={ option.flagRegion } decorative />
-									<Group gap="xs" wrap="nowrap">
-										<Text size="sm">{ option.nativeLabel }</Text>
-										{ localeLabelsDiffer(option.nativeLabel, option.translatedLabel) && (
-											<Text size="sm" c="dimmed">{ option.translatedLabel }</Text>
-										) }
-									</Group>
-								</Group>
-							</UnstyledButton>
-						)
-					}) }
+					{ filteredOptions.map(option => (
+						<UnstyledButton
+							key={ option.id }
+							type="button"
+							onClick={ () => { void handleSelectLocale(option.id) } }
+							data-locale-id={ option.id }
+							data-active={ option.id === locale ? "true" : undefined }
+							className={ clsx(classes.option, option.id === locale && classes.activeOption) }
+						>
+							<Group gap="sm" wrap="nowrap">
+								<LocaleFlag region={ option.flagRegion } decorative />
+								<Text size="sm">{ option.label }</Text>
+							</Group>
+						</UnstyledButton>
+					)) }
 				</Stack>
 			</ScrollArea.Autosize>
 		</Stack>
@@ -91,19 +84,15 @@ interface LanguageModalCurrentLocaleProps {
 
 export function LanguageModalCurrentLocale({ locale }: LanguageModalCurrentLocaleProps) {
 	const { t } = useTranslation()
-	const nativeLabel = localeDisplayName(locale, locale)
-	const translatedLabel = localeDisplayName(locale)
+	const label = localeDisplayName(locale, locale)
 
 	return (
 		<Box className={ clsx(classes.currentLocale) }>
 			<Text size="xs" c="dimmed">{ t("navigation.currentLanguage") }</Text>
 			<Group gap="sm" mt={ 4 }>
-				<LocaleFlag region={ flagRegion(locale) } title={ nativeLabel } />
+				<LocaleFlag region={ flagRegion(locale) } title={ label } />
 				<div>
-					<Text fw={ 600 }>{ nativeLabel }</Text>
-					{ localeLabelsDiffer(nativeLabel, translatedLabel) && (
-						<Text size="xs" c="dimmed">{ translatedLabel }</Text>
-					) }
+					<Text fw={ 600 }>{ label }</Text>
 					<Text size="xs" c="dimmed">{ locale }</Text>
 				</div>
 			</Group>

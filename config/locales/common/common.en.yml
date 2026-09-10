@@ -14,6 +14,7 @@ en:
     dynamic_fields:
       add_item: Add item
       remove_item: Remove item %{index}
+    'no': 'No'
     notices:
       circle_access_denied: You have not been granted access to that Giving Circle
       page_expired: The page expired, please try again.
@@ -28,3 +29,4 @@ en:
       exact_date: Exact Date
       rows_per_page: rows per page
       search: Search
+    'yes': 'Yes'

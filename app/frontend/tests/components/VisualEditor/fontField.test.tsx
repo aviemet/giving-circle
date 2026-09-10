@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, test } from "vitest"
 
 import { headingConfig } from "@/components/VisualEditor/components/Heading"
+import { config } from "@/components/VisualEditor/config"
 import {
 	componentFontFamilyCss,
 	defaultFontValue,
@@ -20,8 +21,7 @@ import {
 	fontSelectValue,
 	fontValueFromSelect,
 } from "@/components/VisualEditor/fields/font/fontSelect"
-import { config } from "@/components/VisualEditor/puck.config"
-import { SlideFontFace } from "@/components/VisualEditor/SlideFontFace"
+import { SlideFontFace } from "@/components/VisualEditor/lib/SlideFontFace"
 
 describe("components/VisualEditor/fields/font", () => {
 	test("fontField is a custom field labeled Font", () => {
@@ -57,7 +57,7 @@ describe("components/VisualEditor/fields/font", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config root font", () => {
+describe("components/VisualEditor/config root font", () => {
 	test("root exposes font field and default", () => {
 		expect(config.root?.fields?.font).toMatchObject({ type: "custom", label: "Font" })
 		expect(config.root?.defaultProps).toMatchObject({

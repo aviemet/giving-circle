@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 import { type CSSProperties } from "react"
 
@@ -273,8 +274,8 @@ function DimensionInputControl({ label, name, value, onChange, allowAuto = false
 	const showAmount = value.unit !== "auto"
 
 	return (
-		<div className={ showAmount ? classes.dimensionRow : classes.dimensionRowUnitOnly }>
-			<div className={ classes.dimensionRowLabel }>
+		<div className={ clsx(showAmount ? classes.dimensionRow : classes.dimensionRowUnitOnly) }>
+			<div className={ clsx(classes.dimensionRowLabel) }>
 				{ label }
 			</div>
 			{ showAmount && (
@@ -381,9 +382,9 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 	]
 
 	return (
-		<div className={ classes.sizingFieldRoot }>
+		<div className={ clsx(classes.sizingFieldRoot) }>
 			<IconSegmented
-				className={ classes.modeSegmented }
+				className={ clsx(classes.modeSegmented) }
 				name={ `${name}.mode` }
 				value={ localValue.mode }
 				options={ modeOptions }
@@ -396,7 +397,7 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 			/>
 
 			{ localValue.mode === "fixed" && (
-				<div className={ classes.dimensionStack }>
+				<div className={ clsx(classes.dimensionStack) }>
 					<DimensionInputControl
 						label={ sizingText("labels.width") }
 						name={ `${name}.width` }
@@ -425,7 +426,7 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 			) }
 
 			{ localValue.mode === "fill" && (
-				<div className={ classes.dimensionStack }>
+				<div className={ clsx(classes.dimensionStack) }>
 					<DimensionInputControl
 						label={ sizingText("labels.height") }
 						name={ `${name}.height` }
@@ -448,7 +449,7 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 			) }
 
 			{ localValue.mode === "clamp" && (
-				<div className={ classes.dimensionStack }>
+				<div className={ clsx(classes.dimensionStack) }>
 					<DimensionInputControl
 						label={ sizingText("labels.clamp_min") }
 						name={ `${name}.clamp.min` }
@@ -489,7 +490,7 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 			) }
 
 			{ localValue.mode === "auto" && (
-				<div className={ classes.dimensionStack }>
+				<div className={ clsx(classes.dimensionStack) }>
 					<DimensionInputControl
 						label={ sizingText("labels.height") }
 						name={ `${name}.height` }
@@ -517,11 +518,11 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 				/>
 			) }
 
-			<details className={ classes.fineTune }>
+			<details className={ clsx(classes.fineTune) }>
 				<summary>{ sizingText("fine_tune.title") }</summary>
-				<div className={ classes.fineTunePanel }>
-					<div className={ classes.fineTuneRow }>
-						<div className={ classes.dimensionRowLabel }>
+				<div className={ clsx(classes.fineTunePanel) }>
+					<div className={ clsx(classes.fineTuneRow) }>
+						<div className={ clsx(classes.dimensionRowLabel) }>
 							{ sizingText("fine_tune.flex_grow") }
 						</div>
 						<NumberInput
@@ -538,8 +539,8 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 							step={ 1 }
 						/>
 					</div>
-					<div className={ classes.fineTuneRow }>
-						<div className={ classes.dimensionRowLabel }>
+					<div className={ clsx(classes.fineTuneRow) }>
+						<div className={ clsx(classes.dimensionRowLabel) }>
 							{ sizingText("fine_tune.flex_shrink") }
 						</div>
 						<NumberInput
@@ -556,8 +557,8 @@ function FlexItemSizingFieldControl({ name, value, onChange }: FlexItemSizingFie
 							step={ 1 }
 						/>
 					</div>
-					<div className={ classes.fineTuneRow }>
-						<div className={ classes.dimensionRowLabel }>
+					<div className={ clsx(classes.fineTuneRow) }>
+						<div className={ clsx(classes.dimensionRowLabel) }>
 							{ sizingText("fine_tune.align_self") }
 						</div>
 						<Select

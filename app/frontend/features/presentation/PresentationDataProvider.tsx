@@ -5,6 +5,10 @@ import { useActivePresentationChannel } from "@/pages/Presentations/Active/useAc
 import { type ElementControlsPayload } from "@/types/ElementControlsPayload"
 
 import {
+	buildEditorMockPresentationValues,
+	editorFinalistCountFromPresentation,
+} from "./values/editorMockPresentationValues"
+import {
 	usePresentationValuesChannel,
 	type PresentationValuesPayload,
 } from "./values/usePresentationValuesChannel"
@@ -12,6 +16,13 @@ import {
 export type PresentationDataPresentation =
 	| Schema.PresentationsInertiaShare
 	| Schema.PresentationsPresentation
+	| Schema.PresentationsFormData
+	| PresentationPreviewPresentation
+
+export interface PresentationPreviewPresentation {
+	name: string
+	orgs: Schema.OrgsPersisted[]
+}
 
 export interface PresentationDataValue {
 	circle: Schema.CirclesMock | Schema.CirclesPersisted
@@ -64,6 +75,38 @@ function initialActiveSlideId(
 	return undefined
 }
 
+function orgsForEditorMock(value: PresentationDataValue): Array<{ id: string }> {
+	const presentation = value.presentation
+	if(presentation && "orgs" in presentation && Array.isArray(presentation.orgs) && presentation.orgs.length > 0) {
+		return presentation.orgs
+	}
+
+	if(value.circle && "orgs" in value.circle && Array.isArray(value.circle.orgs)) {
+		return value.circle.orgs
+	}
+
+	return []
+}
+
+function initialPresentationValues(
+	value: PresentationDataValue,
+	isEditor: boolean,
+): PresentationValuesPayload | undefined {
+	if(!isEditor) {
+		return undefined
+	}
+
+	return buildEditorMockPresentationValues(
+		orgsForEditorMock(value),
+		editorFinalistCountFromPresentation(
+			value.presentation !== undefined && "settings" in value.presentation
+				? value.presentation
+				: undefined,
+			value.circle,
+		),
+	)
+}
+
 export function PresentationDataProvider({
 	value,
 	children,
@@ -77,7 +120,9 @@ export function PresentationDataProvider({
 	const isEditor = value.isEditor === true
 	const isSubscribed = !isEditor && Boolean(presentationId)
 
-	const [values, setValues] = useState<PresentationValuesPayload | undefined>(undefined)
+	const [values, setValues] = useState<PresentationValuesPayload | undefined>(
+		() => initialPresentationValues(value, isEditor),
+	)
 	const [elementControls, setElementControls] = useState<ElementControlsPayload>(
 		() => initialElementControls(value.presentation),
 	)

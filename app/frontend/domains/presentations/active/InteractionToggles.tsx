@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -130,11 +131,11 @@ export function InteractionToggles({
 	}
 
 	return (
-		<Stack gap="sm" className={ classes.root }>
+		<Stack gap="sm" className={ clsx(classes.root) }>
 			{ interactions.map((interaction) => (
 				<Switch
 					key={ interaction.id }
-					className={ classes.row }
+					className={ clsx(classes.row) }
 					label={ interaction.name }
 					checked={ interaction.accepting_responses }
 					disabled={ isPending }

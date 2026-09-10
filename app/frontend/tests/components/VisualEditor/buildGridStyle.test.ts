@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest"
 
-import { buildGridStyle } from "@/components/VisualEditor/components/Grid/buildGridStyle"
+import { buildGridEditorStyle, buildGridStyle } from "@/components/VisualEditor/components/Grid/buildGridStyle"
 import { gridConfig } from "@/components/VisualEditor/components/Grid/gridConfig"
 import { DEFAULT_GRID_GAP, defaultGridLayoutValue } from "@/components/VisualEditor/fields/grid"
 import {
 	LAYOUT_CHROME_LABEL_SPACE_PX,
 	LAYOUT_CHROME_PAD_PX,
 	SLOT_MIN_EMPTY_HEIGHT,
-} from "@/components/VisualEditor/slotEditor"
+} from "@/components/VisualEditor/lib/slotEditor"
 
 describe("components/VisualEditor/buildGridStyle", () => {
 	test("presentation fill keeps collapsing minHeight when overflow is hidden", () => {
@@ -18,7 +18,6 @@ describe("components/VisualEditor/buildGridStyle", () => {
 				overflow: "hidden",
 			},
 			{ mode: "fill" },
-			false,
 		)
 
 		expect(style.minHeight).toBe(0)
@@ -26,14 +25,13 @@ describe("components/VisualEditor/buildGridStyle", () => {
 	})
 
 	test("editor fill keeps a slot floor so empty drop zones cannot collapse", () => {
-		const style = buildGridStyle(
+		const style = buildGridEditorStyle(
 			{},
 			{
 				...defaultGridLayoutValue(),
 				overflow: "hidden",
 			},
 			{ mode: "fill" },
-			true,
 		)
 
 		expect(style.minHeight).toBe(`${ SLOT_MIN_EMPTY_HEIGHT }px`)
@@ -41,7 +39,7 @@ describe("components/VisualEditor/buildGridStyle", () => {
 	})
 
 	test("editor adds layout chrome padding on top of author padding", () => {
-		const style = buildGridStyle(
+		const style = buildGridEditorStyle(
 			{
 				spacing: {
 					margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
@@ -50,7 +48,6 @@ describe("components/VisualEditor/buildGridStyle", () => {
 			},
 			defaultGridLayoutValue(),
 			{ mode: "fill" },
-			true,
 		)
 
 		expect(style.paddingTop).toBe(`calc(8px + ${ LAYOUT_CHROME_LABEL_SPACE_PX }px)`)
@@ -69,7 +66,6 @@ describe("components/VisualEditor/buildGridStyle", () => {
 			},
 			defaultGridLayoutValue(),
 			{ mode: "fill" },
-			false,
 		)
 
 		expect(style.paddingTop).toBe("8px")
@@ -85,11 +81,11 @@ describe("components/VisualEditor/gridConfig", () => {
 		expect(gridConfig.fields?.spacing).toBeTruthy()
 		expect(gridConfig.fields?.background).toBeTruthy()
 		expect(gridConfig.fields?.border).toBeTruthy()
-		expect(gridConfig.fields?.columns).toBeUndefined()
+		expect(gridConfig.fields).not.toHaveProperty("columns")
 		expect(gridConfig.defaultProps?.grid).toEqual(defaultGridLayoutValue())
 	})
 
-	test("resolveData hydrates legacy columns into the grid layout object", async () => {
+	test("resolveData normalizes the current grid layout object", async () => {
 		const resolveData = gridConfig.resolveData
 		expect(resolveData).toBeTypeOf("function")
 		if(!resolveData) {
@@ -98,9 +94,9 @@ describe("components/VisualEditor/gridConfig", () => {
 
 		const resolved = await resolveData({
 			props: {
-				id: "grid-legacy",
+				id: "grid-current",
 				content: [],
-				columns: 4,
+				grid: { ...defaultGridLayoutValue(), columns: 4 },
 			},
 		}, {
 			changed: {},

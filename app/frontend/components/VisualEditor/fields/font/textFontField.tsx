@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 
 import { ColorInput } from "@/components/Inputs"
 import { i18n } from "@/lib/i18n"
@@ -57,7 +58,7 @@ function TextFontFieldControl({
 	fallbackColor,
 	fallbackSizePreset,
 }: TextFontFieldControlProps) {
-	const fontValue = normalizeTextFontValue(value, undefined, {
+	const fontValue = normalizeTextFontValue(value, {
 		color: fallbackColor,
 		sizePreset: fallbackSizePreset,
 	})
@@ -75,7 +76,7 @@ function TextFontFieldControl({
 	}
 
 	return (
-		<div className={ classes.textFontRoot }>
+		<div className={ clsx(classes.textFontRoot) }>
 			<FieldRow label={ fontText("labels.family") }>
 				<FontFamilyControls
 					name={ `${name}.family` }
@@ -105,7 +106,6 @@ function TextFontFieldControl({
 					wrapper={ false }
 					name={ `${name}.color` }
 					value={ fontValue.color }
-					clearable
 					onChange={ (color) => {
 						commit({
 							...fontValue,

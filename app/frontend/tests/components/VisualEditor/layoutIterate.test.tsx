@@ -1,16 +1,23 @@
 import { type PuckContext, type SlotComponent } from "@puckeditor/core"
 import { screen } from "@testing-library/react"
+import clsx from "clsx"
 import { describe, expect, test, vi } from "vitest"
 
-import { ContainerDisplay } from "@/components/VisualEditor/components/Container/Container"
+import * as containerClasses from "@/components/VisualEditor/components/Container/Container.css"
+import * as containerEditorClasses from "@/components/VisualEditor/components/Container/Container.editor.css"
 import { containerConfig } from "@/components/VisualEditor/components/Container/containerConfig"
-import { GridDisplay } from "@/components/VisualEditor/components/Grid/Grid"
+import { ContainerDisplay } from "@/components/VisualEditor/components/Container/ContainerDisplay"
+import { ContainerEditor } from "@/components/VisualEditor/components/Container/ContainerEditor"
 import * as gridClasses from "@/components/VisualEditor/components/Grid/Grid.css"
 import { gridConfig } from "@/components/VisualEditor/components/Grid/gridConfig"
+import { GridDisplay } from "@/components/VisualEditor/components/Grid/GridDisplay"
+import { GridEditor } from "@/components/VisualEditor/components/Grid/GridEditor"
 import { defaultGridLayoutValue } from "@/components/VisualEditor/fields/grid"
-import { ITERATE_NONE, ITERATE_ORGS, RepeatedSlot } from "@/components/VisualEditor/fields/iterate"
+import { ITERATE_FINALIST_ORGS, ITERATE_NONE, ITERATE_ORGS, RepeatedSlot } from "@/components/VisualEditor/fields/iterate"
 import * as iterateClasses from "@/components/VisualEditor/fields/iterate/iterate.css"
 import * as iterateEditorClasses from "@/components/VisualEditor/fields/iterate/iterate.editor.css"
+import * as layoutChrome from "@/components/VisualEditor/styles/layoutChrome.editor.css"
+import * as puckClasses from "@/components/VisualEditor/styles/Puck.css"
 import { PresentationDataProvider } from "@/features/presentation"
 import {
 	createCirclePersisted,
@@ -21,7 +28,7 @@ import { render } from "@/tests/helpers/utils"
 
 const StubSlot: SlotComponent = (props) => {
 	return (
-		<div className={ props?.className } data-testid="layout-slot">
+		<div className={ clsx(props?.className) } data-testid="layout-slot">
 			slot
 		</div>
 	)
@@ -61,7 +68,7 @@ describe("components/VisualEditor/layout iterate", () => {
 		expect(containerConfig.fields?.iterate).toBeTruthy()
 		expect(gridConfig.fields?.iterate).toBeTruthy()
 		expect(gridConfig.fields?.grid).toBeTruthy()
-		expect(gridConfig.fields?.columns).toBeUndefined()
+		expect(gridConfig.fields).not.toHaveProperty("columns")
 		expect(containerConfig.defaultProps?.iterate).toBe(ITERATE_NONE)
 		expect(gridConfig.defaultProps?.iterate).toBe(ITERATE_NONE)
 		expect(gridConfig.defaultProps?.grid).toEqual(defaultGridLayoutValue())
@@ -94,7 +101,7 @@ describe("components/VisualEditor/layout iterate", () => {
 					content={ StubSlot }
 					items={ items }
 					pathPrefix="presentation.org"
-					className={ gridClasses.iterateCell }
+					className={ clsx(gridClasses.iterateCell) }
 				/>
 			</div>,
 		)
@@ -117,7 +124,7 @@ describe("components/VisualEditor/layout iterate", () => {
 	})
 
 	test("live Container with Iterate on renders one slot per org", () => {
-		render(
+		const { container } = render(
 			<PresentationDataProvider
 				value={ {
 					circle: createCirclePersisted(),
@@ -126,6 +133,7 @@ describe("components/VisualEditor/layout iterate", () => {
 			>
 				<div data-testid="parent">
 					<ContainerDisplay
+						id="container-1"
 						content={ StubSlot }
 						alignment="left"
 						iterate={ ITERATE_ORGS }
@@ -142,6 +150,12 @@ describe("components/VisualEditor/layout iterate", () => {
 		)
 
 		expect(screen.getAllByTestId("layout-slot")).toHaveLength(2)
+
+		const host = container.getElementsByClassName(containerClasses.container)[0]
+		expect(host?.className).toContain(containerClasses.container)
+		expect(host?.className).not.toContain(containerEditorClasses.container)
+		expect(host?.className).not.toContain(puckClasses.presentationSlot)
+		expect(host?.className).not.toContain(layoutChrome.frame)
 	})
 
 	test("live Container with Iterate on and no orgs renders no slot copies", () => {
@@ -153,6 +167,7 @@ describe("components/VisualEditor/layout iterate", () => {
 				} }
 			>
 				<ContainerDisplay
+					id="container-1"
 					content={ StubSlot }
 					alignment="left"
 					iterate={ ITERATE_ORGS }
@@ -166,7 +181,7 @@ describe("components/VisualEditor/layout iterate", () => {
 	})
 
 	test("editor Container with Iterate on keeps one slot and the hint", () => {
-		render(
+		const { container } = render(
 			<PresentationDataProvider
 				value={ {
 					circle: createCirclePersisted(),
@@ -174,7 +189,8 @@ describe("components/VisualEditor/layout iterate", () => {
 					isEditor: true,
 				} }
 			>
-				<ContainerDisplay
+				<ContainerEditor
+					id="container-1"
 					content={ StubSlot }
 					alignment="left"
 					iterate={ ITERATE_ORGS }
@@ -186,10 +202,17 @@ describe("components/VisualEditor/layout iterate", () => {
 
 		expect(screen.getAllByTestId("layout-slot")).toHaveLength(1)
 		expect(screen.getByText("Iterates for each organization")).toBeInTheDocument()
+
+		const host = container.getElementsByClassName(containerClasses.container)[0]
+		expect(host?.className).toContain(containerClasses.container)
+		expect(host?.className).toContain(containerEditorClasses.container)
+		expect(host?.className).toContain(puckClasses.presentationSlot)
+		expect(host?.className).toContain(layoutChrome.frame)
+		expect(host?.className).toContain(layoutChrome.labelContainer)
 	})
 
 	test("live Grid with Iterate on renders one slot per org", () => {
-		render(
+		const { container } = render(
 			<PresentationDataProvider
 				value={ {
 					circle: createCirclePersisted(),
@@ -197,8 +220,9 @@ describe("components/VisualEditor/layout iterate", () => {
 				} }
 			>
 				<GridDisplay
+					id="grid-1"
 					content={ StubSlot }
-					columns={ 3 }
+					grid={ defaultGridLayoutValue() }
 					iterate={ ITERATE_ORGS }
 					puck={ livePuck() }
 				/>
@@ -207,6 +231,11 @@ describe("components/VisualEditor/layout iterate", () => {
 
 		expect(screen.getAllByTestId("layout-slot")).toHaveLength(2)
 		expect(screen.getAllByTestId("layout-slot")[0]?.className).toContain(gridClasses.iterateCell)
+
+		const host = container.querySelector("[data-center-last-row]")
+		expect(host?.className).toContain(gridClasses.grid)
+		expect(host?.className).not.toContain(puckClasses.presentationSlot)
+		expect(host?.className).not.toContain(layoutChrome.frame)
 	})
 
 	test("live Grid with last row centered marks the host", () => {
@@ -218,8 +247,8 @@ describe("components/VisualEditor/layout iterate", () => {
 				} }
 			>
 				<GridDisplay
+					id="grid-1"
 					content={ StubSlot }
-					columns={ 3 }
 					grid={ {
 						...defaultGridLayoutValue(),
 						centerLastRow: true,
@@ -234,7 +263,7 @@ describe("components/VisualEditor/layout iterate", () => {
 	})
 
 	test("editor Grid with Iterate on keeps one slot and the hint", () => {
-		render(
+		const { container } = render(
 			<PresentationDataProvider
 				value={ {
 					circle: createCirclePersisted(),
@@ -242,9 +271,10 @@ describe("components/VisualEditor/layout iterate", () => {
 					isEditor: true,
 				} }
 			>
-				<GridDisplay
+				<GridEditor
+					id="grid-1"
 					content={ StubSlot }
-					columns={ 3 }
+					grid={ defaultGridLayoutValue() }
 					iterate={ ITERATE_ORGS }
 					puck={ editorPuck() }
 				/>
@@ -254,5 +284,56 @@ describe("components/VisualEditor/layout iterate", () => {
 		expect(screen.getAllByTestId("layout-slot")).toHaveLength(1)
 		expect(screen.getByText("Iterates for each organization")).toBeInTheDocument()
 		expect(screen.getByTestId("layout-slot").className).toContain(iterateEditorClasses.iterateSlot)
+
+		const host = container.querySelector("[data-center-last-row]")
+		expect(host?.className).toContain(gridClasses.grid)
+		expect(host?.className).toContain(puckClasses.presentationSlot)
+		expect(host?.className).toContain(layoutChrome.frame)
+		expect(host?.className).toContain(layoutChrome.labelGrid)
+	})
+
+	test("live Container with finalist iterate and no vote renders all org slots", () => {
+		render(
+			<PresentationDataProvider
+				value={ {
+					circle: createCirclePersisted(),
+					presentation: presentationWithOrgs(),
+				} }
+			>
+				<ContainerDisplay
+					id="container-1"
+					content={ StubSlot }
+					alignment="left"
+					iterate={ ITERATE_FINALIST_ORGS }
+					flex={ {} }
+					puck={ livePuck() }
+				/>
+			</PresentationDataProvider>,
+		)
+
+		expect(screen.getAllByTestId("layout-slot")).toHaveLength(2)
+	})
+
+	test("editor Container with finalist iterate shows the finalist hint", () => {
+		render(
+			<PresentationDataProvider
+				value={ {
+					circle: createCirclePersisted(),
+					presentation: presentationWithOrgs(),
+					isEditor: true,
+				} }
+			>
+				<ContainerEditor
+					id="container-1"
+					content={ StubSlot }
+					alignment="left"
+					iterate={ ITERATE_FINALIST_ORGS }
+					flex={ {} }
+					puck={ editorPuck() }
+				/>
+			</PresentationDataProvider>,
+		)
+
+		expect(screen.getByText("Iterates for each finalist organization")).toBeInTheDocument()
 	})
 })

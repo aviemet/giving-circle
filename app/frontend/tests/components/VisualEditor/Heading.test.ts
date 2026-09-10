@@ -50,23 +50,23 @@ describe("components/VisualEditor/components/Heading", () => {
 		})
 	})
 
-	test("normalizeHeadingMetrics prefers metrics over legacy props", () => {
+	test("normalizeHeadingMetrics fills defaults for the current metrics object", () => {
 		expect(normalizeHeadingMetrics(
 			{ order: 3, padding: 8 },
-			{ order: 1, padding: 16 },
 		)).toEqual({ order: 3, padding: { amount: 8, unit: "px" } })
 
-		expect(normalizeHeadingMetrics(undefined, {
-			order: 2,
-			padding: 24,
-		})).toEqual({ order: 2, padding: { amount: 24, unit: "px" } })
+		expect(normalizeHeadingMetrics(undefined)).toEqual({
+			order: 1,
+			padding: { amount: 16, unit: "px" },
+		})
 	})
 
 	test("normalizeTextFontValue and resolveFontSize support clamp", () => {
-		expect(normalizeTextFontValue(undefined, {
-			font: { family: "Georgia", url: "" },
+		expect(normalizeTextFontValue({
+			family: "Georgia",
+			url: "",
 			color: "#abc",
-			size: "xl",
+			size: defaultFlexibleFontSize("xl"),
 		})).toMatchObject({
 			family: "Georgia",
 			color: "#abc",
@@ -96,7 +96,7 @@ describe("components/VisualEditor/components/Heading", () => {
 		})
 	})
 
-	test("resolveFontSize maps Auto and legacy heading presets through the slide scale", () => {
+	test("resolveFontSize maps Auto and heading presets through the slide scale", () => {
 		const autoSize = defaultFlexibleFontSize("auto")
 
 		expect(resolveFontSize(autoSize, 1)).toEqual({ fontSize: "4.25rem" })
@@ -108,22 +108,23 @@ describe("components/VisualEditor/components/Heading", () => {
 		expect(resolveFontSize(defaultFlexibleFontSize("6xl"))).toEqual({ fontSize: "8rem" })
 	})
 
-	test("normalizeTypeStyle prefers grouped values over legacy props", () => {
+	test("normalizeTypeStyle fills missing keys from the fallback weight", () => {
 		expect(normalizeTypeStyle(
 			{ fw: 500, td: "underline", tt: "uppercase", fs: "italic" },
-			{ fw: 700, td: "none", tt: "none", fs: "normal" },
 			700,
 		)).toEqual({ fw: 500, td: "underline", tt: "uppercase", fs: "italic" })
+		expect(normalizeTypeStyle(undefined, 700).fw).toBe(700)
 	})
 
-	test("normalizeTextFlow falls back to legacy lineClamp and textWrap", () => {
-		expect(normalizeTextFlow(undefined, {
+	test("normalizeTextFlow fills defaults", () => {
+		expect(normalizeTextFlow(undefined)).toEqual({ lineClamp: 0, textWrap: "wrap" })
+		expect(normalizeTextFlow({ lineClamp: 2, textWrap: "balance" })).toEqual({
 			lineClamp: 2,
 			textWrap: "balance",
-		})).toEqual({ lineClamp: 2, textWrap: "balance" })
+		})
 	})
 
-	test("resolveData hydrates font, metrics, typeStyle, and flow from legacy props", async () => {
+	test("resolveData normalizes the current grouped heading fields", async () => {
 		expect(headingConfig.resolveData).toBeDefined()
 		if(headingConfig.resolveData === undefined) return
 
@@ -132,17 +133,21 @@ describe("components/VisualEditor/components/Heading", () => {
 				props: {
 					id: "heading-resolve",
 					title: "Hello",
-					order: 2,
-					size: "h2",
-					padding: 24,
-					color: "#fff",
-					fw: 700,
-					td: "underline",
-					tt: "uppercase",
-					fs: "italic",
 					alignment: "left",
-					lineClamp: 3,
-					textWrap: "balance",
+					metrics: { order: 2, padding: 24 },
+					font: {
+						family: "",
+						url: "",
+						color: "#fff",
+						size: defaultFlexibleFontSize("h2"),
+					},
+					typeStyle: {
+						fw: 700,
+						td: "underline",
+						tt: "uppercase",
+						fs: "italic",
+					},
+					flow: { lineClamp: 3, textWrap: "balance" },
 				},
 				readOnly: {},
 			},

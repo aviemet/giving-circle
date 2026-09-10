@@ -14,6 +14,9 @@ en:
     active:
       controls:
         element_controls:
+          leveragebar:
+            label: Leverage bar
+            visible: Visible
           timer:
             duration_override: Duration override
             label: Timer
@@ -66,6 +69,7 @@ en:
     form:
       blank_presentation: Blank presentation
       create: Create Presentation
+      finalist_count: Number of finalists
       name: Name
       start_from_template: Start from Presentation Template
       update: Update Presentation
@@ -79,16 +83,17 @@ en:
     interact:
       form:
         finalize: Finalize Vote
-        funds_left: "Funds left to allocate: %{amount}"
+        funds_left: 'Funds left to allocate: %{amount}'
         missing_field: This interaction is missing its vote field configuration.
         partial_submit: Submit without allocating all funds
         partial_votes_submit: Submit without using all votes
+        pledge_amount: Pledge amount
         submit: Submit
         toggle_keyboard: Enter amount with keyboard
         toggle_slider: Adjust amount with slider
         unsupported: This interaction UI is not available.
         update: Update vote
-        votes_left: "Votes left: %{votes}"
+        votes_left: 'Votes left: %{votes}'
       idle:
         body: An interaction will appear here when the host opens one.
         title: Waiting for the next activity
@@ -169,7 +174,17 @@ en:
       edit:
         breadcrumb: Edit
       form:
+        answer_pipeline:
+          description: Member answers and how they become live totals on the presentation.
+          title: Answer pipeline
+        config_template_starter:
+          description: Loads saved member answers and live results into the custom flow below. This does not change the member screen, name, trigger, or interaction settings.
+          hint: Choosing Blank clears member answers and live results only.
+          label: Saved recipe
+          title: Answer pipeline starter
         create: Create Interaction
+        curated_type:
+          description: This interaction type uses a built-in member screen and live results. Configure behavior in the settings below.
         field_builder:
           add_field: Add answer
           answer_n: Answer %{index}
@@ -192,10 +207,14 @@ en:
           repeatable: Allow multiple entries
           type: Answer type
           type_description: What kind of answer members give.
+        interaction_settings:
+          title: Interaction settings
         live_results: Live results
         live_results_description: How those answers become totals shown on the presentation.
         member_answers: Member answers
         member_answers_description: What people fill in during the interaction.
+        member_ui_edit_link: Edit member screen
+        member_ui_summary: Member answers are laid out in the visual editor. The saved layout compiles into the answer pipeline below.
         metrics:
           allocated_totals: Allocated totals
           money_totals: Money totals
@@ -203,6 +222,11 @@ en:
           rank_totals: Rank totals
           vote_counts: Vote counts
         name: Name
+        orchestration:
+          exclude_funded_orgs: Exclude fully funded organizations
+          funding_basis: Funding basis
+          stage: Stage order
+          title: Round orchestration
         output_builder:
           add_output: Add result
           metric: Result shown
@@ -242,6 +266,7 @@ en:
           rank_aggregate: Combine ranks
           sum_by_org: Sum by organization
           sum_money: Sum money
+        select_type_first: Select an interaction type to configure settings and the answer pipeline.
         settings:
           allow_non_finalists: Allow pledges to non-finalists
           allow_over_ask: Allow pledges over organization ask
@@ -253,6 +278,8 @@ en:
         trigger_manual: Manual
         trigger_slide: Slide
         trigger_type: Trigger type
+        type_locked:
+          description: Interaction type is fixed after creation. All other settings remain editable.
         types:
           boolean: Yes/No
           field_group: Group of answers
@@ -266,9 +293,52 @@ en:
           text: Text
         ui_template: Member UI
         update: Update Interaction
+        wizard:
+          back: Back
+          next: Next
+          pipeline_curated_intro: This type uses built-in member answers and live results. You can customize the pipeline below or skip this step and use the defaults.
+          select_type_to_continue: Choose an interaction type to continue.
+          skip_pipeline: Skip pipeline
+          steps:
+            details: Details
+            pipeline: Answers and live results
+            settings: Settings
+            type: Interaction type
+          type_description: This determines what members do on their phones during the interaction and which settings you can configure.
+          type_groups:
+            built_in: Built-in
+            custom: Custom
       index:
         newInteraction: New Interaction
         title: Interactions
+      member_ui:
+        categories:
+          inputs: Inputs
+          layout: Layout
+        components:
+          boolean:
+            label: Boolean input
+          field_key: Field key
+          label: Label
+          org_money_map:
+            label: Organization amounts
+          org_reference:
+            label: Organization choice
+          output_metric: Output metric
+          widget: Widget
+        editor:
+          breadcrumb: Member screen
+          title: Member screen - %{name}
+        root:
+          allow_non_finalists: Allow non-finalists
+          allow_over_ask: Allow over ask
+          default_votes: Default votes
+          exclude_funded_orgs: Exclude fully funded organizations
+          funding_basis: Funding basis
+          label: Member screen
+          output_metric: Output metric
+          stage: Stage
+          title: Title
       new:
         title: New Interaction
       notices:
@@ -327,7 +397,7 @@ en:
       title: Settings
     show:
       active: Active
-      basedOnTemplate: "Based on Presentation Template:"
+      basedOnTemplate: 'Based on Presentation Template:'
       breadcrumbs:
         circles: Circles
         presentations: Presentations

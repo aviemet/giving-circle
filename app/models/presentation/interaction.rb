@@ -5,6 +5,7 @@
 #  id                         :uuid             not null, primary key
 #  accepting_responses        :boolean          default(FALSE), not null
 #  config                     :jsonb            not null
+#  member_ui                  :jsonb            not null
 #  name                       :string           not null
 #  results                    :jsonb            not null
 #  slug                       :string           not null
@@ -28,6 +29,7 @@
 #
 class Presentation::Interaction < ApplicationRecord
   include PgSearchable
+  include InteractionMemberUiConfig
 
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history, :scoped], scope: :presentation
@@ -48,11 +50,13 @@ class Presentation::Interaction < ApplicationRecord
 
   belongs_to :presentation
   belongs_to :interaction_ui_template
+
   has_many :interaction_responses,
     class_name: "Presentation::InteractionResponse",
     foreign_key: :presentation_interaction_id,
     dependent: :destroy,
     inverse_of: :presentation_interaction
+
   has_many :interaction_memberships,
     class_name: "Presentation::InteractionMembership",
     foreign_key: :presentation_interaction_id,
@@ -78,7 +82,7 @@ class Presentation::Interaction < ApplicationRecord
 
   def open_responses!
     transaction do
-      presentation.interactions.where.not(id: id).where(accepting_responses: true).update_all(accepting_responses: false)
+      presentation.interactions.where.not(id: id).where(accepting_responses: true).update_all(accepting_responses: false) # rubocop:disable Rails/SkipsModelValidations
       sync_interaction_memberships!
       update!(accepting_responses: true)
     end
@@ -127,6 +131,6 @@ class Presentation::Interaction < ApplicationRecord
   end
 
   def validate_config_structure
-    Presentation::Interaction::ConfigValidator.validate(self)
+    Interactions::ConfigValidator.validate(self)
   end
 end

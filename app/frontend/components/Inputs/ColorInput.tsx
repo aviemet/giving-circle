@@ -2,6 +2,8 @@ import { ColorInput, type ColorInputProps } from "@mantine/core"
 import { useUncontrolled } from "@mantine/hooks"
 import React, { type Ref } from "react"
 
+import { useFormFieldError } from "@/components/Form"
+
 import { InputWrapper } from "./InputWrapper"
 import { Label } from "./Label"
 
@@ -10,7 +12,7 @@ import { type BaseInputProps } from "."
 export interface ColorPickerInputProps
 	extends
 	Omit<BaseInputProps, "disableAutofill">,
-	Omit<ColorInputProps, "__clearable">
+	ColorInputProps
 {
 	ref?: Ref<HTMLInputElement>
 	label?: React.ReactNode
@@ -19,7 +21,6 @@ export interface ColorPickerInputProps
 	id?: string
 	onChange?: (color: string) => void
 	onFocus?: () => void
-	clearable?: boolean
 	wrapperProps?: Record<string, any>
 	children?: React.ReactNode
 }
@@ -33,12 +34,13 @@ export function ColorPickerInput({
 	onChange,
 	onFocus,
 	value,
-	clearable,
 	wrapper = true,
 	wrapperProps,
 	children,
+	error,
 	...props
 }: ColorPickerInputProps) {
+	const fieldError = useFormFieldError(name)
 	const inputId = id || name
 
 	const [currentValue, handleChange] = useUncontrolled<string>({
@@ -59,7 +61,7 @@ export function ColorPickerInput({
 				name={ name }
 				value={ currentValue }
 				onChange={ handleChange }
-				__clearable={ clearable }
+				error={ error ?? fieldError }
 				{ ...props }
 			/>
 

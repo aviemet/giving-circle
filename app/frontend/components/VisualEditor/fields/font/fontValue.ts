@@ -21,7 +21,7 @@ export function defaultFontValue(): FontValue {
 }
 
 export function isGenericFontFamily(family: string): family is GenericFontFamily {
-	return (GENERIC_FONT_FAMILIES as readonly string[]).includes(family)
+	return GENERIC_FONT_FAMILIES.some((candidate) => candidate === family)
 }
 
 export function hasFontFamily(font: FontValue | undefined): font is FontValue {

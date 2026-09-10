@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 
-import { usePresentationDataContext } from "@/features/presentation"
 import { useActiveSlideId } from "@/features/presentation/ActiveSlideProvider"
-import { useTimerDurationOverrideSeconds } from "@/features/presentation/elementControls"
+import { useTimerDurationOverrideSeconds } from "@/features/presentation/elementControls/TimerDurationOverrideControl"
+import { usePresentationDataContext } from "@/features/presentation/PresentationDataProvider"
 
 export function useLocalCountdown(durationSeconds: number, isRunning: boolean) {
 	const [remainingSeconds, setRemainingSeconds] = useState(durationSeconds)

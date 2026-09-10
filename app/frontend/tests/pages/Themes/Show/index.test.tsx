@@ -20,6 +20,7 @@ describe("pages/Themes/Show/index", () => {
 				active: false,
 				slides_count: 3,
 				theme_id: "theme-1",
+				settings: { finalist_count: 5 },
 			}],
 		})
 

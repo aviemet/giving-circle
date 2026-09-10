@@ -107,103 +107,28 @@ if Rails.env.development?
         name: "Allocation round",
         slug: "allocation-round",
         interaction_ui_template: allocation_ui,
-        config: {
-          "fields" => [
-            {
-              "key" => "allocations",
-              "type" => "org_money_map",
-              "label" => "Allocate to organizations",
-            },
-          ],
-          "outputs" => [
-            {
-              "metric" => "allocated_totals",
-              "source_field" => "allocations",
-              "reducer" => "sum_by_org",
-            },
-          ],
-          "settings" => {},
-        },
+        member_ui: Interactions::MemberUiPresets::ALLOCATION,
       })
 
       circle.interaction_config_templates.create!({
         name: "Org vote",
         slug: "org-vote",
         interaction_ui_template: org_vote_ui,
-        config: {
-          "fields" => [
-            {
-              "key" => "preferred_org",
-              "type" => "org_reference",
-              "label" => "Which organization do you support?",
-            },
-          ],
-          "outputs" => [
-            {
-              "metric" => "vote_counts",
-              "source_field" => "preferred_org",
-              "reducer" => "count_by_value",
-            },
-          ],
-          "settings" => {},
-        },
+        member_ui: Interactions::MemberUiPresets::ORG_VOTE,
       })
 
       circle.interaction_config_templates.create!({
         name: "Finalist vote",
         slug: "finalist-vote",
         interaction_ui_template: finalist_vote_ui,
-        config: {
-          "fields" => [
-            {
-              "key" => "votes",
-              "type" => "org_money_map",
-              "label" => "Cast your votes for organizations",
-            },
-          ],
-          "outputs" => [
-            {
-              "metric" => "org_vote_totals",
-              "source_field" => "votes",
-              "reducer" => "sum_by_org",
-            },
-          ],
-          "settings" => {
-            "finalist_count" => 5,
-            "default_votes" => 10,
-          },
-        },
+        member_ui: Interactions::MemberUiPresets::FINALIST_VOTE,
       })
 
       circle.interaction_config_templates.create!({
         name: "Pledges",
         slug: "pledges",
         interaction_ui_template: pledges_ui,
-        config: {
-          "fields" => [
-            {
-              "key" => "pledges",
-              "type" => "org_money_map",
-              "label" => "Pledge to organizations",
-            },
-            {
-              "key" => "anonymous",
-              "type" => "boolean",
-              "label" => "Anonymous",
-            },
-          ],
-          "outputs" => [
-            {
-              "metric" => "allocated_totals",
-              "source_field" => "pledges",
-              "reducer" => "sum_by_org",
-            },
-          ],
-          "settings" => {
-            "allow_non_finalists" => false,
-            "allow_over_ask" => false,
-          },
-        },
+        member_ui: Interactions::MemberUiPresets::PLEDGES,
       })
     end
   end

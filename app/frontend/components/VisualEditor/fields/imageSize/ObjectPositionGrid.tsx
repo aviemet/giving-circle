@@ -34,7 +34,7 @@ export function ObjectPositionGrid({
 					<IconControlTooltip
 						key={ `${cell.x}-${cell.y}` }
 						label={ cell.label }
-						className={ classes.objectPositionCellHost }
+						className={ clsx(classes.objectPositionCellHost) }
 					>
 						<button
 							type="button"

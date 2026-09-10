@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Stack, Text } from "@/components"
 import { SwitchSlideButton } from "@/domains/presentations/Buttons/SwitchSlideButton"
 import {
-	getElementControlDefinition,
+	ELEMENT_CONTROL_PANELS,
 	scanSlideElements,
 } from "@/features/presentation/elementControls"
 import { type ElementControlsPayload } from "@/types/ElementControlsPayload"
@@ -48,13 +48,7 @@ export function SlideControlColumn({
 			{ controllableElements.length > 0 && (
 				<Stack gap="sm" className={ clsx(classes.elementControls) }>
 					{ controllableElements.map((element) => {
-						const definition = getElementControlDefinition(element.elementType)
-
-						if(definition === undefined) {
-							return null
-						}
-
-						const ControlPanel = definition.ControlPanel
+						const ControlPanel = ELEMENT_CONTROL_PANELS[element.elementType]
 
 						return (
 							<Stack key={ `${element.elementType}-${element.elementId}` } gap="xs" className={ clsx(classes.elementControlPanel) }>
@@ -64,7 +58,6 @@ export function SlideControlColumn({
 								<ControlPanel
 									slideId={ slide.id }
 									elementId={ element.elementId }
-									elementType={ element.elementType }
 									elementControls={ elementControls }
 									circleSlug={ circleSlug }
 									presentationSlug={ presentationSlug }

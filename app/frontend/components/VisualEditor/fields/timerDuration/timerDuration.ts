@@ -12,14 +12,10 @@ export function defaultTimerDuration(): TimerDurationValue {
 
 export function normalizeTimerDuration(
 	value: Partial<TimerDurationValue> | undefined,
-	legacy?: {
-		durationMinutes?: number
-		durationSeconds?: number
-	},
 ): TimerDurationValue {
 	const defaults = defaultTimerDuration()
-	const minutesRaw = value?.minutes ?? legacy?.durationMinutes ?? defaults.minutes
-	const secondsRaw = value?.seconds ?? legacy?.durationSeconds ?? defaults.seconds
+	const minutesRaw = value?.minutes ?? defaults.minutes
+	const secondsRaw = value?.seconds ?? defaults.seconds
 	const minutes = Number.isFinite(minutesRaw) ? Math.max(0, Math.floor(minutesRaw)) : 0
 	const seconds = Number.isFinite(secondsRaw) ? Math.max(0, Math.min(59, Math.floor(secondsRaw))) : 0
 

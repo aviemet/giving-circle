@@ -2,7 +2,7 @@ import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
-import { TextDisplay } from "./Text"
+import { Text, type TextProps } from "./Text"
 import {
 	alignmentField,
 	defaultTextFlow,
@@ -18,48 +18,13 @@ import {
 	textFontField,
 	textLayoutField,
 	typeStyleField,
-	type AlignmentValue,
-	type FontSizeValue,
-	type FontStyleValue,
-	type FontWeightValue,
-	type TextDecorationValue,
-	type TextFlowValue,
-	type TextFontValue,
-	type TextLayoutValue,
-	type TextTransformValue,
-	type TextWrapValue,
-	type TruncateValue,
-	type TypeStyleValue,
 } from "../../fields"
 
-export type TextComponentProps = {
-	content: string
-	size?: FontSizeValue
-	color?: string
-	font?: TextFontValue
-	typeStyle?: TypeStyleValue
-	fw?: FontWeightValue
-	td?: TextDecorationValue
-	tt?: TextTransformValue
-	fs?: FontStyleValue
-	alignment: AlignmentValue
-	flow?: TextFlowValue
-	layout?: TextLayoutValue
-	lineClamp?: number
-	truncate?: TruncateValue
-	inline?: boolean
-	inherit?: boolean
-	span?: boolean
-	textWrap?: TextWrapValue
-}
-
-const t = i18n.t.bind(i18n)
-
-export const textConfig: ComponentConfig<TextComponentProps> = {
-	label: t("slides.editor.components.text.label"),
+export const textConfig: ComponentConfig<TextProps> = {
+	label: i18n.t("slides.editor.components.text.label"),
 	fields: {
 		content: tagsField({
-			label: t("slides.editor.components.text.content"),
+			label: i18n.t("slides.editor.components.text.content"),
 		}),
 		font: textFontField({
 			allowInherit: true,
@@ -69,14 +34,14 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 		}),
 		typeStyle: typeStyleField({ fallbackWeight: 400 }),
 		alignment: alignmentField({
-			label: t("slides.editor.components.text.alignment"),
+			label: i18n.t("slides.editor.components.text.alignment"),
 		}),
 		flow: textFlowField({ includeTruncate: true }),
 		layout: textLayoutField(),
 	},
 
 	defaultProps: {
-		content: t("slides.editor.components.text.default_content"),
+		content: i18n.t("slides.editor.components.text.default_content"),
 		font: defaultTextFontValue({
 			color: "#FFFFFF",
 			sizePreset: "xl",
@@ -91,41 +56,16 @@ export const textConfig: ComponentConfig<TextComponentProps> = {
 		return {
 			props: {
 				...props,
-				font: normalizeTextFontValue(
-					props.font,
-					{
-						font: props.font,
-						color: props.color,
-						size: props.size,
-					},
-					{
-						color: "#FFFFFF",
-						sizePreset: "xl",
-					},
-				),
-				typeStyle: normalizeTypeStyle(props.typeStyle, {
-					fw: props.fw,
-					td: props.td,
-					tt: props.tt,
-					fs: props.fs,
-				}, 400),
-				flow: normalizeTextFlow(
-					props.flow,
-					{
-						lineClamp: props.lineClamp,
-						textWrap: props.textWrap,
-						truncate: props.truncate,
-					},
-					true,
-				),
-				layout: normalizeTextLayout(props.layout, {
-					inline: props.inline,
-					inherit: props.inherit,
-					span: props.span,
+				font: normalizeTextFontValue(props.font, {
+					color: "#FFFFFF",
+					sizePreset: "xl",
 				}),
+				typeStyle: normalizeTypeStyle(props.typeStyle, 400),
+				flow: normalizeTextFlow(props.flow, true),
+				layout: normalizeTextLayout(props.layout),
 			},
 		}
 	},
 
-	render: (props) => <TextDisplay { ...props } />,
+	render: (props) => <Text { ...props } />,
 }

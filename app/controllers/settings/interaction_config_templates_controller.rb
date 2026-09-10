@@ -18,6 +18,7 @@ module Admin
       :name,
       :interaction_ui_template_id,
       { config: {} },
+      { member_ui: {} },
     ]
 
     sortable_fields %w(name slug)
@@ -40,6 +41,13 @@ module Admin
     def new
       render inertia: "InteractionConfigTemplates/New", props: {
         interaction_config_template: InteractionConfigTemplate.new.render(:form_data),
+      }
+    end
+
+    # @route GET /settings/:circle_slug/interaction_templates/:slug/member_ui/edit (edit_member_ui_settings_interaction_template)
+    def edit_member_ui
+      render inertia: "InteractionConfigTemplates/MemberUi/Edit", props: {
+        interaction_config_template: interaction_config_template.render(:edit),
       }
     end
 
@@ -67,9 +75,19 @@ module Admin
     # @route PUT /settings/:circle_slug/interaction_templates/:slug (settings_interaction_template)
     def update
       if interaction_config_template.update(interaction_config_template_params)
+        if member_ui_only_update?
+          head :ok
+          return
+        end
+
         redirect_to edit_settings_interaction_template_path(circle, interaction_config_template),
           notice: t("interaction_config_templates.notices.updated")
       else
+        if member_ui_only_update?
+          render json: { errors: interaction_config_template.errors }, status: :unprocessable_content
+          return
+        end
+
         redirect_to edit_settings_interaction_template_path(circle, interaction_config_template),
           inertia: { errors: interaction_config_template.errors }
       end
@@ -79,6 +97,12 @@ module Admin
     def destroy
       interaction_config_template.destroy!
       redirect_to settings_interaction_templates_path(circle), notice: t("interaction_config_templates.notices.destroyed")
+    end
+
+    private
+
+    def member_ui_only_update?
+      interaction_config_template_params.keys.map(&:to_s) == ["member_ui"]
     end
   end
 end

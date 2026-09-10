@@ -1,12 +1,13 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 
 import { TagsInput } from "@/components/Inputs"
 
-import { dataAccess, getFlatOptions } from "../../dynamicData/dataAccess"
+import { tagOptions } from "../../lib/dynamicData"
 import * as classes from "../puckFieldStyles.css"
 import { PuckFieldLabel } from "../shared/PuckFieldLabel"
 
-const dynamicTagOptionValues = getFlatOptions(dataAccess).map(option => option.value)
+const dynamicTagOptionValues = tagOptions.map(option => option.value)
 
 function tagsField(): Field<string>
 function tagsField(params: Partial<Field<string>> & { options?: string[] }): Field<string>
@@ -24,7 +25,7 @@ function tagsField(params?: Partial<Field<string>> & { options?: string[] }): Fi
 						key={ id }
 						name={ name }
 						wrapper={ false }
-						className={ classes.puckTagsInput }
+						className={ clsx(classes.puckTagsInput) }
 						value={ value }
 						onChange={ onChange }
 						placeholder="Type # to add hashtags..."

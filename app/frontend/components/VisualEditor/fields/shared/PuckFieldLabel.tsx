@@ -1,4 +1,5 @@
 import { FieldLabel } from "@puckeditor/core"
+import clsx from "clsx"
 import { type ReactNode } from "react"
 
 import * as classes from "../puckFieldStyles.css"
@@ -17,7 +18,7 @@ export function PuckFieldLabel({ label, children, readOnly, icon }: PuckFieldLab
 			el="div"
 			readOnly={ readOnly }
 			icon={ icon }
-			className={ classes.puckFieldLabel }
+			className={ clsx(classes.puckFieldLabel) }
 		>
 			{ children }
 		</FieldLabel>

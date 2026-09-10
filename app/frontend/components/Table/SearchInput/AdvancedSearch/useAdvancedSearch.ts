@@ -24,6 +24,23 @@ export type InputParam<T = string | Date> = {
 
 export type ParamValue = string | number | Date | Date[] | undefined | null
 
+function dateFromSearchParam(rawValue: unknown): Date | null {
+	if(rawValue instanceof Date && !Number.isNaN(rawValue.getTime())) {
+		return rawValue
+	}
+
+	if(typeof rawValue !== "string" || rawValue === "") {
+		return null
+	}
+
+	const dateValue = new Date(rawValue)
+	if(Number.isNaN(dateValue.getTime())) {
+		return null
+	}
+
+	return dateValue
+}
+
 /**
  * Hook for building advanced search interfaces
  * @param inputParams Array of objects with the following structure: { label: string, name: string, default?: unknown, dependent?: string|string[] }
@@ -121,31 +138,20 @@ const useAdvancedSearch = (
 	}, [inputParams])
 
 	// Method returned from hook to be passed to an input
-	const buildInputProps = <T = string | Date>(name: InputParamName) => {
+	const buildInputProps = (name: InputParamName) => {
 		const param = localInputParams.find(param => param.name === name)
 		const dateParam = inputParams.find(p => p.type === "date" && (name === `${p.name}[start]` || name === `${p.name}[end]` || name === `${p.name}[type]`))
+		const rawValue = values.get(name)
 
-		let value: T
-		if(dateParam) {
-			const rawValue = values.get(name)
-			if(name.endsWith("[start]") || name.endsWith("[end]")) {
-				if(rawValue !== null && rawValue !== undefined && rawValue !== "") {
-					const dateValue = new Date(rawValue as string)
-					if(!isNaN(dateValue.getTime())) {
-						value = dateValue as T
-					} else {
-						value = null as T
-					}
-				} else {
-					value = null as T
-				}
-			} else {
-				const rawValue = values.get(name)
-				value = (rawValue !== null && rawValue !== undefined ? rawValue : "") as T
-			}
+		let value: string | Date | null
+		if(dateParam && (name.endsWith("[start]") || name.endsWith("[end]"))) {
+			value = dateFromSearchParam(rawValue)
+		} else if(typeof rawValue === "string") {
+			value = rawValue
+		} else if(typeof rawValue === "number") {
+			value = String(rawValue)
 		} else {
-			const rawValue = values.get(name)
-			value = (rawValue !== null && rawValue !== undefined ? rawValue : "") as T
+			value = ""
 		}
 
 		return {

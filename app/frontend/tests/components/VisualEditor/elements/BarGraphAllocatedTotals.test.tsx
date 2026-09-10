@@ -90,9 +90,9 @@ describe("components/VisualEditor/elements/BarGraphAllocatedTotals", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config elements category", () => {
+describe("components/VisualEditor/config elements category", () => {
 	test("includes Elements category with bar graph component", async () => {
-		const { config } = await import("@/components/VisualEditor/puck.config")
+		const { config } = await import("@/components/VisualEditor/config")
 
 		expect(config.categories?.elements?.title).toBe("Elements")
 		expect(config.categories?.elements?.components).toEqual([

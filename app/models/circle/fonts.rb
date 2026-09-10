@@ -37,10 +37,10 @@ module Circle::Fonts
   end
 
   def find_or_attach!(circle, blob)
-    existing_attachment = circle.fonts.attachments.find_by(blob_id: blob.id)
+    existing_attachment = circle.fonts_attachments.find_by(blob_id: blob.id)
     return [existing_attachment, false] if existing_attachment
 
-    duplicate_attachment = circle.fonts.attachments.joins(:blob).find_by(
+    duplicate_attachment = circle.fonts_attachments.joins(:blob).find_by(
       active_storage_blobs: { checksum: blob.checksum },
     )
     if duplicate_attachment
@@ -48,7 +48,6 @@ module Circle::Fonts
       return [duplicate_attachment, false]
     end
 
-    circle.fonts.attach(blob)
-    [circle.fonts.attachments.find_by!(blob_id: blob.id), true]
+    [circle.fonts_attachments.create!(blob:), true]
   end
 end

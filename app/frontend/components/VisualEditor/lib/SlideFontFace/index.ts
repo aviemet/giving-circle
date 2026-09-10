@@ -1,0 +1,1 @@
+export { SlideFontFace } from "./SlideFontFace"

@@ -7,7 +7,7 @@ import { urlParams } from "../routes"
 
 type UrlParams = typeof urlParams
 
-interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" | "flash"> {
+export interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" | "flash"> {
 	auth: {
 		user: Schema.UsersInertiaShare
 	}
@@ -24,15 +24,8 @@ interface InitialInertiaShareProps extends Omit<PageProps, "errors" | "params" |
 	params: Record<string, string>
 }
 
-// Helper type to extract params array and convert it to an object type with string values
-type ParamsObject<T extends readonly string[]> = Record<T[number], string>
+export type UsePagePropsParams<T extends keyof UrlParams = keyof UrlParams> = InitialInertiaShareProps
 
-interface UsePagePropsParams<T extends keyof UrlParams> extends InitialInertiaShareProps {
-	params: ParamsObject<UrlParams[T]["params"]>
-}
-
-export const usePageProps = <T extends keyof UrlParams>(): UsePagePropsParams<T> => {
-	const page = usePage<InitialInertiaShareProps>().props
-
-	return page as UsePagePropsParams<T>
+export const usePageProps = <T extends keyof UrlParams = keyof UrlParams>(): InitialInertiaShareProps => {
+	return usePage<InitialInertiaShareProps>().props
 }

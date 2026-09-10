@@ -1,14 +1,14 @@
 class InteractionConfigTemplates::FormDataSerializer < InteractionConfigTemplateSerializer
   attribute :field_types, type: "string[]" do
-    Presentation::Interaction::Registry::FIELD_TYPES
+    Interactions::Registry::FIELD_TYPES
   end
 
   attribute :metrics, type: "string[]" do
-    Presentation::Interaction::Registry::METRICS
+    Interactions::Registry::METRICS
   end
 
   attribute :reducers, type: "string[]" do
-    Presentation::Interaction::Registry::REDUCERS
+    Interactions::Registry::REDUCERS
   end
 
   has_many :interaction_ui_templates, serializer: InteractionUiTemplates::PersistedSerializer do

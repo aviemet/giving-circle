@@ -3,12 +3,11 @@ import userEvent from "@testing-library/user-event"
 import React from "react"
 import { describe, expect, test, vi } from "vitest"
 
-import { AnswerCard } from "@/domains/presentation/interactions/Form/AnswerCard"
+import { AnswerCard, AnswerPipeline } from "@/domains/presentation/interactions/Form/AnswerPipeline"
 import {
 	referenceNameFromLabel,
 	type InteractionFieldConfig,
 } from "@/domains/presentation/interactions/Form/FieldBuilder"
-import { InteractionConfigPipeline } from "@/domains/presentation/interactions/Form/InteractionConfigPipeline"
 import {
 	defaultOutputForField,
 	rewriteOutputSourceFields,
@@ -82,10 +81,10 @@ describe("AnswerCard", () => {
 	})
 })
 
-describe("InteractionConfigPipeline", () => {
-	test("renders member screen tiles and paired answer to result without from-answer select", () => {
+describe("AnswerPipeline", () => {
+	test("renders interaction type tiles and paired answer to result without from-answer select", () => {
 		render(
-			<InteractionConfigPipeline
+			<AnswerPipeline
 				fields={ [{
 					key: "allocations",
 					type: "org_money_map",
@@ -103,14 +102,14 @@ describe("InteractionConfigPipeline", () => {
 				uiTemplates={ [{ id: "ui-1", name: "Allocation", slug: "allocation" }] }
 				onUiTemplateChange={ vi.fn() }
 				onConfigChange={ vi.fn() }
+				showTypePicker
 			/>,
 		)
 
-		expect(screen.getByText("Member screen")).toBeTruthy()
+		expect(screen.getByRole("listbox", { name: "Interaction type" })).toBeTruthy()
 		expect(screen.getByRole("option", { name: /Allocation/i })).toBeTruthy()
 		expect(screen.getByText("Answer 1")).toBeTruthy()
 		expect(screen.getByText("Live on presentation")).toBeTruthy()
-		expect(screen.getByText("Collects answers")).toBeTruthy()
 		expect(screen.queryByText("From answer")).toBeNull()
 		expect(screen.getByDisplayValue("Allocated totals")).toBeTruthy()
 		expect(screen.getByDisplayValue("Sum by organization")).toBeTruthy()
@@ -122,7 +121,7 @@ describe("InteractionConfigPipeline", () => {
 		const onConfigChange = vi.fn()
 
 		render(
-			<InteractionConfigPipeline
+			<AnswerPipeline
 				fields={ [{
 					key: "allocations",
 					type: "org_money_map",
@@ -140,6 +139,7 @@ describe("InteractionConfigPipeline", () => {
 				uiTemplates={ [{ id: "ui-1", name: "Allocation", slug: "allocation" }] }
 				onUiTemplateChange={ vi.fn() }
 				onConfigChange={ onConfigChange }
+				showTypePicker
 			/>,
 		)
 

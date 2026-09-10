@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { i18n } from "@/lib/i18n"
@@ -26,17 +27,12 @@ export function defaultTextLayout(): TextLayoutValue {
 
 export function normalizeTextLayout(
 	layout: Partial<TextLayoutValue> | undefined,
-	legacy?: {
-		inline?: boolean
-		inherit?: boolean
-		span?: boolean
-	},
 ): TextLayoutValue {
 	const defaults = defaultTextLayout()
 	return {
-		inline: layout?.inline ?? legacy?.inline ?? defaults.inline,
-		inherit: layout?.inherit ?? legacy?.inherit ?? defaults.inherit,
-		span: layout?.span ?? legacy?.span ?? defaults.span,
+		inline: layout?.inline ?? defaults.inline,
+		inherit: layout?.inherit ?? defaults.inherit,
+		span: layout?.span ?? defaults.span,
 	}
 }
 
@@ -59,13 +55,13 @@ function TextLayoutFieldControl({ name, value, onChange }: TextLayoutFieldContro
 	}
 
 	return (
-		<div className={ classes.layoutRoot }>
+		<div className={ clsx(classes.layoutRoot) }>
 			<FieldRow
 				label={ layoutText("labels.inline") }
 				tooltip={ layoutText("hints.inline") }
 			>
 				<IconSegmented
-					className={ classes.layoutToggles }
+					className={ clsx(classes.layoutToggles) }
 					name={ `${name}.inline` }
 					value={ String(localValue.inline) }
 					options={ [
@@ -90,7 +86,7 @@ function TextLayoutFieldControl({ name, value, onChange }: TextLayoutFieldContro
 				tooltip={ layoutText("hints.inherit") }
 			>
 				<IconSegmented
-					className={ classes.layoutToggles }
+					className={ clsx(classes.layoutToggles) }
 					name={ `${name}.inherit` }
 					value={ String(localValue.inherit) }
 					options={ [
@@ -115,7 +111,7 @@ function TextLayoutFieldControl({ name, value, onChange }: TextLayoutFieldContro
 				tooltip={ layoutText("hints.span") }
 			>
 				<IconSegmented
-					className={ classes.layoutToggles }
+					className={ clsx(classes.layoutToggles) }
 					name={ `${name}.span` }
 					value={ String(localValue.span) }
 					options={ [

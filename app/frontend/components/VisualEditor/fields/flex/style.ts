@@ -18,20 +18,12 @@ export type FlexProps = {
 	gap?: LengthValue<GapUnit> | number
 }
 
-export type FlexStyleInput = Partial<FlexProps> & {
+export type FlexStyleInput = {
 	flex: FlexProps
 }
 
 function flexFromProps(props: FlexStyleInput): Partial<FlexProps> {
-	return props.flex ?? {
-		display: props.display,
-		flexDirection: props.flexDirection,
-		flexWrap: props.flexWrap,
-		overflow: props.overflow,
-		justifyContent: props.justifyContent,
-		alignItems: props.alignItems,
-		gap: props.gap,
-	}
+	return props.flex ?? {}
 }
 
 function overflowStyle(flex: Partial<FlexProps>): CSSProperties {

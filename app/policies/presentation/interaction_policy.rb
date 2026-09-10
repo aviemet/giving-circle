@@ -10,4 +10,8 @@ class Presentation::InteractionPolicy < ApplicationPolicy
   def close_responses?
     update?
   end
+
+  def edit_member_ui?
+    update?
+  end
 end

@@ -8,7 +8,6 @@ task prepare: :environment do
   Rake::Task["url_params:generate"].invoke
   # Generate frontend locale files
   Rake::Task["i18n:export"].invoke
-  Rake::Task["i18n:locale_registry"].invoke
   # Annotate files
   system("chusaku")
   Rake::Task["annotate:models"].invoke

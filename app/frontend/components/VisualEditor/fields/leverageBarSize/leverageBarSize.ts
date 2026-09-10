@@ -1,7 +1,5 @@
 import { type CSSProperties } from "react"
 
-import { type DimensionInput } from "../dimension"
-import { type FlexItemSizing } from "../flexItemSizing"
 import {
 	coerceLength,
 	lengthCss,
@@ -19,32 +17,11 @@ export type LeverageBarSizeValue = {
 	height: LengthValue<LeverageBarHeightUnit>
 }
 
-export type LeverageBarSizeLegacyProps = {
-	size?: LeverageBarSizeValue
-	sizing?: FlexItemSizing
-}
-
 export function defaultLeverageBarSize(): LeverageBarSizeValue {
 	return {
 		width: { amount: 100, unit: "%" },
 		height: { amount: 36, unit: "px" },
 	}
-}
-
-function lengthFromDimensionInput<Unit extends string>(
-	input: DimensionInput | undefined,
-	units: readonly Unit[],
-	fallback: LengthValue<Unit>,
-): LengthValue<Unit> {
-	if(input === undefined || input.unit === "auto" || input.amount === undefined) {
-		return fallback
-	}
-
-	return coerceLength(
-		{ amount: input.amount, unit: input.unit },
-		units,
-		fallback.unit,
-	)
 }
 
 export function normalizeLeverageBarSize(
@@ -64,27 +41,6 @@ export function normalizeLeverageBarSize(
 			"px",
 		),
 	}
-}
-
-export function resolveLeverageBarSize(props: LeverageBarSizeLegacyProps): LeverageBarSizeValue {
-	if(props.size !== undefined) {
-		return normalizeLeverageBarSize(props.size)
-	}
-
-	const defaults = defaultLeverageBarSize()
-
-	return normalizeLeverageBarSize({
-		width: lengthFromDimensionInput(
-			props.sizing?.width,
-			LEVERAGE_BAR_WIDTH_UNITS,
-			defaults.width,
-		),
-		height: lengthFromDimensionInput(
-			props.sizing?.height,
-			LEVERAGE_BAR_HEIGHT_UNITS,
-			defaults.height,
-		),
-	})
 }
 
 export function buildLeverageBarSizeStyle(

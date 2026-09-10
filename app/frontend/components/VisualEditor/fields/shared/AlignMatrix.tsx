@@ -61,7 +61,7 @@ export function AlignMatrix({
 					const cellKey = `${cell.x}-${cell.y}`
 					const cellTitle = `${cell.x} ${cell.y}`
 					return (
-						<IconControlTooltip key={ cellKey } label={ cellTitle } className={ classes.alignMatrixCellHost }>
+						<IconControlTooltip key={ cellKey } label={ cellTitle } className={ clsx(classes.alignMatrixCellHost) }>
 							<button
 								type="button"
 								className={ clsx(classes.alignMatrixCell) }

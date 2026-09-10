@@ -7,3 +7,7 @@ export const host = css`
 	flex-grow: 0;
 	flex-shrink: 0;
 `
+
+export const hidden = css`
+	visibility: hidden;
+`

@@ -24,11 +24,6 @@ export function defaultTextFontValue(params: {
 
 export function normalizeTextFontValue(
 	value: Partial<TextFontValue> | undefined,
-	legacy?: {
-		font?: Partial<FontValue>
-		color?: string
-		size?: string
-	},
 	fallback?: {
 		color?: string
 		sizePreset?: FontSizePreset
@@ -40,9 +35,9 @@ export function normalizeTextFontValue(
 	})
 
 	return {
-		family: value?.family ?? legacy?.font?.family ?? defaults.family,
-		url: value?.url ?? legacy?.font?.url ?? defaults.url,
-		color: value?.color ?? legacy?.color ?? defaults.color,
-		size: normalizeFlexibleFontSize(value?.size, legacy?.size ?? fallback?.sizePreset),
+		family: value?.family ?? defaults.family,
+		url: value?.url ?? defaults.url,
+		color: value?.color ?? defaults.color,
+		size: normalizeFlexibleFontSize(value?.size, defaults.size),
 	}
 }

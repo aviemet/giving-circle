@@ -2,7 +2,6 @@ import clsx from "clsx"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-
 import { Box, Page, Section, Stack, Title } from "@/components"
 import { InteractionToggles } from "@/domains/presentations/active/InteractionToggles"
 import { SlideControlColumn } from "@/domains/presentations/active/SlideControlColumn"

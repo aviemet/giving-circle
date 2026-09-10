@@ -2,6 +2,6 @@ class Presentation::Interactions::ActiveInteractionSerializer < Presentation::In
   attribute :context do
     next {} unless @object.presentation
 
-    Presentation::Interaction::ContextLoader.load(@object)
+    Interactions::ContextLoader.load(@object)
   end
 end

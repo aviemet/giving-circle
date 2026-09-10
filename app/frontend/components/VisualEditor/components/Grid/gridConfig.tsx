@@ -1,8 +1,8 @@
-import { Slot, type ComponentConfig } from "@puckeditor/core"
+import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
-import { GridDisplay } from "./Grid"
+import { Grid, type GridProps } from "./Grid"
 import {
 	backgroundField,
 	borderField,
@@ -18,32 +18,10 @@ import {
 	normalizeBorderValue,
 	normalizeGridLayoutValue,
 	normalizeIterateValue,
-	type BackgroundValue,
-	type BorderProps,
-	type BoxModelValue,
-	type DimensionStyleProps,
-	type FlexItemSizing,
-	type GridLayoutValue,
-	type IterateValue,
-	type SpacingProps,
 } from "../../fields"
 
-export type GridProps = SpacingProps & DimensionStyleProps & BorderProps & {
-	background?: BackgroundValue
-	backgroundColor?: string
-	border?: BorderProps
-	content: Slot
-	columns?: number
-	grid?: GridLayoutValue
-	sizing?: FlexItemSizing
-	spacing?: BoxModelValue
-	iterate?: IterateValue
-}
-
-const t = i18n.t.bind(i18n)
-
 export const gridConfig: ComponentConfig<GridProps> = {
-	label: t("slides.editor.components.grid.label"),
+	label: i18n.t("slides.editor.components.grid.label"),
 	inline: true,
 	fields: {
 		iterate: iterateField(),
@@ -66,24 +44,18 @@ export const gridConfig: ComponentConfig<GridProps> = {
 		border: defaultBorderValue(),
 		grid: defaultGridLayoutValue(),
 	},
+
 	resolveData: ({ props }) => {
 		return {
 			props: {
 				...props,
 				iterate: normalizeIterateValue(props.iterate),
-				grid: normalizeGridLayoutValue(props.grid, {
-					columns: props.columns,
-				}),
-				background: normalizeBackgroundValue(props.background, {
-					color: props.backgroundColor,
-				}),
-				border: normalizeBorderValue(props.border, {
-					borderWidth: props.borderWidth,
-					borderRadius: props.borderRadius,
-					borderColor: props.borderColor,
-				}),
+				grid: normalizeGridLayoutValue(props.grid),
+				background: normalizeBackgroundValue(props.background),
+				border: normalizeBorderValue(props.border),
 			},
 		}
 	},
-	render: (props) => <GridDisplay { ...props } />,
+
+	render: (props) => <Grid { ...props } />,
 }

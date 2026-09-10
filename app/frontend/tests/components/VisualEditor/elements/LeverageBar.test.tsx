@@ -73,7 +73,7 @@ describe("components/VisualEditor/components/LeverageBar", () => {
 		expect(leverageBarConfig.defaultProps?.size).toEqual(defaultLeverageBarSize())
 	})
 
-	test("resolveData hydrates leftover flex-item sizing into size", async () => {
+	test("resolveData normalizes the current size field", async () => {
 		const resolveData = leverageBarConfig.resolveData
 		expect(resolveData).toBeTypeOf("function")
 		if(resolveData === undefined) {
@@ -82,10 +82,10 @@ describe("components/VisualEditor/components/LeverageBar", () => {
 
 		const resolved = await resolveData({
 			props: {
-				id: "leverage-bar-legacy",
+				id: "leverage-bar-current",
 				currencyFormat: "compact",
-				sizing: {
-					mode: "fill",
+				size: {
+					width: { amount: 100, unit: "%" },
 					height: { amount: 28, unit: "px" },
 				},
 			},
@@ -105,9 +105,9 @@ describe("components/VisualEditor/components/LeverageBar", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config leverage bar", () => {
+describe("components/VisualEditor/config leverage bar", () => {
 	test("registers LeverageBar in the elements category", async () => {
-		const { config } = await import("@/components/VisualEditor/puck.config")
+		const { config } = await import("@/components/VisualEditor/config")
 
 		expect(config.categories?.elements?.components).toContain("LeverageBar")
 		expect(config.components?.LeverageBar).toBeDefined()

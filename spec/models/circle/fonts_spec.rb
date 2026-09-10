@@ -41,6 +41,32 @@ RSpec.describe Circle::Fonts do
       expect(circle.fonts.count).to eq(1)
     end
 
+    it "attaches a new font blob inside an open transaction" do
+      circle = create(:circle)
+      first_blob = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes-one"),
+        filename: "Brand.woff2",
+        content_type: "font/woff2",
+      )
+      second_blob = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes-two"),
+        filename: "Display.otf",
+        content_type: "font/otf",
+      )
+
+      Circle.transaction do
+        first_attachment, first_created = described_class.find_or_attach!(circle, first_blob)
+        second_attachment, second_created = described_class.find_or_attach!(circle, second_blob)
+
+        expect(first_created).to be(true)
+        expect(second_created).to be(true)
+        expect(first_attachment.blob_id).to eq(first_blob.id)
+        expect(second_attachment.blob_id).to eq(second_blob.id)
+      end
+
+      expect(circle.fonts_attachments.map(&:blob_id)).to contain_exactly(first_blob.id, second_blob.id)
+    end
+
     it "reuses an existing attachment for the same blob" do
       circle = create(:circle)
       blob = ActiveStorage::Blob.create_and_upload!(

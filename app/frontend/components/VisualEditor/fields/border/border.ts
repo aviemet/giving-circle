@@ -11,19 +11,18 @@ export function defaultBorderValue(): BorderProps {
 
 export function normalizeBorderValue(
 	value: Partial<BorderProps> | undefined,
-	legacy?: BorderProps,
 ): BorderProps {
 	return {
 		borderWidth: normalizeOptionalLength(
-			value?.borderWidth ?? legacy?.borderWidth,
+			value?.borderWidth,
 			BORDER_WIDTH_UNITS,
 			"px",
 		),
 		borderRadius: normalizeOptionalLength(
-			value?.borderRadius ?? legacy?.borderRadius,
+			value?.borderRadius,
 			BORDER_RADIUS_UNITS,
 			"px",
 		),
-		borderColor: value?.borderColor ?? legacy?.borderColor,
+		borderColor: value?.borderColor,
 	}
 }

@@ -15,11 +15,13 @@ export interface MenuSlice {
 	setOpenMenus: (menus: MenuKey[]) => void
 }
 
+const allMenuKeys: MenuKey[] = [menuKeys.circle, menuKeys.theme, menuKeys.presentation]
+
 export const createMenuSlice: StateCreator<MenuSlice> =
 	(set) => ({
 		menuKeys: menuKeys,
 
-		openMenus: new Set(Object.keys(menuKeys) as MenuKey[]),
+		openMenus: new Set(allMenuKeys),
 
 		toggleOpenMenu: (menu, open) => set(state => {
 			const newOpenMenus = new Set(state.openMenus)

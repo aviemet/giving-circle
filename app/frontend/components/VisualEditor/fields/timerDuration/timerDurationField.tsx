@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { NumberInput } from "@/components/Inputs"
@@ -41,7 +42,7 @@ function TimerDurationFieldControl({
 	}
 
 	return (
-		<div className={ classes.durationRoot }>
+		<div className={ clsx(classes.durationRoot) }>
 			<FieldRow label={ durationText("labels.minutes") }>
 				<NumberInput
 					wrapper={ false }

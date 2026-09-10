@@ -53,7 +53,7 @@ class Presentation::InteractionResponse < ApplicationRecord
   end
 
   def validate_response_data_structure
-    Presentation::InteractionResponse::DataValidator.validate(self)
+    Interactions::ResponseDataValidator.validate(self)
   end
 
   def schedule_presentation_values_refresh

@@ -5,7 +5,7 @@ import { Box, Text } from "@/components"
 import {
 	leverageFilledPercent,
 	type LeverageTotals,
-} from "@/features/presentation"
+} from "@/features/presentation/values/leverageTotals"
 import { currency, type CurrencyFormatMode } from "@/lib/formatters"
 
 import * as classes from "./LeverageBar.css"
@@ -23,7 +23,7 @@ import {
 	type BorderRadiusUnit,
 	type LengthValue,
 } from "../../fields/shared/length"
-import { SlideFontFace } from "../../SlideFontFace"
+import { SlideFontFace } from "../../lib/SlideFontFace"
 
 export type LeverageBarColors = Pick<LeverageColorsValue, "remainingColor" | "trackColor"> & {
 	borderRadius?: LengthValue<BorderRadiusUnit> | number
@@ -46,7 +46,7 @@ export function LeverageBar({
 	font,
 	currencyFormat = "compact",
 }: LeverageBarProps) {
-	const resolvedFont = normalizeTextFontValue(font, undefined, {
+	const resolvedFont = normalizeTextFontValue(font, {
 		color: "#FFFFFF",
 		sizePreset: "xl",
 	})

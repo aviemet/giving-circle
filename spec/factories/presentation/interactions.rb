@@ -5,6 +5,7 @@
 #  id                         :uuid             not null, primary key
 #  accepting_responses        :boolean          default(FALSE), not null
 #  config                     :jsonb            not null
+#  member_ui                  :jsonb            not null
 #  name                       :string           not null
 #  results                    :jsonb            not null
 #  slug                       :string           not null

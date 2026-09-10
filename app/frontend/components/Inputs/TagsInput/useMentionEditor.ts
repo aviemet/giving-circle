@@ -11,7 +11,7 @@ import {
 	serializedTagsToEditorContent,
 	structuredContentToEditorContent,
 	type TagEditorOption,
-} from "@/components/VisualEditor/dynamicData/contentParser"
+} from "@/components/VisualEditor/lib/dynamicData"
 
 import { createTagMentionExtension } from "./createTagMentionExtension"
 

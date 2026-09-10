@@ -24,9 +24,9 @@ describe("components/VisualEditor/fields/grid", () => {
 		})
 	})
 
-	test("normalizeGridLayoutValue fills defaults and hydrates legacy columns", () => {
+	test("normalizeGridLayoutValue fills defaults", () => {
 		expect(normalizeGridLayoutValue(undefined)).toEqual(defaultGridLayoutValue())
-		expect(normalizeGridLayoutValue({}, { columns: 4 }).columns).toBe(4)
+		expect(normalizeGridLayoutValue({ columns: 4 }).columns).toBe(4)
 		expect(normalizeGridLayoutValue({ columns: 2, centerLastRow: true })).toMatchObject({
 			columns: 2,
 			gap: DEFAULT_GRID_GAP,

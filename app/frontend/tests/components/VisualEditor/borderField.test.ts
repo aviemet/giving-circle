@@ -9,17 +9,18 @@ import {
 } from "@/components/VisualEditor/fields/border"
 
 describe("components/VisualEditor/fields/border", () => {
-	test("normalizeBorderValue prefers grouped values over legacy props", () => {
-		expect(normalizeBorderValue(
-			{ borderWidth: 4, borderRadius: 8, borderColor: "#112233" },
-			{ borderWidth: 1, borderRadius: 2, borderColor: "#abcdef" },
-		)).toEqual({
+	test("normalizeBorderValue fills the current grouped value", () => {
+		expect(normalizeBorderValue({
+			borderWidth: 4,
+			borderRadius: 8,
+			borderColor: "#112233",
+		})).toEqual({
 			borderWidth: { amount: 4, unit: "px" },
 			borderRadius: { amount: 8, unit: "px" },
 			borderColor: "#112233",
 		})
 
-		expect(normalizeBorderValue(undefined, {
+		expect(normalizeBorderValue({
 			borderWidth: 3,
 			borderColor: "#000000",
 		})).toEqual({
@@ -84,7 +85,6 @@ describe("components/VisualEditor/Container fields", () => {
 				},
 			},
 			{ mode: "fill" },
-			false,
 		)
 
 		expect(style.backgroundColor).toBe("#112233")
@@ -92,25 +92,5 @@ describe("components/VisualEditor/Container fields", () => {
 		expect(style.borderRadius).toBe("4px")
 		expect(style.borderColor).toBe("#ffffff")
 		expect(style.borderStyle).toBe("solid")
-	})
-
-	test("buildContainerStyle reads legacy flat background and border props", () => {
-		const style = buildContainerStyle(
-			{
-				backgroundColor: "#abcdef",
-				borderWidth: 1,
-				borderColor: "#000000",
-				flex: {
-					display: "flex",
-					overflow: "hidden",
-				},
-			},
-			{ mode: "fill" },
-			false,
-		)
-
-		expect(style.backgroundColor).toBe("#abcdef")
-		expect(style.borderWidth).toBe("1px")
-		expect(style.borderColor).toBe("#000000")
 	})
 })

@@ -290,7 +290,9 @@ en:
             natural: Natural
             width: Width
         iterate:
+          finalist_organizations: Finalist organizations
           hint: Iterates for each organization
+          hint_finalist_organizations: Iterates for each finalist organization
           label: Iterate
           organizations: Organizations
           over: Over
@@ -493,6 +495,7 @@ en:
           saved: Saved to server
           unsaved: Unsaved changes (local draft only)
         saving: Saving to server...
+        unsaved_navigation: You have changes that are not saved to the server. Stay on this page, discard them, or save before leaving.
       root:
         title: Title
     form:
