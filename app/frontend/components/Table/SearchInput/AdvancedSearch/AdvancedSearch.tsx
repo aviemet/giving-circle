@@ -52,7 +52,12 @@ export function AdvancedSearch({ children }: AdvancedSearchProps) {
 
 	useClickOutside(
 		(event) => {
-			const target = event.target as HTMLElement
+			const target = event.target
+			if(!(target instanceof Element)) {
+				toggleOpen(false)
+				return
+			}
+
 			if(!searchPaper) {
 				toggleOpen(false)
 				return

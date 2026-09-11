@@ -34,7 +34,21 @@ RSpec.describe PresentationValuesChannel, type: :channel do
         "money_totals" => [],
         "rank_totals" => [],
         "org_vote_totals" => [],
+        "pledge_totals" => [],
         "finalist_org_ids" => [org.id],
+        "funding_totals" => [
+          {
+            "org_id" => org.id,
+            "funding_cents" => 0,
+            "currency" => "USD",
+          },
+        ],
+        "funded_org_ids" => [],
+        "leverage" => {
+          "total_ask_cents" => 0,
+          "remaining_cents" => 0,
+          "currency" => "USD",
+        },
       },
     )
   end

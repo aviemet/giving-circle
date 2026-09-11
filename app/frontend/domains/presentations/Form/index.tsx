@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 
 import { Grid } from "@/components"
 import { Form, Submit } from "@/components/Form"
-import { Select, TextInput } from "@/components/Inputs"
+import { NumberInput, Select, TextInput } from "@/components/Inputs"
 import { type HTTPVerb } from "@/lib/http"
 
 export type PresentationFormData = {
@@ -34,6 +34,16 @@ export const PresentationForm = ({ to, method = "post", presentation, templates 
 				<Grid.Col>
 					<TextInput name="presentation.name" label={ t("presentations.form.name") } />
 				</Grid.Col>
+
+				{ !isNew && (
+					<Grid.Col>
+						<NumberInput
+							name="presentation.settings.finalist_count"
+							label={ t("presentations.form.finalist_count") }
+							min={ 1 }
+						/>
+					</Grid.Col>
+				) }
 
 				{ isNew && templateOptions.length > 0 && (
 					<Grid.Col>

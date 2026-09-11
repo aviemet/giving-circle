@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { useTranslation } from "react-i18next"
 
 import { Title, Link } from "@/components"
@@ -31,7 +32,7 @@ const ConfirmationsNew = ({ user }: ConfirmationsNew) => {
 			</div>
 
 			<div>
-				<Submit className="large">{ t("devise.ui.resend_confirmation") }</Submit>
+				<Submit className={ clsx("large") }>{ t("devise.ui.resend_confirmation") }</Submit>
 			</div>
 
 			<Link href={ Routes.newUserRegistration() }>{ t("devise.ui.register") }</Link>

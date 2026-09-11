@@ -15,7 +15,7 @@ export function FieldRow({ label, children, className, tooltip }: FieldRowProps)
 	const labelNode = tooltip === undefined || tooltip.length === 0
 		? label
 		: (
-			<IconControlTooltip label={ tooltip } className={ classes.fieldRowLabelTarget }>
+			<IconControlTooltip label={ tooltip } className={ clsx(classes.fieldRowLabelTarget) }>
 				{ label }
 			</IconControlTooltip>
 		)

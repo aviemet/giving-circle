@@ -194,14 +194,14 @@ function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlPro
 				<SideInput
 					name={ `${name}.margin.top` }
 					value={ margin.top }
-					className={ classes.boxModelTop }
+					className={ clsx(classes.boxModelTop) }
 					ariaLabel={ sideLabel("margin", "top") }
 					onChange={ (top) => updateMargin({ top }) }
 				/>
 				<SideInput
 					name={ `${name}.margin.left` }
 					value={ margin.left }
-					className={ classes.boxModelLeft }
+					className={ clsx(classes.boxModelLeft) }
 					ariaLabel={ sideLabel("margin", "left") }
 					onChange={ (left) => updateMargin({ left }) }
 				/>
@@ -212,14 +212,14 @@ function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlPro
 					<SideInput
 						name={ `${name}.padding.top` }
 						value={ padding.top }
-						className={ classes.boxModelTop }
+						className={ clsx(classes.boxModelTop) }
 						ariaLabel={ sideLabel("padding", "top") }
 						onChange={ (top) => updatePadding({ top }) }
 					/>
 					<SideInput
 						name={ `${name}.padding.left` }
 						value={ padding.left }
-						className={ classes.boxModelLeft }
+						className={ clsx(classes.boxModelLeft) }
 						ariaLabel={ sideLabel("padding", "left") }
 						onChange={ (left) => updatePadding({ left }) }
 					/>
@@ -229,14 +229,14 @@ function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlPro
 					<SideInput
 						name={ `${name}.padding.right` }
 						value={ padding.right }
-						className={ classes.boxModelRight }
+						className={ clsx(classes.boxModelRight) }
 						ariaLabel={ sideLabel("padding", "right") }
 						onChange={ (right) => updatePadding({ right }) }
 					/>
 					<SideInput
 						name={ `${name}.padding.bottom` }
 						value={ padding.bottom }
-						className={ classes.boxModelBottom }
+						className={ clsx(classes.boxModelBottom) }
 						ariaLabel={ sideLabel("padding", "bottom") }
 						onChange={ (bottom) => updatePadding({ bottom }) }
 					/>
@@ -244,14 +244,14 @@ function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlPro
 				<SideInput
 					name={ `${name}.margin.right` }
 					value={ margin.right }
-					className={ classes.boxModelRight }
+					className={ clsx(classes.boxModelRight) }
 					ariaLabel={ sideLabel("margin", "right") }
 					onChange={ (right) => updateMargin({ right }) }
 				/>
 				<SideInput
 					name={ `${name}.margin.bottom` }
 					value={ margin.bottom }
-					className={ classes.boxModelBottom }
+					className={ clsx(classes.boxModelBottom) }
 					ariaLabel={ sideLabel("margin", "bottom") }
 					onChange={ (bottom) => updateMargin({ bottom }) }
 				/>
@@ -260,7 +260,7 @@ function BoxModelFieldControl({ name, value, onChange }: BoxModelFieldControlPro
 	)
 }
 
-function boxModelField(): Field<BoxModelValue | undefined> {
+export function boxModelField(): Field<BoxModelValue | undefined> {
 	const label = spacingText("label")
 	return {
 		type: "custom",
@@ -278,35 +278,3 @@ function boxModelField(): Field<BoxModelValue | undefined> {
 		},
 	}
 }
-
-function spacingField(): Field<SpacingGroup | undefined>
-function spacingField(params: Partial<Field<SpacingGroup | undefined>>): Field<SpacingGroup | undefined>
-function spacingField({ label = "Spacing" }: Partial<Field<SpacingGroup | undefined>> = {}): Field<SpacingGroup | undefined> {
-	return {
-		type: "custom",
-		label,
-		render: ({ name, onChange, value }) => {
-			const boxValue: BoxModelValue = label === spacingText("padding")
-				? { padding: value }
-				: { margin: value }
-
-			return (
-				<PuckFieldLabel label={ label }>
-					<BoxModelFieldControl
-						name={ name }
-						value={ boxValue }
-						onChange={ (next) => {
-							if(label === spacingText("padding")) {
-								onChange(next.padding)
-								return
-							}
-							onChange(next.margin)
-						} }
-					/>
-				</PuckFieldLabel>
-			)
-		},
-	}
-}
-
-export { boxModelField, spacingField }

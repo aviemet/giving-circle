@@ -1,6 +1,6 @@
 import { Mention } from "@tiptap/extension-mention"
 
-import { type TagEditorOption } from "@/components/VisualEditor/dynamicData/contentParser"
+import { type TagEditorOption } from "@/components/VisualEditor/lib/dynamicData"
 
 import { createMentionSuggestionRender } from "./mentionSuggestionRender"
 

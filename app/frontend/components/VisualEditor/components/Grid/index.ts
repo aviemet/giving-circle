@@ -1,3 +1,2 @@
-export { gridClassName, gridDropZoneClassName, type GridComponentProps } from "./Grid"
+export { Grid, type GridProps } from "./Grid"
 export { gridConfig } from "./gridConfig"
-export { type GridProps } from "./gridConfig"

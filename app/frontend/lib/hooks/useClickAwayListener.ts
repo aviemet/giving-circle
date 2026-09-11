@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef } from "react"
+import { useEffect, useCallback, useRef, type RefObject } from "react"
 
 interface UseClickAwayListenerOptions {
 	enabled?: boolean
@@ -7,7 +7,7 @@ interface UseClickAwayListenerOptions {
 }
 
 export const useClickAwayListener = <T extends HTMLElement = HTMLElement>(
-	ref: React.RefObject<T>,
+	ref: RefObject<T | null>,
 	callback: () => void,
 	options: UseClickAwayListenerOptions = {}
 ) => {
@@ -19,7 +19,8 @@ export const useClickAwayListener = <T extends HTMLElement = HTMLElement>(
 	}, [callback])
 
 	const handleMouseDown = useCallback((e: MouseEvent) => {
-		if(ref.current && !ref.current.contains(e.target as Node)) {
+		const target = e.target
+		if(ref.current !== null && target instanceof Node && !ref.current.contains(target)) {
 			if(onMouseDown) {
 				onMouseDown()
 			} else {

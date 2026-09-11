@@ -1,15 +1,16 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, type EffectCallback } from "react"
 
-export const useInit = (cb: Function, cleanup?: () => void) => {
-	const runOnceRef = useRef<boolean>(true)
+export const useInit = (setup: EffectCallback) => {
+	const didRunRef = useRef<boolean>(false)
+	const cleanupRef = useRef<void | (() => void)>(() => {})
 
 	useEffect(() => {
-		if(runOnceRef) {
-			cb()
-			runOnceRef.current = false
+		if(!didRunRef.current) {
+			didRunRef.current = true
+			cleanupRef.current = setup()
 		}
 
-		return cleanup
+		return cleanupRef.current
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 }

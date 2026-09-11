@@ -28,4 +28,11 @@ class SlideSerializer < ApplicationSerializer
     :title,
     data: { type: "SlideData" },
   )
+
+  attribute :thumbnail_url, type: :string, optional: true do
+    next unless slide.thumbnail.attached?
+
+    blob = slide.thumbnail.blob
+    "/rails/active_storage/blobs/redirect/#{blob.signed_id}/#{ERB::Util.url_encode(blob.filename.to_s)}"
+  end
 end

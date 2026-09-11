@@ -1,4 +1,5 @@
 import { Flex, type ButtonProps } from "@mantine/core"
+import clsx from "clsx"
 import React from "react"
 
 import { Button, Link } from "@/components"
@@ -21,7 +22,7 @@ export function Submit({
 	const slotProps = useSlotProps()
 
 	return (
-		<Flex gap="md" className="submit">
+		<Flex gap="md" className={ clsx("submit") }>
 			<Button
 				type="submit"
 				disabled={ slotProps?.processing }

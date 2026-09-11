@@ -1,20 +1,22 @@
 import { modals } from "@mantine/modals"
 import clsx from "clsx"
 
-import { ActionIcon, Card, Image, Text, Center, Link, ConditionalWrapper } from "@/components"
+import { ActionIcon, Card, Text, Center, Link, ConditionalWrapper } from "@/components"
 import { TrashIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
 import { isNonEmptyString } from "@/lib"
 
+import { SlideThumbnail } from "../SlideThumbnail"
 import * as classes from "./SlideFormCard.css"
 
 interface SlideFormCardProps {
 	path: string
 	removeInput: () => void
 	href?: string
+	thumbnailUrl?: string
 }
 
-export function SlideFormCard({ path, removeInput, href }: SlideFormCardProps) {
+export function SlideFormCard({ path, removeInput, href, thumbnailUrl }: SlideFormCardProps) {
 	const handleRemoveElement = () => {
 		modals.openConfirmModal({
 			title: "Remove this slide?",
@@ -47,9 +49,9 @@ export function SlideFormCard({ path, removeInput, href }: SlideFormCardProps) {
 					condition={ isNonEmptyString(href) }
 					wrapper={ children => <Link href={ href! }>{ children }</Link> }
 				>
-					<Image
-						src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-						height={ 140 }
+					<SlideThumbnail
+						src={ thumbnailUrl }
+						alt=""
 					/>
 				</ConditionalWrapper>
 			</Card.Section>

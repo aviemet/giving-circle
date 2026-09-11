@@ -21,6 +21,7 @@ alwaysApply: false
 
 - Define strings in locale YAML under `config/locales/` with a nested directory structure by domain.
 - Frontend JSON under `app/frontend/lib/locales/` is generated via `bundle exec rails i18n:export` (`config/i18n.yml`, `lib/tasks/i18n.rake`). Never edit the JSON by hand.
+- App languages are `config.i18n.available_locales`. Add a locale there when you add YAML for it.
 
 ## Testing
 

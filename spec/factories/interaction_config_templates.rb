@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  config                     :jsonb            not null
+#  member_ui                  :jsonb            not null
 #  name                       :string           not null
 #  slug                       :string           not null
 #  created_at                 :datetime         not null

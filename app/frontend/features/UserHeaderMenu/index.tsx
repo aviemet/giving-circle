@@ -9,7 +9,7 @@ import { usePageProps } from "@/lib/hooks"
 
 import { LanguageModal } from "./LanguageModal"
 
-const UserHeaderMenu = () => {
+export function UserHeaderMenu() {
 	const { t } = useTranslation()
 	const { auth: { user }, circles, active_circle } = usePageProps()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -105,4 +105,3 @@ const UserHeaderMenu = () => {
 	)
 }
 
-export { UserHeaderMenu }

@@ -2,10 +2,12 @@ import { MantineProvider } from "@mantine/core"
 import { render, screen } from "@testing-library/react"
 import { describe, expect, test } from "vitest"
 
+import { leverageBarConfig } from "@/components/VisualEditor/components/LeverageBar"
 import {
 	LeverageBar,
 	type LeverageBarColors,
 } from "@/components/VisualEditor/elements/LeverageBar"
+import { defaultLeverageBarSize } from "@/components/VisualEditor/fields/leverageBarSize"
 import { buildMockLeverage } from "@/features/presentation/values/leverageTotals"
 import { fromCents } from "@/lib/money"
 
@@ -63,9 +65,49 @@ describe("components/VisualEditor/elements/LeverageBar", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config leverage bar", () => {
+describe("components/VisualEditor/components/LeverageBar", () => {
+	test("uses a dedicated size field instead of flex-item Fill/Auto", () => {
+		expect(leverageBarConfig.inline).toBe(true)
+		expect(leverageBarConfig.fields).toHaveProperty("size")
+		expect(leverageBarConfig.fields).not.toHaveProperty("sizing")
+		expect(leverageBarConfig.defaultProps?.size).toEqual(defaultLeverageBarSize())
+	})
+
+	test("resolveData normalizes the current size field", async () => {
+		const resolveData = leverageBarConfig.resolveData
+		expect(resolveData).toBeTypeOf("function")
+		if(resolveData === undefined) {
+			return
+		}
+
+		const resolved = await resolveData({
+			props: {
+				id: "leverage-bar-current",
+				currencyFormat: "compact",
+				size: {
+					width: { amount: 100, unit: "%" },
+					height: { amount: 28, unit: "px" },
+				},
+			},
+		}, {
+			changed: {},
+			lastData: null,
+			trigger: "load",
+			metadata: {},
+			parent: null,
+			root: { props: {} },
+		})
+
+		expect(resolved.props?.size).toEqual({
+			width: { amount: 100, unit: "%" },
+			height: { amount: 28, unit: "px" },
+		})
+	})
+})
+
+describe("components/VisualEditor/config leverage bar", () => {
 	test("registers LeverageBar in the elements category", async () => {
-		const { config } = await import("@/components/VisualEditor/puck.config")
+		const { config } = await import("@/components/VisualEditor/config")
 
 		expect(config.categories?.elements?.components).toContain("LeverageBar")
 		expect(config.components?.LeverageBar).toBeDefined()

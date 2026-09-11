@@ -11,6 +11,7 @@ AllCops:
     - "vendor/**/*"
     - ".git/**/*"
   NewCops: enable
+  SuggestExtensions: false
 
 Rails/HasAndBelongsToMany:
   Enabled: false

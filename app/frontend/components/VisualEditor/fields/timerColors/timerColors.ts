@@ -12,20 +12,11 @@ export function defaultTimerColors(): TimerColorsValue {
 
 export function normalizeTimerColors(
 	value: Partial<TimerColorsValue> | undefined,
-	legacy?: {
-		ringTrackColor?: string
-		ringProgressColor?: string
-		textColor?: string
-	},
 ): TimerColorsValue {
 	const defaults = defaultTimerColors()
 
 	return {
-		ringTrackColor: value?.ringTrackColor
-			?? legacy?.ringTrackColor
-			?? defaults.ringTrackColor,
-		ringProgressColor: value?.ringProgressColor
-			?? legacy?.ringProgressColor
-			?? defaults.ringProgressColor,
+		ringTrackColor: value?.ringTrackColor ?? defaults.ringTrackColor,
+		ringProgressColor: value?.ringProgressColor ?? defaults.ringProgressColor,
 	}
 }

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest"
 
+import { config } from "@/components/VisualEditor/config"
 import {
 	backgroundField,
 	buildBackgroundImageStyle,
@@ -12,7 +13,6 @@ import {
 	normalizeBackgroundImageValue,
 	normalizeBackgroundValue,
 } from "@/components/VisualEditor/fields/backgroundImage"
-import { config } from "@/components/VisualEditor/puck.config"
 import { activeStorageBlobRedirectUrl } from "@/lib/files"
 
 describe("components/VisualEditor/fields/backgroundImage", () => {
@@ -54,33 +54,16 @@ describe("components/VisualEditor/fields/backgroundImage", () => {
 		})
 	})
 
-	test("normalizeBackgroundValue prefers grouped values over legacy props", () => {
-		expect(normalizeBackgroundValue(
-			{
-				color: "#112233",
-				image: { url: "/new.jpg", size: "contain" },
-			},
-			{
-				color: "#000000",
-				image: { url: "/old.jpg", size: "cover" },
-			},
-		)).toEqual({
+	test("normalizeBackgroundValue uses the current grouped value", () => {
+		expect(normalizeBackgroundValue({
+			color: "#112233",
+			image: { url: "/new.jpg", size: "contain" },
+		})).toEqual({
 			color: "#112233",
 			image: {
 				...defaultBackgroundImageValue(),
 				url: "/new.jpg",
 				size: "contain",
-			},
-		})
-
-		expect(normalizeBackgroundValue(undefined, {
-			color: "#abcdef",
-			image: { url: "/legacy.jpg" },
-		})).toEqual({
-			color: "#abcdef",
-			image: {
-				...defaultBackgroundImageValue(),
-				url: "/legacy.jpg",
 			},
 		})
 	})
@@ -91,9 +74,7 @@ describe("components/VisualEditor/fields/backgroundImage", () => {
 			image: defaultBackgroundImageValue(),
 		}).color).toBe("")
 
-		expect(normalizeBackgroundValue(undefined, {
-			image: { url: "/only-image.jpg" },
-		}).color).toBe("#000000")
+		expect(normalizeBackgroundValue(undefined).color).toBe("#000000")
 	})
 
 	test("hasBackgroundColor treats empty as unset", () => {
@@ -114,7 +95,7 @@ describe("components/VisualEditor/fields/backgroundImage", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config root background", () => {
+describe("components/VisualEditor/config root background", () => {
 	test("root exposes combined background field and default", () => {
 		expect(config.root?.fields?.background).toMatchObject({ type: "custom", label: "Background" })
 		expect(config.root?.defaultProps).toMatchObject({

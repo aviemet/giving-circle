@@ -73,7 +73,11 @@ Rails.application.routes.draw do
         path: "interaction_templates",
         param: :slug,
         as: :interaction_templates,
-        shallow: false
+        shallow: false do
+        member do
+          get "member_ui/edit", action: :edit_member_ui, as: :edit_member_ui
+        end
+      end
       resources :message_templates,
         param: :slug,
         shallow: false
@@ -152,6 +156,7 @@ Rails.application.routes.draw do
             member do
               post :open_responses
               post :close_responses
+              get "member_ui/edit", action: :edit_member_ui, as: :edit_member_ui
             end
 
             resources :interaction_responses,

@@ -4,6 +4,7 @@ import { Badge, Card, Group, Stack, Text } from "@/components"
 import { Routes } from "@/lib"
 
 import * as classes from "../Cards.css"
+import clsx from "clsx"
 
 interface PresentationCardProps {
 	presentation: Schema.ThemesPresentationsSummary
@@ -20,13 +21,13 @@ export function PresentationCard({ presentation, circleSlug, themeSlug }: Presen
 			p="xl"
 			radius="md"
 			withBorder
-			className={ classes.dashboardCard }
+			className={ clsx(classes.dashboardCard) }
 			component={ Link }
 			href={ Routes.themePresentation(circleSlug, themeSlug, presentation.slug) }
 		>
 			<Stack gap="sm">
 				<Group justify="space-between" align="flex-start" wrap="wrap" gap="sm">
-					<Text fw={ 600 } size="lg" className={ classes.cardTitle }>
+					<Text fw={ 600 } size="lg" className={ clsx(classes.cardTitle) }>
 						{ presentation.name }
 					</Text>
 					{ presentation.active && (

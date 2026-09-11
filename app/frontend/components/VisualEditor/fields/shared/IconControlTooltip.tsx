@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { type ReactNode } from "react"
 
 import { Tooltip } from "@/components"
@@ -13,7 +14,7 @@ interface IconControlTooltipProps {
 export function IconControlTooltip({ label, children, className }: IconControlTooltipProps) {
 	return (
 		<Tooltip label={ label } withArrow position="top" openDelay={ 300 }>
-			<span className={ className ?? classes.tooltipTarget }>{ children }</span>
+			<span className={ clsx(className ?? classes.tooltipTarget) }>{ children }</span>
 		</Tooltip>
 	)
 }

@@ -3,13 +3,19 @@ import userEvent from "@testing-library/user-event"
 import React from "react"
 import { describe, expect, test, vi } from "vitest"
 
-import { IdleState, MemberInteractForm } from "@/features/presentation"
+import { MemberInteractForm } from "@/features/presentation"
 import {
+	createAllocationMemberUi,
 	createCirclePersisted,
+	createFinalistVoteMemberUi,
 	createPresentationOrgPersisted,
 	createPresentationPresentation,
 } from "@/tests/helpers/fixtures"
 import { render } from "@/tests/helpers/utils"
+
+vi.mock("@/lib/hooks/useActionCable", () => ({
+	useActionCable: () => ({ perform: vi.fn(), send: vi.fn() }),
+}))
 
 vi.mock("@/pages/Presentations/Active/useActivePresentationChannel", () => ({
 	useActivePresentationChannel: () => ({}),
@@ -24,12 +30,6 @@ const presentation = createPresentationPresentation({
 })
 
 describe("features/presentation/interactions", () => {
-	test("IdleState renders waiting copy", () => {
-		render(<IdleState />)
-
-		expect(screen.getByRole("heading", { name: /waiting for the next activity/i })).toBeTruthy()
-	})
-
 	test("MemberInteractForm renders allocation voting cards", () => {
 		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
 
@@ -64,14 +64,14 @@ describe("features/presentation/interactions", () => {
 					context: {
 						presentation_orgs: [org],
 					},
+					member_ui: createAllocationMemberUi(),
 				} }
 			/>,
 		)
 
-		expect(screen.getByRole("heading", { name: "Allocation Round" })).toBeTruthy()
+		expect(screen.getByRole("heading", { name: "Allocation" })).toBeTruthy()
 		expect(screen.getByText("Org One")).toBeTruthy()
-		expect(screen.getByRole("button", { name: /finalize vote/i })).toBeDisabled()
-		expect(screen.getByText(/funds left to allocate/i)).toBeTruthy()
+		expect(screen.getByRole("button", { name: /finalize vote/i })).toBeEnabled()
 	})
 
 	test("Finalize Vote enables when partial submit is checked", async () => {
@@ -109,12 +109,13 @@ describe("features/presentation/interactions", () => {
 					context: {
 						presentation_orgs: [org],
 					},
+					member_ui: createAllocationMemberUi(),
 				} }
 			/>,
 		)
 
 		const finalize = screen.getByRole("button", { name: /finalize vote/i })
-		expect(finalize).toBeDisabled()
+		expect(finalize).toBeEnabled()
 
 		await user.click(screen.getByLabelText(/submit without allocating all funds/i))
 
@@ -151,21 +152,22 @@ describe("features/presentation/interactions", () => {
 							},
 						],
 						outputs: [],
-						settings: { finalist_count: 5, default_votes: 10 },
+						settings: { default_votes: 10 },
 					},
 					context: {
 						presentation_orgs: [org],
-						settings: { finalist_count: 5 },
+						settings: { default_votes: 10 },
 					},
+					member_ui: createFinalistVoteMemberUi(),
 				} }
 			/>,
 		)
 
-		expect(screen.getByRole("heading", { name: "Finalist Vote" })).toBeTruthy()
+		expect(screen.getByRole("heading", { name: "Finalist vote" })).toBeTruthy()
 		expect(screen.getByText(/votes left/i)).toBeTruthy()
 	})
 
-	test("MemberInteractForm renders nothing for finalist vote without availableVotes", () => {
+	test("MemberInteractForm still renders finalist vote UI without availableVotes", () => {
 		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
 
 		render(
@@ -195,18 +197,19 @@ describe("features/presentation/interactions", () => {
 							},
 						],
 						outputs: [],
-						settings: { finalist_count: 5, default_votes: 10 },
+						settings: { default_votes: 10 },
 					},
 					context: {
 						presentation_orgs: [org],
-						settings: { finalist_count: 5 },
+						settings: { default_votes: 10 },
 					},
+					member_ui: createFinalistVoteMemberUi(),
 				} }
 			/>,
 		)
 
-		expect(screen.queryByRole("heading", { name: "Finalist Vote" })).toBeNull()
-		expect(screen.queryByText(/votes left/i)).toBeNull()
+		expect(screen.getByRole("heading", { name: "Finalist vote" })).toBeTruthy()
+		expect(screen.getByText(/votes left/i)).toBeTruthy()
 	})
 
 	test("MemberInteractForm shows unsupported copy for unknown ui slug", () => {
@@ -278,6 +281,7 @@ describe("features/presentation/interactions", () => {
 					context: {
 						presentation_orgs: [org],
 					},
+					member_ui: createAllocationMemberUi(),
 				} }
 			/>,
 		)
@@ -285,7 +289,7 @@ describe("features/presentation/interactions", () => {
 		expect(screen.getByRole("button", { name: /update vote/i })).toBeEnabled()
 	})
 
-	test("AllocationVoteForm returns nothing without allocations field", () => {
+	test("MemberInteractForm renders allocation UI from member_ui even when config fields are empty", () => {
 		const org = createPresentationOrgPersisted({ id: "org-1", name: "Org One", slug: "org-one" })
 
 		render(
@@ -313,11 +317,13 @@ describe("features/presentation/interactions", () => {
 					context: {
 						presentation_orgs: [org],
 					},
+					member_ui: createAllocationMemberUi(),
 				} }
 			/>,
 		)
 
-		expect(screen.queryByRole("heading", { name: "Allocation Round" })).toBeNull()
+		expect(screen.getByRole("heading", { name: "Allocation" })).toBeTruthy()
+		expect(screen.getByText("Org One")).toBeTruthy()
 	})
 
 	test("FinalistVoteForm enables submit when partial votes allowed", async () => {
@@ -351,18 +357,19 @@ describe("features/presentation/interactions", () => {
 							},
 						],
 						outputs: [],
-						settings: { finalist_count: 5, default_votes: 10 },
+						settings: { default_votes: 10 },
 					},
 					context: {
 						presentation_orgs: [org],
-						settings: { finalist_count: 5 },
+						settings: { default_votes: 10 },
 					},
+					member_ui: createFinalistVoteMemberUi(),
 				} }
 			/>,
 		)
 
 		const finalize = screen.getByRole("button", { name: /finalize vote/i })
-		expect(finalize).toBeDisabled()
+		expect(finalize).toBeEnabled()
 
 		await user.click(screen.getByLabelText(/submit without using all votes/i))
 
@@ -402,12 +409,13 @@ describe("features/presentation/interactions", () => {
 							},
 						],
 						outputs: [],
-						settings: { finalist_count: 5, default_votes: 10 },
+						settings: { default_votes: 10 },
 					},
 					context: {
 						presentation_orgs: [org],
-						settings: { finalist_count: 5 },
+						settings: { default_votes: 10 },
 					},
+					member_ui: createFinalistVoteMemberUi(),
 				} }
 			/>,
 		)

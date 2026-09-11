@@ -18,16 +18,13 @@ export default defineConfig((env) => ({
 		react(),
 		wyw({
 			include: ["**/*.{ts,tsx}"],
-			babelOptions: {
-				presets: ["@babel/preset-typescript", "@babel/preset-react"],
-			},
 		}),
 	],
 	resolve: {
 		dedupe: ["axios"],
 		tsconfigPaths: true,
 		alias: {
-			"@": path.resolve(__dirname, "app", "frontend"),
+			"@": path.resolve(import.meta.dirname, "app", "frontend"),
 		},
 	},
 	base: "./",

@@ -1,4 +1,4 @@
-import { type PuckSlideData } from "@/components/VisualEditor/editorPersistence"
+import { type PuckSlideData } from "@/components/VisualEditor/lib/EditorSave/editorPersistence"
 
 const EMPTY_PRESENTATION_SLIDE_DATA: PuckSlideData = {
 	content: [],

@@ -2,9 +2,11 @@
 en:
   navigation:
     circles: Circles
+    collapseSidebar: Collapse sidebar
     currentLanguage: Current language
     dashboard: Dashboard
     exitPresentationControls: Exit presentation controls
+    expandSidebar: Expand sidebar
     general: General
     givingCircles: Giving Circles
     interactionTemplates: Interaction Templates

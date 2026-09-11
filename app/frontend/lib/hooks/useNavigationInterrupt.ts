@@ -14,6 +14,14 @@ export interface UseNavigationInterruptOptions {
 	onNavigationBlocked?: () => void
 }
 
+function isLeavingInertiaVisit(method: string | undefined) {
+	if(method === undefined) {
+		return true
+	}
+
+	return method.toLowerCase() === "get"
+}
+
 function isNavigationInterruptState(state: object | null, historyGuardKey: string) {
 	if(state === null || typeof state !== "object") {
 		return false
@@ -70,6 +78,10 @@ export function useNavigationInterrupt({
 			if(allowNextNavigationRef.current || context.bypass) {
 				allowNextNavigationRef.current = false
 				send({ type: "CONSUME_BYPASS" })
+				return
+			}
+
+			if(!isLeavingInertiaVisit(event.detail.visit.method)) {
 				return
 			}
 

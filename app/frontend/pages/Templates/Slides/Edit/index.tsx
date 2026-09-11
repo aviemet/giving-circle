@@ -1,8 +1,10 @@
 import { useState } from "react"
 
 import { Page, Section } from "@/components"
-import { VisualEditor } from "@/components/VisualEditor"
-import { slideTitleFromData, type PuckSlideData } from "@/components/VisualEditor/editorPersistence"
+import { VisualEditor, slideSaveExtras } from "@/components/VisualEditor"
+import { slidePuckConfig } from "@/components/VisualEditor/config"
+import { slideTitleFromData, type PuckSlideData } from "@/components/VisualEditor/lib/EditorSave/editorPersistence"
+import { withStarterSlideContent } from "@/components/VisualEditor/lib/slotEditor"
 import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useUpdateTemplateSlide } from "@/queries"
@@ -28,8 +30,9 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 
 	const handleSave = async (data: PuckSlideData) => {
 		const title = slideTitleFromData(data) ?? slideTitle
+		const extras = await slideSaveExtras()
 
-		await updateSlideMutation.mutate({ data, title })
+		await updateSlideMutation.mutateAsync({ data, title, thumbnail: extras?.thumbnail })
 		setSlideTitle(title)
 	}
 
@@ -37,18 +40,22 @@ const EditSlides = ({ template, slide }: EditSlidesProps) => {
 
 	useInit(() => {
 		toggleSidebarOpen(false)
+
+		return () => {
+			toggleSidebarOpen()
+		}
 	})
 
 	return (
 		<Page title={ title } disablePadding>
 			<Section>
 				<VisualEditor
-					initialData={ slide?.data || {} }
+					initialData={ withStarterSlideContent(slide?.data || {}) }
 					slideTitle={ slideTitle }
 					onSave={ handleSave }
-					isSaving={ updateSlideMutation.isPending }
 					slideKey={ slide.slug ?? params.slug }
 					returnTo={ returnTo }
+					puckConfig={ slidePuckConfig }
 				/>
 			</Section>
 		</Page>

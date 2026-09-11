@@ -6,6 +6,7 @@ class CreateInteractionConfigTemplates < ActiveRecord::Migration[8.0]
       t.string :name, null: false
       t.string :slug, null: false
       t.jsonb :config, null: false, default: {}
+      t.jsonb :member_ui, null: false, default: {}
 
       t.timestamps
     end

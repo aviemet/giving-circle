@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useRef, useState, type ChangeEvent } from "react"
 
 import { TrashIcon, UploadIcon } from "@/components/Icons"
@@ -105,13 +106,12 @@ function BackgroundFieldControl({
 	}
 
 	return (
-		<div className={ classes.backgroundRoot }>
+		<div className={ clsx(classes.backgroundRoot) }>
 			<FieldRow label={ backgroundText("color") }>
 				<ColorInput
 					wrapper={ false }
 					name={ `${name}.color` }
 					value={ localValue.color ?? "" }
-					clearable
 					onChange={ (color) => updateValue({ color }) }
 					swatches={ [
 						"#2e2e2e",
@@ -135,14 +135,14 @@ function BackgroundFieldControl({
 			<FieldRow label={ backgroundText("image") }>
 				{ hasImage
 					? (
-						<div className={ classes.imageRow }>
+						<div className={ clsx(classes.imageRow) }>
 							<div
-								className={ classes.thumb }
+								className={ clsx(classes.thumb) }
 								style={ { backgroundImage: `url("${localValue.image.url}")` } }
 							/>
 							<button
 								type="button"
-								className={ classes.uploadButton }
+								className={ clsx(classes.uploadButton) }
 								aria-label={ backgroundText("replace") }
 								disabled={ isUploading }
 								onClick={ openFilePicker }
@@ -153,7 +153,7 @@ function BackgroundFieldControl({
 							<IconControlTooltip label={ backgroundText("remove") }>
 								<button
 									type="button"
-									className={ classes.iconButton }
+									className={ clsx(classes.iconButton) }
 									aria-label={ backgroundText("remove") }
 									disabled={ isUploading }
 									onClick={ removeImage }
@@ -164,10 +164,10 @@ function BackgroundFieldControl({
 						</div>
 					)
 					: (
-						<div className={ classes.imageRowEmpty }>
+						<div className={ clsx(classes.imageRowEmpty) }>
 							<button
 								type="button"
-								className={ classes.uploadButton }
+								className={ clsx(classes.uploadButton) }
 								aria-label={ backgroundText("upload") }
 								disabled={ isUploading }
 								onClick={ openFilePicker }
@@ -179,7 +179,7 @@ function BackgroundFieldControl({
 					) }
 				<input
 					ref={ fileInputRef }
-					className={ classes.fileInput }
+					className={ clsx(classes.fileInput) }
 					type="file"
 					name={ `${name}.upload` }
 					accept={ IMAGE_MIME_TYPE.join(",") }
@@ -220,7 +220,7 @@ function BackgroundFieldControl({
 					) }
 
 					<FieldRow label={ backgroundText("position") }>
-						<div className={ classes.offsetPair }>
+						<div className={ clsx(classes.offsetPair) }>
 							<TextInput
 								wrapper={ false }
 								name={ `${name}.offsetX` }

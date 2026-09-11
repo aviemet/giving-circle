@@ -28,6 +28,42 @@ describe("domains/presentations/Buttons/SwitchSlideButton", () => {
 		expect(onClick).toHaveBeenCalled()
 	})
 
+	test("renders the attached thumbnail", () => {
+		const { container } = render(
+			<SwitchSlideButton
+				active={ false }
+				onClick={ () => undefined }
+				slide={ {
+					id: "slide-1",
+					slug: "slide-1",
+					title: "Opening",
+					data: createSlideData(),
+					thumbnail_url: "/rails/active_storage/blobs/redirect/signed/thumb.jpg",
+				} }
+			/>,
+		)
+
+		const image = container.querySelector("img")
+		expect(image?.getAttribute("src")).toBe("/rails/active_storage/blobs/redirect/signed/thumb.jpg")
+	})
+
+	test("marks the selected slide as active", () => {
+		const { container } = render(
+			<SwitchSlideButton
+				active
+				onClick={ () => undefined }
+				slide={ {
+					id: "slide-1",
+					slug: "slide-1",
+					title: "Opening",
+					data: createSlideData(),
+				} }
+			/>,
+		)
+
+		expect(container.querySelector(".active")).toBeTruthy()
+	})
+
 	test("falls back to Untitled Slide", () => {
 		render(
 			<SwitchSlideButton

@@ -15,6 +15,7 @@ class Presentations::InteractionsController < ApplicationController
     :accepting_responses,
     :interaction_ui_template_id,
     { config: {} },
+    { member_ui: {} },
     { trigger_conditions: [:slide_slug] },
   ]
 
@@ -54,6 +55,15 @@ class Presentations::InteractionsController < ApplicationController
     }
   end
 
+  # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug/member_ui/edit (edit_member_ui_theme_presentation_interaction)
+  def edit_member_ui
+    authorize presentation_interaction, policy_class: Presentation::InteractionPolicy
+    render inertia: "Presentations/Interactions/MemberUi/Edit", props: {
+      presentation_interaction: presentation_interaction.render(:edit),
+  presentation: -> { presentation.render(:presentation) },
+    }
+  end
+
   # @route GET /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug/edit (edit_theme_presentation_interaction)
   def edit
     authorize presentation_interaction, policy_class: Presentation::InteractionPolicy
@@ -67,7 +77,7 @@ class Presentations::InteractionsController < ApplicationController
     authorize Presentation::Interaction.new, policy_class: Presentation::InteractionPolicy
     presentation_interaction.presentation = presentation
 
-    if presentation_interaction.save
+    if save_interaction_and_presentation_settings
       redirect_to theme_presentation_interaction_path(presentation.circle, presentation.theme, presentation, presentation_interaction),
         notice: t("presentations.interactions.notices.created")
     else
@@ -80,10 +90,20 @@ class Presentations::InteractionsController < ApplicationController
   # @route PUT /:circle_slug/themes/:theme_slug/presentations/:presentation_slug/interactions/:slug (theme_presentation_interaction)
   def update
     authorize presentation_interaction, policy_class: Presentation::InteractionPolicy
-    if presentation_interaction.update(presentation_interaction_params)
+    if save_interaction_and_presentation_settings
+      if member_ui_only_update?
+        head :ok
+        return
+      end
+
       redirect_to theme_presentation_interaction_path(presentation.circle, presentation.theme, presentation, presentation_interaction),
         notice: t("presentations.interactions.notices.updated")
     else
+      if member_ui_only_update?
+        render json: { errors: presentation_interaction.errors }, status: :unprocessable_content
+        return
+      end
+
       redirect_to edit_theme_presentation_interaction_path(presentation.circle, presentation.theme, presentation, presentation_interaction),
         inertia: { errors: presentation_interaction.errors }
     end
@@ -113,6 +133,44 @@ class Presentations::InteractionsController < ApplicationController
     ActivePresentation::Cache.schedule_refresh(presentation.id)
     redirect_to theme_presentation_interaction_path(presentation.circle, presentation.theme, presentation, presentation_interaction),
       notice: t("presentations.interactions.notices.not_accepting")
+  end
+
+  private
+
+  def save_interaction_and_presentation_settings
+    saved = false
+
+    Presentation.transaction do
+      apply_presentation_finalist_count
+
+      saved = if presentation_interaction.new_record?
+                presentation_interaction.save
+              else
+                presentation_interaction.update(presentation_interaction_params)
+              end
+
+      raise ActiveRecord::Rollback unless saved
+    end
+
+    saved
+  end
+
+  def member_ui_only_update?
+    presentation_interaction_params.keys.map(&:to_s) == ["member_ui"]
+  end
+
+  def apply_presentation_finalist_count
+    finalist_count = params.dig(:presentation, :settings, :finalist_count)
+    return if finalist_count.blank?
+
+    presentation.settings.finalist_count = finalist_count
+    return if presentation.save
+
+    presentation.errors.each do |error|
+      presentation_interaction.errors.add(error.attribute, error.message)
+    end
+
+    raise ActiveRecord::Rollback
   end
 
 end

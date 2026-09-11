@@ -1,54 +1,30 @@
-import { type PuckContext, type SlotComponent } from "@puckeditor/core"
-import clsx from "clsx"
+import { type PuckComponent, type Slot } from "@puckeditor/core"
 
-import { SimpleGrid } from "@/components"
+import { GridDisplay } from "./GridDisplay"
+import { GridEditor } from "./GridEditor"
+import {
+	type BackgroundValue,
+	type BorderProps,
+	type BoxModelValue,
+	type FlexItemSizing,
+	type GridLayoutValue,
+	type IterateValue,
+} from "../../fields"
 
-import * as classes from "./Grid.css"
-import * as editorClasses from "./Grid.editor.css"
-import { GridProps } from "./gridConfig"
-import * as layoutChrome from "../../layoutChrome.editor.css"
-import * as puckClasses from "../../Puck.css"
-import { slotDropZoneProps } from "../../slotEditor"
-
-export type GridComponentProps = Omit<GridProps, "content"> & {
-	content: SlotComponent
-	puck: PuckContext
+export type GridProps = {
+	background?: BackgroundValue
+	border?: BorderProps
+	content: Slot
+	grid?: GridLayoutValue
+	sizing?: FlexItemSizing
+	spacing?: BoxModelValue
+	iterate?: IterateValue
 }
 
-export function gridClassName(isEditing: boolean) {
-	return clsx(
-		classes.grid,
-		isEditing && editorClasses.grid,
-		isEditing && puckClasses.presentationSlot,
-	)
-}
+export type GridComponentProps = Parameters<PuckComponent<GridProps>>[0]
 
-export function gridDropZoneClassName(isEditing: boolean) {
-	return clsx(
-		gridClassName(isEditing),
-		isEditing && layoutChrome.frame,
-		isEditing && layoutChrome.labelGrid,
-	)
-}
-
-export function GridDisplay({
-	content: Content,
-	columns,
-	puck,
-}: GridComponentProps) {
-	const { dragRef, isEditing } = puck
-
-	return (
-		<SimpleGrid
-			ref={ dragRef }
-			className={ gridClassName(isEditing) }
-			cols={ columns }
-			w="100%"
-		>
-			<Content
-				className={ gridDropZoneClassName(isEditing) }
-				{ ...slotDropZoneProps() }
-			/>
-		</SimpleGrid>
-	)
+export function Grid(props: GridComponentProps) {
+	return props.puck.isEditing
+		? <GridEditor { ...props } />
+		: <GridDisplay { ...props } />
 }

@@ -1,16 +1,24 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { i18n } from "@/lib/i18n"
 
 import * as classes from "./headingMetrics.css"
 import { FieldRow, IconSegmented, PuckFieldLabel, UnitNumber } from "../shared"
+import {
+	SPACING_LENGTH_UNITS,
+	coerceLength,
+	isLengthUnit,
+	type LengthValue,
+	type SpacingLengthUnit,
+} from "../shared/length"
 
 export type HeadingOrder = 1 | 2 | 3 | 4 | 5 | 6
 
 export type HeadingMetricsValue = {
 	order: HeadingOrder
-	padding: number
+	padding: LengthValue<SpacingLengthUnit> | number
 }
 
 const HEADING_ORDERS: HeadingOrder[] = [1, 2, 3, 4, 5, 6]
@@ -44,21 +52,21 @@ function parseHeadingOrder(value: string): HeadingOrder | undefined {
 export function defaultHeadingMetrics(): HeadingMetricsValue {
 	return {
 		order: 1,
-		padding: 16,
+		padding: { amount: 16, unit: "px" },
 	}
 }
 
 export function normalizeHeadingMetrics(
 	metrics: Partial<HeadingMetricsValue> | undefined,
-	legacy?: {
-		order?: HeadingOrder
-		padding?: number
-	},
 ): HeadingMetricsValue {
 	const defaults = defaultHeadingMetrics()
 	return {
-		order: metrics?.order ?? legacy?.order ?? defaults.order,
-		padding: metrics?.padding ?? legacy?.padding ?? defaults.padding,
+		order: metrics?.order ?? defaults.order,
+		padding: coerceLength(
+			metrics?.padding ?? defaults.padding,
+			SPACING_LENGTH_UNITS,
+			"px",
+		),
 	}
 }
 
@@ -80,11 +88,13 @@ function HeadingMetricsFieldControl({ name, value, onChange }: HeadingMetricsFie
 		onChange(next)
 	}
 
+	const padding = coerceLength(localValue.padding, SPACING_LENGTH_UNITS, "px")
+
 	return (
-		<div className={ classes.metricsRoot }>
+		<div className={ clsx(classes.metricsRoot) }>
 			<FieldRow label={ metricsText("labels.level") }>
 				<IconSegmented
-					className={ classes.levelSegmented }
+					className={ clsx(classes.levelSegmented) }
 					name={ `${name}.order` }
 					value={ String(localValue.order) }
 					options={ HEADING_ORDERS.map((order) => ({
@@ -103,8 +113,20 @@ function HeadingMetricsFieldControl({ name, value, onChange }: HeadingMetricsFie
 			<FieldRow label={ metricsText("labels.padding") }>
 				<UnitNumber
 					name={ `${name}.padding` }
-					value={ localValue.padding }
-					onChange={ (padding) => updateValue({ padding }) }
+					value={ padding.amount }
+					unit={ padding.unit }
+					units={ SPACING_LENGTH_UNITS }
+					onChange={ (amount) => updateValue({
+						padding: { amount, unit: padding.unit },
+					}) }
+					onUnitChange={ (unit) => {
+						if(!isLengthUnit(unit, SPACING_LENGTH_UNITS)) {
+							return
+						}
+						updateValue({
+							padding: { amount: padding.amount, unit },
+						})
+					} }
 				/>
 			</FieldRow>
 		</div>

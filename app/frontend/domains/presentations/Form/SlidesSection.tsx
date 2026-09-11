@@ -96,6 +96,7 @@ export const SlidesSection = ({ circle, presentation }: SlidesSectionProps) => {
 						key={ index }
 						path={ `presentation.slides_attributes.${index}` }
 						removeInput={ () => handleRemoveSlide(index) }
+						thumbnailUrl={ presentation.slides?.[index]?.thumbnail_url }
 						href={
 							presentation.slug && slideSlugs[index]
 								? Routes.editThemePresentationSlide(circle.slug, active_theme.slug, presentation.slug, slideSlugs[index])

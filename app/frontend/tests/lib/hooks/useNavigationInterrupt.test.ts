@@ -116,4 +116,34 @@ describe("lib/hooks/useNavigationInterrupt", () => {
 
 		visitSpy.mockRestore()
 	})
+
+	test("does not interrupt in-place PATCH visits", () => {
+		const preventDefault = vi.fn()
+		const beforeHandler = vi.fn()
+
+		vi.mocked(router.on).mockImplementation((eventName, handler) => {
+			if(eventName === "before") {
+				beforeHandler.mockImplementation((event) => handler(event))
+			}
+
+			return vi.fn()
+		})
+
+		const { result } = renderHook(() =>
+			useNavigationInterrupt({
+				enabled: true,
+				historyGuardKey: "member-ui-1",
+			}),
+		)
+
+		act(() => {
+			beforeHandler({
+				preventDefault,
+				detail: { visit: { url: "/interactions/pledges", method: "patch" } },
+			})
+		})
+
+		expect(result.current.promptOpen).toBe(false)
+		expect(preventDefault).not.toHaveBeenCalled()
+	})
 })

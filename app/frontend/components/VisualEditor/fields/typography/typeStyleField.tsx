@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import {
@@ -15,10 +16,10 @@ import { Select } from "@/components/Inputs"
 import { i18n } from "@/lib/i18n"
 
 import {
-	type FontStyleValue,
+	isFontStyleValue,
+	isTextDecorationValue,
+	isTextTransformValue,
 	type FontWeightValue,
-	type TextDecorationValue,
-	type TextTransformValue,
 } from "./fields"
 import { fontWeightSelectOptions, parseFontWeight } from "./fontWeightOptions"
 import { defaultTypeStyle, normalizeTypeStyle, type TypeStyleValue } from "./typeStyle"
@@ -27,24 +28,6 @@ import { FieldRow, IconSegmented, PuckFieldLabel } from "../shared"
 
 function styleText(key: string) {
 	return i18n.t(`slides.editor.fields.typography.${key}`)
-}
-
-function isTextDecorationValue(value: string): value is TextDecorationValue {
-	return value === "none"
-		|| value === "underline"
-		|| value === "line-through"
-		|| value === "overline"
-}
-
-function isTextTransformValue(value: string): value is TextTransformValue {
-	return value === "none"
-		|| value === "uppercase"
-		|| value === "lowercase"
-		|| value === "capitalize"
-}
-
-function isFontStyleValue(value: string): value is FontStyleValue {
-	return value === "normal" || value === "italic"
 }
 
 interface TypeStyleFieldControlProps {
@@ -61,7 +44,7 @@ function TypeStyleFieldControl({
 	fallbackWeight,
 }: TypeStyleFieldControlProps) {
 	const [localValue, setLocalValue] = useState<TypeStyleValue>(() => {
-		return normalizeTypeStyle(value, undefined, fallbackWeight)
+		return normalizeTypeStyle(value, fallbackWeight)
 	})
 
 	const updateValue = (patch: Partial<TypeStyleValue>) => {
@@ -74,7 +57,7 @@ function TypeStyleFieldControl({
 	}
 
 	return (
-		<div className={ classes.typographyStack }>
+		<div className={ clsx(classes.typographyStack) }>
 			<FieldRow label={ styleText("labels.weight") }>
 				<Select
 					wrapper={ false }
@@ -95,7 +78,7 @@ function TypeStyleFieldControl({
 
 			<FieldRow label={ styleText("labels.decoration") }>
 				<IconSegmented
-					className={ classes.typographyIcons }
+					className={ clsx(classes.typographyIcons) }
 					name={ `${name}.td` }
 					value={ localValue.td }
 					options={ [
@@ -114,7 +97,7 @@ function TypeStyleFieldControl({
 
 			<FieldRow label={ styleText("labels.transform") }>
 				<IconSegmented
-					className={ classes.typographyIcons }
+					className={ clsx(classes.typographyIcons) }
 					name={ `${name}.tt` }
 					value={ localValue.tt }
 					options={ [
@@ -133,7 +116,7 @@ function TypeStyleFieldControl({
 
 			<FieldRow label={ styleText("labels.style") }>
 				<IconSegmented
-					className={ classes.typographyIcons }
+					className={ clsx(classes.typographyIcons) }
 					name={ `${name}.fs` }
 					value={ localValue.fs }
 					options={ [
@@ -151,7 +134,7 @@ function TypeStyleFieldControl({
 	)
 }
 
-function typeStyleField(params: {
+export function typeStyleField(params: {
 	fallbackWeight?: FontWeightValue
 } = {}): Field<TypeStyleValue | undefined> {
 	const fallbackWeight = params.fallbackWeight ?? 400
@@ -174,5 +157,3 @@ function typeStyleField(params: {
 		},
 	}
 }
-
-export { typeStyleField }

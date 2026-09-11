@@ -8,6 +8,7 @@ import { i18n } from "@/lib/i18n"
 
 import * as classes from "./timerDisplayField.css"
 import { IconSegmented, PuckFieldLabel } from "../shared"
+import clsx from "clsx"
 
 function displayText(key: string) {
 	return i18n.t(`slides.editor.fields.timer_display.${key}`)
@@ -22,9 +23,9 @@ export function timerDisplayField(): Field<TimerDisplayType> {
 		render: ({ name, onChange, value }) => {
 			return (
 				<PuckFieldLabel label={ label }>
-					<div className={ classes.displayRoot }>
+					<div className={ clsx(classes.displayRoot) }>
 						<IconSegmented
-							className={ classes.displaySegmented }
+							className={ clsx(classes.displaySegmented) }
 							name={ name }
 							value={ value }
 							options={ [

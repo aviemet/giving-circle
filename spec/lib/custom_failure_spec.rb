@@ -88,6 +88,7 @@ RSpec.describe CustomFailure, type: :request do
     allow(failure).to receive(:warden_message).and_return(:invalid)
     allow(failure).to receive(:redirect_to)
     flash = ActionDispatch::Flash::FlashHash.new
+    allow(failure).to receive_messages(i18n_message: "Invalid", flash: flash)
     failure.respond_to_failure_types
     expect(failure).to have_received(:redirect_to).with("/login")
 
@@ -97,6 +98,7 @@ RSpec.describe CustomFailure, type: :request do
     allow(failure).to receive(:request).and_return(request)
     allow(failure).to receive(:warden_message).and_return(:unconfirmed)
     allow(failure).to receive(:redirect_to)
+    allow(failure).to receive(:params).and_return({ user: { email: "a@example.com" } })
     failure.respond_to_failure_types
     expect(failure).to have_received(:redirect_to)
 

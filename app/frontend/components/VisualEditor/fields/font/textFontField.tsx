@@ -1,5 +1,5 @@
 import { Field } from "@puckeditor/core"
-import { useState } from "react"
+import clsx from "clsx"
 
 import { ColorInput } from "@/components/Inputs"
 import { i18n } from "@/lib/i18n"
@@ -58,34 +58,31 @@ function TextFontFieldControl({
 	fallbackColor,
 	fallbackSizePreset,
 }: TextFontFieldControlProps) {
-	const [localValue, setLocalValue] = useState<TextFontValue>(() => {
-		return normalizeTextFontValue(value, undefined, {
-			color: fallbackColor,
-			sizePreset: fallbackSizePreset,
-		})
+	const fontValue = normalizeTextFontValue(value, {
+		color: fallbackColor,
+		sizePreset: fallbackSizePreset,
 	})
 
 	const commit = (next: TextFontValue) => {
-		setLocalValue(next)
 		onChange(next)
 	}
 
 	const updateFamily = (font: FontValue) => {
 		commit({
-			...localValue,
+			...fontValue,
 			family: font.family,
 			url: font.url,
 		})
 	}
 
 	return (
-		<div className={ classes.textFontRoot }>
+		<div className={ clsx(classes.textFontRoot) }>
 			<FieldRow label={ fontText("labels.family") }>
 				<FontFamilyControls
 					name={ `${name}.family` }
 					value={ {
-						family: localValue.family,
-						url: localValue.url,
+						family: fontValue.family,
+						url: fontValue.url,
 					} }
 					onChange={ updateFamily }
 					allowInherit={ allowInherit }
@@ -94,11 +91,11 @@ function TextFontFieldControl({
 
 			<FontSizeControl
 				name={ `${name}.size` }
-				value={ localValue.size }
+				value={ fontValue.size }
 				allowAuto={ allowAutoSize }
 				onChange={ (size) => {
 					commit({
-						...localValue,
+						...fontValue,
 						size,
 					})
 				} }
@@ -108,11 +105,10 @@ function TextFontFieldControl({
 				<ColorInput
 					wrapper={ false }
 					name={ `${name}.color` }
-					value={ localValue.color }
-					clearable
+					value={ fontValue.color }
 					onChange={ (color) => {
 						commit({
-							...localValue,
+							...fontValue,
 							color,
 						})
 					} }

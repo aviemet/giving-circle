@@ -9,6 +9,7 @@ module ActivePresentation
             accepting_responses: interaction.accepting_responses,
           }
         },
+        element_controls: presentation.element_controls,
       }
     end
   end

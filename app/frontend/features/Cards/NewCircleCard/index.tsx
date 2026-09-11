@@ -1,4 +1,5 @@
 import { Link } from "@inertiajs/react"
+import clsx from "clsx"
 import { useTranslation } from "react-i18next"
 
 import { Card, Center, Stack, Text } from "@/components"
@@ -18,7 +19,7 @@ export function NewCircleCard() {
 			withBorder
 			component={ Link }
 			href={ Routes.newCircle() }
-			className={ classes.newCircleCard }
+			className={ clsx(classes.newCircleCard) }
 		>
 			<Center h="100%">
 				<Stack gap="xs" align="center">

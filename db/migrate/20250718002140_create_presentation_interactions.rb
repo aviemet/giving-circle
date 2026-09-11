@@ -6,6 +6,7 @@ class CreatePresentationInteractions < ActiveRecord::Migration[8.0]
       t.string :slug, null: false
       t.string :name, null: false
       t.jsonb :config, null: false, default: {}
+      t.jsonb :member_ui, null: false, default: {}
       t.jsonb :results, null: false, default: {}
       t.integer :trigger_type, null: false, default: 0
       t.jsonb :trigger_conditions, null: false, default: {}

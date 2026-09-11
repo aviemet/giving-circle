@@ -6,6 +6,24 @@ interface PresentationValuesAllocatedTotal {
 	currency: string
 }
 
+interface PresentationValuesPledgeTotal {
+	org_id: string
+	pledge_cents: number
+	currency: string
+}
+
+interface PresentationValuesFundingTotal {
+	org_id: string
+	funding_cents: number
+	currency: string
+}
+
+interface PresentationValuesLeverage {
+	remaining_cents: number
+	total_ask_cents: number
+	currency: string
+}
+
 interface PresentationValuesMoneyTotal {
 	total_cents: number
 	currency: string
@@ -23,6 +41,10 @@ interface PresentationValuesRankTotal {
 
 export interface PresentationValuesPayload {
 	allocated_totals: PresentationValuesAllocatedTotal[]
+	pledge_totals: PresentationValuesPledgeTotal[]
+	funding_totals: PresentationValuesFundingTotal[]
+	funded_org_ids: string[]
+	leverage: PresentationValuesLeverage | null
 	org_vote_totals: PresentationValuesOrgVoteTotal[]
 	finalist_org_ids: string[]
 	money_totals: PresentationValuesMoneyTotal[]

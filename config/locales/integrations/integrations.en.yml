@@ -5,13 +5,12 @@ en:
       title: Edit %{name}
     form:
       active: Active
-      auth_profile_hint: "Authentication: %{profile}"
+      auth_profile_hint: 'Authentication: %{profile}'
       auth_profiles:
         api_token: API token
         basic_auth: Username and password
         smtp: SMTP
       create: Create Integration
-      credentials: Credentials
       credential_fields:
         account_sid: Account SID
         api_token: API Token
@@ -23,6 +22,7 @@ en:
         password: Password
         port: Port
         username: Username
+      credentials: Credentials
       medium: Message Medium
       mediums:
         email: Email

@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { useTranslation } from "react-i18next"
 
 import { Box, Title, Link } from "@/components"
@@ -72,7 +73,7 @@ const Register = () => {
 			</Field>
 
 			<Field mb={ 16 }>
-				<Submit className="large">{ t("devise.ui.sign_up") }</Submit>
+				<Submit className={ clsx("large") }>{ t("devise.ui.sign_up") }</Submit>
 			</Field>
 
 			<Link href={ Routes.newUserSession() }>{ t("devise.ui.log_in_instead") }</Link>

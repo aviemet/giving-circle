@@ -8,7 +8,7 @@
 #  name         :string           not null
 #  published_at :datetime
 #  slug         :string
-#  status       :integer          default("draft")
+#  status       :integer          default(0)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  circle_id    :uuid             not null

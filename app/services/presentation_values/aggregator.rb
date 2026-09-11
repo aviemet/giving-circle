@@ -16,30 +16,39 @@ module PresentationValues
     end
 
     def call
+      PresentationValues::Composer.enrich(@presentation, raw_snapshot)
+    end
+
+    def raw_snapshot
       allocated_totals_by_org = {}
+      pledge_totals_by_org = {}
       org_vote_totals_by_org = {}
       vote_counts = {}
       money_totals_cents = 0
       rank_totals = {}
       tracks_allocated_totals = false
+      tracks_pledge_totals = false
       tracks_org_vote_totals = false
 
       @presentation.interactions.includes(:interaction_responses, :interaction_ui_template).find_each do |interaction|
         result = apply_interaction_outputs(
           interaction,
           allocated_totals_by_org: allocated_totals_by_org,
+          pledge_totals_by_org: pledge_totals_by_org,
           org_vote_totals_by_org: org_vote_totals_by_org,
           vote_counts: vote_counts,
           money_totals_cents: money_totals_cents,
           rank_totals: rank_totals,
         )
         tracks_allocated_totals ||= result[:tracks_allocated_totals]
+        tracks_pledge_totals ||= result[:tracks_pledge_totals]
         tracks_org_vote_totals ||= result[:tracks_org_vote_totals]
         money_totals_cents = result[:money_totals_cents]
       end
 
       {
         allocated_totals: tracks_allocated_totals ? build_allocated_totals(allocated_totals_by_org) : [],
+        pledge_totals: tracks_pledge_totals ? build_pledge_totals(pledge_totals_by_org) : [],
         org_vote_totals: tracks_org_vote_totals ? build_org_vote_totals(org_vote_totals_by_org) : [],
         finalist_org_ids: PresentationValues::Finalists.call(
           @presentation,
@@ -56,6 +65,7 @@ module PresentationValues
     def apply_interaction_outputs(
       interaction,
       allocated_totals_by_org:,
+      pledge_totals_by_org:,
       org_vote_totals_by_org:,
       vote_counts:,
       money_totals_cents:,
@@ -66,6 +76,7 @@ module PresentationValues
       unless outputs.is_a?(Array)
         return {
           tracks_allocated_totals: false,
+          tracks_pledge_totals: false,
           tracks_org_vote_totals: false,
           money_totals_cents: money_totals_cents,
         }
@@ -73,6 +84,7 @@ module PresentationValues
 
       field_index = index_fields(config[:fields])
       tracks_allocated_totals = false
+      tracks_pledge_totals = false
       tracks_org_vote_totals = false
 
       outputs.each do |output|
@@ -94,6 +106,9 @@ module PresentationValues
         when "allocated_totals"
           merge_allocated_totals(allocated_totals_by_org, partial)
           tracks_allocated_totals = true
+        when "pledge_totals"
+          merge_allocated_totals(pledge_totals_by_org, partial)
+          tracks_pledge_totals = true
         when "org_vote_totals"
           merge_allocated_totals(org_vote_totals_by_org, partial)
           tracks_org_vote_totals = true
@@ -108,6 +123,7 @@ module PresentationValues
 
       {
         tracks_allocated_totals: tracks_allocated_totals,
+        tracks_pledge_totals: tracks_pledge_totals,
         tracks_org_vote_totals: tracks_org_vote_totals,
         money_totals_cents: money_totals_cents,
       }
@@ -240,6 +256,20 @@ module PresentationValues
         {
           org_id: org_id,
           votes: votes,
+        }
+      end
+    end
+
+    def build_pledge_totals(totals_by_org)
+      @presentation.orgs.find_each do |org|
+        totals_by_org[org.id] = totals_by_org.fetch(org.id, 0)
+      end
+
+      totals_by_org.map do |org_id, pledge_cents|
+        {
+          org_id: org_id,
+          pledge_cents: pledge_cents,
+          currency: "USD",
         }
       end
     end

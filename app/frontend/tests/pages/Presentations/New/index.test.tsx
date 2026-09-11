@@ -25,6 +25,7 @@ describe("pages/Presentations/New/index", () => {
 			slides: [],
 			template_id: "",
 			theme_id: "theme-1",
+			settings: { finalist_count: 5 },
 		}
 
 		render(<NewPresentation presentation={ presentation } templates={ [] } />)

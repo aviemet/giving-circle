@@ -12,7 +12,7 @@ export function DateRangeDate({
 	const { t } = useTranslation()
 	const { values, inputProps, setInputValue } = advancedSearch
 
-	const { mb, wrapperProps, value } = inputProps<DateInputValue>(`${name}[start]`)
+	const { mb, wrapperProps, value } = inputProps(`${name}[start]`)
 
 	const handleChange = (value?: DateInputValue) => {
 		if(value === undefined) return

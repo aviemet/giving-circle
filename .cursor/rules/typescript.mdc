@@ -84,6 +84,7 @@ Consider the keyword `any` to be forbidden, with NO EXCEPTIONS!
 
 - Use `react-i18next` (`useTranslation`, `t()`) in components.
 - Do not edit `app/frontend/lib/locales/*.json`; define strings in `config/locales/**/*.yml` and run `bundle exec rails i18n:export`.
+- App languages are `I18n.available_locales`. Do not treat rails-i18n gem locale files as frontend picker languages.
 
 ## UI and Styling
 

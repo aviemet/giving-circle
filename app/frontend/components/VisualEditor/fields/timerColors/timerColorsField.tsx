@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { ColorInput } from "@/components/Inputs"
@@ -60,7 +61,7 @@ function TimerColorsFieldControl({
 	}
 
 	return (
-		<div className={ classes.colorsRoot }>
+		<div className={ clsx(classes.colorsRoot) }>
 			<FieldRow label={ colorsText("labels.ring_track") }>
 				<ColorInput
 					wrapper={ false }

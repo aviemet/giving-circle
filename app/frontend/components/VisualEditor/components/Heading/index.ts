@@ -1,2 +1,2 @@
 export { headingConfig } from "./headingConfig"
-export { type HeadingProps } from "./headingConfig"
+export { Heading, type HeadingProps } from "./Heading"

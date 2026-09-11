@@ -12,6 +12,7 @@ export interface RadioProps extends Omit<MantineRadioProps, "value">, BaseInputP
 
 export function RadioComponent({
 	id,
+	name,
 	wrapper,
 	wrapperProps,
 	value,
@@ -25,6 +26,7 @@ export function RadioComponent({
 			<Radio
 				ref={ ref }
 				id={ inputId }
+				name={ name }
 				value={ value }
 				{ ...props }
 			/>

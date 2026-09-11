@@ -6,12 +6,16 @@ import {
 } from "@/components/VisualEditor/fields/flexItemSizing"
 
 describe("components/VisualEditor/fields/flexItemSizing", () => {
-	test("auto mode applies only fine tune overrides", () => {
+	test("auto mode hugs content instead of filling leftover space", () => {
 		expect(buildFlexItemSizingStyle({
 			mode: "auto",
 			fineTune: { flexGrow: 2, alignSelf: "center" },
 		})).toEqual({
 			flexGrow: 2,
+			flexShrink: 0,
+			flexBasis: "auto",
+			height: "auto",
+			minHeight: "auto",
 			alignSelf: "center",
 		})
 	})
@@ -67,7 +71,11 @@ describe("components/VisualEditor/fields/flexItemSizing", () => {
 			mode: "auto",
 			height: { amount: 32, unit: "px" },
 		})).toEqual({
+			flexGrow: 0,
+			flexShrink: 0,
+			flexBasis: "auto",
 			height: "32px",
+			minHeight: "auto",
 		})
 	})
 

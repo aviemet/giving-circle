@@ -7,6 +7,7 @@ RSpec.describe "Presentations::Interactions", type: :request do
   let(:presentation) { create(:presentation, theme: create(:theme, circle: @admin.circles.first)) }
   let(:circle) { presentation.circle }
   let(:theme) { presentation.theme }
+  let(:interaction_ui_template) { create(:interaction_ui_template, :allocation) }
 
   describe "GET index" do
     it "is successful" do
@@ -52,6 +53,7 @@ RSpec.describe "Presentations::Interactions", type: :request do
             name: "Allocation Round",
             trigger_type: "manual",
             trigger_conditions: {},
+            interaction_ui_template_id: interaction_ui_template.id,
             config: InteractionConfigFixtures::ALLOCATION_ROUND,
             results: {},
           },
@@ -73,6 +75,7 @@ RSpec.describe "Presentations::Interactions", type: :request do
             name: "Allocation Round",
             trigger_type: "manual",
             trigger_conditions: {},
+            interaction_ui_template_id: interaction_ui_template.id,
             results: {},
           },
         }
@@ -141,6 +144,58 @@ RSpec.describe "Presentations::Interactions", type: :request do
       expect(interaction.name).to eq("Renamed Round")
     end
 
+    it "persists presentation finalist_count when updating a finalist vote interaction" do
+      ui_template = create(:interaction_ui_template, :finalist_vote)
+      interaction = create(
+        :presentation_interaction,
+        presentation: presentation,
+        name: "Finalist vote",
+        interaction_ui_template: ui_template,
+        config: InteractionConfigFixtures::FINALIST_VOTE,
+      )
+
+      patch theme_presentation_interaction_path(circle, theme, presentation, interaction), params: {
+        presentation_interaction: {
+          name: "Finalist vote",
+        },
+        presentation: {
+          settings: {
+            finalist_count: 3,
+          },
+        },
+      }
+
+      expect(response).to redirect_to(theme_presentation_interaction_path(circle, theme, presentation, interaction))
+      expect(presentation.reload.settings.finalist_count).to eq(3)
+    end
+
+    it "does not update when presentation finalist_count is invalid" do
+      ui_template = create(:interaction_ui_template, :finalist_vote)
+      interaction = create(
+        :presentation_interaction,
+        presentation: presentation,
+        name: "Finalist vote",
+        interaction_ui_template: ui_template,
+        config: InteractionConfigFixtures::FINALIST_VOTE,
+      )
+      original_count = presentation.settings.finalist_count
+
+      patch theme_presentation_interaction_path(circle, theme, presentation, interaction), params: {
+        presentation_interaction: {
+          name: "Renamed vote",
+        },
+        presentation: {
+          settings: {
+            finalist_count: 0,
+          },
+        },
+      }
+
+      expect(response).to redirect_to(edit_theme_presentation_interaction_path(circle, theme, presentation, interaction))
+      expect(interaction.reload.name).to eq("Finalist vote")
+      expect(presentation.reload.settings.finalist_count).to eq(original_count)
+    end
+
     it "returns validation errors for invalid update params" do
       interaction = create(:presentation_interaction, presentation: presentation, name: "Original")
 
@@ -160,6 +215,24 @@ RSpec.describe "Presentations::Interactions", type: :request do
 
       expect(response).to redirect_to(edit_theme_presentation_interaction_path(circle, theme, presentation, interaction))
       expect(interaction.reload.config).to eq(InteractionConfigFixtures::ALLOCATION_ROUND)
+    end
+
+    it "saves member_ui without leaving the editor" do
+      interaction = create(
+        :presentation_interaction,
+        presentation: presentation,
+        member_ui: Interactions::MemberUiPresets::ALLOCATION,
+      )
+      next_member_ui = Interactions::MemberUiPresets::PLEDGES
+
+      patch theme_presentation_interaction_path(circle, theme, presentation, interaction), params: {
+        presentation_interaction: {
+          member_ui: next_member_ui,
+        },
+      }
+
+      expect(response).to have_http_status(:ok)
+      expect(interaction.reload.member_ui.dig("root", "props", "title")).to eq("Pledges")
     end
   end
 

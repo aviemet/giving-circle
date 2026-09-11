@@ -42,6 +42,7 @@ export {
 	TbTextSize as FontNormalIcon,
 	TbKeyboard as KeyboardIcon,
 	TbInfoCircle as InfoIcon,
+	TbLayoutSidebarLeftCollapse as SidebarCollapseIcon,
 } from "react-icons/tb"
 
 export {

@@ -131,7 +131,6 @@ function isPresentationOrg(value: unknown): value is Schema.PresentationsOrgsPer
 
 function interactionSettingsFromContext(value: Record<string, unknown>): InteractionSettings {
 	const settings: InteractionSettings = {}
-	if(typeof value.finalist_count === "number") settings.finalist_count = value.finalist_count
 	if(typeof value.default_votes === "number") settings.default_votes = value.default_votes
 	if(typeof value.allow_non_finalists === "boolean") settings.allow_non_finalists = value.allow_non_finalists
 	if(typeof value.allow_over_ask === "boolean") settings.allow_over_ask = value.allow_over_ask
@@ -152,25 +151,17 @@ function orgOptions(context: InteractionFormContext) {
 function orgMoneyMapValue(value: ResponseFieldValue, orgId: string): number | undefined {
 	if(!Array.isArray(value)) return undefined
 
-	const entry = value.find((row) => {
-		if(typeof row !== "object" || row === null || Array.isArray(row)) return false
-		return (row as OrgMoneyMapEntry).org_id === orgId
-	})
-
-	if(!entry || typeof entry !== "object" || Array.isArray(entry)) return undefined
-	return (entry as OrgMoneyMapEntry).amount_cents
+	const entry = value.find((row) => isOrgMoneyMapEntry(row) && row.org_id === orgId)
+	if(!isOrgMoneyMapEntry(entry)) return undefined
+	return entry.amount_cents
 }
 
 function orgRankValue(value: ResponseFieldValue, orgId: string): number | undefined {
 	if(!Array.isArray(value)) return undefined
 
-	const entry = value.find((row) => {
-		if(typeof row !== "object" || row === null || Array.isArray(row)) return false
-		return (row as OrgRankEntry).org_id === orgId
-	})
-
-	if(!entry || typeof entry !== "object" || Array.isArray(entry)) return undefined
-	return (entry as OrgRankEntry).rank
+	const entry = value.find((row) => isOrgRankEntry(row) && row.org_id === orgId)
+	if(!isOrgRankEntry(entry)) return undefined
+	return entry.rank
 }
 
 function moneyAmountCents(value: ResponseFieldValue): number | undefined {

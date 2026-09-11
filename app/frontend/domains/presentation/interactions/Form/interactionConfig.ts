@@ -4,16 +4,23 @@ import { type InteractionFieldConfig } from "./FieldBuilder"
 import { type InteractionOutputConfig } from "./OutputBuilder"
 
 export type InteractionSettings = {
-	finalist_count?: number
 	default_votes?: number
 	allow_non_finalists?: boolean
 	allow_over_ask?: boolean
+}
+
+export type InteractionOrchestration = {
+	stage?: number
+	output_metric?: string
+	funding_basis?: string[]
+	exclude_funded_orgs?: boolean
 }
 
 export type InteractionConfig = {
 	fields: InteractionFieldConfig[]
 	outputs: InteractionOutputConfig[]
 	settings: InteractionSettings
+	orchestration?: InteractionOrchestration
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -40,16 +47,14 @@ export function interactionConfigFrom(value: unknown): InteractionConfig {
 			fields: value.fields,
 			outputs: value.outputs,
 			settings: isRecord(value.settings) ? interactionSettingsFrom(value.settings) : {},
+			orchestration: isRecord(value.orchestration) ? interactionOrchestrationFrom(value.orchestration) : {},
 		}
 	}
-	return { fields: [], outputs: [], settings: {} }
+	return { fields: [], outputs: [], settings: {}, orchestration: {} }
 }
 
 function interactionSettingsFrom(value: Record<string, unknown>): InteractionSettings {
 	const settings: InteractionSettings = {}
-	if(typeof value.finalist_count === "number") {
-		settings.finalist_count = value.finalist_count
-	}
 	if(typeof value.default_votes === "number") {
 		settings.default_votes = value.default_votes
 	}
@@ -62,10 +67,45 @@ function interactionSettingsFrom(value: Record<string, unknown>): InteractionSet
 	return settings
 }
 
+function interactionOrchestrationFrom(value: Record<string, unknown>): InteractionOrchestration {
+	const orchestration: InteractionOrchestration = {}
+	if(typeof value.stage === "number") {
+		orchestration.stage = value.stage
+	}
+	if(typeof value.output_metric === "string") {
+		orchestration.output_metric = value.output_metric
+	}
+	if(Array.isArray(value.funding_basis)) {
+		orchestration.funding_basis = value.funding_basis.filter((metric): metric is string => typeof metric === "string")
+	}
+	if(typeof value.exclude_funded_orgs === "boolean") {
+		orchestration.exclude_funded_orgs = value.exclude_funded_orgs
+	}
+	return orchestration
+}
+
 export const BLANK_INTERACTION_CONFIG: InteractionConfig = {
 	fields: [],
 	outputs: [],
 	settings: {},
+	orchestration: {},
+}
+
+export const CURATED_INTERACTION_UI_SLUGS = new Set(["allocation", "finalist_vote", "pledges"])
+
+export function isCuratedInteractionUiSlug(slug: string | undefined): slug is "allocation" | "finalist_vote" | "pledges" {
+	return slug !== undefined && CURATED_INTERACTION_UI_SLUGS.has(slug)
+}
+
+type InteractionConfigTemplateWithUi = InteractionConfigTemplateOption & {
+	interaction_ui_template?: { id: string }
+}
+
+export function configTemplateForUiTemplate(
+	uiTemplateId: string,
+	templates: InteractionConfigTemplateWithUi[],
+) {
+	return templates.find((template) => template.interaction_ui_template?.id === uiTemplateId)
 }
 
 type InteractionConfigTemplateOption = {
@@ -93,4 +133,27 @@ export function interactionConfigFromTemplate(
 	if(!template) return structuredClone(BLANK_INTERACTION_CONFIG)
 
 	return structuredClone(interactionConfigFrom(template.config))
+}
+
+export function applyInteractionConfigTemplate(
+	current: InteractionConfig,
+	templateId: string,
+	templates: InteractionConfigTemplateOption[],
+): InteractionConfig {
+	const fromTemplate = interactionConfigFromTemplate(templateId, templates)
+
+	return {
+		fields: fromTemplate.fields,
+		outputs: fromTemplate.outputs,
+		settings: current.settings,
+		orchestration: current.orchestration ?? fromTemplate.orchestration ?? {},
+	}
+}
+
+export function clearInteractionConfigPipeline(current: InteractionConfig): InteractionConfig {
+	return {
+		...current,
+		fields: [],
+		outputs: [],
+	}
 }

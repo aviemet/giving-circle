@@ -1,50 +1,31 @@
-import { PuckContext, SlotComponent } from "@puckeditor/core"
-import clsx from "clsx"
+import { PuckComponent, Slot } from "@puckeditor/core"
 
-import { Container } from "@/components"
+import { ContainerDisplay } from "./ContainerDisplay"
+import { ContainerEditor } from "./ContainerEditor"
+import {
+	type AlignmentValue,
+	type BackgroundValue,
+	type BorderProps,
+	type BoxModelValue,
+	type FlexItemSizing,
+	type FlexStyleInput,
+	type IterateValue,
+} from "../../fields"
 
-import { buildContainerStyle } from "./buildContainerStyle"
-import * as classes from "./Container.css"
-import * as editorClasses from "./Container.editor.css"
-import { ContainerProps } from "./containerConfig"
-import * as layoutChrome from "../../layoutChrome.editor.css"
-import * as puckClasses from "../../Puck.css"
-import { slotDropZoneProps } from "../../slotEditor"
-
-export type ContainerComponentProps = Omit<ContainerProps, "content"> & {
-	content: SlotComponent
-	puck: PuckContext
+export type ContainerProps = FlexStyleInput & {
+	background?: BackgroundValue
+	border?: BorderProps
+	content: Slot
+	alignment: AlignmentValue
+	sizing?: FlexItemSizing
+	spacing?: BoxModelValue
+	iterate?: IterateValue
 }
 
-export function containerClassName(isEditing: boolean) {
-	return clsx(
-		classes.container,
-		isEditing && editorClasses.container,
-		isEditing && layoutChrome.frame,
-		isEditing && layoutChrome.labelContainer,
-		isEditing && puckClasses.presentationSlot,
-	)
-}
+export type ContainerComponentProps = Parameters<PuckComponent<ContainerProps>>[0]
 
-export function ContainerDisplay({
-	content: Content,
-	alignment,
-	sizing,
-	puck,
-	...styleProps
-}: ContainerComponentProps) {
-	const { dragRef, isEditing } = puck
-
-	return (
-		<Container
-			ref={ dragRef }
-			component={ Content }
-			className={ containerClassName(isEditing) }
-			ta={ alignment }
-			fluid
-			w="100%"
-			style={ buildContainerStyle(styleProps, sizing, isEditing) }
-			{ ...slotDropZoneProps() }
-		/>
-	)
+export function Container(props: ContainerComponentProps) {
+	return props.puck.isEditing
+		? <ContainerEditor { ...props } />
+		: <ContainerDisplay { ...props } />
 }

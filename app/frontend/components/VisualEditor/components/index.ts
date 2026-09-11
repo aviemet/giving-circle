@@ -1,22 +1,20 @@
-import { type BarGraphAllocatedTotalsProps } from "./BarGraphAllocatedTotals/barGraphAllocatedTotalsConfig"
-import { type CardProps } from "./Card/cardConfig"
-import { type ContainerProps } from "./Container/containerConfig"
-import { type GridProps } from "./Grid/gridConfig"
-import { type HeadingProps } from "./Heading/headingConfig"
-import { type ImageProps } from "./Image/imageConfig"
-import { type LeverageBarProps } from "./LeverageBar/leverageBarConfig"
-import { type OrgsIteratorProps } from "./OrgsIterator/orgsIteratorConfig"
-import { type TextComponentProps } from "./Text/textConfig"
-import { type TimerProps } from "./Timer/timerConfig"
+import { type BarGraphAllocatedTotalsProps } from "./BarGraphAllocatedTotals"
+import { type CardProps } from "./Card"
+import { type ContainerProps } from "./Container"
+import { type GridProps } from "./Grid"
+import { type HeadingProps } from "./Heading"
+import { type ImageProps } from "./Image"
+import { type LeverageBarProps } from "./LeverageBar"
+import { type TextProps } from "./Text"
+import { type TimerProps } from "./Timer"
 
 export type PuckComponentProps = {
 	Grid: GridProps
 	Container: ContainerProps
 	Heading: HeadingProps
-	Text: TextComponentProps
+	Text: TextProps
 	Card: CardProps
 	Image: ImageProps
-	OrgsIterator: OrgsIteratorProps
 	BarGraphAllocatedTotals: BarGraphAllocatedTotalsProps
 	LeverageBar: LeverageBarProps
 	Timer: TimerProps
@@ -27,9 +25,7 @@ export * from "./Container"
 export * from "./Grid"
 export * from "./Heading"
 export * from "./Image"
-export * from "./OrgsIterator"
 export * from "./BarGraphAllocatedTotals"
 export * from "./LeverageBar"
 export * from "./Timer"
-export * from "./SlideRoot"
 export * from "./Text"

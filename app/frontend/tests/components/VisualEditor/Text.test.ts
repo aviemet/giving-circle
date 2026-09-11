@@ -36,7 +36,7 @@ describe("components/VisualEditor/components/Text", () => {
 		expect(textConfig.defaultProps).toMatchObject({
 			font: defaultTextFontValue({
 				color: "#FFFFFF",
-				sizePreset: "md",
+				sizePreset: "xl",
 			}),
 			typeStyle: { fw: 400, td: "none", tt: "none", fs: "normal" },
 			alignment: "left",
@@ -45,27 +45,20 @@ describe("components/VisualEditor/components/Text", () => {
 		})
 	})
 
-	test("normalize helpers prefer grouped values over legacy props", () => {
-		expect(normalizeTextFontValue(
-			{
-				family: "Inter",
-				url: "",
-				color: "#112233",
-				size: {
-					mode: "custom",
-					preset: "md",
-					custom: "72px",
-					clampMin: "1rem",
-					clampPreferred: "5vw",
-					clampMax: "3rem",
-				},
+	test("normalize helpers fill the current grouped values", () => {
+		expect(normalizeTextFontValue({
+			family: "Inter",
+			url: "",
+			color: "#112233",
+			size: {
+				mode: "custom",
+				preset: "md",
+				custom: "72px",
+				clampMin: "1rem",
+				clampPreferred: "5vw",
+				clampMax: "3rem",
 			},
-			{
-				font: { family: "Old", url: "" },
-				color: "#000",
-				size: "sm",
-			},
-		)).toMatchObject({
+		})).toMatchObject({
 			family: "Inter",
 			color: "#112233",
 			size: { mode: "custom", custom: "72px" },
@@ -73,23 +66,20 @@ describe("components/VisualEditor/components/Text", () => {
 
 		expect(normalizeTypeStyle(
 			{ fw: 500, td: "underline", tt: "uppercase", fs: "italic" },
-			{ fw: 400, td: "none", tt: "none", fs: "normal" },
 			400,
 		)).toEqual({ fw: 500, td: "underline", tt: "uppercase", fs: "italic" })
 
 		expect(normalizeTextFlow(
 			{ lineClamp: 3, textWrap: "pretty", truncate: "end" },
-			{ lineClamp: 1, textWrap: "wrap", truncate: "none" },
 			true,
 		)).toEqual({ lineClamp: 3, textWrap: "pretty", truncate: "end" })
 
 		expect(normalizeTextLayout(
 			{ inline: true, inherit: false, span: true },
-			{ inline: false, inherit: true, span: false },
 		)).toEqual({ inline: true, inherit: false, span: true })
 	})
 
-	test("resolveData hydrates font, typeStyle, flow, and layout from legacy props", async () => {
+	test("resolveData normalizes the current grouped text fields", async () => {
 		expect(textConfig.resolveData).toBeDefined()
 		if(textConfig.resolveData === undefined) return
 
@@ -98,19 +88,36 @@ describe("components/VisualEditor/components/Text", () => {
 				props: {
 					id: "text-resolve",
 					content: "Body",
-					size: "md",
-					color: "#fff",
-					fw: 400,
-					td: "none",
-					tt: "none",
-					fs: "normal",
 					alignment: "left",
-					lineClamp: 2,
-					textWrap: "pretty",
-					truncate: "end",
-					inline: true,
-					inherit: false,
-					span: true,
+					font: {
+						family: "",
+						url: "",
+						color: "#fff",
+						size: {
+							mode: "preset",
+							preset: "md",
+							custom: "",
+							clampMin: "1rem",
+							clampPreferred: "5vw",
+							clampMax: "3rem",
+						},
+					},
+					typeStyle: {
+						fw: 400,
+						td: "none",
+						tt: "none",
+						fs: "normal",
+					},
+					flow: {
+						lineClamp: 2,
+						textWrap: "pretty",
+						truncate: "end",
+					},
+					layout: {
+						inline: true,
+						inherit: false,
+						span: true,
+					},
 				},
 				readOnly: {},
 			},

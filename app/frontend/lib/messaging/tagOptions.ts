@@ -1,4 +1,4 @@
-import { type TagEditorOption } from "@/components/VisualEditor/dynamicData/contentParser"
+import { type TagEditorOption } from "@/components/VisualEditor/lib/dynamicData"
 
 const messagingTagOptions: TagEditorOption[] = [
 	{ value: "circle.name", label: "Circle - name" },

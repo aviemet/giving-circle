@@ -164,9 +164,9 @@ describe("components/VisualEditor/elements/Timer", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config timer", () => {
+describe("components/VisualEditor/config timer", () => {
 	test("registers Timer in the elements category", async () => {
-		const { config } = await import("@/components/VisualEditor/puck.config")
+		const { config } = await import("@/components/VisualEditor/config")
 
 		expect(config.categories?.elements?.components).toContain("Timer")
 		expect(config.components?.Timer).toBeDefined()

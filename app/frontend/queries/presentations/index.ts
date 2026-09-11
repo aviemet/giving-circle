@@ -42,6 +42,7 @@ export const useCreatePresentationSlide: ReactMutationFunction<
 interface UpdateSlideData {
 	title?: string
 	data?: SlideData
+	thumbnail?: string
 }
 
 export const useUpdatePresentationSlide: ReactMutationFunction<

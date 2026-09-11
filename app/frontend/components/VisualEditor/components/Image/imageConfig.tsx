@@ -2,7 +2,7 @@ import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
-import { ImageDisplay } from "./Image"
+import { Image, type ImageProps } from "./Image"
 import {
 	alignmentField,
 	borderField,
@@ -13,71 +13,28 @@ import {
 	imageSizeField,
 	normalizeBorderValue,
 	normalizeBoxModelValue,
-	resolveImageSize,
-	type AlignmentValue,
-	type BorderProps,
-	type BoxModelValue,
-	type FlexItemSizing,
-	type ImageSizeValue,
-	type SpacingGroup,
+	normalizeImageSize,
 } from "../../fields"
 
-export type ImageProps = BorderProps & {
-	title: string
-	src: string
-	alignment: AlignmentValue
-	size?: ImageSizeValue
-	spacing?: BoxModelValue
-	border?: BorderProps
-	sizing?: FlexItemSizing
-	margin?: number
-	padding?: number
-	width?: number
-	height?: number
-}
-
-const t = i18n.t.bind(i18n)
-
-function uniformSpacing(value: number): SpacingGroup {
-	return {
-		top: value,
-		right: value,
-		bottom: value,
-		left: value,
-		unit: "px",
-	}
-}
-
-function resolveImageSpacing(props: ImageProps): BoxModelValue {
-	if(props.spacing) {
-		return normalizeBoxModelValue(props.spacing)
-	}
-
-	return normalizeBoxModelValue({
-		margin: typeof props.margin === "number" ? uniformSpacing(props.margin) : undefined,
-		padding: typeof props.padding === "number" ? uniformSpacing(props.padding) : undefined,
-	})
-}
-
 export const imageConfig: ComponentConfig<ImageProps> = {
-	label: t("slides.editor.components.image.label"),
+	label: i18n.t("slides.editor.components.image.label"),
 	inline: true,
 	fields: {
 		title: {
 			type: "text",
-			label: t("slides.editor.components.image.title"),
+			label: i18n.t("slides.editor.components.image.title"),
 		},
 		src: imageField(),
 		size: imageSizeField(),
 		spacing: boxModelField(),
 		border: borderField(),
 		alignment: alignmentField({
-			label: t("slides.editor.components.image.alignment"),
+			label: i18n.t("slides.editor.components.image.alignment"),
 		}),
 	},
 
 	defaultProps: {
-		title: t("slides.editor.components.image.default_title"),
+		title: i18n.t("slides.editor.components.image.default_title"),
 		src: "",
 		alignment: "left",
 		size: defaultImageSize(),
@@ -93,16 +50,12 @@ export const imageConfig: ComponentConfig<ImageProps> = {
 			props: {
 				...props,
 				alignment: props.alignment ?? "left",
-				size: resolveImageSize(props),
-				spacing: resolveImageSpacing(props),
-				border: normalizeBorderValue(props.border, {
-					borderWidth: props.borderWidth,
-					borderRadius: props.borderRadius,
-					borderColor: props.borderColor,
-				}),
+				size: normalizeImageSize(props.size),
+				spacing: normalizeBoxModelValue(props.spacing),
+				border: normalizeBorderValue(props.border),
 			},
 		}
 	},
 
-	render: (props) => <ImageDisplay { ...props } />,
+	render: (props) => <Image { ...props } />,
 }

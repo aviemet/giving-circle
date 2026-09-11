@@ -3,7 +3,6 @@ export {
 	normalizeImageSize,
 	applyImageScaleMode,
 	buildImageSizeStyle,
-	resolveImageSize,
 	resolveAspectRatioCss,
 	imageSizeUsesCropBox,
 	isImageAspectRatio,
@@ -14,6 +13,5 @@ export {
 	type ImageAspectRatio,
 	type ImageObjectFit,
 	type ImageScaleMode,
-	type ImageSizeLegacyProps,
 } from "./imageSize"
 export { imageSizeField } from "./imageSizeField"

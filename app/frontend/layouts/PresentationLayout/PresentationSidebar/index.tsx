@@ -25,8 +25,6 @@ export function PresentationSidebar() {
 			<AppShell.Section mb="xs">
 				{ /* Navbar toggle */ }
 				<Flex justify="space-between" align="center" mx="xs">
-					{ /* Circle title and avatar */ }
-					<ToggleNavbarButton />
 					{ active_circle && active_theme && active_presentation && (
 						<Tooltip label={ t("navigation.exitPresentationControls") }>
 							<ActionIcon
@@ -44,6 +42,7 @@ export function PresentationSidebar() {
 							</ActionIcon>
 						</Tooltip>
 					) }
+					<ToggleNavbarButton />
 				</Flex>
 			</AppShell.Section>
 

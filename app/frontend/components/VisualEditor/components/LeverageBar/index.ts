@@ -1,1 +1,2 @@
-export { leverageBarConfig, type LeverageBarProps } from "./leverageBarConfig"
+export { leverageBarConfig } from "./leverageBarConfig"
+export { LeverageBar, type LeverageBarProps } from "./LeverageBar"

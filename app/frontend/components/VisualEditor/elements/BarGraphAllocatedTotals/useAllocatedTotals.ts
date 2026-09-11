@@ -1,11 +1,12 @@
 import { useMemo } from "react"
 
-import { usePresentationDataContext } from "@/features/presentation"
+import { usePresentationDataContext } from "@/features/presentation/PresentationDataProvider"
+import { filterFinalistOrgs } from "@/features/presentation/values/finalists"
 import { fromCents } from "@/lib/money"
 import { type Money } from "@/types"
 
 import { type AllocatedTotalEntry } from "./BarGraphAllocatedTotals"
-import { getOrgsFromContext } from "../../dynamicData/getOrgsFromContext"
+import { getOrgsFromContext } from "../../lib/dynamicData"
 
 type ContextOrg = ReturnType<typeof getOrgsFromContext>[number]
 type PresentationValues = NonNullable<ReturnType<typeof usePresentationDataContext>>["values"]
@@ -71,7 +72,13 @@ function mergeTotalsWithOrgs(
 
 export function useAllocatedTotals(): AllocatedTotalEntry[] {
 	const contextData = usePresentationDataContext()
-	const orgs = useMemo(() => getOrgsFromContext(contextData), [contextData])
+	const orgs = useMemo(
+		() => filterFinalistOrgs(
+			getOrgsFromContext(contextData),
+			contextData.values?.finalist_org_ids,
+		),
+		[contextData],
+	)
 	const presentationId = contextData.presentation && "id" in contextData.presentation
 		? contextData.presentation.id
 		: undefined

@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  config                     :jsonb            not null
+#  member_ui                  :jsonb            not null
 #  name                       :string           not null
 #  slug                       :string           not null
 #  created_at                 :datetime         not null
@@ -24,6 +25,7 @@
 #
 class InteractionConfigTemplate < ApplicationRecord
   extend FriendlyId
+  include InteractionMemberUiConfig
 
   friendly_id :name, use: [:slugged, :scoped], scope: :circle
 
@@ -50,8 +52,6 @@ class InteractionConfigTemplate < ApplicationRecord
   private
 
   def validate_config_structure
-    interaction = Presentation::Interaction.new(config: config)
-    Presentation::Interaction::ConfigValidator.validate(interaction)
-    interaction.errors[:config].each { |message| errors.add(:config, message) }
+    Interactions::ConfigValidator.validate(self)
   end
 end

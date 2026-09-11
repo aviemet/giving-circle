@@ -19,7 +19,6 @@ import {
 	isImageScaleMode,
 	normalizeImageSize,
 	resolveAspectRatioCss,
-	resolveImageSize,
 } from "@/components/VisualEditor/fields/imageSize/imageSize"
 import {
 	alignMatrixCells,
@@ -65,7 +64,10 @@ describe("VisualEditor pure field helpers", () => {
 		expect(imageSizeUsesCropBox(defaults)).toBe(false)
 		expect(resolveAspectRatioCss({ ...defaults, aspectRatio: "1 / 1" })).toBe("1 / 1")
 		expect(buildImageSizeStyle(defaults).display).toBe("block")
-		expect(resolveImageSize({ width: 100, height: 50 }).mode).toBe("box")
+		expect(normalizeImageSize({
+			width: { amount: 100, unit: "px" },
+			height: { amount: 50, unit: "px" },
+		}).mode).toBe("box")
 	})
 
 	test("alignMatrixMapping", () => {
@@ -93,6 +95,6 @@ describe("VisualEditor pure field helpers", () => {
 		expect(parseFontWeight("nope")).toBeUndefined()
 		expect(fontWeightSelectOptions().length).toBe(FONT_WEIGHTS.length)
 		expect(defaultTypeStyle(700).fw).toBe(700)
-		expect(normalizeTypeStyle({ td: "underline" }, { fw: 600 }).fw).toBe(600)
+		expect(normalizeTypeStyle({ td: "underline", fw: 600 }).fw).toBe(600)
 	})
 })

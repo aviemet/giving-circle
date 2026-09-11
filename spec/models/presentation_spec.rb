@@ -4,6 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  active           :boolean          default(FALSE), not null
+#  element_controls :jsonb            not null
 #  name             :string           not null
 #  settings         :jsonb
 #  slug             :string
@@ -35,10 +36,16 @@ RSpec.describe Presentation do
       expect(build(:presentation)).to be_valid
     end
 
+    it "is invalid when finalist_count is not positive" do
+      presentation = build(:presentation)
+      presentation.settings = { finalist_count: 0 }
+
+      expect(presentation).not_to be_valid
+      expect(presentation.errors[:settings]).to be_present
+    end
+
     it "is invalid with invalid attributes" do
-      %i(name).each do |attr|
-        expect(build(:presentation, attr => nil)).not_to be_valid
-      end
+      expect(build(:presentation, name: nil)).not_to be_valid
     end
   end
 
@@ -94,6 +101,27 @@ RSpec.describe Presentation do
       presentation = create(:presentation, theme: theme)
 
       expect(presentation.orgs).to contain_exactly(org)
+    end
+  end
+
+  describe "#copy_template_slides" do
+    it "copies slide thumbnails from the template" do
+      template = create(:template)
+      slide = create(:slide, title: "Intro")
+      slide.thumbnail.attach(
+        io: StringIO.new("img"),
+        filename: "thumb.jpg",
+        content_type: "image/jpeg",
+      )
+      template.slides << slide
+      theme = create(:theme, circle: template.circle)
+      presentation = create(:presentation, theme:, template:)
+
+      presentation.copy_template_slides
+
+      copied = presentation.slides.find_by!(title: "Intro")
+      expect(copied.thumbnail).to be_attached
+      expect(copied.thumbnail.blob).to eq(slide.thumbnail.blob)
     end
   end
 end

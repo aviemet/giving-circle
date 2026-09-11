@@ -8,6 +8,7 @@ import { useLocation } from "@/lib/hooks"
 
 import { ExternalLink, isExternalLink } from "./ExternalLink"
 import * as classes from "./Link.css"
+import clsx from "clsx"
 
 export interface NavLinkProps extends Omit<MantineNavLinkProps, "label" | "component"> {
 	external?: boolean
@@ -32,7 +33,7 @@ export const NavLink = ({
 				href={ href }
 				active={ false }
 				label={ children }
-				className={ classes.navLinkInactiveHover }
+				className={ clsx(classes.navLinkInactiveHover) }
 				{ ...props }
 			/>
 		)
@@ -46,7 +47,7 @@ export const NavLink = ({
 				target={ target }
 				active={ active === undefined ? pathname === href : active }
 				label={ children }
-				className={ classes.navLinkInactiveHover }
+				className={ clsx(classes.navLinkInactiveHover) }
 				{ ...props }
 			/>
 		)
@@ -58,7 +59,7 @@ export const NavLink = ({
 			href={ href }
 			active={ active === undefined ? pathname === href : active }
 			label={ children }
-			className={ classes.navLinkInactiveHover }
+			className={ clsx(classes.navLinkInactiveHover) }
 			{ ...props }
 		/>
 	)

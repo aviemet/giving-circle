@@ -4,7 +4,7 @@ class Api::Templates::SlidesController < Api::ApiController
   expose :slides, -> { template.slides.includes_associated }
   expose :slide, id: -> { params[:slug] }, scope: -> { template.slides }, find_by: :slug
 
-  strong_params :slide, permit: [:title, data: {}]
+  strong_params :slide, permit: [:title, :thumbnail, data: {}]
 
   # @route POST /api/circles/:circle_slug/templates/:template_slug/slides (api_circle_template_slides)
   def create

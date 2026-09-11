@@ -8,8 +8,6 @@ import {
 } from "./spacing"
 
 export type SpacingProps = {
-	margin?: SpacingGroup
-	padding?: SpacingGroup
 	spacing?: BoxModelValue
 }
 
@@ -18,8 +16,8 @@ export function resolveSpacingGroups(props: SpacingProps): {
 	padding: SpacingGroup | undefined
 } {
 	return {
-		margin: normalizeSpacingGroup(props.spacing?.margin ?? props.margin),
-		padding: normalizeSpacingGroup(props.spacing?.padding ?? props.padding),
+		margin: normalizeSpacingGroup(props.spacing?.margin),
+		padding: normalizeSpacingGroup(props.spacing?.padding),
 	}
 }
 

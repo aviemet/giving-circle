@@ -2,6 +2,7 @@ import { type VisitOptions } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
 import { ActionIcon, Box } from "@mantine/core"
 import { useSessionStorage } from "@mantine/hooks"
+import clsx from "clsx"
 import { debounce } from "lodash"
 import { useMemo, useEffect } from "react"
 import { useTranslation } from "react-i18next"
@@ -124,7 +125,7 @@ export function SearchInput({
 	}, [debouncedSearch, searchValue, onSearchProp, isControlled])
 
 	return (
-		<Box className={ classes.searchWrapper }>
+		<Box className={ clsx(classes.searchWrapper) }>
 			{ advancedSearch && <AdvancedSearch>{ advancedSearch }</AdvancedSearch> }
 			<TextInput
 				name="search"
@@ -137,7 +138,7 @@ export function SearchInput({
 				</ActionIcon> }
 				leftSection={ <SearchIcon size={ 24 } /> }
 				leftSectionPointerEvents="none"
-				className={ classes.searchInput }
+				className={ clsx(classes.searchInput) }
 				wrapper={ false }
 				aria-label={ t("common.table.search") }
 			/>

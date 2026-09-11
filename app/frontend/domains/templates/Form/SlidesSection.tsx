@@ -80,6 +80,7 @@ export const SlidesSection = ({ circle, template }: SlidesSectionProps) => {
 						key={ index }
 						path={ `template.slides_attributes.${index}` }
 						removeInput={ () => handleRemoveSlide(index) }
+						thumbnailUrl={ template.slides?.[index]?.thumbnail_url }
 						href={ template.slug ? Routes.settingsTemplatesEditSlide(circle.slug, template.slug, String(index)) : undefined }
 					/>
 				)) }

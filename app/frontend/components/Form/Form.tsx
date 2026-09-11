@@ -6,7 +6,6 @@ import { Box } from "@/components"
 import { renameObjectWithAttributes } from "@/lib/collections"
 
 import {
-	mergeSlotPropsWithSyntheticFallback,
 	defaultNormalizeSubmitError,
 	runSubmitWithIntercept,
 	type NormalizeSubmitError,
@@ -159,13 +158,12 @@ function FormInner<TFormData extends Record<string, unknown>>({
 			if(submitWith) {
 				const payload = visit.data
 				if(!(payload instanceof FormData)) {
-					const base = mergeSlotPropsWithSyntheticFallback(latestSlotPropsRef.current)
 					runSubmitWithIntercept(
 						payload as Record<string, FormDataConvertible>,
 						(data) => submitWith(data as TFormData),
 						setSlotProps,
 						normalizeSubmitError,
-						base
+						latestSlotPropsRef.current,
 					)
 				}
 				return false

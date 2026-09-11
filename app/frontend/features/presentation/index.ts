@@ -4,6 +4,7 @@ export {
 	remainingNeed,
 } from "./values/allocatedTotals"
 export {
+	filterFinalistOrgs,
 	isFinalistOrgId,
 	useFinalistOrgIds,
 } from "./values/finalists"
@@ -14,6 +15,7 @@ export {
 	type PresentationDataPresentation,
 	type PresentationDataValue,
 } from "./PresentationDataProvider"
+export { ActiveSlideProvider, useActiveSlideId } from "./ActiveSlideProvider"
 export {
 	useLeverageTotals,
 	leverageFilledPercent,

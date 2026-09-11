@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
-import { Card, Image, Text } from "@/components"
-
+import { Card, Text } from "@/components"
+import { SlideThumbnail } from "@/features/Cards"
 
 import * as classes from "./SwitchSlideButton.css"
 
@@ -15,15 +15,15 @@ export const SwitchSlideButton = ({ slide, onClick, active }: SwitchSlideButtonP
 	return (
 		<Card
 			withBorder
-			shadow={ active ? "lg" : "xs" }
+			shadow="none"
 			radius="md"
 			onClick={ onClick }
 			className={ clsx(classes.buttonCard, { active }) }
 		>
 			<Card.Section>
-				<Image
-					src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png"
-					height={ 140 }
+				<SlideThumbnail
+					src={ slide.thumbnail_url }
+					alt=""
 				/>
 			</Card.Section>
 

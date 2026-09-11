@@ -1,8 +1,13 @@
 import { describe, expect, test } from "vitest"
 
-import { buildContainerStyle } from "@/components/VisualEditor/components/Container/buildContainerStyle"
+import { buildContainerEditorStyle, buildContainerStyle } from "@/components/VisualEditor/components/Container/buildContainerStyle"
 import { containerConfig } from "@/components/VisualEditor/components/Container/containerConfig"
-import { SLOT_MIN_EMPTY_HEIGHT } from "@/components/VisualEditor/slotEditor"
+import {
+	LAYOUT_CHROME_LABEL_SPACE_PX,
+	LAYOUT_CHROME_PAD_PX,
+	SLOT_MIN_EMPTY_HEIGHT,
+	withEditorLayoutChromePadding,
+} from "@/components/VisualEditor/lib/slotEditor"
 
 describe("components/VisualEditor/buildContainerStyle", () => {
 	test("presentation fill keeps collapsing minHeight", () => {
@@ -15,14 +20,13 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "fill" },
-			false,
 		)
 
 		expect(style.minHeight).toBe(0)
 	})
 
-	test("editor keeps fill minHeight so flex can stretch", () => {
-		const style = buildContainerStyle(
+	test("editor fill keeps a slot floor so empty drop zones cannot collapse", () => {
+		const style = buildContainerEditorStyle(
 			{
 				flex: {
 					display: "flex",
@@ -31,15 +35,31 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "fill" },
-			true,
 		)
 
-		expect(style.minHeight).toBe(0)
+		expect(style.minHeight).toBe(`${ SLOT_MIN_EMPTY_HEIGHT }px`)
 		expect(style.flexGrow).toBe(1)
 		expect(style.flexBasis).toBe(0)
 	})
 
-	test("editor applies slot floor for non-fill sizing", () => {
+	test("editor applies slot floor for auto sizing", () => {
+		const style = buildContainerEditorStyle(
+			{
+				flex: {
+					display: "flex",
+					flexDirection: "column",
+					overflow: "hidden",
+				},
+			},
+			{ mode: "auto" },
+		)
+
+		expect(style.minHeight).toBe(`${ SLOT_MIN_EMPTY_HEIGHT }px`)
+		expect(style.flexGrow).toBe(0)
+		expect(style.height).toBe("auto")
+	})
+
+	test("presentation auto hugs content instead of filling leftover space", () => {
 		const style = buildContainerStyle(
 			{
 				flex: {
@@ -49,26 +69,63 @@ describe("components/VisualEditor/buildContainerStyle", () => {
 				},
 			},
 			{ mode: "auto" },
-			true,
 		)
 
-		expect(style.minHeight).toBe(`${ SLOT_MIN_EMPTY_HEIGHT }px`)
+		expect(style.flexGrow).toBe(0)
+		expect(style.flexShrink).toBe(0)
+		expect(style.flexBasis).toBe("auto")
+		expect(style.height).toBe("auto")
+		expect(style.minHeight).toBe("auto")
 	})
 
-	test("editor keeps author minHeight when set", () => {
-		const style = buildContainerStyle(
+	test("editor adds layout chrome padding on top of author padding", () => {
+		const style = buildContainerEditorStyle(
 			{
-				minHeight: "200px",
+				spacing: {
+					margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
+					padding: { top: 8, right: 4, bottom: 8, left: 4, unit: "px" },
+				},
 				flex: {
 					display: "flex",
-					overflow: "hidden",
+					flexDirection: "column",
 				},
 			},
 			{ mode: "fill" },
-			true,
 		)
 
-		expect(style.minHeight).toBe("200px")
+		expect(style.paddingTop).toBe(`calc(8px + ${ LAYOUT_CHROME_LABEL_SPACE_PX }px)`)
+		expect(style.paddingRight).toBe(`calc(4px + ${ LAYOUT_CHROME_PAD_PX }px)`)
+		expect(style.paddingBottom).toBe(`calc(8px + ${ LAYOUT_CHROME_PAD_PX }px)`)
+		expect(style.paddingLeft).toBe(`calc(4px + ${ LAYOUT_CHROME_PAD_PX }px)`)
+	})
+
+	test("presentation does not add layout chrome padding", () => {
+		const style = buildContainerStyle(
+			{
+				spacing: {
+					margin: { top: 0, right: 0, bottom: 0, left: 0, unit: "px" },
+					padding: { top: 8, right: 4, bottom: 8, left: 4, unit: "px" },
+				},
+				flex: {
+					display: "flex",
+				},
+			},
+			{ mode: "fill" },
+		)
+
+		expect(style.paddingTop).toBe("8px")
+		expect(style.paddingRight).toBe("4px")
+	})
+})
+
+describe("components/VisualEditor/withEditorLayoutChromePadding", () => {
+	test("zero padding becomes the chrome inset", () => {
+		expect(withEditorLayoutChromePadding({ paddingTop: "0px", paddingRight: 0 })).toMatchObject({
+			paddingTop: `${ LAYOUT_CHROME_LABEL_SPACE_PX }px`,
+			paddingRight: `${ LAYOUT_CHROME_PAD_PX }px`,
+			paddingBottom: `${ LAYOUT_CHROME_PAD_PX }px`,
+			paddingLeft: `${ LAYOUT_CHROME_PAD_PX }px`,
+		})
 	})
 })
 

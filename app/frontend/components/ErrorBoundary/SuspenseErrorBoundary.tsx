@@ -2,7 +2,7 @@ import React, { ComponentType, ErrorInfo, ReactNode } from "react"
 
 import { DefaultErrorFallback } from "./DefaultErrorFallback"
 
-interface SuspenseErrorBoundaryProps {
+export interface SuspenseErrorBoundaryProps {
 	children: ReactNode
 	fallback?: ComponentType<{ error: Error, retry: () => void, retryCount: number }>
 	maxRetries?: number
@@ -19,7 +19,7 @@ interface ErrorBoundaryState {
 }
 
 // Enhanced Error Boundary with retry logic and reset capabilities
-class SuspenseErrorBoundary extends React.Component<
+export class SuspenseErrorBoundary extends React.Component<
   SuspenseErrorBoundaryProps,
   ErrorBoundaryState
 > {
@@ -112,5 +112,3 @@ class SuspenseErrorBoundary extends React.Component<
 		return this.props.children
 	}
 }
-
-export { SuspenseErrorBoundary }

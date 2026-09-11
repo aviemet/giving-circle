@@ -1,4 +1,5 @@
 import { Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import {
@@ -48,19 +49,14 @@ export function defaultTextFlow(includeTruncate = false): TextFlowValue {
 
 export function normalizeTextFlow(
 	flow: Partial<TextFlowValue> | undefined,
-	legacy?: {
-		lineClamp?: number
-		textWrap?: TextWrapValue
-		truncate?: TruncateValue
-	},
 	includeTruncate = false,
 ): TextFlowValue {
 	const defaults = defaultTextFlow(includeTruncate)
 	return {
-		lineClamp: flow?.lineClamp ?? legacy?.lineClamp ?? defaults.lineClamp,
-		textWrap: flow?.textWrap ?? legacy?.textWrap ?? defaults.textWrap,
+		lineClamp: flow?.lineClamp ?? defaults.lineClamp,
+		textWrap: flow?.textWrap ?? defaults.textWrap,
 		...(includeTruncate
-			? { truncate: flow?.truncate ?? legacy?.truncate ?? defaults.truncate ?? "none" }
+			? { truncate: flow?.truncate ?? defaults.truncate ?? "none" }
 			: {}),
 	}
 }
@@ -79,7 +75,7 @@ function TextFlowFieldControl({
 	includeTruncate,
 }: TextFlowFieldControlProps) {
 	const [localValue, setLocalValue] = useState<TextFlowValue>(() => {
-		return normalizeTextFlow(value, undefined, includeTruncate)
+		return normalizeTextFlow(value, includeTruncate)
 	})
 
 	const updateValue = (patch: Partial<TextFlowValue>) => {
@@ -92,7 +88,7 @@ function TextFlowFieldControl({
 	}
 
 	return (
-		<div className={ classes.flowRoot }>
+		<div className={ clsx(classes.flowRoot) }>
 			<FieldRow
 				label={ flowText("labels.clamp") }
 				tooltip={ flowText("hints.clamp") }
@@ -110,7 +106,7 @@ function TextFlowFieldControl({
 				tooltip={ flowText("hints.wrap") }
 			>
 				<IconSegmented
-					className={ classes.wrapSegmented }
+					className={ clsx(classes.wrapSegmented) }
 					name={ `${name}.textWrap` }
 					value={ localValue.textWrap }
 					options={ [

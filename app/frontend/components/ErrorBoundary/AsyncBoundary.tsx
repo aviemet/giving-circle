@@ -1,16 +1,23 @@
-import { ComponentType, ErrorInfo, ReactNode, Suspense, useEffect, useState } from "react"
+import { ComponentType, ReactNode, Suspense, useEffect, useState } from "react"
 
 import { Loading } from "@/components/Loading"
 
-import { SuspenseErrorBoundary } from "./SuspenseErrorBoundary"
+import { SuspenseErrorBoundary, SuspenseErrorBoundaryProps } from "./SuspenseErrorBoundary"
 
-interface SuspenseErrorBoundaryProps {
+interface QueryLoadingWrapperProps {
+	isLoading?: boolean
 	children: ReactNode
-	fallback?: ComponentType<{ error: Error, retry: () => void, retryCount: number }>
-	maxRetries?: number
-	onError?: (error: Error, errorInfo: ErrorInfo) => void
-	resetKeys?: Array<string | number>
-	resetOnPropsChange?: boolean
+	fallback: ReactNode
+}
+
+function QueryLoadingWrapper({
+	isLoading,
+	children,
+	fallback,
+}: QueryLoadingWrapperProps) {
+	return isLoading
+		? <>{ fallback }</>
+		: <>{ children }</>
 }
 
 export interface AsyncBoundaryProps extends SuspenseErrorBoundaryProps {
@@ -22,18 +29,7 @@ export interface AsyncBoundaryProps extends SuspenseErrorBoundaryProps {
 	isLoading?: boolean
 }
 
-const QueryLoadingWrapper: React.FC<{ isLoading?: boolean, children: ReactNode, fallback: ReactNode }> = ({
-	isLoading,
-	children,
-	fallback,
-}) => {
-	if(isLoading) {
-		return <>{ fallback }</>
-	}
-	return <>{ children }</>
-}
-
-const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
+export function AsyncBoundary({
 	children,
 	suspenseFallback,
 	errorFallback,
@@ -46,7 +42,7 @@ const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
 	resetOnPropsChange = true,
 	isLoading,
 	...errorBoundaryProps
-}) => {
+}: AsyncBoundaryProps) {
 	const [showFallback, setShowFallback] = useState(false)
 
 	useEffect(() => {
@@ -54,7 +50,9 @@ const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
 			const timer = setTimeout(() => setShowFallback(true), minimumLoadingTime)
 			return () => clearTimeout(timer)
 		}
+
 		const timer = setTimeout(() => setShowFallback(true), 0)
+
 		return () => clearTimeout(timer)
 	}, [minimumLoadingTime])
 
@@ -80,4 +78,3 @@ const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
 	)
 }
 
-export { AsyncBoundary }

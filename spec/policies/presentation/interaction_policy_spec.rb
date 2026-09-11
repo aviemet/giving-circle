@@ -34,4 +34,19 @@ RSpec.describe Presentation::InteractionPolicy, type: :policy do
       expect(described_class.new(user, record).close_responses?).to be(false)
     end
   end
+
+  describe "#edit_member_ui?" do
+    it "allows super admins" do
+      user = create(:user)
+      user.add_role(:super_admin)
+
+      expect(described_class.new(user, record).edit_member_ui?).to be(true)
+    end
+
+    it "denies unrelated users" do
+      user = create(:user)
+
+      expect(described_class.new(user, record).edit_member_ui?).to be(false)
+    end
+  end
 end

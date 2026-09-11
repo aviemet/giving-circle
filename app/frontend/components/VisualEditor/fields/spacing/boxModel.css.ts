@@ -110,38 +110,57 @@ export const boxModelSideInput = css`
 	min-width: 0;
 	max-width: 2.75rem;
 
-	& .mantine-NumberInput-root,
-	& .mantine-NumberInput-wrapper {
+	&& .mantine-NumberInput-root,
+	&& .mantine-NumberInput-wrapper {
+		--input-height: 1.25rem;
+		--input-size: 1.25rem;
+		--input-padding-y: 0px;
+		--input-padding-x: 2px;
 		width: 100%;
 		min-width: 0;
+		height: 1.25rem;
+		min-height: 1.25rem;
+		max-height: 1.25rem;
+		overflow: visible;
 		border: none;
 		background: transparent;
+		background-color: transparent;
 		box-shadow: none;
 	}
 
-	& .mantine-NumberInput-input,
-	& .mantine-NumberInput-root input {
+	&& .mantine-NumberInput-root:focus-within {
+		outline: none;
+		border: none;
+		background: transparent;
+		background-color: transparent;
+		box-shadow: none;
+	}
+
+	&& .mantine-NumberInput-input,
+	&& .mantine-NumberInput-root input {
 		height: 1.25rem;
 		min-height: 1.25rem;
+		max-height: 1.25rem;
 		padding: 0 2px;
 		text-align: center;
 		font-size: 0.6875rem;
 		line-height: 1;
 		border: 1px solid transparent;
 		border-radius: 2px;
+		background: transparent;
 		background-color: transparent;
 		box-shadow: none;
 		color: var(--puck-color-text);
 	}
 
-	& .mantine-NumberInput-input:hover,
-	& .mantine-NumberInput-root input:hover {
+	&& .mantine-NumberInput-input:hover,
+	&& .mantine-NumberInput-root input:hover {
 		background-color: color-mix(in oklch, var(--puck-field-color-bg, var(--editor-input-bg)) 55%, transparent);
 		border-color: color-mix(in oklch, var(--puck-field-color-border, var(--editor-input-border)) 70%, transparent);
 	}
 
-	& .mantine-NumberInput-input:focus,
-	& .mantine-NumberInput-root input:focus {
+	&& .mantine-NumberInput-input:focus,
+	&& .mantine-NumberInput-root input:focus {
 		outline: none;
 		background-color: var(--puck-field-color-bg, var(--editor-input-bg));
 		border-color: var(--puck-field-color-border-focus, var(--puck-color-focus-ring));

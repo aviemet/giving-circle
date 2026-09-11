@@ -3,7 +3,7 @@ import { describe, expect, test } from "vitest"
 import {
 	isSlideRootClickTarget,
 	PUCK_ROOT_DROPZONE_ID,
-} from "@/components/VisualEditor/components/SlideRoot"
+} from "@/components/VisualEditor/lib/SlideRoot"
 
 describe("components/VisualEditor/components/SlideRoot/slideRootSelection", () => {
 	test("isSlideRootClickTarget returns true for the root dropzone background", () => {

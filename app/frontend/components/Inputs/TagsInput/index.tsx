@@ -6,9 +6,8 @@ import {
 import clsx from "clsx"
 import { useMemo } from "react"
 
-import { useFormField, useFormFieldContext } from "@/components/Form"
-import { type TagEditorOption } from "@/components/VisualEditor/dynamicData/contentParser"
-import { dataAccess, getFlatOptions } from "@/components/VisualEditor/dynamicData/dataAccess"
+import { useFormField } from "@/components/Form"
+import { tagOptions, type TagEditorOption } from "@/components/VisualEditor/lib/dynamicData"
 
 import { HiddenInput } from "../HiddenInput"
 import { type BaseInputProps } from "../index"
@@ -37,7 +36,7 @@ function useTagOptions(options: TagsInputProps["options"]) {
 		)).join("\u0001")
 		: undefined
 
-	const defaultTagOptions = useMemo(() => getFlatOptions(dataAccess), [])
+	const defaultTagOptions = tagOptions
 	return useMemo(() => {
 		if(hasCustomOptions) {
 			const values = optionsKey ? optionsKey.split("\u0001") : []
@@ -53,27 +52,36 @@ function useTagOptions(options: TagsInputProps["options"]) {
 	}, [defaultTagOptions, hasCustomOptions, optionsKey])
 }
 
-function TagsInputEditor({
+export function TagsInput({
 	label,
 	required = false,
 	id,
 	name,
 	wrapper,
 	wrapperProps,
-	value = "",
+	value: valueProp,
 	onChange,
 	readOnly = false,
 	className,
 	options,
-	bound,
 	...props
-}: TagsInputProps & { bound: boolean }) {
+}: TagsInputProps) {
+	const [fieldValue, setFieldValue] = useFormField(name)
 	const inputId = id || name
-	const tagOptions = useTagOptions(options)
+	const resolvedOptions = useTagOptions(options)
+	const value = valueProp !== undefined
+		? valueProp
+		: (typeof fieldValue === "string" ? fieldValue : "")
+
+	const handleChange = (next: string) => {
+		setFieldValue(next)
+		onChange?.(next)
+	}
+
 	const editor = useMentionEditor({
 		value,
-		tagOptions,
-		onChange: readOnly ? undefined : onChange,
+		tagOptions: resolvedOptions,
+		onChange: readOnly ? undefined : handleChange,
 	})
 
 	return (
@@ -83,9 +91,7 @@ function TagsInputEditor({
 					{ label }
 				</Label>
 			) }
-			{ bound && name !== undefined && (
-				<HiddenInput name={ name } value={ value } id={ inputId } />
-			) }
+			<HiddenInput name={ name } value={ value } id={ inputId } />
 			<RichTextEditor
 				editor={ editor }
 				className={ clsx(classes.tagsInput, className) }
@@ -95,30 +101,4 @@ function TagsInputEditor({
 			</RichTextEditor>
 		</InputWrapper>
 	)
-}
-
-function TagsInputFormField(props: TagsInputProps & { name: string }) {
-	const [fieldValue, setFieldValue] = useFormField(props.name)
-	const value = typeof fieldValue === "string" ? fieldValue : ""
-
-	return (
-		<TagsInputEditor
-			{ ...props }
-			bound
-			value={ value }
-			onChange={ (next: string) => {
-				setFieldValue(next)
-				props.onChange?.(next)
-			} }
-		/>
-	)
-}
-
-export function TagsInput(props: TagsInputProps) {
-	const formContext = useFormFieldContext(false)
-	if(props.name !== undefined && props.name.length > 0 && formContext !== null) {
-		return <TagsInputFormField { ...props } name={ props.name } />
-	}
-
-	return <TagsInputEditor { ...props } bound={ false } />
 }

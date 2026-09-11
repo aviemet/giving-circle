@@ -63,5 +63,31 @@ RSpec.describe "Api::Circles::Fonts", type: :request do
       expect(response).to have_http_status(:unprocessable_content)
       expect(circle.fonts.count).to eq(0)
     end
+
+    it "reuses an existing font with the same checksum" do
+      circle = @admin.circles.first
+      original = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes"),
+        filename: "Display.ttf",
+        content_type: "font/ttf",
+      )
+      circle.fonts.attach(original)
+      duplicate = ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new("font-bytes"),
+        filename: "Display.ttf",
+        content_type: "font/ttf",
+      )
+
+      expect {
+        post api_circle_fonts_path(circle_slug: circle.slug), params: { signed_id: duplicate.signed_id }
+      }.not_to(change { circle.fonts.count })
+
+      expect(response).to have_http_status(:ok)
+      expect(response.parsed_body).to include(
+        "family" => "Display",
+        "filename" => "Display.ttf",
+        "signed_id" => original.signed_id,
+      )
+    end
   end
 end

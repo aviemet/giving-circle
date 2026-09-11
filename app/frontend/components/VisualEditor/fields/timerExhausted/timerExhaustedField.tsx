@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { TextInput } from "@/components/Inputs"
@@ -41,10 +42,10 @@ function TimerExhaustedFieldControl({
 	}
 
 	return (
-		<div className={ classes.exhaustedRoot }>
+		<div className={ clsx(classes.exhaustedRoot) }>
 			<FieldRow label={ exhaustedText("labels.mode") }>
 				<IconSegmented
-					className={ classes.modeSegmented }
+					className={ clsx(classes.modeSegmented) }
 					name={ `${name}.mode` }
 					value={ localValue.mode }
 					options={ [

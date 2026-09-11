@@ -22,6 +22,7 @@ describe("pages/Presentations/Active/Members/index", () => {
 					name: "Presentation 1",
 					slug: "presentation-1",
 					theme_id: "theme-1",
+					settings: { finalist_count: 5 },
 				} }
 				members={ [] }
 			/>,

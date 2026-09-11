@@ -1,2 +1,2 @@
-export { containerClassName, type ContainerComponentProps } from "./Container"
-export { containerConfig, type ContainerProps } from "./containerConfig"
+export { Container, type ContainerProps } from "./Container"
+export { containerConfig } from "./containerConfig"

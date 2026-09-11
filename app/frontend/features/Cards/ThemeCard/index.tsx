@@ -1,4 +1,5 @@
 import { Link } from "@inertiajs/react"
+import clsx from "clsx"
 import { type TFunction } from "i18next"
 import { useTranslation } from "react-i18next"
 
@@ -33,13 +34,13 @@ export function ThemeCard({ theme, metaLine }: ThemeCardProps) {
 			p="xl"
 			radius="md"
 			withBorder
-			className={ classes.dashboardCard }
+			className={ clsx(classes.dashboardCard) }
 			component={ Link }
 			href={ Routes.theme(circleSlug, theme.slug) }
 		>
 			<Stack gap="sm">
 				<Group justify="space-between" align="flex-start" wrap="wrap" gap="sm">
-					<Text fw={ 600 } size="lg" className={ classes.cardTitle }>
+					<Text fw={ 600 } size="lg" className={ clsx(classes.cardTitle) }>
 						{ theme.name }
 					</Text>
 					<Badge color={ STATUS_BADGE_COLOR[theme.status] } variant="light">
@@ -48,7 +49,7 @@ export function ThemeCard({ theme, metaLine }: ThemeCardProps) {
 				</Group>
 
 				{ metaLine && (
-					<Text size="sm" c="dimmed" className={ classes.cardMetaLine }>
+					<Text size="sm" c="dimmed" className={ clsx(classes.cardMetaLine) }>
 						{ metaLine }
 					</Text>
 				) }

@@ -105,6 +105,25 @@ RSpec.describe "InteractionConfigTemplates", type: :request do
       expect(response.headers["Location"]).to include("/interaction_templates/")
       expect(response.headers["Location"]).to end_with("/edit")
     end
+
+    it "saves member_ui without leaving the editor" do
+      circle = @admin.circles.first
+      template = create(
+        :interaction_config_template,
+        circle:,
+        member_ui: Interactions::MemberUiPresets::ALLOCATION,
+      )
+      next_member_ui = Interactions::MemberUiPresets::PLEDGES
+
+      patch settings_interaction_template_path(circle, template), params: {
+        interaction_config_template: {
+          member_ui: next_member_ui,
+        },
+      }
+
+      expect(response).to have_http_status(:ok)
+      expect(template.reload.member_ui.dig("root", "props", "title")).to eq("Pledges")
+    end
   end
 
   describe "DELETE destroy" do

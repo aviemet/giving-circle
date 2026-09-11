@@ -5,6 +5,7 @@ import { i18n } from "@/lib/i18n"
 
 import * as classes from "./alignment.css"
 import { IconSegmented, PuckFieldLabel } from "../shared"
+import clsx from "clsx"
 
 export type AlignmentValue = "left" | "center" | "right" | "justify"
 
@@ -31,7 +32,7 @@ function alignmentField({ label = "Alignment" }: Partial<Field<AlignmentValue>> 
 			return (
 				<PuckFieldLabel label={ label }>
 					<IconSegmented
-						className={ classes.alignmentControl }
+						className={ clsx(classes.alignmentControl) }
 						name={ name }
 						value={ value }
 						options={ [

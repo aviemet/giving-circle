@@ -20,9 +20,8 @@ class Api::Circles::FontsController < Api::ApiController
       return
     end
 
-    circle.fonts.attach(blob)
-    attachment = circle.fonts.attachments.find_by!(blob_id: blob.id)
+    attachment, created = Circle::Fonts.find_or_attach!(circle, blob)
 
-    render json: Circles::FontSerializer.render(attachment), status: :created
+    render json: Circles::FontSerializer.render(attachment), status: created ? :created : :ok
   end
 end

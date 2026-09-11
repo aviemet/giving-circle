@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { useEffect, useRef } from "react"
 import { FlipCardPanel, type FlipCardRef } from "react-flip-cards"
 import "react-flip-cards/styles.css"
@@ -28,7 +29,7 @@ export function TimerFlipDisplay({
 	}, [remainingSeconds])
 
 	return (
-		<Box className={ classes.flipWrap }>
+		<Box className={ clsx(classes.flipWrap) }>
 			<FlipCardPanel
 				key={ cardCount }
 				ref={ panelRef }

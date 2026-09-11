@@ -1,215 +1,78 @@
-# Giving Circle Project Documentation
+# Giving Circle
 
-## Project Overview
+Architecture and non-obvious gotchas for this app. File names, CSS, Puck field shapes, and current helpers belong in the code. Style, TypeScript, Rails, i18n, and CSS conventions live in `.cursor/rules/` and are not repeated here.
 
-### Model Organization
-- Circle config (e.g. branding `primary_color`) is stored in the `circles.settings` jsonb column and accessed via `circle.settings.primary_color` (`Circle::Settings` wrapper). Site-wide config belongs in `rails-settings-cached` when implemented.
-- `Theme#orgs` and `Presentation#orgs` select join-table `ask_cents` / `ask_currency` onto each org. Do not `includes(:orgs)` or `preload(:orgs)` on those associations (including `includes_associated`); Rails' separate preload query omits the join and raises `PG::UndefinedTable`. Load orgs via the association when needed (lazy load uses the correct join). Presentation org serialization for live slides uses `Presentations::Orgs::PersistedSerializer` with `currency_for(:ask)`.
-- Slide layout is flex-first: `SlideRoot` is a full-viewport flex container (editable Flex fields). Its content zone inherits direction and stretches children. Containers and fill-sized elements use `flexItemSizing` (`fill` = grow on the main axis with `minHeight: 0`). Do not rely on `min-height: 100%` alone inside block parents. Puck components that must honor flex/grid item sizing (especially Container) set `inline: true` and attach `puck.dragRef` to the root element so grow/stretch apply to the component itself instead of Puck's default wrapper `div`.
+## Domain
 
-### Slide Management
-- When serializing presentations, use the `slides` association, not the JSONB `slides` column on the record.
-- The presentation slide deck (card grid, add/delete) is at `.../presentations/:slug/slides`.
-- Presentation slide editor URLs must use each slide's FriendlyId `slug` (`.../slides/:slug/edit`). Positional indices are not valid slugs and `Presentations::SlidesController#edit` returns 404.
-- Destroying a slide nullifies dependent presentations' `active_slide_id` and removes `SlideParent` rows in model callbacks so FK order stays valid.
+- Circle-specific config lives in `circles.settings` jsonb (`Circle::Settings`). Site-wide config belongs in `rails-settings-cached` when that is added.
+- Presentations have a slide deck (room display) and optional Interactions (member input). The public page `/:circle_slug/p/:presentation_slug` is display-only. Member input is `.../interact` (signed-in membership required).
+- At most one interaction per presentation may have `accepting_responses: true`. Open/close is only from Active Presentation Controls, not Interaction Show.
+- Member screens are Puck layouts in `member_ui` jsonb. `Interactions::MemberUiCompiler` compiles placed inputs into interaction `config` on save. Slide and member editors share one Visual Editor shell and differ by Puck config.
+- Interaction org fields always use `presentation.orgs`, never theme orgs. Live `finalist_org_ids` come from any interaction that outputs `org_vote_totals` (top N from `presentation.settings.finalist_count`); missing or empty responses means all presentation orgs. Do not shrink `presentations_orgs` when finalists change.
+- Responses are not unique on `(interaction, membership)`: some types (pledges) create many rows. Per-member interaction budgets live on `presentation_interaction_memberships.member_attributes`, not `presentations_memberships.funds` (presentation-scoped money only).
+- Models persist. Interaction runtime lives in `app/services/interactions/` as `Interactions::*`.
+- Live slide Elements read Redis `presentation_values`, not raw `interaction_responses`. Postgres remains the source of truth for response rows. Cache refresh is scheduled only for `active` presentations; ActionCable broadcasts only when the snapshot changes. Do not `broadcast_to` from models or fire cable from controllers.
+- One `PresentationDataProvider` owns Inertia presentation props and the single values-channel subscription. Mount it at the presentation surface. Elements must not open their own subscriptions or nest another provider.
+- Money on the wire is `@/types` `Money`. Convert cents only through `@/lib/money`. Never divide or multiply by 100 in UI.
+- Circle outbound email/SMS uses `Integration` (`medium` + `provider` + encrypted credentials). There is no Circle Smtp table. Vendor presets live in `Messaging::ProviderCatalog`; a new vendor is a catalog preset plus an adapter. `MessageTemplate` copies into `Presentation::Message`. Recipients are resolved from presentation memberships at send time, not stored on the message. Setup is under the presentation menu; Active Presentation messaging is send-only. Template variables are `#path` tokens expanded at send.
 
-### API Routes Structure
-- Route annotations on controllers come from `rails annotate:routes`. Do not hand-edit `@route` comments there.
+## Persistence and routes
 
-### FriendlyId History
-- Controllers that need historical slugs use the `FriendlyIdHistory` concern and slug-or-history lookup in exposures; old slugs get a 301 to the current URL.
+- Serialize presentations through the `slides` association, not the JSONB `slides` column.
+- Slide editor URLs use FriendlyId slugs. Numeric indices 404.
+- Destroying a slide nullifies `active_slide_id` and `SlideParent` rows in model callbacks so FK order stays valid.
+- Thumbnails are captured in the editor at save (client `html-to-image`) and attached on `Slide`. Do not screenshot from a job.
+- Historical slugs: `FriendlyIdHistory`; old slugs 301 to current.
+- Nested theme/presentation routes are declared twice (outer `param: :theme_slug` / `:presentation_slug` for CRUD, inner `param: :slug` for nested) so Rails does not emit `:theme_theme_slug`-style names.
+- Rails reserves `actions` as a route segment; this app does not use that name.
+- Controller `@route` comments come from `rails annotate:routes`. Do not hand-edit them.
+- The `urlParams.ts` generator must `reload_routes!` first; lazy route loading otherwise writes an empty file.
+- During active development, edit the original create/alter migration instead of stacking throwaway migrations.
 
-## Project Milestones
+## Visual Editor
 
-### Phase 1: Core Authentication and Authorization
+- Layout is flex/grid first. Puck wraps children in a DropZone `div`. Live/preview that wrapper is `display: contents` so host flex/grid applies to the blocks; the editor DropZone stays a real box so it can receive drops.
+- Components that must honor flex/grid item sizing set Puck `inline: true` and put `puck.dragRef` on the actual root. Without that, grow/stretch apply to Puck's wrapper. Layout boxes use Fill/Auto item sizing; chrome widgets use an explicit size.
+- `#path` tokens are interpolated by `useResolvedTags`. Iterate (`presentation.org`) lives on Container and Grid. Editor shows one template; live maps once per item.
+- Server JSON is the source of truth. `localStorage` is a recovery draft only. Save writes the API. Unsaved navigation is `NavigationInterrupt`. Member UI save is XHR, not an Inertia visit: a visit would trip the leave-page guard (GET / history back only).
+- Puck `resolveData` rewrites the document on mount. Dirty-check against a clone of that resolved snapshot, not the live Puck object, or Save stays disabled.
+- Starter `ComponentData` must include stable `props.id` values or Puck can loop `onChange` and exhaust memory.
+- During active development, slide JSON is throwaway: when a field format changes, drop the old keys. Do not keep dual stored shapes.
+- Custom fonts are circle-scoped attachments. Slide JSON stores `{ family, url }`; `family` alone is a CSS generic.
+- Live `presentation.orgs` falls back to `theme.orgs` when the presentation has none; preview uses mock circle orgs. An empty array is not missing data. New presentations copy theme orgs on create. Do not preload `Theme#orgs` on public loads.
+- Puck components split Display (live) vs Editor (canvas). Stored props live on the entry module, not the config. Config copy calls `i18n.t` inline. Field factories must not take a `t` parameter.
+- Property sidebar is a dense design-tool layout: grouped panels per concern, one control per stored value. Do not ship a stack of default Puck/Mantine widgets for style props.
+- `legacySideBarPlugin` mounts the same fields twice (one copy is 0-width). Segmented controls need a unique radio `name` per instance or label clicks hit the hidden copy.
+- Modules under `VisualEditor/components` and `VisualEditor/elements` must not import `@/features/presentation` barrels. Those pull member Puck config and control registration and can circularly leave palette components undefined. Import concrete modules.
 
-## Conventions
+## Forms, pages, and shell
 
-### Architecture
-- Backend serializers use [oj_serializers](https://github.com/ElMassimo/oj_serializers?tab=readme-ov-file); TS types are generated from them via [types_from_serializers](https://github.com/ElMassimo/types_from_serializers).
+- App `Form` is uncontrolled Inertia `Form` coordinated through `FormFieldContext`. Domain forms pass `initialData={{ model: record }}` and named inputs; do not field-pick or rebuild the payload. Inputs must forward `name` to a real control. Extra React state is only for UI that is not a submitted control; merge it in `transform`.
+- Server validation failures `redirect_to` with `inertia: { errors: ... }`, not a 422 render.
+- `Page` `title` is the browser tab; `heading` is the App shell header. Neither renders in the page body. `heading={null}` clears the shell header. `/circles` uses `hideNavMenu` because the user has not chosen a circle yet.
+- In-app navigation uses Inertia (`Link`, `NavLink`, `Menu.Link`, `ButtonLink`). Plain anchors are for external URLs or internal `target="_blank"`.
+- With Mantine headroom, a collapsed header can zero `--app-shell-header-offset` and shrink the page. The shell pins that offset to the header height while the bar is translated off-screen.
 
-### Development Guidelines
-- Changes should stay small and scoped to one concern.
-- During active development, edit the original create/alter migration instead of adding throwaway add-then-remove migrations; the database will be destroyed and rebuilt when the feature is done.
-- Frontend: named exports only (except `app/frontend/pages`, which MUST default-export Inertia page entry components — `urlParams` type generators rely on that). React components as `export function Name`. Barrel files use `export { X } from "./Y"`. Inertia pages may also export a named `Page` from `withLayout`.
-- Prefer exact HTTP status checks (e.g. `=== 201`), not ranges.
-- TypeScript: no type assertions (`as`, `as unknown as`). Prefer fixing types (unions, generics, exports). Do not add explicit return types when inference is enough. React 19: `useRef<Handle>(null)` is `RefObject<Handle | null>` for imperative helpers; with `@types/react` 19 prefer `ReactElement` / `ReactNode` imports over bare `JSX.Element` when the global `JSX` namespace mis-resolves. `react-i18next` augments global `JSX`, which can confuse IDE navigation on `JSX`.
-- The shared `Page` component: `title` sets the browser tab only (`<Head>`). `heading` sets the App shell header via the layout store (`AppHeader` reads `siteTitle`). Omitted `heading` falls back to `title`, then the app default; `heading={null}` clears the shell header while the tab may still use `title`. Neither prop renders in the page body. RTL tests should assert on real content (tables, forms), not on header copy alone.
-- Nested ternaries are forbidden; use `if`/`else` or early returns.
+## Serializers and loading
 
-### Code Style
-- Import lodash-compatible helpers from `es-toolkit/compat`, not `lodash` / `lodash-es`.
-- Strict equality only (`===` / `!==`). Never `==` / `!=`, including the `!= null` idiom.
-- Folder `index.ts` barrels export public API only. Internal helpers and private subcomponents stay unexported; shared reuse belongs in an intentional shared module, not leaked through the barrel.
-- One React component per file when delivering UI. Types live next to the module they describe (no feature-local `types.ts`).
+- Computed serializer attributes must use the `attribute` block form; a bare `def` on the serializer is ignored.
+- `Theme#orgs` and `Presentation#orgs` select join-table `ask_cents` / `ask_currency`. Do not `includes(:orgs)` or `preload(:orgs)` on those associations (including `includes_associated`): Rails' separate preload omits the join and raises `PG::UndefinedTable`. Lazy-load instead.
+- `disable_menu_rendering` skips menu payloads on public Inertia responses.
 
-### ESLint (flat config, ESLint 10)
-- `eslint-plugin-import` flat entries need `@eslint/compat` `fixupConfigRules` because ESLint 10 dropped legacy `SourceCode` helpers that `import/order` still calls; without fixup, lint crashes instead of reporting a rule.
-- Scope those import fixup blocks with `files` limited to JS/TS modules. Without that, `import/no-unresolved` can run on JSON and similar, triggering more missing legacy APIs / bad `context` passthrough errors from the compat layer.
-- Put shared ignore globs in a top-level `{ ignores }` config object (first entry in `eslint.config.js`). That is the flat-config global ignore list; it applies to every ESLint invocation (`lint`, `lint:fix`, IDE, lint-staged). Generated serializer declarations under `app/frontend/types/serializers/**/*` and `coverage/**/*` belong there.
+## Frontend and tooling gotchas
 
-## Feature Documentation
-*Document completed features and their core functionality here*
+- Import lodash-compatible helpers from `es-toolkit/compat`. Nested ternaries are forbidden.
+- Do not nest `:global(.mantine-*)` under a Linaria class (it emits unscoped and leaks). Use `& .mantine-*` or Mantine `classNames`. Surface/hover colors must use `vars.lightSelector` / `vars.darkSelector` (or Mantine CSS variables), not a single light gray.
+- XState `setup()` only accepts context/event types via `{} as T`. That is the allowed exception to the no-cast rule. Named actions fail if you write `setup<Context, Event>()` instead.
+- Frontend tests assert user-facing behavior, not layout or ARIA shape. Inertia request specs assert `be_successful` unless lazy props would hide a serialization failure.
+- Under jsdom, Mantine DataTable markup is often incomplete; do not assert the full grid DOM.
+- Vitest must not `mergeConfig` the Rails `vite.config.ts`. That leaves file watchers open after `vitest run`.
+- Node 25+ experimental global `localStorage` breaks jsdom Storage. Unit Vitest passes `--no-webstorage`.
+- TypeScript 7 has no stable programmatic API; `typescript` stays aliased to TypeScript 6 for eslint, with `@typescript/native` for `tsc`.
+- ESLint 10: `eslint-plugin-import` needs `@eslint/compat` `fixupConfigRules`, scoped to JS/TS files. Global ignores belong in a top-level `{ ignores }` object (generated serializers and coverage).
+- Vitest mocks of `@inertiajs/react` must provide `useFormContext` or `Form` tests throw.
+- Validation copy stays in Rails YAML and is excluded from the frontend i18n export. Do not hardcode English in `errors.add`.
 
-## Technical Decisions
-
-### Authentication & Authorization
-- Pundit policies lean on `ApplicationPolicy#standard_auth`, circle membership (`user.circles.include?(record.circle)` where relevant), record guards such as `active?`, and a super-admin bypass.
-
-### File Uploads
-- Client uploads go through Rails ActiveStorage DirectUpload (see `@/lib/files` `uploadFile` and `DropzoneInput` with `uploadMode="immediate"`). Attach on models with `has_one_attached` / `has_many_attached` as needed.
-
-### Frontend Components
-
-#### Data tables (Mantine DataTable)
-- Index lists use `features/IndexTableTemplate` with `model` and `pagination` (rows come from domain `*Table` children and `Table.DataTable`). Under jsdom, Mantine DataTable markup is often incomplete; prefer narrow tests (e.g. `TableExports`) over asserting the full grid DOM.
-
-#### Component Organization
-- Frontend code is organized in `/app/frontend/`
-  - `/components`: Reusable, general-purpose components
-  - `/domains`: Tables, forms, and other UI tied to specific models or pages (imports from `@/domains/...`)
-  - `/features`: Cross-cutting app pieces that are not the shared design system (e.g. index table page shell, header controls, template 
-  visual editor). The `Cards` folder lives here: card UIs are reused across multiple domains, not owned by a single model folder.
-  - `/layouts`: App Layout components
-  - `/lib`: Non-React code and utilities
-  - `/pages`: Top-level Inertia pages (entry points for routes)
-  - `/queries`: Async react-query methods (not Ruby query objects; see **Ruby query objects** below)
-  - `/types`: Global types and interfaces
-
-#### Icons
-- Icons are centrally exported from `@/components/Icons`
-- Icons are renamed on export for semantic usage (e.g., `TbDashboard as DashboardIcon`)
-
-#### App shell header (headroom)
-- With Mantine `useHeadroom` and a collapsed `AppShell` header, Mantine can set `--app-shell-header-offset` to `0`, shrinking the page and fighting headroom at the bottom. When collapsed, the shell root uses `shellRootKeepsHeaderScrollSlot` from `layouts/AppShellChrome.css.ts` to pin `--app-shell-header-offset` to `theme.other.header.height` so scroll height matches the visible-header case while the bar stays translated off-screen until scroll-up.
-
-#### UI & Styling
-- Mantine component library
-- Internal navigation uses Inertia (`Link`, `NavLink`, `Menu.Link`, `ButtonLink`). Do not use `<Button component="a" href="...">` for in-app routes; use `ButtonLink`. Plain `<a>` / full page loads are for external URLs only (`Link external`).
-- CSS modules with Linaria
-  - Files use `.css.ts` extension
-  - Import styles as `import * as classes from "./Component.css"` (not named imports from `.css.ts`)
-  - Always pass `className` through `clsx(...)`, even when only one class is applied
-  - Multiple classes are composed in the same `clsx(...)` call
-  - Import `theme` / `vars` from `@/lib/theme`, not `@/lib`. WyW evaluates `.css.ts` in Node; the `@/lib` barrel re-exports browser-only modules (`files` -> ActiveStorage) and kills the eval runner.
-  - Do not nest `:global(.mantine-*)` under a Linaria class to style Mantine internals. Linaria emits that as an unscoped global and it leaks app-wide. Scope with `& .mantine-*` under the local class (see VisualEditor `UnitNumber.css.ts`), or apply a local class via Mantine `classNames`.
-- Dark/light theme support via Mantine theme system
-- Linaria styles that set surfaces or hover backgrounds must use `vars.lightSelector` / `vars.darkSelector` (or Mantine CSS variables such as `--mantine-color-default-border`), not a single light-theme gray such as `vars.colors.gray[0]`, or dark mode will look wrong.
-
-#### Form implementation
-- App `Form` is uncontrolled Inertia `Form` with field coordination through `FormFieldContext` (not `useInertiaForm` on consumers). Inputs must forward `name` to a real control or they are omitted from submit and `getFormData()`.
-- Domain forms stay thin: `initialData={ { model: record } }` and named inputs. Do not field-pick, rebuild, or `useMemo` the initial payload; `Form` applies `initialData` once on mount and hydrates controls from that object by `name`. Follow `domains/circles/Form.tsx` / `domains/presentations/Form`.
-- Extra local state is only for UI that is not a real form control (e.g. FieldBuilder / OutputBuilder). Merge that in `transform` on submit. Do not invent `normalize*` helpers or reconstruct the record field-by-field.
-- Splitting inputs into a child of `Form` is fine when that child needs Form context (`useFormField`, `useFormFieldError`, etc.) before or while rendering. That is not an excuse for Body/Fields/types/normalize layering around a simple form.
-- Typing wrappers with `React.ComponentProps<typeof Form>` drops the form generic and weakens `transform`; prefer `FormComponentProps<Record<string, FormDataConvertible>>` (and pass an explicit JSX generic on `Form` when needed).
-- `Form` syncs Inertia slot props into `FormFieldProvider` via an internal child that calls `useFormContext` in `useLayoutEffect`. Vitest mocks of `@inertiajs/react` must provide `useFormContext` and wrap the mock `<form>` in a provider whose value matches the stub slot props, or `Form` tests throw.
-- Server validation failures should `redirect_to ..., inertia: { errors: record.errors }` (not a 422 render). Shared inputs read those via Form slot `errors` / `useFormFieldError(name)` and show them on the field itself.
-
-#### VisualEditor / dynamic data
-- `PresentationDataProvider` (`@/features/presentation`) supplies Inertia presentation props and, when not editing, the live Redis `values` blob over one `PresentationValuesChannel` subscription. Editor mounts pass `isEditor: true` (mock element data; no live subscribe). Public views can lazy-load memberships via `GET /:circle_slug/p/:presentation_slug/memberships` when needed.
-- Inside iterators, `IteratorItemProvider` exposes `pathPrefix`, `currentItem`, and `index`; `usePresentationData` resolves paths like `presentation.org[].name` against `currentItem` when the path matches the iterator prefix. `buildDataStructure` prefers `contextData.presentation?.orgs` when present.
-- Puck `Render` depends on the layout's provider for dynamic resolution. Slot fields that can be empty need a tangible hit target (pass `minEmptyHeight` via `slotDropZoneProps()` in `VisualEditor/slotEditor.ts` on each slot render). `withStarterSlideContent` seeds empty slides in the editor when server `data.content` is empty; starter `ComponentData` must include stable `props.id` values or Puck can loop `onChange` and exhaust memory. Slide editor persistence lives in `VisualEditor/editorPersistence.ts`: server data is the source of truth; `localStorage` is a per-`slideKey` recovery draft only (reload while editing). Drafts are stored as `{ v: 1, basedOn, data }` where `basedOn` fingerprints the last known server snapshot; if the server no longer matches `basedOn`, or the draft is a legacy unversioned blob, the draft is discarded as stale. On load, a matching differing draft is recovered and labeled in the header; **Save** writes to the API only. **Revert to last save** and **Close without saving** both clear the draft; close abandons local work rather than keeping a draft for later. Slide display name is `slides.title`; Puck root `title` is synced from that column on load and written back on save so card view and editor sidebar match. Unsaved navigation uses `components/Modal/NavigationInterrupt` with `lib/hooks/useNavigationInterrupt` and an XState machine co-located at `components/Modal/NavigationInterrupt/navigationInterruptMachine.ts` (three-option prompt: stay, discard and leave, save and leave). Leave actions set bypass before navigating so Inertia `before` does not re-block; the history trap `pushState`s at most once per guard key while dirty. Puck mounts with `resolveAndCommitData` (setTimeout 0) which rewrites props through config `resolveData` and fires `onChange`; for server loads the editor adopts that resolved document as the dirty-check baseline until that macrotask settles, so hydration is not treated as an unsaved edit. Draft `basedOn` keeps the pre-resolve server fingerprint.
-- VisualEditor component styles are dual-file: colocated `Name.css.ts` is the presentation base; optional `Name.editor.css.ts` holds editor-only drop-target / drag affordances and is applied only when `puck.isEditing`. Shared nestable DropZone slot affordances live on `presentationSlot` in `VisualEditor/Puck.css.ts` (editor chrome + shared slot hooks); apply that class only when editing. Layout hosts (Container, Grid DropZone) also get `layoutChrome.editor.css.ts` `frame` + a label class (`labelContainer` / `labelGrid`) while editing: always-visible depth-colored dashed bounds and a corner chip so nested containers remain selectable/droppable when filled (Puck only outlines empty/selected/hovered zones by default). While Puck sets `data-puck-dragging` on the entry, drag gutters are applied from `Puck.css.ts` `puckRoot` (not `:global([data-puck-dragging]) &` in component CSS - Linaria drops the local class from that pattern). Gutters use `DRAG_SLOT_*` in `slotEditor.ts` (padding + gap on `.layoutChrome.frame` / root zone, larger `DropZone-hitbox`) so parent and between-sibling drops remain hittable instead of only the deepest child. Puck's selected-component ActionBar (label / duplicate / delete) is editor chrome: keep `--puck-actionbar-color-*` contrast overrides on `puckRoot` in `Puck.css.ts`. Do not scope them to an element `host` class; the ActionBar is shared across every component on dark slides, and element-scoped rules make gray-on-gray handles recur for everything else.
-- Puck layout `Container` must render with Mantine `component={Content}` (not `<Container><Content /></Container>`) so flex styles from `buildFlexStyle` apply to the slot element whose children include flattened iterator output; use `fluid` for full-width slides. VisualEditor Puck fields are per-concern modules (`spacing`, `border`, `flex`, `dimension`, `typography`, `alignment`, `font`, `backgroundImage`, etc.); each component config lists only the fields it needs rather than a shared layout bundle. See **VisualEditor property controls** below for the sidebar UX contract. Grouped fields use `normalize*` + config `resolveData` so legacy flat props still hydrate (e.g. `spacing` from `margin`/`padding`, `background` from `backgroundColor`/`backgroundImage`, `border` from top-level border props, Heading `metrics`/`flow`, Text `flow`/`layout`). Custom fonts are circle-scoped (`Circle` `has_many_attached :fonts`, `GET/POST /api/circles/:slug/fonts`). Slide JSON stores `FontValue` `{ family, url }` on Page/Heading/Text; empty values inherit (Heading/Text) or use the system default (Page); `family` alone (no `url`) is a CSS generic (`serif`, `sans-serif`, `monospace`, `cursive`, `fantasy`); `family`+`url` is a custom upload (`SlideFontFace` injects `@font-face`). Heading/Text must set Mantine `ff="inherit"` when FontValue is empty (`componentFontFamilyCss`); omitting `ff` leaves Mantine theme `--mantine-font-family` / headings fonts in place and breaks cascade from SlideRoot. `SlidePresentation` wraps `Render` in `PresentationDataProvider` with live `circle` / `theme` / `presentation` props so tag resolution works on public views, not only in preview.
-- Live presentation orgs come from `Presentations::PresentationSerializer#orgs`, which falls back to `theme.orgs` when `presentations_orgs` is empty. Preview uses mock circle orgs instead; an empty `presentation.orgs` array is not the same as missing data. New presentations `after_create` sync theme orgs into `presentations_orgs`. Do not `includes(:orgs)` / `preload(:orgs)` on `Theme` for public presentation loads; lazy-load `theme.orgs` in the serializer instead.
-
-#### VisualEditor property controls
-- Sidebar controls must read as a **professional design-tool scheme** (dense, intentional, Webflow-like density), not a stack of default Puck/Mantine form widgets. New or changed VisualEditor fields follow this ethos; do not ship lone native `number` / `text` / `select` / dropzone rows for style props when a grouped dense control exists or should.
-- **Group related props** into one custom field panel per concern (`Layout`/`flex`, `Background`, `Border`, `Spacing` box model, `Size`/`flexItemSizing` (width **and** height / max bounds), Image `imageSize` (scale mode natural/width/height/box, max size, aspect, object-fit/position when a crop box exists), typography metrics/flow, Timer `duration` / `colors` / `exhausted`, etc.). Prefer one stored object + `FieldRow` subcontrols over many top-level Puck fields. Reuse `fields/shared` (`FieldRow`, `IconSegmented`, `IconControlTooltip`, `AlignMatrix`, `UnitNumber`, `PuckFieldLabel`) and the same `build*Style` contracts.
-- **One control per value:** do not add a separate top-level color (or other) field when an existing grouped panel already owns that value (e.g. text color lives on `textFontField`, not a sibling `textColor` `colorField`). Minutes + seconds belong in one Duration panel; related colors belong in one Colors panel.
-- VisualEditor field factories and their controls must not take `t` / `TFunction` as a parameter or prop. Copy helpers call `i18n.t` from `@/lib/i18n` directly (e.g. `function colorsText(key: string) { return i18n.t(\`...\${key}\`) }`). Do not invent injectable translation callbacks on field APIs.
-- Do not invent identity type aliases that only rename an existing type (`export type FooValue = Foo`). Import and use the source type.
-- Do not re-export the same symbol from a sibling module "for convenience" (e.g. `fields.ts` re-exporting `boxModelField` from `spacing.tsx`). One definition, one import path through the feature barrel.
-- **Chrome:** theme via Puck 0.22 tokens on `puckRoot` / `puckFieldStyles` (`--puck-field-control-height` and related). Keep control heights uniform. Subtle shadow/selected polish belongs on **widgets** (inputs, segmented controls, icon buttons), not on whole field sections. Section headings (`PuckFieldLabel`) are sentence case and visually distinct from amber `FieldRow` prop labels. Icon-only controls need hover tooltips. Compact file pickers beside selects/rows; no tall Dropzones in the property sidebar. Segmented controls must fill their track (no empty/ghost segments; selected indicator spans the active segment).
-- Conditional density: hide advanced knobs until they apply (e.g. background image size/position/repeat only when an image URL exists; exhausted message only when mode is message). One stored value maps to one input; adjacency groups related UI without merging unrelated models.
-
-#### State management
-- Server-driven UI: Inertia. Ephemeral client state: zustand. Form field coordination: `FormFieldContext` / app `Form` (see Form implementation).
-- For complex state transitions, use x-state. Keep state machine files colocated with the feature.
-
-#### Type system
-- No `any` / `unknown` as escape hatches. No `as` casts; fix the types instead. Avoid redundant explicit annotations when literals already satisfy the type.
-- Strict equality only (`===` / `!==`). Never `==` or `!=`.
-- Define types next to the module they describe (component, parser, builder). Reserve shared files for combination types or utilities used across multiple modules; do not add generic `types.ts` barrels.
-- Feature folder `index.ts` files are deliberate public interfaces: export only what outside callers should import. Do not re-export internal helpers or private subcomponents.
-- Ruby constants can surface in TS via `rails types:generate` / `types.rake` tasks -- keep those tasks updated when adding constants consumers need.
-- `moduleResolution: "bundler"` is required for packages that rely on subpath exports (e.g. TipTap menus).
-- Prefer passing `ref` as a normal prop on function components (React 19) instead of `forwardRef` where appropriate; use `useImperativeHandle` when exposing handles.
-
-#### URL routing & navigation
-- Route helpers are generated (js-routes) into `@/lib` / `app/frontend/lib/routes`; param ordering follows `urlParams.ts` / generated typings.
-- **Theme and presentation params:** Rails would auto-prefix nested params unless routes are declared twice: outer `resources :themes, param: :theme_slug` (and the same idea for presentations with `:presentation_slug`) for CRUD, then inner `resources :themes, param: :slug, except: [...]` (and nested presentation block with `:slug`) for nested routes. That keeps URLs like `/:circle_slug/themes/:theme_slug/presentations/:presentation_slug/...` without `:theme_theme_slug`-style names. Circle stays scope-nested; leaf resources often use `param: :slug`.
-- `@path` / `@route` hints in TS come from the `url_params_json.rb` annotation pass. That generator must call `Rails.application.reload_routes!` first: under Rails lazy route loading, `named_routes.to_a` is empty until routes are drawn, which would write a near-empty `urlParams.ts`.
-- Default `Link` uses Inertia. Off-site `http(s)` / `www` URLs (or `external`) render `ExternalLink` (normalized URL, new tab). Internal `target="_blank"` uses a plain anchor so the browser opens a new tab without Inertia intercepting the click.
-
-#### Internationalization (i18n)
-- Frontend uses `react-i18next`. **Do not edit** `app/frontend/lib/locales/*.json`; those files are generated. Add or change copy in `config/locales/**/*.yml` (model-scoped files such as `config/locales/circles/circles.en.yml` are fine), then run `bundle exec rails i18n:export` (see `lib/tasks/i18n.rake` and `config/i18n.yml`).
-- Keys in YAML map to nested JSON under the locale key (e.g. `circles.index.title` in YAML becomes `circles.index.title` in `en.json`). Frontend `t()` uses that path without a `views.` prefix when defined at the model root in YAML.
-- For react-i18next plurals after export, prefer flat sibling keys in YAML (`themesCount_one`, `themesCount_other`) rather than a nested `themesCount: one/other` hash; nested Rails plural hashes export as objects and `t("...themesCount", { count })` fails at runtime.
-- Dynamic key segments (e.g. `t(\`circles.index.themeStatus.${status}\`)`) may need `ignore_unused` entries in `config/i18n-tasks.yml`; `spec/i18n_spec.rb` enforces no unused keys.
-- Shared flash templates live under `templates.controllers.notices` in `en.yml`.
-- Validation and other server error copy lives in Rails locale YAML (`errors.messages.*`, domain `*.validations.*`). Messages are resolved under `I18n.locale` before Inertia; `config/i18n.yml` excludes `*.errors.*` and `*.activerecord.*` from the frontend export. Do not hardcode English in `errors.add` / validators; prefer `errors.add(:attr, :blank)` or `I18n.t("...")` with full key strings. Runtime deps include `rails-i18n` and `devise-i18n` for stock locale packs when non-English locales are added later.
-- App locale IDs are the i18n export JSON keys (`en`, `en-US`, `de-DE`, …). Translation fallback pack is `en` (`DEFAULT_LOCALE` / Rails `*.en.yml`). Runtime app locale in Zustand is always a canonical registry id: `resolveLocale` maps bare language ids to their home regional form when that sibling exists (`en` → `en-US`, `lo` → `lo-LA`, `de` → `de-DE`; `pt` stays `pt` because there is no `pt-PT`). `DEFAULT_APP_LOCALE` is that canonical default (`en-US`). `LocaleStore.setLocale` / hydrate write the canonical id to the store and to `localStorage` key `giving-circle.locale` (and `i18n.changeLanguage`). Picker lists the same regional forms. Currency/number use `intlLocale()`; datetime uses dayjs. Language UI is `LanguageModal` / `LanguagePicker` with `country-flag-icons`. Chromium returns ISO codes for some languages (`pap`, `sc`, `dz`, `hsb`); `languageDisplayNameFallbacks.ts` supplies English names. `fix_devise_invitable_pt_br_locale.rb` rekeys gem `pt-BR.yml` only when the top-level key is still the broken `pt_BR:` form; current `devise_invitable` already ships `pt-BR:`. i18n `fallbackLng` for `de-DE` is `de` then `en`.
-
-#### Testing
-- Frontend page tests assert that the page loads and that user-facing behavior works. Do not assert layout or markup shape (roles like table/button/columnheader, heading levels, presence/absence of columns, "X is a Y"). Prefer content the user cares about (titles, record names) and direct checks that a function/action did its job. Layout does not error; do not test it.
-- Inertia **request** specs for page loads: assert `expect(response).to be_successful` only; do not assert prop shape or contents (frontend tests cover rendering). Use `expect(inertia).to render_component(...)` only when lazy props would make a bare status check miss a serialization failure.
-- Vitest **browser** mode runs real Chromium with Vite transforms. Importing huge barrels or full Inertia pages can blow the renderer heap (`V8 javascript OOM` / "browser connection was closed") -- shrink browser-mode suites, use jsdom + RTL for heavy trees, and reserve full Playwright E2E for whole-app flows (`yarn playwright install chromium` if binaries are missing).
-- **Unit and browser Vitest must not `mergeConfig` the Rails `vite.config.ts`** (Ruby plugin, Inertia, `FullReload`, WyW/Linaria, `base: "./"`). Merging left chokidar/Vite file watchers open after `vitest run`, causing `close timed out` / "something prevents Vite server from exiting". Unit Vitest (`vitest.config.ts`) uses a minimal setup rooted at `app/frontend` with `@` alias, `tsconfigPaths`, `@vitejs/plugin-react`, and a pre-transform stub for `*.css.ts` / `*.editor.css.ts` (each named export becomes `` `${fileToken}__${name}` `` so editor vs presentation class composition stays distinguishable; no Linaria/WyW in unit tests). Browser Vitest is the same idea without the CSS stub and uses `base: "/"`. Headed runs: `yarn test:browser:headed` / `BROWSER_HEADED=1`.
-- Shared Inertia props for tests: `inertiaPageProps` in `@/tests/helpers/mockServer` (global `afterEach` clears `active_*` / `circles`); `registerActiveCircleLifecycle` in `pageTestLifecycle.ts` wraps the pattern. Vitest root is `app/frontend`; `setupFiles` paths are relative to that root. Unit Vitest uses `fileParallelism: true` (fork workers isolate module state); MSW handlers include `Routes.apiCircleMock("mock-circle")` for `useMockCircle` / `VisualEditor`.
-- Root `tsconfig.json` uses `compilerOptions.types: []`; Vitest globals still need `app/frontend/vitest-globals.d.ts` referencing `vitest/globals` (listing it in `types` can fail on newer TS). `@testing-library/jest-dom` matchers require an explicit setup import (see `mockServer.ts`); Vitest 4 does not ship those matchers by default.
-- Node 25+ enables an experimental global `localStorage` that breaks jsdom's Storage unless disabled. Unit Vitest sets `execArgv: ["--no-webstorage"]` in `vitest.config.ts` so jsdom owns `window.localStorage`.
-- TypeScript 7 has no stable programmatic API yet; keep `typescript` aliased to `@typescript/typescript6` for typescript-eslint and install `@typescript/native` (`npm:typescript@^7`) for `tsc`.
-- Prefer `vi.mock("pkg", factory)` or `importOriginal` when you only need shallow stubs; the typed `vi.mock(import("pkg"), factory)` overload forces nested exports to still satisfy full module types.
-
-#### ActionCable
-- Frontend channel hooks wrap a shared `useActionCable`; channel names and payloads must stay aligned with Ruby channel classes.
-
-### Database query loading
-- Prefer the `includes_associated` scope (and similar patterns) when loading records for serializers to avoid N+1s; include circle associations where serializers touch them.
-- Trim redundant work from `inertia_share` (cached associations where it helps). `disable_menu_rendering` stops menu payloads on public Inertia responses. Preload what menus need on `user.circles` when menus render.
-
-### Ruby query objects
-- Non-ActiveRecord query/service objects live in `app/queries/` (e.g. `RecentThemes`). This directory is **not** on Rails default autoload paths; `config/application.rb` must add it to both `autoload_paths` and `eager_load_paths`. Do not confuse with `app/frontend/queries/` (react-query hooks only).
-- With that path registered, `app/queries/recent_themes.rb` defines a top-level `RecentThemes` constant (not `Queries::RecentThemes`).
-
-### Serializers (oj_serializers)
-- Computed attributes on a serializer use the `attribute` block form, e.g. `attribute :themes_count, type: :number do ... end`. A bare `def themes_count` on the serializer class will not work and breaks Inertia pages that call `render(:index)`.
-
-### App shell and navigation hierarchy
-- `/circles` (dashboard) uses `Page` `hideNavMenu` on purpose: the user is choosing a Circle before circle-scoped sidebar nav (themes, orgs, presentations) applies. In-circle routes show the normal sidebar. Dashboard copy should stay minimal; hierarchy is conveyed by layout, not long subtitles.
-
-## Architecture Decisions
-
-### Presentation system
-- Presentations support runtime "Interactions" (`trigger_type`, `trigger_conditions`, `accepting_responses`, config-driven `fields`/`outputs`, `results`, FK to `interaction_ui_templates`) under the `presentations` namespace.
-- The public presentation page (`/:circle_slug/p/:presentation_slug`) is display-only for a room screen. Do not put interaction forms, modals, or other member input UI there. Member input lives at `/:circle_slug/p/:presentation_slug/interact` (Devise session required, presentation must be `active`, user must resolve to a presentation membership via `Person`).
-- At most one interaction may have `accepting_responses: true` per presentation (`open_responses!` closes others). Member interact UI lives under `features/presentation/interactions` and resolves by `interaction_ui_templates.slug` via an interim in-memory map (`memberInteractionUiBySlug`) of React components that all accept the same `MemberInteractionUiProps`. Unknown slug shows an unsupported fallback; no open interaction shows idle. That map is the stand-in for a future Puck-in-DB lookup that keeps the same props contract. Full Puck-style member UI builder is deferred.
-- Interaction org field types (`org_reference`, `org_money_map`, `org_ranked_list`) always resolve options from `presentation.orgs` (the presentation subset), never theme orgs. There is no org-source config on those fields. ContextLoader filters those options to live `finalist_org_ids` for allocation/pledges (unless pledges `allow_non_finalists`); finalist vote always sees the full presentation org set.
-- Member interact may upsert the latest response for a membership when editing curated UIs; the DB does **not** uniquify `(interaction, membership)` because some interaction types allow multiple responses (e.g. pledges always create).
-- Per-member interaction budgets (e.g. finalist vote allotments) live on `presentation_interaction_memberships.member_attributes` (jsonb), not on `presentations_memberships`. `presentations_memberships.funds` remains presentation-scoped money only.
-- Live `finalist_org_ids` are derived by convention: any interaction that outputs metric `org_vote_totals` and has `settings.finalist_count`, once it has at least one response, supplies top-N org ids into the presentation values snapshot. Missing interaction or zero responses => all presentation org ids. Do not mutate `presentations_orgs` when finalists shrink.
-- Rails reserves `actions` as a route/controller name segment; this project avoids that segment name.
-- Models define shape and persistence only. Live presentation transport is Redis-backed and debounced: model/controller updates call `ActivePresentation::Cache.schedule_refresh` / `PresentationValues::Cache.schedule_refresh` only when the presentation is `active`. Jobs rebuild a Redis snapshot and ActionCable broadcasts only when that snapshot changes. Do not put `broadcast_to` on ActiveRecord models or fire cable messages synchronously from controllers.
-- Live slide Elements read derived `presentation_values` (e.g. `allocated_totals`, `org_vote_totals`, `finalist_org_ids`), not raw `interaction_responses`. Root data stays in Postgres (`presentation_interaction_responses.response_data` only). `PresentationValues::Aggregator` builds one snapshot per presentation from interaction `config.outputs` reducers; `PresentationValues::Cache` stores it ephemerally in Redis; every response commit on an active presentation schedules `PresentationValues::RefreshJob` (1s debounce, 5s max-wait, lock-safe). ActionCable `PresentationValuesChannel` broadcasts only when the Redis snapshot changes.
-- Live interaction open/close state uses the same pattern via `ActivePresentation::Cache` / `RefreshJob` / `ActivePresentationChannel` (`active_presentation_updated` with interaction accepting_responses snapshot).
-- Live open/close for an active presentation is controlled only from Active Presentation Controls (`.../admin`): one Switch per interaction via `PATCH /api/circles/:slug/presentations/:slug/interactions/:slug` (`accepting_responses`). Interaction Show is config/status only (no open/close buttons). Active Members (`.../admin/members`) lists presentation memberships (funds, email, finalist interaction votes when present) with Actions linking to the shared member interact URL.
-- Client home for live Redis presentation data is `@/features/presentation` (payload types, derived helpers, channel hooks). Group by concern under that feature (`values/`, later `orgs/`, etc.). VisualEditor elements and presentation surfaces import from there; do not invent ad-hoc live-value predicates or transforms next to a slide element.
-- One `PresentationDataProvider` owns both Inertia presentation props (`circle` / `theme` / `presentation` / `isEditor`) and the single `PresentationValuesChannel` subscription for the Redis live blob (`values`). Mount it once at the presentation surface (`PublicPresentationLayout`, slide editor, preview). Do not nest a second presentation provider or open ActionCable subscriptions inside slide elements; readers use `usePresentationDataContext()` (and derived hooks such as `useAllocatedTotals` / `useLeverageTotals`).
-- Money: server serializers emit `@/types` `Money` (`amount`, `cents`, `currency_iso`). Convert Redis/form cents only via `@/lib/money` (`fromCents`, `centsOf`, `amountOf`). Never divide/multiply by 100 in UI. `currency.*` formatters accept `number | Money`: bare numbers are major units (legacy); prefer passing `Money`. Presentation helpers treat bare numbers as cents.
-
-### Messaging
-- Circle outbound email/SMS uses `Integration` records (`medium` + `provider` + encrypted credentials jsonb). There is no Circle `Smtp` table; `provider: smtp` is one Integration. Site-wide/Devise mail stays ActionMailer credentials/ENV.
-- Known vendors live in `Messaging::ProviderCatalog`: shared **auth profiles** (`smtp`, `basic_auth`, `api_token`) plus **presets** (Twilio, Plivo, SMTP, MailerLite) that pick medium, credential fields, and adapter class. `Registry` / validation / Integrations form all read that catalog. New vendor = catalog preset + adapter class; Circles only store credentials.
-- `MessageTemplate` (circle) / `Presentation::Message` (presentation) share one model shape for email and SMS, but `medium` is set at create and `attr_readonly` afterward (UI shows it as text on edit). Table remains `presentation_messages`. Content editors share `domains/messaging/MessageContentFields` (and previews) via `fieldPrefix` (`message_template` | `presentation_message`); do not fork those inputs per form. Shared copy lives under `messaging.form.*`.
-- `MessageTemplate` copies into `Presentation::Message`. Send is one GoodJob batch: adapters implement `deliver_batch`; results land in `Presentation::Message#delivery_results` keyed by `membership_id` (correlate provider `to` back via the outbound roster). `::Contactable` is the model concern (`Person` includes it); controller params helper is `ContactableParams`.
-- Presentation `Template` links selected circle `MessageTemplate`s through `templates_message_templates` (`Template#message_templates`). `Template#create_presentation` copies only those linked templates into `Presentation::Message` via `Presentation#copy_template_messages` (alongside slides).
-- Recipients are not stored on the message. Active Messaging send resolves presentation memberships at send time (honoring `skip_interaction`). Omit `membership_ids` to broadcast to all presentation members; pass `membership_ids` on the API send (and job) to limit recipients. Preview who would receive via `GET .../messages/:slug/preview_recipients`.
-- Message **setup** (create/edit) is under the app Presentation menu at `/messaging`. Active Presentation keeps `/admin/messaging` for **sending** prepared messages only (no create UI). Setup Messaging groups messages into Email and SMS tables (name only); send **status** belongs on Active Messaging.
-- Presentation message setup lives under the app Presentation menu (`/presentations/:slug/messaging`), not Active Presentation (`admin/*`). Active sidebar is live controls only.
-- The send button is `SendMessageButton`: it owns send via React Query (`useSendPresentationMessage` / `usePresentationMessageStatus`) against `/api/circles/.../messages/:slug` (POST send, GET status). Polling is `refetchInterval` while status is `sending`. Callers pass circle/presentation/message slugs (+ optional `initialData` / `membershipIds`); no Inertia `reloadOnly` coupling.
-- Template variables use VisualEditor-style `#path` tokens (`#membership.name`, `#circle.name`, `#presentation.name`, `#interact_url`). Editors insert them as atomic TipTap mentions (SMS/subject via `TagsInput`, email body via `RichText` + mentions with marks). Stored strings contain `#path` text; `Messaging::Renderer` expands them at send time. Email/SMS craft preview resolves the same tags via `useMockCircle` / `lib/messaging/previewRender`. Absolute `#interact_url` values use Rails url helpers with `default_url_options` from `APP_URL` (default `http://localhost:$PORT` outside production). The same origin is shared to the frontend as Inertia `app_url`.
-
-# Developer TODOS
+# Developer TODOs
 
 - Build an async dropdown library to use in place of passing props for dropdown values

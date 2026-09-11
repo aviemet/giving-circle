@@ -1,6 +1,8 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, test } from "vitest"
 
+import { headingConfig } from "@/components/VisualEditor/components/Heading"
+import { config } from "@/components/VisualEditor/config"
 import {
 	componentFontFamilyCss,
 	defaultFontValue,
@@ -10,9 +12,16 @@ import {
 	hasCustomFont,
 	hasFontFamily,
 	isGenericFontFamily,
+	matchingCircleFont,
+	signedIdFromFontUrl,
 } from "@/components/VisualEditor/fields/font"
-import { config } from "@/components/VisualEditor/puck.config"
-import { SlideFontFace } from "@/components/VisualEditor/SlideFontFace"
+import {
+	CUSTOM_FONT_SELECT_PREFIX,
+	fontSelectOptions,
+	fontSelectValue,
+	fontValueFromSelect,
+} from "@/components/VisualEditor/fields/font/fontSelect"
+import { SlideFontFace } from "@/components/VisualEditor/lib/SlideFontFace"
 
 describe("components/VisualEditor/fields/font", () => {
 	test("fontField is a custom field labeled Font", () => {
@@ -48,7 +57,7 @@ describe("components/VisualEditor/fields/font", () => {
 	})
 })
 
-describe("components/VisualEditor/puck.config root font", () => {
+describe("components/VisualEditor/config root font", () => {
 	test("root exposes font field and default", () => {
 		expect(config.root?.fields?.font).toMatchObject({ type: "custom", label: "Font" })
 		expect(config.root?.defaultProps).toMatchObject({
@@ -76,5 +85,71 @@ describe("components/VisualEditor/SlideFontFace", () => {
 	test("renders nothing for CSS generic families", () => {
 		const markup = renderToStaticMarkup(<SlideFontFace font={ { family: "monospace", url: "" } } />)
 		expect(markup).toBe("")
+	})
+})
+
+const brandFont: Schema.CirclesFont = {
+	family: "Brand Sans",
+	filename: "Brand Sans.woff2",
+	signed_id: "signed-brand",
+	url: "/rails/active_storage/blobs/redirect/signed-brand/Brand%20Sans.woff2",
+}
+
+const genericLabels = {
+	serif: "Serif",
+	"sans-serif": "Sans serif",
+	monospace: "Monospace",
+	cursive: "Cursive",
+	fantasy: "Fantasy",
+}
+
+describe("components/VisualEditor/fields/font select", () => {
+	test("matches an uploaded circle font by blob signed id even when the URL encoding differs", () => {
+		expect(signedIdFromFontUrl(brandFont.url)).toBe("signed-brand")
+		expect(matchingCircleFont([brandFont], {
+			family: "Brand Sans",
+			url: "/rails/active_storage/blobs/redirect/signed-brand/Brand Sans.woff2",
+		})).toEqual(brandFont)
+	})
+
+	test("lists uploaded circle fonts for the heading picker and selects them by signed id", () => {
+		const options = fontSelectOptions(
+			[brandFont],
+			defaultFontValue(),
+			genericLabels,
+			"Inherit",
+		)
+
+		expect(options).toContainEqual({ value: "", label: "Inherit" })
+		expect(options).toContainEqual({ value: "signed-brand", label: "Brand Sans" })
+		expect(fontSelectValue({
+			family: "Brand Sans",
+			url: brandFont.url,
+		}, [brandFont])).toBe("signed-brand")
+		expect(fontValueFromSelect("signed-brand", [brandFont], defaultFontValue())).toEqual({
+			family: "Brand Sans",
+			url: brandFont.url,
+		})
+	})
+
+	test("keeps an unmatched custom font selectable instead of falling back to inherit", () => {
+		const current = { family: "Orphan", url: "/fonts/orphan.woff2" }
+		const selected = fontSelectValue(current, [])
+		expect(selected).toBe(`${CUSTOM_FONT_SELECT_PREFIX}/fonts/orphan.woff2`)
+		expect(fontSelectOptions([], current, genericLabels, "Inherit")).toContainEqual({
+			value: selected,
+			label: "Orphan",
+		})
+	})
+})
+
+describe("components/VisualEditor/heading inherit", () => {
+	test("heading defaults to an empty font so it inherits the page family", () => {
+		expect(headingConfig.defaultProps?.font).toMatchObject({
+			family: "",
+			url: "",
+			size: { mode: "preset", preset: "auto" },
+		})
+		expect(componentFontFamilyCss(headingConfig.defaultProps?.font)).toBe("inherit")
 	})
 })

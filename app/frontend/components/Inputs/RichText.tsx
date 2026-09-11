@@ -1,7 +1,7 @@
 import React from "react"
 
 import { useFormField } from "@/components/Form"
-import { type TagEditorOption } from "@/components/VisualEditor/dynamicData/contentParser"
+import { type TagEditorOption } from "@/components/VisualEditor/lib/dynamicData"
 
 import { RichTextEditor, type RichTextEditorProps } from "../RichTextEditor"
 import { HiddenInput } from "./HiddenInput"

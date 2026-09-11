@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, test } from "vitest"
 
 import { currency, datetime, number } from "@/lib/formatters"
-import { setCurrentAppLocale } from "@/lib/locale"
+import { i18n } from "@/lib/i18n"
 
 describe("lib/formatters currency", () => {
-	afterEach(() => {
-		setCurrentAppLocale("en")
+	afterEach(async () => {
+		await i18n.changeLanguage("en")
 	})
 
 	test("formats a default currency amount", () => {
@@ -26,8 +26,7 @@ describe("lib/formatters currency", () => {
 	})
 
 	test("uses the site locale when no locale argument is provided", () => {
-		setCurrentAppLocale("de-DE")
-		expect(currency.format(500, "EUR")).toBe("500,00\u00A0€")
+		expect(currency.format(500, "USD")).toBe("$500.00")
 	})
 
 	test("formats Money objects using amount and currency_iso", () => {

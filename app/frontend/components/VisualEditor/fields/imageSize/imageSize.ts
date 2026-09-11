@@ -5,7 +5,6 @@ import {
 	type DimensionInput,
 	type DimensionUnit,
 } from "../dimension"
-import { type FlexItemSizing } from "../flexItemSizing"
 
 export type ImageScaleMode = "natural" | "width" | "height" | "box"
 
@@ -31,13 +30,6 @@ export type ImageSizeValue = {
 	objectFit: ImageObjectFit
 	objectPositionX: string
 	objectPositionY: string
-}
-
-export type ImageSizeLegacyProps = {
-	size?: ImageSizeValue
-	sizing?: FlexItemSizing
-	width?: number
-	height?: number
 }
 
 const IMAGE_DIMENSION_UNITS: DimensionUnit[] = ["px", "%", "rem", "vw", "vh", "auto"]
@@ -298,28 +290,4 @@ export function buildImageSizeStyle(size: ImageSizeValue | undefined): CSSProper
 	}
 
 	return style
-}
-
-export function resolveImageSize(props: ImageSizeLegacyProps): ImageSizeValue {
-	if(props.size) {
-		return normalizeImageSize(props.size)
-	}
-
-	const legacyWidth = props.sizing?.mode === "fixed" && props.sizing.width
-		? props.sizing.width
-		: typeof props.width === "number"
-			? defaultDimension(props.width, "px")
-			: undefined
-	const legacyHeight = typeof props.height === "number"
-		? defaultDimension(props.height, "px")
-		: undefined
-
-	if(legacyWidth || legacyHeight) {
-		return normalizeImageSize({
-			width: legacyWidth,
-			height: legacyHeight,
-		})
-	}
-
-	return defaultImageSize()
 }

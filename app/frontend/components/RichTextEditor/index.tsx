@@ -20,7 +20,7 @@ import {
 	hydrateRichTextTagMentions,
 	serializeRichTextTagMentions,
 	type TagEditorOption,
-} from "@/components/VisualEditor/dynamicData/contentParser"
+} from "@/components/VisualEditor/lib/dynamicData"
 
 import * as classes from "./index.css"
 import { DEFAULT_LABELS } from "./tiptapLabels"

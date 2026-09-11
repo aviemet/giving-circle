@@ -1,8 +1,10 @@
 import { useState } from "react"
 
 import { Page, Section } from "@/components"
-import { VisualEditor } from "@/components/VisualEditor"
-import { slideTitleFromData, type PuckSlideData } from "@/components/VisualEditor/editorPersistence"
+import { VisualEditor, slideSaveExtras } from "@/components/VisualEditor"
+import { slidePuckConfig } from "@/components/VisualEditor/config"
+import { slideTitleFromData, type PuckSlideData } from "@/components/VisualEditor/lib/EditorSave/editorPersistence"
+import { withStarterSlideContent } from "@/components/VisualEditor/lib/slotEditor"
 import { Routes } from "@/lib"
 import { useInit, usePageProps } from "@/lib/hooks"
 import { useUpdatePresentationSlide } from "@/queries"
@@ -32,8 +34,9 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 
 	const handleSave = async (data: PuckSlideData) => {
 		const title = slideTitleFromData(data) ?? slideTitle
+		const extras = await slideSaveExtras()
 
-		await updateSlideMutation.mutate({ data, title })
+		await updateSlideMutation.mutateAsync({ data, title, thumbnail: extras?.thumbnail })
 		setSlideTitle(title)
 	}
 
@@ -41,8 +44,10 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 
 	useInit(() => {
 		toggleSidebarOpen(false)
-	}, () => {
-		toggleSidebarOpen()
+
+		return () => {
+			toggleSidebarOpen()
+		}
 	})
 
 	if(!active_circle || !active_theme || !active_presentation) return <></>
@@ -64,13 +69,13 @@ const EditPresentationSlides = ({ presentation, slide }: EditPresentationSlidesP
 		>
 			<Section>
 				<VisualEditor
-					initialData={ slide?.data || {} }
+					initialData={ withStarterSlideContent(slide?.data || {}) }
 					slideTitle={ slideTitle }
 					presentation={ active_presentation }
 					onSave={ handleSave }
-					isSaving={ updateSlideMutation.isPending }
 					slideKey={ slide.slug ?? params.slug }
 					returnTo={ returnTo }
+					puckConfig={ slidePuckConfig }
 				/>
 			</Section>
 		</Page>

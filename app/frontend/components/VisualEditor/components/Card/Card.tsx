@@ -1,48 +1,28 @@
-import clsx from "clsx"
+import { PuckComponent } from "@puckeditor/core"
 
-import { Card, DangerousHtml, Text } from "@/components"
-import { isNonEmptyString } from "@/lib/strings"
+import { CardDisplay } from "./CardDisplay"
+import { CardEditor } from "./CardEditor"
+import {
+	type BorderProps,
+	type BoxModelValue,
+	type FlexItemSizing,
+	type FlexStyleInput,
+} from "../../fields"
 
-import * as classes from "./Card.css"
-import { type CardProps } from "./cardConfig"
-import { usePresentationData } from "../../dynamicData/MockData"
-import { buildBorderStyle } from "../../fields/border"
-import { buildFlexStyle } from "../../fields/flex"
-import { buildFlexItemSizingStyle } from "../../fields/flexItemSizing"
-import { buildSpacingStyle } from "../../fields/spacing"
+export type CardProps = FlexStyleInput & {
+	title: string
+	description: string
+	backgroundColor: string
+	fontColor: string
+	sizing?: FlexItemSizing
+	spacing?: BoxModelValue
+	border?: BorderProps
+}
 
-export function CardDisplay({
-	title,
-	description,
-	backgroundColor,
-	fontColor,
-	sizing,
-	...styleProps
-}: CardProps) {
-	const evaluatedTitle = usePresentationData(title)
-	const evaluatedDescription = usePresentationData(description)
-	const showDescription = isNonEmptyString(description)
+export type CardComponentProps = Parameters<PuckComponent<CardProps>>[0]
 
-	return (
-		<Card
-			className={ clsx(classes.card) }
-			style={ {
-				...buildSpacingStyle(styleProps),
-				...buildBorderStyle(styleProps),
-				...buildFlexStyle(styleProps),
-				...buildFlexItemSizingStyle(sizing),
-				backgroundColor,
-			} }
-			padding="md"
-		>
-			<Text fw={ 700 } size="lg" c={ fontColor } mb="xs">
-				<DangerousHtml component="span">{ evaluatedTitle }</DangerousHtml>
-			</Text>
-			{ showDescription && (
-				<Text c={ fontColor }>
-					<DangerousHtml component="span">{ evaluatedDescription }</DangerousHtml>
-				</Text>
-			) }
-		</Card>
-	)
+export function Card(props: CardComponentProps) {
+	return props.puck.isEditing
+		? <CardEditor { ...props } />
+		: <CardDisplay { ...props } />
 }

@@ -17,7 +17,7 @@ describe("domains/interactionConfigTemplates/Form", () => {
 
 		expect(screen.getByText(/defines the member form/i)).toBeTruthy()
 		expect(screen.getByLabelText("Name")).toBeTruthy()
-		expect(screen.getByText("Member screen")).toBeTruthy()
+		expect(screen.getByRole("listbox", { name: "Interaction type" })).toBeTruthy()
 		expect(screen.getByRole("button", { name: "Create Template" })).toBeTruthy()
 	})
 

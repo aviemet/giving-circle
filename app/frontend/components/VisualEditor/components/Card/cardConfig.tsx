@@ -2,59 +2,41 @@ import { type ComponentConfig } from "@puckeditor/core"
 
 import { i18n } from "@/lib/i18n"
 
-import { CardDisplay } from "./Card"
+import { Card, CardProps } from "./Card"
 import {
-	borderColorField,
-	borderRadiusField,
-	borderWidthField,
+	borderField,
 	boxModelField,
 	colorField,
+	defaultBorderValue,
 	flexField,
 	flexItemSizingField,
-	type BorderProps,
-	type BoxModelValue,
-	type FlexItemSizing,
-	type FlexStyleInput,
-	type SpacingProps,
+	normalizeBorderValue,
 	tagsField,
 } from "../../fields"
 
-export type CardProps = SpacingProps & BorderProps & FlexStyleInput & {
-	title: string
-	description: string
-	backgroundColor: string
-	fontColor: string
-	sizing?: FlexItemSizing
-	spacing?: BoxModelValue
-}
-
-const t = i18n.t.bind(i18n)
-
 export const cardConfig: ComponentConfig<CardProps> = {
-	label: t("slides.editor.components.card.label"),
+	label: i18n.t("slides.editor.components.card.label"),
 	fields: {
 		title: tagsField({
-			label: t("slides.editor.components.card.title"),
+			label: i18n.t("slides.editor.components.card.title"),
 		}),
 		description: tagsField({
-			label: t("slides.editor.components.card.description"),
+			label: i18n.t("slides.editor.components.card.description"),
 		}),
 		sizing: flexItemSizingField(),
 		spacing: boxModelField(),
-		borderWidth: borderWidthField(),
-		borderRadius: borderRadiusField(),
-		borderColor: borderColorField(),
+		border: borderField(),
 		flex: flexField(),
 		backgroundColor: colorField({
-			label: t("slides.editor.components.card.background_color"),
+			label: i18n.t("slides.editor.components.card.background_color"),
 		}),
 		fontColor: colorField({
-			label: t("slides.editor.components.card.font_color"),
+			label: i18n.t("slides.editor.components.card.font_color"),
 		}),
 	},
 	defaultProps: {
-		title: t("slides.editor.components.card.default_title"),
-		description: t("slides.editor.components.card.default_description"),
+		title: i18n.t("slides.editor.components.card.default_title"),
+		description: i18n.t("slides.editor.components.card.default_description"),
 		backgroundColor: "#FEFEFE",
 		fontColor: "#111111",
 		sizing: { mode: "auto" },
@@ -71,6 +53,15 @@ export const cardConfig: ComponentConfig<CardProps> = {
 			overflow: "visible",
 			gap: 0,
 		},
+		border: defaultBorderValue(),
 	},
-	render: (props) => <CardDisplay { ...props } />,
+	resolveData: ({ props }) => {
+		return {
+			props: {
+				...props,
+				border: normalizeBorderValue(props.border),
+			},
+		}
+	},
+	render: (props) => <Card { ...props } />,
 }

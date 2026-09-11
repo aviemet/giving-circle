@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { Digit, type DigitProps } from "react-led-digit"
 
 import { Box } from "@/components"
@@ -51,7 +52,7 @@ export function TimerSevenSegmentDisplay({
 
 	return (
 		<Box
-			className={ classes.sevenSegmentWrap }
+			className={ clsx(classes.sevenSegmentWrap) }
 			style={ {
 				fontSize: resolvedFontSize,
 				color: digitColor,

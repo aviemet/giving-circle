@@ -128,6 +128,20 @@ RSpec.describe "/presentations", type: :request do
         expect(presentation.name).to eq(new_attributes[:name])
       end
 
+      it "persists finalist_count in presentation settings" do
+        presentation = create(:presentation)
+
+        patch theme_presentation_url(presentation.circle, presentation.theme, presentation), params: {
+          presentation: {
+            name: presentation.name,
+            settings: { finalist_count: 3 },
+          },
+        }
+        presentation.reload
+
+        expect(presentation.settings.finalist_count).to eq(3)
+      end
+
       it "redirects to the presentation" do
         presentation = create(:presentation)
 

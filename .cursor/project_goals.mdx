@@ -4,10 +4,10 @@ Product and architecture intent that is not yet fully realized in the current UI
 
 ## Interactions: form and response config as one authoring surface
 
-**Status:** Interim — not done yet.
+**Status:** Shipped (Puck member screens).
 
-Member-facing Interaction Forms (`InteractionUiTemplate` / slug → React UI today) and Interaction Config (`config.fields` / `config.outputs` that shape `presentation_interaction_responses.response_data`) are tightly coupled: every input on the form should correspond to the response data we define, and vice versa.
+Member-facing layout lives in `member_ui` (Puck JSON). `Interactions::MemberUiCompiler` compiles placed interaction input components into `config.fields`, `config.outputs`, `config.settings`, and `config.orchestration` on save, so the member screen and response schema stay aligned.
 
-Today those concerns are split (config authored in Settings templates / interaction forms; member UI selected by template slug and resolved via an in-memory component map). That split is acceptable as a stopgap.
+Admin edits member screens in the Visual Editor (`.../member_ui/edit` on templates and presentation interactions). Runtime renders via `MemberInteractForm` with catalog-bound input components under `components/VisualEditor/components/interaction/`.
 
-**Goal:** Author the member form and the response-data definitions in the same place, at the same time — eventually a single WYSIWYG-style designer — so form inputs and response schema cannot drift apart.
+Remaining polish (not blocking the goal): richer orchestration admin UI, multi-select funding basis in Puck root fields, and stricter client-side submit gating tied to partial-submit checkboxes.

@@ -1,4 +1,5 @@
 import { type Field } from "@puckeditor/core"
+import clsx from "clsx"
 import { useState } from "react"
 
 import { ColorInput } from "@/components/Inputs"
@@ -11,6 +12,11 @@ import {
 } from "./leverageColors"
 import * as classes from "./leverageColorsField.css"
 import { FieldRow, PuckFieldLabel, UnitNumber } from "../shared"
+import {
+	BORDER_RADIUS_UNITS,
+	coerceLength,
+	isLengthUnit,
+} from "../shared/length"
 
 const COLOR_SWATCHES = [
 	"#2e2e2e",
@@ -59,8 +65,10 @@ function LeverageColorsFieldControl({
 		onChange(next)
 	}
 
+	const borderRadius = coerceLength(localValue.borderRadius, BORDER_RADIUS_UNITS, "px")
+
 	return (
-		<div className={ classes.colorsRoot }>
+		<div className={ clsx(classes.colorsRoot) }>
 			<FieldRow label={ colorsText("labels.remaining") }>
 				<ColorInput
 					wrapper={ false }
@@ -82,8 +90,20 @@ function LeverageColorsFieldControl({
 			<FieldRow label={ colorsText("labels.radius") }>
 				<UnitNumber
 					name={ `${name}.borderRadius` }
-					value={ localValue.borderRadius }
-					onChange={ (borderRadius) => updateValue({ borderRadius }) }
+					value={ borderRadius.amount }
+					unit={ borderRadius.unit }
+					units={ BORDER_RADIUS_UNITS }
+					onChange={ (amount) => updateValue({
+						borderRadius: { amount, unit: borderRadius.unit },
+					}) }
+					onUnitChange={ (unit) => {
+						if(!isLengthUnit(unit, BORDER_RADIUS_UNITS)) {
+							return
+						}
+						updateValue({
+							borderRadius: { amount: borderRadius.amount, unit },
+						})
+					} }
 				/>
 			</FieldRow>
 		</div>
@@ -101,7 +121,7 @@ function leverageColorsField(): Field<LeverageColorsValue | undefined> {
 				<PuckFieldLabel label={ label }>
 					<LeverageColorsFieldControl
 						name={ name }
-						value={ value ?? defaultLeverageColors() }
+						value={ value ?? defaultLeverageColors }
 						onChange={ onChange }
 					/>
 				</PuckFieldLabel>

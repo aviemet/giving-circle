@@ -1,2 +1,2 @@
 export { imageConfig } from "./imageConfig"
-export { type ImageProps } from "./imageConfig"
+export { Image, type ImageProps } from "./Image"

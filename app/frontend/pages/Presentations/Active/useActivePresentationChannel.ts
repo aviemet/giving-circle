@@ -1,4 +1,6 @@
 import { useActionCable } from "@/lib/hooks/useActionCable"
+import { type ElementControlsPayload } from "@/types/ElementControlsPayload"
+
 
 interface ActivePresentationInteractionSnapshot {
 	id: string
@@ -8,6 +10,7 @@ interface ActivePresentationInteractionSnapshot {
 
 interface ActivePresentationSnapshot {
 	interactions?: ActivePresentationInteractionSnapshot[]
+	element_controls?: ElementControlsPayload
 }
 
 interface ActivePresentationMessage {
@@ -20,6 +23,7 @@ interface ActivePresentationMessage {
 
 interface UseActivePresentationChannelOptions {
 	presentationId: string
+	enabled?: boolean
 	onSlideSwitched?: (slideId: string) => void
 	onSlideUpdated?: (slideId: string, content: string) => void
 	onActivePresentationUpdated?: (snapshot: ActivePresentationSnapshot) => void
@@ -29,6 +33,7 @@ interface UseActivePresentationChannelOptions {
 
 export const useActivePresentationChannel = ({
 	presentationId,
+	enabled = true,
 	onSlideSwitched,
 	onSlideUpdated,
 	onActivePresentationUpdated,
@@ -39,6 +44,7 @@ export const useActivePresentationChannel = ({
 		channelName: "ActivePresentationChannel",
 
 		params: { presentation_id: presentationId },
+		enabled: enabled && presentationId.length > 0,
 
 		onReceived: (data) => {
 			switch(data.type) {

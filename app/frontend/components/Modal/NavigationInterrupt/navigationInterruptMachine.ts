@@ -26,6 +26,7 @@ export function parseInertiaVisitUrl(url: string | URL) {
 
 export const navigationInterruptMachine = setup({
 	types: {
+		// XState has no other way to declare context and event types. setup<Context, Event>() makes the named actions below (assignPending, enableBypass, ...) fail type-checking. This empty object is never used.
 		context: {} as NavigationInterruptContext,
 		events: {} as NavigationInterruptEvent,
 	},

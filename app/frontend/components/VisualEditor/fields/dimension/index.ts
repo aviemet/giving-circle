@@ -11,4 +11,3 @@ export {
 	type ParsedDimension,
 } from "./dimension"
 export { buildDimensionStyle, type DimensionStyleProps } from "./style"
-export { widthField, minWidthField, minHeightField } from "./fields"

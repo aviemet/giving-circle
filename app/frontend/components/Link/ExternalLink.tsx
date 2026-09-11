@@ -54,7 +54,7 @@ export function ExternalLink({
 	const content = (
 		<>
 			{ children }
-			<ExternalLinkIcon className="external" />
+			<ExternalLinkIcon className={ clsx("external") } />
 		</>
 	)
 

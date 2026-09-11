@@ -16,6 +16,11 @@ type ContextOrg =
 
 interface AllocatedTotalsSnapshot {
 	allocated_totals: { allocated_cents: number }[]
+	leverage?: {
+		remaining_cents: number
+		total_ask_cents: number
+		currency: string
+	} | null
 }
 
 const MOCK_REMAINING_CENTS = 6_000_000
@@ -69,6 +74,15 @@ export function deriveLeverageFromAsksAndAllocated(
 	currencyIso: string,
 	values: AllocatedTotalsSnapshot | undefined,
 ): LeverageTotals {
+	if(values && "leverage" in values && values.leverage !== null && values.leverage !== undefined) {
+		const leverage = values.leverage
+
+		return {
+			remaining: fromCents(leverage.remaining_cents, leverage.currency ?? currencyIso),
+			total: fromCents(leverage.total_ask_cents, leverage.currency ?? currencyIso),
+		}
+	}
+
 	const totalCents = askCentsList.reduce((sum, askCents) => sum + askCents, 0)
 	const allocatedCents = (values?.allocated_totals ?? []).reduce(
 		(sum, entry) => sum + entry.allocated_cents,

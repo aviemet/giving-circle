@@ -1,6 +1,7 @@
 class Presentations::PresentationSerializer < Presentations::PersistedSerializer
   attributes(
     :active_slide_id,
+    element_controls: { type: "ElementControlsPayload" },
   )
 
   has_many :slides, serializer: Slides::PresentationSerializer

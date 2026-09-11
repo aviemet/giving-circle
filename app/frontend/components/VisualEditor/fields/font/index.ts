@@ -7,6 +7,8 @@ export {
 	hasCustomFont,
 	hasFontFamily,
 	isGenericFontFamily,
+	matchingCircleFont,
+	signedIdFromFontUrl,
 	type FontValue,
 	type GenericFontFamily,
 } from "./fontField"
