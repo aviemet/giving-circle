@@ -52,6 +52,7 @@ export function OrgAllocationCard({
 						className={ clsx(classes.numericInput) }
 						wrapper={ false }
 						aria-label={ orgName }
+						currency={ currencyIso }
 						value={ amountDollars }
 						min={ 0 }
 						max={ maxDollars }

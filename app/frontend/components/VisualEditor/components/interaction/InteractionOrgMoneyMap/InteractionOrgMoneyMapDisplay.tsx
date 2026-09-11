@@ -287,6 +287,7 @@ function PledgeOrgMoneyMap({
 			</SimpleGrid>
 			<CurrencyInput
 				label={ t("presentations.interact.form.pledge_amount") }
+				currency={ currencyIso }
 				value={ amountDollars }
 				min={ 0 }
 				decimalScale={ 2 }
